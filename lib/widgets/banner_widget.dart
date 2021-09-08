@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/utils/utils.dart';
 import 'widgets.dart';
 
 class BannerWidget extends StatelessWidget {
@@ -27,7 +28,7 @@ class BannerWidget extends StatelessWidget {
               (item) => YodaImage(
                 image: item,
                 width: 1.sw,
-                borderRadius: 20.0,
+                borderRadius: Constants.BORDER_RADIUS_MAIN,
               ),
             )
             .toList(),

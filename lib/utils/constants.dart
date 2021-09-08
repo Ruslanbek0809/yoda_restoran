@@ -12,4 +12,7 @@ class Constants {
   /// Device Types
   static const TABLET = "tablet";
   static const PHONE = "phone";
+
+  /// Border Radius Constants
+  static const BORDER_RADIUS_MAIN = 20.0;
 }

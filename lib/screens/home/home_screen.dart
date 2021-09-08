@@ -31,7 +31,7 @@ List<HomeCategory> homeCategories = [
 ];
 
 List<Restaurant> restaurants = [
-  Restaurant(1, 'Kebapchy', 'Kebap we başgalar', 'assets/kebapchy.jpg'),
+  Restaurant(1, 'Kebapçy', 'Kebap we başgalar', 'assets/kebapchy.jpg'),
   Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
   Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
   Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
@@ -39,6 +39,7 @@ List<Restaurant> restaurants = [
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+  bool isFavorited = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,82 +210,132 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeCategoriesWidget(
                 homeCategories: homeCategories,
               ),
+              SizedBox(height: 10.w),
+//// Restaurants Widget
               Expanded(
-                  child: ListView.builder(
-                itemCount: restaurants.length,
-                itemBuilder: (ctx, pos) => Container(
-                  height: 0.45.sw,
-                  decoration: BoxDecoration(color: Colors.grey),
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      YodaImage(
-                        image: restaurants[pos].image,
-                        height: 0.45.sw,
-                        borderRadius: 20,
-                      ),
-                      // Stack(
-                      //   children: [
-                      //   ],
-                      // ),
-                    ],
+                child: ListView.builder(
+                  itemCount: restaurants.length,
+                  itemBuilder: (ctx, pos) => Container(
+                    height: 0.62.sw,
+                    width: 1.sw,
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            YodaImage(
+                              image: restaurants[pos].image,
+                              height: 0.45.sw,
+                              width: 1.sw,
+                              borderRadius: Constants.BORDER_RADIUS_MAIN,
+                            ),
+///// Delivery time Widget
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                width: 0.3.sw,
+                                height: 33.w,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 5.w,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.MAIN_DARK.withOpacity(0.9),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                        Constants.BORDER_RADIUS_MAIN),
+                                    bottomRight: Radius.circular(
+                                        Constants.BORDER_RADIUS_MAIN),
+                                  ),
+                                ),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '40-50 min.',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.WHITE,
+                                  ),
+                                ),
+                              ),
+                            ),
+//// Favourite Widget
+                            Positioned(
+                              top: 10.w,
+                              right: 10.w,
+                              child: Container(
+                                width: 0.11.sw,
+                                height: 0.11.sw,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.WHITE.withOpacity(0.8),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
+                                    setState(() {
+                                      isFavorited = !isFavorited;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    isFavorited
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: isFavorited
+                                        ? AppTheme.RED
+                                        : IconTheme.of(context).color,
+                                    size: 25.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 5.w),
+                          child: Text(
+                            restaurants[pos].name,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 23.sp,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.MAIN_DARK,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.star, size: 20.w, color: AppTheme.GREEN),
+                            SizedBox(width: 3.w),
+                            Text(
+                              '4.9 (123)',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: AppTheme.MAIN_DARK,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Text(
+                              restaurants[pos].foods,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: AppTheme.MAIN_DARK,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              )),
+              ),
             ],
           ),
-          // SubcategoryWidget(),
-          // ScrollableListTabView(
-          //   tabHeight: 48,
-          //   bodyAnimationDuration: const Duration(milliseconds: 300),
-          //   tabAnimationCurve: Curves.ease,
-          //   tabAnimationDuration: const Duration(milliseconds: 300),
-          //   bodyAnimationCurve: Curves.linear,
-          //   tabs: [
-          //     ScrollableListTab(
-          //         tab: ListTab(
-          //             tabLabel: Text('Label 1'),
-          //             innerLabel: Text('Label 1'),
-          //             icon: Icon(Icons.group)),
-          //         body: ListView.builder(
-          //           shrinkWrap: true,
-          //           physics: NeverScrollableScrollPhysics(),
-          //           itemCount: 10,
-          //           itemBuilder: (_, index) => ListTile(
-          //             leading: Container(
-          //               height: 40,
-          //               width: 40,
-          //               decoration: BoxDecoration(
-          //                   shape: BoxShape.circle, color: Colors.grey),
-          //               alignment: Alignment.center,
-          //               child: Text(index.toString()),
-          //             ),
-          //             title: Text('List element $index'),
-          //           ),
-          //         )),
-          //     ScrollableListTab(
-          //         tab: ListTab(
-          //             tabLabel: Text('Label 1'),
-          //             innerLabel: Text('Label 1'),
-          //             icon: Icon(Icons.group)),
-          //         body: ListView.builder(
-          //           shrinkWrap: true,
-          //           physics: NeverScrollableScrollPhysics(),
-          //           itemCount: 10,
-          //           itemBuilder: (_, index) => ListTile(
-          //             leading: Container(
-          //               height: 40,
-          //               width: 40,
-          //               decoration: BoxDecoration(
-          //                   shape: BoxShape.circle, color: Colors.grey),
-          //               alignment: Alignment.center,
-          //               child: Text(index.toString()),
-          //             ),
-          //             title: Text('List element $index'),
-          //           ),
-          //         )),
-          //   ],
-          // ),
         ),
       ),
     );
