@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class YodaImage extends StatelessWidget {
+  final String image;
+  final double? width;
+  final double? height;
+  final BoxFit fit;
+  final double borderRadius;
+  final AlignmentGeometry alignment;
+
+  const YodaImage({
+    required this.image,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.borderRadius = 0.0,
+    this.alignment = Alignment.center,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (!(image.contains('http'))) {
+      return ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        child: Image.asset(
+          image,
+          width: width,
+          height: height,
+          fit: fit,
+          alignment: alignment,
+        ),
+      );
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: CachedNetworkImage(
+        imageUrl: image,
+        fit: fit,
+        width: width,
+        height: height,
+        placeholder: (context, url) => Image.asset(
+          'assets/placeholder.jpg',
+          fit: fit,
+          width: width,
+          height: height,
+          alignment: alignment,
+        ),
+        errorWidget: (context, url, error) => Image.asset(
+          'assets/errorImage.png',
+          fit: fit,
+          width: width,
+          height: height,
+          alignment: alignment,
+        ),
+      ),
+    );
+  }
+}
