@@ -40,91 +40,14 @@ List<Restaurant> restaurants = [
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   bool isFavorited = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       /// Resize according to onscreen keyboard
       resizeToAvoidBottomInset: true,
       backgroundColor: AppTheme.WHITE,
-      drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomScrollView(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                SliverAppBar(
-                  backgroundColor: Colors.transparent,
-                  automaticallyImplyLeading: false,
-                  elevation: 0,
-                  stretch: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.2,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Text(
-                      'ýoda.restoran',
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    titlePadding: const EdgeInsets.only(bottom: 40.0),
-                    centerTitle: true,
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      ListTile(
-                        title: Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20.0),
-                        leading: Icon(
-                          Icons.home_rounded,
-                          color: Theme.of(context).accentColor,
-                        ),
-                        selected: true,
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      ListTile(
-                        title: const Text('Settings'),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20.0),
-                        leading: Icon(
-                          Icons
-                              .settings_rounded, // miscellaneous_services_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        title: const Text('About'),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20.0),
-                        leading: Icon(
-                          Icons.info_outline_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, '/about');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerWidget(),
       body: SafeArea(
         child: NestedScrollView(
           // physics: const BouncingScrollPhysics(),
@@ -192,150 +115,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 //// Categories Widget
-              // SliverPersistentHeader(
-              //   pinned: true,
-              //   floating: true,
-              //   delegate: ContestTabHeader(
-              //     categoriesWidget: HomeCategoriesWidget(
-              //       homeCategories: homeCategories,
-              //     ),
-              //     size: 90.w,
-              //   ),
-              // ),
-            ];
-          },
-          body: Column(
-            children: [
-//// Categories Widget
-              HomeCategoriesWidget(
-                homeCategories: homeCategories,
-              ),
-              SizedBox(height: 10.w),
-//// Restaurants Widget
-              Expanded(
-                child: ListView.builder(
-                  itemCount: restaurants.length,
-                  itemBuilder: (ctx, pos) => Container(
-                    height: 0.62.sw,
-                    width: 1.sw,
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            YodaImage(
-                              image: restaurants[pos].image,
-                              height: 0.45.sw,
-                              width: 1.sw,
-                              borderRadius: Constants.BORDER_RADIUS_MAIN,
-                            ),
-///// Delivery time Widget
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                width: 0.3.sw,
-                                height: 33.w,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w,
-                                  vertical: 5.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_DARK.withOpacity(0.9),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                        Constants.BORDER_RADIUS_MAIN),
-                                    bottomRight: Radius.circular(
-                                        Constants.BORDER_RADIUS_MAIN),
-                                  ),
-                                ),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  '40-50 min.',
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppTheme.WHITE,
-                                  ),
-                                ),
-                              ),
-                            ),
-//// Favourite Widget
-                            Positioned(
-                              top: 10.w,
-                              right: 10.w,
-                              child: Container(
-                                width: 0.11.sw,
-                                height: 0.11.sw,
-                                decoration: BoxDecoration(
-                                  color: AppTheme.WHITE.withOpacity(0.8),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () {
-                                    setState(() {
-                                      isFavorited = !isFavorited;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    isFavorited
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color: isFavorited
-                                        ? AppTheme.RED
-                                        : IconTheme.of(context).color,
-                                    size: 25.w,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 5.w),
-                          child: Text(
-                            restaurants[pos].name,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 23.sp,
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.MAIN_DARK,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Icon(Icons.star, size: 20.w, color: AppTheme.GREEN),
-                            SizedBox(width: 3.w),
-                            Text(
-                              '4.9 (123)',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: AppTheme.MAIN_DARK,
-                              ),
-                            ),
-                            SizedBox(width: 5.w),
-                            Text(
-                              restaurants[pos].foods,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: AppTheme.MAIN_DARK,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+              SliverPersistentHeader(
+                pinned: false,
+                floating: true,
+                delegate: ContestTabHeader(
+                  categoriesWidget: HomeCategoriesWidget(
+                    homeCategories: homeCategories,
                   ),
+                  size: 90.w,
                 ),
               ),
-            ],
+            ];
+          },  
+///// Restaurants Widget
+          body: ListView.builder(
+            padding: EdgeInsets.only(top: 10.w),
+            itemCount: restaurants.length,
+            itemBuilder: (ctx, pos) => RestaurantWidget(
+              restaurant: restaurants[pos],
+            ),
           ),
+//           Column(
+//             children: [
+// //// Categories Widget
+//               // HomeCategoriesWidget(
+//               //   homeCategories: homeCategories,
+//               // ),
+//               // SizedBox(height: 10.w),
+// //// Restaurants Widget
+//               Expanded(
+//                 child:
+//               ),
+//             ],
+//           ),
         ),
       ),
     );
