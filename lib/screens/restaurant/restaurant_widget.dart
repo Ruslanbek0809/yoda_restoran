@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/screens/home/custom_sliverappbar.dart';
+import 'package:yoda_res/screens/home/diegoex.dart';
+import 'package:yoda_res/screens/home/ex2.dart';
+import 'package:yoda_res/screens/home/hey.dart';
+import 'package:yoda_res/screens/home/post.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
+
+import 'restaurant.dart';
 
 class RestaurantWidget extends StatefulWidget {
   final Restaurant restaurant;
@@ -34,13 +41,41 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
         children: [
           Stack(
             children: [
-              YodaImage(
-                image: restaurant.image,
-                height: 0.45.sw,
-                width: 1.sw,
-                borderRadius: Constants.BORDER_RADIUS_MAIN,
+//// IMAGE with ripple effect
+              Stack(
+                children: [
+                  YodaImage(
+                    image: restaurant.image,
+                    height: 0.45.sw,
+                    width: 1.sw,
+                    borderRadius: Constants.BORDER_RADIUS_MAIN,
+                  ),
+                  Positioned.fill(
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: AppTheme().mainBorderRadius,
+                      child: InkWell(
+                        borderRadius: AppTheme().mainBorderRadius,
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SamplePage(),
+                              //  RestaurantDetailsScreen(),
+                              // MainCollapsingToolbar()
+                              // NewsScreen()
+                              // CustomSliverAppbar()
+                              // HomePage(),
+                              // ScrollablePositionedListPage()
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
-///// Delivery time Widget
+//// Delivery time Widget
               Positioned(
                 bottom: 0,
                 right: 0,
@@ -70,7 +105,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                 ),
               ),
-//// Favourite Widget
+              //// Favourite Widget
               Positioned(
                 top: 10.w,
                 right: 10.w,
