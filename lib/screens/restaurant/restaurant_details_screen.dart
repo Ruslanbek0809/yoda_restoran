@@ -25,7 +25,7 @@ import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SamplePage extends StatefulWidget {
-  static const _kBasePadding = 16.0;
+  static const kBasePadding = 16.0;
   static const kExpandedHeight = 250.0;
 
   @override
@@ -38,6 +38,9 @@ class _SamplePageState extends State<SamplePage>
     "Ertirki",
     "Abetky",
     "Ortanky",
+    "Ertirki",
+    "Abetky",
+    "Ortanky",
   ];
   late TabController _tabController;
   final _scrollController = ScrollController();
@@ -46,29 +49,29 @@ class _SamplePageState extends State<SamplePage>
     super.initState();
     _tabController = TabController(
       initialIndex: 0,
-      length: 3,
+      length: 6,
       vsync: this,
     );
     _scrollController.addListener(() {
-      _titlePaddingNotifier.value = _horizontalTitlePadding;
+      titlePaddingNotifier.value = _horizontalTitlePadding;
     });
   }
 
-  final ValueNotifier<double> _titlePaddingNotifier =
-      ValueNotifier(SamplePage._kBasePadding);
+  final ValueNotifier<double> titlePaddingNotifier =
+      ValueNotifier(SamplePage.kBasePadding);
 
   double get _horizontalTitlePadding {
     const kCollapsedPadding = 60.0;
 
     if (_scrollController.hasClients) {
       return min(
-          SamplePage._kBasePadding + kCollapsedPadding,
-          SamplePage._kBasePadding +
+          SamplePage.kBasePadding + kCollapsedPadding,
+          SamplePage.kBasePadding +
               (kCollapsedPadding * _scrollController.offset) /
                   (SamplePage.kExpandedHeight - kToolbarHeight));
     }
 
-    return SamplePage._kBasePadding;
+    return SamplePage.kBasePadding;
   }
 
   @override
@@ -87,7 +90,7 @@ class _SamplePageState extends State<SamplePage>
                 collapseMode: CollapseMode.pin,
                 centerTitle: false,
                 title: ValueListenableBuilder(
-                  valueListenable: _titlePaddingNotifier,
+                  valueListenable: titlePaddingNotifier,
                   builder: (context, value, child) {
                     return Padding(
                       padding: EdgeInsets.symmetric(
@@ -115,6 +118,7 @@ class _SamplePageState extends State<SamplePage>
               automaticallyImplyLeading:
                   false, // Used for removing back buttoon.
               title: TabBar(
+                isScrollable: true,
                 controller: _tabController,
                 // These are the widgets to put in each tab in the tab bar.
                 tabs: _tabs.map((String name) => Tab(text: name)).toList(),

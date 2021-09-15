@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/screens/home/custom_sliverappbar.dart';
-import 'package:yoda_res/screens/home/diegoex.dart';
-import 'package:yoda_res/screens/home/ex2.dart';
-import 'package:yoda_res/screens/home/hey.dart';
-import 'package:yoda_res/screens/home/post.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 
@@ -61,7 +56,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SamplePage(),
-                              //  RestaurantDetailsScreen(),
+                              // RestaurantDetailsScreen(),
                               // MainCollapsingToolbar()
                               // NewsScreen()
                               // CustomSliverAppbar()
