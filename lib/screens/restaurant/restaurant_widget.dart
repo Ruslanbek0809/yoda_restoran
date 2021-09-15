@@ -55,13 +55,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SamplePage(),
-                              // RestaurantDetailsScreen(),
-                              // MainCollapsingToolbar()
-                              // NewsScreen()
-                              // CustomSliverAppbar()
-                              // HomePage(),
-                              // ScrollablePositionedListPage()
+                              builder: (context) => RestaurantDetailsScreen(),
                             ),
                           );
                         },
