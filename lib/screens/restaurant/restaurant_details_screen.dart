@@ -30,6 +30,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     FoodCategory(4, 'Burgerlar'),
   ];
 
+  List<FoodModel> _foodList = [
+    FoodModel(0, 'Sandwich', 25, 'assets/breakfast_sandwich.jpg'),
+    FoodModel(0, 'Egg', 10, 'assets/breakfast_egg.jpg'),
+    FoodModel(0, 'Sandwich', 15, 'assets/breakfast_latte.jpg'),
+  ];
+
   void _scrollListener() {
     if (_isShrink != lastStatus) {
       setState(() {
@@ -78,6 +84,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
             //pinned SliverAppBar height in header
             kToolbarHeight;
     return Scaffold(
+      backgroundColor: AppTheme.WHITE,
       body: ExtendedNestedScrollView(
           controller: _scrollController,
           // onlyOneScrollInBody: true,
@@ -501,55 +508,58 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   controller: _tabController,
                   children: _foodCategoryList
                       .map<Widget>(
-                        (foodCategory) => ListView(
-                          children: [
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                              child: Text(foodCategory.name),
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                            Container(
-                              height: 100,
-                              margin: EdgeInsets.only(bottom: 10),
-                              color: Colors.red,
-                            ),
-                          ],
+                        (foodCategory) => GridView.builder(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.w, horizontal: 10.w),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10.w, //spaceTopBottom
+                            crossAxisSpacing: 5.w, //spaceLeftRight
+                            childAspectRatio: 1.sw / 1.5.sw,
+                          ),
+                          itemCount: _foodList.length,
+                          itemBuilder: (context, pos) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: AppTheme.MAIN_LIGHT,
+                                borderRadius: AppTheme().mainBorderRadius,
+                              ),
+                              padding: EdgeInsets.all(5.w),
+                              child: LayoutBuilder(
+                                builder: (BuildContext context,
+                                    BoxConstraints constraints) {
+                                  return Column(
+                                    // mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      YodaImage(
+                                        image: _foodList[pos].image,
+                                        height: constraints.maxWidth,
+                                        width: constraints.maxWidth,
+                                        borderRadius: 20.0,
+                                      ),
+                                      Text(
+                                        'Özüm aljak',
+                                        style: TextStyle(
+                                          fontSize: 17.sp,
+                                          color: AppTheme.FONT_COLOR,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Özüm aljak',
+                                        style: TextStyle(
+                                          fontSize: 17.sp,
+                                          color: AppTheme.FONT_COLOR,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            );
+                          },
                         ),
                       )
                       .toList(),
