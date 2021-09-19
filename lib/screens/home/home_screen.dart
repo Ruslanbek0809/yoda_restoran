@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/screens/restaurant/restaurant.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../models/models.dart';
+import '../restaurant/restaurant.dart';
+import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 import 'home.dart';
 
 class HomeScreen extends StatefulWidget {

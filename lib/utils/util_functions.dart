@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
-import 'package:yoda_res/utils/utils.dart';
+import 'utils.dart';
 
 enum FormValidation { phoneInvalid }
 
@@ -12,7 +11,7 @@ final bool isAndroid = Platform.isAndroid;
 
 /// Logging
 const kLOG_TAG = '[Belent Online]';
-const kLOG_ENABLE = false;
+const kLOG_ENABLE = true;
 void printLog(dynamic data) {
   if (kLOG_ENABLE) {
     // final now = DateTime.now().toUtc().toString().split(' ').last;

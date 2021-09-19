@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/models/models.dart';
+import '../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+import '../../utils/utils.dart';
+import '../../widgets/widgets.dart';
 
 class HomeCategoriesWidget extends StatefulWidget {
   final List<HomeCategory> homeCategories;

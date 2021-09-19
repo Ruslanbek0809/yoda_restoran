@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../utils/utils.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;

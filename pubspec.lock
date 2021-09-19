@@ -331,20 +331,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.2"
-  scrollable_list_tabview:
-    dependency: "direct main"
-    description:
-      name: scrollable_list_tabview
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.6"
-  scrollable_positioned_list:
-    dependency: transitive
-    description:
-      name: scrollable_positioned_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.10"
   shared_preferences:
     dependency: "direct main"
     description:

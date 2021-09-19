@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+import '../../utils/utils.dart';
+import '../../widgets/widgets.dart';
 
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({Key? key}) : super(key: key);

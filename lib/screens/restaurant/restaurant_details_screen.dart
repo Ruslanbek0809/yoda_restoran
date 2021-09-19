@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+import 'package:yoda_res/models/models.dart';
+import '../../utils/utils.dart';
+import '../../widgets/widgets.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   @override
@@ -13,12 +14,21 @@ class RestaurantDetailsScreen extends StatefulWidget {
 
 class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     with TickerProviderStateMixin {
-  late TabController primaryTC;
+  late TabController _tabController;
 
   var top = 0.0;
   late ScrollController _scrollController;
   bool lastStatus = true;
   bool isDelivery = true;
+  int _activeIndex = 0;
+
+  List<FoodCategory> _foodCategoryList = [
+    FoodCategory(0, 'Ertirlikler'),
+    FoodCategory(1, 'Işdäaçarlar'),
+    FoodCategory(2, 'Desertler'),
+    FoodCategory(3, 'Steak'),
+    FoodCategory(4, 'Burgerlar'),
+  ];
 
   void _scrollListener() {
     if (_isShrink != lastStatus) {
@@ -26,6 +36,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
         lastStatus = _isShrink;
       });
     }
+  }
+
+  void _tabListener() {
+    setState(() {
+      _activeIndex = _tabController.index;
+    });
   }
 
   bool get _isShrink {
@@ -37,14 +53,18 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   void initState() {
     super.initState();
 
-    primaryTC = new TabController(length: 2, vsync: this);
     _scrollController = ScrollController()..addListener(_scrollListener);
+    _tabController =
+        TabController(length: _foodCategoryList.length, vsync: this);
+    _tabController.addListener(_tabListener);
   }
 
   @override
   void dispose() {
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
+    _tabController.dispose();
+    _tabController.removeListener(_tabListener);
     super.dispose();
   }
 
@@ -427,123 +447,112 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
           pinnedHeaderSliverHeightBuilder: () {
             return pinnedHeaderHeight;
           },
+//// TabBar Widget
           body: Column(
             children: <Widget>[
-              ColoredBox(
-                color: AppTheme.WHITE,
-                child: TabBar(
-                  controller: primaryTC,
-                  labelColor: Colors.black87,
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab(text: "Tab1"),
-                    Tab(text: "Tab2"),
-                  ],
+              Material(
+                elevation: _isShrink ? 3.0 : 0.0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: ColoredBox(
+                    color: AppTheme.WHITE,
+                    child: TabBar(
+                      controller: _tabController,
+                      isScrollable: true,
+                      indicatorColor: Colors.transparent,
+                      labelPadding: EdgeInsets.all(0.0),
+                      tabs: _foodCategoryList
+                          .map<Widget>((foodCategory) => Tab(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: AppTheme().buttonBorderRadius,
+                                    color: _activeIndex ==
+                                            _foodCategoryList
+                                                .indexOf(foodCategory)
+                                        ? AppTheme.MAIN_LIGHT
+                                        : AppTheme.WHITE,
+                                  ),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 3.w, horizontal: 5.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 15.w),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    foodCategory.name,
+                                    style: TextStyle(
+                                      color: _activeIndex ==
+                                              _foodCategoryList
+                                                  .indexOf(foodCategory)
+                                          ? AppTheme.FONT_COLOR
+                                          : AppTheme.DRAWER_ICON,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
                 ),
               ),
+//// TabBarView Widget
               Expanded(
                 child: TabBarView(
-                  controller: primaryTC,
-                  children: <Widget>[
-                    ListView(
-                      children: [
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
+                  controller: _tabController,
+                  children: _foodCategoryList
+                      .map<Widget>(
+                        (foodCategory) => ListView(
+                          children: [
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                              child: Text(foodCategory.name),
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                            Container(
+                              height: 100,
+                              margin: EdgeInsets.only(bottom: 10),
+                              color: Colors.red,
+                            ),
+                          ],
                         ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
-                    ListView(
-                      children: [
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
-                  ],
+                      )
+                      .toList(),
                 ),
               )
             ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoda_res/screens/profile/contact_us_screen.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../profile/contact_us_screen.dart';
+import '../../utils/utils.dart';
 
 class DrawerWidget extends StatelessWidget {
   DrawerWidget({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class DrawerWidget extends StatelessWidget {
         ListTile(
           leading: SvgPicture.asset(
             svgName,
-            color: AppTheme.DRAWER,
+            color: AppTheme.DRAWER_ICON,
             width: 33.w,
           ),
           title: Text(
@@ -113,7 +113,7 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     'assets/chat_circle.svg',
-                    color: AppTheme.DRAWER,
+                    color: AppTheme.DRAWER_ICON,
                     width: 50.w,
                   ),
                   SizedBox(width: 10.w),
@@ -137,7 +137,7 @@ class DrawerWidget extends StatelessWidget {
                       'Biz bilen habarlaş',
                       style: TextStyle(
                         fontSize: 16.sp,
-                        color: AppTheme.DRAWER,
+                        color: AppTheme.DRAWER_ICON,
                       ),
                     ),
                   ),

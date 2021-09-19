@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../utils/utils.dart';
 import 'widgets.dart';
 
 class BannerWidget extends StatelessWidget {
