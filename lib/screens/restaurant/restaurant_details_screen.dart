@@ -20,6 +20,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   late ScrollController _scrollController;
   bool lastStatus = true;
   bool isDelivery = true;
+  bool isButtonToggled = false;
   int _activeIndex = 0;
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
@@ -584,37 +585,115 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                         Spacer(),
                                         AnimatedSwitcher(
                                           duration: Duration(milliseconds: 300),
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            borderRadius:
-                                                AppTheme().buttonBorderRadius,
-                                            elevation: 1,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  AppTheme().buttonBorderRadius,
-                                              onTap: () async {
-                                                _tweenController.forward();
-                                              },
-                                              child: Ink(
-                                                width: constraints.maxWidth,
-                                                decoration: BoxDecoration(
-                                                  color: AppTheme.WHITE,
+                                          child: isButtonToggled
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Material(
+                                                      color: AppTheme.WHITE,
+                                                      borderRadius: AppTheme()
+                                                          .buttonBorderRadius,
+                                                      elevation: 1,
+                                                      child: InkWell(
+                                                        borderRadius: AppTheme()
+                                                            .buttonBorderRadius,
+                                                        onTap: () async {
+                                                          _tweenController
+                                                              .forward();
+                                                          if (isButtonToggled)
+                                                            setState(() {
+                                                              isButtonToggled =
+                                                                  !isButtonToggled;
+                                                            });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.w),
+                                                          child: Icon(
+                                                            Icons.remove,
+                                                            size: 25.w,
+                                                            color: AppTheme
+                                                                .FONT_COLOR,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '1',
+                                                      style: TextStyle(
+                                                        fontSize: 20.sp,
+                                                        color:
+                                                            AppTheme.FONT_COLOR,
+                                                      ),
+                                                    ),
+                                                    Material(
+                                                      color: AppTheme.WHITE,
+                                                      borderRadius: AppTheme()
+                                                          .buttonBorderRadius,
+                                                      elevation: 1,
+                                                      child: InkWell(
+                                                        borderRadius: AppTheme()
+                                                            .buttonBorderRadius,
+                                                        onTap: () {},
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.w),
+                                                          child: Icon(
+                                                            Icons.add,
+                                                            size: 25.w,
+                                                            color: AppTheme
+                                                                .FONT_COLOR,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Material(
+                                                  color: Colors.transparent,
                                                   borderRadius: AppTheme()
                                                       .buttonBorderRadius,
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 10.w),
-                                                child: Text(
-                                                  '${_foodList[pos].price} TMT',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 20.sp,
-                                                    color: AppTheme.FONT_COLOR,
+                                                  elevation: 1,
+                                                  child: InkWell(
+                                                    borderRadius: AppTheme()
+                                                        .buttonBorderRadius,
+                                                    onTap: () async {
+                                                      _tweenController
+                                                          .forward();
+                                                      if (!isButtonToggled)
+                                                        setState(() {
+                                                          isButtonToggled =
+                                                              !isButtonToggled;
+                                                        });
+                                                    },
+                                                    child: Ink(
+                                                      width:
+                                                          constraints.maxWidth,
+                                                      decoration: BoxDecoration(
+                                                        color: AppTheme.WHITE,
+                                                        borderRadius: AppTheme()
+                                                            .buttonBorderRadius,
+                                                      ),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 10.w),
+                                                      child: Text(
+                                                        '${_foodList[pos].price} TMT',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 20.sp,
+                                                          color: AppTheme
+                                                              .FONT_COLOR,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
                                         )
                                       ],
                                     );
