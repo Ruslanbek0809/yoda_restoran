@@ -31,9 +31,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   ];
 
   List<FoodModel> _foodList = [
-    FoodModel(0, 'Sandwich', 25, 'assets/breakfast_sandwich.jpg'),
-    FoodModel(0, 'Egg', 10, 'assets/breakfast_egg.jpg'),
-    FoodModel(0, 'Sandwich', 15, 'assets/breakfast_latte.jpg'),
+    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg'),
+    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg'),
+    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg'),
   ];
 
   void _scrollListener() {
@@ -316,7 +316,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                                 'Eltip bermek',
                                                 style: TextStyle(
                                                   fontSize: 17.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: !isDelivery
+                                                      ? AppTheme.FONT_GREY_COLOR
+                                                      : AppTheme.FONT_COLOR,
                                                 ),
                                               ),
                                             ),
@@ -345,7 +347,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                                 'Özüm aljak',
                                                 style: TextStyle(
                                                   fontSize: 17.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: isDelivery
+                                                      ? AppTheme.FONT_GREY_COLOR
+                                                      : AppTheme.FONT_COLOR,
                                                 ),
                                               ),
                                             ),
@@ -518,7 +522,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                             crossAxisCount: 2,
                             mainAxisSpacing: 10.w, //spaceTopBottom
                             crossAxisSpacing: 5.w, //spaceLeftRight
-                            childAspectRatio: 1.sw / 1.5.sw,
+                            childAspectRatio: 1.sw / 1.65.sw,
                           ),
                           itemCount: _foodList.length,
                           itemBuilder: (context, pos) {
@@ -532,7 +536,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 builder: (BuildContext context,
                                     BoxConstraints constraints) {
                                   return Column(
-                                    // mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       YodaImage(
                                         image: _foodList[pos].image,
@@ -540,20 +545,60 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                         width: constraints.maxWidth,
                                         borderRadius: 20.0,
                                       ),
-                                      Text(
-                                        'Özüm aljak',
-                                        style: TextStyle(
-                                          fontSize: 17.sp,
-                                          color: AppTheme.FONT_COLOR,
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 8.w, bottom: 4.w),
+                                        child: Text(
+                                          _foodList[pos].name,
+                                          style: TextStyle(
+                                            fontSize: 17.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
                                         ),
                                       ),
                                       Text(
-                                        'Özüm aljak',
+                                        '${_foodList[pos].weight} ${_foodList[pos].weightType}',
                                         style: TextStyle(
-                                          fontSize: 17.sp,
-                                          color: AppTheme.FONT_COLOR,
+                                          fontSize: 15.sp,
+                                          color: AppTheme.DRAWER_ICON,
                                         ),
                                       ),
+                                      Spacer(),
+                                      AnimatedSwitcher(
+                                        duration: Duration(milliseconds: 300),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              AppTheme().buttonBorderRadius,
+                                          elevation: 1,
+                                          child: InkWell(
+                                            borderRadius:
+                                                AppTheme().buttonBorderRadius,
+                                            onTap: () {},
+                                            child: Ink(
+                                              width: constraints.maxWidth,
+                                              decoration: BoxDecoration(
+                                                color: AppTheme.WHITE,
+                                                borderRadius: AppTheme()
+                                                    .buttonBorderRadius,
+                                                // boxShadow: [
+                                                //   AppTheme().buttonShadow
+                                                // ],
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10.w),
+                                              child: Text(
+                                                '${_foodList[pos].price} TMT',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  color: AppTheme.FONT_COLOR,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   );
                                 },

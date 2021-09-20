@@ -6,6 +6,7 @@ class AppTheme {
   static const Color MAIN_LIGHT = Color(0xFFF1F0ED);
   static const Color MAIN_DARK = Color(0xFF41413E);
   static const Color FONT_COLOR = Color(0xFF20201F);
+  static const Color FONT_GREY_COLOR = Color(0xFF9F9D9A);
   static const Color DRAWER_ICON = Color(0xFF9D9B98);
   static const Color DRAWER_DIVIDER = Color(0xFFCCCCCC);
   static const Color GREEN = Color(0xFF76C03F);
@@ -57,7 +58,7 @@ class AppTheme {
 
   BoxShadow get buttonShadow => BoxShadow(
         color: MAIN_DARK.withOpacity(0.75),
-        blurRadius: 5.0,
+        blurRadius: 3.0,
         offset: const Offset(1.1, 1.1),
       );
 
