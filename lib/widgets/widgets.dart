@@ -6,3 +6,4 @@ export 'custom_icon_text_button.dart';
 export 'custom_text_button.dart';
 export 'custom_icon_button.dart';
 export 'otp_timer_widget.dart';
+export 'stagger_animation_widget.dart';
