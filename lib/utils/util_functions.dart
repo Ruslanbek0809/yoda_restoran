@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'utils.dart';
 
-enum FormValidation { phoneInvalid }
+enum FormValidation { phoneInvalid, valid }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

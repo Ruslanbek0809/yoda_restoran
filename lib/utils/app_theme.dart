@@ -59,9 +59,15 @@ class AppTheme {
   //     blurRadius: 6.0);
 
   BoxShadow get buttonShadow => BoxShadow(
-        color: MAIN_DARK.withOpacity(0.75),
+        color: MAIN_DARK.withOpacity(0.5),
         blurRadius: 3.0,
         offset: const Offset(1.1, 1.1),
+      );
+
+  BoxShadow get fillShadow => BoxShadow(
+        offset: Offset(0, 1),
+        color: Colors.black12,
+        blurRadius: 3,
       );
 
   BoxShadow get searchShadow => BoxShadow(

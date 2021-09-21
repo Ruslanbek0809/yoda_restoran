@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/app_theme.dart';
 
-class StaggerAnimationWidget extends StatelessWidget {
+class StaggerAnimationButtonWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final String? titleButton;
 
-  StaggerAnimationWidget({
+  StaggerAnimationButtonWidget({
     Key? key,
     required this.buttonController,
     this.onTap,
