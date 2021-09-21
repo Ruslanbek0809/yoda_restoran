@@ -224,24 +224,6 @@ class _OtpScreenState extends State<OtpScreen> with TickerProviderStateMixin {
                     color: AppTheme.MAIN,
                     onPressed: () {},
                   )
-            // GestureDetector(
-            //     child: Container(
-            //       decoration: BoxDecoration(
-            //           color: Colors.black,
-            //           shape: BoxShape.rectangle,
-            //           borderRadius: BorderRadius.circular(32)),
-            //       alignment: Alignment.center,
-            //       child: Text(
-            //         "Kody gaýtadan ugrat",
-            //         style: TextStyle(
-            //             fontWeight: FontWeight.bold,
-            //             color: AppTheme.WHITE),
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       // Resend you OTP via API or anything
-            //     },
-            //   ),
           ],
         ),
       ),
