@@ -610,7 +610,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                                         },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              EdgeInsets.all( 
                                                                   10.w),
                                                           child: Icon(
                                                             Icons.remove,
