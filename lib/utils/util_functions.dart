@@ -20,6 +20,16 @@ void printLog(dynamic data) {
   }
 }
 
+// SnackBar Widget
+snackBar(String? message, BuildContext context) {
+  return ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message!),
+      duration: Duration(seconds: 2),
+    ),
+  );
+}
+
 /// Device Type
 String getDeviceType() {
   final data = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);

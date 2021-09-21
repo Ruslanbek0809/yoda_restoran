@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/screens/login/login_screen.dart';
 import 'route.dart';
+import 'screens/login/login.dart';
 import 'utils/utils.dart';
 
 final mainScaffoldKey = GlobalKey();
@@ -69,7 +69,8 @@ class _YodaResAppState extends State<YodaResApp> {
               },
               home: Scaffold(
                 key: mainScaffoldKey,
-                body: LoginScreen(),
+                body: OtpScreen(),
+                // LoginScreen(),
                 // HomeScreen(),
               ),
               routes: Routes.getAllRoutes,
