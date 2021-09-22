@@ -86,7 +86,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           autovalidateMode: AutovalidateMode.disabled,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -99,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8.w),
+                  padding: EdgeInsets.only(top: 10.w),
                   child: TextFormField(
                     controller: _nameController,
                     keyboardType: TextInputType.text,
@@ -111,6 +110,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     focusNode: _nameFocus,
+                    onFieldSubmitted: (notUsed) {
+                      fieldFocusChange(context, _nameFocus, _birthdateFocus);
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Ady dolduryň';
@@ -122,19 +124,70 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: 8.w),
                   child: TextFormField(
-                    controller: _phoneController,
-                    keyboardType: TextInputType.phone,
+                    controller: _birthdateController,
+                    keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
-                      labelText: 'Telefon belgiňiz',
+                      labelText: 'Doglan senesi',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _birthdateFocus,
+                    onFieldSubmitted: (notUsed) {
+                      fieldFocusChange(context, _birthdateFocus, _genderFocus);
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Doglan senesini giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _genderController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Jynsy',
                       labelStyle: TextStyle(
                         color: AppTheme.DRAWER_ICON,
                       ),
                     ),
                     focusNode: _phoneFocus,
+                    onFieldSubmitted: (notUsed) {
+                      fieldFocusChange(context, _genderFocus, _emailFocus);
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Telefon belgiňizi giriziň';
+                        return 'Jynsy giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Elektron poçtasy',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _emailFocus,
+                    onFieldSubmitted: (notUsed) {
+                      fieldFocusChange(context, _emailFocus, _phoneFocus);
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Elektron poçtaňyzy giriziň';
                       }
                       return null;
                     },
@@ -145,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: TextFormField(
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       labelText: 'Telefon belgiňiz',
                       labelStyle: TextStyle(
@@ -153,6 +206,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     focusNode: _phoneFocus,
+                    onFieldSubmitted: (notUsed) {
+                      _phoneFocus.unfocus();
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Telefon belgiňizi giriziň';
@@ -161,38 +217,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.w),
-                  child: TextFormField(
-                    controller: _phoneController,
-                    keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                      labelText: 'Telefon belgiňiz',
-                      labelStyle: TextStyle(
-                        color: AppTheme.DRAWER_ICON,
-                      ),
-                    ),
-                    focusNode: _phoneFocus,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Telefon belgiňizi giriziň';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.w),
-                  child: CustomElevatedButton(
-                    height: 1.sw / 10,
-                    width: 1.sw,
-                    color: AppTheme.MAIN,
-                    borderRadius: 10.0,
-                    text: 'Ugratmak',
-                    isLoading: _isLoading,
-                    onPressed: _onRememberButtonPressed,
-                  ),
+                SizedBox(height: 0.2.sw),
+                CustomElevatedButton(
+                  height: 1.sw / 9,
+                  width: 1.sw,
+                  color: AppTheme.MAIN,
+                  borderRadius: 10.0,
+                  text: 'Ýatda sakla',
+                  isLoading: _isLoading,
+                  onPressed: _onRememberButtonPressed,
                 ),
               ],
             ),

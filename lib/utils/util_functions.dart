@@ -57,6 +57,12 @@ extension IndexedIterable<E> on Iterable<E> {
   }
 }
 
+fieldFocusChange(
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  currentFocus.unfocus();
+  FocusScope.of(context).requestFocus(nextFocus);
+}
+
 
 /// Keyboard Actions
 // KeyboardActionsConfig buildKeyboardActionsConfig(
