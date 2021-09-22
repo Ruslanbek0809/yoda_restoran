@@ -16,34 +16,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final GlobalKey<ScaffoldState> _profileScaffoldKey =
       GlobalKey<ScaffoldState>();
   bool _isLoading = false;
-  final GlobalKey<FormState> _contactformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profileformKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _infoController = TextEditingController();
+  final TextEditingController _birthdateController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final _phoneController = TextEditingController(text: '+993 ');
   var maskFormatter = MaskTextInputFormatter(
       mask: '+993 ## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
   final FocusNode _nameFocus = FocusNode();
+  final FocusNode _birthdateFocus = FocusNode();
+  final FocusNode _genderFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
   final FocusNode _phoneFocus = FocusNode();
-  final FocusNode _infoFocus = FocusNode();
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     _nameController.dispose();
     _phoneController.dispose();
-    _infoController.dispose();
+    _birthdateController.dispose();
+    _genderController.dispose();
+    _emailController.dispose();
     _nameFocus.dispose();
     _phoneFocus.dispose();
-    _infoFocus.dispose();
+    _birthdateFocus.dispose();
+    _genderFocus.dispose();
+    _emailFocus.dispose();
     super.dispose();
   }
 
-  Future _onContactPressed() async {
+  Future _onRememberButtonPressed() async {
     setState(() {
       _isLoading = true;
     });
-    if (_contactformKey.currentState!.validate()) {
-      printLog('_contactformKey validated');
+    if (_profileformKey.currentState!.validate()) {
+      printLog('_profileformKey validated');
       setState(() {
         _isLoading = false;
       });
@@ -62,14 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: GestureDetector(
           onTap: () => _profileScaffoldKey.currentState!.openDrawer(),
           child: Icon(
-            Icons.menu,
+            Icons.arrow_back,
             color: AppTheme.FONT_COLOR,
-          ),
-        ),
-        title: Text(
-          'Profil',
-          style: TextStyle(
-            color: AppTheme.FONT_COLOR,
+            size: 25.w,
           ),
         ),
       ),
@@ -78,72 +80,122 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: AppTheme.WHITE,
           borderRadius: AppTheme().containerRadius,
         ),
-        padding: EdgeInsets.only(top: 5.w, right: 15.w, left: 15.w),
+        padding: EdgeInsets.only(top: 5.w, left: 25.w, right: 25.w),
         child: Form(
-          key: _contactformKey,
+          key: _profileformKey,
           autovalidateMode: AutovalidateMode.disabled,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(hintText: 'Ady'),
-                focusNode: _nameFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Ady dolduryň';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(hintText: 'Telefon belgiňiz'),
-                focusNode: _phoneFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Telefon belgiňizi giriziň';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _infoController,
-                maxLines: 8,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      gapPadding: 0.0,
-                    ),
-                    hintText: 'Habarnama'),
-                focusNode: _infoFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Habarnama hökman dolduryň';
-                  }
-                  return null;
-                },
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.w),
-                child: CustomElevatedButton(
-                  height: 1.sw / 10,
-                  width: 1.sw,
-                  color: AppTheme.MAIN,
-                  borderRadius: 10.0,
-                  text: 'Ugratmak',
-                  isLoading: _isLoading,
-                  onPressed: _onContactPressed,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Profil',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _nameController,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Ady',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _nameFocus,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Ady dolduryň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Telefon belgiňiz',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _phoneFocus,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Telefon belgiňizi giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Telefon belgiňiz',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _phoneFocus,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Telefon belgiňizi giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w),
+                  child: TextFormField(
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Telefon belgiňiz',
+                      labelStyle: TextStyle(
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                    focusNode: _phoneFocus,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Telefon belgiňizi giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.w),
+                  child: CustomElevatedButton(
+                    height: 1.sw / 10,
+                    width: 1.sw,
+                    color: AppTheme.MAIN,
+                    borderRadius: 10.0,
+                    text: 'Ugratmak',
+                    isLoading: _isLoading,
+                    onPressed: _onRememberButtonPressed,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
