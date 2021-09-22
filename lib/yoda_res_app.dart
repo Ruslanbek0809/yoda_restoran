@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'route.dart';
+import 'screens/home/home.dart';
 import 'screens/login/login.dart';
 import 'utils/utils.dart';
 
@@ -69,9 +70,10 @@ class _YodaResAppState extends State<YodaResApp> {
               },
               home: Scaffold(
                 key: mainScaffoldKey,
-                body: OtpScreen(),
-                // LoginScreen(),
-                // HomeScreen(),
+                body:
+                    // OtpScreen(),
+                    // LoginScreen(),
+                    HomeScreen(),
               ),
               routes: Routes.getAllRoutes,
               themeMode: ThemeMode.light,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:yoda_res/screens/home/home.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
@@ -12,6 +13,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final GlobalKey<ScaffoldState> _profileScaffoldKey =
+      GlobalKey<ScaffoldState>();
   bool _isLoading = false;
   final GlobalKey<FormState> _contactformKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -50,22 +53,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      key: _profileScaffoldKey,
+      backgroundColor: AppTheme.WHITE,
+      drawer: DrawerWidget(),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppTheme.WHITE,
         elevation: 0,
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => _profileScaffoldKey.currentState!.openDrawer(),
           child: Icon(
-            Icons.cancel, // TODO: Change this to other icon
-            color: AppTheme.BLACK,
-            size: 22.w,
+            Icons.menu,
+            color: AppTheme.FONT_COLOR,
           ),
         ),
         title: Text(
-          'Biz bilen habarlaş',
+          'Profil',
           style: TextStyle(
-            color: AppTheme.WHITE,
+            color: AppTheme.FONT_COLOR,
           ),
         ),
       ),
