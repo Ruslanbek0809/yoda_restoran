@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -43,6 +46,103 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _genderFocus.dispose();
     _emailFocus.dispose();
     super.dispose();
+  }
+
+  void _onGenderPressed() {
+    printLog('_onGenderPressed');
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return CupertinoActionSheet(
+            actions: <Widget>[
+              CupertinoActionSheetAction(
+                child: Text(
+                  'Erkek',
+                ),
+                onPressed: () {
+                  _genderController.text = 'Erkek';
+                  Navigator.of(context).pop();
+                },
+              ),
+              CupertinoActionSheetAction(
+                child: Text(
+                  'Aýal',
+                ),
+                onPressed: () {
+                  _genderController.text = 'Aýal';
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+            cancelButton: CupertinoActionSheetAction(
+              isDestructiveAction: true,
+              child: Text(
+                'Ýap',
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          );
+        },
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        isDismissible: true,
+        builder: (BuildContext context) {
+          return BottomSheet(
+            onClosing: () {},
+            builder: (BuildContext context) {
+              return Container(
+                height: 186,
+                child: ListView(
+                  children: <Widget>[
+                    ListTile(
+                      title: Center(
+                        child: Text(
+                          'Erkek',
+                        ),
+                      ),
+                      onTap: () {
+                        _genderController.text = 'Erkek';
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    Divider(height: 8),
+                    ListTile(
+                      title: Center(
+                        child: Text(
+                          'Aýal',
+                        ),
+                      ),
+                      onTap: () {
+                        _genderController.text = 'Aýal';
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    Divider(height: 8),
+                    ListTile(
+                      title: Center(
+                        child: Text(
+                          'Ýap',
+                          style: TextStyle(color: AppTheme.RED),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      );
+    }
   }
 
   Future _onRememberButtonPressed() async {
@@ -147,26 +247,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.w),
-                  child: TextFormField(
-                    controller: _genderController,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                      labelText: 'Jynsy',
-                      labelStyle: TextStyle(
-                        color: AppTheme.DRAWER_ICON,
+                  child: GestureDetector(
+                    onTap: _onGenderPressed,
+                    child: Container(
+                      color: Colors.transparent,
+                      child: IgnorePointer(
+                        child: TextFormField(
+                          controller: _genderController,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            labelText: 'Jynsy',
+                            labelStyle: TextStyle(
+                              color: AppTheme.DRAWER_ICON,
+                            ),
+                          ),
+                          focusNode: _genderFocus,
+                          onFieldSubmitted: (notUsed) {
+                            fieldFocusChange(
+                                context, _genderFocus, _emailFocus);
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Jynsy giriziň';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                     ),
-                    focusNode: _phoneFocus,
-                    onFieldSubmitted: (notUsed) {
-                      fieldFocusChange(context, _genderFocus, _emailFocus);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Jynsy giriziň';
-                      }
-                      return null;
-                    },
                   ),
                 ),
                 Padding(
