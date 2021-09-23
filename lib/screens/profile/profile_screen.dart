@@ -48,6 +48,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
+  _showDialog() {
+    return () => showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(2050),
+        ).then(print);
+  }
+
   void _onGenderPressed() {
     printLog('_onGenderPressed');
     if (Platform.isIOS) {
@@ -223,7 +232,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.w),
-                  child: TextFormField(
+                  child:
+                      // GestureDetector(
+                      //   onTap: _showDialog,
+                      //   child: Container(
+                      //     color: Colors.transparent,
+                      //     child: IgnorePointer(
+                      //       child:
+                      TextFormField(
+                    onTap: () async {
+                      DateTime? date = DateTime(1900);
+                      FocusScope.of(context).requestFocus(new FocusNode());
+
+                      date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100));
+                    },
                     controller: _birthdateController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
@@ -243,6 +269,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       }
                       return null;
                     },
+                    //       ),
+                    //     ),
+                    //   ),
                   ),
                 ),
                 Padding(
