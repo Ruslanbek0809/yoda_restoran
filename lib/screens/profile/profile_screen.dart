@@ -7,6 +7,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:yoda_res/screens/home/home.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -57,10 +58,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ).then(print);
   }
 
-  void _onGenderPressed() {
+  void _onGenderPressed() async {
     printLog('_onGenderPressed');
     if (Platform.isIOS) {
-      showCupertinoModalPopup(
+      await showCupertinoModalPopup(
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
@@ -98,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       );
     } else {
-      showModalBottomSheet(
+      await showModalBottomSheet(
         context: context,
         isDismissible: true,
         builder: (BuildContext context) {
@@ -246,9 +247,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       date = await showDatePicker(
                           context: context,
+                          locale: const Locale("ru", "RU"),
                           initialDate: DateTime.now(),
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100));
+                      _birthdateController.text = date!.toIso8601String();
                     },
                     controller: _birthdateController,
                     keyboardType: TextInputType.text,
@@ -280,6 +283,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: _onGenderPressed,
                     child: Container(
                       color: Colors.transparent,
+                      //// the red square would receive click events when tapping the blue square.
                       child: IgnorePointer(
                         child: TextFormField(
                           controller: _genderController,

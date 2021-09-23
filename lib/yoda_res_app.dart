@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'route.dart';
 import 'screens/home/home.dart';
@@ -43,6 +44,16 @@ class _YodaResAppState extends State<YodaResApp> {
             //   child:
             MaterialApp(
               title: Constants.appName,
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: [
+                const Locale('en'),
+                const Locale('tk'),
+                const Locale('ru'),
+              ],
               debugShowCheckedModeBanner: false,
               navigatorKey: yodaResNavigatorKey,
               theme: ThemeData(
