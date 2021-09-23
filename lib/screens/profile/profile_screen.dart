@@ -242,15 +242,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       //       child:
                       TextFormField(
                     onTap: () async {
-                      DateTime? date = DateTime(1900);
-                      FocusScope.of(context).requestFocus(new FocusNode());
+                      DateTime? date;
+                      FocusScope.of(context).requestFocus(FocusNode());
 
                       date = await showDatePicker(
-                          context: context,
-                          locale: const Locale("ru", "RU"),
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100));
+                        context: context,
+                        cancelText: 'Ýatyrmak',
+                        helpText: 'Doglan senäňizi giriziň',
+                        confirmText: 'Tassyklamak',
+                        fieldHintText: '01/01/2001',
+                        fieldLabelText: 'Doglan senäňizi giriziň',
+                        errorFormatText: 'Formaty dogry giriziň',
+                        errorInvalidText: 'Ýalňyş format',
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
                       _birthdateController.text = date!.toIso8601String();
                     },
                     controller: _birthdateController,
