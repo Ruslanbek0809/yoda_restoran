@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:yoda_res/library/flutter_datetime_picker.dart';
+import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:yoda_res/screens/home/home.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -238,19 +239,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       DateTime? date;
                       FocusScope.of(context).requestFocus(FocusNode());
 
-                      date = await showDatePicker(
-                        context: context,
-                        cancelText: 'Ýatyrmak',
-                        helpText: 'Doglan senäňizi giriziň',
-                        confirmText: 'Tassyklamak',
-                        fieldHintText: '01/01/2001',
-                        fieldLabelText: 'Doglan senäňizi giriziň',
-                        errorFormatText: 'Formaty dogry giriziň',
-                        errorInvalidText: 'Ýalňyş format',
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      );
+                      date = await DatePicker.showDatePicker(context,
+                          showTitleActions: true,
+                          minTime: DateTime(1900, 1, 1),
+                          maxTime: DateTime.now(), onChanged: (date) {
+                        print('change $date');
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                      }, currentTime: DateTime.now(), locale: LocaleType.tk);
+                      // await showDatePicker(
+                      //   context: context,
+                      //   cancelText: 'Ýatyrmak',
+                      //   helpText: 'Doglan senäňizi giriziň',
+                      //   confirmText: 'Tassyklamak',
+                      //   fieldHintText: '01/01/2001',
+                      //   fieldLabelText: 'Doglan senäňizi giriziň',
+                      //   errorFormatText: 'Formaty dogry giriziň',
+                      //   errorInvalidText: 'Ýalňyş format',
+                      //   initialDate: DateTime.now(),
+                      //   firstDate: DateTime(1900),
+                      //   lastDate: DateTime.now(),
+                      // );
                       _birthdateController.text = date!.toIso8601String();
                     },
                     controller: _birthdateController,

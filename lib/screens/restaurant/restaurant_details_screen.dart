@@ -68,7 +68,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _tabController.addListener(_tabListener);
 
     /// Container bounce back
-
     _tweenController = AnimationController(
         duration: const Duration(milliseconds: 50), vsync: this)
       ..addStatusListener((status) {
@@ -610,7 +609,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                                         },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.all( 
+                                                              EdgeInsets.all(
                                                                   10.w),
                                                           child: Icon(
                                                             Icons.remove,
