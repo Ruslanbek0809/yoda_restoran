@@ -233,14 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.w),
-                  child:
-                      // GestureDetector(
-                      //   onTap: _showDialog,
-                      //   child: Container(
-                      //     color: Colors.transparent,
-                      //     child: IgnorePointer(
-                      //       child:
-                      TextFormField(
+                  child: TextFormField(
                     onTap: () async {
                       DateTime? date;
                       FocusScope.of(context).requestFocus(FocusNode());
@@ -279,9 +272,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       }
                       return null;
                     },
-                    //       ),
-                    //     ),
-                    //   ),
                   ),
                 ),
                 Padding(
