@@ -3,6 +3,7 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/screens/restaurant/product_bottom_sheet.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
@@ -56,6 +57,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   bool get _isShrink {
     return _scrollController.hasClients &&
         _scrollController.offset > (0.5.sh - kToolbarHeight);
+  }
+
+  void _onSortClicked() {
+    showProductBottomSheet(context);
   }
 
   @override
