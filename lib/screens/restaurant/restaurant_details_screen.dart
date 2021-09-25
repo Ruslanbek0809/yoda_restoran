@@ -6,6 +6,7 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/screens/restaurant/product_bottom_sheet.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'product_widget.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   @override
@@ -21,10 +22,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   late ScrollController _scrollController;
   bool lastStatus = true;
   bool isDelivery = true;
-  bool isButtonToggled = false;
   int _activeIndex = 0;
-  late AnimationController _tweenController;
-  Tween<double> _tween = Tween(begin: 1, end: 0.98);
 
   List<FoodCategory> _foodCategoryList = [
     FoodCategory(0, 'Ertirlikler'),
@@ -59,10 +57,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
         _scrollController.offset > (0.5.sh - kToolbarHeight);
   }
 
-  void _onProductBottomSheetClicked(FoodModel food) {
-    showProductBottomSheet(context, food);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -71,16 +65,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _tabController =
         TabController(length: _foodCategoryList.length, vsync: this);
     _tabController.addListener(_tabListener);
-
-    /// Container bounce back
-    _tweenController = AnimationController(
-        duration: const Duration(milliseconds: 50), vsync: this)
-      ..addStatusListener((status) {
-//// This listener was used to repeat animation once
-        if (status == AnimationStatus.completed) {
-          _tweenController.reverse();
-        }
-      });
   }
 
   @override
@@ -89,7 +73,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _scrollController.dispose();
     _tabController.dispose();
     _tabController.removeListener(_tabListener);
-    _tweenController.dispose();
     super.dispose();
   }
 
@@ -545,170 +528,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           ),
                           itemCount: _foodList.length,
                           itemBuilder: (context, pos) {
-                            return ScaleTransition(
-                              scale: _tween.animate(CurvedAnimation(
-                                  parent: _tweenController,
-                                  curve: Curves.bounceInOut)),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
-                                  borderRadius: AppTheme().mainBorderRadius,
-                                ),
-                                padding: EdgeInsets.all(5.w),
-                                child: LayoutBuilder(
-                                  builder: (BuildContext context,
-                                      BoxConstraints constraints) {
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        YodaImage(
-                                          image: _foodList[pos].image,
-                                          height: constraints.maxWidth,
-                                          width: constraints.maxWidth,
-                                          borderRadius: 20.0,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8.w, bottom: 4.w),
-                                          child: Text(
-                                            _foodList[pos].name,
-                                            style: TextStyle(
-                                              fontSize: 17.sp,
-                                              color: AppTheme.FONT_COLOR,
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          '${_foodList[pos].weight} ${_foodList[pos].weightType}',
-                                          style: TextStyle(
-                                            fontSize: 15.sp,
-                                            color: AppTheme.DRAWER_ICON,
-                                          ),
-                                        ),
-                                        Spacer(),
-//// Button Widget
-                                        AnimatedSwitcher(
-                                          duration: Duration(milliseconds: 300),
-                                          child: isButtonToggled
-                                              ? Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Material(
-                                                      color: AppTheme.WHITE,
-                                                      borderRadius: AppTheme()
-                                                          .buttonBorderRadius,
-                                                      elevation: 1,
-                                                      child: InkWell(
-                                                        borderRadius: AppTheme()
-                                                            .buttonBorderRadius,
-                                                        onTap: () async {
-                                                          _tweenController
-                                                              .forward();
-                                                          if (isButtonToggled)
-                                                            setState(() {
-                                                              isButtonToggled =
-                                                                  !isButtonToggled;
-                                                            });
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10.w),
-                                                          child: Icon(
-                                                            Icons.remove,
-                                                            size: 25.w,
-                                                            color: AppTheme
-                                                                .FONT_COLOR,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '1',
-                                                      style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        color:
-                                                            AppTheme.FONT_COLOR,
-                                                      ),
-                                                    ),
-                                                    Material(
-                                                      color: AppTheme.WHITE,
-                                                      borderRadius: AppTheme()
-                                                          .buttonBorderRadius,
-                                                      elevation: 1,
-                                                      child: InkWell(
-                                                        borderRadius: AppTheme()
-                                                            .buttonBorderRadius,
-                                                        onTap: () {
-                                                          _onProductBottomSheetClicked(
-                                                              _foodList[pos]);
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10.w),
-                                                          child: Icon(
-                                                            Icons.add,
-                                                            size: 25.w,
-                                                            color: AppTheme
-                                                                .FONT_COLOR,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              : Material(
-                                                  color: Colors.transparent,
-                                                  borderRadius: AppTheme()
-                                                      .buttonBorderRadius,
-                                                  elevation: 1,
-                                                  child: InkWell(
-                                                    borderRadius: AppTheme()
-                                                        .buttonBorderRadius,
-                                                    onTap: () async {
-                                                      _tweenController
-                                                          .forward();
-                                                      if (!isButtonToggled)
-                                                        setState(() {
-                                                          isButtonToggled =
-                                                              !isButtonToggled;
-                                                        });
-                                                    },
-                                                    child: Ink(
-                                                      width:
-                                                          constraints.maxWidth,
-                                                      decoration: BoxDecoration(
-                                                        color: AppTheme.WHITE,
-                                                        borderRadius: AppTheme()
-                                                            .buttonBorderRadius,
-                                                      ),
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 10.w),
-                                                      child: Text(
-                                                        '${_foodList[pos].price} TMT',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: 20.sp,
-                                                          color: AppTheme
-                                                              .FONT_COLOR,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                        )
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
+                            return ProductWidget(food: _foodList[pos]);
                           },
                         ),
                       )
