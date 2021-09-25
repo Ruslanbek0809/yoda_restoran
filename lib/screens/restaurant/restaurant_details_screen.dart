@@ -59,8 +59,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
         _scrollController.offset > (0.5.sh - kToolbarHeight);
   }
 
-  void _onSortClicked() {
-    showProductBottomSheet(context);
+  void _onProductBottomSheetClicked(FoodModel food) {
+    showProductBottomSheet(context, food);
   }
 
   @override
@@ -587,6 +587,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                           ),
                                         ),
                                         Spacer(),
+//// Button Widget
                                         AnimatedSwitcher(
                                           duration: Duration(milliseconds: 300),
                                           child: isButtonToggled
@@ -641,7 +642,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                                       child: InkWell(
                                                         borderRadius: AppTheme()
                                                             .buttonBorderRadius,
-                                                        onTap: () {},
+                                                        onTap: () {
+                                                          _onProductBottomSheetClicked(
+                                                              _foodList[pos]);
+                                                        },
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsets.all(

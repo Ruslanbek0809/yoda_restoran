@@ -11,6 +11,7 @@ class AppTheme {
   static const Color DRAWER_DIVIDER = Color(0xFFCCCCCC);
   static const Color FILL_COLOR = Color(0xFFF8F8F8);
   static const Color FILL_BORDER_COLOR = Color(0xFFBBBBBB);
+  static const Color BUTTON_BORDER_COLOR = Color(0xFF888888);
   static const Color GREEN = Color(0xFF76C03F);
   static const Color RED = Color(0xFFE64F3A);
   static const Color BLACK = Color(0xFF000000);
@@ -93,4 +94,5 @@ class AppTheme {
   BorderRadius get mainBorderRadius => BorderRadius.circular(20.0);
   BorderRadius get buttonBorderRadius => BorderRadius.circular(15.0);
   BorderRadius get containerRadius => BorderRadius.circular(10.0);
+  BorderRadius get button2BorderRadius => BorderRadius.circular(12.0);
 }

@@ -9,6 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String text;
   final double borderRadius;
   final bool isLoading;
+  final double elevation;
   final Function onPressed;
   CustomElevatedButton(
       {required this.height,
@@ -17,6 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
       required this.text,
       required this.borderRadius,
       this.isLoading = false,
+      this.elevation = 3,
       required this.onPressed});
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
         onPrimary: color,
         onSurface: color,
         shadowColor: color,
-        elevation: 3,
+        elevation: elevation,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius)),
         minimumSize: Size(width, height),
