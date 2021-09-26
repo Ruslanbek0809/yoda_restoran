@@ -27,14 +27,22 @@ class FoodBottomSheetWidget extends StatefulWidget {
 }
 
 class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
+  AdditionalFoodModel? selectedAdditional;
+
+  void _setSelectedAdditionalFood(AdditionalFoodModel? additionalFoodModel) {
+    setState(() {
+      selectedAdditional = additionalFoodModel;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.9.sh,
+      height: 0.925.sh,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_BUTTON)),
-        color: AppTheme.MAIN_LIGHT,
+        color: AppTheme.BOTTOM_BACKGROUND_COLOR,
       ),
       child: Stack(
         children: [
@@ -77,26 +85,42 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                 ),
                 Column(
                   children: widget.food.additionals
-                      .map<Widget>((AdditionalFoodModel additional) =>
-                          CheckboxListTile(
-                            title: Text(additional.name),
-                            value: additional.isAdded,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            activeColor: AppTheme.MAIN,
-                            contentPadding: EdgeInsets.only(left: 5.w),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                additional.isAdded = value!;
-                              });
-                            },
-                          ))
+                      .map<Widget>(
+                        (AdditionalFoodModel additional) =>
+                            RadioListTile<AdditionalFoodModel>(
+                          value: additional,
+                          groupValue: selectedAdditional,
+                          onChanged: _setSelectedAdditionalFood,
+                          title: Text(additional.name),
+                          activeColor: AppTheme.MAIN,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          toggleable: true,
+                        ),
+                      )
                       .toList(),
                 ),
-                SizedBox(height: 0.175.sh)
+                // Column(
+                //   children: widget.food.additionals
+                //       .map<Widget>((AdditionalFoodModel additional) =>
+                //           CheckboxListTile(
+                //             title: Text(additional.name),
+                //             value: additional.isAdded,
+                //             controlAffinity: ListTileControlAffinity.leading,
+                //             activeColor: AppTheme.MAIN,
+                //             contentPadding: EdgeInsets.only(left: 5.w),
+                //             onChanged: (bool? value) {
+                //               setState(() {
+                //                 additional.isAdded = value!;
+                //               });
+                //             },
+                //           ))
+                //       .toList(),
+                // ),
+                SizedBox(height: 0.15.sh)
               ],
             ),
           ),
-//// BELOW CONTAINER Widget
+          //// BELOW CONTAINER Widget
           Positioned(
             bottom: 0,
             left: 0,
@@ -146,7 +170,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                       ],
                     ),
                   ),
-//// Buttons Widget
+                  //// Buttons Widget
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -215,7 +239,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                     ],
                   ),
                   SizedBox(
-                    height: 0.075.sw,
+                    height: 0.05.sw,
                   ),
                 ],
               ),
