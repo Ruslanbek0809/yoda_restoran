@@ -75,6 +75,23 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                     maxLines: 3,
                   ),
                 ),
+                Column(
+                  children: widget.food.additionals
+                      .map<Widget>((AdditionalFoodModel additional) =>
+                          CheckboxListTile(
+                            title: Text(additional.name),
+                            value: additional.isAdded,
+                            controlAffinity: ListTileControlAffinity.leading,
+                            activeColor: AppTheme.MAIN,
+                            contentPadding: EdgeInsets.only(left: 5.w),
+                            onChanged: (bool? value) {
+                              setState(() {
+                                additional.isAdded = value!;
+                              });
+                            },
+                          ))
+                      .toList(),
+                ),
                 SizedBox(height: 0.175.sh)
               ],
             ),
