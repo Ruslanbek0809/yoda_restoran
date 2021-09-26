@@ -21,20 +21,19 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: widget.homeCategories.mapIndexed((cat, pos) {
+        children: widget.homeCategories.map((category) {
           return AnimatedContainer(
             duration: Duration(milliseconds: 250),
             curve: Curves.fastOutSlowIn,
-            width: selectedCatId == widget.homeCategories[pos].id ? 72.w : 75.w,
-            height:
-                selectedCatId == widget.homeCategories[pos].id ? 72.w : 75.w,
+            width: selectedCatId == category.id ? 72.w : 75.w,
+            height: selectedCatId == category.id ? 72.w : 75.w,
             margin: EdgeInsets.only(
                 top: 15.w), // margin on top of persistent header
             color: AppTheme.WHITE,
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  selectedCatId = cat.id;
+                  selectedCatId = category.id;
                 });
               },
               child: Column(
@@ -43,41 +42,30 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: YodaImage(
-                      image: widget.homeCategories[pos].image,
+                      image: category.image,
                       fit: BoxFit.cover,
-                      width: selectedCatId == widget.homeCategories[pos].id
-                          ? 45.w
-                          : 50.w,
-                      height: selectedCatId == widget.homeCategories[pos].id
-                          ? 45.w
-                          : 50.w,
+                      width: selectedCatId == category.id ? 45.w : 50.w,
+                      height: selectedCatId == category.id ? 45.w : 50.w,
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 7.w),
                     padding: EdgeInsets.symmetric(
-                        horizontal:
-                            selectedCatId == widget.homeCategories[pos].id
-                                ? 5.w
-                                : 0.0,
-                        vertical: selectedCatId == widget.homeCategories[pos].id
-                            ? 2.w
-                            : 0.0),
+                        horizontal: selectedCatId == category.id ? 5.w : 0.0,
+                        vertical: selectedCatId == category.id ? 2.w : 0.0),
                     decoration: BoxDecoration(
                       borderRadius: AppTheme().buttonBorderRadius,
-                      color: selectedCatId == widget.homeCategories[pos].id
+                      color: selectedCatId == category.id
                           ? AppTheme.MAIN
                           : AppTheme.WHITE,
                     ),
                     child: Text(
-                      widget.homeCategories[pos].name,
+                      category.name,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: selectedCatId == widget.homeCategories[pos].id
-                            ? 11.sp
-                            : 12.sp,
+                        fontSize: selectedCatId == category.id ? 11.sp : 12.sp,
                         fontWeight: FontWeight.w600,
-                        color: selectedCatId == widget.homeCategories[pos].id
+                        color: selectedCatId == category.id
                             ? AppTheme.WHITE
                             : AppTheme.MAIN,
                       ),

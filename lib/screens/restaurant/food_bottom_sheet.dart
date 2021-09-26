@@ -83,39 +83,84 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                     maxLines: 3,
                   ),
                 ),
-                Column(
-                  children: widget.food.additionals
-                      .map<Widget>(
-                        (AdditionalFoodModel additional) =>
-                            RadioListTile<AdditionalFoodModel>(
-                          value: additional,
-                          groupValue: selectedAdditional,
-                          onChanged: _setSelectedAdditionalFood,
-                          title: Text(additional.name),
-                          activeColor: AppTheme.MAIN,
-                          controlAffinity: ListTileControlAffinity.leading,
-                          toggleable: true,
-                        ),
-                      )
-                      .toList(),
-                ),
                 // Column(
                 //   children: widget.food.additionals
-                //       .map<Widget>((AdditionalFoodModel additional) =>
-                //           CheckboxListTile(
-                //             title: Text(additional.name),
-                //             value: additional.isAdded,
-                //             controlAffinity: ListTileControlAffinity.leading,
-                //             activeColor: AppTheme.MAIN,
-                //             contentPadding: EdgeInsets.only(left: 5.w),
-                //             onChanged: (bool? value) {
-                //               setState(() {
-                //                 additional.isAdded = value!;
-                //               });
-                //             },
-                //           ))
+                //       .map<Widget>(
+                //         (AdditionalFoodModel additional) =>
+                //             RadioListTile<AdditionalFoodModel>(
+                //           value: additional,
+                //           groupValue: selectedAdditional,
+                //           onChanged: _setSelectedAdditionalFood,
+                //           title: Row(
+                //             children: [
+                //               Text(
+                //                 '${additional.name} ml',
+                //                 style: TextStyle(
+                //                   color: AppTheme.FONT_COLOR,
+                //                   fontSize: 14.sp,
+                //                 ),
+                //               ),
+                //               SizedBox(width: 7.w),
+                //               Text(
+                //                 '+${additional.price} TMT',
+                //                 style: TextStyle(
+                //                   color: AppTheme.FONT_GREY_COLOR,
+                //                   fontSize: 16.sp,
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           activeColor: AppTheme.MAIN,
+                //           controlAffinity: ListTileControlAffinity.leading,
+                //           toggleable: true,
+                //         ),
+                //       )
                 //       .toList(),
                 // ),
+                Column(
+                  children: widget.food.additionals
+                      .mapIndexed<Widget>(
+                          (AdditionalFoodModel additional, int pos) => Column(
+                                children: [
+                                  CheckboxListTile(
+                                    title: Row(
+                                      children: [
+                                        Text(
+                                          additional.name,
+                                          style: TextStyle(
+                                            color: AppTheme.FONT_COLOR,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                        SizedBox(width: 7.w),
+                                        Text(
+                                          '+${additional.price} TMT',
+                                          style: TextStyle(
+                                            color: AppTheme.FONT_GREY_COLOR,
+                                            fontSize: 16.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    value: additional.isAdded,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    activeColor: AppTheme.MAIN,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        additional.isAdded = value!;
+                                      });
+                                    },
+                                  ),
+                                  if (pos != widget.food.additionals.length - 1)
+                                    Divider(
+                                      color: AppTheme.DRAWER_DIVIDER,
+                                      indent: 0.175.sw,
+                                    )
+                                ],
+                              ))
+                      .toList(),
+                ),
                 SizedBox(height: 0.15.sh)
               ],
             ),
