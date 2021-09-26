@@ -3,10 +3,10 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/screens/restaurant/product_bottom_sheet.dart';
+import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
-import 'product_widget.dart';
+import 'food_widget.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   @override
@@ -33,9 +33,21 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   ];
 
   List<FoodModel> _foodList = [
-    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg'),
-    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg'),
-    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg'),
+    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
+      AdditionalFoodModel('Peýnir', 10, false),
+      AdditionalFoodModel('Ýumurtga', 10, false),
+      AdditionalFoodModel('Bet zat', 15, false),
+    ]),
+    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
+      AdditionalFoodModel('Peýnir', 10, false),
+      AdditionalFoodModel('Ýumurtga', 10, false),
+      AdditionalFoodModel('Bet zat', 15, false),
+    ]),
+    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
+      AdditionalFoodModel('Peýnir', 10, false),
+      AdditionalFoodModel('Ýumurtga', 10, false),
+      AdditionalFoodModel('Bet zat', 15, false),
+    ]),
   ];
 
   void _scrollListener() {
@@ -528,7 +540,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           ),
                           itemCount: _foodList.length,
                           itemBuilder: (context, pos) {
-                            return ProductWidget(food: _foodList[pos]);
+                            return FoodWidget(food: _foodList[pos]);
                           },
                         ),
                       )

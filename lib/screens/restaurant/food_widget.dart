@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/models/food_model.dart';
-import 'package:yoda_res/screens/restaurant/product_bottom_sheet.dart';
+import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductWidget extends StatefulWidget {
+class FoodWidget extends StatefulWidget {
   final FoodModel food;
-  const ProductWidget({Key? key, required this.food}) : super(key: key);
+  const FoodWidget({Key? key, required this.food}) : super(key: key);
 
   @override
-  _ProductWidgetState createState() => _ProductWidgetState();
+  _FoodWidgetState createState() => _FoodWidgetState();
 }
 
-class _ProductWidgetState extends State<ProductWidget>
+class _FoodWidgetState extends State<FoodWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
@@ -43,7 +43,7 @@ class _ProductWidgetState extends State<ProductWidget>
   }
 
   void _onProductBottomSheetClicked(FoodModel food) {
-    showProductBottomSheet(context, food);
+    showFoodBottomSheet(context, food);
   }
 
   @override
