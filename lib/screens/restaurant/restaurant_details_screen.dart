@@ -82,7 +82,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _tabController.addListener(_tabListener);
 
     bottomCartController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 150));
 
     bottomCartOffset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
         .animate(bottomCartController);
@@ -571,9 +571,43 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   child: Container(
                     height: 0.2.sw,
                     width: 1.sw,
-                    alignment: Alignment.center,
                     color: AppTheme.WHITE,
-                    child: Text('Hey'),
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      decoration: BoxDecoration(
+                        color: AppTheme.MAIN,
+                        borderRadius: AppTheme().containerRadius,
+                      ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '40-50 min',
+                            style: TextStyle(
+                              color: AppTheme.WHITE,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          Text(
+                            'Sargyt',
+                            style: TextStyle(
+                              color: AppTheme.WHITE,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '35 TMT',
+                            style: TextStyle(
+                              color: AppTheme.WHITE,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               )

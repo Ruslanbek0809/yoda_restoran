@@ -136,16 +136,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                               child: InkWell(
                                 borderRadius: AppTheme().buttonBorderRadius,
                                 onTap: () {
-                                  switch (widget.animationController.status) {
-                                    case AnimationStatus.completed:
-                                      widget.animationController.reverse();
-                                      break;
-                                    case AnimationStatus.dismissed:
-                                      widget.animationController.forward();
-                                      break;
-                                    default:
-                                  }
-                                  // _onProductBottomSheetClicked(food);
+                                  _onProductBottomSheetClicked(food);
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(10.w),
@@ -166,11 +157,23 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                           child: InkWell(
                             borderRadius: AppTheme().buttonBorderRadius,
                             onTap: () async {
+                              //// Bouncing animation trigger
                               _tweenController.forward();
+                              //// Toggle switch animation between price and quantity
                               if (!isButtonToggled)
                                 setState(() {
                                   isButtonToggled = !isButtonToggled;
                                 });
+                              //// bottomCartnAnimationController trigger
+                              switch (widget.animationController.status) {
+                                case AnimationStatus.completed:
+                                  widget.animationController.reverse();
+                                  break;
+                                case AnimationStatus.dismissed:
+                                  widget.animationController.forward();
+                                  break;
+                                default:
+                              }
                             },
                             child: Ink(
                               width: constraints.maxWidth,
