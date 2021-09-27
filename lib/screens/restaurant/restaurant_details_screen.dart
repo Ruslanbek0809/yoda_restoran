@@ -84,7 +84,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     bottomCartController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
 
-    bottomCartOffset = Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 1.0))
+    bottomCartOffset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
         .animate(bottomCartController);
   }
 
@@ -569,7 +569,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                 child: SlideTransition(
                   position: bottomCartOffset,
                   child: Container(
-                    height: 0.1.sw,
+                    height: 0.2.sw,
                     width: 1.sw,
                     alignment: Alignment.center,
                     color: AppTheme.WHITE,
