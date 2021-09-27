@@ -55,12 +55,6 @@ class AppTheme {
 
   static SizedBox horizontalSpace(double width) => SizedBox(width: width);
 
-  /// Shadows
-  // BoxShadow get mainShadow => BoxShadow(
-  //     color: MAIN_LIGHT.withOpacity(0.25),
-  //     offset: const Offset(1.1, 1.1),
-  //     blurRadius: 6.0);
-
   BoxShadow get buttonShadow => BoxShadow(
         color: MAIN_DARK.withOpacity(0.5),
         blurRadius: 3.0,
@@ -79,17 +73,10 @@ class AppTheme {
         offset: const Offset(1.1, 1.1),
       );
 
-  // BoxShadow get buttonShadow => BoxShadow(
-  //       color: MAIN,
-  //       blurRadius: 4,
-  //       offset: Offset(1, 1),
-  //     );
-
-  BoxShadow get smallShadow => BoxShadow(
-        color: MAIN.withOpacity(0.4),
-        spreadRadius: 4,
-        blurRadius: 5,
-        offset: Offset(0, 3),
+  BoxShadow get bottomCartShadow => BoxShadow(
+        color: AppTheme.MAIN_DARK.withOpacity(0.3),
+        blurRadius: 3.0,
+        offset: const Offset(0.0, 1.1),
       );
 
   /// Radiuses

@@ -173,7 +173,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
               ],
             ),
           ),
-          //// BELOW CONTAINER Widget
+          //// ADD CART Widget
           Positioned(
             bottom: 0,
             left: 0,
@@ -228,6 +228,8 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
+                        width: 0.33.sw,
+                        height: 0.15.sw,
                         decoration: BoxDecoration(
                           color: AppTheme.WHITE,
                           borderRadius: AppTheme().button2BorderRadius,
@@ -237,39 +239,48 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Material(
-                              color: AppTheme.WHITE,
-                              borderRadius: AppTheme().button2BorderRadius,
-                              elevation: 0,
-                              child: InkWell(
+                            SizedBox(
+                              width: 0.11.sw,
+                              height: 0.15.sw,
+                              child: Material(
+                                color: AppTheme.WHITE,
                                 borderRadius: AppTheme().button2BorderRadius,
-                                onTap: () async {},
-                                child: Padding(
-                                  padding: EdgeInsets.all(14.w),
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 25.w,
-                                    color: AppTheme.FONT_COLOR,
+                                elevation: 0,
+                                child: InkWell(
+                                  borderRadius: AppTheme().button2BorderRadius,
+                                  onTap: () async {},
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.w),
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 25.w,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                color: AppTheme.FONT_COLOR,
+                            SizedBox(
+                              width: 0.1.sw,
+                              child: Text(
+                                '1',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: AppTheme.FONT_COLOR,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                            Material(
-                              color: AppTheme.WHITE,
-                              borderRadius: AppTheme().button2BorderRadius,
-                              elevation: 0,
-                              child: InkWell(
+                            SizedBox(
+                              width: 0.11.sw,
+                              height: 0.15.sw,
+                              child: Material(
+                                color: AppTheme.WHITE,
                                 borderRadius: AppTheme().button2BorderRadius,
-                                onTap: () {},
-                                child: Padding(
-                                  padding: EdgeInsets.all(14.w),
+                                elevation: 0,
+                                child: InkWell(
+                                  borderRadius: AppTheme().button2BorderRadius,
+                                  onTap: () {},
                                   child: Icon(
                                     Icons.add,
                                     size: 25.w,

@@ -164,7 +164,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                                 setState(() {
                                   isButtonToggled = !isButtonToggled;
                                 });
-                              //// bottomCartnAnimationController trigger
+                              //// bottomCartAnimationController trigger
                               switch (widget.animationController.status) {
                                 case AnimationStatus.completed:
                                   widget.animationController.reverse();
