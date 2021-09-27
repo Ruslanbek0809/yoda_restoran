@@ -5,16 +5,22 @@ import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'restaurant.dart';
+
 class FoodWidget extends StatefulWidget {
   final FoodModel food;
-  const FoodWidget({Key? key, required this.food}) : super(key: key);
+  final AnimationController animationController;
+  const FoodWidget(
+      {Key? key, required this.animationController, required this.food})
+      : super(key: key);
 
   @override
   _FoodWidgetState createState() => _FoodWidgetState();
 }
 
-class _FoodWidgetState extends State<FoodWidget>
-    with SingleTickerProviderStateMixin {
+class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
+  GlobalKey<RestaurantDetailsScreenState> restaurantDetailsKey =
+      GlobalKey<RestaurantDetailsScreenState>();
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
 
@@ -38,8 +44,8 @@ class _FoodWidgetState extends State<FoodWidget>
 
   @override
   void dispose() {
-    super.dispose();
     _tweenController.dispose();
+    super.dispose();
   }
 
   void _onProductBottomSheetClicked(FoodModel food) {
@@ -130,7 +136,16 @@ class _FoodWidgetState extends State<FoodWidget>
                               child: InkWell(
                                 borderRadius: AppTheme().buttonBorderRadius,
                                 onTap: () {
-                                  _onProductBottomSheetClicked(food);
+                                  switch (widget.animationController.status) {
+                                    case AnimationStatus.completed:
+                                      widget.animationController.reverse();
+                                      break;
+                                    case AnimationStatus.dismissed:
+                                      widget.animationController.forward();
+                                      break;
+                                    default:
+                                  }
+                                  // _onProductBottomSheetClicked(food);
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(10.w),

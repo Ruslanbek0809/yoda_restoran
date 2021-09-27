@@ -3,19 +3,22 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import 'food_widget.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
+  RestaurantDetailsScreen({Key? key}) : super(key: key);
+
   @override
-  _RestaurantDetailsScreenState createState() =>
-      _RestaurantDetailsScreenState();
+  RestaurantDetailsScreenState createState() => RestaurantDetailsScreenState();
 }
 
-class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
+class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     with TickerProviderStateMixin {
+  late AnimationController bottomCartController;
+  late Animation<Offset> bottomCartOffset;
+
   late TabController _tabController;
 
   var top = 0.0;
@@ -77,6 +80,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _tabController =
         TabController(length: _foodCategoryList.length, vsync: this);
     _tabController.addListener(_tabListener);
+
+    bottomCartController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+
+    bottomCartOffset = Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 1.0))
+        .animate(bottomCartController);
   }
 
   @override
@@ -84,7 +93,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _tabController.dispose();
-    _tabController.removeListener(_tabListener);
+    bottomCartController.dispose();
     super.dispose();
   }
 
@@ -473,78 +482,99 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
             return pinnedHeaderHeight;
           },
 //// TabBar Widget
-          body: Column(
-            children: <Widget>[
-              Material(
-                elevation: _isShrink ? 3.0 : 0.0,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: ColoredBox(
-                    color: AppTheme.WHITE,
-                    child: TabBar(
-                      controller: _tabController,
-                      isScrollable: true,
-                      indicatorColor: Colors.transparent,
-                      labelPadding: EdgeInsets.all(0.0),
-                      tabs: _foodCategoryList
-                          .map<Widget>((foodCategory) => Tab(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: AppTheme().buttonBorderRadius,
-                                    color: _activeIndex ==
-                                            _foodCategoryList
-                                                .indexOf(foodCategory)
-                                        ? AppTheme.MAIN_LIGHT
-                                        : AppTheme.WHITE,
-                                  ),
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: 3.w, horizontal: 5.w),
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 15.w),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    foodCategory.name,
-                                    style: TextStyle(
-                                      color: _activeIndex ==
-                                              _foodCategoryList
-                                                  .indexOf(foodCategory)
-                                          ? AppTheme.FONT_COLOR
-                                          : AppTheme.DRAWER_ICON,
-                                      fontSize: 14.sp,
+          body: Stack(
+            children: [
+              Column(
+                children: <Widget>[
+                  Material(
+                    elevation: _isShrink ? 3.0 : 0.0,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: ColoredBox(
+                        color: AppTheme.WHITE,
+                        child: TabBar(
+                          controller: _tabController,
+                          isScrollable: true,
+                          indicatorColor: Colors.transparent,
+                          labelPadding: EdgeInsets.all(0.0),
+                          tabs: _foodCategoryList
+                              .map<Widget>((foodCategory) => Tab(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            AppTheme().buttonBorderRadius,
+                                        color: _activeIndex ==
+                                                _foodCategoryList
+                                                    .indexOf(foodCategory)
+                                            ? AppTheme.MAIN_LIGHT
+                                            : AppTheme.WHITE,
+                                      ),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 3.w, horizontal: 5.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 15.w),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        foodCategory.name,
+                                        style: TextStyle(
+                                          color: _activeIndex ==
+                                                  _foodCategoryList
+                                                      .indexOf(foodCategory)
+                                              ? AppTheme.FONT_COLOR
+                                              : AppTheme.DRAWER_ICON,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ))
-                          .toList(),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
 //// TabBarView Widget
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: _foodCategoryList
-                      .map<Widget>(
-                        (foodCategory) => GridView.builder(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15.w, horizontal: 10.w),
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10.w, //spaceTopBottom
-                            crossAxisSpacing: 5.w, //spaceLeftRight
-                            childAspectRatio: 1.sw / 1.65.sw,
-                          ),
-                          itemCount: _foodList.length,
-                          itemBuilder: (context, pos) {
-                            return FoodWidget(food: _foodList[pos]);
-                          },
-                        ),
-                      )
-                      .toList(),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: _foodCategoryList
+                          .map<Widget>(
+                            (foodCategory) => GridView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15.w, horizontal: 10.w),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10.w, //spaceTopBottom
+                                crossAxisSpacing: 5.w, //spaceLeftRight
+                                childAspectRatio: 1.sw / 1.65.sw,
+                              ),
+                              itemCount: _foodList.length,
+                              itemBuilder: (context, pos) {
+                                return FoodWidget(
+                                  food: _foodList[pos],
+                                  animationController: bottomCartController,
+                                );
+                              },
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SlideTransition(
+                  position: bottomCartOffset,
+                  child: Container(
+                    height: 0.1.sw,
+                    width: 1.sw,
+                    alignment: Alignment.center,
+                    color: AppTheme.WHITE,
+                    child: Text('Hey'),
+                  ),
                 ),
               )
             ],
