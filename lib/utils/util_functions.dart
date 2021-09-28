@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoda_res/widgets/widgets.dart';
 import 'utils.dart';
 
 enum FormValidation { phoneInvalid, valid }
@@ -61,6 +63,52 @@ fieldFocusChange(
     BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
   currentFocus.unfocus();
   FocusScope.of(context).requestFocus(nextFocus);
+}
+
+Future<dynamic> showAlertDialog({
+  required BuildContext context,
+  required String title,
+  required String content,
+  required String cancelActionText,
+  required String defaultActionText,
+}) async {
+  if (!Platform.isIOS) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: <Widget>[
+          CustomTextButton(
+            text: cancelActionText,
+            onPressed: () => Navigator.of(context).pop(false),
+          ),
+          CustomTextButton(
+            text: defaultActionText,
+            onPressed: () => Navigator.of(context).pop(true),
+          ),
+        ],
+      ),
+    );
+  }
+
+  return showCupertinoDialog(
+    context: context,
+    builder: (context) => CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions: <Widget>[
+        CupertinoDialogAction(
+          child: Text(cancelActionText),
+          onPressed: () => Navigator.of(context).pop(false),
+        ),
+        CupertinoDialogAction(
+          child: Text(defaultActionText),
+          onPressed: () => Navigator.of(context).pop(true),
+        ),
+      ],
+    ),
+  );
 }
 
 
