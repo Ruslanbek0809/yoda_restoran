@@ -78,22 +78,30 @@ Future<dynamic> showAlertDialog({
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          style: TextStyle(color: AppTheme.FONT_COLOR, fontSize: 16.sp),
+          style: TextStyle(
+            color: AppTheme.FONT_COLOR,
+            fontSize: 16.sp,
+          ),
         ),
         actions: <Widget>[
           CustomTextButton(
-            text: cancelActionText,
-            color: Colors.transparent,
-            fontSize: 18.sp,
-            textColor: AppTheme.FONT_COLOR,
-            onPressed: () => Navigator.of(context).pop(false),
-          ),
-          CustomTextButton(
             text: defaultActionText,
             color: Colors.transparent,
-            fontSize: 18.sp,
-            textColor: AppTheme.FONT_COLOR,
+            textStyle: TextStyle(
+              color: AppTheme.FONT_COLOR,
+              fontSize: 17.sp,
+              fontWeight: FontWeight.bold,
+            ),
             onPressed: () => Navigator.of(context).pop(true),
+          ),
+          CustomTextButton(
+            text: cancelActionText,
+            color: Colors.transparent,
+            textStyle: TextStyle(
+              color: AppTheme.FONT_COLOR,
+              fontSize: 17.sp,
+            ),
+            onPressed: () => Navigator.of(context).pop(false),
           ),
         ],
       ),
@@ -106,12 +114,21 @@ Future<dynamic> showAlertDialog({
       title: Text(title),
       actions: <Widget>[
         CupertinoDialogAction(
-          child: Text(cancelActionText),
-          onPressed: () => Navigator.of(context).pop(false),
+          child: Text(defaultActionText),
+          textStyle: TextStyle(
+            color: AppTheme.FONT_COLOR,
+            fontSize: 17.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          onPressed: () => Navigator.of(context).pop(true),
         ),
         CupertinoDialogAction(
-          child: Text(defaultActionText),
-          onPressed: () => Navigator.of(context).pop(true),
+          child: Text(cancelActionText),
+          textStyle: TextStyle(
+            color: AppTheme.FONT_COLOR,
+            fontSize: 17.sp,
+          ),
+          onPressed: () => Navigator.of(context).pop(false),
         ),
       ],
     ),
