@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum FormValidation { phoneInvalid, valid }
 
@@ -68,7 +69,6 @@ fieldFocusChange(
 Future<dynamic> showAlertDialog({
   required BuildContext context,
   required String title,
-  required String content,
   required String cancelActionText,
   required String defaultActionText,
 }) async {
@@ -76,15 +76,23 @@ Future<dynamic> showAlertDialog({
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(content),
+        title: Text(
+          title,
+          style: TextStyle(color: AppTheme.FONT_COLOR, fontSize: 16.sp),
+        ),
         actions: <Widget>[
           CustomTextButton(
             text: cancelActionText,
+            color: Colors.transparent,
+            fontSize: 18.sp,
+            textColor: AppTheme.FONT_COLOR,
             onPressed: () => Navigator.of(context).pop(false),
           ),
           CustomTextButton(
             text: defaultActionText,
+            color: Colors.transparent,
+            fontSize: 18.sp,
+            textColor: AppTheme.FONT_COLOR,
             onPressed: () => Navigator.of(context).pop(true),
           ),
         ],
@@ -96,7 +104,6 @@ Future<dynamic> showAlertDialog({
     context: context,
     builder: (context) => CupertinoAlertDialog(
       title: Text(title),
-      content: Text(content),
       actions: <Widget>[
         CupertinoDialogAction(
           child: Text(cancelActionText),

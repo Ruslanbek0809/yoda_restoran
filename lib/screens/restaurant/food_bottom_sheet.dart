@@ -301,8 +301,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                         onPressed: () {
                           showAlertDialog(
                             context: context,
-                            title: '',
-                            content: 'Täze sargyt üçin sebedi boşadyň',
+                            title: 'Täze sargyt üçin sebedi boşadyň',
                             defaultActionText: 'Sebet',
                             cancelActionText: 'Boşat',
                           );

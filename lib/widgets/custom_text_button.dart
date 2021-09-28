@@ -4,11 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;
-  final Color? color;
+  final Color color;
+  final Color textColor;
+  final double? fontSize;
   final Function onPressed;
   CustomTextButton(
       {required this.text,
       this.color = AppTheme.MAIN,
+      this.textColor = AppTheme.WHITE,
+      this.fontSize,
       required this.onPressed});
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,8 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: AppTheme.WHITE,
-          fontSize: 15.sp,
+          color: textColor,
+          fontSize: fontSize ?? 15.sp,
           fontWeight: FontWeight.bold,
         ),
       ),
