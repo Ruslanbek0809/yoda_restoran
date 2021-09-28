@@ -299,9 +299,13 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                         borderRadius: Constants.BORDER_RADIUS_BUTTON_2,
                         elevation: 0,
                         onPressed: () {
-                          // showAlertDialog(
-                          //     title: '',
-                          //     content: 'Täze sargyt üçin sebedi boşadyň');
+                          showAlertDialog(
+                            context: context,
+                            title: '',
+                            content: 'Täze sargyt üçin sebedi boşadyň',
+                            defaultActionText: 'Sebet',
+                            cancelActionText: 'Boşat',
+                          );
                         },
                       ),
                     ],
