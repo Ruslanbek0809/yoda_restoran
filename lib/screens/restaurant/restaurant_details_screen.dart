@@ -568,47 +568,52 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                 alignment: Alignment.bottomCenter,
                 child: SlideTransition(
                   position: bottomCartOffset,
-                  child: Container(
-                    height: 0.2.sw,
-                    width: 1.sw,
-                    decoration:
-                        BoxDecoration(color: AppTheme.WHITE, boxShadow: [
-                      AppTheme().bottomCartShadow,
-                    ]),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(RouteList.cart);
+                    },
                     child: Container(
-                      margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      decoration: BoxDecoration(
-                        color: AppTheme.MAIN,
-                        borderRadius: AppTheme().containerRadius,
-                      ),
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '40-50 min',
-                            style: TextStyle(
-                              color: AppTheme.WHITE,
-                              fontSize: 16.sp,
+                      height: 0.2.sw,
+                      width: 1.sw,
+                      decoration:
+                          BoxDecoration(color: AppTheme.WHITE, boxShadow: [
+                        AppTheme().bottomCartShadow,
+                      ]),
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
+                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                        decoration: BoxDecoration(
+                          color: AppTheme.MAIN,
+                          borderRadius: AppTheme().containerRadius,
+                        ),
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '40-50 min',
+                              style: TextStyle(
+                                color: AppTheme.WHITE,
+                                fontSize: 16.sp,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Sargyt',
-                            style: TextStyle(
-                              color: AppTheme.WHITE,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
+                            Text(
+                              'Sargyt',
+                              style: TextStyle(
+                                color: AppTheme.WHITE,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            '35 TMT',
-                            style: TextStyle(
-                              color: AppTheme.WHITE,
-                              fontSize: 16.sp,
+                            Text(
+                              '35 TMT',
+                              style: TextStyle(
+                                color: AppTheme.WHITE,
+                                fontSize: 16.sp,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

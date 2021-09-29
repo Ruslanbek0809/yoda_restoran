@@ -87,6 +87,7 @@ class _YodaResAppState extends State<YodaResApp> {
                     HomeScreen(),
               ),
               routes: Routes.getAllRoutes,
+              onGenerateRoute: Routes.getRouteGenerate,
               themeMode: ThemeMode.light,
               // onGenerateRoute: Routes.getRouteGenerate,
               // theme: getTheme(context),
