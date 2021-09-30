@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:yoda_res/library/flutter_datetime_picker.dart';
-import 'package:yoda_res/screens/home/home.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoda_res/widgets/widgets.dart';
 import '../../utils/utils.dart';
 
 class CartScreen extends StatefulWidget {
@@ -19,40 +18,128 @@ class _CartScreenState extends State<CartScreen> {
   bool _isLoading = false;
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.WHITE,
-      drawer: DrawerWidget(),
       appBar: AppBar(
         backgroundColor: AppTheme.WHITE,
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Icon(
-            Icons.arrow_back,
-            color: AppTheme.FONT_COLOR,
-            size: 25.w,
+        leadingWidth: 35.w,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10.w),
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: SvgPicture.asset(
+              'assets/cancel.svg',
+              color: AppTheme.MAIN_DARK,
+            ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 10.w),
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SvgPicture.asset(
+                'assets/trash.svg',
+                color: AppTheme.MAIN_DARK,
+                width: 25.w,
+              ),
+            ),
+          ),
+        ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.WHITE,
-          borderRadius: AppTheme().containerRadius,
-        ),
-        padding: EdgeInsets.only(top: 5.w, left: 25.w, right: 25.w),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[],
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Sargyt',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Sargyt',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Sargyt',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Sargyt',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          //// Checkout Button Widget
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppTheme.WHITE,
+                borderRadius: AppTheme().containerRadius,
+                border: Border.all(
+                    color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        '175 TMT',
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          color: AppTheme.FONT_COLOR,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '30-40 min',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppTheme.FONT_COLOR,
+                        ),
+                      ),
+                    ],
+                  ),
+                  //// Buttons Widget
+                  CustomElevatedButton(
+                    height: 0.15.sw,
+                    width: 0.575.sw,
+                    text: 'Dowam etmek',
+                    borderRadius: Constants.BORDER_RADIUS_BUTTON_2,
+                    elevation: 0,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

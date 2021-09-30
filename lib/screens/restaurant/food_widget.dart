@@ -4,8 +4,7 @@ import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'restaurant.dart';
+import 'restaurant_details_screen.dart';
 
 class FoodWidget extends StatefulWidget {
   final FoodModel food;

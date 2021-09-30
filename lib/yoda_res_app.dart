@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'route.dart';
 import 'screens/home/home.dart';
-import 'screens/login/login.dart';
 import 'utils/utils.dart';
 
 final mainScaffoldKey = GlobalKey();
@@ -85,12 +84,12 @@ class _YodaResAppState extends State<YodaResApp> {
                     // OtpScreen(),
                     // LoginScreen(),
                     HomeScreen(),
+                // CartScreen(),
               ),
               routes: Routes.getAllRoutes,
               onGenerateRoute: Routes.getRouteGenerate,
               themeMode: ThemeMode.light,
-              // onGenerateRoute: Routes.getRouteGenerate,
-              // theme: getTheme(context),
+              // theme: getTheme(context),e
             )
         // );
         );

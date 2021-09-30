@@ -150,6 +150,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     top = constraints.biggest.height;
                     return FlexibleSpaceBar(
                       collapseMode: CollapseMode.pin,
+                      stretchModes: [StretchMode.zoomBackground],
                       centerTitle: false,
                       title: AnimatedSwitcher(
                         duration: Duration(milliseconds: 300),
@@ -536,27 +537,35 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
+                      physics: BouncingScrollPhysics(),
                       children: _foodCategoryList
                           .map<Widget>(
-                            (foodCategory) => GridView.builder(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 15.w, horizontal: 10.w),
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 10.w, //spaceTopBottom
-                                crossAxisSpacing: 5.w, //spaceLeftRight
-                                childAspectRatio: 1.sw / 1.65.sw,
+                            (foodCategory) => ScrollConfiguration(
+                              behavior: ScrollBehavior(),
+                              child: GlowingOverscrollIndicator(
+                                axisDirection: AxisDirection.down,
+                                color: AppTheme.MAIN,
+                                child: GridView.builder(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 15.w, horizontal: 10.w),
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 10.w, //spaceTopBottom
+                                    crossAxisSpacing: 5.w, //spaceLeftRight
+                                    childAspectRatio: 1.sw / 1.65.sw,
+                                  ),
+                                  itemCount: _foodList.length,
+                                  itemBuilder: (context, pos) {
+                                    return FoodWidget(
+                                      food: _foodList[pos],
+                                      animationController: bottomCartController,
+                                    );
+                                  },
+                                ),
                               ),
-                              itemCount: _foodList.length,
-                              itemBuilder: (context, pos) {
-                                return FoodWidget(
-                                  food: _foodList[pos],
-                                  animationController: bottomCartController,
-                                );
-                              },
                             ),
                           )
                           .toList(),
@@ -573,7 +582,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       Navigator.of(context).pushNamed(RouteList.cart);
                     },
                     child: Container(
-                      height: 0.2.sw,
+                      height: 0.22.sw,
                       width: 1.sw,
                       decoration:
                           BoxDecoration(color: AppTheme.WHITE, boxShadow: [
