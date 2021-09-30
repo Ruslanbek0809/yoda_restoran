@@ -85,15 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  custom_nested_scroll_view:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "364860e390d22c4554f29e7d34bb9d513012c53b"
-      url: "https://github.com/idootop/custom_nested_scroll_view.git"
-    source: git
-    version: "0.0.1"
   extended_nested_scroll_view:
     dependency: "direct main"
     description:
@@ -366,20 +357,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.2"
-  scrollable_list_tabview:
-    dependency: "direct main"
-    description:
-      name: scrollable_list_tabview
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0-nullsafety"
-  scrollable_positioned_list:
-    dependency: transitive
-    description:
-      name: scrollable_positioned_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0-nullsafety.0"
   shared_preferences:
     dependency: "direct main"
     description:

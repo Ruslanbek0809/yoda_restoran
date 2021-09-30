@@ -49,10 +49,6 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   
   extended_nested_scroll_view: ^4.0.0
-  scrollable_list_tabview: ^0.2.0-nullsafety
-  custom_nested_scroll_view:
-    git:
-      url: https://github.com/idootop/custom_nested_scroll_view.git
 
   # IMAGE
   cached_network_image: ^3.1.0
