@@ -84,8 +84,8 @@ class _YodaResAppState extends State<YodaResApp> {
                 body:
                     // OtpScreen(),
                     // LoginScreen(),
-                    // HomeScreen(),
-                    CartScreen(),
+                    HomeScreen(),
+                // CartScreen(),
               ),
               routes: Routes.getAllRoutes,
               onGenerateRoute: Routes.getRouteGenerate,

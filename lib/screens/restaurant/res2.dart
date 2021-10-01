@@ -14,7 +14,7 @@ class RestaurantScreen2 extends StatefulWidget {
 class _RestaurantScreen2State extends State<RestaurantScreen2>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  final _tabGridScrollController = ScrollController();
+  int currentTab = 0;
 
   late ScrollController _sliverScrollController;
   bool lastStatus = true;
@@ -28,7 +28,10 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
     FoodCategory(2, 'Desertler'),
     FoodCategory(3, 'Steak'),
     FoodCategory(4, 'Burgerlar'),
+    FoodCategory(3, 'Bla'),
+    FoodCategory(4, 'BTaaa'),
   ];
+  // I 1 2 4 Q
 
   List<FoodModel> _foodList = [
     FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
@@ -49,6 +52,16 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
   ];
 
   void _scrollListener() {
+    /// Animate to currentTab when listview scrools
+    // printLog("offset = ${_sliverScrollController.offset}");
+    // currentTab = (_sliverScrollController.offset) ~/
+    //     ((_foodList.length / 2).ceil() * (0.5.sh));
+    // // currentTab = (_sliverScrollController.offset) ~/
+    // //     ((_foodList.length / 2).ceil() * (1.sw / 1.65.sw));
+    // print(
+    //     'currentTab=> $currentTab ${(_foodList.length / 2).ceil()} ${1.sw} ${0.5.sh} ${(1.sw / 1.65.sw)}');
+    // _tabController.animateTo(currentTab);
+//// For SliverAppBar
     if (_isShrink != lastStatus) {
       setState(() {
         lastStatus = _isShrink;
@@ -87,142 +100,145 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: CustomScrollView(
-          controller: _sliverScrollController,
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              expandedHeight: 0.5.sh,
-              pinned: true,
-              stretch: true,
-              floating: false,
-              leading: AnimatedSwitcher(
-                duration: Duration(milliseconds: 300),
-                child: Container(
-                  height: 50.w,
-                  width: 50.w,
-                  margin: EdgeInsets.only(left: 10.w, top: 5.w),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _isShrink ? Colors.transparent : AppTheme.WHITE,
-                      boxShadow: _isShrink ? [] : [AppTheme().buttonShadow]),
-                  child: Material(
+    double itemWidth = (1.sw - 5.w * 2 - 20.w) / 2;
+    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview horizontal padding) / crossAxisCount
+
+    double itemHeight = itemWidth + 0.4.sw; // 0.4.sw is for item height
+    return Scaffold(
+      body: CustomScrollView(
+        controller: _sliverScrollController,
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 0.5.sh,
+            pinned: true,
+            stretch: true,
+            floating: false,
+            leading: AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              child: Container(
+                height: 50.w,
+                width: 50.w,
+                margin: EdgeInsets.only(left: 10.w, top: 5.w),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
                     color: _isShrink ? Colors.transparent : AppTheme.WHITE,
-                    shape: CircleBorder(),
-                    elevation: 0,
-                    child: InkWell(
-                      customBorder: CircleBorder(),
-                      onTap: () {},
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 27.w,
-                        color: AppTheme.BLACK,
-                      ), // other widget
-                    ),
+                    boxShadow: _isShrink ? [] : [AppTheme().buttonShadow]),
+                child: Material(
+                  color: _isShrink ? Colors.transparent : AppTheme.WHITE,
+                  shape: CircleBorder(),
+                  elevation: 0,
+                  child: InkWell(
+                    customBorder: CircleBorder(),
+                    onTap: () {},
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 27.w,
+                      color: AppTheme.BLACK,
+                    ), // other widget
                   ),
                 ),
               ),
-              flexibleSpace: FlexibleSpaceBar(
-                stretchModes: [StretchMode.zoomBackground],
-                background: YodaImage(
-                  image: 'assets/burgerlist.jpg',
-                ),
-                title: Text(
-                  'Kebapçy',
-                  style: TextStyle(fontSize: 17.sp),
-                ),
-                centerTitle: false,
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              stretchModes: [StretchMode.zoomBackground],
+              background: YodaImage(
+                image: 'assets/burgerlist.jpg',
               ),
-              bottom: ColoredTabBar(
-                color: AppTheme.WHITE,
-                tabBar: TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  unselectedLabelColor: AppTheme.MAIN,
-                  tabs: _foodCategoryList
-                      .map<Widget>((category) => Tab(text: category.name))
-                      .toList(),
-                  onTap: (index) {
-                    double offset = _foodCategoryList.getRange(0, index).fold(
-                      0,
-                      (prev, category) {
-                        int rows =
-                            (3 / 2).ceil(); // food length to crossAxisCount
-                        return prev += rows * (1.sw + 10);
-                      },
-                    );
+              title: Text(
+                'Kebapçy',
+                style: TextStyle(fontSize: 17.sp),
+              ),
+              centerTitle: false,
+            ),
+            bottom: ColoredTabBar(
+              color: AppTheme.WHITE,
+              tabBar: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                unselectedLabelColor: AppTheme.MAIN,
+                tabs: _foodCategoryList
+                    .map<Widget>((category) => Tab(text: category.name))
+                    .toList(),
+                onTap: (index) {
+                  double offset = _foodCategoryList.getRange(0, index).fold(
+                    0,
+                    (prev, category) {
+                      int rows = (_foodList.length / 2)
+                          .ceil(); // food length to crossAxisCount
+                      return prev += rows *
+                          (itemHeight + 25.w); // Gridview vertical padding
+                    },
+                  );
 
-                    _sliverScrollController.animateTo(
-                      offset + ((index - 1) * 55),
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.linear,
+                  _sliverScrollController.animateTo(
+                    offset +
+                        ((index - 1) * 50.w) +
+                        0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.5.sh expanded height
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                },
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _foodCategoryList.length,
+                  separatorBuilder: (context, index) {
+                    if (index < _foodCategoryList.length) {
+                      FoodCategory category = _foodCategoryList[index + 1];
+
+                      return Container(
+                        height: 50.w,
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 5),
+                            child: Text(
+                              category.name,
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                  itemBuilder: (context, index) {
+                    return GridView.builder(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 15.w, horizontal: 10.w),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10.w, //spaceTopBottom
+                        crossAxisSpacing: 5.w, //spaceLeftRight
+                        childAspectRatio: itemWidth / itemHeight,
+                      ),
+                      itemCount: _foodList.length,
+                      itemBuilder: (context, pos) {
+                        return FoodWidget(
+                          food: _foodList[pos],
+                          animationController: bottomCartController,
+                        );
+                      },
                     );
                   },
                 ),
-              ),
+              ],
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  ListView.separated(
-                    // controller: _tabGridScrollController,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _foodCategoryList.length,
-                    separatorBuilder: (context, index) {
-                      if (index < _foodCategoryList.length) {
-                        FoodCategory category = _foodCategoryList[index + 1];
-
-                        return Container(
-                          height: 50,
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
-                              child: Text(
-                                category.name,
-                                textAlign: TextAlign.left,
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                    itemBuilder: (context, index) {
-                      return GridView.builder(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 15.w, horizontal: 10.w),
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10.w, //spaceTopBottom
-                          crossAxisSpacing: 5.w, //spaceLeftRight
-                          childAspectRatio: 1.sw / 1.65.sw,
-                        ),
-                        itemCount: _foodList.length,
-                        itemBuilder: (context, pos) {
-                          return FoodWidget(
-                            food: _foodList[pos],
-                            animationController: bottomCartController,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

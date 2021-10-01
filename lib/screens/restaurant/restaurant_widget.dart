@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/screens/restaurant/res2.dart';
+import 'package:yoda_res/screens/restaurant/tab.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
@@ -56,9 +57,9 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              // builder: (context) => SectionWidget(),
-                              // builder: (context) => RestaurantScreen2(),
-                              builder: (context) => RestaurantDetailsScreen(),
+                              // builder: (context) => MyWidget(),
+                              builder: (context) => RestaurantScreen2(),
+                              // builder: (context) => RestaurantDetailsScreen(),
                             ),
                           );
                         },

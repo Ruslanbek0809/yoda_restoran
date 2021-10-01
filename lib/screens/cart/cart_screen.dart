@@ -106,7 +106,7 @@ class _CartScreenState extends State<CartScreen> {
                   border: Border.all(
                       color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                 ),
-                padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 20.w),
+                padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

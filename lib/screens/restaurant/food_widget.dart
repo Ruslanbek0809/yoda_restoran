@@ -73,23 +73,23 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                   width: constraints.maxWidth,
                   borderRadius: 20.0,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
-                  child: Text(
-                    food.name,
-                    style: TextStyle(
-                      fontSize: 17.sp,
-                      color: AppTheme.FONT_COLOR,
-                    ),
-                  ),
-                ),
-                Text(
-                  '${food.weight} ${food.weightType}',
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: AppTheme.DRAWER_ICON,
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
+                //   child: Text(
+                //     food.name,
+                //     style: TextStyle(
+                //       fontSize: 17.sp,
+                //       color: AppTheme.FONT_COLOR,
+                //     ),
+                //   ),
+                // ),
+                // Text(
+                //   '${food.weight} ${food.weightType}',
+                //   style: TextStyle(
+                //     fontSize: 15.sp,
+                //     color: AppTheme.DRAWER_ICON,
+                //   ),
+                // ),
                 Spacer(),
 //// Button Widget
                 AnimatedSwitcher(
