@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'route.dart';
+import 'screens/cart/cart.dart';
 import 'screens/home/home.dart';
 import 'utils/utils.dart';
 
@@ -83,8 +84,8 @@ class _YodaResAppState extends State<YodaResApp> {
                 body:
                     // OtpScreen(),
                     // LoginScreen(),
-                    HomeScreen(),
-                // CartScreen(),
+                    // HomeScreen(),
+                    CartScreen(),
               ),
               routes: Routes.getAllRoutes,
               onGenerateRoute: Routes.getRouteGenerate,
