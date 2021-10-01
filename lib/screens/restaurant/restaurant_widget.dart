@@ -4,6 +4,7 @@ import 'package:yoda_res/screens/restaurant/res2.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'custom_help.dart';
 import 'restaurant.dart';
 
 class RestaurantWidget extends StatefulWidget {
@@ -55,8 +56,9 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => RestaurantScreen2(),
-                              // builder: (context) => RestaurantDetailsScreen(),
+                              // builder: (context) => SectionWidget(),
+                              // builder: (context) => RestaurantScreen2(),
+                              builder: (context) => RestaurantDetailsScreen(),
                             ),
                           );
                         },

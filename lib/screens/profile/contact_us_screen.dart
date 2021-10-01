@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
@@ -54,12 +55,18 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leadingWidth: 35.w,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(
-            Icons.cancel, // TODO: Change this to other icon
-            color: AppTheme.BLACK,
-            size: 22.w,
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SvgPicture.asset(
+                'assets/cancel.svg',
+                color: AppTheme.BLACK,
+              ),
+            ),
           ),
         ),
         title: Text(

@@ -133,6 +133,8 @@ class DrawerWidget extends StatelessWidget {
                         barrierDismissible: true,
                         builder: (BuildContext context) {
                           return Dialog(
+                            insetPadding: EdgeInsets.symmetric(
+                                vertical: 5.w, horizontal: 35.w),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             elevation: 0,

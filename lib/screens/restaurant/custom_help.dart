@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
-
-import 'food_widget.dart';
 
 class SectionWidget extends StatefulWidget {
   @override
@@ -13,11 +10,8 @@ class SectionWidget extends StatefulWidget {
 }
 
 class _SectionWidgetState extends State<SectionWidget>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   final scrollController = ScrollController();
-
-  late AnimationController bottomCartController;
-  late Animation<Offset> bottomCartOffset;
 
   List<FoodCategory> _foodCategoryList = [
     FoodCategory(0, 'Ertirlikler'),
@@ -25,6 +19,11 @@ class _SectionWidgetState extends State<SectionWidget>
     FoodCategory(2, 'Desertler'),
     FoodCategory(3, 'Steak'),
     FoodCategory(4, 'Burgerlar'),
+    FoodCategory(5, 'Ertirlikler'),
+    FoodCategory(6, 'Işdäaçarlar'),
+    FoodCategory(7, 'Desertler'),
+    FoodCategory(8, 'Steak'),
+    FoodCategory(9, 'Burgerlar'),
   ];
 
   List<FoodModel> _foodList = [
@@ -45,18 +44,10 @@ class _SectionWidgetState extends State<SectionWidget>
     ]),
   ];
 
-  @override
-  void initState() {
-    super.initState();
-
-    bottomCartController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 150));
-
-    bottomCartOffset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
-        .animate(bottomCartController);
-  }
-
-  Widget _buildBody() {
+  Widget _buildBody(
+    double itemWidth,
+    double itemHeight,
+  ) {
     return SafeArea(
       bottom: false,
       child: ListView.separated(
@@ -85,23 +76,25 @@ class _SectionWidgetState extends State<SectionWidget>
           }
         },
         itemBuilder: (context, index) {
-          return GridView.builder(
-            padding: EdgeInsets.symmetric(vertical: 15.w, horizontal: 10.w),
+          return GridView.count(
+            padding: const EdgeInsets.only(
+              left: 10,
+              top: 10,
+              right: 7,
+              bottom: 0,
+            ),
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: itemWidth / itemHeight,
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10.w, //spaceTopBottom
-              crossAxisSpacing: 5.w, //spaceLeftRight
-              childAspectRatio: 1.sw / 1.65.sw,
-            ),
-            itemCount: _foodList.length,
-            itemBuilder: (context, pos) {
-              return FoodWidget(
-                food: _foodList[pos],
-                animationController: bottomCartController,
+            children: _foodList.map((product) {
+              return Container(
+                color: Colors.red,
+                margin: EdgeInsets.symmetric(vertical: 10),
               );
-            },
+            }).toList(),
           );
         },
       ),
@@ -110,6 +103,10 @@ class _SectionWidgetState extends State<SectionWidget>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double itemWidth = (size.width - 10 * 2 - 17) / 3;
+
+    double itemHeight = itemWidth + 66;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(48.0),
@@ -129,8 +126,8 @@ class _SectionWidgetState extends State<SectionWidget>
               double offset = _foodCategoryList.getRange(0, index).fold(
                 0,
                 (prev, category) {
-                  int rows = (3 / 2).ceil(); // food length to crossAxisCount
-                  return prev += rows * (1.sw + 10);
+                  int rows = (_foodList.length / 3).ceil();
+                  return prev += rows * (itemHeight + 10);
                 },
               );
 
@@ -144,7 +141,10 @@ class _SectionWidgetState extends State<SectionWidget>
         ),
         // : Container()
       ),
-      body: _buildBody(),
+      body: _buildBody(
+        itemWidth,
+        itemHeight,
+      ),
     );
   }
 }
