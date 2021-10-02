@@ -67,7 +67,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                   // ListView.separated(
                   //   padding: EdgeInsets.only(bottom: 64.0),
-                  //   itemCount: cartData.cartItems.length,
+                  //   itemCount: foodList.length,
                   //   itemBuilder: (context, index) {
                   //     var product = cartData.cartItems[index];
 

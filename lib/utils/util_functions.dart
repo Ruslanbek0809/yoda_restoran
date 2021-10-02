@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -135,7 +136,6 @@ Future<dynamic> showAlertDialog({
   );
 }
 
-
 /// Keyboard Actions
 // KeyboardActionsConfig buildKeyboardActionsConfig(
 //     BuildContext context, List<FocusNode> list) {
@@ -165,3 +165,29 @@ Future<dynamic> showAlertDialog({
 //         .toList(),
 //   );
 // }
+
+List<FoodCategory> foodCategoryList = [
+  FoodCategory(0, 'Ertirlikler'),
+  FoodCategory(1, 'Işdäaçarlar'),
+  FoodCategory(2, 'Desertler'),
+  FoodCategory(3, 'Steak'),
+  FoodCategory(4, 'Burgerlar'),
+];
+
+List<FoodModel> foodList = [
+  FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
+    AdditionalFoodModel('Peýnir', 10, false),
+    AdditionalFoodModel('Ýumurtga', 10, false),
+    AdditionalFoodModel('Bet zat', 15, false),
+  ]),
+  FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
+    AdditionalFoodModel('Peýnir', 10, false),
+    AdditionalFoodModel('Ýumurtga', 10, false),
+    AdditionalFoodModel('Bet zat', 15, false),
+  ]),
+  FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
+    AdditionalFoodModel('Peýnir', 10, false),
+    AdditionalFoodModel('Ýumurtga', 10, false),
+    AdditionalFoodModel('Bet zat', 15, false),
+  ]),
+];

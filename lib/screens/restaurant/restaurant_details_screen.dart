@@ -27,32 +27,6 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   bool isDelivery = true;
   int _activeIndex = 0;
 
-  List<FoodCategory> _foodCategoryList = [
-    FoodCategory(0, 'Ertirlikler'),
-    FoodCategory(1, 'Işdäaçarlar'),
-    FoodCategory(2, 'Desertler'),
-    FoodCategory(3, 'Steak'),
-    FoodCategory(4, 'Burgerlar'),
-  ];
-
-  List<FoodModel> _foodList = [
-    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-  ];
-
   void _scrollListener() {
     if (_isShrink != lastStatus) {
       setState(() {
@@ -78,7 +52,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
 
     _scrollController = ScrollController()..addListener(_scrollListener);
     _tabController =
-        TabController(length: _foodCategoryList.length, vsync: this);
+        TabController(length: foodCategoryList.length, vsync: this);
     _tabController.addListener(_tabListener);
 
     bottomCartController =
@@ -498,14 +472,14 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           isScrollable: true,
                           indicatorColor: Colors.transparent,
                           labelPadding: EdgeInsets.all(0.0),
-                          tabs: _foodCategoryList
+                          tabs: foodCategoryList
                               .map<Widget>((foodCategory) => Tab(
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             AppTheme().buttonBorderRadius,
                                         color: _activeIndex ==
-                                                _foodCategoryList
+                                                foodCategoryList
                                                     .indexOf(foodCategory)
                                             ? AppTheme.MAIN_LIGHT
                                             : AppTheme.WHITE,
@@ -519,7 +493,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                         foodCategory.name,
                                         style: TextStyle(
                                           color: _activeIndex ==
-                                                  _foodCategoryList
+                                                  foodCategoryList
                                                       .indexOf(foodCategory)
                                               ? AppTheme.FONT_COLOR
                                               : AppTheme.DRAWER_ICON,
@@ -538,7 +512,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     child: TabBarView(
                       controller: _tabController,
                       physics: BouncingScrollPhysics(),
-                      children: _foodCategoryList
+                      children: foodCategoryList
                           .map<Widget>(
                             (foodCategory) => ScrollConfiguration(
                               behavior: ScrollBehavior(),
@@ -557,10 +531,10 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     crossAxisSpacing: 5.w, //spaceLeftRight
                                     childAspectRatio: 1.sw / 1.65.sw,
                                   ),
-                                  itemCount: _foodList.length,
+                                  itemCount: foodList.length,
                                   itemBuilder: (context, pos) {
                                     return FoodWidget(
-                                      food: _foodList[pos],
+                                      food: foodList[pos],
                                       animationController: bottomCartController,
                                     );
                                   },

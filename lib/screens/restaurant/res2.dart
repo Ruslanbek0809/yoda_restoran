@@ -22,35 +22,6 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
   late AnimationController bottomCartController;
   late Animation<Offset> bottomCartOffset;
 
-  List<FoodCategory> _foodCategoryList = [
-    FoodCategory(0, 'Ertirlikler'),
-    FoodCategory(1, 'Işdäaçarlar'),
-    FoodCategory(2, 'Desertler'),
-    FoodCategory(3, 'Steak'),
-    FoodCategory(4, 'Burgerlar'),
-    FoodCategory(3, 'Bla'),
-    FoodCategory(4, 'BTaaa'),
-  ];
-  // I 1 2 4 Q
-
-  List<FoodModel> _foodList = [
-    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-  ];
-
   void _scrollListener() {
 //// Animate to currentTab when listview scrools
     // printLog("offset = ${_sliverScrollController.offset}");
@@ -81,7 +52,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
 
     _tabController = TabController(
       vsync: this,
-      length: _foodCategoryList.length,
+      length: foodCategoryList.length,
     );
     _sliverScrollController = ScrollController()..addListener(_scrollListener);
 
@@ -160,14 +131,14 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                 controller: _tabController,
                 isScrollable: true,
                 unselectedLabelColor: AppTheme.MAIN,
-                tabs: _foodCategoryList
+                tabs: foodCategoryList
                     .map<Widget>((category) => Tab(text: category.name))
                     .toList(),
                 onTap: (index) {
-                  double offset = _foodCategoryList.getRange(0, index).fold(
+                  double offset = foodCategoryList.getRange(0, index).fold(
                     0,
                     (prev, category) {
-                      int rows = (_foodList.length / 2)
+                      int rows = (foodList.length / 2)
                           .ceil(); // food length to crossAxisCount
                       return prev += rows *
                           (itemHeight + 24.w); // Gridview vertical padding
@@ -191,10 +162,10 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                 ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: _foodCategoryList.length,
+                  itemCount: foodCategoryList.length,
                   separatorBuilder: (context, index) {
-                    if (index < _foodCategoryList.length) {
-                      FoodCategory category = _foodCategoryList[index + 1];
+                    if (index < foodCategoryList.length) {
+                      FoodCategory category = foodCategoryList[index + 1];
 
                       return Container(
                         height: 50.w,
@@ -228,10 +199,10 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                         crossAxisSpacing: 5.w, //spaceLeftRight
                         childAspectRatio: itemWidth / itemHeight,
                       ),
-                      itemCount: _foodList.length,
+                      itemCount: foodList.length,
                       itemBuilder: (context, pos) {
                         return FoodWidget(
-                          food: _foodList[pos],
+                          food: foodList[pos],
                           animationController: bottomCartController,
                         );
                       },

@@ -13,37 +13,6 @@ class _SectionWidgetState extends State<SectionWidget>
     with SingleTickerProviderStateMixin {
   final scrollController = ScrollController();
 
-  List<FoodCategory> _foodCategoryList = [
-    FoodCategory(0, 'Ertirlikler'),
-    FoodCategory(1, 'Işdäaçarlar'),
-    FoodCategory(2, 'Desertler'),
-    FoodCategory(3, 'Steak'),
-    FoodCategory(4, 'Burgerlar'),
-    FoodCategory(5, 'Ertirlikler'),
-    FoodCategory(6, 'Işdäaçarlar'),
-    FoodCategory(7, 'Desertler'),
-    FoodCategory(8, 'Steak'),
-    FoodCategory(9, 'Burgerlar'),
-  ];
-
-  List<FoodModel> _foodList = [
-    FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-    FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
-      AdditionalFoodModel('Peýnir', 10, false),
-      AdditionalFoodModel('Ýumurtga', 10, false),
-      AdditionalFoodModel('Bet zat', 15, false),
-    ]),
-  ];
-
   Widget _buildBody(
     double itemWidth,
     double itemHeight,
@@ -52,10 +21,10 @@ class _SectionWidgetState extends State<SectionWidget>
       bottom: false,
       child: ListView.separated(
         controller: scrollController,
-        itemCount: _foodCategoryList.length,
+        itemCount: foodCategoryList.length,
         separatorBuilder: (context, index) {
-          if (index < _foodCategoryList.length) {
-            FoodCategory category = _foodCategoryList[index + 1];
+          if (index < foodCategoryList.length) {
+            FoodCategory foodCategory = foodCategoryList[index + 1];
 
             return Container(
               height: 50,
@@ -64,7 +33,7 @@ class _SectionWidgetState extends State<SectionWidget>
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   child: Text(
-                    category.name,
+                    foodCategory.name,
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18, color: Colors.grey),
                   ),
@@ -89,7 +58,7 @@ class _SectionWidgetState extends State<SectionWidget>
             childAspectRatio: itemWidth / itemHeight,
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            children: _foodList.map((product) {
+            children: foodList.map((product) {
               return Container(
                 color: Colors.red,
                 margin: EdgeInsets.symmetric(vertical: 10),
@@ -121,12 +90,12 @@ class _SectionWidgetState extends State<SectionWidget>
             ],
           ),
           child: SubcategoryTabs(
-            categories: _foodCategoryList,
+            categories: foodCategoryList,
             onItemPressed: (index) {
-              double offset = _foodCategoryList.getRange(0, index).fold(
+              double offset = foodCategoryList.getRange(0, index).fold(
                 0,
                 (prev, category) {
-                  int rows = (_foodList.length / 3).ceil();
+                  int rows = (foodList.length / 3).ceil();
                   return prev += rows * (itemHeight + 10);
                 },
               );
