@@ -52,15 +52,16 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
   ];
 
   void _scrollListener() {
-    /// Animate to currentTab when listview scrools
+//// Animate to currentTab when listview scrools
     // printLog("offset = ${_sliverScrollController.offset}");
     // currentTab = (_sliverScrollController.offset) ~/
-    //     ((_foodList.length / 2).ceil() * (0.5.sh));
+    //     ((_foodList.length / 2).ceil() * (1.2.sw));
     // // currentTab = (_sliverScrollController.offset) ~/
     // //     ((_foodList.length / 2).ceil() * (1.sw / 1.65.sw));
     // print(
     //     'currentTab=> $currentTab ${(_foodList.length / 2).ceil()} ${1.sw} ${0.5.sh} ${(1.sw / 1.65.sw)}');
     // _tabController.animateTo(currentTab);
+
 //// For SliverAppBar
     if (_isShrink != lastStatus) {
       setState(() {
@@ -95,6 +96,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
   void dispose() {
     _tabController.dispose();
     _sliverScrollController.removeListener(_scrollListener);
+    _sliverScrollController.dispose();
     super.dispose();
   }
 
@@ -103,7 +105,8 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
     double itemWidth = (1.sw - 5.w * 2 - 20.w) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview horizontal padding) / crossAxisCount
 
-    double itemHeight = itemWidth + 0.4.sw; // 0.4.sw is for item height
+    double itemHeight = itemWidth + 0.3.sw; // 0.4.sw is for item height
+    printLog('ItemHeight: $itemHeight and expected ${0.75.sw}');
     return Scaffold(
       body: CustomScrollView(
         controller: _sliverScrollController,
@@ -167,7 +170,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                       int rows = (_foodList.length / 2)
                           .ceil(); // food length to crossAxisCount
                       return prev += rows *
-                          (itemHeight + 25.w); // Gridview vertical padding
+                          (itemHeight + 24.w); // Gridview vertical padding
                     },
                   );
 
