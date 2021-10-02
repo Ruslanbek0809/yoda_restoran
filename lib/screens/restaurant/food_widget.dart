@@ -4,7 +4,6 @@ import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'restaurant_details_screen.dart';
 
 class FoodWidget extends StatefulWidget {
   final FoodModel food;
@@ -18,8 +17,6 @@ class FoodWidget extends StatefulWidget {
 }
 
 class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
-  GlobalKey<RestaurantDetailsScreenState> restaurantDetailsKey =
-      GlobalKey<RestaurantDetailsScreenState>();
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
 

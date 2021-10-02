@@ -45,7 +45,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                     image: restaurant.image,
                     height: 0.45.sw,
                     width: 1.sw,
-                    borderRadius: Constants.BORDER_RADIUS_MAIN,
+                    borderRadius: Constants.BORDER_RADIUS_20,
                   ),
                   Positioned.fill(
                     child: Material(
@@ -82,9 +82,9 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   decoration: BoxDecoration(
                     color: AppTheme.MAIN_DARK.withOpacity(0.9),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(Constants.BORDER_RADIUS_MAIN),
+                      topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
                       bottomRight:
-                          Radius.circular(Constants.BORDER_RADIUS_MAIN),
+                          Radius.circular(Constants.BORDER_RADIUS_20),
                     ),
                   ),
                   alignment: Alignment.center,

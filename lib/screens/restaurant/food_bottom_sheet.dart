@@ -9,7 +9,7 @@ void showFoodBottomSheet(BuildContext context, FoodModel food) {
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-          top: Radius.circular(Constants.BORDER_RADIUS_MAIN)),
+          top: Radius.circular(Constants.BORDER_RADIUS_20)),
     ),
     context: context,
     builder: (ctx) {
@@ -41,7 +41,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
       height: 0.925.sh,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
-            top: Radius.circular(Constants.BORDER_RADIUS_MAIN)),
+            top: Radius.circular(Constants.BORDER_RADIUS_20)),
         color: AppTheme.BOTTOM_BACKGROUND_COLOR,
       ),
       child: Stack(
@@ -52,7 +52,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(Constants.BORDER_RADIUS_MAIN)),
+                      top: Radius.circular(Constants.BORDER_RADIUS_20)),
                   child: YodaImage(
                     image: widget.food.image,
                     height: 0.4.sh,
@@ -296,7 +296,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                         height: 0.15.sw,
                         width: 0.575.sw,
                         text: 'Goş',
-                        borderRadius: Constants.BORDER_RADIUS_BUTTON_2,
+                        borderRadius: Constants.BORDER_RADIUS_BUTTON_12,
                         elevation: 0,
                         onPressed: () {
                           showAlertDialog(

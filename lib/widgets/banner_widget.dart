@@ -28,7 +28,7 @@ class BannerWidget extends StatelessWidget {
               (item) => YodaImage(
                 image: item,
                 width: 1.sw,
-                borderRadius: Constants.BORDER_RADIUS_MAIN,
+                borderRadius: Constants.BORDER_RADIUS_20,
               ),
             )
             .toList(),
