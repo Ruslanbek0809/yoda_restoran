@@ -34,83 +34,98 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
       children: [
         YodaImage(
           image: food.image,
-          height: 0.35.sw,
-          width: 0.35.sw,
+          height: 0.3.sw,
+          width: 0.3.sw,
           borderRadius: Constants.BORDER_RADIUS_10,
         ),
         Expanded(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    food.name,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: AppTheme.FONT_COLOR,
+          child: Container(
+            height: 0.3
+                .sw, // this height is used to make Column apply MainAxisAlignment.spaceBetween
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      food.name,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '${food.price} TMT',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      color: AppTheme.FONT_COLOR,
+                    Text(
+                      '${food.price} TMT',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
+                  ],
+                ),
+                // Text(
+                //   'Ajy sos',
+                //   style: TextStyle(
+                //     fontSize: 14.sp,
+                //     color: AppTheme.DRAWER_ICON,
+                //   ),
+                // ),
 //// Button Widget
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Material(
-                    color: AppTheme.WHITE,
-                    borderRadius: AppTheme().buttonBorderRadius,
-                    elevation: 1,
-                    child: InkWell(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Material(
+                      color: AppTheme.MAIN_LIGHT,
                       borderRadius: AppTheme().buttonBorderRadius,
-                      onTap: () async {},
-                      child: Padding(
-                        padding: EdgeInsets.all(10.w),
-                        child: Icon(
-                          Icons.remove,
-                          size: 25.w,
-                          color: AppTheme.FONT_COLOR,
+                      elevation: 0,
+                      child: InkWell(
+                        borderRadius: AppTheme().buttonBorderRadius,
+                        onTap: () async {},
+                        child: Padding(
+                          padding: EdgeInsets.all(10.w),
+                          child: Icon(
+                            Icons.remove,
+                            size: 25.w,
+                            color: AppTheme.FONT_COLOR,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      color: AppTheme.FONT_COLOR,
+                    SizedBox(width: 10.w),
+                    Text(
+                      '1',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
                     ),
-                  ),
-                  Material(
-                    color: AppTheme.WHITE,
-                    borderRadius: AppTheme().buttonBorderRadius,
-                    elevation: 1,
-                    child: InkWell(
+                    SizedBox(width: 10.w),
+                    Material(
+                      color: AppTheme.MAIN_LIGHT,
                       borderRadius: AppTheme().buttonBorderRadius,
-                      onTap: () {
-                        _onProductBottomSheetClicked(food);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(10.w),
-                        child: Icon(
-                          Icons.add,
-                          size: 25.w,
-                          color: AppTheme.FONT_COLOR,
+                      elevation: 0,
+                      child: InkWell(
+                        borderRadius: AppTheme().buttonBorderRadius,
+                        onTap: () {
+                          _onProductBottomSheetClicked(food);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(10.w),
+                          child: Icon(
+                            Icons.add,
+                            size: 25.w,
+                            color: AppTheme.FONT_COLOR,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

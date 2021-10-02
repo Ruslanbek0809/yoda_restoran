@@ -67,6 +67,7 @@ class _CartScreenState extends State<CartScreen> {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(top: 15.w),
                   itemCount: foodList.length,
                   itemBuilder: (context, pos) {
                     return CartFoodWidget(food: foodList[pos]);
@@ -74,8 +75,6 @@ class _CartScreenState extends State<CartScreen> {
                   separatorBuilder: (context, index) {
                     return Divider(
                       thickness: 1,
-                      indent: 15.w,
-                      endIndent: 15.w,
                       color: AppTheme.DRAWER_DIVIDER,
                     );
                   },
