@@ -96,7 +96,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                     ),
                     SizedBox(width: 10.w),
                     Text(
-                      '1',
+                      '12',
                       style: TextStyle(
                         fontSize: 20.sp,
                         color: AppTheme.FONT_COLOR,

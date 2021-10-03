@@ -15,7 +15,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   bool _isLoading = false;
-
+  bool _switchValue = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,12 +73,55 @@ class _CartScreenState extends State<CartScreen> {
                     return CartFoodWidget(food: foodList[pos]);
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
-                      thickness: 1,
-                      color: AppTheme.DRAWER_DIVIDER,
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 7.w),
+                      child: Divider(
+                        thickness: 1,
+                        color: AppTheme.DRAWER_DIVIDER,
+                      ),
                     );
                   },
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 7.w),
+                  child: Divider(
+                    thickness: 1,
+                    color: AppTheme.DRAWER_DIVIDER,
+                  ),
+                ),
+//// Accessories Widget
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: SvgPicture.asset(
+                        'assets/forkKnife.svg',
+                        color: AppTheme.MAIN_DARK,
+                        width: 25.w,
+                      ),
+                    ),
+                    SizedBox(width: 15.w),
+                    Text(
+                      'Esbaplar',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
+                    ),
+                    Spacer(),
+                    CupertinoSwitch(
+                      activeColor: AppTheme.MAIN,
+                      trackColor: AppTheme.TOGGLE_COLOR,
+                      value: _switchValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _switchValue = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                // ToggleButton(),
                 SizedBox(
                     height: 0.25
                         .sw), // this one is needed to compensate height of Checkout Button Widget is taking
