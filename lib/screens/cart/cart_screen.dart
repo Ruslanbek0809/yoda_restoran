@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoda_res/screens/cart/cart_food_widget.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import '../../utils/utils.dart';
 import 'cart.dart';
@@ -53,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: ListView(
-              // ListView is used instead of SingleChildScrollView bc of its incompatibility with Stack. Note: Don't use Scrollable Widget inside another one
+              // ListView was used instead of SingleChildScrollView bc of its incompatibility with Stack Widget
               physics: BouncingScrollPhysics(),
               children: <Widget>[
                 Text(
@@ -64,31 +65,32 @@ class _CartScreenState extends State<CartScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 15.w),
-                  itemCount: foodList.length,
-                  itemBuilder: (context, pos) {
-                    return CartFoodWidget(food: foodList[pos]);
-                  },
-                  separatorBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 7.w),
-                      child: Divider(
-                        thickness: 1,
-                        color: AppTheme.DRAWER_DIVIDER,
-                      ),
-                    );
-                  },
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 7.w),
-                  child: Divider(
-                    thickness: 1,
-                    color: AppTheme.DRAWER_DIVIDER,
-                  ),
-                ),
+//// CartWidget
+                // ListView.separated(
+                //   shrinkWrap: true,
+                //   physics: NeverScrollableScrollPhysics(),
+                //   padding: EdgeInsets.only(top: 15.w),
+                //   itemCount: foodList.length,
+                //   itemBuilder: (context, pos) {
+                //     return CartWidget(food: foodList[pos]);
+                //   },
+                //   separatorBuilder: (context, index) {
+                //     return Padding(
+                //       padding: EdgeInsets.symmetric(vertical: 7.w),
+                //       child: Divider(
+                //         thickness: 1,
+                //         color: AppTheme.DRAWER_DIVIDER,
+                //       ),
+                //     );
+                //   },
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 7.w),
+                //   child: Divider(
+                //     thickness: 1,
+                //     color: AppTheme.DRAWER_DIVIDER,
+                //   ),
+                // ),
 //// Accessories Widget
                 Row(
                   children: [
@@ -121,7 +123,30 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                // ToggleButton(),
+                Padding(
+                  padding: EdgeInsets.only(top: 15.w, bottom: 10.w),
+                  child: Text(
+                    'Ýene bir zat?',
+                    style: TextStyle(
+                      color: AppTheme.MAIN_DARK,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+//// CartFoodList Widget
+                SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: foodList.map((food) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: CartFoodWidget(food: food),
+                      );
+                    }).toList(),
+                  ),
+                ),
                 SizedBox(
                     height: 0.25
                         .sw), // this one is needed to compensate height of Checkout Button Widget is taking

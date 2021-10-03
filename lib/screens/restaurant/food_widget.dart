@@ -68,7 +68,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                   image: food.image,
                   height: constraints.maxWidth,
                   width: constraints.maxWidth,
-                  borderRadius: 20.0,
+                  borderRadius: Constants.BORDER_RADIUS_20,
                 ),
                 // Padding(
                 //   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
