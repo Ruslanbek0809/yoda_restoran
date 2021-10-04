@@ -52,6 +52,8 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
       scale: _tween.animate(
           CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut)),
       child: Container(
+        width: 0.33.sw +
+            10.w, // this width is used to make spaceBetween work in Row Button widgets
         decoration: BoxDecoration(
           color: AppTheme.MAIN_LIGHT,
           borderRadius: AppTheme().mainBorderRadius,
@@ -90,6 +92,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
               child: isButtonToggled
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Material(
                           color: AppTheme.WHITE,
