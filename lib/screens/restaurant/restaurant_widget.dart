@@ -83,8 +83,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                     color: AppTheme.MAIN_DARK.withOpacity(0.9),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
-                      bottomRight:
-                          Radius.circular(Constants.BORDER_RADIUS_20),
+                      bottomRight: Radius.circular(Constants.BORDER_RADIUS_20),
                     ),
                   ),
                   alignment: Alignment.center,

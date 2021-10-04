@@ -153,11 +153,12 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                             left: 0.0,
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: AppTheme.WHITE,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20.0),
-                                    topRight: Radius.circular(20.0),
-                                  )),
+                                color: AppTheme.WHITE,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 15.w, vertical: 15.w),
                               child: Column(

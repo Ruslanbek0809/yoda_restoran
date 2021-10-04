@@ -15,7 +15,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool _isLoading = false;
   bool _switchValue = true;
   @override
   Widget build(BuildContext context) {
@@ -51,13 +50,14 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: ListView(
-              // ListView was used instead of SingleChildScrollView bc of its incompatibility with Stack Widget
-              physics: BouncingScrollPhysics(),
-              children: <Widget>[
-                Text(
+          ListView(
+            // ListView was used instead of SingleChildScrollView bc of its incompatibility with Stack Widget
+            // Also horizontal: 15.w padding is used for each inner widgets bc of horizontal CartFoodWidget list scroll
+            physics: BouncingScrollPhysics(),
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Text(
                   'Sargyt',
                   style: TextStyle(
                     color: AppTheme.MAIN_DARK,
@@ -65,34 +65,37 @@ class _CartScreenState extends State<CartScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
 //// CartWidget
-                // ListView.separated(
-                //   shrinkWrap: true,
-                //   physics: NeverScrollableScrollPhysics(),
-                //   padding: EdgeInsets.only(top: 15.w),
-                //   itemCount: foodList.length,
-                //   itemBuilder: (context, pos) {
-                //     return CartWidget(food: foodList[pos]);
-                //   },
-                //   separatorBuilder: (context, index) {
-                //     return Padding(
-                //       padding: EdgeInsets.symmetric(vertical: 7.w),
-                //       child: Divider(
-                //         thickness: 1,
-                //         color: AppTheme.DRAWER_DIVIDER,
-                //       ),
-                //     );
-                //   },
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(vertical: 7.w),
-                //   child: Divider(
-                //     thickness: 1,
-                //     color: AppTheme.DRAWER_DIVIDER,
-                //   ),
-                // ),
+              // ListView.separated(
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
+              //   itemCount: foodList.length,
+              //   itemBuilder: (context, pos) {
+              //     return CartWidget(food: foodList[pos]);
+              //   },
+              //   separatorBuilder: (context, index) {
+              //     return Padding(
+              //       padding: EdgeInsets.symmetric(vertical: 7.w),
+              //       child: Divider(
+              //         thickness: 1,
+              //         color: AppTheme.DRAWER_DIVIDER,
+              //       ),
+              //     );
+              //   },
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 7.w),
+              //   child: Divider(
+              //     thickness: 1,
+              //     color: AppTheme.DRAWER_DIVIDER,
+              //   ),
+              // ),
 //// Accessories Widget
-                Row(
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Row(
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
@@ -123,35 +126,54 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 15.w, bottom: 10.w),
-                  child: Text(
-                    'Ýene bir zat?',
-                    style: TextStyle(
-                      color: AppTheme.MAIN_DARK,
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 15.w, bottom: 10.w, left: 15.w, right: 15.w),
+                child: Text(
+                  'Ýene bir zat?',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
+              ),
 //// CartFoodList Widget
-                SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: foodList.map((food) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: CartFoodWidget(food: food),
-                      );
-                    }).toList(),
+              SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: foodList.mapIndexed((food, pos) {
+                    return pos == 0
+                        ? Padding(
+                            padding: EdgeInsets.only(right: 5.w, left: 15.w),
+                            child: CartFoodWidget(food: food),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: CartFoodWidget(food: food),
+                          );
+                  }).toList(),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 20.w, bottom: 10.w, left: 15.w, right: 15.w),
+                child: Text(
+                  'Almak usuly',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(
-                    height: 0.25
-                        .sw), // this one is needed to compensate height of Checkout Button Widget is taking
-              ],
-            ),
+              ),
+              ToggleButton(),
+              SizedBox(
+                  height: 0.25
+                      .sw), // this one is needed to compensate height of Checkout Button Widget is taking
+            ],
           ),
           Positioned(
             bottom: 0,
