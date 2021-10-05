@@ -7,7 +7,6 @@ class AppTheme {
   static const Color MAIN_DARK = Color(0xFF41413E);
   static const Color FONT_COLOR = Color(0xFF20201F);
   static const Color FONT_GREY_COLOR = Color(0xFF9F9D9A);
-  static const Color BOTTOM_BACKGROUND_COLOR = Color(0xFFF5F4F2);
   static const Color BOTTOM_SHEET_FONT_COLOR = Color(0xFF787773);
   static const Color DRAWER_ICON = Color(0xFF9D9B98);
   static const Color DRAWER_DIVIDER = Color(0xFFCCCCCC);

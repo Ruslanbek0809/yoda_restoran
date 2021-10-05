@@ -42,7 +42,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20)),
-        color: AppTheme.BOTTOM_BACKGROUND_COLOR,
+        color: AppTheme.MAIN_LIGHT,
       ),
       child: Stack(
         children: [
@@ -111,7 +111,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                                   ),
                                 ],
                               ),
-                              activeColor: AppTheme.MAIN,
+                              activeColor: AppTheme.GREEN,
                               controlAffinity: ListTileControlAffinity.leading,
                               toggleable: true,
                             ),
@@ -153,7 +153,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                 //                     value: additional.isAdded,
                 //                     controlAffinity:
                 //                         ListTileControlAffinity.leading,
-                //                     activeColor: AppTheme.MAIN,
+                //                     activeColor: AppTheme.GREEN,
                 //                     onChanged: (bool? value) {
                 //                       setState(() {
                 //                         additional.isAdded = value!;
