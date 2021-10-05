@@ -69,20 +69,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               size: 25.w,
             ),
           ),
-          centerTitle: true,
           title: Text(
             'Biz bilen habarlaş',
             style: TextStyle(
-              color: AppTheme.WHITE,
+              color: AppTheme.MAIN_DARK,
             ),
           ),
+          centerTitle: true,
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            color: AppTheme.WHITE,
-            borderRadius: AppTheme().containerRadius,
-          ),
-          padding: EdgeInsets.only(top: 5.w, right: 15.w, left: 15.w),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 17.w),
           child: Form(
             key: _contactformKey,
             autovalidateMode: AutovalidateMode.disabled,
@@ -90,11 +86,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 25.w),
                 TextFormField(
                   controller: _nameController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(hintText: 'Ady'),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: AppTheme().containerRadius,
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Ady',
+                    hintStyle:
+                        TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+                    filled: true,
+                    fillColor: AppTheme.MAIN_LIGHT,
+                  ),
                   focusNode: _nameFocus,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -103,11 +110,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     return null;
                   },
                 ),
+                SizedBox(height: 15.w),
                 TextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(hintText: 'Telefon belgiňiz'),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: AppTheme().containerRadius,
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Telefon belgiňiz',
+                    hintStyle:
+                        TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+                    filled: true,
+                    fillColor: AppTheme.MAIN_LIGHT,
+                  ),
                   focusNode: _phoneFocus,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -116,17 +134,23 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     return null;
                   },
                 ),
+                SizedBox(height: 15.w),
                 TextFormField(
                   controller: _infoController,
-                  maxLines: 8,
+                  maxLines: 10,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        gapPadding: 0.0,
-                      ),
-                      hintText: 'Habarnama'),
+                    border: OutlineInputBorder(
+                      borderRadius: AppTheme().containerRadius,
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Habarnama',
+                    hintStyle:
+                        TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+                    filled: true,
+                    fillColor: AppTheme.MAIN_LIGHT,
+                  ),
                   focusNode: _infoFocus,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -135,17 +159,17 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     return null;
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.w),
-                  child: CustomElevatedButton(
-                    height: 1.sw / 10,
-                    width: 1.sw,
-                    color: AppTheme.MAIN,
-                    borderRadius: 10.0,
-                    text: 'Ugratmak',
-                    isLoading: _isLoading,
-                    onPressed: _onContactPressed,
+                SizedBox(height: 35.w),
+                CustomTextButton(
+                  text: 'Ugratmak',
+                  padding:
+                      EdgeInsets.symmetric(vertical: 14.w, horizontal: 0.34.sw),
+                  textStyle: TextStyle(
+                    color: AppTheme.WHITE,
+                    fontSize: 18.sp,
                   ),
+                  borderRadius: AppTheme().containerRadius,
+                  onPressed: _onContactPressed,
                 ),
               ],
             ),

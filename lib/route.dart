@@ -16,7 +16,7 @@ class Routes {
     // RouteList.register: (context) => RegistrationScreen(),
     RouteList.cart: (context) => CartScreen(),
     RouteList.profile: (context) => ProfileScreen(),
-    // RouteList.contact: (context) => ContactUsScreen(),
+    RouteList.contact: (context) => ContactUsScreen(),
   };
 
   // function to give specific build route for a route
