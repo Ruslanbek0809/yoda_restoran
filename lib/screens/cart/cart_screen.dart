@@ -207,11 +207,10 @@ class _CartScreenState extends State<CartScreen> {
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: AppTheme.WHITE,
-                borderRadius: AppTheme().containerRadius,
-                border:
-                    Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-              ),
+                  color: AppTheme.WHITE,
+                  border: Border.all(
+                      color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                  boxShadow: [AppTheme().bottomCartShadow]),
               padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

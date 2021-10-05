@@ -75,7 +75,7 @@ class AppTheme {
 
   BoxShadow get bottomCartShadow => BoxShadow(
         color: AppTheme.MAIN_DARK.withOpacity(0.3),
-        blurRadius: 3.0,
+        blurRadius: 5.0,
         offset: const Offset(0.0, 1.1),
       );
 
