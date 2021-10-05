@@ -58,7 +58,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
           color: AppTheme.MAIN_LIGHT,
           borderRadius: AppTheme().mainBorderRadius,
         ),
-        padding: EdgeInsets.all(5.w),
+        padding: EdgeInsets.all(6.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -97,7 +97,8 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                         Material(
                           color: AppTheme.WHITE,
                           borderRadius: AppTheme().buttonBorderRadius,
-                          elevation: 1,
+                          elevation: 3,
+                          shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
                             borderRadius: AppTheme().buttonBorderRadius,
                             onTap: () async {
@@ -108,7 +109,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                                 });
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(9.w),
+                              padding: EdgeInsets.all(8.w),
                               child: Icon(
                                 Icons.remove,
                                 size: 22.w,
@@ -127,14 +128,15 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                         Material(
                           color: AppTheme.WHITE,
                           borderRadius: AppTheme().buttonBorderRadius,
-                          elevation: 1,
+                          elevation: 3,
+                          shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
                             borderRadius: AppTheme().buttonBorderRadius,
                             onTap: () {
                               _tweenController.forward();
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(9.w),
+                              padding: EdgeInsets.all(8.w),
                               child: Icon(
                                 Icons.add,
                                 size: 22.w,
@@ -148,7 +150,8 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                   : Material(
                       color: Colors.transparent,
                       borderRadius: AppTheme().buttonBorderRadius,
-                      elevation: 1,
+                      elevation: 3,
+                      shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                       child: InkWell(
                         borderRadius: AppTheme().buttonBorderRadius,
                         onTap: () async {
