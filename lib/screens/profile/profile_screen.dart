@@ -241,7 +241,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () async {
                         DateTime? date;
                         FocusScope.of(context).requestFocus(FocusNode());
-
                         date = await DatePicker.showDatePicker(context,
                             showTitleActions: true,
                             minTime: DateTime(1900, 1, 1),

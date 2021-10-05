@@ -50,103 +50,105 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leadingWidth: 35.w,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: SvgPicture.asset(
-                'assets/cancel.svg',
-                color: AppTheme.BLACK,
-              ),
+    return WillPopScope(
+      onWillPop: () async {
+        await Navigator.pushReplacementNamed(context, RouteList.home);
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: AppTheme.WHITE,
+        appBar: AppBar(
+          backgroundColor: AppTheme.WHITE,
+          elevation: 0,
+          leading: GestureDetector(
+            onTap: () async =>
+                await Navigator.pushReplacementNamed(context, RouteList.home),
+            child: Icon(
+              Icons.arrow_back,
+              color: AppTheme.FONT_COLOR,
+              size: 25.w,
+            ),
+          ),
+          centerTitle: true,
+          title: Text(
+            'Biz bilen habarlaş',
+            style: TextStyle(
+              color: AppTheme.WHITE,
             ),
           ),
         ),
-        title: Text(
-          'Biz bilen habarlaş',
-          style: TextStyle(
+        body: Container(
+          decoration: BoxDecoration(
             color: AppTheme.WHITE,
+            borderRadius: AppTheme().containerRadius,
           ),
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.WHITE,
-          borderRadius: AppTheme().containerRadius,
-        ),
-        padding: EdgeInsets.only(top: 5.w, right: 15.w, left: 15.w),
-        child: Form(
-          key: _contactformKey,
-          autovalidateMode: AutovalidateMode.disabled,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(hintText: 'Ady'),
-                focusNode: _nameFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Ady dolduryň';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(hintText: 'Telefon belgiňiz'),
-                focusNode: _phoneFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Telefon belgiňizi giriziň';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _infoController,
-                maxLines: 8,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      gapPadding: 0.0,
-                    ),
-                    hintText: 'Habarnama'),
-                focusNode: _infoFocus,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Habarnama hökman dolduryň';
-                  }
-                  return null;
-                },
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.w),
-                child: CustomElevatedButton(
-                  height: 1.sw / 10,
-                  width: 1.sw,
-                  color: AppTheme.MAIN,
-                  borderRadius: 10.0,
-                  text: 'Ugratmak',
-                  isLoading: _isLoading,
-                  onPressed: _onContactPressed,
+          padding: EdgeInsets.only(top: 5.w, right: 15.w, left: 15.w),
+          child: Form(
+            key: _contactformKey,
+            autovalidateMode: AutovalidateMode.disabled,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  controller: _nameController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(hintText: 'Ady'),
+                  focusNode: _nameFocus,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Ady dolduryň';
+                    }
+                    return null;
+                  },
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(hintText: 'Telefon belgiňiz'),
+                  focusNode: _phoneFocus,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Telefon belgiňizi giriziň';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _infoController,
+                  maxLines: 8,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        gapPadding: 0.0,
+                      ),
+                      hintText: 'Habarnama'),
+                  focusNode: _infoFocus,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Habarnama hökman dolduryň';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.w),
+                  child: CustomElevatedButton(
+                    height: 1.sw / 10,
+                    width: 1.sw,
+                    color: AppTheme.MAIN,
+                    borderRadius: 10.0,
+                    text: 'Ugratmak',
+                    isLoading: _isLoading,
+                    onPressed: _onContactPressed,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

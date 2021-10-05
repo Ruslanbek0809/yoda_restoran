@@ -6,4 +6,6 @@ class RouteList {
   static const String cart = '/cart';
 
   // Profile
+  static const String profile = '/profile';
+  static const String contact = '/contact';
 }

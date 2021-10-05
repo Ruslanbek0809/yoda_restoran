@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoda_res/screens/profile/profile.dart';
 
 import 'screens/cart/cart.dart';
 import 'screens/home/home.dart';
@@ -14,6 +15,8 @@ class Routes {
     RouteList.home: (context) => HomeScreen(),
     // RouteList.register: (context) => RegistrationScreen(),
     RouteList.cart: (context) => CartScreen(),
+    RouteList.profile: (context) => ProfileScreen(),
+    // RouteList.contact: (context) => ContactUsScreen(),
   };
 
   // function to give specific build route for a route

@@ -36,8 +36,7 @@ List<Restaurant> restaurants = [
 ];
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> homeScaffoldKey =
-      GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _scrollController = ScrollController();
   bool isFavorited = false;
 
@@ -72,9 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
 //// Menu button
                           IconButton(
                             icon: const Icon(Icons.menu),
-                            onPressed: () {
-                              homeScaffoldKey.currentState!.openDrawer();
-                            },
+                            onPressed: () =>
+                                homeScaffoldKey.currentState!.openDrawer(),
                             tooltip: 'Drawer',
                           ),
 //// Search

@@ -18,15 +18,8 @@ class DrawerWidget extends StatelessWidget {
         {
           title = 'Profil';
           svgName = 'assets/user.svg';
-          onTap = () async {
-            // Navigator.of(context).pop();
-            // Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (BuildContext context) => ProfileScreen()));
-            await Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ProfileScreen()));
-          };
+          onTap = () async =>
+              await Navigator.pushReplacementNamed(context, RouteList.profile);
           break;
         }
       case 'orders':
@@ -118,41 +111,26 @@ class DrawerWidget extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top: 0.25.sh, left: 20.w),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/chat_circle.svg',
-                    color: AppTheme.DRAWER_ICON,
-                    width: 50.w,
-                  ),
-                  SizedBox(width: 10.w),
-                  GestureDetector(
-                    onTap: () async {
-                      await showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            insetPadding: EdgeInsets.symmetric(
-                                vertical: 5.w, horizontal: 25.w),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            child: ContactUsScreen(),
-                          );
-                        },
-                      );
-                    },
-                    child: Text(
+              child: GestureDetector(
+                onTap: () async => await Navigator.pushReplacementNamed(
+                    context, RouteList.contact),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/chat_circle.svg',
+                      color: AppTheme.DRAWER_ICON,
+                      width: 50.w,
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
                       'Biz bilen habarlaş',
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: AppTheme.DRAWER_ICON,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

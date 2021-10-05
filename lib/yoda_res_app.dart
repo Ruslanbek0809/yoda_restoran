@@ -79,14 +79,14 @@ class _YodaResAppState extends State<YodaResApp> {
                   child: widget!,
                 );
               },
-              home: Scaffold(
-                key: mainScaffoldKey,
-                body:
-                    // OtpScreen(),
-                    // LoginScreen(),
-                    HomeScreen(),
-                    // CartScreen(),
-              ),
+              // home: Scaffold(
+              //   key: mainScaffoldKey,
+              //   body:
+              //       // OtpScreen(),
+              //       // LoginScreen(),
+              //       HomeScreen(),
+              //       // CartScreen(),
+              // ),
               routes: Routes.getAllRoutes,
               onGenerateRoute: Routes.getRouteGenerate,
               themeMode: ThemeMode.light,
