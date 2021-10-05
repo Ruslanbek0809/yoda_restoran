@@ -36,6 +36,8 @@ List<Restaurant> restaurants = [
 ];
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> homeScaffoldKey =
+      GlobalKey<ScaffoldState>();
   final ScrollController _scrollController = ScrollController();
   bool isFavorited = false;
 
@@ -44,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       /// Resize according to onscreen keyboard
       resizeToAvoidBottomInset: true,
+      key: homeScaffoldKey,
       backgroundColor: AppTheme.WHITE,
       drawer: DrawerWidget(),
       body: SafeArea(
@@ -70,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           IconButton(
                             icon: const Icon(Icons.menu),
                             onPressed: () {
-                              Scaffold.of(context).openDrawer();
+                              homeScaffoldKey.currentState!.openDrawer();
                             },
                             tooltip: 'Drawer',
                           ),
