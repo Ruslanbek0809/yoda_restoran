@@ -67,31 +67,31 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
 //// CartWidget
-              // ListView.separated(
-              //   shrinkWrap: true,
-              //   physics: NeverScrollableScrollPhysics(),
-              //   padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
-              //   itemCount: foodList.length,
-              //   itemBuilder: (context, pos) {
-              //     return CartWidget(food: foodList[pos]);
-              //   },
-              //   separatorBuilder: (context, index) {
-              //     return Padding(
-              //       padding: EdgeInsets.symmetric(vertical: 7.w),
-              //       child: Divider(
-              //         thickness: 1,
-              //         color: AppTheme.DRAWER_DIVIDER,
-              //       ),
-              //     );
-              //   },
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(vertical: 7.w),
-              //   child: Divider(
-              //     thickness: 1,
-              //     color: AppTheme.DRAWER_DIVIDER,
-              //   ),
-              // ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
+                itemCount: foodList.length,
+                itemBuilder: (context, pos) {
+                  return CartWidget(food: foodList[pos]);
+                },
+                separatorBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 7.w),
+                    child: Divider(
+                      thickness: 1,
+                      color: AppTheme.DRAWER_DIVIDER,
+                    ),
+                  );
+                },
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 7.w),
+                child: Divider(
+                  thickness: 1,
+                  color: AppTheme.DRAWER_DIVIDER,
+                ),
+              ),
 //// Accessories Widget
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -170,6 +170,29 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
               ToggleButton(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: SvgPicture.asset(
+                        'assets/map_pin.svg',
+                        color: AppTheme.MAIN_DARK,
+                        width: 25.w,
+                      ),
+                    ),
+                    SizedBox(width: 5.w),
+                    Text(
+                      'Alişer Nowaýy köç. 171',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
                   height: 0.25
                       .sw), // this one is needed to compensate height of Checkout Button Widget is taking
