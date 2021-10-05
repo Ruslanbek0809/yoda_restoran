@@ -275,7 +275,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     color: AppTheme.MAIN_LIGHT,
                                     thickness: 1.w,
                                   ),
-                                  ToggleButton(),
+                                  ToggleButtonWidget(),
 //// Delivery/On-site Widget
                                   // Container(
                                   //   decoration: BoxDecoration(

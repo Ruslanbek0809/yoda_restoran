@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class ToggleButton extends StatefulWidget {
+class ToggleButtonWidget extends StatefulWidget {
   @override
-  _ToggleButtonState createState() => _ToggleButtonState();
+  _ToggleButtonWidgetState createState() => _ToggleButtonWidgetState();
 }
 
-class _ToggleButtonState extends State<ToggleButton> {
+class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
   double height = 35.w;
   double halfWidth = 0.5.sw;
   bool isDelivery = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

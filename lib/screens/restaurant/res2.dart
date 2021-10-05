@@ -3,7 +3,6 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'food_widget.dart';
 
 class RestaurantScreen2 extends StatefulWidget {
@@ -79,139 +78,198 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
     double itemHeight = itemWidth + 0.3.sw; // 0.4.sw is for item height
     printLog('ItemHeight: $itemHeight and expected ${0.75.sw}');
     return Scaffold(
-      body: CustomScrollView(
-        controller: _sliverScrollController,
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 0.5.sh,
-            pinned: true,
-            stretch: true,
-            floating: false,
-            leading: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: Container(
-                height: 50.w,
-                width: 50.w,
-                margin: EdgeInsets.only(left: 10.w, top: 5.w),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _isShrink ? Colors.transparent : AppTheme.WHITE,
-                    boxShadow: _isShrink ? [] : [AppTheme().buttonShadow]),
-                child: Material(
-                  color: _isShrink ? Colors.transparent : AppTheme.WHITE,
-                  shape: CircleBorder(),
-                  elevation: 0,
-                  child: InkWell(
-                    customBorder: CircleBorder(),
-                    onTap: () {},
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 27.w,
-                      color: AppTheme.BLACK,
-                    ), // other widget
+      body: Stack(
+        children: [
+          CustomScrollView(
+            controller: _sliverScrollController,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 0.5.sh,
+                pinned: true,
+                stretch: true,
+                floating: false,
+                leading: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: Container(
+                    height: 50.w,
+                    width: 50.w,
+                    margin: EdgeInsets.only(left: 10.w, top: 5.w),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _isShrink ? Colors.transparent : AppTheme.WHITE,
+                        boxShadow: _isShrink ? [] : [AppTheme().buttonShadow]),
+                    child: Material(
+                      color: _isShrink ? Colors.transparent : AppTheme.WHITE,
+                      shape: CircleBorder(),
+                      elevation: 0,
+                      child: InkWell(
+                        customBorder: CircleBorder(),
+                        onTap: () {},
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 27.w,
+                          color: AppTheme.BLACK,
+                        ), // other widget
+                      ),
+                    ),
+                  ),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  stretchModes: [StretchMode.zoomBackground],
+                  background: YodaImage(
+                    image: 'assets/burgerlist.jpg',
+                  ),
+                  title: Text(
+                    'Kebapçy',
+                    style: TextStyle(fontSize: 17.sp),
+                  ),
+                  centerTitle: false,
+                ),
+                bottom: ColoredTabBar(
+                  color: AppTheme.WHITE,
+                  tabBar: TabBar(
+                    controller: _tabController,
+                    isScrollable: true,
+                    unselectedLabelColor: AppTheme.MAIN,
+                    tabs: foodCategoryList
+                        .map<Widget>((category) => Tab(text: category.name))
+                        .toList(),
+                    onTap: (index) {
+                      double offset = foodCategoryList.getRange(0, index).fold(
+                        0,
+                        (prev, category) {
+                          int rows = (foodList.length / 2)
+                              .ceil(); // food length to crossAxisCount
+                          return prev += rows *
+                              (itemHeight + 24.w); // GridView vertical padding
+                        },
+                      );
+
+                      _sliverScrollController.animateTo(
+                        offset +
+                            ((index - 1) * 50.w) +
+                            0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.5.sh expanded height
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.linear,
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: foodCategoryList.length,
+                      separatorBuilder: (context, index) {
+                        if (index < foodCategoryList.length) {
+                          FoodCategory category = foodCategoryList[index + 1];
+
+                          return Container(
+                            height: 50.w,
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                                child: Text(
+                                  category.name,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                      itemBuilder: (context, index) {
+                        return GridView.builder(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.w, horizontal: 10.w),
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10.w, //spaceTopBottom
+                            crossAxisSpacing: 5.w, //spaceLeftRight
+                            childAspectRatio: itemWidth / itemHeight,
+                          ),
+                          itemCount: foodList.length,
+                          itemBuilder: (context, pos) {
+                            return FoodWidget(
+                              food: foodList[pos],
+                              animationController: bottomCartController,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SlideTransition(
+              position: bottomCartOffset,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(RouteList.cart);
+                },
+                child: Container(
+                  height: 0.22.sw,
+                  width: 1.sw,
+                  decoration: BoxDecoration(color: AppTheme.WHITE, boxShadow: [
+                    AppTheme().bottomCartShadow,
+                  ]),
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    decoration: BoxDecoration(
+                      color: AppTheme.MAIN,
+                      borderRadius: AppTheme().containerRadius,
+                    ),
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '40-50 min',
+                          style: TextStyle(
+                            color: AppTheme.WHITE,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        Text(
+                          'Sargyt',
+                          style: TextStyle(
+                            color: AppTheme.WHITE,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '35 TMT',
+                          style: TextStyle(
+                            color: AppTheme.WHITE,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              stretchModes: [StretchMode.zoomBackground],
-              background: YodaImage(
-                image: 'assets/burgerlist.jpg',
-              ),
-              title: Text(
-                'Kebapçy',
-                style: TextStyle(fontSize: 17.sp),
-              ),
-              centerTitle: false,
-            ),
-            bottom: ColoredTabBar(
-              color: AppTheme.WHITE,
-              tabBar: TabBar(
-                controller: _tabController,
-                isScrollable: true,
-                unselectedLabelColor: AppTheme.MAIN,
-                tabs: foodCategoryList
-                    .map<Widget>((category) => Tab(text: category.name))
-                    .toList(),
-                onTap: (index) {
-                  double offset = foodCategoryList.getRange(0, index).fold(
-                    0,
-                    (prev, category) {
-                      int rows = (foodList.length / 2)
-                          .ceil(); // food length to crossAxisCount
-                      return prev += rows *
-                          (itemHeight + 24.w); // Gridview vertical padding
-                    },
-                  );
-
-                  _sliverScrollController.animateTo(
-                    offset +
-                        ((index - 1) * 50.w) +
-                        0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.5.sh expanded height
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.linear,
-                  );
-                },
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: foodCategoryList.length,
-                  separatorBuilder: (context, index) {
-                    if (index < foodCategoryList.length) {
-                      FoodCategory category = foodCategoryList[index + 1];
-
-                      return Container(
-                        height: 50.w,
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 5),
-                            child: Text(
-                              category.name,
-                              textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  },
-                  itemBuilder: (context, index) {
-                    return GridView.builder(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.w, horizontal: 10.w),
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10.w, //spaceTopBottom
-                        crossAxisSpacing: 5.w, //spaceLeftRight
-                        childAspectRatio: itemWidth / itemHeight,
-                      ),
-                      itemCount: foodList.length,
-                      itemBuilder: (context, pos) {
-                        return FoodWidget(
-                          food: foodList[pos],
-                          animationController: bottomCartController,
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
+          )
         ],
       ),
     );
