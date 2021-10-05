@@ -169,7 +169,10 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-              ToggleButton(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: ToggleButton(),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
                 child: Row(

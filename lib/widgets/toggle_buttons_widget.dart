@@ -24,7 +24,6 @@ class _ToggleButtonState extends State<ToggleButton> {
         color: AppTheme.MAIN_LIGHT,
         borderRadius: AppTheme().buttonBorderRadius,
       ),
-      margin: EdgeInsets.symmetric(horizontal: 15.w),
       padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.w),
       child: Stack(
         children: [

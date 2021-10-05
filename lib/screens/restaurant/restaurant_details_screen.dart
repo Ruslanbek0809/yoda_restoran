@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:yoda_res/models/models.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import 'food_widget.dart';
@@ -276,87 +275,88 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     color: AppTheme.MAIN_LIGHT,
                                     thickness: 1.w,
                                   ),
+                                  ToggleButton(),
 //// Delivery/On-site Widget
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppTheme.MAIN_LIGHT,
-                                      borderRadius:
-                                          AppTheme().buttonBorderRadius,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2.w, vertical: 2.w),
-                                    child: LayoutBuilder(builder:
-                                        (BuildContext context,
-                                            BoxConstraints constraints) {
-                                      return Row(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (!isDelivery)
-                                                setState(() {
-                                                  isDelivery = true;
-                                                });
-                                            },
-                                            child: AnimatedContainer(
-                                              duration:
-                                                  Duration(milliseconds: 250),
-                                              width: constraints.maxWidth / 2,
-                                              decoration: BoxDecoration(
-                                                color: isDelivery
-                                                    ? AppTheme.WHITE
-                                                    : AppTheme.MAIN_LIGHT,
-                                                borderRadius: AppTheme()
-                                                    .buttonBorderRadius,
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 12.5.w),
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'Eltip bermek',
-                                                style: TextStyle(
-                                                  fontSize: 17.sp,
-                                                  color: !isDelivery
-                                                      ? AppTheme.FONT_GREY_COLOR
-                                                      : AppTheme.FONT_COLOR,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                isDelivery = false;
-                                              });
-                                            },
-                                            child: AnimatedContainer(
-                                              duration:
-                                                  Duration(milliseconds: 250),
-                                              width: constraints.maxWidth / 2,
-                                              decoration: BoxDecoration(
-                                                color: !isDelivery
-                                                    ? AppTheme.WHITE
-                                                    : AppTheme.MAIN_LIGHT,
-                                                borderRadius: AppTheme()
-                                                    .buttonBorderRadius,
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 12.5.w),
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'Özüm aljak',
-                                                style: TextStyle(
-                                                  fontSize: 17.sp,
-                                                  color: isDelivery
-                                                      ? AppTheme.FONT_GREY_COLOR
-                                                      : AppTheme.FONT_COLOR,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }),
-                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     color: AppTheme.MAIN_LIGHT,
+                                  //     borderRadius:
+                                  //         AppTheme().buttonBorderRadius,
+                                  //   ),
+                                  //   padding: EdgeInsets.symmetric(
+                                  //       horizontal: 2.w, vertical: 2.w),
+                                  //   child: LayoutBuilder(builder:
+                                  //       (BuildContext context,
+                                  //           BoxConstraints constraints) {
+                                  //     return Row(
+                                  //       children: [
+                                  //         GestureDetector(
+                                  //           onTap: () {
+                                  //             if (!isDelivery)
+                                  //               setState(() {
+                                  //                 isDelivery = true;
+                                  //               });
+                                  //           },
+                                  //           child: AnimatedContainer(
+                                  //             duration:
+                                  //                 Duration(milliseconds: 250),
+                                  //             width: constraints.maxWidth / 2,
+                                  //             decoration: BoxDecoration(
+                                  //               color: isDelivery
+                                  //                   ? AppTheme.WHITE
+                                  //                   : AppTheme.MAIN_LIGHT,
+                                  //               borderRadius: AppTheme()
+                                  //                   .buttonBorderRadius,
+                                  //             ),
+                                  //             padding: EdgeInsets.symmetric(
+                                  //                 vertical: 12.5.w),
+                                  //             alignment: Alignment.center,
+                                  //             child: Text(
+                                  //               'Eltip bermek',
+                                  //               style: TextStyle(
+                                  //                 fontSize: 17.sp,
+                                  //                 color: !isDelivery
+                                  //                     ? AppTheme.FONT_GREY_COLOR
+                                  //                     : AppTheme.FONT_COLOR,
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         GestureDetector(
+                                  //           onTap: () {
+                                  //             setState(() {
+                                  //               isDelivery = false;
+                                  //             });
+                                  //           },
+                                  //           child: AnimatedContainer(
+                                  //             duration:
+                                  //                 Duration(milliseconds: 250),
+                                  //             width: constraints.maxWidth / 2,
+                                  //             decoration: BoxDecoration(
+                                  //               color: !isDelivery
+                                  //                   ? AppTheme.WHITE
+                                  //                   : AppTheme.MAIN_LIGHT,
+                                  //               borderRadius: AppTheme()
+                                  //                   .buttonBorderRadius,
+                                  //             ),
+                                  //             padding: EdgeInsets.symmetric(
+                                  //                 vertical: 12.5.w),
+                                  //             alignment: Alignment.center,
+                                  //             child: Text(
+                                  //               'Özüm aljak',
+                                  //               style: TextStyle(
+                                  //                 fontSize: 17.sp,
+                                  //                 color: isDelivery
+                                  //                     ? AppTheme.FONT_GREY_COLOR
+                                  //                     : AppTheme.FONT_COLOR,
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     );
+                                  //   }),
+                                  // ),
                                 ],
                               ),
                             ),
