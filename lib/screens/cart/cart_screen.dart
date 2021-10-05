@@ -86,7 +86,7 @@ class _CartScreenState extends State<CartScreen> {
                 },
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 7.w),
+                padding: EdgeInsets.symmetric(vertical: 7.w, horizontal: 15.w),
                 child: Divider(
                   thickness: 1,
                   color: AppTheme.DRAWER_DIVIDER,
@@ -201,6 +201,7 @@ class _CartScreenState extends State<CartScreen> {
                       .sw), // this one is needed to compensate height of Checkout Button Widget is taking
             ],
           ),
+//// BottomCartWidget
           Positioned(
             bottom: 0,
             left: 0,

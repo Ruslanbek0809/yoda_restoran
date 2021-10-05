@@ -58,7 +58,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
           color: AppTheme.MAIN_LIGHT,
           borderRadius: AppTheme().mainBorderRadius,
         ),
-        padding: EdgeInsets.all(5.w),
+        padding: EdgeInsets.fromLTRB(7.w, 7.w, 7.w, 7.w),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             return Column(
@@ -70,23 +70,24 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                   width: constraints.maxWidth,
                   borderRadius: Constants.BORDER_RADIUS_20,
                 ),
-                // Padding(
-                //   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
-                //   child: Text(
-                //     food.name,
-                //     style: TextStyle(
-                //       fontSize: 17.sp,
-                //       color: AppTheme.FONT_COLOR,
-                //     ),
-                //   ),
-                // ),
-                // Text(
-                //   '${food.weight} ${food.weightType}',
-                //   style: TextStyle(
-                //     fontSize: 15.sp,
-                //     color: AppTheme.DRAWER_ICON,
-                //   ),
-                // ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
+                  child: Text(
+                    food.name,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      color: AppTheme.FONT_COLOR,
+                    ),
+                  ),
+                ),
+                Text(
+                  '${food.weight} ${food.weightType}',
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: AppTheme.DRAWER_ICON,
+                  ),
+                ),
                 Spacer(),
 //// Button Widget
                 AnimatedSwitcher(
@@ -98,7 +99,8 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                             Material(
                               color: AppTheme.WHITE,
                               borderRadius: AppTheme().buttonBorderRadius,
-                              elevation: 1,
+                              elevation: 3,
+                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().buttonBorderRadius,
                                 onTap: () async {
@@ -128,7 +130,8 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                             Material(
                               color: AppTheme.WHITE,
                               borderRadius: AppTheme().buttonBorderRadius,
-                              elevation: 1,
+                              elevation: 3,
+                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().buttonBorderRadius,
                                 onTap: () {
@@ -149,7 +152,8 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                       : Material(
                           color: Colors.transparent,
                           borderRadius: AppTheme().buttonBorderRadius,
-                          elevation: 1,
+                          elevation: 3,
+                          shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
                             borderRadius: AppTheme().buttonBorderRadius,
                             onTap: () async {

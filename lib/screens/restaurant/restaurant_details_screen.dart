@@ -530,7 +530,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 10.w, //spaceTopBottom
                                     crossAxisSpacing: 5.w, //spaceLeftRight
-                                    childAspectRatio: 1.sw / 1.65.sw,
+                                    childAspectRatio: 1.sw / 1.7.sw,
                                   ),
                                   itemCount: foodList.length,
                                   itemBuilder: (context, pos) {
