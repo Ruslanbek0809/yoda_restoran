@@ -83,7 +83,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             key: _contactformKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 25.w),
