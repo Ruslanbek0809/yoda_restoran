@@ -15,21 +15,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 final List<String> imgList = [
+  'assets/foodbanner1.png',
   'assets/foodbanner.jpg',
-  'assets/foodbanner1.jpg',
   'assets/foodbanner2.png',
 ];
 
 List<HomeCategory> homeCategories = [
-  HomeCategory(1, 'Filter', 'assets/filter.png'),
-  HomeCategory(2, 'Halanlarym', 'assets/favorite.png'),
-  HomeCategory(3, 'Burger', 'assets/burger.png'),
-  HomeCategory(4, 'Sushi', 'assets/sushi.png'),
-  HomeCategory(5, 'Pizza', 'assets/pizza.png'),
+  HomeCategory(1, 'Halanlarym', 'assets/cat_fav.png'),
+  HomeCategory(2, 'Sushi', 'assets/cat_sushi.png'),
+  HomeCategory(3, 'Burger', 'assets/cat_burger.png'),
+  HomeCategory(4, 'Pizza', 'assets/cat_pizza.png'),
+  HomeCategory(5, 'Dessert', 'assets/cat_dessert.png'),
 ];
 
 List<Restaurant> restaurants = [
-  Restaurant(1, 'Kebapçy', 'Kebap we başgalar', 'assets/kebapchy.jpg'),
+  Restaurant(1, 'Sushi', 'Sushi we başgalar', 'assets/sushi.png'),
   Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
   Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
   Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
@@ -117,9 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: false,
                 floating: true,
                 delegate: ContestTabHeader(
-                  categoriesWidget: HomeCategoriesWidget(
-                    homeCategories: homeCategories,
-                  ),
+                  categoriesWidget:
+                      HomeCategoriesWidget(homeCategories: homeCategories),
                   size: 90.w,
                 ),
               ),

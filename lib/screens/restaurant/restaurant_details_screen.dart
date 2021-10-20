@@ -138,14 +138,14 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       ),
                       background: Stack(
                         children: [
-//// IMAGE Widget
+//------------------ IMAGE ---------------------//
                           Positioned(
                             top: 0,
                             right: 0.0,
                             left: 0.0,
                             child: YodaImage(image: 'assets/burgerlist.jpg'),
                           ),
-//// FOREGROUND Info Widget
+//------------------ FOREGROUND INFO ---------------------//
                           Positioned(
                             bottom: 0,
                             right: 0.0,
@@ -275,8 +275,8 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     color: AppTheme.MAIN_LIGHT,
                                     thickness: 1.w,
                                   ),
+//------------------ DELIVERY/SELF-PICKUP ---------------------//
                                   ToggleButtonWidget(),
-//// Delivery/On-site Widget
                                   // Container(
                                   //   decoration: BoxDecoration(
                                   //     color: AppTheme.MAIN_LIGHT,
@@ -367,7 +367,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     );
                   },
                 ),
-//// ACTIONS button (Fav and Search)
+//------------------ FAV ---------------------//
                 actions: [
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
@@ -417,6 +417,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           ),
                   ),
                   SizedBox(width: 10.w),
+//------------------ SEARCH ---------------------//
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
                     child: Padding(
@@ -457,7 +458,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
           pinnedHeaderSliverHeightBuilder: () {
             return pinnedHeaderHeight;
           },
-//// TabBar Widget
+//------------------ CATEGORY TABS ---------------------//
           body: Stack(
             children: [
               Column(
@@ -508,7 +509,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       ),
                     ),
                   ),
-//// TabBarView Widget
+//------------------ FOODS TABBAR VIEW ---------------------//
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
@@ -548,6 +549,7 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   )
                 ],
               ),
+//------------------ BOTTOM CART POPUP ---------------------//
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SlideTransition(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoda_res/screens/profile/profile.dart';
-import '../profile/contact_us_screen.dart';
 import '../../utils/utils.dart';
 
 class DrawerWidget extends StatelessWidget {

@@ -64,6 +64,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+//------------------ IMAGE ---------------------//
                 YodaImage(
                   image: food.image,
                   height: constraints.maxWidth,
@@ -89,7 +90,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                   ),
                 ),
                 Spacer(),
-//// Button Widget
+//------------------ BUTTONS ---------------------//
                 AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   child: isButtonToggled
