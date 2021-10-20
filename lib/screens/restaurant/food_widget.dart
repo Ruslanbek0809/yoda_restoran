@@ -29,7 +29,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
     food = widget.food;
 //// Container bounce back
     _tweenController = AnimationController(
-        duration: const Duration(milliseconds: 50), vsync: this)
+        duration: const Duration(milliseconds: 100), vsync: this)
       ..addStatusListener((status) {
 //// This listener was used to repeat animation once
         if (status == AnimationStatus.completed) {
@@ -111,13 +111,32 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                Text(
-                  '${food.weight} ${food.weightType}',
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: AppTheme.DRAWER_ICON,
-                  ),
-                ),
+                isButtonToggled
+                    ? Row(
+                        children: [
+                          Text(
+                            '${food.price} TMT / ',
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              color: AppTheme.DRAWER_ICON,
+                            ),
+                          ),
+                          Text(
+                            '${food.weight} ${food.weightType}',
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              color: AppTheme.DRAWER_ICON,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        '${food.weight} ${food.weightType}',
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: AppTheme.DRAWER_ICON,
+                        ),
+                      ),
                 Spacer(),
 //------------------ BUTTONS ---------------------//
                 AnimatedSwitcher(

@@ -7,6 +7,7 @@ import 'route.dart';
 import 'screens/cart/cart.dart';
 import 'screens/home/home.dart';
 import 'utils/utils.dart';
+import 'widgets/widgets.dart';
 
 final mainScaffoldKey = GlobalKey();
 final GlobalKey<NavigatorState> yodaResNavigatorKey = GlobalKey();
@@ -72,11 +73,14 @@ class _YodaResAppState extends State<YodaResApp> {
                 ),
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              builder: (context, widget) {
-                return MediaQuery(
-                  //Setting font does not change with system font size
-                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                  child: widget!,
+              builder: (context, child) {
+                return ScrollConfiguration(
+                  behavior: MyBehavior(), // to remove the glow effect entirely
+                  child: MediaQuery(
+                    //Setting font does not change with system font size
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: child!,
+                  ),
                 );
               },
               // home: Scaffold(
@@ -85,12 +89,11 @@ class _YodaResAppState extends State<YodaResApp> {
               //       // OtpScreen(),
               //       // LoginScreen(),
               //       HomeScreen(),
-                    // CartScreen(),
+              // CartScreen(),
               // ),
               routes: Routes.getAllRoutes,
               onGenerateRoute: Routes.getRouteGenerate,
               themeMode: ThemeMode.light,
-              // theme: getTheme(context),e
             )
         // );
         );

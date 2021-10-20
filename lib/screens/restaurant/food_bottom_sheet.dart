@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 
 void showFoodBottomSheet(BuildContext context, FoodModel food) {
   showModalBottomSheet(
+    enableDrag: true,
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
           top: Radius.circular(Constants.BORDER_RADIUS_20)),
     ),
+    backgroundColor: Colors.transparent,
     context: context,
-    builder: (ctx) {
-      return FoodBottomSheetWidget(food);
-    },
+    builder: (ctx) => DraggableScrollableSheet(
+      initialChildSize: 0.95,
+      maxChildSize: 0.95,
+      // minChildSize: 0.9,
+      expand: true,
+      builder: (context, scrollController) => FoodBottomSheetWidget(
+        food,
+        scrollController,
+      ),
+    ),
   );
 }
 
 class FoodBottomSheetWidget extends StatefulWidget {
   final FoodModel food;
-  FoodBottomSheetWidget(this.food);
+  final ScrollController scrollController;
+  FoodBottomSheetWidget(this.food, this.scrollController);
 
   @override
   _FoodBottomSheetWidgetState createState() => _FoodBottomSheetWidgetState();
@@ -38,139 +49,171 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.925.sh,
+      height: 0.95.sh,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20)),
-        color: AppTheme.MAIN_LIGHT,
+        color: Colors.transparent,
       ),
       child: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(Constants.BORDER_RADIUS_20)),
-                  child: YodaImage(
-                    image: widget.food.image,
-                    height: 0.4.sh,
-                    width: 1.sw,
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 15.w, horizontal: 10.w),
-                  child: Text(
-                    'Bu sandwiçi iýseň uzak gün keýpiň kök bolýar we hiç açlyk duýmaýarsyň. Iýip görenler soň hemişe bu sendwiçi sargaýarlar.',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: AppTheme.BOTTOM_SHEET_FONT_COLOR,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(Constants.BORDER_RADIUS_20),
+              ),
+              color: Colors.transparent,
+            ),
+            child: SingleChildScrollView(
+              controller: widget.scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 17.5.w,
+                    width: 40.w,
+                    child: SvgPicture.asset(
+                      'assets/bottom_sheet_dragger.svg',
+                      color: AppTheme.WHITE,
                     ),
-                    maxLines: 3,
                   ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
-                  child: Text(
-                    'Goşmaça',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppTheme.DRAWER_ICON,
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(Constants.BORDER_RADIUS_20),
                     ),
-                    maxLines: 3,
+                    child: YodaImage(
+                      image: widget.food.image,
+                      height: 0.4.sh,
+                      width: 1.sw,
+                    ),
                   ),
-                ),
-                Column(
-                  children: widget.food.additionals
-                      .mapIndexed<Widget>(
-                        (AdditionalFoodModel additional, int pos) => Column(
-                          children: [
-                            RadioListTile<AdditionalFoodModel>(
-                              value: additional,
-                              groupValue: selectedAdditional,
-                              onChanged: _setSelectedAdditionalFood,
-                              title: Row(
-                                children: [
-                                  Text(
-                                    '${additional.name} ml',
-                                    style: TextStyle(
-                                      color: AppTheme.FONT_COLOR,
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                  SizedBox(width: 7.w),
-                                  Text(
-                                    '+${additional.price} TMT',
-                                    style: TextStyle(
-                                      color: AppTheme.FONT_GREY_COLOR,
-                                      fontSize: 16.sp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              activeColor: AppTheme.GREEN,
-                              controlAffinity: ListTileControlAffinity.leading,
-                              toggleable: true,
+                  Container(
+                    color: AppTheme.WHITE,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.w, horizontal: 10.w),
+                          child: Text(
+                            'Bu sandwiçi iýseň uzak gün keýpiň kök bolýar we hiç açlyk duýmaýarsyň. Iýip görenler soň hemişe bu sendwiçi sargaýarlar.',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppTheme.BOTTOM_SHEET_FONT_COLOR,
                             ),
-                            if (pos != widget.food.additionals.length - 1)
-                              Divider(
-                                color: AppTheme.DRAWER_DIVIDER,
-                                indent: 0.175.sw,
-                              )
-                          ],
+                            maxLines: 3,
+                          ),
                         ),
-                      )
-                      .toList(),
-                ),
-                // Column(
-                //   children: widget.food.additionals
-                //       .mapIndexed<Widget>(
-                //           (AdditionalFoodModel additional, int pos) => Column(
-                //                 children: [
-                //                   CheckboxListTile(
-                //                     title: Row(
-                //                       children: [
-                //                         Text(
-                //                           additional.name,
-                //                           style: TextStyle(
-                //                             color: AppTheme.FONT_COLOR,
-                //                             fontSize: 14.sp,
-                //                           ),
-                //                         ),
-                //                         SizedBox(width: 7.w),
-                //                         Text(
-                //                           '+${additional.price} TMT',
-                //                           style: TextStyle(
-                //                             color: AppTheme.FONT_GREY_COLOR,
-                //                             fontSize: 16.sp,
-                //                           ),
-                //                         ),
-                //                       ],
-                //                     ),
-                //                     value: additional.isAdded,
-                //                     controlAffinity:
-                //                         ListTileControlAffinity.leading,
-                //                     activeColor: AppTheme.GREEN,
-                //                     onChanged: (bool? value) {
-                //                       setState(() {
-                //                         additional.isAdded = value!;
-                //                       });
-                //                     },
-                //                   ),
-                //                   if (pos != widget.food.additionals.length - 1)
-                //                     Divider(
-                //                       color: AppTheme.DRAWER_DIVIDER,
-                //                       indent: 0.175.sw,
-                //                     )
-                //                 ],
-                //               ))
-                //       .toList(),
-                // ),
-                SizedBox(height: 0.175.sh)
-              ],
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.w, horizontal: 10.w),
+                          child: Text(
+                            'Goşmaça',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppTheme.DRAWER_ICON,
+                            ),
+                            maxLines: 3,
+                          ),
+                        ),
+                        Column(
+                          children: widget.food.additionals
+                              .mapIndexed<Widget>(
+                                (AdditionalFoodModel additional, int pos) =>
+                                    Column(
+                                  children: [
+                                    RadioListTile<AdditionalFoodModel>(
+                                      value: additional,
+                                      groupValue: selectedAdditional,
+                                      onChanged: _setSelectedAdditionalFood,
+                                      title: Row(
+                                        children: [
+                                          Text(
+                                            '${additional.name} ml',
+                                            style: TextStyle(
+                                              color: AppTheme.FONT_COLOR,
+                                              fontSize: 14.sp,
+                                            ),
+                                          ),
+                                          SizedBox(width: 7.w),
+                                          Text(
+                                            '+${additional.price} TMT',
+                                            style: TextStyle(
+                                              color: AppTheme.FONT_GREY_COLOR,
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      activeColor: AppTheme.GREEN,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      toggleable: true,
+                                    ),
+                                    if (pos !=
+                                        widget.food.additionals.length - 1)
+                                      Divider(
+                                        color: AppTheme.DRAWER_DIVIDER,
+                                        indent: 0.175.sw,
+                                      )
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ),
+                        // Column(
+                        //   children: widget.food.additionals
+                        //       .mapIndexed<Widget>((AdditionalFoodModel
+                        //                   additional,
+                        //               int pos) =>
+                        //           Column(
+                        //             children: [
+                        //               CheckboxListTile(
+                        //                 title: Row(
+                        //                   children: [
+                        //                     Text(
+                        //                       additional.name,
+                        //                       style: TextStyle(
+                        //                         color: AppTheme.FONT_COLOR,
+                        //                         fontSize: 14.sp,
+                        //                       ),
+                        //                     ),
+                        //                     SizedBox(width: 7.w),
+                        //                     Text(
+                        //                       '+${additional.price} TMT',
+                        //                       style: TextStyle(
+                        //                         color: AppTheme.FONT_GREY_COLOR,
+                        //                         fontSize: 16.sp,
+                        //                       ),
+                        //                     ),
+                        //                   ],
+                        //                 ),
+                        //                 value: additional.isAdded,
+                        //                 controlAffinity:
+                        //                     ListTileControlAffinity.leading,
+                        //                 activeColor: AppTheme.GREEN,
+                        //                 onChanged: (bool? value) {
+                        //                   setState(() {
+                        //                     additional.isAdded = value!;
+                        //                   });
+                        //                 },
+                        //               ),
+                        //               if (pos !=
+                        //                   widget.food.additionals.length - 1)
+                        //                 Divider(
+                        //                   color: AppTheme.DRAWER_DIVIDER,
+                        //                   indent: 0.175.sw,
+                        //                 )
+                        //             ],
+                        //           ))
+                        //       .toList(),
+                        // ),
+                        SizedBox(height: 0.175.sh)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           //// ADD CART Widget
