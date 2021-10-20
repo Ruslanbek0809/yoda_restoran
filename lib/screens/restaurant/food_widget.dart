@@ -64,12 +64,41 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-//------------------ IMAGE ---------------------//
-                YodaImage(
-                  image: food.image,
-                  height: constraints.maxWidth,
-                  width: constraints.maxWidth,
-                  borderRadius: Constants.BORDER_RADIUS_20,
+//------------------ IMAGE with DISCOUNT(if needed) ---------------------//
+                Stack(
+                  children: [
+                    YodaImage(
+                      image: food.image,
+                      height: constraints.maxWidth,
+                      width: constraints.maxWidth,
+                      borderRadius: Constants.BORDER_RADIUS_20,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 5.0),
+                        decoration: BoxDecoration(
+                          color: AppTheme.MAIN,
+                          borderRadius: BorderRadius.only(
+                            topLeft:
+                                Radius.circular(Constants.BORDER_RADIUS_20),
+                            bottomRight:
+                                Radius.circular(Constants.BORDER_RADIUS_20),
+                          ),
+                        ),
+                        child: FittedBox(
+                          child: Text(
+                            '-20%',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
