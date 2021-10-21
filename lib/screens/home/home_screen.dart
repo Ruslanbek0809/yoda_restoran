@@ -122,6 +122,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 90.w,
                 ),
               ),
+//// Discounts Widget
+              SliverPersistentHeader(
+                pinned: false,
+                floating: true,
+                delegate: ContestTabHeader(
+                  categoriesWidget:
+                      DiscountsWidget(homeCategories: homeCategories),
+                  size: 90.w,
+                ),
+              ),
             ];
           },
 ///// Restaurants Widget

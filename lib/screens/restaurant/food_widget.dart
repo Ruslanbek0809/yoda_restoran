@@ -183,7 +183,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                               shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().buttonBorderRadius,
-                                onTap: () {
+                                onTap: () { 
                                   _onProductBottomSheetClicked(food);
                                 },
                                 child: Padding(
