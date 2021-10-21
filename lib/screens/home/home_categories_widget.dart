@@ -18,6 +18,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

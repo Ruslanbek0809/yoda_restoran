@@ -25,7 +25,7 @@ List<HomeCategory> homeCategories = [
   HomeCategory(2, 'Sushi', 'assets/cat_sushi.png'),
   HomeCategory(3, 'Burger', 'assets/cat_burger.png'),
   HomeCategory(4, 'Pizza', 'assets/cat_pizza.png'),
-  HomeCategory(5, 'Dessert', 'assets/cat_dessert.png'),
+  HomeCategory(5, 'Hemmesi', 'assets/cat_filter.png'),
 ];
 
 List<Restaurant> restaurants = [
@@ -33,6 +33,17 @@ List<Restaurant> restaurants = [
   Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
   Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
   Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
+];
+
+List<Discount> discounts = [
+  Discount(1, 'assets/discount1.png'),
+  Discount(2, 'assets/discount2.png'),
+  Discount(3, 'assets/discount3.png'),
+  Discount(4, 'assets/discount4.png'),
+  Discount(5, 'assets/discount1.png'),
+  Discount(6, 'assets/discount2.png'),
+  Discount(7, 'assets/discount3.png'),
+  Discount(8, 'assets/discount4.png'),
 ];
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -46,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
       /// Resize according to onscreen keyboard
       resizeToAvoidBottomInset: true,
       key: homeScaffoldKey,
-      backgroundColor: AppTheme.WHITE,
       drawer: DrawerWidget(),
       body: SafeArea(
         child: NestedScrollView(
@@ -117,8 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: false,
                 floating: true,
                 delegate: ContestTabHeader(
-                  categoriesWidget:
-                      HomeCategoriesWidget(homeCategories: homeCategories),
+                  child: HomeCategoriesWidget(homeCategories: homeCategories),
                   size: 90.w,
                 ),
               ),
@@ -127,9 +136,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: false,
                 floating: true,
                 delegate: ContestTabHeader(
-                  categoriesWidget:
-                      DiscountsWidget(homeCategories: homeCategories),
-                  size: 90.w,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 15.w, top: 15.w),
+                        child: Text(
+                          'Aksiýalar',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 23.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.MAIN_DARK,
+                          ),
+                        ),
+                      ),
+                      DiscountsWidget(discounts: discounts),
+                    ],
+                  ),
+                  size: 150.w,
                 ),
               ),
             ];

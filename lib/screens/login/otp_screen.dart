@@ -103,7 +103,6 @@ class _OtpScreenState extends State<OtpScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.WHITE,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

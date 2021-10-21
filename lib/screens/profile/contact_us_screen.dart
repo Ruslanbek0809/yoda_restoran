@@ -56,7 +56,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: AppTheme.WHITE,
         appBar: AppBar(
           backgroundColor: AppTheme.WHITE,
           elevation: 0,

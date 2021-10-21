@@ -19,7 +19,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.WHITE,
       appBar: AppBar(
         backgroundColor: AppTheme.WHITE,
         elevation: 0,

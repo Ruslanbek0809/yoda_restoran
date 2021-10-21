@@ -174,7 +174,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: AppTheme.WHITE,
         drawer: DrawerWidget(),
         appBar: AppBar(
           backgroundColor: AppTheme.WHITE,

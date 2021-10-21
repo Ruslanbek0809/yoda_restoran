@@ -60,6 +60,7 @@ class _YodaResAppState extends State<YodaResApp> {
               theme: ThemeData(
                 brightness: Brightness.light,
                 primaryColor: AppTheme.MAIN,
+                scaffoldBackgroundColor: AppTheme.WHITE,
                 appBarTheme: AppBarTheme(
                   elevation: 0,
                 ),

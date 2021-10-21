@@ -5,42 +5,31 @@ import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
 class DiscountsWidget extends StatefulWidget {
-  final List<HomeCategory> homeCategories;
-  const DiscountsWidget({Key? key, required this.homeCategories})
-      : super(key: key);
+  final List<Discount> discounts;
+  const DiscountsWidget({Key? key, required this.discounts}) : super(key: key);
 
   @override
   _DiscountsWidgetState createState() => _DiscountsWidgetState();
 }
 
 class _DiscountsWidgetState extends State<DiscountsWidget> {
-  int selectedCatId = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: widget.homeCategories.map((category) {
-          return AnimatedContainer(
-            duration: Duration(milliseconds: 250),
-            curve: Curves.fastOutSlowIn,
-            width: selectedCatId == category.id ? 72.w : 75.w,
-            height: selectedCatId == category.id ? 72.w : 75.w,
-            margin: EdgeInsets.only(
-                top: 15.w), // margin on top of persistent header
-            color: AppTheme.WHITE,
+        children: widget.discounts.mapIndexed((discount, pos) {
+          return Padding(
+            padding: EdgeInsets.fromLTRB(pos == 0 ? 15.w : 4.w, 5.w, 4.w, 5.w),
             child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedCatId = category.id;
-                });
-              },
+              onTap: () {},
               child: YodaImage(
-                image: category.image,
+                image: discount.image,
                 fit: BoxFit.cover,
-                width: selectedCatId == category.id ? 45.w : 50.w,
-                height: selectedCatId == category.id ? 45.w : 50.w,
+                width: 95.w,
+                height: 95.w,
               ),
             ),
           );

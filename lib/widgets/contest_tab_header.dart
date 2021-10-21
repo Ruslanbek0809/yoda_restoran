@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class ContestTabHeader extends SliverPersistentHeaderDelegate {
   ContestTabHeader({
-    required this.categoriesWidget,
+    required this.child,
     required this.size,
   });
-  final Widget categoriesWidget;
+  final Widget child;
   final double size;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return categoriesWidget;
+    return child;
   }
 
   @override

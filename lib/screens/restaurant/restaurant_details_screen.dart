@@ -80,7 +80,6 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
             //pinned SliverAppBar height in header
             kToolbarHeight;
     return Scaffold(
-      backgroundColor: AppTheme.WHITE,
       body: ExtendedNestedScrollView(
           controller: _scrollController,
           // onlyOneScrollInBody: true,
