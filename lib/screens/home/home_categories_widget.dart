@@ -22,7 +22,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
     HomeCategory(3, 'Kofe', 'assets/cat_add_kofe.png'),
     HomeCategory(4, 'Manty', 'assets/cat_add_manty.png'),
     HomeCategory(5, 'Sagdyn', 'assets/cat_add_sagdyn.png'),
-    HomeCategory(5, 'Steýk', 'assets/cat_add_steyk.png'),
+    HomeCategory(6, 'Steýk', 'assets/cat_add_steyk.png'),
   ];
   void _onFilterCategoryClicked(List<HomeCategory> additionalCategories) {
     showCategoriesFilterBottomSheet(context, additionalCategories);

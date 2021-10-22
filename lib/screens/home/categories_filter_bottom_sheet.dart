@@ -130,32 +130,53 @@ class _CategoriesFilterBottomSheetWidgetState
                             bool _isFilterCategoryChecked =
                                 selectedCategoryFilters.contains(
                                     widget.additionalCategories[pos].id);
-                            printLog('Isfliter=> $_isFilterCategoryChecked');
                             return AnimatedContainer(
                               duration: Duration(milliseconds: 250),
                               curve: Curves.fastOutSlowIn,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: Column(
-                                children: [
-                                  YodaImage(
-                                    image:
-                                        widget.additionalCategories[pos].image,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 7.w),
-                                    child: Text(
-                                      widget.additionalCategories[pos].name,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppTheme.FONT_COLOR,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (_isFilterCategoryChecked == true) {
+                                      _isFilterCategoryChecked = false;
+                                      selectedCategoryFilters.remove(
+                                          widget.additionalCategories[pos].id);
+                                    } else {
+                                      _isFilterCategoryChecked = true;
+                                      selectedCategoryFilters.add(
+                                          widget.additionalCategories[pos].id);
+                                    }
+                                    _isFilterCategoryChecked =
+                                        selectedCategoryFilters.contains(widget
+                                            .additionalCategories[pos].id);
+                                    printLog(
+                                        'is Checked=> $_isFilterCategoryChecked');
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    YodaImage(
+                                      image: widget
+                                          .additionalCategories[pos].image,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 7.w),
+                                      child: Text(
+                                        widget.additionalCategories[pos].name,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: _isFilterCategoryChecked
+                                              ? AppTheme.MAIN
+                                              : AppTheme.FONT_COLOR,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },
