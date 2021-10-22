@@ -3,6 +3,7 @@ import '../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'home.dart';
 
 class HomeCategoriesWidget extends StatefulWidget {
   final List<HomeCategory> homeCategories;
@@ -15,6 +16,18 @@ class HomeCategoriesWidget extends StatefulWidget {
 
 class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
   int selectedCatId = 0;
+  List<HomeCategory> additionalCategories = [
+    HomeCategory(1, 'Çaý', 'assets/cat_add_chay.png'),
+    HomeCategory(2, 'Döner', 'assets/cat_add_doner.png'),
+    HomeCategory(3, 'Kofe', 'assets/cat_add_kofe.png'),
+    HomeCategory(4, 'Manty', 'assets/cat_add_manty.png'),
+    HomeCategory(5, 'Sagdyn', 'assets/cat_add_sagdyn.png'),
+    HomeCategory(5, 'Steýk', 'assets/cat_add_steyk.png'),
+  ];
+  void _onFilterCategoryClicked(List<HomeCategory> additionalCategories) {
+    showCategoriesFilterBottomSheet(context, additionalCategories);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,20 +35,27 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: widget.homeCategories.map((category) {
+        children: widget.homeCategories.mapIndexed((category, pos) {
           return AnimatedContainer(
             duration: Duration(milliseconds: 250),
             curve: Curves.fastOutSlowIn,
             width: selectedCatId == category.id ? 72.w : 75.w,
             height: selectedCatId == category.id ? 72.w : 75.w,
             margin: EdgeInsets.only(
-                top: 15.w), // margin on top of persistent header
+                top: 15.w,
+                left: pos == 0
+                    ? 10.w
+                    : 0.w), // margin on top of persistent header
             color: AppTheme.WHITE,
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  selectedCatId = category.id;
-                });
+                if (pos == widget.homeCategories.length - 1) {
+                  _onFilterCategoryClicked(additionalCategories);
+                } else {
+                  setState(() {
+                    selectedCatId = category.id;
+                  });
+                }
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

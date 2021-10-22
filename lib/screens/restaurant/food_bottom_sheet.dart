@@ -18,7 +18,6 @@ void showFoodBottomSheet(BuildContext context, FoodModel food) {
     builder: (ctx) => DraggableScrollableSheet(
       initialChildSize: 0.95,
       maxChildSize: 0.95,
-      expand: true,
       builder: (context, scrollController) => FoodBottomSheetWidget(
         food,
         scrollController,
