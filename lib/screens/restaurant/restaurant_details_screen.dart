@@ -560,10 +560,12 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     child: Container(
                       height: 0.22.sw,
                       width: 1.sw,
-                      decoration:
-                          BoxDecoration(color: AppTheme.WHITE, boxShadow: [
-                        AppTheme().bottomCartShadow,
-                      ]),
+                      decoration: BoxDecoration(
+                        color: AppTheme.WHITE,
+                        boxShadow: [
+                          AppTheme().bottomCartShadow,
+                        ],
+                      ),
                       child: Container(
                         margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
                         padding: EdgeInsets.symmetric(horizontal: 15.w),

@@ -42,6 +42,7 @@ class CategoriesFilterBottomSheetWidget extends StatefulWidget {
 class _CategoriesFilterBottomSheetWidgetState
     extends State<CategoriesFilterBottomSheetWidget> {
   CategoryFilter? selectedFilter;
+  Set<int> selectedCategoryFilters = {};
 
   List<CategoryFilter> categoryFilters = [
     CategoryFilter(1, 'Adaty'),
@@ -50,6 +51,7 @@ class _CategoriesFilterBottomSheetWidgetState
     CategoryFilter(4, 'Gymmatdan arzana'),
     CategoryFilter(5, 'Arzandan gymmada'),
   ];
+
   void _setSelectedCategoryFilter(CategoryFilter? _selectedFilter) {
     setState(() {
       selectedFilter = _selectedFilter;
@@ -125,7 +127,13 @@ class _CategoriesFilterBottomSheetWidgetState
                           ),
                           itemCount: widget.additionalCategories.length,
                           itemBuilder: (context, pos) {
-                            return Container(
+                            bool _isFilterCategoryChecked =
+                                selectedCategoryFilters.contains(
+                                    widget.additionalCategories[pos].id);
+                            printLog('Isfliter=> $_isFilterCategoryChecked');
+                            return AnimatedContainer(
+                              duration: Duration(milliseconds: 250),
+                              curve: Curves.fastOutSlowIn,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
@@ -222,25 +230,19 @@ class _CategoriesFilterBottomSheetWidgetState
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: AppTheme.WHITE,
-                border:
-                    Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: CustomElevatedButton(
-                height: 0.15.sw,
-                width: 0.575.sw,
-                text: 'Goş',
-                borderRadius: Constants.BORDER_RADIUS_BUTTON_12,
-                elevation: 0,
-                onPressed: () {
-                  showAlertDialog(
-                    context: context,
-                    title: 'Täze sargyt üçin sebedi boşadyň',
-                    defaultActionText: 'Sebet',
-                    cancelActionText: 'Boşat',
-                  );
-                },
+                  color: AppTheme.WHITE,
+                  border: Border.all(
+                      color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                  boxShadow: [AppTheme().bottomCartShadow]),
+              padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
+              child: CustomTextButton(
+                text: 'Tassykla',
+                padding: EdgeInsets.symmetric(vertical: 17.w),
+                textStyle: TextStyle(
+                  color: AppTheme.WHITE,
+                  fontSize: 18.sp,
+                ),
+                onPressed: () {},
               ),
             ),
           )
