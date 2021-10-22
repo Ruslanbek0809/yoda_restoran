@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:yoda_res/models/home_category.dart';
+import 'package:yoda_res/utils/utils.dart';
+import 'package:yoda_res/widgets/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class CategoryFilterWidget extends StatefulWidget {
+  final HomeCategory homeCategory;
+  final bool isCategoryFilterChecked;
+  final Function(int, bool)? categoryFilterCallback;
+  const CategoryFilterWidget(
+      {Key? key,
+      required this.homeCategory,
+      this.isCategoryFilterChecked = false,
+      this.categoryFilterCallback})
+      : super(key: key);
+
+  @override
+  _CategoryFilterWidgetState createState() => _CategoryFilterWidgetState();
+}
+
+class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _tweenController;
+  Tween<double> _tween = Tween(begin: 1, end: 0.95);
+  bool isCategoryFilterChecked = false;
+  @override
+  void initState() {
+//// Container bounce back
+    _tweenController = AnimationController(
+        duration: const Duration(milliseconds: 100), vsync: this)
+      ..addStatusListener((status) {
+//// This listener was used to repeat animation once
+        if (status == AnimationStatus.completed) {
+          _tweenController.reverse();
+        }
+      });
+    isCategoryFilterChecked = isCategoryFilterChecked;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: _tween.animate(
+          CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut)),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: GestureDetector(
+          onTap: () {
+            _tweenController.forward();
+            setState(() {
+              if (isCategoryFilterChecked == true) {
+                isCategoryFilterChecked = false;
+                widget.categoryFilterCallback!(widget.homeCategory.id, true);
+              } else {
+                isCategoryFilterChecked = true;
+                widget.categoryFilterCallback!(widget.homeCategory.id, false);
+              }
+            });
+          },
+          child: Column(
+            children: [
+              YodaImage(
+                image: widget.homeCategory.image,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 7.w),
+                child: Text(
+                  widget.homeCategory.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isCategoryFilterChecked
+                        ? AppTheme.MAIN
+                        : AppTheme.FONT_COLOR,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
