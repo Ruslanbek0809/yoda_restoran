@@ -5,6 +5,8 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 
+import 'home.dart';
+
 void showCategoriesFilterBottomSheet(
     BuildContext context, List<HomeCategory> additionalCategories) {
   showModalBottomSheet(
@@ -40,7 +42,8 @@ class CategoriesFilterBottomSheetWidget extends StatefulWidget {
 }
 
 class _CategoriesFilterBottomSheetWidgetState
-    extends State<CategoriesFilterBottomSheetWidget> {
+    extends State<CategoriesFilterBottomSheetWidget>
+    with SingleTickerProviderStateMixin {
   CategoryFilter? selectedFilter;
   Set<int> selectedCategoryFilters = {};
 
@@ -95,7 +98,7 @@ class _CategoriesFilterBottomSheetWidgetState
                       color: AppTheme.WHITE,
                     ),
                   ),
-                  //--------------- KITCHEN CATEGORIES -------------- //
+                  // --------------- KITCHEN CATEGORIES -------------- //
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.vertical(
@@ -127,57 +130,21 @@ class _CategoriesFilterBottomSheetWidgetState
                           ),
                           itemCount: widget.additionalCategories.length,
                           itemBuilder: (context, pos) {
-                            bool _isFilterCategoryChecked =
+                            bool isCategoryFilterChecked =
                                 selectedCategoryFilters.contains(
                                     widget.additionalCategories[pos].id);
-                            return AnimatedContainer(
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.fastOutSlowIn,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (_isFilterCategoryChecked == true) {
-                                      _isFilterCategoryChecked = false;
-                                      selectedCategoryFilters.remove(
-                                          widget.additionalCategories[pos].id);
-                                    } else {
-                                      _isFilterCategoryChecked = true;
-                                      selectedCategoryFilters.add(
-                                          widget.additionalCategories[pos].id);
-                                    }
-                                    _isFilterCategoryChecked =
-                                        selectedCategoryFilters.contains(widget
-                                            .additionalCategories[pos].id);
-                                    printLog(
-                                        'is Checked=> $_isFilterCategoryChecked');
-                                  });
-                                },
-                                child: Column(
-                                  children: [
-                                    YodaImage(
-                                      image: widget
-                                          .additionalCategories[pos].image,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 7.w),
-                                      child: Text(
-                                        widget.additionalCategories[pos].name,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: _isFilterCategoryChecked
-                                              ? AppTheme.MAIN
-                                              : AppTheme.FONT_COLOR,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            return CategoryFilterWidget(
+                              homeCategory: widget.additionalCategories[pos],
+                              isCategoryFilterChecked: isCategoryFilterChecked,
+                              categoryFilterCallback:
+                                  (int categoryFilterID, bool isAdd) {
+                                if (isAdd) {
+                                  selectedCategoryFilters.add(categoryFilterID);
+                                } else {
+                                  selectedCategoryFilters
+                                      .remove(categoryFilterID);
+                                }
+                              },
                             );
                           },
                         ),
