@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final controller = TextEditingController();
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 0.3.sh,
+                expandedHeight: 0.34.sh,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 toolbarHeight: 60.w,
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   suffixIcon: Icon(
                                     CupertinoIcons.search,
-                                    color: AppTheme.MAIN,
+                                    color: AppTheme.FONT_COLOR,
                                   ),
                                   border: InputBorder.none,
                                   hintText: 'Gözleg',
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 floating: true,
                 delegate: ContestTabHeader(
                   child: HomeCategoriesWidget(homeCategories: homeCategories),
-                  size: 90.w,
+                  size: 80.w,
                 ),
               ),
 //// Discounts Widget

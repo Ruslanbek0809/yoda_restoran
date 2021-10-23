@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../utils/utils.dart';
 import 'widgets.dart';
 
 class BannerWidget extends StatelessWidget {
@@ -17,9 +16,9 @@ class BannerWidget extends StatelessWidget {
       child: CarouselSlider(
         options: CarouselOptions(
           autoPlay: false,
-          aspectRatio: 2.5,
-          // viewportFraction:
-          //     1.0, // The fraction of the viewport that each page should occupy
+          aspectRatio: 2,
+          viewportFraction:
+              1.0, // The fraction of the viewport that each page should occupy
           enlargeCenterPage: true,
           enlargeStrategy: CenterPageEnlargeStrategy.scale,
         ),
@@ -28,7 +27,7 @@ class BannerWidget extends StatelessWidget {
               (item) => YodaImage(
                 image: item,
                 width: 1.sw,
-                borderRadius: Constants.BORDER_RADIUS_20,
+                borderRadius: 0.0,
               ),
             )
             .toList(),

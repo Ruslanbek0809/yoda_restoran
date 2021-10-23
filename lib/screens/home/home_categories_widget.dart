@@ -42,7 +42,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
             width: selectedCatId == category.id ? 72.w : 75.w,
             height: selectedCatId == category.id ? 72.w : 75.w,
             margin: EdgeInsets.only(
-                top: 15.w,
+                top: 5.w,
                 left: pos == 0
                     ? 10.w
                     : 0.w), // margin on top of persistent header
@@ -88,7 +88,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                         fontWeight: FontWeight.w600,
                         color: selectedCatId == category.id
                             ? AppTheme.WHITE
-                            : AppTheme.MAIN,
+                            : AppTheme.FONT_COLOR,
                       ),
                     ),
                   ),
