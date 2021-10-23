@@ -3,7 +3,7 @@ import '../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
-import 'home.dart';
+import 'category_filter_bottom_sheet/category_bottom_sheet.dart';
 
 class HomeCategoriesWidget extends StatefulWidget {
   final List<HomeCategory> homeCategories;
