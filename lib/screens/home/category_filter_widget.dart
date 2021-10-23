@@ -66,16 +66,27 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
               YodaImage(
                 image: widget.homeCategory.image,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 7.w),
+              Container(
+                margin: EdgeInsets.only(top: 7.w),
+                padding: EdgeInsets.symmetric(
+                    horizontal: isCategoryFilterChecked ? 8.w : 0.0,
+                    vertical: isCategoryFilterChecked ? 3.w : 0.0),
+                decoration: BoxDecoration(
+                  borderRadius: AppTheme().buttonBorderRadius,
+                  color: isCategoryFilterChecked
+                      ? AppTheme.MAIN
+                      : Colors.transparent,
+                ),
                 child: Text(
                   widget.homeCategory.name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: isCategoryFilterChecked
+                        ? FontWeight.w400
+                        : FontWeight.w600,
                     color: isCategoryFilterChecked
-                        ? AppTheme.MAIN
+                        ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,
                   ),
                 ),

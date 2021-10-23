@@ -119,6 +119,7 @@ class _CategoriesFilterBottomSheetWidgetState
                           ),
                         ),
                         GridView.builder(
+                          padding: EdgeInsets.only(top: 10.w),
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
@@ -126,7 +127,7 @@ class _CategoriesFilterBottomSheetWidgetState
                             crossAxisCount: 4,
                             mainAxisSpacing: 10.w, //spaceTopBottom
                             crossAxisSpacing: 10.w, //spaceLeftRight
-                            childAspectRatio: 0.8,
+                            childAspectRatio: 0.75,
                           ),
                           itemCount: widget.additionalCategories.length,
                           itemBuilder: (context, pos) {
