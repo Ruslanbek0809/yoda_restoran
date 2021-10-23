@@ -54,10 +54,10 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
             setState(() {
               if (isCategoryFilterChecked == true) {
                 isCategoryFilterChecked = false;
-                widget.categoryFilterCallback!(widget.homeCategory.id, true);
+                widget.categoryFilterCallback!(widget.homeCategory.id, false);
               } else {
                 isCategoryFilterChecked = true;
-                widget.categoryFilterCallback!(widget.homeCategory.id, false);
+                widget.categoryFilterCallback!(widget.homeCategory.id, true);
               }
             });
           },

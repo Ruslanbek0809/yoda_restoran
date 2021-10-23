@@ -60,6 +60,10 @@ class _CategoriesFilterBottomSheetWidgetState
   void _setSelectedCategoryFilter(CategoryFilter? _selectedFilter) {
     setState(() {
       selectedFilter = _selectedFilter;
+      if (selectedFilter != categoryFilters[0])
+        _filterButtonAnimationController.forward();
+      else
+        _filterButtonAnimationController.reverse();
     });
   }
 
@@ -148,15 +152,11 @@ class _CategoriesFilterBottomSheetWidgetState
                                   (int categoryFilterID, bool isAdd) {
                                 if (isAdd) {
                                   selectedCategoryFilters.add(categoryFilterID);
-                                  printLog(
-                                      'selectedCategoryFilters isNotEmpty: ${selectedCategoryFilters.length}');
                                   if (selectedCategoryFilters.isNotEmpty)
                                     _filterButtonAnimationController.forward();
                                 } else {
                                   selectedCategoryFilters
                                       .remove(categoryFilterID);
-                                  printLog(
-                                      'selectedCategoryFilters isEmpty: ${selectedCategoryFilters.length}');
                                   if (selectedCategoryFilters.isEmpty)
                                     _filterButtonAnimationController.reverse();
                                 }
