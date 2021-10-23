@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
@@ -29,7 +30,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
     // // currentTab = (_sliverScrollController.offset) ~/
     // //     ((_foodList.length / 2).ceil() * (1.sw / 1.65.sw));
     // print(
-    //     'currentTab=> $currentTab ${(_foodList.length / 2).ceil()} ${1.sw} ${0.5.sh} ${(1.sw / 1.65.sw)}');
+    //     'currentTab=> $currentTab ${(_foodList.length / 2).ceil()} ${1.sw} ${0.55.sh} ${(1.sw / 1.65.sw)}');
     // _tabController.animateTo(currentTab);
 
 //// For SliverAppBar
@@ -42,7 +43,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
 
   bool get _isShrink {
     return _sliverScrollController.hasClients &&
-        _sliverScrollController.offset > (0.5.sh - kToolbarHeight);
+        _sliverScrollController.offset > (0.55.sh - kToolbarHeight - 50.w);
   }
 
   @override
@@ -84,11 +85,13 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
             controller: _sliverScrollController,
             physics: const BouncingScrollPhysics(),
             slivers: [
+//------------------ ARROW BACK ---------------------//
               SliverAppBar(
-                expandedHeight: 0.5.sh,
+                expandedHeight: 0.55.sh,
                 pinned: true,
                 stretch: true,
                 floating: false,
+                backgroundColor: AppTheme.WHITE,
                 leading: AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   child: Container(
@@ -110,22 +113,373 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                           Icons.arrow_back,
                           size: 27.w,
                           color: AppTheme.BLACK,
-                        ), // other widget
+                        ),
                       ),
                     ),
                   ),
                 ),
+//------------------ ACTIONS FAV ---------------------//
+                actions: [
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: _isShrink
+                        ? SizedBox()
+                        : AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 5.w),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _isShrink
+                                        ? Colors.transparent
+                                        : AppTheme.WHITE,
+                                    boxShadow: _isShrink
+                                        ? []
+                                        : [AppTheme().buttonShadow]),
+                                child: Material(
+                                  shape: CircleBorder(),
+                                  elevation: 0,
+                                  color: _isShrink
+                                      ? Colors.transparent
+                                      : AppTheme.WHITE,
+                                  child: InkWell(
+                                    customBorder: CircleBorder(),
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.w),
+                                      child: Icon(
+                                        Icons.favorite_outline_outlined,
+                                        size: 27.w,
+                                        color: AppTheme.BLACK,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
+                  SizedBox(width: 10.w),
+//------------------ ACTIONS SEARCH ---------------------//
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 5.w),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:
+                                _isShrink ? Colors.transparent : AppTheme.WHITE,
+                            boxShadow:
+                                _isShrink ? [] : [AppTheme().buttonShadow]),
+                        child: Material(
+                          shape: CircleBorder(),
+                          elevation: 0,
+                          color:
+                              _isShrink ? Colors.transparent : AppTheme.WHITE,
+                          child: InkWell(
+                            customBorder: CircleBorder(),
+                            onTap: () {},
+                            child: Padding(
+                              padding: EdgeInsets.all(8.w),
+                              child: Icon(
+                                Icons.search,
+                                size: 27.w,
+                                color: AppTheme.BLACK,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.w),
+                ],
+//------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
                 flexibleSpace: FlexibleSpaceBar(
                   stretchModes: [StretchMode.zoomBackground],
-                  background: YodaImage(
-                    image: 'assets/burgerlist.jpg',
-                  ),
-                  title: Text(
-                    'Kebapçy',
-                    style: TextStyle(fontSize: 17.sp),
-                  ),
                   centerTitle: false,
+                  //// NOTE: Container background image used to add custom widget in front of this background image
+                  background: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/burgerlist.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                    //// NOTE: Instead of direct Container Column is used to make child work properly
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.WHITE,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                          ),
+                          padding: EdgeInsets.fromLTRB(15.w, 15.w, 15.w, 50.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Kebapçy',
+                                style: TextStyle(
+                                  fontSize: 32.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppTheme.MAIN_DARK,
+                                ),
+                              ),
+                              SizedBox(height: 10.w),
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.MAIN_LIGHT,
+                                      borderRadius: AppTheme().mainBorderRadius,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12.5.w, vertical: 7.5.w),
+                                    margin: EdgeInsets.symmetric(vertical: 5.w),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: AppTheme.MAIN_DARK,
+                                          size: 24.w,
+                                        ),
+                                        Text(
+                                          '4.5',
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.MAIN_LIGHT,
+                                      borderRadius: AppTheme().mainBorderRadius,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12.5.w, vertical: 10.w),
+                                    margin: EdgeInsets.symmetric(vertical: 5.w),
+                                    child: Text(
+                                      '45-55 min',
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.MAIN_LIGHT,
+                                      borderRadius: AppTheme().mainBorderRadius,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12.5.w, vertical: 10.w),
+                                    margin: EdgeInsets.symmetric(vertical: 5.w),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'Eltip bermek ',
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                        Text(
+                                          '20 TMT',
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.MAIN_LIGHT,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.all(5.w),
+                                    child: SvgPicture.asset(
+                                      'assets/restaurant_info.svg',
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                color: AppTheme.MAIN_LIGHT,
+                                thickness: 1.w,
+                              ),
+//------------------ DELIVERY/SELF-PICKUP ---------------------//
+                              ToggleButtonWidget(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+//                   titlePadding: EdgeInsets.only(bottom: 40.w),
+//                   title: _isShrink
+//                       ? SizedBox()
+//                       : Stack(
+//                           children: [
+//                             Positioned(
+//                               bottom: 0.0,
+//                               right: 0.0,
+//                               left: 0.0,
+//                               child: Container(
+//                                 decoration: BoxDecoration(
+//                                   color: AppTheme.WHITE,
+//                                   borderRadius: BorderRadius.only(
+//                                     topLeft: Radius.circular(20.0),
+//                                     topRight: Radius.circular(20.0),
+//                                   ),
+//                                 ),
+//                                 padding: EdgeInsets.symmetric(
+//                                     horizontal: 5.w, vertical: 5.w),
+//                                 child: Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   mainAxisAlignment: MainAxisAlignment.start,
+//                                   children: [
+//                                     Text(
+//                                       'Kebapçy',
+//                                       style: TextStyle(
+//                                         fontSize: 18.sp,
+//                                         fontWeight: FontWeight.bold,
+//                                         color: AppTheme.MAIN_DARK,
+//                                       ),
+//                                     ),
+//                                     SizedBox(height: 10.w),
+//                                     Row(
+//                                       children: [
+//                                         Container(
+//                                           decoration: BoxDecoration(
+//                                             color: AppTheme.MAIN_LIGHT,
+//                                             borderRadius:
+//                                                 AppTheme().mainBorderRadius,
+//                                           ),
+//                                           padding: EdgeInsets.symmetric(
+//                                               horizontal: 5.w, vertical: 2.w),
+//                                           margin: EdgeInsets.symmetric(
+//                                               vertical: 5.w),
+//                                           child: Row(
+//                                             mainAxisSize: MainAxisSize.min,
+//                                             children: [
+//                                               Icon(
+//                                                 Icons.star,
+//                                                 color: AppTheme.MAIN_DARK,
+//                                                 size: 18.w,
+//                                               ),
+//                                               Text(
+//                                                 '4.5',
+//                                                 style: TextStyle(
+//                                                   fontSize: 12.sp,
+//                                                   color: AppTheme.FONT_COLOR,
+//                                                 ),
+//                                               ),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                         SizedBox(width: 5.w),
+//                                         Container(
+//                                           decoration: BoxDecoration(
+//                                             color: AppTheme.MAIN_LIGHT,
+//                                             borderRadius:
+//                                                 AppTheme().mainBorderRadius,
+//                                           ),
+//                                           padding: EdgeInsets.symmetric(
+//                                               horizontal: 5.w, vertical: 2.w),
+//                                           margin: EdgeInsets.symmetric(
+//                                               vertical: 5.w),
+//                                           child: Text(
+//                                             '45-55 min',
+//                                             style: TextStyle(
+//                                               fontSize: 12.sp,
+//                                               color: AppTheme.FONT_COLOR,
+//                                             ),
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                     Row(
+//                                       children: [
+//                                         Container(
+//                                           decoration: BoxDecoration(
+//                                             color: AppTheme.MAIN_LIGHT,
+//                                             borderRadius:
+//                                                 AppTheme().mainBorderRadius,
+//                                           ),
+//                                           padding: EdgeInsets.symmetric(
+//                                               horizontal: 5.w, vertical: 2.w),
+//                                           margin: EdgeInsets.symmetric(
+//                                               vertical: 5.w),
+//                                           child: Row(
+//                                             mainAxisSize: MainAxisSize.min,
+//                                             children: [
+//                                               Text(
+//                                                 'Eltip bermek ',
+//                                                 style: TextStyle(
+//                                                   fontSize: 12.sp,
+//                                                   color: AppTheme.FONT_COLOR,
+//                                                 ),
+//                                               ),
+//                                               Text(
+//                                                 '20 TMT',
+//                                                 style: TextStyle(
+//                                                   fontSize: 12.sp,
+//                                                   color: AppTheme.FONT_COLOR,
+//                                                 ),
+//                                               ),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                         SizedBox(width: 5.w),
+//                                         Container(
+//                                           decoration: BoxDecoration(
+//                                             color: AppTheme.MAIN_LIGHT,
+//                                             shape: BoxShape.circle,
+//                                           ),
+//                                           padding: EdgeInsets.all(0.w),
+//                                           child: SvgPicture.asset(
+//                                             'assets/restaurant_info.svg',
+//                                             color: AppTheme.FONT_COLOR,
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                     Divider(
+//                                       color: AppTheme.MAIN_LIGHT,
+//                                       thickness: 1.w,
+//                                     ),
+// //------------------ DELIVERY/SELF-PICKUP ---------------------//
+//                                     ToggleButtonWidget(),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
                 ),
+//------------------ TABBAR ---------------------//
                 bottom: ColoredTabBar(
                   color: AppTheme.WHITE,
                   tabBar: TabBar(
@@ -149,7 +503,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                       _sliverScrollController.animateTo(
                         offset +
                             ((index - 1) * 50.w) +
-                            0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.5.sh expanded height
+                            0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.55.sh expanded height
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear,
                       );
@@ -157,6 +511,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                   ),
                 ),
               ),
+//------------------ FOOD LIST with NAME ---------------------//
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
@@ -216,6 +571,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
               ),
             ],
           ),
+//------------------ BOTTOM CART ---------------------//
           Align(
             alignment: Alignment.bottomCenter,
             child: SlideTransition(

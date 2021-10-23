@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'res2.dart';
 import 'restaurant.dart';
 
 class RestaurantWidget extends StatefulWidget {
@@ -35,7 +36,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
         children: [
           Stack(
             children: [
-//// IMAGE with ripple effect
+//------------------ IMAGE with ripple effect ---------------------//
               Stack(
                 children: [
                   YodaImage(
@@ -55,8 +56,8 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                             context,
                             MaterialPageRoute(
                               // builder: (context) => MyWidget(),
-                              // builder: (context) => RestaurantScreen2(),
-                              builder: (context) => RestaurantDetailsScreen(),
+                              builder: (context) => RestaurantScreen2(),
+                              // builder: (context) => RestaurantDetailsScreen(),
                             ),
                           );
                         },
@@ -65,7 +66,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                 ],
               ),
-//// Delivery time Widget
+//------------------ STACK DELIVERY ---------------------//
               Positioned(
                 bottom: 0,
                 right: 0,
@@ -94,7 +95,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                 ),
               ),
-              //// Favourite Widget
+//------------------ STACK FAVORITE ---------------------//
               Positioned(
                 top: 10.w,
                 right: 10.w,
@@ -124,6 +125,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
               ),
             ],
           ),
+//------------------ FOOD NAME ---------------------//
           Padding(
             padding: EdgeInsets.only(top: 5.w),
             child: Text(
@@ -136,6 +138,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
               ),
             ),
           ),
+//------------------ RATING and FOODS ADDITIONAL NAME ---------------------//
           Row(
             children: [
               Icon(Icons.star, size: 20.w, color: AppTheme.GREEN),

@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// Resize according to onscreen keyboard
+      /// Resize according to On-Screen keyboard
       resizeToAvoidBottomInset: true,
       key: homeScaffoldKey,
       drawer: DrawerWidget(),
@@ -116,13 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-//// Banners Widget
+//------------------ BANNER ---------------------//
                       BannerWidget(imgList: imgList),
                     ],
                   ),
                 ),
               ),
-//// Categories Widget
+//------------------ HOME CATEGORIES ---------------------//
               SliverPersistentHeader(
                 pinned: false,
                 floating: true,
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 80.w,
                 ),
               ),
-//// Discounts Widget
+//------------------ DISCOUNTS ---------------------//
               SliverPersistentHeader(
                 pinned: false,
                 floating: true,
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ];
           },
-///// Restaurants Widget
+//------------------ RESTAURANTS ---------------------//
           body: ListView.builder(
             padding: EdgeInsets.only(top: 10.w),
             itemCount: restaurants.length,
