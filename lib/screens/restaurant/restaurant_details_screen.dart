@@ -276,86 +276,6 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
                                   ToggleButtonWidget(),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //     color: AppTheme.MAIN_LIGHT,
-                                  //     borderRadius:
-                                  //         AppTheme().buttonBorderRadius,
-                                  //   ),
-                                  //   padding: EdgeInsets.symmetric(
-                                  //       horizontal: 2.w, vertical: 2.w),
-                                  //   child: LayoutBuilder(builder:
-                                  //       (BuildContext context,
-                                  //           BoxConstraints constraints) {
-                                  //     return Row(
-                                  //       children: [
-                                  //         GestureDetector(
-                                  //           onTap: () {
-                                  //             if (!isDelivery)
-                                  //               setState(() {
-                                  //                 isDelivery = true;
-                                  //               });
-                                  //           },
-                                  //           child: AnimatedContainer(
-                                  //             duration:
-                                  //                 Duration(milliseconds: 250),
-                                  //             width: constraints.maxWidth / 2,
-                                  //             decoration: BoxDecoration(
-                                  //               color: isDelivery
-                                  //                   ? AppTheme.WHITE
-                                  //                   : AppTheme.MAIN_LIGHT,
-                                  //               borderRadius: AppTheme()
-                                  //                   .buttonBorderRadius,
-                                  //             ),
-                                  //             padding: EdgeInsets.symmetric(
-                                  //                 vertical: 12.5.w),
-                                  //             alignment: Alignment.center,
-                                  //             child: Text(
-                                  //               'Eltip bermek',
-                                  //               style: TextStyle(
-                                  //                 fontSize: 17.sp,
-                                  //                 color: !isDelivery
-                                  //                     ? AppTheme.FONT_GREY_COLOR
-                                  //                     : AppTheme.FONT_COLOR,
-                                  //               ),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //         GestureDetector(
-                                  //           onTap: () {
-                                  //             setState(() {
-                                  //               isDelivery = false;
-                                  //             });
-                                  //           },
-                                  //           child: AnimatedContainer(
-                                  //             duration:
-                                  //                 Duration(milliseconds: 250),
-                                  //             width: constraints.maxWidth / 2,
-                                  //             decoration: BoxDecoration(
-                                  //               color: !isDelivery
-                                  //                   ? AppTheme.WHITE
-                                  //                   : AppTheme.MAIN_LIGHT,
-                                  //               borderRadius: AppTheme()
-                                  //                   .buttonBorderRadius,
-                                  //             ),
-                                  //             padding: EdgeInsets.symmetric(
-                                  //                 vertical: 12.5.w),
-                                  //             alignment: Alignment.center,
-                                  //             child: Text(
-                                  //               'Özüm aljak',
-                                  //               style: TextStyle(
-                                  //                 fontSize: 17.sp,
-                                  //                 color: isDelivery
-                                  //                     ? AppTheme.FONT_GREY_COLOR
-                                  //                     : AppTheme.FONT_COLOR,
-                                  //               ),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       ],
-                                  //     );
-                                  //   }),
-                                  // ),
                                 ],
                               ),
                             ),
@@ -372,13 +292,6 @@ class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     duration: Duration(milliseconds: 300),
                     child: _isShrink
                         ? SizedBox()
-                        // IconButton(
-                        //     onPressed: () {},
-                        //     icon: Icon(
-                        //       Icons.favorite_outline_rounded,
-                        //       size: 30.w,
-                        //     ),
-                        //   )
                         : AnimatedSwitcher(
                             duration: Duration(milliseconds: 300),
                             child: Padding(

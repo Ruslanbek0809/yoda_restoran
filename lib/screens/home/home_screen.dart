@@ -78,14 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-//// Menu button
+//------------------ MENU ---------------------//
                           IconButton(
                             icon: const Icon(Icons.menu),
                             onPressed: () =>
                                 homeScaffoldKey.currentState!.openDrawer(),
                             tooltip: 'Drawer',
                           ),
-//// Search
+//------------------ SEARCH ---------------------//
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.only(left: 15.w, right: 5.w),
@@ -116,13 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-//// Banners Widget
+//------------------ BANNERS ---------------------//
                       BannerWidget(imgList: imgList),
                     ],
                   ),
                 ),
               ),
-//// Categories Widget
+//------------------ HOME CATEGORIES ---------------------//
               SliverPersistentHeader(
                 pinned: false,
                 floating: true,
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 80.w,
                 ),
               ),
-//// Discounts Widget
+//------------------ DISCOUNTS ---------------------//
               SliverPersistentHeader(
                 pinned: false,
                 floating: true,
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ];
           },
-///// Restaurants Widget
+//------------------ RESTAURANTS ---------------------//
           body: ListView.builder(
             padding: EdgeInsets.only(top: 10.w),
             itemCount: restaurants.length,

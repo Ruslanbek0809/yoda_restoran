@@ -35,7 +35,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
         children: [
           Stack(
             children: [
-//// IMAGE with ripple effect
+//------------------ IMAGE with ripple effect ---------------------//
               Stack(
                 children: [
                   YodaImage(
@@ -65,7 +65,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                 ],
               ),
-//// Delivery time Widget
+//------------------ DELIVERY TIME ---------------------//
               Positioned(
                 bottom: 0,
                 right: 0,
