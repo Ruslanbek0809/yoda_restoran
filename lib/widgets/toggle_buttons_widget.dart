@@ -8,6 +8,7 @@ class ToggleButtonWidget extends StatefulWidget {
 }
 
 class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
+  double height = 35.w;
   double halfWidth = 0.5.sw;
   bool isDelivery = false;
 
