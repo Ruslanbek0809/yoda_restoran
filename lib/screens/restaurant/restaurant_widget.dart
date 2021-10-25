@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
+import 'res2.dart';
 import 'restaurant.dart';
 
 class RestaurantWidget extends StatefulWidget {
@@ -55,8 +56,8 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                             context,
                             MaterialPageRoute(
                               // builder: (context) => MyWidget(),
-                              // builder: (context) => RestaurantScreen2(),
-                              builder: (context) => RestaurantDetailsScreen(),
+                              builder: (context) => RestaurantScreen2(),
+                              // builder: (context) => RestaurantDetailsScreen(),
                             ),
                           );
                         },

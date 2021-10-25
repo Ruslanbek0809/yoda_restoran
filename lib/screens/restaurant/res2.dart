@@ -92,6 +92,19 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                 stretch: true,
                 floating: false,
                 backgroundColor: AppTheme.WHITE,
+                centerTitle: false,
+                title: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: _isShrink
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 10.w, top: 5.w),
+                          child: Text(
+                            'Kebapçy',
+                            style: TextStyle(fontSize: 20.sp),
+                          ),
+                        )
+                      : SizedBox(),
+                ),
                 leading: AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   child: Container(
@@ -199,7 +212,6 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
 //------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
                 flexibleSpace: FlexibleSpaceBar(
                   stretchModes: [StretchMode.zoomBackground],
-                  centerTitle: false,
                   //// NOTE: Container background image used to add custom widget in front of this background image
                   background: Container(
                     decoration: BoxDecoration(
