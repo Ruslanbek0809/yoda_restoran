@@ -232,7 +232,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                               topRight: Radius.circular(20.0),
                             ),
                           ),
-                          padding: EdgeInsets.fromLTRB(15.w, 15.w, 15.w, 50.w),
+                          padding: EdgeInsets.fromLTRB(15.w, 15.w, 15.w, 55.w),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -356,9 +356,27 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                   tabBar: TabBar(
                     controller: _tabController,
                     isScrollable: true,
-                    unselectedLabelColor: AppTheme.MAIN,
+                    indicatorColor: Colors.transparent,
+                    labelPadding: EdgeInsets.all(0.0),
                     tabs: foodCategoryList
-                        .map<Widget>((category) => Tab(text: category.name))
+                        .map<Widget>((category) => Tab(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: AppTheme().buttonBorderRadius,
+                                color: AppTheme.WHITE,
+                              ),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 3.w, horizontal: 5.w),
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              alignment: Alignment.center,
+                              child: Text(
+                                category.name,
+                                style: TextStyle(
+                                  color: AppTheme.DRAWER_ICON,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            )))
                         .toList(),
                     onTap: (index) {
                       double offset = foodCategoryList.getRange(0, index).fold(
@@ -374,7 +392,8 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                       _sliverScrollController.animateTo(
                         offset +
                             ((index - 1) * 50.w) +
-                            0.4.sh, // * 50.w is same with Category title height //  + 0.3.sh is to compensate 0.55.sh expanded height
+                            0.55.sh -
+                            45.w, // * 50.w is same with each Food category title height // + 0.55.sh is to compensate 0.55.sh expanded height // + 45.w is for tab title
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear,
                       );
