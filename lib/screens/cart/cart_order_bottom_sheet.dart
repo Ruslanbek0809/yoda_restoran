@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'package:yoda_res/widgets/widgets.dart';
 
 void cartOrderBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -209,31 +210,41 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),
               padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-              child: Center(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppTheme.MAIN,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: AppTheme().buttonBorderRadius),
-                          padding: EdgeInsets.symmetric(vertical: 17.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '175 TMT',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          color: AppTheme.FONT_COLOR,
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: Text(
-                          'Tassykla',
-                          style: TextStyle(
-                            color: AppTheme.WHITE,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        onPressed: () {},
                       ),
-                    )
-                  ],
-                ),
+                      Text(
+                        '30-40 min',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppTheme.FONT_COLOR,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  CustomTextButton(
+                    text: 'Sargyt et',
+                    padding: EdgeInsets.symmetric(
+                        vertical: 17.w, horizontal: 0.2.sw),
+                    textStyle: TextStyle(
+                      color: AppTheme.WHITE,
+                      fontSize: 18.sp,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ),
           )
