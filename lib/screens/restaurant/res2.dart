@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
@@ -14,10 +16,11 @@ class RestaurantScreen2 extends StatefulWidget {
 class _RestaurantScreen2State extends State<RestaurantScreen2>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  int currentTab = 0;
+  int activetab = 0;
 
   late ScrollController _sliverScrollController;
   bool lastStatus = true;
+  bool isTabPressed = false;
 
   late AnimationController bottomCartController;
   late Animation<Offset> bottomCartOffset;
@@ -46,6 +49,12 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
         _sliverScrollController.offset > (0.55.sh - kToolbarHeight - 50.w);
   }
 
+  void _tabListener() {
+    setState(() {
+      activetab = _tabController.index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +63,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
       vsync: this,
       length: foodCategoryList.length,
     );
+    _tabController.addListener(_tabListener);
     _sliverScrollController = ScrollController()..addListener(_scrollListener);
 
     bottomCartController =
@@ -363,22 +373,37 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                                 child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: AppTheme().buttonBorderRadius,
-                                color: AppTheme.WHITE,
+                                color: activetab ==
+                                        foodCategoryList.indexOf(category)
+                                    ? isTabPressed
+                                        ? AppTheme.MAIN_LIGHT
+                                        : AppTheme.WHITE
+                                    : AppTheme.WHITE,
                               ),
                               margin: EdgeInsets.symmetric(
-                                  vertical: 3.w, horizontal: 5.w),
+                                vertical: 3.w,
+                                horizontal: 5.w,
+                              ),
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               alignment: Alignment.center,
                               child: Text(
                                 category.name,
                                 style: TextStyle(
-                                  color: AppTheme.DRAWER_ICON,
+                                  color: activetab ==
+                                          foodCategoryList.indexOf(category)
+                                      ? isTabPressed
+                                          ? AppTheme.FONT_COLOR
+                                          : AppTheme.DRAWER_ICON
+                                      : AppTheme.DRAWER_ICON,
                                   fontSize: 14.sp,
                                 ),
                               ),
                             )))
                         .toList(),
                     onTap: (index) {
+                      setState(() {
+                        isTabPressed = true;
+                      });
                       double offset = foodCategoryList.getRange(0, index).fold(
                         0,
                         (prev, category) {
@@ -397,6 +422,11 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear,
                       );
+                      Timer(Duration(milliseconds: 800), () {
+                        setState(() {
+                          isTabPressed = false;
+                        });
+                      });
                     },
                   ),
                 ),
