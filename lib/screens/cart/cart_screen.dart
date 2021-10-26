@@ -16,6 +16,10 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   bool _switchValue = true;
+  void _onCartOrderClicked() {
+    cartOrderBottomSheet(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,7 +248,9 @@ class _CartScreenState extends State<CartScreen> {
                       color: AppTheme.WHITE,
                       fontSize: 18.sp,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _onCartOrderClicked();
+                    },
                   ),
                 ],
               ),
