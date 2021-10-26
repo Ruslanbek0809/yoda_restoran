@@ -370,35 +370,37 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                     labelPadding: EdgeInsets.all(0.0),
                     tabs: foodCategoryList
                         .map<Widget>((category) => Tab(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: AppTheme().buttonBorderRadius,
-                                color: activetab ==
-                                        foodCategoryList.indexOf(category)
-                                    ? isTabPressed
-                                        ? AppTheme.MAIN_LIGHT
-                                        : AppTheme.WHITE
-                                    : AppTheme.WHITE,
-                              ),
-                              margin: EdgeInsets.symmetric(
-                                vertical: 3.w,
-                                horizontal: 5.w,
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              alignment: Alignment.center,
-                              child: Text(
-                                category.name,
-                                style: TextStyle(
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                decoration: BoxDecoration(
+                                  borderRadius: AppTheme().buttonBorderRadius,
                                   color: activetab ==
                                           foodCategoryList.indexOf(category)
                                       ? isTabPressed
-                                          ? AppTheme.FONT_COLOR
-                                          : AppTheme.DRAWER_ICON
-                                      : AppTheme.DRAWER_ICON,
-                                  fontSize: 14.sp,
+                                          ? AppTheme.MAIN_LIGHT
+                                          : AppTheme.WHITE
+                                      : AppTheme.WHITE,
+                                ),
+                                margin: EdgeInsets.symmetric(
+                                  vertical: 3.w,
+                                  horizontal: 5.w,
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  category.name,
+                                  style: TextStyle(
+                                    color: activetab ==
+                                            foodCategoryList.indexOf(category)
+                                        ? isTabPressed
+                                            ? AppTheme.FONT_COLOR
+                                            : AppTheme.DRAWER_ICON
+                                        : AppTheme.DRAWER_ICON,
+                                    fontSize: 14.sp,
+                                  ),
                                 ),
                               ),
-                            )))
+                            ))
                         .toList(),
                     onTap: (index) {
                       setState(() {
