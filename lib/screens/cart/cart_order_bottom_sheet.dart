@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 
+import 'cart.dart';
+
 void cartOrderBottomSheet(BuildContext context) {
   showModalBottomSheet(
     enableDrag: true,
@@ -37,9 +39,9 @@ class CartOrderBottomSheetWidget extends StatefulWidget {
 class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
     with SingleTickerProviderStateMixin {
   final TextEditingController _notesController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
+
+  void _onCartAddressClicked() {
+    cartAddressBottomSheet(context);
   }
 
   @override
@@ -242,7 +244,9 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                       color: AppTheme.WHITE,
                       fontSize: 18.sp,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _onCartAddressClicked();
+                    },
                   ),
                 ],
               ),
