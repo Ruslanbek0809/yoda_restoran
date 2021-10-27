@@ -64,6 +64,10 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
             ),
             child: SingleChildScrollView(
               controller: widget.scrollController,
+              padding: EdgeInsets.only(
+
+                  /// To resize screen when OnKeyboard opened
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
 
 void cartAddressAddEditBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -90,6 +89,8 @@ class _CartAddressAddEditBottomSheetWidgetState
             ),
             child: SingleChildScrollView(
               controller: widget.scrollController,
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -299,41 +300,29 @@ class _CartAddressAddEditBottomSheetWidgetState
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),
               padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '175 TMT',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '30-40 min',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppTheme.MAIN,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: AppTheme().buttonBorderRadius),
+                  padding: EdgeInsets.symmetric(vertical: 17.w),
+                ),
+                child: Text(
+                  'Tassykla',
+                  style: TextStyle(
+                    color: AppTheme.WHITE,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w400,
                   ),
-                  CustomTextButton(
-                    text: 'Sargyt et',
-                    padding: EdgeInsets.symmetric(
-                        vertical: 17.w, horizontal: 0.2.sw),
-                    textStyle: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
+                ),
+                onPressed: () {
+                  // if (_filterButtonAnimationController.value == 0.0) {
+                  //   _filterButtonAnimationController.forward();
+                  // } else {
+                  //   _filterButtonAnimationController.reverse();
+                  // }
+                },
               ),
             ),
           )
