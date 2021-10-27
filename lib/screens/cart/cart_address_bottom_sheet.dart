@@ -37,6 +37,7 @@ class CartAddressAddEditBottomSheetWidget extends StatefulWidget {
 class _CartAddressAddEditBottomSheetWidgetState
     extends State<CartAddressAddEditBottomSheetWidget>
     with SingleTickerProviderStateMixin {
+  bool _isLoading = false;
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _streetController = TextEditingController();
@@ -67,6 +68,18 @@ class _CartAddressAddEditBottomSheetWidgetState
     _floorFocus.dispose();
     _notesFocus.dispose();
     super.dispose();
+  }
+
+  Future _onConfirmButtonPressed() async {
+    setState(() {
+      _isLoading = true;
+    });
+    if (_cartAddressformKey.currentState!.validate()) {
+      printLog('_contactformKey validated');
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -316,13 +329,7 @@ class _CartAddressAddEditBottomSheetWidgetState
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                onPressed: () {
-                  // if (_filterButtonAnimationController.value == 0.0) {
-                  //   _filterButtonAnimationController.forward();
-                  // } else {
-                  //   _filterButtonAnimationController.reverse();
-                  // }
-                },
+                onPressed: () {},
               ),
             ),
           )

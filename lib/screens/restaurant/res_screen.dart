@@ -6,14 +6,14 @@ import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import 'food_widget.dart';
 
-class RestaurantDetailsScreen extends StatefulWidget {
-  RestaurantDetailsScreen({Key? key}) : super(key: key);
+class ResScreen extends StatefulWidget {
+  ResScreen({Key? key}) : super(key: key);
 
   @override
-  RestaurantDetailsScreenState createState() => RestaurantDetailsScreenState();
+  ResScreenState createState() => ResScreenState();
 }
 
-class RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
+class ResScreenState extends State<ResScreen>
     with TickerProviderStateMixin {
   late AnimationController bottomCartController;
   late Animation<Offset> bottomCartOffset;

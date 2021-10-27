@@ -8,12 +8,12 @@ import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'food_widget.dart';
 
-class RestaurantScreen2 extends StatefulWidget {
+class RestaurantDetailsScreen extends StatefulWidget {
   @override
-  _RestaurantScreen2State createState() => _RestaurantScreen2State();
+  _RestaurantDetailsScreenState createState() => _RestaurantDetailsScreenState();
 }
 
-class _RestaurantScreen2State extends State<RestaurantScreen2>
+class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   int activetab = 0;
@@ -131,7 +131,7 @@ class _RestaurantScreen2State extends State<RestaurantScreen2>
                       elevation: 0,
                       child: InkWell(
                         customBorder: CircleBorder(),
-                        onTap: () {},
+                        onTap: () => Navigator.pop(context),
                         child: Icon(
                           Icons.arrow_back,
                           size: 27.w,
