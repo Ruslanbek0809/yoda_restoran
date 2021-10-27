@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 
-void cartAddressBottomSheet(BuildContext context) {
+void cartAddressAddEditBottomSheet(BuildContext context) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
@@ -16,26 +16,27 @@ void cartAddressBottomSheet(BuildContext context) {
     backgroundColor: Colors.transparent,
     context: context,
     builder: (ctx) => DraggableScrollableSheet(
-      initialChildSize: 0.53,
-      maxChildSize: 0.53,
-      builder: (context, scrollController) => CartAddressBottomSheetWidget(
+      initialChildSize: 0.7,
+      maxChildSize: 0.7,
+      builder: (context, scrollController) =>
+          CartAddressAddEditBottomSheetWidget(
         scrollController,
       ),
     ),
   );
 }
 
-class CartAddressBottomSheetWidget extends StatefulWidget {
+class CartAddressAddEditBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
-  CartAddressBottomSheetWidget(this.scrollController);
+  CartAddressAddEditBottomSheetWidget(this.scrollController);
 
   @override
-  _CartAddressBottomSheetWidgetState createState() =>
-      _CartAddressBottomSheetWidgetState();
+  _CartAddressAddEditBottomSheetWidgetState createState() =>
+      _CartAddressAddEditBottomSheetWidgetState();
 }
 
-class _CartAddressBottomSheetWidgetState
-    extends State<CartAddressBottomSheetWidget>
+class _CartAddressAddEditBottomSheetWidgetState
+    extends State<CartAddressAddEditBottomSheetWidget>
     with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
   final TextEditingController _cityController = TextEditingController();
@@ -72,7 +73,7 @@ class _CartAddressBottomSheetWidgetState
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.53.sh,
+      height: 0.7.sh,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20)),
@@ -108,7 +109,7 @@ class _CartAddressBottomSheetWidgetState
                       ),
                       color: AppTheme.WHITE,
                     ),
-                    padding: EdgeInsets.fromLTRB(20.w, 20.w, 0.w, 20.w),
+                    padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 50.w),
                     child: Form(
                       key: _cartAddressformKey,
                       autovalidateMode: AutovalidateMode.disabled,
@@ -129,10 +130,10 @@ class _CartAddressBottomSheetWidgetState
                             keyboardType: TextInputType.text,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                              // border: OutlineInputBorder(
-                              //   borderRadius: AppTheme().containerRadius,
-                              //   borderSide: BorderSide.none,
-                              // ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                              ),
                               hintText: 'Aşgabat',
                               hintStyle: TextStyle(
                                   fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
@@ -148,7 +149,7 @@ class _CartAddressBottomSheetWidgetState
                           SizedBox(height: 10.w),
                           // --------------- STREET -------------- //
                           Padding(
-                            padding: EdgeInsets.only(left: 5.w),
+                            padding: EdgeInsets.only(left: 5.w, top: 15.w),
                             child: Text(
                               'Köçe',
                               style: TextStyle(
@@ -160,15 +161,15 @@ class _CartAddressBottomSheetWidgetState
                             keyboardType: TextInputType.text,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                              // border: OutlineInputBorder(
-                              //   borderRadius: AppTheme().containerRadius,
-                              //   borderSide: BorderSide.none,
-                              // ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                              ),
                               hintText: 'A.Nowaýy 23, 64',
                               hintStyle: TextStyle(
                                   fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
                             ),
-                            focusNode: _cityFocus,
+                            focusNode: _streetFocus,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Köçäni giriziň';
@@ -176,130 +177,84 @@ class _CartAddressBottomSheetWidgetState
                               return null;
                             },
                           ),
-                          SizedBox(height: 10.w),
+                          SizedBox(height: 15.w),
                           // --------------- APARTMENT/HOUSE/FLOOR -------------- //
                           Row(
                             children: [
                               Flexible(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 5.w),
-                                      child: Text(
-                                        'Jaý',
-                                        style: TextStyle(
-                                            fontSize: 14.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
+                                child: TextFormField(
+                                  controller: _apartmentController,
+                                  keyboardType: TextInputType.number,
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(
+                                    border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          width: 0.5),
                                     ),
-                                    TextFormField(
-                                      controller: _streetController,
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        // border: OutlineInputBorder(
-                                        //   borderRadius: AppTheme().containerRadius,
-                                        //   borderSide: BorderSide.none,
-                                        // ),
-                                        hintText: 'A.Nowaýy 23, 64',
-                                        hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
-                                      focusNode: _cityFocus,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Köçäni giriziň';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ],
+                                    labelText: 'Jaý',
+                                    labelStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppTheme.DRAWER_ICON),
+                                  ),
+                                  focusNode: _apartmentFocus,
+                                  validator: (value) {
+                                    return null;
+                                  },
                                 ),
                               ),
+                              SizedBox(width: 10),
                               Flexible(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 5.w),
-                                      child: Text(
-                                        'Köçe',
-                                        style: TextStyle(
-                                            fontSize: 14.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
+                                child: TextFormField(
+                                  controller: _houseController,
+                                  keyboardType: TextInputType.number,
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(
+                                    border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          width: 0.5),
                                     ),
-                                    TextFormField(
-                                      controller: _streetController,
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        // border: OutlineInputBorder(
-                                        //   borderRadius: AppTheme().containerRadius,
-                                        //   borderSide: BorderSide.none,
-                                        // ),
-                                        hintText: 'A.Nowaýy 23, 64',
-                                        hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
-                                      focusNode: _cityFocus,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Köçäni giriziň';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ],
+                                    labelText: 'Otag',
+                                    labelStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppTheme.DRAWER_ICON),
+                                  ),
+                                  focusNode: _houseFocus,
+                                  validator: (value) {
+                                    return null;
+                                  },
                                 ),
                               ),
+                              SizedBox(width: 10),
                               Flexible(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 5.w),
-                                      child: Text(
-                                        'Köçe',
-                                        style: TextStyle(
-                                            fontSize: 14.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
+                                child: TextFormField(
+                                  controller: _floorController,
+                                  keyboardType: TextInputType.number,
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(
+                                    border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          width: 0.5),
                                     ),
-                                    TextFormField(
-                                      controller: _streetController,
-                                      keyboardType: TextInputType.text,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        // border: OutlineInputBorder(
-                                        //   borderRadius: AppTheme().containerRadius,
-                                        //   borderSide: BorderSide.none,
-                                        // ),
-                                        hintText: 'A.Nowaýy 23, 64',
-                                        hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: AppTheme.DRAWER_ICON),
-                                      ),
-                                      focusNode: _cityFocus,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Köçäni giriziň';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ],
+                                    labelText: 'Gat',
+                                    labelStyle: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppTheme.DRAWER_ICON),
+                                  ),
+                                  focusNode: _floorFocus,
+                                  validator: (value) {
+                                    return null;
+                                  },
                                 ),
-                              )
+                              ),
+                              Flexible(child: SizedBox())
                             ],
                           ),
-                          SizedBox(height: 10.w),
                           // --------------- NOTE -------------- //
                           Padding(
-                            padding: EdgeInsets.only(left: 5.w),
+                            padding: EdgeInsets.only(left: 5.w, top: 15.w),
                             child: Text(
                               'Bellik',
                               style: TextStyle(

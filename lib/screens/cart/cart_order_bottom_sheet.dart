@@ -41,7 +41,7 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
   final TextEditingController _notesController = TextEditingController();
 
   void _onCartAddressClicked() {
-    cartAddressBottomSheet(context);
+    cartAddressAddEditBottomSheet(context);
   }
 
   @override
