@@ -10,7 +10,8 @@ import 'food_widget.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   @override
-  _RestaurantDetailsScreenState createState() => _RestaurantDetailsScreenState();
+  _RestaurantDetailsScreenState createState() =>
+      _RestaurantDetailsScreenState();
 }
 
 class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>

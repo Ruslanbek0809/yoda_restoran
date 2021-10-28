@@ -13,34 +13,33 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppTheme.MAIN_LIGHT,
-        borderRadius: AppTheme().buttonBorderRadius,
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.w),
-      child: Stack(
-        children: [
-          AnimatedAlign(
-            alignment: Alignment(isDelivery ? -1 : 1, 0),
-            duration: Duration(milliseconds: 300),
-            child: Container(
-              width: halfWidth,
-              height: 45.w,
-              decoration: BoxDecoration(
-                color: AppTheme.WHITE,
-                borderRadius: AppTheme().buttonBorderRadius,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isDelivery = !isDelivery;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppTheme.MAIN_LIGHT,
+          borderRadius: AppTheme().buttonBorderRadius,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.w),
+        child: Stack(
+          children: [
+            AnimatedAlign(
+              alignment: Alignment(isDelivery ? -1 : 1, 0),
+              duration: Duration(milliseconds: 300),
+              child: Container(
+                width: halfWidth,
+                height: 45.w,
+                decoration: BoxDecoration(
+                  color: AppTheme.WHITE,
+                  borderRadius: AppTheme().buttonBorderRadius,
+                ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              if (!isDelivery)
-                setState(() {
-                  isDelivery = true;
-                });
-            },
-            child: Align(
+            Align(
               alignment: Alignment(-1, 0),
               child: Container(
                 width: halfWidth,
@@ -57,14 +56,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                 ),
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                isDelivery = false;
-              });
-            },
-            child: Align(
+            Align(
               alignment: Alignment(1, 0),
               child: Container(
                 width: halfWidth,
@@ -81,8 +73,8 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
