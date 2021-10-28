@@ -6,6 +6,7 @@ import 'package:yoda_res/screens/cart/cart_food_widget.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import '../../utils/utils.dart';
 import 'cart.dart';
+import 'cart_bottom_sheets/cart_order_bottom_sheet.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

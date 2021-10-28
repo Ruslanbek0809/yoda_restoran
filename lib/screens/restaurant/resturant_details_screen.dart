@@ -103,7 +103,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                 stretch: true,
                 floating: false,
                 backgroundColor: AppTheme.WHITE,
-                centerTitle: false,
+                centerTitle: true,
                 title: AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   child: _isShrink
@@ -147,37 +147,44 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                 actions: [
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 5.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              _isShrink ? Colors.transparent : AppTheme.WHITE,
-                          // boxShadow: _isShrink
-                          //     ? []
-                          //     : [AppTheme().buttonShadow],
-                        ),
-                        child: Material(
-                          shape: CircleBorder(),
-                          elevation: 0,
-                          color:
-                              _isShrink ? Colors.transparent : AppTheme.WHITE,
-                          child: InkWell(
-                            customBorder: CircleBorder(),
-                            onTap: () {},
+                    child: _isShrink
+                        ? SizedBox()
+                        : AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
                             child: Padding(
-                              padding: EdgeInsets.all(8.w),
-                              child: Icon(
-                                Icons.favorite_outline_outlined,
-                                size: 27.w,
-                                color: AppTheme.BLACK,
+                              padding: EdgeInsets.only(top: 5.w),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _isShrink
+                                      ? Colors.transparent
+                                      : AppTheme.WHITE,
+                                  // boxShadow: _isShrink
+                                  //     ? []
+                                  //     : [AppTheme().buttonShadow],
+                                ),
+                                child: Material(
+                                  shape: CircleBorder(),
+                                  elevation: 0,
+                                  color: _isShrink
+                                      ? Colors.transparent
+                                      : AppTheme.WHITE,
+                                  child: InkWell(
+                                    customBorder: CircleBorder(),
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.w),
+                                      child: Icon(
+                                        Icons.favorite_outline_outlined,
+                                        size: 27.w,
+                                        color: AppTheme.BLACK,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
                   ),
                   SizedBox(width: 10.w),
 //------------------ ACTIONS SEARCH ---------------------//
