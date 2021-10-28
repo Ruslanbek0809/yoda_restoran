@@ -322,7 +322,7 @@ class _CartAddressAddEditBottomSheetWidgetState
                   padding: EdgeInsets.symmetric(vertical: 17.w),
                 ),
                 child: Text(
-                  'Tassykla',
+                  'Ýatda sakla',
                   style: TextStyle(
                     color: AppTheme.WHITE,
                     fontSize: 18.sp,

@@ -203,43 +203,23 @@ class _CartAddressSelectBottomSheetWidgetState
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),
               padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '175 TMT',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '30-40 min',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppTheme.MAIN,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: AppTheme().buttonBorderRadius),
+                  padding: EdgeInsets.symmetric(vertical: 17.w),
+                ),
+                child: Text(
+                  'Salgyny saýla',
+                  style: TextStyle(
+                    color: AppTheme.WHITE,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w400,
                   ),
-                  CustomTextButton(
-                    text: 'Sargyt et',
-                    padding: EdgeInsets.symmetric(
-                        vertical: 17.w, horizontal: 0.2.sw),
-                    textStyle: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                    ),
-                    onPressed: () {
-                      _onCartAddressClicked();
-                    },
-                  ),
-                ],
+                ),
+                onPressed: () {},
               ),
             ),
           )
