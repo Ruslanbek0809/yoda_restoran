@@ -156,7 +156,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                               _isShrink ? Colors.transparent : AppTheme.WHITE,
                           // boxShadow: _isShrink
                           //     ? []
-                          //     : [AppTheme().buttonShadow], 
+                          //     : [AppTheme().buttonShadow],
                         ),
                         child: Material(
                           shape: CircleBorder(),
@@ -367,7 +367,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     tabs: foodCategoryList
                         .map<Widget>((category) => Tab(
                               child: AnimatedContainer(
-                                duration: Duration(milliseconds: 300),
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.easeInOut,
                                 decoration: BoxDecoration(
                                   borderRadius: AppTheme().buttonBorderRadius,
                                   color: activetab ==
@@ -420,7 +421,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear,
                       );
-                      Timer(Duration(milliseconds: 800), () {
+                      Timer(Duration(milliseconds: 1200), () {
                         setState(() {
                           isTabPressed = false;
                         });
