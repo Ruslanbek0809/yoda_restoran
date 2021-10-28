@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoda_res/screens/cart/cart_bottom_sheets/cart_address_select_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'cart_bottom_sheets.dart';
@@ -40,7 +41,7 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
   final TextEditingController _notesController = TextEditingController();
 
   void _onCartAddressClicked() {
-    cartAddressAddEditBottomSheet(context);
+    cartAddressSelectBottomSheet(context);
   }
 
   @override

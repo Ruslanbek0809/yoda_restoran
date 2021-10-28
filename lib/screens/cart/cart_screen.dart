@@ -70,7 +70,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-//// CartWidget
+//------------------ CARTWIDGET ---------------------//
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -96,41 +96,42 @@ class _CartScreenState extends State<CartScreen> {
                   color: AppTheme.DRAWER_DIVIDER,
                 ),
               ),
-//// Accessories Widget
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: SvgPicture.asset(
-                        'assets/forkKnife.svg',
-                        color: AppTheme.MAIN_DARK,
-                        width: 25.w,
-                      ),
-                    ),
-                    SizedBox(width: 15.w),
-                    Text(
-                      'Esbaplar',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: AppTheme.FONT_COLOR,
-                      ),
-                    ),
-                    Spacer(),
-                    CupertinoSwitch(
-                      activeColor: AppTheme.MAIN,
-                      trackColor: AppTheme.TOGGLE_COLOR,
-                      value: _switchValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _switchValue = value;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
+//------------------ ACCESSORIES ---------------------//
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 15.w),
+              //   child: Row(
+              //     children: [
+              //       GestureDetector(
+              //         onTap: () => Navigator.pop(context),
+              //         child: SvgPicture.asset(
+              //           'assets/forkKnife.svg',
+              //           color: AppTheme.MAIN_DARK,
+              //           width: 25.w,
+              //         ),
+              //       ),
+              //       SizedBox(width: 15.w),
+              //       Text(
+              //         'Esbaplar',
+              //         style: TextStyle(
+              //           fontSize: 18.sp,
+              //           color: AppTheme.FONT_COLOR,
+              //         ),
+              //       ),
+              //       Spacer(),
+              //       CupertinoSwitch(
+              //         activeColor: AppTheme.MAIN,
+              //         trackColor: AppTheme.TOGGLE_COLOR,
+              //         value: _switchValue,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             _switchValue = value;
+              //           });
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // ),
+//------------------ CARTFOODWIDGET ---------------------//
               Padding(
                 padding: EdgeInsets.only(
                     top: 15.w, bottom: 10.w, left: 15.w, right: 15.w),
@@ -143,7 +144,6 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-//// CartFoodList Widget
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
