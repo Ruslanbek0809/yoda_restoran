@@ -26,6 +26,7 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
   bool isCategoryFilterChecked = false;
   @override
   void initState() {
+    super.initState();
 //// Container bounce back
     _tweenController = AnimationController(
         duration: const Duration(milliseconds: 100), vsync: this)
@@ -36,7 +37,6 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
         }
       });
     isCategoryFilterChecked = isCategoryFilterChecked;
-    super.initState();
   }
 
   @override
