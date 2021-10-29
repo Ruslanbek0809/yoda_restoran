@@ -123,20 +123,35 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   ), // Text widget is used to make UI look alike Figma UI
                 ],
               ),
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text('Content row 2'),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text('Content row 2'),
-                  ],
-                ),
-              ],
+              children: orderList[pos]
+                  .foodList
+                  .map((orderFood) => Padding(
+                        padding: EdgeInsets.only(
+                          left: 30.w,
+                          bottom: 5.w,
+                          right: 15.w,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              orderFood.name,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                color: AppTheme.FONT_COLOR,
+                              ),
+                            ),
+                            Text(
+                              '1 x ${orderFood.price} TMT',
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                color: AppTheme.FONT_COLOR,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ))
+                  .toList(),
             ),
           );
         },
