@@ -52,17 +52,60 @@ class _OrdersScreenState extends State<OrdersScreen> {
         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.w),
         itemCount: orderList.length,
         itemBuilder: (context, pos) {
-          return ExpansionTile(
-            initiallyExpanded: false,
-            title: SizedBox(),
-            //// have to user SizedBox in leading
-            leading: SizedBox(
-              width: 0.7.sw,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          return Theme(
+            data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent,
+              dividerTheme: DividerThemeData(
+                  color: Theme.of(context).colorScheme.background),
+            ),
+            child: ExpansionTile(
+              initiallyExpanded: false,
+              title: SizedBox(),
+              onExpansionChanged: (value) {
+                printLog('onExpansionChanged()');
+              },
+              //// have to user SizedBox in leading
+              leading: SizedBox(
+                width: 0.7.sw,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      orderList[pos].restaurantName,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.FONT_COLOR,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 5.w),
+                    //------------------ DATE and STATUS ---------------------//
+                    Row(
+                      children: [
+                        Text(
+                          '9 Ýanwar, 2021',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                        Text(
+                          ' - ${orderList[pos].orderStatus.name}',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: AppTheme.STATUS_COLOR,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              trailing: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    orderList[pos].restaurantName,
+                    orderList[pos].orderPrice.toString() + ' TMT',
                     style: TextStyle(
                       fontSize: 18.sp,
                       color: AppTheme.FONT_COLOR,
@@ -70,64 +113,31 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     ),
                   ),
                   SizedBox(height: 5.w),
-                  //------------------ DATE and STATUS ---------------------//
-                  Row(
-                    children: [
-                      Text(
-                        '9 Ýanwar, 2021',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.FONT_COLOR,
-                        ),
-                      ),
-                      Text(
-                        ' - ${orderList[pos].orderStatus.name}',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.STATUS_COLOR,
-                        ),
-                      ),
-                    ],
-                  ),
+                  Text(
+                    orderList[pos].orderPrice.toString() + ' TMT',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      color: Colors.transparent,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ), // Text widget is used to make UI look alike Figma UI
                 ],
               ),
-            ),
-            trailing: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  orderList[pos].orderPrice.toString() + ' TMT',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    color: AppTheme.FONT_COLOR,
-                    fontWeight: FontWeight.w600,
-                  ),
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Content row 2'),
+                  ],
                 ),
-                SizedBox(height: 5.w),
-                Text(
-                  orderList[pos].orderPrice.toString() + ' TMT',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    color: Colors.transparent,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ), // Text widget is used to make UI look alike Figma UI
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Content row 2'),
+                  ],
+                ),
               ],
             ),
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text('Content row 2'),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text('Content row 2'),
-                ],
-              ),
-            ],
           );
         },
         separatorBuilder: (context, index) {
