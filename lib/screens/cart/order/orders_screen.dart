@@ -52,165 +52,159 @@ class _OrdersScreenState extends State<OrdersScreen> {
         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.w),
         itemCount: orderList.length,
         itemBuilder: (context, pos) {
-          return Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 5.w, bottom: 5.w),
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                    dividerColor: Colors.transparent,
-                    dividerTheme: DividerThemeData(
-                        color: Theme.of(context).colorScheme.background),
-                  ),
-                  child: ExpansionTile(
-                    initiallyExpanded: false,
-                    title: SizedBox(),
-                    onExpansionChanged: (value) {
-                      printLog('onExpansionChanged()');
-                    },
-                    //// have to user SizedBox in leading
-                    leading: SizedBox(
-                      width: 0.7.sw,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          return Padding(
+            padding: EdgeInsets.only(top: 5.w),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                dividerColor: Colors.transparent,
+                dividerTheme: DividerThemeData(
+                    color: Theme.of(context).colorScheme.background),
+              ),
+              child: ExpansionTile(
+                initiallyExpanded: false,
+                title: SizedBox(),
+                onExpansionChanged: (value) {
+                  printLog('onExpansionChanged()');
+                },
+                //// have to user SizedBox in leading
+                leading: SizedBox(
+                  width: 0.7.sw,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        orderList[pos].restaurantName,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          color: AppTheme.FONT_COLOR,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 5.w),
+                      //------------------ DATE and STATUS ---------------------//
+                      Row(
                         children: [
                           Text(
-                            orderList[pos].restaurantName,
+                            '9 Ýanwar, 2021',
                             style: TextStyle(
-                              fontSize: 18.sp,
+                              fontSize: 14.sp,
                               color: AppTheme.FONT_COLOR,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 5.w),
-                          //------------------ DATE and STATUS ---------------------//
-                          Row(
-                            children: [
-                              Text(
-                                '9 Ýanwar, 2021',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: AppTheme.FONT_COLOR,
-                                ),
-                              ),
-                              Text(
-                                ' - ${orderList[pos].orderStatus.name}',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: AppTheme.STATUS_COLOR,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            ' - ${orderList[pos].orderStatus.name}',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppTheme.STATUS_COLOR,
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    trailing: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          orderList[pos].orderPrice.toString() + ' TMT',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppTheme.FONT_COLOR,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(height: 5.w),
-                        Text(
-                          orderList[pos].orderPrice.toString() + ' TMT',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: Colors.transparent,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ), // Text widget is used to make UI look alike Figma UI
-                      ],
-                    ),
-                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        children: orderList[pos]
-                            .foodList
-                            .map((orderFood) => Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 30.w,
-                                    bottom: 5.w,
-                                    right: 15.w,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        orderFood.name,
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          color: AppTheme.FONT_COLOR,
-                                        ),
-                                      ),
-                                      Text(
-                                        '1 x ${orderFood.price} TMT',
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: AppTheme.FONT_COLOR,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ))
-                            .toList(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 30.w, bottom: 5.w),
-                        child: Text(
-                          '+ Ajy sos',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: AppTheme.DRAWER_ICON,
-                          ),
-                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 1.sw,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppTheme.MAIN_DARK,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().containerRadius),
-                      padding: EdgeInsets.symmetric(vertical: 11.w),
-                    ),
-                    child: Text(
-                      'Salgyny saýla',
+                trailing: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      orderList[pos].orderPrice.toString() + ' TMT',
                       style: TextStyle(
-                        color: AppTheme.WHITE,
                         fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
+                        color: AppTheme.FONT_COLOR,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(RouteList.orders);
-                    },
-                  ),
+                    SizedBox(height: 5.w),
+                    Text(
+                      orderList[pos].orderPrice.toString() + ' TMT',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: Colors.transparent,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ), // Text widget is used to make UI look alike Figma UI
+                  ],
                 ),
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Column(
+                    children: orderList[pos]
+                        .foodList
+                        .map((orderFood) => Padding(
+                              padding: EdgeInsets.only(
+                                left: 35.w,
+                                bottom: 5.w,
+                                right: 15.w,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    orderFood.name,
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                  Text(
+                                    '1 x ${orderFood.price} TMT',
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 35.w, bottom: 5.w),
+                    child: Text(
+                      '+ Ajy sos',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 1.sw,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.w, vertical: 10.w),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: AppTheme.MAIN_DARK,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: AppTheme().containerRadius),
+                          padding: EdgeInsets.symmetric(vertical: 12.w),
+                        ),
+                        child: Text(
+                          'Salgyny saýla',
+                          style: TextStyle(
+                            color: AppTheme.WHITE,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(RouteList.orders);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           );
         },
         separatorBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.w),
-            child: Divider(
-              thickness: 1,
-              color: AppTheme.DRAWER_DIVIDER,
-            ),
+          return Divider(
+            thickness: 1,
+            color: AppTheme.DRAWER_DIVIDER,
           );
         },
       ),
