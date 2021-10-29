@@ -66,9 +66,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 onExpansionChanged: (value) {
                   printLog('onExpansionChanged()');
                 },
-                //// have to user SizedBox in leading
+                //// have to use SizedBox in leading bc of tileWidth issue
                 leading: SizedBox(
                   width: 0.7.sw,
+                  // height: orderList[pos].orderStatus.id == 3 ? 0.2.sw : 0.15.sw,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -100,6 +101,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           ),
                         ],
                       ),
+                      // if (orderList[pos].orderStatus.id == 3)
+                      //   Text(
+                      //     'Sürüji: Sultan +993 64 687171',
+                      //     style: TextStyle(
+                      //       fontSize: 14.sp,
+                      //       color: AppTheme.STATUS_COLOR,
+                      //     ),
+                      //   ),
                     ],
                   ),
                 ),
@@ -183,16 +192,18 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           padding: EdgeInsets.symmetric(vertical: 12.w),
                         ),
                         child: Text(
-                          'Salgyny saýla',
+                          orderList[pos].orderStatus.id == 3
+                              ? 'Sürüji: Sultan +993 64 687171'
+                              : orderList[pos].orderStatus.id == 4
+                                  ? 'Täzeden sargyt et'
+                                  : 'Sargydy ýatyr',
                           style: TextStyle(
                             color: AppTheme.WHITE,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(RouteList.orders);
-                        },
+                        onPressed: () {},
                       ),
                     ),
                   ),

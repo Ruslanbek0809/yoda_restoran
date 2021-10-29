@@ -219,9 +219,8 @@ class _CartAddressSelectBottomSheetWidgetState
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(RouteList.orders);
-                },
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(RouteList.orders),
               ),
             ),
           )
