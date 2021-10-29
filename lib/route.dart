@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/screens/profile/profile.dart';
-
 import 'screens/cart/cart.dart';
+import 'screens/cart/order/order.dart';
 import 'screens/home/home.dart';
 import 'utils/utils.dart';
 
@@ -15,6 +15,7 @@ class Routes {
     RouteList.home: (context) => HomeScreen(),
     // RouteList.register: (context) => RegistrationScreen(),
     RouteList.cart: (context) => CartScreen(),
+    RouteList.orders: (context) => OrdersScreen(),
     RouteList.profile: (context) => ProfileScreen(),
     RouteList.contact: (context) => ContactUsScreen(),
   };
