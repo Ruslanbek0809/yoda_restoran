@@ -174,18 +174,18 @@ List<FoodCategory> foodCategoryList = [
   FoodCategory(4, 'Burgerlar'),
 ];
 
-List<FoodModel> foodList = [
-  FoodModel(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
+List<Food> foodList = [
+  Food(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
-  FoodModel(0, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
+  Food(1, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
-  FoodModel(0, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
+  Food(2, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),

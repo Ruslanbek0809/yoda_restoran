@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
 import 'cart_bottom_sheets.dart';
 
 void cartAddressSelectBottomSheet(BuildContext context) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
+    isDismissible: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(Constants.BORDER_RADIUS_20),

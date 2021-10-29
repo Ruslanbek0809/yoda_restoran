@@ -1,7 +1,9 @@
 export 'home_category.dart';
 export 'restaurant.dart';
 export 'food_category.dart';
-export 'food_model.dart';
+export 'food.dart';
 export 'discount.dart';
 export 'category_filter.dart';
 export 'address.dart';
+export 'order.dart';
+export 'order_status.dart';

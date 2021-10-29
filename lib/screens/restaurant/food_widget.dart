@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/models/food_model.dart';
+import 'package:yoda_res/models/food.dart';
 import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FoodWidget extends StatefulWidget {
-  final FoodModel food;
+  final Food food;
   final AnimationController animationController;
   const FoodWidget(
       {Key? key, required this.animationController, required this.food})
@@ -20,7 +20,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
 
-  late FoodModel food;
+  late Food food;
   bool isButtonToggled = false;
 
   @override
@@ -44,7 +44,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _onProductBottomSheetClicked(FoodModel food) {
+  void _onProductBottomSheetClicked(Food food) {
     showFoodBottomSheet(context, food);
   }
 
