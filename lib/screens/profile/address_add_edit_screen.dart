@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class AddressAddEditScreen extends StatefulWidget {
   @override
-  _AddressAddEditScreenState createState() =>
-      _AddressAddEditScreenState();
+  _AddressAddEditScreenState createState() => _AddressAddEditScreenState();
 }
 
-class _AddressAddEditScreenState
-    extends State<AddressAddEditScreen>
+class _AddressAddEditScreenState extends State<AddressAddEditScreen>
     with SingleTickerProviderStateMixin {
   bool _isLoading = false;
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
@@ -59,220 +56,212 @@ class _AddressAddEditScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 0.7.sh,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-            top: Radius.circular(Constants.BORDER_RADIUS_20)),
-        color: Colors.transparent,
-      ),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(Constants.BORDER_RADIUS_20),
-              ),
-              color: Colors.transparent,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppTheme.WHITE,
+        elevation: 1,
+        leadingWidth: 35.w,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10.w),
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: AppTheme.FONT_COLOR,
+              size: 25.w,
             ),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // --------------- BOTTOM SHEET DRAGGER -------------- //
-                  SizedBox(
-                    height: 17.5.w,
-                    width: 40.w,
-                    child: SvgPicture.asset(
-                      'assets/bottom_sheet_dragger.svg',
-                      color: AppTheme.WHITE,
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(Constants.BORDER_RADIUS_20),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        centerTitle: true,
+        title: Text(
+          'Salgylar',
+          style: TextStyle(
+            color: AppTheme.MAIN_DARK,
+            fontSize: 22.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Form(
+                  key: _cartAddressformKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // --------------- CITY -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.w),
+                        child: Text(
+                          'Şäher',
+                          style: TextStyle(
+                              fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                        ),
                       ),
-                      color: AppTheme.WHITE,
-                    ),
-                    padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 50.w),
-                    child: Form(
-                      key: _cartAddressformKey,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      TextFormField(
+                        controller: _cityController,
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          ),
+                          hintText: 'Aşgabat',
+                          hintStyle: TextStyle(
+                              fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+                        ),
+                        focusNode: _cityFocus,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Şäheri giriziň';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10.w),
+                      // --------------- STREET -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.w, top: 15.w),
+                        child: Text(
+                          'Köçe',
+                          style: TextStyle(
+                              fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _streetController,
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          ),
+                          hintText: 'A.Nowaýy 23, 64',
+                          hintStyle: TextStyle(
+                              fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+                        ),
+                        focusNode: _streetFocus,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Köçäni giriziň';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 15.w),
+                      // --------------- APARTMENT/HOUSE/FLOOR -------------- //
+                      Row(
                         children: [
-                          // --------------- CITY -------------- //
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: Text(
-                              'Şäher',
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
-                            ),
-                          ),
-                          TextFormField(
-                            controller: _cityController,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                              ),
-                              hintText: 'Aşgabat',
-                              hintStyle: TextStyle(
-                                  fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
-                            ),
-                            focusNode: _cityFocus,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Şäheri giriziň';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10.w),
-                          // --------------- STREET -------------- //
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w, top: 15.w),
-                            child: Text(
-                              'Köçe',
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
-                            ),
-                          ),
-                          TextFormField(
-                            controller: _streetController,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                              ),
-                              hintText: 'A.Nowaýy 23, 64',
-                              hintStyle: TextStyle(
-                                  fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
-                            ),
-                            focusNode: _streetFocus,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Köçäni giriziň';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 15.w),
-                          // --------------- APARTMENT/HOUSE/FLOOR -------------- //
-                          Row(
-                            children: [
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _apartmentController,
-                                  keyboardType: TextInputType.number,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppTheme.DRAWER_DIVIDER,
-                                          width: 0.5),
-                                    ),
-                                    labelText: 'Jaý',
-                                    labelStyle: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: AppTheme.DRAWER_ICON),
-                                  ),
-                                  focusNode: _apartmentFocus,
-                                  validator: (value) {
-                                    return null;
-                                  },
+                          Flexible(
+                            child: TextFormField(
+                              controller: _apartmentController,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.DRAWER_DIVIDER,
+                                      width: 0.5),
                                 ),
+                                labelText: 'Jaý',
+                                labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppTheme.DRAWER_ICON),
                               ),
-                              SizedBox(width: 10),
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _houseController,
-                                  keyboardType: TextInputType.number,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppTheme.DRAWER_DIVIDER,
-                                          width: 0.5),
-                                    ),
-                                    labelText: 'Otag',
-                                    labelStyle: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: AppTheme.DRAWER_ICON),
-                                  ),
-                                  focusNode: _houseFocus,
-                                  validator: (value) {
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _floorController,
-                                  keyboardType: TextInputType.number,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppTheme.DRAWER_DIVIDER,
-                                          width: 0.5),
-                                    ),
-                                    labelText: 'Gat',
-                                    labelStyle: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: AppTheme.DRAWER_ICON),
-                                  ),
-                                  focusNode: _floorFocus,
-                                  validator: (value) {
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Flexible(child: SizedBox())
-                            ],
-                          ),
-                          // --------------- NOTE -------------- //
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w, top: 15.w),
-                            child: Text(
-                              'Bellik',
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                              focusNode: _apartmentFocus,
+                              validator: (value) {
+                                return null;
+                              },
                             ),
                           ),
-                          SizedBox(height: 5.w),
-                          TextFormField(
-                            controller: _notesController,
-                            maxLines: 5,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.done,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: AppTheme().containerRadius,
-                                borderSide: BorderSide.none,
+                          SizedBox(width: 10),
+                          Flexible(
+                            child: TextFormField(
+                              controller: _houseController,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.DRAWER_DIVIDER,
+                                      width: 0.5),
+                                ),
+                                labelText: 'Otag',
+                                labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppTheme.DRAWER_ICON),
                               ),
-                              filled: true,
-                              fillColor: AppTheme.MAIN_LIGHT,
+                              focusNode: _houseFocus,
+                              validator: (value) {
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              return null;
-                            },
                           ),
+                          SizedBox(width: 10),
+                          Flexible(
+                            child: TextFormField(
+                              controller: _floorController,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.DRAWER_DIVIDER,
+                                      width: 0.5),
+                                ),
+                                labelText: 'Gat',
+                                labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppTheme.DRAWER_ICON),
+                              ),
+                              focusNode: _floorFocus,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                          ),
+                          Flexible(child: SizedBox())
                         ],
                       ),
-                    ),
+                      // --------------- NOTE -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.w, top: 15.w),
+                        child: Text(
+                          'Bellik',
+                          style: TextStyle(
+                              fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                        ),
+                      ),
+                      SizedBox(height: 5.w),
+                      TextFormField(
+                        controller: _notesController,
+                        maxLines: 5,
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.done,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: AppTheme().containerRadius,
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: AppTheme.MAIN_LIGHT,
+                        ),
+                        validator: (value) {
+                          return null;
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           //--------------- FILTER BUTTONS -------------- //
@@ -281,30 +270,45 @@ class _AddressAddEditScreenState
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
-                color: AppTheme.WHITE,
-                border:
-                    Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-              ),
-              padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: AppTheme.MAIN,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppTheme().buttonBorderRadius),
-                  padding: EdgeInsets.symmetric(vertical: 17.w),
-                ),
-                child: Text(
-                  'Ýatda sakla',
-                  style: TextStyle(
-                    color: AppTheme.WHITE,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w400,
+              color: AppTheme.WHITE,
+              padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
+              child: Column(
+                children: [
+                  TextButton(
+                    child: Text(
+                      'Salgyny aýyr',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
+                    ),
+                    onPressed: () async => await Navigator.pushReplacementNamed(
+                        context, RouteList.home),
                   ),
-                ),
-                        onPressed: () => Navigator.of(context)
-                            .pushReplacementNamed(RouteList.addresses),
+                  SizedBox(height: 15.w),
+                  SizedBox(
+                    width: 1.sw,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: AppTheme.MAIN,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: AppTheme().containerRadius),
+                        padding: EdgeInsets.symmetric(vertical: 15.w),
+                      ),
+                      child: Text(
+                        'Salgyny goş',
+                        style: TextStyle(
+                          color: AppTheme.WHITE,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onPressed: () =>
+                          Navigator.of(context).popAndPushNamed(RouteList.home),
+                    ),
+                  ),
+                ],
               ),
             ),
           )

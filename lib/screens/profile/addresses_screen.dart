@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -106,53 +105,3 @@ class _AddressesScreenState extends State<AddressesScreen>
     );
   }
 }
-
- //--------------- FILTER BUTTONS -------------- //
-            // Positioned(
-            //   bottom: 0,
-            //   left: 0,
-            //   right: 0,
-            //   child: Container(
-            //     color: AppTheme.WHITE,
-            //     padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
-            //     child: Column(
-            //       children: [
-            //         TextButton(
-            //           child: Text(
-            //             'Salgyny aýyr',
-            //             style: TextStyle(
-            //               fontSize: 18.sp,
-            //               color: AppTheme.FONT_COLOR,
-            //             ),
-            //           ),
-            //           onPressed: () async =>
-            //               await Navigator.pushReplacementNamed(
-            //                   context, RouteList.home),
-            //         ),
-            //         SizedBox(height: 15.w),
-            //         SizedBox(
-            //           width: 1.sw,
-            //           child: TextButton(
-            //             style: TextButton.styleFrom(
-            //               backgroundColor: AppTheme.MAIN,
-            //               elevation: 0,
-            //               shape: RoundedRectangleBorder(
-            //                   borderRadius: AppTheme().containerRadius),
-            //               padding: EdgeInsets.symmetric(vertical: 15.w),
-            //             ),
-            //             child: Text(
-            //               'Salgyny goş',
-            //               style: TextStyle(
-            //                 color: AppTheme.WHITE,
-            //                 fontSize: 18.sp,
-            //                 fontWeight: FontWeight.w600,
-            //               ),
-            //             ),
-            //             onPressed: () => Navigator.of(context)
-            //                 .popAndPushNamed(RouteList.home),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // )
