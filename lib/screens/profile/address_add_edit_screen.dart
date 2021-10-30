@@ -57,6 +57,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: AppTheme.WHITE,
         elevation: 1,
@@ -74,7 +75,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
         ),
         centerTitle: true,
         title: Text(
-          'Salgylar',
+          'Salgy',
           style: TextStyle(
             color: AppTheme.MAIN_DARK,
             fontSize: 22.sp,
@@ -97,7 +98,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                     children: [
                       // --------------- CITY -------------- //
                       Padding(
-                        padding: EdgeInsets.only(left: 5.w),
+                        padding: EdgeInsets.only(top: 10.w),
                         child: Text(
                           'Şäher',
                           style: TextStyle(
@@ -112,6 +113,10 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.FONT_COLOR, width: 0.5),
                           ),
                           hintText: 'Aşgabat',
                           hintStyle: TextStyle(
@@ -128,7 +133,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                       SizedBox(height: 10.w),
                       // --------------- STREET -------------- //
                       Padding(
-                        padding: EdgeInsets.only(left: 5.w, top: 15.w),
+                        padding: EdgeInsets.only(top: 15.w),
                         child: Text(
                           'Köçe',
                           style: TextStyle(
@@ -143,6 +148,10 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppTheme.FONT_COLOR, width: 0.5),
                           ),
                           hintText: 'A.Nowaýy 23, 64',
                           hintStyle: TextStyle(
@@ -171,9 +180,13 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                                       color: AppTheme.DRAWER_DIVIDER,
                                       width: 0.5),
                                 ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.FONT_COLOR, width: 0.5),
+                                ),
                                 labelText: 'Jaý',
                                 labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 18.sp,
                                     color: AppTheme.DRAWER_ICON),
                               ),
                               focusNode: _apartmentFocus,
@@ -194,9 +207,13 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                                       color: AppTheme.DRAWER_DIVIDER,
                                       width: 0.5),
                                 ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.FONT_COLOR, width: 0.5),
+                                ),
                                 labelText: 'Otag',
                                 labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 18.sp,
                                     color: AppTheme.DRAWER_ICON),
                               ),
                               focusNode: _houseFocus,
@@ -217,9 +234,13 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                                       color: AppTheme.DRAWER_DIVIDER,
                                       width: 0.5),
                                 ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppTheme.FONT_COLOR, width: 0.5),
+                                ),
                                 labelText: 'Gat',
                                 labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 18.sp,
                                     color: AppTheme.DRAWER_ICON),
                               ),
                               focusNode: _floorFocus,
@@ -233,17 +254,17 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                       ),
                       // --------------- NOTE -------------- //
                       Padding(
-                        padding: EdgeInsets.only(left: 5.w, top: 15.w),
+                        padding: EdgeInsets.only(top: 20.w),
                         child: Text(
                           'Bellik',
                           style: TextStyle(
                               fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
                         ),
                       ),
-                      SizedBox(height: 5.w),
+                      SizedBox(height: 7.w),
                       TextFormField(
                         controller: _notesController,
-                        maxLines: 5,
+                        maxLines: 6,
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
@@ -282,8 +303,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                         color: AppTheme.FONT_COLOR,
                       ),
                     ),
-                    onPressed: () async => await Navigator.pushReplacementNamed(
-                        context, RouteList.home),
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                   SizedBox(height: 15.w),
                   SizedBox(
@@ -304,8 +324,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      onPressed: () =>
-                          Navigator.of(context).popAndPushNamed(RouteList.home),
+                      onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),
                 ],
