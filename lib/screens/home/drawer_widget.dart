@@ -24,14 +24,15 @@ class DrawerWidget extends StatelessWidget {
         {
           title = 'Sargytlar';
           svgName = 'assets/list_bullets.svg';
-          onTap = () async {};
+          onTap = () {};
           break;
         }
       case 'addresses':
         {
           title = 'Salgylar';
           svgName = 'assets/map_pin.svg';
-          onTap = () async {};
+          onTap = () async => await Navigator.pushReplacementNamed(
+              context, RouteList.addresses);
           break;
         }
       case 'about':

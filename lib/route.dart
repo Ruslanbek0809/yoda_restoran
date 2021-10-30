@@ -18,6 +18,8 @@ class Routes {
     RouteList.orders: (context) => OrdersScreen(),
     RouteList.orderSuccess: (context) => OrderSuccessScreen(),
     RouteList.profile: (context) => ProfileScreen(),
+    RouteList.addresses: (context) => AddressesScreen(),
+    RouteList.addressAddEdit: (context) => AddressAddEditScreen(),
     RouteList.contact: (context) => ContactUsScreen(),
   };
 
