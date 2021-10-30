@@ -203,7 +203,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context)
+                            .pushNamed(RouteList.orderSuccess),
                       ),
                     ),
                   ),

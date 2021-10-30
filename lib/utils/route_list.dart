@@ -7,6 +7,7 @@ class RouteList {
 
   // Order
   static const String orders = '/orders';
+  static const String orderSuccess = '/orderSuccess';
 
   // Profile
   static const String profile = '/profile';

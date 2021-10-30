@@ -16,6 +16,7 @@ class Routes {
     // RouteList.register: (context) => RegistrationScreen(),
     RouteList.cart: (context) => CartScreen(),
     RouteList.orders: (context) => OrdersScreen(),
+    RouteList.orderSuccess: (context) => OrdersScreen(),
     RouteList.profile: (context) => ProfileScreen(),
     RouteList.contact: (context) => ContactUsScreen(),
   };
