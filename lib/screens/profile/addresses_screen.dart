@@ -35,7 +35,7 @@ class _AddressesScreenState extends State<AddressesScreen>
               icon: Icon(
                 Icons.arrow_back,
                 color: AppTheme.FONT_COLOR,
-                size: 25,
+                size: 25.w,
               ),
               onPressed: () => Navigator.pop(context),
             ),
@@ -50,112 +50,109 @@ class _AddressesScreenState extends State<AddressesScreen>
             ),
           ),
         ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      children: addresses
-                          .map(
-                            (address) => Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    address.name,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10.w),
-                                  Divider(color: AppTheme.DRAWER_DIVIDER)
-                                ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: addresses
+                      .map(
+                        (address) => Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                address.name,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  color: AppTheme.FONT_COLOR,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
-                  Material(
-                    color: AppTheme.WHITE,
-                    child: InkWell(
-                      onTap: () async => await Navigator.pushNamed(
-                          context, RouteList.addressAddEdit),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.w),
-                        child: Text(
-                          'Täze salgy goş...',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppTheme.FONT_COLOR,
+                              SizedBox(height: 10.w),
+                              Divider(color: AppTheme.DRAWER_DIVIDER)
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5.w),
-                  Divider(color: AppTheme.DRAWER_DIVIDER)
-                ],
-              ),
-            ),
-            //--------------- FILTER BUTTONS -------------- //
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                color: AppTheme.WHITE,
-                padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
-                child: Column(
-                  children: [
-                    TextButton(
+                      )
+                      .toList(),
+                ),
+                Material(
+                  color: AppTheme.WHITE,
+                  child: InkWell(
+                    onTap: () async => await Navigator.pushNamed(
+                        context, RouteList.addressAddEdit),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.w),
                       child: Text(
-                        'Salgyny aýyr',
+                        'Täze salgy goş...',
                         style: TextStyle(
                           fontSize: 18.sp,
                           color: AppTheme.FONT_COLOR,
                         ),
                       ),
-                      onPressed: () async =>
-                          await Navigator.pushReplacementNamed(
-                              context, RouteList.home),
                     ),
-                    SizedBox(height: 15.w),
-                    SizedBox(
-                      width: 1.sw,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppTheme.MAIN,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: AppTheme().containerRadius),
-                          padding: EdgeInsets.symmetric(vertical: 15.w),
-                        ),
-                        child: Text(
-                          'Salgyny goş',
-                          style: TextStyle(
-                            color: AppTheme.WHITE,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: () => Navigator.of(context)
-                            .popAndPushNamed(RouteList.home),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            )
-          ],
+                SizedBox(height: 5.w),
+                Divider(color: AppTheme.DRAWER_DIVIDER)
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 }
+
+ //--------------- FILTER BUTTONS -------------- //
+            // Positioned(
+            //   bottom: 0,
+            //   left: 0,
+            //   right: 0,
+            //   child: Container(
+            //     color: AppTheme.WHITE,
+            //     padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
+            //     child: Column(
+            //       children: [
+            //         TextButton(
+            //           child: Text(
+            //             'Salgyny aýyr',
+            //             style: TextStyle(
+            //               fontSize: 18.sp,
+            //               color: AppTheme.FONT_COLOR,
+            //             ),
+            //           ),
+            //           onPressed: () async =>
+            //               await Navigator.pushReplacementNamed(
+            //                   context, RouteList.home),
+            //         ),
+            //         SizedBox(height: 15.w),
+            //         SizedBox(
+            //           width: 1.sw,
+            //           child: TextButton(
+            //             style: TextButton.styleFrom(
+            //               backgroundColor: AppTheme.MAIN,
+            //               elevation: 0,
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: AppTheme().containerRadius),
+            //               padding: EdgeInsets.symmetric(vertical: 15.w),
+            //             ),
+            //             child: Text(
+            //               'Salgyny goş',
+            //               style: TextStyle(
+            //                 color: AppTheme.WHITE,
+            //                 fontSize: 18.sp,
+            //                 fontWeight: FontWeight.w600,
+            //               ),
+            //             ),
+            //             onPressed: () => Navigator.of(context)
+            //                 .popAndPushNamed(RouteList.home),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // )

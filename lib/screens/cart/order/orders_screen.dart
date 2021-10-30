@@ -32,7 +32,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             icon: Icon(
               Icons.arrow_back,
               color: AppTheme.FONT_COLOR,
-              size: 25,
+              size: 25.w,
             ),
             onPressed: () => Navigator.pop(context),
           ),
