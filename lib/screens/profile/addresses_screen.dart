@@ -52,95 +52,57 @@ class _AddressesScreenState extends State<AddressesScreen>
         ),
         body: Stack(
           children: [
-            Column(
-              children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: addresses
-                        .map(
-                          (address) => Column(
-                            children: [
-                              Material(
-                                color: AppTheme.WHITE,
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedAddressID = address.id;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 5.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/checkCircle.svg',
-                                              color: selectedAddressID ==
-                                                      address.id
-                                                  ? AppTheme.GREEN
-                                                  : Colors.white,
-                                              width: 25.w,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            Text(
-                                              address.name,
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/addressFilter.svg',
-                                          color: AppTheme.MAIN_DARK,
-                                          width: 25.w,
-                                        ),
-                                      ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      children: addresses
+                          .map(
+                            (address) => Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    address.name,
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: AppTheme.FONT_COLOR,
                                     ),
                                   ),
-                                ),
+                                  SizedBox(height: 10.w),
+                                  Divider(color: AppTheme.DRAWER_DIVIDER)
+                                ],
                               ),
-                              Divider(color: AppTheme.DRAWER_DIVIDER)
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-                Material(
-                  color: AppTheme.WHITE,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.w),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: AppTheme.FONT_COLOR,
-                            size: 25.w,
-                          ),
-                          SizedBox(width: 10.w),
-                          Text(
-                            'Täze salgy goş...',
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              color: AppTheme.FONT_COLOR,
                             ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  Material(
+                    color: AppTheme.WHITE,
+                    child: InkWell(
+                      onTap: () async => await Navigator.pushNamed(
+                          context, RouteList.addressAddEdit),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.w),
+                        child: Text(
+                          'Täze salgy goş...',
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: AppTheme.FONT_COLOR,
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  SizedBox(height: 5.w),
+                  Divider(color: AppTheme.DRAWER_DIVIDER)
+                ],
+              ),
             ),
             //--------------- FILTER BUTTONS -------------- //
             Positioned(
