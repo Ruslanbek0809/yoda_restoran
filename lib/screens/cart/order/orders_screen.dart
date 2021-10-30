@@ -39,7 +39,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         ),
         centerTitle: true,
         title: Text(
-          'Sargytlar',
+          'Sargytlarym',
           style: TextStyle(
             color: AppTheme.MAIN_DARK,
             fontSize: 22.sp,
