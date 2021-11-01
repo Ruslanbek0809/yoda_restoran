@@ -187,6 +187,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               size: 25.w,
             ),
           ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 5.w),
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Ulgamdan çyk',
+                  style: TextStyle(
+                    color: AppTheme.FONT_COLOR,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         body: Container(
           decoration: BoxDecoration(
