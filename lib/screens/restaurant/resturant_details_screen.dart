@@ -402,12 +402,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 child: Text(
                                   category.name,
                                   style: TextStyle(
-                                    color: activetab ==
-                                            foodCategoryList.indexOf(category)
-                                        ? isTabPressed
-                                            ? AppTheme.FONT_COLOR
-                                            : AppTheme.DRAWER_ICON
-                                        : AppTheme.DRAWER_ICON,
+                                    color: AppTheme.FONT_COLOR,
                                     fontSize: 14.sp,
                                   ),
                                 ),

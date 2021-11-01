@@ -15,7 +15,7 @@ void restaurantInfoBottomSheet(BuildContext context) {
     backgroundColor: Colors.transparent,
     context: context,
     builder: (ctx) => DraggableScrollableSheet(
-      initialChildSize: 0.45,
+      initialChildSize: 0.47,
       maxChildSize: 0.95,
       builder: (context, scrollController) => RestaurantInfoBottomSheetWidget(
         scrollController,
@@ -36,51 +36,6 @@ class RestaurantInfoBottomSheetWidget extends StatefulWidget {
 class _RestaurantInfoBottomSheetWidgetState
     extends State<RestaurantInfoBottomSheetWidget>
     with SingleTickerProviderStateMixin {
-  bool _isLoading = false;
-  final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _apartmentController = TextEditingController();
-  final TextEditingController _houseController = TextEditingController();
-  final TextEditingController _floorController = TextEditingController();
-  final TextEditingController _notesController = TextEditingController();
-  final FocusNode _cityFocus = FocusNode();
-  final FocusNode _streetFocus = FocusNode();
-  final FocusNode _apartmentFocus = FocusNode();
-  final FocusNode _houseFocus = FocusNode();
-  final FocusNode _floorFocus = FocusNode();
-  final FocusNode _notesFocus = FocusNode();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    _cityController.dispose();
-    _streetController.dispose();
-    _apartmentController.dispose();
-    _houseController.dispose();
-    _floorController.dispose();
-    _notesController.dispose();
-    _cityFocus.dispose();
-    _streetFocus.dispose();
-    _apartmentFocus.dispose();
-    _houseFocus.dispose();
-    _floorFocus.dispose();
-    _notesFocus.dispose();
-    super.dispose();
-  }
-
-  Future _onConfirmButtonPressed() async {
-    setState(() {
-      _isLoading = true;
-    });
-    if (_cartAddressformKey.currentState!.validate()) {
-      printLog('_contactformKey validated');
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,7 +54,7 @@ class _RestaurantInfoBottomSheetWidgetState
           children: [
             // --------------- BOTTOM SHEET DRAGGER -------------- //
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.w),
+              padding: EdgeInsets.symmetric(vertical: 15.w),
               child: SvgPicture.asset(
                 'assets/bottom_sheet_dragger.svg',
                 color: AppTheme.MAIN_LIGHT,
@@ -114,7 +69,7 @@ class _RestaurantInfoBottomSheetWidgetState
                 ),
                 color: AppTheme.WHITE,
               ),
-              padding: EdgeInsets.fromLTRB(16.w, 20.w, 16.w, 50.w),
+              padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 45.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
