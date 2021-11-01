@@ -68,7 +68,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             ),
           ),
           title: Text(
-            'Biz bilen habarlaş',
+            'Biz bilen habarlaşyň',
             style: TextStyle(
               color: AppTheme.MAIN_DARK,
             ),
@@ -81,7 +81,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             key: _contactformKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 50.w),
                 TextFormField(
@@ -89,6 +89,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(12, 17, 12, 17),
                     border: UnderlineInputBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
@@ -124,6 +125,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(12, 17, 12, 17),
                     border: UnderlineInputBorder(
                       // borderRadius: AppTheme().containerRadius,
                       borderSide: BorderSide(
@@ -149,7 +151,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ),
                 TextFormField(
                   controller: _infoController,
-                  maxLines: 11,
+                  maxLines: 10,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
@@ -189,6 +191,33 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       bottomRight: Radius.circular(10.0),
                     ),
                     onPressed: _onContactPressed,
+                  ),
+                ),
+                SizedBox(height: 0.35.sw),
+                Text(
+                  'Telefon: +99363 687171',
+                  style: TextStyle(
+                    color: AppTheme.CONTACT_DIVIDER,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 2.w),
+                Text(
+                  'Salgy: G.Kulyýew köç.29 (Rowana), 2-nji gat',
+                  style: TextStyle(
+                    color: AppTheme.CONTACT_DIVIDER,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 2.w),
+                Text(
+                  'Instagram: @yoda.restoran',
+                  style: TextStyle(
+                    color: AppTheme.CONTACT_DIVIDER,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
