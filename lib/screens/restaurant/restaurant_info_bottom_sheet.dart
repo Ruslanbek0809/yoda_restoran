@@ -16,7 +16,7 @@ void restaurantInfoBottomSheet(BuildContext context) {
     context: context,
     builder: (ctx) => DraggableScrollableSheet(
       initialChildSize: 0.45,
-      maxChildSize: 0.45,
+      maxChildSize: 0.95,
       builder: (context, scrollController) => RestaurantInfoBottomSheetWidget(
         scrollController,
       ),
@@ -88,7 +88,7 @@ class _RestaurantInfoBottomSheetWidgetState
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(Constants.BORDER_RADIUS_20),
         ),
-        color: Colors.transparent,
+        color: AppTheme.WHITE,
       ),
       child: SingleChildScrollView(
         controller: widget.scrollController,
@@ -98,12 +98,13 @@ class _RestaurantInfoBottomSheetWidgetState
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // --------------- BOTTOM SHEET DRAGGER -------------- //
-            SizedBox(
-              height: 17.5.w,
-              width: 40.w,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.w),
               child: SvgPicture.asset(
                 'assets/bottom_sheet_dragger.svg',
-                color: AppTheme.WHITE,
+                color: AppTheme.MAIN_LIGHT,
+                height: 8.w,
+                width: 20.w,
               ),
             ),
             Container(
