@@ -7,6 +7,7 @@ import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'food_widget.dart';
+import 'restaurant.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   @override
@@ -80,6 +81,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     _sliverScrollController.removeListener(_scrollListener);
     _sliverScrollController.dispose();
     super.dispose();
+  }
+
+  void _onRestaurantInfoPressed() {
+    restaurantInfoBottomSheet(context);
   }
 
   @override
@@ -337,15 +342,18 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     ),
                                   ),
                                   SizedBox(width: 10.w),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppTheme.MAIN_LIGHT,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.all(5.w),
-                                    child: SvgPicture.asset(
-                                      'assets/restaurant_info.svg',
-                                      color: AppTheme.FONT_COLOR,
+                                  GestureDetector(
+                                    onTap: () => _onRestaurantInfoPressed(),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.MAIN_LIGHT,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      padding: EdgeInsets.all(5.w),
+                                      child: SvgPicture.asset(
+                                        'assets/restaurant_info.svg',
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
                                     ),
                                   ),
                                 ],
