@@ -57,7 +57,7 @@ class _AddressAddEditScreenState extends State<AddressAddEditScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: AppTheme.WHITE,
         elevation: 1,

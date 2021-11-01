@@ -36,7 +36,8 @@ class _AddressesScreenState extends State<AddressesScreen>
                 color: AppTheme.FONT_COLOR,
                 size: 25.w,
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () async =>
+                  await Navigator.pushReplacementNamed(context, RouteList.home),
             ),
           ),
           centerTitle: true,
