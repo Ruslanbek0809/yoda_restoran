@@ -96,6 +96,7 @@ class DrawerWidget extends StatelessWidget {
                 width: 0.6.sw,
               ),
             ),
+
             Divider(
               thickness: 1,
               endIndent: 0.1.sw,
@@ -107,6 +108,41 @@ class DrawerWidget extends StatelessWidget {
               (pos) {
                 return menuList(drawerList[pos], context);
               },
+            ),
+            Theme(
+              data: Theme.of(context).copyWith(
+                dividerColor: Colors.transparent,
+                dividerTheme: DividerThemeData(
+                    color: Theme.of(context).colorScheme.background),
+              ),
+              child: ExpansionTile(
+                initiallyExpanded: false,
+                onExpansionChanged: (value) {
+                  printLog('onExpansionChanged()');
+                },
+                leading: SvgPicture.asset(
+                  'assets/globe.svg',
+                  color: AppTheme.DRAWER_ICON,
+                  width: 33.w,
+                ),
+                title: Text(
+                  'Türkmen',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: AppTheme.MAIN_DARK,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Divider(
+                    thickness: 1,
+                    endIndent: 0.1.sw,
+                    indent: 0.17.sw,
+                    color: AppTheme.DRAWER_DIVIDER,
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 0.25.sh, left: 20.w),
