@@ -101,8 +101,7 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget>
                   widget.homeCategory.name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 13.sp,
                     color: isHomeCategoryPressed
                         ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,
