@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
@@ -90,9 +89,17 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: AppTheme().containerRadius,
-                      borderSide: BorderSide.none,
+                    border: UnderlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
+                      borderSide: BorderSide(
+                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
                     ),
                     hintText: 'Ady',
                     hintStyle:
@@ -103,20 +110,24 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   focusNode: _nameFocus,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Ady dolduryň';
+                      return 'Ady giriziň';
                     }
                     return null;
                   },
                 ),
-                SizedBox(height: 15.w),
                 TextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: AppTheme().containerRadius,
-                      borderSide: BorderSide.none,
+                    border: UnderlineInputBorder(
+                      // borderRadius: AppTheme().containerRadius,
+                      borderSide: BorderSide(
+                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
                     ),
                     hintText: 'Telefon belgiňiz',
                     hintStyle:
@@ -132,7 +143,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 15.w),
                 TextFormField(
                   controller: _infoController,
                   maxLines: 10,
@@ -140,10 +150,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: AppTheme().containerRadius,
+                      // borderRadius: AppTheme().containerRadius,
                       borderSide: BorderSide.none,
                     ),
-                    hintText: 'Habarnama',
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Tekst',
                     hintStyle:
                         TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
                     filled: true,
@@ -152,21 +165,23 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   focusNode: _infoFocus,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Habarnama hökman dolduryň';
+                      return 'Teksti hökman dolduryň';
                     }
                     return null;
                   },
                 ),
-                SizedBox(height: 35.w),
                 CustomTextButton(
-                  text: 'Ugratmak',
+                  text: 'Ugrat',
                   padding:
                       EdgeInsets.symmetric(vertical: 14.w, horizontal: 0.34.sw),
                   textStyle: TextStyle(
                     color: AppTheme.WHITE,
                     fontSize: 18.sp,
                   ),
-                  borderRadius: AppTheme().containerRadius,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0),
+                  ),
                   onPressed: _onContactPressed,
                 ),
               ],
