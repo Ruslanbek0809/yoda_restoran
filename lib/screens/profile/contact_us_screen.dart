@@ -96,11 +96,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         topRight: Radius.circular(10.0),
                       ),
                       borderSide: BorderSide(
-                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                          color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                          color: AppTheme.CONTACT_COLOR, width: 0.5),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0),
@@ -129,11 +129,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     border: UnderlineInputBorder(
                       // borderRadius: AppTheme().containerRadius,
                       borderSide: BorderSide(
-                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                          color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                          color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     hintText: 'Telefon belgiňiz',
                     hintStyle:
@@ -197,7 +197,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Text(
                   'Telefon: +99363 687171',
                   style: TextStyle(
-                    color: AppTheme.CONTACT_DIVIDER,
+                    color: AppTheme.CONTACT_COLOR,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -206,7 +206,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Text(
                   'Salgy: G.Kulyýew köç.29 (Rowana), 2-nji gat',
                   style: TextStyle(
-                    color: AppTheme.CONTACT_DIVIDER,
+                    color: AppTheme.CONTACT_COLOR,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -215,7 +215,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Text(
                   'Instagram: @yoda.restoran',
                   style: TextStyle(
-                    color: AppTheme.CONTACT_DIVIDER,
+                    color: AppTheme.CONTACT_COLOR,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),

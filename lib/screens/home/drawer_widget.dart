@@ -83,68 +83,100 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 0.2.sh,
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 15.w),
-              child: SvgPicture.asset(
-                'assets/yoda_restoran.svg',
-                color: AppTheme.MAIN_DARK,
-                width: 0.6.sw,
-              ),
-            ),
-
-            Divider(
-              thickness: 1,
-              endIndent: 0.1.sw,
-              color: AppTheme.DRAWER_DIVIDER,
-            ),
-            //// Drawer Menu
-            ...List.generate(
-              drawerList.length,
-              (pos) {
-                return menuList(drawerList[pos], context);
-              },
-            ),
-            Theme(
-              data: Theme.of(context).copyWith(
-                dividerColor: Colors.transparent,
-                dividerTheme: DividerThemeData(
-                    color: Theme.of(context).colorScheme.background),
-              ),
-              child: ExpansionTile(
-                initiallyExpanded: false,
-                onExpansionChanged: (value) {
-                  printLog('onExpansionChanged()');
-                },
-                leading: SvgPicture.asset(
-                  'assets/globe.svg',
-                  color: AppTheme.DRAWER_ICON,
-                  width: 33.w,
-                ),
-                title: Text(
-                  'Türkmen',
-                  style: TextStyle(
-                    fontSize: 16.sp,
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 0.2.sh,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: 15.w),
+                  child: SvgPicture.asset(
+                    'assets/yoda_restoran.svg',
                     color: AppTheme.MAIN_DARK,
-                    fontWeight: FontWeight.w600,
+                    width: 0.6.sw,
                   ),
                 ),
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Divider(
-                    thickness: 1,
-                    endIndent: 0.1.sw,
-                    indent: 0.17.sw,
-                    color: AppTheme.DRAWER_DIVIDER,
+
+                Divider(
+                  thickness: 1,
+                  endIndent: 0.1.sw,
+                  color: AppTheme.DRAWER_DIVIDER,
+                ),
+                //// Drawer Menu
+                ...List.generate(
+                  drawerList.length,
+                  (pos) {
+                    return menuList(drawerList[pos], context);
+                  },
+                ),
+                Theme(
+                  data: Theme.of(context).copyWith(
+                    dividerColor: Colors.transparent,
+                    dividerTheme: DividerThemeData(
+                        color: Theme.of(context).colorScheme.background),
                   ),
-                ],
-              ),
+                  child: ExpansionTile(
+                    initiallyExpanded: false,
+                    onExpansionChanged: (value) {
+                      printLog('onExpansionChanged()');
+                    },
+                    leading: SvgPicture.asset(
+                      'assets/globe.svg',
+                      color: AppTheme.DRAWER_ICON,
+                      width: 33.w,
+                    ),
+                    title: Text(
+                      'Türkmen',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppTheme.MAIN_DARK,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    iconColor: AppTheme.CONTACT_COLOR,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 66.w,
+                          top: 5.w,
+                          bottom: 5.w,
+                        ),
+                        child: Text(
+                          'Türkmen',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.MAIN_DARK,
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1,
+                        endIndent: 0.1.sw,
+                        indent: 0.17.sw,
+                        color: AppTheme.DRAWER_DIVIDER,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 66.w, top: 5.w),
+                        child: Text(
+                          'Rus dili',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.MAIN_DARK,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Padding(
+          ),
+          Positioned(
+            bottom: 0.20.sw,
+            child: Padding(
               padding: EdgeInsets.only(top: 0.25.sh, left: 20.w),
               child: GestureDetector(
                 onTap: () async => await Navigator.pushReplacementNamed(
@@ -168,8 +200,8 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
