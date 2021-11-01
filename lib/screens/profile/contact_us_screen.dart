@@ -76,14 +76,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           centerTitle: true,
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 17.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Form(
             key: _contactformKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 25.w),
+                SizedBox(height: 50.w),
                 TextFormField(
                   controller: _nameController,
                   keyboardType: TextInputType.text,
@@ -100,6 +100,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                           color: AppTheme.CONTACT_DIVIDER, width: 0.5),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
                     ),
                     hintText: 'Ady',
                     hintStyle:
@@ -145,7 +149,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ),
                 TextFormField(
                   controller: _infoController,
-                  maxLines: 10,
+                  maxLines: 11,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
@@ -170,19 +174,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     return null;
                   },
                 ),
-                CustomTextButton(
-                  text: 'Ugrat',
-                  padding:
-                      EdgeInsets.symmetric(vertical: 14.w, horizontal: 0.34.sw),
-                  textStyle: TextStyle(
-                    color: AppTheme.WHITE,
-                    fontSize: 18.sp,
+                SizedBox(
+                  width: 1.sw,
+                  child: CustomTextButton(
+                    text: 'Ugrat',
+                    padding:
+                        EdgeInsets.symmetric(vertical: 13.w, horizontal: 16.w),
+                    textStyle: TextStyle(
+                      color: AppTheme.WHITE,
+                      fontSize: 18.sp,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0),
+                    ),
+                    onPressed: _onContactPressed,
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0),
-                  ),
-                  onPressed: _onContactPressed,
                 ),
               ],
             ),
