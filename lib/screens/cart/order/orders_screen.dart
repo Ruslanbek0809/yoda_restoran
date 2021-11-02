@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -210,6 +211,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             if (!Platform.isIOS)
                               showDialog(
                                 context: context,
+                                barrierDismissible: true,
                                 builder: (context) => AlertDialog(
                                   title: Text(
                                     'Sargyt taýýarlanýar',
@@ -234,12 +236,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             else
                               showCupertinoDialog(
                                 context: context,
+                                barrierDismissible: true,
                                 builder: (context) => CupertinoAlertDialog(
                                   title: Text(
                                     'Sargyt taýýarlanylýar',
                                     style: TextStyle(
                                       color: AppTheme.DIALOG_TITLE_COLOR,
                                       fontSize: 16.sp,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
                                   content: Text(
@@ -247,11 +251,51 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                     style: TextStyle(
                                       color: AppTheme.FONT_COLOR,
                                       fontSize: 20.sp,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
                               );
-                          }
+                          } else if (orderList[pos].orderStatus.id == 3) {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: AppTheme().mainBorderRadius,
+                                ),
+                                title: Column(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/circle_wavy_check.svg',
+                                      color: AppTheme.MAIN,
+                                      width: 120.w,
+                                      height: 120.w,
+                                    ),
+                                    SizedBox(height: 10.w),
+                                    Text(
+                                      'Soltan Restoran',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: AppTheme.MAIN,
+                                        fontSize: 22.sp,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                content: Text(
+                                  'Siziň sargydyňyz kabul edildi!',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: AppTheme.GREEN,
+                                    fontSize: 26.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else if (orderList[pos].orderStatus.id == 4) {}
                         },
                       ),
                     ),
