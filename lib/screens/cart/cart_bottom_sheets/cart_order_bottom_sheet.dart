@@ -17,8 +17,8 @@ void cartOrderBottomSheet(BuildContext context) {
     backgroundColor: Colors.transparent,
     context: context,
     builder: (ctx) => DraggableScrollableSheet(
-      initialChildSize: 0.53,
-      maxChildSize: 0.53,
+      initialChildSize: 0.6,
+      maxChildSize: 0.6,
       builder: (context, scrollController) => CartOrderBottomSheetWidget(
         scrollController,
       ),
@@ -113,48 +113,94 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                         ],
                       ),
 // --------------- HOUSE PART -------------- //
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => Navigator.pop(context),
-                                    child: SvgPicture.asset(
+                      Material(
+                        color: AppTheme.WHITE,
+                        child: InkWell(
+                          onTap: () {
+                            _onCartAddressClicked();
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
                                       'assets/house.svg',
                                       color: AppTheme.MAIN_DARK,
                                       width: 25.w,
                                     ),
-                                  ),
-                                  SizedBox(width: 15.w),
-                                  Text(
-                                    'A.Nowaýy 23, 64',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: AppTheme.FONT_COLOR,
+                                    SizedBox(width: 15.w),
+                                    Text(
+                                      'A.Nowaýy 23, 64',
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  _onCartAddressClicked();
-                                },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 20,
-                                  color: AppTheme.FONT_COLOR,
+                                  ],
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: EdgeInsets.only(right: 20.w),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 20,
+                                    color: AppTheme.FONT_COLOR,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Divider(
-                            color: AppTheme.DRAWER_DIVIDER,
-                            indent: 0.111.sw,
-                          )
-                        ],
+                        ),
+                      ),
+                      Divider(
+                        color: AppTheme.DRAWER_DIVIDER,
+                        indent: 0.111.sw,
+                      ),
+// --------------- DELIVERY TIME -------------- //
+                      Material(
+                        color: AppTheme.WHITE,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/clock.svg',
+                                      color: AppTheme.MAIN_DARK,
+                                      width: 25.w,
+                                    ),
+                                    SizedBox(width: 15.w),
+                                    Text(
+                                      'Eltip bermeli wagty 30-40 minut',
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(right: 20.w),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 20,
+                                    color: AppTheme.FONT_COLOR,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        color: AppTheme.DRAWER_DIVIDER,
+                        indent: 0.111.sw,
                       ),
                       SizedBox(height: 10.w),
 // --------------- NOTE -------------- //
