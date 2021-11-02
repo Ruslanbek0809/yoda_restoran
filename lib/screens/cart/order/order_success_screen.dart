@@ -66,8 +66,8 @@ class OrderSuccessScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onPressed: () =>
-                    Navigator.of(context).popAndPushNamed(RouteList.home),
+                onPressed: () => Navigator.of(context)
+                    .pushNamedAndRemoveUntil(RouteList.home, (route) => false),
               ),
             ),
           ),

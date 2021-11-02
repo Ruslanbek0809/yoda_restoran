@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -203,8 +205,54 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed(RouteList.orderSuccess),
+                        onPressed: () {
+                          if (orderList[pos].orderStatus.id == 2) {
+                            if (!Platform.isIOS)
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text(
+                                    'Sargyt taýýarlanýar',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: AppTheme.DIALOG_TITLE_COLOR,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: AppTheme.FONT_COLOR,
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            else
+                              showCupertinoDialog(
+                                context: context,
+                                builder: (context) => CupertinoAlertDialog(
+                                  title: Text(
+                                    'Sargyt taýýarlanylýar',
+                                    style: TextStyle(
+                                      color: AppTheme.DIALOG_TITLE_COLOR,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                    style: TextStyle(
+                                      color: AppTheme.FONT_COLOR,
+                                      fontSize: 20.sp,
+                                    ),
+                                  ),
+                                ),
+                              );
+                          }
+                        },
                       ),
                     ),
                   ),

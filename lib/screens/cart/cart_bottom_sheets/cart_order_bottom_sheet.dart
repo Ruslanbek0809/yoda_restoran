@@ -243,7 +243,10 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                     color: AppTheme.WHITE,
                     fontSize: 18.sp,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .popAndPushNamed(RouteList.orderSuccess);
+                  },
                 ),
               ],
             ),

@@ -70,6 +70,7 @@ fieldFocusChange(
 Future<dynamic> showAlertDialog({
   required BuildContext context,
   required String title,
+  String content = '',
   required String cancelActionText,
   required String defaultActionText,
 }) async {
