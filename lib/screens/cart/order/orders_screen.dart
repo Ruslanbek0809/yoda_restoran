@@ -288,7 +288,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                   'Siziň sargydyňyz kabul edildi!',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: AppTheme.GREEN,
+                                    color: AppTheme.GREEN_COLOR,
                                     fontSize: 26.sp,
                                     fontWeight: FontWeight.bold,
                                   ),

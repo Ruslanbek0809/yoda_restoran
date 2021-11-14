@@ -201,7 +201,7 @@ class _CategoriesFilterBottomSheetWidgetState
                                           fontSize: 16.sp,
                                         ),
                                       ),
-                                      activeColor: AppTheme.GREEN,
+                                      activeColor: AppTheme.GREEN_COLOR,
                                       controlAffinity:
                                           ListTileControlAffinity.trailing,
                                       toggleable: true,

@@ -18,7 +18,7 @@ class AppTheme {
   static const Color BUTTON_BORDER_COLOR = Color(0xFF888888);
   static const Color TOGGLE_COLOR = Color(0xFFDDDDDB);
   static const Color DIALOG_TITLE_COLOR = Color(0xFF666666);
-  static const Color GREEN = Color(0xFF76C03F);
+  static const Color GREEN_COLOR = Color(0xFF76C03F);
   static const Color RED = Color(0xFFE64F3A);
   static const Color BLACK = Color(0xFF000000);
   static const Color WHITE = Color(0xFFFFFFFF);

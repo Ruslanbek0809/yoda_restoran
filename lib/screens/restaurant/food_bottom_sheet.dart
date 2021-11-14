@@ -143,7 +143,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                                           ),
                                         ],
                                       ),
-                                      activeColor: AppTheme.GREEN,
+                                      activeColor: AppTheme.GREEN_COLOR,
                                       controlAffinity:
                                           ListTileControlAffinity.leading,
                                       toggleable: true,

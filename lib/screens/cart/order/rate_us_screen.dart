@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -14,6 +15,7 @@ class _RateUsScreenState extends State<RateUsScreen>
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
   final TextEditingController _notesController = TextEditingController();
   final FocusNode _notesFocus = FocusNode();
+  int _selectedRating = 1;
 
   @override
   void dispose() {
@@ -53,10 +55,13 @@ class _RateUsScreenState extends State<RateUsScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          'assets/rate_yoda_res.svg',
-                          color: AppTheme.MAIN,
-                          width: 0.35.sw,
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.h),
+                          child: SvgPicture.asset(
+                            'assets/rate_yoda_res.svg',
+                            color: AppTheme.MAIN,
+                            width: 0.35.sw,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
@@ -70,7 +75,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: Text(
                             'Sargyt edeniňiz üçin sag boluň!',
                             style: TextStyle(
@@ -89,6 +94,27 @@ class _RateUsScreenState extends State<RateUsScreen>
                               color: AppTheme.FONT_COLOR,
                             ),
                             textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: RatingBar.builder(
+                            initialRating: 3,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: false,
+                            itemCount: 5,
+                            glow: false,
+                            unratedColor: AppTheme.GREEN_COLOR.withOpacity(0.4),
+                            itemSize: 55,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star_rate_rounded,
+                              color: AppTheme.GREEN_COLOR,
+                            ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            },
                           ),
                         ),
                         // --------------- Comment -------------- //

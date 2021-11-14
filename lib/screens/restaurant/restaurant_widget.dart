@@ -139,7 +139,7 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
           ),
           Row(
             children: [
-              Icon(Icons.star, size: 20.w, color: AppTheme.GREEN),
+              Icon(Icons.star, size: 20.w, color: AppTheme.GREEN_COLOR),
               SizedBox(width: 3.w),
               Text(
                 '4.9 (123)',

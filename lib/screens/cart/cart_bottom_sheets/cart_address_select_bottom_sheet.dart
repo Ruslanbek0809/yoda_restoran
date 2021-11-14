@@ -125,7 +125,7 @@ class _CartAddressSelectBottomSheetWidgetState
                                                     'assets/checkCircle.svg',
                                                     color: selectedAddressID ==
                                                             address.id
-                                                        ? AppTheme.GREEN
+                                                        ? AppTheme.GREEN_COLOR
                                                         : Colors.white,
                                                     width: 25.w,
                                                   ),
