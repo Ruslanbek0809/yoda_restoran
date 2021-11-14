@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'route.dart';
-import 'screens/cart/cart.dart';
-import 'screens/home/home.dart';
 import 'utils/utils.dart';
 import 'widgets/widgets.dart';
 
@@ -61,6 +59,7 @@ class _YodaResAppState extends State<YodaResApp> {
                 brightness: Brightness.light,
                 primaryColor: AppTheme.MAIN,
                 scaffoldBackgroundColor: AppTheme.WHITE,
+                splashColor: AppTheme.MAIN_LIGHT,
                 appBarTheme: AppBarTheme(
                   elevation: 0,
                 ),
@@ -70,6 +69,7 @@ class _YodaResAppState extends State<YodaResApp> {
                 brightness: Brightness.dark,
                 primaryColor: AppTheme.MAIN,
                 scaffoldBackgroundColor: AppTheme.WHITE,
+                splashColor: AppTheme.MAIN_LIGHT,
                 appBarTheme: AppBarTheme(
                   elevation: 0,
                 ),

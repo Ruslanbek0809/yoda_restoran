@@ -95,12 +95,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0),
                       ),
-                      borderSide: BorderSide(
-                          color: AppTheme.CONTACT_COLOR, width: 0.5),
+                      borderSide:
+                          BorderSide(color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.CONTACT_COLOR, width: 0.5),
+                      borderSide:
+                          BorderSide(color: AppTheme.CONTACT_COLOR, width: 0.5),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0),
@@ -128,12 +128,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     contentPadding: EdgeInsets.fromLTRB(12, 17, 12, 17),
                     border: UnderlineInputBorder(
                       // borderRadius: AppTheme().containerRadius,
-                      borderSide: BorderSide(
-                          color: AppTheme.CONTACT_COLOR, width: 0.5),
+                      borderSide:
+                          BorderSide(color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.CONTACT_COLOR, width: 0.5),
+                      borderSide:
+                          BorderSide(color: AppTheme.CONTACT_COLOR, width: 0.5),
                     ),
                     hintText: 'Telefon belgiňiz',
                     hintStyle:
