@@ -21,6 +21,7 @@ class Routes {
     RouteList.addresses: (context) => AddressesScreen(),
     RouteList.addressAddEdit: (context) => AddressAddEditScreen(),
     RouteList.contact: (context) => ContactUsScreen(),
+    RouteList.rateUs: (context) => RateUsScreen(),
   };
 
   // function to give specific build route for a route

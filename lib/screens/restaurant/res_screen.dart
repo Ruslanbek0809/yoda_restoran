@@ -467,9 +467,7 @@ class ResScreenState extends State<ResScreen>
                 child: SlideTransition(
                   position: bottomCartOffset,
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(RouteList.cart);
-                    },
+                    onTap: () => Navigator.of(context).pushNamed(RouteList.cart),
                     child: Container(
                       height: 0.22.sw,
                       width: 1.sw,

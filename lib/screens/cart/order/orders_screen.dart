@@ -272,7 +272,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                       width: 120.w,
                                       height: 120.w,
                                     ),
-                                    SizedBox(height: 10.w), 
+                                    SizedBox(height: 10.w),
                                     Text(
                                       'Soltan Restoran',
                                       textAlign: TextAlign.center,
@@ -295,7 +295,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 ),
                               ),
                             );
-                          } else if (orderList[pos].orderStatus.id == 4) {}
+                          } else if (orderList[pos].orderStatus.id == 4) {
+                            Navigator.of(context).pushNamed(RouteList.rateUs);
+                          }
                         },
                       ),
                     ),

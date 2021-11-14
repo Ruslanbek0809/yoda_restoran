@@ -9,6 +9,9 @@ class RouteList {
   static const String orders = '/orders';
   static const String orderSuccess = '/orderSuccess';
 
+  // Rate
+  static const String rateUs = '/rateUs';
+
   // Profile
   static const String profile = '/profile';
   static const String contact = '/contact';
