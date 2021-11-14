@@ -12,10 +12,9 @@ class RateUsScreen extends StatefulWidget {
 class _RateUsScreenState extends State<RateUsScreen>
     with SingleTickerProviderStateMixin {
   bool _isLoading = false;
-  final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _rateFormKey = GlobalKey<FormState>();
   final TextEditingController _notesController = TextEditingController();
   final FocusNode _notesFocus = FocusNode();
-  int _selectedRating = 1;
 
   @override
   void dispose() {
@@ -29,7 +28,7 @@ class _RateUsScreenState extends State<RateUsScreen>
     setState(() {
       _isLoading = true;
     });
-    if (_cartAddressformKey.currentState!.validate()) {
+    if (_rateFormKey.currentState!.validate()) {
       printLog('_contactformKey validated');
       setState(() {
         _isLoading = false;
@@ -50,11 +49,12 @@ class _RateUsScreenState extends State<RateUsScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Form(
-                    key: _cartAddressformKey,
+                    key: _rateFormKey,
                     autovalidateMode: AutovalidateMode.disabled,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // --------------- YODA RES Title -------------- //
                         Padding(
                           padding: EdgeInsets.only(top: 10.h),
                           child: SvgPicture.asset(
@@ -63,6 +63,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                             width: 0.35.sw,
                           ),
                         ),
+                        // --------------- RES NAME -------------- //
                         Padding(
                           padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
                           child: Text(
@@ -74,6 +75,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                             ),
                           ),
                         ),
+                        // --------------- TEXT -------------- //
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: Text(
@@ -85,6 +87,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                             ),
                           ),
                         ),
+                        // --------------- TEXT -------------- //
                         Padding(
                           padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                           child: Text(
@@ -96,18 +99,19 @@ class _RateUsScreenState extends State<RateUsScreen>
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        // --------------- RATING -------------- //
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: RatingBar.builder(
-                            initialRating: 3,
+                            initialRating: 5,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: false,
                             itemCount: 5,
                             glow: false,
                             unratedColor: AppTheme.GREEN_COLOR.withOpacity(0.4),
-                            itemSize: 55,
-                            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                            itemSize: 60,
+                            itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                             itemBuilder: (context, _) => Icon(
                               Icons.star_rate_rounded,
                               color: AppTheme.GREEN_COLOR,
@@ -117,28 +121,32 @@ class _RateUsScreenState extends State<RateUsScreen>
                             },
                           ),
                         ),
-                        // --------------- Comment -------------- //
-                        TextFormField(
-                          controller: _notesController,
-                          maxLines: 6,
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: AppTheme().containerRadius,
-                              borderSide: BorderSide.none,
+                        // --------------- COMMENT -------------- //
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          child: TextFormField(
+                            controller: _notesController,
+                            minLines: 8,
+                            maxLines: null,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.done,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: AppTheme().containerRadius,
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: AppTheme.MAIN_LIGHT,
+                              hintText: 'Teswir',
+                              hintStyle: TextStyle(
+                                fontSize: 16.sp,
+                                color: AppTheme.TEXTFIELD_HINT_COLOR,
+                              ),
                             ),
-                            filled: true,
-                            fillColor: AppTheme.MAIN_LIGHT,
-                            hintText: 'Teswir',
-                            hintStyle: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppTheme.TEXTFIELD_HINT_COLOR,
-                            ),
+                            validator: (value) {
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            return null;
-                          },
                         ),
                       ],
                     ),
