@@ -58,16 +58,40 @@ class _RateUsScreenState extends State<RateUsScreen>
                           color: AppTheme.MAIN,
                           width: 0.35.sw,
                         ),
-                        // --------------- NOTE -------------- //
                         Padding(
-                          padding: EdgeInsets.only(top: 20.w),
+                          padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
                           child: Text(
-                            'Bellik',
+                            'Soltan Restoran',
                             style: TextStyle(
-                                fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                              fontSize: 30.sp,
+                              color: AppTheme.MAIN_DARK,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        SizedBox(height: 7.w),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                          child: Text(
+                            'Sargyt edeniňiz üçin sag boluň!',
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              color: AppTheme.FONT_COLOR,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                          child: Text(
+                            'Işimiziň hilini ýokarlandyrmak üçin tagamlarymyza we hyzmatymyza berjek bahaňyz biziň üçin wajyp.',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppTheme.FONT_COLOR,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        // --------------- Comment -------------- //
                         TextFormField(
                           controller: _notesController,
                           maxLines: 6,
