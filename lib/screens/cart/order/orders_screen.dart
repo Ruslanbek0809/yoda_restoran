@@ -272,7 +272,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                       width: 120.w,
                                       height: 120.w,
                                     ),
-                                    SizedBox(height: 10.w),
+                                    SizedBox(height: 10.w), 
                                     Text(
                                       'Soltan Restoran',
                                       textAlign: TextAlign.center,
