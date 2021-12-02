@@ -190,25 +190,52 @@ class _CartScreenState extends State<CartScreen> {
 //------------------ DELIVERY TYPE TEXT based on condition ---------------------//
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: SvgPicture.asset(
-                        'assets/map_pin.svg',
-                        color: AppTheme.MAIN_DARK,
-                        width: 25.w,
-                      ),
-                    ),
-                    SizedBox(width: 5.w),
-                    Text(
-                      'Alişer Nowaýy köç. 171',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: AppTheme.FONT_COLOR,
-                      ),
-                    ),
-                  ],
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: _isDelivery
+                      ? Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: YodaImage(
+                                image: 'assets/delivery.png',
+                                width: 25.w,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Expanded(
+                              child: Text(
+                                'Eltip bermek üçin töleg operator tarapyndan goşular.',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppTheme.FONT_COLOR,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: SvgPicture.asset(
+                                'assets/map_pin.svg',
+                                color: AppTheme.MAIN_DARK,
+                                width: 25.w,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Expanded(
+                              child: Text(
+                                'Alişer Nowaýy köç. 171',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppTheme.FONT_COLOR,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
               ),
               SizedBox(
@@ -223,10 +250,11 @@ class _CartScreenState extends State<CartScreen> {
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                  color: AppTheme.WHITE,
-                  border: Border.all(
-                      color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-                  boxShadow: [AppTheme().bottomCartShadow]),
+                color: AppTheme.WHITE,
+                border:
+                    Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                boxShadow: [AppTheme().bottomCartShadow],
+              ),
               padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
