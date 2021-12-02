@@ -254,11 +254,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                               topRight: Radius.circular(20.0),
                             ),
                           ),
-                          padding: EdgeInsets.fromLTRB(15.w, 15.w, 15.w, 55.w),
+                          padding: EdgeInsets.fromLTRB(15.w, 17.h, 15.w, 50.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              //------------------ TITLE NAME ---------------------//
                               Text(
                                 'Kebapçy',
                                 style: TextStyle(
@@ -267,29 +268,31 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   color: AppTheme.MAIN_DARK,
                                 ),
                               ),
-                              SizedBox(height: 10.w),
+                              SizedBox(height: 10.h),
+                              //------------------ RATE / WORK TIME / INFO---------------------//
                               Row(
                                 children: [
+                                  //------------------ RATE ---------------------//
                                   Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.MAIN_LIGHT,
                                       borderRadius: AppTheme().mainBorderRadius,
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 12.5.w, vertical: 7.5.w),
+                                        horizontal: 12.5.w, vertical: 7.5.h),
                                     margin: EdgeInsets.symmetric(vertical: 5.w),
                                     child: Row(
-                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Icon(
                                           Icons.star,
                                           color: AppTheme.MAIN_DARK,
-                                          size: 24.w,
+                                          size: 26.w,
                                         ),
+                                        SizedBox(width: 3.w),
                                         Text(
                                           '4.5',
                                           style: TextStyle(
-                                            fontSize: 15.sp,
+                                            fontSize: 16.sp,
                                             color: AppTheme.FONT_COLOR,
                                           ),
                                         ),
@@ -297,48 +300,27 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     ),
                                   ),
                                   SizedBox(width: 10.w),
+                                  //------------------ WORK TIME ---------------------//
                                   Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.MAIN_LIGHT,
                                       borderRadius: AppTheme().mainBorderRadius,
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 12.5.w, vertical: 10.w),
-                                    margin: EdgeInsets.symmetric(vertical: 5.w),
-                                    child: Text(
-                                      '45-55 min',
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppTheme.FONT_COLOR,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppTheme.MAIN_LIGHT,
-                                      borderRadius: AppTheme().mainBorderRadius,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 12.5.w, vertical: 10.w),
+                                        horizontal: 12.5.w, vertical: 7.5.h),
                                     margin: EdgeInsets.symmetric(vertical: 5.w),
                                     child: Row(
-                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
-                                          'Eltip bermek ',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: AppTheme.FONT_COLOR,
-                                          ),
+                                        Icon(
+                                          Icons.access_time_rounded,
+                                          color: AppTheme.MAIN_DARK,
+                                          size: 26.w,
                                         ),
+                                        SizedBox(width: 5.w),
                                         Text(
-                                          '20 TMT',
+                                          '10:00 - 22:00',
                                           style: TextStyle(
-                                            fontSize: 16.sp,
+                                            fontSize: 18.sp,
                                             color: AppTheme.FONT_COLOR,
                                           ),
                                         ),
@@ -346,6 +328,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     ),
                                   ),
                                   SizedBox(width: 10.w),
+                                  //------------------ INFO ---------------------//
                                   GestureDetector(
                                     onTap: () => _onRestaurantInfoPressed(),
                                     child: Container(
@@ -353,7 +336,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                         color: AppTheme.MAIN_LIGHT,
                                         shape: BoxShape.circle,
                                       ),
-                                      padding: EdgeInsets.all(5.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 7.5.w, vertical: 7.5.h),
                                       child: SvgPicture.asset(
                                         'assets/restaurant_info.svg',
                                         color: AppTheme.FONT_COLOR,
@@ -362,9 +346,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   ),
                                 ],
                               ),
-                              Divider(
-                                color: AppTheme.MAIN_LIGHT,
-                                thickness: 1.w,
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 3.h),
+                                child: Divider(
+                                  color: AppTheme.MAIN_LIGHT,
+                                  thickness: 1.w,
+                                ),
                               ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
                               ToggleButtonWidget(),
