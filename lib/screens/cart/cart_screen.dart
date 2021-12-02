@@ -17,6 +17,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   bool _switchValue = true;
+  bool _isDelivery = false;
   void _onCartOrderClicked() {
     cartOrderBottomSheet(context);
   }
@@ -131,7 +132,7 @@ class _CartScreenState extends State<CartScreen> {
               //     ],
               //   ),
               // ),
-//------------------ CARTFOODWIDGET ---------------------//
+//------------------ CART FOOD WIDGET TITLE ---------------------//
               Padding(
                 padding: EdgeInsets.only(
                     top: 15.w, bottom: 10.w, left: 15.w, right: 15.w),
@@ -144,6 +145,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
+//------------------ CART FOOD WIDGET LIST ---------------------//
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -161,6 +163,7 @@ class _CartScreenState extends State<CartScreen> {
                   }).toList(),
                 ),
               ),
+//------------------ DELIVERY TOGGLE TITLE ---------------------//
               Padding(
                 padding: EdgeInsets.only(
                     top: 20.w, bottom: 10.w, left: 15.w, right: 15.w),
@@ -173,10 +176,18 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
+//------------------ DELIVERY TOGGLE ---------------------//
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: ToggleButtonWidget(),
+                child: ToggleButtonWidget(
+                  toggleCallback: (isDelivery) {
+                    setState(() {
+                      _isDelivery = isDelivery;
+                    });
+                  },
+                ),
               ),
+//------------------ DELIVERY TYPE TEXT based on condition ---------------------//
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
                 child: Row(
@@ -205,7 +216,7 @@ class _CartScreenState extends State<CartScreen> {
                       .sw), // this one is needed to compensate height of Checkout Button Widget is taking
             ],
           ),
-//// BottomCartWidget
+//------------------ BOTTOM CART WIDGET ---------------------//
           Positioned(
             bottom: 0,
             left: 0,
@@ -220,34 +231,22 @@ class _CartScreenState extends State<CartScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '175 TMT',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '30-40 min',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppTheme.FONT_COLOR,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    '175 TMT',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: AppTheme.MAIN_DARK,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   CustomTextButton(
                     text: 'Dowam et',
                     padding: EdgeInsets.symmetric(
                         vertical: 17.w, horizontal: 0.2.sw),
                     textStyle: TextStyle(
-                      color: AppTheme.WHITE,
                       fontSize: 18.sp,
+                      fontWeight: FontWeight.normal,
+                      color: AppTheme.WHITE,
                     ),
                     onPressed: () {
                       _onCartOrderClicked();

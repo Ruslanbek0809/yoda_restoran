@@ -23,6 +23,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   late ScrollController _sliverScrollController;
   bool lastStatus = true;
   bool isTabPressed = false;
+  bool _isDelivery = false;
 
   late AnimationController bottomCartController;
   late Animation<Offset> bottomCartOffset;
@@ -354,7 +355,13 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 ),
                               ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
-                              ToggleButtonWidget(),
+                              ToggleButtonWidget(
+                                toggleCallback: (isDelivery) {
+                                  setState(() {
+                                    _isDelivery = isDelivery;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ),

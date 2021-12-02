@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class ToggleButtonWidget extends StatefulWidget {
+  final Function(bool)? toggleCallback;
+  ToggleButtonWidget({this.toggleCallback});
   @override
   _ToggleButtonWidgetState createState() => _ToggleButtonWidgetState();
 }
@@ -17,6 +19,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
         onTap: () {
           setState(() {
             isDelivery = !isDelivery;
+            widget.toggleCallback!(isDelivery);
           });
         },
         child: Container(
