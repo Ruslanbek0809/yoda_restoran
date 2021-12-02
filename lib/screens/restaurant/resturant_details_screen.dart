@@ -116,7 +116,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           padding: EdgeInsets.only(left: 10.w, top: 5.w),
                           child: Text(
                             'Kebapçy',
-                            style: TextStyle(fontSize: 20.sp),
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              color: AppTheme.FONT_COLOR,
+                            ),
                           ),
                         )
                       : SizedBox(),
@@ -234,8 +237,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   background: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/burgerlist.jpg'),
-                          fit: BoxFit.cover),
+                        image: AssetImage('assets/burgerlist.jpg'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     //// NOTE: Instead of direct Container Column is used to make child work properly
                     child: Column(

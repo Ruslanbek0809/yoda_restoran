@@ -13,69 +13,69 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isDelivery = !isDelivery;
-        });
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.MAIN_LIGHT,
-          borderRadius: AppTheme().buttonBorderRadius,
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.w),
-        child: Stack(
-          children: [
-            AnimatedAlign(
-              alignment: Alignment(isDelivery ? -1 : 1, 0),
-              duration: Duration(milliseconds: 300),
-              child: Container(
-                width: halfWidth,
-                height: 45.w,
-                decoration: BoxDecoration(
-                  color: AppTheme.WHITE,
-                  borderRadius: AppTheme().buttonBorderRadius,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment(-1, 0),
-              child: Container(
-                width: halfWidth,
-                padding: EdgeInsets.symmetric(vertical: 12.5.w),
-                alignment: Alignment.center,
-                child: Text(
-                  'Eltip bermek',
-                  style: TextStyle(
-                    fontSize: 17.sp,
-                    color: !isDelivery
-                        ? AppTheme.FONT_GREY_COLOR
-                        : AppTheme.FONT_COLOR,
+    return LayoutBuilder(builder: (context, constraints) {
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            isDelivery = !isDelivery;
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppTheme.MAIN_LIGHT,
+            borderRadius: AppTheme().buttonBorderRadius,
+          ),
+          height: 50.h,
+          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 4.h),
+          child: Stack(
+            children: [
+              AnimatedAlign(
+                alignment: Alignment(isDelivery ? -1 : 1, 0),
+                duration: Duration(milliseconds: 300),
+                child: Container(
+                  width: constraints.maxWidth / 2,
+                  decoration: BoxDecoration(
+                    color: AppTheme.WHITE,
+                    borderRadius: AppTheme().buttonBorderRadius,
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment(1, 0),
-              child: Container(
-                width: halfWidth,
-                padding: EdgeInsets.symmetric(vertical: 12.5.w),
-                alignment: Alignment.center,
-                child: Text(
-                  'Özüm aljak',
-                  style: TextStyle(
-                    fontSize: 17.sp,
-                    color: isDelivery
-                        ? AppTheme.FONT_GREY_COLOR
-                        : AppTheme.FONT_COLOR,
+              Align(
+                alignment: Alignment(-1, 0),
+                child: Container(
+                  width: constraints.maxWidth / 2,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Eltip bermek',
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      color: !isDelivery
+                          ? AppTheme.FONT_GREY_COLOR
+                          : AppTheme.FONT_COLOR,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment(1, 0),
+                child: Container(
+                  width: constraints.maxWidth / 2,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Özüm aljak',
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      color: isDelivery
+                          ? AppTheme.FONT_GREY_COLOR
+                          : AppTheme.FONT_COLOR,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

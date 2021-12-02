@@ -48,15 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  _showDialog() {
-    return () => showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime(2050),
-        ).then(print);
-  }
-
   void _onGenderPressed() async {
     printLog('_onGenderPressed');
     if (Platform.isIOS) {
@@ -256,27 +247,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () async {
                         DateTime? date;
                         FocusScope.of(context).requestFocus(FocusNode());
-                        date = await DatePicker.showDatePicker(context,
-                            showTitleActions: true,
-                            minTime: DateTime(1900, 1, 1),
-                            maxTime: DateTime.now(), onChanged: (date) {
-                          print('change $date');
-                        }, onConfirm: (date) {
-                          print('confirm $date');
-                        }, currentTime: DateTime.now(), locale: LocaleType.tk);
-                        // await showDatePicker(
-                        //   context: context,
-                        //   cancelText: 'Ýatyrmak',
-                        //   helpText: 'Doglan senäňizi giriziň',
-                        //   confirmText: 'Tassyklamak',
-                        //   fieldHintText: '01/01/2001',
-                        //   fieldLabelText: 'Doglan senäňizi giriziň',
-                        //   errorFormatText: 'Formaty dogry giriziň',
-                        //   errorInvalidText: 'Ýalňyş format',
-                        //   initialDate: DateTime.now(),
-                        //   firstDate: DateTime(1900),
-                        //   lastDate: DateTime.now(),
-                        // );
+                        date = await DatePicker.showDatePicker(
+                          context,
+                          showTitleActions: true,
+                          minTime: DateTime(1900, 1, 1),
+                          maxTime: DateTime.now(),
+                          onChanged: (date) {
+                            print('change $date');
+                          },
+                          onConfirm: (date) {
+                            print('confirm $date');
+                          },
+                          currentTime: DateTime.now(),
+                          locale: LocaleType.tk,
+                        );
                         _birthdateController.text = date!.toIso8601String();
                       },
                       controller: _birthdateController,
