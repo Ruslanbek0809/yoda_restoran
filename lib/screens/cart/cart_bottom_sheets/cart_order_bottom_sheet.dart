@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:yoda_res/library/flutter_datetime_picker.dart';
+import 'package:yoda_res/library/src/datetime_picker_theme.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:yoda_res/screens/cart/cart_bottom_sheets/cart_address_select_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -194,8 +195,16 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                                       onConfirm: (date) {
                                         print('Senä confirm $date');
                                       },
-                                      currentTime: now,
+                                      currentTime: _deliverDateTime,
                                       locale: LocaleType.tk,
+                                      theme: DatePickerTheme(
+                                        doneStyle: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppTheme.FONT_COLOR,
+                                        ),
+                                        backgroundColor: AppTheme.MAIN_LIGHT,
+                                      ),
                                     ) ??
                                     _deliverDateTime;
                             _deliverDateFormatted =
@@ -215,12 +224,33 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                                       width: 25.w,
                                     ),
                                     SizedBox(width: 15.w),
-                                    Text(
-                                      'Eltip bermeli wagty 30-40 minut',
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppTheme.FONT_COLOR,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Eltmeli wagty: ',
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                        Text(
+                                          _deliverDateTime == now
+                                              ? 'Şu wagt'
+                                              : _deliverDateTime!
+                                                          .isAfter(now) &&
+                                                      _deliverDateTime!
+                                                          .isBefore(tomorrow!)
+                                                  ? 'Şu gün $_deliverDateFormatted'
+                                                  : _deliverDateTime!
+                                                          .isAfter(tomorrow!)
+                                                      ? 'Ertir $_deliverDateFormatted'
+                                                      : '',
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

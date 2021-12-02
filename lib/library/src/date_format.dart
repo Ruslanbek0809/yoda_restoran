@@ -5,7 +5,7 @@ import 'i18n_model.dart';
 /// Example:
 ///     formatDate(new DateTime(2018,8,31), [ymdw]);
 ///     // => Today
-const String ymdw = 'ymdw';
+const String ymdw = 'Ertir';
 
 ///
 /// Example:

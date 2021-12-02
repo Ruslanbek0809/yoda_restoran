@@ -3,6 +3,7 @@ library flutter_datetime_picker;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 import 'src/date_model.dart';
 import 'src/datetime_picker_theme.dart';
@@ -482,11 +483,17 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsets.only(left: 16, top: 0),
-              child: Text(
-                '$cancel',
-                style: theme.cancelStyle,
-              ),
+              padding:
+                  EdgeInsets.only(left: 16, top: 0), // Change top: 0 to top:10
+              child: Icon(
+                Icons.keyboard_arrow_down,
+                size: 45,
+                color: AppTheme.DIALOG_TITLE_COLOR,
+              ), // Change Text Widget to Icon Widget
+              // Text(
+              //   '$cancel',
+              //   style: theme.cancelStyle,
+              // ),
               onPressed: () {
                 Navigator.pop(context);
                 if (widget.route.onCancel != null) {
@@ -499,7 +506,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             height: theme.titleHeight,
             child: CupertinoButton(
               pressedOpacity: 0.3,
-              padding: EdgeInsets.only(right: 16, top: 0),
+              padding:
+                  EdgeInsets.only(right: 16, top: 8), // Change top: 0 to top:10
               child: Text(
                 '$done',
                 style: theme.doneStyle,
