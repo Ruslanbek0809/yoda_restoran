@@ -16,7 +16,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool _switchValue = true;
+  // bool _switchValue = true;
   bool _isDelivery = false;
   void _onCartOrderClicked() {
     cartOrderBottomSheet(context);
@@ -276,9 +276,7 @@ class _CartScreenState extends State<CartScreen> {
                       fontWeight: FontWeight.normal,
                       color: AppTheme.WHITE,
                     ),
-                    onPressed: () {
-                      _onCartOrderClicked();
-                    },
+                    onPressed: () => _onCartOrderClicked(),
                   ),
                 ],
               ),

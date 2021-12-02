@@ -74,9 +74,9 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'pm': 'PM'
   },
   LocaleType.tk: {
-    'cancel': 'Ýatyrmak',
-    'done': 'Tassyklamak',
-    'today': 'Bugün',
+    'cancel': 'Ýatyr',
+    'done': 'Tassykla',
+    'today': 'Şu gün',
     'monthShort': [
       'Ýan',
       'Few',

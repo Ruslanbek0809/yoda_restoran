@@ -79,7 +79,7 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                     ),
                     color: AppTheme.WHITE,
                   ),
-                  padding: EdgeInsets.fromLTRB(20.w, 20.w, 0.w, 20.w),
+                  padding: EdgeInsets.fromLTRB(20.w, 18.h, 0.w, 20.h),
                   child: Column(
                     children: [
 // --------------- PHONE PART -------------- //
