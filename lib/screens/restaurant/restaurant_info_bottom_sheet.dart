@@ -108,15 +108,7 @@ class _RestaurantInfoBottomSheetWidgetState
                   ),
                   SizedBox(height: 10.w),
                   Text(
-                    'Iş wagty: 08:00 - 23:00',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: AppTheme.FONT_COLOR,
-                    ),
-                  ),
-                  SizedBox(height: 15.w),
-                  Text(
-                    'Eltip bermek: 00:30 çenli',
+                    'Sargyt alýan wagty: 10:00 - 22:00',
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: AppTheme.FONT_COLOR,

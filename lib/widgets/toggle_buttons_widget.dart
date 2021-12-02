@@ -8,7 +8,6 @@ class ToggleButtonWidget extends StatefulWidget {
 }
 
 class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
-  double halfWidth = 0.5.sw;
   bool isDelivery = false;
 
   @override
@@ -25,8 +24,8 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
             color: AppTheme.MAIN_LIGHT,
             borderRadius: AppTheme().buttonBorderRadius,
           ),
-          height: 50.h,
-          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 4.h),
+          height: 47.h,
+          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
           child: Stack(
             children: [
               AnimatedAlign(
