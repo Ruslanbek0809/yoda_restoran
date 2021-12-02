@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:yoda_res/library/flutter_datetime_picker.dart';
+import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:yoda_res/screens/cart/cart_bottom_sheets/cart_address_select_bottom_sheet.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:yoda_res/widgets/widgets.dart';
@@ -41,6 +44,22 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
 
   void _onCartAddressClicked() {
     cartAddressSelectBottomSheet(context);
+  }
+
+  /// DateTime vars
+  final now = DateTime.now();
+  DateTime? tomorrow;
+  DateTime? maxDateTime;
+  DateTime? _deliverDateTime;
+  String? _deliverDateFormatted = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    _deliverDateTime = now;
+    tomorrow = DateTime(now.year, now.month, now.day + 1);
+    maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
   }
 
   @override
@@ -162,7 +181,27 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                       Material(
                         color: AppTheme.WHITE,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            _deliverDateTime =
+                                await DatePicker.showDateTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      minTime: now,
+                                      maxTime: maxDateTime,
+                                      onChanged: (date) {
+                                        print('Senä change $date');
+                                      },
+                                      onConfirm: (date) {
+                                        print('Senä confirm $date');
+                                      },
+                                      currentTime: now,
+                                      locale: LocaleType.tk,
+                                    ) ??
+                                    _deliverDateTime;
+                            _deliverDateFormatted =
+                                DateFormat('HH:mm').format(_deliverDateTime!);
+                            setState(() {});
+                          },
                           child: Padding(
                             padding: EdgeInsets.symmetric(vertical: 10.w),
                             child: Row(
