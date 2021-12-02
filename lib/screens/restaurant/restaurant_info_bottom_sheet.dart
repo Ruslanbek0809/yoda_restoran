@@ -69,7 +69,7 @@ class _RestaurantInfoBottomSheetWidgetState
                 ),
                 color: AppTheme.WHITE,
               ),
-              padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 45.w),
+              padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 35.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -77,7 +77,7 @@ class _RestaurantInfoBottomSheetWidgetState
                   Text(
                     'Kebapçy',
                     style: TextStyle(
-                      fontSize: 24.sp,
+                      fontSize: 26.sp,
                       fontWeight: FontWeight.bold,
                       color: AppTheme.MAIN_DARK,
                     ),

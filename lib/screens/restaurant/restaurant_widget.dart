@@ -48,9 +48,9 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   Positioned.fill(
                     child: Material(
                       color: Colors.transparent,
-                      borderRadius: AppTheme().mainBorderRadius,
+                      borderRadius: AppTheme().radius20,
                       child: InkWell(
-                        borderRadius: AppTheme().mainBorderRadius,
+                        borderRadius: AppTheme().radius20,
                         onTap: () async {
                           await Navigator.push(
                             context,

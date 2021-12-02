@@ -94,7 +94,7 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget>
                     horizontal: isHomeCategoryPressed ? 5.w : 0.0,
                     vertical: isHomeCategoryPressed ? 2.w : 0.0),
                 decoration: BoxDecoration(
-                  borderRadius: AppTheme().buttonBorderRadius,
+                  borderRadius: AppTheme().radius15,
                   color: isHomeCategoryPressed ? AppTheme.MAIN : AppTheme.WHITE,
                 ),
                 child: Text(

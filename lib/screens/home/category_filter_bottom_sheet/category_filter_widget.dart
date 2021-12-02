@@ -72,7 +72,7 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
                     horizontal: isCategoryFilterChecked ? 8.w : 0.0,
                     vertical: isCategoryFilterChecked ? 3.w : 0.0),
                 decoration: BoxDecoration(
-                  borderRadius: AppTheme().buttonBorderRadius,
+                  borderRadius: AppTheme().radius15,
                   color: isCategoryFilterChecked
                       ? AppTheme.MAIN
                       : Colors.transparent,

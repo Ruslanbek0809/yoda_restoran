@@ -27,7 +27,7 @@ class CustomOutlinedButton extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: borderRadius as BorderRadiusGeometry? ??
-                AppTheme().buttonBorderRadius),
+                AppTheme().radius15),
         // minimumSize: Size(width!, height!),
       ),
       onPressed: onPressed as void Function()?,

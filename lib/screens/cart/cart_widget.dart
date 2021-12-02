@@ -78,10 +78,10 @@ class _CartWidgetState extends State<CartWidget> with TickerProviderStateMixin {
                   children: [
                     Material(
                       color: AppTheme.MAIN_LIGHT,
-                      borderRadius: AppTheme().buttonBorderRadius,
+                      borderRadius: AppTheme().radius15,
                       elevation: 0,
                       child: InkWell(
-                        borderRadius: AppTheme().buttonBorderRadius,
+                        borderRadius: AppTheme().radius15,
                         onTap: () async {},
                         child: Padding(
                           padding: EdgeInsets.all(10.w),
@@ -104,10 +104,10 @@ class _CartWidgetState extends State<CartWidget> with TickerProviderStateMixin {
                     SizedBox(width: 10.w),
                     Material(
                       color: AppTheme.MAIN_LIGHT,
-                      borderRadius: AppTheme().buttonBorderRadius,
+                      borderRadius: AppTheme().radius15,
                       elevation: 0,
                       child: InkWell(
-                        borderRadius: AppTheme().buttonBorderRadius,
+                        borderRadius: AppTheme().radius15,
                         onTap: () {
                           _onProductBottomSheetClicked(food);
                         },

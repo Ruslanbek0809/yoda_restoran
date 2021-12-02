@@ -51,7 +51,7 @@ class StaggerAnimationButtonWidget extends StatelessWidget {
         alignment: FractionalOffset.center,
         decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: AppTheme().containerRadius,
+            borderRadius: AppTheme().radius10,
             boxShadow: [AppTheme().buttonShadow]),
         child: buttonSqueezeanimation.value > 75.0
             ? Text(

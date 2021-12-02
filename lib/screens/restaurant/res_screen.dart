@@ -178,7 +178,7 @@ class ResScreenState extends State<ResScreen>
                                         decoration: BoxDecoration(
                                           color: AppTheme.MAIN_LIGHT,
                                           borderRadius:
-                                              AppTheme().mainBorderRadius,
+                                              AppTheme().radius20,
                                         ),
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 12.5.w,
@@ -208,7 +208,7 @@ class ResScreenState extends State<ResScreen>
                                         decoration: BoxDecoration(
                                           color: AppTheme.MAIN_LIGHT,
                                           borderRadius:
-                                              AppTheme().mainBorderRadius,
+                                              AppTheme().radius20,
                                         ),
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 12.5.w, vertical: 10.w),
@@ -230,7 +230,7 @@ class ResScreenState extends State<ResScreen>
                                         decoration: BoxDecoration(
                                           color: AppTheme.MAIN_LIGHT,
                                           borderRadius:
-                                              AppTheme().mainBorderRadius,
+                                              AppTheme().radius20,
                                         ),
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 12.5.w, vertical: 10.w),
@@ -391,7 +391,7 @@ class ResScreenState extends State<ResScreen>
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius:
-                                            AppTheme().buttonBorderRadius,
+                                            AppTheme().radius15,
                                         color: _activeIndex ==
                                                 foodCategoryList
                                                     .indexOf(foodCategory)
@@ -482,7 +482,7 @@ class ResScreenState extends State<ResScreen>
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
                         decoration: BoxDecoration(
                           color: AppTheme.MAIN,
-                          borderRadius: AppTheme().containerRadius,
+                          borderRadius: AppTheme().radius10,
                         ),
                         alignment: Alignment.center,
                         child: Row(

@@ -191,7 +191,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           backgroundColor: AppTheme.MAIN_DARK,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
-                              borderRadius: AppTheme().containerRadius),
+                              borderRadius: AppTheme().radius10),
                           padding: EdgeInsets.symmetric(vertical: 12.w),
                         ),
                         child: Text(
@@ -262,7 +262,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               barrierDismissible: true,
                               builder: (context) => AlertDialog(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: AppTheme().mainBorderRadius,
+                                  borderRadius: AppTheme().radius20,
                                 ),
                                 title: Column(
                                   children: [

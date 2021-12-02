@@ -56,7 +56,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
       child: Container(
         decoration: BoxDecoration(
           color: AppTheme.MAIN_LIGHT,
-          borderRadius: AppTheme().mainBorderRadius,
+          borderRadius: AppTheme().radius20,
         ),
         padding: EdgeInsets.fromLTRB(7.w, 7.w, 7.w, 7.w),
         child: LayoutBuilder(
@@ -147,11 +147,11 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                           children: [
                             Material(
                               color: AppTheme.WHITE,
-                              borderRadius: AppTheme().buttonBorderRadius,
+                              borderRadius: AppTheme().radius15,
                               elevation: 3,
                               shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                               child: InkWell(
-                                borderRadius: AppTheme().buttonBorderRadius,
+                                borderRadius: AppTheme().radius15,
                                 onTap: () async {
                                   _tweenController.forward();
                                   if (isButtonToggled)
@@ -178,11 +178,11 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                             ),
                             Material(
                               color: AppTheme.WHITE,
-                              borderRadius: AppTheme().buttonBorderRadius,
+                              borderRadius: AppTheme().radius15,
                               elevation: 3,
                               shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                               child: InkWell(
-                                borderRadius: AppTheme().buttonBorderRadius,
+                                borderRadius: AppTheme().radius15,
                                 onTap: () => _onProductBottomSheetClicked(food),
                                 child: Padding(
                                   padding: EdgeInsets.all(10.w),
@@ -198,11 +198,11 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                         )
                       : Material(
                           color: Colors.transparent,
-                          borderRadius: AppTheme().buttonBorderRadius,
+                          borderRadius: AppTheme().radius15,
                           elevation: 3,
                           shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
-                            borderRadius: AppTheme().buttonBorderRadius,
+                            borderRadius: AppTheme().radius15,
                             onTap: () async {
                               //// Bouncing animation trigger
                               _tweenController.forward();
@@ -226,7 +226,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                               width: constraints.maxWidth,
                               decoration: BoxDecoration(
                                 color: AppTheme.WHITE,
-                                borderRadius: AppTheme().buttonBorderRadius,
+                                borderRadius: AppTheme().radius15,
                               ),
                               padding: EdgeInsets.symmetric(vertical: 10.w),
                               child: Text(

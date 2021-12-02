@@ -22,7 +22,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
         child: Container(
           decoration: BoxDecoration(
             color: AppTheme.MAIN_LIGHT,
-            borderRadius: AppTheme().buttonBorderRadius,
+            borderRadius: AppTheme().radius15,
           ),
           height: 47.h,
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
@@ -35,7 +35,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
                   width: constraints.maxWidth / 2,
                   decoration: BoxDecoration(
                     color: AppTheme.WHITE,
-                    borderRadius: AppTheme().buttonBorderRadius,
+                    borderRadius: AppTheme().radius15,
                   ),
                 ),
               ),

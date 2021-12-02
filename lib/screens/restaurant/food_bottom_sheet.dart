@@ -273,7 +273,7 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                         height: 0.15.sw,
                         decoration: BoxDecoration(
                           color: AppTheme.WHITE,
-                          borderRadius: AppTheme().button2BorderRadius,
+                          borderRadius: AppTheme().radius12,
                           border: Border.all(
                               color: AppTheme.BUTTON_BORDER_COLOR, width: 0.5),
                         ),
@@ -285,10 +285,10 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                               height: 0.15.sw,
                               child: Material(
                                 color: AppTheme.WHITE,
-                                borderRadius: AppTheme().button2BorderRadius,
+                                borderRadius: AppTheme().radius12,
                                 elevation: 0,
                                 child: InkWell(
-                                  borderRadius: AppTheme().button2BorderRadius,
+                                  borderRadius: AppTheme().radius12,
                                   onTap: () async {},
                                   child: Padding(
                                     padding: EdgeInsets.all(2.w),
@@ -317,10 +317,10 @@ class _FoodBottomSheetWidgetState extends State<FoodBottomSheetWidget> {
                               height: 0.15.sw,
                               child: Material(
                                 color: AppTheme.WHITE,
-                                borderRadius: AppTheme().button2BorderRadius,
+                                borderRadius: AppTheme().radius12,
                                 elevation: 0,
                                 child: InkWell(
-                                  borderRadius: AppTheme().button2BorderRadius,
+                                  borderRadius: AppTheme().radius12,
                                   onTap: () {},
                                   child: Icon(
                                     Icons.add,

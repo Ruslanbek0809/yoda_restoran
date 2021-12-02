@@ -56,7 +56,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
             10.w, // this width is used to make spaceBetween work in Row Button widgets
         decoration: BoxDecoration(
           color: AppTheme.MAIN_LIGHT,
-          borderRadius: AppTheme().mainBorderRadius,
+          borderRadius: AppTheme().radius20,
         ),
         padding: EdgeInsets.all(6.w),
         child: Column(
@@ -96,11 +96,11 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                       children: [
                         Material(
                           color: AppTheme.WHITE,
-                          borderRadius: AppTheme().buttonBorderRadius,
+                          borderRadius: AppTheme().radius15,
                           elevation: 3,
                           shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
-                            borderRadius: AppTheme().buttonBorderRadius,
+                            borderRadius: AppTheme().radius15,
                             onTap: () async {
                               _tweenController.forward();
                               if (isButtonToggled)
@@ -127,11 +127,11 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                         ),
                         Material(
                           color: AppTheme.WHITE,
-                          borderRadius: AppTheme().buttonBorderRadius,
+                          borderRadius: AppTheme().radius15,
                           elevation: 3,
                           shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                           child: InkWell(
-                            borderRadius: AppTheme().buttonBorderRadius,
+                            borderRadius: AppTheme().radius15,
                             onTap: () {
                               _tweenController.forward();
                             },
@@ -149,11 +149,11 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                     )
                   : Material(
                       color: Colors.transparent,
-                      borderRadius: AppTheme().buttonBorderRadius,
+                      borderRadius: AppTheme().radius15,
                       elevation: 3,
                       shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                       child: InkWell(
-                        borderRadius: AppTheme().buttonBorderRadius,
+                        borderRadius: AppTheme().radius15,
                         onTap: () async {
                           //// Bouncing animation trigger
                           _tweenController.forward();
@@ -167,7 +167,7 @@ class _CartFoodWidgetState extends State<CartFoodWidget>
                           width: 0.33.sw,
                           decoration: BoxDecoration(
                             color: AppTheme.WHITE,
-                            borderRadius: AppTheme().buttonBorderRadius,
+                            borderRadius: AppTheme().radius15,
                           ),
                           padding: EdgeInsets.symmetric(vertical: 10.w),
                           child: Text(

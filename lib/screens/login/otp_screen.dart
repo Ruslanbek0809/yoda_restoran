@@ -152,7 +152,7 @@ class _OtpScreenState extends State<OtpScreen> with TickerProviderStateMixin {
                   },
                   pinTheme: PinTheme(
                     shape: PinCodeFieldShape.box,
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     fieldHeight: 50.w,
                     fieldWidth: 40.w,
                     fieldOuterPadding: EdgeInsets.symmetric(horizontal: 5.w),

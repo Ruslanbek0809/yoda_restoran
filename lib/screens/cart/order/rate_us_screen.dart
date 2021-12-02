@@ -132,7 +132,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                             textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius: AppTheme().containerRadius,
+                                borderRadius: AppTheme().radius10,
                                 borderSide: BorderSide.none,
                               ),
                               filled: true,
@@ -169,7 +169,7 @@ class _RateUsScreenState extends State<RateUsScreen>
                       backgroundColor: AppTheme.MAIN,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().containerRadius),
+                          borderRadius: AppTheme().radius10),
                       padding: EdgeInsets.symmetric(vertical: 15.w),
                     ),
                     child: Text(

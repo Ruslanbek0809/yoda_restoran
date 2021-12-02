@@ -228,7 +228,7 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: AppTheme().containerRadius,
+                                  borderRadius: AppTheme().radius10,
                                   borderSide: BorderSide.none,
                                 ),
                                 filled: true,

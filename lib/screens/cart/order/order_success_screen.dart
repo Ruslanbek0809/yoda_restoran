@@ -55,7 +55,7 @@ class OrderSuccessScreen extends StatelessWidget {
                   backgroundColor: AppTheme.MAIN,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                      borderRadius: AppTheme().containerRadius),
+                      borderRadius: AppTheme().radius10),
                   padding: EdgeInsets.symmetric(vertical: 15.w),
                 ),
                 child: Text(

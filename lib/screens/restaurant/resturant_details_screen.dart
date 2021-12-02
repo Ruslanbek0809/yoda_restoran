@@ -276,7 +276,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.MAIN_LIGHT,
-                                      borderRadius: AppTheme().mainBorderRadius,
+                                      borderRadius: AppTheme().radius20,
                                     ),
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 12.5.w, vertical: 7.5.h),
@@ -304,7 +304,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.MAIN_LIGHT,
-                                      borderRadius: AppTheme().mainBorderRadius,
+                                      borderRadius: AppTheme().radius20,
                                     ),
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 12.5.w, vertical: 7.5.h),
@@ -376,7 +376,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.easeInOut,
                                 decoration: BoxDecoration(
-                                  borderRadius: AppTheme().buttonBorderRadius,
+                                  borderRadius: AppTheme().radius15,
                                   color: activetab ==
                                           foodCategoryList.indexOf(category)
                                       ? isTabPressed
@@ -508,35 +508,27 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   ]),
                   child: Container(
                     margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
-                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    padding: EdgeInsets.symmetric(horizontal: 18.w),
                     decoration: BoxDecoration(
                       color: AppTheme.MAIN,
-                      borderRadius: AppTheme().containerRadius,
+                      borderRadius: AppTheme().radius10,
                     ),
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '40-50 min',
-                          style: TextStyle(
-                            color: AppTheme.WHITE,
-                            fontSize: 16.sp,
-                          ),
-                        ),
-                        Text(
                           'Sargyt',
                           style: TextStyle(
                             color: AppTheme.WHITE,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp,
                           ),
                         ),
                         Text(
                           '35 TMT',
                           style: TextStyle(
                             color: AppTheme.WHITE,
-                            fontSize: 16.sp,
+                            fontSize: 18.sp,
                           ),
                         ),
                       ],

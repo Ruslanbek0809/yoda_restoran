@@ -84,8 +84,9 @@ class AppTheme {
       );
 
   /// Radiuses
-  BorderRadius get mainBorderRadius => BorderRadius.circular(20.0);
-  BorderRadius get buttonBorderRadius => BorderRadius.circular(15.0);
-  BorderRadius get containerRadius => BorderRadius.circular(10.0);
-  BorderRadius get button2BorderRadius => BorderRadius.circular(12.0);
+  BorderRadius get radius20 => BorderRadius.circular(20.0);
+  BorderRadius get radius15 => BorderRadius.circular(15.0);
+  BorderRadius get radius12 => BorderRadius.circular(12.0);
+  BorderRadius get radius10 => BorderRadius.circular(10.0);
+  BorderRadius get radius5 => BorderRadius.circular(5.0);
 }

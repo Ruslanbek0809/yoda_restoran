@@ -198,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Container(
           decoration: BoxDecoration(
             color: AppTheme.WHITE,
-            borderRadius: AppTheme().containerRadius,
+            borderRadius: AppTheme().radius10,
           ),
           padding: EdgeInsets.only(top: 5.w, left: 25.w, right: 25.w),
           child: Form(

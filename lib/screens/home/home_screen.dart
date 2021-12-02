@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: EdgeInsets.only(left: 15.w, right: 5.w),
                               margin: EdgeInsets.only(right: 10.w),
                               decoration: BoxDecoration(
-                                borderRadius: AppTheme().mainBorderRadius,
+                                borderRadius: AppTheme().radius20,
                                 color: Theme.of(context).cardColor,
                                 boxShadow: [AppTheme().searchShadow],
                               ),

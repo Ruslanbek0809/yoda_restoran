@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen>
                 style: TextStyle(color: AppTheme.FONT_COLOR),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     borderSide: BorderSide(
                       color: AppTheme.FILL_BORDER_COLOR,
                       width: 0.3,
@@ -122,28 +122,28 @@ class _LoginScreenState extends State<LoginScreen>
                   fillColor: AppTheme.FILL_COLOR,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     borderSide: BorderSide(
                       color: AppTheme.FILL_BORDER_COLOR,
                       width: 0.3,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     borderSide: BorderSide(
                       color: AppTheme.FILL_BORDER_COLOR,
                       width: 0.3,
                     ),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     borderSide: BorderSide(
                       color: AppTheme.RED,
                       width: 0.3,
                     ),
                   ),
                   errorBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().containerRadius,
+                    borderRadius: AppTheme().radius10,
                     borderSide: BorderSide(
                       color: AppTheme.RED,
                       width: 0.3,
