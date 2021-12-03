@@ -21,12 +21,14 @@ class OrderSuccessScreen extends StatelessWidget {
               color: AppTheme.MAIN_DARK,
             ),
           ),
-          SizedBox(height: 30.w),
-          YodaImage(
-            image: 'assets/orderSuccess.jpg',
-            height: 0.25.sh,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.h),
+            child: SvgPicture.asset(
+              'assets/checkCircle.svg',
+              color: AppTheme.MAIN,
+              width: 0.28.sh,
+            ),
           ),
-          SizedBox(height: 25.w),
           Text(
             'Sargydyňyz restorana geçirildi',
             textAlign: TextAlign.center,
@@ -54,8 +56,8 @@ class OrderSuccessScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: AppTheme.MAIN,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: AppTheme().radius10),
+                  shape:
+                      RoundedRectangleBorder(borderRadius: AppTheme().radius10),
                   padding: EdgeInsets.symmetric(vertical: 15.w),
                 ),
                 child: Text(
