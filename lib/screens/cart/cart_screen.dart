@@ -16,6 +16,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final TextEditingController _promocodeController = TextEditingController();
+
   // bool _switchValue = true;
   bool _isDelivery = false;
   void _onCartOrderClicked() {
@@ -61,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
             physics: BouncingScrollPhysics(),
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Text(
                   'Sargyt',
                   style: TextStyle(
@@ -75,7 +77,7 @@ class _CartScreenState extends State<CartScreen> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
+                padding: EdgeInsets.only(top: 15.w, left: 16.w, right: 16.w),
                 itemCount: foodList.length,
                 itemBuilder: (context, pos) {
                   return CartWidget(food: foodList[pos]);
@@ -91,7 +93,7 @@ class _CartScreenState extends State<CartScreen> {
                 },
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 7.w, horizontal: 15.w),
+                padding: EdgeInsets.symmetric(vertical: 7.w, horizontal: 16.w),
                 child: Divider(
                   thickness: 1,
                   color: AppTheme.DRAWER_DIVIDER,
@@ -135,7 +137,7 @@ class _CartScreenState extends State<CartScreen> {
 //------------------ CART FOOD WIDGET TITLE ---------------------//
               Padding(
                 padding: EdgeInsets.only(
-                    top: 15.w, bottom: 10.w, left: 15.w, right: 15.w),
+                    top: 15.w, bottom: 10.w, left: 16.w, right: 16.w),
                 child: Text(
                   'Ýene bir zat?',
                   style: TextStyle(
@@ -153,7 +155,7 @@ class _CartScreenState extends State<CartScreen> {
                   children: foodList.mapIndexed((food, pos) {
                     return pos == 0
                         ? Padding(
-                            padding: EdgeInsets.only(right: 5.w, left: 15.w),
+                            padding: EdgeInsets.only(right: 6.w, left: 16.w),
                             child: CartFoodWidget(food: food),
                           )
                         : Padding(
@@ -166,7 +168,7 @@ class _CartScreenState extends State<CartScreen> {
 //------------------ DELIVERY TOGGLE TITLE ---------------------//
               Padding(
                 padding: EdgeInsets.only(
-                    top: 20.w, bottom: 10.w, left: 15.w, right: 15.w),
+                    top: 20.w, bottom: 10.w, left: 16.w, right: 16.w),
                 child: Text(
                   'Almak usuly',
                   style: TextStyle(
@@ -178,7 +180,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
 //------------------ DELIVERY TOGGLE ---------------------//
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: ToggleButtonWidget(
                   toggleCallback: (isDelivery) {
                     setState(() {
@@ -189,7 +191,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
 //------------------ DELIVERY TYPE TEXT based on condition ---------------------//
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
                   child: _isDelivery
@@ -239,8 +241,41 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                 ),
               ),
+              //------------------ PROMOCODE ---------------------//
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: TextField(
+                  controller: _promocodeController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: AppTheme.FONT_COLOR,
+                  ),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: AppTheme().radius15,
+                        borderSide: BorderSide(
+                          color: AppTheme.FILL_BORDER_SECOND_COLOR
+                              .withOpacity(0.2),
+                          width: 1,
+                        ),
+                      ),
+                      hintText: 'Promo kody giriziň',
+                      hintStyle: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.FONT_GREY_COLOR,
+                      )
+                      // suffixIcon: SvgPicture.asset(
+                      //   'assets/check_outlined_circle.svg',
+                      //   color: AppTheme.MAIN,
+                      //   width: 25.w,
+                      // ),
+                      ),
+                ),
+              ),
               SizedBox(
-                  height: 0.25
+                  height: 0.27
                       .sw), // this one is needed to compensate height of Checkout Button Widget is taking
             ],
           ),

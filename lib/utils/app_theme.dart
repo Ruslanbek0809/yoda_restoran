@@ -14,6 +14,7 @@ class AppTheme {
   static const Color CONTACT_COLOR = Color(0xFF999999);
   static const Color FILL_COLOR = Color(0xFFF8F8F8);
   static const Color FILL_BORDER_COLOR = Color(0xFFBBBBBB);
+  static const Color FILL_BORDER_SECOND_COLOR = Color(0xFFF1F0ED);
   static const Color TEXTFIELD_HINT_COLOR = Color(0xFF999999);
   static const Color BUTTON_BORDER_COLOR = Color(0xFF888888);
   static const Color TOGGLE_COLOR = Color(0xFFDDDDDB);
