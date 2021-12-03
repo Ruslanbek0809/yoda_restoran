@@ -243,6 +243,18 @@ class _CartScreenState extends State<CartScreen> {
               ),
               //------------------ PROMOCODE ---------------------//
               Padding(
+                padding: EdgeInsets.only(
+                    top: 20.w, bottom: 10.w, left: 16.w, right: 16.w),
+                child: Text(
+                  'Promo kod',
+                  style: TextStyle(
+                    color: AppTheme.MAIN_DARK,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: TextField(
                   controller: _promocodeController,
@@ -253,25 +265,40 @@ class _CartScreenState extends State<CartScreen> {
                     color: AppTheme.FONT_COLOR,
                   ),
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: AppTheme().radius15,
-                        borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_SECOND_COLOR
-                              .withOpacity(0.2),
-                          width: 1,
-                        ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: AppTheme().radius15,
+                    //   borderSide: BorderSide(
+                    //     color: AppTheme.FILL_BORDER_SECOND_COLOR
+                    //         .withOpacity(0.2),
+                    //     width: 1,
+                    //   ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: AppTheme().radius15,
+                      borderSide: BorderSide(
+                        color: AppTheme.FILL_BORDER_SECOND_COLOR,
+                        width: 1,
                       ),
-                      hintText: 'Promo kody giriziň',
-                      hintStyle: TextStyle(
-                        fontSize: 18.sp,
-                        color: AppTheme.FONT_GREY_COLOR,
-                      )
-                      // suffixIcon: SvgPicture.asset(
+                    ),
+                    hintText: 'Promo kody giriziň',
+                    hintStyle: TextStyle(
+                      fontSize: 18.sp,
+                      color: AppTheme.FONT_GREY_COLOR,
+                    ),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(right: 7.w),
+                      child: SvgPicture.asset(
+                        'assets/warning_circle.svg',
+                        color: AppTheme.CONTACT_COLOR,
+                        width: 25.w,
+                      ),
+                      // SvgPicture.asset(
                       //   'assets/check_outlined_circle.svg',
                       //   color: AppTheme.MAIN,
                       //   width: 25.w,
                       // ),
-                      ),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
