@@ -76,6 +76,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //------------------ RESTAURANT NAME ---------------------//
                       Text(
                         orderList[pos].restaurantName,
                         style: TextStyle(
@@ -115,6 +116,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     ],
                   ),
                 ),
+                //------------------ PROMOCODE ---------------------//
                 trailing: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -126,15 +128,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 5.w),
-                    Text(
-                      orderList[pos].orderPrice.toString() + ' TMT',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: Colors.transparent,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ), // Text widget is used to make UI look alike Figma UI
+                    Expanded(child: SizedBox()),
                   ],
                 ),
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
