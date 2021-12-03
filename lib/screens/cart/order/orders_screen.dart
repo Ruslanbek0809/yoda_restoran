@@ -72,7 +72,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 //// have to use SizedBox in leading bc of tileWidth issue
                 leading: SizedBox(
                   width: 0.7.sw,
-                  // height: orderList[pos].orderStatus.id == 3 ? 0.2.sw : 0.15.sw,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -133,6 +132,42 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 ),
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  //------------------ INNER PART ---------------------//
+                  //------------------ DRIVER and DELIVERY ---------------------//
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 5.h),
+                    child: Text(
+                      'Sürüji: +993 64 687171',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppTheme.FONT_COLOR,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Eltip bermek tölegi:',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                        Text(
+                          '20 TMT',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  //------------------ ORDER PRODUCT LIST ---------------------//
                   Column(
                     children: orderList[pos]
                         .foodList
@@ -175,6 +210,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       ),
                     ),
                   ),
+                  //------------------ ORDER BUTTON ---------------------//
                   SizedBox(
                     width: 1.sw,
                     child: Padding(
@@ -197,10 +233,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           style: TextStyle(
                             color: AppTheme.WHITE,
                             fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         onPressed: () {
+                          //------------------ onPressed() ---------------------//
                           if (orderList[pos].orderStatus.id == 2) {
                             if (!Platform.isIOS)
                               showDialog(
