@@ -197,12 +197,13 @@ class _CartScreenState extends State<CartScreen> {
                           children: [
                             GestureDetector(
                               onTap: () => Navigator.pop(context),
-                              child: YodaImage(
-                                image: 'assets/delivery.png',
-                                width: 25.w,
+                              child: SvgPicture.asset(
+                                'assets/delivery.svg',
+                                color: AppTheme.MAIN_DARK,
+                                width: 35.w,
                               ),
                             ),
-                            SizedBox(width: 5.w),
+                            SizedBox(width: 8.w),
                             Expanded(
                               child: Text(
                                 'Eltip bermek üçin töleg operator tarapyndan goşular.',
