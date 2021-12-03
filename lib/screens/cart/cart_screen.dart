@@ -263,8 +263,8 @@ class _CartScreenState extends State<CartScreen> {
                     '175 TMT',
                     style: TextStyle(
                       fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
                       color: AppTheme.MAIN_DARK,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   CustomTextButton(

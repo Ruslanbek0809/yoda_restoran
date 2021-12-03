@@ -329,26 +329,13 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '175 TMT',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        color: AppTheme.FONT_COLOR,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '30-40 min',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: AppTheme.FONT_COLOR,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                Text(
+                  '175 TMT',
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.FONT_COLOR,
+                  ),
                 ),
                 CustomTextButton(
                   text: 'Sargyt et',
@@ -357,6 +344,7 @@ class _CartOrderBottomSheetWidgetState extends State<CartOrderBottomSheetWidget>
                   textStyle: TextStyle(
                     color: AppTheme.WHITE,
                     fontSize: 18.sp,
+                    fontWeight: FontWeight.normal,
                   ),
                   onPressed: () {
                     Navigator.of(context)
