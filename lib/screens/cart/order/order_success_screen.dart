@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/widgets/widgets.dart';
@@ -21,13 +22,9 @@ class OrderSuccessScreen extends StatelessWidget {
               color: AppTheme.MAIN_DARK,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.h),
-            child: SvgPicture.asset(
-              'assets/checkCircle.svg',
-              color: AppTheme.MAIN,
-              width: 0.28.sh,
-            ),
+          Lottie.asset(
+            'assets/success_check.json',
+            height: 0.4.sh,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
