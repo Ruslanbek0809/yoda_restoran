@@ -239,7 +239,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         ),
                         onPressed: () {
                           //------------------ onPressed() ---------------------//
+
                           if (orderList[pos].orderStatus.id == 2) {
+                            Navigator.of(context).pushNamed(RouteList.rateUs);
+                          } else if (orderList[pos].orderStatus.id == 2) {
                             if (!Platform.isIOS)
                               showDialog(
                                 context: context,
@@ -320,15 +323,52 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                   'Siziň sargydyňyz kabul edildi!',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w600,
                                     color: AppTheme.GREEN_COLOR,
-                                    fontSize: 26.sp,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                             );
                           } else if (orderList[pos].orderStatus.id == 4) {
-                            Navigator.of(context).pushNamed(RouteList.rateUs);
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: AppTheme().radius20,
+                                ),
+                                title: Column(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/delivery.svg',
+                                      color: AppTheme.MAIN,
+                                      width: 90.w,
+                                      height: 90.w,
+                                    ),
+                                    SizedBox(height: 15.h),
+                                    Text(
+                                      'Soltan Restoran',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: AppTheme.MAIN,
+                                        fontSize: 22.sp,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                content: Text(
+                                  'Siziň sargydyňyz ugradyldy.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.GREEN_COLOR,
+                                  ),
+                                ),
+                              ),
+                            );
                           }
                         },
                       ),
