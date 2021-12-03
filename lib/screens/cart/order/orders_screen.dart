@@ -64,7 +64,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     color: Theme.of(context).colorScheme.background),
               ),
               child: ExpansionTile(
-                initiallyExpanded: false,
+                initiallyExpanded: orderList[pos].orderStatus.id == 2 ||
+                    orderList[pos].orderStatus.id == 1,
                 title: SizedBox(),
                 onExpansionChanged: (value) {
                   printLog('onExpansionChanged()');

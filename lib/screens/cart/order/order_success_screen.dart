@@ -29,22 +29,28 @@ class OrderSuccessScreen extends StatelessWidget {
               width: 0.28.sh,
             ),
           ),
-          Text(
-            'Sargydyňyz restorana geçirildi',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.sp,
-              color: AppTheme.FONT_COLOR,
-              fontWeight: FontWeight.w600,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Text(
+              'Sargydyňyz restorana geçirildi',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.sp,
+                color: AppTheme.FONT_COLOR,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           SizedBox(height: 10.w),
-          Text(
-            'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppTheme.FONT_COLOR,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Text(
+              'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: AppTheme.DIALOG_TITLE_COLOR,
+              ),
             ),
           ),
           SizedBox(height: 50.w),
@@ -54,7 +60,7 @@ class OrderSuccessScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: AppTheme.MAIN,
+                  backgroundColor: AppTheme.MAIN_DARK,
                   elevation: 0,
                   shape:
                       RoundedRectangleBorder(borderRadius: AppTheme().radius10),
@@ -65,7 +71,7 @@ class OrderSuccessScreen extends StatelessWidget {
                   style: TextStyle(
                     color: AppTheme.WHITE,
                     fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
                 onPressed: () => Navigator.of(context)
@@ -76,7 +82,7 @@ class OrderSuccessScreen extends StatelessWidget {
           SizedBox(height: 15.w),
           TextButton(
             child: Text(
-              'Sargytlar sahypasy',
+              'Sargytlar',
               style: TextStyle(
                 fontSize: 18.sp,
                 color: AppTheme.FONT_COLOR,
