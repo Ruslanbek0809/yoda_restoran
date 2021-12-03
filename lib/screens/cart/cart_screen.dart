@@ -27,6 +27,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: AppTheme.WHITE,
         elevation: 0,
@@ -265,14 +266,13 @@ class _CartScreenState extends State<CartScreen> {
                     color: AppTheme.FONT_COLOR,
                   ),
                   decoration: InputDecoration(
-                    // border: OutlineInputBorder(
-                    //   borderRadius: AppTheme().radius15,
-                    //   borderSide: BorderSide(
-                    //     color: AppTheme.FILL_BORDER_SECOND_COLOR
-                    //         .withOpacity(0.2),
-                    //     width: 1,
-                    //   ),
-                    // ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: AppTheme().radius15,
+                      borderSide: BorderSide(
+                        color: AppTheme.FILL_BORDER_SECOND_COLOR,
+                        width: 1,
+                      ),
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: AppTheme().radius15,
                       borderSide: BorderSide(
@@ -287,10 +287,13 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 7.w),
-                      child: SvgPicture.asset(
-                        'assets/warning_circle.svg',
-                        color: AppTheme.CONTACT_COLOR,
-                        width: 25.w,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: SvgPicture.asset(
+                          'assets/warning_circle.svg',
+                          color: AppTheme.CONTACT_COLOR,
+                          width: 25.w,
+                        ),
                       ),
                       // SvgPicture.asset(
                       //   'assets/check_outlined_circle.svg',
@@ -298,6 +301,18 @@ class _CartScreenState extends State<CartScreen> {
                       //   width: 25.w,
                       // ),
                     ),
+                  ),
+                ),
+              ),
+              //------------------ PROMOCODE ---------------------//
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 8.w, bottom: 10.w, left: 29.w, right: 16.w),
+                child: Text(
+                  'Siziň sargydyňyzdan 150 manat aýrylar.',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppTheme.DIALOG_TITLE_COLOR,
                   ),
                 ),
               ),
