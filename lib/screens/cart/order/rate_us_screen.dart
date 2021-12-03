@@ -180,7 +180,45 @@ class _RateUsScreenState extends State<RateUsScreen>
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (context) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppTheme().radius20,
+                        ),
+                        title: Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/success_rate_star.svg',
+                              color: AppTheme.MAIN,
+                              width: 120.w,
+                              height: 120.w,
+                            ),
+                            SizedBox(height: 15.h),
+                            Text(
+                              'Soltan Restoran',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppTheme.MAIN,
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            )
+                          ],
+                        ),
+                        content: Text(
+                          'Pikiriňizi paýlaşanyňyz üçin sag boluň!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.GREEN_COLOR,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Navigator.of(context).pop(),
                   ),
                 ),
               ),

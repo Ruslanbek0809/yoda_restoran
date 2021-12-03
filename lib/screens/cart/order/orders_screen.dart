@@ -239,8 +239,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         ),
                         onPressed: () {
                           //------------------ onPressed() ---------------------//
-
-                          if (orderList[pos].orderStatus.id == 2) {
+                          if (orderList[pos].orderStatus.id == 1) {
                             Navigator.of(context).pushNamed(RouteList.rateUs);
                           } else if (orderList[pos].orderStatus.id == 2) {
                             if (!Platform.isIOS)
