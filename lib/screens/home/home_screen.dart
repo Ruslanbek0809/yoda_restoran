@@ -97,6 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: TextField(
                                 controller: controller,
+                                onTap: () => showSearch(
+                                  context: context,
+                                  delegate: HomeSearchScreen(),
+                                ), // Built-in search functionality
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration(
                                   focusedBorder: const UnderlineInputBorder(
