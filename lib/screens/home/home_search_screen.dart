@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeSearchScreen extends SearchDelegate<String> {
   HomeSearchScreen();
@@ -8,10 +9,11 @@ class HomeSearchScreen extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        padding: EdgeInsets.only(right: 10),
+        padding: EdgeInsets.only(right: 10.w),
         icon: Icon(
           Icons.clear,
-          color: AppTheme.MAIN_DARK,
+          size: 25.w,
+          color: AppTheme.DRAWER_DIVIDER,
         ),
         onPressed: () {
           query = '';
@@ -25,10 +27,12 @@ class HomeSearchScreen extends SearchDelegate<String> {
     return IconButton(
       icon: Icon(
         Icons.arrow_back_ios,
-        size: 20,
-        color: AppTheme.MAIN_DARK,
+        size: 20.w,
+        color: AppTheme.FONT_COLOR,
       ),
-      onPressed: () {},
+      onPressed: () {
+        // close(context, null); // Closes the search page and returns to the underlying route
+      },
     );
   }
 
@@ -42,33 +46,30 @@ class HomeSearchScreen extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Scaffold(body: Center());
-    // ListView.builder(
-    //   itemBuilder: (context, index) => ListTile(
-    //     onTap: () {
-    //       Navigator.push(
-    //           context,
-    //           MaterialPageRoute(
-    //               builder: (context) => ProductDetailScreen(
-    //                     product: suggestionList[index],
-    //                     market: market,
-    //                   )));
-    //     },
-    //     title: RichText(
-    //         text: TextSpan(
-    //       text: vm.lang == 'en' && suggestionList[index].nameEn != null
-    //           ? suggestionList[index].nameEn
-    //           : vm.lang == 'ru' && suggestionList[index].nameRu != null
-    //               ? suggestionList[index].nameRu
-    //               : suggestionList[index].nameTm ?? '',
-    //       style: TextStyle(
-    //         color: Colors.black,
-    //         fontSize: 18,
-    //         fontFamily: GoogleFonts.poppins().fontFamily,
-    //       ),
-    //     )),
-    //   ),
-    //   itemCount: suggestionList.length,
-    // );
+    return SizedBox();
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppTheme.WHITE,
+        elevation: 0.5,
+      ),
+      textTheme: TextTheme(
+        headline6: TextStyle( 
+          fontSize: 18.sp,
+          fontWeight: FontWeight.normal,
+          color: AppTheme.MAIN_DARK,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+        errorBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+      ),
+    );
   }
 }
