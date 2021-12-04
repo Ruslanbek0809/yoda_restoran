@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
-
 import 'search.dart';
 
 class HeaderSearchWidget extends StatelessWidget {
@@ -9,12 +9,8 @@ class HeaderSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.only(left: 15.w, right: 5.w),
         margin: EdgeInsets.only(right: 10.w),
-        // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-        // margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        // height: 40.h,
-
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
         decoration: BoxDecoration(
           borderRadius: AppTheme().radius20,
           color: Theme.of(context).cardColor,
@@ -46,10 +42,17 @@ class HeaderSearchWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Gözleg'),
-              const Icon(
-                Icons.search,
-                size: 24,
+              Text(
+                'Gözleg',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: AppTheme.FONT_GREY_COLOR,
+                ),
+              ),
+              Icon(
+                CupertinoIcons.search,
+                size: 22.w,
+                color: AppTheme.FONT_COLOR,
               ),
             ],
           ),
