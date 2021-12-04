@@ -35,7 +35,7 @@ class HeaderSearchWidget extends StatelessWidget {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SearchScreen(isBrandSearch: true),
+                builder: (context) => SearchScreen(),
               ),
             );
           },

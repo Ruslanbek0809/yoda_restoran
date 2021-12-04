@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchBox extends StatefulWidget {
+class SearchBoxWidget extends StatefulWidget {
   final bool autoFocus;
   final FocusNode? focusNode;
   final TextEditingController? controller;
@@ -11,7 +11,7 @@ class SearchBox extends StatefulWidget {
   final Function(String value)? onChanged;
   final Function(String value)? onSubmitted;
 
-  SearchBox({
+  SearchBoxWidget({
     Key? key,
     this.focusNode,
     this.onCancel,
@@ -22,13 +22,11 @@ class SearchBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchBoxState createState() => _SearchBoxState();
+  _SearchBoxWidgetState createState() => _SearchBoxWidgetState();
 }
 
-class _SearchBoxState extends State<SearchBox> {
+class _SearchBoxWidgetState extends State<SearchBoxWidget> {
   TextEditingController? _textController;
-
-  double get widthButtonCancel => _textController!.text.isEmpty ? 0 : 50;
 
   String _oldSearchText = '';
   Timer? _debounceQuery;
@@ -71,17 +69,19 @@ class _SearchBoxState extends State<SearchBox> {
   Widget build(BuildContext context) {
     // final currentLang = Provider.of<LangProvider>(context).currentLang;
     return Container(
-      height: 45,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColorLight,
+        color: AppTheme.WHITE,
         borderRadius: BorderRadius.circular(6),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
+      margin: EdgeInsets.symmetric(vertical: 5.h),
       child: TextField(
+        style: TextStyle(
+          fontSize: 18.sp,
+          color: AppTheme.MAIN_DARK,
+        ),
         decoration: InputDecoration(
           fillColor: AppTheme.WHITE,
-          // hintText: i18n(currentLang, ki18nSearchTitle),
           enabledBorder: InputBorder.none,
           border: InputBorder.none,
         ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'search.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchScreen extends StatefulWidget {
-  final bool isBrandSearch;
   final int? catID;
   final int? subCatID;
-  SearchScreen({this.isBrandSearch = false, this.catID, this.subCatID});
+  SearchScreen({this.catID, this.subCatID});
   @override
   State<StatefulWidget> createState() => _SearchScreenState();
 }
@@ -21,7 +21,6 @@ class _SearchScreenState<T> extends State<SearchScreen>
 
   bool isVisibleSearch = false;
   bool _showProductsResult = false;
-  bool _showBrandsResult = false;
 
   // SearchProvider get _searchPvd =>
   //     Provider.of<SearchProvider>(context, listen: false);
@@ -38,11 +37,8 @@ class _SearchScreenState<T> extends State<SearchScreen>
     _searchFieldNode.addListener(() {
       if (_searchKeyword.isEmpty && !_searchFieldNode.hasFocus) {
         _showProductsResult = false;
-        _showBrandsResult = false;
       } else {
         _showProductsResult = !_searchFieldNode.hasFocus;
-        if (widget.isBrandSearch)
-          _showBrandsResult = !_searchFieldNode.hasFocus;
       }
     });
   }
@@ -58,7 +54,6 @@ class _SearchScreenState<T> extends State<SearchScreen>
   void _onSearchTextChangeCallBack(String searchText) {
     if (searchText.isEmpty) {
       _showProductsResult = false;
-      _showBrandsResult = false;
       setState(() {});
       return;
     }
@@ -71,11 +66,6 @@ class _SearchScreenState<T> extends State<SearchScreen>
         //   catID: widget.catID,
         //   subCatID: widget.subCatID,
         // );
-//// If brandSearch is enabled
-        // if (widget.isBrandSearch) {
-        //   _showBrandsResult = true;
-        //   _searchPvd.loadBrands(searchText: searchText);
-        // }
       });
     }
   }
@@ -90,11 +80,6 @@ class _SearchScreenState<T> extends State<SearchScreen>
       //   catID: widget.catID,
       //   subCatID: widget.subCatID,
       // );
-//// If brandSearch is enabled
-      if (widget.isBrandSearch) {
-        _showBrandsResult = true;
-        // _searchPvd.loadBrands(searchText: searchText);
-      }
     });
 
     var currentFocus = FocusScope.of(context);
@@ -133,20 +118,18 @@ class _SearchScreenState<T> extends State<SearchScreen>
           backgroundColor: AppTheme.WHITE,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            backgroundColor: theme.backgroundColor,
-            iconTheme: theme.primaryIconTheme,
-            textTheme: theme.primaryTextTheme,
-            brightness: Theme.of(context).brightness,
+            backgroundColor: AppTheme.WHITE,
+            elevation: 0.5,
             titleSpacing: 0,
             leading: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back_ios,
-                color: Colors.black,
-                size: 20,
+                color: AppTheme.FONT_COLOR,
+                size: 20.w,
               ),
               onPressed: close,
             ),
-            title: SearchBox(
+            title: SearchBoxWidget(
               autoFocus: true,
               controller: _searchFieldController,
               focusNode: _searchFieldNode,
@@ -154,28 +137,33 @@ class _SearchScreenState<T> extends State<SearchScreen>
               onSubmitted: _onSubmitCallBack,
             ),
             actions: [
-              _searchFieldController.text.isEmpty
-                  ? IconButton(
-                      tooltip: 'Search',
-                      // tooltip: i18n(currentLang, ki18nSearch),
-                      icon: const Icon(
-                        Icons.search,
-                        color: Colors.black,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: _searchFieldController.text.isEmpty
+                    ? IconButton(
+                        tooltip: 'Search',
+                        // tooltip: i18n(currentLang, ki18nSearch),
+                        icon: Icon(
+                          Icons.search,
+                          size: 22.w,
+                          color: AppTheme.DRAWER_DIVIDER,
+                        ),
+                        onPressed: () {},
+                      )
+                    : IconButton(
+                        tooltip: 'Clear',
+                        // tooltip: i18n(currentLang, ki18nClearCart),
+                        icon: Icon(
+                          Icons.clear,
+                          size: 22.w,
+                          color: AppTheme.DRAWER_DIVIDER,
+                        ),
+                        onPressed: () {
+                          _searchFieldController.clear();
+                          _searchFieldNode.requestFocus();
+                        },
                       ),
-                      onPressed: () {},
-                    )
-                  : IconButton(
-                      tooltip: 'Clear',
-                      // tooltip: i18n(currentLang, ki18nClearCart),
-                      icon: const Icon(
-                        Icons.clear,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        _searchFieldController.clear();
-                        _searchFieldNode.requestFocus();
-                      },
-                    ),
+              ),
             ],
           ),
           body: AnimatedSwitcher(
