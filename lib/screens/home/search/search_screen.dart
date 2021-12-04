@@ -182,13 +182,16 @@ class _SearchScreenState<T> extends State<SearchScreen>
             duration: const Duration(milliseconds: 300),
             reverseDuration: const Duration(milliseconds: 300),
             child: _showProductsResult
-                ? SearchProductsResultWidget(
-                    searchName: _searchKeyword,
-                  )
+                ? SizedBox() // In production change to SearchProductsResultWidget()
+                // SearchProductsResultWidget(
+                //     searchName: _searchKeyword,
+                //   )
                 : Align(
                     alignment: Alignment.topCenter,
-                    child: RecentSearchesWidget(onTap: _onSubmitCallBack),
-                  ),
+                    child:
+                        SizedBox() // In production change to RecentSearchesWidget()
+                    // RecentSearchesWidget(onTap: _onSubmitCallBack),
+                    ),
           ),
         ),
       ),

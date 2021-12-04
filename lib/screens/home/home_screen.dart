@@ -6,6 +6,7 @@ import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/widgets.dart';
 import 'home.dart';
+import 'search/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -86,38 +87,39 @@ class _HomeScreenState extends State<HomeScreen> {
                             tooltip: 'Drawer',
                           ),
 //------------------ SEARCH ---------------------//
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 15.w, right: 5.w),
-                              margin: EdgeInsets.only(right: 10.w),
-                              decoration: BoxDecoration(
-                                borderRadius: AppTheme().radius20,
-                                color: Theme.of(context).cardColor,
-                                boxShadow: [AppTheme().searchShadow],
-                              ),
-                              child: TextField(
-                                controller: controller,
-                                onTap: () => showSearch(
-                                  context: context,
-                                  delegate: HomeSearchScreen(),
-                                ), // Built-in search functionality
-                                textAlignVertical: TextAlignVertical.center,
-                                decoration: InputDecoration(
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.5, color: Colors.transparent),
-                                  ),
-                                  suffixIcon: Icon(
-                                    CupertinoIcons.search,
-                                    color: AppTheme.FONT_COLOR,
-                                  ),
-                                  border: InputBorder.none,
-                                  hintText: 'Gözleg',
-                                ),
-                                onSubmitted: (query) {},
-                              ),
-                            ),
-                          ),
+                          HeaderSearchWidget(),
+                          // Expanded(
+                          //   child: Container(
+                          //     padding: EdgeInsets.only(left: 15.w, right: 5.w),
+                          //     margin: EdgeInsets.only(right: 10.w),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: AppTheme().radius20,
+                          //       color: Theme.of(context).cardColor,
+                          //       boxShadow: [AppTheme().searchShadow],
+                          //     ),
+                          //     child: TextField(
+                          //       controller: controller,
+                          //       onTap: () => showSearch(
+                          //         context: context,
+                          //         delegate: HomeSearchScreen(),
+                          //       ), // Built-in search functionality
+                          //       textAlignVertical: TextAlignVertical.center,
+                          //       decoration: InputDecoration(
+                          //         focusedBorder: const UnderlineInputBorder(
+                          //           borderSide: BorderSide(
+                          //               width: 1.5, color: Colors.transparent),
+                          //         ),
+                          //         suffixIcon: Icon(
+                          //           CupertinoIcons.search,
+                          //           color: AppTheme.FONT_COLOR,
+                          //         ),
+                          //         border: InputBorder.none,
+                          //         hintText: 'Gözleg',
+                          //       ),
+                          //       onSubmitted: (query) {},
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
 //------------------ BANNERS ---------------------//

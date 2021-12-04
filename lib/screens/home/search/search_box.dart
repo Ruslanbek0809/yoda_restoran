@@ -1,11 +1,7 @@
 import 'dart:async';
-
-import 'package:belent_online/common/theme/theme.dart';
-
-import '../../../common/utils.dart';
-import '../../../providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class SearchBox extends StatefulWidget {
   final bool autoFocus;
@@ -73,7 +69,7 @@ class _SearchBoxState extends State<SearchBox> {
 
   @override
   Widget build(BuildContext context) {
-    final currentLang = Provider.of<LangProvider>(context).currentLang;
+    // final currentLang = Provider.of<LangProvider>(context).currentLang;
     return Container(
       height: 45,
       decoration: BoxDecoration(
@@ -84,8 +80,8 @@ class _SearchBoxState extends State<SearchBox> {
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextField(
         decoration: InputDecoration(
-          fillColor: AppTheme.ACCENT_COLOR,
-          hintText: i18n(currentLang, ki18nSearchTitle),
+          fillColor: AppTheme.WHITE,
+          // hintText: i18n(currentLang, ki18nSearchTitle),
           enabledBorder: InputBorder.none,
           border: InputBorder.none,
         ),
