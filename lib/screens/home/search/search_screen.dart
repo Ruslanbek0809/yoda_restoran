@@ -178,48 +178,51 @@ class _SearchScreenState<T> extends State<SearchScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //------------------ RESTAURANT PART ---------------------//
-                  Row(
-                    children: [
-                      //------------------ IMAGE ---------------------//
-                      Flexible(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          child: YodaImage(
-                            image: restaurants[pos].image,
-                            height: 35.h,
-                            width: 35.h,
-                            borderRadius: Constants.BORDER_RADIUS_10,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        //------------------ IMAGE ---------------------//
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: YodaImage(
+                              image: restaurants[pos].image,
+                              height: 35.h,
+                              width: 35.h,
+                              borderRadius: Constants.BORDER_RADIUS_10,
+                            ),
                           ),
                         ),
-                      ),
-                      //------------------ NAME and ADDRESS ---------------------//
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              restaurants[pos].name,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.w600,
-                                color: AppTheme.MAIN_DARK,
+                        //------------------ NAME and ADDRESS ---------------------//
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                restaurants[pos].name,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppTheme.MAIN_DARK,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 3.h),
-                            Text(
-                              'G. Kulyýew köç. 29 Rowana, 2-nji gat',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: AppTheme.DRAWER_ICON,
+                              SizedBox(height: 3.h),
+                              Text(
+                                'G. Kulyýew köç. 29 Rowana, 2-nji gat',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppTheme.DRAWER_ICON,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   //------------------ RESTAURANT FOODS PART ---------------------//
                   ListView.separated(
@@ -227,32 +230,35 @@ class _SearchScreenState<T> extends State<SearchScreen>
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.only(top: 15.h, left: 24.w + 35.h),
                     itemCount: foodList.length,
-                    itemBuilder: (context, pos) => Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          foodList[pos].name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 16.w, left: 5.w),
-                          child: Text(
-                            foodList[pos].price.toString() + ' TMT',
+                    itemBuilder: (context, pos) => GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            foodList[pos].name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 18.sp,
                               color: AppTheme.FONT_COLOR,
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(right: 16.w, left: 5.w),
+                            child: Text(
+                              foodList[pos].price.toString() + ' TMT',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.FONT_COLOR,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     separatorBuilder: (context, index) {
                       return Padding(
@@ -265,17 +271,20 @@ class _SearchScreenState<T> extends State<SearchScreen>
                     },
                   ),
                   //------------------ FOOD MORE ---------------------//
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 24.w + 35.h,
-                      top: 15.h,
-                      bottom: 5.h,
-                    ),
-                    child: Text(
-                      'Ýene ' + '${foodList.length - 3}',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: AppTheme.DRAWER_ICON,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 24.w + 35.h,
+                        top: 15.h,
+                        bottom: 5.h,
+                      ),
+                      child: Text(
+                        'Ýene ' + '${foodList.length - 3}',
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          color: AppTheme.DRAWER_ICON,
+                        ),
                       ),
                     ),
                   ),
