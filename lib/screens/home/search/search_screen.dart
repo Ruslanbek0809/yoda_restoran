@@ -264,6 +264,21 @@ class _SearchScreenState<T> extends State<SearchScreen>
                       );
                     },
                   ),
+                  //------------------ FOOD MORE ---------------------//
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 24.w + 35.h,
+                      top: 15.h,
+                      bottom: 5.h,
+                    ),
+                    child: Text(
+                      'Ýene ' + '${foodList.length - 3}',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        color: AppTheme.DRAWER_ICON,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
