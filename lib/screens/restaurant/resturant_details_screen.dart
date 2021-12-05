@@ -215,7 +215,16 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                               _isShrink ? Colors.transparent : AppTheme.WHITE,
                           child: InkWell(
                             customBorder: CircleBorder(),
-                            onTap: () {},
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RestaurantSearchScreen(
+                                    bottomCartController: bottomCartController,
+                                  ),
+                                ),
+                              );
+                            },
                             child: Padding(
                               padding: EdgeInsets.all(8.w),
                               child: Icon(

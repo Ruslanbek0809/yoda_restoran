@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             tooltip: 'Drawer',
                           ),
 //------------------ SEARCH ---------------------//
-                          HeaderSearchWidget(),
+                          HomeSearchWidget(),
                         ],
                       ),
 //------------------ BANNERS ---------------------//

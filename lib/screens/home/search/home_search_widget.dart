@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'search.dart';
 
-class HeaderSearchWidget extends StatelessWidget {
+class HomeSearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -16,20 +16,6 @@ class HeaderSearchWidget extends StatelessWidget {
           color: Theme.of(context).cardColor,
           boxShadow: [AppTheme().searchShadow],
         ),
-        // decoration: BoxDecoration(
-        //   color: Colors.white,
-        //   boxShadow: [
-        //     BoxShadow(
-        //       color: Colors.black.withOpacity(0.1),
-        //       blurRadius: 3.0,
-        //     ),
-        //   ],
-        //   borderRadius: BorderRadius.circular(15.0),
-        //   border: Border.all(
-        //     width: 1.0,
-        //     color: Colors.black.withOpacity(0.05),
-        //   ),
-        // ),
         child: InkWell(
           onTap: () async {
             await Navigator.push(
