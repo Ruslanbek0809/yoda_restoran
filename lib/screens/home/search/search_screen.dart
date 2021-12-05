@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'package:yoda_res/widgets/widgets.dart';
+import '../home.dart';
 import 'search.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -166,21 +168,77 @@ class _SearchScreenState<T> extends State<SearchScreen>
               ),
             ],
           ),
-          body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            reverseDuration: const Duration(milliseconds: 300),
-            child: _showProductsResult
-                ? SizedBox() // In production change to SearchProductsResultWidget()
-                // SearchProductsResultWidget(
-                //     searchName: _searchKeyword,
-                //   )
-                : Align(
-                    alignment: Alignment.topCenter,
-                    child:
-                        SizedBox() // In production change to RecentSearchesWidget()
-                    // RecentSearchesWidget(onTap: _onSubmitCallBack),
-                    ),
+          //------------------ ListView builder ---------------------//
+          body: ListView.builder(
+            padding: EdgeInsets.only(top: 10.w),
+            itemCount: restaurants.length,
+            itemBuilder: (ctx, pos) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              child: Column(
+                children: [
+                  //------------------ RESTAURANT PART ---------------------//
+                  Row(
+                    children: [
+                      //------------------ IMAGE ---------------------//
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: YodaImage(
+                            image: restaurants[pos].image,
+                            height: 35.h,
+                            width: 35.h,
+                            borderRadius: Constants.BORDER_RADIUS_10,
+                          ),
+                        ),
+                      ),
+                      //------------------ NAME and ADDRESS ---------------------//
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              restaurants[pos].name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.MAIN_DARK,
+                              ),
+                            ),
+                            SizedBox(height: 3.h),
+                            Text(
+                              'G. Kulyýew köç. 29 Rowana, 2-nji gat',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: AppTheme.DRAWER_ICON,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
+          // AnimatedSwitcher(
+          //   duration: const Duration(milliseconds: 300),
+          //   reverseDuration: const Duration(milliseconds: 300),
+          //   child: _showProductsResult
+          //       ? SizedBox() // In production change to SearchProductsResultWidget()
+          //       // SearchProductsResultWidget(
+          //       //     searchName: _searchKeyword,
+          //       //   )
+          //       : Align(
+          //           alignment: Alignment.topCenter,
+          //           child:
+          //               SizedBox() // In production change to RecentSearchesWidget()
+          //           // RecentSearchesWidget(onTap: _onSubmitCallBack),
+          //           ),
+          // ),
         ),
       ),
     );
