@@ -191,4 +191,9 @@ List<Food> foodList = [
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
+  Food(3, 'Burger', 150, 'g', 25, 'assets/burgerzone.jpg', [
+    AdditionalFoodModel('Peýnir', 10, false),
+    AdditionalFoodModel('Ýumurtga', 10, false),
+    AdditionalFoodModel('Bet zat', 15, false),
+  ]),
 ];

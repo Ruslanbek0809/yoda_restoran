@@ -11,6 +11,7 @@ class AppTheme {
   static const Color BOTTOM_SHEET_FONT_COLOR = Color(0xFF787773);
   static const Color DRAWER_ICON = Color(0xFF9D9B98);
   static const Color DRAWER_DIVIDER = Color(0xFFCCCCCC);
+  static const Color DRAWER_SECOND_DIVIDER_COLOR = Color(0xFFDDDDDD);
   static const Color CONTACT_COLOR = Color(0xFF999999);
   static const Color FILL_COLOR = Color(0xFFF8F8F8);
   static const Color FILL_BORDER_COLOR = Color(0xFFBBBBBB);

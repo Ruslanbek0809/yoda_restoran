@@ -175,6 +175,7 @@ class _SearchScreenState<T> extends State<SearchScreen>
             itemBuilder: (ctx, pos) => Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //------------------ RESTAURANT PART ---------------------//
                   Row(
@@ -219,7 +220,50 @@ class _SearchScreenState<T> extends State<SearchScreen>
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  //------------------ RESTAURANT FOODS PART ---------------------//
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.only(top: 15.h, left: 24.w + 35.h),
+                    itemCount: foodList.length,
+                    itemBuilder: (context, pos) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          foodList[pos].name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.w, left: 5.w),
+                          child: Text(
+                            foodList[pos].price.toString() + ' TMT',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.FONT_COLOR,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    separatorBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.h),
+                        child: Divider(
+                          thickness: 0.5,
+                          color: AppTheme.DRAWER_SECOND_DIVIDER_COLOR,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

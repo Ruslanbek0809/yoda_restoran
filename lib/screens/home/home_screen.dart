@@ -30,7 +30,12 @@ List<HomeCategory> homeCategories = [
 ];
 
 List<Restaurant> restaurants = [
-  Restaurant(1, 'Sushi', 'Sushi we başgalar', 'assets/sushi.png'),
+  Restaurant(
+    1,
+    'Sushi',
+    'Sushi we başgalar',
+    'assets/sushi.png',
+  ),
   Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
   Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
   Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
