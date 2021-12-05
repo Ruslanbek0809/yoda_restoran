@@ -80,7 +80,7 @@ class _FoodWidgetState extends State<FoodWidget> with TickerProviderStateMixin {
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.0, vertical: 5.0),
                         decoration: BoxDecoration(
-                          color: AppTheme.MAIN,
+                          color: AppTheme.GREEN_COLOR,
                           borderRadius: BorderRadius.only(
                             topLeft:
                                 Radius.circular(Constants.BORDER_RADIUS_20),

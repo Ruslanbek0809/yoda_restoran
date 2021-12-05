@@ -170,7 +170,7 @@ class _RestaurantSearchScreenState<T> extends State<RestaurantSearchScreen>
               ),
             ],
           ),
-          //------------------ ListView builder ---------------------//
+          //------------------ FOOD ListView builder ---------------------//
           body: GridView.builder(
             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
             shrinkWrap: true,

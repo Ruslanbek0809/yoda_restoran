@@ -204,7 +204,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color:
+                          color: 
                               _isShrink ? Colors.transparent : AppTheme.WHITE,
                           // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                         ),
