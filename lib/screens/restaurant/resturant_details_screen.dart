@@ -264,14 +264,18 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                               topRight: Radius.circular(20.0),
                             ),
                           ),
-                          padding: EdgeInsets.fromLTRB(15.w, 17.h, 15.w, 50.h),
+                          padding: EdgeInsets.only(top: 17.h, bottom: 50.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               //------------------ TITLE NAME ---------------------//
                               Padding(
-                                padding: EdgeInsets.only(bottom: 10.h),
+                                padding: EdgeInsets.only(
+                                  bottom: 10.h,
+                                  left: 16.w,
+                                  right: 16.w,
+                                ),
                                 child: Text(
                                   'Kebapçy',
                                   style: TextStyle(
@@ -292,7 +296,11 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                     ),
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 10.w, vertical: 7.h),
-                                    margin: EdgeInsets.symmetric(vertical: 5.w),
+                                    margin: EdgeInsets.only(
+                                      top: 5.w,
+                                      bottom: 5.w,
+                                      left: 16.w,
+                                    ),
                                     child: Row(
                                       children: [
                                         Icon(
@@ -358,21 +366,32 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 8.h,
+                                  horizontal: 16.w,
+                                ),
                                 child: Divider(
                                   color: AppTheme.MAIN_LIGHT,
                                   thickness: 1.w,
                                 ),
                               ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
-                              ToggleButtonWidget(
-                                toggleCallback: (isDelivery) {
-                                  setState(() {
-                                    _isDelivery = isDelivery;
-                                  });
-                                },
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                child: ToggleButtonWidget(
+                                  toggleCallback: (isDelivery) {
+                                    setState(() {
+                                      _isDelivery = isDelivery;
+                                    });
+                                  },
+                                ),
                               ),
-                              //------------------ INFO ---------------------//
+                              //------------------ MAIN DIVIDER ---------------------//
+                              Container(
+                                color: AppTheme.MAIN_DIVIDER_COLOR,
+                                padding: EdgeInsets.symmetric(vertical: 4.h),
+                                margin: EdgeInsets.only(top: 15.h),
+                              ),
                             ],
                           ),
                         ),
@@ -492,6 +511,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                             crossAxisCount: 2,
                             mainAxisSpacing: 10.w, //spaceTopBottom
                             crossAxisSpacing: 5.w, //spaceLeftRight
+                            // mainAxisSpacing: 12.h, //spaceTopBottom
+                            // crossAxisSpacing: 8.w, //spaceLeftRight
                             childAspectRatio: itemWidth / itemHeight,
                           ),
                           itemCount: foodList.length,
