@@ -204,7 +204,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: 
+                          color:
                               _isShrink ? Colors.transparent : AppTheme.WHITE,
                           // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                         ),
@@ -270,15 +270,17 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               //------------------ TITLE NAME ---------------------//
-                              Text(
-                                'Kebapçy',
-                                style: TextStyle(
-                                  fontSize: 32.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppTheme.MAIN_DARK,
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10.h),
+                                child: Text(
+                                  'Kebapçy',
+                                  style: TextStyle(
+                                    fontSize: 32.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.MAIN_DARK,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 10.h),
                               //------------------ RATE / WORK TIME / INFO---------------------//
                               Row(
                                 children: [
@@ -289,18 +291,46 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                       borderRadius: AppTheme().radius20,
                                     ),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 12.5.w, vertical: 7.5.h),
+                                        horizontal: 10.w, vertical: 7.h),
                                     margin: EdgeInsets.symmetric(vertical: 5.w),
                                     child: Row(
                                       children: [
                                         Icon(
-                                          Icons.star,
+                                          Icons.star_rounded,
                                           color: AppTheme.MAIN_DARK,
-                                          size: 26.w,
+                                          size: 22.w,
                                         ),
                                         SizedBox(width: 3.w),
                                         Text(
                                           '4.5',
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            color: AppTheme.FONT_COLOR,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  //------------------ WORK TIME ---------------------//
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.MAIN_LIGHT,
+                                      borderRadius: AppTheme().radius20,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10.w, vertical: 7.h),
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 5.h, horizontal: 10.w),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.access_time_rounded,
+                                          color: AppTheme.MAIN_DARK,
+                                          size: 22.w,
+                                        ),
+                                        SizedBox(width: 5.w),
+                                        Text(
+                                          '10:00 - 22:00',
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             color: AppTheme.FONT_COLOR,
@@ -309,35 +339,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                       ],
                                     ),
                                   ),
-                                  SizedBox(width: 10.w),
-                                  //------------------ WORK TIME ---------------------//
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppTheme.MAIN_LIGHT,
-                                      borderRadius: AppTheme().radius20,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 12.5.w, vertical: 7.5.h),
-                                    margin: EdgeInsets.symmetric(vertical: 5.w),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.access_time_rounded,
-                                          color: AppTheme.MAIN_DARK,
-                                          size: 26.w,
-                                        ),
-                                        SizedBox(width: 5.w),
-                                        Text(
-                                          '10:00 - 22:00',
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: AppTheme.FONT_COLOR,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
                                   //------------------ INFO ---------------------//
                                   GestureDetector(
                                     onTap: () => _onRestaurantInfoPressed(),
@@ -347,7 +348,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                         shape: BoxShape.circle,
                                       ),
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 7.5.w, vertical: 7.5.h),
+                                          horizontal: 5.w, vertical: 5.h),
                                       child: SvgPicture.asset(
                                         'assets/restaurant_info.svg',
                                         color: AppTheme.FONT_COLOR,
@@ -357,7 +358,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: 3.h),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
                                 child: Divider(
                                   color: AppTheme.MAIN_LIGHT,
                                   thickness: 1.w,
@@ -371,6 +372,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                                   });
                                 },
                               ),
+                              //------------------ INFO ---------------------//
                             ],
                           ),
                         ),

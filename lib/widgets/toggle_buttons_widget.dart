@@ -27,7 +27,7 @@ class _ToggleButtonWidgetState extends State<ToggleButtonWidget> {
             color: AppTheme.MAIN_LIGHT,
             borderRadius: AppTheme().radius15,
           ),
-          height: 47.h,
+          height: 44.h,
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
           child: Stack(
             children: [
