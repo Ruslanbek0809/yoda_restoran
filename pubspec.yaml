@@ -41,6 +41,7 @@ dependencies:
   # TOOLS
   package_info: ^2.0.2
   intl: ^0.17.0
+  json_annotation: ^4.4.0
 
   # NETWORK
   dio: ^4.0.4
@@ -68,6 +69,7 @@ dev_dependencies:
 
   build_runner: ^2.1.5
   stacked_generator: ^0.5.6
+  json_serializable: ^6.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
