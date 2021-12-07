@@ -31,7 +31,9 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # STATE MANAGEMENT
-  provider: ^6.0.0
+  stacked: ^2.2.7+1
+  stacked_services: ^0.8.16
+  stacked_hooks: ^0.2.1+1 # Mostly used in TextEditingController
 
   # STORAGE
   shared_preferences: ^2.0.7
@@ -39,6 +41,9 @@ dependencies:
   # TOOLS
   package_info: ^2.0.2
   intl: ^0.17.0
+
+  # NETWORK
+  dio: ^4.0.4
 
   # UI
   keyboard_actions: ^3.3.1+1
@@ -60,6 +65,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^2.1.5
+  stacked_generator: ^0.5.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

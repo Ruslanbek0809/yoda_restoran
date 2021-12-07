@@ -91,7 +91,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   @override
   Widget build(BuildContext context) {
     double itemWidth = (1.sw - 5.w * 2 - 20.w) / 2;
-    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview horizontal padding) / crossAxisCount
+    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing) / crossAxisCount
 
     double itemHeight = itemWidth + 0.3.sw; // 0.4.sw is for item height
     printLog('ItemHeight: $itemHeight and expected ${0.75.sw}');
