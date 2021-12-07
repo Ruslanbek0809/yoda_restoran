@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:yoda_res/app/constants.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class ApiRootService {
-  static Dio dio = Dio();
+  Dio dio = Dio();
 
-  static Future initDio() async {
+  Future initDio() async {
     Map<String, dynamic> _headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ class ApiRootService {
     // if (token != null) headers['Authorization'] = "Bearer $token";
     // dio.options.baseUrl =
     //     lang == 'tm' ? MyConstants.baseUrlTm : MyConstants.baseUrlRu;
-    dio.options.baseUrl = Constants.baseUrl;
+    dio.options.baseUrl = Constants.baseUrlTm;
     dio.options.headers = _headers;
 
     dio.interceptors.add(
