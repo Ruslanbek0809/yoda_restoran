@@ -5,8 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'app/app.router.dart';
+import 'ui/widgets/widgets.dart';
 import 'utils/utils.dart';
-import 'widgets/widgets.dart';
 
 // final mainScaffoldKey = GlobalKey();
 // final GlobalKey<NavigatorState> yodaResNavigatorKey = GlobalKey();
@@ -24,6 +24,14 @@ class YodaResApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: () => MaterialApp(
         title: Constants.appName,
+        navigatorKey: StackedService.navigatorKey, // For stacked_services
+
+        onGenerateRoute: StackedRouter()
+            .onGenerateRoute, // Auto generates all routes using stacked package
+
+        // routes: Routes.getAllRoutes,
+        // navigatorKey: yodaResNavigatorKey,
+        // onGenerateRoute: Routes.getRouteGenerate,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -65,11 +73,6 @@ class YodaResApp extends StatelessWidget {
             ),
           );
         },
-        navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
-        // routes: Routes.getAllRoutes,
-        // navigatorKey: yodaResNavigatorKey,
-        // onGenerateRoute: Routes.getRouteGenerate,
       ),
     );
   }

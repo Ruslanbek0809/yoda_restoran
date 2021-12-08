@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
 
 void showFoodBottomSheet(BuildContext context, Food food) {
   showModalBottomSheet(

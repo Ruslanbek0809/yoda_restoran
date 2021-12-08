@@ -3,9 +3,46 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+final List<String> imgList = [
+  'assets/foodbanner1.png',
+  'assets/foodbanner.jpg',
+  'assets/foodbanner2.png',
+];
+
+List<HomeCategory> homeCategories = [
+  HomeCategory(1, 'Halanlarym', 'assets/cat_fav.png'),
+  HomeCategory(2, 'Sushi', 'assets/cat_sushi.png'),
+  HomeCategory(3, 'Burger', 'assets/cat_burger.png'),
+  HomeCategory(4, 'Pizza', 'assets/cat_pizza.png'),
+  HomeCategory(5, 'Hemmesi', 'assets/cat_filter.png'),
+];
+
+List<Restaurant> restaurants = [
+  Restaurant(
+    1,
+    'Sushi',
+    'Sushi we başgalar',
+    'assets/sushi.png',
+  ),
+  Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
+  Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
+  Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
+];
+
+List<Discount> discounts = [
+  Discount(1, 'assets/discount1.png'),
+  Discount(2, 'assets/discount2.png'),
+  Discount(3, 'assets/discount3.png'),
+  Discount(4, 'assets/discount4.png'),
+  Discount(5, 'assets/discount1.png'),
+  Discount(6, 'assets/discount2.png'),
+  Discount(7, 'assets/discount3.png'),
+  Discount(8, 'assets/discount4.png'),
+];
 
 enum FormValidation { phoneInvalid, valid }
 

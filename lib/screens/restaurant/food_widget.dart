@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yoda_res/models/food.dart';
 import 'package:yoda_res/screens/restaurant/food_bottom_sheet.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FoodWidget extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
 
 import 'startup_viewmodel.dart';
@@ -9,13 +10,11 @@ class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-        body: Center(
-          child: Text('StartUpView'),
-        ),
-        // floatingActionButton:
-        //     FloatingActionButton(onPressed: model.navigateToReactiveEx),
-      ),
+      onModelReady: (model) =>
+          SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+        model.runStartupLogic();
+      }),
+      builder: (context, model, child) => SizedBox(),
       viewModelBuilder: () => StartUpViewModel(),
     );
   }

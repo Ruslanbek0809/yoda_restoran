@@ -34,39 +34,4 @@ class ApiRootService {
       ),
     );
   }
-
-  // Future<Response> getData(
-  //     {required String url, Map<String, dynamic>? queryParams}) async {
-  //   await initDio();
-  //   Response response = await dio.get(url, queryParameters: queryParams);
-  //   return response;
-  // }
-
-  // Future<Response> deleteData(
-  //     {required String url, Map<String, dynamic>? queryParams}) async {
-  //   await initDio();
-  //   Response response = await dio.delete(url, data: queryParams);
-  //   return response;
-  // }
-
-  // Future<Response> patchDataWithForm(
-  //     {required String url, FormData? formData}) async {
-  //   await initDio();
-  //   Response response = await dio.patch(url, data: formData);
-  //   return response;
-  // }
-
-  // Future<Response> postDataWithForm(
-  //     {required String url, FormData? formData}) async {
-  //   await initDio();
-  //   Response response = await dio.post(url, data: formData);
-  //   return response;
-  // }
-
-  // Future<Response> putDataWithForm(
-  //     {required String url, FormData? formData}) async {
-  //   await initDio();
-  //   Response response = await dio.put(url, data: formData);
-  //   return response;
-  // }
 }

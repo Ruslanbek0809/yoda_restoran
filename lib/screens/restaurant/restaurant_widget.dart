@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
-import '../../widgets/widgets.dart';
 import 'resturant_details_screen.dart';
-import 'test_space.dart';
 
 class RestaurantWidget extends StatefulWidget {
   final Restaurant restaurant;
