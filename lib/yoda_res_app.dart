@@ -24,6 +24,7 @@ class YodaResApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: () => MaterialApp(
         title: Constants.appName,
+        navigatorObservers: [StackedService.routeObserver],
         navigatorKey: StackedService.navigatorKey, // For stacked_services
 
         onGenerateRoute: StackedRouter()
