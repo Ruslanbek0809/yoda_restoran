@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class ApiRootService {
+  final log = getLogger('ApiRootService');
   Dio dio = Dio();
 
   Future initDio() async {
+    log.i('Initialise DIO');
     Map<String, dynamic> _headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -33,5 +36,6 @@ class ApiRootService {
         },
       ),
     );
+    log.i('DIO initialised');
   }
 }

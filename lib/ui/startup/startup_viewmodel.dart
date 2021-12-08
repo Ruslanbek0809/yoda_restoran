@@ -11,8 +11,11 @@ class StartUpViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
 
   Future<void> runStartupLogic() async {
+    log.i('Started');
     await _apiRootService.initDio();
 
+    log.i('Ended');
+    _navService.replaceWith(Routes.homeView);
     // if (_userService.hasLoggedInUser) {
     //   log.v('We have a user session on disk. Sync the user profile ...');
     //   await _userService.syncUserAccount();

@@ -8,10 +8,10 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: HomeView),
-    MaterialRoute(page: HomeView),
-    MaterialRoute(page: HomeView),
-    MaterialRoute(page: HomeView),
-    MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
   ],
   dependencies: [
     LazySingleton(classType: ApiRootService),

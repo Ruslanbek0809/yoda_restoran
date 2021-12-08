@@ -14,8 +14,6 @@ import 'utils/utils.dart';
 class YodaResApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    printLog('[YodaResAppState] BUILD');
-
     /// Orientation: PORTRAIT Only
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -44,6 +42,7 @@ class YodaResApp extends StatelessWidget {
           const Locale('ru'),
         ],
         debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.light,
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: AppTheme.MAIN,

@@ -10,31 +10,19 @@ import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
-  final ScrollController _scrollController = ScrollController();
-  bool isFavorited = false;
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        /// Resize according to onscreen keyboard
+        /// Resize according to Onscreen keyboard
         resizeToAvoidBottomInset: true,
-        key: homeScaffoldKey,
+        key: model.homeScaffoldKey,
         drawer: DrawerView(),
         body: SafeArea(
           child: NestedScrollView(
             physics: const ClampingScrollPhysics(),
-            controller: _scrollController,
             headerSliverBuilder: (BuildContext context, bool innerBoxScrolled) {
-              final controller = TextEditingController();
               return <Widget>[
                 SliverAppBar(
                   expandedHeight: 0.34.sh,
@@ -55,8 +43,7 @@ class _HomeViewState extends State<HomeView> {
                                 Icons.menu,
                                 size: 24.w,
                               ),
-                              onPressed: () =>
-                                  homeScaffoldKey.currentState!.openDrawer(),
+                              onPressed: model.homeMenuPressed,
                               tooltip: 'Drawer',
                             ),
 //------------------ SEARCH ---------------------//
