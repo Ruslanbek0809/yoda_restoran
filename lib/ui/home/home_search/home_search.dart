@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'search.dart';
 
-class HomeSearchWidget extends StatelessWidget {
+import 'home_search_view.dart';
+
+class HomeSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -21,7 +22,7 @@ class HomeSearchWidget extends StatelessWidget {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SearchScreen(),
+                builder: (context) => HomeSearchView(),
               ),
             );
           },

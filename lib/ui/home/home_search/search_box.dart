@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchBoxWidget extends StatefulWidget {
+class SearchBox extends StatefulWidget {
   final bool autoFocus;
   final FocusNode? focusNode;
   final TextEditingController? controller;
@@ -11,7 +11,7 @@ class SearchBoxWidget extends StatefulWidget {
   final Function(String value)? onChanged;
   final Function(String value)? onSubmitted;
 
-  SearchBoxWidget({
+  SearchBox({
     Key? key,
     this.focusNode,
     this.onCancel,
@@ -22,10 +22,10 @@ class SearchBoxWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchBoxWidgetState createState() => _SearchBoxWidgetState();
+  _SearchBoxState createState() => _SearchBoxState();
 }
 
-class _SearchBoxWidgetState extends State<SearchBoxWidget> {
+class _SearchBoxState extends State<SearchBox> {
   TextEditingController? _textController;
 
   String _oldSearchText = '';

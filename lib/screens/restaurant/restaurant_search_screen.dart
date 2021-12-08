@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/screens/home/search/search.dart';
+import 'package:yoda_res/ui/home/home_search/search_box.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -133,7 +133,7 @@ class _RestaurantSearchScreenState<T> extends State<RestaurantSearchScreen>
               ),
               onPressed: close,
             ),
-            title: SearchBoxWidget(
+            title: SearchBox(
               autoFocus: true,
               controller: _searchFieldController,
               focusNode: _searchFieldNode,

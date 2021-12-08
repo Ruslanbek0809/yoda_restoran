@@ -4,7 +4,7 @@
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import '../home.dart';
 
-// class SearchProductsResultWidget extends StatefulWidget {
+// class SearchResult extends StatefulWidget {
 //   final String searchName;
 
 //   const SearchProductsResultWidget({required this.searchName});

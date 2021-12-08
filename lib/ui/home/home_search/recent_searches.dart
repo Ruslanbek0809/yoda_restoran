@@ -2,11 +2,11 @@
 // import 'package:provider/provider.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class RecentSearchesWidget extends StatelessWidget {
+// class RecentSearches extends StatelessWidget {
 //   final Function? onTap;
 //   final bool isBrand;
 
-//   RecentSearchesWidget({this.onTap, this.isBrand = false});
+//   RecentSearches({this.onTap, this.isBrand = false});
 
 //   @override
 //   Widget build(BuildContext context) {
