@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
 class HomeCategory extends StatefulWidget {
-  final Category homeCategory;
+  final CategoryUI homeCategory;
   final int pos;
   final int homeCatLength;
   const HomeCategory(
@@ -25,13 +25,13 @@ class _HomeCategoryState extends State<HomeCategory>
   bool isHomeCategoryPressed = false;
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.95);
-  List<Category> additionalCategories = [
-    Category(1, 'Çaý', 'assets/cat_add_chay.png'),
-    Category(2, 'Döner', 'assets/cat_add_doner.png'),
-    Category(3, 'Kofe', 'assets/cat_add_kofe.png'),
-    Category(4, 'Manty', 'assets/cat_add_manty.png'),
-    Category(5, 'Sagdyn', 'assets/cat_add_sagdyn.png'),
-    Category(6, 'Steýk', 'assets/cat_add_steyk.png'),
+  List<CategoryUI> additionalCategories = [
+    CategoryUI(1, 'Çaý', 'assets/cat_add_chay.png'),
+    CategoryUI(2, 'Döner', 'assets/cat_add_doner.png'),
+    CategoryUI(3, 'Kofe', 'assets/cat_add_kofe.png'),
+    CategoryUI(4, 'Manty', 'assets/cat_add_manty.png'),
+    CategoryUI(5, 'Sagdyn', 'assets/cat_add_sagdyn.png'),
+    CategoryUI(6, 'Steýk', 'assets/cat_add_steyk.png'),
   ];
 
   @override
@@ -48,7 +48,7 @@ class _HomeCategoryState extends State<HomeCategory>
       });
   }
 
-  void _onFilterCategoryClicked(List<Category> additionalCategories) {
+  void _onFilterCategoryClicked(List<CategoryUI> additionalCategories) {
     showCategoriesFilterBottomSheet(context, additionalCategories);
   }
 

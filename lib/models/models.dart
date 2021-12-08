@@ -1,5 +1,5 @@
-export 'category.dart';
-export 'restaurant.dart';
+export 'category_ui.dart';
+export 'restaurant_ui.dart';
 export 'food_category.dart';
 export 'food.dart';
 export 'discount.dart';
@@ -7,3 +7,5 @@ export 'category_filter.dart';
 export 'address.dart';
 export 'order.dart';
 export 'order_status.dart';
+export 'slider.dart';
+export 'main_category.dart';

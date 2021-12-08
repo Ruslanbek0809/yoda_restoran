@@ -14,13 +14,13 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-        /// Resize according to Onscreen keyboard
-        resizeToAvoidBottomInset: true,
-        key: model.homeScaffoldKey,
-        drawer: DrawerView(),
-        body: SafeArea(
-          child: NestedScrollView(
+      builder: (context, model, child) => SafeArea(
+        child: Scaffold(
+          /// Resize according to Onscreen keyboard
+          resizeToAvoidBottomInset: true,
+          key: model.homeScaffoldKey,
+          drawer: DrawerView(),
+          body: NestedScrollView(
             physics: const ClampingScrollPhysics(),
             headerSliverBuilder: (BuildContext context, bool innerBoxScrolled) {
               return <Widget>[
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-//------------------ MENU ---------------------//
+                            //------------------ MENU ---------------------//
                             IconButton(
                               icon: Icon(
                                 Icons.menu,
@@ -46,17 +46,17 @@ class HomeView extends StatelessWidget {
                               onPressed: model.homeMenuPressed,
                               tooltip: 'Drawer',
                             ),
-//------------------ SEARCH ---------------------//
+                            //------------------ SEARCH ---------------------//
                             HomeSearch(),
                           ],
                         ),
-//------------------ BANNERS ---------------------//
+                        //------------------ BANNERS ---------------------//
                         BannerWidget(imgList: imgList),
                       ],
                     ),
                   ),
                 ),
-//------------------ HOME CATEGORIES ---------------------//
+                //------------------ HOME CATEGORIES ---------------------//
                 SliverPersistentHeader(
                   pinned: false,
                   floating: true,
@@ -65,7 +65,7 @@ class HomeView extends StatelessWidget {
                     size: 80.w,
                   ),
                 ),
-//------------------ DISCOUNTS ---------------------//
+                //------------------ DISCOUNTS ---------------------//
                 SliverPersistentHeader(
                   pinned: false,
                   floating: true,
@@ -93,7 +93,7 @@ class HomeView extends StatelessWidget {
                 ),
               ];
             },
-//------------------ RESTAURANTS ---------------------//
+            //------------------ RESTAURANTS ---------------------//
             body: ListView.builder(
               padding: EdgeInsets.only(top: 10.w),
               itemCount: restaurants.length,
@@ -101,19 +101,19 @@ class HomeView extends StatelessWidget {
                 restaurant: restaurants[pos],
               ),
             ),
-//           Column(
-//             children: [
-// //// Categories Widget
-//               // HomeCategoriesWidget(
-//               //   homeCategories: homeCategories,
-//               // ),
-//               // SizedBox(height: 10.w),
-// //// Restaurants Widget
-//               Expanded(
-//                 child:
-//               ),
-//             ],
-//           ),
+            //           Column(
+            //             children: [
+            // //// Categories Widget
+            //               // HomeCategoriesWidget(
+            //               //   homeCategories: homeCategories,
+            //               // ),
+            //               // SizedBox(height: 10.w),
+            // //// Restaurants Widget
+            //               Expanded(
+            //                 child:
+            //               ),
+            //             ],
+            //           ),
           ),
         ),
       ),

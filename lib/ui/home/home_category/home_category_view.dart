@@ -6,7 +6,7 @@ import 'home_category.dart';
 import 'home_category_view_model.dart';
 
 class HomeCategoryView extends StatelessWidget {
-  final List<Category> homeCategories;
+  final List<CategoryUI> homeCategories;
   const HomeCategoryView({Key? key, required this.homeCategories})
       : super(key: key);
 

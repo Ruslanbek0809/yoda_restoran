@@ -8,7 +8,7 @@ import 'restaurant_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RestaurantView extends StatefulWidget {
-  final Restaurant restaurant;
+  final RestaurantUI restaurant;
   const RestaurantView({required this.restaurant, Key? key}) : super(key: key);
 
   @override

@@ -1,7 +1,7 @@
 class Constants {
   static const appName = "YodaRes";
 
-  static const baseUrlTm = 'https://belent.tm/';
+  static const baseUrlTm = 'http://yoda.com.tm:8000/';
 
   /// SharedPreferences
   static const currentLang = 'currentLang';

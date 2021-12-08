@@ -7,7 +7,7 @@ import 'package:yoda_res/utils/utils.dart';
 import 'category_filter.dart';
 
 void showCategoriesFilterBottomSheet(
-    BuildContext context, List<Category> additionalCategories) {
+    BuildContext context, List<CategoryUI> additionalCategories) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
@@ -31,7 +31,7 @@ void showCategoriesFilterBottomSheet(
 
 class CategoriesFilterBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
-  final List<Category> additionalCategories;
+  final List<CategoryUI> additionalCategories;
   CategoriesFilterBottomSheetWidget(
       this.scrollController, this.additionalCategories);
 

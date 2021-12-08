@@ -15,24 +15,24 @@ final List<String> imgList = [
   'assets/foodbanner2.png',
 ];
 
-List<Category> homeCategories = [
-  Category(1, 'Halanlarym', 'assets/cat_fav.png'),
-  Category(2, 'Sushi', 'assets/cat_sushi.png'),
-  Category(3, 'Burger', 'assets/cat_burger.png'),
-  Category(4, 'Pizza', 'assets/cat_pizza.png'),
-  Category(5, 'Hemmesi', 'assets/cat_filter.png'),
+List<CategoryUI> homeCategories = [
+  CategoryUI(1, 'Halanlarym', 'assets/cat_fav.png'),
+  CategoryUI(2, 'Sushi', 'assets/cat_sushi.png'),
+  CategoryUI(3, 'Burger', 'assets/cat_burger.png'),
+  CategoryUI(4, 'Pizza', 'assets/cat_pizza.png'),
+  CategoryUI(5, 'Hemmesi', 'assets/cat_filter.png'),
 ];
 
-List<Restaurant> restaurants = [
-  Restaurant(
+List<RestaurantUI> restaurants = [
+  RestaurantUI(
     1,
     'Sushi',
     'Sushi we başgalar',
     'assets/sushi.png',
   ),
-  Restaurant(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
-  Restaurant(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
-  Restaurant(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
+  RestaurantUI(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
+  RestaurantUI(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
+  RestaurantUI(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
 ];
 
 List<Discount> discounts = [
