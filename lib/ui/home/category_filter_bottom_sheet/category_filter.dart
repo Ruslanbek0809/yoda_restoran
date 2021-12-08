@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/models/home_category.dart';
+import 'package:yoda_res/models/category.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryFilterWidget extends StatefulWidget {
-  final HomeCategory homeCategory;
+  final Category homeCategory;
   final bool isCategoryFilterChecked;
   final Function(int, bool)? categoryFilterCallback;
   const CategoryFilterWidget(

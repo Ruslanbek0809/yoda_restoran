@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yoda_res/screens/profile/profile.dart';
 import 'screens/cart/cart.dart';
 import 'screens/cart/order/order.dart';
-import 'screens/home/home.dart';
+// import 'screens/home/home.dart';
 import 'utils/utils.dart';
 
 class Routes {
@@ -12,7 +12,7 @@ class Routes {
       _routeGenerate(settings);
 
   static final Map<String, WidgetBuilder> _routes = {
-    RouteList.home: (context) => HomeScreen(),
+    // RouteList.home: (context) => HomeScreen(),
     // RouteList.register: (context) => RegistrationScreen(),
     RouteList.cart: (context) => CartScreen(),
     RouteList.orders: (context) => OrdersScreen(),

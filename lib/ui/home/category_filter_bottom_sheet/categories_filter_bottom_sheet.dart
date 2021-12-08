@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'category_bottom_sheet.dart';
+
+import 'category_filter.dart';
 
 void showCategoriesFilterBottomSheet(
-    BuildContext context, List<HomeCategory> additionalCategories) {
+    BuildContext context, List<Category> additionalCategories) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
@@ -30,7 +31,7 @@ void showCategoriesFilterBottomSheet(
 
 class CategoriesFilterBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
-  final List<HomeCategory> additionalCategories;
+  final List<Category> additionalCategories;
   CategoriesFilterBottomSheetWidget(
       this.scrollController, this.additionalCategories);
 

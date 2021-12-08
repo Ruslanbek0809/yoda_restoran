@@ -13,12 +13,12 @@ final List<String> imgList = [
   'assets/foodbanner2.png',
 ];
 
-List<HomeCategory> homeCategories = [
-  HomeCategory(1, 'Halanlarym', 'assets/cat_fav.png'),
-  HomeCategory(2, 'Sushi', 'assets/cat_sushi.png'),
-  HomeCategory(3, 'Burger', 'assets/cat_burger.png'),
-  HomeCategory(4, 'Pizza', 'assets/cat_pizza.png'),
-  HomeCategory(5, 'Hemmesi', 'assets/cat_filter.png'),
+List<Category> homeCategories = [
+  Category(1, 'Halanlarym', 'assets/cat_fav.png'),
+  Category(2, 'Sushi', 'assets/cat_sushi.png'),
+  Category(3, 'Burger', 'assets/cat_burger.png'),
+  Category(4, 'Pizza', 'assets/cat_pizza.png'),
+  Category(5, 'Hemmesi', 'assets/cat_filter.png'),
 ];
 
 List<Restaurant> restaurants = [

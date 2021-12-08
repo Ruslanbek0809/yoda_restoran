@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoda_res/screens/restaurant/restaurant.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
-import '../../models/models.dart';
 import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'home.dart';
+import 'category/home_discounts.dart';
+import 'home_category/home_category_view.dart';
 import 'home_search/search.dart';
 
 class HomeView extends StatefulWidget {
@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
                 pinned: false,
                 floating: true,
                 delegate: ContestTabHeader(
-                  child: HomeCategoriesWidget(homeCategories: homeCategories),
+                  child: HomeCategoryView(homeCategories: homeCategories),
                   size: 80.w,
                 ),
               ),
