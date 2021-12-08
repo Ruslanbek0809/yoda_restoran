@@ -14,109 +14,118 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-      builder: (context, model, child) => SafeArea(
-        child: Scaffold(
-          /// Resize according to Onscreen keyboard
-          resizeToAvoidBottomInset: true,
-          key: model.homeScaffoldKey,
-          drawer: DrawerView(),
-          body: NestedScrollView(
-            physics: const ClampingScrollPhysics(),
-            headerSliverBuilder: (BuildContext context, bool innerBoxScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  expandedHeight: 0.34.sh,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  toolbarHeight: 60.w,
-                  automaticallyImplyLeading: false,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Column(
-                      children: [
-                        SizedBox(height: 15.w),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            //------------------ MENU ---------------------//
-                            IconButton(
-                              icon: Icon(
-                                Icons.menu,
-                                size: 24.w,
-                              ),
-                              onPressed: model.homeMenuPressed,
-                              tooltip: 'Drawer',
-                            ),
-                            //------------------ SEARCH ---------------------//
-                            HomeSearch(),
-                          ],
-                        ),
-                        //------------------ BANNERS ---------------------//
-                        BannerWidget(imgList: imgList),
-                      ],
-                    ),
-                  ),
-                ),
-                //------------------ HOME CATEGORIES ---------------------//
-                SliverPersistentHeader(
-                  pinned: false,
-                  floating: true,
-                  delegate: ContestTabHeader(
-                    child: HomeCategoryView(homeCategories: homeCategories),
-                    size: 80.w,
-                  ),
-                ),
-                //------------------ DISCOUNTS ---------------------//
-                SliverPersistentHeader(
-                  pinned: false,
-                  floating: true,
-                  delegate: ContestTabHeader(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.w, top: 15.w),
-                          child: Text(
-                            'Aksiýalar',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 23.sp,
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.MAIN_DARK,
+      builder: (context, model, child) {
+        print(
+            'isBusy: ${model.isBusy} and twoCon: ${model.fetchinghomeSliders} and ${model.fetchinghomeMainCat} now BOTH: ${model.fetchinghomeSliders && model.fetchinghomeMainCat}');
+        return SafeArea(
+          child: Scaffold(
+            /// Resize according to Onscreen keyboard
+            resizeToAvoidBottomInset: true,
+            key: model.homeScaffoldKey,
+            drawer: DrawerView(),
+            body: model.isBusy
+                ? LoadingWidget()
+                : NestedScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxScrolled) {
+                      return <Widget>[
+                        SliverAppBar(
+                          expandedHeight: 0.34.sh,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          toolbarHeight: 60.w,
+                          automaticallyImplyLeading: false,
+                          flexibleSpace: FlexibleSpaceBar(
+                            background: Column(
+                              children: [
+                                SizedBox(height: 15.w),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    //------------------ MENU ---------------------//
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.menu,
+                                        size: 24.w,
+                                      ),
+                                      onPressed: model.homeMenuPressed,
+                                      tooltip: 'Drawer',
+                                    ),
+                                    //------------------ SEARCH ---------------------//
+                                    HomeSearch(),
+                                  ],
+                                ),
+                                //------------------ BANNERS ---------------------//
+                                BannerWidget(imgList: imgList),
+                              ],
                             ),
                           ),
                         ),
-                        HomeDiscounts(discounts: discounts),
-                      ],
+                        //------------------ HOME CATEGORIES ---------------------//
+                        SliverPersistentHeader(
+                          pinned: false,
+                          floating: true,
+                          delegate: ContestTabHeader(
+                            child: HomeCategoryView(
+                                homeCategories: homeCategories),
+                            size: 80.w,
+                          ),
+                        ),
+                        //------------------ DISCOUNTS ---------------------//
+                        SliverPersistentHeader(
+                          pinned: false,
+                          floating: true,
+                          delegate: ContestTabHeader(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 15.w, top: 15.w),
+                                  child: Text(
+                                    'Aksiýalar',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 23.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppTheme.MAIN_DARK,
+                                    ),
+                                  ),
+                                ),
+                                HomeDiscounts(discounts: discounts),
+                              ],
+                            ),
+                            size: 150.w,
+                          ),
+                        ),
+                      ];
+                    },
+                    //------------------ RESTAURANTS ---------------------//
+                    body: ListView.builder(
+                      padding: EdgeInsets.only(top: 10.w),
+                      itemCount: restaurants.length,
+                      itemBuilder: (ctx, pos) => RestaurantView(
+                        restaurant: restaurants[pos],
+                      ),
                     ),
-                    size: 150.w,
+                    //           Column(
+                    //             children: [
+                    // //// Categories Widget
+                    //               // HomeCategoriesWidget(
+                    //               //   homeCategories: homeCategories,
+                    //               // ),
+                    //               // SizedBox(height: 10.w),
+                    // //// Restaurants Widget
+                    //               Expanded(
+                    //                 child:
+                    //               ),
+                    //             ],
+                    //           ),
                   ),
-                ),
-              ];
-            },
-            //------------------ RESTAURANTS ---------------------//
-            body: ListView.builder(
-              padding: EdgeInsets.only(top: 10.w),
-              itemCount: restaurants.length,
-              itemBuilder: (ctx, pos) => RestaurantView(
-                restaurant: restaurants[pos],
-              ),
-            ),
-            //           Column(
-            //             children: [
-            // //// Categories Widget
-            //               // HomeCategoriesWidget(
-            //               //   homeCategories: homeCategories,
-            //               // ),
-            //               // SizedBox(height: 10.w),
-            // //// Restaurants Widget
-            //               Expanded(
-            //                 child:
-            //               ),
-            //             ],
-            //           ),
           ),
-        ),
-      ),
+        );
+      },
       viewModelBuilder: () => HomeViewModel(),
     );
   }

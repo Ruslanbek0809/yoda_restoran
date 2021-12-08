@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'slider.g.dart';
 
 @JsonSerializable()
-class Slider {
-  Slider({
+class Sliderr {
+  Sliderr({
     this.id,
     this.image,
     this.option,
@@ -26,7 +26,8 @@ class Slider {
   @JsonKey(name: 'order')
   final int? order;
 
-  factory Slider.fromJson(Map<String, dynamic> json) => _$SliderFromJson(json);
+  factory Sliderr.fromJson(Map<String, dynamic> json) =>
+      _$SliderrFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SliderToJson(this);
+  Map<String, dynamic> toJson() => _$SliderrToJson(this);
 }

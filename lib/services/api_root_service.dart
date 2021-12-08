@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/utils/utils.dart';
 
+/// ApiRootService is used to initializeDio in both ApiService and UserApiService
 class ApiRootService {
   final log = getLogger('ApiRootService');
   Dio dio = Dio();
