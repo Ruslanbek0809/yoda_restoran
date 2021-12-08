@@ -1,23 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_category.dart';
+part of 'size.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MainCategory _$MainCategoryFromJson(Map<String, dynamic> json) => MainCategory(
+Size _$SizeFromJson(Map<String, dynamic> json) => Size(
       id: json['id'] as int?,
-      image: json['image'] as String?,
       name: json['name'] as String?,
       nameTk: json['name_tk'] as String?,
       nameRu: json['name_ru'] as String?,
     );
 
-Map<String, dynamic> _$MainCategoryToJson(MainCategory instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SizeToJson(Size instance) => <String, dynamic>{
       'id': instance.id,
-      'image': instance.image,
       'name': instance.name,
       'name_tk': instance.nameTk,
       'name_ru': instance.nameRu,

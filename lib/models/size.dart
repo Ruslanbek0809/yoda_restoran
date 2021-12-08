@@ -1,11 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'main_category.g.dart';
+part 'size.g.dart';
 
 @JsonSerializable()
-class MainCategory {
-  MainCategory({
+class Size {
+  Size({
     this.id,
-    this.image,
     this.name,
     this.nameTk,
     this.nameRu,
@@ -13,10 +12,6 @@ class MainCategory {
 
   @JsonKey(name: 'id')
   final int? id;
-
-  @JsonKey(name: 'image')
-  final String? image;
-
   @JsonKey(name: 'name')
   final String? name;
 
@@ -26,8 +21,7 @@ class MainCategory {
   @JsonKey(name: 'name_ru')
   final String? nameRu;
 
-  factory MainCategory.fromJson(Map<String, dynamic> json) =>
-      _$MainCategoryFromJson(json);
+  factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MainCategoryToJson(this);
+  Map<String, dynamic> toJson() => _$SizeToJson(this);
 }

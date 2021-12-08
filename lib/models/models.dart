@@ -9,3 +9,7 @@ export 'order.dart';
 export 'order_status.dart';
 export 'slider.dart';
 export 'main_category.dart';
+export 'meal.dart';
+export 'size.dart';
+export 'main_volume.dart';
+export 'volume.dart';
