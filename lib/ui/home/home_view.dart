@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/screens/restaurant/restaurant.dart';
+import 'package:yoda_res/ui/drawer/drawer_view.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'home_category/home_category_view.dart';
@@ -27,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
         /// Resize according to onscreen keyboard
         resizeToAvoidBottomInset: true,
         key: homeScaffoldKey,
-        drawer: DrawerWidget(),
+        drawer: DrawerView(),
         body: SafeArea(
           child: NestedScrollView(
             physics: const ClampingScrollPhysics(),
@@ -109,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
             body: ListView.builder(
               padding: EdgeInsets.only(top: 10.w),
               itemCount: restaurants.length,
-              itemBuilder: (ctx, pos) => RestaurantWidget(
+              itemBuilder: (ctx, pos) => RestaurantView(
                 restaurant: restaurants[pos],
               ),
             ),

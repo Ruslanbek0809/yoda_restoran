@@ -7,6 +7,8 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+final List<String> drawerList = ["profile", "orders", "addresses", "about"];
+
 final List<String> imgList = [
   'assets/foodbanner1.png',
   'assets/foodbanner.jpg',
@@ -42,6 +44,11 @@ List<Discount> discounts = [
   Discount(6, 'assets/discount2.png'),
   Discount(7, 'assets/discount3.png'),
   Discount(8, 'assets/discount4.png'),
+];
+
+List<Address> addresses = [
+  Address(1, 'A.Nowaýy, 164'),
+  Address(2, 'N.Andalyp 32'),
 ];
 
 enum FormValidation { phoneInvalid, valid }
