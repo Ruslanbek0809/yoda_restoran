@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:yoda_res/library/flutter_datetime_picker.dart';
 import 'package:yoda_res/library/src/datetime_picker_theme.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
-import 'package:yoda_res/screens/cart/cart_bottom_sheets/cart_address_select_bottom_sheet.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:yoda_res/widgets/widgets.dart';
+
+import 'cart_address_select_bottom_sheet.dart';
 
 void cartOrderBottomSheet(BuildContext context) {
   showModalBottomSheet(

@@ -51,6 +51,13 @@ List<Address> addresses = [
   Address(2, 'N.Andalyp 32'),
 ];
 
+List<Order> orderList = [
+  Order(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), foodList),
+  Order(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), foodList),
+  Order(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), foodList),
+  Order(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), foodList),
+];
+
 enum FormValidation { phoneInvalid, valid }
 
 /// Platform Types
