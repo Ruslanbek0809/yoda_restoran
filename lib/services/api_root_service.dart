@@ -19,24 +19,25 @@ class ApiRootService {
     dio.options.baseUrl = Constants.baseUrlTm;
     dio.options.headers = _headers;
 
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest:
-            (RequestOptions options, RequestInterceptorHandler handler) async {
-          print('REQUEST[${options.method}] => PATH: ${options.path}');
-        },
-        onResponse: (Response response, ResponseInterceptorHandler handler) {
-          print(
-              'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-          return handler.resolve(response);
-        },
-        onError: (DioError err, ErrorInterceptorHandler handler) async {
-          print(
-              'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
-          return handler.reject(err);
-        },
-      ),
-    );
-    log.i('DIO initialised');
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      // Do something before request is sent
+      return handler.next(options); //continue
+      // If you want to resolve the request with some custom data，
+      // you can resolve a `Response` object eg: `handler.resolve(response)`.
+      // If you want to reject the request with a error message,
+      // you can reject a `DioError` object eg: `handler.reject(dioError)`
+    }, onResponse: (response, handler) {
+      // Do something with response data
+      return handler.next(response); // continue
+      // If you want to reject the request with a error message,
+      // you can reject a `DioError` object eg: `handler.reject(dioError)`
+    }, onError: (DioError e, handler) {
+      // Do something with response error
+      return handler.next(e); //continue
+      // If you want to resolve the request with some custom data，
+      // you can resolve a `Response` object eg: `handler.resolve(response)`.
+    }));
+
+    log.i('DIO initialised => ${dio.options.baseUrl}');
   }
 }

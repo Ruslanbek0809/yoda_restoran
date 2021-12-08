@@ -15,15 +15,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
-        print(
-            'isBusy: ${model.isBusy} and twoCon: ${model.fetchinghomeSliders} and ${model.fetchinghomeMainCat} now BOTH: ${model.fetchinghomeSliders && model.fetchinghomeMainCat}');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
-            body: model.isBusy
+            body: model.fetchinghomeSliders && model.fetchinghomeMainCat
                 ? LoadingWidget()
                 : NestedScrollView(
                     physics: const ClampingScrollPhysics(),

@@ -9,7 +9,8 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpinKitSpinningLines(
-      size: width ?? 35.w,
+      size: width ?? 0.25.sw,
+      lineWidth: 5.0,
       color: AppTheme.MAIN,
     );
   }
