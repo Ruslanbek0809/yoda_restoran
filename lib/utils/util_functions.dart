@@ -67,6 +67,14 @@ List<CategoryUI> additionalCategories = [
   CategoryUI(6, 'Steýk', 'assets/cat_add_steyk.png'),
 ];
 
+List<CategoryFilter> categoryFilters = [
+  CategoryFilter(1, 'Adaty'),
+  CategoryFilter(2, 'Reýtingi boýunça'),
+  CategoryFilter(3, 'Çalt'),
+  CategoryFilter(4, 'Gymmatdan arzana'),
+  CategoryFilter(5, 'Arzandan gymmada'),
+];
+
 enum FormValidation { phoneInvalid, valid }
 
 /// Platform Types

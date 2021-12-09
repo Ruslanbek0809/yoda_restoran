@@ -48,14 +48,6 @@ class _CategoriesFilterBottomSheetWidgetState
   CategoryFilter? selectedFilter;
   Set<int> selectedCategoryFilters = {};
 
-  List<CategoryFilter> categoryFilters = [
-    CategoryFilter(1, 'Adaty'),
-    CategoryFilter(2, 'Reýtingi boýunça'),
-    CategoryFilter(3, 'Çalt'),
-    CategoryFilter(4, 'Gymmatdan arzana'),
-    CategoryFilter(5, 'Arzandan gymmada'),
-  ];
-
   void _setSelectedCategoryFilter(CategoryFilter? _selectedFilter) {
     setState(() {
       selectedFilter = _selectedFilter;

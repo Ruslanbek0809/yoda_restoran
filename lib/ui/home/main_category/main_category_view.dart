@@ -16,7 +16,7 @@ class MainCategoryView extends StatelessWidget {
       builder: (context, model, child) => SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        child: Row(
+        child: Row( 
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: mainCategories!.mapIndexed((mainCategory, pos) {
             return MainCategoryItem(
