@@ -8,6 +8,7 @@ import 'package:yoda_res/services/home_service.dart';
 // A map key of type string
 const String homeSlidersFuture = 'homeSlidersFuture';
 const String homeMainCatFuture = 'homeMainCatFuture';
+const String homeRandomResFuture = 'homeRandomResFuture';
 
 class HomeViewModel extends MultipleFutureViewModel {
   final log = getLogger('HomeViewModel');
@@ -18,9 +19,11 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
   List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
+  List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
 
   bool get fetchinghomeSliders => busy(homeSlidersFuture);
   bool get fetchinghomeMainCat => busy(homeMainCatFuture);
+  bool get fetchingRandomRes => busy(homeRandomResFuture);
 
   void homeMenuPressed() {
     log.i('openDrawer()');
@@ -31,5 +34,6 @@ class HomeViewModel extends MultipleFutureViewModel {
   Map<String, Future Function()> get futuresMap => {
         homeSlidersFuture: _homeService.getSliders,
         homeMainCatFuture: _homeService.getMainCategories,
+        homeRandomResFuture: _homeService.getRandomRestorants,
       };
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
+import 'package:yoda_res/ui/slider/slider_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'home_category/home_category_view.dart';
@@ -21,7 +22,9 @@ class HomeView extends StatelessWidget {
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
-            body: model.fetchinghomeSliders && model.fetchinghomeMainCat
+            body: model.fetchinghomeSliders &&
+                    model.fetchinghomeMainCat &&
+                    model.fetchingRandomRes
                 ? LoadingWidget()
                 : NestedScrollView(
                     physics: const ClampingScrollPhysics(),
@@ -55,7 +58,7 @@ class HomeView extends StatelessWidget {
                                   ],
                                 ),
                                 //------------------ BANNERS ---------------------//
-                                BannerWidget(imgList: imgList),
+                                SliderView(sliders: model.sliders),
                               ],
                             ),
                           ),

@@ -15,7 +15,7 @@ class ApiService {
     List<SliderModel> _sliders = [];
     try {
       Response response = await _apiRoot.dio.get('api/sliders/');
-      log.i('RESPONSE: api/slider/ => ${response.data}');
+      // log.i('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_slider) {
@@ -33,7 +33,7 @@ class ApiService {
     List<MainCategory> _mainCategories = [];
     try {
       Response response = await _apiRoot.dio.get('api/maincategories/');
-      log.i('RESPONSE: api/maincategories/ => ${response.data}');
+      // log.i('RESPONSE: api/maincategories/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_mainCategory) {
@@ -51,7 +51,7 @@ class ApiService {
     List<Restaurant> _randomRestaurants = [];
     try {
       Response response = await _apiRoot.dio.get('api/restaurants/');
-      log.i('RESPONSE: api/restaurants/ => ${response.data}');
+      // log.i('RESPONSE: api/restaurants/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_randomRestaurant) {
