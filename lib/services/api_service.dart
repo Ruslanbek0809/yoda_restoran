@@ -12,15 +12,15 @@ class ApiService {
 
   //------------------ HOME APIS ---------------------//
 
-  Future<List<Sliderr>> getSliders() async {
-    List<Sliderr> _sliders = [];
+  Future<List<SliderModel>> getSliders() async {
+    List<SliderModel> _sliders = [];
     try {
       Response response = await _apiRootService.dio.get('api/sliders/');
       log.i('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_slider) {
-          _sliders.add(Sliderr.fromJson(_slider));
+          _sliders.add(SliderModel.fromJson(_slider));
         });
       }
       return _sliders;

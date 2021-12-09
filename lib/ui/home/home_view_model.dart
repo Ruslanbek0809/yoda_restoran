@@ -16,7 +16,7 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<Sliderr>? get sliders => dataMap![homeSlidersFuture];
+  List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
   List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
 
   bool get fetchinghomeSliders => busy(homeSlidersFuture);

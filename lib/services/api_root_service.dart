@@ -16,7 +16,7 @@ class ApiRootService {
     // if (token != null) headers['Authorization'] = "Bearer $token";
     // dio.options.baseUrl =
     //     lang == 'tm' ? MyConstants.baseUrlTm : MyConstants.baseUrlRu;
-    dio.options.baseUrl = Constants.baseUrlTm;
+    dio.options.baseUrl = Constants.baseUrlTk;
     dio.options.headers = _headers;
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {

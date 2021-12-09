@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'size.g.dart';
 
 @JsonSerializable()
-class Size {
-  Size({
+class SizeModel {
+  SizeModel({
     this.id,
     this.name,
     this.nameTk,
@@ -21,7 +21,8 @@ class Size {
   @JsonKey(name: 'name_ru')
   final String? nameRu;
 
-  factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
+  factory SizeModel.fromJson(Map<String, dynamic> json) =>
+      _$SizeModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SizeToJson(this);
+  Map<String, dynamic> toJson() => _$SizeModelToJson(this);
 }

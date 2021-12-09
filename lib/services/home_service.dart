@@ -7,8 +7,8 @@ class HomeService {
   final log = getLogger('HomeService');
   final _api = locator<ApiService>();
 
-  List<Sliderr>? _sliders;
-  List<Sliderr>? get sliders => _sliders;
+  List<SliderModel>? _sliders;
+  List<SliderModel>? get sliders => _sliders;
 
   List<MainCategory>? _mainCategories;
   List<MainCategory>? get mainCategories => _mainCategories;
@@ -17,7 +17,7 @@ class HomeService {
   bool get hasmainCategories =>
       _mainCategories != null && _mainCategories!.isNotEmpty;
 
-  Future<List<Sliderr>?> getSliders() async {
+  Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
     log.i(_sliders!.length);
     return _sliders;

@@ -88,7 +88,7 @@ class Meal {
   final int? sizeId;
 
   @JsonKey(name: 'sizeJson')
-  final Size? size;
+  final SizeModel? size;
 
   @JsonKey(name: 'gVolumes')
   final List<MainVolume>? gVolumes;

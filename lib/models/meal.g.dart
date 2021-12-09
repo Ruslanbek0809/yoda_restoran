@@ -32,7 +32,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       sizeId: json['size'] as int?,
       size: json['sizeJson'] == null
           ? null
-          : Size.fromJson(json['sizeJson'] as Map<String, dynamic>),
+          : SizeModel.fromJson(json['sizeJson'] as Map<String, dynamic>),
       gVolumes: (json['gVolumes'] as List<dynamic>?)
           ?.map((e) => MainVolume.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -6,7 +6,7 @@ part of 'slider.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Sliderr _$SliderrFromJson(Map<String, dynamic> json) => Sliderr(
+SliderModel _$SliderModelFromJson(Map<String, dynamic> json) => SliderModel(
       id: json['id'] as int?,
       image: json['image'] as String?,
       option: json['option'] as String?,
@@ -14,7 +14,8 @@ Sliderr _$SliderrFromJson(Map<String, dynamic> json) => Sliderr(
       order: json['order'] as int?,
     );
 
-Map<String, dynamic> _$SliderrToJson(Sliderr instance) => <String, dynamic>{
+Map<String, dynamic> _$SliderModelToJson(SliderModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'image': instance.image,
       'option': instance.option,

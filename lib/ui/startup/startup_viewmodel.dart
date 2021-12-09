@@ -34,16 +34,5 @@ class StartUpViewModel extends BaseViewModel {
     //   log.v('No user on disk, navigate to the LoginView');
     //   _navigationService.replaceWith(Routes.loginView);
     // }
-
-    // _navService.replaceWith(Routes.)
-    // void navigateToReactiveEx() {
-    //   print('navigateToReactiveEx called');
-    //   _navigationService.navigateTo(Routes.reactiveExampleView);
-    // }
-
-    // void navigateToPartial() {
-    //   print('navigateToPartial called');
-    //   _navigationService.navigateTo(Routes.partialBuildsView);
-    // }
   }
 }
