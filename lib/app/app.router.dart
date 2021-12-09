@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
@@ -54,7 +53,7 @@ class StackedRouter extends RouterBase {
     },
     RestaurantDetailsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const RestaurantDetailsView(),
+        builder: (context) => RestaurantDetailsView(),
         settings: data,
       );
     },

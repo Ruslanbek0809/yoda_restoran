@@ -34,6 +34,7 @@
 //   late Animation<Offset> bottomCartOffset;
 
 //   void _scrollListener() {
+//     printLog('_isShrink: $_isShrink');
 // //// Animate to currentTab when listview scrools
 //     // printLog("offset = ${_sliverScrollController.offset}");
 //     // currentTab = (_sliverScrollController.offset) ~/
@@ -60,6 +61,7 @@
 //   void _tabListener() {
 //     setState(() {
 //       activetab = _tabController.index;
+//       printLog('activetab: $activetab');
 //     });
 //   }
 

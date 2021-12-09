@@ -18,6 +18,8 @@ class MainCategoryViewModel extends BaseViewModel {
     }
     log.i(_multiSelectionList);
     notifyListeners();
+
+    // TODO: showCategoriesFilterBottomSheet
     // if (pos == homeCatLength - 1) {
     //   _onFilterCategoryClicked(additionalCategories);
     // }

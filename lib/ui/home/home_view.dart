@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                                   ],
                                 ),
                                 //------------------ BANNERS ---------------------//
-                                SliderView(sliders: model.sliders!),
+                                SliderView(sliders: model.sliders ?? []),
                               ],
                             ),
                           ),
@@ -70,7 +70,8 @@ class HomeView extends StatelessWidget {
                           floating: true,
                           delegate: ContestTabHeader(
                             child: MainCategoryView(
-                                mainCategories: model.mainCategories),
+                              mainCategories: model.mainCategories ?? [],
+                            ),
                             size: 75.h,
                           ),
                         ),
@@ -106,7 +107,7 @@ class HomeView extends StatelessWidget {
                     //------------------ RESTAURANTS ---------------------//
                     body: ListView.builder(
                       padding: EdgeInsets.only(top: 10.w),
-                      itemCount: model.randomRestaurants?.length,
+                      itemCount: model.randomRestaurants?.length ?? 0,
                       itemBuilder: (ctx, pos) => RestaurantView(
                         restaurant: model.randomRestaurants![pos],
                       ),
