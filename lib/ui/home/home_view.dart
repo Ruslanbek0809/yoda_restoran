@@ -9,7 +9,6 @@ import 'package:yoda_res/utils/utils.dart';
 import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'main_category/home_discounts.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,6 +16,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
+        model.log.i('HomeView');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
@@ -106,24 +106,11 @@ class HomeView extends StatelessWidget {
                     //------------------ RESTAURANTS ---------------------//
                     body: ListView.builder(
                       padding: EdgeInsets.only(top: 10.w),
-                      itemCount: restaurants.length,
+                      itemCount: model.randomRestaurants?.length,
                       itemBuilder: (ctx, pos) => RestaurantView(
-                        restaurant: restaurants[pos],
+                        restaurant: model.randomRestaurants![pos],
                       ),
                     ),
-                    //           Column(
-                    //             children: [
-                    // //// Categories Widget
-                    //               // HomeCategoriesWidget(
-                    //               //   homeCategories: homeCategories,
-                    //               // ),
-                    //               // SizedBox(height: 10.w),
-                    // //// Restaurants Widget
-                    //               Expanded(
-                    //                 child:
-                    //               ),
-                    //             ],
-                    //           ),
                   ),
           ),
         );

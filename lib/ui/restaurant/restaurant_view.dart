@@ -7,16 +7,9 @@ import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RestaurantView extends StatefulWidget {
-  final RestaurantUI restaurant;
+class RestaurantView extends StatelessWidget {
+  final Restaurant restaurant;
   const RestaurantView({required this.restaurant, Key? key}) : super(key: key);
-
-  @override
-  State<RestaurantView> createState() => _RestaurantViewState();
-}
-
-class _RestaurantViewState extends State<RestaurantView> {
-  bool isFavorited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +27,7 @@ class _RestaurantViewState extends State<RestaurantView> {
                 Stack(
                   children: [
                     YodaImage(
-                      image: widget.restaurant.image,
+                      image: restaurant.image!,
                       height: 0.45.sw,
                       width: 1.sw,
                       borderRadius: Constants.BORDER_RADIUS_20,
@@ -45,20 +38,13 @@ class _RestaurantViewState extends State<RestaurantView> {
                         borderRadius: AppTheme().radius20,
                         child: InkWell(
                           borderRadius: AppTheme().radius20,
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RestaurantDetailsView(),
-                              ),
-                            );
-                          },
+                          // onTap: model.navToResDetailsView,
                         ),
                       ),
                     ),
                   ],
                 ),
-//------------------ DELIVERY TIME ---------------------//
+                //------------------ DELIVERY TIME ---------------------//
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -79,7 +65,7 @@ class _RestaurantViewState extends State<RestaurantView> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      '40-50 min.',
+                      restaurant.prepareTime!,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
@@ -88,7 +74,7 @@ class _RestaurantViewState extends State<RestaurantView> {
                     ),
                   ),
                 ),
-                //// Favourite Widget
+                //------------------ FAVOURITE ---------------------//
                 Positioned(
                   top: 10.w,
                   right: 10.w,
@@ -101,16 +87,14 @@ class _RestaurantViewState extends State<RestaurantView> {
                     ),
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      onPressed: () {
-                        setState(() {
-                          isFavorited = !isFavorited;
-                        });
-                      },
+                      onPressed: model.updateResFavorite,
                       icon: Icon(
-                        isFavorited ? Icons.favorite : Icons.favorite_border,
-                        color: isFavorited
+                        model.isFavorited
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: model.isFavorited
                             ? AppTheme.RED
-                            : IconTheme.of(context).color,
+                            : Colors.transparent,
                         size: 25.w,
                       ),
                     ),
@@ -118,10 +102,11 @@ class _RestaurantViewState extends State<RestaurantView> {
                 ),
               ],
             ),
+            //------------------ NAME ---------------------//
             Padding(
               padding: EdgeInsets.only(top: 5.w),
               child: Text(
-                widget.restaurant.name,
+                restaurant.name!,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 23.sp,
@@ -130,21 +115,16 @@ class _RestaurantViewState extends State<RestaurantView> {
                 ),
               ),
             ),
+            //------------------ RATE ---------------------//
             Row(
               children: [
-                Icon(Icons.star, size: 20.w, color: AppTheme.GREEN_COLOR),
-                SizedBox(width: 3.w),
-                Text(
-                  '4.9 (123)',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppTheme.MAIN_DARK,
-                  ),
+                Icon(
+                  Icons.star_rounded,
+                  size: 20.w,
+                  color: AppTheme.GREEN_COLOR,
                 ),
-                SizedBox(width: 5.w),
                 Text(
-                  widget.restaurant.foods,
+                  '${restaurant.rating} (${restaurant.rated})',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.sp,
