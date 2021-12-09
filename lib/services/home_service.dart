@@ -16,6 +16,9 @@ class HomeService {
   List<Restaurant>? _randomRestaurants;
   List<Restaurant>? get randomRestaurants => _randomRestaurants;
 
+  List<Promoted>? _promotedList;
+  List<Promoted>? get promotedList => _promotedList;
+
   bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
 
   bool get hasMainCategories =>
@@ -23,6 +26,9 @@ class HomeService {
 
   bool get hasRandomRestaurants =>
       _randomRestaurants != null && _randomRestaurants!.isNotEmpty;
+
+  bool get hasPromotedList =>
+      _promotedList != null && _promotedList!.isNotEmpty;
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
@@ -40,5 +46,11 @@ class HomeService {
     _randomRestaurants = await _api.getRandomRestorants();
     log.i(_randomRestaurants!.length);
     return _randomRestaurants;
+  }
+
+  Future<List<Promoted>?> getPromotedRestaurants() async {
+    _promotedList = await _api.getPromotedRestaurants();
+    log.i(_promotedList!.length);
+    return _promotedList;
   }
 }

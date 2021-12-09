@@ -64,4 +64,22 @@ class ApiService {
       rethrow;
     }
   }
+
+  Future<List<Promoted>> getPromotedRestaurants() async {
+    List<Promoted> _promotedList = [];
+    try {
+      Response response = await _apiRoot.dio.get('api/promoted/');
+      // log.i('RESPONSE: api/restaurants/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_promoted) {
+          _promotedList.add(Promoted.fromJson(_promoted));
+        });
+      }
+      return _promotedList;
+    } catch (error) {
+      log.i('ERROR on api/promoted/ :$error');
+      rethrow;
+    }
+  }
 }
