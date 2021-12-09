@@ -13,3 +13,4 @@ export 'meal.dart';
 export 'size.dart';
 export 'main_volume.dart';
 export 'volume.dart';
+export 'restaurant.dart';

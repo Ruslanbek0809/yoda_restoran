@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'models.dart';
+
 part 'meal.g.dart';
 
 @JsonSerializable()
@@ -9,11 +9,7 @@ class Meal {
     this.id,
     this.image,
     this.name,
-    this.nameTk,
-    this.nameRu,
     this.description,
-    this.descriptionTk,
-    this.descriptionRu,
     this.approved,
     this.discount,
     this.price,
@@ -39,20 +35,8 @@ class Meal {
   @JsonKey(name: 'name')
   final String? name;
 
-  @JsonKey(name: 'name_tk')
-  final String? nameTk;
-
-  @JsonKey(name: 'name_ru')
-  final String? nameRu;
-
   @JsonKey(name: 'description')
   final String? description;
-
-  @JsonKey(name: 'description_tk')
-  final String? descriptionTk;
-
-  @JsonKey(name: 'description_ru')
-  final String? descriptionRu;
 
   @JsonKey(name: 'approved')
   final bool? approved;

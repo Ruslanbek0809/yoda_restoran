@@ -3,19 +3,18 @@ import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/api_root_service.dart';
-import 'package:yoda_res/utils/utils.dart';
 
 class ApiService {
   final log = getLogger('ApiService');
 
-  final _apiRootService = locator<ApiRootService>();
+  final _apiRoot = locator<ApiRootService>();
 
   //------------------ HOME APIS ---------------------//
 
   Future<List<SliderModel>> getSliders() async {
     List<SliderModel> _sliders = [];
     try {
-      Response response = await _apiRootService.dio.get('api/sliders/');
+      Response response = await _apiRoot.dio.get('api/sliders/');
       log.i('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
@@ -25,7 +24,7 @@ class ApiService {
       }
       return _sliders;
     } catch (error) {
-      printLog('ERROR on api/slider/ :$error');
+      log.i('ERROR on api/slider/ :$error');
       rethrow;
     }
   }
@@ -33,7 +32,7 @@ class ApiService {
   Future<List<MainCategory>> getMainCategories() async {
     List<MainCategory> _mainCategories = [];
     try {
-      Response response = await _apiRootService.dio.get('api/maincategories/');
+      Response response = await _apiRoot.dio.get('api/maincategories/');
       log.i('RESPONSE: api/maincategories/ => ${response.data}');
 
       if (response.data != null) {
@@ -43,7 +42,25 @@ class ApiService {
       }
       return _mainCategories;
     } catch (error) {
-      printLog('ERROR on api/slider/ :$error');
+      log.i('ERROR on api/maincategories/ :$error');
+      rethrow;
+    }
+  }
+
+  Future<List<Restaurant>> getRandomRestorants() async {
+    List<Restaurant> _randomRestaurants = [];
+    try {
+      Response response = await _apiRoot.dio.get('api/restaurants/');
+      log.i('RESPONSE: api/restaurants/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_randomRestaurant) {
+          _randomRestaurants.add(Restaurant.fromJson(_randomRestaurant));
+        });
+      }
+      return _randomRestaurants;
+    } catch (error) {
+      log.i('ERROR on api/restaurants/ :$error');
       rethrow;
     }
   }

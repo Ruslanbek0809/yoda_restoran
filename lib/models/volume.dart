@@ -6,22 +6,15 @@ class Volume {
   Volume({
     this.id,
     this.volume,
-    this.volumeTk,
-    this.volumeRu,
     this.price,
     this.groupId,
   });
 
   @JsonKey(name: 'id')
   final int? id;
+
   @JsonKey(name: 'volume')
   final String? volume;
-
-  @JsonKey(name: 'volume_tk')
-  final String? volumeTk;
-
-  @JsonKey(name: 'volume_ru')
-  final String? volumeRu;
 
   @JsonKey(name: 'price')
   final num? price;

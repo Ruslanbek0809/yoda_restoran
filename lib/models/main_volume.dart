@@ -8,8 +8,6 @@ class MainVolume {
   MainVolume({
     this.id,
     this.name,
-    this.nameTk,
-    this.nameRu,
     this.mealId,
     this.volumes,
   });
@@ -18,12 +16,6 @@ class MainVolume {
   final int? id;
   @JsonKey(name: 'name')
   final String? name;
-
-  @JsonKey(name: 'name_tk')
-  final String? nameTk;
-
-  @JsonKey(name: 'name_ru')
-  final String? nameRu;
 
   @JsonKey(name: 'meal')
   final int? mealId;
