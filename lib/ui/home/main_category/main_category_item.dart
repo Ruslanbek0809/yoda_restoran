@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCategoryItem extends ViewModelWidget<MainCategoryViewModel> {
+class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory? mainCategory;
   final int pos;
   final int homeCatLength;
@@ -18,22 +19,23 @@ class MainCategoryItem extends ViewModelWidget<MainCategoryViewModel> {
   }) : super(key: key, reactive: true);
 
   @override
-  Widget build(BuildContext context, MainCategoryViewModel model) {
-    // Tween<double> _tween = Tween(begin: 1, end: 0.95);
-//     final _tweenController = useAnimationController(
-//       duration: const Duration(milliseconds: 100),
-//     )..addStatusListener(
-//         (status) {
-// //// This listener was used to repeat animation once
-//           if (status == AnimationStatus.completed) {
-//             _tweenController.reverse();
-//           }
-//         },
-//       );
-    return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 1, end: 0.95),
+  Widget buildViewModelWidget(
+      BuildContext context, MainCategoryViewModel model) {
+    Tween<double> _tween = Tween(begin: 1, end: 0.95);
+    final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
-      builder: (BuildContext _, double value, Widget? __) => Container(
+    );
+    return ScaleTransition(
+      scale: _tween.animate(CurvedAnimation(
+          parent: _tweenController
+            ..addStatusListener((status) {
+//// This listener was used to repeat animation once
+              if (status == AnimationStatus.completed) {
+                _tweenController.reverse();
+              }
+            }),
+          curve: Curves.bounceInOut)),
+      child: Container(
         width: 75.w,
         height: 75.w,
         margin: EdgeInsets.only(
@@ -41,7 +43,10 @@ class MainCategoryItem extends ViewModelWidget<MainCategoryViewModel> {
             left: pos == 0 ? 10.w : 0.w), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
-          onTap: model.updateMainCategoryItem,
+          onTap: () {
+            _tweenController.forward();
+            model.updateMainCategoryItem();
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
