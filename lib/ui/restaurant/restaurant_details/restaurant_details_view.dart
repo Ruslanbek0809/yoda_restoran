@@ -6,8 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/food/food_view.dart';
 import 'package:yoda_res/ui/restaurant/restaunant_bottom_sheets/restaurant_info_bottom_sheet.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_search/restaurant_search_vew.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -375,13 +374,7 @@ class _RestaurantDetailsViewState extends State<RestaurantDetailsView>
                                 Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 16.w),
-                                  child: ToggleButtonWidget(
-                                    toggleCallback: (isDelivery) {
-                                      setState(() {
-                                        _isDelivery = isDelivery;
-                                      });
-                                    },
-                                  ),
+                                  child: ToggleButtonView(),
                                 ),
                                 //------------------ MAIN DIVIDER ---------------------//
                                 Container(
@@ -582,55 +575,6 @@ class _RestaurantDetailsViewState extends State<RestaurantDetailsView>
         ),
       ),
       viewModelBuilder: () => RestaurantDetailsViewModel(),
-    );
-  }
-}
-
-class SubcategoryTabs extends StatefulWidget {
-  final List<FoodCategory> categories;
-  final Function(int)? onItemPressed;
-
-  SubcategoryTabs({
-    required this.categories,
-    this.onItemPressed,
-  });
-
-  @override
-  _SubcategoryTabsState createState() => _SubcategoryTabsState();
-}
-
-class _SubcategoryTabsState extends State<SubcategoryTabs>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      vsync: this,
-      length: widget.categories.length,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: TabBar(
-        controller: _tabController,
-        isScrollable: true,
-        unselectedLabelColor: AppTheme.MAIN,
-        tabs: widget.categories
-            .map<Widget>((category) => Tab(text: category.name))
-            .toList(),
-        onTap: widget.onItemPressed,
-      ),
     );
   }
 }

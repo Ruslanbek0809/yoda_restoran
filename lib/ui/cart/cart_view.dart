@@ -183,16 +183,16 @@ class _CartViewState extends State<CartView> {
                   ),
                 ),
 //------------------ DELIVERY TOGGLE ---------------------//
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: ToggleButtonWidget(
-                    toggleCallback: (isDelivery) {
-                      setState(() {
-                        _isDelivery = isDelivery;
-                      });
-                    },
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+                //   child: ToggleButtonWidget(
+                //     toggleCallback: (isDelivery) {
+                //       setState(() {
+                //         _isDelivery = isDelivery;
+                //       });
+                //     },
+                //   ),
+                // ),
 //------------------ DELIVERY TYPE TEXT based on condition ---------------------//
                 Padding(
                   padding:
