@@ -5,6 +5,7 @@ import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/services/user_api_service.dart';
 import 'package:yoda_res/ui/home/home_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_details/restaurant_details_view.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import 'package:yoda_res/ui/startup/startup_view.dart';
 
 @StackedApp(
@@ -12,6 +13,10 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: RestaurantDetailsView),
+    MaterialRoute(page: RestaurantSearchView),
+    // MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
+    // MaterialRoute(page: HomeView),
     // MaterialRoute(page: HomeView),
     // MaterialRoute(page: HomeView),
     // MaterialRoute(page: HomeView),

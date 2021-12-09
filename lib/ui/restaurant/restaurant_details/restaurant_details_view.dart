@@ -220,17 +220,7 @@ class _RestaurantDetailsViewState extends State<RestaurantDetailsView>
                                 _isShrink ? Colors.transparent : AppTheme.WHITE,
                             child: InkWell(
                               customBorder: CircleBorder(),
-                              onTap: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RestaurantSearchView(
-                                      bottomCartController:
-                                          bottomCartController,
-                                    ),
-                                  ),
-                                );
-                              },
+                              onTap: model.navToResSearchView,
                               child: Padding(
                                 padding: EdgeInsets.all(8.w),
                                 child: Icon(

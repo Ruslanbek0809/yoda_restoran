@@ -12,16 +12,19 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
+import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
 
 class Routes {
   static const String startUpView = '/';
   static const String homeView = '/home-view';
   static const String restaurantDetailsView = '/restaurant-details-view';
+  static const String restaurantSearchView = '/restaurant-search-view';
   static const all = <String>{
     startUpView,
     homeView,
     restaurantDetailsView,
+    restaurantSearchView,
   };
 }
 
@@ -32,6 +35,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.restaurantDetailsView, page: RestaurantDetailsView),
+    RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -54,5 +58,23 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    RestaurantSearchView: (data) {
+      var args = data.getArgs<RestaurantSearchViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RestaurantSearchView(
+            bottomCartController: args.bottomCartController),
+        settings: data,
+      );
+    },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// RestaurantSearchView arguments holder class
+class RestaurantSearchViewArguments {
+  final AnimationController bottomCartController;
+  RestaurantSearchViewArguments({required this.bottomCartController});
 }
