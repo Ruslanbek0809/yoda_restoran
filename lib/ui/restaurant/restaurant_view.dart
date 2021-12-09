@@ -94,7 +94,7 @@ class RestaurantView extends StatelessWidget {
                             : Icons.favorite_border,
                         color: model.isFavorited
                             ? AppTheme.RED
-                            : Colors.transparent,
+                            : AppTheme.MAIN_DARK,
                         size: 25.w,
                       ),
                     ),

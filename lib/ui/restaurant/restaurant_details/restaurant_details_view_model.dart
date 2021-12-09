@@ -21,15 +21,15 @@ class RestaurantDetailsViewModel extends BaseViewModel {
 
   /// Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
-    log.i('TabIndex: $tabIndex');
     _activeTab = tabIndex;
+    // log.i('_activeTab: $_activeTab');
     notifyListeners();
   }
 
   /// Function to change ACTIVE TAB
   void updateLastScrollStatus(bool isReallyShrink) {
-    log.i('isReallyShrink: $isReallyShrink');
     _isShrink = isReallyShrink;
+    // log.i('_isShrink: $_isShrink');
     notifyListeners();
   }
 
@@ -38,13 +38,14 @@ class RestaurantDetailsViewModel extends BaseViewModel {
     if (_isTabPressed) {
       Timer(Duration(milliseconds: 1200), () {
         _isTabPressed = false;
+        log.i('_isTabPressed: $_isTabPressed');
         notifyListeners();
       });
     } else {
       _isTabPressed = true;
+      log.i('_isTabPressed: $_isTabPressed');
       notifyListeners();
     }
-    log.i('_isTabPressed: $_isTabPressed');
   }
 
   // TODO: restaurantInfoBottomSheet
