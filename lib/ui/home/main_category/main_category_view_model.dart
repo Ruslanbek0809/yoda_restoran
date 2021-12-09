@@ -1,16 +1,26 @@
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/app/app.logger.dart';
 
 class MainCategoryViewModel extends BaseViewModel {
-  bool _isUpdated = false;
+  final log = getLogger('MainCategoryViewModel');
+  List<int> _multiSelectionList = [];
 
-  bool get isUpdated => _isUpdated;
+  /// Function to check wether this mainCegory selected or NOT
+  bool isMainCategorySelected(int? mainCategoryId) =>
+      _multiSelectionList.contains(mainCategoryId);
 
-  void updateMainCategoryItem() {
-    _isUpdated = !_isUpdated;
+  /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
+  void updateMainCategoryItem(int? mainCategoryId) {
+    if (_multiSelectionList.contains(mainCategoryId)) {
+      _multiSelectionList.remove(mainCategoryId);
+    } else {
+      _multiSelectionList.add(mainCategoryId!);
+    }
+    log.i(_multiSelectionList);
+    notifyListeners();
     // if (pos == homeCatLength - 1) {
     //   _onFilterCategoryClicked(additionalCategories);
     // }
-    notifyListeners();
   }
 
   // void _onFilterCategoryClicked(List<CategoryUI> additionalCategories) {

@@ -8,7 +8,7 @@ import 'slider_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SliderView extends StatelessWidget {
-  final List<SliderModel>? sliders;
+  final List<SliderModel> sliders;
   const SliderView({
     required this.sliders,
     Key? key,
@@ -27,7 +27,7 @@ class SliderView extends StatelessWidget {
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.scale,
           ),
-          items: sliders!
+          items: sliders
               .map(
                 (slider) => Stack(
                   children: [

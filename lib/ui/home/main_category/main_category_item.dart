@@ -45,7 +45,7 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
         child: GestureDetector(
           onTap: () {
             _tweenController.forward();
-            model.updateMainCategoryItem();
+            model.updateMainCategoryItem(mainCategory!.id);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,19 +62,26 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
               Container(
                 margin: EdgeInsets.only(top: 3.w),
                 padding: EdgeInsets.symmetric(
-                    horizontal: model.isUpdated ? 5.w : 0.0,
-                    vertical: model.isUpdated ? 2.h : 0.0),
+                    horizontal: model.isMainCategorySelected(mainCategory!.id)
+                        ? 5.w
+                        : 0.0,
+                    vertical: model.isMainCategorySelected(mainCategory!.id)
+                        ? 2.h
+                        : 0.0),
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
-                  color: model.isUpdated ? AppTheme.MAIN : AppTheme.WHITE,
+                  color: model.isMainCategorySelected(mainCategory!.id)
+                      ? AppTheme.MAIN
+                      : AppTheme.WHITE,
                 ),
                 child: Text(
                   mainCategory!.name!,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 13.sp,
-                    color:
-                        model.isUpdated ? AppTheme.WHITE : AppTheme.FONT_COLOR,
+                    color: model.isMainCategorySelected(mainCategory!.id)
+                        ? AppTheme.WHITE
+                        : AppTheme.FONT_COLOR,
                   ),
                 ),
               ),

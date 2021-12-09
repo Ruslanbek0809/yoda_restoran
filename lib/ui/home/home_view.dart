@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                                   ],
                                 ),
                                 //------------------ BANNERS ---------------------//
-                                SliderView(sliders: model.sliders),
+                                SliderView(sliders: model.sliders!),
                               ],
                             ),
                           ),
