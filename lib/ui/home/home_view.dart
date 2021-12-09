@@ -69,8 +69,8 @@ class HomeView extends StatelessWidget {
                           floating: true,
                           delegate: ContestTabHeader(
                             child: HomeCategoryView(
-                                homeCategories: homeCategories),
-                            size: 80.w,
+                                mainCategories: model.mainCategories),
+                            size: 75.h,
                           ),
                         ),
                         //------------------ DISCOUNTS ---------------------//
@@ -83,12 +83,12 @@ class HomeView extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(left: 15.w, top: 15.w),
+                                      EdgeInsets.only(left: 15.w, top: 12.h),
                                   child: Text(
                                     'Aksiýalar',
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontSize: 23.sp,
+                                      fontSize: 24.sp,
                                       fontWeight: FontWeight.bold,
                                       color: AppTheme.MAIN_DARK,
                                     ),
