@@ -5,8 +5,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/utils/utils.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RestaurantDetailsViewModel extends BaseViewModel {
   final log = getLogger('RestaurantDetailsViewModel');
@@ -37,8 +35,16 @@ class RestaurantDetailsViewModel extends BaseViewModel {
 
   // Function to create ripple like effect when Tab pressed
   void updateOnTapRipple() {
-    _isTabPressed = !_isTabPressed;
-    notifyListeners();
+    if (_isTabPressed) {
+      Timer(Duration(milliseconds: 1200), () {
+        _isTabPressed = false;
+        notifyListeners();
+      });
+    } else {
+      _isTabPressed = true;
+      notifyListeners();
+    }
+    log.i('_isTabPressed: $_isTabPressed');
   }
 
   // TODO: restaurantInfoBottomSheet
