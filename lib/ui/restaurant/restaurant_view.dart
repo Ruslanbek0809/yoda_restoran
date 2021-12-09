@@ -38,7 +38,7 @@ class RestaurantView extends StatelessWidget {
                         borderRadius: AppTheme().radius20,
                         child: InkWell(
                           borderRadius: AppTheme().radius20,
-                          // onTap: model.navToResDetailsView,
+                          onTap: model.navToResDetailsView,
                         ),
                       ),
                     ),

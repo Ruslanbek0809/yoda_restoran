@@ -18,4 +18,6 @@ class RestaurantViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void navToResDetailsView() =>
+      _navService.navigateTo(Routes.restaurantDetailsView);
 }
