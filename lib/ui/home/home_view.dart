@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
+import 'package:yoda_res/ui/home/main_category/main_category_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/slider/slider_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'home_category/home_category_view.dart';
-import 'home_category/home_discounts.dart';
 import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'main_category/home_discounts.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -68,7 +69,7 @@ class HomeView extends StatelessWidget {
                           pinned: false,
                           floating: true,
                           delegate: ContestTabHeader(
-                            child: HomeCategoryView(
+                            child: MainCategoryView(
                                 mainCategories: model.mainCategories),
                             size: 75.h,
                           ),

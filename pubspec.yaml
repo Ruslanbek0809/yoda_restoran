@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.4.0
   logger: ^1.1.0
+  flutter_hooks: ^0.17.0 # To use hooks with stacked package
 
   # NETWORK
   dio: ^4.0.4
