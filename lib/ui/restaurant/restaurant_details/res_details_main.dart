@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/restaurant/food/food_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -441,11 +442,10 @@ class ResDetailsMainWidget
                     ),
                     itemCount: foodList.length,
                     itemBuilder: (context, pos) {
-                      return Container(color: Colors.red);
-                      // return FoodView(
-                      //   food: foodList[pos],
-                      //   animationController: bottomCartController,
-                      // );
+                      // return Container(color: Colors.red);
+                      return FoodView(
+                        food: foodList[pos],
+                      );
                     },
                   );
                 },
