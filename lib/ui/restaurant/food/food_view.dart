@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/restaunant_bottom_sheets/food_bottom_sheet.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
@@ -7,25 +8,14 @@ import 'package:yoda_res/utils/utils.dart';
 import 'food_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FoodView extends StatefulWidget {
+class FoodView extends HookViewModelWidget<FoodViewModel> {
   final Food food;
-  const FoodView({Key? key, required this.food}) : super(key: key);
-
-  @override
-  State<FoodView> createState() => _FoodViewState();
-}
-
-class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
-  late AnimationController _tweenController;
-  Tween<double> _tween = Tween(begin: 1, end: 0.98);
-
-  late Food food;
-  bool isButtonToggled = false;
+  const FoodView({Key? key, required this.food})
+      : super(key: key, reactive: true);
 
   @override
   void initState() {
     super.initState();
-    food = widget.food;
 //// Container bounce back
     _tweenController = AnimationController(
         duration: const Duration(milliseconds: 100), vsync: this)
@@ -48,7 +38,7 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildViewModelWidget(BuildContext context) {
     return ViewModelBuilder<FoodViewModel>.reactive(
       builder: (context, model, child) => ScaleTransition(
         scale: _tween.animate(CurvedAnimation(
@@ -111,7 +101,7 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  isButtonToggled
+                  model.isButtonToggled
                       ? Row(
                           children: [
                             Text(
@@ -141,7 +131,7 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
 //------------------ BUTTONS ---------------------//
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: isButtonToggled
+                    child: model.isButtonToggled
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -155,10 +145,7 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
                                   borderRadius: AppTheme().radius15,
                                   onTap: () async {
                                     _tweenController.forward();
-                                    if (isButtonToggled)
-                                      setState(() {
-                                        isButtonToggled = !isButtonToggled;
-                                      });
+                                    model.updateButtonToggle();
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.all(10.w),
@@ -209,23 +196,10 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
                               onTap: () async {
                                 //// Bouncing animation trigger
                                 _tweenController.forward();
-                                //// Toggle switch animation between price and quantity
-                                if (!isButtonToggled)
-                                  setState(() {
-                                    isButtonToggled = !isButtonToggled;
-                                  });
+
+                                model.updateButtonToggle();
 
                                 model.updateBottomCartStatus();
-                                // //// bottomCartAnimationController trigger
-                                // switch (widget.animationController.status) {
-                                //   case AnimationStatus.completed:
-                                //     widget.animationController.reverse();
-                                //     break;
-                                //   case AnimationStatus.dismissed:
-                                //     widget.animationController.forward();
-                                //     break;
-                                //   default:
-                                // }
                               },
                               child: Ink(
                                 width: constraints.maxWidth,

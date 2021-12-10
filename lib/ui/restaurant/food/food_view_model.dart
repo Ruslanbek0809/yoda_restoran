@@ -9,14 +9,25 @@ class FoodViewModel extends ReactiveViewModel {
   final log = getLogger('FoodViewModel');
 
   final _bottomCartService = locator<BottomCartService>();
+
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
+
+  bool _isButtonToggled = false;
+  bool get isButtonToggled => _isButtonToggled;
 
   /// Function to update updateBottomCartStatus
   void updateBottomCartStatus() {
     _bottomCartService.updateBottomCartStatus();
 
     log.i('bottomCartStatus: $bottomCartStatus');
+    notifyListeners();
+  }
+
+  /// Function to update isButtonToggled
+  void updateButtonToggle() {
+    _isButtonToggled = !_isButtonToggled;
+    log.i('_isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 

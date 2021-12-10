@@ -442,7 +442,6 @@ class ResDetailsMainWidget
                     ),
                     itemCount: foodList.length,
                     itemBuilder: (context, pos) {
-                      // return Container(color: Colors.red);
                       return FoodView(
                         food: foodList[pos],
                       );
