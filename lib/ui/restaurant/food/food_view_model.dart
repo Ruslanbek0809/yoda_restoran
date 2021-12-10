@@ -4,7 +4,8 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class FoodViewModel extends BaseViewModel {
+/// ReactiveViewModel is used to "react"
+class FoodViewModel extends ReactiveViewModel {
   final log = getLogger('FoodViewModel');
 
   final _bottomCartService = locator<BottomCartService>();
@@ -18,4 +19,7 @@ class FoodViewModel extends BaseViewModel {
     log.i('bottomCartStatus: $bottomCartStatus');
     notifyListeners();
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 }

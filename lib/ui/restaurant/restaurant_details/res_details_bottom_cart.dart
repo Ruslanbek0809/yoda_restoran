@@ -5,8 +5,8 @@ import 'package:yoda_res/ui/restaurant/restaurant_details/restaurant_details_vie
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BottomCartWidget extends HookViewModelWidget<RestaurantDetailsViewModel> {
-  const BottomCartWidget({Key? key}) : super(key: key);
+class ResDetailsBottomCart extends HookViewModelWidget<RestaurantDetailsViewModel> {
+  const ResDetailsBottomCart({Key? key}) : super(key: key);
 
   @override
   Widget buildViewModelWidget(

@@ -8,7 +8,8 @@ import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class RestaurantDetailsViewModel extends BaseViewModel {
+/// ReactiveViewModel is used to "react"
+class RestaurantDetailsViewModel extends ReactiveViewModel {
   final log = getLogger('RestaurantDetailsViewModel');
 
   final _navService = locator<NavigationService>();
@@ -60,4 +61,7 @@ class RestaurantDetailsViewModel extends BaseViewModel {
 
   void navToResSearchView() => _navService.navigateTo(
       Routes.restaurantSearchView); // TODO: Change page transition here
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 }

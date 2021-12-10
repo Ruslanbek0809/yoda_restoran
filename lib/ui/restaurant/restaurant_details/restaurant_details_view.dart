@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_details/bottom_cart.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_bottom_cart.dart';
 import 'res_details_main.dart';
 import 'restaurant_details_view_model.dart';
 
@@ -14,7 +14,7 @@ class RestaurantDetailsView extends StatelessWidget {
             //------------------ RESTAURANT MAIN PART ---------------------//
             ResDetailsMainWidget(),
             //------------------ BOTTOM CART ---------------------//
-            BottomCartWidget(),
+            ResDetailsBottomCart(),
           ],
         ),
       ),
