@@ -28,8 +28,19 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchingRandomRes => busy(homeRandomResFuture);
   bool get fetchingPromotedRes => busy(homePromotedResFuture);
 
+  int _promotedCounter = 0;
+  bool get isOkToPromote =>
+      _promotedCounter <
+      promotedRes!.length; // Check if promoted below than its length
+
+  int get promotedCounter =>
+      _promotedCounter; // Increment each time when promoted part is displayed
+
+  // int get promotedCounter =>
+  //     _promotedCounter++; // Increment each time when promoted part is displayed
+
   void homeMenuPressed() {
-    log.i('openDrawer()');
+    log.i('openDrawer(): $_promotedCounter');
     homeScaffoldKey.currentState!.openDrawer();
   }
 

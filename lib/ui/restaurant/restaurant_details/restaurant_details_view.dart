@@ -13,54 +13,7 @@ class RestaurantDetailsView extends StatelessWidget {
         body: Stack(
           children: [
             ResDetailsMainWidget(),
-//------------------ BOTTOM CART ---------------------//
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: SlideTransition(
-            //     position: bottomCartOffset,
-            //     child: GestureDetector(
-            //       onTap: () {
-            //         Navigator.of(context).pushNamed(RouteList.cart);
-            //       },
-            //       child: Container(
-            //         height: 0.22.sw,
-            //         width: 1.sw,
-            //         decoration:
-            //             BoxDecoration(color: AppTheme.WHITE, boxShadow: [
-            //           AppTheme().bottomCartShadow,
-            //         ]),
-            //         child: Container(
-            //           margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
-            //           padding: EdgeInsets.symmetric(horizontal: 18.w),
-            //           decoration: BoxDecoration(
-            //             color: AppTheme.MAIN,
-            //             borderRadius: AppTheme().radius10,
-            //           ),
-            //           alignment: Alignment.center,
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             children: [
-            //               Text(
-            //                 'Sargyt',
-            //                 style: TextStyle(
-            //                   color: AppTheme.WHITE,
-            //                   fontSize: 20.sp,
-            //                 ),
-            //               ),
-            //               Text(
-            //                 '35 TMT',
-            //                 style: TextStyle(
-            //                   color: AppTheme.WHITE,
-            //                   fontSize: 18.sp,
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // )
+            //------------------ BOTTOM CART ---------------------//
           ],
         ),
       ),

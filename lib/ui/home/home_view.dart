@@ -23,9 +23,7 @@ class HomeView extends StatelessWidget {
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
-            body: model.fetchinghomeSliders &&
-                    model.fetchinghomeMainCat &&
-                    model.fetchingRandomRes
+            body: model.anyObjectsBusy
                 ? LoadingWidget()
                 : NestedScrollView(
                     physics: const ClampingScrollPhysics(),
@@ -88,7 +86,6 @@ class HomeView extends StatelessWidget {
                                       EdgeInsets.only(left: 15.w, top: 12.h),
                                   child: Text(
                                     'Aksiýalar',
-                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 24.sp,
                                       fontWeight: FontWeight.bold,
@@ -105,12 +102,60 @@ class HomeView extends StatelessWidget {
                       ];
                     },
                     //------------------ RESTAURANTS ---------------------//
-                    body: ListView.builder(
-                      padding: EdgeInsets.only(top: 10.w),
-                      itemCount: model.randomRestaurants?.length ?? 0,
-                      itemBuilder: (ctx, pos) => RestaurantView(
-                        restaurant: model.randomRestaurants![pos],
+                    body: ListView.separated(
+                      padding: EdgeInsets.only(top: 10.h),
+                      itemCount: 20,
+                      itemBuilder: (ctx, pos) => Container(
+                        margin: EdgeInsets.all(5),
+                        height: 75,
+                        width: 75,
+                        color: Colors.red,
+                        child: Center(child: Text(pos.toString())),
                       ),
+                      // itemCount: model.randomRestaurants?.length ?? 0,
+                      // itemBuilder: (ctx, pos) => RestaurantView(
+                      //   restaurant: model.randomRestaurants![pos],
+                      // ),
+                      separatorBuilder: (ctx, pos) {
+                        /// After every 5 restaurant, it shows promoted ones
+                        if ((pos + 1) % 3 == 0) {
+                          // && model.isOkToPromote
+                          int promotePos = model.promotedCounter;
+                          model.log.i('promotePos: $promotePos');
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15.w, top: 12.h),
+                                child: Text(
+                                  model.promotedRes![promotePos].name!,
+                                  style: TextStyle(
+                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.MAIN_DARK,
+                                  ),
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: model
+                                      .promotedRes![promotePos].restaurants!
+                                      .map((promoted) {
+                                    return Container(
+                                      padding: EdgeInsets.all(10),
+                                      color: Colors.blue,
+                                      child: Text(promoted.name!),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                        return SizedBox();
+                      },
                     ),
                   ),
           ),

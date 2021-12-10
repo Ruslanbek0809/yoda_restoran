@@ -109,7 +109,7 @@ class RestaurantView extends StatelessWidget {
                 restaurant.name!,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 23.sp,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
                   color: AppTheme.MAIN_DARK,
                 ),
