@@ -14,10 +14,24 @@ class BottomCartWidget extends HookViewModelWidget<RestaurantDetailsViewModel> {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
-
     final bottomCartOffset =
         Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
             .animate(bottomCartController);
+
+    /// BottomCartController trigger
+    if (model.bottomCartStatus != BottomCartStatus.idle)
+      switch (bottomCartController.status) {
+        case AnimationStatus.completed:
+          if (model.bottomCartStatus == BottomCartStatus.reverse)
+            bottomCartController.reverse();
+          break;
+        case AnimationStatus.dismissed:
+          if (model.bottomCartStatus == BottomCartStatus.forward)
+            bottomCartController.forward();
+          break;
+        default:
+      }
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: SlideTransition(

@@ -9,10 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FoodView extends StatefulWidget {
   final Food food;
-  final AnimationController animationController;
-  const FoodView(
-      {Key? key, required this.animationController, required this.food})
-      : super(key: key);
+  const FoodView({Key? key, required this.food}) : super(key: key);
 
   @override
   State<FoodView> createState() => _FoodViewState();
@@ -217,16 +214,16 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
                                   setState(() {
                                     isButtonToggled = !isButtonToggled;
                                   });
-                                //// bottomCartAnimationController trigger
-                                switch (widget.animationController.status) {
-                                  case AnimationStatus.completed:
-                                    widget.animationController.reverse();
-                                    break;
-                                  case AnimationStatus.dismissed:
-                                    widget.animationController.forward();
-                                    break;
-                                  default:
-                                }
+                                // //// bottomCartAnimationController trigger
+                                // switch (widget.animationController.status) {
+                                //   case AnimationStatus.completed:
+                                //     widget.animationController.reverse();
+                                //     break;
+                                //   case AnimationStatus.dismissed:
+                                //     widget.animationController.forward();
+                                //     break;
+                                //   default:
+                                // }
                               },
                               child: Ink(
                                 width: constraints.maxWidth,

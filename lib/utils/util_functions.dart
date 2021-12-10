@@ -77,6 +77,10 @@ List<CategoryFilter> categoryFilters = [
 
 enum FormValidation { phoneInvalid, valid }
 
+/// Enum for bottomCartController
+///
+enum BottomCartStatus { idle, forward, reverse }
+
 /// Platform Types
 final bool isIos = Platform.isIOS;
 final bool isAndroid = Platform.isAndroid;

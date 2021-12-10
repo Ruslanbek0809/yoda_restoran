@@ -175,10 +175,11 @@ class _RestaurantSearchViewState extends State<RestaurantSearchView>
               ),
               itemCount: foodList.length,
               itemBuilder: (context, pos) {
-                return FoodView(
-                  food: foodList[pos],
-                  animationController: widget.bottomCartController,
-                );
+                // return FoodView(
+                //   food: foodList[pos],
+                //   animationController: widget.bottomCartController,
+                // );
+                return SizedBox(); // TODO: Change it to above one
               },
             ),
             // AnimatedSwitcher(
