@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tm.com.yoda_res">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="yoda_res"
         android:icon="@mipmap/ic_launcher">

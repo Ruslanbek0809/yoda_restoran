@@ -18,7 +18,6 @@ class BottomCartService with ReactiveServiceMixin {
 
   /// Function to update isBottomCartShown
   void updateBottomCartStatus() {
-    log.i('');
     switch (_bottomCartStatus.value) {
       case BottomCartStatus.idle:
         _bottomCartStatus.value = BottomCartStatus.forward;
@@ -33,5 +32,6 @@ class BottomCartService with ReactiveServiceMixin {
         _bottomCartStatus.value = BottomCartStatus.idle;
         break;
     }
+    log.i(_bottomCartStatus.value);
   }
 }

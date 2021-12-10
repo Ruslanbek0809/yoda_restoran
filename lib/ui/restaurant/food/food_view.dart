@@ -215,6 +215,7 @@ class _FoodViewState extends State<FoodView> with TickerProviderStateMixin {
                                     isButtonToggled = !isButtonToggled;
                                   });
 
+                                model.updateBottomCartStatus();
                                 // //// bottomCartAnimationController trigger
                                 // switch (widget.animationController.status) {
                                 //   case AnimationStatus.completed:
