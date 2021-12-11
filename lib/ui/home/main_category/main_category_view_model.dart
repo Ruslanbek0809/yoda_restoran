@@ -22,7 +22,6 @@ class MainCategoryViewModel extends BaseViewModel {
     } else {
       _multiSelectionList.add(mainCategoryId!);
     }
-    showCustomBottomSheet();
     log.i(_multiSelectionList);
     notifyListeners();
   }

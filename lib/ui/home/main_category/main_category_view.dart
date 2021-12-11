@@ -19,11 +19,7 @@ class MainCategoryView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: mainCategories!.mapIndexed((mainCategory, pos) {
-            return MainCategoryItem(
-              mainCategory: mainCategory,
-              pos: pos,
-              homeCatLength: homeCategories.length,
-            );
+            return MainCategoryItem(mainCategory: mainCategory);
           }).toList(),
         ),
       ),

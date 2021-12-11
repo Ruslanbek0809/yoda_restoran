@@ -9,13 +9,9 @@ import '../../../utils/utils.dart';
 
 class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory? mainCategory;
-  final int pos;
-  final int homeCatLength;
   MainCategoryItem({
     Key? key,
     this.mainCategory,
-    required this.pos,
-    required this.homeCatLength,
   }) : super(key: key, reactive: true);
 
   @override
@@ -47,8 +43,8 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
         width: 75.w,
         height: 75.w,
         margin: EdgeInsets.only(
-            top: 5.w,
-            left: pos == 0 ? 10.w : 0.w), // margin on top of persistent header
+          top: 5.w,
+        ), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
           onTap: () {
@@ -62,7 +58,6 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                 borderRadius: BorderRadius.circular(10),
                 child: YodaImage(
                   image: mainCategory!.image!,
-                  fit: BoxFit.cover,
                   width: 50.w,
                   height: 50.w,
                 ),
@@ -86,7 +81,7 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                   mainCategory!.name!,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: 14.sp,
                     color: model.isMainCategorySelected(mainCategory!.id)
                         ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,

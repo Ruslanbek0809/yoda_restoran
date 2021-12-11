@@ -4,24 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
-
 import 'main_category_item.dart';
-
-// void mainCategoryBottomSheet(
-//     BuildContext context, List<CategoryUI> additionalCategories) {
-//   showModalBottomSheet(
-//     enableDrag: true,
-//     isScrollControlled: true,
-//     shape: RoundedRectangleBorder(
-//       borderRadius: BorderRadius.vertical(
-//         top: Radius.circular(Constants.BORDER_RADIUS_20),
-//       ),
-//     ),
-//     backgroundColor: Colors.transparent,
-//     context: context,
-//     builder: (context) => MainCategoryBottomSheetView(additionalCategories),
-//   );
-// }
 
 class MainCategoryBottomSheetView extends StatefulWidget {
   final List<CategoryUI> additionalCategories;
