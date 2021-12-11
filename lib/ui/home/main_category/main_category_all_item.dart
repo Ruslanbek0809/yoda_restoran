@@ -36,16 +36,15 @@ class MainCategoryAllItem extends HookViewModelWidget<MainCategoryViewModel> {
         CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut),
       ),
       child: Container(
-        width: 75.w,
-        height: 75.w,
         margin: EdgeInsets.only(
-          top: 5.w,
-        ), // margin on top of persistent header
+            top: 5.w,
+            left: 12.w,
+            right: 12.w), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
-          onTap: () {
-            _tweenController.forward();
-            model.showCustomBottomSheet();
+          onTap: () async {
+            await _tweenController.forward();
+            await model.showCustomBottomSheet();
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,8 +52,8 @@ class MainCategoryAllItem extends HookViewModelWidget<MainCategoryViewModel> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  width: 50.w,
-                  height: 50.w,
+                  width: 70.w,
+                  height: 70.w,
                   child: Material(
                     shape: CircleBorder(),
                     color: AppTheme.MAIN_LIGHT,

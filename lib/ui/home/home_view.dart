@@ -67,10 +67,10 @@ class HomeView extends StatelessWidget {
                           pinned: false,
                           floating: true,
                           delegate: ContestTabHeader(
+                            size: 90.h,
                             child: MainCategoryView(
                               mainCategories: model.mainCategories ?? [],
                             ),
-                            size: 75.h,
                           ),
                         ),
                         //------------------ DISCOUNTS ---------------------//

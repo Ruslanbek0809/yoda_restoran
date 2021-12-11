@@ -37,33 +37,31 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
 
     return ScaleTransition(
       scale: _tween.animate(
-        CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut),
+        CurvedAnimation(
+          parent: _tweenController,
+          curve: Curves.bounceInOut,
+        ),
       ),
       child: Container(
-        width: 75.w,
-        height: 75.w,
         margin: EdgeInsets.only(
-          top: 5.w,
-        ), // margin on top of persistent header
+            top: 5.h, left: 12.w), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
-          onTap: () {
-            _tweenController.forward();
+          onTap: () async {
+            await _tweenController.forward();
             model.updateMainCategoryItem(mainCategory!.id);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: YodaImage(
-                  image: mainCategory!.image!,
-                  width: 50.w,
-                  height: 50.w,
-                ),
+              YodaImage(
+                image: mainCategory!.image!,
+                width: 70.w,
+                height: 70.w,
+                borderRadius: 10.0,
               ),
               Container(
-                margin: EdgeInsets.only(top: 3.w),
+                margin: EdgeInsets.only(top: 3.h),
                 padding: EdgeInsets.symmetric(
                     horizontal: model.isMainCategorySelected(mainCategory!.id)
                         ? 5.w
@@ -82,6 +80,9 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.sp,
+                    fontWeight: model.isMainCategorySelected(mainCategory!.id)
+                        ? FontWeight.w400
+                        : FontWeight.w600,
                     color: model.isMainCategorySelected(mainCategory!.id)
                         ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,

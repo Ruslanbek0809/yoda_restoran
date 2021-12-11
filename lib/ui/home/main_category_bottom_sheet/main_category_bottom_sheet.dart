@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'main_category_item.dart';
+import 'main_category_item_bottom.dart';
 
 class MainCategoryBottomSheetView extends StatefulWidget {
   final List<CategoryUI> additionalCategories;
@@ -118,29 +118,22 @@ class _MainCategoryBottomSheetViewState
                             ),
                             itemCount: widget.additionalCategories.length,
                             itemBuilder: (context, pos) {
-                              bool isCategoryFilterChecked =
-                                  selectedCategoryFilters.contains(
-                                      widget.additionalCategories[pos].id);
-                              return MainCategoryItem(
-                                homeCategory: widget.additionalCategories[pos],
-                                isCategoryFilterChecked:
-                                    isCategoryFilterChecked,
-                                categoryFilterCallback:
-                                    (int categoryFilterID, bool isAdd) {
-                                  if (isAdd) {
-                                    selectedCategoryFilters
-                                        .add(categoryFilterID);
-                                    if (selectedCategoryFilters.isNotEmpty)
-                                      _filterButtonAnimationController
-                                          .forward();
-                                  } else {
-                                    selectedCategoryFilters
-                                        .remove(categoryFilterID);
-                                    if (selectedCategoryFilters.isEmpty)
-                                      _filterButtonAnimationController
-                                          .reverse();
-                                  }
-                                },
+                              return MainCategoryItemBottom(
+                                mainCategory: ,
+                                //  if (isAdd) {
+                                //     selectedCategoryFilters
+                                //         .add(categoryFilterID);
+                                //     if (selectedCategoryFilters.isNotEmpty)
+                                //       _filterButtonAnimationController
+                                //           .forward();
+                                //   } else {
+                                //     selectedCategoryFilters
+                                //         .remove(categoryFilterID);
+                                //     if (selectedCategoryFilters.isEmpty)
+                                //       _filterButtonAnimationController
+                                //           .reverse();
+                                //   }
+                                // },
                               );
                             },
                           ),
