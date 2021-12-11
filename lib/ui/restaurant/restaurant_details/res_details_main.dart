@@ -6,9 +6,7 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-
 import 'restaurant_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -283,7 +281,7 @@ class ResDetailsMainWidget
                                   ),
                                   SizedBox(width: 5.w),
                                   Text(
-                                    restaurant.prepareTime!,
+                                    restaurant.workingHours!,
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       color: AppTheme.FONT_COLOR,
@@ -295,7 +293,7 @@ class ResDetailsMainWidget
                             // //------------------ INFO ---------------------//
                             GestureDetector(
                               onTap: () {
-                                // _onRestaurantInfoPressed();
+                                model.showCustomBottomSheet(restaurant);
                               },
                               child: Container(
                                 decoration: BoxDecoration(

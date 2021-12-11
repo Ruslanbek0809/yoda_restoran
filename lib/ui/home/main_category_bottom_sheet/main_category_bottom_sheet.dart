@@ -44,7 +44,8 @@ class MainCategoryBottomSheet
       height: 0.95.sh,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
-            top: Radius.circular(Constants.BORDER_RADIUS_20)),
+          top: Radius.circular(Constants.BORDER_RADIUS_20),
+        ),
         color: Colors.transparent,
       ),
       child: Stack(

@@ -9,8 +9,8 @@ import 'package:yoda_res/utils/utils.dart';
 class MainCategoryViewModel extends BaseViewModel {
   final log = getLogger('MainCategoryViewModel');
 
-  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
-  final HomeService _homeService = locator<HomeService>();
+  final _bottomSheetService = locator<BottomSheetService>();
+  final _homeService = locator<HomeService>();
 
   List<int> _multiSelectionList = [];
 

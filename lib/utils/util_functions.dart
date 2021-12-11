@@ -85,7 +85,7 @@ enum BottomCartStatus { idle, forward, reverse }
 enum SortAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
-enum BottomSheetType { mainCategory, restorauntInfo, mealDetails }
+enum BottomSheetType { mainCategory, restaurantInfo, mealDetails }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

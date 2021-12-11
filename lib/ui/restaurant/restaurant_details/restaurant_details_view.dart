@@ -13,6 +13,7 @@ class RestaurantDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RestaurantDetailsViewModel>.nonReactive(
+      // onModelReady: (model) => model.updateRestaurant(restaurant),
       builder: (context, model, child) => Scaffold(
         body: Stack(
           children: [
