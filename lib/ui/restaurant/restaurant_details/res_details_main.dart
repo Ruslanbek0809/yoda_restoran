@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 import 'restaurant_details_view_model.dart';
@@ -12,7 +15,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ResDetailsMainWidget
     extends HookViewModelWidget<RestaurantDetailsViewModel> {
   final Restaurant restaurant;
-  const ResDetailsMainWidget({required this.restaurant, Key? key}) : super(key: key, reactive: true);
+  const ResDetailsMainWidget({required this.restaurant, Key? key})
+      : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(
@@ -66,7 +70,8 @@ class ResDetailsMainWidget
                 ? Padding(
                     padding: EdgeInsets.only(left: 10.w, top: 5.w),
                     child: Text(
-                      'Kebapçy',
+                      restaurant.name!,
+                      overflow: TextOverflow.fade,
                       style: TextStyle(
                         fontSize: 20.sp,
                         color: AppTheme.FONT_COLOR,
@@ -186,8 +191,9 @@ class ResDetailsMainWidget
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/burgerlist.jpg'),
+                  image: CachedNetworkImageProvider(restaurant.image!),
                   fit: BoxFit.cover,
+                  // AssetImage('assets/burgerlist.jpg'),
                 ),
               ),
               //// NOTE: Instead of direct Container Column is used to make child work properly
@@ -216,7 +222,7 @@ class ResDetailsMainWidget
                             right: 16.w,
                           ),
                           child: Text(
-                            'Kebapçy',
+                            restaurant.name!,
                             style: TextStyle(
                               fontSize: 32.sp,
                               fontWeight: FontWeight.bold,
@@ -249,7 +255,7 @@ class ResDetailsMainWidget
                                   ),
                                   SizedBox(width: 3.w),
                                   Text(
-                                    '4.5',
+                                    restaurant.rating.toString(),
                                     style: TextStyle(
                                       fontSize: 15.sp,
                                       color: AppTheme.FONT_COLOR,
@@ -277,7 +283,7 @@ class ResDetailsMainWidget
                                   ),
                                   SizedBox(width: 5.w),
                                   Text(
-                                    '10:00 - 22:00',
+                                    restaurant.prepareTime!,
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       color: AppTheme.FONT_COLOR,
@@ -286,23 +292,24 @@ class ResDetailsMainWidget
                                 ],
                               ),
                             ),
-                            // TODO: Uncomment and fix Info
                             // //------------------ INFO ---------------------//
-                            // GestureDetector(
-                            //   onTap: () => _onRestaurantInfoPressed(),
-                            //   child: Container(
-                            //     decoration: BoxDecoration(
-                            //       color: AppTheme.MAIN_LIGHT,
-                            //       shape: BoxShape.circle,
-                            //     ),
-                            //     padding: EdgeInsets.symmetric(
-                            //         horizontal: 5.w, vertical: 5.h),
-                            //     child: SvgPicture.asset(
-                            //       'assets/restaurant_info.svg',
-                            //       color: AppTheme.FONT_COLOR,
-                            //     ),
-                            //   ),
-                            // ),
+                            GestureDetector(
+                              onTap: () {
+                                // _onRestaurantInfoPressed();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppTheme.MAIN_LIGHT,
+                                  shape: BoxShape.circle,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5.w, vertical: 5.h),
+                                child: SvgPicture.asset(
+                                  'assets/restaurant_info.svg',
+                                  color: AppTheme.MAIN_DARK,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Padding(
