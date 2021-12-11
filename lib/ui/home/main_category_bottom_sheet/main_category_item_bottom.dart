@@ -60,7 +60,7 @@ class MainCategoryItemBottom
               margin: EdgeInsets.only(top: 7.w),
               padding: EdgeInsets.symmetric(
                   horizontal: model.isMainCategorySelected(mainCategory!.id)
-                      ? 5.w
+                      ? 7.w
                       : 0.0,
                   vertical: model.isMainCategorySelected(mainCategory!.id)
                       ? 2.h
@@ -76,9 +76,9 @@ class MainCategoryItemBottom
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: model.isMainCategorySelected(mainCategory!.id)
-                      ? FontWeight.w400
-                      : FontWeight.w600,
+                  // fontWeight: model.isMainCategorySelected(mainCategory!.id)
+                  //     ? FontWeight.w400
+                  //     : FontWeight.w600,
                   color: model.isMainCategorySelected(mainCategory!.id)
                       ? AppTheme.WHITE
                       : AppTheme.FONT_COLOR,

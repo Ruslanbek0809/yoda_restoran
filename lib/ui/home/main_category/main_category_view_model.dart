@@ -33,13 +33,15 @@ class MainCategoryViewModel extends BaseViewModel {
       _multiSelectionList.add(mainCategoryId!);
     }
     log.i(_multiSelectionList);
+    updateBottomCartStatus();
     notifyListeners();
   }
 
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     _selectedSort = newSelectedSort;
-    log.i(_selectedSort);
+    log.i(_selectedSort!.name);
+    updateBottomCartStatus();
     notifyListeners();
   }
 
@@ -47,19 +49,25 @@ class MainCategoryViewModel extends BaseViewModel {
   void updateBottomCartStatus() {
     switch (_sortAnimationStatus) {
       case SortAnimationStatus.idle:
-        if (_multiSelectionList.isNotEmpty &&
-            _selectedSort != mainCategorySortList[0])
+        if (_multiSelectionList.isNotEmpty ||
+            _selectedSort != mainCategorySortList[0]) {
           _sortAnimationStatus = SortAnimationStatus.forward;
+          notifyListeners();
+        }
         break;
       case SortAnimationStatus.forward:
         if (_multiSelectionList.isEmpty &&
-            _selectedSort == mainCategorySortList[0])
+            _selectedSort == mainCategorySortList[0]) {
           _sortAnimationStatus = SortAnimationStatus.reverse;
+          notifyListeners();
+        }
         break;
       case SortAnimationStatus.reverse:
-        if (_multiSelectionList.isNotEmpty &&
-            _selectedSort != mainCategorySortList[0])
+        if (_multiSelectionList.isNotEmpty ||
+            _selectedSort != mainCategorySortList[0]) {
           _sortAnimationStatus = SortAnimationStatus.forward;
+          notifyListeners();
+        }
         break;
       default:
         _sortAnimationStatus = SortAnimationStatus.idle;
@@ -70,7 +78,7 @@ class MainCategoryViewModel extends BaseViewModel {
 
   /// Function to call MainCategoryBottomSheetView
   Future showCustomBottomSheet() async {
-    log.i('showCustomBottomSheet');
+    log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.mainCategory,
       enableDrag: true,
