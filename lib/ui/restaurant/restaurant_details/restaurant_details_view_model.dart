@@ -54,11 +54,6 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
     }
   }
 
-  // TODO: restaurantInfoBottomSheet
-  // void _onRestaurantInfoPressed() {
-  //   restaurantInfoBottomSheet(context);
-  // }
-
   void navToResSearchView() => _navService.navigateTo(
       Routes.restaurantSearchView); // TODO: Change page transition here
 

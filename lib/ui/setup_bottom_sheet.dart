@@ -10,7 +10,6 @@ void setupBottomSheet() {
   final bottomSheetBuilders = {
     BottomSheetType.mainCategory: (context, sheetRequest, completer) =>
         MainCategoryBottomSheetView(
-          additionalCategories: additionalCategories,
           request: sheetRequest,
           completer: completer,
         ),

@@ -13,10 +13,13 @@ class MainCategoryViewModel extends BaseViewModel {
   final HomeService _homeService = locator<HomeService>();
 
   List<int> _multiSelectionList = [];
+
   CategoryFilter? _selectedSort = mainCategorySortList[0];
+  SortAnimationStatus _sortAnimationStatus = SortAnimationStatus.idle;
 
   CategoryFilter? get selectedSort => _selectedSort;
   List<MainCategory>? get mainCategories => _homeService.mainCategories;
+  SortAnimationStatus get sortAnimationStatus => _sortAnimationStatus;
 
   /// Function to check wether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>
@@ -33,19 +36,45 @@ class MainCategoryViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  /// Function to UPDATE _selectedSort
+  void updateSelectedSort(CategoryFilter? newSelectedSort) {
+    _selectedSort = newSelectedSort;
+    log.i(_selectedSort);
+    notifyListeners();
+  }
+
+  /// Function to update _sortAnimationStatus
+  void updateBottomCartStatus() {
+    switch (_sortAnimationStatus) {
+      case SortAnimationStatus.idle:
+        if (_multiSelectionList.isNotEmpty &&
+            _selectedSort != mainCategorySortList[0])
+          _sortAnimationStatus = SortAnimationStatus.forward;
+        break;
+      case SortAnimationStatus.forward:
+        if (_multiSelectionList.isEmpty &&
+            _selectedSort == mainCategorySortList[0])
+          _sortAnimationStatus = SortAnimationStatus.reverse;
+        break;
+      case SortAnimationStatus.reverse:
+        if (_multiSelectionList.isNotEmpty &&
+            _selectedSort != mainCategorySortList[0])
+          _sortAnimationStatus = SortAnimationStatus.forward;
+        break;
+      default:
+        _sortAnimationStatus = SortAnimationStatus.idle;
+        break;
+    }
+    log.i(_sortAnimationStatus);
+  }
+
+  /// Function to call MainCategoryBottomSheetView
   Future showCustomBottomSheet() async {
     log.i('showCustomBottomSheet');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.mainCategory,
       enableDrag: true,
       isScrollControlled: true,
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.vertical(
-      //     top: Radius.circular(Constants.BORDER_RADIUS_20),
-      //   ),
-      // ),
-      // barrierColor: Colors.transparent,
-      // backgroundColor: Colors.transparent,
     );
   }
 }
