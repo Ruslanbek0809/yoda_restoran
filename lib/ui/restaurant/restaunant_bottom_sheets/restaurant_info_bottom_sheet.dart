@@ -76,12 +76,15 @@ class RestaurantInfoBottomSheetWidget extends StatelessWidget {
                           width: 25.w,
                         ),
                         SizedBox(width: 5.w),
-                        Text(
-                          restaurant.address!,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppTheme.FONT_COLOR,
+                        Flexible(
+                          child: Text(
+                            restaurant.address!,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppTheme.FONT_COLOR,
+                            ),
                           ),
                         ),
                       ],
