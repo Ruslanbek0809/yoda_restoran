@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/home/home_search/search_box.dart';
-import 'package:yoda_res/ui/restaurant/food/food_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -173,7 +172,7 @@ class _RestaurantSearchViewState extends State<RestaurantSearchView>
                 crossAxisSpacing: 8.w, //spaceLeftRight
                 childAspectRatio: itemWidth / itemHeight,
               ),
-              itemCount: foodList.length,
+              itemCount: mealList.length,
               itemBuilder: (context, pos) {
                 // return FoodView(
                 //   food: foodList[pos],

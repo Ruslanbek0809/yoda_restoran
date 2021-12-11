@@ -5,7 +5,7 @@ import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 /// ReactiveViewModel is used to "react"
-class FoodViewModel extends ReactiveViewModel {
+class MealViewModel extends ReactiveViewModel {
   final log = getLogger('FoodViewModel');
 
   final _bottomCartService = locator<BottomCartService>();

@@ -81,9 +81,9 @@ class _CartViewState extends State<CartView> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(top: 15.w, left: 16.w, right: 16.w),
-                  itemCount: foodList.length,
+                  itemCount: mealList.length,
                   itemBuilder: (context, pos) {
-                    return CartFoodView(food: foodList[pos]);
+                    return CartFoodView(food: mealList[pos]);
                   },
                   separatorBuilder: (context, index) {
                     return Padding(
@@ -156,7 +156,7 @@ class _CartViewState extends State<CartView> {
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: foodList.mapIndexed((food, pos) {
+                    children: mealList.mapIndexed((food, pos) {
                       return pos == 0
                           ? Padding(
                               padding: EdgeInsets.only(right: 6.w, left: 16.w),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/restaurant/food/food_view.dart';
+import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -375,7 +375,7 @@ class ResDetailsMainWidget
                 double offset = foodCategoryList.getRange(0, index).fold(
                   0,
                   (prev, category) {
-                    int rows = (foodList.length / 2)
+                    int rows = (mealList.length / 2)
                         .ceil(); // food length to crossAxisCount
                     return prev +=
                         rows * (itemHeight + 24.w); // GridView vertical padding
@@ -440,10 +440,10 @@ class ResDetailsMainWidget
                       // crossAxisSpacing: 8.w, //spaceLeftRight
                       childAspectRatio: itemWidth / itemHeight,
                     ),
-                    itemCount: foodList.length,
+                    itemCount: mealList.length,
                     itemBuilder: (context, pos) {
-                      return FoodView(
-                        food: foodList[pos],
+                      return MealView(
+                        meal: mealList[pos],
                       );
                     },
                   );

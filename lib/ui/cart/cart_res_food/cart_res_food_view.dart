@@ -9,7 +9,7 @@ import 'cart_res_food_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartResFoodView extends StatefulWidget {
-  final Food food;
+  final MealUI food;
   const CartResFoodView({Key? key, required this.food}) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class _CartResFoodViewState extends State<CartResFoodView>
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
 
-  late Food food;
+  late MealUI food;
   bool isButtonToggled = false;
 
   @override
@@ -45,7 +45,7 @@ class _CartResFoodViewState extends State<CartResFoodView>
     super.dispose();
   }
 
-  void _onProductBottomSheetClicked(Food food) {
+  void _onProductBottomSheetClicked(MealUI food) {
     showFoodBottomSheet(context, food);
   }
 

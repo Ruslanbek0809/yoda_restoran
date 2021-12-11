@@ -5,7 +5,7 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-void showFoodBottomSheet(BuildContext context, Food food) {
+void showFoodBottomSheet(BuildContext context, MealUI food) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
@@ -27,7 +27,7 @@ void showFoodBottomSheet(BuildContext context, Food food) {
 }
 
 class FoodBottomSheetWidget extends StatefulWidget {
-  final Food food;
+  final MealUI food;
   final ScrollController scrollController;
   FoodBottomSheetWidget(this.food, this.scrollController);
 

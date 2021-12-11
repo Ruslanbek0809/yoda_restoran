@@ -52,10 +52,10 @@ List<Address> addresses = [
 ];
 
 List<Order> orderList = [
-  Order(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), foodList),
-  Order(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), foodList),
-  Order(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), foodList),
-  Order(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), foodList),
+  Order(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), mealList),
+  Order(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), mealList),
+  Order(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), mealList),
+  Order(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), mealList),
 ];
 
 List<CategoryUI> additionalCategories = [
@@ -247,23 +247,23 @@ List<FoodCategory> foodCategoryList = [
   FoodCategory(4, 'Burgerlar'),
 ];
 
-List<Food> foodList = [
-  Food(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
+List<MealUI> mealList = [
+  MealUI(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
-  Food(1, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
+  MealUI(1, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
-  Food(2, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
+  MealUI(2, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
-  Food(3, 'Burger', 150, 'g', 25, 'assets/burgerzone.jpg', [
+  MealUI(3, 'Burger', 150, 'g', 25, 'assets/burgerzone.jpg', [
     AdditionalFoodModel('Peýnir', 10, false),
     AdditionalFoodModel('Ýumurtga', 10, false),
     AdditionalFoodModel('Bet zat', 15, false),

@@ -220,14 +220,14 @@ class _HomeSearchViewState extends State<HomeSearchView>
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.only(top: 15.h, left: 24.w + 35.h),
-                      itemCount: foodList.length,
+                      itemCount: mealList.length,
                       itemBuilder: (context, pos) => GestureDetector(
                         onTap: () {},
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              foodList[pos].name,
+                              mealList[pos].name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -238,7 +238,7 @@ class _HomeSearchViewState extends State<HomeSearchView>
                             Padding(
                               padding: EdgeInsets.only(right: 16.w, left: 5.w),
                               child: Text(
-                                foodList[pos].price.toString() + ' TMT',
+                                mealList[pos].price.toString() + ' TMT',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -271,7 +271,7 @@ class _HomeSearchViewState extends State<HomeSearchView>
                           bottom: 5.h,
                         ),
                         child: Text(
-                          'Ýene ' + '${foodList.length - 3}',
+                          'Ýene ' + '${mealList.length - 3}',
                           style: TextStyle(
                             fontSize: 18.sp,
                             color: AppTheme.DRAWER_ICON,

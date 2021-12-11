@@ -9,7 +9,7 @@ import 'cart_food_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartFoodView extends StatefulWidget {
-  final Food food;
+  final MealUI food;
   const CartFoodView({Key? key, required this.food}) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class CartFoodView extends StatefulWidget {
 }
 
 class _CartFoodViewState extends State<CartFoodView> {
-  void _onProductBottomSheetClicked(Food food) {
+  void _onProductBottomSheetClicked(MealUI food) {
     showFoodBottomSheet(context, food);
   }
 

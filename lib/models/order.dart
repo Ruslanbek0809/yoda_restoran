@@ -5,7 +5,7 @@ class Order {
   final String restaurantName;
   final num orderPrice;
   final OrderStatus orderStatus;
-  final List<Food> foodList;
+  final List<MealUI> foodList;
   Order(this.id, this.restaurantName, this.orderPrice, this.orderStatus,
       this.foodList);
 }

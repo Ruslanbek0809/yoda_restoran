@@ -4,31 +4,16 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'food_view_model.dart';
+import 'meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked/stacked.dart';
 
-/// The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
-class FoodView extends StatelessWidget {
-  final Food food;
-  const FoodView({Key? key, required this.food}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<FoodViewModel>.nonReactive(
-      builder: (context, model, child) => FoodWidget(food: food),
-      viewModelBuilder: () => FoodViewModel(),
-    );
-  }
-}
-
-class FoodWidget extends HookViewModelWidget<FoodViewModel> {
-  final Food food;
-  const FoodWidget({Key? key, required this.food})
+class MealItem extends HookViewModelWidget<MealViewModel> {
+  final MealUI meal;
+  const MealItem({Key? key, required this.meal})
       : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, FoodViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, MealViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.98);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
@@ -37,7 +22,7 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
     /// To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
-//// This listener was used to repeat animation once
+        // This listener was used to repeat animation once
         if (status == AnimationStatus.completed) {
           _tweenController.reverse();
         }
@@ -69,7 +54,7 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
                 Stack(
                   children: [
                     YodaImage(
-                      image: food.image,
+                      image: meal.image,
                       height: constraints.maxWidth,
                       width: constraints.maxWidth,
                       borderRadius: Constants.BORDER_RADIUS_20,
@@ -104,7 +89,7 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
                 Padding(
                   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
                   child: Text(
-                    food.name,
+                    meal.name,
                     maxLines: 2,
                     style: TextStyle(
                       fontSize: 17.sp,
@@ -116,14 +101,14 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
                     ? Row(
                         children: [
                           Text(
-                            '${food.price} TMT / ',
+                            '${meal.price} TMT / ',
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: AppTheme.DRAWER_ICON,
                             ),
                           ),
                           Text(
-                            '${food.weight} ${food.weightType}',
+                            '${meal.weight} ${meal.weightType}',
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: AppTheme.DRAWER_ICON,
@@ -132,7 +117,7 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
                         ],
                       )
                     : Text(
-                        '${food.weight} ${food.weightType}',
+                        '${meal.weight} ${meal.weightType}',
                         style: TextStyle(
                           fontSize: 15.sp,
                           color: AppTheme.DRAWER_ICON,
@@ -219,7 +204,7 @@ class FoodWidget extends HookViewModelWidget<FoodViewModel> {
                               ),
                               padding: EdgeInsets.symmetric(vertical: 10.w),
                               child: Text(
-                                '${food.price} TMT',
+                                '${meal.price} TMT',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20.sp,

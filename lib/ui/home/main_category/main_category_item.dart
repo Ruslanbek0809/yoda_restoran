@@ -27,29 +27,21 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
     );
 
     /// To dispose a status listener attached to _tweenController
-//     useEffect(() {
-//       void _listenerStatus(AnimationStatus status) {
-// //// This listener was used to repeat animation once
-//         if (status == AnimationStatus.completed) {
-//           _tweenController.reverse();
-//         }
-//       }
+    useEffect(() {
+      void _listenerStatus(AnimationStatus status) {
+        // This listener was used to repeat animation once
+        if (status == AnimationStatus.completed) {
+          _tweenController.reverse();
+        }
+      }
 
-//       _tweenController..addStatusListener(_listenerStatus);
-//       return () => _tweenController.removeStatusListener(_listenerStatus);
-//     }, [_tweenController]);
+      _tweenController..addStatusListener(_listenerStatus);
+      return () => _tweenController.removeStatusListener(_listenerStatus);
+    }, [_tweenController]);
 
     return ScaleTransition(
       scale: _tween.animate(
-        CurvedAnimation(
-            parent: _tweenController
-              ..addStatusListener((status) {
-//// This listener was used to repeat animation once
-                if (status == AnimationStatus.completed) {
-                  _tweenController.reverse();
-                }
-              }),
-            curve: Curves.bounceInOut),
+        CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut),
       ),
       child: Container(
         width: 75.w,

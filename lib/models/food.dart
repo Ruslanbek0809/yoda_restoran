@@ -1,4 +1,4 @@
-class Food {
+class MealUI {
   final int id;
   final String name;
   final num weight;
@@ -6,7 +6,7 @@ class Food {
   final num price;
   final String image;
   final List<AdditionalFoodModel> additionals;
-  Food(
+  MealUI(
     this.id,
     this.name,
     this.weight,
