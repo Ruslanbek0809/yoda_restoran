@@ -27,6 +27,7 @@ class MainCategoryViewModel extends BaseViewModel {
   }
 
   Future showCustomBottomSheet() async {
+    log.i('showCustomBottomSheet');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.mainCategory,
       enableDrag: true,

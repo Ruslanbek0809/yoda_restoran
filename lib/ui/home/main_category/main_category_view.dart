@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/home/main_category/main_category_all_item.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_item.dart';
+import 'package:yoda_res/utils/utils.dart';
 import 'main_category_view_model.dart';
 
 class MainCategoryView extends StatelessWidget {
@@ -16,9 +18,11 @@ class MainCategoryView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: mainCategories!.map((mainCategory) {
-            return MainCategoryItem(mainCategory: mainCategory);
-          }).toList(),
+          children: mainCategories!.take(6).mapIndexed((mainCategory, pos) {
+            return pos != mainCategories!.take(6).length - 1
+                ? MainCategoryItem(mainCategory: mainCategory)
+                : MainCategoryAllItem();
+          }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
         ),
       ),
       viewModelBuilder: () => MainCategoryViewModel(),
