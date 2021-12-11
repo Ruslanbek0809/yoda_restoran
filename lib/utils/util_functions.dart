@@ -67,7 +67,7 @@ List<CategoryUI> additionalCategories = [
   CategoryUI(6, 'Steýk', 'assets/cat_add_steyk.png'),
 ];
 
-List<CategoryFilter> categoryFilters = [
+List<CategoryFilter> mainCategorySortList = [
   CategoryFilter(1, 'Adaty'),
   CategoryFilter(2, 'Reýtingi boýunça'),
   CategoryFilter(3, 'Çalt'),

@@ -2,14 +2,21 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class MainCategoryViewModel extends BaseViewModel {
   final log = getLogger('MainCategoryViewModel');
 
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final HomeService _homeService = locator<HomeService>();
 
   List<int> _multiSelectionList = [];
+  CategoryFilter? _selectedSort = mainCategorySortList[0];
+
+  CategoryFilter? get selectedSort => _selectedSort;
+  List<MainCategory>? get mainCategories => _homeService.mainCategories;
 
   /// Function to check wether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>

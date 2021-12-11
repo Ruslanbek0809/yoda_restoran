@@ -1,58 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'main_category_item_bottom.dart';
 
-class MainCategoryBottomSheetView extends StatefulWidget {
-  final List<CategoryUI> additionalCategories;
+class MainCategoryBottomSheetView
+    extends HookViewModelWidget<MainCategoryViewModel> {
   final SheetRequest request;
   final Function(SheetResponse) completer;
   const MainCategoryBottomSheetView({
     Key? key,
-    required this.additionalCategories,
     required this.request,
     required this.completer,
-  }) : super(key: key);
+  }) : super(key: key, reactive: true);
+
+  // void _setSelectedCategoryFilter(CategoryFilter? _selectedFilter) {
+  //   setState(() {
+  //     selectedFilter = _selectedFilter;
+  //     if (selectedFilter != categoryFilters[0])
+  //       _filterButtonAnimationController.forward();
+  //     else
+  //       _filterButtonAnimationController.reverse();
+  //   });
+  // }
+  // _filterButtonAnimationController =
+  //     AnimationController(duration: Duration(milliseconds: 100), vsync: this);
+  // _filterButtonAnimation =
+  //     IntTween(begin: 0, end: 100).animate(_filterButtonAnimationController);
+  // _filterButtonAnimation.addListener(() => setState(() {}));
 
   @override
-  _MainCategoryBottomSheetViewState createState() =>
-      _MainCategoryBottomSheetViewState();
-}
-
-class _MainCategoryBottomSheetViewState
-    extends State<MainCategoryBottomSheetView>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _filterButtonAnimationController;
-  late Animation _filterButtonAnimation;
-  CategoryFilter? selectedFilter;
-  Set<int> selectedCategoryFilters = {};
-
-  void _setSelectedCategoryFilter(CategoryFilter? _selectedFilter) {
-    setState(() {
-      selectedFilter = _selectedFilter;
-      if (selectedFilter != categoryFilters[0])
-        _filterButtonAnimationController.forward();
-      else
-        _filterButtonAnimationController.reverse();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    selectedFilter = categoryFilters[0];
-    _filterButtonAnimationController =
-        AnimationController(duration: Duration(milliseconds: 100), vsync: this);
-    _filterButtonAnimation =
-        IntTween(begin: 0, end: 100).animate(_filterButtonAnimationController);
-    _filterButtonAnimation.addListener(() => setState(() {}));
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildViewModelWidget(
+      BuildContext context, MainCategoryViewModel model) {
     return DraggableScrollableSheet(
       initialChildSize: 0.95,
       maxChildSize: 0.95,
@@ -112,14 +95,14 @@ class _MainCategoryBottomSheetViewState
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
-                              mainAxisSpacing: 10.w, //spaceTopBottom
+                              mainAxisSpacing: 10.h, //spaceTopBottom
                               crossAxisSpacing: 10.w, //spaceLeftRight
                               childAspectRatio: 0.75,
                             ),
-                            itemCount: widget.additionalCategories.length,
+                            itemCount: model.mainCategories!.length,
                             itemBuilder: (context, pos) {
                               return MainCategoryItemBottom(
-                                mainCategory: ,
+                                mainCategory: model.mainCategories![pos],
                                 //  if (isAdd) {
                                 //     selectedCategoryFilters
                                 //         .add(categoryFilterID);
@@ -159,7 +142,7 @@ class _MainCategoryBottomSheetViewState
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: categoryFilters
+                            children: mainCategorySortList
                                 .mapIndexed<Widget>(
                                   (CategoryFilter categoryFilter, int pos) =>
                                       Column(
@@ -168,7 +151,7 @@ class _MainCategoryBottomSheetViewState
                                     children: [
                                       RadioListTile<CategoryFilter>(
                                         value: categoryFilter,
-                                        groupValue: selectedFilter,
+                                        groupValue: model.selectedSort,
                                         onChanged: _setSelectedCategoryFilter,
                                         title: Text(
                                           categoryFilter.name,
@@ -182,7 +165,8 @@ class _MainCategoryBottomSheetViewState
                                             ListTileControlAffinity.trailing,
                                         toggleable: true,
                                       ),
-                                      if (pos != categoryFilters.length - 1)
+                                      if (pos !=
+                                          mainCategorySortList.length - 1)
                                         Divider(
                                           color: AppTheme.DRAWER_DIVIDER,
                                           indent: 10.w,
