@@ -17,6 +17,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: ApiRootService),
     LazySingleton(classType: ApiService),

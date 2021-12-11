@@ -75,11 +75,14 @@ List<CategoryFilter> categoryFilters = [
   CategoryFilter(5, 'Arzandan gymmada'),
 ];
 
+/// Enum for FormValidation
 enum FormValidation { phoneInvalid, valid }
 
 /// Enum for bottomCartController
-///
 enum BottomCartStatus { idle, forward, reverse }
+
+/// Enum for bottom sheet types
+enum BottomSheetType { mainCategory, restorauntInfo, mealDetails }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

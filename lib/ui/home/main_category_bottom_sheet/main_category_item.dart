@@ -4,11 +4,11 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoryFilterWidget extends StatefulWidget {
+class MainCategoryItem extends StatefulWidget {
   final CategoryUI homeCategory;
   final bool isCategoryFilterChecked;
   final Function(int, bool)? categoryFilterCallback;
-  const CategoryFilterWidget(
+  const MainCategoryItem(
       {Key? key,
       required this.homeCategory,
       this.isCategoryFilterChecked = false,
@@ -16,10 +16,10 @@ class CategoryFilterWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CategoryFilterWidgetState createState() => _CategoryFilterWidgetState();
+  _MainCategoryItemState createState() => _MainCategoryItemState();
 }
 
-class _CategoryFilterWidgetState extends State<CategoryFilterWidget>
+class _MainCategoryItemState extends State<MainCategoryItem>
     with SingleTickerProviderStateMixin {
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.95);
