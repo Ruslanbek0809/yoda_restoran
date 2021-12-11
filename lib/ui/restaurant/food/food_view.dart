@@ -6,10 +6,25 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'food_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
 
-class FoodView extends HookViewModelWidget<FoodViewModel> {
+/// The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
+class FoodView extends StatelessWidget {
   final Food food;
-  const FoodView({Key? key, required this.food})
+  const FoodView({Key? key, required this.food}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<FoodViewModel>.nonReactive(
+      builder: (context, model, child) => FoodWidget(food: food),
+      viewModelBuilder: () => FoodViewModel(),
+    );
+  }
+}
+
+class FoodWidget extends HookViewModelWidget<FoodViewModel> {
+  final Food food;
+  const FoodWidget({Key? key, required this.food})
       : super(key: key, reactive: true);
 
   @override
@@ -18,6 +33,8 @@ class FoodView extends HookViewModelWidget<FoodViewModel> {
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
     );
+
+    /// To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
 //// This listener was used to repeat animation once

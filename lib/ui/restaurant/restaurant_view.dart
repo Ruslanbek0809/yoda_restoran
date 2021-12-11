@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_details/restaurant_details_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_view_model.dart';
