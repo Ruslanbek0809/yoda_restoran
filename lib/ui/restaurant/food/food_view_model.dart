@@ -31,6 +31,11 @@ class FoodViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// TODO: Add this bottom sheet
+  // void _onProductBottomSheetClicked(Food food) {
+  //   showFoodBottomSheet(context, food);
+  // }
+
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 }
