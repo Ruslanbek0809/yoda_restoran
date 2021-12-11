@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../models/models.dart';
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
@@ -53,8 +54,12 @@ class StackedRouter extends RouterBase {
       );
     },
     RestaurantDetailsView: (data) {
+      var args = data.getArgs<RestaurantDetailsViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => RestaurantDetailsView(),
+        builder: (context) => RestaurantDetailsView(
+          restaurant: args.restaurant,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -72,6 +77,13 @@ class StackedRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// RestaurantDetailsView arguments holder class
+class RestaurantDetailsViewArguments {
+  final Restaurant restaurant;
+  final Key? key;
+  RestaurantDetailsViewArguments({required this.restaurant, this.key});
+}
 
 /// RestaurantSearchView arguments holder class
 class RestaurantSearchViewArguments {

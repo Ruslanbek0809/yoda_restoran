@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
+import 'package:yoda_res/models/models.dart';
 
 class RestaurantViewModel extends BaseViewModel {
   final log = getLogger('RestaurantViewModel');
@@ -18,6 +19,8 @@ class RestaurantViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void navToResDetailsView() =>
-      _navService.navigateTo(Routes.restaurantDetailsView);
+  void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
+        Routes.restaurantDetailsView,
+        arguments: RestaurantDetailsViewArguments(restaurant: restaurant),
+      );
 }

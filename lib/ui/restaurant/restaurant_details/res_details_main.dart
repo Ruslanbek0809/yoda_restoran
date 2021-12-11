@@ -11,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResDetailsMainWidget
     extends HookViewModelWidget<RestaurantDetailsViewModel> {
-  const ResDetailsMainWidget({Key? key}) : super(key: key, reactive: true);
+  final Restaurant restaurant;
+  const ResDetailsMainWidget({required this.restaurant, Key? key}) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(
@@ -51,7 +52,7 @@ class ResDetailsMainWidget
       controller: customScrollController,
       physics: const BouncingScrollPhysics(),
       slivers: [
-//------------------ ARROW BACK ---------------------//
+        //------------------ ARROW BACK ---------------------//
         SliverAppBar(
           expandedHeight: 0.55.sh,
           pinned: true,
@@ -101,7 +102,7 @@ class ResDetailsMainWidget
               ),
             ),
           ),
-//------------------ ACTIONS FAV ---------------------//
+          //------------------ ACTIONS FAV ---------------------//
           actions: [
             AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
@@ -178,7 +179,7 @@ class ResDetailsMainWidget
             ),
             SizedBox(width: 15.w),
           ],
-//------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
+          //------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
           flexibleSpace: FlexibleSpaceBar(
             stretchModes: [StretchMode.zoomBackground],
             //// NOTE: Container background image used to add custom widget in front of this background image
@@ -332,7 +333,7 @@ class ResDetailsMainWidget
               ),
             ),
           ),
-//------------------ TABBAR ---------------------//
+          //------------------ TABBAR ---------------------//
           bottom: ColoredTabBar(
             color: AppTheme.WHITE,
             tabBar: TabBar(
