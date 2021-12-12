@@ -103,7 +103,9 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                     ? Row(
                         children: [
                           Text(
-                            '${meal.price} TMT / ',
+                            meal.discount != null || meal.discount! > 0
+                                ? '${meal.discountedPrice} TMT'
+                                : '${meal.price} TMT',
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: AppTheme.DRAWER_ICON,
@@ -118,13 +120,33 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                           ),
                         ],
                       )
-                    : Text(
-                        '${meal.value} ${meal.size!.name}',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          color: AppTheme.DRAWER_ICON,
-                        ),
-                      ),
+                    : meal.discount != null || meal.discount! > 0
+                        ? Row(
+                            children: [
+                              Text(
+                                '${meal.price} TMT',
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  color: AppTheme.DRAWER_ICON,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              Text(
+                                '${meal.value} ${meal.size!.name}',
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  color: AppTheme.DRAWER_ICON,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            '${meal.value} ${meal.size!.name}',
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              color: AppTheme.DRAWER_ICON,
+                            ),
+                          ),
                 Spacer(),
 //------------------ BUTTONS ---------------------//
                 AnimatedSwitcher(
@@ -205,7 +227,9 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                               ),
                               padding: EdgeInsets.symmetric(vertical: 10.w),
                               child: Text(
-                                '${meal.price} TMT',
+                                meal.discount != null || meal.discount! > 0
+                                    ? '${meal.discountedPrice} TMT'
+                                    : '${meal.price} TMT',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20.sp,
