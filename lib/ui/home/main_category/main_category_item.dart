@@ -58,6 +58,7 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                 image: mainCategory!.image!,
                 width: 70.w,
                 height: 70.w,
+                // fit: BoxFit.cover,
                 borderRadius: 10.0,
               ),
               Container(

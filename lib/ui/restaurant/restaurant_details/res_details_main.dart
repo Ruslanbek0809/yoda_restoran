@@ -346,15 +346,15 @@ class ResDetailsMainWidget
               isScrollable: true,
               indicatorColor: Colors.transparent,
               labelPadding: EdgeInsets.all(0.0),
-              tabs: foodCategoryList
-                  .map<Widget>((category) => Tab(
+              tabs: model.resCategories!
+                  .map<Widget>((resCategory) => Tab(
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           decoration: BoxDecoration(
                             borderRadius: AppTheme().radius15,
                             color: model.activeTab ==
-                                    foodCategoryList.indexOf(category)
+                                    model.resCategories!.indexOf(resCategory)
                                 ? model.isTabPressed
                                     ? AppTheme.MAIN_LIGHT
                                     : AppTheme.WHITE
@@ -367,7 +367,7 @@ class ResDetailsMainWidget
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           alignment: Alignment.center,
                           child: Text(
-                            category.name,
+                            resCategory.resCategoryModel!.name!,
                             style: TextStyle(
                               color: AppTheme.FONT_COLOR,
                               fontSize: 14.sp,
@@ -378,7 +378,7 @@ class ResDetailsMainWidget
                   .toList(),
               onTap: (index) {
                 model.updateOnTapRipple();
-                double offset = foodCategoryList.getRange(0, index).fold(
+                double offset = model.resCategories!.getRange(0, index).fold(
                   0,
                   (prev, category) {
                     int rows = (mealList.length / 2)
@@ -408,10 +408,10 @@ class ResDetailsMainWidget
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: foodCategoryList.length,
+                itemCount: model.resCategories!.length,
                 separatorBuilder: (context, index) {
-                  if (index < foodCategoryList.length) {
-                    FoodCategory category = foodCategoryList[index + 1];
+                  if (index < model.resCategories!.length) {
+                    ResCategory resCategory = model.resCategories![index + 1];
 
                     return Container(
                       height: 50.w,
@@ -421,7 +421,7 @@ class ResDetailsMainWidget
                           padding:
                               EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                           child: Text(
-                            category.name,
+                            resCategory.resCategoryModel!.name!,
                             textAlign: TextAlign.left,
                             style: TextStyle(fontSize: 18, color: Colors.grey),
                           ),
@@ -433,6 +433,7 @@ class ResDetailsMainWidget
                   }
                 },
                 itemBuilder: (context, index) {
+                  final resCategoryMeals = model.resCategories![index].meals;
                   return GridView.builder(
                     padding:
                         EdgeInsets.symmetric(vertical: 15.w, horizontal: 10.w),
@@ -446,10 +447,10 @@ class ResDetailsMainWidget
                       // crossAxisSpacing: 8.w, //spaceLeftRight
                       childAspectRatio: itemWidth / itemHeight,
                     ),
-                    itemCount: mealList.length,
+                    itemCount: resCategoryMeals!.length,
                     itemBuilder: (context, pos) {
                       return MealView(
-                        meal: mealList[pos],
+                        meal: resCategoryMeals[pos],
                       );
                     },
                   );

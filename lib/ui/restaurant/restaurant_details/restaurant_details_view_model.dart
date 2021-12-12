@@ -71,6 +71,7 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
 
   // Function to fetch Restaurant categories with their meals
   Future getResCatsWithMeals(int restaurantId) async {
+    log.i('');
     await runBusyFuture(_restaurantService.getResCatsWithMeals(restaurantId));
     log.i('resCategories length: ${resCategories!.length}');
   }

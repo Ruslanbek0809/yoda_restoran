@@ -88,9 +88,11 @@ class ApiService {
   Future<List<ResCategory>> getResCatsWithMeals(int restaurantId) async {
     List<ResCategory> _resCategories = [];
     try {
+      // Response response =
+      //     await _apiRoot.dio.get('api/categories?restaurant=$restaurantId');
       Response response = await _apiRoot.dio
           .get('api/categories', queryParameters: {'restaurant': restaurantId});
-      // log.i('RESPONSE: api/categories/ => ${response.data}');
+      log.i('RESPONSE: api/categories/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {
@@ -98,8 +100,10 @@ class ApiService {
         });
       }
       return _resCategories;
-    } catch (error) {
-      log.i('ERROR on api/categories/ :$error');
+    } on DioError catch (error) {
+      log.i(error);
+      // log.i(
+      //     'ERROR on api/categories :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }
