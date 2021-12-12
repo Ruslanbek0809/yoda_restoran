@@ -15,3 +15,5 @@ export 'main_volume.dart';
 export 'volume.dart';
 export 'restaurant.dart';
 export 'promoted.dart';
+export 'res_category.dart';
+export 'res_category_model.dart';

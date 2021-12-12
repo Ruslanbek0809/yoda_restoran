@@ -10,7 +10,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../services/home_service.dart';
 import '../services/services.dart';
 
 final locator = StackedLocator.instance;
