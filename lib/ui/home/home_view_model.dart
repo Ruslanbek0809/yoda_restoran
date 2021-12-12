@@ -4,6 +4,8 @@ import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/home_service.dart';
+import 'package:yoda_res/services/services.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 // A map key of type string
 const String homeSlidersFuture = 'homeSlidersFuture';
@@ -15,6 +17,10 @@ class HomeViewModel extends MultipleFutureViewModel {
   final log = getLogger('HomeViewModel');
 
   final _homeService = locator<HomeService>();
+  final _bottomCartService = locator<BottomCartService>();
+
+  BottomCartStatus get bottomCartStatus => _bottomCartService
+      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -51,4 +57,33 @@ class HomeViewModel extends MultipleFutureViewModel {
         homeRandomResFuture: _homeService.getRandomRestorants,
         homePromotedResFuture: _homeService.getPromotedRestaurants,
       };
+
+  //------------------ Custom overridden REACTIVE PART ---------------------//
+  late List<ReactiveServiceMixin> _reactiveServices;
+
+  // List<ReactiveServiceMixin> get reactiveServices; /// Instead of this getter I will directly initialise reactiveness here
+
+  HomeViewModel() {
+    _reactToServices([_bottomCartService]);
+    // _reactToServices(reactiveServices);
+  }
+
+  void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {
+    _reactiveServices = reactiveServices;
+    for (var reactiveService in _reactiveServices) {
+      reactiveService.addListener(_indicateChange);
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var reactiveService in _reactiveServices) {
+      reactiveService.removeListener(_indicateChange);
+    }
+    super.dispose();
+  }
+
+  void _indicateChange() {
+    notifyListeners();
+  }
 }

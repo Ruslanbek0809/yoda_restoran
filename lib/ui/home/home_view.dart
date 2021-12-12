@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
+import 'package:yoda_res/ui/home/home_view_bottom_cart.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_bottom_cart.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/slider/slider_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
@@ -163,7 +163,7 @@ class HomeView extends StatelessWidget {
                       ),
 
                 //------------------ BOTTOM CART ---------------------//
-                ResDetailsBottomCart(),
+                HomeViewBottomCart(),
               ],
             ),
           ),

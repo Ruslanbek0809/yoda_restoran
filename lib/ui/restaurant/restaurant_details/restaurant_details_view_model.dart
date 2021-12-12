@@ -18,7 +18,6 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _restaurantService = locator<RestaurantService>();
 
-  // Restaurant? _restaurant;
   int _activeTab = 0;
   bool _isTabPressed = false;
   bool _isShrink = false;
