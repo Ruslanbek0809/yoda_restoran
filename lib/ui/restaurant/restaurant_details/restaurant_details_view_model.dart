@@ -16,25 +16,20 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _navService = locator<NavigationService>();
   final _bottomCartService = locator<BottomCartService>();
-
-  BottomCartStatus get bottomCartStatus => _bottomCartService.bottomCartStatus;
+  final _restaurantService = locator<RestaurantService>();
 
   // Restaurant? _restaurant;
   int _activeTab = 0;
   bool _isTabPressed = false;
   bool _isShrink = false;
 
-  // Restaurant? get restaurant => _restaurant;
   int get activeTab => _activeTab;
   bool get isTabPressed => _isTabPressed;
   bool get isShrink => _isShrink;
 
-  /// Function to UPDATE _restaurant
-  // void updateRestaurant(Restaurant newRestaurant) {
-  //   _restaurant = newRestaurant;
-  //   log.i(_restaurant!.name);
-  //   notifyListeners();
-  // }
+  BottomCartStatus get bottomCartStatus => _bottomCartService
+      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
+  List<ResCategory>? get resCategories => _restaurantService.resCategories;
 
   /// Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
@@ -72,6 +67,11 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
       isScrollControlled: true,
       data: restaurant,
     );
+  }
+
+  // Function to fetch Restaurant categories with their meals
+  Future getResCatsWithMeals(int restaurantId) async {
+    await runBusyFuture(_restaurantService.getResCatsWithMeals(restaurantId));
   }
 
   void navToResSearchView() => _navService.navigateTo(

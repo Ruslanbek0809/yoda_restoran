@@ -69,7 +69,7 @@ class ApiService {
     List<Promoted> _promotedList = [];
     try {
       Response response = await _apiRoot.dio.get('api/promoted/');
-      // log.i('RESPONSE: api/restaurants/ => ${response.data}');
+      // log.i('RESPONSE: api/promoted/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_promoted) {
@@ -79,6 +79,27 @@ class ApiService {
       return _promotedList;
     } catch (error) {
       log.i('ERROR on api/promoted/ :$error');
+      rethrow;
+    }
+  }
+
+  //------------------ RESTAURANT APIS ---------------------//
+
+  Future<List<ResCategory>> getResCatsWithMeals(int restaurantId) async {
+    List<ResCategory> _resCategories = [];
+    try {
+      Response response = await _apiRoot.dio
+          .get('api/categories', queryParameters: {'restaurant': restaurantId});
+      // log.i('RESPONSE: api/categories/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_resCategory) {
+          _resCategories.add(ResCategory.fromJson(_resCategory));
+        });
+      }
+      return _resCategories;
+    } catch (error) {
+      log.i('ERROR on api/categories/ :$error');
       rethrow;
     }
   }
