@@ -12,13 +12,15 @@ class RestaurantDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Restaurant ID  : ${restaurant.id}');
     return ViewModelBuilder<RestaurantDetailsViewModel>.nonReactive(
+      onModelReady: (model) => model.getResCatsWithMeals(restaurant.id!),
       builder: (context, model, child) => Scaffold(
         body: Stack(
           children: [
             //------------------ RESTAURANT MAIN PART ---------------------//
-            ResDetailsMainWidget(restaurant: restaurant),
+            model.isBusy
+                ? ResDetailsMainWidget(restaurant: restaurant)
+                : ResDetailsMainWidget(restaurant: restaurant),
             //------------------ BOTTOM CART ---------------------//
             ResDetailsBottomCart(),
           ],
