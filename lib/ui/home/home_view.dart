@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_bottom_cart.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/slider/slider_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
@@ -23,141 +24,148 @@ class HomeView extends StatelessWidget {
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
-            body: model.anyObjectsBusy
-                ? LoadingWidget()
-                : NestedScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxScrolled) {
-                      return <Widget>[
-                        SliverAppBar(
-                          expandedHeight: 0.34.sh,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                          toolbarHeight: 60.w,
-                          automaticallyImplyLeading: false,
-                          flexibleSpace: FlexibleSpaceBar(
-                            background: Column(
-                              children: [
-                                SizedBox(height: 15.w),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    //------------------ MENU ---------------------//
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.menu,
-                                        size: 24.w,
-                                      ),
-                                      onPressed: model.homeMenuPressed,
-                                      tooltip: 'Drawer',
+            body: Stack(
+              children: [
+                model.anyObjectsBusy
+                    ? LoadingWidget()
+                    : NestedScrollView(
+                        physics: const ClampingScrollPhysics(),
+                        headerSliverBuilder:
+                            (BuildContext context, bool innerBoxScrolled) {
+                          return <Widget>[
+                            SliverAppBar(
+                              expandedHeight: 0.34.sh,
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              toolbarHeight: 60.w,
+                              automaticallyImplyLeading: false,
+                              flexibleSpace: FlexibleSpaceBar(
+                                background: Column(
+                                  children: [
+                                    SizedBox(height: 15.w),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        //------------------ MENU ---------------------//
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.menu,
+                                            size: 24.w,
+                                          ),
+                                          onPressed: model.homeMenuPressed,
+                                          tooltip: 'Drawer',
+                                        ),
+                                        //------------------ SEARCH ---------------------//
+                                        HomeSearch(),
+                                      ],
                                     ),
-                                    //------------------ SEARCH ---------------------//
-                                    HomeSearch(),
+                                    //------------------ BANNERS ---------------------//
+                                    SliderView(sliders: model.sliders ?? []),
                                   ],
                                 ),
-                                //------------------ BANNERS ---------------------//
-                                SliderView(sliders: model.sliders ?? []),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        //------------------ HOME CATEGORIES ---------------------//
-                        SliverPersistentHeader(
-                          pinned: false,
-                          floating: true,
-                          delegate: ContestTabHeader(
-                            size: 90.h,
-                            child: MainCategoryView(
-                              mainCategories: model.mainCategories ?? [],
-                            ),
-                          ),
-                        ),
-                        //------------------ DISCOUNTS ---------------------//
-                        SliverPersistentHeader(
-                          pinned: false,
-                          floating: true,
-                          delegate: ContestTabHeader(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 15.w, top: 12.h),
-                                  child: Text(
-                                    'Aksiýalar',
-                                    style: TextStyle(
-                                      fontSize: 24.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppTheme.MAIN_DARK,
-                                    ),
-                                  ),
+                            //------------------ HOME CATEGORIES ---------------------//
+                            SliverPersistentHeader(
+                              pinned: false,
+                              floating: true,
+                              delegate: ContestTabHeader(
+                                size: 90.h,
+                                child: MainCategoryView(
+                                  mainCategories: model.mainCategories ?? [],
                                 ),
-                                HomeDiscounts(discounts: discounts),
-                              ],
+                              ),
                             ),
-                            size: 150.w,
+                            //------------------ DISCOUNTS ---------------------//
+                            SliverPersistentHeader(
+                              pinned: false,
+                              floating: true,
+                              delegate: ContestTabHeader(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 15.w, top: 12.h),
+                                      child: Text(
+                                        'Aksiýalar',
+                                        style: TextStyle(
+                                          fontSize: 24.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppTheme.MAIN_DARK,
+                                        ),
+                                      ),
+                                    ),
+                                    HomeDiscounts(discounts: discounts),
+                                  ],
+                                ),
+                                size: 150.w,
+                              ),
+                            ),
+                          ];
+                        },
+                        //------------------ RESTAURANTS ---------------------//
+                        body: ListView.separated(
+                          padding: EdgeInsets.only(top: 10.h),
+                          // itemCount: 20,
+                          // itemBuilder: (ctx, pos) => Container(
+                          //   margin: EdgeInsets.all(5),
+                          //   height: 75,
+                          //   width: 75,
+                          //   color: Colors.red,
+                          //   child: Center(child: Text(pos.toString())),
+                          // ),
+                          itemCount: model.randomRestaurants?.length ?? 0,
+                          itemBuilder: (ctx, pos) => RestaurantView(
+                            restaurant: model.randomRestaurants![pos],
                           ),
+                          separatorBuilder: (ctx, pos) {
+                            // /// After every 5 restaurant, it shows promoted ones
+                            // if ((pos + 1) % 3 == 0) {
+                            //   // && model.isOkToPromote
+                            //   int promotePos = model.promotedCounter;
+                            //   model.log.i('promotePos: $promotePos');
+                            //   return Column(
+                            //     children: [
+                            //       Padding(
+                            //         padding: EdgeInsets.only(left: 15.w, top: 12.h),
+                            //         child: Text(
+                            //           model.promotedRes![promotePos].name!,
+                            //           style: TextStyle(
+                            //             fontSize: 24.sp,
+                            //             fontWeight: FontWeight.bold,
+                            //             color: AppTheme.MAIN_DARK,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       SingleChildScrollView(
+                            //         physics: BouncingScrollPhysics(),
+                            //         scrollDirection: Axis.horizontal,
+                            //         child: Row(
+                            //           mainAxisAlignment: MainAxisAlignment.start,
+                            //           children: model
+                            //               .promotedRes![promotePos].restaurants!
+                            //               .map((promoted) {
+                            //             return Container(
+                            //               padding: EdgeInsets.all(10),
+                            //               color: Colors.blue,
+                            //               child: Text(promoted.name!),
+                            //             );
+                            //           }).toList(),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   );
+                            // }
+                            return SizedBox();
+                          },
                         ),
-                      ];
-                    },
-                    //------------------ RESTAURANTS ---------------------//
-                    body: ListView.separated(
-                      padding: EdgeInsets.only(top: 10.h),
-                      // itemCount: 20,
-                      // itemBuilder: (ctx, pos) => Container(
-                      //   margin: EdgeInsets.all(5),
-                      //   height: 75,
-                      //   width: 75,
-                      //   color: Colors.red,
-                      //   child: Center(child: Text(pos.toString())),
-                      // ),
-                      itemCount: model.randomRestaurants?.length ?? 0,
-                      itemBuilder: (ctx, pos) => RestaurantView(
-                        restaurant: model.randomRestaurants![pos],
                       ),
-                      separatorBuilder: (ctx, pos) {
-                        // /// After every 5 restaurant, it shows promoted ones
-                        // if ((pos + 1) % 3 == 0) {
-                        //   // && model.isOkToPromote
-                        //   int promotePos = model.promotedCounter;
-                        //   model.log.i('promotePos: $promotePos');
-                        //   return Column(
-                        //     children: [
-                        //       Padding(
-                        //         padding: EdgeInsets.only(left: 15.w, top: 12.h),
-                        //         child: Text(
-                        //           model.promotedRes![promotePos].name!,
-                        //           style: TextStyle(
-                        //             fontSize: 24.sp,
-                        //             fontWeight: FontWeight.bold,
-                        //             color: AppTheme.MAIN_DARK,
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       SingleChildScrollView(
-                        //         physics: BouncingScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         child: Row(
-                        //           mainAxisAlignment: MainAxisAlignment.start,
-                        //           children: model
-                        //               .promotedRes![promotePos].restaurants!
-                        //               .map((promoted) {
-                        //             return Container(
-                        //               padding: EdgeInsets.all(10),
-                        //               color: Colors.blue,
-                        //               child: Text(promoted.name!),
-                        //             );
-                        //           }).toList(),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   );
-                        // }
-                        return SizedBox();
-                      },
-                    ),
-                  ),
+
+                //------------------ BOTTOM CART ---------------------//
+                ResDetailsBottomCart(),
+              ],
+            ),
           ),
         );
       },
