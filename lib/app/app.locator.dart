@@ -10,7 +10,9 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/home_service.dart';
 import '../services/services.dart';
+import '../services/user_api_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -28,4 +30,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => UserApiService());
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => BottomCartService());
+  locator.registerLazySingleton(() => RestaurantService());
 }
