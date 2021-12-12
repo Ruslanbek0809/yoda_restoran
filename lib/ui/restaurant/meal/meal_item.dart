@@ -8,7 +8,7 @@ import 'meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MealItem extends HookViewModelWidget<MealViewModel> {
-  final MealUI meal;
+  final Meal meal;
   const MealItem({Key? key, required this.meal})
       : super(key: key, reactive: true);
 
@@ -54,42 +54,44 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                 Stack(
                   children: [
                     YodaImage(
-                      image: meal.image,
+                      image: meal.image!,
                       height: constraints.maxWidth,
                       width: constraints.maxWidth,
                       borderRadius: Constants.BORDER_RADIUS_20,
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 5.0),
-                        decoration: BoxDecoration(
-                          color: AppTheme.GREEN_COLOR,
-                          borderRadius: BorderRadius.only(
-                            topLeft:
-                                Radius.circular(Constants.BORDER_RADIUS_20),
-                            bottomRight:
-                                Radius.circular(Constants.BORDER_RADIUS_20),
+                    if (meal.discount != null || meal.discount! > 0)
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 5.0),
+                          decoration: BoxDecoration(
+                            color: AppTheme.GREEN_COLOR,
+                            borderRadius: BorderRadius.only(
+                              topLeft:
+                                  Radius.circular(Constants.BORDER_RADIUS_20),
+                              bottomRight:
+                                  Radius.circular(Constants.BORDER_RADIUS_20),
+                            ),
                           ),
-                        ),
-                        child: FittedBox(
-                          child: Text(
-                            '-20%',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
+                          child: FittedBox(
+                            child: Text(
+                              '-${meal.discount}%',
+                              style: TextStyle(
+                                color: AppTheme.WHITE,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
                   child: Text(
-                    meal.name,
+                    meal.name!,
                     maxLines: 2,
                     style: TextStyle(
                       fontSize: 17.sp,
@@ -108,7 +110,7 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                             ),
                           ),
                           Text(
-                            '${meal.weight} ${meal.weightType}',
+                            '${meal.value} ${meal.size!.name}',
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: AppTheme.DRAWER_ICON,
@@ -117,7 +119,7 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                         ],
                       )
                     : Text(
-                        '${meal.weight} ${meal.weightType}',
+                        '${meal.value} ${meal.size!.name}',
                         style: TextStyle(
                           fontSize: 15.sp,
                           color: AppTheme.DRAWER_ICON,
@@ -193,7 +195,6 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                               _tweenController.forward();
 
                               model.updateButtonToggle();
-
                               model.updateBottomCartStatus();
                             },
                             child: Ink(
