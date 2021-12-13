@@ -121,44 +121,44 @@ class HomeView extends StatelessWidget {
                           ),
                           separatorBuilder: (ctx, pos) {
                             // /// After every 5 restaurant, it shows promoted ones
-                            if ((pos + 1) % 5 == 0) {
-                              // && model.isOkToPromote
-                              int promotePos = model.promotedCounter;
-                              model.log.i('promotePos: $promotePos');
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 15.w, top: 12.h),
-                                    child: Text(
-                                      model.promotedRes![promotePos].name!,
-                                      style: TextStyle(
-                                        fontSize: 24.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: AppTheme.MAIN_DARK,
-                                      ),
-                                    ),
-                                  ),
-                                  SingleChildScrollView(
-                                    physics: BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: model
-                                          .promotedRes![promotePos].restaurants!
-                                          .map((promoted) {
-                                        return Container(
-                                          padding: EdgeInsets.all(10),
-                                          color: Colors.blue,
-                                          child: Text(promoted.name!),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
+                            // if ((pos + 1) % 5 == 0) {
+                            //   // && model.isOkToPromote
+                            //   int promotePos = model.promotedCounter;
+                            //   model.log.i('promotePos: $promotePos');
+                            //   return Column(
+                            //     children: [
+                            //       Padding(
+                            //         padding:
+                            //             EdgeInsets.only(left: 15.w, top: 12.h),
+                            //         child: Text(
+                            //           model.promotedRes![promotePos].name!,
+                            //           style: TextStyle(
+                            //             fontSize: 24.sp,
+                            //             fontWeight: FontWeight.bold,
+                            //             color: AppTheme.MAIN_DARK,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       SingleChildScrollView(
+                            //         physics: BouncingScrollPhysics(),
+                            //         scrollDirection: Axis.horizontal,
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           children: model
+                            //               .promotedRes![promotePos].restaurants!
+                            //               .map((promoted) {
+                            //             return Container(
+                            //               padding: EdgeInsets.all(10),
+                            //               color: Colors.blue,
+                            //               child: Text(promoted.name!),
+                            //             );
+                            //           }).toList(),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   );
+                            // }
                             return SizedBox();
                           },
                         ),

@@ -11,16 +11,15 @@ class MainCategoryViewModel extends ReactiveViewModel {
 
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
-  final _mainCatService = locator<MainCategoryService>(); // To update multiSelectionList in realtime(reactive) 
+  final _mainCatService = locator<
+      MainCategoryService>(); // To update multiSelectionList in realtime(reactive)
 
   List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
-  CategoryFilter? _selectedSort = mainCategorySortList[0];
-  SortAnimationStatus _sortAnimationStatus = SortAnimationStatus.idle;
-
-  CategoryFilter? get selectedSort => _selectedSort;
   List<MainCategory>? get mainCategories => _homeService.mainCategories;
-  SortAnimationStatus get sortAnimationStatus => _sortAnimationStatus;
+  CategoryFilter? get selectedSort => _mainCatService.selectedSort;
+  SortAnimationStatus get sortAnimationStatus =>
+      _mainCatService.sortAnimationStatus;
 
   /// Function to check wether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>
@@ -30,47 +29,21 @@ class MainCategoryViewModel extends ReactiveViewModel {
   void updateMainCategoryItem(int? mainCategoryId) {
     _mainCatService.updateMainCategoryItem(mainCategoryId);
     log.i(_multiSelectionList);
-    updateBottomCartStatus();
     notifyListeners();
   }
 
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
-    _selectedSort = newSelectedSort;
-    log.i(_selectedSort!.name);
-    updateBottomCartStatus();
+    _mainCatService.updateSelectedSort(newSelectedSort);
+    log.i(selectedSort!.name);
     notifyListeners();
   }
 
   /// Function to update _sortAnimationStatus
   void updateBottomCartStatus() {
-    switch (_sortAnimationStatus) {
-      case SortAnimationStatus.idle:
-        if (_multiSelectionList.isNotEmpty ||
-            _selectedSort != mainCategorySortList[0]) {
-          _sortAnimationStatus = SortAnimationStatus.forward;
-          notifyListeners();
-        }
-        break;
-      case SortAnimationStatus.forward:
-        if (_multiSelectionList.isEmpty &&
-            _selectedSort == mainCategorySortList[0]) {
-          _sortAnimationStatus = SortAnimationStatus.reverse;
-          notifyListeners();
-        }
-        break;
-      case SortAnimationStatus.reverse:
-        if (_multiSelectionList.isNotEmpty ||
-            _selectedSort != mainCategorySortList[0]) {
-          _sortAnimationStatus = SortAnimationStatus.forward;
-          notifyListeners();
-        }
-        break;
-      default:
-        _sortAnimationStatus = SortAnimationStatus.idle;
-        break;
-    }
-    log.i(_sortAnimationStatus);
+    _mainCatService.updateSortAnimationStatus();
+    log.i(sortAnimationStatus);
+    notifyListeners();
   }
 
   /// Function to call MainCategoryBottomSheetView
