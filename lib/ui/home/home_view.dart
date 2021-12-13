@@ -109,6 +109,19 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 10.h),
                             itemCount: model.resWithProms?.length ?? 0,
                             itemBuilder: (ctx, pos) {
+                              if ((pos + 1) % 5 == 0 &&
+                                  model.resWithProms![pos].prom != null)
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(model.resWithProms![pos].prom?.name! ??
+                                        'Hey'),
+                                    RestaurantView(
+                                      restaurant:
+                                          model.resWithProms![pos].restaurant,
+                                    ),
+                                  ],
+                                );
                               return RestaurantView(
                                 restaurant: model.resWithProms![pos].restaurant,
                               );
