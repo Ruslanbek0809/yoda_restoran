@@ -6,14 +6,14 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class MainCategoryViewModel extends BaseViewModel {
+class MainCategoryViewModel extends ReactiveViewModel {
   final log = getLogger('MainCategoryViewModel');
 
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<MainCategoryService>();
 
-  List<int> _multiSelectionList = [];
+  List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
   CategoryFilter? _selectedSort = mainCategorySortList[0];
   SortAnimationStatus _sortAnimationStatus = SortAnimationStatus.idle;
@@ -28,7 +28,7 @@ class MainCategoryViewModel extends BaseViewModel {
 
   /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
   void updateMainCategoryItem(int? mainCategoryId) {
-    _mainCatService.
+    _mainCatService.updateMainCategoryItem(mainCategoryId);
     log.i(_multiSelectionList);
     updateBottomCartStatus();
     notifyListeners();
@@ -82,4 +82,7 @@ class MainCategoryViewModel extends BaseViewModel {
       isScrollControlled: true,
     );
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
 }

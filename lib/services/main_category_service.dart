@@ -11,22 +11,23 @@ class MainCategoryService with ReactiveServiceMixin {
   }
 
   // 2
-  ReactiveValue<List<int>>? _multiSelectionList;
+  ReactiveValue<List<int>> _multiSelectionList = ReactiveValue<List<int>>([]);
+  List<int> get multiSelectionList=> _multiSelectionList.value;
 
   /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
   void updateMainCategoryItem(int? mainCategoryId) {
     log.i('');
-    if (_multiSelectionList!.value.contains(mainCategoryId)) {
-      _multiSelectionList!.value.remove(mainCategoryId);
+    if (_multiSelectionList.value.contains(mainCategoryId)) {
+      _multiSelectionList.value.remove(mainCategoryId);
     } else {
-      _multiSelectionList!.value.add(mainCategoryId!);
+      _multiSelectionList.value.add(mainCategoryId!);
     }
   }
 
   // ReactiveValue<BottomCartStatus> _bottomCartStatus =
   //     ReactiveValue<BottomCartStatus>(BottomCartStatus.idle);
   // BottomCartStatus get bottomCartStatus => _bottomCartStatus.value;
-  
+
   /// Function to update isBottomCartShown
   // void updateBottomCartStatus() {
   //   switch (_bottomCartStatus.value) {
