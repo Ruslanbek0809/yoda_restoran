@@ -25,6 +25,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     LazySingleton(classType: HomeService),
     LazySingleton(classType: BottomCartService),
     LazySingleton(classType: RestaurantService),
+    LazySingleton(classType: MainCategoryService),
   ],
   logger: StackedLogger(),
 )

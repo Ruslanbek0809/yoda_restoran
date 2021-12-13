@@ -11,7 +11,7 @@ class MainCategoryViewModel extends ReactiveViewModel {
 
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
-  final _mainCatService = locator<MainCategoryService>();
+  final _mainCatService = locator<MainCategoryService>(); // To update multiSelectionList in realtime(reactive) 
 
   List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
