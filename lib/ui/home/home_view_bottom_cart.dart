@@ -58,7 +58,7 @@ class HomeViewBottomCart extends HookViewModelWidget<HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Sargyt',
+                    'Restoran ady',
                     style: TextStyle(
                       color: AppTheme.WHITE,
                       fontSize: 20.sp,

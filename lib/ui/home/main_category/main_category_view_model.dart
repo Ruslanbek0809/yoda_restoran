@@ -11,6 +11,7 @@ class MainCategoryViewModel extends BaseViewModel {
 
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
+  final _mainCatService = locator<MainCategoryService>();
 
   List<int> _multiSelectionList = [];
 
@@ -27,11 +28,7 @@ class MainCategoryViewModel extends BaseViewModel {
 
   /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
   void updateMainCategoryItem(int? mainCategoryId) {
-    if (_multiSelectionList.contains(mainCategoryId)) {
-      _multiSelectionList.remove(mainCategoryId);
-    } else {
-      _multiSelectionList.add(mainCategoryId!);
-    }
+    _mainCatService.
     log.i(_multiSelectionList);
     updateBottomCartStatus();
     notifyListeners();
