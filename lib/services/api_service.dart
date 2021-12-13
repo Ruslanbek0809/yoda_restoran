@@ -29,7 +29,7 @@ class ApiService {
     }
   }
 
-  Future<List<MainCategory>> getMainCategories() async {
+  Future<List<MainCategory>> getMainCats() async {
     List<MainCategory> _mainCategories = [];
     try {
       Response response = await _apiRoot.dio.get('api/maincategories/');
@@ -47,7 +47,7 @@ class ApiService {
     }
   }
 
-  Future<List<Restaurant>> getRandomRestorants() async {
+  Future<List<Restaurant>> getRandomRess() async {
     List<Restaurant> _randomRestaurants = [];
     try {
       Response response = await _apiRoot.dio.get('api/restaurants/');
@@ -65,7 +65,7 @@ class ApiService {
     }
   }
 
-  Future<List<Promoted>> getPromotedRestaurants() async {
+  Future<List<Promoted>> getProms() async {
     List<Promoted> _promotedList = [];
     try {
       Response response = await _apiRoot.dio.get('api/promoted/');

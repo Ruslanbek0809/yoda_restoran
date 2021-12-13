@@ -16,7 +16,7 @@ class MainCategoryViewModel extends ReactiveViewModel {
 
   List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
-  List<MainCategory>? get mainCategories => _homeService.mainCategories;
+  List<MainCategory>? get mainCategories => _homeService.mainCats;
   CategoryFilter? get selectedSort => _mainCatService.selectedSort;
   SortAnimationStatus get sortAnimationStatus =>
       _mainCatService.sortAnimationStatus;
@@ -30,6 +30,7 @@ class MainCategoryViewModel extends ReactiveViewModel {
     _mainCatService.updateMainCategoryItem(mainCategoryId);
     log.i(_multiSelectionList);
     notifyListeners();
+    updateSortAnimationStatus();
   }
 
   /// Function to UPDATE _selectedSort
@@ -37,10 +38,11 @@ class MainCategoryViewModel extends ReactiveViewModel {
     _mainCatService.updateSelectedSort(newSelectedSort);
     log.i(selectedSort!.name);
     notifyListeners();
+    updateSortAnimationStatus();
   }
 
   /// Function to update _sortAnimationStatus
-  void updateBottomCartStatus() {
+  void updateSortAnimationStatus() {
     _mainCatService.updateSortAnimationStatus();
     log.i(sortAnimationStatus);
     notifyListeners();

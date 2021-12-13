@@ -72,7 +72,7 @@ class HomeView extends StatelessWidget {
                               delegate: ContestTabHeader(
                                 size: 90.h,
                                 child: MainCategoryView(
-                                  mainCategories: model.mainCategories ?? [],
+                                  mainCategories: model.mainCats ?? [],
                                 ),
                               ),
                             ),
@@ -105,21 +105,14 @@ class HomeView extends StatelessWidget {
                           ];
                         },
                         //------------------ RESTAURANTS ---------------------//
-                        body: ListView.separated(
-                          padding: EdgeInsets.only(top: 10.h),
-                          // itemCount: 20,
-                          // itemBuilder: (ctx, pos) => Container(
-                          //   margin: EdgeInsets.all(5),
-                          //   height: 75,
-                          //   width: 75,
-                          //   color: Colors.red,
-                          //   child: Center(child: Text(pos.toString())),
-                          // ),
-                          itemCount: model.randomRestaurants?.length ?? 0,
-                          itemBuilder: (ctx, pos) => RestaurantView(
-                            restaurant: model.randomRestaurants![pos],
-                          ),
-                          separatorBuilder: (ctx, pos) {
+                        body: ListView.builder(
+                            padding: EdgeInsets.only(top: 10.h),
+                            itemCount: model.resWithProms?.length ?? 0,
+                            itemBuilder: (ctx, pos) {
+                              return RestaurantView(
+                                restaurant: model.resWithProms![pos].restaurant,
+                              );
+                            }
                             // /// After every 5 restaurant, it shows promoted ones
                             // if ((pos + 1) % 5 == 0) {
                             //   // && model.isOkToPromote
@@ -159,9 +152,7 @@ class HomeView extends StatelessWidget {
                             //     ],
                             //   );
                             // }
-                            return SizedBox();
-                          },
-                        ),
+                            ),
                       ),
 
                 //------------------ BOTTOM CART ---------------------//

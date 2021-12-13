@@ -8,9 +8,9 @@ import 'package:yoda_res/utils/utils.dart';
 
 // A map key of type string
 const String homeSlidersFuture = 'homeSlidersFuture';
-const String homeMainCatFuture = 'homeMainCatFuture';
-const String homeRandomResFuture = 'homeRandomResFuture';
-const String homePromotedResFuture = 'homePromotedResFuture';
+const String homeMainCatsFuture = 'homeMainCatsFuture';
+const String homeRandomRessFuture = 'homeRandomRessFuture';
+const String homePromsFuture = 'homePromsFuture';
 
 class HomeViewModel extends MultipleFutureViewModel {
   final log = getLogger('HomeViewModel');
@@ -23,38 +23,67 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
-  List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
-  List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
-  List<Promoted>? get promotedRes => dataMap![homePromotedResFuture];
+  List<SliderModel>? get sliders => _homeService.sliders;
+  List<MainCategory>? get mainCats => _homeService.mainCats;
+  List<Restaurant>? get randomRess => _homeService.randomRess;
+  List<Promoted>? get proms => _homeService.proms;
+
+  /// Combined list of randomRestaurants and promotedRestaurants
+  List<HomeResPromo>? get resWithProms {
+    List<HomeResPromo> _resWithProms = [];
+    int promoPosCount = 0;
+
+    _homeService.randomRess!.forEach(
+      (_randomRes) {
+        int pos = _homeService.randomRess!.indexOf(_randomRes);
+
+        /// Here in 5th restaurant we will add new Promoted from promotedList
+        if ((pos + 1) % 5 == 0) {
+          if (promoPosCount <= _homeService.proms!.length - 1)
+            _resWithProms.add(
+              HomeResPromo(
+                _randomRes,
+                Promoted(
+                  id: _homeService.proms![promoPosCount].id,
+                  name: _homeService.proms![promoPosCount].name,
+                  order: _homeService.proms![promoPosCount].order,
+                  restaurants: _homeService.proms![promoPosCount].restaurants,
+                ),
+              ),
+            );
+          promoPosCount++;
+        } else {
+          _resWithProms.add(HomeResPromo(_randomRes, null));
+        }
+      },
+    );
+    return _resWithProms;
+  }
+
+  // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
+  // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
+  // List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
+  // List<Promoted>? get promotedRes => dataMap![homePromotedResFuture];
 
   bool get fetchinghomeSliders => busy(homeSlidersFuture);
-  bool get fetchinghomeMainCat => busy(homeMainCatFuture);
-  bool get fetchingRandomRes => busy(homeRandomResFuture);
-  bool get fetchingPromotedRes => busy(homePromotedResFuture);
-
-  int _promotedCounter = 0;
-  bool get isOkToPromote =>
-      _promotedCounter <
-      promotedRes!.length; // Check if promoted below than its length
-
-  int get promotedCounter =>
-      _promotedCounter; // Increment each time when promoted part is displayed
+  bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
+  bool get fetchingRandomRes => busy(homeRandomRessFuture);
+  bool get fetchingPromotedRes => busy(homePromsFuture);
 
   // int get promotedCounter =>
   //     _promotedCounter++; // Increment each time when promoted part is displayed
 
   void homeMenuPressed() {
-    log.i('openDrawer(): $_promotedCounter');
+    log.i('openDrawer()');
     homeScaffoldKey.currentState!.openDrawer();
   }
 
   @override
   Map<String, Future Function()> get futuresMap => {
         homeSlidersFuture: _homeService.getSliders,
-        homeMainCatFuture: _homeService.getMainCategories,
-        homeRandomResFuture: _homeService.getRandomRestorants,
-        homePromotedResFuture: _homeService.getPromotedRestaurants,
+        homeMainCatsFuture: _homeService.getMainCategs,
+        homeRandomRessFuture: _homeService.getRandomRess,
+        homePromsFuture: _homeService.getProms,
       };
 
   //------------------ Custom overridden REACTIVE PART ---------------------//

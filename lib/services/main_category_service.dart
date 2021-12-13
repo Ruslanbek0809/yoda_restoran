@@ -32,14 +32,14 @@ class MainCategoryService with ReactiveServiceMixin {
     } else {
       _multiSelectionList.value.add(mainCategoryId!);
     }
-    updateSortAnimationStatus();
+    // updateSortAnimationStatus();
   }
 
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     log.i('');
     _selectedSort = newSelectedSort!;
-    updateSortAnimationStatus();
+    // updateSortAnimationStatus();
   }
 
   /// Function to update _sortAnimationStatus

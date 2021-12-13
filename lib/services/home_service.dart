@@ -10,25 +10,22 @@ class HomeService {
   List<SliderModel>? _sliders;
   List<SliderModel>? get sliders => _sliders;
 
-  List<MainCategory>? _mainCategories;
-  List<MainCategory>? get mainCategories => _mainCategories;
+  List<MainCategory>? _mainCats;
+  List<MainCategory>? get mainCats => _mainCats;
 
-  List<Restaurant>? _randomRestaurants;
-  List<Restaurant>? get randomRestaurants => _randomRestaurants;
+  List<Restaurant>? _randomRess;
+  List<Restaurant>? get randomRess => _randomRess;
 
-  List<Promoted>? _promotedList;
-  List<Promoted>? get promotedList => _promotedList;
+  List<Promoted>? _proms;
+  List<Promoted>? get proms => _proms;
 
   bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
 
-  bool get hasMainCategories =>
-      _mainCategories != null && _mainCategories!.isNotEmpty;
+  bool get hasMainCats => _mainCats != null && _mainCats!.isNotEmpty;
 
-  bool get hasRandomRestaurants =>
-      _randomRestaurants != null && _randomRestaurants!.isNotEmpty;
+  bool get hasRandomRess => _randomRess != null && _randomRess!.isNotEmpty;
 
-  bool get hasPromotedList =>
-      _promotedList != null && _promotedList!.isNotEmpty;
+  bool get hasProms => _proms != null && _proms!.isNotEmpty;
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
@@ -36,21 +33,21 @@ class HomeService {
     return _sliders;
   }
 
-  Future<List<MainCategory>?> getMainCategories() async {
-    _mainCategories = await _api.getMainCategories();
-    log.i(_mainCategories!.length);
-    return _mainCategories;
+  Future<List<MainCategory>?> getMainCategs() async {
+    _mainCats = await _api.getMainCats();
+    log.i(_mainCats!.length);
+    return _mainCats;
   }
 
-  Future<List<Restaurant>?> getRandomRestorants() async {
-    _randomRestaurants = await _api.getRandomRestorants();
-    log.i(_randomRestaurants!.length);
-    return _randomRestaurants;
+  Future<List<Restaurant>?> getRandomRess() async {
+    _randomRess = await _api.getRandomRess();
+    log.i(_randomRess!.length);
+    return _randomRess;
   }
 
-  Future<List<Promoted>?> getPromotedRestaurants() async {
-    _promotedList = await _api.getPromotedRestaurants();
-    log.i(_promotedList!.length);
-    return _promotedList;
+  Future<List<Promoted>?> getProms() async {
+    _proms = await _api.getProms();
+    log.i(_proms!.length);
+    return _proms;
   }
 }

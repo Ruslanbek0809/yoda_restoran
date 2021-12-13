@@ -19,6 +19,7 @@ class MainCategoryBottomSheet
   @override
   Widget buildViewModelWidget(
       BuildContext context, MainCategoryViewModel model) {
+    model.log.i('MainCategoryBottomSheet');
     final sortAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
@@ -231,13 +232,7 @@ class MainCategoryBottomSheet
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        onPressed: () {
-                          // if (_filterButtonAnimationController.value == 0.0) {
-                          //   _filterButtonAnimationController.forward();
-                          // } else {
-                          //   _filterButtonAnimationController.reverse();
-                          // }
-                        },
+                        onPressed: () {},
                       ),
                     )
                   ],
