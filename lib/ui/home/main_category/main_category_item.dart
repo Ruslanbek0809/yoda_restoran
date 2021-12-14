@@ -77,14 +77,20 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                       ? AppTheme.MAIN
                       : AppTheme.WHITE,
                 ),
-                child: Text(
-                  mainCategory.name!,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: model.isMainCategorySelected(mainCategory.id)
-                        ? AppTheme.WHITE
-                        : AppTheme.FONT_COLOR,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: mainCategories.indexOf(mainCategory) == 0
+                          ? 5.w
+                          : 0.0),
+                  child: Text(
+                    mainCategory.name!,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: model.isMainCategorySelected(mainCategory.id)
+                          ? AppTheme.WHITE
+                          : AppTheme.FONT_COLOR,
+                    ),
                   ),
                 ),
               ),

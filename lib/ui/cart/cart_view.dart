@@ -156,8 +156,8 @@ class _CartViewState extends State<CartView> {
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: mealList.mapIndexed((food, pos) {
-                      return pos == 0
+                    children: mealList.map((food) {
+                      return mealList.indexOf(food) == 0
                           ? Padding(
                               padding: EdgeInsets.only(right: 6.w, left: 16.w),
                               child: CartResFoodView(food: food),

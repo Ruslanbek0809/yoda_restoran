@@ -18,11 +18,12 @@ class MainCategoryView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: mainCategories!.take(6).mapIndexed((mainCategory, pos) {
-            return pos != mainCategories!.take(6).length - 1
+          children: mainCategories!.take(6).map((mainCategory) {
+            return mainCategories!.indexOf(mainCategory) !=
+                    mainCategories!.take(6).length - 1
                 ? MainCategoryItem(
                     mainCategory: mainCategory,
-                    mainCategories: mainCategories!,
+                    mainCategories: mainCategories!, // for pos only
                   )
                 : MainCategoryAllItem();
           }).toList(), // mainCategories!.take(6) is used to take only 6 from the list

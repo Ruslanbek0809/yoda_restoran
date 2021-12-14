@@ -132,9 +132,8 @@ class MainCategoryBottomSheet
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: mainCategorySortList
-                              .mapIndexed<Widget>(
-                                (CategoryFilter categoryFilter, int pos) =>
-                                    Column(
+                              .map<Widget>(
+                                (CategoryFilter categoryFilter) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     RadioListTile<CategoryFilter>(
@@ -153,7 +152,9 @@ class MainCategoryBottomSheet
                                           ListTileControlAffinity.trailing,
                                       toggleable: true,
                                     ),
-                                    if (pos != mainCategorySortList.length - 1)
+                                    if (mainCategorySortList
+                                            .indexOf(categoryFilter) !=
+                                        mainCategorySortList.length - 1)
                                       Divider(
                                         color: AppTheme.DRAWER_DIVIDER,
                                         indent: 10.w,
