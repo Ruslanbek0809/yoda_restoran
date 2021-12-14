@@ -109,13 +109,50 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 10.h),
                             itemCount: model.resWithProms?.length ?? 0,
                             itemBuilder: (ctx, pos) {
+                              //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
                               if ((pos + 1) % 5 == 0 &&
                                   model.resWithProms![pos].prom != null)
                                 return Column(
                                   mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(model.resWithProms![pos].prom?.name! ??
-                                        'Hey'),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 16.w, top: 12.h),
+                                          child: Text(
+                                            model
+                                                .resWithProms![pos].prom!.name!,
+                                            style: TextStyle(
+                                              fontSize: 24.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppTheme.MAIN_DARK,
+                                            ),
+                                          ),
+                                        ),
+                                        SingleChildScrollView(
+                                          physics: BouncingScrollPhysics(),
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: model.resWithProms![pos]
+                                                .prom!.restaurants!
+                                                .map((promoted) {
+                                              return Container(
+                                                padding: EdgeInsets.all(10),
+                                                color: Colors.blue,
+                                                child: Text(promoted.name!),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    //------------------ RESTAURANTS ---------------------//
                                     RestaurantView(
                                       restaurant:
                                           model.resWithProms![pos].restaurant,
@@ -126,45 +163,6 @@ class HomeView extends StatelessWidget {
                                 restaurant: model.resWithProms![pos].restaurant,
                               );
                             }
-                            // /// After every 5 restaurant, it shows promoted ones
-                            // if ((pos + 1) % 5 == 0) {
-                            //   // && model.isOkToPromote
-                            //   int promotePos = model.promotedCounter;
-                            //   model.log.i('promotePos: $promotePos');
-                            //   return Column(
-                            //     children: [
-                            //       Padding(
-                            //         padding:
-                            //             EdgeInsets.only(left: 15.w, top: 12.h),
-                            //         child: Text(
-                            //           model.promotedRes![promotePos].name!,
-                            //           style: TextStyle(
-                            //             fontSize: 24.sp,
-                            //             fontWeight: FontWeight.bold,
-                            //             color: AppTheme.MAIN_DARK,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       SingleChildScrollView(
-                            //         physics: BouncingScrollPhysics(),
-                            //         scrollDirection: Axis.horizontal,
-                            //         child: Row(
-                            //           mainAxisAlignment:
-                            //               MainAxisAlignment.start,
-                            //           children: model
-                            //               .promotedRes![promotePos].restaurants!
-                            //               .map((promoted) {
-                            //             return Container(
-                            //               padding: EdgeInsets.all(10),
-                            //               color: Colors.blue,
-                            //               child: Text(promoted.name!),
-                            //             );
-                            //           }).toList(),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   );
-                            // }
                             ),
                       ),
 
