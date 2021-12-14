@@ -35,6 +35,7 @@ class HomeService {
 
   Future<List<MainCategory>?> getMainCategs() async {
     _mainCats = await _api.getMainCats();
+    _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
     log.i(_mainCats!.length);
     return _mainCats;
   }

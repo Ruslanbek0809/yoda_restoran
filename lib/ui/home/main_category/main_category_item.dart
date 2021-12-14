@@ -8,10 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
 class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
-  final MainCategory? mainCategory;
+  final MainCategory mainCategory;
+  final List<MainCategory> mainCategories;
   MainCategoryItem({
     Key? key,
-    this.mainCategory,
+    required this.mainCategory,
+    required this.mainCategories,
   }) : super(key: key, reactive: true);
 
   @override
@@ -49,13 +51,13 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
-            model.updateMainCategoryItem(mainCategory!.id);
+            model.updateMainCategoryItem(mainCategory.id);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               YodaImage(
-                image: mainCategory!.image!,
+                image: mainCategory.image!,
                 width: 70.w,
                 height: 70.w,
                 borderRadius: 10.0,
@@ -63,24 +65,24 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
               Container(
                 margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
-                    horizontal: model.isMainCategorySelected(mainCategory!.id)
+                    horizontal: model.isMainCategorySelected(mainCategory.id)
                         ? 7.w
                         : 0.0,
-                    vertical: model.isMainCategorySelected(mainCategory!.id)
+                    vertical: model.isMainCategorySelected(mainCategory.id)
                         ? 2.h
                         : 0.0),
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
-                  color: model.isMainCategorySelected(mainCategory!.id)
+                  color: model.isMainCategorySelected(mainCategory.id)
                       ? AppTheme.MAIN
                       : AppTheme.WHITE,
                 ),
                 child: Text(
-                  mainCategory!.name!,
+                  mainCategory.name!,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: model.isMainCategorySelected(mainCategory!.id)
+                    color: model.isMainCategorySelected(mainCategory.id)
                         ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,
                   ),

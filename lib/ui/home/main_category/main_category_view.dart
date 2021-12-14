@@ -20,7 +20,10 @@ class MainCategoryView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: mainCategories!.take(6).mapIndexed((mainCategory, pos) {
             return pos != mainCategories!.take(6).length - 1
-                ? MainCategoryItem(mainCategory: mainCategory)
+                ? MainCategoryItem(
+                    mainCategory: mainCategory,
+                    mainCategories: mainCategories!,
+                  )
                 : MainCategoryAllItem();
           }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
         ),
