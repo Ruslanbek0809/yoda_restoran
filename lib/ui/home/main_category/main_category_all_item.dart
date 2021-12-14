@@ -65,7 +65,7 @@ class MainCategoryAllItem extends HookViewModelWidget<MainCategoryViewModel> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 3.w),
+                padding: EdgeInsets.only(top: 2.h),
                 child: Text(
                   'Hemmesi',
                   style: TextStyle(

@@ -7,6 +7,7 @@ class MainCategory {
     this.id,
     this.image,
     this.name,
+    this.order,
   });
 
   @JsonKey(name: 'id')
@@ -17,6 +18,9 @@ class MainCategory {
 
   @JsonKey(name: 'name')
   final String? name;
+
+  @JsonKey(name: 'order')
+  final int? order;
 
   factory MainCategory.fromJson(Map<String, dynamic> json) =>
       _$MainCategoryFromJson(json);

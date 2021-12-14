@@ -70,9 +70,6 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchingRandomRes => busy(homeRandomRessFuture);
   bool get fetchingPromotedRes => busy(homePromsFuture);
 
-  // int get promotedCounter =>
-  //     _promotedCounter++; // Increment each time when promoted part is displayed
-
   void homeMenuPressed() {
     log.i('openDrawer()');
     homeScaffoldKey.currentState!.openDrawer();

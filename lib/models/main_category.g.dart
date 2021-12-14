@@ -10,6 +10,7 @@ MainCategory _$MainCategoryFromJson(Map<String, dynamic> json) => MainCategory(
       id: json['id'] as int?,
       image: json['image'] as String?,
       name: json['name'] as String?,
+      order: json['order'] as int?,
     );
 
 Map<String, dynamic> _$MainCategoryToJson(MainCategory instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$MainCategoryToJson(MainCategory instance) =>
       'id': instance.id,
       'image': instance.image,
       'name': instance.name,
+      'order': instance.order,
     };
