@@ -84,6 +84,10 @@ class HomeViewModel extends MultipleFutureViewModel {
     await runBusyFuture(
       Future.wait(
         [
+          _homeService.getSliders(),
+          _homeService.getMainCategs(),
+          _homeService.getRandomRess(),
+          _homeService.getProms(),
         ],
       ),
     );
