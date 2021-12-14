@@ -17,7 +17,7 @@ class RestaurantView extends StatelessWidget {
         return Container(
           height: 0.3.sh,
           width: 1.sw,
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.w),
+          margin: EdgeInsets.fromLTRB(16.w, 2.h, 16.w, 4.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -28,7 +28,7 @@ class RestaurantView extends StatelessWidget {
                     children: [
                       YodaImage(
                         image: restaurant.image!,
-                        height: 0.45.sw,
+                        height: 0.22.sh,
                         width: 1.sw,
                         borderRadius: Constants.BORDER_RADIUS_20,
                       ),
@@ -51,11 +51,9 @@ class RestaurantView extends StatelessWidget {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      // width: 0.3.sw,
-                      height: 33.w,
                       padding: EdgeInsets.symmetric(
                         horizontal: 10.w,
-                        vertical: 3.w,
+                        vertical: 5.h,
                       ),
                       decoration: BoxDecoration(
                         color: AppTheme.MAIN_DARK.withOpacity(0.9),
@@ -78,7 +76,6 @@ class RestaurantView extends StatelessWidget {
                             restaurant.workingHours!,
                             style: TextStyle(
                               fontSize: 16.sp,
-                              // fontWeight: FontWeight.w600,
                               color: AppTheme.WHITE,
                             ),
                           ),
@@ -116,7 +113,7 @@ class RestaurantView extends StatelessWidget {
               ),
               //------------------ NAME ---------------------//
               Padding(
-                padding: EdgeInsets.only(top: 5.w),
+                padding: EdgeInsets.only(top: 6.h),
                 child: Text(
                   restaurant.name!,
                   overflow: TextOverflow.ellipsis,

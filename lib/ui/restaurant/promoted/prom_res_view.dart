@@ -8,15 +8,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PromResView extends StatelessWidget {
   final Restaurant restaurant;
-  const PromResView({required this.restaurant, Key? key}) : super(key: key);
+  final List<Restaurant> promRess;
+  const PromResView(
+      {required this.restaurant, required this.promRess, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PromResViewModel>.reactive(
       builder: (context, model, child) => Container(
-        height: 0.2.sh,
+        height: 0.24.sh,
         width: 0.7.sw,
-        margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.w),
+        margin: EdgeInsets.fromLTRB(
+          promRess.indexOf(restaurant) == 0 ? 16.w : 8.w,
+          4.h,
+          promRess.indexOf(restaurant) == promRess.length - 1 ? 16.w : 0.w,
+          4.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,8 +35,8 @@ class PromResView extends StatelessWidget {
                   children: [
                     YodaImage(
                       image: restaurant.image!,
-                      height: 0.45.sw,
-                      width: 1.sw,
+                      height: 0.18.sh,
+                      width: 0.7.sw,
                       borderRadius: Constants.BORDER_RADIUS_20,
                     ),
                     Positioned.fill(
@@ -50,11 +58,9 @@ class PromResView extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: Container(
-                    // width: 0.3.sw,
-                    height: 33.w,
                     padding: EdgeInsets.symmetric(
                       horizontal: 10.w,
-                      vertical: 3.w,
+                      vertical: 5.h,
                     ),
                     decoration: BoxDecoration(
                       color: AppTheme.MAIN_DARK.withOpacity(0.9),
@@ -65,42 +71,32 @@ class PromResView extends StatelessWidget {
                       ),
                     ),
                     alignment: Alignment.center,
-                    child: Text(
-                      restaurant.prepareTime!,
-                      // restaurant.prepareTime!,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.WHITE,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.access_time_rounded,
+                          color: AppTheme.WHITE,
+                          size: 14.w,
+                        ),
+                        SizedBox(width: 3.w),
+                        Text(
+                          restaurant.workingHours!,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: AppTheme.WHITE,
+                          ),
+                        ),
+                      ],
                     ),
-                    //  Row(
-                    //   children: [
-                    //     Icon(
-                    //       Icons.access_time_rounded,
-                    //       color: AppTheme.WHITE,
-                    //       size: 22.w,
-                    //     ),
-                    //     SizedBox(width: 3.w),
-                    //     Text(
-                    //       restaurant.workingHours!,
-                    //       style: TextStyle(
-                    //         fontSize: 16.sp,
-                    //         // fontWeight: FontWeight.w600,
-                    //         color: AppTheme.WHITE,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                 ),
                 //------------------ FAVOURITE ---------------------//
                 Positioned(
-                  top: 10.w,
-                  right: 10.w,
+                  top: 8.w,
+                  right: 8.w,
                   child: Container(
-                    width: 0.11.sw,
-                    height: 0.11.sw,
+                    width: 0.09.sw,
+                    height: 0.09.sw,
                     decoration: BoxDecoration(
                       color: AppTheme.WHITE.withOpacity(0.8),
                       shape: BoxShape.circle,
@@ -115,7 +111,7 @@ class PromResView extends StatelessWidget {
                         color: model.isFavorited
                             ? AppTheme.RED
                             : AppTheme.MAIN_DARK,
-                        size: 25.w,
+                        size: 20.w,
                       ),
                     ),
                   ),
@@ -124,12 +120,12 @@ class PromResView extends StatelessWidget {
             ),
             //------------------ NAME ---------------------//
             Padding(
-              padding: EdgeInsets.only(top: 5.w),
+              padding: EdgeInsets.only(top: 5.h),
               child: Text(
                 restaurant.name!,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 24.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                   color: AppTheme.MAIN_DARK,
                 ),
@@ -140,14 +136,14 @@ class PromResView extends StatelessWidget {
               children: [
                 Icon(
                   Icons.star_rounded,
-                  size: 20.w,
+                  size: 18.w,
                   color: AppTheme.GREEN_COLOR,
                 ),
                 Text(
                   '${restaurant.rating} (${restaurant.rated})',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     color: AppTheme.MAIN_DARK,
                   ),
                 ),

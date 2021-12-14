@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import 'package:yoda_res/ui/home/home_view_bottom_cart.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view.dart';
+import 'package:yoda_res/ui/restaurant/promoted/prom_res_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/slider/slider_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
@@ -141,11 +142,13 @@ class HomeView extends StatelessWidget {
                                                 MainAxisAlignment.start,
                                             children: model.resWithProms![pos]
                                                 .prom!.restaurants!
-                                                .map((promoted) {
-                                              return Container(
-                                                padding: EdgeInsets.all(10),
-                                                color: Colors.blue,
-                                                child: Text(promoted.name!),
+                                                .map((promRes) {
+                                              return PromResView(
+                                                restaurant: promRes,
+                                                promRess: model
+                                                    .resWithProms![pos]
+                                                    .prom!
+                                                    .restaurants!,
                                               );
                                             }).toList(),
                                           ),
@@ -162,8 +165,7 @@ class HomeView extends StatelessWidget {
                               return RestaurantView(
                                 restaurant: model.resWithProms![pos].restaurant,
                               );
-                            }
-                            ),
+                            }),
                       ),
 
                 //------------------ BOTTOM CART ---------------------//
