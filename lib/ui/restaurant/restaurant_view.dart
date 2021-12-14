@@ -66,33 +66,24 @@ class RestaurantView extends StatelessWidget {
                         ),
                       ),
                       alignment: Alignment.center,
-                      child: Text(
-                        restaurant.prepareTime!,
-                        // restaurant.prepareTime!,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.WHITE,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.access_time_rounded,
+                            color: AppTheme.WHITE,
+                            size: 22.w,
+                          ),
+                          SizedBox(width: 3.w),
+                          Text(
+                            restaurant.workingHours!,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              // fontWeight: FontWeight.w600,
+                              color: AppTheme.WHITE,
+                            ),
+                          ),
+                        ],
                       ),
-                      //  Row(
-                      //   children: [
-                      //     Icon(
-                      //       Icons.access_time_rounded,
-                      //       color: AppTheme.WHITE,
-                      //       size: 22.w,
-                      //     ),
-                      //     SizedBox(width: 3.w),
-                      //     Text(
-                      //       restaurant.workingHours!,
-                      //       style: TextStyle(
-                      //         fontSize: 16.sp,
-                      //         // fontWeight: FontWeight.w600,
-                      //         color: AppTheme.WHITE,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                     ),
                   ),
                   //------------------ FAVOURITE ---------------------//
