@@ -79,19 +79,19 @@ class HomeViewModel extends MultipleFutureViewModel {
   }
 
   // Function to call all apis when button is clicked
-  Future callFuturePullToRefresh() async {
-    log.i('');
-    await runBusyFuture(
-      Future.wait(
-        [
-          _homeService.getSliders(),
-          _homeService.getMainCategs(),
-          _homeService.getRandomRess(),
-          _homeService.getProms(),
-        ],
-      ),
-    );
-  }
+  // Future callFuturePullToRefresh() async {
+  //   log.i('');
+  //   await runBusyFuture(
+  //     Future.wait(
+  //       [
+  //         _homeService.getSliders(),
+  //         _homeService.getMainCategs(),
+  //         _homeService.getRandomRess(),
+  //         _homeService.getProms(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Map<String, Future Function()> get futuresMap => {
