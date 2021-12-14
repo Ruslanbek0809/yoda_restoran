@@ -78,6 +78,17 @@ class HomeViewModel extends MultipleFutureViewModel {
     homeScaffoldKey.currentState!.openDrawer();
   }
 
+  // Function to call all apis when button is clicked
+  Future callFuturePullToRefresh() async {
+    log.i('');
+    await runBusyFuture(
+      Future.wait(
+        [
+        ],
+      ),
+    );
+  }
+
   @override
   Map<String, Future Function()> get futuresMap => {
         homeSlidersFuture: _homeService.getSliders,
