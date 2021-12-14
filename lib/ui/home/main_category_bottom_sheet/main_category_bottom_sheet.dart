@@ -102,10 +102,11 @@ class MainCategoryBottomSheet
                             crossAxisSpacing: 10.w, //spaceLeftRight
                             childAspectRatio: 0.75,
                           ),
-                          itemCount: model.mainCategories!.length,
+                          itemCount: model.mainCats!.length,
                           itemBuilder: (context, pos) {
+                            // if (pos == 0) return SizedBox();
                             return MainCategoryItemBottom(
-                              mainCategory: model.mainCategories![pos],
+                              mainCategory: model.mainCats![pos],
                             );
                           },
                         ),

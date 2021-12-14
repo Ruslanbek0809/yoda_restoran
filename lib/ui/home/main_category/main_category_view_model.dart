@@ -16,7 +16,11 @@ class MainCategoryViewModel extends ReactiveViewModel {
 
   List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
-  List<MainCategory>? get mainCategories => _homeService.mainCats;
+  List<MainCategory>? get mainCats => _homeService.mainCats;
+
+  // List<MainCategory>? get mainBSCats => _homeService.mainCats;
+  // _homeService.mainCats!..removeAt(0);
+
   CategoryFilter? get selectedSort => _mainCatService.selectedSort;
   SortAnimationStatus get sortAnimationStatus =>
       _mainCatService.sortAnimationStatus;
@@ -31,6 +35,11 @@ class MainCategoryViewModel extends ReactiveViewModel {
     log.i(_multiSelectionList);
     notifyListeners();
     updateSortAnimationStatus();
+  }
+
+  /// Function to LOAD restaurants by mainCategoryID
+  Future updateMainCategory() async {
+    await _homeService.updateMainCategory();
   }
 
   /// Function to UPDATE _selectedSort

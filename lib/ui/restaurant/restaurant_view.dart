@@ -27,8 +27,8 @@ class RestaurantView extends StatelessWidget {
                   Stack(
                     children: [
                       YodaImage(
-                        image: 'assets/ph_restaurant.png',
-                        // image: restaurant.image!,
+                        image: restaurant.image!,
+                        phImage: 'assets/ph_restaurant.png',
                         height: 0.22.sh,
                         width: 1.sw,
                         borderRadius: Constants.BORDER_RADIUS_20,

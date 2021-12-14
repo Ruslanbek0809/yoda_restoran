@@ -94,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
                               delegate: ContestTabHeader(
                                 size: 90.h,
                                 child: MainCategoryView(
-                                  mainCategories: model.mainCats ?? [],
+                                  // mainCategories: model.mainCats ?? [],
                                 ),
                               ),
                             ),

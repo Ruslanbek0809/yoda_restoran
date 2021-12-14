@@ -9,11 +9,11 @@ import '../../../utils/utils.dart';
 
 class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory mainCategory;
-  final List<MainCategory> mainCategories;
+  // final List<MainCategory> mainCategories;
   MainCategoryItem({
     Key? key,
     required this.mainCategory,
-    required this.mainCategories,
+    // required this.mainCategories,
   }) : super(key: key, reactive: true);
 
   @override
@@ -46,7 +46,10 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(
-            top: 5.h, left: 5.w), // margin on top of persistent header
+            top: 5.h,
+            left: model.mainCats!.indexOf(mainCategory) == 0
+                ? 12.w
+                : 5.w), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
           onTap: () async {
@@ -77,20 +80,14 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                       ? AppTheme.MAIN
                       : AppTheme.WHITE,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: mainCategories.indexOf(mainCategory) == 0
-                          ? 5.w
-                          : 0.0),
-                  child: Text(
-                    mainCategory.name!,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: model.isMainCategorySelected(mainCategory.id)
-                          ? AppTheme.WHITE
-                          : AppTheme.FONT_COLOR,
-                    ),
+                child: Text(
+                  mainCategory.name!,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: model.isMainCategorySelected(mainCategory.id)
+                        ? AppTheme.WHITE
+                        : AppTheme.FONT_COLOR,
                   ),
                 ),
               ),

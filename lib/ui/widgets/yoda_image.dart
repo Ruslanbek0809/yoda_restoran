@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class YodaImage extends StatelessWidget {
   final String image;
+  final String phImage;
   final double? width;
   final double? height;
   final BoxFit fit;
@@ -11,6 +12,7 @@ class YodaImage extends StatelessWidget {
 
   const YodaImage({
     required this.image,
+    this.phImage = 'assets/ph_product.png',
     this.width,
     this.height,
     this.fit = BoxFit.cover,
@@ -41,14 +43,14 @@ class YodaImage extends StatelessWidget {
         width: width,
         height: height,
         placeholder: (context, url) => Image.asset(
-          'assets/placeholder.jpg',
+          phImage,
           fit: fit,
           width: width,
           height: height,
           alignment: alignment,
         ),
         errorWidget: (context, url, error) => Image.asset(
-          'assets/errorImage.png',
+          phImage,
           fit: fit,
           width: width,
           height: height,

@@ -51,4 +51,6 @@ class HomeService {
     log.i(_proms!.length);
     return _proms;
   }
+
+  Future updateMainCategory() async {}
 }

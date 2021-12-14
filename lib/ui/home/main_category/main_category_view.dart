@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/models.dart';
+// import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_all_item.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_item.dart';
-import 'package:yoda_res/utils/utils.dart';
 import 'main_category_view_model.dart';
 
 class MainCategoryView extends StatelessWidget {
-  final List<MainCategory>? mainCategories;
-  const MainCategoryView({Key? key, this.mainCategories}) : super(key: key);
+  // final List<MainCategory>? mainCategories;
+  // const MainCategoryView({Key? key, this.mainCategories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +17,12 @@ class MainCategoryView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: mainCategories!.take(6).map((mainCategory) {
-            return mainCategories!.indexOf(mainCategory) !=
-                    mainCategories!.take(6).length - 1
+          children: model.mainCats!.take(6).map((mainCategory) {
+            return model.mainCats!.indexOf(mainCategory) !=
+                    model.mainCats!.take(6).length - 1
                 ? MainCategoryItem(
                     mainCategory: mainCategory,
-                    mainCategories: mainCategories!, // for pos only
+                    // mainCategories: model.mainCategories!, // for pos only
                   )
                 : MainCategoryAllItem();
           }).toList(), // mainCategories!.take(6) is used to take only 6 from the list

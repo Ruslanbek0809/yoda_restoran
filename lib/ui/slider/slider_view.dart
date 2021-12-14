@@ -32,8 +32,8 @@ class SliderView extends StatelessWidget {
                 (slider) => Stack(
                   children: [
                     YodaImage(
-                      image: 'assets/ph_slider.png',
-                      // image: slider.image!,
+                      image: slider.image!,
+                      phImage: 'assets/ph_slider.png',
                       width: 1.sw,
                       borderRadius: 0.0,
                     ),
