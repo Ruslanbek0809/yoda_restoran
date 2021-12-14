@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import 'package:yoda_res/ui/home/home_view_bottom_cart.dart';
@@ -13,7 +14,20 @@ import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'main_category/home_discounts.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final _refreshController = RefreshController();
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
@@ -29,145 +43,151 @@ class HomeView extends StatelessWidget {
               children: [
                 model.anyObjectsBusy
                     ? LoadingWidget()
-                    : NestedScrollView(
-                        physics: const ClampingScrollPhysics(),
-                        headerSliverBuilder:
-                            (BuildContext context, bool innerBoxScrolled) {
-                          return <Widget>[
-                            SliverAppBar(
-                              expandedHeight: 0.34.sh,
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              toolbarHeight: 60.w,
-                              automaticallyImplyLeading: false,
-                              flexibleSpace: FlexibleSpaceBar(
-                                background: Column(
-                                  children: [
-                                    SizedBox(height: 15.w),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        //------------------ MENU ---------------------//
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.menu,
-                                            size: 24.w,
-                                          ),
-                                          onPressed: model.homeMenuPressed,
-                                          tooltip: 'Drawer',
+                    : CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            expandedHeight: 0.34.sh,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            toolbarHeight: 60.w,
+                            automaticallyImplyLeading: false,
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: Column(
+                                children: [
+                                  SizedBox(height: 15.w),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      //------------------ MENU ---------------------//
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.menu,
+                                          size: 24.w,
                                         ),
-                                        //------------------ SEARCH ---------------------//
-                                        HomeSearch(),
-                                      ],
-                                    ),
-                                    //------------------ BANNERS ---------------------//
-                                    SliderView(sliders: model.sliders ?? []),
-                                  ],
-                                ),
+                                        onPressed: model.homeMenuPressed,
+                                        tooltip: 'Drawer',
+                                      ),
+                                      //------------------ SEARCH ---------------------//
+                                      HomeSearch(),
+                                    ],
+                                  ),
+                                  //------------------ BANNERS ---------------------//
+                                  SliderView(sliders: model.sliders ?? []),
+                                ],
                               ),
                             ),
-                            //------------------ HOME CATEGORIES ---------------------//
-                            SliverPersistentHeader(
-                              pinned: false,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                size: 90.h,
-                                child: MainCategoryView(
-                                  mainCategories: model.mainCats ?? [],
-                                ),
+                          ),
+                          //------------------ HOME CATEGORIES ---------------------//
+                          SliverPersistentHeader(
+                            pinned: false,
+                            floating: false,
+                            delegate: ContestTabHeader(
+                              size: 90.h,
+                              child: MainCategoryView(
+                                mainCategories: model.mainCats ?? [],
                               ),
                             ),
-                            //------------------ DISCOUNTS ---------------------//
-                            SliverPersistentHeader(
-                              pinned: false,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 15.w, top: 12.h),
-                                      child: Text(
-                                        'Aksiýalar',
-                                        style: TextStyle(
-                                          fontSize: 24.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppTheme.MAIN_DARK,
-                                        ),
+                          ),
+                          //------------------ DISCOUNTS ---------------------//
+                          SliverPersistentHeader(
+                            pinned: false,
+                            floating: false,
+                            delegate: ContestTabHeader(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 15.w, top: 12.h),
+                                    child: Text(
+                                      'Aksiýalar',
+                                      style: TextStyle(
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppTheme.MAIN_DARK,
                                       ),
                                     ),
-                                    HomeDiscounts(discounts: discounts),
-                                  ],
-                                ),
-                                size: 150.w,
+                                  ),
+                                  HomeDiscounts(discounts: discounts),
+                                ],
                               ),
+                              size: 150.w,
                             ),
-                          ];
-                        },
-                        //------------------ RESTAURANTS ---------------------//
-                        body: ListView.builder(
-                            padding: EdgeInsets.only(top: 10.h),
-                            itemCount: model.resWithProms?.length ?? 0,
-                            itemBuilder: (ctx, pos) {
-                              //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                              if ((pos + 1) % 5 == 0 &&
-                                  model.resWithProms![pos].prom != null)
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
+                          ),
+                          //------------------ BODY: RESTAURANTS ---------------------//
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.only(top: 10.h),
+                                itemCount: model.resWithProms?.length ?? 0,
+                                itemBuilder: (ctx, pos) {
+                                  //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
+                                  if ((pos + 1) % 5 == 0 &&
+                                      model.resWithProms![pos].prom != null)
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 16.w, top: 12.h),
-                                          child: Text(
-                                            model
-                                                .resWithProms![pos].prom!.name!,
-                                            style: TextStyle(
-                                              fontSize: 24.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppTheme.MAIN_DARK,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 16.w, top: 12.h),
+                                              child: Text(
+                                                model.resWithProms![pos].prom!
+                                                    .name!,
+                                                style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppTheme.MAIN_DARK,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        SingleChildScrollView(
-                                          physics: BouncingScrollPhysics(),
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: model.resWithProms![pos]
-                                                .prom!.restaurants!
-                                                .map((promRes) {
-                                              return PromResView(
-                                                restaurant: promRes,
-                                                promRess: model
+                                            SingleChildScrollView(
+                                              physics: BouncingScrollPhysics(),
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: model
                                                     .resWithProms![pos]
                                                     .prom!
-                                                    .restaurants!,
-                                              );
-                                            }).toList(),
-                                          ),
+                                                    .restaurants!
+                                                    .map((promRes) {
+                                                  return PromResView(
+                                                    restaurant: promRes,
+                                                    promRess: model
+                                                        .resWithProms![pos]
+                                                        .prom!
+                                                        .restaurants!,
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        //------------------ RESTAURANTS ---------------------//
+                                        RestaurantView(
+                                          restaurant: model
+                                              .resWithProms![pos].restaurant,
                                         ),
                                       ],
-                                    ),
-                                    //------------------ RESTAURANTS ---------------------//
-                                    RestaurantView(
-                                      restaurant:
-                                          model.resWithProms![pos].restaurant,
-                                    ),
-                                  ],
-                                );
-                              return RestaurantView(
-                                restaurant: model.resWithProms![pos].restaurant,
-                              );
-                            }),
+                                    );
+                                  return RestaurantView(
+                                    restaurant:
+                                        model.resWithProms![pos].restaurant,
+                                  );
+                                },
+                              ),
+                            ]),
+                          ),
+                        ],
                       ),
-
                 //------------------ BOTTOM CART ---------------------//
                 HomeViewBottomCart(),
               ],
