@@ -55,7 +55,8 @@ class MealItem extends HookViewModelWidget<MealViewModel> {
                 Stack(
                   children: [
                     YodaImage(
-                      image: meal.image,
+                      image: 'assets/ph_product.png',
+                      // image: meal.image,
                       // image: meal.image!,
                       height: constraints.maxWidth,
                       width: constraints.maxWidth,
