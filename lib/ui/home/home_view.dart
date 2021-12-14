@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                                     HomeDiscounts(discounts: discounts),
                                   ],
                                 ),
-                                size: 150.w,
+                                size: 135.h,
                               ),
                             ),
                             //------------------ BODY: RESTAURANTS ---------------------//

@@ -44,7 +44,7 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(
-            top: 5.h, left: 12.w), // margin on top of persistent header
+            top: 5.h, left: 5.w), // margin on top of persistent header
         color: AppTheme.WHITE,
         child: GestureDetector(
           onTap: () async {
@@ -58,11 +58,10 @@ class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
                 image: mainCategory!.image!,
                 width: 70.w,
                 height: 70.w,
-                // fit: BoxFit.cover,
                 borderRadius: 10.0,
               ),
               Container(
-                margin: EdgeInsets.only(top: 3.h),
+                margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
                     horizontal: model.isMainCategorySelected(mainCategory!.id)
                         ? 7.w
