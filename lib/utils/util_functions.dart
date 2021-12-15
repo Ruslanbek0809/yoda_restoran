@@ -275,3 +275,31 @@ List<MealUI> mealList = [
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
 ];
+
+
+  // late AnimationController _buttonController;
+  
+  // _buttonController = AnimationController(
+  //     duration: const Duration(milliseconds: 2000), vsync: this);
+
+  // Future _playAnimation() async {
+  //   try {
+  //     await _buttonController.forward();
+  //   } on TickerCanceled {
+  //     printLog('[_playAnimation] error');
+  //   }
+  // }
+
+  // Future _stopAnimation() async {
+  //   try {
+  //     await _buttonController.reverse();
+  //   } on TickerCanceled {
+  //     printLog('[_stopAnimation] error');
+  //   }
+  // }
+
+  // StaggerAnimationButtonWidget(
+  //   titleButton: 'Dowam',
+  //   buttonController: _buttonController.view as AnimationController,
+  //   onTap: _onContinueButtonPressed,
+  // ),

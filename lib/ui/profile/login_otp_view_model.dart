@@ -15,14 +15,15 @@ abstract class LoginOtpViewModel extends FormViewModel {
   @override
   void setFormStatus() {}
 
-  Future<Response> runLoginOtp(String phone);
+  Future<void> runLoginOtp();
 
-  Future saveData(String phone) async {
+  Future saveData() async {
     // Run loginOtp and set viewmodel to busy
-    final response =
-        await runBusyFuture(runLoginOtp(phone), throwException: true);
+    await runBusyFuture(runLoginOtp(), throwException: true);
 
-    await _handleResponse(response);
+    // Navigate to successful route
+    navigationService.replaceWith(successRoute!);
+    // await _handleResponse(response);
   }
 
   /// Checks if the result has an error. If it doesn't we navigate to the success view
