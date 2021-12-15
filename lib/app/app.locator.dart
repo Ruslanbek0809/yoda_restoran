@@ -11,7 +11,6 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/services.dart';
-import '../services/user_api_service.dart';
 
 final locator = StackedLocator.instance;
 

@@ -12,6 +12,7 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../models/models.dart';
 import '../ui/home/home_view.dart';
+import '../ui/profile/login/login_view.dart';
 import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
@@ -21,11 +22,13 @@ class Routes {
   static const String homeView = '/home-view';
   static const String restaurantDetailsView = '/restaurant-details-view';
   static const String restaurantSearchView = '/restaurant-search-view';
+  static const String loginView = '/login-view';
   static const all = <String>{
     startUpView,
     homeView,
     restaurantDetailsView,
     restaurantSearchView,
+    loginView,
   };
 }
 
@@ -37,6 +40,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.restaurantDetailsView, page: RestaurantDetailsView),
     RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
+    RouteDef(Routes.loginView, page: LoginView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -68,6 +72,12 @@ class StackedRouter extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => RestaurantSearchView(
             bottomCartController: args.bottomCartController),
+        settings: data,
+      );
+    },
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
         settings: data,
       );
     },
