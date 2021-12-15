@@ -30,4 +30,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => BottomCartService());
   locator.registerLazySingleton(() => RestaurantService());
   locator.registerLazySingleton(() => MainCategoryService());
+  locator.registerLazySingleton(() => PushNotificationService());
 }

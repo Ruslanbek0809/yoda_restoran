@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -12,6 +10,8 @@ class PushNotificationService {
   String? get fcmToken => _fcmToken;
 
   Future initialise() async {
+    log.i('');
+
     /// This function is used to authorize permissions. On Anroid not needed. Here I use it to see authorizationStatus
     NotificationSettings settings = await _fcm.requestPermission(
       alert: true,
@@ -41,7 +41,7 @@ class PushNotificationService {
       }
     });
 
-    /// When the app is completely closed (not in the background) and opened directly from the push notification and to open a notification message displayed via FCM
+    /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground onMessageOpenedApp!');
       print('Message data: ${message.data}');
