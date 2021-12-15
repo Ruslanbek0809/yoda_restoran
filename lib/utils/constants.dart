@@ -4,6 +4,9 @@ class Constants {
   static const baseUrlTk = 'http://yoda.com.tm:8000/';
   static const baseUrlRu = 'http://yoda.com.tm:8000/';
 
+  /// Firebase topic name
+  static const topicAllDevices = 'yoda_res';
+
   /// SharedPreferences
   static const currentLang = 'currentLang';
   static const accessToken = 'accessToken';

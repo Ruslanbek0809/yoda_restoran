@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
@@ -9,10 +10,15 @@ class StartUpViewModel extends BaseViewModel {
   final log = getLogger('StartUpViewModel');
   final _apiRootService = locator<ApiRootService>();
   final _navService = locator<NavigationService>();
+  final _pushNotificationService = locator<PushNotificationService>();
 
   Future<void> runStartupLogic() async {
     log.i('Started');
     await _apiRootService.initDio();
+
+    /// FIREBASE initialization
+    await Firebase.initializeApp()
+        .then((value) => _pushNotificationService.initialise()); 
 
     log.i('Ended');
     _navService.replaceWith(Routes.loginView);
