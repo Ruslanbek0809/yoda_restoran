@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 
+import 'login_view.form.dart';
 import 'login_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginView extends StatelessWidget {
+@FormView(fields: [
+  FormTextField(name: 'phone'),
+]) // Needed when generating formFields
+
+class LoginView extends StatelessWidget with $LoginView {
   var maskFormatter = MaskTextInputFormatter(
       mask: '+993 ## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
 
@@ -31,6 +37,8 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
+      onModelReady: (model) =>
+          listenToFormUpdated(model), // Needed when generating formFields
       builder: (context, model, child) => Scaffold(
         body: Column(
           children: <Widget>[
@@ -62,7 +70,7 @@ class LoginView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: TextField(
-                controller: _phoneController,
+                controller: phoneController,
                 inputFormatters: [maskFormatter],
                 keyboardType: TextInputType.phone,
                 style: TextStyle(color: AppTheme.FONT_COLOR),
@@ -108,9 +116,7 @@ class LoginView extends StatelessWidget {
                       width: 0.3,
                     ),
                   ),
-                  errorText: (_validate == FormValidation.phoneInvalid)
-                      ? 'Nomeri doly giriziň'
-                      : null,
+                  errorText: 'Nomeri doly giriziň',
                 ),
                 textInputAction: TextInputAction.done,
               ),

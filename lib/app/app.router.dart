@@ -77,7 +77,7 @@ class StackedRouter extends RouterBase {
     },
     LoginView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const LoginView(),
+        builder: (context) => LoginView(),
         settings: data,
       );
     },
