@@ -9,11 +9,9 @@ import '../../../utils/utils.dart';
 
 class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory mainCategory;
-  // final List<MainCategory> mainCategories;
   MainCategoryItem({
     Key? key,
     required this.mainCategory,
-    // required this.mainCategories,
   }) : super(key: key, reactive: true);
 
   @override
