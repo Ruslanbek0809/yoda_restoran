@@ -123,10 +123,10 @@ class LoginView extends StatelessWidget with $LoginView {
             ),
             verticalSpaceMedium,
             SizedBox(
-              width: 1.sw,
+              width: 1.sw - 16.w,
               child: CustomTextButton(
                 text: 'Ugrat',
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
                 textStyle: TextStyle(
                   color: AppTheme.WHITE,
                   fontSize: 18.sp,

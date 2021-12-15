@@ -9,7 +9,8 @@ class LoginViewModel extends LoginOtpViewModel {
   final _userApiService = locator<UserApiService>();
 
   @override
-  Future<void> runLoginOtp() => _userApiService.loginUser(phoneValue!);
+  Future<void> runLoginOtp() =>
+      _userApiService.loginUser(phoneValue!); // phoneValue is generated value
 
   void navigateBack() => navigationService.back();
 }

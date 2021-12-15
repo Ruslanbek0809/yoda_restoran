@@ -22,7 +22,8 @@ class StartUpViewModel extends BaseViewModel {
     await _apiRootService.initDio();
 
     log.i('Ended');
-    _navService.replaceWith(Routes.loginView);
+    _navService.replaceWith(Routes.homeView);
+    // _navService.replaceWith(Routes.loginView);
 
     // if (_userService.hasLoggedInUser) {
     //   log.v('We have a user session on disk. Sync the user profile ...');
