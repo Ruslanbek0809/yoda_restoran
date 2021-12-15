@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,7 +64,7 @@ class YodaResApp extends StatelessWidget {
         ),
         builder: (context, child) {
           return ScrollConfiguration(
-            behavior: MyBehavior(), // to remove the glow effect entirely
+            behavior: MyBehavior(), // To remove the glow effect entirely
             child: MediaQuery(
               //Setting font does not change with system font size
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

@@ -14,14 +14,16 @@ class StartUpViewModel extends BaseViewModel {
 
   Future<void> runStartupLogic() async {
     log.i('Started');
-    await _apiRootService.initDio();
 
-    /// FIREBASE initialization
+    /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()
-        .then((value) => _pushNotificationService.initialise()); 
+        .then((value) => _pushNotificationService.initialise());
+
+    await _apiRootService.initDio();
 
     log.i('Ended');
     _navService.replaceWith(Routes.loginView);
+
     // if (_userService.hasLoggedInUser) {
     //   log.v('We have a user session on disk. Sync the user profile ...');
     //   await _userService.syncUserAccount();
