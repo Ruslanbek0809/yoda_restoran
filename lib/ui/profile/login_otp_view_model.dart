@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/app/app.logger.dart';
 
 abstract class LoginOtpViewModel extends FormViewModel {
+  final log = getLogger('LoginOtpViewModel');
+
   final navigationService = locator<NavigationService>();
 
   final String? successRoute;
@@ -12,19 +15,30 @@ abstract class LoginOtpViewModel extends FormViewModel {
   @override
   void setFormStatus() {}
 
-  Future saveData() async {
+  Future<Response> runLoginOtp(String phone);
+
+  Future saveData(String phone) async {
     // Run loginOtp and set viewmodel to busy
-    final result = await runBusyFuture(runLoginOtp());
+    final response =
+        await runBusyFuture(runLoginOtp(phone), throwException: true);
+
+    await _handleResponse(response);
+  }
+
+  /// Checks if the result has an error. If it doesn't we navigate to the success view
+  /// else we show the friendly validation message.
+  Future<void> _handleResponse(Response result) async {
+    log.v('');
 
     // Check result
     if (!result.hasError) {
       // Navigate to successful route
       navigationService.replaceWith(successRoute!);
     } else {
-      // set validation message if we have an error
-      setValidationMessage(result.errorMessage); // this gives validationMessage
+      log.w('Login Failed: ${result.body}');
+
+      setValidationMessage(result.body);
+      notifyListeners();
     }
   }
-
-  Future runLoginOtp();
 }

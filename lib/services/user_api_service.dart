@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/services/services.dart';
@@ -6,6 +9,10 @@ class UserApiService {
   final log = getLogger('UserApiService');
 
   final _apiRoot = locator<ApiRootService>();
+  final _pushNotificationService = locator<PushNotificationService>();
+
+  String? _otp;
+  String? get otp => _otp;
 
   // User? _currentUser;
 
@@ -13,30 +20,25 @@ class UserApiService {
 
   // bool get hasLoggedInUser => _firebaseAuthenticationService.hasUser;
 
-  // Future<void> syncUserAccount() async {
-  //   final firebaseUserId =
-  //       _firebaseAuthenticationService.firebaseAuth.currentUser!.uid;
+  Future<void> loginUser(String phone) async {
+    log.i(
+        'Phone: $phone,type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
 
-  //   log.v('Sync user $firebaseUserId');
+    try {
+      Response response = await _apiRoot.dio.get(
+        'auth/login/',
+        queryParameters: {
+          'mobile': phone,
+          'type': Platform.isAndroid ? 'android' : 'ios',
+          'registration_id': _pushNotificationService.fcmToken,
+        },
+      );
+      log.v('RESPONSE: auth/login/ => ${response.data}');
 
-  //   final userAccount = await _firestoreApi.getUser(userId: firebaseUserId);
-
-  //   if (userAccount != null) {
-  //     log.v('User account exists. Save as _currentUser');
-  //     _currentUser = userAccount;
-  //   }
-  // }
-
-  // Future<void> syncOrCreateUserAccount({required User user}) async {
-  //   log.i('user:$user');
-
-  //   await syncUserAccount();
-
-  //   if (_currentUser == null) {
-  //     log.v('We have no user account. Create a new user ...');
-  //     await _firestoreApi.createUser(user: user);
-  //     _currentUser = user;
-  //     log.v('_currentUser has been saved');
-  //   }
-  // }
+      if (response.data != null) _otp = response.data;
+    } catch (error) {
+      log.v('ERROR on auth/login/ :$error');
+      throw DioErrorType.response;
+    }
+  }
 }
