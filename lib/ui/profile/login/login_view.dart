@@ -67,10 +67,10 @@ class LoginView extends StatelessWidget with $LoginView {
                     decoration: InputDecoration(
                       labelText: 'Tel',
                       labelStyle: ktsLabelText,
-                      prefix: Text('+993 ', style: ktsTextfieldText),
-                      // prefix: Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      // ),
+                      prefix: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Text('+993', style: ktsTextfieldText),
+                      ),
                       fillColor: AppTheme.FILL_COLOR,
                       filled: true,
                       border: OutlineInputBorder(
@@ -110,8 +110,7 @@ class LoginView extends StatelessWidget with $LoginView {
                       ),
                     ),
                     validator: (value) {
-                      String phone = "+993${maskFormatter.getUnmaskedText()}";
-                      if (phone.length < 12) {
+                      if (value == null || value.isEmpty || value.length < 11) {
                         return 'Nomeri doly giriziň';
                       }
                       return null;
@@ -120,7 +119,7 @@ class LoginView extends StatelessWidget with $LoginView {
                 ),
                 verticalSpaceMedium,
                 SizedBox(
-                  width: 0.9.sw,
+                  width: 0.88.sw,
                   child: CustomTextChildButton(
                       child:
                           // Text(

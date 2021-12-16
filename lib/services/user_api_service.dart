@@ -22,13 +22,13 @@ class UserApiService {
 
   Future<void> loginUser(String phone) async {
     log.i(
-        'Phone: $phone,type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
+        'Phone: +993${phone.replaceAll(' ', '')},type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
 
     try {
       Response response = await _apiRoot.dio.get(
         'auth/login/',
         queryParameters: {
-          'mobile': phone,
+          'mobile': '+993${phone.replaceAll(' ', '')}',
           'type': Platform.isAndroid ? 'android' : 'ios',
           'registration_id': _pushNotificationService.fcmToken,
         },
