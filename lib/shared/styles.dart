@@ -1,8 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'shared.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Text Styles
 // To make it clear which weight we are using, we'll define the weight even for regular
 // fonts
+
+TextStyle ktsButtonText = TextStyle(
+  color: kcPrimaryColor,
+  fontSize: 18.sp,
+);
+
 const TextStyle heading1Style = TextStyle(
   fontSize: 34,
   fontWeight: FontWeight.w400,

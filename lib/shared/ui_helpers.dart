@@ -24,3 +24,10 @@ double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
 
 double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
+
+/// Radiuses
+final kbr20 = BorderRadius.circular(20.0);
+final kbr15 = BorderRadius.circular(15.0);
+final kbr12 = BorderRadius.circular(12.0);
+final kbr10 = BorderRadius.circular(10.0);
+final kbr5 = BorderRadius.circular(5.0);
