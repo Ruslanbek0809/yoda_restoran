@@ -11,9 +11,11 @@ import 'login_view.form.dart';
 import 'login_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-@FormView(fields: [
-  FormTextField(name: 'phone'),
-]) // Needed when generating formFields
+@FormView(
+  fields: [
+    FormTextField(name: 'phone'),
+  ],
+) // Needed when generating Formfields
 
 // ignore: must_be_immutable
 class LoginView extends StatelessWidget with $LoginView {
