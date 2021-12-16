@@ -15,26 +15,21 @@ class OtpViewModel extends LoginOtpViewModel {
 
   int get durationTime => 59;
 
-  bool _isResend = true;
-  bool get isResend => _isResend;
+  bool _hideResendButton = true;
+  bool get hideResendButton => _hideResendButton;
 
   String? _currentOtp = '';
   String? get currentOtp => _currentOtp;
 
-  void updaIsResend() {
-    _isResend = !_isResend;
-    log.i('_isResend: $_isResend');
+  void updateResentButton() {
+    _hideResendButton = !_hideResendButton;
+    log.i('_hideResendButton: $_hideResendButton');
     notifyListeners();
   }
 
   void updateOtp(String? otp) {
     _currentOtp = otp;
     log.i('_currentOtp: $_currentOtp');
-  }
-
-  void setState() {
-    log.i('');
-    notifyListeners();
   }
 
   @override

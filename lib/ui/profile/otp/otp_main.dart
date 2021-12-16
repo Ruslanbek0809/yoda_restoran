@@ -17,6 +17,8 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
   Widget buildViewModelWidget(BuildContext context, OtpViewModel model) {
     final otpController = useTextEditingController();
 
+    /// Here I used 2nd approach of creating textEditingController without StatefullWidget
+
     // ignore: close_sinks
     final errorController = useStreamController<
         ErrorAnimationType>(); // To shake when error happens
@@ -30,7 +32,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to update isResend
         if (status == AnimationStatus.dismissed) {
-          model.updaIsResend();
+          model.updateResentButton();
         }
       }
 
@@ -38,14 +40,17 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       return () => timeController.removeStatusListener(_listenerStatus);
     }, [timeController]);
 
-    /// Here it starts countdown in reverse
-    timeController.reverse(
-        from: timeController.value == 0.0 ? 1.0 : timeController.value);
+    if (model.hideResendButton)
+
+      /// Here it starts countdown in reverse
+      timeController.reverse(
+          from: timeController.value == 0.0 ? 1.0 : timeController.value);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            //------------------ YodaRes LOGO ---------------------//
             SizedBox(
               height: 1.sh / 2.5,
               child: SvgPicture.asset(
@@ -62,6 +67,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 color: AppTheme.MAIN_DARK,
               ),
             ),
+            verticalSpaceTiny,
             verticalSpaceMedium,
             Text(
               'Telefon belgiňize gelen gizli kody giriziň',
@@ -71,6 +77,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
               ),
             ),
             verticalSpaceMedium,
+            //------------------ PinCodeTextField ---------------------//
             Form(
               key: formKey,
               child: Padding(
@@ -147,17 +154,11 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
               ),
             ),
             verticalSpaceMedium,
-            //------------------ LOGIN BUTTON ---------------------//
+            //------------------ Verify BUTTON ---------------------//
             SizedBox(
               width: 0.88.sw,
               child: CustomTextChildButton(
-                  child:
-                      // Text(
-                      //   'Dowam et',
-                      //   style: ktsButtonText,
-                      // ),
-                      // ButtonLoading(),
-                      AnimatedSwitcher(
+                  child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
@@ -175,30 +176,28 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     formKey.currentState!.save();
 
                     String currentOtp = otpController.text;
-                    model.log.i('currentOtp: $currentOtp');
                     if (currentOtp.length != 6 ||
                         currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      model.setState();
                       return;
                     }
-                    
+
                     model.updateOtp(currentOtp);
-                    // snackBar("OTP Verified!!", context);
+                    /// TODO: Add SnackBar
 
                     await model.saveData();
                   }),
             ),
             verticalSpaceMedium,
-            model.isResend
+            model.hideResendButton
                 ? Offstage(
-                    offstage: !model.isResend,
+                    offstage: !model.hideResendButton,
                     child: OtpTimerWidget(timeController))
                 : CustomTextButton(
                     text: 'Kody gaýtadan ugrat',
                     color: kcPrimaryColor,
-                    onPressed: () {},
+                    onPressed: model.updateResentButton,
                   )
           ],
         ),

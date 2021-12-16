@@ -34,6 +34,7 @@ class LoginView extends StatelessWidget with $LoginView {
             key: formKey,
             child: Column(
               children: <Widget>[
+                //------------------ YodaRes LOGO ---------------------//
                 SizedBox(
                   height: 1.sh / 2.5,
                   child: SvgPicture.asset(
@@ -123,17 +124,11 @@ class LoginView extends StatelessWidget with $LoginView {
                   ),
                 ),
                 verticalSpaceMedium,
-                //------------------ LOGIN BUTTON ---------------------//
+                //------------------ Login BUTTON ---------------------//
                 SizedBox(
                   width: 0.88.sw,
                   child: CustomTextChildButton(
-                      child:
-                          // Text(
-                          //   'Dowam et',
-                          //   style: ktsButtonText,
-                          // ),
-                          // ButtonLoading(),
-                          AnimatedSwitcher(
+                      child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
                         child: model.isBusy
                             ? ButtonLoading()

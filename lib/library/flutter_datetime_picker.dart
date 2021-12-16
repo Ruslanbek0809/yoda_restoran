@@ -306,9 +306,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               ),
               child: GestureDetector(
                 child: Material(
-                  color: theme.backgroundColor == null
-                      ? Colors.white
-                      : theme.backgroundColor,
+                  color: theme.backgroundColor,
                   child: _renderPickerView(theme),
                 ),
               ),
@@ -469,7 +467,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
   // Title View
   Widget _renderTitleActionsView(DatePickerTheme theme) {
     final done = _localeDone();
-    final cancel = _localeCancel();
 
     return Container(
       height: theme.titleHeight,
@@ -527,10 +524,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   String _localeDone() {
     return i18nObjInLocale(widget.locale)['done'] as String;
-  }
-
-  String _localeCancel() {
-    return i18nObjInLocale(widget.locale)['cancel'] as String;
   }
 }
 
