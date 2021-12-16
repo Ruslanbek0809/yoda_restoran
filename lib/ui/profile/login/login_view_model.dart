@@ -7,7 +7,7 @@ import 'login_view.form.dart';
 class LoginViewModel extends LoginOtpViewModel {
   LoginViewModel() : super(successRoute: Routes.homeView);
   final _userApiService = locator<UserApiService>();
-
+  
   @override
   Future<void> runLoginOtp() =>
       _userApiService.loginUser(phoneValue!); // phoneValue is generated value

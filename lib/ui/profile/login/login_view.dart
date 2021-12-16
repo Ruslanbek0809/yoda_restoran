@@ -69,10 +69,11 @@ class LoginView extends StatelessWidget with $LoginView {
             verticalSpaceLarge,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: TextField(
+              child: TextFormField(
                 controller: phoneController,
                 inputFormatters: [maskFormatter],
                 keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.done,
                 style: TextStyle(color: AppTheme.FONT_COLOR),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -116,9 +117,15 @@ class LoginView extends StatelessWidget with $LoginView {
                       width: 0.3,
                     ),
                   ),
-                  errorText: 'Nomeri doly giriziň',
+                  // errorText: 'Nomeri doly giriziň',
                 ),
-                textInputAction: TextInputAction.done,
+                validator: (value) {
+                  String phone = "+993${maskFormatter.getUnmaskedText()}";
+                  if (phone.length < 12) {
+                    return 'Nomeri doly giriziň';
+                  }
+                  return null;
+                },
               ),
             ),
             verticalSpaceMedium,
