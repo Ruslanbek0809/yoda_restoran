@@ -15,7 +15,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     MaterialRoute(page: RestaurantDetailsView),
     MaterialRoute(page: RestaurantSearchView),
     MaterialRoute(page: LoginView),
-    MaterialRoute(page: OtpView),
+    MaterialRoute(page: AddressAddEditView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

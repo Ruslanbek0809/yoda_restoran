@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,11 +25,10 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       duration: Duration(seconds: model.durationTime),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    /// To dispose a status listener attached to timeController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
-        // This listener was used to repeat animation once
-
+        // This listener was used to update isResend
         if (status == AnimationStatus.dismissed) {
           model.updaIsResend();
         }
@@ -41,6 +38,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       return () => timeController.removeStatusListener(_listenerStatus);
     }, [timeController]);
 
+    /// Here it starts countdown in reverse
     timeController.reverse(
         from: timeController.value == 0.0 ? 1.0 : timeController.value);
 
@@ -64,7 +62,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 color: AppTheme.MAIN_DARK,
               ),
             ),
-            SizedBox(height: 25.w),
+            verticalSpaceMedium,
             Text(
               'Telefon belgiňize gelen gizli kody giriziň',
               style: TextStyle(
@@ -72,7 +70,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 color: AppTheme.DRAWER_ICON,
               ),
             ),
-            SizedBox(height: 30.w),
+            verticalSpaceMedium,
             Form(
               key: formKey,
               child: Padding(
@@ -196,7 +194,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     child: OtpTimerWidget(timeController))
                 : CustomTextButton(
                     text: 'Kody gaýtadan ugrat',
-                    color: AppTheme.MAIN,
+                    color: kcPrimaryColor,
                     onPressed: () {},
                   )
           ],

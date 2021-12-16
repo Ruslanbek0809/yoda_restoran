@@ -7,14 +7,15 @@ import 'package:yoda_res/utils/utils.dart';
 import 'address_add_edit_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OtpView extends StatefulWidget {
-  const OtpView({Key? key}) : super(key: key);
+class AddressAddEditView extends StatefulWidget {
+  const AddressAddEditView({Key? key}) : super(key: key);
 
   @override
-  State<OtpView> createState() => _OtpViewState();
+  State<AddressAddEditView> createState() => _AddressAddEditViewState();
 }
 
-class _OtpViewState extends State<OtpView> with SingleTickerProviderStateMixin {
+class _AddressAddEditViewState extends State<AddressAddEditView>
+    with SingleTickerProviderStateMixin {
   bool _isLoading = false;
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
   final TextEditingController _cityController = TextEditingController();
@@ -62,7 +63,7 @@ class _OtpViewState extends State<OtpView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OtpViewModel>.reactive(
+    return ViewModelBuilder<AddressAddEditViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -341,7 +342,7 @@ class _OtpViewState extends State<OtpView> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
-      viewModelBuilder: () => OtpViewModel(),
+      viewModelBuilder: () => AddressAddEditViewModel(),
     );
   }
 }

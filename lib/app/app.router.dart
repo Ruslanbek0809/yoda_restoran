@@ -24,14 +24,14 @@ class Routes {
   static const String restaurantDetailsView = '/restaurant-details-view';
   static const String restaurantSearchView = '/restaurant-search-view';
   static const String loginView = '/login-view';
-  static const String otpView = '/otp-view';
+  static const String addressAddEditView = '/address-add-edit-view';
   static const all = <String>{
     startUpView,
     homeView,
     restaurantDetailsView,
     restaurantSearchView,
     loginView,
-    otpView,
+    addressAddEditView,
   };
 }
 
@@ -44,7 +44,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.restaurantDetailsView, page: RestaurantDetailsView),
     RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
     RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.otpView, page: OtpView),
+    RouteDef(Routes.addressAddEditView, page: AddressAddEditView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -85,9 +85,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    OtpView: (data) {
+    AddressAddEditView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const OtpView(),
+        builder: (context) => const AddressAddEditView(),
         settings: data,
       );
     },

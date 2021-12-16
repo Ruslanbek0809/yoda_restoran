@@ -1,3 +1,3 @@
 import 'package:stacked/stacked.dart';
 
-class OtpViewModel extends BaseViewModel {}
+class AddressAddEditViewModel extends BaseViewModel {}

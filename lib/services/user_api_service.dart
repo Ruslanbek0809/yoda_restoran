@@ -11,7 +11,7 @@ class UserApiService {
   final _apiRoot = locator<ApiRootService>();
   final _pushNotificationService = locator<PushNotificationService>();
 
-  String? _otp;
+  String? _otp = '123456';
   String?
       _phone; // To store phone info while app is active to use in verifyUser()
   String? get otp => _otp;
