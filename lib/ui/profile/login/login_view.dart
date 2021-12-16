@@ -16,23 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 ]) // Needed when generating formFields
 
 class LoginView extends StatelessWidget with $LoginView {
+  final _formKey = GlobalKey<FormState>();
   var maskFormatter = MaskTextInputFormatter(
-      mask: '+993 ## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
-
-  // void _onContinueButtonPressed() async {
-  //   String phone = "+993${maskFormatter.getUnmaskedText()}";
-  //   // String realPhone = maskFormatter.getUnmaskedText();
-  //   if (phone.length < 12) {
-  //     setState(() {
-  //       _validate = FormValidation.phoneInvalid;
-  //     });
-  //     return;
-  //   }
-
-  //   _validate = FormValidation.valid;
-  //   await _playAnimation();
-  //   await _stopAnimation();
-  // }
+      mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
@@ -40,119 +26,147 @@ class LoginView extends StatelessWidget with $LoginView {
       onModelReady: (model) =>
           listenToFormUpdated(model), // Needed when generating formFields
       builder: (context, model, child) => Scaffold(
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 1.sh / 2.5,
-              child: SvgPicture.asset(
-                'assets/yoda_restoran.svg',
-                color: AppTheme.MAIN_DARK,
-                width: 0.75.sw,
-              ),
-            ),
-            Text(
-              'Ulgama girmek',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22.sp,
-                color: AppTheme.MAIN_DARK,
-              ),
-            ),
-            SizedBox(height: 25.w),
-            Text(
-              'Telefon belgiňizi giriziň',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: AppTheme.DRAWER_ICON,
-              ),
-            ),
-            verticalSpaceLarge,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: TextFormField(
-                controller: phoneController,
-                inputFormatters: [maskFormatter],
-                keyboardType: TextInputType.phone,
-                textInputAction: TextInputAction.done,
-                style: TextStyle(color: AppTheme.FONT_COLOR),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: AppTheme().radius10,
-                    borderSide: BorderSide(
-                      color: AppTheme.FILL_BORDER_COLOR,
-                      width: 0.3,
-                    ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 1.sh / 2.5,
+                  child: SvgPicture.asset(
+                    'assets/yoda_restoran.svg',
+                    color: AppTheme.MAIN_DARK,
+                    width: 0.75.sw,
                   ),
-                  prefixIcon: Icon(
-                    Icons.phone,
-                    color: AppTheme.FONT_COLOR,
-                  ),
-                  fillColor: AppTheme.FILL_COLOR,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().radius10,
-                    borderSide: BorderSide(
-                      color: AppTheme.FILL_BORDER_COLOR,
-                      width: 0.3,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().radius10,
-                    borderSide: BorderSide(
-                      color: AppTheme.FILL_BORDER_COLOR,
-                      width: 0.3,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().radius10,
-                    borderSide: BorderSide(
-                      color: AppTheme.RED,
-                      width: 0.3,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: AppTheme().radius10,
-                    borderSide: BorderSide(
-                      color: AppTheme.RED,
-                      width: 0.3,
-                    ),
-                  ),
-                  // errorText: 'Nomeri doly giriziň',
                 ),
-                validator: (value) {
-                  String phone = "+993${maskFormatter.getUnmaskedText()}";
-                  if (phone.length < 12) {
-                    return 'Nomeri doly giriziň';
-                  }
-                  return null;
-                },
-              ),
+                Text(
+                  'Ulgama girmek',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.sp,
+                    color: AppTheme.MAIN_DARK,
+                  ),
+                ),
+                SizedBox(height: 25.w),
+                Text(
+                  'Telefon belgiňizi giriziň',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppTheme.DRAWER_ICON,
+                  ),
+                ),
+                verticalSpaceLarge,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.w),
+                  child: TextFormField(
+                    controller: phoneController,
+                    inputFormatters: [maskFormatter],
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.done,
+                    style: TextStyle(color: AppTheme.FONT_COLOR),
+                    decoration: InputDecoration(
+                      prefixIcon: Text(
+                        '+993',
+                        style: TextStyle(fontSize: 16.sp),
+                      ),
+                      // Row(
+                      //   children: [
+                      //     Icon(
+                      //       Icons.phone,
+                      //       color: AppTheme.FONT_COLOR,
+                      //     ),
+                      //     Text(
+                      //       '+993',
+                      //       style: TextStyle(fontSize: 16.sp),
+                      //     ),
+                      //   ],
+                      // ),
+                      // labelText: 'Tel',
+                      // prefix: Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      // ),
+                      fillColor: AppTheme.FILL_COLOR,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: AppTheme().radius10,
+                        borderSide: BorderSide(
+                          color: AppTheme.FILL_BORDER_COLOR,
+                          width: 0.3,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: AppTheme().radius10,
+                        borderSide: BorderSide(
+                          color: AppTheme.FILL_BORDER_COLOR,
+                          width: 0.3,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: AppTheme().radius10,
+                        borderSide: BorderSide(
+                          color: AppTheme.FILL_BORDER_COLOR,
+                          width: 0.3,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: AppTheme().radius10,
+                        borderSide: BorderSide(
+                          color: AppTheme.RED,
+                          width: 0.3,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: AppTheme().radius10,
+                        borderSide: BorderSide(
+                          color: AppTheme.RED,
+                          width: 0.3,
+                        ),
+                      ),
+                      // errorText: 'Nomeri doly giriziň',
+                    ),
+                    // onChanged: (String? value) =>
+                    //     model.formValueMap[PhoneValueKey] = value,
+                    validator: (value) {
+                      String phone = "+993${maskFormatter.getUnmaskedText()}";
+                      if (phone.length < 12) {
+                        return 'Nomeri doly giriziň';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                verticalSpaceMedium,
+                SizedBox(
+                  width: 1.sw - 16.w,
+                  child: CustomTextChildButton(
+                      child: ButtonLoading(),
+                      // model.isBusy
+                      //     ? ButtonLoading()
+                      //     : Text(
+                      //         'Dowam et',
+                      //         style: ktsButtonText,
+                      //       ),
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      borderRadius: kbr10,
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        _formKey.currentState!.save();
+                        model.saveData();
+                      }),
+                ),
+                verticalSpaceMedium,
+                Text(
+                  'Siziň telefon belgiňize gizlin SMS kody geler.',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppTheme.DRAWER_ICON,
+                  ),
+                ),
+              ],
             ),
-            verticalSpaceMedium,
-            SizedBox(
-              width: 1.sw - 16.w,
-              child: CustomTextChildButton(
-                child: ButtonLoading(),
-                // model.isBusy
-                //     ? ButtonLoading()
-                //     : Text(
-                //         'Dowam et',
-                //         style: ktsButtonText,
-                //       ),
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                borderRadius: kbr10,
-                onPressed: model.saveData,
-              ),
-            ),
-            verticalSpaceMedium,
-            Text(
-              'Siziň telefon belgiňize gizlin SMS kody geler.',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: AppTheme.DRAWER_ICON,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
       viewModelBuilder: () => LoginViewModel(),
