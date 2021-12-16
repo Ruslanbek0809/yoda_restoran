@@ -7,8 +7,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // fonts
 
 TextStyle ktsButtonText = TextStyle(
-  color: kcPrimaryColor,
+  color: kcWhiteColor,
+  fontSize: 20.sp,
+);
+
+TextStyle ktsTextfieldText = TextStyle(
+  color: kcFontColor,
   fontSize: 18.sp,
+);
+
+TextStyle ktsLabelText = TextStyle(
+  color: kcHelperColor,
+  fontSize: 16.sp,
 );
 
 const TextStyle heading1Style = TextStyle(

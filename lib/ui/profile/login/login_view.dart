@@ -57,31 +57,17 @@ class LoginView extends StatelessWidget with $LoginView {
                 ),
                 verticalSpaceLarge,
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w),
+                  padding: EdgeInsets.symmetric(horizontal: 0.10.sw),
                   child: TextFormField(
                     controller: phoneController,
                     inputFormatters: [maskFormatter],
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
-                    style: TextStyle(color: AppTheme.FONT_COLOR),
+                    style: ktsTextfieldText,
                     decoration: InputDecoration(
-                      prefixIcon: Text(
-                        '+993',
-                        style: TextStyle(fontSize: 16.sp),
-                      ),
-                      // Row(
-                      //   children: [
-                      //     Icon(
-                      //       Icons.phone,
-                      //       color: AppTheme.FONT_COLOR,
-                      //     ),
-                      //     Text(
-                      //       '+993',
-                      //       style: TextStyle(fontSize: 16.sp),
-                      //     ),
-                      //   ],
-                      // ),
-                      // labelText: 'Tel',
+                      labelText: 'Tel',
+                      labelStyle: ktsLabelText,
+                      prefix: Text('+993 ', style: ktsTextfieldText),
                       // prefix: Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       // ),
@@ -122,10 +108,7 @@ class LoginView extends StatelessWidget with $LoginView {
                           width: 0.3,
                         ),
                       ),
-                      // errorText: 'Nomeri doly giriziň',
                     ),
-                    // onChanged: (String? value) =>
-                    //     model.formValueMap[PhoneValueKey] = value,
                     validator: (value) {
                       String phone = "+993${maskFormatter.getUnmaskedText()}";
                       if (phone.length < 12) {
@@ -137,16 +120,21 @@ class LoginView extends StatelessWidget with $LoginView {
                 ),
                 verticalSpaceMedium,
                 SizedBox(
-                  width: 1.sw - 16.w,
+                  width: 0.9.sw,
                   child: CustomTextChildButton(
-                      child: ButtonLoading(),
+                      child:
+                          // Text(
+                          //   'Dowam et',
+                          //   style: ktsButtonText,
+                          // ),
+                          ButtonLoading(),
                       // model.isBusy
                       //     ? ButtonLoading()
                       //     : Text(
                       //         'Dowam et',
                       //         style: ktsButtonText,
                       //       ),
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
                       onPressed: () {
                         if (!_formKey.currentState!.validate()) {
