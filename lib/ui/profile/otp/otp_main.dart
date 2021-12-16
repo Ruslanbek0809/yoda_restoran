@@ -10,13 +10,13 @@ import 'package:yoda_res/utils/utils.dart';
 import 'otp_view_model.dart';
 
 class OtpMain extends HookViewModelWidget<OtpViewModel> {
-  final TextEditingController otpController;
-  OtpMain({required this.otpController, Key? key})
-      : super(key: key, reactive: true);
+  OtpMain({Key? key}) : super(key: key, reactive: true);
 
   final formKey = GlobalKey<FormState>();
   @override
   Widget buildViewModelWidget(BuildContext context, OtpViewModel model) {
+    final otpController = useTextEditingController();
+
     // ignore: close_sinks
     final errorController = useStreamController<
         ErrorAnimationType>(); // To shake when error happens
@@ -110,6 +110,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   animationDuration: Duration(milliseconds: 300),
                   enableActiveFill: true,
                   errorAnimationController: errorController,
+                  errorTextSpace: 25.w,
                   controller: otpController,
                   keyboardType: TextInputType.number,
                   boxShadows: [
@@ -136,7 +137,6 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     dialogTitle: 'Kody doldur',
                     dialogContent: 'Bu kody doldurmak isleýärsiňizmi?',
                   ),
-                  errorTextSpace: 25.w,
                   // obscureText: false,
                   // obscuringCharacter: '*',
                   // obscuringWidget: FlutterLogo(
@@ -168,23 +168,26 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   borderRadius: kbr10,
-                  onPressed: () {
+                  onPressed: () async {
                     if (!formKey.currentState!.validate()) {
                       return;
                     }
                     formKey.currentState!.save();
 
                     String currentOtp = otpController.text;
-                    if (currentOtp.length != 6 || currentOtp != model.otp) {
+                    model.log.i('currentOtp: $currentOtp');
+                    if (currentOtp.length != 6 ||
+                        currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
                       model.setState();
                       return;
                     }
-
+                    
+                    model.updateOtp(currentOtp);
                     // snackBar("OTP Verified!!", context);
 
-                    model.saveData();
+                    await model.saveData();
                   }),
             ),
             verticalSpaceMedium,

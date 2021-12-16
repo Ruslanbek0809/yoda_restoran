@@ -12,8 +12,8 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../models/models.dart';
 import '../ui/home/home_view.dart';
-import '../ui/profile/address_add_edit/address_add_edit_view.dart';
 import '../ui/profile/login/login_view.dart';
+import '../ui/profile/otp/otp_view.dart';
 import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
@@ -24,14 +24,14 @@ class Routes {
   static const String restaurantDetailsView = '/restaurant-details-view';
   static const String restaurantSearchView = '/restaurant-search-view';
   static const String loginView = '/login-view';
-  static const String addressAddEditView = '/address-add-edit-view';
+  static const String otpView = '/otp-view';
   static const all = <String>{
     startUpView,
     homeView,
     restaurantDetailsView,
     restaurantSearchView,
     loginView,
-    addressAddEditView,
+    otpView,
   };
 }
 
@@ -44,7 +44,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.restaurantDetailsView, page: RestaurantDetailsView),
     RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
     RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.addressAddEditView, page: AddressAddEditView),
+    RouteDef(Routes.otpView, page: OtpView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -85,9 +85,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    AddressAddEditView: (data) {
+    OtpView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AddressAddEditView(),
+        builder: (context) => OtpView(),
         settings: data,
       );
     },
