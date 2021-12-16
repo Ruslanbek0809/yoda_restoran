@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 TextStyle ktsButtonText = TextStyle(
   color: kcWhiteColor,
   fontSize: 20.sp,
+  fontWeight: FontWeight.normal,
 );
 
 TextStyle ktsTextfieldText = TextStyle(
@@ -19,6 +20,12 @@ TextStyle ktsTextfieldText = TextStyle(
 TextStyle ktsLabelText = TextStyle(
   color: kcHelperColor,
   fontSize: 16.sp,
+);
+
+TextStyle ktsTextButtonText = TextStyle(
+  color: kcPrimaryColor,
+  fontSize: 16.sp,
+  fontWeight: FontWeight.bold,
 );
 
 const TextStyle heading1Style = TextStyle(

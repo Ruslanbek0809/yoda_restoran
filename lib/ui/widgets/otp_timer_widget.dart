@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class OtpTimerWidget extends StatelessWidget {
@@ -32,16 +33,10 @@ class OtpTimerWidget extends StatelessWidget {
                 Icons.access_time,
                 color: AppTheme.MAIN,
               ),
-              SizedBox(
-                width: 5.w,
-              ),
+              SizedBox(width: 5.w),
               Text(
                 'Kody $timerString dan täzeden ugrat',
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  color: AppTheme.MAIN,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: ktsTextButtonText,
               ),
             ],
           );

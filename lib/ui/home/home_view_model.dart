@@ -32,31 +32,31 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<HomeResPromo>? get resWithProms {
     List<HomeResPromo> _resWithProms = [];
     int promoPosCount = 0;
+    if (_homeService.randomRess!.isNotEmpty)
+      _homeService.randomRess!.forEach(
+        (_randomRes) {
+          int pos = _homeService.randomRess!.indexOf(_randomRes);
 
-    _homeService.randomRess!.forEach(
-      (_randomRes) {
-        int pos = _homeService.randomRess!.indexOf(_randomRes);
-
-        /// Here in 5th restaurant we will add new Promoted from promotedList
-        if ((pos + 1) % 5 == 0) {
-          if (promoPosCount <= _homeService.proms!.length - 1)
-            _resWithProms.add(
-              HomeResPromo(
-                _randomRes,
-                Promoted(
-                  id: _homeService.proms![promoPosCount].id,
-                  name: _homeService.proms![promoPosCount].name,
-                  order: _homeService.proms![promoPosCount].order,
-                  restaurants: _homeService.proms![promoPosCount].restaurants,
+          /// Here in 5th restaurant we will add new Promoted from promotedList
+          if ((pos + 1) % 5 == 0) {
+            if (promoPosCount <= _homeService.proms!.length - 1)
+              _resWithProms.add(
+                HomeResPromo(
+                  _randomRes,
+                  Promoted(
+                    id: _homeService.proms![promoPosCount].id,
+                    name: _homeService.proms![promoPosCount].name,
+                    order: _homeService.proms![promoPosCount].order,
+                    restaurants: _homeService.proms![promoPosCount].restaurants,
+                  ),
                 ),
-              ),
-            );
-          promoPosCount++;
-        } else {
-          _resWithProms.add(HomeResPromo(_randomRes, null));
-        }
-      },
-    );
+              );
+            promoPosCount++;
+          } else {
+            _resWithProms.add(HomeResPromo(_randomRes, null));
+          }
+        },
+      );
     return _resWithProms;
   }
 

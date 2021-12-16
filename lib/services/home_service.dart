@@ -7,16 +7,16 @@ class HomeService {
   final log = getLogger('HomeService');
   final _api = locator<ApiService>();
 
-  List<SliderModel>? _sliders;
+  List<SliderModel>? _sliders = [];
   List<SliderModel>? get sliders => _sliders;
 
-  List<MainCategory>? _mainCats;
+  List<MainCategory>? _mainCats = [];
   List<MainCategory>? get mainCats => _mainCats;
 
-  List<Restaurant>? _randomRess;
+  List<Restaurant>? _randomRess = [];
   List<Restaurant>? get randomRess => _randomRess;
 
-  List<Promoted>? _proms;
+  List<Promoted>? _proms = [];
   List<Promoted>? get proms => _proms;
 
   bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
