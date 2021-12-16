@@ -19,7 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class LoginView extends StatelessWidget with $LoginView {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   var maskFormatter = MaskTextInputFormatter(
       mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
 
@@ -31,7 +31,7 @@ class LoginView extends StatelessWidget with $LoginView {
       builder: (context, model, child) => Scaffold(
         body: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -145,10 +145,10 @@ class LoginView extends StatelessWidget with $LoginView {
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
                       onPressed: () {
-                        if (!_formKey.currentState!.validate()) {
+                        if (!formKey.currentState!.validate()) {
                           return;
                         }
-                        _formKey.currentState!.save();
+                        formKey.currentState!.save();
                         model.saveData();
                       }),
                 ),
