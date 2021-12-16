@@ -125,10 +125,13 @@ class LoginView extends StatelessWidget with $LoginView {
             SizedBox(
               width: 1.sw - 16.w,
               child: CustomTextChildButton(
-                child: Text(
-                  'Dowam et',
-                  style: ktsButtonText,
-                ),
+                child: ButtonLoading(),
+                // model.isBusy
+                //     ? ButtonLoading()
+                //     : Text(
+                //         'Dowam et',
+                //         style: ktsButtonText,
+                //       ),
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 borderRadius: kbr10,
                 onPressed: model.saveData,

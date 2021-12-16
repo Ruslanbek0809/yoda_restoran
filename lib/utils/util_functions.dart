@@ -7,6 +7,8 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
 final List<String> drawerList = ["profile", "orders", "addresses", "about"];
 
 final List<String> imgList = [
@@ -275,6 +277,8 @@ List<MealUI> mealList = [
     AdditionalFoodModel('Bet zat', 15, false),
   ]),
 ];
+
+
 
 
   // late AnimationController _buttonController;
