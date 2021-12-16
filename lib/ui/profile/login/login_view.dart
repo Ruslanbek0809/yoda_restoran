@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
   FormTextField(name: 'phone'),
 ]) // Needed when generating formFields
 
+// ignore: must_be_immutable
 class LoginView extends StatelessWidget with $LoginView {
   final _formKey = GlobalKey<FormState>();
   var maskFormatter = MaskTextInputFormatter(
@@ -36,7 +37,7 @@ class LoginView extends StatelessWidget with $LoginView {
                   child: SvgPicture.asset(
                     'assets/yoda_restoran.svg',
                     color: AppTheme.MAIN_DARK,
-                    width: 0.75.sw,
+                    width: 0.73.sw,
                   ),
                 ),
                 Text(
@@ -47,7 +48,8 @@ class LoginView extends StatelessWidget with $LoginView {
                     color: AppTheme.MAIN_DARK,
                   ),
                 ),
-                SizedBox(height: 25.w),
+                verticalSpaceTiny,
+                verticalSpaceMedium,
                 Text(
                   'Telefon belgiňizi giriziň',
                   style: TextStyle(
@@ -55,7 +57,8 @@ class LoginView extends StatelessWidget with $LoginView {
                     color: AppTheme.DRAWER_ICON,
                   ),
                 ),
-                verticalSpaceLarge,
+                verticalSpaceMedium,
+                //------------------ PHONE TEXTFIELD ---------------------//
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.10.sw),
                   child: TextFormField(
@@ -118,6 +121,7 @@ class LoginView extends StatelessWidget with $LoginView {
                   ),
                 ),
                 verticalSpaceMedium,
+                //------------------ LOGIN BUTTON ---------------------//
                 SizedBox(
                   width: 0.88.sw,
                   child: CustomTextChildButton(
@@ -126,13 +130,16 @@ class LoginView extends StatelessWidget with $LoginView {
                           //   'Dowam et',
                           //   style: ktsButtonText,
                           // ),
-                          ButtonLoading(),
-                      // model.isBusy
-                      //     ? ButtonLoading()
-                      //     : Text(
-                      //         'Dowam et',
-                      //         style: ktsButtonText,
-                      //       ),
+                          // ButtonLoading(),
+                          AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        child: model.isBusy
+                            ? ButtonLoading()
+                            : Text(
+                                'Dowam et',
+                                style: ktsButtonText,
+                              ),
+                      ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
                       onPressed: () {

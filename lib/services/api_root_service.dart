@@ -21,6 +21,7 @@ class ApiRootService {
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // Do something before request is sent
+      print('REQUEST[${options.method}] => PATH: ${options.path}');
       return handler.next(options); //continue
       // If you want to resolve the request with some custom data，
       // you can resolve a `Response` object eg: `handler.resolve(response)`.
