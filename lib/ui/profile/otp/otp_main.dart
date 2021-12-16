@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
@@ -16,45 +19,30 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget buildViewModelWidget(BuildContext context, OtpViewModel model) {
-
-    
     // ignore: close_sinks
-    StreamController<ErrorAnimationType>? errorController;
+    final errorController = useStreamController<
+        ErrorAnimationType>(); // To shake when error happens
 
-    /// Timer vars
-    late Timer timer;
-    late int totalTimeInSeconds;
-    late bool _hideResendButton;
-    final int time = 59;
-    late AnimationController _timeController;
+    final timeController = useAnimationController(
+      duration: Duration(seconds: model.durationTime),
+    );
 
-    @override
-    void initState() {
-      errorController = StreamController<ErrorAnimationType>();
-      totalTimeInSeconds = time;
-      super.initState();
-      _timeController =
-          AnimationController(vsync: this, duration: Duration(seconds: time))
-            ..addStatusListener((status) {
-              if (status == AnimationStatus.dismissed) {
-                setState(() {
-                  _hideResendButton = !_hideResendButton;
-                });
-              }
-            });
-      _timeController.reverse(
-          from: _timeController.value == 0.0 ? 1.0 : _timeController.value);
-      _startCountdown();
-    }
+    /// To dispose a status listener attached to _tweenController
+    useEffect(() {
+      void _listenerStatus(AnimationStatus status) {
+        // This listener was used to repeat animation once
 
-    Future _startCountdown() async {
-      setState(() {
-        _hideResendButton = true;
-        totalTimeInSeconds = time;
-      });
-      _timeController.reverse(
-          from: _timeController.value == 0.0 ? 1.0 : _timeController.value);
-    }
+        if (status == AnimationStatus.dismissed) {
+          model.updaIsResend();
+        }
+      }
+
+      timeController..addStatusListener(_listenerStatus);
+      return () => timeController.removeStatusListener(_listenerStatus);
+    }, [timeController]);
+
+    timeController.reverse(
+        from: timeController.value == 0.0 ? 1.0 : timeController.value);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -190,26 +178,22 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
 
                     String currentOtp = otpController.text;
                     if (currentOtp.length != 6 || currentOtp != model.otp) {
-                      errorController!.add(ErrorAnimationType
+                      errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      setState(() => );
-                    } else {
-                      setState(
-                        () {
-                          hasError = false;
-                          snackBar("OTP Verified!!", context);
-                        },
-                      );
+                      model.setState();
+                      return;
                     }
+
+                    // snackBar("OTP Verified!!", context);
+
                     model.saveData();
                   }),
             ),
-            SizedBox(height: 15.w),
-            _hideResendButton
+            verticalSpaceMedium,
+            model.isResend
                 ? Offstage(
-                    offstage: !_hideResendButton,
-                    child: OtpTimerWidget(_timeController),
-                  )
+                    offstage: !model.isResend,
+                    child: OtpTimerWidget(timeController))
                 : CustomTextButton(
                     text: 'Kody gaýtadan ugrat',
                     color: AppTheme.MAIN,

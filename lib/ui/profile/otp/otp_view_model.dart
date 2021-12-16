@@ -8,6 +8,18 @@ class OtpViewModel extends LoginOtpViewModel {
   OtpViewModel() : super(successRoute: Routes.homeView);
   final _userApiService = locator<UserApiService>();
   String? get otp => _userApiService.otp;
+  int get durationTime => 59;
+  bool _isResend = true;
+  bool get isResend => _isResend;
+
+  void updaIsResend() {
+    _isResend = !_isResend;
+    notifyListeners();
+  }
+
+  void setState() {
+    notifyListeners();
+  }
 
   @override
   Future<void> runLoginOtp() =>
