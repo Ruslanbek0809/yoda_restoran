@@ -7,8 +7,6 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
 final List<String> drawerList = ["profile", "orders", "addresses", "about"];
 
 final List<String> imgList = [
@@ -88,6 +86,9 @@ enum SortAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
 enum BottomSheetType { mainCategory, restaurantInfo, mealDetails }
+
+/// Enum for dialog types
+enum DialogType { basic, cart }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;
