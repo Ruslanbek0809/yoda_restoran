@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/ui/widgets/loading_widget.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -250,15 +251,13 @@ class ResDetailsMainBusy extends StatelessWidget {
                           ),
                         ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
-                        Padding(
+                        IgnorePointer(
+                          child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: SizedBox(height: 44.h)),
-                        //------------------ MAIN DIVIDER ---------------------//
-                        Container(
-                          color: AppTheme.MAIN_DIVIDER_COLOR,
-                          padding: EdgeInsets.symmetric(vertical: 4.h),
-                          margin: EdgeInsets.only(top: 15.h),
+                            child: ToggleButtonView(),
+                          ),
                         ),
+                        SizedBox(height: 23.h),
                       ],
                     ),
                   ),
