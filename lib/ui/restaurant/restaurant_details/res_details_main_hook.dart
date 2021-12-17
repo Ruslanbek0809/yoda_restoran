@@ -10,9 +10,10 @@ import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResDetailsMain extends HookViewModelWidget<RestaurantDetailsViewModel> {
+class ResDetailsMainHook
+    extends HookViewModelWidget<RestaurantDetailsViewModel> {
   final Restaurant restaurant;
-  const ResDetailsMain({required this.restaurant, Key? key})
+  const ResDetailsMainHook({required this.restaurant, Key? key})
       : super(key: key, reactive: true);
 
   @override
@@ -24,7 +25,7 @@ class ResDetailsMain extends HookViewModelWidget<RestaurantDetailsViewModel> {
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
-      initialLength: foodCategoryList.length,
+      initialLength: model.resCategories!.length,
       initialIndex: model.activeTab,
     );
 

@@ -7,10 +7,9 @@ import 'package:yoda_res/utils/utils.dart';
 import 'meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MealItem extends HookViewModelWidget<MealViewModel> {
+class MealItemHook extends HookViewModelWidget<MealViewModel> {
   final Meal meal;
-  // final MealUI meal;
-  const MealItem({Key? key, required this.meal})
+  const MealItemHook({Key? key, required this.meal})
       : super(key: key, reactive: true);
 
   @override

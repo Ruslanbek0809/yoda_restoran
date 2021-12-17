@@ -34,7 +34,6 @@ class ResDetailsMainBusy extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppTheme.WHITE,
-                // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
               ),
               child: Material(
                 color: AppTheme.WHITE,
