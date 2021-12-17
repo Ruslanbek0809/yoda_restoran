@@ -12,3 +12,4 @@ export 'auto_hide_keyboard.dart';
 export 'loading_widget.dart';
 export 'custom_text_child_button.dart';
 export 'button_loading.dart';
+export 'colored_tabbar.dart';

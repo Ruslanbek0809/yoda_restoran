@@ -6,6 +6,7 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class ResDetailsMainHook
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
-      initialLength: model.resCategories!.length,
+      initialLength: foodCategoryList.length,
       initialIndex: model.activeTab,
     );
 
@@ -346,7 +347,7 @@ class ResDetailsMainHook
               isScrollable: true,
               indicatorColor: Colors.transparent,
               labelPadding: EdgeInsets.all(0.0),
-              tabs: model.resCategories!
+              tabs: foodCategoryList
                   .map<Widget>((resCategory) => Tab(
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 500),
@@ -354,7 +355,7 @@ class ResDetailsMainHook
                           decoration: BoxDecoration(
                             borderRadius: AppTheme().radius15,
                             color: model.activeTab ==
-                                    model.resCategories!.indexOf(resCategory)
+                                    foodCategoryList.indexOf(resCategory)
                                 ? model.isTabPressed
                                     ? AppTheme.MAIN_LIGHT
                                     : AppTheme.WHITE
@@ -367,7 +368,7 @@ class ResDetailsMainHook
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           alignment: Alignment.center,
                           child: Text(
-                            resCategory.resCategoryModel!.name!,
+                            resCategory.name,
                             style: TextStyle(
                               color: AppTheme.FONT_COLOR,
                               fontSize: 14.sp,
@@ -462,20 +463,4 @@ class ResDetailsMainHook
       ],
     );
   }
-}
-
-class ColoredTabBar extends Container implements PreferredSizeWidget {
-  ColoredTabBar({required this.color, required this.tabBar});
-
-  final Color color;
-  final TabBar tabBar;
-
-  @override
-  Size get preferredSize => tabBar.preferredSize;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        color: color,
-        child: tabBar,
-      );
 }
