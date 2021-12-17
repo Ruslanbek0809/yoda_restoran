@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_bottom_cart.dart';
+import 'res_details_main.dart';
+import 'res_details_main_busy.dart';
 import 'ressss.dart';
 import 'restaurant_details_view_model.dart';
 
@@ -18,11 +20,10 @@ class RestaurantDetailsView extends StatelessWidget {
         body: Stack(
           children: [
             //------------------ RESTAURANT MAIN PART ---------------------//
-            // model.isBusy
-            //     ? ResDetailsMainBusy(restaurant: restaurant)
-            //     :
-            // ResDetailsMain(restaurant: restaurant),
-            ResDetailsMainWidget(restaurant: restaurant),
+            model.isBusy
+                ? ResDetailsMainBusy(restaurant: restaurant)
+                : ResDetailsMain(restaurant: restaurant),
+            // ResDetailsMainWidget(restaurant: restaurant),
             //------------------ BOTTOM CART ---------------------//
             ResDetailsBottomCart(),
           ],

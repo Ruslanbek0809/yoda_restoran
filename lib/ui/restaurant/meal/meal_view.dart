@@ -6,8 +6,8 @@ import 'package:stacked/stacked.dart';
 
 /// The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
 class MealView extends StatelessWidget {
-  final MealUI meal;
-  // final Meal meal;
+  final Meal meal;
+  // final MealUI meal;
   const MealView({Key? key, required this.meal}) : super(key: key);
 
   @override
