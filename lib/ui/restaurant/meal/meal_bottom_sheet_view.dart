@@ -150,7 +150,7 @@ class MealBottomSheet extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-                            if (meal.gCostumizes!.isNotEmpty)
+                            if (meal.gCustomizables!.isNotEmpty)
                               Divider(color: kcDividerColor),
                             //----------- MAIN CUSTOMIZE LIST --------------//
                             // ...meal.gCostumizes!
@@ -160,7 +160,7 @@ class MealBottomSheet extends StatelessWidget {
                             //           Padding(
                             //             padding: EdgeInsets.symmetric(
                             //               vertical: 10.h,
-                            //               horizontal: 10.w,
+                            //               horizontal: 15.w,
                             //             ),
                             //             child: Text(
                             //               mainCustomize.name!,
@@ -172,7 +172,7 @@ class MealBottomSheet extends StatelessWidget {
                             //             shrinkWrap: true,
                             //             physics: NeverScrollableScrollPhysics(),
                             //             itemCount:
-                            //                 mainCustomize.volumes!.length,
+                            //                  .volumes!.length,
                             //             separatorBuilder: (ctx, pos) => Divider(
                             //               color: AppTheme.DRAWER_DIVIDER,
                             //               indent: 0.175.sw,

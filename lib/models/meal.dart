@@ -23,7 +23,7 @@ class Meal {
     this.sizeId,
     this.size,
     this.gVolumes,
-    this.gCostumizes,
+    this.gCustomizables,
   });
 
   @JsonKey(name: 'id')
@@ -78,7 +78,7 @@ class Meal {
   final List<MainVolume>? gVolumes;
 
   @JsonKey(name: 'gCostumizes')
-  final List<MainVolume>? gCostumizes;
+  final List<MainCustomizable>? gCustomizables;
 
   factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
 

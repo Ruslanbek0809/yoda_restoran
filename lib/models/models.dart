@@ -12,6 +12,7 @@ export 'main_category.dart';
 export 'meal.dart';
 export 'size.dart';
 export 'main_volume.dart';
+export 'main_customizable.dart';
 export 'volume.dart';
 export 'restaurant.dart';
 export 'promoted.dart';
