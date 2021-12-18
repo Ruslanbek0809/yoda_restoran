@@ -15,7 +15,7 @@ class ApiService {
     List<SliderModel> _sliders = [];
     try {
       Response response = await _apiRoot.dio.get('api/sliders/');
-      // log.i('RESPONSE: api/slider/ => ${response.data}');
+      // log.v('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_slider) {
@@ -24,7 +24,7 @@ class ApiService {
       }
       return _sliders;
     } catch (error) {
-      log.i('ERROR on api/slider/ :$error');
+      log.v('ERROR on api/slider/ :$error');
       rethrow;
     }
   }
@@ -33,7 +33,7 @@ class ApiService {
     List<MainCategory> _mainCategories = [];
     try {
       Response response = await _apiRoot.dio.get('api/maincategories/');
-      // log.i('RESPONSE: api/maincategories/ => ${response.data}');
+      // log.v('RESPONSE: api/maincategories/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_mainCategory) {
@@ -42,7 +42,7 @@ class ApiService {
       }
       return _mainCategories;
     } catch (error) {
-      log.i('ERROR on api/maincategories/ :$error');
+      log.v('ERROR on api/maincategories/ :$error');
       rethrow;
     }
   }
@@ -51,7 +51,7 @@ class ApiService {
     List<Restaurant> _randomRestaurants = [];
     try {
       Response response = await _apiRoot.dio.get('api/restaurants/');
-      // log.i('RESPONSE: api/restaurants/ => ${response.data}');
+      // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_randomRestaurant) {
@@ -60,7 +60,7 @@ class ApiService {
       }
       return _randomRestaurants;
     } catch (error) {
-      log.i('ERROR on api/restaurants/ :$error');
+      log.v('ERROR on api/restaurants/ :$error');
       rethrow;
     }
   }
@@ -69,7 +69,7 @@ class ApiService {
     List<Promoted> _promotedList = [];
     try {
       Response response = await _apiRoot.dio.get('api/promoted/');
-      // log.i('RESPONSE: api/promoted/ => ${response.data}');
+      // log.v('RESPONSE: api/promoted/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_promoted) {
@@ -78,7 +78,7 @@ class ApiService {
       }
       return _promotedList;
     } catch (error) {
-      log.i('ERROR on api/promoted/ :$error');
+      log.v('ERROR on api/promoted/ :$error');
       rethrow;
     }
   }
@@ -92,7 +92,7 @@ class ApiService {
       //     await _apiRoot.dio.get('api/categories?restaurant=$restaurantId');
       Response response = await _apiRoot.dio.get('api/categories/',
           queryParameters: {'restaurant': restaurantId});
-      // log.i('RESPONSE: api/categories/ => ${response.data}');
+      // log.v('RESPONSE: api/categories/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {
@@ -101,8 +101,8 @@ class ApiService {
       }
       return _resCategories;
     } on DioError catch (error) {
-      log.i(error);
-      // log.i(
+      log.v(error);
+      // log.v(
       //     'ERROR on api/categories/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }

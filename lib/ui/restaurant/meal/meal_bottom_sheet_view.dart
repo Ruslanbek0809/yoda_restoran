@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:stacked/stacked.dart';
@@ -48,11 +49,11 @@ class MealBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 17.5.w,
+                        height: 15.h,
                         width: 40.w,
                         child: SvgPicture.asset(
                           'assets/bottom_sheet_dragger.svg',
-                          color: AppTheme.WHITE,
+                          color: kcWhiteColor,
                         ),
                       ),
                       ClipRRect(
@@ -60,38 +61,35 @@ class MealBottomSheet extends StatelessWidget {
                           top: Radius.circular(Constants.BORDER_RADIUS_20),
                         ),
                         child: YodaImage(
-                          image: widget.food.image,
-                          height: 0.4.sh,
+                          image: meal.image!,
+                          height: 1.sw,
                           width: 1.sw,
                         ),
                       ),
                       Container(
-                        color: AppTheme.WHITE,
+                        color: kcWhiteColor,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 15.w, horizontal: 10.w),
+                                vertical: 15.h,
+                                horizontal: 10.w,
+                              ),
                               child: Text(
-                                'Bu sandwiçi iýseň uzak gün keýpiň kök bolýar we hiç açlyk duýmaýarsyň. Iýip görenler soň hemişe bu sendwiçi sargaýarlar.',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  color: AppTheme.BOTTOM_SHEET_FONT_COLOR,
-                                ),
+                                meal.description!,
                                 maxLines: 3,
+                                style: ktsDefault16HelperColor,
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 10.w, horizontal: 10.w),
+                                vertical: 10.h,
+                                horizontal: 10.w,
+                              ),
                               child: Text(
                                 'Goşmaça',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: AppTheme.DRAWER_ICON,
-                                ),
-                                maxLines: 3,
+                                style: ktsDefault14HelperColor,
                               ),
                             ),
                             Column(

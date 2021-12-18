@@ -43,6 +43,11 @@ TextStyle ktsDefault16Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle ktsDefault16HelperColor = TextStyle(
+  fontSize: 16.sp,
+  color: kcHelperColor,
+);
+
 TextStyle ktsDefault18Text = TextStyle(
   fontSize: 18.sp,
   color: kcFontColor,

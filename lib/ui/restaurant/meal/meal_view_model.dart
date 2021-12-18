@@ -34,8 +34,8 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// Function to call RestaurantDetailsInfoBottomSheet
-  Future showCustomBottomSheet(Meal meal) async {
+  /// Function to call MealBottomSheet
+  Future showCustomMealBottomSheet(Meal meal) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.meal,
