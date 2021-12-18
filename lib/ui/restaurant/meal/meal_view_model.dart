@@ -47,18 +47,28 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  List<Volume>? _selectedVolumes = [];
-  List<Volume>? get selectedVolumes => _selectedVolumes;
+  List<Volume?> _selectedVolumes = [];
+  List<Volume?> get selectedVolumes => _selectedVolumes;
 
   List<List<Volume>>? _selectedMultiCustomizables = [];
   List<List<Volume>>? get selectedMultiCustomizables =>
       _selectedMultiCustomizables;
 
-  void setOnModelReadyVolumesCustomizes(int ) {
-    
+  /// SETS and CREATES initial list for selectedVolumes and selectedMultiCustomizables
+  void setOnModelReadyVolumesCustomizes(int mainVolumeLength) {
+    log.i('mainVolumeLength: $mainVolumeLength');
+    _selectedVolumes = List.filled(mainVolumeLength,
+        null); // Here created new list based on gVolumesLength with all its value null
+    log.i('_selectedVolumes: $_selectedVolumes');
   }
 
-  void updateSelectedVolume(int pos, MainVolume mainVolume) {}
+  /// UPDATES _selectedVolumes's mainVolumePos positioned volume
+  void updateSelectedVolume(int mainVolumePos, Volume volume) {
+    log.i('mainVolumePos: $mainVolumePos and selectedVolume: ${volume.volumeName}');
+    _selectedVolumes[mainVolumePos] = volume;
+    log.i('_selectedVolumes[mainVolumePos]: : ${_selectedVolumes[mainVolumePos]!.volumeName}');
+    notifyListeners();
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];

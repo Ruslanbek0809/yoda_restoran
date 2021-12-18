@@ -7,10 +7,10 @@ import 'meal_view_model.dart';
 
 class MealMainVolumeView extends StatelessWidget {
   final MainVolume mainVolume;
-  final int pos;
+  final int mainVolumePos;
   const MealMainVolumeView({
     required this.mainVolume,
-    required this.pos,
+    required this.mainVolumePos,
     Key? key,
   }) : super(key: key);
 
@@ -40,8 +40,11 @@ class MealMainVolumeView extends StatelessWidget {
             ),
             itemBuilder: (ctx, volumePos) => RadioListTile<Volume>(
               value: mainVolume.volumes![volumePos],
-              groupValue: selectedAdditional,
-              onChanged: _setSelectedAdditionalFood,
+              groupValue: model.selectedVolumes[mainVolumePos],
+              onChanged: (selectedVolume) {
+                model.updateSelectedVolume(
+                    mainVolumePos, selectedVolume!);
+              },
               title: Row(
                 children: [
                   Text(

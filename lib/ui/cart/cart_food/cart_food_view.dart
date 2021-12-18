@@ -18,7 +18,7 @@ class CartFoodView extends StatefulWidget {
 
 class _CartFoodViewState extends State<CartFoodView> {
   void _onProductBottomSheetClicked(MealUI food) {
-    showFoodBottomSheet(context, food);
+    // showFoodBottomSheet(context, food);
   }
 
   @override

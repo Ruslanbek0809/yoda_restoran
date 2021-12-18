@@ -46,7 +46,7 @@ class _CartResFoodViewState extends State<CartResFoodView>
   }
 
   void _onProductBottomSheetClicked(MealUI food) {
-    showFoodBottomSheet(context, food);
+    // showFoodBottomSheet(context, food);
   }
 
   @override

@@ -91,7 +91,7 @@ class MealBottomSheet extends StatelessWidget {
                                   (MainVolume mainVolume, int pos) =>
                                       MealMainVolumeView(
                                     mainVolume: mainVolume,
-                                    pos: pos,
+                                    mainVolumePos: pos,
                                   ),
                                 )
                                 .toList(),
