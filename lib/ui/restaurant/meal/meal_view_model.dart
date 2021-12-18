@@ -53,6 +53,10 @@ class MealViewModel extends ReactiveViewModel {
   List<List<Customizable>>? _selectedCustomizables = [];
   List<List<Customizable>>? get selectedCustomizables => _selectedCustomizables;
 
+  /// Function to check wether this selectedCustomizable selected or NOT
+  bool isCustomizableSelected(int? mainCustomizablePos, int customizableId) =>
+      _selectedCustomizables![mainCustomizablePos!].contains(customizableId);
+
   /// SETS and CREATES initial list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolumesCustomizes(
       int gVolumesLength, int gCustomizablesLength) {
@@ -62,8 +66,6 @@ class MealViewModel extends ReactiveViewModel {
     ); // Here created new list based on mainVolumeLength with all its value null
 
     _selectedCustomizables = List.generate(gCustomizablesLength, (_) => []);
-
-    log.i('_selectedCustomizables: ${_selectedCustomizables!.length}');
   }
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume

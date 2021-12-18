@@ -153,61 +153,62 @@ class MealBottomSheet extends StatelessWidget {
                             if (meal.gCustomizables!.isNotEmpty)
                               Divider(color: kcDividerColor),
                             //----------- MAIN CUSTOMIZE LIST --------------//
-                            // ...meal.gCostumizes!
-                            //     .map<Widget>(
-                            //       (MainVolume mainCustomize) => Column(
-                            //         children: [
-                            //           Padding(
-                            //             padding: EdgeInsets.symmetric(
-                            //               vertical: 10.h,
-                            //               horizontal: 15.w,
-                            //             ),
-                            //             child: Text(
-                            //               mainCustomize.name!,
-                            //               style: ktsDefault14HelperColor,
-                            //             ),
-                            //           ),
-                            //           //----------- VOLUME LIST for each MAIN VOLUME --------------//
-                            //           ListView.separated(
-                            //             shrinkWrap: true,
-                            //             physics: NeverScrollableScrollPhysics(),
-                            //             itemCount:
-                            //                  .volumes!.length,
-                            //             separatorBuilder: (ctx, pos) => Divider(
-                            //               color: AppTheme.DRAWER_DIVIDER,
-                            //               indent: 0.175.sw,
-                            //             ),
-                            //             itemBuilder: (ctx, pos) =>
-                            //                 CheckboxListTile(
-                            //               title: Row(
-                            //                 children: [
-                            //                   Text(
-                            //                     mainCustomize
-                            //                         .volumes![pos].volumeName!,
-                            //                     style: ktsDefault14Text,
-                            //                   ),
-                            //                   SizedBox(width: 7.w),
-                            //                   Text(
-                            //                     '+${mainCustomize.volumes![pos].price} TMT',
-                            //                     style: ktsDefault16HelperColor,
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //               value: additional.isAdded,
-                            //               controlAffinity:
-                            //                   ListTileControlAffinity.leading,
-                            //               activeColor: AppTheme.GREEN,
-                            //               onChanged: (bool? value) {
-                            //                 setState(() {
-                            //                   additional.isAdded = value!;
-                            //                 });
-                            //               },
-                            //             ),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     )
-                            //     .toList(),
+                            ...meal.gCustomizables!
+                                .map<Widget>(
+                                  (MainCustomizable mainCustomizable) => Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 15.w,
+                                        ),
+                                        child: Text(
+                                          mainCustomizable.name!,
+                                          style: ktsDefault14HelperColor,
+                                        ),
+                                      ),
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: mainCustomizable
+                                            .customizables!.length,
+                                        separatorBuilder: (ctx, pos) => Divider(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          indent: 0.175.sw,
+                                        ),
+                                        itemBuilder: (ctx, pos) =>
+                                            CheckboxListTile(
+                                          title: Row(
+                                            children: [
+                                              Text(
+                                                mainCustomizable
+                                                    .customizables![pos]
+                                                    .customizableName!,
+                                                style: ktsDefault14Text,
+                                              ),
+                                              SizedBox(width: 7.w),
+                                              Text(
+                                                '+${mainCustomizable.customizables![pos].price} TMT',
+                                                style: ktsDefault16HelperColor,
+                                              ),
+                                            ],
+                                          ),
+                                          value: additional.isAdded,
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          activeColor: AppTheme.GREEN,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              additional.isAdded = value!;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
                             SizedBox(height: 0.175.sh)
                           ],
                         ),
