@@ -29,8 +29,23 @@ TextStyle ktsTextButtonText = TextStyle(
 );
 
 TextStyle ktsDefault14Text = TextStyle(
-  color: kcFontColor,
   fontSize: 14.sp,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault14HelperColor = TextStyle(
+  fontSize: 14.sp,
+  color: kcHelperColor,
+);
+
+TextStyle ktsDefault16Text = TextStyle(
+  fontSize: 16.sp,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault18Text = TextStyle(
+  fontSize: 18.sp,
+  color: kcFontColor,
 );
 
 const TextStyle heading1Style = TextStyle(

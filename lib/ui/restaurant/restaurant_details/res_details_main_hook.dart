@@ -23,7 +23,7 @@ class ResDetailsMainHook
       BuildContext context, RestaurantDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.3.sw; // 0.3.sw is for item height
+    double itemHeight = itemWidth + 0.31.sw; // 0.31.sw is for item height
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(

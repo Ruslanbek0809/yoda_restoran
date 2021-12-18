@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'meal_view_model.dart';
@@ -59,7 +60,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                       width: constraints.maxWidth,
                       borderRadius: Constants.BORDER_RADIUS_20,
                     ),
-                    if (meal.discount != null || meal.discount! > 0)
+                    if (meal.discount != null && meal.discount! > 0)
                       Positioned(
                         bottom: 0,
                         right: 0,
@@ -77,10 +78,10 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                           ),
                           child: FittedBox(
                             child: Text(
-                              '-${meal.discount}%',
+                              '-${meal.discount!.toInt()}%',
                               style: TextStyle(
-                                color: AppTheme.WHITE,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 16.sp,
+                                color: kcWhiteColor,
                               ),
                             ),
                           ),
@@ -89,14 +90,12 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8.w, bottom: 4.w),
+                  padding: EdgeInsets.only(top: 7.h, bottom: 3.h),
                   child: Text(
                     meal.name!,
                     maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 17.sp,
-                      color: AppTheme.FONT_COLOR,
-                    ),
+                    overflow: TextOverflow.ellipsis,
+                    style: ktsDefault16Text,
                   ),
                 ),
                 model.isButtonToggled
@@ -106,46 +105,34 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             meal.discount != null || meal.discount! > 0
                                 ? '${meal.discountedPrice} TMT'
                                 : '${meal.price} TMT',
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: AppTheme.DRAWER_ICON,
-                            ),
+                            style: ktsDefault14HelperColor,
                           ),
                           Text(
-                            '${meal.value} ${meal.size!.name}',
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: AppTheme.DRAWER_ICON,
-                            ),
+                            ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                            style: ktsDefault14HelperColor,
                           ),
                         ],
                       )
-                    : meal.discount != null || meal.discount! > 0
+                    : meal.discount != null && meal.discount! > 0
                         ? Row(
                             children: [
                               Text(
                                 '${meal.price} TMT',
                                 style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: AppTheme.DRAWER_ICON,
+                                  fontSize: 14.sp,
+                                  color: kcHelperColor,
                                   decoration: TextDecoration.lineThrough,
                                 ),
                               ),
                               Text(
-                                '${meal.value} ${meal.size!.name}',
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: AppTheme.DRAWER_ICON,
-                                ),
+                                ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                                style: ktsDefault14HelperColor,
                               ),
                             ],
                           )
                         : Text(
-                            '${meal.value} ${meal.size!.name}',
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: AppTheme.DRAWER_ICON,
-                            ),
+                            '${meal.value!.toInt()} ${meal.size!.name}',
+                            style: ktsDefault14HelperColor,
                           ),
                 Spacer(),
 //------------------ BUTTONS ---------------------//
@@ -167,10 +154,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   model.updateButtonToggle();
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.w),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w,
+                                    vertical: 10.h,
+                                  ),
                                   child: Icon(
                                     Icons.remove,
-                                    size: 25.w,
+                                    size: 22.w,
                                     color: AppTheme.FONT_COLOR,
                                   ),
                                 ),
@@ -178,10 +168,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             ),
                             Text(
                               '1',
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                color: AppTheme.FONT_COLOR,
-                              ),
+                              style: ktsDefault18Text,
                             ),
                             Material(
                               color: AppTheme.WHITE,
@@ -194,10 +181,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   // _onProductBottomSheetClicked(food);
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.w),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w,
+                                    vertical: 10.h,
+                                  ),
                                   child: Icon(
                                     Icons.add,
-                                    size: 25.w,
+                                    size: 22.w,
                                     color: AppTheme.FONT_COLOR,
                                   ),
                                 ),
@@ -225,16 +215,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 color: AppTheme.WHITE,
                                 borderRadius: AppTheme().radius15,
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 10.w),
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Text(
-                                meal.discount != null || meal.discount! > 0
+                                meal.discount != null && meal.discount! > 0
                                     ? '${meal.discountedPrice} TMT'
                                     : '${meal.price} TMT',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: AppTheme.FONT_COLOR,
-                                ),
+                                style: ktsDefault18Text,
                               ),
                             ),
                           ),
