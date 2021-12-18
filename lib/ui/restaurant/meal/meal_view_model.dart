@@ -60,6 +60,10 @@ class MealViewModel extends ReactiveViewModel {
       gVolumesLength,
       (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
     ); // Here created new list based on mainVolumeLength with all its value null
+
+    _selectedCustomizables = List.generate(gCustomizablesLength, (_) => []);
+
+    log.i('_selectedCustomizables: ${_selectedCustomizables!.length}');
   }
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
