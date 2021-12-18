@@ -32,6 +32,9 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       gVolumes: (json['gVolumes'] as List<dynamic>?)
           ?.map((e) => MainVolume.fromJson(e as Map<String, dynamic>))
           .toList(),
+      gCustomizables: (json['gCostumizes'] as List<dynamic>?)
+          ?.map((e) => MainCustomizable.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
@@ -52,4 +55,5 @@ Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
       'size': instance.sizeId,
       'sizeJson': instance.size,
       'gVolumes': instance.gVolumes,
+      'gCostumizes': instance.gCustomizables,
     };

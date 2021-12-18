@@ -19,3 +19,4 @@ export 'promoted.dart';
 export 'res_category.dart';
 export 'res_category_model.dart';
 export 'home_res_promo.dart';
+export 'customizable.dart';

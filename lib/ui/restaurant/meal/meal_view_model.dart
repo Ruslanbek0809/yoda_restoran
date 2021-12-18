@@ -50,14 +50,14 @@ class MealViewModel extends ReactiveViewModel {
   List<Volume?> _selectedVolumes = [];
   List<Volume?> get selectedVolumes => _selectedVolumes;
 
-  List<List<Volume>>? _selectedMultiCustomizables = [];
-  List<List<Volume>>? get selectedMultiCustomizables =>
-      _selectedMultiCustomizables;
+  List<List<Customizable>>? _selectedCustomizables = [];
+  List<List<Customizable>>? get selectedCustomizables => _selectedCustomizables;
 
   /// SETS and CREATES initial list for selectedVolumes and selectedMultiCustomizables
-  void setOnModelReadyVolumesCustomizes(int mainVolumeLength) {
+  void setOnModelReadyVolumesCustomizes(
+      int gVolumesLength, int gCustomizablesLength) {
     _selectedVolumes = List.generate(
-      mainVolumeLength,
+      gVolumesLength,
       (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
     ); // Here created new list based on mainVolumeLength with all its value null
   }

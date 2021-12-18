@@ -23,8 +23,8 @@ class MealBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) =>
-          model.setOnModelReadyVolumesCustomizes(meal.gVolumes!.length),
+      onModelReady: (model) => model.setOnModelReadyVolumesCustomizes(
+          meal.gVolumes!.length, meal.gCustomizables!.length),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,

@@ -11,6 +11,9 @@ MainCustomizable _$MainCustomizableFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       name: json['name'] as String?,
       mealId: json['meal'] as int?,
+      customizables: (json['costumizes'] as List<dynamic>?)
+          ?.map((e) => Customizable.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MainCustomizableToJson(MainCustomizable instance) =>
@@ -18,4 +21,5 @@ Map<String, dynamic> _$MainCustomizableToJson(MainCustomizable instance) =>
       'id': instance.id,
       'name': instance.name,
       'meal': instance.mealId,
+      'costumizes': instance.customizables,
     };

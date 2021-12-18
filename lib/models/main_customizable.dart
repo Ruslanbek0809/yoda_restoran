@@ -21,7 +21,7 @@ class MainCustomizable {
   final int? mealId;
 
   @JsonKey(name: 'costumizes')
-  final List<Volume>? customizables;
+  final List<Customizable>? customizables;
 
   factory MainCustomizable.fromJson(Map<String, dynamic> json) =>
       _$MainCustomizableFromJson(json);
