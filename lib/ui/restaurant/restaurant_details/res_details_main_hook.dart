@@ -407,7 +407,7 @@ class ResDetailsMainHook
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: model.resCategories!.length,
                 itemBuilder: (context, index) {
-                  FoodCategory category = foodCategoryList[index];
+                  final resCategory = model.resCategories![index];
                   final resCategoryMeals = model.resCategories![index].meals;
                   return Column(
                     children: [
@@ -415,7 +415,7 @@ class ResDetailsMainHook
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(left: 12.w, top: 7.h),
                         child: Text(
-                          category.name,
+                          resCategory.resCategoryModel!.name!,
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: kcSecondFontColor,
@@ -435,9 +435,9 @@ class ResDetailsMainHook
                           crossAxisSpacing: 6.w, //spaceLeftRight
                           childAspectRatio: itemWidth / itemHeight,
                         ),
-                        itemCount: mealList.length,
+                        itemCount: resCategoryMeals!.length,
                         itemBuilder: (context, pos) {
-                          return MealView(meal: resCategoryMeals![pos]);
+                          return MealView(meal: resCategoryMeals[pos]);
                         },
                       ),
                     ],

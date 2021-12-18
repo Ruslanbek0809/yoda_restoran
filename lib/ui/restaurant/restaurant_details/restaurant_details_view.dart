@@ -20,10 +20,10 @@ class RestaurantDetailsView extends StatelessWidget {
         body: Stack(
           children: [
             //------------------ RESTAURANT MAIN PART ---------------------//
-            ResDetailsMainWidget(restaurant: restaurant),
-            // model.isBusy
-            //     ? ResDetailsMainBusy(restaurant: restaurant)
-            //     : ResDetailsMainHook(restaurant: restaurant),
+            model.isBusy
+                ? ResDetailsMainBusy(restaurant: restaurant)
+                : ResDetailsMainHook(restaurant: restaurant),
+            // ResDetailsMainWidget(restaurant: restaurant),
             //------------------ BOTTOM CART ---------------------//
             ResDetailsBottomCart(),
           ],
