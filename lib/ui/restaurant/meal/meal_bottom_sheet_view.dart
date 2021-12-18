@@ -56,6 +56,7 @@ class MealBottomSheet extends StatelessWidget {
                           color: kcWhiteColor,
                         ),
                       ),
+                      //----------- IMAGE --------------//
                       ClipRRect(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(Constants.BORDER_RADIUS_20),
@@ -66,6 +67,7 @@ class MealBottomSheet extends StatelessWidget {
                           width: 1.sw,
                         ),
                       ),
+                      //----------- DESCRIPTION --------------//
                       Container(
                         color: kcWhiteColor,
                         child: Column(
@@ -82,30 +84,37 @@ class MealBottomSheet extends StatelessWidget {
                                 style: ktsDefault16HelperColor,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10.h,
-                                horizontal: 10.w,
-                              ),
-                              child: Text(
-                                'Goşmaça',
-                                style: ktsDefault14HelperColor,
-                              ),
-                            ),
-                            Column(
-                              children: widget.food.additionals
-                                  .mapIndexed<Widget>(
-                                    (AdditionalFoodModel additional, int pos) =>
-                                        Column(
-                                      children: [
-                                        RadioListTile<AdditionalFoodModel>(
-                                          value: additional,
+                            //----------- MAIN VOLUME LIST --------------//
+                            ...meal.gVolumes!
+                                .map<Widget>(
+                                  (MainVolume mainVolume) => Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 10.w,
+                                        ),
+                                        child: Text(
+                                          mainVolume.name!,
+                                          style: ktsDefault14HelperColor,
+                                        ),
+                                      ),
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
+                                        itemCount: mainVolume.volumes!.length,
+                                        separatorBuilder: (ctx, pos) => Divider(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          indent: 0.175.sw,
+                                        ),
+                                        itemBuilder: (ctx, pos) =>
+                                            RadioListTile<Volume>(
+                                          value: mainVolume.volumes![pos],
                                           groupValue: selectedAdditional,
                                           onChanged: _setSelectedAdditionalFood,
                                           title: Row(
                                             children: [
                                               Text(
-                                                '${additional.name} ml',
+                                                '${mainVolume.volumes![pos].volumeName} ml',
                                                 style: TextStyle(
                                                   color: AppTheme.FONT_COLOR,
                                                   fontSize: 14.sp,
@@ -113,7 +122,7 @@ class MealBottomSheet extends StatelessWidget {
                                               ),
                                               SizedBox(width: 7.w),
                                               Text(
-                                                '+${additional.price} TMT',
+                                                '+${mainVolume.volumes![pos].price} TMT',
                                                 style: TextStyle(
                                                   color:
                                                       AppTheme.FONT_GREY_COLOR,
@@ -127,17 +136,12 @@ class MealBottomSheet extends StatelessWidget {
                                               ListTileControlAffinity.leading,
                                           toggleable: true,
                                         ),
-                                        if (pos !=
-                                            widget.food.additionals.length - 1)
-                                          Divider(
-                                            color: AppTheme.DRAWER_DIVIDER,
-                                            indent: 0.175.sw,
-                                          )
-                                      ],
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+
                             // Column(
                             //   children: widget.food.additionals
                             //       .mapIndexed<Widget>((AdditionalFoodModel

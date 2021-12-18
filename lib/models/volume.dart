@@ -5,7 +5,7 @@ part 'volume.g.dart';
 class Volume {
   Volume({
     this.id,
-    this.volume,
+    this.volumeName,
     this.price,
     this.groupId,
   });
@@ -14,7 +14,7 @@ class Volume {
   final int? id;
 
   @JsonKey(name: 'volume')
-  final String? volume;
+  final String? volumeName;
 
   @JsonKey(name: 'price')
   final num? price;
