@@ -101,6 +101,8 @@ class MealBottomSheet extends StatelessWidget {
                                       ),
                                       //----------- VOLUME LIST for each MAIN VOLUME --------------//
                                       ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
                                         itemCount: mainVolume.volumes!.length,
                                         separatorBuilder: (ctx, pos) => Divider(
                                           color: AppTheme.DRAWER_DIVIDER,
@@ -115,20 +117,13 @@ class MealBottomSheet extends StatelessWidget {
                                             children: [
                                               Text(
                                                 '${mainVolume.volumes![pos].volumeName} ml',
-                                                style: TextStyle(
-                                                  color: AppTheme.FONT_COLOR,
-                                                  fontSize: 14.sp,
-                                                ),
+                                                style: ktsDefault14Text,
                                               ),
                                               SizedBox(width: 7.w),
                                               Text(
-                                                '+${mainVolume.volumes![pos].price} TMT',
-                                                style: TextStyle(
-                                                  color:
-                                                      AppTheme.FONT_GREY_COLOR,
-                                                  fontSize: 16.sp,
-                                                ),
-                                              ),
+                                                  '+${mainVolume.volumes![pos].price} TMT',
+                                                  style:
+                                                      ktsDefault16HelperColor),
                                             ],
                                           ),
                                           activeColor: AppTheme.GREEN_COLOR,
@@ -141,54 +136,62 @@ class MealBottomSheet extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-
-                            // Column(
-                            //   children: widget.food.additionals
-                            //       .mapIndexed<Widget>((AdditionalFoodModel
-                            //                   additional,
-                            //               int pos) =>
-                            //           Column(
-                            //             children: [
-                            //               CheckboxListTile(
-                            //                 title: Row(
-                            //                   children: [
-                            //                     Text(
-                            //                       additional.name,
-                            //                       style: TextStyle(
-                            //                         color: AppTheme.FONT_COLOR,
-                            //                         fontSize: 14.sp,
-                            //                       ),
-                            //                     ),
-                            //                     SizedBox(width: 7.w),
-                            //                     Text(
-                            //                       '+${additional.price} TMT',
-                            //                       style: TextStyle(
-                            //                         color: AppTheme.FONT_GREY_COLOR,
-                            //                         fontSize: 16.sp,
-                            //                       ),
-                            //                     ),
-                            //                   ],
-                            //                 ),
-                            //                 value: additional.isAdded,
-                            //                 controlAffinity:
-                            //                     ListTileControlAffinity.leading,
-                            //                 activeColor: AppTheme.GREEN,
-                            //                 onChanged: (bool? value) {
-                            //                   setState(() {
-                            //                     additional.isAdded = value!;
-                            //                   });
-                            //                 },
-                            //               ),
-                            //               if (pos !=
-                            //                   widget.food.additionals.length - 1)
-                            //                 Divider(
-                            //                   color: AppTheme.DRAWER_DIVIDER,
-                            //                   indent: 0.175.sw,
-                            //                 )
-                            //             ],
-                            //           ))
-                            //       .toList(),
-                            // ),
+                            //----------- MAIN CUSTOMIZE LIST --------------//
+                            ...meal.gCostumizes!
+                                .map<Widget>(
+                                  (MainVolume mainCustomize) => Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 10.w,
+                                        ),
+                                        child: Text(
+                                          mainCustomize.name!,
+                                          style: ktsDefault14HelperColor,
+                                        ),
+                                      ),
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                            mainCustomize.volumes!.length,
+                                        separatorBuilder: (ctx, pos) => Divider(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          indent: 0.175.sw,
+                                        ),
+                                        itemBuilder: (ctx, pos) =>
+                                            CheckboxListTile(
+                                          title: Row(
+                                            children: [
+                                              Text(
+                                                mainCustomize
+                                                    .volumes![pos].volumeName!,
+                                                style: ktsDefault14Text,
+                                              ),
+                                              SizedBox(width: 7.w),
+                                              Text(
+                                                '+${mainCustomize.volumes![pos].price} TMT',
+                                                style: ktsDefault16HelperColor,
+                                              ),
+                                            ],
+                                          ),
+                                          value: additional.isAdded,
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          activeColor: AppTheme.GREEN,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              additional.isAdded = value!;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
                             SizedBox(height: 0.175.sh)
                           ],
                         ),
@@ -221,7 +224,7 @@ class MealBottomSheet extends StatelessWidget {
                               textBaseline: TextBaseline.ideographic,
                               children: [
                                 Text(
-                                  widget.food.name,
+                                  meal.name!,
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     color: AppTheme.FONT_COLOR,
@@ -229,7 +232,7 @@ class MealBottomSheet extends StatelessWidget {
                                 ),
                                 SizedBox(width: 10.w),
                                 Text(
-                                  '${widget.food.weight} ${widget.food.weightType}',
+                                  '${meal.value!.toInt()} ${meal.size!.name}',
                                   style: TextStyle(
                                     fontSize: 15.sp,
                                     color: AppTheme.DRAWER_ICON,
@@ -238,7 +241,7 @@ class MealBottomSheet extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              '${widget.food.price} TMT',
+                              '${meal.price} TMT',
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 color: AppTheme.FONT_COLOR,
