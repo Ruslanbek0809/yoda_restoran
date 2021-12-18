@@ -8,6 +8,7 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:stacked/stacked.dart';
 
+import 'meal_main_volume.dart';
 import 'meal_view_model.dart';
 
 class MealBottomSheet extends StatelessWidget {
@@ -86,112 +87,70 @@ class MealBottomSheet extends StatelessWidget {
                             ),
                             //----------- MAIN VOLUME LIST --------------//
                             ...meal.gVolumes!
-                                .map<Widget>(
-                                  (MainVolume mainVolume) => Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 10.h,
-                                          horizontal: 10.w,
-                                        ),
-                                        child: Text(
-                                          mainVolume.name!,
-                                          style: ktsDefault14HelperColor,
-                                        ),
-                                      ),
-                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
-                                      ListView.separated(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: mainVolume.volumes!.length,
-                                        separatorBuilder: (ctx, pos) => Divider(
-                                          color: AppTheme.DRAWER_DIVIDER,
-                                          indent: 0.175.sw,
-                                        ),
-                                        itemBuilder: (ctx, pos) =>
-                                            RadioListTile<Volume>(
-                                          value: mainVolume.volumes![pos],
-                                          groupValue: selectedAdditional,
-                                          onChanged: _setSelectedAdditionalFood,
-                                          title: Row(
-                                            children: [
-                                              Text(
-                                                '${mainVolume.volumes![pos].volumeName} ml',
-                                                style: ktsDefault14Text,
-                                              ),
-                                              SizedBox(width: 7.w),
-                                              Text(
-                                                  '+${mainVolume.volumes![pos].price} TMT',
-                                                  style:
-                                                      ktsDefault16HelperColor),
-                                            ],
-                                          ),
-                                          activeColor: AppTheme.GREEN_COLOR,
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          toggleable: true,
-                                        ),
-                                      ),
-                                    ],
+                                .mapIndexed<Widget>(
+                                  (MainVolume mainVolume, int pos) =>
+                                      MealMainVolumeView(
+                                    mainVolume: mainVolume,
+                                    pos: pos,
                                   ),
                                 )
                                 .toList(),
-                            //----------- MAIN CUSTOMIZE LIST --------------//
-                            ...meal.gCostumizes!
-                                .map<Widget>(
-                                  (MainVolume mainCustomize) => Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 10.h,
-                                          horizontal: 10.w,
-                                        ),
-                                        child: Text(
-                                          mainCustomize.name!,
-                                          style: ktsDefault14HelperColor,
-                                        ),
-                                      ),
-                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
-                                      ListView.separated(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount:
-                                            mainCustomize.volumes!.length,
-                                        separatorBuilder: (ctx, pos) => Divider(
-                                          color: AppTheme.DRAWER_DIVIDER,
-                                          indent: 0.175.sw,
-                                        ),
-                                        itemBuilder: (ctx, pos) =>
-                                            CheckboxListTile(
-                                          title: Row(
-                                            children: [
-                                              Text(
-                                                mainCustomize
-                                                    .volumes![pos].volumeName!,
-                                                style: ktsDefault14Text,
-                                              ),
-                                              SizedBox(width: 7.w),
-                                              Text(
-                                                '+${mainCustomize.volumes![pos].price} TMT',
-                                                style: ktsDefault16HelperColor,
-                                              ),
-                                            ],
-                                          ),
-                                          value: additional.isAdded,
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          activeColor: AppTheme.GREEN,
-                                          onChanged: (bool? value) {
-                                            setState(() {
-                                              additional.isAdded = value!;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
+                            // //----------- MAIN CUSTOMIZE LIST --------------//
+                            // ...meal.gCostumizes!
+                            //     .map<Widget>(
+                            //       (MainVolume mainCustomize) => Column(
+                            //         children: [
+                            //           Padding(
+                            //             padding: EdgeInsets.symmetric(
+                            //               vertical: 10.h,
+                            //               horizontal: 10.w,
+                            //             ),
+                            //             child: Text(
+                            //               mainCustomize.name!,
+                            //               style: ktsDefault14HelperColor,
+                            //             ),
+                            //           ),
+                            //           //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                            //           ListView.separated(
+                            //             shrinkWrap: true,
+                            //             physics: NeverScrollableScrollPhysics(),
+                            //             itemCount:
+                            //                 mainCustomize.volumes!.length,
+                            //             separatorBuilder: (ctx, pos) => Divider(
+                            //               color: AppTheme.DRAWER_DIVIDER,
+                            //               indent: 0.175.sw,
+                            //             ),
+                            //             itemBuilder: (ctx, pos) =>
+                            //                 CheckboxListTile(
+                            //               title: Row(
+                            //                 children: [
+                            //                   Text(
+                            //                     mainCustomize
+                            //                         .volumes![pos].volumeName!,
+                            //                     style: ktsDefault14Text,
+                            //                   ),
+                            //                   SizedBox(width: 7.w),
+                            //                   Text(
+                            //                     '+${mainCustomize.volumes![pos].price} TMT',
+                            //                     style: ktsDefault16HelperColor,
+                            //                   ),
+                            //                 ],
+                            //               ),
+                            //               value: additional.isAdded,
+                            //               controlAffinity:
+                            //                   ListTileControlAffinity.leading,
+                            //               activeColor: AppTheme.GREEN,
+                            //               onChanged: (bool? value) {
+                            //                 setState(() {
+                            //                   additional.isAdded = value!;
+                            //                 });
+                            //               },
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     )
+                            //     .toList(),
                             SizedBox(height: 0.175.sh)
                           ],
                         ),

@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/meal.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -34,6 +34,8 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+//------------------------ MEAL BOTTOM SHEET PART ----------------------------//
+
   /// Function to call MealBottomSheet
   Future showCustomMealBottomSheet(Meal meal) async {
     log.i('');
@@ -45,13 +47,18 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  // AdditionalFoodModel? selectedAdditional;
+  List<Volume>? _selectedVolumes = [];
+  List<Volume>? get selectedVolumes => _selectedVolumes;
 
-  // void _setSelectedAdditionalFood(AdditionalFoodModel? additionalFoodModel) {
-  //   setState(() {
-  //     selectedAdditional = additionalFoodModel;
-  //   });
-  // }
+  List<List<Volume>>? _selectedMultiCustomizables = [];
+  List<List<Volume>>? get selectedMultiCustomizables =>
+      _selectedMultiCustomizables;
+
+  void setOnModelReadyVolumesCustomizes(int ) {
+    
+  }
+
+  void updateSelectedVolume(int pos, MainVolume mainVolume) {}
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
