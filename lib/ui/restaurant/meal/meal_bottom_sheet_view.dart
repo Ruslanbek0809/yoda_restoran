@@ -75,10 +75,8 @@ class MealBottomSheet extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 15.h,
-                                horizontal: 10.w,
-                              ),
+                              padding:
+                                  EdgeInsets.fromLTRB(15.w, 15.h, 10.w, 15.h),
                               child: Text(
                                 meal.description!,
                                 maxLines: 3,
@@ -99,7 +97,7 @@ class MealBottomSheet extends StatelessWidget {
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                           vertical: 10.h,
-                                          horizontal: 10.w,
+                                          horizontal: 15.w,
                                         ),
                                         child: Text(
                                           mainVolume.name!,
@@ -152,7 +150,9 @@ class MealBottomSheet extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-                            // //----------- MAIN CUSTOMIZE LIST --------------//
+                            if (meal.gCostumizes!.isNotEmpty)
+                              Divider(color: kcDividerColor),
+                            //----------- MAIN CUSTOMIZE LIST --------------//
                             // ...meal.gCostumizes!
                             //     .map<Widget>(
                             //       (MainVolume mainCustomize) => Column(
