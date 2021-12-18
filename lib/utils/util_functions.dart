@@ -85,7 +85,7 @@ enum BottomCartStatus { idle, forward, reverse }
 enum SortAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
-enum BottomSheetType { mainCategory, restaurantInfo, mealDetails }
+enum BottomSheetType { mainCategory, restaurantInfo, meal }
 
 /// Enum for dialog types
 enum DialogType { basic, cart }

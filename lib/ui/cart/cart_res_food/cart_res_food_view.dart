@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/restaurant/restaunant_bottom_sheets/food_bottom_sheet.dart';
+import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 

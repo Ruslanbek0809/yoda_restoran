@@ -5,11 +5,11 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class RestaurantInfoBottomSheetWidget extends StatelessWidget {
+class RestaurantInfoBottomSheet extends StatelessWidget {
   final Restaurant restaurant;
   final SheetRequest request;
   final Function(SheetResponse) completer;
-  const RestaurantInfoBottomSheetWidget({
+  const RestaurantInfoBottomSheet({
     Key? key,
     required this.restaurant,
     required this.request,
