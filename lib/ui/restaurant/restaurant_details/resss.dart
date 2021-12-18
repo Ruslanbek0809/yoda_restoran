@@ -4,30 +4,28 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'restaurant_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResDetailsMainHook
+class ResDetailsMainWidget
     extends HookViewModelWidget<RestaurantDetailsViewModel> {
   final Restaurant restaurant;
-  const ResDetailsMainHook({required this.restaurant, Key? key})
+  const ResDetailsMainWidget({required this.restaurant, Key? key})
       : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(
       BuildContext context, RestaurantDetailsViewModel model) {
+    print('itemWidth 0.3.sw:${0.3.sw} and sh: 0.2.sh');
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.3.sw; // 0.3.sw is for item height
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
-      initialLength: model.resCategories!.length,
+      initialLength: foodCategoryList.length,
       initialIndex: model.activeTab,
     );
 
@@ -348,15 +346,15 @@ class ResDetailsMainHook
               isScrollable: true,
               indicatorColor: Colors.transparent,
               labelPadding: EdgeInsets.all(0.0),
-              tabs: model.resCategories!
-                  .map<Widget>((resCategory) => Tab(
+              tabs: foodCategoryList
+                  .map<Widget>((category) => Tab(
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           decoration: BoxDecoration(
                             borderRadius: AppTheme().radius15,
                             color: model.activeTab ==
-                                    model.resCategories!.indexOf(resCategory)
+                                    foodCategoryList.indexOf(category)
                                 ? model.isTabPressed
                                     ? AppTheme.MAIN_LIGHT
                                     : AppTheme.WHITE
@@ -369,15 +367,18 @@ class ResDetailsMainHook
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           alignment: Alignment.center,
                           child: Text(
-                            resCategory.resCategoryModel!.name!,
-                            style: ktsDefault14Text,
+                            category.name,
+                            style: TextStyle(
+                              color: AppTheme.FONT_COLOR,
+                              fontSize: 14.sp,
+                            ),
                           ),
                         ),
                       ))
                   .toList(),
               onTap: (index) {
                 model.updateOnTapRipple();
-                double offset = model.resCategories!.getRange(0, index).fold(
+                double offset = foodCategoryList.getRange(0, index).fold(
                   0,
                   (prev, category) {
                     int rows = (mealList.length / 2).ceil();
@@ -405,10 +406,9 @@ class ResDetailsMainHook
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: model.resCategories!.length,
+                itemCount: foodCategoryList.length,
                 itemBuilder: (context, index) {
                   FoodCategory category = foodCategoryList[index];
-                  final resCategoryMeals = model.resCategories![index].meals;
                   return Column(
                     children: [
                       Container(
@@ -418,7 +418,7 @@ class ResDetailsMainHook
                           category.name,
                           style: TextStyle(
                             fontSize: 16.sp,
-                            color: kcSecondFontColor,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
@@ -437,7 +437,7 @@ class ResDetailsMainHook
                         ),
                         itemCount: mealList.length,
                         itemBuilder: (context, pos) {
-                          return MealView(meal: resCategoryMeals![pos]);
+                          return Container(color: Colors.blue);
                         },
                       ),
                     ],
@@ -450,4 +450,20 @@ class ResDetailsMainHook
       ],
     );
   }
+}
+
+class ColoredTabBar extends Container implements PreferredSizeWidget {
+  ColoredTabBar({required this.color, required this.tabBar});
+
+  final Color color;
+  final TabBar tabBar;
+
+  @override
+  Size get preferredSize => tabBar.preferredSize;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        color: color,
+        child: tabBar,
+      );
 }

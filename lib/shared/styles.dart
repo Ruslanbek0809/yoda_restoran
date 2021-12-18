@@ -28,6 +28,11 @@ TextStyle ktsTextButtonText = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle ktsDefault14Text = TextStyle(
+  color: kcFontColor,
+  fontSize: 14.sp,
+);
+
 const TextStyle heading1Style = TextStyle(
   fontSize: 34,
   fontWeight: FontWeight.w400,

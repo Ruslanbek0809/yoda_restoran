@@ -90,9 +90,9 @@ class ApiService {
     try {
       // Response response =
       //     await _apiRoot.dio.get('api/categories?restaurant=$restaurantId');
-      Response response = await _apiRoot.dio
-          .get('api/categories', queryParameters: {'restaurant': restaurantId});
-      log.i('RESPONSE: api/categories/ => ${response.data}');
+      Response response = await _apiRoot.dio.get('api/categories/',
+          queryParameters: {'restaurant': restaurantId});
+      // log.i('RESPONSE: api/categories/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {
@@ -103,7 +103,7 @@ class ApiService {
     } on DioError catch (error) {
       log.i(error);
       // log.i(
-      //     'ERROR on api/categories :${error.response!.statusCode} and ${error.response!.data}');
+      //     'ERROR on api/categories/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }

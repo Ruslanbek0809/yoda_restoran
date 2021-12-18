@@ -251,9 +251,14 @@ Future<dynamic> showAlertDialog({
 List<FoodCategory> foodCategoryList = [
   FoodCategory(0, 'Ertirlikler'),
   FoodCategory(1, 'Işdäaçarlar'),
-  // FoodCategory(2, 'Desertler'),
-  // FoodCategory(3, 'Steak'),
-  // FoodCategory(4, 'Burgerlar'),
+  FoodCategory(2, 'Desertler'),
+  FoodCategory(3, 'Steak'),
+  FoodCategory(4, 'Burgerlar'),
+  FoodCategory(5, 'Bbashgalar'),
+  FoodCategory(6, 'Yene bashgalar'),
+  FoodCategory(7, 'Sonkylar'),
+  FoodCategory(8, 'We sonkylar'),
+  FoodCategory(9, 'FInallll'),
 ];
 
 List<MealUI> mealList = [
