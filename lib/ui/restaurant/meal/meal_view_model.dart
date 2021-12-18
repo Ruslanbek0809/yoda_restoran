@@ -56,17 +56,15 @@ class MealViewModel extends ReactiveViewModel {
 
   /// SETS and CREATES initial list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolumesCustomizes(int mainVolumeLength) {
-    log.i('mainVolumeLength: $mainVolumeLength');
-    _selectedVolumes = List.filled(mainVolumeLength,
-        null); // Here created new list based on gVolumesLength with all its value null
-    log.i('_selectedVolumes: $_selectedVolumes');
+    _selectedVolumes = List.generate(
+      mainVolumeLength,
+      (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
+    ); // Here created new list based on mainVolumeLength with all its value null
   }
 
-  /// UPDATES _selectedVolumes's mainVolumePos positioned volume
-  void updateSelectedVolume(int mainVolumePos, Volume volume) {
-    log.i('mainVolumePos: $mainVolumePos and selectedVolume: ${volume.volumeName}');
+  /// UPDATES _selectedVolumes's mainVolumePos value to volume
+  void updateSelectedVolume(int mainVolumePos, Volume? volume) {
     _selectedVolumes[mainVolumePos] = volume;
-    log.i('_selectedVolumes[mainVolumePos]: : ${_selectedVolumes[mainVolumePos]!.volumeName}');
     notifyListeners();
   }
 

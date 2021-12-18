@@ -8,7 +8,7 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:stacked/stacked.dart';
 
-import 'meal_main_volume.dart';
+import 'meal_main_volume_view.dart';
 import 'meal_view_model.dart';
 
 class MealBottomSheet extends StatelessWidget {
@@ -25,6 +25,8 @@ class MealBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
+      onModelReady: (model) =>
+          model.setOnModelReadyVolumesCustomizes(meal.gVolumes!.length),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
@@ -88,11 +90,68 @@ class MealBottomSheet extends StatelessWidget {
                             //----------- MAIN VOLUME LIST --------------//
                             ...meal.gVolumes!
                                 .mapIndexed<Widget>(
-                                  (MainVolume mainVolume, int pos) =>
-                                      MealMainVolumeView(
-                                    mainVolume: mainVolume,
-                                    mainVolumePos: pos,
+                                  (MainVolume mainVolume, mainVolumePos) =>
+                                      Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 10.w,
+                                        ),
+                                        child: Text(
+                                          mainVolume.name!,
+                                          style: ktsDefault14HelperColor,
+                                        ),
+                                      ),
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: mainVolume.volumes!.length,
+                                          separatorBuilder: (ctx, volumePos) =>
+                                              Divider(
+                                                color: kcDividerColor,
+                                                indent: 0.175.sw,
+                                              ),
+                                          itemBuilder: (ctx, volumePos) {
+                                            return RadioListTile<Volume?>(
+                                              value: mainVolume
+                                                  .volumes![volumePos],
+                                              groupValue: model.selectedVolumes[
+                                                  mainVolumePos],
+                                              onChanged: (selectedVolume) {
+                                                model.updateSelectedVolume(
+                                                    mainVolumePos,
+                                                    selectedVolume!);
+                                              },
+                                              title: Row(
+                                                children: [
+                                                  Text(
+                                                    '${mainVolume.volumes![volumePos].volumeName} ml',
+                                                    style: ktsDefault14Text,
+                                                  ),
+                                                  SizedBox(width: 7.w),
+                                                  Text(
+                                                      '+${mainVolume.volumes![volumePos].price} TMT',
+                                                      style:
+                                                          ktsDefault16HelperColor),
+                                                ],
+                                              ),
+                                              activeColor: kcGreenColor,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
+                                              toggleable: true,
+                                            );
+                                          }),
+                                    ],
                                   ),
+                                  // MealMainVolumeView(
+                                  //   mainVolume: mainVolume,
+                                  //   mainVolumePos:
+                                  //       meal.gVolumes!.indexOf(mainVolume),
+                                  // ),
                                 )
                                 .toList(),
                             // //----------- MAIN CUSTOMIZE LIST --------------//

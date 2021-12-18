@@ -178,7 +178,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               child: InkWell(
                                 borderRadius: AppTheme().radius15,
                                 onTap: () {
-                                  // _onProductBottomSheetClicked(food);
+                                  model.showCustomMealBottomSheet(meal);
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
