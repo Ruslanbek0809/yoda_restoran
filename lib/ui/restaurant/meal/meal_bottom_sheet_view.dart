@@ -7,8 +7,6 @@ import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:stacked/stacked.dart';
-
-import 'meal_main_volume_view.dart';
 import 'meal_view_model.dart';
 
 class MealBottomSheet extends StatelessWidget {
@@ -84,7 +82,10 @@ class MealBottomSheet extends StatelessWidget {
                               child: Text(
                                 meal.description!,
                                 maxLines: 3,
-                                style: ktsDefault16HelperColor,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: kcBottomDescColor,
+                                ),
                               ),
                             ),
                             //----------- MAIN VOLUME LIST --------------//
@@ -92,6 +93,8 @@ class MealBottomSheet extends StatelessWidget {
                                 .mapIndexed<Widget>(
                                   (MainVolume mainVolume, mainVolumePos) =>
                                       Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.symmetric(
@@ -147,11 +150,6 @@ class MealBottomSheet extends StatelessWidget {
                                           }),
                                     ],
                                   ),
-                                  // MealMainVolumeView(
-                                  //   mainVolume: mainVolume,
-                                  //   mainVolumePos:
-                                  //       meal.gVolumes!.indexOf(mainVolume),
-                                  // ),
                                 )
                                 .toList(),
                             // //----------- MAIN CUSTOMIZE LIST --------------//
