@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
-
-import 'main_category_bottom_sheet.dart';
+import 'package:yoda_res/utils/utils.dart';
+import 'main_cat_bottom_sort.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'main_category_item_bottom_hook.dart';
 
 class MainCategoryBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -20,8 +24,144 @@ class MainCategoryBottomSheetView extends StatelessWidget {
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
-        builder: (context, scrollController) =>
-            MainCategoryBottomSheet(scrollController: scrollController),
+        builder: (context, scrollController) => Container(
+          height: 0.95.sh,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(Constants.BORDER_RADIUS_20),
+            ),
+            color: Colors.transparent,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(Constants.BORDER_RADIUS_20),
+                  ),
+                  color: Colors.transparent,
+                ),
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 17.5.w,
+                        width: 40.w,
+                        child: SvgPicture.asset(
+                          'assets/bottom_sheet_dragger.svg',
+                          color: AppTheme.WHITE,
+                        ),
+                      ),
+                      // --------------- KITCHEN CATEGORIES -------------- //
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(Constants.BORDER_RADIUS_20),
+                          ),
+                          color: AppTheme.WHITE,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 30.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Aşhana',
+                              style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            GridView.builder(
+                              padding: EdgeInsets.only(top: 10.w),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                mainAxisSpacing: 10.h, //spaceTopBottom
+                                crossAxisSpacing: 10.w, //spaceLeftRight
+                                childAspectRatio: 0.75,
+                              ),
+                              itemCount: model.mainCats!.length,
+                              itemBuilder: (context, pos) {
+                                return MainCategoryItemBottomHook(
+                                  mainCategory: model.mainCats![pos],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      //--------------- MAIN CATEGORY SORT -------------- //
+                      Container(
+                        color: AppTheme.WHITE,
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              child: Text(
+                                'Görkezmeli tertibi',
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: mainCategorySortList
+                                  .map<Widget>(
+                                    (CategoryFilter categoryFilter) => Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        RadioListTile<CategoryFilter>(
+                                          value: categoryFilter,
+                                          groupValue: model.selectedSort,
+                                          onChanged: model.updateSelectedSort,
+                                          title: Text(
+                                            categoryFilter.name,
+                                            style: TextStyle(
+                                              color: AppTheme.FONT_COLOR,
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                          activeColor: AppTheme.GREEN_COLOR,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
+                                          toggleable: true,
+                                        ),
+                                        if (mainCategorySortList
+                                                .indexOf(categoryFilter) !=
+                                            mainCategorySortList.length - 1)
+                                          Divider(
+                                            color: AppTheme.DRAWER_DIVIDER,
+                                            indent: 10.w,
+                                            endIndent: 15.w,
+                                          )
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            SizedBox(height: 0.175.sh)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              //--------------- FILTER BUTTONS -------------- //
+              MainCatSortBottom(),
+            ],
+          ),
+        ),
       ),
       viewModelBuilder: () => MainCategoryViewModel(),
     );

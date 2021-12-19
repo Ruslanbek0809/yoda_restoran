@@ -101,11 +101,8 @@ class HomeViewModel extends MultipleFutureViewModel {
   //------------------ Custom overridden REACTIVE PART ---------------------//
   late List<ReactiveServiceMixin> _reactiveServices;
 
-  // List<ReactiveServiceMixin> get reactiveServices; /// Instead of this getter I will directly initialise reactiveness here
-
   HomeViewModel() {
     _reactToServices([_bottomCartService]);
-    // _reactToServices(reactiveServices);
   }
 
   void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {

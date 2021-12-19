@@ -50,9 +50,10 @@ class _HomeViewState extends State<HomeView> {
                         controller: _refreshController,
                         enablePullDown: true,
                         onRefresh: () async {
-                          await model.initialise();
+                          await model
+                              .initialise(); // This reinitializes whole HomeView
                           _refreshController.refreshCompleted();
-                        }, // This reinitializes whole HomeView
+                        },
                         child: CustomScrollView(
                           slivers: [
                             SliverAppBar(
@@ -124,77 +125,81 @@ class _HomeViewState extends State<HomeView> {
                             ),
                             //------------------ BODY: RESTAURANTS ---------------------//
                             SliverList(
-                              delegate: SliverChildListDelegate([
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.only(top: 10.h),
-                                  itemCount: model.resWithProms?.length ?? 0,
-                                  itemBuilder: (ctx, pos) {
-                                    //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                                    if ((pos + 1) % 5 == 0 &&
-                                        model.resWithProms![pos].prom != null)
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 16.w, top: 12.h),
-                                                child: Text(
-                                                  model.resWithProms![pos].prom!
-                                                      .name!,
-                                                  style: TextStyle(
-                                                    fontSize: 24.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: AppTheme.MAIN_DARK,
+                              delegate: SliverChildListDelegate(
+                                [
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.only(top: 10.h),
+                                    itemCount: model.resWithProms?.length ?? 0,
+                                    itemBuilder: (ctx, pos) {
+                                      //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
+                                      if ((pos + 1) % 5 == 0 &&
+                                          model.resWithProms![pos].prom != null)
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16.w, top: 12.h),
+                                                  child: Text(
+                                                    model.resWithProms![pos]
+                                                        .prom!.name!,
+                                                    style: TextStyle(
+                                                      fontSize: 24.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: AppTheme.MAIN_DARK,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              SingleChildScrollView(
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: model
-                                                      .resWithProms![pos]
-                                                      .prom!
-                                                      .restaurants!
-                                                      .map((promRes) {
-                                                    return PromResView(
-                                                      restaurant: promRes,
-                                                      promRess: model
-                                                          .resWithProms![pos]
-                                                          .prom!
-                                                          .restaurants!,
-                                                    );
-                                                  }).toList(),
+                                                SingleChildScrollView(
+                                                  physics:
+                                                      BouncingScrollPhysics(),
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: model
+                                                        .resWithProms![pos]
+                                                        .prom!
+                                                        .restaurants!
+                                                        .map((promRes) {
+                                                      return PromResView(
+                                                        restaurant: promRes,
+                                                        promRess: model
+                                                            .resWithProms![pos]
+                                                            .prom!
+                                                            .restaurants!,
+                                                      );
+                                                    }).toList(),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          //------------------ RESTAURANTS ---------------------//
-                                          RestaurantView(
-                                            restaurant: model
-                                                .resWithProms![pos].restaurant,
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                            //------------------ RESTAURANTS ---------------------//
+                                            RestaurantView(
+                                              restaurant: model
+                                                  .resWithProms![pos]
+                                                  .restaurant,
+                                            ),
+                                          ],
+                                        );
+                                      return RestaurantView(
+                                        restaurant:
+                                            model.resWithProms![pos].restaurant,
                                       );
-                                    return RestaurantView(
-                                      restaurant:
-                                          model.resWithProms![pos].restaurant,
-                                    );
-                                  },
-                                ),
-                              ]),
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

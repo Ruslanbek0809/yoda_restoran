@@ -7,9 +7,9 @@ import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCategoryItem extends HookViewModelWidget<MainCategoryViewModel> {
+class MainCategoryItemHook extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory mainCategory;
-  MainCategoryItem({
+  MainCategoryItemHook({
     Key? key,
     required this.mainCategory,
   }) : super(key: key, reactive: true);

@@ -153,7 +153,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 child: InkWell(
                                   borderRadius: AppTheme().radius15,
                                   onTap: () async {
-                                    _tweenController.forward();
+                                    await _tweenController.forward();
                                     model.updateButtonToggle();
                                   },
                                   child: Padding(

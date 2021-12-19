@@ -7,10 +7,10 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MainCategoryItemBottom
+class MainCategoryItemBottomHook
     extends HookViewModelWidget<MainCategoryViewModel> {
   final MainCategory? mainCategory;
-  MainCategoryItemBottom({
+  MainCategoryItemBottomHook({
     Key? key,
     this.mainCategory,
   }) : super(key: key, reactive: true);
@@ -43,8 +43,8 @@ class MainCategoryItemBottom
         ),
       ),
       child: GestureDetector(
-        onTap: () {
-          _tweenController.forward();
+        onTap: () async {
+          await _tweenController.forward();
 
           model.updateMainCategoryItem(mainCategory!.id);
         },
