@@ -157,7 +157,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                   ),
                 ),
               ),
-              //--------------- FILTER BUTTONS -------------- //
+              //--------------- SORT SELECTIONS -------------- //
               MainCatSortBottom(),
             ],
           ),

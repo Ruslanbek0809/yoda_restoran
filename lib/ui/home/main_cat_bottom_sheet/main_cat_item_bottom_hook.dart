@@ -7,16 +7,14 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MainCategoryItemBottomHook
-    extends HookViewModelWidget<MainCatViewModel> {
+class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
   final MainCategory? mainCategory;
   MainCategoryItemBottomHook({
     Key? key,
     this.mainCategory,
   }) : super(key: key, reactive: true);
 
-  Widget buildViewModelWidget(
-      BuildContext context, MainCatViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.95);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
