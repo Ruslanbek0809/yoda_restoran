@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/main_category/main_category_all_item.dart';
-import 'package:yoda_res/ui/home/main_category/main_category_item_hook.dart';
-import 'main_category_view_model.dart';
+import 'package:yoda_res/ui/home/main_category/main_cat_all_item.dart';
+import 'package:yoda_res/ui/home/main_category/main_cat_item_hook.dart';
+import 'main_cat_view_model.dart';
 
-class MainCategoryView extends StatelessWidget {
+class MainCatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainCatViewModel>.nonReactive(
@@ -16,8 +16,8 @@ class MainCategoryView extends StatelessWidget {
           children: model.mainCats!.take(6).map((mainCategory) {
             return model.mainCats!.indexOf(mainCategory) !=
                     model.mainCats!.take(6).length - 1
-                ? MainCategoryItemHook(mainCategory: mainCategory)
-                : MainCategoryAllItem();
+                ? MainCatItemHook(mainCategory: mainCategory)
+                : MainCatAllItem();
           }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
         ),
       ),

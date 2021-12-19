@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
+import 'package:yoda_res/ui/home/main_category/main_cat_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCategoryItemHook extends HookViewModelWidget<MainCatViewModel> {
+class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
   final MainCategory mainCategory;
-  MainCategoryItemHook({
+  MainCatItemHook({
     Key? key,
     required this.mainCategory,
   }) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, MainCatViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.95);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),

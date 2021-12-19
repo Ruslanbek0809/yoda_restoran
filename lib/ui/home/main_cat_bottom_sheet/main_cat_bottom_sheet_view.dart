@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
+import 'package:yoda_res/ui/home/main_category/main_cat_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'main_cat_bottom_sort.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
