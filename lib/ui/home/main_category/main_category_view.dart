@@ -7,7 +7,7 @@ import 'main_category_view_model.dart';
 class MainCategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MainCategoryViewModel>.nonReactive(
+    return ViewModelBuilder<MainCatViewModel>.nonReactive(
       builder: (context, model, child) => SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -21,7 +21,7 @@ class MainCategoryView extends StatelessWidget {
           }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
         ),
       ),
-      viewModelBuilder: () => MainCategoryViewModel(),
+      viewModelBuilder: () => MainCatViewModel(),
     );
   }
 }

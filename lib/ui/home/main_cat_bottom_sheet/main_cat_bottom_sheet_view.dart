@@ -7,12 +7,12 @@ import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'main_cat_bottom_sort.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'main_category_item_bottom_hook.dart';
+import 'main_cat_item_bottom_hook.dart';
 
-class MainCategoryBottomSheetView extends StatelessWidget {
+class MainCatBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse) completer;
-  const MainCategoryBottomSheetView({
+  const MainCatBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
@@ -20,7 +20,7 @@ class MainCategoryBottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MainCategoryViewModel>.nonReactive(
+    return ViewModelBuilder<MainCatViewModel>.nonReactive(
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
@@ -163,7 +163,7 @@ class MainCategoryBottomSheetView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => MainCategoryViewModel(),
+      viewModelBuilder: () => MainCatViewModel(),
     );
   }
 }

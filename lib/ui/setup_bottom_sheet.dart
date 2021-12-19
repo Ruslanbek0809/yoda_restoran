@@ -3,7 +3,7 @@ import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-import 'home/main_category_bottom_sheet/main_category_bottom_sheet_view.dart';
+import 'home/main_category_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'restaurant/restaurant_info_bottom_sheet.dart';
 
 void setupBottomSheet() {
@@ -11,7 +11,7 @@ void setupBottomSheet() {
 
   final bottomSheetBuilders = {
     BottomSheetType.mainCategory: (context, sheetRequest, completer) =>
-        MainCategoryBottomSheetView(
+        MainCatBottomSheetView(
           request: sheetRequest,
           completer: completer,
         ),

@@ -6,7 +6,7 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class MainCategoryViewModel extends ReactiveViewModel {
+class MainCatViewModel extends ReactiveViewModel {
   final log = getLogger('MainCategoryViewModel');
 
   final _bottomSheetService = locator<BottomSheetService>();

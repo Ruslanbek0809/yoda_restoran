@@ -7,7 +7,7 @@ import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCategoryItemHook extends HookViewModelWidget<MainCategoryViewModel> {
+class MainCategoryItemHook extends HookViewModelWidget<MainCatViewModel> {
   final MainCategory mainCategory;
   MainCategoryItemHook({
     Key? key,
@@ -16,7 +16,7 @@ class MainCategoryItemHook extends HookViewModelWidget<MainCategoryViewModel> {
 
   @override
   Widget buildViewModelWidget(
-      BuildContext context, MainCategoryViewModel model) {
+      BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.95);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),

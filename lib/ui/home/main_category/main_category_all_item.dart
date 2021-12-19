@@ -5,14 +5,14 @@ import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCategoryAllItem extends HookViewModelWidget<MainCategoryViewModel> {
+class MainCategoryAllItem extends HookViewModelWidget<MainCatViewModel> {
   MainCategoryAllItem({
     Key? key,
   }) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(
-      BuildContext context, MainCategoryViewModel model) {
+      BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.95);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),

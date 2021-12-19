@@ -5,12 +5,12 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/ui/home/main_category/main_category_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class MainCatSortBottom extends HookViewModelWidget<MainCategoryViewModel> {
+class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
   const MainCatSortBottom({Key? key}) : super(key: key);
 
   @override
   Widget buildViewModelWidget(
-      BuildContext context, MainCategoryViewModel model) {
+      BuildContext context, MainCatViewModel model) {
     final sortAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
