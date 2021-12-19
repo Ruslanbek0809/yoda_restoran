@@ -12,6 +12,12 @@ TextStyle ktsButtonText = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
+TextStyle ktsButton18Text = TextStyle(
+  color: kcWhiteColor,
+  fontSize: 18.sp,
+  fontWeight: FontWeight.normal,
+);
+
 TextStyle ktsTextfieldText = TextStyle(
   color: kcFontColor,
   fontSize: 18.sp,
