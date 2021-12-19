@@ -248,7 +248,7 @@ class MealBottomSheet extends StatelessWidget {
                     children: [
                       //----------- MEAL INFO --------------//
                       Padding(
-                        padding: EdgeInsets.only(top: 10.w, bottom: 15.w),
+                        padding: EdgeInsets.only(top: 10.h, bottom: 12.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -277,116 +277,115 @@ class MealBottomSheet extends StatelessWidget {
                         ),
                       ),
                       //----------- BUTTONS --------------//
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              // width: 0.33.sw,
-                              height: 0.15.sw,
-                              decoration: BoxDecoration(
-                                color: AppTheme.WHITE,
-                                borderRadius: AppTheme().radius12,
-                                border: Border.all(
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppTheme.WHITE,
+                                  borderRadius: AppTheme().radius15,
+                                  border: Border.all(
                                     color: AppTheme.BUTTON_BORDER_COLOR,
-                                    width: 0.5),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 0.11.sw,
-                                    height: 0.15.sw,
-                                    child: Material(
-                                      color: AppTheme.WHITE,
-                                      borderRadius: AppTheme().radius12,
-                                      elevation: 0,
-                                      child: InkWell(
-                                        borderRadius: AppTheme().radius12,
-                                        onTap: () async {},
-                                        child: Padding(
-                                          padding: EdgeInsets.all(2.w),
-                                          child: Icon(
-                                            Icons.remove,
-                                            size: 25.w,
-                                            color: AppTheme.FONT_COLOR,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Material(
+                                        color: AppTheme.WHITE,
+                                        borderRadius: AppTheme().radius15,
+                                        // borderRadius: BorderRadius.only(
+                                        //   topLeft: Radius.circular(15.0),
+                                        //   bottomLeft: Radius.circular(15.0),
+                                        // ),
+                                        elevation: 0,
+                                        child: InkWell(
+                                          borderRadius: AppTheme().radius15,
+                                          // borderRadius: BorderRadius.only(
+                                          //   topLeft: Radius.circular(15.0),
+                                          //   bottomLeft: Radius.circular(15.0),
+                                          // ),
+                                          onTap: () async {},
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15.h),
+                                            child: Icon(
+                                              Icons.remove,
+                                              size: 23.w,
+                                              color: AppTheme.FONT_COLOR,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 0.1.sw,
-                                    child: Text(
-                                      '1',
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        color: AppTheme.FONT_COLOR,
+                                    Expanded(
+                                      child: Text(
+                                        '1',
+                                        style: ktsDefault20Text,
+                                        textAlign: TextAlign.center,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 0.11.sw,
-                                    height: 0.15.sw,
-                                    child: Material(
-                                      color: AppTheme.WHITE,
-                                      borderRadius: AppTheme().radius12,
-                                      elevation: 0,
-                                      child: InkWell(
-                                        borderRadius: AppTheme().radius12,
-                                        onTap: () {},
-                                        child: Icon(
-                                          Icons.add,
-                                          size: 25.w,
-                                          color: AppTheme.FONT_COLOR,
+                                    Expanded(
+                                      child: Material(
+                                        color: AppTheme.WHITE,
+                                        borderRadius: AppTheme().radius15,
+                                        // borderRadius: BorderRadius.only(
+                                        //   topRight: Radius.circular(15.0),
+                                        //   bottomRight: Radius.circular(15.0),
+                                        // ),
+                                        elevation: 0,
+                                        child: InkWell(
+                                          borderRadius: AppTheme().radius15,
+                                          // borderRadius: BorderRadius.only(
+                                          //   topRight: Radius.circular(15.0),
+                                          //   bottomRight: Radius.circular(15.0),
+                                          // ),
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15.h),
+                                            child: Icon(
+                                              Icons.add,
+                                              size: 23.w,
+                                              color: AppTheme.FONT_COLOR,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: CustomTextChildButton(
-                              child: Text(
-                                'Goş',
-                                style: ktsButton18Text,
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              flex: 3,
+                              child: CustomTextChildButton(
+                                child: Text(
+                                  'Goş',
+                                  style: ktsButton18Text,
+                                ),
+                                borderRadius: AppTheme().radius15,
+                                padding: EdgeInsets.symmetric(vertical: 17.h),
+                                onPressed: () {
+                                  showAlertDialog(
+                                    context: context,
+                                    title: 'Täze sargyt üçin sebedi boşadyň',
+                                    defaultActionText: 'Sebet',
+                                    cancelActionText: 'Boşat',
+                                  );
+                                },
                               ),
-                              borderRadius: AppTheme().radius15,
-                              padding: EdgeInsets.symmetric(vertical: 17.h),
-                              onPressed: () {
-                                showAlertDialog(
-                                  context: context,
-                                  title: 'Täze sargyt üçin sebedi boşadyň',
-                                  defaultActionText: 'Sebet',
-                                  cancelActionText: 'Boşat',
-                                );
-                              },
                             ),
-                            // CustomElevatedButton(
-                            //   height: 0.15.sw,
-                            //   width: 0.575.sw,
-                            //   text: 'Goş',
-                            //   borderRadius: Constants.BORDER_RADIUS_BUTTON_12,
-                            //   elevation: 0,
-                            //   onPressed: () {
-                            //     showAlertDialog(
-                            //       context: context,
-                            //       title: 'Täze sargyt üçin sebedi boşadyň',
-                            //       defaultActionText: 'Sebet',
-                            //       cancelActionText: 'Boşat',
-                            //     );
-                            //   },
-                            // ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.05.sw,
+                          ],
+                        ),
                       ),
                     ],
                   ),

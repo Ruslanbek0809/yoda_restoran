@@ -59,6 +59,11 @@ TextStyle ktsDefault18Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle ktsDefault20Text = TextStyle(
+  fontSize: 20.sp,
+  color: kcFontColor,
+);
+
 const TextStyle heading1Style = TextStyle(
   fontSize: 34,
   fontWeight: FontWeight.w400,
