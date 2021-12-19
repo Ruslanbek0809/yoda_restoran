@@ -374,14 +374,18 @@ class MealBottomSheet extends StatelessWidget {
                                 ),
                                 borderRadius: AppTheme().radius15,
                                 padding: EdgeInsets.symmetric(vertical: 17.h),
-                                onPressed: () {
-                                  showAlertDialog(
-                                    context: context,
-                                    title: 'Täze sargyt üçin sebedi boşadyň',
-                                    defaultActionText: 'Sebet',
-                                    cancelActionText: 'Boşat',
-                                  );
+                                onPressed: () async {
+                                  model.updateButtonToggle();
+                                  model.updateBottomCartStatus();
                                 },
+                                // () {
+                                //   showAlertDialog(
+                                //     context: context,
+                                //     title: 'Täze sargyt üçin sebedi boşadyň',
+                                //     defaultActionText: 'Sebet',
+                                //     cancelActionText: 'Boşat',
+                                //   );
+                                // },
                               ),
                             ),
                           ],

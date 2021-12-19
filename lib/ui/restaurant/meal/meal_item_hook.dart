@@ -206,13 +206,17 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
                             child: InkWell(
                               borderRadius: AppTheme().radius15,
-                              onTap: () async {
-                                //// Bouncing animation trigger
-                                _tweenController.forward();
+                              onTap: meal.gVolumes!.isNotEmpty ||
+                                      meal.gCustomizables!.isNotEmpty
+                                  ? () async =>
+                                      model.showCustomMealBottomSheet(meal)
+                                  : () async {
+                                      //// Bouncing animation trigger
+                                      await _tweenController.forward();
 
-                                model.updateButtonToggle();
-                                model.updateBottomCartStatus();
-                              },
+                                      model.updateButtonToggle();
+                                      model.updateBottomCartStatus();
+                                    },
                               child: Ink(
                                 width: constraints.maxWidth,
                                 decoration: BoxDecoration(
