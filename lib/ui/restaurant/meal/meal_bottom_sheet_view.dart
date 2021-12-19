@@ -204,10 +204,10 @@ class MealBottomSheet extends StatelessWidget {
                                               ListTileControlAffinity.leading,
                                           activeColor: kcGreenColor,
                                           onChanged: (bool? value) {
-                                            // model.updateSelectedCustomizable(
-                                            //     mainCustomizablePos,
-                                            //     mainCustomizable
-                                            //         .customizables![pos].id!);
+                                            model.updateSelectedCustomizable(
+                                                mainCustomizablePos,
+                                                mainCustomizable
+                                                    .customizables![pos].id!);
                                           },
                                         ),
                                       ),

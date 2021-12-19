@@ -74,6 +74,20 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// ADD or REMOVE selected customizable in _selectedCustomizables![mainVolumePos]
+  void updateSelectedCustomizable(int mainVolumePos, int? customizableId) {
+    log.i('mainVolumePos: $mainVolumePos, $customizableId');
+    if (_selectedCustomizables![mainVolumePos].contains(customizableId))
+      _selectedCustomizables![mainVolumePos].remove(customizableId);
+    else
+      _selectedCustomizables![mainVolumePos].add(customizableId!);
+
+    log.i(
+        '_selectedCustomizables![mainVolumePos]: ${_selectedCustomizables![mainVolumePos]}');
+    log.i(
+        '_selectedCustomizables![mainVolumePos]: ${_selectedCustomizables![mainVolumePos].length}');
+    notifyListeners();
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
