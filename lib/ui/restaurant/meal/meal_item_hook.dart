@@ -105,8 +105,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                           children: [
                             Text(
                               meal.discount != null || meal.discount! > 0
-                                  ? '${meal.discountedPrice} TMT'
-                                  : '${meal.price} TMT',
+                                  ? '${meal.discountedPrice!.toInt()} TMT'
+                                  : '${meal.price!.toInt()} TMT',
                               style: ktsDefault14HelperColor,
                             ),
                             Text(
@@ -119,7 +119,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                           ? Row(
                               children: [
                                 Text(
-                                  '${meal.price} TMT',
+                                  '${meal.price!.toInt()} TMT',
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     color: kcHelperColor,
@@ -222,8 +222,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Text(
                                   meal.discount != null && meal.discount! > 0
-                                      ? '${meal.discountedPrice} TMT'
-                                      : '${meal.price} TMT',
+                                      ? '${meal.discountedPrice!.toInt()} TMT'
+                                      : '${meal.price!.toInt()} TMT',
                                   textAlign: TextAlign.center,
                                   style: ktsDefault18Text,
                                 ),

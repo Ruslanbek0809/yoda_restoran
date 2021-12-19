@@ -19,18 +19,18 @@ class MealViewModel extends ReactiveViewModel {
   bool _isButtonToggled = false;
   bool get isButtonToggled => _isButtonToggled;
 
+  /// Function to update isButtonToggled
+  void updateButtonToggle() {
+    _isButtonToggled = !_isButtonToggled;
+    log.i('_isButtonToggled: $_isButtonToggled');
+    notifyListeners();
+  }
+
   /// Function to update updateBottomCartStatus
   void updateBottomCartStatus() {
     _bottomCartService.updateBottomCartStatus();
 
     log.i('bottomCartStatus: $bottomCartStatus');
-    notifyListeners();
-  }
-
-  /// Function to update isButtonToggled
-  void updateButtonToggle() {
-    _isButtonToggled = !_isButtonToggled;
-    log.i('_isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
@@ -77,16 +77,10 @@ class MealViewModel extends ReactiveViewModel {
 
   /// ADD or REMOVE selected customizable in _selectedCustomizables![mainVolumePos]
   void updateSelectedCustomizable(int mainVolumePos, int? customizableId) {
-    log.i('mainVolumePos: $mainVolumePos, $customizableId');
     if (_selectedCustomizables![mainVolumePos].contains(customizableId))
       _selectedCustomizables![mainVolumePos].remove(customizableId);
     else
       _selectedCustomizables![mainVolumePos].add(customizableId!);
-
-    log.i(
-        '_selectedCustomizables![mainVolumePos]: ${_selectedCustomizables![mainVolumePos]}');
-    log.i(
-        '_selectedCustomizables![mainVolumePos]: ${_selectedCustomizables![mainVolumePos].length}');
     notifyListeners();
   }
 
