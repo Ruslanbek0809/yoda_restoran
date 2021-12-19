@@ -12,7 +12,7 @@ class MainCatViewModel extends ReactiveViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
-      MainCategoryService>(); // To update multiSelectionList in realtime(reactive)
+      MainCatService>(); // To update multiSelectionList in realtime(reactive)
 
   List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
 
@@ -30,24 +30,23 @@ class MainCatViewModel extends ReactiveViewModel {
   void updateMainCategoryItem(int? mainCategoryId) {
     _mainCatService.updateMainCategoryItem(mainCategoryId);
     log.i(_multiSelectionList);
+    _mainCatService.updateSortAnimationStatus();
     notifyListeners();
-    updateSortAnimationStatus();
   }
 
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     _mainCatService.updateSelectedSort(newSelectedSort);
     log.i(selectedSort!.name);
+    _mainCatService.updateSortAnimationStatus();
     notifyListeners();
-    updateSortAnimationStatus();
   }
 
   /// Function to update _sortAnimationStatus
-  void updateSortAnimationStatus() {
-    _mainCatService.updateSortAnimationStatus();
-    log.i(sortAnimationStatus);
-    notifyListeners();
-  }
+  // void updateSortAnimationStatus() {
+  //   log.i(sortAnimationStatus);
+  //   notifyListeners();
+  // }
 
   /// LOAD restaurants by mainCategoryID
   Future updateMainCategory() async {

@@ -114,7 +114,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: mainCategorySortList
+                              children: mainCatSortList
                                   .map<Widget>(
                                     (CategoryFilter categoryFilter) => Column(
                                       crossAxisAlignment:
@@ -136,9 +136,9 @@ class MainCatBottomSheetView extends StatelessWidget {
                                               ListTileControlAffinity.trailing,
                                           toggleable: true,
                                         ),
-                                        if (mainCategorySortList
+                                        if (mainCatSortList
                                                 .indexOf(categoryFilter) !=
-                                            mainCategorySortList.length - 1)
+                                            mainCatSortList.length - 1)
                                           Divider(
                                             color: AppTheme.DRAWER_DIVIDER,
                                             indent: 10.w,
