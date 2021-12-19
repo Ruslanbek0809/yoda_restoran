@@ -50,10 +50,10 @@ class MealViewModel extends ReactiveViewModel {
   List<Volume?> _selectedVolumes = [];
   List<Volume?> get selectedVolumes => _selectedVolumes;
 
-  List<List<Customizable>>? _selectedCustomizables = [];
-  List<List<Customizable>>? get selectedCustomizables => _selectedCustomizables;
+  List<List<int>>? _selectedCustomizables = [];
+  List<List<int>>? get selectedCustomizables => _selectedCustomizables;
 
-  /// Function to check wether this selectedCustomizable selected or NOT
+  /// CHECK wether this selectedCustomizable selected or NOT
   bool isCustomizableSelected(int? mainCustomizablePos, int customizableId) =>
       _selectedCustomizables![mainCustomizablePos!].contains(customizableId);
 
@@ -73,6 +73,7 @@ class MealViewModel extends ReactiveViewModel {
     _selectedVolumes[mainVolumePos] = volume;
     notifyListeners();
   }
+
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];

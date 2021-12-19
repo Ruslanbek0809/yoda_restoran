@@ -154,8 +154,10 @@ class MealBottomSheet extends StatelessWidget {
                               Divider(color: kcDividerColor),
                             //----------- MAIN CUSTOMIZE LIST --------------//
                             ...meal.gCustomizables!
-                                .map<Widget>(
-                                  (MainCustomizable mainCustomizable) => Column(
+                                .mapIndexed<Widget>(
+                                  (MainCustomizable mainCustomizable,
+                                          int mainCustomizablePos) =>
+                                      Column(
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.symmetric(
@@ -194,14 +196,18 @@ class MealBottomSheet extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          value: additional.isAdded,
+                                          value: model.isCustomizableSelected(
+                                              mainCustomizablePos,
+                                              mainCustomizable
+                                                  .customizables![pos].id!),
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
-                                          activeColor: AppTheme.GREEN,
+                                          activeColor: kcGreenColor,
                                           onChanged: (bool? value) {
-                                            setState(() {
-                                              additional.isAdded = value!;
-                                            });
+                                            // model.updateSelectedCustomizable(
+                                            //     mainCustomizablePos,
+                                            //     mainCustomizable
+                                            //         .customizables![pos].id!);
                                           },
                                         ),
                                       ),
