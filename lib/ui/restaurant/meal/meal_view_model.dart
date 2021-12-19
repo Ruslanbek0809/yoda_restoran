@@ -42,6 +42,7 @@ class MealViewModel extends ReactiveViewModel {
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.meal,
       enableDrag: true,
+      barrierDismissible: true,
       isScrollControlled: true,
       data: meal,
     );

@@ -40,196 +40,201 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
           curve: Curves.bounceInOut,
         ),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.MAIN_LIGHT,
-          borderRadius: AppTheme().radius20,
-        ),
-        padding: EdgeInsets.fromLTRB(7.w, 7.w, 7.w, 7.w),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-//------------------ IMAGE with DISCOUNT(if needed) ---------------------//
-                Stack(
-                  children: [
-                    YodaImage(
-                      image: meal.image!,
-                      height: constraints.maxWidth,
-                      width: constraints.maxWidth,
-                      borderRadius: Constants.BORDER_RADIUS_20,
-                    ),
-                    if (meal.discount != null && meal.discount! > 0)
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 5.0),
-                          decoration: BoxDecoration(
-                            color: AppTheme.GREEN_COLOR,
-                            borderRadius: BorderRadius.only(
-                              topLeft:
-                                  Radius.circular(Constants.BORDER_RADIUS_20),
-                              bottomRight:
-                                  Radius.circular(Constants.BORDER_RADIUS_20),
+      child: GestureDetector(
+        onTap: () async => model.showCustomMealBottomSheet(meal),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppTheme.MAIN_LIGHT,
+            borderRadius: AppTheme().radius20,
+          ),
+          padding: EdgeInsets.fromLTRB(7.w, 7.w, 7.w, 7.w),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //------------------ IMAGE with DISCOUNT(if needed) ---------------------//
+                  Stack(
+                    children: [
+                      YodaImage(
+                        image: meal.image!,
+                        height: constraints.maxWidth,
+                        width: constraints.maxWidth,
+                        borderRadius: Constants.BORDER_RADIUS_20,
+                      ),
+                      if (meal.discount != null && meal.discount! > 0)
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 5.0),
+                            decoration: BoxDecoration(
+                              color: AppTheme.GREEN_COLOR,
+                              borderRadius: BorderRadius.only(
+                                topLeft:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                                bottomRight:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                              ),
                             ),
-                          ),
-                          child: FittedBox(
-                            child: Text(
-                              '-${meal.discount!.toInt()}%',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: kcWhiteColor,
+                            child: FittedBox(
+                              child: Text(
+                                '-${meal.discount!.toInt()}%',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: kcWhiteColor,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 7.h, bottom: 3.h),
-                  child: Text(
-                    meal.name!,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: ktsDefault16Text,
+                    ],
                   ),
-                ),
-                model.isButtonToggled
-                    ? Row(
-                        children: [
-                          Text(
-                            meal.discount != null || meal.discount! > 0
-                                ? '${meal.discountedPrice} TMT'
-                                : '${meal.price} TMT',
-                            style: ktsDefault14HelperColor,
-                          ),
-                          Text(
-                            ' * ${meal.value!.toInt()} ${meal.size!.name}',
-                            style: ktsDefault14HelperColor,
-                          ),
-                        ],
-                      )
-                    : meal.discount != null && meal.discount! > 0
-                        ? Row(
-                            children: [
-                              Text(
-                                '${meal.price} TMT',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: kcHelperColor,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
-                              Text(
-                                ' * ${meal.value!.toInt()} ${meal.size!.name}',
-                                style: ktsDefault14HelperColor,
-                              ),
-                            ],
-                          )
-                        : Text(
-                            '${meal.value!.toInt()} ${meal.size!.name}',
-                            style: ktsDefault14HelperColor,
-                          ),
-                Spacer(),
-//------------------ BUTTONS ---------------------//
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
-                  child: model.isButtonToggled
+                  Padding(
+                    padding: EdgeInsets.only(top: 7.h, bottom: 3.h),
+                    child: Text(
+                      meal.name!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: ktsDefault16Text,
+                    ),
+                  ),
+                  model.isButtonToggled
                       ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Material(
-                              color: AppTheme.WHITE,
-                              borderRadius: AppTheme().radius15,
-                              elevation: 3,
-                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                              child: InkWell(
-                                borderRadius: AppTheme().radius15,
-                                onTap: () async {
-                                  _tweenController.forward();
-                                  model.updateButtonToggle();
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w,
-                                    vertical: 10.h,
-                                  ),
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 22.w,
-                                    color: AppTheme.FONT_COLOR,
-                                  ),
-                                ),
-                              ),
+                            Text(
+                              meal.discount != null || meal.discount! > 0
+                                  ? '${meal.discountedPrice} TMT'
+                                  : '${meal.price} TMT',
+                              style: ktsDefault14HelperColor,
                             ),
                             Text(
-                              '1',
-                              style: ktsDefault18Text,
-                            ),
-                            Material(
-                              color: AppTheme.WHITE,
-                              borderRadius: AppTheme().radius15,
-                              elevation: 3,
-                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                              child: InkWell(
-                                borderRadius: AppTheme().radius15,
-                                onTap: () {
-                                  model.showCustomMealBottomSheet(meal);
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w,
-                                    vertical: 10.h,
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 22.w,
-                                    color: AppTheme.FONT_COLOR,
-                                  ),
-                                ),
-                              ),
+                              ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                              style: ktsDefault14HelperColor,
                             ),
                           ],
                         )
-                      : Material(
-                          color: Colors.transparent,
-                          borderRadius: AppTheme().radius15,
-                          elevation: 3,
-                          shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                          child: InkWell(
-                            borderRadius: AppTheme().radius15,
-                            onTap: () async {
-                              //// Bouncing animation trigger
-                              _tweenController.forward();
-
-                              model.updateButtonToggle();
-                              model.updateBottomCartStatus();
-                            },
-                            child: Ink(
-                              width: constraints.maxWidth,
-                              decoration: BoxDecoration(
+                      : meal.discount != null && meal.discount! > 0
+                          ? Row(
+                              children: [
+                                Text(
+                                  '${meal.price} TMT',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: kcHelperColor,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                Text(
+                                  ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                                  style: ktsDefault14HelperColor,
+                                ),
+                              ],
+                            )
+                          : Text(
+                              '${meal.value!.toInt()} ${meal.size!.name}',
+                              style: ktsDefault14HelperColor,
+                            ),
+                  Spacer(),
+                  //------------------ BUTTONS ---------------------//
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: model.isButtonToggled
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Material(
                                 color: AppTheme.WHITE,
                                 borderRadius: AppTheme().radius15,
+                                elevation: 3,
+                                shadowColor:
+                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                child: InkWell(
+                                  borderRadius: AppTheme().radius15,
+                                  onTap: () async {
+                                    _tweenController.forward();
+                                    model.updateButtonToggle();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 10.h,
+                                    ),
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 22.w,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 10.h),
-                              child: Text(
-                                meal.discount != null && meal.discount! > 0
-                                    ? '${meal.discountedPrice} TMT'
-                                    : '${meal.price} TMT',
-                                textAlign: TextAlign.center,
+                              Text(
+                                '1',
                                 style: ktsDefault18Text,
+                              ),
+                              Material(
+                                color: AppTheme.WHITE,
+                                borderRadius: AppTheme().radius15,
+                                elevation: 3,
+                                shadowColor:
+                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                child: InkWell(
+                                  borderRadius: AppTheme().radius15,
+                                  onTap: () {
+                                    model.showCustomMealBottomSheet(meal);
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 10.h,
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 22.w,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Material(
+                            color: Colors.transparent,
+                            borderRadius: AppTheme().radius15,
+                            elevation: 3,
+                            shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                            child: InkWell(
+                              borderRadius: AppTheme().radius15,
+                              onTap: () async {
+                                //// Bouncing animation trigger
+                                _tweenController.forward();
+
+                                model.updateButtonToggle();
+                                model.updateBottomCartStatus();
+                              },
+                              child: Ink(
+                                width: constraints.maxWidth,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.WHITE,
+                                  borderRadius: AppTheme().radius15,
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                child: Text(
+                                  meal.discount != null && meal.discount! > 0
+                                      ? '${meal.discountedPrice} TMT'
+                                      : '${meal.price} TMT',
+                                  textAlign: TextAlign.center,
+                                  style: ktsDefault18Text,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                )
-              ],
-            );
-          },
+                  )
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
