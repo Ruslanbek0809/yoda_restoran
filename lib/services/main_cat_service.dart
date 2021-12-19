@@ -17,8 +17,10 @@ class MainCatService with ReactiveServiceMixin {
   ReactiveValue<List<int>> _multiSelectionList = ReactiveValue<List<int>>([]);
   List<int> get multiSelectionList => _multiSelectionList.value;
 
-  CategoryFilter _selectedSort = mainCatSortList[0];
-  CategoryFilter get selectedSort => _selectedSort;
+  ReactiveValue<CategoryFilter> _selectedSort =
+      ReactiveValue<CategoryFilter>(mainCatSortList[0]);
+  // CategoryFilter _selectedSort = mainCatSortList[0];
+  CategoryFilter get selectedSort => _selectedSort.value;
 
   ReactiveValue<SortAnimationStatus> _sortAnimationStatus =
       ReactiveValue<SortAnimationStatus>(SortAnimationStatus.idle);
@@ -34,7 +36,7 @@ class MainCatService with ReactiveServiceMixin {
 
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
-    _selectedSort = newSelectedSort!;
+    _selectedSort.value = newSelectedSort!;
   }
 
   /// Function to update _sortAnimationStatus
@@ -42,19 +44,19 @@ class MainCatService with ReactiveServiceMixin {
     switch (_sortAnimationStatus.value) {
       case SortAnimationStatus.idle:
         if (_multiSelectionList.value.isNotEmpty ||
-            _selectedSort != mainCatSortList[0]) {
+            _selectedSort.value != mainCatSortList[0]) {
           _sortAnimationStatus.value = SortAnimationStatus.forward;
         }
         break;
       case SortAnimationStatus.forward:
         if (_multiSelectionList.value.isEmpty &&
-            _selectedSort == mainCatSortList[0]) {
+            _selectedSort.value == mainCatSortList[0]) {
           _sortAnimationStatus.value = SortAnimationStatus.reverse;
         }
         break;
       case SortAnimationStatus.reverse:
         if (_multiSelectionList.value.isNotEmpty ||
-            _selectedSort != mainCatSortList[0]) {
+            _selectedSort.value != mainCatSortList[0]) {
           _sortAnimationStatus.value = SortAnimationStatus.forward;
         }
         break;
