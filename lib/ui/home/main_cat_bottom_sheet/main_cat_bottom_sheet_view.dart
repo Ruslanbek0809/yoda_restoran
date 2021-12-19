@@ -20,7 +20,7 @@ class MainCatBottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MainCatViewModel>.nonReactive(
+    return ViewModelBuilder<MainCatViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,

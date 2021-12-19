@@ -6,7 +6,7 @@ import 'package:yoda_res/ui/home/main_category/main_cat_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
-  const MainCatSortBottom({Key? key}) : super(key: key);
+  const MainCatSortBottom({Key? key}) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
@@ -30,6 +30,7 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
         default:
           break;
       }
+    model.log.i('model.sortAnimationStatus: ${model.sortAnimationStatus}');
 
     return Positioned(
       bottom: 0,
