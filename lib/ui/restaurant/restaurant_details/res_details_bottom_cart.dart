@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResDetailsBottomCart
-    extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
   const ResDetailsBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, ResDetailsViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
@@ -46,8 +45,8 @@ class ResDetailsBottomCart
               AppTheme().bottomCartShadow,
             ]),
             child: Container(
-              margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              margin: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 15.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
                 color: AppTheme.MAIN,
                 borderRadius: AppTheme().radius10,
@@ -56,20 +55,8 @@ class ResDetailsBottomCart
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Sargyt',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 20.sp,
-                    ),
-                  ),
-                  Text(
-                    '35 TMT',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                    ),
-                  ),
+                  Text('Sargyt', style: ktsButton18Text),
+                  Text('35 TMT', style: ktsButton18Text),
                 ],
               ),
             ),
