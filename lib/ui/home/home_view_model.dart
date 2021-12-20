@@ -32,7 +32,18 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   List<int> get selectedMainCats => _mainCatService.selectedMainCats;
 
-  /// Combined list of randomRestaurants and promotedRestaurants
+  // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
+  // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
+  // List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
+  // List<Promoted>? get promotedRes => dataMap![homePromotedResFuture];
+
+  bool get fetchinghomeSliders => busy(homeSlidersFuture);
+  bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
+  bool get fetchingRandomRes => busy(homeRandomRessFuture);
+  bool get fetchingPromotedRes => busy(homePromsFuture);
+  bool get fetchingSelectedMainCatsRes => !_homeService.hasSelectedMainCats;
+
+  /// GETTER for combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get resWithProms {
     List<HomeResPromo> _resWithProms = [];
     int promoPosCount = 0;
@@ -64,35 +75,10 @@ class HomeViewModel extends MultipleFutureViewModel {
     return _resWithProms;
   }
 
-  // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
-  // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
-  // List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
-  // List<Promoted>? get promotedRes => dataMap![homePromotedResFuture];
-
-  bool get fetchinghomeSliders => busy(homeSlidersFuture);
-  bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
-  bool get fetchingRandomRes => busy(homeRandomRessFuture);
-  bool get fetchingPromotedRes => busy(homePromsFuture);
-
   void homeMenuPressed() {
     log.i('openDrawer()');
     homeScaffoldKey.currentState!.openDrawer();
   }
-
-  // Function to call all apis when button is clicked
-  // Future callFuturePullToRefresh() async {
-  //   log.i('');
-  //   await runBusyFuture(
-  //     Future.wait(
-  //       [
-  //         _homeService.getSliders(),
-  //         _homeService.getMainCategs(),
-  //         _homeService.getRandomRess(),
-  //         _homeService.getProms(),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   @override
   Map<String, Future Function()> get futuresMap => {

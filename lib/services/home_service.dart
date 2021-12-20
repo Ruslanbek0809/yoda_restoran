@@ -32,6 +32,10 @@ class HomeService {
   List<Restaurant>? get selectedMainCatRestaurants =>
       _selectedMainCatRestaurants;
 
+  bool get hasSelectedMainCats =>
+      _selectedMainCatRestaurants != null &&
+      _selectedMainCatRestaurants!.isNotEmpty;
+
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
     log.i(_sliders!.length);
@@ -59,7 +63,8 @@ class HomeService {
 
   Future<List<Restaurant>?> getSelectedMainCats(
       List<int> _selectedMainCats) async {
-    _selectedMainCatRestaurants = await _api.getRandomRess();
+    _selectedMainCatRestaurants =
+        await _api.getSelectedMainCats(_selectedMainCats);
     log.i(_selectedMainCatRestaurants!.length);
     return _selectedMainCatRestaurants;
   }
