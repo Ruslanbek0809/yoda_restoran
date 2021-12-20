@@ -79,11 +79,11 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
 
 //------------------------ NAVIGATIONS ----------------------------//
 
-  void navToResSearchView() => _navService.navigateTo(
-      Routes.restaurantSearchView); // TODO: Change page transition here
-
   Future navToCartView() async => await _navService
       .navigateTo(Routes.cartView); // TODO: Change page transition here
+
+  void navToResSearchView() => _navService.navigateTo(
+      Routes.restaurantSearchView); // TODO: Change page transition here
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
