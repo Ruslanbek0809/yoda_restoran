@@ -52,5 +52,5 @@ class HomeService {
     return _proms;
   }
 
-  Future updateMainCategory() async {}
+  Future updateSelectedMainCats(List<int> multiSelectionList) async {}
 }

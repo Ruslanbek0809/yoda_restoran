@@ -17,9 +17,8 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   final _homeService = locator<HomeService>();
   final _bottomCartService = locator<BottomCartService>();
-
-  BottomCartStatus get bottomCartStatus => _bottomCartService
-      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
+  final _mainCatService = locator<
+      MainCatService>(); // To update multiSelectionList in realtime(reactive)
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,6 +26,11 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<MainCategory>? get mainCats => _homeService.mainCats;
   List<Restaurant>? get randomRess => _homeService.randomRess;
   List<Promoted>? get proms => _homeService.proms;
+
+  BottomCartStatus get bottomCartStatus => _bottomCartService
+      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
+
+  List<int> get multiSelectionList => _mainCatService.selectedMainCats;
 
   /// Combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get resWithProms {

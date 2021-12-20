@@ -14,7 +14,7 @@ class MainCatViewModel extends ReactiveViewModel {
   final _mainCatService = locator<
       MainCatService>(); // To update multiSelectionList in realtime(reactive)
 
-  List<int> get _multiSelectionList => _mainCatService.multiSelectionList;
+  List<int> get _selectedMainCats => _mainCatService.selectedMainCats;
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
@@ -24,13 +24,15 @@ class MainCatViewModel extends ReactiveViewModel {
 
   /// Function to check wether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>
-      _multiSelectionList.contains(mainCategoryId);
+      _selectedMainCats.contains(mainCategoryId);
 
   /// ADD or REMOVE mainCategory to/from _multiSelectionList
-  void updateMainCategoryItem(int? mainCategoryId) {
-    _mainCatService.updateMainCategoryItem(mainCategoryId);
-    log.i(_multiSelectionList);
+  Future<void> updateSelectedMainCats(int? mainCatId) async {
+    _mainCatService.updateSelectedMainCats(mainCatId);
+    await _homeService.updateSelectedMainCats(
+        _selectedMainCats); // FETCH HOME to SHOW RESULT of selectedMainCats
     _mainCatService.updateSortAnimationStatus();
+    log.i(_selectedMainCats);
     notifyListeners();
   }
 
@@ -47,11 +49,6 @@ class MainCatViewModel extends ReactiveViewModel {
   //   log.i(sortAnimationStatus);
   //   notifyListeners();
   // }
-
-  /// LOAD restaurants by mainCategoryID
-  Future updateMainCategory() async {
-    await _homeService.updateMainCategory();
-  }
 
   //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 

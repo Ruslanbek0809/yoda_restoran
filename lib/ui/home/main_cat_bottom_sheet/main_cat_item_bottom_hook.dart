@@ -44,7 +44,7 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
         onTap: () async {
           await _tweenController.forward();
 
-          model.updateMainCategoryItem(mainCategory!.id);
+          model.updateSelectedMainCats(mainCategory!.id);
         },
         child: Column(
           children: [
