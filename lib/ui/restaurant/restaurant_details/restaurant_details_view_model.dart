@@ -13,10 +13,11 @@ import 'package:yoda_res/utils/utils.dart';
 class RestaurantDetailsViewModel extends ReactiveViewModel {
   final log = getLogger('RestaurantDetailsViewModel');
 
-  final _bottomSheetService = locator<BottomSheetService>();
   final _navService = locator<NavigationService>();
-  final _bottomCartService = locator<BottomCartService>();
   final _restaurantService = locator<RestaurantService>();
+  final _bottomSheetService = locator<BottomSheetService>();
+  final _bottomCartService = locator<BottomCartService>();
+  final _dialogService = locator<DialogService>();
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -57,7 +58,16 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
     }
   }
 
-  /// Function to call RestaurantDetailsInfoBottomSheet
+  // FETCHS Restaurant categories with their meals
+  Future getResCatsWithMeals(int restaurantId) async {
+    log.i('');
+    await runBusyFuture(_restaurantService.getResCatsWithMeals(restaurantId));
+    log.i('resCategories length: ${resCategories!.length}');
+  }
+
+//------------------------ RESTAURANT BOTTOM SHEET ----------------------------//
+
+  /// SHOWS RestaurantDetailsInfoBottomSheet
   Future showCustomBottomSheet(Restaurant restaurant) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
@@ -68,12 +78,20 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
     );
   }
 
-  // Function to fetch Restaurant categories with their meals
-  Future getResCatsWithMeals(int restaurantId) async {
+  /// SHOWS Clear Cart Dialog
+  Future showClearCartDialog() async {
     log.i('');
-    await runBusyFuture(_restaurantService.getResCatsWithMeals(restaurantId));
-    log.i('resCategories length: ${resCategories!.length}');
+    await _dialogService.showCustomDialog(
+        variant: DialogType.basic,
+        title: 'This is a custom UI with Text as main button',
+        description:
+            'Sheck out the builder in the dialog_ui_register.dart file',
+        mainButtonTitle: 'Ok',
+        showIconInMainButton: false,
+        barrierDismissible: true);
   }
+
+//------------------------ NAVIGATIONS ----------------------------//
 
   void navToResSearchView() => _navService.navigateTo(
       Routes.restaurantSearchView); // TODO: Change page transition here

@@ -19,7 +19,6 @@ class MainCatService with ReactiveServiceMixin {
 
   ReactiveValue<CategoryFilter> _selectedSort =
       ReactiveValue<CategoryFilter>(mainCatSortList[0]);
-  // CategoryFilter _selectedSort = mainCatSortList[0];
   CategoryFilter get selectedSort => _selectedSort.value;
 
   ReactiveValue<SortAnimationStatus> _sortAnimationStatus =

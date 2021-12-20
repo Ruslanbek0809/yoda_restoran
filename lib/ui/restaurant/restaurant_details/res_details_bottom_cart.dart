@@ -38,9 +38,7 @@ class ResDetailsBottomCart
       child: SlideTransition(
         position: bottomCartOffset,
         child: GestureDetector(
-          onTap: () {
-            // Navigator.of(context).pushNamed(RouteList.cart);
-          },
+          onTap: () async => await model.showClearCartDialog(),
           child: Container(
             height: 0.22.sw,
             width: 1.sw,
