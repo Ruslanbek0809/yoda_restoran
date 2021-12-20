@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
-import 'package:yoda_res/ui/home/home_view_bottom_cart.dart';
+import 'package:yoda_res/ui/home/home_bottom_cart.dart';
 import 'package:yoda_res/ui/home/main_category/main_cat_view.dart';
 import 'package:yoda_res/ui/restaurant/promoted/prom_res_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
@@ -205,7 +205,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                 //------------------ BOTTOM CART ---------------------//
-                HomeViewBottomCart(),
+                HomeBottomCart(),
               ],
             ),
           ),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'home_view_model.dart';
 
-class HomeViewBottomCart extends HookViewModelWidget<HomeViewModel> {
-  const HomeViewBottomCart({Key? key}) : super(key: key);
+class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
+  const HomeBottomCart({Key? key}) : super(key: key);
 
   @override
   Widget buildViewModelWidget(BuildContext context, HomeViewModel model) {
@@ -37,18 +38,17 @@ class HomeViewBottomCart extends HookViewModelWidget<HomeViewModel> {
       child: SlideTransition(
         position: bottomCartOffset,
         child: GestureDetector(
-          onTap: () {
-            // Navigator.of(context).pushNamed(RouteList.cart);
-          },
+          onTap: () {},
           child: Container(
             height: 0.22.sw,
             width: 1.sw,
-            decoration: BoxDecoration(color: AppTheme.WHITE, boxShadow: [
-              AppTheme().bottomCartShadow,
-            ]),
+            decoration: BoxDecoration(
+              color: AppTheme.WHITE,
+              boxShadow: [AppTheme().bottomCartShadow],
+            ),
             child: Container(
-              margin: EdgeInsets.fromLTRB(10.w, 10.w, 10.w, 15.w),
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              margin: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 15.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
                 color: AppTheme.MAIN,
                 borderRadius: AppTheme().radius10,
@@ -57,20 +57,8 @@ class HomeViewBottomCart extends HookViewModelWidget<HomeViewModel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Restoran ady',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 20.sp,
-                    ),
-                  ),
-                  Text(
-                    '35 TMT',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                    ),
-                  ),
+                  Text('Restoran ady', style: ktsButton18Text),
+                  Text('35 TMT', style: ktsButton18Text),
                 ],
               ),
             ),
