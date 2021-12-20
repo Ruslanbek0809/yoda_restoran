@@ -5,7 +5,7 @@ import 'package:yoda_res/ui/cart/cart_view.dart';
 import 'package:yoda_res/ui/home/home_view.dart';
 import 'package:yoda_res/ui/profile/login/login_view.dart';
 import 'package:yoda_res/ui/profile/otp/otp_view.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_details/restaurant_details_view.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_view.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import 'package:yoda_res/ui/startup/startup_view.dart';
 
@@ -13,7 +13,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: HomeView),
-    MaterialRoute(page: RestaurantDetailsView),
+    MaterialRoute(page: ResDetailsView),
     MaterialRoute(page: RestaurantSearchView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: OtpView),

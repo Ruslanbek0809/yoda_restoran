@@ -13,6 +13,7 @@ class MealViewModel extends ReactiveViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
+  final _navService = locator<NavigationService>();
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
@@ -99,6 +100,10 @@ class MealViewModel extends ReactiveViewModel {
       barrierDismissible: true,
     );
   }
+
+//------------------------ NAVIGATIONS ----------------------------//
+
+  void navBack() => _navService.back();
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];

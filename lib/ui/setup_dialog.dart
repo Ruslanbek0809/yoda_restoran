@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
@@ -27,6 +30,29 @@ class MealDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS)
+      return CupertinoAlertDialog(
+        title: Text(request.title!),
+        content: Text(request.description!),
+        actions: <Widget>[
+          CustomTextChildButton(
+            child: Text(
+              request.secondaryButtonTitle!,
+              style: ktsDefault18BoldText,
+            ),
+            color: Colors.transparent,
+            onPressed: () => completer(DialogResponse()),
+          ),
+          CustomTextChildButton(
+            child: Text(
+              request.mainButtonTitle!,
+              style: ktsDefault18Text,
+            ),
+            color: Colors.transparent,
+            onPressed: () => completer(DialogResponse()),
+          ),
+        ],
+      );
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
       titlePadding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 10.h),

@@ -10,8 +10,8 @@ import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 /// ReactiveViewModel is used to "react"
-class RestaurantDetailsViewModel extends ReactiveViewModel {
-  final log = getLogger('RestaurantDetailsViewModel');
+class ResDetailsViewModel extends ReactiveViewModel {
+  final log = getLogger('ResDetailsViewModel');
 
   final _navService = locator<NavigationService>();
   final _restaurantService = locator<RestaurantService>();

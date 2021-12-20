@@ -15,7 +15,7 @@ import '../ui/cart/cart_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/profile/login/login_view.dart';
 import '../ui/profile/otp/otp_view.dart';
-import '../ui/restaurant/restaurant_details/restaurant_details_view.dart';
+import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
 
@@ -44,7 +44,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.homeView, page: HomeView),
-    RouteDef(Routes.restaurantDetailsView, page: RestaurantDetailsView),
+    RouteDef(Routes.restaurantDetailsView, page: ResDetailsView),
     RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.otpView, page: OtpView),
@@ -65,10 +65,10 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    RestaurantDetailsView: (data) {
+    ResDetailsView: (data) {
       var args = data.getArgs<RestaurantDetailsViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => RestaurantDetailsView(
+        builder: (context) => ResDetailsView(
           restaurant: args.restaurant,
           key: args.key,
         ),

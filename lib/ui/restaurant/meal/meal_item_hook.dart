@@ -41,8 +41,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         ),
       ),
       child: GestureDetector(
-        onTap: model.showClearOrNavigateCartDialog,
-        // onTap: () async => model.showCustomMealBottomSheet(meal),
+        onTap: () async => model.showCustomMealBottomSheet(meal),
         child: Container(
           decoration: BoxDecoration(
             color: AppTheme.MAIN_LIGHT,

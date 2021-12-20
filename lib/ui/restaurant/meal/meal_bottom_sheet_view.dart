@@ -377,6 +377,7 @@ class MealBottomSheet extends StatelessWidget {
                                 onPressed: () async {
                                   model.updateButtonToggle();
                                   model.updateBottomCartStatus();
+                                  model.navBack();
                                 },
                               ),
                             ),

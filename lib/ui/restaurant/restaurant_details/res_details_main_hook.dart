@@ -9,18 +9,18 @@ import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'restaurant_details_view_model.dart';
+import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResDetailsMainHook
-    extends HookViewModelWidget<RestaurantDetailsViewModel> {
+    extends HookViewModelWidget<ResDetailsViewModel> {
   final Restaurant restaurant;
   const ResDetailsMainHook({required this.restaurant, Key? key})
       : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(
-      BuildContext context, RestaurantDetailsViewModel model) {
+      BuildContext context, ResDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.31.sw; // 0.31.sw is for item height
