@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,39 +28,37 @@ class MealDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+      titlePadding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 10.h),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+      actionsAlignment: MainAxisAlignment.center,
       title: Text(
         request.title!,
-        style: TextStyle(
-          color: AppTheme.FONT_COLOR,
-          fontSize: 16.sp,
-        ),
+        textAlign: TextAlign.center,
       ),
+      titleTextStyle: ktsDefault20BoldText,
       content: Text(
         request.description!,
-        style: TextStyle(
-          color: AppTheme.FONT_COLOR,
-          fontSize: 16.sp,
-        ),
+        textAlign: TextAlign.center,
+        style: ktsDefault14DialogText,
       ),
       actions: <Widget>[
-        CustomTextButton(
-          text: request.secondaryButtonTitle!,
-          color: Colors.transparent,
-          textStyle: TextStyle(
-            color: AppTheme.FONT_COLOR,
-            fontSize: 17.sp,
-            fontWeight: FontWeight.bold,
+        CustomTextChildButton(
+          child: Text(
+            request.secondaryButtonTitle!,
+            style: ktsDefault18BoldText,
           ),
-          onPressed: () => Navigator.of(context).pop(true),
+          color: Colors.transparent,
+          onPressed: () => completer(DialogResponse()),
         ),
-        CustomTextButton(
-          text: request.mainButtonTitle!,
-          color: Colors.transparent,
-          textStyle: TextStyle(
-            color: AppTheme.FONT_COLOR,
-            fontSize: 17.sp,
+        SizedBox(width: 8.w),
+        CustomTextChildButton(
+          child: Text(
+            request.mainButtonTitle!,
+            style: ktsDefault18Text,
           ),
-          onPressed: () => Navigator.of(context).pop(false),
+          color: Colors.transparent,
+          onPressed: () => completer(DialogResponse()),
         ),
       ],
     );

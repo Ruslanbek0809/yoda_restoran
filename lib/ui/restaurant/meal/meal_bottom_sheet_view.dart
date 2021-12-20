@@ -102,7 +102,7 @@ class MealBottomSheet extends StatelessWidget {
                                           ),
                                           child: Text(
                                             mainVolume.name!,
-                                            style: ktsDefault14HelperColor,
+                                            style: ktsDefault14HelperText,
                                           ),
                                         ),
                                         //----------- VOLUME LIST for each MAIN VOLUME --------------//
@@ -172,7 +172,7 @@ class MealBottomSheet extends StatelessWidget {
                                           ),
                                           child: Text(
                                             mainCustomizable.name!,
-                                            style: ktsDefault14HelperColor,
+                                            style: ktsDefault14HelperText,
                                           ),
                                         ),
                                         //----------- VOLUME LIST for each MAIN VOLUME --------------//

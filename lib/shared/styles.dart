@@ -39,13 +39,25 @@ TextStyle ktsDefault14Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault14HelperColor = TextStyle(
+TextStyle ktsDefault14HelperText = TextStyle(
   fontSize: 14.sp,
   color: kcHelperColor,
 );
 
+TextStyle ktsDefault14DialogText = TextStyle(
+  fontSize: 14.sp,
+  color: kcDialogColor,
+);
+
 TextStyle ktsDefault16Text = TextStyle(
   fontSize: 16.sp,
+  fontWeight: FontWeight.normal,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault16BoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
   color: kcFontColor,
 );
 
@@ -56,11 +68,24 @@ TextStyle ktsDefault16HelperColor = TextStyle(
 
 TextStyle ktsDefault18Text = TextStyle(
   fontSize: 18.sp,
+  fontWeight: FontWeight.normal,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault18BoldText = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w600,
   color: kcFontColor,
 );
 
 TextStyle ktsDefault20Text = TextStyle(
   fontSize: 20.sp,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault20BoldText = TextStyle(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w600,
   color: kcFontColor,
 );
 
