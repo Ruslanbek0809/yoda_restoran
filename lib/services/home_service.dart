@@ -41,7 +41,8 @@ class HomeService with ReactiveServiceMixin {
       _selectedMainCatRestaurants;
 
   // 2
-  ReactiveValue<bool> _fetchingSelectedMainCats = ReactiveValue<bool>(false);
+  ReactiveValue<bool> _fetchingSelectedMainCats =
+      ReactiveValue<bool>(false); // Custom busy for HomeView
   bool get fetchingSelectedMainCats => _fetchingSelectedMainCats.value;
 
   Future<List<SliderModel>?> getSliders() async {
@@ -72,13 +73,9 @@ class HomeService with ReactiveServiceMixin {
   Future<List<Restaurant>?> getSelectedMainCats(
       List<int> _selectedMainCats) async {
     _fetchingSelectedMainCats.value = true;
-    log.i(
-        'BEFORE _fetchingSelectedMainCats: ${_fetchingSelectedMainCats.value}');
     _selectedMainCatRestaurants =
         await _api.getSelectedMainCats(_selectedMainCats);
     _fetchingSelectedMainCats.value = false;
-    log.i(
-        'AFTER _fetchingSelectedMainCats: ${_fetchingSelectedMainCats.value}');
     log.i(_selectedMainCatRestaurants!.length);
     return _selectedMainCatRestaurants;
   }

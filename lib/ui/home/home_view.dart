@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
-        model.log.i('HomeView: ${model.fetchingSelectedMainCatsRes}');
+        model.log.i('HomeView');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
@@ -65,22 +65,24 @@ class _HomeViewState extends State<HomeView> {
                               flexibleSpace: FlexibleSpaceBar(
                                 background: Column(
                                   children: [
-                                    SizedBox(height: 15.w),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        //------------------ MENU ---------------------//
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.menu,
-                                            size: 24.w,
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15.h),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          //------------------ MENU ---------------------//
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.menu,
+                                              size: 24.w,
+                                            ),
+                                            onPressed: model.homeMenuPressed,
+                                            tooltip: 'Drawer',
                                           ),
-                                          onPressed: model.homeMenuPressed,
-                                          tooltip: 'Drawer',
-                                        ),
-                                        //------------------ SEARCH ---------------------//
-                                        HomeSearch(),
-                                      ],
+                                          //------------------ SEARCH ---------------------//
+                                          HomeSearch(),
+                                        ],
+                                      ),
                                     ),
                                     //------------------ BANNERS ---------------------//
                                     SliderView(sliders: model.sliders ?? []),
