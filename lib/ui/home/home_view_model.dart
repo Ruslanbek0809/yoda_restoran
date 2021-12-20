@@ -41,7 +41,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
   bool get fetchingRandomRes => busy(homeRandomRessFuture);
   bool get fetchingPromotedRes => busy(homePromsFuture);
-  bool get fetchingSelectedMainCatsRes => !_homeService.hasSelectedMainCats;
+  bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
 
   /// GETTER for combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get resWithProms {
@@ -92,7 +92,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   late List<ReactiveServiceMixin> _reactiveServices;
 
   HomeViewModel() {
-    _reactToServices([_bottomCartService]);
+    _reactToServices([_bottomCartService, _homeService]);
   }
 
   void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {

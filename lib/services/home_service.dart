@@ -1,10 +1,18 @@
+import 'package:stacked/stacked.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/api_service.dart';
 
-class HomeService {
+// 1 For Reactive View
+class HomeService with ReactiveServiceMixin {
   final log = getLogger('HomeService');
+
+  HomeService() {
+    // 3
+    listenToReactiveValues([_fetchingSelectedMainCats]);
+  }
+
   final _api = locator<ApiService>();
 
   List<SliderModel>? _sliders = [];
@@ -32,9 +40,9 @@ class HomeService {
   List<Restaurant>? get selectedMainCatRestaurants =>
       _selectedMainCatRestaurants;
 
-  bool get hasSelectedMainCats =>
-      _selectedMainCatRestaurants != null &&
-      _selectedMainCatRestaurants!.isNotEmpty;
+  // 2
+  ReactiveValue<bool> _fetchingSelectedMainCats = ReactiveValue<bool>(false);
+  bool get fetchingSelectedMainCats => _fetchingSelectedMainCats.value;
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
@@ -63,8 +71,14 @@ class HomeService {
 
   Future<List<Restaurant>?> getSelectedMainCats(
       List<int> _selectedMainCats) async {
+    _fetchingSelectedMainCats.value = true;
+    log.i(
+        'BEFORE _fetchingSelectedMainCats: ${_fetchingSelectedMainCats.value}');
     _selectedMainCatRestaurants =
         await _api.getSelectedMainCats(_selectedMainCats);
+    _fetchingSelectedMainCats.value = false;
+    log.i(
+        'AFTER _fetchingSelectedMainCats: ${_fetchingSelectedMainCats.value}');
     log.i(_selectedMainCatRestaurants!.length);
     return _selectedMainCatRestaurants;
   }
