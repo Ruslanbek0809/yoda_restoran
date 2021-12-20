@@ -12,6 +12,7 @@ class MealViewModel extends ReactiveViewModel {
 
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _dialogService = locator<DialogService>();
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
@@ -82,6 +83,21 @@ class MealViewModel extends ReactiveViewModel {
     else
       _selectedCustomizables![mainVolumePos].add(customizableId!);
     notifyListeners();
+  }
+
+  /// SHOWS Clear or Navigate Cart Dialog
+  Future showClearOrNavigateCartDialog() async {
+    log.i('');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.basic,
+      title: 'Sebedi boşadyň',
+      description:
+          'Sebetde başga restorandan goşulan haryt bar. Täze sargyt etmek üçin ilki restorana sargydyňyzy ugradyň ýa-da sebedi boşadyň.',
+      mainButtonTitle: 'Sebedi boşat',
+      secondaryButtonTitle: 'Sebede geç',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
   }
 
   @override

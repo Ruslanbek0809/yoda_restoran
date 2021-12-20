@@ -378,14 +378,6 @@ class MealBottomSheet extends StatelessWidget {
                                   model.updateButtonToggle();
                                   model.updateBottomCartStatus();
                                 },
-                                // () {
-                                //   showAlertDialog(
-                                //     context: context,
-                                //     title: 'Täze sargyt üçin sebedi boşadyň',
-                                //     defaultActionText: 'Sebet',
-                                //     cancelActionText: 'Boşat',
-                                //   );
-                                // },
                               ),
                             ),
                           ],

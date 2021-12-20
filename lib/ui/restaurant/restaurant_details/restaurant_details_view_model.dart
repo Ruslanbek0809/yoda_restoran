@@ -82,13 +82,13 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
   Future showClearCartDialog() async {
     log.i('');
     await _dialogService.showCustomDialog(
-        variant: DialogType.basic,
-        title: 'This is a custom UI with Text as main button',
-        description:
-            'Sheck out the builder in the dialog_ui_register.dart file',
-        mainButtonTitle: 'Ok',
-        showIconInMainButton: false,
-        barrierDismissible: true);
+      variant: DialogType.basic,
+      title: 'This is a custom UI with Text as main button',
+      description: 'Sheck out the builder in the dialog_ui_register.dart file',
+      mainButtonTitle: 'Ok',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
