@@ -17,7 +17,6 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
   final _restaurantService = locator<RestaurantService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
-  final _dialogService = locator<DialogService>();
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -75,19 +74,6 @@ class RestaurantDetailsViewModel extends ReactiveViewModel {
       enableDrag: true,
       isScrollControlled: true,
       data: restaurant,
-    );
-  }
-
-  /// SHOWS Clear Cart Dialog
-  Future showClearCartDialog() async {
-    log.i('');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.basic,
-      title: 'This is a custom UI with Text as main button',
-      description: 'Sheck out the builder in the dialog_ui_register.dart file',
-      mainButtonTitle: 'Ok',
-      showIconInMainButton: false,
-      barrierDismissible: true,
     );
   }
 
