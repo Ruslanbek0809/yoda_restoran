@@ -29,8 +29,9 @@ class MainCatViewModel extends ReactiveViewModel {
   /// ADD or REMOVE mainCategory to/from _multiSelectionList
   Future<void> updateSelectedMainCats(int? mainCatId) async {
     _mainCatService.updateSelectedMainCats(mainCatId);
-    await _homeService.updateSelectedMainCats(
-        _selectedMainCats); // FETCH HOME to SHOW RESULT of selectedMainCats
+    if (_selectedMainCats.isNotEmpty)
+      await _homeService.getSelectedMainCats(
+          _selectedMainCats); // FETCH HOME to SHOW RESULT of selectedMainCats
     _mainCatService.updateSortAnimationStatus();
     log.i(_selectedMainCats);
     notifyListeners();

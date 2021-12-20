@@ -83,6 +83,31 @@ class ApiService {
     }
   }
 
+  Future<List<Restaurant>> getSelectedMainCats(
+      List<int> _selectedMainCats) async {
+    List<Restaurant> _selectedMainCatRestaurants = [];
+    Map<String, dynamic> _queryPars = {};
+    _queryPars = {
+      for (int _selectedMainCat in _selectedMainCats)
+        'mainCat': _selectedMainCat
+    }; // CREATES new map list => 'mainCat': 1, 'mainCat': 2
+
+    try {
+      Response response = await _apiRoot.dio
+          .get('api/restaurants/', queryParameters: _queryPars);
+
+      if (response.data != null) {
+        response.data.forEach((_promoted) {
+          _selectedMainCatRestaurants.add(Restaurant.fromJson(_promoted));
+        });
+      }
+      return _selectedMainCatRestaurants;
+    } catch (error) {
+      log.v('ERROR on api/promoted/ :$error');
+      rethrow;
+    }
+  }
+
   //------------------ RESTAURANT APIS ---------------------//
 
   Future<List<ResCategory>> getResCatsWithMeals(int restaurantId) async {

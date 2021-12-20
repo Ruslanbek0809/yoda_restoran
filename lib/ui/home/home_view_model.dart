@@ -30,7 +30,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
-  List<int> get multiSelectionList => _mainCatService.selectedMainCats;
+  List<int> get selectedMainCats => _mainCatService.selectedMainCats;
 
   /// Combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get resWithProms {

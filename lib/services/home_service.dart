@@ -27,6 +27,11 @@ class HomeService {
 
   bool get hasProms => _proms != null && _proms!.isNotEmpty;
 
+  // ------- SELECTECTED MAIN CAT RESTAURANTS --------//
+  List<Restaurant>? _selectedMainCatRestaurants = [];
+  List<Restaurant>? get selectedMainCatRestaurants =>
+      _selectedMainCatRestaurants;
+
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
     log.i(_sliders!.length);
@@ -52,5 +57,10 @@ class HomeService {
     return _proms;
   }
 
-  Future updateSelectedMainCats(List<int> multiSelectionList) async {}
+  Future<List<Restaurant>?> getSelectedMainCats(
+      List<int> _selectedMainCats) async {
+    _selectedMainCatRestaurants = await _api.getRandomRess();
+    log.i(_selectedMainCatRestaurants!.length);
+    return _selectedMainCatRestaurants;
+  }
 }
