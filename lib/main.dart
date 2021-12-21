@@ -6,6 +6,7 @@ import 'package:yoda_res/ui/setup_dialog.dart';
 import 'package:yoda_res/yoda_res_app.dart';
 
 import 'app/app.locator.dart';
+import 'models/hive_models/hive_models.dart';
 import 'ui/setup_bottom_sheet.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -19,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
+  Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();
