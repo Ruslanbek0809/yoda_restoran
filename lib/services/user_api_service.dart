@@ -26,14 +26,15 @@ class UserApiService {
     log.i(
         'Phone: +993${phone.replaceAll(' ', '')},type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
 
+    final FormData userFormData = FormData.fromMap({
+      'mobile': '+993${phone.replaceAll(' ', '')}',
+      'type': Platform.isAndroid ? 'android' : 'ios',
+      'registration_id': _pushNotificationService.fcmToken,
+    });
     try {
-      Response response = await _apiRoot.dio.get(
+      Response response = await _apiRoot.dio.post(
         'auth/login/',
-        queryParameters: {
-          'mobile': '+993${phone.replaceAll(' ', '')}',
-          'type': Platform.isAndroid ? 'android' : 'ios',
-          'registration_id': _pushNotificationService.fcmToken,
-        },
+        data: userFormData,
       );
       log.v('RESPONSE: auth/login/ => ${response.data}');
 
