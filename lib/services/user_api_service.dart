@@ -53,13 +53,18 @@ class UserApiService {
   Future<void> verifyUser(String otp) async {
     log.i('Otp: $otp, Phone: $_phone');
 
+    final FormData otpFormData = FormData.fromMap({
+      'mobile': _phone,
+      'otp': otp,
+    });
     try {
-      Response response = await _apiRoot.dio.get(
-        'auth/verify/', 
+      Response response = await _apiRoot.dio.post(
+        'auth/verify/',
+        data: otpFormData,
       );
       log.v('RESPONSE: auth/verify/ => ${response.data}');
 
-      if (response.data != null) _otp = response.data;
+      // if (response.data != null) _otp = response.data;
     } catch (error) {
       log.v('ERROR on auth/verify/ :$error');
       throw DioErrorType.response;
