@@ -39,7 +39,7 @@ class UserApiService {
       log.v('RESPONSE: auth/login/ => ${response.data}');
 
       if (response.data != null) {
-        _otp = response.data; // This _otp var is used for testing ONLY
+        _otp = response.data['otp']; // This _otp var is used for testing ONLY
 
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
@@ -55,11 +55,7 @@ class UserApiService {
 
     try {
       Response response = await _apiRoot.dio.get(
-        'auth/verify/',
-        queryParameters: {
-          'mobile': _phone,
-          'otp': otp,
-        },
+        'auth/verify/', 
       );
       log.v('RESPONSE: auth/verify/ => ${response.data}');
 
