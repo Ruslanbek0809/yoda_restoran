@@ -42,7 +42,12 @@ dependencies:
   # STORAGE
   shared_preferences: ^2.0.7
 
+  # DB
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
+
   # TOOLS
+  hive_generator: ^1.1.1
   package_info: ^2.0.2
   intl: ^0.17.0
   json_annotation: ^4.4.0
