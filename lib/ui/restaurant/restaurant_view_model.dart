@@ -5,8 +5,8 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 
-class RestaurantViewModel extends BaseViewModel {
-  final log = getLogger('RestaurantViewModel');
+class ResViewModel extends BaseViewModel {
+  final log = getLogger('ResViewModel');
 
   final _navService = locator<NavigationService>();
 
@@ -20,7 +20,7 @@ class RestaurantViewModel extends BaseViewModel {
   }
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
-        Routes.restaurantDetailsView,
-        arguments: RestaurantDetailsViewArguments(restaurant: restaurant),
+        Routes.resDetailsView,
+        arguments: ResDetailsViewArguments(restaurant: restaurant),
       );
 }

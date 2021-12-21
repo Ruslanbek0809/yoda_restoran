@@ -22,7 +22,7 @@ import '../ui/startup/startup_view.dart';
 class Routes {
   static const String startUpView = '/';
   static const String homeView = '/home-view';
-  static const String restaurantDetailsView = '/restaurant-details-view';
+  static const String resDetailsView = '/res-details-view';
   static const String restaurantSearchView = '/restaurant-search-view';
   static const String loginView = '/login-view';
   static const String otpView = '/otp-view';
@@ -30,7 +30,7 @@ class Routes {
   static const all = <String>{
     startUpView,
     homeView,
-    restaurantDetailsView,
+    resDetailsView,
     restaurantSearchView,
     loginView,
     otpView,
@@ -44,7 +44,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.homeView, page: HomeView),
-    RouteDef(Routes.restaurantDetailsView, page: ResDetailsView),
+    RouteDef(Routes.resDetailsView, page: ResDetailsView),
     RouteDef(Routes.restaurantSearchView, page: RestaurantSearchView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.otpView, page: OtpView),
@@ -66,7 +66,7 @@ class StackedRouter extends RouterBase {
       );
     },
     ResDetailsView: (data) {
-      var args = data.getArgs<RestaurantDetailsViewArguments>(nullOk: false);
+      var args = data.getArgs<ResDetailsViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => ResDetailsView(
           restaurant: args.restaurant,
@@ -108,11 +108,11 @@ class StackedRouter extends RouterBase {
 /// Arguments holder classes
 /// *************************************************************************
 
-/// RestaurantDetailsView arguments holder class
-class RestaurantDetailsViewArguments {
+/// ResDetailsView arguments holder class
+class ResDetailsViewArguments {
   final Restaurant restaurant;
   final Key? key;
-  RestaurantDetailsViewArguments({required this.restaurant, this.key});
+  ResDetailsViewArguments({required this.restaurant, this.key});
 }
 
 /// RestaurantSearchView arguments holder class

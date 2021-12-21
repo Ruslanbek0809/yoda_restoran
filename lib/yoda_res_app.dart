@@ -26,10 +26,6 @@ class YodaResApp extends StatelessWidget {
 
         onGenerateRoute: StackedRouter()
             .onGenerateRoute, // Auto generates all routes using stacked package
-
-        // routes: Routes.getAllRoutes,
-        // navigatorKey: yodaResNavigatorKey,
-        // onGenerateRoute: Routes.getRouteGenerate,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

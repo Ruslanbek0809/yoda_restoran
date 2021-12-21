@@ -7,6 +7,10 @@ class Constants {
   /// Firebase topic name
   static const topicAllDevices = 'yoda_res';
 
+  // Hive
+  static const cartMealsBox = 'cartMealsBox';
+  static const cartResBox = 'cartResBox';
+
   /// SharedPreferences
   static const currentLang = 'currentLang';
   static const accessToken = 'accessToken';

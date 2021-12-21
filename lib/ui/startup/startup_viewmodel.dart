@@ -11,6 +11,7 @@ class StartUpViewModel extends BaseViewModel {
   final _apiRootService = locator<ApiRootService>();
   final _navService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
+  final _hvDbService = locator<HvDbService>();
 
   Future<void> runStartupLogic() async {
     log.i('Started');
@@ -20,10 +21,11 @@ class StartUpViewModel extends BaseViewModel {
         .initialise()); // Here we initialise fcm using PushNotificationService
 
     await _apiRootService.initDio();
+    await _hvDbService.initDB();
 
     log.i('Ended');
-    // _navService.replaceWith(Routes.homeView);
-    _navService.replaceWith(Routes.loginView);
+    _navService.replaceWith(Routes.homeView);
+    // _navService.replaceWith(Routes.loginView);
 
     // if (_userService.hasLoggedInUser) {
     //   log.v('We have a user session on disk. Sync the user profile ...');

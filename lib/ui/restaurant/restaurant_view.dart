@@ -12,7 +12,7 @@ class RestaurantView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<RestaurantViewModel>.reactive(
+    return ViewModelBuilder<ResViewModel>.reactive(
       builder: (context, model, child) {
         return Container(
           height: 0.3.sh,
@@ -147,7 +147,7 @@ class RestaurantView extends StatelessWidget {
           ),
         );
       },
-      viewModelBuilder: () => RestaurantViewModel(),
+      viewModelBuilder: () => ResViewModel(),
     );
   }
 }
