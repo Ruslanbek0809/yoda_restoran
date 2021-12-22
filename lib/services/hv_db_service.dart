@@ -22,7 +22,7 @@ class HiveDbService {
   /// GETS all CART meals in onModelReady()
   void getCartMeals() {
     log.i('');
-    
+
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     _cartMeals = cartMealsBox.values.toList();
   }
@@ -75,4 +75,11 @@ class HiveDbService {
     log.i('_cartMeals[pos].quantity: ${_cartMeals[pos].quantity}');
   }
 
+  Future<void> clearCart() async {
+    printLog('');
+
+    await cartMealsBox.clear();
+    _cartMeals.clear();
+    log.i('_cartMeals length: ${_cartMeals.length}');
+  }
 }
