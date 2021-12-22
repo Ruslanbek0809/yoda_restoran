@@ -4,9 +4,20 @@ part 'hive_meal.g.dart';
 
 /// Removed description, approved, available, restaurantId, categoryId, data_begin, data_end, value, sizeId, SizeModel
 /// Needed gVolumes, gCustomizes
-/// Added quantity
+/// Added quantity, increment
 @HiveType(typeId: 0)
 class HiveMeal {
+  HiveMeal({
+    this.id,
+    this.image,
+    this.name,
+    this.price,
+    this.discount,
+    this.discountedPrice,
+    this.increment,
+    this.quantity,
+  });
+
   @HiveField(0)
   int? id;
 

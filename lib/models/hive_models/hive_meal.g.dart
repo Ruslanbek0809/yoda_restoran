@@ -16,15 +16,16 @@ class HiveMealAdapter extends TypeAdapter<HiveMeal> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HiveMeal()
-      ..id = fields[0] as int?
-      ..image = fields[1] as String?
-      ..name = fields[2] as String?
-      ..price = fields[3] as num?
-      ..discount = fields[4] as num?
-      ..discountedPrice = fields[5] as num?
-      ..increment = fields[6] as num?
-      ..quantity = fields[7] as num?;
+    return HiveMeal(
+      id: fields[0] as int?,
+      image: fields[1] as String?,
+      name: fields[2] as String?,
+      price: fields[3] as num?,
+      discount: fields[4] as num?,
+      discountedPrice: fields[5] as num?,
+      increment: fields[6] as num?,
+      quantity: fields[7] as num?,
+    );
   }
 
   @override
