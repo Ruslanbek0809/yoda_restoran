@@ -19,25 +19,25 @@ class HiveMeal {
   });
 
   @HiveField(0)
-  int? id;
+  final int? id;
 
   @HiveField(1)
-  String? image;
+  final String? image;
 
   @HiveField(2)
-  String? name;
+  final String? name;
 
   @HiveField(3)
-  num? price;
+  final num? price;
 
   @HiveField(4)
-  int? discount;
+  final int? discount;
 
   @HiveField(5)
-  num? discountedPrice;
+  final num? discountedPrice;
 
   @HiveField(6)
-  num? increment; // Incrementing quantity of a product for each step
+  final num? increment; // Incrementing quantity of a product for each step
 
   @HiveField(7)
   int? quantity;
