@@ -24,7 +24,7 @@ class HiveMealAdapter extends TypeAdapter<HiveMeal> {
       discount: fields[4] as num?,
       discountedPrice: fields[5] as num?,
       increment: fields[6] as num?,
-      quantity: fields[7] as num?,
+      quantity: fields[7] as int?,
     );
   }
 

@@ -14,12 +14,16 @@ class MealViewModel extends ReactiveViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
+  final _hiveDbService = locator<HiveDbService>();
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
 
   bool _isButtonToggled = false;
   bool get isButtonToggled => _isButtonToggled;
+
+  int _quantity = 0;
+  int get quantity => _quantity;
 
   /// Function to update isButtonToggled
   void updateButtonToggle() {
@@ -34,6 +38,13 @@ class MealViewModel extends ReactiveViewModel {
 
     log.i('bottomCartStatus: $bottomCartStatus');
     notifyListeners();
+  }
+
+  //----------- HIVE DB PART ------------//
+
+  void getMealQuantity(int? mealId) {
+    _quantity = _hiveDbService.getMealQuantity(mealId)!;
+    log.i('_quantity: $_quantity');
   }
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//

@@ -27,7 +27,7 @@ class HiveDbService {
     _cartMeals = cartMealsBox.values.toList();
   }
 
-  num? getMealQuantity({int? mealId}) {
+  int? getMealQuantity(int? mealId) {
     log.i('');
 
     int pos = _cartMeals.indexWhere((_meal) => _meal.id == mealId);

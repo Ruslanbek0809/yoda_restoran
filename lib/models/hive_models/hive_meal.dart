@@ -40,5 +40,5 @@ class HiveMeal {
   num? increment; // Incrementing quantity of a product for each step
 
   @HiveField(7)
-  num? quantity;
+  int? quantity;
 }
