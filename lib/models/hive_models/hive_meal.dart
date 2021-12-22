@@ -4,7 +4,7 @@ part 'hive_meal.g.dart';
 
 /// Removed description, approved, available, restaurantId, categoryId, data_begin, data_end, value, sizeId, SizeModel
 /// Needed gVolumes, gCustomizes
-/// Added quantity, increment
+/// Added quantity
 @HiveType(typeId: 0)
 class HiveMeal {
   HiveMeal({
@@ -14,7 +14,6 @@ class HiveMeal {
     this.price,
     this.discount,
     this.discountedPrice,
-    this.increment,
     this.quantity,
   });
 
@@ -35,9 +34,6 @@ class HiveMeal {
 
   @HiveField(5)
   final num? discountedPrice;
-
-  @HiveField(6)
-  final num? increment; // Incrementing quantity of a product for each step
 
   @HiveField(7)
   int? quantity;

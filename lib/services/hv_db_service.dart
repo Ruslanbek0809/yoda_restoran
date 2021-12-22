@@ -7,8 +7,10 @@ import 'package:yoda_res/utils/utils.dart';
 class HiveDbService {
   final log = getLogger('HiveDbService');
 
-  // static late Box<HiveMeal> cartResBox; // Change model type in
+  static late Box<HiveRestaurant> cartResBox; // Change model type in
   static late Box<HiveMeal> cartMealsBox;
+
+  HiveRestaurant? cartRes;
 
   List<HiveMeal> cartMeals = [];
   // List<HiveMeal> get cartMeals => [..._cartMeals];
@@ -16,11 +18,20 @@ class HiveDbService {
   /// INITIALIZE in StartUpViewModel
   Future initDB() async {
     log.i('');
-    // await Hive.openBox<HiveMeal>(Constants.cartResBox);
+
+    await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
   }
 
-  /// GETS all CART meals in onModelReady()
+  /// GETS CART restaurant from cartResBox
+  void getCartRes() {
+    cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
+    cartRes = cartResBox.get('cartRes');
+
+    log.i('cartRes $cartRes');
+  }
+
+  /// GETS all CART meals from cartMealsBox
   void getCartMeals() {
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     cartMeals = cartMealsBox.values.toList();

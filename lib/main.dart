@@ -20,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
+  Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   setupLocator();
   setupBottomSheet();

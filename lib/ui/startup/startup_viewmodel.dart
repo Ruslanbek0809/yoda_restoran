@@ -11,7 +11,7 @@ class StartUpViewModel extends BaseViewModel {
   final _apiRootService = locator<ApiRootService>();
   final _navService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
-  final _hvDbService = locator<HiveDbService>();
+  final _hiveDbService = locator<HiveDbService>();
 
   Future<void> runStartupLogic() async {
     log.i('Started');
@@ -21,10 +21,9 @@ class StartUpViewModel extends BaseViewModel {
         .initialise()); // Here we initialise fcm using PushNotificationService
 
     await _apiRootService.initDio();
-    await _hvDbService.initDB();
-    _hvDbService.getCartMeals();
-
-    /// GETS all CART meals inside hive box
+    await _hiveDbService.initDB();
+    _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
+    _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
     log.i('Ended');
     _navService.replaceWith(Routes.homeView);

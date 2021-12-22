@@ -19,7 +19,9 @@ class HiveRestaurant {
     this.prepareTime,
   });
 
-  @HiveField(0)
+  @HiveField(0, defaultValue: -1)
+
+  /// TODO: Remove if not needed. Used for default ID testing
   final int? id;
 
   @HiveField(1)
