@@ -19,16 +19,30 @@ class HiveDbService {
     await Hive.openBox(Constants.cartMealsBox);
   }
 
+  /// GETS all CART meals in onModelReady()
   void getCartMeals() {
     log.i('');
+
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     _cartMeals = cartMealsBox.values.toList();
   }
 
-  Future<void> addMealToCart({Meal? meal, num? quantity = 1}) async {
+  num? getMealQuantity({int? mealId}) {
+    log.i('');
+
+    int pos = _cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    if (pos == -1) return 0;
+    log.i('_cartMeals[pos].id: ${_cartMeals[pos].id}');
+    return _cartMeals[pos].quantity;
+  }
+
+  /// ADDS a meal to CART
+  Future<void> addMealToCart(Meal? meal, {int? quantity = 1}) async {
+    log.i('mealId: ${meal!.id}, quantity: $quantity');
+
     try {
       final HiveMeal _cartMeal = HiveMeal(
-        id: meal!.id,
+        id: meal.id,
         image: meal.image,
         name: meal.name,
         price: meal.price,
@@ -38,8 +52,9 @@ class HiveDbService {
       );
       await cartMealsBox.add(_cartMeal);
       _cartMeals.add(_cartMeal);
+      log.i('_cartMeals length: ${_cartMeals.length}');
     } catch (e) {
-      log.v('Could ADD a meal to cart: $e');
+      log.v('Couldn\'t ADD a meal to CART: $e');
     }
   }
 }
