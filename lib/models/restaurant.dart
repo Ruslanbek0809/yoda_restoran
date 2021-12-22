@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'restaurant.g.dart';
 
+/// TODO: Add payments list here
 @JsonSerializable()
 class Restaurant {
   Restaurant({
@@ -15,8 +16,6 @@ class Restaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
-    this.disabled,
-    this.approved,
   });
 
   @JsonKey(name: 'id')
@@ -51,12 +50,6 @@ class Restaurant {
 
   @JsonKey(name: 'prepareTime')
   final String? prepareTime;
-
-  @JsonKey(name: 'disabled')
-  final bool? disabled;
-
-  @JsonKey(name: 'approved')
-  final bool? approved;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
       _$RestaurantFromJson(json);

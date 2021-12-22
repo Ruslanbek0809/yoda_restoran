@@ -8,7 +8,7 @@ import 'package:yoda_res/utils/utils.dart';
 
 /// ReactiveViewModel is used to "react"
 class MealViewModel extends ReactiveViewModel {
-  final log = getLogger('FoodViewModel');
+  final log = getLogger('MealViewModel');
 
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
@@ -64,10 +64,11 @@ class MealViewModel extends ReactiveViewModel {
   }
 
   /// UPDATES a meal in CART. Also UPDATES _quantity and _isButtonToggled
-  Future<void> updateMealInCart({int? mealId, int? quantity}) async {
-    log.i('updateMealInCart() mealId: $mealId, quantity: $quantity');
+  Future<void> updateMealInCart({int? mealId, int? mealQuantity}) async {
+    log.i('updateMealInCart() mealId: $mealId, mealQuantity: $mealQuantity');
 
-    await _hiveDbService.updateMealInCart(mealId: mealId, quantity: quantity);
+    await _hiveDbService.updateMealInCart(
+        mealId: mealId, quantity: mealQuantity);
     quantity = _hiveDbService.getMealQuantity(mealId)!;
     if (quantity >= 1)
       _isButtonToggled = true;

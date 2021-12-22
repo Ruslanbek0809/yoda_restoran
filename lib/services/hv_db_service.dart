@@ -67,11 +67,11 @@ class HiveDbService {
     if (pos == -1) return;
 
     if (quantity! >= 1) {
-      cartMealsBox.deleteAt(pos);
-      cartMeals.removeAt(pos);
-    } else {
       cartMeals[pos].quantity = quantity;
       cartMealsBox.putAt(pos, cartMeals[pos]);
+    } else {
+      cartMealsBox.deleteAt(pos);
+      cartMeals.removeAt(pos);
     }
     log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
   }

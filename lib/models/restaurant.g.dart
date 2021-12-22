@@ -18,8 +18,6 @@ Restaurant _$RestaurantFromJson(Map<String, dynamic> json) => Restaurant(
       workingHours: json['workingHours'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       prepareTime: json['prepareTime'] as String?,
-      disabled: json['disabled'] as bool?,
-      approved: json['approved'] as bool?,
     );
 
 Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
@@ -35,6 +33,4 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'workingHours': instance.workingHours,
       'phoneNumber': instance.phoneNumber,
       'prepareTime': instance.prepareTime,
-      'disabled': instance.disabled,
-      'approved': instance.approved,
     };
