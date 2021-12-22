@@ -31,5 +31,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => RestaurantService());
   locator.registerLazySingleton(() => MainCatService());
   locator.registerLazySingleton(() => PushNotificationService());
-  locator.registerLazySingleton(() => HvDbService());
+  locator.registerLazySingleton(() => HiveDbService());
 }

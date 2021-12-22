@@ -31,7 +31,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     LazySingleton(classType: RestaurantService),
     LazySingleton(classType: MainCatService),
     LazySingleton(classType: PushNotificationService),
-    LazySingleton(classType: HvDbService),
+    LazySingleton(classType: HiveDbService),
   ],
   logger: StackedLogger(),
 )

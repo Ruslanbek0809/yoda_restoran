@@ -11,7 +11,7 @@ class StartUpViewModel extends BaseViewModel {
   final _apiRootService = locator<ApiRootService>();
   final _navService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
-  final _hvDbService = locator<HvDbService>();
+  final _hvDbService = locator<HiveDbService>();
 
   Future<void> runStartupLogic() async {
     log.i('Started');
