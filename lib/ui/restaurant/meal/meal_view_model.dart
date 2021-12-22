@@ -56,7 +56,23 @@ class MealViewModel extends ReactiveViewModel {
 
     await _hiveDbService.addMealToCart(meal);
     _quantity = _hiveDbService.getMealQuantity(meal.id)!;
-    if (quantity >= 1) _isButtonToggled = true;
+    if (_quantity >= 1) _isButtonToggled = true;
+
+    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    notifyListeners();
+  }
+
+  /// UPDATES a meal in CART. Also UPDATES _quantity and _isButtonToggled
+  Future<void> updateMealInCart({int? mealId, int? quantity}) async {
+    log.i('mealId: $mealId, quantity: $quantity');
+
+    await _hiveDbService.updateMealInCart(mealId: mealId, quantity: quantity);
+    _quantity = _hiveDbService.getMealQuantity(mealId)!;
+    if (_quantity >= 1)
+      _isButtonToggled = true;
+    else
+      _isButtonToggled = false;
+
     log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
