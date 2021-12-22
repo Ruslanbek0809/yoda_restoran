@@ -12,15 +12,13 @@ import 'package:yoda_res/utils/utils.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResDetailsMainHook
-    extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   final Restaurant restaurant;
   const ResDetailsMainHook({required this.restaurant, Key? key})
       : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, ResDetailsViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.31.sw; // 0.31.sw is for item height
@@ -408,7 +406,7 @@ class ResDetailsMainHook
                 itemCount: model.resCategories!.length,
                 itemBuilder: (context, index) {
                   final resCategory = model.resCategories![index];
-                  final resCategoryMeals = model.resCategories![index].meals;
+                  final resCategoryMeals = resCategory.meals;
                   return Column(
                     children: [
                       Container(

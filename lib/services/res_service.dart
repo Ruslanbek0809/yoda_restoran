@@ -4,11 +4,11 @@ import 'package:yoda_res/models/models.dart';
 
 import 'api_service.dart';
 
-class RestaurantService {
-  final log = getLogger('RestaurantService');
+class ResService {
+  final log = getLogger('ResService');
   final _api = locator<ApiService>();
 
-  List<ResCategory>? _resCategories;
+  List<ResCategory>? _resCategories = [];
   List<ResCategory>? get resCategories => _resCategories;
 
   bool get hasResCategories =>

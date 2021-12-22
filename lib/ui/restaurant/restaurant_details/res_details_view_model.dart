@@ -14,7 +14,7 @@ class ResDetailsViewModel extends ReactiveViewModel {
   final log = getLogger('ResDetailsViewModel');
 
   final _navService = locator<NavigationService>();
-  final _restaurantService = locator<RestaurantService>();
+  final _resService = locator<ResService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
 
@@ -28,7 +28,7 @@ class ResDetailsViewModel extends ReactiveViewModel {
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
-  List<ResCategory>? get resCategories => _restaurantService.resCategories;
+  List<ResCategory>? get resCategories => _resService.resCategories;
 
   /// Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
@@ -58,9 +58,9 @@ class ResDetailsViewModel extends ReactiveViewModel {
   }
 
   // FETCHS Restaurant categories with their meals
-  Future getResCatsWithMeals(int restaurantId) async {
+  Future getResCatsWithMeals(int resId) async {
     log.i('');
-    await runBusyFuture(_restaurantService.getResCatsWithMeals(restaurantId));
+    await runBusyFuture(_resService.getResCatsWithMeals(resId));
     log.i('resCategories length: ${resCategories!.length}');
   }
 

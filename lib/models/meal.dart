@@ -42,7 +42,7 @@ class Meal {
   final bool? approved;
 
   @JsonKey(name: 'discount')
-  final int? discount;
+  final num? discount;
 
   @JsonKey(name: 'price')
   final num? price;

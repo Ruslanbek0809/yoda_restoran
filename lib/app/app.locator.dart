@@ -28,7 +28,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => UserApiService());
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => BottomCartService());
-  locator.registerLazySingleton(() => RestaurantService());
+  locator.registerLazySingleton(() => ResService());
   locator.registerLazySingleton(() => MainCatService());
   locator.registerLazySingleton(() => PushNotificationService());
   locator.registerLazySingleton(() => HiveDbService());

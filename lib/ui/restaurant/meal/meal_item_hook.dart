@@ -80,7 +80,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             ),
                             child: FittedBox(
                               child: Text(
-                                '-${meal.discount!}%',
+                                '-${meal.discount!.toInt()}%',
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   color: kcWhiteColor,

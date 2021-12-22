@@ -22,8 +22,7 @@ class MealViewModel extends ReactiveViewModel {
   bool _isButtonToggled = false;
   bool get isButtonToggled => _isButtonToggled;
 
-  int _quantity = 0;
-  int get quantity => _quantity;
+  int quantity = 0;
 
   /// Function to update isButtonToggled
   void updateButtonToggle() {
@@ -44,36 +43,39 @@ class MealViewModel extends ReactiveViewModel {
 
   /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
   void getMealQuantity(int? mealId) {
-    _quantity = _hiveDbService.getMealQuantity(mealId)!;
+    quantity = _hiveDbService.getMealQuantity(mealId)!;
     if (quantity >= 1) _isButtonToggled = true;
-    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    log.i(
+        'getMealQuantity() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
   /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
   Future<void> addMealToCart(Meal? meal) async {
-    log.i('mealId: ${meal!.id}');
+    log.i('addMealToCart() mealId: ${meal!.id}');
 
     await _hiveDbService.addMealToCart(meal);
-    _quantity = _hiveDbService.getMealQuantity(meal.id)!;
-    if (_quantity >= 1) _isButtonToggled = true;
+    quantity = _hiveDbService.getMealQuantity(meal.id)!;
+    if (quantity >= 1) _isButtonToggled = true;
 
-    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    log.i(
+        'addMealToCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
   /// UPDATES a meal in CART. Also UPDATES _quantity and _isButtonToggled
   Future<void> updateMealInCart({int? mealId, int? quantity}) async {
-    log.i('mealId: $mealId, quantity: $quantity');
+    log.i('updateMealInCart() mealId: $mealId, quantity: $quantity');
 
     await _hiveDbService.updateMealInCart(mealId: mealId, quantity: quantity);
-    _quantity = _hiveDbService.getMealQuantity(mealId)!;
-    if (_quantity >= 1)
+    quantity = _hiveDbService.getMealQuantity(mealId)!;
+    if (quantity >= 1)
       _isButtonToggled = true;
     else
       _isButtonToggled = false;
 
-    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    log.i(
+        'updateMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 

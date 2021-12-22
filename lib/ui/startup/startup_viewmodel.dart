@@ -22,6 +22,9 @@ class StartUpViewModel extends BaseViewModel {
 
     await _apiRootService.initDio();
     await _hvDbService.initDB();
+    _hvDbService.getCartMeals();
+
+    /// GETS all CART meals inside hive box
 
     log.i('Ended');
     _navService.replaceWith(Routes.homeView);

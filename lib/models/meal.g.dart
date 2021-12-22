@@ -12,7 +12,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       name: json['name'] as String?,
       description: json['description'] as String?,
       approved: json['approved'] as bool?,
-      discount: json['discount'] as int?,
+      discount: json['discount'] as num?,
       price: json['price'] as num?,
       discountedPrice: json['discountedPrice'] as num?,
       available: json['available'] as bool?,

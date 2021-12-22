@@ -7,34 +7,34 @@ import 'package:yoda_res/utils/utils.dart';
 class HiveDbService {
   final log = getLogger('HiveDbService');
 
-  static late Box<HiveMeal> cartResBox; // Change model type in
+  // static late Box<HiveMeal> cartResBox; // Change model type in
   static late Box<HiveMeal> cartMealsBox;
 
-  List<HiveMeal> _cartMeals = [];
-  List<HiveMeal> get cartMeals => [..._cartMeals];
+  List<HiveMeal> cartMeals = [];
+  // List<HiveMeal> get cartMeals => [..._cartMeals];
 
   /// INITIALIZE in StartUpViewModel
   Future initDB() async {
-    await Hive.openBox<HiveMeal>(Constants.cartResBox);
-    await Hive.openBox(Constants.cartMealsBox);
+    log.i('');
+    // await Hive.openBox<HiveMeal>(Constants.cartResBox);
+    await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
   }
 
   /// GETS all CART meals in onModelReady()
   void getCartMeals() {
-    log.i('');
-
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
-    _cartMeals = cartMealsBox.values.toList();
+    cartMeals = cartMealsBox.values.toList();
+
+    log.i('${cartMeals.length}');
   }
 
   /// GETS quantity of cartMeal for this meal
   int? getMealQuantity(int? mealId) {
-    log.i('');
-
-    int pos = _cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
     if (pos == -1) return 0;
-    log.i('_cartMeals[pos].id: ${_cartMeals[pos].id}');
-    return _cartMeals[pos].quantity;
+
+    log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
+    return cartMeals[pos].quantity;
   }
 
   /// ADDS a meal to CART
@@ -47,13 +47,13 @@ class HiveDbService {
         image: meal.image,
         name: meal.name,
         price: meal.price,
-        discount: meal.discount,
+        discount: meal.discount!.toInt(),
         discountedPrice: meal.discountedPrice,
         quantity: quantity,
       );
       await cartMealsBox.add(_cartMeal);
-      _cartMeals.add(_cartMeal);
-      log.i('_cartMeals length: ${_cartMeals.length}');
+      cartMeals.add(_cartMeal);
+      log.i('cartMeals length: ${cartMeals.length}');
     } catch (e) {
       log.v('Couldn\'t ADD a meal to CART: $e');
     }
@@ -63,24 +63,22 @@ class HiveDbService {
     log.i('mealId: $mealId, quantity: $quantity');
 
     /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
-    int pos = _cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
     if (pos == -1) return;
 
     if (quantity! >= 1) {
       cartMealsBox.deleteAt(pos);
-      _cartMeals.removeAt(pos);
+      cartMeals.removeAt(pos);
     } else {
-      _cartMeals[pos].quantity = quantity;
-      cartMealsBox.putAt(pos, _cartMeals[pos]);
+      cartMeals[pos].quantity = quantity;
+      cartMealsBox.putAt(pos, cartMeals[pos]);
     }
-    log.i('_cartMeals[pos].quantity: ${_cartMeals[pos].quantity}');
+    log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
   }
 
   Future<void> clearCart() async {
-    printLog('');
-
     await cartMealsBox.clear();
-    _cartMeals.clear();
-    log.i('_cartMeals length: ${_cartMeals.length}');
+    cartMeals.clear();
+    log.i('cartMeals length: ${cartMeals.length}');
   }
 }

@@ -28,7 +28,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     LazySingleton(classType: UserApiService),
     LazySingleton(classType: HomeService),
     LazySingleton(classType: BottomCartService),
-    LazySingleton(classType: RestaurantService),
+    LazySingleton(classType: ResService),
     LazySingleton(classType: MainCatService),
     LazySingleton(classType: PushNotificationService),
     LazySingleton(classType: HiveDbService),
