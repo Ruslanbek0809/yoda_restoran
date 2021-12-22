@@ -22,7 +22,7 @@ class HiveDbService {
   /// GETS all CART meals in onModelReady()
   void getCartMeals() {
     log.i('');
-
+    
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     _cartMeals = cartMealsBox.values.toList();
   }
@@ -57,4 +57,22 @@ class HiveDbService {
       log.v('Couldn\'t ADD a meal to CART: $e');
     }
   }
+
+  Future<void> updateMealInCart({int? mealId, int? quantity}) async {
+    log.i('mealId: $mealId, quantity: $quantity');
+
+    /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
+    int pos = _cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    if (pos == -1) return;
+
+    if (quantity! >= 1) {
+      cartMealsBox.deleteAt(pos);
+      _cartMeals.removeAt(pos);
+    } else {
+      _cartMeals[pos].quantity = quantity;
+      cartMealsBox.putAt(pos, _cartMeals[pos]);
+    }
+    log.i('_cartMeals[pos].quantity: ${_cartMeals[pos].quantity}');
+  }
+
 }
