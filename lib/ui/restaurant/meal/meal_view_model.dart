@@ -42,9 +42,12 @@ class MealViewModel extends ReactiveViewModel {
 
   //----------- HIVE DB PART ------------//
 
+  /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
   void getMealQuantity(int? mealId) {
     _quantity = _hiveDbService.getMealQuantity(mealId)!;
-    log.i('_quantity: $_quantity');
+    if (quantity >= 1) _isButtonToggled = true;
+    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    notifyListeners();
   }
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//

@@ -11,7 +11,8 @@ class MealView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MealViewModel>.nonReactive(
+    return ViewModelBuilder<MealViewModel>.reactive(
+      onModelReady: (model) => model.getMealQuantity(meal.id),
       builder: (context, model, child) => MealItemHook(meal: meal),
       viewModelBuilder: () => MealViewModel(),
     );

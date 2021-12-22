@@ -27,6 +27,7 @@ class HiveDbService {
     _cartMeals = cartMealsBox.values.toList();
   }
 
+  /// GETS quantity of cartMeal for this meal
   int? getMealQuantity(int? mealId) {
     log.i('');
 

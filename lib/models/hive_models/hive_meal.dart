@@ -31,7 +31,7 @@ class HiveMeal {
   num? price;
 
   @HiveField(4)
-  num? discount;
+  int? discount;
 
   @HiveField(5)
   num? discountedPrice;
