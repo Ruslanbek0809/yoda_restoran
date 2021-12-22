@@ -50,6 +50,17 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
+  Future<void> addMealToCart(Meal? meal) async {
+    log.i('mealId: ${meal!.id}');
+
+    await _hiveDbService.addMealToCart(meal);
+    _quantity = _hiveDbService.getMealQuantity(meal.id)!;
+    if (quantity >= 1) _isButtonToggled = true;
+    log.i('_quantity: $_quantity, _isButtonToggled: $_isButtonToggled');
+    notifyListeners();
+  }
+
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
   /// Function to call MealBottomSheet

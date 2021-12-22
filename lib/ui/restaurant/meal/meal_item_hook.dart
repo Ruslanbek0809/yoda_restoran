@@ -170,7 +170,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 ),
                               ),
                               Text(
-                                '1',
+                                model.quantity.toString(),
                                 style: ktsDefault18Text,
                               ),
                               Material(
@@ -214,7 +214,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       //// Bouncing animation trigger
                                       await _tweenController.forward();
 
-                                      model.updateButtonToggle();
+                                      model.addMealToCart(meal);
                                       model.updateBottomCartStatus();
                                     },
                               child: Ink(
