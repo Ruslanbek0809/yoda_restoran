@@ -4,7 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart_bottom_sheets/cart_order_bottom_sheet.dart';
-import 'cart_food/cart_food_view.dart';
+import 'cart_meal/cart_meal_view.dart';
 import 'cart_res_food/cart_res_food_view.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -81,9 +81,9 @@ class _CartViewState extends State<CartView> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(top: 15.w, left: 16.w, right: 16.w),
-                  itemCount: mealList.length,
+                  itemCount: model.cartMeals.length,
                   itemBuilder: (context, pos) {
-                    return CartFoodView(food: mealList[pos]);
+                    return CartMealView(meal: model.cartMeals[pos]);
                   },
                   separatorBuilder: (context, index) {
                     return Padding(

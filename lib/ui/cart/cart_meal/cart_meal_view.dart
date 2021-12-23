@@ -1,34 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
+import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-
-import 'cart_food_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CartFoodView extends StatefulWidget {
-  final MealUI food;
-  const CartFoodView({Key? key, required this.food}) : super(key: key);
+import 'cart_meal_view_model.dart';
 
-  @override
-  State<CartFoodView> createState() => _CartFoodViewState();
-}
-
-class _CartFoodViewState extends State<CartFoodView> {
-  void _onProductBottomSheetClicked(MealUI food) {
-    // showFoodBottomSheet(context, food);
-  }
+class CartMealView extends StatelessWidget {
+  final HiveMeal meal;
+  const CartMealView({Key? key, required this.meal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartFoodViewModel>.reactive(
+    return ViewModelBuilder<CartMealViewModel>.reactive(
       builder: (context, model, child) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           YodaImage(
-            image: widget.food.image,
+            image: meal.image!,
             height: 0.3.sw,
             width: 0.3.sw,
             borderRadius: Constants.BORDER_RADIUS_10,
@@ -46,18 +37,12 @@ class _CartFoodViewState extends State<CartFoodView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.food.name,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: AppTheme.FONT_COLOR,
-                        ),
+                        meal.name!,
+                        style: ktsDefault16Text,
                       ),
                       Text(
-                        '${widget.food.price} TMT',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: AppTheme.FONT_COLOR,
-                        ),
+                        '${meal.price} TMT',
+                        style: ktsDefault18Text,
                       ),
                     ],
                   ),
@@ -104,9 +89,7 @@ class _CartFoodViewState extends State<CartFoodView> {
                         elevation: 0,
                         child: InkWell(
                           borderRadius: AppTheme().radius15,
-                          onTap: () {
-                            _onProductBottomSheetClicked(widget.food);
-                          },
+                          onTap: () {},
                           child: Padding(
                             padding: EdgeInsets.all(10.w),
                             child: Icon(
@@ -125,7 +108,7 @@ class _CartFoodViewState extends State<CartFoodView> {
           ),
         ],
       ),
-      viewModelBuilder: () => CartFoodViewModel(),
+      viewModelBuilder: () => CartMealViewModel(),
     );
   }
 }
