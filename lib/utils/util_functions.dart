@@ -88,7 +88,7 @@ enum SortAnimationStatus { idle, forward, reverse }
 enum BottomSheetType { mainCategory, restaurantInfo, meal }
 
 /// Enum for dialog types
-enum DialogType { basic, cart }
+enum DialogType { basic, mealCartClear, cartClear }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

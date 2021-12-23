@@ -17,8 +17,10 @@ void setupDialog() {
   final builders = {
     DialogType.basic: (context, sheetRequest, completer) =>
         _BasicDialog(request: sheetRequest, completer: completer),
-    DialogType.cart: (context, sheetRequest, completer) =>
+    DialogType.mealCartClear: (context, sheetRequest, completer) =>
         MealDialogView(request: sheetRequest, completer: completer),
+    DialogType.cartClear: (context, sheetRequest, completer) =>
+        CartClearDialogView(request: sheetRequest, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
@@ -98,6 +100,86 @@ class MealDialogView extends StatelessWidget {
                   color: Colors.transparent,
                   onPressed: () async {
                     await model.clearCart();
+                    completer(DialogResponse());
+                  },
+                ),
+              ],
+            ),
+      viewModelBuilder: () => MealViewModel(),
+    );
+  }
+}
+
+class CartClearDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const CartClearDialogView(
+      {Key? key, required this.request, required this.completer});
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<MealViewModel>.reactive(
+      builder: (context, model, child) => (Platform.isIOS)
+          ? CupertinoAlertDialog(
+              title: Text(request.title!),
+              content: Text(request.description!),
+              actions: <Widget>[
+                CustomTextChildButton(
+                  child: Text(
+                    request.secondaryButtonTitle!,
+                    style: ktsDefault18BoldText,
+                  ),
+                  color: Colors.transparent,
+                  onPressed: () async {
+                    completer(DialogResponse());
+                  },
+                ),
+                CustomTextChildButton(
+                  child: Text(
+                    request.mainButtonTitle!,
+                    style: ktsDefault18Text,
+                  ),
+                  color: Colors.transparent,
+                  onPressed: () async {
+                    completer(DialogResponse());
+                  },
+                ),
+              ],
+            )
+          : AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+              titlePadding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 10.h),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+              actionsAlignment: MainAxisAlignment.center,
+              title: Text(
+                request.title!,
+                textAlign: TextAlign.center,
+              ),
+              titleTextStyle: ktsDefault20BoldText,
+              content: Text(
+                request.description!,
+                textAlign: TextAlign.center,
+                style: ktsDefault14DialogText,
+              ),
+              actions: <Widget>[
+                CustomTextChildButton(
+                  child: Text(
+                    request.secondaryButtonTitle!,
+                    style: ktsDefault18BoldText,
+                  ),
+                  color: Colors.transparent,
+                  onPressed: () async {
+                    completer(DialogResponse());
+                  },
+                ),
+                SizedBox(width: 8.w),
+                CustomTextChildButton(
+                  child: Text(
+                    request.mainButtonTitle!,
+                    style: ktsDefault18Text,
+                  ),
+                  color: Colors.transparent,
+                  onPressed: () async {
                     completer(DialogResponse());
                   },
                 ),

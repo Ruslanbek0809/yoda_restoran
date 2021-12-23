@@ -155,7 +155,7 @@ class MealViewModel extends ReactiveViewModel {
   Future showClearOrNavigateCartDialog() async {
     log.i('');
     await _dialogService.showCustomDialog(
-      variant: DialogType.cart,
+      variant: DialogType.mealCartClear,
       title: 'Sebedi boşadyň',
       description:
           'Sebetde başga restorandan goşulan haryt bar. Täze sargyt etmek üçin ilki restorana sargydyňyzy ugradyň ýa-da sebedi boşadyň.',
