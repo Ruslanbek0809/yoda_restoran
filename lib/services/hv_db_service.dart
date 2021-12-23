@@ -26,9 +26,9 @@ class HiveDbService {
   /// GETS CART restaurant from cartResBox
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
-    cartRes = cartResBox.get('cartRes');
+    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
 
-    log.i('cartRes $cartRes');
+    log.i('cartRes ${cartRes!.id}');
   }
 
   /// GETS all CART meals from cartMealsBox
@@ -38,6 +38,37 @@ class HiveDbService {
 
     log.i('${cartMeals.length}');
   }
+
+  //------------------ RESTAURANT PART ---------------------//
+
+  /// UPDATES a restaurant in CART
+  Future<void> updateResInCart(Restaurant? restaurant) async {
+    log.i('resId: ${restaurant!.id}');
+
+    try {
+      final HiveRestaurant _restaurant = HiveRestaurant(
+        id: restaurant.id,
+        image: restaurant.image,
+        name: restaurant.name,
+        description: restaurant.description,
+        rated: restaurant.rated,
+        rating: restaurant.rating,
+        workingHours: restaurant.workingHours,
+        prepareTime: restaurant.prepareTime,
+        phoneNumber: restaurant.phoneNumber,
+        address: restaurant.address,
+        deliveryPrice: restaurant.deliveryPrice,
+      );
+      await cartResBox.put('cartRes', _restaurant);
+      cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+
+      log.i('cartRes ${cartRes!.id}');
+    } catch (e) {
+      log.v('Couldn\'t UPDATE a restaurant in CART: $e');
+    }
+  }
+
+  //------------------ MEAL PART ---------------------//
 
   /// GETS quantity of cartMeal for this meal
   int? getMealQuantity(int? mealId) {
