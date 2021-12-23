@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -12,8 +13,17 @@ class CartViewModel extends BaseViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
+  final _cartService = locator<CartService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+  List<Meal>? get moreMeals => _cartService.moreMeals;
+
+  // FETCHS more meals
+  Future getMoreMeals() async {
+    log.i('');
+    await runBusyFuture(_cartService.getMoreMeals());
+    log.i('moreMeals length: ${moreMeals!.length}');
+  }
 
   /// CLEAR CART
   Future<void> clearCart() async {

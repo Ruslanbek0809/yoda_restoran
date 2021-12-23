@@ -28,6 +28,7 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartViewModel>.reactive(
+      onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) => Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(

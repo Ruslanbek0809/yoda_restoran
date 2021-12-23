@@ -7,3 +7,4 @@ export 'res_service.dart';
 export 'main_cat_service.dart';
 export 'push_notification_service.dart';
 export 'hv_db_service.dart';
+export 'cart_service.dart';
