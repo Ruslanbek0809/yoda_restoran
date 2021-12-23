@@ -62,7 +62,7 @@ class HiveDbService {
       await cartResBox.put('cartRes', _restaurant);
       cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
 
-      log.i('cartRes ${cartRes!.id}');
+      log.i('cartResId ${cartRes!.id}');
     } catch (e) {
       log.v('Couldn\'t UPDATE a restaurant in CART: $e');
     }
@@ -119,8 +119,9 @@ class HiveDbService {
   }
 
   Future<void> clearCart() async {
+    log.i('BEFORE CLEAR cartMeals length: ${cartMeals.length}');
     await cartMealsBox.clear();
     cartMeals.clear();
-    log.i('cartMeals length: ${cartMeals.length}');
+    log.i('AFTER CLEAR cartMeals length: ${cartMeals.length}');
   }
 }

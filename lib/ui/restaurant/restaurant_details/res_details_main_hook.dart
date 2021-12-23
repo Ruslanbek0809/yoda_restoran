@@ -437,7 +437,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         itemBuilder: (context, pos) {
                           return MealView(
                             meal: resCategoryMeals[pos],
-                            restaurant: restaurant,
+                            restaurant: restaurant, // Needed for add meal with conditions only in CART
                           );
                         },
                       ),

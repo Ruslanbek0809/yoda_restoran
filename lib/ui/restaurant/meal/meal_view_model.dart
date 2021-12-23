@@ -66,7 +66,8 @@ class MealViewModel extends ReactiveViewModel {
       await _hiveDbService.addMealToCart(meal);
     } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
         _hiveDbService.cartRes!.id != -1) {
-      /// TODO: Add Dialog
+      await showClearOrNavigateCartDialog();
+      await _hiveDbService.clearCart();
       await _hiveDbService.updateResInCart(restaurant);
       await _hiveDbService.addMealToCart(meal);
     }
@@ -146,6 +147,8 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+//------------------------ MEAL CART DIALOG PART ----------------------------//
+
   /// SHOWS Clear or Navigate Cart Dialog
   Future showClearOrNavigateCartDialog() async {
     log.i('');
@@ -159,6 +162,14 @@ class MealViewModel extends ReactiveViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
+  }
+
+  /// CLEAR CART
+  Future<void> clearCart() async {
+    log.i('clearCart()');
+
+    await _hiveDbService.clearCart();
+    notifyListeners();
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
