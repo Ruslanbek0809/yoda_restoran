@@ -111,17 +111,28 @@ class HiveDbService {
     if (quantity! >= 1) {
       cartMeals[pos].quantity = quantity;
       cartMealsBox.putAt(pos, cartMeals[pos]);
+      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
     } else {
       cartMealsBox.deleteAt(pos);
       cartMeals.removeAt(pos);
     }
-    log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
   }
 
   Future<void> clearCart() async {
     log.i('BEFORE CLEAR cartMeals length: ${cartMeals.length}');
     await cartMealsBox.clear();
+    await cartResBox.clear();
     cartMeals.clear();
-    log.i('AFTER CLEAR cartMeals length: ${cartMeals.length}');
+    await cartResBox.put('cartRes', HiveRestaurant(id: -1));
+    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+    log.i(
+        'AFTER CLEAR cartMeals length: ${cartMeals.length} and cartResId: ${cartRes!.id}');
+  }
+
+  Future<void> setResDefault() async {
+    await cartResBox.clear();
+    await cartResBox.put('cartRes', HiveRestaurant(id: -1));
+    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+    log.i('cartResId: ${cartRes!.id}');
   }
 }

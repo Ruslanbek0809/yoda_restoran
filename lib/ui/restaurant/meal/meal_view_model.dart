@@ -45,8 +45,6 @@ class MealViewModel extends ReactiveViewModel {
   void getMealQuantity(int? mealId) {
     quantity = _hiveDbService.getMealQuantity(mealId)!;
     if (quantity >= 1) _isButtonToggled = true;
-    log.i(
-        'getMealQuantity() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
@@ -59,6 +57,10 @@ class MealViewModel extends ReactiveViewModel {
     log.i(
         'addMealToCartWithCondition() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
+    if (_hiveDbService.cartMeals.isEmpty)
+      await _hiveDbService
+          .setResDefault(); // SETS CART restaurant to default value
+
     if (_hiveDbService.cartRes!.id == meal.restaurantId) {
       await _hiveDbService.addMealToCart(meal);
     } else if (_hiveDbService.cartRes!.id == -1) {
@@ -66,10 +68,13 @@ class MealViewModel extends ReactiveViewModel {
       await _hiveDbService.addMealToCart(meal);
     } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
         _hiveDbService.cartRes!.id != -1) {
-      await showClearOrNavigateCartDialog();
-      await _hiveDbService.clearCart();
-      await _hiveDbService.updateResInCart(restaurant);
-      await _hiveDbService.addMealToCart(meal);
+      await showClearOrNavigateCartDialog(); // CALLS MealDialogView
+
+      /// If user CLEARS cart then START below functions
+      if (_hiveDbService.cartMeals.isEmpty) {
+        await _hiveDbService.updateResInCart(restaurant);
+        await _hiveDbService.addMealToCart(meal);
+      }
     }
 
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
