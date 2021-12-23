@@ -50,26 +50,32 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// ADDS or UPDATES a restaurant in CART
-  /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled.
+  /// ADDS or UPDATES a restaurant in CART in condition
+  /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
   Future<void> addMealToCartWithCondition(
-      Meal? meal, Restaurant? restaurant) async {
+    Meal? meal,
+    Restaurant? restaurant,
+  ) async {
     log.i(
         'addMealToCartWithCondition() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
     if (_hiveDbService.cartRes!.id == meal.restaurantId) {
-      
+      await _hiveDbService.addMealToCart(meal);
     } else if (_hiveDbService.cartRes!.id == -1) {
+      await _hiveDbService.updateResInCart(restaurant);
+      await _hiveDbService.addMealToCart(meal);
     } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
-        _hiveDbService.cartRes!.id != -1) {}
-
-    await _hiveDbService.addMealToCart(meal);
+        _hiveDbService.cartRes!.id != -1) {
+      /// TODO: Add Dialog
+      await _hiveDbService.updateResInCart(restaurant);
+      await _hiveDbService.addMealToCart(meal);
+    }
 
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
     if (quantity >= 1) _isButtonToggled = true;
 
     log.i(
-        'addMealToCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+        'addMealToCartWithCondition() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
