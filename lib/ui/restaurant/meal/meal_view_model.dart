@@ -94,9 +94,6 @@ class MealViewModel extends ReactiveViewModel {
     else
       _isButtonToggled = false;
 
-    if (_hiveDbService.cartMeals.isEmpty)
-      _bottomCartService.hideBottomCart(); // HIDES BottomCart.
-
     log.i(
         'updateMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
@@ -174,7 +171,6 @@ class MealViewModel extends ReactiveViewModel {
     log.i('clearCart()');
 
     await _hiveDbService.clearCart();
-    _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     notifyListeners();
   }
 

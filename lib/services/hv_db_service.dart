@@ -1,11 +1,15 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class HiveDbService {
   final log = getLogger('HiveDbService');
+
+  final _bottomCartService = locator<BottomCartService>();
 
   static late Box<HiveRestaurant> cartResBox; // Change model type in
   static late Box<HiveMeal> cartMealsBox;
@@ -27,7 +31,6 @@ class HiveDbService {
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
     cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
-
     log.i('cartRes ${cartRes!.id}');
   }
 
@@ -35,6 +38,8 @@ class HiveDbService {
   void getCartMeals() {
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     cartMeals = cartMealsBox.values.toList();
+    if (cartMeals.isNotEmpty)
+      _bottomCartService.showBottomCart(); // SHOWS BottomCart.
 
     log.i('${cartMeals.length}');
   }
@@ -115,6 +120,9 @@ class HiveDbService {
     } else {
       cartMealsBox.deleteAt(pos);
       cartMeals.removeAt(pos);
+
+      if (cartMeals.isEmpty)
+        _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     }
   }
 
@@ -125,6 +133,8 @@ class HiveDbService {
     cartMeals.clear();
     await cartResBox.put('cartRes', HiveRestaurant(id: -1));
     cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+
+    _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     log.i(
         'AFTER CLEAR cartMeals length: ${cartMeals.length} and cartResId: ${cartRes!.id}');
   }
