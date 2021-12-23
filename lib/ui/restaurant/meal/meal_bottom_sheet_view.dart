@@ -376,7 +376,6 @@ class MealBottomSheet extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(vertical: 17.h),
                                 onPressed: () async {
                                   model.updateButtonToggle();
-                                  model.updateBottomCartStatus();
                                   model.navBack();
                                 },
                               ),

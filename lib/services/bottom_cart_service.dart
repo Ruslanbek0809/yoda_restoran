@@ -16,17 +16,27 @@ class BottomCartService with ReactiveServiceMixin {
       ReactiveValue<BottomCartStatus>(BottomCartStatus.idle);
   BottomCartStatus get bottomCartStatus => _bottomCartStatus.value;
 
-  /// Function to update isBottomCartShown
-  void updateBottomCartStatus() {
+  /// SHOWS BottomCart
+  void showBottomCart() {
     switch (_bottomCartStatus.value) {
       case BottomCartStatus.idle:
         _bottomCartStatus.value = BottomCartStatus.forward;
         break;
-      case BottomCartStatus.forward:
-        _bottomCartStatus.value = BottomCartStatus.reverse;
-        break;
       case BottomCartStatus.reverse:
         _bottomCartStatus.value = BottomCartStatus.forward;
+        break;
+      default:
+        _bottomCartStatus.value = BottomCartStatus.idle;
+        break;
+    }
+    log.i(_bottomCartStatus.value);
+  }
+
+  /// HIDES BottomCart
+  void hideBottomCart() {
+    switch (_bottomCartStatus.value) {
+      case BottomCartStatus.forward:
+        _bottomCartStatus.value = BottomCartStatus.reverse;
         break;
       default:
         _bottomCartStatus.value = BottomCartStatus.idle;

@@ -230,7 +230,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   restaurant,
                                 );
                                 await _tweenController.forward();
-                                model.updateBottomCartStatus();
                               },
                               child: Ink(
                                 width: constraints.maxWidth,

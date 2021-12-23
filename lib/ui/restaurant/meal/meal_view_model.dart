@@ -34,7 +34,8 @@ class MealViewModel extends ReactiveViewModel {
 
   /// Function to update updateBottomCartStatus
   void updateBottomCartStatus() {
-    _bottomCartService.updateBottomCartStatus();
+    _bottomCartService.hideBottomCart();
+    _bottomCartService.showBottomCart();
 
     log.i('bottomCartStatus: $bottomCartStatus');
     notifyListeners();
