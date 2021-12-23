@@ -44,7 +44,10 @@ class MealDialogView extends StatelessWidget {
                     style: ktsDefault18BoldText,
                   ),
                   color: Colors.transparent,
-                  onPressed: () => completer(DialogResponse()),
+                  onPressed: () async {
+                    await model.navToCartView();
+                    completer(DialogResponse());
+                  },
                 ),
                 CustomTextChildButton(
                   child: Text(
@@ -52,7 +55,10 @@ class MealDialogView extends StatelessWidget {
                     style: ktsDefault18Text,
                   ),
                   color: Colors.transparent,
-                  onPressed: () => completer(DialogResponse()),
+                  onPressed: () async {
+                    await model.clearCart();
+                    completer(DialogResponse());
+                  },
                 ),
               ],
             )
@@ -78,7 +84,10 @@ class MealDialogView extends StatelessWidget {
                     style: ktsDefault18BoldText,
                   ),
                   color: Colors.transparent,
-                  onPressed: () => completer(DialogResponse()),
+                  onPressed: () async {
+                    await model.navToCartView();
+                    completer(DialogResponse());
+                  },
                 ),
                 SizedBox(width: 8.w),
                 CustomTextChildButton(
