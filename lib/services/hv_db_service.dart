@@ -30,7 +30,8 @@ class HiveDbService {
   /// GETS CART restaurant from cartResBox
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
-    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+    cartRes = cartResBox.get('cartRes',
+        defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.i('cartRes ${cartRes!.id}');
   }
 
@@ -65,7 +66,8 @@ class HiveDbService {
         deliveryPrice: restaurant.deliveryPrice,
       );
       await cartResBox.put('cartRes', _restaurant);
-      cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+      cartRes = cartResBox.get('cartRes',
+          defaultValue: HiveRestaurant(id: -1, name: 'Default'));
 
       log.i('cartResId ${cartRes!.id}');
     } catch (e) {
@@ -131,8 +133,9 @@ class HiveDbService {
     await cartMealsBox.clear();
     await cartResBox.clear();
     cartMeals.clear();
-    await cartResBox.put('cartRes', HiveRestaurant(id: -1));
-    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+    await cartResBox.put('cartRes', HiveRestaurant(id: -1, name: 'Default'));
+    cartRes = cartResBox.get('cartRes',
+        defaultValue: HiveRestaurant(id: -1, name: 'Default'));
 
     _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     log.i(
@@ -141,8 +144,9 @@ class HiveDbService {
 
   Future<void> setResDefault() async {
     await cartResBox.clear();
-    await cartResBox.put('cartRes', HiveRestaurant(id: -1));
-    cartRes = cartResBox.get('cartRes', defaultValue: HiveRestaurant(id: -1));
+    await cartResBox.put('cartRes', HiveRestaurant(id: -1, name: 'Default'));
+    cartRes = cartResBox.get('cartRes',
+        defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.i('cartResId: ${cartRes!.id}');
   }
 }

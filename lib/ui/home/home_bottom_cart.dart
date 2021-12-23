@@ -57,7 +57,7 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Restoran ady', style: ktsButton18Text),
+                  Text(model.cartRes!.name!, style: ktsButton18Text),
                   Text('35 TMT', style: ktsButton18Text),
                 ],
               ),

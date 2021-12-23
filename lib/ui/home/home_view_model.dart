@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -19,6 +20,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _mainCatService = locator<
       MainCatService>(); // To update multiSelectionList in realtime(reactive)
+  final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -75,6 +77,8 @@ class HomeViewModel extends MultipleFutureViewModel {
     return _resWithProms;
   }
 
+  //------------------ DRAWER ---------------------//
+
   void homeMenuPressed() {
     log.i('openDrawer()');
     homeScaffoldKey.currentState!.openDrawer();
@@ -87,6 +91,10 @@ class HomeViewModel extends MultipleFutureViewModel {
         homeRandomRessFuture: _homeService.getRandomRess,
         homePromsFuture: _homeService.getProms,
       };
+
+  //------------------ BOTTOM CART ---------------------//
+
+  HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   //------------------ Custom overridden REACTIVE PART ---------------------//
   late List<ReactiveServiceMixin> _reactiveServices;

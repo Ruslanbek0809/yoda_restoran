@@ -67,10 +67,10 @@ class MealViewModel extends ReactiveViewModel {
 
       /// If user CLEARS cart then START below functions
       if (_hiveDbService.cartMeals.isEmpty) {
-        await _hiveDbService.updateResInCart(restaurant);
-        await _hiveDbService.addMealToCart(meal);
         _bottomCartService
             .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
+        await _hiveDbService.updateResInCart(restaurant);
+        await _hiveDbService.addMealToCart(meal);
       }
     }
 

@@ -28,7 +28,7 @@ class BottomCartService with ReactiveServiceMixin {
       case BottomCartStatus.forward:
         break;
       default:
-        _bottomCartStatus.value = BottomCartStatus.idle;
+        _bottomCartStatus.value = BottomCartStatus.forward;
         break;
     }
     log.i(_bottomCartStatus.value);
@@ -39,6 +39,9 @@ class BottomCartService with ReactiveServiceMixin {
     switch (_bottomCartStatus.value) {
       case BottomCartStatus.forward:
         _bottomCartStatus.value = BottomCartStatus.reverse;
+        break;
+      case BottomCartStatus.reverse:
+        _bottomCartStatus.value = BottomCartStatus.idle;
         break;
       default:
         _bottomCartStatus.value = BottomCartStatus.idle;
