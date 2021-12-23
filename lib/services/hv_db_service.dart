@@ -32,7 +32,7 @@ class HiveDbService {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
-    log.i('cartRes ${cartRes!.id}');
+    log.i('cartRes ${cartRes!.id}');  
   }
 
   /// GETS all CART meals from cartMealsBox

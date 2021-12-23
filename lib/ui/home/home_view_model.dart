@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
@@ -21,6 +23,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _mainCatService = locator<
       MainCatService>(); // To update multiSelectionList in realtime(reactive)
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
+  final _navService = locator<NavigationService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -95,6 +98,25 @@ class HomeViewModel extends MultipleFutureViewModel {
   //------------------ BOTTOM CART ---------------------//
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
+
+  void navToResDetailsView() => _navService.navigateTo(
+        Routes.resDetailsView,
+        arguments: ResDetailsViewArguments(
+          restaurant: Restaurant(
+            id: cartRes!.id,
+            name: cartRes!.name,
+            image: cartRes!.image,
+            rated: cartRes!.rated,
+            rating: cartRes!.rating,
+            description: cartRes!.description,
+            deliveryPrice: cartRes!.deliveryPrice,
+            address: cartRes!.address,
+            phoneNumber: cartRes!.phoneNumber,
+            prepareTime: cartRes!.prepareTime,
+            workingHours: cartRes!.workingHours,
+          ),
+        ),
+      );
 
   //------------------ Custom overridden REACTIVE PART ---------------------//
   late List<ReactiveServiceMixin> _reactiveServices;

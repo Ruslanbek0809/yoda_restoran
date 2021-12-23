@@ -38,7 +38,7 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
       child: SlideTransition(
         position: bottomCartOffset,
         child: GestureDetector(
-          onTap: () {},
+          onTap: model.navToResDetailsView,
           child: Container(
             height: 0.22.sw,
             width: 1.sw,
