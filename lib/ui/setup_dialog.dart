@@ -130,6 +130,7 @@ class ClearCartDialogView extends StatelessWidget {
                   ),
                   color: Colors.transparent,
                   onPressed: () async {
+                    await model.clearCart();
                     completer(DialogResponse());
                   },
                 ),
@@ -163,6 +164,7 @@ class ClearCartDialogView extends StatelessWidget {
                   ),
                   color: Colors.transparent,
                   onPressed: () async {
+                    await model.clearCart();
                     completer(DialogResponse());
                   },
                 ),
