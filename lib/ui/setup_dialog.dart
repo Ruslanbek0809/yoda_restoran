@@ -52,10 +52,7 @@ class MealDialogView extends StatelessWidget {
                     style: ktsDefault18Text,
                   ),
                   color: Colors.transparent,
-                  onPressed: () async {
-                    await model.clearCart();
-                    completer(DialogResponse());
-                  },
+                  onPressed: () => completer(DialogResponse()),
                 ),
               ],
             )
@@ -90,7 +87,10 @@ class MealDialogView extends StatelessWidget {
                     style: ktsDefault18Text,
                   ),
                   color: Colors.transparent,
-                  onPressed: () => completer(DialogResponse()),
+                  onPressed: () async {
+                    await model.clearCart();
+                    completer(DialogResponse());
+                  },
                 ),
               ],
             ),
