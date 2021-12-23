@@ -80,28 +80,20 @@ class _CartViewState extends State<CartView> {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 15.w, left: 16.w, right: 16.w),
+                  padding: EdgeInsets.only(top: 15.h, left: 16.w, right: 16.w),
                   itemCount: model.cartMeals.length,
                   itemBuilder: (context, pos) {
                     return CartMealView(meal: model.cartMeals[pos]);
                   },
                   separatorBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 7.w),
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Divider(
                         thickness: 1,
-                        color: AppTheme.DRAWER_DIVIDER,
+                        color: AppTheme.DRAWER_DIVIDER.withOpacity(0.5),
                       ),
                     );
                   },
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 7.w, horizontal: 16.w),
-                  child: Divider(
-                    thickness: 1,
-                    color: AppTheme.DRAWER_DIVIDER,
-                  ),
                 ),
 //------------------ ACCESSORIES ---------------------//
                 // Padding(
@@ -141,7 +133,7 @@ class _CartViewState extends State<CartView> {
 //------------------ CART FOOD WIDGET TITLE ---------------------//
                 Padding(
                   padding: EdgeInsets.only(
-                      top: 15.w, bottom: 10.w, left: 16.w, right: 16.w),
+                      top: 15.h, bottom: 10.w, left: 16.w, right: 16.w),
                   child: Text(
                     'Ýene bir zat?',
                     style: TextStyle(

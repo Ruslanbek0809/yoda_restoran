@@ -5,7 +5,6 @@ import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'cart_meal_view_model.dart';
 
 class CartMealView extends StatelessWidget {
@@ -26,8 +25,8 @@ class CartMealView extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              height: 0.3
-                  .sw, // this height is used to make Column apply MainAxisAlignment.spaceBetween
+              height:
+                  0.3.sw, // MAKES Column apply MainAxisAlignment.spaceBetween
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,13 +35,19 @@ class CartMealView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      Expanded(
+                          child: Text(
                         meal.name!,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: ktsDefault16Text,
-                      ),
-                      Text(
-                        '${meal.price} TMT',
-                        style: ktsDefault18Text,
+                      )),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.w),
+                        child: Text(
+                          '${meal.price} TMT',
+                          style: ktsDefault18Text,
+                        ),
                       ),
                     ],
                   ),
@@ -74,15 +79,10 @@ class CartMealView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        '12',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppTheme.FONT_COLOR,
-                        ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Text('12', style: ktsDefault20Text),
                       ),
-                      SizedBox(width: 10.w),
                       Material(
                         color: AppTheme.MAIN_LIGHT,
                         borderRadius: AppTheme().radius15,
