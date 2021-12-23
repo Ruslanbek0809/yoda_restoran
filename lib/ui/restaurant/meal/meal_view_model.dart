@@ -32,15 +32,6 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// Function to update updateBottomCartStatus
-  void updateBottomCartStatus() {
-    _bottomCartService.hideBottomCart();
-    _bottomCartService.showBottomCart();
-
-    log.i('bottomCartStatus: $bottomCartStatus');
-    notifyListeners();
-  }
-
   //----------- HIVE DB PART ------------//
 
   /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
@@ -68,6 +59,8 @@ class MealViewModel extends ReactiveViewModel {
     } else if (_hiveDbService.cartRes!.id == -1) {
       await _hiveDbService.updateResInCart(restaurant);
       await _hiveDbService.addMealToCart(meal);
+      _bottomCartService
+          .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
     } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
         _hiveDbService.cartRes!.id != -1) {
       await showClearOrNavigateCartDialog(); // CALLS MealDialogView
@@ -76,6 +69,8 @@ class MealViewModel extends ReactiveViewModel {
       if (_hiveDbService.cartMeals.isEmpty) {
         await _hiveDbService.updateResInCart(restaurant);
         await _hiveDbService.addMealToCart(meal);
+        _bottomCartService
+            .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
       }
     }
 
@@ -98,6 +93,9 @@ class MealViewModel extends ReactiveViewModel {
       _isButtonToggled = true;
     else
       _isButtonToggled = false;
+
+    if (_hiveDbService.cartMeals.isEmpty)
+      _bottomCartService.hideBottomCart(); // HIDES BottomCart.
 
     log.i(
         'updateMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
@@ -176,6 +174,7 @@ class MealViewModel extends ReactiveViewModel {
     log.i('clearCart()');
 
     await _hiveDbService.clearCart();
+    _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     notifyListeners();
   }
 
