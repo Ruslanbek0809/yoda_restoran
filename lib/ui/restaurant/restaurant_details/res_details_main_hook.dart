@@ -435,7 +435,10 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         ),
                         itemCount: resCategoryMeals!.length,
                         itemBuilder: (context, pos) {
-                          return MealView(meal: resCategoryMeals[pos]);
+                          return MealView(
+                            meal: resCategoryMeals[pos],
+                            restaurant: restaurant,
+                          );
                         },
                       ),
                     ],

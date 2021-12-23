@@ -7,13 +7,19 @@ import 'package:stacked/stacked.dart';
 /// The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
 class MealView extends StatelessWidget {
   final Meal meal;
-  const MealView({Key? key, required this.meal}) : super(key: key);
+  final Restaurant restaurant;
+  const MealView({
+    Key? key,
+    required this.meal,
+    required this.restaurant,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
       onModelReady: (model) => model.getMealQuantity(meal.id),
-      builder: (context, model, child) => MealItemHook(meal: meal),
+      builder: (context, model, child) =>
+          MealItemHook(meal: meal, restaurant: restaurant),
       viewModelBuilder: () => MealViewModel(),
     );
   }

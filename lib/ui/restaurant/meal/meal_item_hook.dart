@@ -10,8 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MealItemHook extends HookViewModelWidget<MealViewModel> {
   final Meal meal;
-  const MealItemHook({Key? key, required this.meal})
-      : super(key: key, reactive: true);
+  final Restaurant restaurant;
+  const MealItemHook({
+    Key? key,
+    required this.meal,
+    required this.restaurant,
+  }) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(BuildContext context, MealViewModel model) {
@@ -221,7 +225,10 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   //     :
                                   () async {
                                 //// Bouncing animation trigger
-                                await model.addMealToCart(meal);
+                                await model.addMealToCartWithCondition(
+                                  meal,
+                                  restaurant,
+                                );
                                 await _tweenController.forward();
                                 model.updateBottomCartStatus();
                               },
