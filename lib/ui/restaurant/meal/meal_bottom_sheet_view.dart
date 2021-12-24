@@ -24,7 +24,7 @@ class MealBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
       onModelReady: (model) => model.setOnModelReadyVolsCustoms(
-          meal.gVolumes!.length, meal.gCustomizables!.length),
+          meal.gVolumes!.length),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
@@ -376,7 +376,7 @@ class MealBottomSheet extends StatelessWidget {
                                 borderRadius: AppTheme().radius15,
                                 padding: EdgeInsets.symmetric(vertical: 17.h),
                                 onPressed: () async {
-                                  model.updateButtonToggle();
+                                  await model.addUpdateMealInCartFromBottomSheet(meal, restaurant)
                                   model.navBack();
                                 },
                               ),

@@ -27,11 +27,11 @@ class MealViewModel extends ReactiveViewModel {
   int quantityDraft = 1;
 
   /// Function to update isButtonToggled
-  void updateButtonToggle() {
-    _isButtonToggled = !_isButtonToggled;
-    log.i('_isButtonToggled: $_isButtonToggled');
-    notifyListeners();
-  }
+  // void updateButtonToggle() {
+  //   _isButtonToggled = !_isButtonToggled;
+  //   log.i('_isButtonToggled: $_isButtonToggled');
+  //   notifyListeners();
+  // }
 
   /// ADDS to quantityInDraft
   void addQuantityDraft() {
@@ -48,7 +48,11 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+
+
   //----------- HIVE DB PART ------------//
+
+
 
   /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
   void getMealQuantity(int? mealId) {
@@ -114,7 +118,11 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+
+
 //------------------------ MEAL CART DIALOG PART ----------------------------//
+
+
 
   /// SHOWS Clear or Navigate Cart Dialog
   Future showClearOrNavigateCartDialog() async {
@@ -139,7 +147,12 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+
+
+
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
+
+
 
   /// Function to call MealBottomSheet
   Future showCustomMealBottomSheet(Meal meal) async {
@@ -160,7 +173,7 @@ class MealViewModel extends ReactiveViewModel {
   List<Customizable> get selectedCustoms => _selectedCustoms;
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
-  void setOnModelReadyVolsCustoms(int gVolsLength, int gCustomsLength) {
+  void setOnModelReadyVolsCustoms(int gVolsLength) {
     _selectedVols = List.generate(
       gVolsLength,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
