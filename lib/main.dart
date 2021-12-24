@@ -22,6 +22,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
+  Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();

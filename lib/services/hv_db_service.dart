@@ -13,6 +13,7 @@ class HiveDbService {
 
   static late Box<HiveRestaurant> cartResBox; // Change model type in
   static late Box<HiveMeal> cartMealsBox;
+  static late Box<HiveVolCus> volCartBox;
 
   HiveRestaurant? cartRes;
 
@@ -25,6 +26,7 @@ class HiveDbService {
 
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
+    await Hive.openBox<HiveVolCus>(Constants.volCartBox);
   }
 
   /// GETS CART restaurant from cartResBox
@@ -32,7 +34,7 @@ class HiveDbService {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
-    log.i('cartRes ${cartRes!.id}');  
+    log.i('cartRes ${cartRes!.id}');
   }
 
   /// GETS all CART meals from cartMealsBox

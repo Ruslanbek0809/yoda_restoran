@@ -143,8 +143,9 @@ class ApiService {
       if (response.data != null) {
         response.data.forEach((_resCategory) {
           _moreMeals.add(Meal.fromJson(_resCategory));
-        });
+        });  
       }
+      
       return _moreMeals;
     } on DioError catch (error) {
       log.v(error);

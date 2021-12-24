@@ -10,6 +10,8 @@ class Constants {
   // Hive
   static const cartMealsBox = 'cartMealsBox';
   static const cartResBox = 'cartResBox';
+  static const testCartBox = 'testCartBox';
+  static const volCartBox = 'volCartBox';
 
   /// SharedPreferences
   static const currentLang = 'currentLang';

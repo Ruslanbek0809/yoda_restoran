@@ -224,7 +224,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   //         model.showCustomMealBottomSheet(meal)
                                   //     :
                                   () async {
-                                //// Bouncing animation trigger
+                                // //// Bouncing animation trigger
                                 await model.addMealToCartWithCondition(
                                   meal,
                                   restaurant,
