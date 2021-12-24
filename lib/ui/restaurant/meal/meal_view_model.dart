@@ -48,11 +48,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-
-
   //----------- HIVE DB PART ------------//
-
-
 
   /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
   void getMealQuantity(int? mealId) {
@@ -118,11 +114,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-
-
 //------------------------ MEAL CART DIALOG PART ----------------------------//
-
-
 
   /// SHOWS Clear or Navigate Cart Dialog
   Future showClearOrNavigateCartDialog() async {
@@ -147,22 +139,20 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-
-
-
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-
-
   /// Function to call MealBottomSheet
-  Future showCustomMealBottomSheet(Meal meal) async {
+  Future showCustomMealBottomSheet(Meal meal, Restaurant restaurant) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.meal,
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
-      data: meal,
+      data: MealBottomSheetData(
+        meal: meal,
+        restaurant: restaurant,
+      ),
     );
   }
 

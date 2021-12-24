@@ -23,7 +23,8 @@ void setupBottomSheet() {
     BottomSheetType.meal: (context, sheetRequest, completer) => MealBottomSheet(
           request: sheetRequest,
           completer: completer,
-          meal: sheetRequest.data,
+          meal: sheetRequest.data.meal,
+          restaurant: sheetRequest.data.restaurant,
         ),
   };
 

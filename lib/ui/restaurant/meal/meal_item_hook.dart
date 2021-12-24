@@ -45,7 +45,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         ),
       ),
       child: GestureDetector(
-        onTap: () async => model.showCustomMealBottomSheet(meal),
+        onTap: () async => model.showCustomMealBottomSheet(meal, restaurant),
         child: Container(
           decoration: BoxDecoration(
             color: AppTheme.MAIN_LIGHT,
@@ -219,8 +219,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               borderRadius: AppTheme().radius15,
                               onTap: meal.gVolumes!.isNotEmpty ||
                                       meal.gCustomizables!.isNotEmpty
-                                  ? () async =>
-                                      model.showCustomMealBottomSheet(meal)
+                                  ? () async => model.showCustomMealBottomSheet(
+                                      meal, restaurant)
                                   : () async {
                                       // //// Bouncing animation trigger
                                       await model.addMealToCart(

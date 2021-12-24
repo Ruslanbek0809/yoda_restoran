@@ -11,11 +11,13 @@ import 'meal_view_model.dart';
 
 class MealBottomSheet extends StatelessWidget {
   final Meal meal;
+  final Restaurant restaurant;
   final SheetRequest request;
   final Function(SheetResponse) completer;
   const MealBottomSheet({
     Key? key,
     required this.meal,
+    required this.restaurant,
     required this.request,
     required this.completer,
   }) : super(key: key);
@@ -23,8 +25,8 @@ class MealBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) => model.setOnModelReadyVolsCustoms(
-          meal.gVolumes!.length),
+      onModelReady: (model) =>
+          model.setOnModelReadyVolsCustoms(meal.gVolumes!.length),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
@@ -376,7 +378,9 @@ class MealBottomSheet extends StatelessWidget {
                                 borderRadius: AppTheme().radius15,
                                 padding: EdgeInsets.symmetric(vertical: 17.h),
                                 onPressed: () async {
-                                  await model.addUpdateMealInCartFromBottomSheet(meal, restaurant)
+                                  await model
+                                      .addUpdateMealInCartFromBottomSheet(
+                                          meal, restaurant);
                                   model.navBack();
                                 },
                               ),
