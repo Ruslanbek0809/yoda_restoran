@@ -137,51 +137,49 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  List<Volume>? _selectedVols = [];
-  List<Volume>? get selectedVols => _selectedVols;
+  List<Volume> _selectedVols = [];
+  List<Volume> get selectedVols => _selectedVols;
 
-  List<Customizable>? _selectedCustoms = [];
-  List<Customizable>? get selectedCustoms => _selectedCustoms;
+  List<Customizable> _selectedCustoms = [];
+  List<Customizable> get selectedCustoms => _selectedCustoms;
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolsCustoms(int gVolsLength, int gCustomsLength) {
     _selectedVols = List.generate(
       gVolsLength,
-      (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
+      (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
   }
 
-  /// CHECKS wether this vol in _selectedVols or NOT
-  Volume? isVolSelected(Volume? vol) => _selectedVols!.firstWhere(
-        (_vol) => _vol.id == vol!.id,
-        orElse: () =>
-            Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
-      );
+  // /// CHECKS wether this vol in _selectedVols or NOT
+  // Volume? isVolSelected(Volume? vol) => _selectedVols!.firstWhere(
+  //       (_vol) => _vol.id == vol!.id,
+  //       orElse: () =>
+  //           Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
+  //     );
 
   /// CHECKS wether this cus in _selectedCustoms or NOT
-  bool isCustomSelected(Customizable? cus) => _selectedCustoms!.contains(cus);
+  bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(int mainVolPos, Volume? volume) {
-    _selectedVols![mainVolPos] = volume!;
+    _selectedVols[mainVolPos] = volume!;
     notifyListeners();
   }
 
   /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
   void updateSelectedCustoms(Customizable? selectedCus) {
-    if (_selectedCustoms!.contains(selectedCus))
-      _selectedCustoms!.remove(selectedCus);
+    if (_selectedCustoms.contains(selectedCus))
+      _selectedCustoms.remove(selectedCus);
     else
-      _selectedCustoms!.add(selectedCus!);
+      _selectedCustoms.add(selectedCus!);
     notifyListeners();
   }
 
   /// ADDS or UPDATES a restaurant in CART
   /// ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
-  Future<void> addMealToCartFromBottomSheet(
-    Meal? meal,
-    Restaurant? restaurant,
-  ) async {
+  Future<void> addMealToCartFromBottomSheet(Meal? meal, Restaurant? restaurant,
+      {int? quantity = 1}) async {
     log.i(
         'addMealToCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
@@ -190,7 +188,9 @@ class MealViewModel extends ReactiveViewModel {
           .setResDefault(); // SETS CART restaurant to default value
 
     if (_hiveDbService.cartRes!.id == meal.restaurantId) {
-      await _hiveDbService.addMealToCart(meal);
+      await _hiveDbService.addMealToCartFromBottomSheet(
+          meal, _selectedVols, _selectedCustoms,
+          quantity: quantity);
     } else if (_hiveDbService.cartRes!.id == -1) {
       await _hiveDbService.updateResInCart(restaurant);
       await _hiveDbService.addMealToCart(meal);

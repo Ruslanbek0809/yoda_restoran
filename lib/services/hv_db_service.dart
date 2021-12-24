@@ -155,11 +155,12 @@ class HiveDbService {
   //------------------ MEAL BOTTOM SHEET PART ---------------------//
 
   /// ADDS a meal to CART from BOTTOM SHEET
-  Future<void> addMealToCartFromBottomSheet(Meal? meal,
+  Future<void> addMealToCartFromBottomSheet(
+      Meal? meal, List<Volume> selectedVols, List<Customizable> selectedCustoms,
       {int? quantity = 1}) async {
     log.i('mealId: ${meal!.id}, quantity: $quantity');
 
-    bool isUnique = true;
+    bool isUnique = false;
 
     List<HiveMeal>? similarMeals = [];
 
@@ -167,25 +168,106 @@ class HiveDbService {
     for (HiveMeal cartMeal in cartMeals)
       if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
 
-    /// STEP 2. CHECK GVOLUMES
-    // if(similarMeals.isNotEmpty)
-    //   for()
+    /// STEP 2. MAKE isUnique to TRUE if similarMeals isEmpty
+    isUnique = true;
 
-    try {
-      final HiveMeal _cartMeal = HiveMeal(
-        id: meal.id,
-        image: meal.image,
-        name: meal.name,
-        price: meal.price,
-        discount: meal.discount!.toInt(),
-        discountedPrice: meal.discountedPrice,
-        quantity: quantity,
-      );
-      await cartMealsBox.add(_cartMeal);
-      cartMeals.add(_cartMeal);
-      log.i('cartMeals length: ${cartMeals.length}');
-    } catch (e) {
-      log.v('Couldn\'t ADD a meal to CART: $e');
+    /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration
+    for (HiveMeal similarMeal in similarMeals) {
+      /// STEP 4. CHECK selectedVols and UPDATE isUnique by condition
+      for (var vol in selectedVols) {
+        isUnique = !similarMeal.volumes!.contains(
+          HiveVolCus(
+            id: vol.id,
+            name: vol.volumeName,
+            price: vol.price,
+          ),
+        );
+
+        if (isUnique) break;
+      }
+
+      /// STEP 5. CHECK selectedCustoms and UPDATE isUnique by condition
+      for (var cus in selectedCustoms) {
+        isUnique = !similarMeal.customs!.contains(
+          HiveVolCus(
+            id: cus.id,
+            name: cus.customizableName,
+            price: cus.price,
+          ),
+        );
+
+        if (isUnique) break;
+      }
+
+      log.i('isUnique at the END: $isUnique');
+    }
+
+    /// STEP 6. ADD or UPDATE a meal in CART
+    if (isUnique) {
+      /// ADD
+
+      List<HiveVolCus> _cartMealVolumes = [];
+      List<HiveVolCus> _cartMealCustoms = [];
+
+      /// STEP 6.1. ADD all selectedVols to _cartMeal.volumes
+      for (var vol in selectedVols)
+        _cartMealVolumes.add(
+          HiveVolCus(
+            id: vol.id,
+            name: vol.volumeName,
+            price: vol.price,
+          ),
+        );
+
+      /// STEP 6.2. ADD all selectedCustoms to _cartMeal.customs
+      for (var cus in selectedCustoms)
+        _cartMealCustoms.add(
+          HiveVolCus(
+            id: cus.id,
+            name: cus.customizableName,
+            price: cus.price,
+          ),
+        );
+
+      log.i(
+          '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
+
+      try {
+        final HiveMeal _cartMeal = HiveMeal(
+          id: meal.id,
+          image: meal.image,
+          name: meal.name,
+          price: meal.price,
+          discount: meal.discount!.toInt(),
+          discountedPrice: meal.discountedPrice,
+          quantity: quantity,
+          volumes: _cartMealVolumes,
+          customs: _cartMealCustoms,
+        );
+        await cartMealsBox.add(_cartMeal);  
+        cartMeals.add(_cartMeal);
+        log.i('cartMeals length: ${cartMeals.length}');
+      } catch (e) {
+        log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
+      }
+    } else {
+      /// UPDATE
+
+      /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
+      int pos = cartMeals.indexWhere((_meal) => _meal.id == meal.id);
+      if (pos == -1) return;
+
+      if (quantity! >= 1) {
+        cartMeals[pos].quantity = quantity;
+        cartMealsBox.putAt(pos, cartMeals[pos]);
+        log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
+      } else {
+        cartMealsBox.deleteAt(pos);
+        cartMeals.removeAt(pos);
+
+        if (cartMeals.isEmpty)
+          _bottomCartService.hideBottomCart(); // HIDES BottomCart.
+      }
     }
   }
 }
