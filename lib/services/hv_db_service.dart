@@ -167,8 +167,8 @@ class HiveDbService {
   /// ADDS a meal to CART from BOTTOM SHEET
   Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, List<Volume> selectedVols, List<Customizable> selectedCustoms,
-      {int? quantity = 1}) async {
-    log.i('mealId: ${meal!.id}, quantity: $quantity');
+      {int? quantityDraft = 1}) async {
+    log.i('mealId: ${meal!.id}, quantityDraft: $quantityDraft');
 
     bool isUnique = false;
 
@@ -251,7 +251,7 @@ class HiveDbService {
           price: meal.price,
           discount: meal.discount!.toInt(),
           discountedPrice: meal.discountedPrice,
-          quantity: quantity,
+          quantity: quantityDraft,
           volumes: _cartMealVolumes,
           customs: _cartMealCustoms,
         );
@@ -300,7 +300,7 @@ class HiveDbService {
           listEquals(_meal.customs, _cartMealCustoms));
       if (pos == -1) return;
 
-      cartMeals[pos].quantity = cartMeals[pos].quantity! + quantity!;
+      cartMeals[pos].quantity = cartMeals[pos].quantity! + quantityDraft!;
       cartMealsBox.putAt(pos, cartMeals[pos]);
       log.i(
           'cartMeals[pos].quantity: ${cartMeals[pos].quantity}, _cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');

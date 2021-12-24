@@ -198,8 +198,7 @@ class MealViewModel extends ReactiveViewModel {
   /// ADDS or UPDATES a restaurant in CART
   /// ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
   Future<void> addUpdateMealInCartFromBottomSheet(
-      Meal? meal, Restaurant? restaurant,
-      {int? quantity = 1}) async {
+      Meal? meal, Restaurant? restaurant) async {
     log.i(
         'addMealToCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
@@ -212,7 +211,7 @@ class MealViewModel extends ReactiveViewModel {
         meal,
         _selectedVols,
         _selectedCustoms,
-        quantity: quantity,
+        quantityDraft: quantityDraft,
       );
     } else if (_hiveDbService.cartRes!.id == -1) {
       await _hiveDbService.updateResInCart(restaurant);
@@ -220,7 +219,7 @@ class MealViewModel extends ReactiveViewModel {
         meal,
         _selectedVols,
         _selectedCustoms,
-        quantity: quantity,
+        quantityDraft: quantityDraft,
       );
       _bottomCartService
           .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
@@ -237,7 +236,7 @@ class MealViewModel extends ReactiveViewModel {
           meal,
           _selectedVols,
           _selectedCustoms,
-          quantity: quantity,
+          quantityDraft: quantityDraft,
         );
       }
     }
@@ -246,7 +245,7 @@ class MealViewModel extends ReactiveViewModel {
     if (quantity >= 1) _isButtonToggled = true;
 
     log.i(
-        'addMealToCartWithCondition() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+        'addUpdateMealInCartFromBottomSheet() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
