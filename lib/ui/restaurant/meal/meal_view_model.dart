@@ -140,38 +140,35 @@ class MealViewModel extends ReactiveViewModel {
   List<Volume?> _selectedVols = [];
   List<Volume?> get selectedVols => _selectedVols;
 
-  List<List<Customizable>>? _selectedCustoms = [];
-  List<List<Customizable>>? get selectedCustoms => _selectedCustoms;
+  List<Customizable>? _selectedCustoms = [];
+  List<Customizable>? get selectedCustoms => _selectedCustoms;
+
+  // List<List<Customizable>>? _selectedCustoms = [];
+  // List<List<Customizable>>? get selectedCustoms => _selectedCustoms;
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
-  void setOnModelReadyVolsCustoms(
-      int gVolsLength, int gCustomsLength) {
+  void setOnModelReadyVolsCustoms(int gVolsLength, int gCustomsLength) {
     _selectedVols = List.generate(
       gVolsLength,
       (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
     );
-
-    _selectedCustoms = List.generate(gCustomsLength, (_) => []);
   }
 
   /// CHECKS wether this selectedCustomizable selected or NOT
-  bool isCustomizableSelected(int? mainCusPos, Customizable? cus) =>
-      _selectedCustoms![mainCusPos!].contains(cus);
+  bool isCustomSelected(Customizable? cus) => _selectedCustoms!.contains(cus);
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
-  void updateSelectedVolume(int mainVolumePos, Volume? volume) {
-    _selectedVols[mainVolumePos] = volume;
-    log.i(
-        '_selectedVolumes[mainVolumePos]: ${_selectedVols[mainVolumePos]!.volumeName}');
+  void updateSelectedVols(int mainVolPos, Volume? volume) {
+    _selectedVols[mainVolPos] = volume;
     notifyListeners();
   }
 
   /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
-  void updateSelectedCustomizable(int mainCusPos, Customizable? selectedCus) {
-    if (_selectedCustoms![mainCusPos].contains(selectedCus))
-      _selectedCustoms![mainCusPos].remove(selectedCus);
+  void updateSelectedCustoms(Customizable? selectedCus) {
+    if (_selectedCustoms!.contains(selectedCus))
+      _selectedCustoms!.remove(selectedCus);
     else
-      _selectedCustoms![mainCusPos].add(selectedCus!);
+      _selectedCustoms!.add(selectedCus!);
     notifyListeners();
   }
 

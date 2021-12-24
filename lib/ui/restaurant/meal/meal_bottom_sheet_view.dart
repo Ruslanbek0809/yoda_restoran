@@ -121,11 +121,10 @@ class MealBottomSheet extends StatelessWidget {
                                               return RadioListTile<Volume?>(
                                                 value: mainVolume
                                                     .volumes![volumePos],
-                                                groupValue:
-                                                    model.selectedVols[
-                                                        mainVolumePos],
+                                                groupValue: model.selectedVols[
+                                                    mainVolumePos],
                                                 onChanged: (selectedVolume) {
-                                                  model.updateSelectedVolume(
+                                                  model.updateSelectedVols(
                                                       mainVolumePos,
                                                       selectedVolume!);
                                                 },
@@ -205,18 +204,17 @@ class MealBottomSheet extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            value: model.isCustomizableSelected(
-                                                mainCustomizablePos,
+                                            value: model.isCustomSelected(
                                                 mainCustomizable
                                                     .customizables![pos]),
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             activeColor: kcGreenColor,
                                             onChanged: (bool? value) {
-                                              model.updateSelectedCustomizable(
-                                                  mainCustomizablePos,
-                                                  mainCustomizable
-                                                      .customizables![pos]);
+                                              model.updateSelectedCustoms(
+                                                mainCustomizable
+                                                    .customizables![pos],
+                                              );
                                             },
                                           ),
                                         ),
