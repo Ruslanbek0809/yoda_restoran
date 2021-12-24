@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 
 part 'hive_meal.g.dart';
 
@@ -15,6 +16,8 @@ class HiveMeal {
     this.discount,
     this.discountedPrice,
     this.quantity,
+    this.volumes,
+    this.customs,
   });
 
   @HiveField(0)
@@ -37,4 +40,10 @@ class HiveMeal {
 
   @HiveField(6)
   int? quantity;
+
+  @HiveField(7)
+  final List<HiveVolCus>? volumes;
+
+  @HiveField(8)
+  final List<HiveVolCus>? customs;
 }

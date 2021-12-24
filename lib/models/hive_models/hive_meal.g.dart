@@ -24,13 +24,15 @@ class HiveMealAdapter extends TypeAdapter<HiveMeal> {
       discount: fields[4] as int?,
       discountedPrice: fields[5] as num?,
       quantity: fields[6] as int?,
+      volumes: (fields[7] as List?)?.cast<HiveVolCus>(),
+      customs: (fields[8] as List?)?.cast<HiveVolCus>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveMeal obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class HiveMealAdapter extends TypeAdapter<HiveMeal> {
       ..writeByte(5)
       ..write(obj.discountedPrice)
       ..writeByte(6)
-      ..write(obj.quantity);
+      ..write(obj.quantity)
+      ..writeByte(7)
+      ..write(obj.volumes)
+      ..writeByte(8)
+      ..write(obj.customs);
   }
 
   @override

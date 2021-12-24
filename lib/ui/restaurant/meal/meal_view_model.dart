@@ -43,12 +43,11 @@ class MealViewModel extends ReactiveViewModel {
 
   /// ADDS or UPDATES a restaurant in CART in condition
   /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
-  Future<void> addMealToCartWithCondition(
+  Future<void> addMealToCart(
     Meal? meal,
     Restaurant? restaurant,
   ) async {
-    log.i(
-        'addMealToCartWithCondition() mealId: ${meal!.id}, resId: ${restaurant!.id}');
+    log.i('addMealToCart() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
     if (_hiveDbService.cartMeals.isEmpty)
       await _hiveDbService
@@ -99,56 +98,6 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ MEAL BOTTOM SHEET PART ----------------------------//
-
-  /// Function to call MealBottomSheet
-  Future showCustomMealBottomSheet(Meal meal) async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.meal,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-      data: meal,
-    );
-  }
-
-  List<Volume?> _selectedVolumes = [];
-  List<Volume?> get selectedVolumes => _selectedVolumes;
-
-  List<List<int>>? _selectedCustomizables = [];
-  List<List<int>>? get selectedCustomizables => _selectedCustomizables;
-
-  /// CHECK wether this selectedCustomizable selected or NOT
-  bool isCustomizableSelected(int? mainCustomizablePos, int customizableId) =>
-      _selectedCustomizables![mainCustomizablePos!].contains(customizableId);
-
-  /// SETS and CREATES initial list for selectedVolumes and selectedMultiCustomizables
-  void setOnModelReadyVolumesCustomizes(
-      int gVolumesLength, int gCustomizablesLength) {
-    _selectedVolumes = List.generate(
-      gVolumesLength,
-      (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
-    ); // Here created new list based on mainVolumeLength with all its value null
-
-    _selectedCustomizables = List.generate(gCustomizablesLength, (_) => []);
-  }
-
-  /// UPDATES _selectedVolumes's mainVolumePos value to volume
-  void updateSelectedVolume(int mainVolumePos, Volume? volume) {
-    _selectedVolumes[mainVolumePos] = volume;
-    notifyListeners();
-  }
-
-  /// ADD or REMOVE selected customizable in _selectedCustomizables![mainVolumePos]
-  void updateSelectedCustomizable(int mainVolumePos, int? customizableId) {
-    if (_selectedCustomizables![mainVolumePos].contains(customizableId))
-      _selectedCustomizables![mainVolumePos].remove(customizableId);
-    else
-      _selectedCustomizables![mainVolumePos].add(customizableId!);
-    notifyListeners();
-  }
-
 //------------------------ MEAL CART DIALOG PART ----------------------------//
 
   /// SHOWS Clear or Navigate Cart Dialog
@@ -171,6 +120,99 @@ class MealViewModel extends ReactiveViewModel {
     log.i('clearCart()');
 
     await _hiveDbService.clearCart();
+    notifyListeners();
+  }
+
+//------------------------ MEAL BOTTOM SHEET PART ----------------------------//
+
+  /// Function to call MealBottomSheet
+  Future showCustomMealBottomSheet(Meal meal) async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.meal,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+      data: meal,
+    );
+  }
+
+  List<Volume?> _selectedVols = [];
+  List<Volume?> get selectedVols => _selectedVols;
+
+  List<List<Customizable>>? _selectedCustoms = [];
+  List<List<Customizable>>? get selectedCustoms => _selectedCustoms;
+
+  /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
+  void setOnModelReadyVolsCustoms(
+      int gVolsLength, int gCustomsLength) {
+    _selectedVols = List.generate(
+      gVolsLength,
+      (_) => Volume(id: 0, groupId: 0, price: 0, volumeName: ''),
+    );
+
+    _selectedCustoms = List.generate(gCustomsLength, (_) => []);
+  }
+
+  /// CHECKS wether this selectedCustomizable selected or NOT
+  bool isCustomizableSelected(int? mainCusPos, Customizable? cus) =>
+      _selectedCustoms![mainCusPos!].contains(cus);
+
+  /// UPDATES _selectedVolumes's mainVolumePos value to volume
+  void updateSelectedVolume(int mainVolumePos, Volume? volume) {
+    _selectedVols[mainVolumePos] = volume;
+    log.i(
+        '_selectedVolumes[mainVolumePos]: ${_selectedVols[mainVolumePos]!.volumeName}');
+    notifyListeners();
+  }
+
+  /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
+  void updateSelectedCustomizable(int mainCusPos, Customizable? selectedCus) {
+    if (_selectedCustoms![mainCusPos].contains(selectedCus))
+      _selectedCustoms![mainCusPos].remove(selectedCus);
+    else
+      _selectedCustoms![mainCusPos].add(selectedCus!);
+    notifyListeners();
+  }
+
+  /// ADDS or UPDATES a restaurant in CART
+  /// ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
+  Future<void> addMealToCartFromBottomSheet(
+    Meal? meal,
+    Restaurant? restaurant,
+  ) async {
+    log.i(
+        'addMealToCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
+
+    if (_hiveDbService.cartMeals.isEmpty)
+      await _hiveDbService
+          .setResDefault(); // SETS CART restaurant to default value
+
+    if (_hiveDbService.cartRes!.id == meal.restaurantId) {
+      await _hiveDbService.addMealToCart(meal);
+    } else if (_hiveDbService.cartRes!.id == -1) {
+      await _hiveDbService.updateResInCart(restaurant);
+      await _hiveDbService.addMealToCart(meal);
+      _bottomCartService
+          .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
+    } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
+        _hiveDbService.cartRes!.id != -1) {
+      await showClearOrNavigateCartDialog(); // CALLS MealDialogView
+
+      /// If user CLEARS cart then START below functions
+      if (_hiveDbService.cartMeals.isEmpty) {
+        _bottomCartService
+            .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
+        await _hiveDbService.updateResInCart(restaurant);
+        await _hiveDbService.addMealToCart(meal);
+      }
+    }
+
+    quantity = _hiveDbService.getMealQuantity(meal.id)!;
+    if (quantity >= 1) _isButtonToggled = true;
+
+    log.i(
+        'addMealToCartWithCondition() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 

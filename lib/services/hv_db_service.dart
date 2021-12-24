@@ -151,4 +151,41 @@ class HiveDbService {
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.i('cartResId: ${cartRes!.id}');
   }
+
+  //------------------ MEAL BOTTOM SHEET PART ---------------------//
+
+  /// ADDS a meal to CART from BOTTOM SHEET
+  Future<void> addMealToCartFromBottomSheet(Meal? meal,
+      {int? quantity = 1}) async {
+    log.i('mealId: ${meal!.id}, quantity: $quantity');
+
+    bool isUnique = true;
+
+    List<HiveMeal>? similarMeals = [];
+
+    /// STEP 1. Filter only to similar meals from cartMeals
+    for (HiveMeal cartMeal in cartMeals)
+      if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
+
+    /// STEP 2. CHECK GVOLUMES
+    // if(similarMeals.isNotEmpty)
+    //   for()
+
+    try {
+      final HiveMeal _cartMeal = HiveMeal(
+        id: meal.id,
+        image: meal.image,
+        name: meal.name,
+        price: meal.price,
+        discount: meal.discount!.toInt(),
+        discountedPrice: meal.discountedPrice,
+        quantity: quantity,
+      );
+      await cartMealsBox.add(_cartMeal);
+      cartMeals.add(_cartMeal);
+      log.i('cartMeals length: ${cartMeals.length}');
+    } catch (e) {
+      log.v('Couldn\'t ADD a meal to CART: $e');
+    }
+  }
 }

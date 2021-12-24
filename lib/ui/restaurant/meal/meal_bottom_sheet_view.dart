@@ -23,7 +23,7 @@ class MealBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) => model.setOnModelReadyVolumesCustomizes(
+      onModelReady: (model) => model.setOnModelReadyVolsCustoms(
           meal.gVolumes!.length, meal.gCustomizables!.length),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
@@ -122,7 +122,7 @@ class MealBottomSheet extends StatelessWidget {
                                                 value: mainVolume
                                                     .volumes![volumePos],
                                                 groupValue:
-                                                    model.selectedVolumes[
+                                                    model.selectedVols[
                                                         mainVolumePos],
                                                 onChanged: (selectedVolume) {
                                                   model.updateSelectedVolume(
@@ -208,7 +208,7 @@ class MealBottomSheet extends StatelessWidget {
                                             value: model.isCustomizableSelected(
                                                 mainCustomizablePos,
                                                 mainCustomizable
-                                                    .customizables![pos].id!),
+                                                    .customizables![pos]),
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             activeColor: kcGreenColor,
@@ -216,7 +216,7 @@ class MealBottomSheet extends StatelessWidget {
                                               model.updateSelectedCustomizable(
                                                   mainCustomizablePos,
                                                   mainCustomizable
-                                                      .customizables![pos].id!);
+                                                      .customizables![pos]);
                                             },
                                           ),
                                         ),
