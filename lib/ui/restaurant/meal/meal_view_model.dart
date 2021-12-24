@@ -24,12 +24,19 @@ class MealViewModel extends ReactiveViewModel {
   bool get isButtonToggled => _isButtonToggled;
 
   int quantity = 0;
-  int quantityInDraft = 0;
+  int quantityInDraft = 1;
 
   /// Function to update isButtonToggled
   void updateButtonToggle() {
     _isButtonToggled = !_isButtonToggled;
     log.i('_isButtonToggled: $_isButtonToggled');
+    notifyListeners();
+  }
+
+  /// ADDS to quantityInDraft
+  void addQuantityDraft() {
+    quantityInDraft += 1;
+    log.i('addQuantityDraft() quantityInDraft: $quantityInDraft');
     notifyListeners();
   }
 
@@ -221,7 +228,7 @@ class MealViewModel extends ReactiveViewModel {
           _selectedCustoms,
           quantity: quantity,
         );
-      } 
+      }
     }
 
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
