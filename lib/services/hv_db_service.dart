@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
@@ -203,9 +204,8 @@ class HiveDbService {
     }
 
     /// STEP 6. ADD or UPDATE a meal in CART
+    /// ADD PART
     if (isUnique) {
-      /// ADD
-
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
@@ -229,6 +229,8 @@ class HiveDbService {
           ),
         );
 
+      _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
+      _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
       log.i(
           '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
 
@@ -244,30 +246,52 @@ class HiveDbService {
           volumes: _cartMealVolumes,
           customs: _cartMealCustoms,
         );
-        await cartMealsBox.add(_cartMeal);  
+        await cartMealsBox.add(_cartMeal);
         cartMeals.add(_cartMeal);
         log.i('cartMeals length: ${cartMeals.length}');
       } catch (e) {
         log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
       }
-    } else {
-      /// UPDATE
+    }
+
+    /// UPDATE PART
+    else {
+      List<HiveVolCus> _cartMealVolumes = [];
+      List<HiveVolCus> _cartMealCustoms = [];
+
+      /// STEP 6.1. ADD all selectedVols to _cartMeal.volumes
+      for (var vol in selectedVols)
+        _cartMealVolumes.add(
+          HiveVolCus(
+            id: vol.id,
+            name: vol.volumeName,
+            price: vol.price,
+          ),
+        );
+
+      /// STEP 6.2. ADD all selectedCustoms to _cartMeal.customs
+      for (var cus in selectedCustoms)
+        _cartMealCustoms.add(
+          HiveVolCus(
+            id: cus.id,
+            name: cus.customizableName,
+            price: cus.price,
+          ),
+        );
+
+      _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
+      _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
 
       /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
-      int pos = cartMeals.indexWhere((_meal) => _meal.id == meal.id);
+      int pos = cartMeals.indexWhere((_meal) =>
+          _meal.id == meal.id &&
+          listEquals(_meal.volumes, _cartMealVolumes) &&
+          listEquals(_meal.customs, _cartMealCustoms));
       if (pos == -1) return;
 
-      if (quantity! >= 1) {
-        cartMeals[pos].quantity = quantity;
-        cartMealsBox.putAt(pos, cartMeals[pos]);
-        log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
-      } else {
-        cartMealsBox.deleteAt(pos);
-        cartMeals.removeAt(pos);
-
-        if (cartMeals.isEmpty)
-          _bottomCartService.hideBottomCart(); // HIDES BottomCart.
-      }
+      cartMeals[pos].quantity = cartMeals[pos].quantity! + quantity!;
+      cartMealsBox.putAt(pos, cartMeals[pos]);
+      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
     }
   }
 }
