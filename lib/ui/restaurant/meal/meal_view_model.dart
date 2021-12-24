@@ -137,14 +137,11 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  List<Volume?> _selectedVols = [];
-  List<Volume?> get selectedVols => _selectedVols;
+  List<Volume>? _selectedVols = [];
+  List<Volume>? get selectedVols => _selectedVols;
 
   List<Customizable>? _selectedCustoms = [];
   List<Customizable>? get selectedCustoms => _selectedCustoms;
-
-  // List<List<Customizable>>? _selectedCustoms = [];
-  // List<List<Customizable>>? get selectedCustoms => _selectedCustoms;
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolsCustoms(int gVolsLength, int gCustomsLength) {
@@ -154,12 +151,19 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  /// CHECKS wether this selectedCustomizable selected or NOT
+  /// CHECKS wether this vol in _selectedVols or NOT
+  Volume? isVolSelected(Volume? vol) => _selectedVols!.firstWhere(
+        (_vol) => _vol.id == vol!.id,
+        orElse: () =>
+            Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
+      );
+
+  /// CHECKS wether this cus in _selectedCustoms or NOT
   bool isCustomSelected(Customizable? cus) => _selectedCustoms!.contains(cus);
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(int mainVolPos, Volume? volume) {
-    _selectedVols[mainVolPos] = volume;
+    _selectedVols![mainVolPos] = volume!;
     notifyListeners();
   }
 

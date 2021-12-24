@@ -121,12 +121,15 @@ class MealBottomSheet extends StatelessWidget {
                                               return RadioListTile<Volume?>(
                                                 value: mainVolume
                                                     .volumes![volumePos],
-                                                groupValue: model.selectedVols[
-                                                    mainVolumePos],
+                                                groupValue: model.isVolSelected(
+                                                  mainVolume
+                                                      .volumes![volumePos],
+                                                ),
                                                 onChanged: (selectedVolume) {
-                                                  model.updateSelectedVols(
-                                                      mainVolumePos,
-                                                      selectedVolume!);
+                                                  if (selectedVolume != null)
+                                                    model.updateSelectedVols(
+                                                        mainVolumePos,
+                                                        selectedVolume);
                                                 },
                                                 title: Row(
                                                   children: [
