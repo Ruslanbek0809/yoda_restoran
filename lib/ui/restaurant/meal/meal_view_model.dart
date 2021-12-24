@@ -24,6 +24,7 @@ class MealViewModel extends ReactiveViewModel {
   bool get isButtonToggled => _isButtonToggled;
 
   int quantity = 0;
+  int quantityInDraft = 0;
 
   /// Function to update isButtonToggled
   void updateButtonToggle() {
@@ -178,7 +179,8 @@ class MealViewModel extends ReactiveViewModel {
 
   /// ADDS or UPDATES a restaurant in CART
   /// ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
-  Future<void> addMealToCartFromBottomSheet(Meal? meal, Restaurant? restaurant,
+  Future<void> addUpdateMealInCartFromBottomSheet(
+      Meal? meal, Restaurant? restaurant,
       {int? quantity = 1}) async {
     log.i(
         'addMealToCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
@@ -188,12 +190,20 @@ class MealViewModel extends ReactiveViewModel {
           .setResDefault(); // SETS CART restaurant to default value
 
     if (_hiveDbService.cartRes!.id == meal.restaurantId) {
-      await _hiveDbService.addMealToCartFromBottomSheet(
-          meal, _selectedVols, _selectedCustoms,
-          quantity: quantity);
+      await _hiveDbService.addUpdateMealInCartFromBottomSheet(
+        meal,
+        _selectedVols,
+        _selectedCustoms,
+        quantity: quantity,
+      );
     } else if (_hiveDbService.cartRes!.id == -1) {
       await _hiveDbService.updateResInCart(restaurant);
-      await _hiveDbService.addMealToCart(meal);
+      await _hiveDbService.addUpdateMealInCartFromBottomSheet(
+        meal,
+        _selectedVols,
+        _selectedCustoms,
+        quantity: quantity,
+      );
       _bottomCartService
           .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
     } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
@@ -205,8 +215,13 @@ class MealViewModel extends ReactiveViewModel {
         _bottomCartService
             .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
         await _hiveDbService.updateResInCart(restaurant);
-        await _hiveDbService.addMealToCart(meal);
-      }
+        await _hiveDbService.addUpdateMealInCartFromBottomSheet(
+          meal,
+          _selectedVols,
+          _selectedCustoms,
+          quantity: quantity,
+        );
+      } 
     }
 
     quantity = _hiveDbService.getMealQuantity(meal.id)!;

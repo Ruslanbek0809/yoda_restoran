@@ -82,11 +82,17 @@ class HiveDbService {
 
   /// GETS quantity of cartMeal for this meal
   int? getMealQuantity(int? mealId) {
-    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
-    if (pos == -1) return 0;
+    var _quantity = 0;
+    for (var _cartMeal in cartMeals)
+      if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
 
-    log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
-    return cartMeals[pos].quantity;
+    //     int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    // if (pos == -1) return 0;
+    // log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
+    // return cartMeals[pos].quantity;
+
+    log.i(' _quantity: $_quantity');
+    return _quantity;
   }
 
   /// ADDS a meal to CART
@@ -102,6 +108,8 @@ class HiveDbService {
         discount: meal.discount!.toInt(),
         discountedPrice: meal.discountedPrice,
         quantity: quantity,
+        customs: [],
+        volumes: [],
       );
       await cartMealsBox.add(_cartMeal);
       cartMeals.add(_cartMeal);
@@ -111,6 +119,7 @@ class HiveDbService {
     }
   }
 
+  /// ADDS a meal in CART
   Future<void> updateMealInCart({int? mealId, int? quantity}) async {
     log.i('mealId: $mealId, quantity: $quantity');
 
@@ -156,7 +165,7 @@ class HiveDbService {
   //------------------ MEAL BOTTOM SHEET PART ---------------------//
 
   /// ADDS a meal to CART from BOTTOM SHEET
-  Future<void> addMealToCartFromBottomSheet(
+  Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, List<Volume> selectedVols, List<Customizable> selectedCustoms,
       {int? quantity = 1}) async {
     log.i('mealId: ${meal!.id}, quantity: $quantity');
@@ -281,6 +290,8 @@ class HiveDbService {
 
       _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
       _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
+      log.i(
+          '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
 
       /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
       int pos = cartMeals.indexWhere((_meal) =>
@@ -291,7 +302,8 @@ class HiveDbService {
 
       cartMeals[pos].quantity = cartMeals[pos].quantity! + quantity!;
       cartMealsBox.putAt(pos, cartMeals[pos]);
-      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
+      log.i(
+          'cartMeals[pos].quantity: ${cartMeals[pos].quantity}, _cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
     }
   }
 }
