@@ -157,11 +157,11 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 child: InkWell(
                                   borderRadius: AppTheme().radius15,
                                   onTap: () async {
-                                    await model.updateMealInCart(
-                                      mealId: meal.id,
-                                      mealQuantity: model.quantity - 1,
-                                    );
-                                    await _tweenController.forward();
+                                    // await model.updateMealInCart(
+                                    //   mealId: meal.id,
+                                    //   mealQuantity: model.quantity - 1,
+                                    // );
+                                    // await _tweenController.forward();
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(

@@ -24,7 +24,7 @@ class MealViewModel extends ReactiveViewModel {
   bool get isButtonToggled => _isButtonToggled;
 
   int quantity = 0;
-  int quantityInDraft = 1;
+  int quantityDraft = 1;
 
   /// Function to update isButtonToggled
   void updateButtonToggle() {
@@ -35,16 +35,16 @@ class MealViewModel extends ReactiveViewModel {
 
   /// ADDS to quantityInDraft
   void addQuantityDraft() {
-    quantityInDraft += 1;
-    log.i('addQuantityDraft() quantityInDraft: $quantityInDraft');
+    quantityDraft += 1;
+    log.i('addQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
   }
 
   /// SUBTRACTS quantityInDraft
   void subtractQuantityDraft() {
-    if (quantityInDraft <= 1) return;
-    quantityInDraft -= 1;
-    log.i('subtractQuantityDraft() quantityInDraft: $quantityInDraft');
+    if (quantityDraft <= 1) return;
+    quantityDraft -= 1;
+    log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
   }
 

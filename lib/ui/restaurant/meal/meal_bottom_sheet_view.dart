@@ -311,14 +311,16 @@ class MealBottomSheet extends StatelessWidget {
                                           //   topLeft: Radius.circular(15.0),
                                           //   bottomLeft: Radius.circular(15.0),
                                           // ),
-                                          onTap: () async {},
+                                          onTap: model.subtractQuantityDraft,
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 15.h),
                                             child: Icon(
                                               Icons.remove,
                                               size: 23.w,
-                                              color: AppTheme.FONT_COLOR,
+                                              color: model.quantityDraft == 1
+                                                  ? kcHelperColor
+                                                  : AppTheme.FONT_COLOR,
                                             ),
                                           ),
                                         ),
@@ -326,7 +328,7 @@ class MealBottomSheet extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '1',
+                                        model.quantityDraft.toString(),
                                         style: ktsDefault20Text,
                                         textAlign: TextAlign.center,
                                       ),
@@ -346,7 +348,7 @@ class MealBottomSheet extends StatelessWidget {
                                           //   topRight: Radius.circular(15.0),
                                           //   bottomRight: Radius.circular(15.0),
                                           // ),
-                                          onTap: () {},
+                                          onTap: model.addQuantityDraft,
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 15.h),
