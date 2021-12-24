@@ -40,6 +40,14 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// SUBTRACTS quantityInDraft
+  void subtractQuantityDraft() {
+    if (quantityInDraft <= 1) return;
+    quantityInDraft -= 1;
+    log.i('subtractQuantityDraft() quantityInDraft: $quantityInDraft');
+    notifyListeners();
+  }
+
   //----------- HIVE DB PART ------------//
 
   /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
