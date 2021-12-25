@@ -20,22 +20,19 @@ class HiveVolCusAdapter extends TypeAdapter<HiveVolCus> {
       id: fields[0] as int?,
       name: fields[1] as String?,
       price: fields[2] as num?,
-      groupId: fields[3] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveVolCus obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.price)
-      ..writeByte(3)
-      ..write(obj.groupId);
+      ..write(obj.price);
   }
 
   @override

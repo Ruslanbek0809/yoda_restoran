@@ -173,6 +173,7 @@ class HiveDbService {
     bool isUnique = false;
 
     List<HiveMeal>? similarMeals = [];
+    HiveMeal? similarUpdateMeal;
 
     /// STEP 1. Filter only to similar meals from cartMeals
     for (HiveMeal cartMeal in cartMeals)
@@ -186,36 +187,13 @@ class HiveDbService {
 
     /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
     for (HiveMeal similarMeal in similarMeals) {
-      /// STEP 3.1. CREATE lists for similarMeal.volumes and similarMeal.customs to work with CONTAINS METHOD
-      // List<Volume>? similarVolsList = [];
-      // List<Customizable>? similarCustomsList = [];
-
-      // if (similarMeal.volumes!.isNotEmpty)
-      //   similarMeal.volumes!.forEach((_vol) {
-      //     similarVolsList.add(Volume(
-      //       id: _vol.id,
-      //       volumeName: _vol.name,
-      //       price: _vol.price,
-      //       groupId: _vol.groupId,
-      //     ));
-      //   });
-
-      // if (similarMeal.customs!.isNotEmpty)
-      //   similarMeal.customs!.forEach((_cus) {
-      //     similarCustomsList.add(Customizable(
-      //       id: _cus.id,
-      //       customizableName: _cus.name,
-      //       price: _cus.price,
-      //       groupId: _cus.groupId,
-      //     ));
-      //   });
-
       /// STEP 3.1. CHECK whether similarMeal.volumes and similarMeal.customs length EQUAL or NOT to selectedVols and selectedCustoms length. If NOT, MAKE isUnique to TRUE
-      if (selectedVols.length != similarMeal.volumes!.length ||
-          selectedCustoms.length != similarMeal.customs!.length) {
-        isUnique = true;
-        if (isUnique) break;
-      }
+      // if (selectedVols.length != similarMeal.volumes!.length ||
+      //     selectedCustoms.length != similarMeal.customs!.length) {
+      //   log.v('FOUND NOT SAME LENGTH PARAMS');
+      //   isUnique = true;
+      //   if (isUnique) break;
+      // }
 
       /// STEP 3.2. CHECK selectedVols and UPDATE isUnique var by condition ( ID COMPARISON )
       for (Volume vol in selectedVols) {
@@ -235,6 +213,8 @@ class HiveDbService {
         if (isUnique) break;
       }
 
+      /// STEP 3.4. GETS value of similarMeal to similarUpdateMeal if there is similarMeal
+      similarUpdateMeal = similarMeal;
       log.i('INSIDE SIMILARS isUnique at the END: $isUnique');
     }
 
@@ -246,30 +226,21 @@ class HiveDbService {
       List<HiveVolCus> _cartMealCustoms = [];
 
       /// STEP 4.1. ADD all selectedVols to _cartMeal.volumes
-      for (Volume vol in selectedVols) {
-        HiveVolCus hiveVol = HiveVolCus(
+      for (Volume vol in selectedVols)
+        _cartMealVolumes.add(HiveVolCus(
           id: vol.id,
           name: vol.volumeName,
           price: vol.price,
-          groupId: vol.groupId,
-        );
-        _cartMealVolumes.add(hiveVol);
-      }
+        ));
 
       /// STEP 4.2. ADD all selectedCustoms to _cartMeal.customs
-      for (Customizable cus in selectedCustoms) {
-        log.v('ADDING selectedCustoms Loop: ${cus.id}');
-        HiveVolCus hiveCus = HiveVolCus(
+      for (Customizable cus in selectedCustoms)
+        _cartMealCustoms.add(HiveVolCus(
           id: cus.id,
           name: cus.customizableName,
           price: cus.price,
-          groupId: cus.groupId,
-        );
-        _cartMealCustoms.add(hiveCus);
-      }
+        ));
 
-      _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
-      _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
       log.i(
           '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
 
@@ -296,45 +267,13 @@ class HiveDbService {
     /// UPDATE PART
     else {
       log.i('UPDATES with isUnique: $isUnique');
-      List<HiveVolCus> _cartMealVolumes = [];
-      List<HiveVolCus> _cartMealCustoms = [];
-
-      /// STEP 6.1. ADD all selectedVols to _cartMeal.volumes
-      for (Volume vol in selectedVols) {
-        HiveVolCus hiveVol = HiveVolCus(
-          id: vol.id,
-          name: vol.volumeName,
-          price: vol.price,
-        );
-        _cartMealVolumes.add(hiveVol);
-      }
-
-      /// STEP 6.2. ADD all selectedCustoms to _cartMeal.customs
-      for (Customizable cus in selectedCustoms) {
-        HiveVolCus hiveCus = HiveVolCus(
-          id: cus.id,
-          name: cus.customizableName,
-          price: cus.price,
-        );
-        _cartMealCustoms.add(hiveCus);
-      }
-
-      _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
-      _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
-      log.i(
-          '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
-
-      /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
-      int pos = cartMeals.indexWhere((_meal) =>
-          _meal.id == meal.id &&
-          listEquals(_meal.volumes, _cartMealVolumes) &&
-          listEquals(_meal.customs, _cartMealCustoms));
+      int pos = cartMeals.indexOf(similarUpdateMeal!);
+      log.i('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;
 
-      cartMeals[pos].quantity = cartMeals[pos].quantity! + quantityDraft!;
+      similarUpdateMeal.quantity = similarUpdateMeal.quantity! + quantityDraft!;
       cartMealsBox.putAt(pos, cartMeals[pos]);
-      log.i(
-          'cartMeals[pos].quantity: ${cartMeals[pos].quantity}, _cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
+      log.i('similarUpdateMeal.quantity: ${similarUpdateMeal.quantity}');
     }
   }
 }
