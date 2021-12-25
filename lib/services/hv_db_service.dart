@@ -184,41 +184,55 @@ class HiveDbService {
     log.v(
         'BEFORE STEP 3. length selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
 
-    /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration
-    // if (similarMeals.isNotEmpty)
+    /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
     for (HiveMeal similarMeal in similarMeals) {
-      /// STEP 3.1. CHECK selectedVols and UPDATE isUnique by condition
+      /// STEP 3.1. CREATE lists for similarMeal.volumes and similarMeal.customs to work with CONTAINS METHOD
+      // List<Volume>? similarVolsList = [];
+      // List<Customizable>? similarCustomsList = [];
+
+      // if (similarMeal.volumes!.isNotEmpty)
+      //   similarMeal.volumes!.forEach((_vol) {
+      //     similarVolsList.add(Volume(
+      //       id: _vol.id,
+      //       volumeName: _vol.name,
+      //       price: _vol.price,
+      //       groupId: _vol.groupId,
+      //     ));
+      //   });
+
+      // if (similarMeal.customs!.isNotEmpty)
+      //   similarMeal.customs!.forEach((_cus) {
+      //     similarCustomsList.add(Customizable(
+      //       id: _cus.id,
+      //       customizableName: _cus.name,
+      //       price: _cus.price,
+      //       groupId: _cus.groupId,
+      //     ));
+      //   });
+
+      /// STEP 3.1. CHECK whether similarMeal.volumes and similarMeal.customs length EQUAL or NOT to selectedVols and selectedCustoms length. If NOT, MAKE isUnique to TRUE
+      if (selectedVols.length != similarMeal.volumes!.length ||
+          selectedCustoms.length != similarMeal.customs!.length) {
+        isUnique = true;
+        if (isUnique) break;
+      }
+
+      /// STEP 3.2. CHECK selectedVols and UPDATE isUnique var by condition ( ID COMPARISON )
       for (Volume vol in selectedVols) {
         log.v('selectedVols Loop: ${vol.id}');
-        HiveVolCus hiveVol = HiveVolCus(
-          id: vol.id,
-          name: vol.volumeName,
-          price: vol.price,
-        );
-        log.v(hiveVol == similarMeal.volumes![0]);
-        log.v(
-            'hiveVol iD: ${hiveVol.id} and similarMeal.volumes![0] ID: ${similarMeal.volumes![0].id}');
-        isUnique = !similarMeal.volumes!.contains(hiveVol);
+        isUnique = !similarMeal.volumes!
+            .any((_vol) => _vol.id != -1 && _vol.id == vol.id);
 
         if (isUnique) break;
       }
 
-      /// STEP 3.2. CHECK selectedCustoms and UPDATE isUnique by condition
+      /// STEP 3.3. CHECK selectedCustoms and UPDATE isUnique var by condition ( ID COMPARISON )
       /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison WORKAROUND
       for (Customizable cus in selectedCustoms) {
         log.v('selectedCustoms Loop: ${cus.id}');
-        for (HiveVolCus hiveVolCus in similarMeal.customs!) {
-          log.v(
-              'selectedCustoms => similarMeal.customs Loop: ${hiveVolCus.id}');
-          log.v('!(hiveVolCus.id == cus.id): ${!(hiveVolCus.id == cus.id)}');
-          isUnique = !(hiveVolCus.id == cus.id);
 
-          if (isUnique) break;
-        }
-
+        isUnique = !similarMeal.customs!.any((_cus) => _cus.id == cus.id);
         if (isUnique) break;
-
-        // isUnique = !similarMeal.customs!.contains(hiveCus);
       }
 
       log.i('INSIDE SIMILARS isUnique at the END: $isUnique');
@@ -237,6 +251,7 @@ class HiveDbService {
           id: vol.id,
           name: vol.volumeName,
           price: vol.price,
+          groupId: vol.groupId,
         );
         _cartMealVolumes.add(hiveVol);
       }
@@ -248,6 +263,7 @@ class HiveDbService {
           id: cus.id,
           name: cus.customizableName,
           price: cus.price,
+          groupId: cus.groupId,
         );
         _cartMealCustoms.add(hiveCus);
       }

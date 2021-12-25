@@ -8,6 +8,7 @@ class HiveVolCus {
     this.id,
     this.name,
     this.price,
+    this.groupId,
   });
 
   @HiveField(0)
@@ -18,4 +19,7 @@ class HiveVolCus {
 
   @HiveField(2)
   final num? price;
+
+  @HiveField(3)
+  final int? groupId;
 }
