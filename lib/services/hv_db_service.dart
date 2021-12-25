@@ -119,7 +119,7 @@ class HiveDbService {
     }
   }
 
-  /// ADDS a meal in CART
+  /// UPDATES a meal in CART
   Future<void> updateMealInCart({int? mealId, int? quantity}) async {
     log.i('mealId: $mealId, quantity: $quantity');
 
@@ -179,64 +179,78 @@ class HiveDbService {
       if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
 
     /// STEP 2. MAKE isUnique to TRUE if similarMeals isEmpty
-    isUnique = true;
+    if (similarMeals.isEmpty) isUnique = true;
+
+    log.v(
+        'BEFORE STEP 3. length selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
 
     /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration
+    // if (similarMeals.isNotEmpty)
     for (HiveMeal similarMeal in similarMeals) {
-      /// STEP 4. CHECK selectedVols and UPDATE isUnique by condition
-      for (var vol in selectedVols) {
-        isUnique = !similarMeal.volumes!.contains(
-          HiveVolCus(
-            id: vol.id,
-            name: vol.volumeName,
-            price: vol.price,
-          ),
+      /// STEP 3.1. CHECK selectedVols and UPDATE isUnique by condition
+      for (Volume vol in selectedVols) {
+        log.v('selectedVols Loop: ${vol.id}');
+        HiveVolCus hiveVol = HiveVolCus(
+          id: vol.id,
+          name: vol.volumeName,
+          price: vol.price,
         );
+        log.v(hiveVol == similarMeal.volumes![0]);
+        log.v(
+            'hiveVol iD: ${hiveVol.id} and similarMeal.volumes![0] ID: ${similarMeal.volumes![0].id}');
+        isUnique = !similarMeal.volumes!.contains(hiveVol);
 
         if (isUnique) break;
       }
 
-      /// STEP 5. CHECK selectedCustoms and UPDATE isUnique by condition
-      for (var cus in selectedCustoms) {
-        isUnique = !similarMeal.customs!.contains(
-          HiveVolCus(
-            id: cus.id,
-            name: cus.customizableName,
-            price: cus.price,
-          ),
-        );
+      /// STEP 3.2. CHECK selectedCustoms and UPDATE isUnique by condition
+      /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison WORKAROUND
+      for (Customizable cus in selectedCustoms) {
+        log.v('selectedCustoms Loop: ${cus.id}');
+        for (HiveVolCus hiveVolCus in similarMeal.customs!) {
+          log.v(
+              'selectedCustoms => similarMeal.customs Loop: ${hiveVolCus.id}');
+          log.v('!(hiveVolCus.id == cus.id): ${!(hiveVolCus.id == cus.id)}');
+          isUnique = !(hiveVolCus.id == cus.id);
+
+          if (isUnique) break;
+        }
 
         if (isUnique) break;
+
+        // isUnique = !similarMeal.customs!.contains(hiveCus);
       }
 
-      log.i('isUnique at the END: $isUnique');
+      log.i('INSIDE SIMILARS isUnique at the END: $isUnique');
     }
 
-    /// STEP 6. ADD or UPDATE a meal in CART
+    /// STEP 4. ADD or UPDATE a meal in CART
     /// ADD PART
     if (isUnique) {
+      log.i('ADDS with isUnique: $isUnique');
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
-      /// STEP 6.1. ADD all selectedVols to _cartMeal.volumes
-      for (var vol in selectedVols)
-        _cartMealVolumes.add(
-          HiveVolCus(
-            id: vol.id,
-            name: vol.volumeName,
-            price: vol.price,
-          ),
+      /// STEP 4.1. ADD all selectedVols to _cartMeal.volumes
+      for (Volume vol in selectedVols) {
+        HiveVolCus hiveVol = HiveVolCus(
+          id: vol.id,
+          name: vol.volumeName,
+          price: vol.price,
         );
+        _cartMealVolumes.add(hiveVol);
+      }
 
-      /// STEP 6.2. ADD all selectedCustoms to _cartMeal.customs
-      for (var cus in selectedCustoms)
-        _cartMealCustoms.add(
-          HiveVolCus(
-            id: cus.id,
-            name: cus.customizableName,
-            price: cus.price,
-          ),
+      /// STEP 4.2. ADD all selectedCustoms to _cartMeal.customs
+      for (Customizable cus in selectedCustoms) {
+        log.v('ADDING selectedCustoms Loop: ${cus.id}');
+        HiveVolCus hiveCus = HiveVolCus(
+          id: cus.id,
+          name: cus.customizableName,
+          price: cus.price,
         );
+        _cartMealCustoms.add(hiveCus);
+      }
 
       _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
       _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
@@ -265,28 +279,29 @@ class HiveDbService {
 
     /// UPDATE PART
     else {
+      log.i('UPDATES with isUnique: $isUnique');
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
       /// STEP 6.1. ADD all selectedVols to _cartMeal.volumes
-      for (var vol in selectedVols)
-        _cartMealVolumes.add(
-          HiveVolCus(
-            id: vol.id,
-            name: vol.volumeName,
-            price: vol.price,
-          ),
+      for (Volume vol in selectedVols) {
+        HiveVolCus hiveVol = HiveVolCus(
+          id: vol.id,
+          name: vol.volumeName,
+          price: vol.price,
         );
+        _cartMealVolumes.add(hiveVol);
+      }
 
       /// STEP 6.2. ADD all selectedCustoms to _cartMeal.customs
-      for (var cus in selectedCustoms)
-        _cartMealCustoms.add(
-          HiveVolCus(
-            id: cus.id,
-            name: cus.customizableName,
-            price: cus.price,
-          ),
+      for (Customizable cus in selectedCustoms) {
+        HiveVolCus hiveCus = HiveVolCus(
+          id: cus.id,
+          name: cus.customizableName,
+          price: cus.price,
         );
+        _cartMealCustoms.add(hiveCus);
+      }
 
       _cartMealVolumes.sort((prev, next) => prev.id!.compareTo(next.id!));
       _cartMealCustoms.sort((prev, next) => prev.id!.compareTo(next.id!));
