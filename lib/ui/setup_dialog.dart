@@ -148,7 +148,7 @@ class ClearCartDialogView extends StatelessWidget {
             )
           : AlertDialog(
               shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-              titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 15.h),
+              titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
               contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
               actionsAlignment: MainAxisAlignment.center,
               title: Text(

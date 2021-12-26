@@ -14,7 +14,7 @@ class CartMealView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartMealViewModel>.reactive(
-      onModelReady: (model) => model.getCartMealQuantity(cartMeal.id),
+      onModelReady: (model) => model.getCartMealQuantity(cartMeal),
       builder: (context, model, child) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,7 +28,7 @@ class CartMealView extends StatelessWidget {
             child: Container(
               height:
                   0.3.sw, // MAKES Column apply MainAxisAlignment.spaceBetween
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.w),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,14 +52,14 @@ class CartMealView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Text(
-                  //   'Ajy sos',
-                  //   style: TextStyle(
-                  //     fontSize: 14.sp,
-                  //     color: AppTheme.DRAWER_ICON,
-                  //   ),
-                  // ),
-//// Button Widget
+                  //------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//
+                  Text(
+                    model.concatenateVolsCustoms,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: ktsDefault14HelperText,
+                  ),
+                  //------------------ BUTTONS ---------------------//
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

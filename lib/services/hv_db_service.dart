@@ -284,12 +284,13 @@ class HiveDbService {
 //---------------------------------------//
 //---------------------------------------//
 
-  /// GETS quantity of cartMeal for this meal
-  int? getCartMealQuantity(int? mealId) {
-    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
+  /// GETS quantity of this hiveMeal from cartMeals
+  int getCartMealQuantity(HiveMeal hiveMeal) {
+    int pos = cartMeals.indexOf(hiveMeal);
+    log.i('pos of similarUpdateMeal: $pos');
     if (pos == -1) return 0;
 
     log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
-    return cartMeals[pos].quantity;
+    return cartMeals[pos].quantity!;
   }
 }
