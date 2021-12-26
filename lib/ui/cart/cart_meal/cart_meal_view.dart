@@ -8,17 +8,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'cart_meal_view_model.dart';
 
 class CartMealView extends StatelessWidget {
-  final HiveMeal meal;
-  const CartMealView({Key? key, required this.meal}) : super(key: key);
+  final HiveMeal cartMeal;
+  const CartMealView({Key? key, required this.cartMeal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartMealViewModel>.reactive(
+      onModelReady: (model) => model.getCartMealQuantity(cartMeal.id),
       builder: (context, model, child) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           YodaImage(
-            image: meal.image!,
+            image: cartMeal.image!,
             height: 0.3.sw,
             width: 0.3.sw,
             borderRadius: Constants.BORDER_RADIUS_10,
@@ -37,7 +38,7 @@ class CartMealView extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        meal.name!,
+                        cartMeal.name!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: ktsDefault16Text,
@@ -45,7 +46,7 @@ class CartMealView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 5.w),
                         child: Text(
-                          '${meal.price} TMT',
+                          '${cartMeal.price} TMT',
                           style: ktsDefault18Text,
                         ),
                       ),
@@ -81,7 +82,10 @@ class CartMealView extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: Text('12', style: ktsDefault20Text),
+                        child: Text(
+                          model.quantity.toString(),
+                          style: ktsDefault20Text,
+                        ),
                       ),
                       Material(
                         color: AppTheme.MAIN_LIGHT,

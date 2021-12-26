@@ -3,6 +3,7 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 
+/// CartService is used only inside CartView and CartMealView
 class CartService {
   final log = getLogger('CartService');
 

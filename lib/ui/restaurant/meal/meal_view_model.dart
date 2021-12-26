@@ -235,12 +235,13 @@ class MealViewModel extends ReactiveViewModel {
         await _hiveDbService.addUpdateMealInCartFromBottomSheet(
           meal,
           _selectedVols,
-          _selectedCustoms, 
+          _selectedCustoms,
           quantityDraft: quantityDraft,
         );
       }
     }
 
+    // getMealQuantity(meal.id);
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
     if (quantity >= 1) _isButtonToggled = true;
 

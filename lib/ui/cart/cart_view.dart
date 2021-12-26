@@ -84,7 +84,7 @@ class _CartViewState extends State<CartView> {
                   padding: EdgeInsets.only(top: 15.h, left: 16.w, right: 16.w),
                   itemCount: model.cartMeals.length,
                   itemBuilder: (context, pos) {
-                    return CartMealView(meal: model.cartMeals[pos]);
+                    return CartMealView(cartMeal: model.cartMeals[pos]);
                   },
                   separatorBuilder: (context, index) {
                     return Padding(

@@ -48,7 +48,9 @@ class HiveDbService {
     log.i('${cartMeals.length}');
   }
 
-  //------------------ RESTAURANT PART ---------------------//
+//---------------------------------------//
+//------------------ RESTAURANT PART ---------------------//
+//---------------------------------------//
 
   /// UPDATES a restaurant in CART
   Future<void> updateResInCart(Restaurant? restaurant) async {
@@ -78,18 +80,15 @@ class HiveDbService {
     }
   }
 
-  //------------------ MEAL PART ---------------------//
+//---------------------------------------//
+//------------------ MEAL PART ---------------------//
+//---------------------------------------//
 
-  /// GETS quantity of cartMeal for this meal
+  /// GETS total quantity of cartMeals for meal with mealId
   int? getMealQuantity(int? mealId) {
     var _quantity = 0;
     for (var _cartMeal in cartMeals)
       if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
-
-    //     int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
-    // if (pos == -1) return 0;
-    // log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
-    // return cartMeals[pos].quantity;
 
     log.i(' _quantity: $_quantity');
     return _quantity;
@@ -162,7 +161,9 @@ class HiveDbService {
     log.i('cartResId: ${cartRes!.id}');
   }
 
-  //------------------ MEAL BOTTOM SHEET PART ---------------------//
+//---------------------------------------//
+//------------------ MEAL BOTTOM SHEET PART ---------------------//
+//---------------------------------------//
 
   /// ADDS a meal to CART from BOTTOM SHEET
   Future<void> addUpdateMealInCartFromBottomSheet(
@@ -275,5 +276,20 @@ class HiveDbService {
       cartMealsBox.putAt(pos, cartMeals[pos]);
       log.i('similarUpdateMeal.quantity: ${similarUpdateMeal.quantity}');
     }
+  }
+
+//---------------------------------------//
+//---------------------------------------//
+//----------------------- CART VIEW PART --------------------------//
+//---------------------------------------//
+//---------------------------------------//
+
+  /// GETS quantity of cartMeal for this meal
+  int? getCartMealQuantity(int? mealId) {
+    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    if (pos == -1) return 0;
+
+    log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
+    return cartMeals[pos].quantity;
   }
 }

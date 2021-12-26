@@ -381,7 +381,9 @@ class MealBottomSheet extends StatelessWidget {
                                   await model
                                       .addUpdateMealInCartFromBottomSheet(
                                           meal, restaurant);
-                                  model.navBack();
+
+                                  completer(SheetResponse());
+                                  // model.navBack();
                                 },
                               ),
                             ),
