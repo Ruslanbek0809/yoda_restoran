@@ -273,7 +273,7 @@ class MealBottomSheet extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              '${meal.price} TMT',
+                              '${model.totalDraftSum(meal.discount != null || meal.discount! > 0 ? meal.discountedPrice! : meal.price!)} TMT',
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 color: AppTheme.FONT_COLOR,

@@ -183,6 +183,20 @@ class MealViewModel extends ReactiveViewModel {
   /// CHECKS wether this cus in _selectedCustoms or NOT
   bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);
 
+  /// GETS total meal draft sum
+  num totalDraftSum(num mealPrice) {
+    num totalDraftPrice = 0;
+    totalDraftPrice += mealPrice;
+    _selectedVols.forEach((vol) {
+      if (vol.id != -1) totalDraftPrice += vol.price!;
+    });
+    _selectedCustoms.forEach((cus) {
+      totalDraftPrice += cus.price!;
+    });
+
+    return totalDraftPrice;
+  }
+
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(int mainVolPos, Volume? volume) {
     _selectedVols[mainVolPos] = volume!;
