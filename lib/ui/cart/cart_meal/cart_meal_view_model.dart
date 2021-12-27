@@ -15,7 +15,7 @@ class CartMealViewModel extends BaseViewModel {
   /// GETS quantity of cartMeal for this mealId
   void getCartMealQuantity(HiveMeal hiveMeal) {
     quantity = _hiveDbService.getCartMealQuantity(hiveMeal);
-    cartMeal = hiveMeal;
+    cartMeal = hiveMeal; // Assigning initial value
     notifyListeners();
   }
 
@@ -32,5 +32,18 @@ class CartMealViewModel extends BaseViewModel {
     });
 
     return concatenatedString.toString();
+  }
+
+  /// UPDATES cartMeal
+  Future<void> updateCartMealInCart(int? mealQuantity) async {
+    log.i(
+        'updateCartMealInCart() cartMeal.id: ${cartMeal!.id}, mealQuantity: $mealQuantity');
+
+    await _hiveDbService.updateCartMealInCart(
+        hiveMeal: cartMeal, quantity: mealQuantity);
+    quantity = _hiveDbService.getCartMealQuantity(cartMeal!);
+
+    log.i('updateCartMealInCart() quantity: $quantity');
+    notifyListeners();
   }
 }

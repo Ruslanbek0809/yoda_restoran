@@ -69,7 +69,8 @@ class CartMealView extends StatelessWidget {
                         elevation: 0,
                         child: InkWell(
                           borderRadius: AppTheme().radius15,
-                          onTap: () async {},
+                          onTap: () async => await model
+                              .updateCartMealInCart(model.quantity - 1),
                           child: Padding(
                             padding: EdgeInsets.all(10.w),
                             child: Icon(
@@ -93,7 +94,8 @@ class CartMealView extends StatelessWidget {
                         elevation: 0,
                         child: InkWell(
                           borderRadius: AppTheme().radius15,
-                          onTap: () {},
+                          onTap: () async => await model
+                              .updateCartMealInCart(model.quantity + 1),
                           child: Padding(
                             padding: EdgeInsets.all(10.w),
                             child: Icon(

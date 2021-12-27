@@ -25,6 +25,7 @@ void setupBottomSheet() {
           completer: completer,
           meal: sheetRequest.data.meal,
           restaurant: sheetRequest.data.restaurant,
+          mealViewModel: sheetRequest.data.mealViewModel,
         ),
   };
 

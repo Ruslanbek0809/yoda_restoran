@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
@@ -290,7 +289,26 @@ class HiveDbService {
     log.i('pos of similarUpdateMeal: $pos');
     if (pos == -1) return 0;
 
-    log.i(' cartMeals[pos].id: ${cartMeals[pos].id}');
     return cartMeals[pos].quantity!;
+  }
+
+  /// UPDATES cart meal in cartMeals
+  Future<void> updateCartMealInCart({HiveMeal? hiveMeal, int? quantity}) async {
+    log.i('hiveMeal.id: ${hiveMeal!.id}, quantity: $quantity');
+
+    int pos = cartMeals.indexOf(hiveMeal);
+    if (pos == -1) return;
+
+    if (quantity! >= 1) {
+      cartMeals[pos].quantity = quantity;
+      cartMealsBox.putAt(pos, cartMeals[pos]);
+      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
+    } else {
+      cartMealsBox.deleteAt(pos);
+      cartMeals.removeAt(pos);
+
+      if (cartMeals.isEmpty)
+        _bottomCartService.hideBottomCart(); // HIDES BottomCart.
+    }
   }
 }
