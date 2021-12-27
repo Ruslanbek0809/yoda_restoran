@@ -29,6 +29,7 @@ class MealBottomSheet extends StatelessWidget {
     return ViewModelBuilder<MealViewModel>.reactive(
       onModelReady: (model) =>
           model.setOnModelReadyVolsCustoms(meal.gVolumes!.length),
+      // viewModelBuilder: () => MealViewModel(),
       viewModelBuilder: () => mealViewModel,
       disposeViewModel: false,
       builder: (context, model, child) => DraggableScrollableSheet(
@@ -387,7 +388,6 @@ class MealBottomSheet extends StatelessWidget {
                                           meal, restaurant);
 
                                   completer(SheetResponse());
-                                  // model.navBack();
                                 },
                               ),
                             ),

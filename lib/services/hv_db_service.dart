@@ -170,7 +170,7 @@ class HiveDbService {
       {int? quantityDraft = 1}) async {
     log.i('mealId: ${meal!.id}, quantityDraft: $quantityDraft');
 
-    bool isUnique = false;
+    bool isNew = true;
 
     List<HiveMeal>? similarMeals = [];
     HiveMeal? similarUpdateMeal;
@@ -179,51 +179,67 @@ class HiveDbService {
     for (HiveMeal cartMeal in cartMeals)
       if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
 
-    /// STEP 2. MAKE isUnique to TRUE if similarMeals isEmpty
-    if (similarMeals.isEmpty) isUnique = true;
+    /// STEP 2. MAKE isNew to TRUE if similarMeals isEmpty
+    if (similarMeals.isEmpty) isNew = true;
 
     log.v(
         'BEFORE STEP 3. length selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
 
     /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
     for (HiveMeal similarMeal in similarMeals) {
-      /// STEP 3.1. CHECK whether similarMeal.volumes and similarMeal.customs length EQUAL or NOT to selectedVols and selectedCustoms length. If NOT, MAKE isUnique to TRUE
-      // if (selectedVols.length != similarMeal.volumes!.length ||
-      //     selectedCustoms.length != similarMeal.customs!.length) {
-      //   log.v('FOUND NOT SAME LENGTH PARAMS');
-      //   isUnique = true;
-      //   if (isUnique) break;
-      // }
+      /// STEP 3.1. CREATE and DEFINE initial value for condition
+      bool shouldAdd = false;
 
-      /// STEP 3.2. CHECK selectedVols and UPDATE isUnique var by condition ( ID COMPARISON )
-      for (Volume vol in selectedVols) {
-        log.v('selectedVols Loop: ${vol.id}');
-        isUnique = !similarMeal.volumes!
-            .any((_vol) => _vol.id != -1 && _vol.id == vol.id);
+      List<Volume> _filteredSelectedVols = [];
+      selectedVols.forEach(
+        (vol) {
+          if (vol.id != -1) _filteredSelectedVols.add(vol);
+        },
+      );
+      // log.v('filteredVols length: ${_filteredSelectedVols.length}');
 
-        if (isUnique) break;
+      /// STEP 3.2. CHECK length. If not same then it is already new meal
+      if (selectedVols.length != similarMeal.volumes!.length ||
+          selectedCustoms.length != similarMeal.customs!.length) {
+        shouldAdd = true;
+        log.v('INSIDE NOT SAME LENGdTH SIMILAR. That why isUnique: $shouldAdd');
       }
+
+      /// STEP 3.2. CHECK selectedVols and UPDATE isAdd var by condition ( ID COMPARISON )
+      for (Volume vol in _filteredSelectedVols) {
+        shouldAdd = !similarMeal.volumes!.any((_vol) => _vol.id == vol.id);
+        if (shouldAdd) break;
+      }
+
+      log.i('shouldAdd AFTER VOLUME ---------------------------- $shouldAdd');
 
       /// STEP 3.3. CHECK selectedCustoms and UPDATE isUnique var by condition ( ID COMPARISON )
       /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison WORKAROUND
-      for (Customizable cus in selectedCustoms) {
-        log.v('selectedCustoms Loop: ${cus.id}');
+      if (!shouldAdd)
+        for (Customizable cus in selectedCustoms) {
+          log.v('cus.id in each selectedCustoms: ${cus.id}');
+          shouldAdd = !similarMeal.customs!.any((_cus) => _cus.id == cus.id);
+          if (shouldAdd) break;
+        }
 
-        isUnique = !similarMeal.customs!.any((_cus) => _cus.id == cus.id);
-        if (isUnique) break;
+      log.i(
+          'shouldAdd AFTER CUSTOMIZES ---------------------------- $shouldAdd');
+
+      /// STEP 3.4. if isUnique FALSE in the end then ASSIGN its value to isNew and UPDATE similarUpdateMeal
+      if (!shouldAdd) {
+        isNew = shouldAdd;
+        similarUpdateMeal = similarMeal;
+        log.v('INSIDE UPDATEEE SIMILARS isUnique at the END: $shouldAdd');
+        break;
       }
 
-      /// STEP 3.4. GETS value of similarMeal to similarUpdateMeal if there is similarMeal
-      similarUpdateMeal = similarMeal;
-
-      if (!isUnique) break;
-      log.i('INSIDE SIMILARS isUnique at the END: $isUnique');
+      log.v('INSIDE SIMILARS isUnique at the END: $shouldAdd');
     }
 
     /// STEP 4. ADD or UPDATE a meal in CART
     /// ADD PART
-    if (isUnique) {
-      log.i('ADDS with isUnique: $isUnique');
+    if (isNew) {
+      log.i('ADDS with isNew: $isNew');
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
@@ -268,7 +284,7 @@ class HiveDbService {
 
     /// UPDATE PART
     else {
-      log.i('UPDATES with isUnique: $isUnique');
+      log.i('UPDATES with isNew: $isNew');
       int pos = cartMeals.indexOf(similarUpdateMeal!);
       log.i('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;
