@@ -215,6 +215,8 @@ class HiveDbService {
 
       /// STEP 3.4. GETS value of similarMeal to similarUpdateMeal if there is similarMeal
       similarUpdateMeal = similarMeal;
+
+      if (!isUnique) break;
       log.i('INSIDE SIMILARS isUnique at the END: $isUnique');
     }
 

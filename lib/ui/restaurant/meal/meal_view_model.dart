@@ -166,6 +166,7 @@ class MealViewModel extends ReactiveViewModel {
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolsCustoms(int gVolsLength) {
+    log.i('setOnModelReadyVolsCustoms()');
     _selectedVols = List.generate(
       gVolsLength,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
@@ -243,10 +244,16 @@ class MealViewModel extends ReactiveViewModel {
       }
     }
 
-    // getMealQuantity(meal.id);
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
     if (quantity >= 1) _isButtonToggled = true;
 
+    quantityDraft = 1;
+    _selectedCustoms.clear();
+    _selectedVols = List.generate(
+      _selectedVols.length,
+      (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
+    );
+    // _selectedVols.clear();
     log.i(
         'addUpdateMealInCartFromBottomSheet() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
