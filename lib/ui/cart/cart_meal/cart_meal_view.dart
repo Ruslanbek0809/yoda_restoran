@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/shared/styles.dart';
+import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,7 @@ class CartMealView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartMealViewModel>.reactive(
+    return ViewModelBuilder<CartViewModel>.reactive(
       onModelReady: (model) => model.getCartMealQuantity(cartMeal),
       builder: (context, model, child) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +115,7 @@ class CartMealView extends StatelessWidget {
           ),
         ],
       ),
-      viewModelBuilder: () => CartMealViewModel(),
+      viewModelBuilder: () => CartViewModel(),
     );
   }
 }

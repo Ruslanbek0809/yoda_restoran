@@ -279,8 +279,7 @@ class MealViewModel extends ReactiveViewModel {
   Future navToCartView() async => await _navService
       .navigateTo(Routes.cartView); // TODO: Change page transition here
 
-  void navBack() => _navService.back();
-
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_bottomCartService, _hiveDbService];
 }

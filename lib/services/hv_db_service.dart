@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:stacked/stacked.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
@@ -6,8 +7,14 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class HiveDbService {
+// 1 For Reactive Views
+class HiveDbService with ReactiveServiceMixin {
   final log = getLogger('HiveDbService');
+
+  HiveDbService() {
+    // 3
+    listenToReactiveValues([_cartMeals]);
+  }
 
   final _bottomCartService = locator<BottomCartService>();
 
@@ -17,8 +24,9 @@ class HiveDbService {
 
   HiveRestaurant? cartRes;
 
-  List<HiveMeal> cartMeals = [];
-  // List<HiveMeal> get cartMeals => [..._cartMeals];
+  // 2
+  ReactiveValue<List<HiveMeal>> _cartMeals = ReactiveValue<List<HiveMeal>>([]);
+  List<HiveMeal> get cartMeals => _cartMeals.value;
 
   /// INITIALIZE in StartUpViewModel
   Future initDB() async {
@@ -40,11 +48,11 @@ class HiveDbService {
   /// GETS all CART meals from cartMealsBox
   void getCartMeals() {
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
-    cartMeals = cartMealsBox.values.toList();
-    if (cartMeals.isNotEmpty)
+    _cartMeals.value = cartMealsBox.values.toList();
+    if (_cartMeals.value.isNotEmpty)
       _bottomCartService.showBottomCart(); // SHOWS BottomCart.
 
-    log.i('${cartMeals.length}');
+    log.i('_cartMeals.value length${_cartMeals.value.length}');
   }
 
 //---------------------------------------//
@@ -86,7 +94,7 @@ class HiveDbService {
   /// GETS total quantity of cartMeals for meal with mealId
   int? getMealQuantity(int? mealId) {
     var _quantity = 0;
-    for (var _cartMeal in cartMeals)
+    for (var _cartMeal in _cartMeals.value)
       if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
 
     log.i(' _quantity: $_quantity');
@@ -110,8 +118,8 @@ class HiveDbService {
         volumes: [],
       );
       await cartMealsBox.add(_cartMeal);
-      cartMeals.add(_cartMeal);
-      log.i('cartMeals length: ${cartMeals.length}');
+      _cartMeals.value.add(_cartMeal);
+      log.i('_cartMeals.value length: ${_cartMeals.value.length}');
     } catch (e) {
       log.v('Couldn\'t ADD a meal to CART: $e');
     }
@@ -122,34 +130,37 @@ class HiveDbService {
     log.i('mealId: $mealId, quantity: $quantity');
 
     /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
-    int pos = cartMeals.indexWhere((_meal) => _meal.id == mealId);
+    int pos = _cartMeals.value.indexWhere((_meal) => _meal.id == mealId);
     if (pos == -1) return;
 
     if (quantity! >= 1) {
-      cartMeals[pos].quantity = quantity;
-      cartMealsBox.putAt(pos, cartMeals[pos]);
-      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
+      _cartMeals.value[pos].quantity = quantity;
+      cartMealsBox.putAt(pos, _cartMeals.value[pos]);
+      log.i(
+          '_cartMeals.value[pos].quantity: ${_cartMeals.value[pos].quantity}');
     } else {
       cartMealsBox.deleteAt(pos);
-      cartMeals.removeAt(pos);
+      _cartMeals.value.removeAt(pos);
 
-      if (cartMeals.isEmpty)
+      log.i('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
+
+      if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     }
   }
 
   Future<void> clearCart() async {
-    log.i('BEFORE CLEAR cartMeals length: ${cartMeals.length}');
+    log.i('BEFORE CLEAR _cartMeals.value length: ${_cartMeals.value.length}');
     await cartMealsBox.clear();
     await cartResBox.clear();
-    cartMeals.clear();
+    _cartMeals.value.clear();
     await cartResBox.put('cartRes', HiveRestaurant(id: -1, name: 'Default'));
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
 
     _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     log.i(
-        'AFTER CLEAR cartMeals length: ${cartMeals.length} and cartResId: ${cartRes!.id}');
+        'AFTER CLEAR _cartMeals.value length: ${_cartMeals.value.length} and cartResId: ${cartRes!.id}');
   }
 
   Future<void> setResDefault() async {
@@ -176,7 +187,7 @@ class HiveDbService {
     HiveMeal? similarUpdateMeal;
 
     /// STEP 1. Filter only to similar meals from cartMeals
-    for (HiveMeal cartMeal in cartMeals)
+    for (HiveMeal cartMeal in _cartMeals.value)
       if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
 
     /// STEP 2. MAKE isNew to TRUE if similarMeals isEmpty
@@ -206,7 +217,8 @@ class HiveDbService {
             'INSIDE NOT SAME LENGdTH SIMILAR. That why shouldAdd: $shouldAdd');
       }
 
-      log.i('shouldAdd AFTER LENGTH Comparison ---------------------------- $shouldAdd');
+      log.i(
+          'shouldAdd AFTER LENGTH Comparison ---------------------------- $shouldAdd');
 
       /// STEP 3.2. CHECK selectedVols and UPDATE isAdd var by condition ( ID COMPARISON )
       for (Volume vol in _filteredSelectedVols) {
@@ -278,8 +290,8 @@ class HiveDbService {
           customs: _cartMealCustoms,
         );
         await cartMealsBox.add(_cartMeal);
-        cartMeals.add(_cartMeal);
-        log.i('cartMeals length: ${cartMeals.length}');
+        _cartMeals.value.add(_cartMeal);
+        log.i('_cartMeals.value length: ${_cartMeals.value.length}');
       } catch (e) {
         log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
       }
@@ -288,12 +300,12 @@ class HiveDbService {
     /// UPDATE PART
     else {
       log.i('UPDATES with isNew: $isNew');
-      int pos = cartMeals.indexOf(similarUpdateMeal!);
+      int pos = _cartMeals.value.indexOf(similarUpdateMeal!);
       log.i('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;
 
       similarUpdateMeal.quantity = similarUpdateMeal.quantity! + quantityDraft!;
-      cartMealsBox.putAt(pos, cartMeals[pos]);
+      cartMealsBox.putAt(pos, _cartMeals.value[pos]);
       log.i('similarUpdateMeal.quantity: ${similarUpdateMeal.quantity}');
     }
   }
@@ -306,29 +318,31 @@ class HiveDbService {
 
   /// GETS quantity of this hiveMeal from cartMeals
   int getCartMealQuantity(HiveMeal hiveMeal) {
-    int pos = cartMeals.indexOf(hiveMeal);
+    int pos = _cartMeals.value.indexOf(hiveMeal);
     log.i('pos of similarUpdateMeal: $pos');
     if (pos == -1) return 0;
 
-    return cartMeals[pos].quantity!;
+    return _cartMeals.value[pos].quantity!;
   }
 
   /// UPDATES cart meal in cartMeals
   Future<void> updateCartMealInCart({HiveMeal? hiveMeal, int? quantity}) async {
     log.i('hiveMeal.id: ${hiveMeal!.id}, quantity: $quantity');
 
-    int pos = cartMeals.indexOf(hiveMeal);
+    int pos = _cartMeals.value.indexOf(hiveMeal);
     if (pos == -1) return;
 
     if (quantity! >= 1) {
-      cartMeals[pos].quantity = quantity;
-      cartMealsBox.putAt(pos, cartMeals[pos]);
-      log.i('cartMeals[pos].quantity: ${cartMeals[pos].quantity}');
+      _cartMeals.value[pos].quantity = quantity;
+      cartMealsBox.putAt(pos, _cartMeals.value[pos]);
+      log.i(
+          '_cartMeals.value[pos].quantity: ${_cartMeals.value[pos].quantity}');
     } else {
       cartMealsBox.deleteAt(pos);
-      cartMeals.removeAt(pos);
+      _cartMeals.value.removeAt(pos);
+      log.i('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
 
-      if (cartMeals.isEmpty)
+      if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     }
   }
