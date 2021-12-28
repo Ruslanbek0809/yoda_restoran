@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 // 1 For Reactive Views
@@ -8,45 +9,39 @@ class MainFilterService with ReactiveServiceMixin {
 
   MainFilterService() {
     // 3
-    listenToReactiveValues([_bottomCartStatus]);
+    listenToReactiveValues([_mainFilterAnimationStatus]);
   }
 
-  // 2
-  ReactiveValue<BottomCartStatus> _bottomCartStatus =
-      ReactiveValue<BottomCartStatus>(BottomCartStatus.idle);
-  BottomCartStatus get bottomCartStatus => _bottomCartStatus.value;
+  ReactiveValue<MainFilterAnimationStatus> _mainFilterAnimationStatus =
+      ReactiveValue<MainFilterAnimationStatus>(MainFilterAnimationStatus.idle);
+  MainFilterAnimationStatus get mainFilterAnimationStatus =>
+      _mainFilterAnimationStatus.value;
 
-  /// SHOWS BottomCart
-  void showBottomCart() {
-    switch (_bottomCartStatus.value) {
-      case BottomCartStatus.idle:
-        _bottomCartStatus.value = BottomCartStatus.forward;
+  /// UPDATES _mainFilterAnimationStatus
+  void updateMainAnimationFilterStatus(
+      CategoryFilter? selectedSort, List<int> selectedMainCats) {
+    log.v(
+        'selectedMainCats length: ${selectedMainCats.length} and selectedSort: ${selectedSort!.name}');
+    switch (_mainFilterAnimationStatus.value) {
+      case MainFilterAnimationStatus.idle:
+        if (selectedMainCats.isNotEmpty || selectedSort != mainCatSortList[0]) {
+          _mainFilterAnimationStatus.value = MainFilterAnimationStatus.forward;
+        }
         break;
-      case BottomCartStatus.reverse:
-        _bottomCartStatus.value = BottomCartStatus.forward;
+      case MainFilterAnimationStatus.forward:
+        if (selectedMainCats.isEmpty && selectedSort == mainCatSortList[0]) {
+          _mainFilterAnimationStatus.value = MainFilterAnimationStatus.reverse;
+        }
         break;
-      case BottomCartStatus.forward:
+      case MainFilterAnimationStatus.reverse:
+        if (selectedMainCats.isNotEmpty || selectedSort != mainCatSortList[0]) {
+          _mainFilterAnimationStatus.value = MainFilterAnimationStatus.forward;
+        }
         break;
       default:
-        _bottomCartStatus.value = BottomCartStatus.forward;
+        _mainFilterAnimationStatus.value = MainFilterAnimationStatus.idle;
         break;
     }
-    log.i(_bottomCartStatus.value);
-  }
-
-  /// HIDES BottomCart
-  void hideBottomCart() {
-    switch (_bottomCartStatus.value) {
-      case BottomCartStatus.forward:
-        _bottomCartStatus.value = BottomCartStatus.reverse;
-        break;
-      case BottomCartStatus.reverse:
-        _bottomCartStatus.value = BottomCartStatus.idle;
-        break;
-      default:
-        _bottomCartStatus.value = BottomCartStatus.idle;
-        break;
-    }
-    log.i(_bottomCartStatus.value);
+    log.i(_mainFilterAnimationStatus.value);
   }
 }

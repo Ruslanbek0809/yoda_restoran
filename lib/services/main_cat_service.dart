@@ -9,8 +9,7 @@ class MainCatService with ReactiveServiceMixin {
 
   MainCatService() {
     // 3
-    listenToReactiveValues(
-        [_selectedMainCats, selectedSort, _mainFilterStatus]);
+    listenToReactiveValues([_selectedMainCats, selectedSort]);
   }
 
   // 2
@@ -20,10 +19,6 @@ class MainCatService with ReactiveServiceMixin {
   ReactiveValue<CategoryFilter> _selectedSort =
       ReactiveValue<CategoryFilter>(mainCatSortList[0]);
   CategoryFilter get selectedSort => _selectedSort.value;
-
-  ReactiveValue<MainFilterStatus> _mainFilterStatus =
-      ReactiveValue<MainFilterStatus>(MainFilterStatus.idle);
-  MainFilterStatus get mainFilterStatus => _mainFilterStatus.value;
 
   /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
   void updateSelectedMainCats(int? mainCatId) {
@@ -36,35 +31,6 @@ class MainCatService with ReactiveServiceMixin {
   /// Function to UPDATE _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     _selectedSort.value = newSelectedSort!;
-  }
-
-  /// UPDATES _mainFilterStatus
-  void updateMainFilterStatus() {
-    log.v(
-        '_selectedMainCats.value: ${_selectedMainCats.value.length} and _selectedSort.value: ${_selectedSort.value.name}');
-    switch (_mainFilterStatus.value) {
-      case MainFilterStatus.idle:
-        if (_selectedMainCats.value.isNotEmpty ||
-            _selectedSort.value != mainCatSortList[0]) {
-          _mainFilterStatus.value = MainFilterStatus.forward;
-        }
-        break;
-      case MainFilterStatus.forward:
-        if (_selectedMainCats.value.isEmpty &&
-            _selectedSort.value == mainCatSortList[0]) {
-          _mainFilterStatus.value = MainFilterStatus.reverse;
-        }
-        break;
-      case MainFilterStatus.reverse:
-        if (_selectedMainCats.value.isNotEmpty ||
-            _selectedSort.value != mainCatSortList[0]) {
-          _mainFilterStatus.value = MainFilterStatus.forward;
-        }
-        break;
-      default:
-        _mainFilterStatus.value = MainFilterStatus.idle;
-        break;
-    }
   }
 
   /// CLEARS __selectedMainCats.value (CALLED from _homeService)

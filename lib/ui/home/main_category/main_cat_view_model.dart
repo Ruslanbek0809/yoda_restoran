@@ -19,8 +19,8 @@ class MainCatViewModel extends ReactiveViewModel {
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
   CategoryFilter? get selectedSort => _mainCatService.selectedSort;
-  MainFilterStatus get sortAnimationStatus =>
-      _mainCatService.mainFilterStatus;
+  MainFilterAnimationStatus get mainFilterAnimationStatus =>
+      _mainCatService.mainFilterAnimationStatus;
 
   /// Function to check wether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>
@@ -33,7 +33,7 @@ class MainCatViewModel extends ReactiveViewModel {
         'updateSelectedMainCats() _selectedMainCats: ${_selectedMainCats.length}');
     await _homeService.getSelectedMainCats(
         _selectedMainCats); // FETCH HOME to SHOW RESULT of selectedMainCats
-    _mainCatService.updateMainFilterStatus();
+    _mainCatService.updateMainAnimationFilterStatus();
     notifyListeners();
   }
 
@@ -41,7 +41,7 @@ class MainCatViewModel extends ReactiveViewModel {
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     _mainCatService.updateSelectedSort(newSelectedSort);
     log.i(selectedSort!.name);
-    _mainCatService.updateMainFilterStatus();
+    _mainCatService.updateMainAnimationFilterStatus();
     notifyListeners();
   }
 

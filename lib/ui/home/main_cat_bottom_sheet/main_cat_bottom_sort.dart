@@ -10,27 +10,27 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
-    final sortAnimationController = useAnimationController(
+    final mainFilterAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
     final _sortAnimationValue =
-        IntTween(begin: 0, end: 100).animate(sortAnimationController);
+        IntTween(begin: 0, end: 100).animate(mainFilterAnimationController);
 
-    /// sortAnimationController trigger
-    if (model.sortAnimationStatus != MainFilterStatus.idle)
-      switch (sortAnimationController.status) {
+    /// mainFilterAnimationController trigger
+    if (model.mainFilterAnimationStatus != MainFilterAnimationStatus.idle)
+      switch (mainFilterAnimationController.status) {
         case AnimationStatus.completed:
-          if (model.sortAnimationStatus == MainFilterStatus.reverse)
-            sortAnimationController.reverse();
+          if (model.mainFilterAnimationStatus == MainFilterAnimationStatus.reverse)
+            mainFilterAnimationController.reverse();
           break;
         case AnimationStatus.dismissed:
-          if (model.sortAnimationStatus == MainFilterStatus.forward)
-            sortAnimationController.forward();
+          if (model.mainFilterAnimationStatus == MainFilterAnimationStatus.forward)
+            mainFilterAnimationController.forward();
           break;
         default:
           break;
       }
-    model.log.i('model.sortAnimationStatus: ${model.sortAnimationStatus}');
+    model.log.i('model.sortAnimationStatus: ${model.mainFilterAnimationStatus}');
 
     return Positioned(
       bottom: 0,

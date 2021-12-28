@@ -82,7 +82,7 @@ enum FormValidation { phoneInvalid, valid }
 enum BottomCartStatus { idle, forward, reverse }
 
 /// Enum for sortAnimationController
-enum MainFilterStatus { idle, forward, reverse }
+enum MainFilterAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
 enum BottomSheetType { mainCategory, restaurantInfo, meal }
