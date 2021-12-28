@@ -42,7 +42,7 @@ class HiveDbService with ReactiveServiceMixin {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
-    log.i('cartRes ${cartRes!.id}');
+    log.v('cartRes ${cartRes!.id}');
   }
 
   /// GETS all CART meals from cartMealsBox
@@ -52,7 +52,7 @@ class HiveDbService with ReactiveServiceMixin {
     if (_cartMeals.value.isNotEmpty)
       _bottomCartService.showBottomCart(); // SHOWS BottomCart.
 
-    log.i('_cartMeals.value length${_cartMeals.value.length}');
+    log.v('_cartMeals.value length: ${_cartMeals.value.length}');
   }
 
 //---------------------------------------//
@@ -81,7 +81,7 @@ class HiveDbService with ReactiveServiceMixin {
       cartRes = cartResBox.get('cartRes',
           defaultValue: HiveRestaurant(id: -1, name: 'Default'));
 
-      log.i('cartResId ${cartRes!.id}');
+      log.v('cartResId ${cartRes!.id}');
     } catch (e) {
       log.v('Couldn\'t UPDATE a restaurant in CART: $e');
     }
@@ -97,13 +97,13 @@ class HiveDbService with ReactiveServiceMixin {
     for (var _cartMeal in _cartMeals.value)
       if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
 
-    log.i(' _quantity: $_quantity');
+    log.v(' _quantity: $_quantity');
     return _quantity;
   }
 
   /// ADDS a meal to CART
   Future<void> addMealToCart(Meal? meal, {int? quantity = 1}) async {
-    log.i('mealId: ${meal!.id}, quantity: $quantity');
+    log.v('mealId: ${meal!.id}, quantity: $quantity');
 
     try {
       final HiveMeal _cartMeal = HiveMeal(
@@ -119,7 +119,7 @@ class HiveDbService with ReactiveServiceMixin {
       );
       await cartMealsBox.add(_cartMeal);
       _cartMeals.value.add(_cartMeal);
-      log.i('_cartMeals.value length: ${_cartMeals.value.length}');
+      log.v('_cartMeals.value length: ${_cartMeals.value.length}');
     } catch (e) {
       log.v('Couldn\'t ADD a meal to CART: $e');
     }
@@ -127,7 +127,7 @@ class HiveDbService with ReactiveServiceMixin {
 
   /// UPDATES a meal in CART
   Future<void> updateMealInCart({int? mealId, int? quantity}) async {
-    log.i('mealId: $mealId, quantity: $quantity');
+    log.v('mealId: $mealId, quantity: $quantity');
 
     /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
     int pos = _cartMeals.value.indexWhere((_meal) => _meal.id == mealId);
@@ -136,13 +136,13 @@ class HiveDbService with ReactiveServiceMixin {
     if (quantity! >= 1) {
       _cartMeals.value[pos].quantity = quantity;
       cartMealsBox.putAt(pos, _cartMeals.value[pos]);
-      log.i(
+      log.v(
           '_cartMeals.value[pos].quantity: ${_cartMeals.value[pos].quantity}');
     } else {
       cartMealsBox.deleteAt(pos);
       _cartMeals.value.removeAt(pos);
 
-      log.i('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
+      log.v('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
 
       if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.
@@ -150,7 +150,7 @@ class HiveDbService with ReactiveServiceMixin {
   }
 
   Future<void> clearCart() async {
-    log.i('BEFORE CLEAR _cartMeals.value length: ${_cartMeals.value.length}');
+    log.v('BEFORE CLEAR _cartMeals.value length: ${_cartMeals.value.length}');
     await cartMealsBox.clear();
     await cartResBox.clear();
     _cartMeals.value.clear();
@@ -159,7 +159,7 @@ class HiveDbService with ReactiveServiceMixin {
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
 
     _bottomCartService.hideBottomCart(); // HIDES BottomCart.
-    log.i(
+    log.v(
         'AFTER CLEAR _cartMeals.value length: ${_cartMeals.value.length} and cartResId: ${cartRes!.id}');
   }
 
@@ -168,7 +168,7 @@ class HiveDbService with ReactiveServiceMixin {
     await cartResBox.put('cartRes', HiveRestaurant(id: -1, name: 'Default'));
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
-    log.i('cartResId: ${cartRes!.id}');
+    log.v('cartResId: ${cartRes!.id}');
   }
 
 //---------------------------------------//
@@ -179,7 +179,7 @@ class HiveDbService with ReactiveServiceMixin {
   Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, List<Volume> selectedVols, List<Customizable> selectedCustoms,
       {int? quantityDraft = 1}) async {
-    log.i('mealId: ${meal!.id}, quantityDraft: $quantityDraft');
+    log.v('mealId: ${meal!.id}, quantityDraft: $quantityDraft');
 
     bool isNew = true;
 
@@ -194,7 +194,7 @@ class HiveDbService with ReactiveServiceMixin {
     if (similarMeals.isEmpty) isNew = true;
 
     log.v(
-        'BEFORE STEP 3. length selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
+        'BEFORE SIMILARS selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
 
     /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
     for (HiveMeal similarMeal in similarMeals) {
@@ -213,8 +213,7 @@ class HiveDbService with ReactiveServiceMixin {
       if (selectedVols.length != similarMeal.volumes!.length ||
           selectedCustoms.length != similarMeal.customs!.length) {
         shouldAdd = true;
-        log.v(
-            'INSIDE NOT SAME LENGdTH SIMILAR. That why shouldAdd: $shouldAdd');
+        log.v('INSIDE NOT SAME LENGTH SIMILAR. That why shouldAdd: $shouldAdd');
       }
 
       log.i(
@@ -254,7 +253,7 @@ class HiveDbService with ReactiveServiceMixin {
     /// STEP 4. ADD or UPDATE a meal in CART
     /// ADD PART
     if (isNew) {
-      log.i('ADDS with isNew: $isNew');
+      log.v('ADDS with isNew: $isNew');
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
@@ -274,7 +273,7 @@ class HiveDbService with ReactiveServiceMixin {
           price: cus.price,
         ));
 
-      log.i(
+      log.v(
           '_cartMealVolumes LEN: ${_cartMealVolumes.length} and _cartMealCustoms LEN: ${_cartMealCustoms.length}');
 
       try {
@@ -291,7 +290,7 @@ class HiveDbService with ReactiveServiceMixin {
         );
         await cartMealsBox.add(_cartMeal);
         _cartMeals.value.add(_cartMeal);
-        log.i('_cartMeals.value length: ${_cartMeals.value.length}');
+        log.v('_cartMeals.value length: ${_cartMeals.value.length}');
       } catch (e) {
         log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
       }
@@ -299,14 +298,14 @@ class HiveDbService with ReactiveServiceMixin {
 
     /// UPDATE PART
     else {
-      log.i('UPDATES with isNew: $isNew');
+      log.v('UPDATES with isNew: $isNew');
       int pos = _cartMeals.value.indexOf(similarUpdateMeal!);
-      log.i('pos of similarUpdateMeal: $pos');
+      log.v('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;
 
       similarUpdateMeal.quantity = similarUpdateMeal.quantity! + quantityDraft!;
       cartMealsBox.putAt(pos, _cartMeals.value[pos]);
-      log.i('similarUpdateMeal.quantity: ${similarUpdateMeal.quantity}');
+      log.v('similarUpdateMeal.quantity: ${similarUpdateMeal.quantity}');
     }
   }
 
@@ -319,8 +318,9 @@ class HiveDbService with ReactiveServiceMixin {
   /// GETS quantity of this hiveMeal from cartMeals
   int getCartMealQuantity(HiveMeal hiveMeal) {
     int pos = _cartMeals.value.indexOf(hiveMeal);
-    log.i('pos of similarUpdateMeal: $pos');
     if (pos == -1) return 0;
+    log.v(
+        '_cartMeals.value[pos].quantity!: ${_cartMeals.value[pos].quantity!}');
 
     return _cartMeals.value[pos].quantity!;
   }
@@ -335,12 +335,12 @@ class HiveDbService with ReactiveServiceMixin {
     if (quantity! >= 1) {
       _cartMeals.value[pos].quantity = quantity;
       cartMealsBox.putAt(pos, _cartMeals.value[pos]);
-      log.i(
+      log.v(
           '_cartMeals.value[pos].quantity: ${_cartMeals.value[pos].quantity}');
     } else {
       cartMealsBox.deleteAt(pos);
       _cartMeals.value.removeAt(pos);
-      log.i('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
+      log.v('REMOVED _cartMeals.value.length: ${_cartMeals.value.length}');
 
       if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.

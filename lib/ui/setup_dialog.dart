@@ -19,7 +19,11 @@ void setupDialog() {
     DialogType.mealCartClear: (context, sheetRequest, completer) =>
         MealDialogView(request: sheetRequest, completer: completer),
     DialogType.clearCart: (context, sheetRequest, completer) =>
-        ClearCartDialogView(request: sheetRequest, completer: completer),
+        ClearCartDialogView(
+          request: sheetRequest,
+          completer: completer,
+          cartViewModel: sheetRequest.data,
+        ),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
@@ -112,76 +116,85 @@ class MealDialogView extends StatelessWidget {
 class ClearCartDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
-  const ClearCartDialogView(
-      {Key? key, required this.request, required this.completer});
+  final CartViewModel cartViewModel;
+  const ClearCartDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+    required this.cartViewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartViewModel>.reactive(
-      builder: (context, model, child) => (Platform.isIOS)
-          ? CupertinoAlertDialog(
-              title: Text(request.title!),
-              content: Text(request.description!),
-              actions: <Widget>[
-                CustomTextChildButton(
-                  child: Text(
-                    request.secondaryButtonTitle!,
-                    style: ktsDefault18Text,
+      viewModelBuilder: () => cartViewModel,
+      disposeViewModel: false,
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!),
+                content: Text(request.description!),
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.clearCart();
+                      completer(DialogResponse());
+                    },
                   ),
-                  color: Colors.transparent,
-                  onPressed: () async {
-                    await model.clearCart();
-                    completer(DialogResponse());
-                  },
-                ),
-                CustomTextChildButton(
-                  child: Text(
-                    request.mainButtonTitle!,
-                    style: ktsDefault18Text,
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
                   ),
-                  color: Colors.transparent,
-                  onPressed: () async {
-                    completer(DialogResponse());
-                  },
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            )
-          : AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-              titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
-              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-              actionsAlignment: MainAxisAlignment.center,
-              title: Text(
-                request.title!,
-                textAlign: TextAlign.center,
-              ),
-              titleTextStyle: ktsDefault20BoldText,
-              actions: <Widget>[
-                CustomTextChildButton(
-                  child: Text(
-                    request.secondaryButtonTitle!,
-                    style: ktsDefault18Text,
+                titleTextStyle: ktsDefault20BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.clearCart();
+                      completer(DialogResponse());
+                    },
                   ),
-                  color: Colors.transparent,
-                  onPressed: () async {
-                    await model.clearCart();
-                    completer(DialogResponse());
-                  },
-                ),
-                SizedBox(width: 42.w),
-                CustomTextChildButton(
-                  child: Text(
-                    request.mainButtonTitle!,
-                    style: ktsDefault18Text,
+                  SizedBox(width: 42.w),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
                   ),
-                  color: Colors.transparent,
-                  onPressed: () async {
-                    completer(DialogResponse());
-                  },
-                ),
-              ],
-            ),
-      viewModelBuilder: () => CartViewModel(),
+                ],
+              );
+      },
     );
   }
 }

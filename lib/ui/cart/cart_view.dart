@@ -49,7 +49,7 @@ class _CartViewState extends State<CartView> {
             Padding(
               padding: EdgeInsets.only(right: 10.w),
               child: GestureDetector(
-                onTap: () async => await model.showClearCartDialog(),
+                onTap: () async => await model.showClearCartDialog(model),
                 child: SvgPicture.asset(
                   'assets/trash.svg',
                   color: AppTheme.MAIN_DARK,

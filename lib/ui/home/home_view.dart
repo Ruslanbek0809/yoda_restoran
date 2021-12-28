@@ -32,7 +32,6 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
-        model.log.i('HomeView');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
