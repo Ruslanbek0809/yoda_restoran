@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import 'package:yoda_res/ui/home/home_bottom_cart.dart';
 import 'package:yoda_res/ui/home/main_category/main_cat_view.dart';
@@ -222,21 +223,54 @@ class _HomeViewState extends State<HomeView> {
                                             );
                                           },
                                         )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.only(top: 20.h),
-                                          itemCount: model
-                                              .selectedMainCatRestaurants
-                                              .length,
-                                          itemBuilder: (ctx, pos) {
-                                            return RestaurantView(
-                                              restaurant: model
-                                                      .selectedMainCatRestaurants[
-                                                  pos],
-                                            );
-                                          },
+                                      : Column(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 16.w,
+                                                  vertical: 5.h),
+                                              child: Divider(
+                                                thickness: 1,
+                                              ),
+                                            ),
+                                            //------------------ FOUND TITLE and CLEAR part ---------------------//
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 16.w,
+                                                  vertical: 3.h),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '${model.selectedMainCatRestaurants.length} restoran tapyldy',
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: ktsDefault20BoldText,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            //------------------ RESULT SELECTED MAIN CATS RES LIST ---------------------//
+                                            ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              padding:
+                                                  EdgeInsets.only(top: 10.h),
+                                              itemCount: model
+                                                  .selectedMainCatRestaurants
+                                                  .length,
+                                              itemBuilder: (ctx, pos) {
+                                                return RestaurantView(
+                                                  restaurant: model
+                                                          .selectedMainCatRestaurants[
+                                                      pos],
+                                                );
+                                              },
+                                            ),
+                                          ],
                                         ),
                                 ],
                               ),
