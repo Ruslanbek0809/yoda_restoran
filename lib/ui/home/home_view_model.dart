@@ -19,6 +19,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final log = getLogger('HomeViewModel');
 
   final _homeService = locator<HomeService>();
+  final _mainCatService = locator<MainCatService>();
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
@@ -78,6 +79,13 @@ class HomeViewModel extends MultipleFutureViewModel {
         },
       );
     return _resWithProms;
+  }
+
+  /// CLEARS and UPDATES HomeView to its default
+  Future<void> clearSelectedMainCatRess() async {
+    _homeService.clearSelectedMainCatRess();
+    _mainCatService.clearSelectedMainCats();
+    await initialise();
   }
 
   //------------------ DRAWER ---------------------//

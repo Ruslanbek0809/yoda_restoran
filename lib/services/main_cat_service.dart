@@ -66,4 +66,9 @@ class MainCatService with ReactiveServiceMixin {
         break;
     }
   }
+
+  /// CLEAR __selectedMainCats.value (CALLED from _homeService)
+  void clearSelectedMainCats() {
+    _selectedMainCats.value.clear();
+  }
 }

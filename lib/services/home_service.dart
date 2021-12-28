@@ -91,4 +91,10 @@ class HomeService with ReactiveServiceMixin {
           '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
     }
   }
+
+  void clearSelectedMainCatRess() {
+    _selectedMainCatRestaurants!.clear();
+    log.v(
+        '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+  }
 }

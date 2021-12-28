@@ -262,7 +262,7 @@ class _HomeViewState extends State<HomeView> {
                                                         EdgeInsets.symmetric(
                                                             vertical: 8.h,
                                                             horizontal: 22.w),
-                                                    onPressed: () {},
+                                                    onPressed: model.clearSelectedMainCatRess,
                                                   ),
                                                 ],
                                               ),
