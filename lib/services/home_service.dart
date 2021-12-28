@@ -51,36 +51,44 @@ class HomeService with ReactiveServiceMixin {
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
-    log.i(_sliders!.length);
+    log.v(_sliders!.length);
     return _sliders;
   }
 
   Future<List<MainCategory>?> getMainCategs() async {
     _mainCats = await _api.getMainCats();
     _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
-    log.i(_mainCats!.length);
+    log.v(_mainCats!.length);
     return _mainCats;
   }
 
   Future<List<Restaurant>?> getRandomRess() async {
     _randomRess = await _api.getRandomRess();
-    log.i(_randomRess!.length);
+    log.v(_randomRess!.length);
     return _randomRess;
   }
 
   Future<List<Promoted>?> getProms() async {
     _proms = await _api.getProms();
-    log.i(_proms!.length);
+    log.v(_proms!.length);
     return _proms;
   }
 
-  Future<List<Restaurant>?> getSelectedMainCats(
-      List<int> _selectedMainCats) async {
-    _fetchingSelectedMainCats.value = true;
-    _selectedMainCatRestaurants =
-        await _api.getSelectedMainCats(_selectedMainCats);
-    _fetchingSelectedMainCats.value = false;
-    log.i(_selectedMainCatRestaurants!.length);
-    return _selectedMainCatRestaurants;
+  Future<void> getSelectedMainCats(List<int> selectedMainCats) async {
+    if (selectedMainCats.isNotEmpty) {
+      _fetchingSelectedMainCats.value = true;
+      _selectedMainCatRestaurants =
+          await _api.getSelectedMainCats(selectedMainCats);
+      _fetchingSelectedMainCats.value = false;
+      log.v(
+          '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+    } else {
+      _fetchingSelectedMainCats.value = true;
+      _selectedMainCatRestaurants!.clear();
+      await Future.delayed(Duration(seconds: 1));
+      _fetchingSelectedMainCats.value = false;
+      log.v(
+          '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+    }
   }
 }

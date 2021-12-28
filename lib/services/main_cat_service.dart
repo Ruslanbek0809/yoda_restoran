@@ -41,7 +41,7 @@ class MainCatService with ReactiveServiceMixin {
   /// Function to update _sortAnimationStatus
   void updateSortAnimationStatus() {
     log.v(
-        '_multiSelectionList.value: ${_selectedMainCats.value.length} and _selectedSort.value: ${_selectedSort.value.name}');
+        '_selectedMainCats.value: ${_selectedMainCats.value.length} and _selectedSort.value: ${_selectedSort.value.name}');
     switch (_sortAnimationStatus.value) {
       case SortAnimationStatus.idle:
         if (_selectedMainCats.value.isNotEmpty ||
