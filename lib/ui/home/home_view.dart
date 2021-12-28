@@ -249,6 +249,21 @@ class _HomeViewState extends State<HomeView> {
                                                         TextOverflow.ellipsis,
                                                     style: ktsDefault20BoldText,
                                                   ),
+                                                  CustomTextChildButton(
+                                                    child: Text(
+                                                      'Arassala',
+                                                      style: ktsDefault16Text,
+                                                    ),
+                                                    color:
+                                                        kcSecondaryLightColor,
+                                                    borderRadius:
+                                                        AppTheme().radius20,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 8.h,
+                                                            horizontal: 22.w),
+                                                    onPressed: () {},
+                                                  ),
                                                 ],
                                               ),
                                             ),
