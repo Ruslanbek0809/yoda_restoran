@@ -57,7 +57,7 @@ class CartViewModel extends ReactiveViewModel {
       data: cartViewModel,
     );
   }
-
+    
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back();
 
