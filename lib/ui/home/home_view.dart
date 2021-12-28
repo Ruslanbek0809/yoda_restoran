@@ -56,7 +56,10 @@ class _HomeViewState extends State<HomeView> {
                         child: CustomScrollView(
                           slivers: [
                             SliverAppBar(
-                              expandedHeight: 0.34.sh,
+                              expandedHeight:
+                                  model.selectedMainCatRestaurants.isEmpty
+                                      ? 0.34.sh
+                                      : 0.1.sh,
                               backgroundColor: Colors.transparent,
                               elevation: 0,
                               toolbarHeight: 60.w,
@@ -223,7 +226,7 @@ class _HomeViewState extends State<HomeView> {
                                           shrinkWrap: true,
                                           physics:
                                               NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.only(top: 10.h),
+                                          padding: EdgeInsets.only(top: 20.h),
                                           itemCount: model
                                               .selectedMainCatRestaurants
                                               .length,
