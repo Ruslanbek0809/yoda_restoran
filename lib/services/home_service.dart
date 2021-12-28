@@ -40,6 +40,10 @@ class HomeService with ReactiveServiceMixin {
   List<Restaurant>? get selectedMainCatRestaurants =>
       _selectedMainCatRestaurants;
 
+  bool get hasSelectedMainCatRestaurants =>
+      _selectedMainCatRestaurants != null &&
+      _selectedMainCatRestaurants!.isNotEmpty;
+
   // 2
   ReactiveValue<bool> _fetchingSelectedMainCats =
       ReactiveValue<bool>(false); // Custom busy for HomeView
