@@ -20,8 +20,6 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   final _homeService = locator<HomeService>();
   final _bottomCartService = locator<BottomCartService>();
-  final _mainCatService = locator<
-      MainCatService>(); // To update multiSelectionList in realtime(reactive)
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
 
@@ -35,7 +33,9 @@ class HomeViewModel extends MultipleFutureViewModel {
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
-  List<int> get selectedMainCats => _mainCatService.selectedMainCats;
+  // List<int> get selectedMainCats => _mainCatService.selectedMainCats;
+  List<Restaurant> get selectedMainCatRestaurants =>
+      _homeService.selectedMainCatRestaurants!;
 
   // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
   // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
