@@ -17,14 +17,14 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
         IntTween(begin: 0, end: 100).animate(sortAnimationController);
 
     /// sortAnimationController trigger
-    if (model.sortAnimationStatus != SortAnimationStatus.idle)
+    if (model.sortAnimationStatus != MainFilterStatus.idle)
       switch (sortAnimationController.status) {
         case AnimationStatus.completed:
-          if (model.sortAnimationStatus == SortAnimationStatus.reverse)
+          if (model.sortAnimationStatus == MainFilterStatus.reverse)
             sortAnimationController.reverse();
           break;
         case AnimationStatus.dismissed:
-          if (model.sortAnimationStatus == SortAnimationStatus.forward)
+          if (model.sortAnimationStatus == MainFilterStatus.forward)
             sortAnimationController.forward();
           break;
         default:

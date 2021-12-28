@@ -21,6 +21,7 @@ class MainCatBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainCatViewModel>.reactive(
+      viewModelBuilder: () => MainCatViewModel(),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.95,
         maxChildSize: 0.95,
@@ -54,7 +55,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                           color: AppTheme.WHITE,
                         ),
                       ),
-                      // --------------- KITCHEN CATEGORIES -------------- //
+                      // --------------- MAIN CATEGORIES -------------- //
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.vertical(
@@ -163,7 +164,6 @@ class MainCatBottomSheetView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => MainCatViewModel(),
     );
   }
 }

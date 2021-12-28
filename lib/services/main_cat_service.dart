@@ -10,7 +10,7 @@ class MainCatService with ReactiveServiceMixin {
   MainCatService() {
     // 3
     listenToReactiveValues(
-        [_selectedMainCats, selectedSort, _sortAnimationStatus]);
+        [_selectedMainCats, selectedSort, _mainFilterStatus]);
   }
 
   // 2
@@ -21,9 +21,9 @@ class MainCatService with ReactiveServiceMixin {
       ReactiveValue<CategoryFilter>(mainCatSortList[0]);
   CategoryFilter get selectedSort => _selectedSort.value;
 
-  ReactiveValue<SortAnimationStatus> _sortAnimationStatus =
-      ReactiveValue<SortAnimationStatus>(SortAnimationStatus.idle);
-  SortAnimationStatus get sortAnimationStatus => _sortAnimationStatus.value;
+  ReactiveValue<MainFilterStatus> _mainFilterStatus =
+      ReactiveValue<MainFilterStatus>(MainFilterStatus.idle);
+  MainFilterStatus get mainFilterStatus => _mainFilterStatus.value;
 
   /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
   void updateSelectedMainCats(int? mainCatId) {
@@ -38,36 +38,36 @@ class MainCatService with ReactiveServiceMixin {
     _selectedSort.value = newSelectedSort!;
   }
 
-  /// Function to update _sortAnimationStatus
-  void updateSortAnimationStatus() {
+  /// UPDATES _mainFilterStatus
+  void updateMainFilterStatus() {
     log.v(
         '_selectedMainCats.value: ${_selectedMainCats.value.length} and _selectedSort.value: ${_selectedSort.value.name}');
-    switch (_sortAnimationStatus.value) {
-      case SortAnimationStatus.idle:
+    switch (_mainFilterStatus.value) {
+      case MainFilterStatus.idle:
         if (_selectedMainCats.value.isNotEmpty ||
             _selectedSort.value != mainCatSortList[0]) {
-          _sortAnimationStatus.value = SortAnimationStatus.forward;
+          _mainFilterStatus.value = MainFilterStatus.forward;
         }
         break;
-      case SortAnimationStatus.forward:
+      case MainFilterStatus.forward:
         if (_selectedMainCats.value.isEmpty &&
             _selectedSort.value == mainCatSortList[0]) {
-          _sortAnimationStatus.value = SortAnimationStatus.reverse;
+          _mainFilterStatus.value = MainFilterStatus.reverse;
         }
         break;
-      case SortAnimationStatus.reverse:
+      case MainFilterStatus.reverse:
         if (_selectedMainCats.value.isNotEmpty ||
             _selectedSort.value != mainCatSortList[0]) {
-          _sortAnimationStatus.value = SortAnimationStatus.forward;
+          _mainFilterStatus.value = MainFilterStatus.forward;
         }
         break;
       default:
-        _sortAnimationStatus.value = SortAnimationStatus.idle;
+        _mainFilterStatus.value = MainFilterStatus.idle;
         break;
     }
   }
 
-  /// CLEAR __selectedMainCats.value (CALLED from _homeService)
+  /// CLEARS __selectedMainCats.value (CALLED from _homeService)
   void clearSelectedMainCats() {
     _selectedMainCats.value.clear();
   }
