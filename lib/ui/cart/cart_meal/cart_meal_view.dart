@@ -46,7 +46,7 @@ class CartMealView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 5.w),
                         child: Text(
-                          '${cartMeal.price} TMT',
+                          '${model.totalMealSum} TMT',
                           style: ktsDefault18Text,
                         ),
                       ),

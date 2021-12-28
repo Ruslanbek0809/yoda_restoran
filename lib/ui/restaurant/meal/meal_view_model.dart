@@ -194,6 +194,7 @@ class MealViewModel extends ReactiveViewModel {
       totalDraftPrice += cus.price!;
     });
 
+    totalDraftPrice *= quantity;
     return totalDraftPrice;
   }
 

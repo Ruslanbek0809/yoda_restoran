@@ -19,6 +19,24 @@ class CartMealViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  /// GETS total meal draft sum
+  num get totalMealSum {
+    num totalMealSum = 0;
+    totalMealSum += cartMeal!.discount != null || cartMeal!.discount! > 0
+        ? cartMeal!.discountedPrice!
+        : cartMeal!.price!;
+
+    cartMeal!.volumes!.forEach((vol) {
+      if (vol.id != -1) totalMealSum += vol.price!;
+    });
+    cartMeal!.customs!.forEach((cus) {
+      totalMealSum += cus.price!;
+    });
+
+    totalMealSum *= quantity;
+    return totalMealSum;
+  }
+
   /// CONCATENATES all cartMeal vols and customs into one string
   String get concatenateVolsCustoms {
     StringBuffer concatenatedString = StringBuffer();

@@ -15,14 +15,22 @@ class CartViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _cartService = locator<CartService>();
 
-  List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+  // List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+  List<HiveMeal> cartMeals = [];
   List<Meal>? get moreMeals => _cartService.moreMeals;
 
-  // FETCHS more meals
+  // void getCartMeals() {
+  //   cartMeals = _hiveDbService.cartMeals;
+  //   notifyListeners();
+  // }
+
+  // FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
+    cartMeals = _hiveDbService.cartMeals;
     log.i('');
     await runBusyFuture(_cartService.getMoreMeals());
     log.i('moreMeals length: ${moreMeals!.length}');
+    notifyListeners();
   }
 
   /// CLEAR CART
@@ -30,7 +38,8 @@ class CartViewModel extends BaseViewModel {
     log.i('clearCart()');
 
     await _hiveDbService.clearCart();
-    navBack();
+    cartMeals.clear();
+    // navBack();
     notifyListeners();
   }
 

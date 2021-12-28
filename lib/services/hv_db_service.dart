@@ -196,14 +196,17 @@ class HiveDbService {
           if (vol.id != -1) _filteredSelectedVols.add(vol);
         },
       );
-      // log.v('filteredVols length: ${_filteredSelectedVols.length}');
+      log.v('filteredVols length: ${_filteredSelectedVols.length}');
 
-      /// STEP 3.2. CHECK length. If not same then it is already new meal
+      /// STEP 3.2. CHECK length. If not same then UPDATE shouldAdd to TRUE
       if (selectedVols.length != similarMeal.volumes!.length ||
           selectedCustoms.length != similarMeal.customs!.length) {
         shouldAdd = true;
-        log.v('INSIDE NOT SAME LENGdTH SIMILAR. That why isUnique: $shouldAdd');
+        log.v(
+            'INSIDE NOT SAME LENGdTH SIMILAR. That why shouldAdd: $shouldAdd');
       }
+
+      log.i('shouldAdd AFTER LENGTH Comparison ---------------------------- $shouldAdd');
 
       /// STEP 3.2. CHECK selectedVols and UPDATE isAdd var by condition ( ID COMPARISON )
       for (Volume vol in _filteredSelectedVols) {
@@ -225,15 +228,15 @@ class HiveDbService {
       log.i(
           'shouldAdd AFTER CUSTOMIZES ---------------------------- $shouldAdd');
 
-      /// STEP 3.4. if isUnique FALSE in the end then ASSIGN its value to isNew and UPDATE similarUpdateMeal
+      /// STEP 3.4. if shouldAdd FALSE in the end then ASSIGN its value to isNew and UPDATE similarUpdateMeal
       if (!shouldAdd) {
         isNew = shouldAdd;
         similarUpdateMeal = similarMeal;
-        log.v('INSIDE UPDATEEE SIMILARS isUnique at the END: $shouldAdd');
+        log.v('INSIDE UPDATEEE SIMILARS shouldAdd at the END: $shouldAdd');
         break;
       }
 
-      log.v('INSIDE SIMILARS isUnique at the END: $shouldAdd');
+      log.v('INSIDE SIMILARS shouldAdd at the END: $shouldAdd');
     }
 
     /// STEP 4. ADD or UPDATE a meal in CART
