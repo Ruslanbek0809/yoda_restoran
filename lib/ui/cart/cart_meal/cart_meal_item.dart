@@ -14,8 +14,11 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel model) {
     model.log.v('CartMealItem =========');
-    num? totalMealSum = model.getTotalMealSum(cartMeal);
-    String concatenateVolsCustoms = model.getConcatenateVolsCustoms(cartMeal);
+
+    num? totalMealSum = model.getTotalMealSum(cartMeal); // Gets totalMealSum
+    String concatenateVolsCustoms = model
+        .getConcatenateVolsCustoms(cartMeal); // Gets concatenatedVolsCustoms
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,22 +46,22 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       overflow: TextOverflow.ellipsis,
                       style: ktsDefault16Text,
                     )),
-                    // Padding(
-                    //   padding: EdgeInsets.only(left: 5.w),
-                    //   child: Text(
-                    //     '${model.totalMealSum} TMT',
-                    //     style: ktsDefault18Text,
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.w),
+                      child: Text(
+                        '$totalMealSum TMT',
+                        style: ktsDefault18Text,
+                      ),
+                    ),
                   ],
                 ),
                 //------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//
-                // Text(
-                //   model.concatenateVolsCustoms,
-                //   maxLines: 1,
-                //   overflow: TextOverflow.ellipsis,
-                //   style: ktsDefault14HelperText,
-                // ),
+                Text(
+                  concatenateVolsCustoms,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: ktsDefault14HelperText,
+                ),
                 //------------------ BUTTONS ---------------------//
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,

@@ -33,8 +33,8 @@ class CartViewModel extends ReactiveViewModel {
 
     await _hiveDbService.clearCart();
     log.i('cartMeals length: ${cartMeals.length}');
-    notifyListeners();
     navBack();
+    notifyListeners();
   }
 
 //------------------------ Clear CART DIALOG PART ----------------------------//
@@ -106,9 +106,7 @@ class CartViewModel extends ReactiveViewModel {
 
     await _hiveDbService.updateCartMealInCart(
         hiveMeal: cartMeal, quantity: mealQuantity);
-    // quantity = _hiveDbService.getCartMealQuantity(cartMeal!);
 
-    // log.i('updateCartMealInCart() quantity: $quantity');
     notifyListeners();
   }
 
