@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'cart_meal/cart_meal_view.dart';
+import 'cart_meal/cart_meal_item.dart';
 import 'cart_res_food/cart_res_food_view.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +19,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartViewModel>.reactive(
+    return ViewModelBuilder<CartViewModel>.nonReactive(
       onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
         model.log.v('CartView ===================');
@@ -80,7 +79,7 @@ class CartView extends StatelessWidget {
                         EdgeInsets.only(top: 15.h, left: 16.w, right: 16.w),
                     itemCount: model.cartMeals.length,
                     itemBuilder: (context, pos) {
-                      return CartMealView(cartMeal: model.cartMeals[pos]);
+                      return CartMealItem(cartMeal: model.cartMeals[pos]);
                     },
                     separatorBuilder: (context, index) {
                       return Padding(
@@ -236,80 +235,8 @@ class CartView extends StatelessWidget {
                   //           ),
                   //   ),
                   // ),
-                  // //------------------ PROMOCODE ---------------------//
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //       top: 20.w, bottom: 10.w, left: 16.w, right: 16.w),
-                  //   child: Text(
-                  //     'Promo kod',
-                  //     style: TextStyle(
-                  //       color: AppTheme.MAIN_DARK,
-                  //       fontSize: 24.sp,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  //   child: TextField(
-                  //     controller: _promocodeController,
-                  //     keyboardType: TextInputType.text,
-                  //     textInputAction: TextInputAction.done,
-                  //     style: TextStyle(
-                  //       fontSize: 18.sp,
-                  //       color: AppTheme.FONT_COLOR,
-                  //     ),
-                  //     decoration: InputDecoration(
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: AppTheme().radius15,
-                  //         borderSide: BorderSide(
-                  //           color: AppTheme.FILL_BORDER_SECOND_COLOR,
-                  //           width: 1,
-                  //         ),
-                  //       ),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: AppTheme().radius15,
-                  //         borderSide: BorderSide(
-                  //           color: AppTheme.FILL_BORDER_SECOND_COLOR,
-                  //           width: 1,
-                  //         ),
-                  //       ),
-                  //       hintText: 'Promo kody giriziň',
-                  //       hintStyle: TextStyle(
-                  //         fontSize: 18.sp,
-                  //         color: AppTheme.FONT_GREY_COLOR,
-                  //       ),
-                  //       suffixIcon: Padding(
-                  //         padding: EdgeInsets.only(right: 7.w),
-                  //         child: GestureDetector(
-                  //           onTap: () {},
-                  //           child: SvgPicture.asset(
-                  //             'assets/warning_circle.svg',
-                  //             color: AppTheme.CONTACT_COLOR,
-                  //             width: 25.w,
-                  //           ),
-                  //         ),
-                  //         // SvgPicture.asset(
-                  //         //   'assets/check_outlined_circle.svg',
-                  //         //   color: AppTheme.MAIN,
-                  //         //   width: 25.w,
-                  //         // ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // //------------------ PROMOCODE ---------------------//
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //       top: 8.w, bottom: 10.w, left: 29.w, right: 16.w),
-                  //   child: Text(
-                  //     'Siziň sargydyňyzdan 150 manat aýrylar.',
-                  //     style: TextStyle(
-                  //       fontSize: 14.sp,
-                  //       color: AppTheme.DIALOG_TITLE_COLOR,
-                  //     ),
-                  //   ),
-                  // ),
+                  //------------------ PROMOCODE ---------------------//
+                  
                   SizedBox(
                       height: 0.27
                           .sw), // this one is needed to compensate height of Checkout Button Widget is taking

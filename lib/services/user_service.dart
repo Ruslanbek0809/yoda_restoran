@@ -93,17 +93,18 @@ class UserService {
 
         /// Step 2. SAVES userModel to Hive userBox
         await userBox.put(
-            Constants.userBox,
-            HiveUser(
-              id: userModel.id,
-              firstName: userModel.firstName,
-              lastName: userModel.lastName,
-              email: userModel.email,
-              mobile: userModel.mobile,
-              gender: userModel.gender,
-              birthday: userModel.birthday,
-              accessToken: response.data['access'],
-            ));
+          Constants.userBox,
+          HiveUser(
+            id: userModel.id,
+            firstName: userModel.firstName,
+            lastName: userModel.lastName,
+            email: userModel.email,
+            mobile: userModel.mobile,
+            gender: userModel.gender,
+            birthday: userModel.birthday,
+            accessToken: response.data['access'],
+          ),
+        );
 
         /// Step 3. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
