@@ -19,7 +19,7 @@ class StartUpViewModel extends BaseViewModel {
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp().then((value) => _pushNotificationService
-        .initialise()); // Here we initialise fcm using PushNotificationService
+        .initialise());
 
     await _apiRootService.initDio();
     await _hiveDbService.initDB();

@@ -6,6 +6,12 @@ import 'package:yoda_res/utils/utils.dart';
 class UserService {
   final log = getLogger('UserService');
 
+  // User? _currentUser;
+
+  // User get currentUser => _currentUser!;
+
+  // bool get hasLoggedInUser => _firebaseAuthenticationService.hasUser;
+
   /// INITIALIZE in StartUpViewModel
   Future initUser() async {
     log.v('====== UserService STARTED opening boxes ======');

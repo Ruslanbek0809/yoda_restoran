@@ -12,6 +12,7 @@ class HiveUser {
     this.mobile,
     this.gender,
     this.birthDate,
+    this.accessToken,
   });
 
   @HiveField(0)
@@ -34,4 +35,7 @@ class HiveUser {
 
   @HiveField(6)
   final String? birthDate;
+
+  @HiveField(7)
+  final String? accessToken;
 }
