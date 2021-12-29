@@ -27,13 +27,6 @@ class OtpViewModel extends LoginOtpViewModel {
     notifyListeners();
   }
 
-  void updateOtp(String? otp) {
-    _currentOtp = otp;
-    log.i('_currentOtp: $_currentOtp');
-  }
-
   @override
-  Future<void> runLoginOtp() => _userService.verifyUser(_currentOtp!);
-
-  void navigateBack() => navigationService.back();
+  Future<void> runLoginOtp() => _userService.verifyUser();
 }

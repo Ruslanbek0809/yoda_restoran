@@ -173,8 +173,6 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                       return;
                     }
 
-                    model.updateOtp(currentOtp);
-
                     /// TODO: Add SnackBar
 
                     await model.saveData();

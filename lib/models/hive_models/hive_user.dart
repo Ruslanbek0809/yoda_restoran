@@ -11,7 +11,7 @@ class HiveUser {
     this.email,
     this.mobile,
     this.gender,
-    this.birthDate,
+    this.birthday,
     this.accessToken,
   });
 
@@ -34,7 +34,7 @@ class HiveUser {
   final String? gender;
 
   @HiveField(6)
-  final String? birthDate;
+  final String? birthday;
 
   @HiveField(7)
   final String? accessToken;

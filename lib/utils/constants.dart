@@ -8,9 +8,9 @@ class Constants {
   static const topicAllDevices = 'yoda_res';
 
   // Hive
+  static const userBox = 'userBox';
   static const cartMealsBox = 'cartMealsBox';
   static const cartResBox = 'cartResBox';
-  static const testCartBox = 'testCartBox';
   static const volCartBox = 'volCartBox';
 
   /// SharedPreferences

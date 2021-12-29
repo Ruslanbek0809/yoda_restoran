@@ -18,7 +18,7 @@ class HiveDbService with ReactiveServiceMixin {
 
   final _bottomCartService = locator<BottomCartService>();
 
-  static late Box<HiveRestaurant> cartResBox; // Change model type in
+  static late Box<HiveRestaurant> cartResBox;
   static late Box<HiveMeal> cartMealsBox;
   static late Box<HiveVolCus> volCartBox;
 
