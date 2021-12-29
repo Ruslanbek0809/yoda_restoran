@@ -12,9 +12,10 @@ class StartUpViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _userService = locator<UserService>();
 
   Future<void> runStartupLogic() async {
-    log.i('Started');
+    log.i('===== StartUpViewModel STARTED =====');
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp().then((value) => _pushNotificationService
@@ -22,10 +23,12 @@ class StartUpViewModel extends BaseViewModel {
 
     await _apiRootService.initDio();
     await _hiveDbService.initDB();
+    await _userService.initUser();
+
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
-    log.i('Ended');
+    log.i('===== StartUpViewModel ENDED =====');
     _navService.replaceWith(Routes.homeView);
     // _navService.replaceWith(Routes.loginView);
 

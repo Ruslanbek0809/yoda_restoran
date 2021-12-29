@@ -34,4 +34,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => HiveDbService());
   locator.registerLazySingleton(() => CartService());
   locator.registerLazySingleton(() => MainFilterService());
+  locator.registerLazySingleton(() => UserService());
 }

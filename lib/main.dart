@@ -23,6 +23,7 @@ void main() async {
   Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
+  Hive.registerAdapter<HiveUser>(HiveUserAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();

@@ -8,7 +8,7 @@ class ApiRootService {
   Dio dio = Dio();
 
   Future initDio() async {
-    log.i('Initialise DIO');
+    log.v('====== DIO STARTED initialising ======');
     Map<String, dynamic> _headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -40,6 +40,6 @@ class ApiRootService {
       // you can resolve a `Response` object eg: `handler.resolve(response)`.
     }));
 
-    log.i('DIO initialised => ${dio.options.baseUrl}');
+    log.v('====== DIO ENDED initialising ====== => ${dio.options.baseUrl}');
   }
 }

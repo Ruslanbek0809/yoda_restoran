@@ -34,6 +34,7 @@ import 'package:yoda_res/ui/startup/startup_view.dart';
     LazySingleton(classType: HiveDbService),
     LazySingleton(classType: CartService),
     LazySingleton(classType: MainFilterService),
+    LazySingleton(classType: UserService),
   ],
   logger: StackedLogger(),
 )

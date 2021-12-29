@@ -30,11 +30,13 @@ class HiveDbService with ReactiveServiceMixin {
 
   /// INITIALIZE in StartUpViewModel
   Future initDB() async {
-    log.i('');
+    log.v('====== HiveDbService STARTED opening boxes ======');
 
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
+
+    log.v('====== HiveDbService ENDED opening boxes ======');
   }
 
   /// GETS CART restaurant from cartResBox
