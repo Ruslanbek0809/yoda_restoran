@@ -22,6 +22,7 @@ class MainFilterService with ReactiveServiceMixin {
       CategoryFilter? selectedSort, List<int> selectedMainCats) {
     log.v(
         'selectedMainCats length: ${selectedMainCats.length} and selectedSort: ${selectedSort!.name}');
+        
     switch (_mainFilterAnimationStatus.value) {
       case MainFilterAnimationStatus.idle:
         if (selectedMainCats.isNotEmpty || selectedSort != mainCatSortList[0]) {
@@ -42,6 +43,7 @@ class MainFilterService with ReactiveServiceMixin {
         _mainFilterAnimationStatus.value = MainFilterAnimationStatus.idle;
         break;
     }
-    log.i(_mainFilterAnimationStatus.value);
+    log.v(
+        '_mainFilterAnimationStatus.value: ${_mainFilterAnimationStatus.value}');
   }
 }

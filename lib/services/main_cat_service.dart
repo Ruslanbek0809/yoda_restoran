@@ -20,7 +20,7 @@ class MainCatService with ReactiveServiceMixin {
       ReactiveValue<CategoryFilter>(mainCatSortList[0]);
   CategoryFilter get selectedSort => _selectedSort.value;
 
-  /// Function to ADD or REMOVE mainCategory to/from _multiSelectionList
+  /// ADDS or REMOVES mainCategory to/from _selectedMainCats
   void updateSelectedMainCats(int? mainCatId) {
     if (_selectedMainCats.value.contains(mainCatId))
       _selectedMainCats.value.remove(mainCatId);
@@ -28,12 +28,12 @@ class MainCatService with ReactiveServiceMixin {
       _selectedMainCats.value.add(mainCatId!);
   }
 
-  /// Function to UPDATE _selectedSort
+  /// UPDATES _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
     _selectedSort.value = newSelectedSort!;
   }
 
-  /// CLEARS __selectedMainCats.value (CALLED from _homeService)
+  /// CLEARS _selectedMainCats.value (CALLED from _homeService)
   void clearSelectedMainCats() {
     _selectedMainCats.value.clear();
   }

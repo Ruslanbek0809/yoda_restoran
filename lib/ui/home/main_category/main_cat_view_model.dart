@@ -12,48 +12,59 @@ class MainCatViewModel extends ReactiveViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
-      MainCatService>(); // To update multiSelectionList in realtime(reactive)
-
-  List<int> get _selectedMainCats => _mainCatService.selectedMainCats;
+      MainCatService>(); // To update _selectedMainCats in realtime(reactive)
+  final _mainFilterService = locator<MainFilterService>();
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
+  List<int> get selectedMainCats => _mainCatService.selectedMainCats;
+
   CategoryFilter? get selectedSort => _mainCatService.selectedSort;
+
   MainFilterAnimationStatus get mainFilterAnimationStatus =>
-      _mainCatService.mainFilterAnimationStatus;
+      _mainFilterService.mainFilterAnimationStatus;
 
-  /// Function to check wether this mainCegory selected or NOT
+  /// CHECKS whether this mainCegory selected or NOT
   bool isMainCategorySelected(int? mainCategoryId) =>
-      _selectedMainCats.contains(mainCategoryId);
+      selectedMainCats.contains(mainCategoryId);
 
-  /// ADD or REMOVE mainCategory to/from _selectedMainCats
+  /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
   Future<void> updateSelectedMainCats(int? mainCatId) async {
-    _mainCatService.updateSelectedMainCats(mainCatId);
     log.i(
-        'updateSelectedMainCats() _selectedMainCats: ${_selectedMainCats.length}');
+        'updateSelectedMainCats() _selectedMainCats length: ${selectedMainCats.length}');
+
+    _mainCatService.updateSelectedMainCats(
+        mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
+
     await _homeService.getSelectedMainCats(
-        _selectedMainCats); // FETCH HOME to SHOW RESULT of selectedMainCats
-    _mainCatService.updateMainAnimationFilterStatus();
+        selectedMainCats); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
+
+    _mainFilterService.updateMainAnimationFilterStatus(
+        _mainCatService.selectedSort,
+        _mainCatService
+            .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
+
     notifyListeners();
   }
 
-  /// Function to UPDATE _selectedSort
+  /// UPDATES _selectedSort
   void updateSelectedSort(CategoryFilter? newSelectedSort) {
-    _mainCatService.updateSelectedSort(newSelectedSort);
-    log.i(selectedSort!.name);
-    _mainCatService.updateMainAnimationFilterStatus();
+    log.i('updateSelectedSort(): ${selectedSort!.name}');
+
+    _mainCatService.updateSelectedSort(
+        newSelectedSort); // UPDATES selectedSort (CALLED from _mainCatService)
+
+    _mainFilterService.updateMainAnimationFilterStatus(
+        _mainCatService.selectedSort,
+        _mainCatService
+            .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
+
     notifyListeners();
   }
-
-  /// Function to update _sortAnimationStatus
-  // void updateSortAnimationStatus() {
-  //   log.i(sortAnimationStatus);
-  //   notifyListeners();
-  // }
 
   //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-  /// Function to call MainCategoryBottomSheetView
+  /// CALLS MainCategoryBottomSheetView
   Future showCustomBottomSheet() async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
@@ -64,5 +75,6 @@ class MainCatViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_mainCatService, _mainFilterService];
 }

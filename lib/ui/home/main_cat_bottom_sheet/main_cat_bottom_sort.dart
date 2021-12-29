@@ -13,24 +13,27 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
     final mainFilterAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
-    final _sortAnimationValue =
+    final mainFilterAnimationValue =
         IntTween(begin: 0, end: 100).animate(mainFilterAnimationController);
 
     /// mainFilterAnimationController trigger
     if (model.mainFilterAnimationStatus != MainFilterAnimationStatus.idle)
       switch (mainFilterAnimationController.status) {
         case AnimationStatus.completed:
-          if (model.mainFilterAnimationStatus == MainFilterAnimationStatus.reverse)
+          if (model.mainFilterAnimationStatus ==
+              MainFilterAnimationStatus.reverse)
             mainFilterAnimationController.reverse();
           break;
         case AnimationStatus.dismissed:
-          if (model.mainFilterAnimationStatus == MainFilterAnimationStatus.forward)
+          if (model.mainFilterAnimationStatus ==
+              MainFilterAnimationStatus.forward)
             mainFilterAnimationController.forward();
           break;
         default:
           break;
       }
-    model.log.i('model.sortAnimationStatus: ${model.mainFilterAnimationStatus}');
+    model.log.i(
+        'model.mainFilterAnimationStatus: ${model.mainFilterAnimationStatus}');
 
     return Positioned(
       bottom: 0,
@@ -46,7 +49,7 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
           child: Row(
             children: <Widget>[
               Expanded(
-                flex: _sortAnimationValue.value,
+                flex: mainFilterAnimationValue.value,
                 child: SizedBox(
                   width: 0.0,
                   child: TextButton(
