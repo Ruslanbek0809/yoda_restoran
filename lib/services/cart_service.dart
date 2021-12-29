@@ -24,6 +24,8 @@ class CartService {
 
   /// SEARCHES promocodes and GETS first
   Future<void> searchPromocode(String searchText) async {
+    log.v('searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}');
+
     _promocode =
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
   }

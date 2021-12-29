@@ -14,6 +14,8 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel model) {
     model.log.v('CartMealItem =========');
+    num? totalMealSum = model.getTotalMealSum(cartMeal);
+    String concatenateVolsCustoms = model.getConcatenateVolsCustoms(cartMeal);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

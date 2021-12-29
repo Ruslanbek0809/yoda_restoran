@@ -66,37 +66,37 @@ class CartViewModel extends ReactiveViewModel {
   // }
 
   /// GETS total meal draft sum
-  // num get totalMealSum {
-  //   num totalMealSum = 0;
-  //   totalMealSum += cartMeal!.discount != null || cartMeal!.discount! > 0
-  //       ? cartMeal!.discountedPrice!
-  //       : cartMeal!.price!;
+  num getTotalMealSum(HiveMeal cartMeal) {
+    num totalMealSum = 0;
+    totalMealSum += cartMeal.discount != null || cartMeal.discount! > 0
+        ? cartMeal.discountedPrice!
+        : cartMeal.price!;
 
-  //   cartMeal!.volumes!.forEach((vol) {
-  //     if (vol.id != -1) totalMealSum += vol.price!;
-  //   });
-  //   cartMeal!.customs!.forEach((cus) {
-  //     totalMealSum += cus.price!;
-  //   });
+    cartMeal.volumes!.forEach((vol) {
+      if (vol.id != -1) totalMealSum += vol.price!;
+    });
+    cartMeal.customs!.forEach((cus) {
+      totalMealSum += cus.price!;
+    });
 
-  //   totalMealSum *= quantity;
-  //   return totalMealSum;
-  // }
+    totalMealSum *= cartMeal.quantity!;
+    return totalMealSum;
+  }
 
-  // /// CONCATENATES all cartMeal vols and customs into one string
-  // String get concatenateVolsCustoms {
-  //   StringBuffer concatenatedString = StringBuffer();
+  /// CONCATENATES all cartMeal vols and customs into one string
+  String getConcatenateVolsCustoms(HiveMeal cartMeal) {
+    StringBuffer concatenatedString = StringBuffer();
 
-  //   cartMeal!.volumes!.forEach((vol) {
-  //     if (vol.id != -1) concatenatedString.write('${vol.name} ');
-  //   });
+    cartMeal.volumes!.forEach((vol) {
+      if (vol.id != -1) concatenatedString.write('${vol.name} ');
+    });
 
-  //   cartMeal!.customs!.forEach((cus) {
-  //     concatenatedString.write('${cus.name} ');
-  //   });
+    cartMeal.customs!.forEach((cus) {
+      concatenatedString.write('${cus.name} ');
+    });
 
-  //   return concatenatedString.toString();
-  // }
+    return concatenatedString.toString();
+  }
 
   /// UPDATES cartMeal
   Future<void> updateCartMealInCart(

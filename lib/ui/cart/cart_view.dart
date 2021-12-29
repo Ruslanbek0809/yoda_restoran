@@ -160,18 +160,18 @@ class CartView extends StatelessWidget {
                     ),
                   ),
 //------------------ DELIVERY TOGGLE TITLE ---------------------//
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //       top: 20.w, bottom: 10.w, left: 16.w, right: 16.w),
-                  //   child: Text(
-                  //     'Almak usuly',
-                  //     style: TextStyle(
-                  //       color: AppTheme.MAIN_DARK,
-                  //       fontSize: 24.sp,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                    child: Text(
+                      'Almak usuly',
+                      style: TextStyle(
+                        color: AppTheme.MAIN_DARK,
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
 //------------------ DELIVERY TOGGLE ---------------------//
                   // Padding(
                   //   padding: EdgeInsets.symmetric(horizontal: 16.w),
