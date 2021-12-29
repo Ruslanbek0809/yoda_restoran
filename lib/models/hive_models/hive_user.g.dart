@@ -23,7 +23,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       email: fields[3] as String?,
       mobile: fields[4] as String?,
       gender: fields[5] as String?,
-      birthDate: fields[6] as String?,
+      birthday: fields[6] as String?,
       accessToken: fields[7] as String?,
     );
   }
@@ -45,7 +45,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       ..writeByte(5)
       ..write(obj.gender)
       ..writeByte(6)
-      ..write(obj.birthDate)
+      ..write(obj.birthday)
       ..writeByte(7)
       ..write(obj.accessToken);
   }
