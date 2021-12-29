@@ -22,3 +22,5 @@ export 'home_res_promo.dart';
 export 'customizable.dart';
 export 'meal_bottom_sheet_data.dart';
 export 'user.dart';
+export 'promocode.dart';
+export 'promocode_type.dart';
