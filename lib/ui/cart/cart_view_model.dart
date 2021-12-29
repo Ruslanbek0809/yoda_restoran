@@ -116,6 +116,17 @@ class CartViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+//------------------------ CART MEAL ----------------------------//
+
+  Future<void> startSearch(String? searchText) async {
+    if (searchText != null && searchText.isEmpty || searchText!.length < 2)
+      return;
+
+    try {} catch (err) {
+      throw err;
+    }
+  }
+
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back();
 

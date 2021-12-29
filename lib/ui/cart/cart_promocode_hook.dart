@@ -10,14 +10,14 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
   const CartPromocodeHook({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, CartViewModel viewModel) {
+  Widget buildViewModelWidget(BuildContext context, CartViewModel model) {
     final _promocodeController = useTextEditingController();
 
     return Column(
       children: [
         Padding(
           padding:
-              EdgeInsets.only(top: 20.w, bottom: 10.w, left: 16.w, right: 16.w),
+              EdgeInsets.only(top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
           child: Text(
             'Promo kod',
             style: TextStyle(
@@ -74,9 +74,11 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
                 // ),
               ),
             ),
+            onChanged: (value) => model.startSearch,
+            onSubmitted: (value) => model.startSearch,
           ),
         ),
-        //------------------ PROMOCODE ---------------------//
+        //------------------ PROMOCODE RESULT TEXT ---------------------//
         Padding(
           padding:
               EdgeInsets.only(top: 8.w, bottom: 10.w, left: 29.w, right: 16.w),
