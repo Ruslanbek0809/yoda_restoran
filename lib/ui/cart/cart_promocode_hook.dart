@@ -13,6 +13,7 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
   Widget buildViewModelWidget(BuildContext context, CartViewModel model) {
     final _promocodeController = useTextEditingController();
 
+    model.log.v('CartPromocodeHook =========');
     return Column(
       children: [
         Padding(
@@ -74,8 +75,8 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
                 // ),
               ),
             ),
-            onChanged: (value) => model.searchPromocode,
-            onSubmitted: (value) => model.searchPromocode,
+            onChanged: model.searchPromocode,
+            onSubmitted: model.searchPromocode,
           ),
         ),
         //------------------ PROMOCODE RESULT TEXT ---------------------//

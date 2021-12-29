@@ -20,7 +20,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartViewModel>.nonReactive(
+    return ViewModelBuilder<CartViewModel>.reactive(
       onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
         model.log.v('CartView ===================');

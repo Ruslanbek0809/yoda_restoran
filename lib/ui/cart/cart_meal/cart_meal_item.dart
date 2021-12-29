@@ -51,12 +51,12 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                   ],
                 ),
                 //------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//
-                Text(
-                  model.concatenateVolsCustoms,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: ktsDefault14HelperText,
-                ),
+                // Text(
+                //   model.concatenateVolsCustoms,
+                //   maxLines: 1,
+                //   overflow: TextOverflow.ellipsis,
+                //   style: ktsDefault14HelperText,
+                // ),
                 //------------------ BUTTONS ---------------------//
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -67,8 +67,8 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       elevation: 0,
                       child: InkWell(
                         borderRadius: AppTheme().radius15,
-                        onTap: () async => await model
-                            .updateCartMealInCart(model.quantity - 1),
+                        onTap: () async => await model.updateCartMealInCart(
+                            cartMeal, cartMeal.quantity! - 1),
                         child: Padding(
                           padding: EdgeInsets.all(10.w),
                           child: Icon(
@@ -82,7 +82,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
-                        model.quantity.toString(),
+                        cartMeal.quantity.toString(),
                         style: ktsDefault20Text,
                       ),
                     ),
@@ -92,8 +92,8 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       elevation: 0,
                       child: InkWell(
                         borderRadius: AppTheme().radius15,
-                        onTap: () async => await model
-                            .updateCartMealInCart(model.quantity + 1),
+                        onTap: () async => await model.updateCartMealInCart(
+                            cartMeal, cartMeal.quantity! + 1),
                         child: Padding(
                           padding: EdgeInsets.all(10.w),
                           child: Icon(

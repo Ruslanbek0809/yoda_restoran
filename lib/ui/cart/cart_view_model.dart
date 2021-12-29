@@ -55,59 +55,60 @@ class CartViewModel extends ReactiveViewModel {
 
 //------------------------ CART MEAL ----------------------------//
 
-  HiveMeal? cartMeal;
-  int quantity = 0;
+  // HiveMeal? cartMeal;
+  // int quantity = 0;
 
-  /// GETS quantity of cartMeal for this mealId
-  void getCartMealQuantity(HiveMeal hiveMeal) {
-    quantity = _hiveDbService.getCartMealQuantity(hiveMeal);
-    cartMeal = hiveMeal; // Assigning initial value
-    notifyListeners();
-  }
+  // /// GETS quantity of cartMeal for this mealId
+  // void getCartMealQuantity(HiveMeal hiveMeal) {
+  //   quantity = _hiveDbService.getCartMealQuantity(hiveMeal);
+  //   cartMeal = hiveMeal; // Assigning initial value
+  //   notifyListeners();
+  // }
 
   /// GETS total meal draft sum
-  num get totalMealSum {
-    num totalMealSum = 0;
-    totalMealSum += cartMeal!.discount != null || cartMeal!.discount! > 0
-        ? cartMeal!.discountedPrice!
-        : cartMeal!.price!;
+  // num get totalMealSum {
+  //   num totalMealSum = 0;
+  //   totalMealSum += cartMeal!.discount != null || cartMeal!.discount! > 0
+  //       ? cartMeal!.discountedPrice!
+  //       : cartMeal!.price!;
 
-    cartMeal!.volumes!.forEach((vol) {
-      if (vol.id != -1) totalMealSum += vol.price!;
-    });
-    cartMeal!.customs!.forEach((cus) {
-      totalMealSum += cus.price!;
-    });
+  //   cartMeal!.volumes!.forEach((vol) {
+  //     if (vol.id != -1) totalMealSum += vol.price!;
+  //   });
+  //   cartMeal!.customs!.forEach((cus) {
+  //     totalMealSum += cus.price!;
+  //   });
 
-    totalMealSum *= quantity;
-    return totalMealSum;
-  }
+  //   totalMealSum *= quantity;
+  //   return totalMealSum;
+  // }
 
-  /// CONCATENATES all cartMeal vols and customs into one string
-  String get concatenateVolsCustoms {
-    StringBuffer concatenatedString = StringBuffer();
+  // /// CONCATENATES all cartMeal vols and customs into one string
+  // String get concatenateVolsCustoms {
+  //   StringBuffer concatenatedString = StringBuffer();
 
-    cartMeal!.volumes!.forEach((vol) {
-      if (vol.id != -1) concatenatedString.write('${vol.name} ');
-    });
+  //   cartMeal!.volumes!.forEach((vol) {
+  //     if (vol.id != -1) concatenatedString.write('${vol.name} ');
+  //   });
 
-    cartMeal!.customs!.forEach((cus) {
-      concatenatedString.write('${cus.name} ');
-    });
+  //   cartMeal!.customs!.forEach((cus) {
+  //     concatenatedString.write('${cus.name} ');
+  //   });
 
-    return concatenatedString.toString();
-  }
+  //   return concatenatedString.toString();
+  // }
 
   /// UPDATES cartMeal
-  Future<void> updateCartMealInCart(int? mealQuantity) async {
+  Future<void> updateCartMealInCart(
+      HiveMeal cartMeal, int? mealQuantity) async {
     log.i(
-        'updateCartMealInCart() cartMeal.id: ${cartMeal!.id}, mealQuantity: $mealQuantity');
+        'updateCartMealInCart() cartMeal.id: ${cartMeal.id}, mealQuantity: $mealQuantity');
 
     await _hiveDbService.updateCartMealInCart(
         hiveMeal: cartMeal, quantity: mealQuantity);
-    quantity = _hiveDbService.getCartMealQuantity(cartMeal!);
+    // quantity = _hiveDbService.getCartMealQuantity(cartMeal!);
 
-    log.i('updateCartMealInCart() quantity: $quantity');
+    // log.i('updateCartMealInCart() quantity: $quantity');
     notifyListeners();
   }
 
@@ -115,6 +116,7 @@ class CartViewModel extends ReactiveViewModel {
 
   /// SEARCHES and GETS promocode if found
   Future<void> searchPromocode(String? searchText) async {
+    log.i('searchPromocode() searchText: $searchText');
     if (searchText != null && searchText.isEmpty || searchText!.length < 2)
       return;
 
@@ -123,6 +125,7 @@ class CartViewModel extends ReactiveViewModel {
     } catch (err) {
       throw err;
     }
+    // notifyListeners();
   }
 
 //------------------------ NAVIGATION ----------------------------//
