@@ -26,7 +26,7 @@ class UserService {
 
   HiveUser? get currentUser => _currentUser;
 
-  // bool get hasLoggedInUser => _currentUser =! null ? true :;
+  bool get hasLoggedInUser => _currentUser != null ? true : false;
 
   /// INITIALIZE in StartUpViewModel
   Future initUser() async {

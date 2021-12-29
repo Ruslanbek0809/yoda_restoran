@@ -28,27 +28,15 @@ class StartUpViewModel extends BaseViewModel {
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
+    /// NAV next View based on condition
+    if (_userService.hasLoggedInUser) {
+      log.v('USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      _navService.replaceWith(Routes.homeView);
+    } else {
+      log.v('USER NOTTTTT FOUND');
+      _navService.replaceWith(Routes.loginView);
+    }
+
     log.i('===== StartUpViewModel ENDED =====');
-    // _navService.replaceWith(Routes.homeView);
-    _navService.replaceWith(Routes.loginView);
-
-    // if (_userService.hasLoggedInUser) {
-    //   log.v('We have a user session on disk. Sync the user profile ...');
-    //   await _userService.syncUserAccount();
-
-    //   final currentUser = _userService.currentUser;
-    //   log.v('User sync complete. User profile: $currentUser');
-
-    //   if (!currentUser.hasAddress) {
-    //     _navigationService.navigateTo(Routes.addressSelectionView);
-    //   } else {
-    //     log.v('We have a default address. Let\'s show them products!');
-    //     _navigationService.replaceWith(Routes.homeView);
-    //     // navigate to home view
-    //   }
-    // } else {
-    //   log.v('No user on disk, navigate to the LoginView');
-    //   _navigationService.replaceWith(Routes.loginView);
-    // }
   }
 }
