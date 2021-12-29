@@ -143,14 +143,39 @@ class ApiService {
       if (response.data != null) {
         response.data.forEach((_resCategory) {
           _moreMeals.add(Meal.fromJson(_resCategory));
-        });  
+        });
       }
-      
+
       return _moreMeals;
     } on DioError catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
+
+  Future<Promocode> searchPromocode(String searchText, int resId) async {
+    List<Promocode> _promocodeList = [];
+    try {
+      Response response =
+          await _apiRoot.dio.get('api/promocode/', queryParameters: {
+        'search': searchText,
+        'restaurant': resId,
+      });
+      log.v('RESPONSE: api/promocode/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_resCategory) {
+          _promocodeList.add(Promocode.fromJson(_resCategory));
+        });
+      }
+
+      return _promocodeList[0];
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/promocode/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }

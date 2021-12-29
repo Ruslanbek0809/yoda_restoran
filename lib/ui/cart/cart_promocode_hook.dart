@@ -74,8 +74,8 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
                 // ),
               ),
             ),
-            onChanged: (value) => model.startSearch,
-            onSubmitted: (value) => model.startSearch,
+            onChanged: (value) => model.searchPromocode,
+            onSubmitted: (value) => model.searchPromocode,
           ),
         ),
         //------------------ PROMOCODE RESULT TEXT ---------------------//

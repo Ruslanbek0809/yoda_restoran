@@ -16,7 +16,10 @@ class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+
   List<Meal>? get moreMeals => _cartService.moreMeals;
+
+  Promocode? get promocode => _cartService.promocode;
 
   // void getCartMeals() {
   //   cartMeals = _hiveDbService.cartMeals;
@@ -118,11 +121,14 @@ class CartViewModel extends ReactiveViewModel {
 
 //------------------------ CART MEAL ----------------------------//
 
-  Future<void> startSearch(String? searchText) async {
+  /// SEARCHES and GETS promocode if found
+  Future<void> searchPromocode(String? searchText) async {
     if (searchText != null && searchText.isEmpty || searchText!.length < 2)
       return;
 
-    try {} catch (err) {
+    try {
+      await runBusyFuture(_cartService.searchPromocode(searchText));
+    } catch (err) {
       throw err;
     }
   }
