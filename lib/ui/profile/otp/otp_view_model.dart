@@ -9,9 +9,9 @@ class OtpViewModel extends LoginOtpViewModel {
 
   final log = getLogger('OtpViewModel');
 
-  final _userApiService = locator<UserApiService>();
+  final _userService = locator<UserService>();
 
-  String? get successOtp => _userApiService.otp;
+  String? get successOtp => _userService.otp;
 
   int get durationTime => 59;
 
@@ -33,7 +33,7 @@ class OtpViewModel extends LoginOtpViewModel {
   }
 
   @override
-  Future<void> runLoginOtp() => _userApiService.verifyUser(_currentOtp!);
+  Future<void> runLoginOtp() => _userService.verifyUser(_currentOtp!);
 
   void navigateBack() => navigationService.back();
 }

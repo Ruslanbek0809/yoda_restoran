@@ -25,7 +25,6 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => ApiRootService());
   locator.registerLazySingleton(() => ApiService());
-  locator.registerLazySingleton(() => UserApiService());
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => BottomCartService());
   locator.registerLazySingleton(() => ResService());
