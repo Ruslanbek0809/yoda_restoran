@@ -98,7 +98,7 @@ class CartViewModel extends ReactiveViewModel {
     return concatenatedString.toString();
   }
 
-  /// UPDATES cartMeal
+  /// UPDATES cartMeal. If cartMeals is empty then navBack bc CartView is empty
   Future<void> updateCartMealInCart(
       HiveMeal cartMeal, int? mealQuantity) async {
     log.i(
@@ -106,6 +106,8 @@ class CartViewModel extends ReactiveViewModel {
 
     await _hiveDbService.updateCartMealInCart(
         hiveMeal: cartMeal, quantity: mealQuantity);
+
+    if (cartMeals.isEmpty) navBack();
 
     notifyListeners();
   }
