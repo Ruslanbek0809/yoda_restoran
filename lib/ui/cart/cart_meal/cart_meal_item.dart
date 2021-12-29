@@ -41,13 +41,13 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       overflow: TextOverflow.ellipsis,
                       style: ktsDefault16Text,
                     )),
-                    Padding(
-                      padding: EdgeInsets.only(left: 5.w),
-                      child: Text(
-                        '${model.totalMealSum} TMT',
-                        style: ktsDefault18Text,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(left: 5.w),
+                    //   child: Text(
+                    //     '${model.totalMealSum} TMT',
+                    //     style: ktsDefault18Text,
+                    //   ),
+                    // ),
                   ],
                 ),
                 //------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//

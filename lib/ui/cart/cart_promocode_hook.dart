@@ -79,17 +79,18 @@ class CartPromocodeHook extends HookViewModelWidget<CartViewModel> {
           ),
         ),
         //------------------ PROMOCODE RESULT TEXT ---------------------//
-        Padding(
-          padding:
-              EdgeInsets.only(top: 8.w, bottom: 10.w, left: 29.w, right: 16.w),
-          child: Text(
-            'Siziň sargydyňyzdan 150 manat aýrylar.',
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppTheme.DIALOG_TITLE_COLOR,
+        if (model.promocode != null)
+          Padding(
+            padding: EdgeInsets.only(
+                top: 8.h, bottom: 10.w, left: 29.w, right: 16.w),
+            child: Text(
+              'Siziň sargydyňyzdan 150 manat aýrylar.',
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: AppTheme.DIALOG_TITLE_COLOR,
+              ),
             ),
           ),
-        ),
       ],
     );
   }

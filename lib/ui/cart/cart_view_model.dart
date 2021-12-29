@@ -21,21 +21,13 @@ class CartViewModel extends ReactiveViewModel {
 
   Promocode? get promocode => _cartService.promocode;
 
-  // void getCartMeals() {
-  //   cartMeals = _hiveDbService.cartMeals;
-  //   log.i('cartMeals length: ${cartMeals.length}');
-  //   notifyListeners();
-  // }
-
   // FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
-    // getCartMeals();
     await runBusyFuture(_cartService.getMoreMeals());
     log.i('moreMeals length: ${moreMeals!.length} ');
-    // notifyListeners();
   }
 
-  /// CLEAR CART
+  /// CLEARS CART
   Future<void> clearCart() async {
     log.i('clearCart()');
 
