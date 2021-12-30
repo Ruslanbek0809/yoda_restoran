@@ -8,12 +8,13 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: preferredSize.height,
+      padding: EdgeInsets.only(top: 20.h),
       child: child,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(76.h);
+  Size get preferredSize => Size.fromHeight(86.h);
 }

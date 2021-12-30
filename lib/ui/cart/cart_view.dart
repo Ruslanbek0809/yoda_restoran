@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/cart/cart_toggle_button.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart_meal/cart_meal_item.dart';
@@ -12,51 +13,48 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CartView extends StatelessWidget {
   const CartView({Key? key}) : super(key: key);
 
-  // // bool _switchValue = true;
-  // bool _isDelivery = false;
-
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartViewModel>.reactive(
+    return ViewModelBuilder<CartViewModel>.nonReactive(
       onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
         model.log.v('CartView ===================');
         return Scaffold(
-          appBar: AppBar(
-            
-            toolbarHeight: kToolbarHeight + 20.h,
-            backgroundColor: AppTheme.WHITE,
-            elevation: 1,
-            leadingWidth: 35.w,
-            leading: Padding(
-              padding: EdgeInsets.only(left: 10.w),
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppTheme.FONT_COLOR,
-                  size: 25.w,
+          appBar: MyAppbar(
+            child: AppBar(
+              backgroundColor: AppTheme.WHITE,
+              elevation: 1,
+              leadingWidth: 35.w,
+              leading: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.FONT_COLOR,
+                    size: 25.w,
+                  ),
+                  onPressed: () => Navigator.pop(context),
                 ),
-                onPressed: () => Navigator.pop(context),
               ),
-            ),
-            centerTitle: true,
-            title: Text(
-              'Sargyt',
-              style: ktsDefault22BoldText,
-            ),
-            actions: [
-              Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: GestureDetector(
-                  onTap: () async => await model.showClearCartDialog(model),
-                  child: SvgPicture.asset(
-                    'assets/trash.svg',
-                    color: AppTheme.MAIN_DARK,
-                    width: 25.w,
+              centerTitle: true,
+              title: Text(
+                'Sargyt',
+                style: ktsDefault22BoldText,
+              ),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w),
+                  child: GestureDetector(
+                    onTap: () async => await model.showClearCartDialog(model),
+                    child: SvgPicture.asset(
+                      'assets/trash.svg',
+                      color: AppTheme.MAIN_DARK,
+                      width: 25.w,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           body: Stack(
             children: [
@@ -123,7 +121,7 @@ class CartView extends StatelessWidget {
 //------------------ CART FOOD WIDGET TITLE ---------------------//
                   Padding(
                     padding: EdgeInsets.only(
-                        top: 15.h, bottom: 10.w, left: 16.w, right: 16.w),
+                        top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
                     child: Text(
                       'Ýene bir zat?',
                       style: TextStyle(
@@ -152,83 +150,7 @@ class CartView extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
-//------------------ DELIVERY TOGGLE TITLE ---------------------//
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
-                    child: Text(
-                      'Almak usuly',
-                      style: TextStyle(
-                        color: AppTheme.MAIN_DARK,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-//------------------ DELIVERY TOGGLE ---------------------//
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  //   child: ToggleButtonWidget(
-                  //     toggleCallback: (isDelivery) {
-                  //       setState(() {
-                  //         _isDelivery = isDelivery;
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
-//------------------ DELIVERY TYPE TEXT based on condition ---------------------//
-                  // Padding(
-                  //   padding:
-                  //       EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
-                  //   child: AnimatedSwitcher(
-                  //     duration: const Duration(milliseconds: 300),
-                  //     child: _isDelivery
-                  //         ? Row(
-                  //             children: [
-                  //               GestureDetector(
-                  //                 onTap: () => Navigator.pop(context),
-                  //                 child: SvgPicture.asset(
-                  //                   'assets/delivery.svg',
-                  //                   color: AppTheme.MAIN_DARK,
-                  //                   width: 35.w,
-                  //                 ),
-                  //               ),
-                  //               SizedBox(width: 8.w),
-                  //               Expanded(
-                  //                 child: Text(
-                  //                   'Eltip bermek üçin töleg operator tarapyndan goşular.',
-                  //                   style: TextStyle(
-                  //                     fontSize: 16.sp,
-                  //                     color: AppTheme.FONT_COLOR,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           )
-                  //         : Row(
-                  //             children: [
-                  //               GestureDetector(
-                  //                 onTap: () => Navigator.pop(context),
-                  //                 child: SvgPicture.asset(
-                  //                   'assets/map_pin.svg',
-                  //                   color: AppTheme.MAIN_DARK,
-                  //                   width: 25.w,
-                  //                 ),
-                  //               ),
-                  //               SizedBox(width: 5.w),
-                  //               Expanded(
-                  //                 child: Text(
-                  //                   'Alişer Nowaýy köç. 171',
-                  //                   style: TextStyle(
-                  //                     fontSize: 16.sp,
-                  //                     color: AppTheme.FONT_COLOR,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //   ),
-                  // ),
+                  CartToggleButton(),
                   SizedBox(
                       height: 0.27
                           .sw), // COMPENSATES height of Checkout Button Widget is taking

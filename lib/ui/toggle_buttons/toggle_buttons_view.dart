@@ -21,6 +21,7 @@ class ToggleButtonView extends StatelessWidget {
                   ),
                   height: 44.h,
                   padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                  margin: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Stack(
                     children: [
                       AnimatedAlign(

@@ -321,10 +321,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           ),
                         ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: ToggleButtonView(),
-                        ),
+                        ToggleButtonView(),
                         //------------------ MAIN DIVIDER ---------------------//
                         Container(
                           color: AppTheme.MAIN_DIVIDER_COLOR,

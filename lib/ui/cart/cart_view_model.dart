@@ -24,6 +24,8 @@ class CartViewModel extends ReactiveViewModel {
 
   Promocode? get promocode => _cartService.promocode;
 
+  bool isDelivery = false;
+
   // FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
     await runBusyFuture(_cartService.getMoreMeals());

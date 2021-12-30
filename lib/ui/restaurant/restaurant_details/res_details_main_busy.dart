@@ -252,10 +252,7 @@ class ResDetailsMainBusy extends StatelessWidget {
                         ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
                         IgnorePointer(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: ToggleButtonView(),
-                          ),
+                          child: ToggleButtonView(),
                         ),
                         SizedBox(height: 23.h),
                       ],
