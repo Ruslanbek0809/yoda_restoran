@@ -85,7 +85,7 @@ enum BottomCartStatus { idle, forward, reverse }
 enum MainFilterAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
-enum BottomSheetType { mainCategory, restaurantInfo, meal }
+enum BottomSheetType { mainCategory, restaurantInfo, meal, checkout }
 
 /// Enum for dialog types
 enum DialogType { mealCartClear, clearCart }

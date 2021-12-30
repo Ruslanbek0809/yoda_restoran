@@ -253,7 +253,9 @@ class CartView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppTheme.WHITE,
                     border: Border.all(
-                        color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                      color: AppTheme.BUTTON_BORDER_COLOR,
+                      width: 0.1,
+                    ),
                     boxShadow: [AppTheme().bottomCartShadow],
                   ),
                   padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),

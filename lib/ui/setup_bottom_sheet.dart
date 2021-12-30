@@ -1,5 +1,6 @@
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/ui/cart/cart_bottom_sheets/cart_bottom_sheets.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'home/main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
@@ -26,6 +27,11 @@ void setupBottomSheet() {
           meal: sheetRequest.data.meal,
           restaurant: sheetRequest.data.restaurant,
           mealViewModel: sheetRequest.data.mealViewModel,
+        ),
+    BottomSheetType.checkout: (context, sheetRequest, completer) =>
+        CheckoutBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
         ),
   };
 
