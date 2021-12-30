@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartMealItem extends ViewModelWidget<CartViewModel> {
   final HiveMeal cartMeal;
-  const CartMealItem({Key? key, required this.cartMeal}) : super(key: key);
+  const CartMealItem({Key? key, required this.cartMeal})
+      : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, CartViewModel model) {

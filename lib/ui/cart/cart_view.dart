@@ -229,8 +229,6 @@ class CartView extends StatelessWidget {
                   //           ),
                   //   ),
                   // ),
-                  //------------------ PROMOCODE ---------------------//
-                  CartPromocodeHook(),
                   SizedBox(
                       height: 0.27
                           .sw), // COMPENSATES height of Checkout Button Widget is taking

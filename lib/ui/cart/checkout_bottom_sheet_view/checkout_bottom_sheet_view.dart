@@ -10,6 +10,7 @@ import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_note_hook.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'checkout_promocode_hook.dart';
 import 'checkout_view_model.dart';
 
 class CheckoutBottomSheetView extends StatelessWidget {
@@ -20,8 +21,6 @@ class CheckoutBottomSheetView extends StatelessWidget {
     required this.request,
     required this.completer,
   }) : super(key: key);
-
-  final TextEditingController _notesController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -243,8 +242,10 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.DRAWER_DIVIDER,
                             indent: 0.111.sw,
                           ),
-                          SizedBox(height: 10.w),
-// --------------- NOTE -------------- //
+                          SizedBox(height: 10.h),
+                          //------------------ PROMOCODE ---------------------//
+                          CheckoutPromocodeHook(),
+                          // --------------- NOTE -------------- //
                           CheckoutNoteHook(),
                         ],
                       ),
