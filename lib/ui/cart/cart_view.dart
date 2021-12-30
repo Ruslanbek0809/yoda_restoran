@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart_meal/cart_meal_item.dart';
 import 'cart_promocode_hook.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartView extends StatelessWidget {
   const CartView({Key? key}) : super(key: key);
-  // final TextEditingController _promocodeController = TextEditingController();
 
   // // bool _switchValue = true;
   // bool _isDelivery = false;
@@ -244,44 +245,38 @@ class CartView extends StatelessWidget {
                 ],
               ),
 //------------------ BOTTOM CART WIDGET ---------------------//
-              // Positioned(
-              //   bottom: 0,
-              //   left: 0,
-              //   right: 0,
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //       color: AppTheme.WHITE,
-              //       border: Border.all(
-              //           color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-              //       boxShadow: [AppTheme().bottomCartShadow],
-              //     ),
-              //     padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //         Text(
-              //           '175 TMT',
-              //           style: TextStyle(
-              //             fontSize: 20.sp,
-              //             fontWeight: FontWeight.w600,
-              //             color: AppTheme.MAIN_DARK,
-              //           ),
-              //         ),
-              //         CustomTextButton(
-              //           text: 'Dowam et',
-              //           padding: EdgeInsets.symmetric(
-              //               vertical: 17.w, horizontal: 0.2.sw),
-              //           textStyle: TextStyle(
-              //             fontSize: 18.sp,
-              //             fontWeight: FontWeight.normal,
-              //             color: AppTheme.WHITE,
-              //           ),
-              //           onPressed: () => _onCartOrderClicked(),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppTheme.WHITE,
+                    border: Border.all(
+                        color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                    boxShadow: [AppTheme().bottomCartShadow],
+                  ),
+                  padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '175 TMT',
+                        style: ktsDefault20BoldText,
+                      ),
+                      CustomTextChildButton(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 17.w, horizontal: 0.2.sw),
+                        child: Text(
+                          'Dowam et',
+                          style: ktsButton18Text,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         );
