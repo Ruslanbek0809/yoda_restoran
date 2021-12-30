@@ -14,10 +14,7 @@ class Constants {
   static const volCartBox = 'volCartBox';
 
   /// SharedPreferences
-  static const currentLang = 'currentLang';
   static const accessToken = 'accessToken';
-  static const isLoggedIn = 'isLoggedIn';
-  static const isSeenIntro = 'isSeenIntro';
 
   /// Device Types
   static const TABLET = "tablet";

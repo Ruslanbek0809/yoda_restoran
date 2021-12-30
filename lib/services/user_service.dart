@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
@@ -106,7 +107,11 @@ class UserService {
           ),
         );
 
-        /// Step 3. GETS hiveUser from Hive userBox
+        /// Step 3. SETS accessToken to Constants.accessToken var
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString(Constants.accessToken, response.data['access']);
+
+        /// Step 4. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
       }
     } catch (error) {

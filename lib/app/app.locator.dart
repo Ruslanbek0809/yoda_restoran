@@ -20,19 +20,20 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
+  locator.registerLazySingleton(() => HiveDbService());
+  locator.registerLazySingleton(() => ApiRootService());
+  locator.registerLazySingleton(() => ApiService());
+  locator.registerLazySingleton(() => PushNotificationService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => DialogService());
-  locator.registerLazySingleton(() => ApiRootService());
-  locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => BottomCartService());
   locator.registerLazySingleton(() => ResService());
   locator.registerLazySingleton(() => MainCatService());
-  locator.registerLazySingleton(() => PushNotificationService());
-  locator.registerLazySingleton(() => HiveDbService());
   locator.registerLazySingleton(() => CartService());
   locator.registerLazySingleton(() => MainFilterService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => ToggleButtonService());
+  locator.registerLazySingleton(() => CheckoutService());
 }

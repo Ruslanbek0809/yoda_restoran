@@ -23,8 +23,6 @@ class CartViewModel extends ReactiveViewModel {
 
   List<Meal>? get moreMeals => _cartService.moreMeals;
 
-  Promocode? get promocode => _cartService.promocode;
-
   bool get isDelivery => _toggleButtonService.isDelivery;
 
   // FETCHS more meals and GETS all carts
@@ -128,21 +126,6 @@ class CartViewModel extends ReactiveViewModel {
     if (cartMeals.isEmpty) navBack();
 
     notifyListeners();
-  }
-
-//------------------------ CART MEAL ----------------------------//
-
-  /// SEARCHES and GETS promocode if found
-  Future<void> searchPromocode(String? searchText) async {
-    log.i('searchPromocode() searchText: $searchText');
-    if (searchText != null && searchText.isEmpty || searchText!.length < 2)
-      return;
-
-    try {
-      await runBusyFuture(_cartService.searchPromocode(searchText));
-    } catch (err) {
-      throw err;
-    }
   }
 
 //------------------------ CHECKOUT BOTTOM SHEET ----------------------------//

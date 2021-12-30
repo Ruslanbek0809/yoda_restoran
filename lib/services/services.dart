@@ -10,3 +10,4 @@ export 'cart_service.dart';
 export 'main_filter_service.dart';
 export 'user_service.dart';
 export 'toggle_button_service.dart';
+export 'checkout_service.dart';

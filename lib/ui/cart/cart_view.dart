@@ -40,7 +40,7 @@ class CartView extends StatelessWidget {
               centerTitle: true,
               title: Text(
                 'Sargyt',
-                style: ktsDefault22BoldText,
+                style: ktsDefault22DarkText,
               ),
               actions: [
                 Padding(
@@ -125,11 +125,7 @@ class CartView extends StatelessWidget {
                         top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
                     child: Text(
                       'Ýene bir zat?',
-                      style: TextStyle(
-                        color: AppTheme.MAIN_DARK,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: ktsDefault24DarkText,
                     ),
                   ),
 //------------------ CART FOOD WIDGET LIST ---------------------//
@@ -151,6 +147,7 @@ class CartView extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
+//------------------ TOGGLE BUTTON ---------------------//
                   CartToggleButton(),
                   SizedBox(
                       height: 0.27

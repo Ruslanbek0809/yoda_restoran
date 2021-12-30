@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -21,11 +22,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
               EdgeInsets.only(top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
           child: Text(
             'Almak usuly',
-            style: TextStyle(
-              color: AppTheme.MAIN_DARK,
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w600,
-            ),
+            style: ktsDefault24DarkText,
           ),
         ),
 //------------------ DELIVERY TOGGLE ---------------------//

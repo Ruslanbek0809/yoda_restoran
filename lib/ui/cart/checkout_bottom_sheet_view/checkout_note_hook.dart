@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -22,10 +23,7 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
             padding: EdgeInsets.only(left: 5.w),
             child: Text(
               'Bellik',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: AppTheme.DRAWER_ICON,
-              ),
+              style: ktsDefault16HelperText,
             ),
           ),
           SizedBox(height: 5.h),

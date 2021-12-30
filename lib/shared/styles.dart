@@ -61,7 +61,7 @@ TextStyle ktsDefault16BoldText = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault16HelperColor = TextStyle(
+TextStyle ktsDefault16HelperText = TextStyle(
   fontSize: 16.sp,
   color: kcHelperColor,
 );
@@ -89,9 +89,15 @@ TextStyle ktsDefault20BoldText = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault22BoldText = TextStyle(
+TextStyle ktsDefault22DarkText = TextStyle(
   fontSize: 22.sp,
   fontWeight: FontWeight.bold,
+  color: kcSecondaryDarkColor,
+);
+
+TextStyle ktsDefault24DarkText = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
 );
 

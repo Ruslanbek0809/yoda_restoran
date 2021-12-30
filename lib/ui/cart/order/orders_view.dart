@@ -31,7 +31,7 @@ class OrdersView extends StatelessWidget {
           centerTitle: true,
           title: Text(
             'Sargytlarym',
-            style: ktsDefault22BoldText,
+            style: ktsDefault22DarkText,
           ),
         ),
         body: ListView.separated(

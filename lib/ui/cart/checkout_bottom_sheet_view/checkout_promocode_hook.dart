@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class CheckoutPromocodeHook extends HookViewModelWidget<CartViewModel> {
+class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
   const CheckoutPromocodeHook({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, CartViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
     final _promocodeController = useTextEditingController();
     model.log.v('CheckoutPromocodeHook =========');
     return Column(

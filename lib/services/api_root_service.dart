@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 /// ApiRootService is used to initializeDio in both ApiService and UserApiService
 class ApiRootService {
   final log = getLogger('ApiRootService');
+
   Dio dio = Dio();
 
   Future initDio() async {
@@ -13,7 +15,14 @@ class ApiRootService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     };
-    // if (token != null) headers['Authorization'] = "Bearer $token";
+
+    /// Reason for usage of SharedPreferences is that ERROR is occuring in _userService.currentUser.accessToken (Stacked itself error related to services)
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? accessToken = prefs.getString(Constants.accessToken);
+
+    if (accessToken != null)
+      _headers["Authorization"] = "Bearer " + accessToken;
+
     // dio.options.baseUrl =
     //     lang == 'tm' ? MyConstants.baseUrlTk : MyConstants.baseUrlRu;
     dio.options.baseUrl = Constants.baseUrlTk;
