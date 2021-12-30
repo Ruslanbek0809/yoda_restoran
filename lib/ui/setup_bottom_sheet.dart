@@ -1,8 +1,8 @@
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/ui/cart/cart_bottom_sheets/cart_bottom_sheets.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'cart/checkout_bottom_sheet_view/checkout_bottom_sheet_view.dart';
 import 'home/main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'restaurant/restaurant_info_bottom_sheet.dart';
 
