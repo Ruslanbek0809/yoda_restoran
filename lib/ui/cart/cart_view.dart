@@ -5,7 +5,6 @@ import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart_meal/cart_meal_item.dart';
-import 'checkout_bottom_sheet_view/checkout_note_hook.dart';
 import 'cart_res_food/cart_res_food_view.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,8 +22,9 @@ class CartView extends StatelessWidget {
       builder: (context, model, child) {
         model.log.v('CartView ===================');
         return Scaffold(
-          resizeToAvoidBottomInset: true,
           appBar: AppBar(
+            
+            toolbarHeight: kToolbarHeight + 20.h,
             backgroundColor: AppTheme.WHITE,
             elevation: 1,
             leadingWidth: 35.w,

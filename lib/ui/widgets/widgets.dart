@@ -13,3 +13,4 @@ export 'loading_widget.dart';
 export 'custom_text_child_button.dart';
 export 'button_loading.dart';
 export 'colored_tabbar.dart';
+export 'my_app_bar.dart';
