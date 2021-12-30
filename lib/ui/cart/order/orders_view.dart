@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'order_view_model.dart';
 
@@ -30,11 +31,7 @@ class OrdersView extends StatelessWidget {
           centerTitle: true,
           title: Text(
             'Sargytlarym',
-            style: TextStyle(
-              color: AppTheme.MAIN_DARK,
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-            ),
+            style: ktsDefault22BoldText,
           ),
         ),
         body: ListView.separated(
