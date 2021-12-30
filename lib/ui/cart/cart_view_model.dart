@@ -38,6 +38,28 @@ class CartViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  num get getTotalCartSum {
+    num totalCartSum = 0;
+
+    _hiveDbService.cartMeals.forEach((_cartMeal) {
+      totalCartSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+          ? _cartMeal.discountedPrice!
+          : _cartMeal.price!;
+
+      _cartMeal.volumes!.forEach((vol) {
+        if (vol.id != -1) totalCartSum += vol.price!;
+      });
+      _cartMeal.customs!.forEach((cus) {
+        totalCartSum += cus.price!;
+      });
+
+      totalCartSum *= _cartMeal.quantity!;
+    });
+
+    return totalCartSum;
+  }
+
 //------------------------ Clear CART DIALOG PART ----------------------------//
 
   /// SHOWS Clear CART Dialog
