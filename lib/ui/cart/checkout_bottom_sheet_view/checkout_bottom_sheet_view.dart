@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/library/flutter_datetime_picker.dart';
 import 'package:yoda_res/library/src/datetime_picker_theme.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
+import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_note_hook.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'checkout_view_model.dart';
@@ -244,40 +245,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           ),
                           SizedBox(height: 10.w),
 // --------------- NOTE -------------- //
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 40.w, right: 15.w, bottom: 15.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.w),
-                                  child: Text(
-                                    'Bellik',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: AppTheme.DRAWER_ICON,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 5.w),
-                                TextField(
-                                  controller: _notesController,
-                                  maxLines: 5,
-                                  keyboardType: TextInputType.text,
-                                  textInputAction: TextInputAction.done,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: AppTheme().radius10,
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: AppTheme.MAIN_LIGHT,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          CheckoutNoteHook(),
                         ],
                       ),
                     ),
