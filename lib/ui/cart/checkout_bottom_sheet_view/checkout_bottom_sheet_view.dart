@@ -149,19 +149,19 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.WHITE,
                             child: InkWell(
                               onTap: () async {
-                                _deliverDateTime =
+                                model.deliverDateTime =
                                     await DatePicker.showDateTimePicker(
                                           context,
                                           showTitleActions: true,
-                                          minTime: now,
-                                          maxTime: maxDateTime,
+                                          minTime: model.now,
+                                          maxTime: model.maxDateTime,
                                           onChanged: (date) {
                                             print('Senä change $date');
                                           },
                                           onConfirm: (date) {
                                             print('Senä confirm $date');
                                           },
-                                          currentTime: _deliverDateTime,
+                                          currentTime: model.deliverDateTime,
                                           locale: LocaleType.tk,
                                           theme: DatePickerTheme(
                                             doneStyle: TextStyle(
@@ -173,9 +173,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                 AppTheme.MAIN_LIGHT,
                                           ),
                                         ) ??
-                                        _deliverDateTime;
-                                _deliverDateFormatted = DateFormat('HH:mm')
-                                    .format(_deliverDateTime!);
+                                        model.deliverDateTime;
+                                model.deliverDateFormatted = DateFormat('HH:mm')
+                                    .format(model.deliverDateTime!);
                                 // setState(() {});
                               },
                               child: Padding(
@@ -202,18 +202,19 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              _deliverDateTime == now
+                                              model.deliverDateTime == model.now
                                                   ? 'Şu wagt'
-                                                  : _deliverDateTime!
-                                                              .isAfter(now) &&
-                                                          _deliverDateTime!
-                                                              .isBefore(
-                                                                  tomorrow!)
-                                                      ? 'Şu gün $_deliverDateFormatted'
-                                                      : _deliverDateTime!
+                                                  : model.deliverDateTime!
                                                               .isAfter(
-                                                                  tomorrow!)
-                                                          ? 'Ertir $_deliverDateFormatted'
+                                                                  model.now) &&
+                                                          model.deliverDateTime!
+                                                              .isBefore(model
+                                                                  .tomorrow!)
+                                                      ? 'Şu gün ${model.deliverDateFormatted}'
+                                                      : model.deliverDateTime!
+                                                              .isAfter(model
+                                                                  .tomorrow!)
+                                                          ? 'Ertir ${model.deliverDateFormatted}'
                                                           : '',
                                               style: TextStyle(
                                                 fontSize: 16.sp,

@@ -8,11 +8,11 @@ class CheckoutViewModel extends BaseViewModel {
   final now = DateTime.now();
   DateTime? tomorrow;
   DateTime? maxDateTime;
-  DateTime? _deliverDateTime;
-  String? _deliverDateFormatted = '';
+  DateTime? deliverDateTime;
+  String? deliverDateFormatted = '';
 
   void getOnModelReady() {
-    _deliverDateTime = now;
+    deliverDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
   }
