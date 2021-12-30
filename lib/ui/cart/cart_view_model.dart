@@ -17,6 +17,7 @@ class CartViewModel extends ReactiveViewModel {
   final _cartService = locator<CartService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _userService = locator<UserService>();
+  final _toggleButtonService = locator<ToggleButtonService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
 
@@ -24,7 +25,7 @@ class CartViewModel extends ReactiveViewModel {
 
   Promocode? get promocode => _cartService.promocode;
 
-  bool isDelivery = false;
+  bool get isDelivery => _toggleButtonService.isDelivery;
 
   // FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
@@ -81,16 +82,6 @@ class CartViewModel extends ReactiveViewModel {
   }
 
 //------------------------ CART MEAL ----------------------------//
-
-  // HiveMeal? cartMeal;
-  // int quantity = 0;
-
-  // /// GETS quantity of cartMeal for this mealId
-  // void getCartMealQuantity(HiveMeal hiveMeal) {
-  //   quantity = _hiveDbService.getCartMealQuantity(hiveMeal);
-  //   cartMeal = hiveMeal; // Assigning initial value
-  //   notifyListeners();
-  // }
 
   /// GETS total meal draft sum
   num getTotalMealSum(HiveMeal cartMeal) {
@@ -183,5 +174,6 @@ class CartViewModel extends ReactiveViewModel {
   void navBack() => _navService.back();
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_hiveDbService, _toggleButtonService];
 }

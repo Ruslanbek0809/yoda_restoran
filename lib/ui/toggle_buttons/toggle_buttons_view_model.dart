@@ -1,14 +1,21 @@
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/services/services.dart';
 
-class ToggleButtonViewModel extends BaseViewModel {
+class ToggleButtonViewModel extends ReactiveViewModel {
   final log = getLogger('ToggleButtonViewModel');
-  bool _isDelivery = false;
-  bool get isDelivery => _isDelivery;
 
-  void updateToggleType() {
-    _isDelivery = !_isDelivery;
-    log.i('_isDelivery: $_isDelivery');
+  final _toggleButtonService = locator<ToggleButtonService>();
+
+  bool get isDelivery => _toggleButtonService.isDelivery;
+
+  /// UPDATES isDelivery var (USES _toggleButtonService)
+  void updateToggleButton() {
+    _toggleButtonService.updateToggleButton();
     notifyListeners();
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_toggleButtonService];
 }

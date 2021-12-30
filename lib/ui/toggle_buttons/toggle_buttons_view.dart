@@ -13,7 +13,7 @@ class ToggleButtonView extends StatelessWidget {
     return ViewModelBuilder<ToggleButtonViewModel>.reactive(
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
-                onTap: model.updateToggleType,
+                onTap: model.updateToggleButton,
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.MAIN_LIGHT,
