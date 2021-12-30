@@ -2,6 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
@@ -15,6 +16,7 @@ class CartViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _cartService = locator<CartService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _userService = locator<UserService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
 
@@ -151,6 +153,18 @@ class CartViewModel extends ReactiveViewModel {
   }
 
 //------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
+
+  /// CALLS navs based on user's login state.
+  Future<void> onCartCheckoutButtonPressed() async {
+    if (_userService.hasLoggedInUser) {
+      log.v(
+          'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      await showCustomCheckoutBottomSheet();
+    } else {
+      log.v('USER NOTTTTT FOUND');
+      await _navService.navigateTo(Routes.loginView);
+    }
+  }
 
   /// CALLS CheckoutBottomSheetView
   Future showCustomCheckoutBottomSheet() async {

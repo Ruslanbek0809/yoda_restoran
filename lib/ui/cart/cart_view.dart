@@ -258,7 +258,7 @@ class CartView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '175 TMT',
+                        '${model.getTotalCartSum} TMT',
                         style: ktsDefault20BoldText,
                       ),
                       CustomTextChildButton(
@@ -268,7 +268,7 @@ class CartView extends StatelessWidget {
                           'Dowam et',
                           style: ktsButton18Text,
                         ),
-                        onPressed: model.showCustomCheckoutBottomSheet,
+                        onPressed: model.onCartCheckoutButtonPressed,
                       ),
                     ],
                   ),

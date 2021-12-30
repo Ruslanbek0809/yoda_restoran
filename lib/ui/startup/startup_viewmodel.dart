@@ -30,7 +30,8 @@ class StartUpViewModel extends BaseViewModel {
 
     /// NAV next View based on condition
     if (_userService.hasLoggedInUser) {
-      log.v('USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      log.v(
+          'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
       _navService.replaceWith(Routes.homeView);
     } else {
       log.v('USER NOTTTTT FOUND');
