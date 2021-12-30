@@ -29,17 +29,23 @@ class CartView extends StatelessWidget {
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: AppTheme.WHITE,
-            elevation: 0,
+            elevation: 1,
             leadingWidth: 35.w,
             leading: Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: SvgPicture.asset(
-                  'assets/cancel.svg',
-                  color: AppTheme.MAIN_DARK,
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppTheme.FONT_COLOR,
+                  size: 25.w,
                 ),
+                onPressed: () => Navigator.pop(context),
               ),
+            ),
+            centerTitle: true,
+            title: Text(
+              'Sargyt',
+              style: ktsDefault22BoldText,
             ),
             actions: [
               Padding(
@@ -62,17 +68,6 @@ class CartView extends StatelessWidget {
                 // Also horizontal: 15.w padding is used for each inner widgets bc of horizontal CartFoodWidget list scroll
                 physics: BouncingScrollPhysics(),
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Text(
-                      'Sargyt',
-                      style: TextStyle(
-                        color: AppTheme.MAIN_DARK,
-                        fontSize: 32.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
 //------------------ CARTWIDGET ---------------------//
                   ListView.separated(
                     shrinkWrap: true,

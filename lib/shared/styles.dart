@@ -89,6 +89,12 @@ TextStyle ktsDefault20BoldText = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle ktsDefault22BoldText = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.bold,
+  color: kcSecondaryDarkColor,
+);
+
 const TextStyle heading1Style = TextStyle(
   fontSize: 34,
   fontWeight: FontWeight.w400,
