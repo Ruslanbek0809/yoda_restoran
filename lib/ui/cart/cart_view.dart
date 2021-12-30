@@ -273,7 +273,7 @@ class CartView extends StatelessWidget {
                           'Dowam et',
                           style: ktsButton18Text,
                         ),
-                        onPressed: () {},
+                        onPressed: model.showCustomCheckoutBottomSheet,
                       ),
                     ],
                   ),

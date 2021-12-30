@@ -14,6 +14,7 @@ class CartViewModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
   final _cartService = locator<CartService>();
+  final _bottomSheetService = locator<BottomSheetService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
 
@@ -125,7 +126,19 @@ class CartViewModel extends ReactiveViewModel {
     } catch (err) {
       throw err;
     }
-    // notifyListeners();
+  }
+
+//------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
+
+  /// CALLS CheckoutBottomSheetView
+  Future showCustomCheckoutBottomSheet() async {
+    log.i('showCustomCheckoutBottomSheet()');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.checkout,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
   }
 
 //------------------------ NAVIGATION ----------------------------//
