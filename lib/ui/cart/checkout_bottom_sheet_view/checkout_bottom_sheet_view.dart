@@ -22,21 +22,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
 
   final TextEditingController _notesController = TextEditingController();
 
-  /// DateTime vars
-  final now = DateTime.now();
-  DateTime? tomorrow;
-  DateTime? maxDateTime;
-  DateTime? _deliverDateTime;
-  String? _deliverDateFormatted = '';
-
-  // _deliverDateTime = now;
-  // tomorrow = DateTime(now.year, now.month, now.day + 1);
-  // maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutViewModel>.reactive(
+      onModelReady: (model) => model.getOnModelReady(),
       viewModelBuilder: () => CheckoutViewModel(),
-      disposeViewModel: false,
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.6,
         maxChildSize: 0.6,
@@ -305,7 +295,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   border: Border.all(
                       color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                 ),
-                padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
+                padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

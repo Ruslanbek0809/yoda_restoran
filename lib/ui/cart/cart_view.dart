@@ -15,9 +15,6 @@ class CartView extends StatelessWidget {
 
   // // bool _switchValue = true;
   // bool _isDelivery = false;
-  // void _onCartOrderClicked() {
-  //   cartOrderBottomSheet(context);
-  // }
 
   @override
   Widget build(BuildContext context) {
