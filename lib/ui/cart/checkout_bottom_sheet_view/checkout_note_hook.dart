@@ -13,7 +13,7 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
     final _noteController = useTextEditingController();
 
-    model.log.v('CheckoutNoteHook =========');
+    // model.log.v('CheckoutNoteHook =========');
     return Padding(
       padding: EdgeInsets.only(left: 40.w, right: 15.w, bottom: 15.h),
       child: Column(

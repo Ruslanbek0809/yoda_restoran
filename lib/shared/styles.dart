@@ -72,10 +72,21 @@ TextStyle ktsDefault18Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault18BoldText = TextStyle(
+TextStyle ktsDefault18SemiBoldText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
+);
+
+TextStyle ktsDefault18BoldText = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.bold,
+  color: kcFontColor,
+);
+
+TextStyle ktsDefault18HelperText = TextStyle(
+  fontSize: 18.sp,
+  color: kcHelperColor,
 );
 
 TextStyle ktsDefault20Text = TextStyle(

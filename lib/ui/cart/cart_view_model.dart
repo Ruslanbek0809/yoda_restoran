@@ -25,7 +25,7 @@ class CartViewModel extends ReactiveViewModel {
 
   bool get isDelivery => _toggleButtonService.isDelivery;
 
-  // FETCHS more meals and GETS all carts
+  /// FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
     await runBusyFuture(_cartService.getMoreMeals());
     log.i('moreMeals length: ${moreMeals!.length} ');

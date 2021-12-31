@@ -46,7 +46,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
-                    style: ktsDefault18BoldText,
+                    style: ktsDefault18SemiBoldText,
                   ),
                   color: Colors.transparent,
                   onPressed: () async {
@@ -86,7 +86,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
-                    style: ktsDefault18BoldText,
+                    style: ktsDefault18SemiBoldText,
                   ),
                   color: Colors.transparent,
                   onPressed: () async {

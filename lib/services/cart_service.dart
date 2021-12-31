@@ -8,7 +8,6 @@ class CartService {
   final log = getLogger('CartService');
 
   final _api = locator<ApiService>();
-  final _hiveDbService = locator<HiveDbService>();
 
   Promocode? _promocode;
 
@@ -20,13 +19,5 @@ class CartService {
   /// GETS More meals for this res
   Future<void> getMoreMeals() async {
     _moreMeals = await _api.getMoreMeals();
-  }
-
-  /// SEARCHES promocodes and GETS first
-  Future<void> searchPromocode(String searchText) async {
-    log.v('searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}');
-
-    _promocode =
-        await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
   }
 }

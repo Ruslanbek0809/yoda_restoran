@@ -30,7 +30,7 @@ class ApiRootService {
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // Do something before request is sent
-      print(
+      log.v(
           'REQUEST[${options.method}] => PATH: ${Constants.baseUrlTk}${options.path}');
       return handler.next(options); //continue
       // If you want to resolve the request with some custom data，

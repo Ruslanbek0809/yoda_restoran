@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/library/flutter_datetime_picker.dart';
 import 'package:yoda_res/library/src/datetime_picker_theme.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_note_hook.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -28,8 +29,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
       onModelReady: (model) => model.getOnModelReady(),
       viewModelBuilder: () => CheckoutViewModel(),
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        maxChildSize: 0.6,
+        initialChildSize: 0.7,
+        maxChildSize: 0.7,
+        expand: false,
         builder: (context, scrollController) => Stack(
           children: [
             Container(
@@ -64,38 +66,27 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         ),
                         color: AppTheme.WHITE,
                       ),
-                      padding: EdgeInsets.fromLTRB(20.w, 18.h, 0.w, 20.h),
+                      padding: EdgeInsets.fromLTRB(20.w, 20.h, 0.w, 20.h),
                       child: Column(
                         children: [
 // --------------- PHONE PART -------------- //
-                          Column(
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => Navigator.pop(context),
-                                    child: SvgPicture.asset(
-                                      'assets/phone.svg',
-                                      color: AppTheme.MAIN_DARK,
-                                      width: 25.w,
-                                    ),
-                                  ),
-                                  SizedBox(width: 15.w),
-                                  Text(
-                                    '+993 61883349',
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                              SvgPicture.asset(
+                                'assets/phone.svg',
+                                color: AppTheme.MAIN_DARK,
+                                width: 25.w,
                               ),
-                              Divider(
-                                color: AppTheme.DRAWER_DIVIDER,
-                                indent: 0.111.sw,
-                              )
+                              SizedBox(width: 15.w),
+                              Text(
+                                '+993 61883349',
+                                style: ktsDefault18BoldText,
+                              ),
                             ],
+                          ),
+                          Divider(
+                            color: AppTheme.DRAWER_DIVIDER,
+                            indent: 0.111.sw,
                           ),
 // --------------- HOUSE PART -------------- //
                           Material(
@@ -105,7 +96,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 /// TODO: AddressBottomSheet
                               },
                               child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.w),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -120,10 +111,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         SizedBox(width: 15.w),
                                         Text(
                                           'A.Nowaýy 23, 64',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: AppTheme.FONT_COLOR,
-                                          ),
+                                          style: ktsDefault16Text,
                                         ),
                                       ],
                                     ),
@@ -144,7 +132,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.DRAWER_DIVIDER,
                             indent: 0.111.sw,
                           ),
-// --------------- DELIVERY TIME -------------- //
+// --------------- DELIVERY DATE TIME -------------- //
                           Material(
                             color: AppTheme.WHITE,
                             child: InkWell(
@@ -156,19 +144,15 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           minTime: model.now,
                                           maxTime: model.maxDateTime,
                                           onChanged: (date) {
-                                            print('Senä change $date');
+                                            model.log.i('Senä change $date');
                                           },
                                           onConfirm: (date) {
-                                            print('Senä confirm $date');
+                                            model.log.i('Senä confirm $date');
                                           },
                                           currentTime: model.deliverDateTime,
                                           locale: LocaleType.tk,
                                           theme: DatePickerTheme(
-                                            doneStyle: TextStyle(
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppTheme.FONT_COLOR,
-                                            ),
+                                            doneStyle: ktsDefault20BoldText,
                                             backgroundColor:
                                                 AppTheme.MAIN_LIGHT,
                                           ),
@@ -176,10 +160,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         model.deliverDateTime;
                                 model.deliverDateFormatted = DateFormat('HH:mm')
                                     .format(model.deliverDateTime!);
-                                // setState(() {});
                               },
                               child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.w),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -196,10 +179,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           children: [
                                             Text(
                                               'Eltmeli wagty: ',
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
+                                              style: ktsDefault16Text,
                                             ),
                                             Text(
                                               model.deliverDateTime == model.now
@@ -216,10 +196,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                                   .tomorrow!)
                                                           ? 'Ertir ${model.deliverDateFormatted}'
                                                           : '',
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
+                                              style: ktsDefault16Text,
                                             ),
                                           ],
                                         ),
