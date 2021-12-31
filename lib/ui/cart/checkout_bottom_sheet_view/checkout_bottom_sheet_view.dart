@@ -29,8 +29,8 @@ class CheckoutBottomSheetView extends StatelessWidget {
       onModelReady: (model) => model.getOnModelReady(),
       viewModelBuilder: () => CheckoutViewModel(),
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        maxChildSize: 0.7,
+        initialChildSize: 0.8,
+        maxChildSize: 0.8,
         expand: false,
         builder: (context, scrollController) => Stack(
           children: [
@@ -199,6 +199,50 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                               style: ktsDefault16Text,
                                             ),
                                           ],
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 20.w),
+                                      child: Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 20,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            color: AppTheme.DRAWER_DIVIDER,
+                            indent: 0.111.sw,
+                          ),
+// --------------- PARMENT TYPE -------------- //
+                          Material(
+                            color: AppTheme.WHITE,
+                            child: InkWell(
+                              onTap: () {
+                                /// TODO: PaymentType
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/wallet.svg',
+                                          color: AppTheme.MAIN_DARK,
+                                          width: 25.w,
+                                        ),
+                                        SizedBox(width: 15.w),
+                                        Text(
+                                          'Töleg görnüşi: Nagt',
+                                          style: ktsDefault16Text,
                                         ),
                                       ],
                                     ),

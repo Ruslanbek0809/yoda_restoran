@@ -69,7 +69,7 @@ class CartView extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     padding:
-                        EdgeInsets.only(top: 15.h, left: 16.w, right: 16.w),
+                        EdgeInsets.only(top: 20.h, left: 16.w, right: 16.w),
                     itemCount: model.cartMeals.length,
                     itemBuilder: (context, pos) {
                       return CartMealItem(cartMeal: model.cartMeals[pos]);

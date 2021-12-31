@@ -32,7 +32,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                   controller: _promocodeController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  style: ktsDefault16Text,
+                  style: ktsButton18Text,
                   decoration: InputDecoration(
                     isDense: true, // MAKES it more denser
                     focusedBorder: OutlineInputBorder(
@@ -50,7 +50,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                       ),
                     ),
                     hintText: 'Promo kody giriziň',
-                    hintStyle: ktsDefault16HelperText,
+                    hintStyle: ktsDefault18HelperText,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
                       child: model.promocode != null
@@ -61,7 +61,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                             )
                           : SizedBox(),
                       // SvgPicture.asset(
-                      //   'assets/check_outlined_circle.svg',
+                      //   'assets/warning_circle.svg',
                       //   color: AppTheme.MAIN,
                       //   width: 25.w,
                       // ),
