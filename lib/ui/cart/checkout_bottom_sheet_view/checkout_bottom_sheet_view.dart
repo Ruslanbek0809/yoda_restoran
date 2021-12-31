@@ -291,21 +291,15 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '175 TMT',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.FONT_COLOR,
-                      ),
+                      '${model.getTotalCartSum} TMT',
+                      style: ktsDefault20BoldText,
                     ),
-                    CustomTextButton(
-                      text: 'Sargyt et',
+                    CustomTextChildButton(
                       padding: EdgeInsets.symmetric(
                           vertical: 17.w, horizontal: 0.2.sw),
-                      textStyle: TextStyle(
-                        color: AppTheme.WHITE,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.normal,
+                      child: Text(
+                        'Sargyt et',
+                        style: ktsButton18Text,
                       ),
                       onPressed: () {
                         Navigator.of(context)
