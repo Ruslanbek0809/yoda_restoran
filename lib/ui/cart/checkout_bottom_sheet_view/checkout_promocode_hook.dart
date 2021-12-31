@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
     final _promocodeController = useTextEditingController();
     // model.log.v('CheckoutPromocodeHook =========');
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -51,14 +53,13 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     hintStyle: ktsDefault16HelperText,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          'assets/warning_circle.svg',
-                          color: AppTheme.CONTACT_COLOR,
-                          width: 16.w,
-                        ),
-                      ),
+                      child: model.promocode != null
+                          ? SvgPicture.asset(
+                              'assets/check_outlined_circle.svg',
+                              color: AppTheme.MAIN,
+                              width: 16.w,
+                            )
+                          : SizedBox(),
                       // SvgPicture.asset(
                       //   'assets/check_outlined_circle.svg',
                       //   color: AppTheme.MAIN,
@@ -74,17 +75,24 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
           ],
         ),
         //------------------ PROMOCODE RESULT TEXT ---------------------//
-        // if (model.promocode != null)
-        Padding(
-          padding:
-              EdgeInsets.only(top: 8.h, bottom: 10.w, left: 29.w, right: 16.w),
-          child: Text(
-            model.promocode != null
-                ? 'Siziň sargydyňyzdan 150 manat aýrylar.'
-                : '', // Need to get its space here
-            style: ktsDefault14HelperText,
-          ),
-        ),
+        model.isBusy
+            ? Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h),
+                child: SpinKitThreeBounce(
+                  size: 16.w,
+                  color: kcPrimaryColor,
+                ),
+              )
+            : Padding(
+                padding: EdgeInsets.only(
+                    top: 8.h, bottom: 8.h, left: 0.15.sw, right: 20.w),
+                child: Text(
+                  model.promocode != null
+                      ? 'Siziň sargydyňyzdan 150 manat aýrylar.'
+                      : '', // Need to get its space here
+                  style: ktsDefault14HelperText,
+                ),
+              ),
       ],
     );
   }
