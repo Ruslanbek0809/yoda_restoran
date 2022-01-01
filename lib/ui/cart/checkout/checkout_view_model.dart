@@ -73,7 +73,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 //------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
 
   /// CALLS PaymentTypeBottomSheetView
-  Future showCustomPaymentTypeBottomSheet() async {
+  Future<void> showCustomPaymentTypeBottomSheet() async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.paymentType,
@@ -101,8 +101,10 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+//------------------------ ADD/SELECT ADDRESS BOTTOM SHEET ----------------------------//
+
   /// CALLS AddAddressBottomSheet
-  Future showCustomAddAddressBottomSheet() async {
+  Future<void> showCustomAddAddressBottomSheet() async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.addAddress,
@@ -111,6 +113,81 @@ class CheckoutViewModel extends ReactiveViewModel {
       isScrollControlled: true,
     );
   }
+
+  String? _city = 'Aşgabat';
+  String? get city => _city;
+
+  String? _street;
+  String? get street => _street;
+
+  int? _apartment;
+  int? get apartment => _apartment;
+
+  int? _house;
+  int? get house => _house;
+
+  int? _floor;
+  int? get floor => _floor;
+
+  String? _note;
+  String? get note => _note;
+
+  /// UPDATES _street
+  void updateStreet(String? value) {
+    log.v('updateStreet value: $value');
+    if (value == null) return;
+
+    _street = value;
+    notifyListeners();
+  }
+
+  /// UPDATES _apartment
+  void updateApartment(String? value) {
+    log.v('updateApartment value: $value');
+    if (value == null) return;
+
+    _apartment = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _house
+  void updateHouse(String? value) {
+    log.v('updateHouse value: $value');
+    if (value == null) return;
+
+    _house = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _floor
+  void updateFloor(String? value) {
+    log.v('updateFloor value: $value');
+    if (value == null) return;
+
+    _floor = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _street
+  void updateNote(String? value) {
+    log.v('updateNote value: $value');
+    if (value == null) return;
+
+    _note = value;
+    notifyListeners();
+  }
+
+  // Future _onConfirmButtonPressed() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   if (_cartAddressformKey.currentState!.validate()) {
+  //     printLog('_contactformKey validated');
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_checkoutService];

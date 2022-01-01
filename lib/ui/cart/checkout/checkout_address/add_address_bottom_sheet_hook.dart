@@ -45,12 +45,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             hintText: 'Aşgabat',
             hintStyle: ktsDefault18HelperText,
           ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Şäheri giriziň';
-            }
-            return null;
-          },
+          validator: (value) => null,
         ),
         // --------------- STREET -------------- //
         Padding(
@@ -95,9 +90,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   labelText: 'Jaý',
                   labelStyle: ktsDefault14HelperText,
                 ),
-                validator: (value) {
-                  return null;
-                },
+                validator: (value) => null,
               ),
             ),
             SizedBox(width: 10.w),
@@ -115,9 +108,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   labelText: 'Otag',
                   labelStyle: ktsDefault14HelperText,
                 ),
-                validator: (value) {
-                  return null;
-                },
+                validator: (value) => null,
               ),
             ),
             SizedBox(width: 10.w),
@@ -135,9 +126,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   labelText: 'Gat',
                   labelStyle: ktsDefault14HelperText,
                 ),
-                validator: (value) {
-                  return null;
-                },
+                validator: (value) => null,
               ),
             ),
             Flexible(child: SizedBox())
@@ -166,9 +155,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             filled: true,
             fillColor: AppTheme.MAIN_LIGHT,
           ),
-          validator: (value) {
-            return null;
-          },
+          validator: (value) => null,
         ),
       ],
     );

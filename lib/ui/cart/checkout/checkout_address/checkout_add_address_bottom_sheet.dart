@@ -20,23 +20,13 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
 
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
 
-  // Future _onConfirmButtonPressed() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   if (_cartAddressformKey.currentState!.validate()) {
-  //     printLog('_contactformKey validated');
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.7,
         maxChildSize: 0.7,
+        expand: false,
         builder: (context, scrollController) => Container(
           height: 0.7.sh,
           decoration: BoxDecoration(
