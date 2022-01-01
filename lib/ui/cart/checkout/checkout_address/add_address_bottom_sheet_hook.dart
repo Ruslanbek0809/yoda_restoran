@@ -15,7 +15,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
-    final _cityController = useTextEditingController();
+    final _cityController = useTextEditingController(text: 'Aşgabat');
     final _streetController = useTextEditingController();
     final _apartmentController = useTextEditingController();
     final _houseController = useTextEditingController();
@@ -30,22 +30,22 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
           padding: EdgeInsets.only(left: 5.w),
           child: Text('Şäher', style: ktsDefault14HelperText),
         ),
-        TextFormField(
-          controller: _cityController,
-          initialValue: 'Aşgabat',
-          onTap: null,
-          style: ktsDefault18Text,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+        IgnorePointer(
+          child: TextFormField(
+            controller: _cityController,
+            style: ktsDefault18Text,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              border: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              ),
+              hintText: 'Aşgabat',
+              hintStyle: ktsDefault18HelperText,
             ),
-            hintText: 'Aşgabat',
-            hintStyle: ktsDefault18HelperText,
+            validator: (value) => null,
           ),
-          validator: (value) => null,
         ),
         // --------------- STREET -------------- //
         Padding(
@@ -65,35 +65,12 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             hintText: 'A.Nowaýy 23, 64',
             hintStyle: ktsDefault18HelperText,
           ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Köçäni giriziň';
-            }
-            return null;
-          },
+          validator: model.updateStreet,
         ),
         SizedBox(height: 15.h),
         // --------------- APARTMENT/HOUSE/FLOOR -------------- //
         Row(
           children: [
-            Flexible(
-              child: TextFormField(
-                controller: _apartmentController,
-                style: ktsDefault18Text,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                  ),
-                  labelText: 'Jaý',
-                  labelStyle: ktsDefault14HelperText,
-                ),
-                validator: (value) => null,
-              ),
-            ),
-            SizedBox(width: 10.w),
             Flexible(
               child: TextFormField(
                 controller: _houseController,
@@ -105,10 +82,28 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
+                  labelText: 'Jaý',
+                  labelStyle: ktsDefault14HelperText,
+                ),
+                validator: model.updateHouse,
+              ),
+            ),
+            SizedBox(width: 10.w),
+            Flexible(
+              child: TextFormField(
+                controller: _apartmentController,
+                style: ktsDefault18Text,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                  ),
                   labelText: 'Otag',
                   labelStyle: ktsDefault14HelperText,
                 ),
-                validator: (value) => null,
+                validator: model.updateApartment,
               ),
             ),
             SizedBox(width: 10.w),
@@ -126,7 +121,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   labelText: 'Gat',
                   labelStyle: ktsDefault14HelperText,
                 ),
-                validator: (value) => null,
+                validator: model.updateFloor,
               ),
             ),
             Flexible(child: SizedBox())
@@ -155,7 +150,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             filled: true,
             fillColor: AppTheme.MAIN_LIGHT,
           ),
-          validator: (value) => null,
+          validator: model.updateNote,
         ),
       ],
     );

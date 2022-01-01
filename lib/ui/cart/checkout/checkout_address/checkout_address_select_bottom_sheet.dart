@@ -8,29 +8,6 @@ import 'package:yoda_res/utils/utils.dart';
 
 import 'checkout_address_add_edit_bottom_sheet.dart';
 
-void cartAddressSelectBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    enableDrag: true,
-    isScrollControlled: true,
-    isDismissible: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(Constants.BORDER_RADIUS_20),
-      ),
-    ),
-    backgroundColor: Colors.transparent,
-    context: context,
-    builder: (ctx) => DraggableScrollableSheet(
-      initialChildSize: 0.4,
-      maxChildSize: 0.4,
-      builder: (context, scrollController) =>
-          CartAddressSelectBottomSheetWidget(
-        scrollController,
-      ),
-    ),
-  );
-}
-
 class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
   const CheckoutPaymentTypeBottomSheetView({Key? key}) : super(key: key);
 

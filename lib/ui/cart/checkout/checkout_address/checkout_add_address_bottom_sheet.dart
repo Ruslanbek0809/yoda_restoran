@@ -100,6 +100,8 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                           : Text('Ýatda sakla', style: ktsButton18Text),
                     ),
                     onPressed: () async {
+                      FocusScope.of(context)
+                          .unfocus(); // UNFOCUSES all textfield b4 data fetch
                       if (!_addressformKey.currentState!.validate()) return;
                       _addressformKey.currentState!.save();
                       await model.onAddAddressPressed();

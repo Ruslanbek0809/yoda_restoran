@@ -86,16 +86,25 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                                   vertical: 5.w),
                                               child: Row(
                                                 children: [
-                                                  SvgPicture.asset(
-                                                    'assets/checkCircle.svg',
-                                                    color:
+                                                  AnimatedSwitcher(
+                                                    duration: const Duration(
+                                                        milliseconds: 300),
+                                                    child:
                                                         model.tempSelectedPaymentType
                                                                     .id ==
                                                                 paymentType.id
-                                                            ? AppTheme
-                                                                .GREEN_COLOR
-                                                            : Colors.white,
-                                                    width: 25.w,
+                                                            ? SvgPicture.asset(
+                                                                'assets/checkCircle.svg',
+                                                                color: AppTheme
+                                                                    .GREEN_COLOR,
+                                                                width: 25.w,
+                                                              )
+                                                            : SvgPicture.asset(
+                                                                'assets/checkCircle.svg',
+                                                                color: Colors
+                                                                    .white,
+                                                                width: 25.w,
+                                                              ),
                                                   ),
                                                   SizedBox(width: 10.w),
                                                   Text(

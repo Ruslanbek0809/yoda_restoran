@@ -122,14 +122,17 @@ class UserService {
 
   Future<void> addAddress(String? city, String? street, int? house,
       int? apartment, int? floor, String? note) async {
-    final FormData addressFormData = FormData.fromMap({
-      'city': city,
-      'street': street,
-      'house': house,
-      'apartment': apartment,
-      'floor': floor,
-      'notes': note,
-    });
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['city'] = city;
+    _queryParams['street'] = street;
+    if (house != null) _queryParams['house'] = house;
+    if (apartment != null) _queryParams['apartment'] = apartment;
+    if (floor != null) _queryParams['floor'] = floor;
+    if (note != null) _queryParams['notes'] = note;
+
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData addressFormData = FormData.fromMap(_queryParams);
+
     try {
       Response response = await _apiRoot.dio.post(
         'api/address/',

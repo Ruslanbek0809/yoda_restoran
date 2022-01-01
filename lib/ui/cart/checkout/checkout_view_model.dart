@@ -133,45 +133,47 @@ class CheckoutViewModel extends ReactiveViewModel {
   String? get note => _note;
 
   /// UPDATES _street
-  void updateStreet(String? value) {
+  String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
-    if (value == null) return;
+    if (value!.isEmpty) {
+      return 'Köçäni giriziň';
+    }
 
     _street = value;
     notifyListeners();
   }
 
-  /// UPDATES _apartment
-  void updateApartment(String? value) {
-    log.v('updateApartment value: $value');
-    if (value == null) return;
-
-    _apartment = int.parse(value);
-    notifyListeners();
-  }
-
   /// UPDATES _house
-  void updateHouse(String? value) {
+  String? updateHouse(String? value) {
     log.v('updateHouse value: $value');
-    if (value == null) return;
+    if (value == null || value.isEmpty) return null;
 
     _house = int.parse(value);
     notifyListeners();
   }
 
+  /// UPDATES _apartment
+  String? updateApartment(String? value) {
+    log.v('updateApartment value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _apartment = int.parse(value);
+    notifyListeners();
+  }
+
   /// UPDATES _floor
-  void updateFloor(String? value) {
+  String? updateFloor(String? value) {
     log.v('updateFloor value: $value');
-    if (value == null) return;
+    if (value == null || value.isEmpty) return null;
 
     _floor = int.parse(value);
     notifyListeners();
   }
 
   /// UPDATES _street
-  void updateNote(String? value) {
+  String? updateNote(String? value) {
     log.v('updateNote value: $value');
-    if (value == null) return;
+    if (value == null || value.isEmpty) return null;
 
     _note = value;
     notifyListeners();
