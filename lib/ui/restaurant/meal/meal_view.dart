@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/models/models.dart';
+import '../../../models/models.dart';
 import 'meal_item_hook.dart';
 import 'meal_view_model.dart';
 import 'package:stacked/stacked.dart';

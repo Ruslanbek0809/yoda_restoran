@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.locator.dart';
+import '../app/app.logger.dart';
+import '../models/hive_models/hive_models.dart';
+import '../models/models.dart';
+import 'services.dart';
+import '../utils/utils.dart';
 
 class UserService {
   final log = getLogger('UserService');
@@ -122,24 +122,23 @@ class UserService {
 
   //------------------ ADDRESS APIS ---------------------//
 
-  Future<List<Meal>> getAddresses() async {
-    List<Meal> _moreMeals = [];
+  Future<List<Address>> getAddresses() async {
+    List<Address> _addresses = [];
     try {
-      Response response = await _apiRoot.dio
-          .get('api/restaurantMeals/', queryParameters: {'another': true});
-      // log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
+      Response response = await _apiRoot.dio.get('api/user/');
+      log.v('RESPONSE: api/user/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_resCategory) {
-          _moreMeals.add(Meal.fromJson(_resCategory));
+        response.data.forEach((_address) {
+          _addresses.add(Address.fromJson(_address));
         });
       }
 
-      return _moreMeals;
+      return _addresses;
     } on DioError catch (error) {
       log.v(error);
       // log.v(
-      //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
+      //     'ERROR on api/user/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }

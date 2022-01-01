@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
-import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../models/models.dart';
+import '../../../shared/shared.dart';
+import '../meal/meal_view.dart';
+import '../../toggle_buttons/toggle_buttons_view.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

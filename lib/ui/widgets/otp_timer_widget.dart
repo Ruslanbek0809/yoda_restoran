@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/shared/styles.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../shared/styles.dart';
+import '../../utils/utils.dart';
 
 class OtpTimerWidget extends StatelessWidget {
   final AnimationController controller;

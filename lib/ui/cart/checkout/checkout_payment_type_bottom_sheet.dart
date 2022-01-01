@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
-import 'package:yoda_res/ui/widgets/custom_text_child_button.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
+import 'checkout_view_model.dart';
+import '../../widgets/custom_text_child_button.dart';
+import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../models/models.dart';
+import '../../utils/utils.dart';
 
 class RestaurantInfoBottomSheet extends StatelessWidget {
   final Restaurant restaurant;

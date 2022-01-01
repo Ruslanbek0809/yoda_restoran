@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/services/services.dart';
+import '../../app/app.locator.dart';
+import '../../app/app.logger.dart';
+import '../../services/services.dart';
 
 class ToggleButtonViewModel extends ReactiveViewModel {
   final log = getLogger('ToggleButtonViewModel');

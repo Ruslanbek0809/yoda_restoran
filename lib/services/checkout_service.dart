@@ -1,9 +1,9 @@
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/utils/util_functions.dart';
+import '../app/app.locator.dart';
+import '../app/app.logger.dart';
+import '../models/models.dart';
+import 'services.dart';
+import '../utils/util_functions.dart';
 
 class CheckoutService with ReactiveServiceMixin {
   final log = getLogger('CheckoutService');
@@ -26,8 +26,8 @@ class CheckoutService with ReactiveServiceMixin {
 
   Promocode? get promocode => _promocode;
 
-  List<SliderModel>? _sliders = [];
-  List<SliderModel>? get sliders => _sliders;
+  List<Address>? _addresses = [];
+  List<Address>? get addresses => _addresses;
 
   /// UPDATES paymentType
   void updatePaymentType(PaymentType selectedPaymentType) =>
@@ -43,7 +43,8 @@ class CheckoutService with ReactiveServiceMixin {
 
   /// GETS all addresses
   Future<void> getAddresses() async {
-    _userService.addAddress(city, street, house, apartment, floor, note);
+    _addresses = await _userService.getAddresses();
+    log.v('_addresses!.length: ${_addresses!.length}');
   }
 
   /// ADDS new address

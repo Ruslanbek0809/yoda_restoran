@@ -1,13 +1,14 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/ui/cart/cart_view.dart';
-import 'package:yoda_res/ui/home/home_view.dart';
-import 'package:yoda_res/ui/profile/login/login_view.dart';
-import 'package:yoda_res/ui/profile/otp/otp_view.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_details/res_details_view.dart';
-import 'package:yoda_res/ui/restaurant/restaurant_search/restaurant_search_vew.dart';
-import 'package:yoda_res/ui/startup/startup_view.dart';
+
+import '../services/services.dart';
+import '../ui/cart/cart_view.dart';
+import '../ui/home/home_view.dart';
+import '../ui/profile/login/login_view.dart';
+import '../ui/profile/otp/otp_view.dart';
+import '../ui/restaurant/restaurant_details/res_details_view.dart';
+import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
+import '../ui/startup/startup_view.dart';
 
 @StackedApp(
   routes: [

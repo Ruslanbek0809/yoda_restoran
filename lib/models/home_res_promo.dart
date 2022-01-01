@@ -1,4 +1,4 @@
-import 'package:yoda_res/models/models.dart';
+import 'models.dart';
 
 class HomeResPromo {
   final Restaurant restaurant;

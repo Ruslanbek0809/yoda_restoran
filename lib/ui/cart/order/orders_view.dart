@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
+import '../../../utils/utils.dart';
 import 'order_view_model.dart';
 
 class OrdersView extends StatelessWidget {

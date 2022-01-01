@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
+import '../../app/app.locator.dart';
+import '../../app/app.logger.dart';
 
 abstract class LoginOtpViewModel extends FormViewModel {
   final log = getLogger('LoginOtpViewModel');

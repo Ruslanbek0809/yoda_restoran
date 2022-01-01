@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../models/models.dart';
+import '../widgets/widgets.dart';
+import '../../utils/utils.dart';
 import 'restaurant_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

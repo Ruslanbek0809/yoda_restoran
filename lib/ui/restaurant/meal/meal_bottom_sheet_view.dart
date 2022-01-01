@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../models/models.dart';
+import '../../../shared/shared.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 import 'package:stacked/stacked.dart';
 import 'meal_view_model.dart';
 

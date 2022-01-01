@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 
 import 'login_view.form.dart';
 import 'login_view_model.dart';

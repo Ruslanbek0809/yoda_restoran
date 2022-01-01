@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 import 'otp_view_model.dart';
 
 class OtpMain extends HookViewModelWidget<OtpViewModel> {

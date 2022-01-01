@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.logger.dart';
+import '../utils/utils.dart';
 
 class PushNotificationService {
   final log = getLogger('PushNotificationService');

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchBox extends StatefulWidget {

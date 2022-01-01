@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/shared/styles.dart';
-import 'package:yoda_res/ui/cart/cart_view_model.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../models/hive_models/hive_models.dart';
+import '../../../shared/styles.dart';
+import '../cart_view_model.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartMealItem extends ViewModelWidget<CartViewModel> {

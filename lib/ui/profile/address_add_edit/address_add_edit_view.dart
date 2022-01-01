@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 
 import 'address_add_edit_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

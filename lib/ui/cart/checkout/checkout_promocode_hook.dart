@@ -4,9 +4,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
+import 'checkout_view_model.dart';
+import '../../../utils/utils.dart';
 
 class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
   const CheckoutPromocodeHook({Key? key}) : super(key: key, reactive: true);

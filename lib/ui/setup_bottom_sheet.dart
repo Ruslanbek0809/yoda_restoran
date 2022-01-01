@@ -1,8 +1,8 @@
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/ui/cart/checkout/checkout_address/checkout_address_select_bottom_sheet.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.locator.dart';
+import 'cart/checkout/checkout_address/checkout_select_address_bottom_sheet.dart';
+import 'restaurant/meal/meal_bottom_sheet_view.dart';
+import '../utils/utils.dart';
 import 'cart/checkout/checkout_address/checkout_add_address_bottom_sheet.dart';
 import 'cart/checkout/checkout_bottom_sheet_view.dart';
 import 'cart/checkout/checkout_payment_type_bottom_sheet.dart';

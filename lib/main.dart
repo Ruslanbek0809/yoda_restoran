@@ -2,12 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:yoda_res/ui/setup_dialog.dart';
-import 'package:yoda_res/yoda_res_app.dart';
 
 import 'app/app.locator.dart';
 import 'models/hive_models/hive_models.dart';
 import 'ui/setup_bottom_sheet.dart';
+import 'ui/setup_dialog.dart';
+import 'yoda_res_app.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,

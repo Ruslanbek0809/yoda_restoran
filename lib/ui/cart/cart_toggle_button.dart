@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/cart_view_model.dart';
-import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../shared/shared.dart';
+import 'cart_view_model.dart';
+import '../toggle_buttons/toggle_buttons_view.dart';
+import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartToggleButton extends ViewModelWidget<CartViewModel> {

@@ -1,5 +1,5 @@
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_view_model.dart';
+import 'models.dart';
+import '../ui/restaurant/meal/meal_view_model.dart';
 
 class MealBottomSheetData {
   MealBottomSheetData({

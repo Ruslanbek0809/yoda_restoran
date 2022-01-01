@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/services/services.dart';
+import '../../app/app.locator.dart';
+import '../../app/app.logger.dart';
+import '../../app/app.router.dart';
+import '../../services/services.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final log = getLogger('StartUpViewModel');

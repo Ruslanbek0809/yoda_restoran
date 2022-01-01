@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/main_category/main_cat_all_item.dart';
-import 'package:yoda_res/ui/home/main_category/main_cat_item_hook.dart';
+import 'main_cat_all_item.dart';
+import 'main_cat_item_hook.dart';
 import 'main_cat_view_model.dart';
 
 class MainCatView extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/home_search/search_box.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../home/home_search/search_box.dart';
+import '../../../utils/utils.dart';
 import 'restaurant_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.logger.dart';
+import '../utils/utils.dart';
 
 // 1 For Reactive Views
 class BottomCartService with ReactiveServiceMixin {

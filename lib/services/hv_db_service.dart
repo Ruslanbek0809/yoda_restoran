@@ -1,11 +1,11 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.locator.dart';
+import '../app/app.logger.dart';
+import '../models/hive_models/hive_models.dart';
+import '../models/models.dart';
+import 'services.dart';
+import '../utils/utils.dart';
 
 // 1 For Reactive Views
 class HiveDbService with ReactiveServiceMixin {

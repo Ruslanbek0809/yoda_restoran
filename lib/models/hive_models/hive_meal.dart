@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
+import 'hive_models.dart';
 
 part 'hive_meal.g.dart';
 

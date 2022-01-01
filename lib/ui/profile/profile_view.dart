@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/library/flutter_datetime_picker.dart';
-import 'package:yoda_res/library/src/i18n_model.dart';
-import 'package:yoda_res/ui/drawer/drawer_view.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../library/flutter_datetime_picker.dart';
+import '../../library/src/i18n_model.dart';
+import '../drawer/drawer_view.dart';
+import '../widgets/widgets.dart';
+import '../../utils/utils.dart';
 
 import 'profile_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

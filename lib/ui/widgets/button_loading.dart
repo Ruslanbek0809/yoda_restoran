@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:yoda_res/shared/shared.dart';
+import '../../shared/shared.dart';
 
 class ButtonLoading extends StatelessWidget {
   @override

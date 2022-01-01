@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/slider.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../models/slider.dart';
+import '../widgets/widgets.dart';
 
 import 'slider_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

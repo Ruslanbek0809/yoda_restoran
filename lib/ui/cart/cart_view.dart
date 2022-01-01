@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/cart_toggle_button.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../shared/shared.dart';
+import 'cart_toggle_button.dart';
+import '../widgets/widgets.dart';
+import '../../utils/utils.dart';
 import 'cart_meal/cart_meal_item.dart';
 import 'cart_res_food/cart_res_food_view.dart';
 import 'cart_view_model.dart';

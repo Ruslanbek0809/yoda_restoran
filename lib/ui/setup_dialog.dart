@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/shared/styles.dart';
-import 'package:yoda_res/ui/cart/cart_view_model.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_view_model.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.locator.dart';
+import '../shared/styles.dart';
+import 'cart/cart_view_model.dart';
+import 'restaurant/meal/meal_view_model.dart';
+import 'widgets/widgets.dart';
+import '../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void setupDialog() {

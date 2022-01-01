@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../utils/utils.dart';
 
 import 'drawer_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,6 +1,6 @@
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/models.dart';
+import '../app/app.locator.dart';
+import '../app/app.logger.dart';
+import '../models/models.dart';
 
 import 'api_service.dart';
 

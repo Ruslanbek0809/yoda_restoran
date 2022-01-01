@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
 import 'home_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'search_box.dart';

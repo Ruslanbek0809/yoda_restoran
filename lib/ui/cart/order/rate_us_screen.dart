@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 
 class RateUsScreen extends StatefulWidget {
   @override

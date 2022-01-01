@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/toggle_buttons/toggle_buttons_view.dart';
-import 'package:yoda_res/ui/widgets/loading_widget.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../models/models.dart';
+import '../../toggle_buttons/toggle_buttons_view.dart';
+import '../../widgets/loading_widget.dart';
+import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResDetailsMainBusy extends StatelessWidget {
