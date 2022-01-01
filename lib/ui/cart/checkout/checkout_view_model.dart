@@ -101,7 +101,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ ADD/SELECT ADDRESS BOTTOM SHEET ----------------------------//
+//------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
 
   /// CALLS AddAddressBottomSheet
   Future<void> showCustomAddAddressBottomSheet() async {
@@ -178,6 +178,43 @@ class CheckoutViewModel extends ReactiveViewModel {
     _note = value;
     notifyListeners();
   }
+
+  Future<void> onAddAddressPressed() async {
+    log.v('onAddAddressPressed()');
+    try {
+      await runBusyFuture(_checkoutService.addAddress(
+          _city, _street, _house, _apartment, _floor, _note));
+    } catch (err) {
+      throw err;
+    }
+  }
+//------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
+
+  /// CALLS AddAddressBottomSheet
+  Future<void> showCustomSelectAddressBottomSheet() async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.addAddress,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
+  }
+
+  String? _street;
+  String? get street => _street;
+
+  /// UPDATES _street
+  String? updateStreet(String? value) {
+    log.v('updateStreet value: $value');
+    if (value!.isEmpty) {
+      return 'Köçäni giriziň';
+    }
+
+    _street = value;
+    notifyListeners();
+  }
+
 
   Future<void> onAddAddressPressed() async {
     log.v('onAddAddressPressed()');

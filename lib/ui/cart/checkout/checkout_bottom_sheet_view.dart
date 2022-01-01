@@ -92,7 +92,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           Material(
                             color: AppTheme.WHITE,
                             child: InkWell(
-                              onTap: model.showCustomAddAddressBottomSheet,
+                              onTap: model.showCustomSelectAddressBottomSheet,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Row(

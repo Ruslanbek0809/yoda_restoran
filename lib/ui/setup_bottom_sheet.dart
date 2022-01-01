@@ -1,5 +1,6 @@
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_address/checkout_address_select_bottom_sheet.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart/checkout/checkout_address/checkout_add_address_bottom_sheet.dart';
@@ -42,6 +43,11 @@ void setupBottomSheet() {
         ),
     BottomSheetType.addAddress: (context, sheetRequest, completer) =>
         CheckoutAddAddressBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
+        ),
+    BottomSheetType.selectAddress: (context, sheetRequest, completer) =>
+        CheckoutSelectAddressBottomSheetView(
           request: sheetRequest,
           completer: completer,
         ),
