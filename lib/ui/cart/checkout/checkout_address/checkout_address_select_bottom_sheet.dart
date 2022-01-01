@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
@@ -83,9 +84,9 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                           color: AppTheme.WHITE,
                                           child: InkWell(
                                             onTap: () {
-                                              setState(() {
-                                                selectedAddressID = address.id;
-                                              });
+                                              // setState(() {
+                                              //   selectedAddressID = address.id;
+                                              // });
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
@@ -128,11 +129,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                                       SizedBox(width: 10.w),
                                                       Text(
                                                         address.name,
-                                                        style: TextStyle(
-                                                          fontSize: 18.sp,
-                                                          color: AppTheme
-                                                              .FONT_COLOR,
-                                                        ),
+                                                        style: ktsDefault18Text,
                                                       ),
                                                     ],
                                                   ),
@@ -155,9 +152,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                             Material(
                               color: AppTheme.WHITE,
                               child: InkWell(
-                                onTap: () {
-                                  _onCartAddressClicked();
-                                },
+                                onTap: model.showCustomAddAddressBottomSheet,
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 5.w),
                                   child: Row(

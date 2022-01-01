@@ -120,6 +120,30 @@ class UserService {
     }
   }
 
+  //------------------ ADDRESS APIS ---------------------//
+
+  Future<List<Meal>> getAddresses() async {
+    List<Meal> _moreMeals = [];
+    try {
+      Response response = await _apiRoot.dio
+          .get('api/restaurantMeals/', queryParameters: {'another': true});
+      // log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_resCategory) {
+          _moreMeals.add(Meal.fromJson(_resCategory));
+        });
+      }
+
+      return _moreMeals;
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
+
   Future<void> addAddress(String? city, String? street, int? house,
       int? apartment, int? floor, String? note) async {
     Map<String, dynamic> _queryParams = {};

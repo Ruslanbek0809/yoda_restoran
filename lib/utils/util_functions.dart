@@ -32,9 +32,9 @@ List<Discount> discounts = [
   Discount(8, 'assets/discount4.png'),
 ];
 
-List<Address> addresses = [
-  Address(1, 'A.Nowaýy, 164'),
-  Address(2, 'N.Andalyp 32'),
+List<AddressUI> addresses = [
+  AddressUI(1, 'A.Nowaýy, 164'),
+  AddressUI(2, 'N.Andalyp 32'),
 ];
 
 List<Order> orderList = [

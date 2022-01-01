@@ -204,6 +204,17 @@ class CheckoutViewModel extends ReactiveViewModel {
   String? _street;
   String? get street => _street;
 
+  /// SEARCHES and GETS promocode if found
+  Future<void> getAddresses() async {
+    log.i('getAddresses()');
+
+    try {
+      await runBusyFuture(_checkoutService.searchPromocode(searchText));
+    } catch (err) {
+      throw err;
+    }
+  }
+
   /// UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
@@ -214,7 +225,6 @@ class CheckoutViewModel extends ReactiveViewModel {
     _street = value;
     notifyListeners();
   }
-
 
   Future<void> onAddAddressPressed() async {
     log.v('onAddAddressPressed()');

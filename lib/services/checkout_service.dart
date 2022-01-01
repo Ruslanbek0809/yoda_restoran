@@ -26,6 +26,9 @@ class CheckoutService with ReactiveServiceMixin {
 
   Promocode? get promocode => _promocode;
 
+  List<SliderModel>? _sliders = [];
+  List<SliderModel>? get sliders => _sliders;
+
   /// UPDATES paymentType
   void updatePaymentType(PaymentType selectedPaymentType) =>
       _paymentType.value = selectedPaymentType;
@@ -38,6 +41,12 @@ class CheckoutService with ReactiveServiceMixin {
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
   }
 
+  /// GETS all addresses
+  Future<void> getAddresses() async {
+    _userService.addAddress(city, street, house, apartment, floor, note);
+  }
+
+  /// ADDS new address
   Future<void> addAddress(String? city, String? street, int? house,
       int? apartment, int? floor, String? note) async {
     _userService.addAddress(city, street, house, apartment, floor, note);
