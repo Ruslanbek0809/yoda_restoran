@@ -3,6 +3,7 @@ import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/ui/restaurant/meal/meal_bottom_sheet_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'cart/checkout_bottom_sheet_view/checkout_bottom_sheet_view.dart';
+import 'cart/checkout_bottom_sheet_view/checkout_payment_type_bottom_sheet.dart';
 import 'home/main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'restaurant/restaurant_info_bottom_sheet.dart';
 
@@ -34,7 +35,7 @@ void setupBottomSheet() {
           completer: completer,
         ),
     BottomSheetType.paymentType: (context, sheetRequest, completer) =>
-        CheckoutBottomSheetView(
+        CheckoutPaymentTypeBottomSheetView(
           request: sheetRequest,
           completer: completer,
         ),

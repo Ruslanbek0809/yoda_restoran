@@ -239,7 +239,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         ),
                                         SizedBox(width: 15.w),
                                         Text(
-                                          'Töleg görnüşi: Nagt',
+                                          'Töleg görnüşi: ${model.selectedPaymentType!.name}',
                                           style: ktsDefault16Text,
                                         ),
                                       ],

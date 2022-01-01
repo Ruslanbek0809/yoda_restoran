@@ -6,12 +6,14 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class CheckoutViewModel extends BaseViewModel {
+class CheckoutViewModel extends ReactiveViewModel {
   final log = getLogger('CheckoutViewModel');
 
   final _checkoutService = locator<CheckoutService>();
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
+
+  PaymentType? get selectedPaymentType => _checkoutService.paymentType;
 
   Promocode? get promocode => _checkoutService.promocode;
 
@@ -75,4 +77,15 @@ class CheckoutViewModel extends BaseViewModel {
       isScrollControlled: true,
     );
   }
+
+  /// UPDATES paymentType ( uses _checkoutService reactivity)
+  void updatePaymentType(PaymentType selectedPaymentType) async {
+    log.v('selectedPaymentType: ${selectedPaymentType.name}');
+
+    _checkoutService.updatePaymentType(selectedPaymentType);
+    notifyListeners();
+  }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_checkoutService];
 }

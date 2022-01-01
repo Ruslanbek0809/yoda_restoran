@@ -75,9 +75,8 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                           color: AppTheme.WHITE,
                                           child: InkWell(
                                             onTap: () {
-                                              // setState(() {
-                                              //   selectedAddressID = address.id;
-                                              // });
+                                              model.updatePaymentType(
+                                                  paymentType);
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
@@ -94,12 +93,12 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                                     children: [
                                                       SvgPicture.asset(
                                                         'assets/checkCircle.svg',
-                                                        // color:
-                                                        //     selectedAddressID ==
-                                                        //             address.id
-                                                        //         ? AppTheme
-                                                        //             .GREEN_COLOR
-                                                        //         : Colors.white,
+                                                        color: model.selectedPaymentType!
+                                                                    .id ==
+                                                                paymentType.id
+                                                            ? AppTheme
+                                                                .GREEN_COLOR
+                                                            : Colors.white,
                                                         width: 25.w,
                                                       ),
                                                       SizedBox(width: 10.w),

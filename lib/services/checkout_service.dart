@@ -27,7 +27,9 @@ class CheckoutService with ReactiveServiceMixin {
 
   Promocode? get promocode => _promocode;
 
-  
+  /// UPDATES paymentType
+  void updatePaymentType(PaymentType selectedPaymentType) =>
+      _paymentType.value = selectedPaymentType;
 
   /// SEARCHES promocodes and GETS first
   Future<void> searchPromocode(String searchText) async {
