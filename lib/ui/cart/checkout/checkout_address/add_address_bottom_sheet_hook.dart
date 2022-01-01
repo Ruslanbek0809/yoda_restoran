@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
-import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
   const AddAddressBottomSheetHook({
@@ -27,13 +28,13 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
         // --------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w),
-          child: Text(
-            'Şäher',
-            style: TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
-          ),
+          child: Text('Şäher', style: ktsDefault14HelperText),
         ),
         TextFormField(
           controller: _cityController,
+          initialValue: 'Aşgabat',
+          onTap: null,
+          style: ktsDefault18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
@@ -42,9 +43,8 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
             hintText: 'Aşgabat',
-            hintStyle: TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+            hintStyle: ktsDefault18HelperText,
           ),
-          focusNode: _cityFocus,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Şäheri giriziň';
@@ -52,17 +52,14 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             return null;
           },
         ),
-        SizedBox(height: 10.w),
         // --------------- STREET -------------- //
         Padding(
-          padding: EdgeInsets.only(left: 5.w, top: 15.w),
-          child: Text(
-            'Köçe',
-            style: TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
-          ),
+          padding: EdgeInsets.only(left: 5.w, top: 25.h),
+          child: Text('Köçe', style: ktsDefault14HelperText),
         ),
         TextFormField(
           controller: _streetController,
+          style: ktsDefault18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
@@ -71,9 +68,8 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                   BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
             hintText: 'A.Nowaýy 23, 64',
-            hintStyle: TextStyle(fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
+            hintStyle: ktsDefault18HelperText,
           ),
-          focusNode: _streetFocus,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Köçäni giriziň';
@@ -81,13 +77,14 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             return null;
           },
         ),
-        SizedBox(height: 15.w),
+        SizedBox(height: 15.h),
         // --------------- APARTMENT/HOUSE/FLOOR -------------- //
         Row(
           children: [
             Flexible(
               child: TextFormField(
                 controller: _apartmentController,
+                style: ktsDefault18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -96,19 +93,18 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Jaý',
-                  labelStyle:
-                      TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                  labelStyle: ktsDefault14HelperText,
                 ),
-                focusNode: _apartmentFocus,
                 validator: (value) {
                   return null;
                 },
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 10.w),
             Flexible(
               child: TextFormField(
                 controller: _houseController,
+                style: ktsDefault18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -117,19 +113,18 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Otag',
-                  labelStyle:
-                      TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                  labelStyle: ktsDefault14HelperText,
                 ),
-                focusNode: _houseFocus,
                 validator: (value) {
                   return null;
                 },
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 10.w),
             Flexible(
               child: TextFormField(
                 controller: _floorController,
+                style: ktsDefault18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -138,10 +133,8 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Gat',
-                  labelStyle:
-                      TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+                  labelStyle: ktsDefault14HelperText,
                 ),
-                focusNode: _floorFocus,
                 validator: (value) {
                   return null;
                 },
@@ -152,16 +145,17 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
         ),
         // --------------- NOTE -------------- //
         Padding(
-          padding: EdgeInsets.only(left: 5.w, top: 15.w),
+          padding: EdgeInsets.only(left: 5.w, top: 15.h),
           child: Text(
             'Bellik',
-            style: TextStyle(fontSize: 14.sp, color: AppTheme.DRAWER_ICON),
+            style: ktsDefault14HelperText,
           ),
         ),
-        SizedBox(height: 5.w),
+        SizedBox(height: 5.h),
         TextFormField(
           controller: _notesController,
           maxLines: 5,
+          style: ktsDefault18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(

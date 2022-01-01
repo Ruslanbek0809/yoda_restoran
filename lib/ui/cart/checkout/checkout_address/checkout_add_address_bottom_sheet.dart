@@ -18,20 +18,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
     required this.completer,
   }) : super(key: key);
 
-  // bool _isLoading = false;
   final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
-  // final TextEditingController _cityController = TextEditingController();
-  // final TextEditingController _streetController = TextEditingController();
-  // final TextEditingController _apartmentController = TextEditingController();
-  // final TextEditingController _houseController = TextEditingController();
-  // final TextEditingController _floorController = TextEditingController();
-  // final TextEditingController _notesController = TextEditingController();
-  // final FocusNode _cityFocus = FocusNode();
-  // final FocusNode _streetFocus = FocusNode();
-  // final FocusNode _apartmentFocus = FocusNode();
-  // final FocusNode _houseFocus = FocusNode();
-  // final FocusNode _floorFocus = FocusNode();
-  // final FocusNode _notesFocus = FocusNode();
 
   // Future _onConfirmButtonPressed() async {
   //   setState(() {
