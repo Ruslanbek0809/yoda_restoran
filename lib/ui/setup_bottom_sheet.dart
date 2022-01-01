@@ -39,6 +39,11 @@ void setupBottomSheet() {
           request: sheetRequest,
           completer: completer,
         ),
+    BottomSheetType.addAddress: (context, sheetRequest, completer) =>
+        CheckoutPaymentTypeBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
+        ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);

@@ -72,7 +72,9 @@ enum BottomSheetType {
   restaurantInfo,
   meal,
   checkout,
-  paymentType
+  paymentType,
+  selectAddress,
+  addAddress,
 }
 
 /// Enum for dialog types
