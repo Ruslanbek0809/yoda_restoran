@@ -18,7 +18,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
     required this.completer,
   }) : super(key: key);
 
-  final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _addressformKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                         ),
                         padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 50.h),
                         child: Form(
-                          key: _cartAddressformKey,
+                          key: _addressformKey,
                           autovalidateMode: AutovalidateMode.disabled,
                           child: AddAddressBottomSheetHook(),
                         ),
@@ -93,9 +93,11 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                     borderRadius: AppTheme().radius15,
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     child: Text('Ýatda sakla', style: ktsButton18Text),
-                    onPressed: () {
-                      // model.updatePaymentType();
-                      completer(SheetResponse());
+                    onPressed: () async {
+                      if (_addressformKey.currentState!.validate()) {
+                        await model.onAddAddressPressed();
+                        completer(SheetResponse());
+                      }
                     },
                   ),
                 ),

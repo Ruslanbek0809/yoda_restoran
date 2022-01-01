@@ -155,6 +155,8 @@ class ApiService {
     }
   }
 
+  //------------------ CHECKOUT APIS ---------------------//
+
   Future<Promocode> searchPromocode(String searchText, int resId) async {
     List<Promocode> _promocodeList = [];
     try {

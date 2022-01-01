@@ -119,4 +119,30 @@ class UserService {
       throw DioErrorType.response;
     }
   }
+
+  Future<void> addAddress(String? city, String? street, int? house,
+      int? apartment, int? floor, String? note) async {
+    final FormData addressFormData = FormData.fromMap({
+      'city': city,
+      'street': street,
+      'house': house,
+      'apartment': apartment,
+      'floor': floor,
+      'notes': note,
+    });
+    try {
+      Response response = await _apiRoot.dio.post(
+        'api/address/',
+        data: addressFormData,
+      );
+      log.v('RESPONSE: api/address/ => ${response.data}');
+
+      if (response.data != null) {}
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/address/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
 }

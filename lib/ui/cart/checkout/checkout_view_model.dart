@@ -177,17 +177,15 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  // Future _onConfirmButtonPressed() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   if (_cartAddressformKey.currentState!.validate()) {
-  //     printLog('_contactformKey validated');
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
+  Future<void> onAddAddressPressed() async {
+    log.v('onAddAddressPressed()');
+    try {
+      await runBusyFuture(_checkoutService.addAddress(
+          _city, _street, _house, _apartment, _floor, _note));
+    } catch (err) {
+      throw err;
+    }
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_checkoutService];

@@ -2,10 +2,8 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/util_functions.dart';
-
-import 'api_service.dart';
-import 'hv_db_service.dart';
 
 class CheckoutService with ReactiveServiceMixin {
   final log = getLogger('CheckoutService');
@@ -16,6 +14,7 @@ class CheckoutService with ReactiveServiceMixin {
   }
 
   final _api = locator<ApiService>();
+  final _userService = locator<UserService>();
   final _hiveDbService = locator<HiveDbService>();
 
   ReactiveValue<PaymentType> _paymentType =
@@ -37,5 +36,10 @@ class CheckoutService with ReactiveServiceMixin {
 
     _promocode =
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
+  }
+
+  Future<void> addAddress(String? city, String? street, int? house,
+      int? apartment, int? floor, String? note) async {
+    _userService.addAddress(city, street, house, apartment, floor, note);
   }
 }
