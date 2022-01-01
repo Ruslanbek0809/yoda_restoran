@@ -19,14 +19,16 @@ class StartUpViewModel extends BaseViewModel {
 
   Future<void> runStartupLogic() async {
     log.i('===== StartUpViewModel STARTED =====');
-    await Future.delayed(Duration(milliseconds: 100)).then((value) {
-      _startAnimation = true;
-      notifyListeners();
-      // Future.delayed(Duration(milliseconds: 700)).then((value) {
-      //   print('Hey I am finished :)');
-      //   // Navigator.push(context, ScaleRoute(page: (RedPage())));
-      // });
-    });
+    // await Future.delayed(Duration(milliseconds: 100)).then((value) {
+    //   _startAnimation = true;
+    //   notifyListeners();
+    //   // Future.delayed(Duration(milliseconds: 700)).then((value) {
+    //   //   print('Hey I am finished :)');
+    //   //   // Navigator.push(context, ScaleRoute(page: (RedPage())));
+    //   // });
+    // });
+    _startAnimation = true;
+    notifyListeners();
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()

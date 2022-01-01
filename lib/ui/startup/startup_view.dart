@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'startup_animated_text_hook.dart';
 import 'startup_viewmodel.dart';
 
 class StartUpView extends StatelessWidget {
@@ -36,6 +38,32 @@ class StartUpView extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
               ),
+              SizedBox(height: 25.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StartUpAnimatedTextHook(
+                    delay: 3750,
+                    child: SvgPicture.asset(
+                      'assets/title_yoda.svg',
+                      color: kcSecondaryDarkColor,
+                      width: 0.22.sw,
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 2.h),
+                    child: StartUpAnimatedTextHook(
+                      delay: 4750,
+                      child: SvgPicture.asset(
+                        'assets/title_restoran.svg',
+                        color: kcSecondaryDarkColor,
+                        width: 0.33.sw,
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
