@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
+import 'package:yoda_res/ui/widgets/custom_text_child_button.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,11 +21,11 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.4,
-        maxChildSize: 0.4,
+        initialChildSize: 0.35,
+        maxChildSize: 0.35,
         expand: false,
         builder: (context, scrollController) => Container(
-          height: 0.4.sh,
+          height: 0.35.sh,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(Constants.BORDER_RADIUS_20)),
@@ -63,7 +65,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                           ),
                           color: AppTheme.WHITE,
                         ),
-                        padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 50.w),
+                        padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 50.h),
                         child: Column(
                           children: [
                             Column(
@@ -75,47 +77,30 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                           color: AppTheme.WHITE,
                                           child: InkWell(
                                             onTap: () {
-                                              model.updatePaymentType(
-                                                  paymentType);
+                                              model
+                                                  .updateTempSelectedPaymentType(
+                                                      paymentType);
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 5.w),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
                                                 children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                        'assets/checkCircle.svg',
-                                                        color: model.selectedPaymentType!
+                                                  SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color:
+                                                        model.tempSelectedPaymentType
                                                                     .id ==
                                                                 paymentType.id
                                                             ? AppTheme
                                                                 .GREEN_COLOR
                                                             : Colors.white,
-                                                        width: 25.w,
-                                                      ),
-                                                      SizedBox(width: 10.w),
-                                                      Text(
-                                                        paymentType.name,
-                                                        style: TextStyle(
-                                                          fontSize: 18.sp,
-                                                          color: AppTheme
-                                                              .FONT_COLOR,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SvgPicture.asset(
-                                                    'assets/addressFilter.svg',
-                                                    color: AppTheme.MAIN_DARK,
                                                     width: 25.w,
+                                                  ),
+                                                  SizedBox(width: 10.w),
+                                                  Text(
+                                                    paymentType.name,
+                                                    style: ktsDefault18Text,
                                                   ),
                                                 ],
                                               ),
@@ -146,25 +131,15 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                     border: Border.all(
                         color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                   ),
-                  padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppTheme.MAIN,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().radius15),
-                      padding: EdgeInsets.symmetric(vertical: 17.w),
-                    ),
-                    child: Text(
-                      'Salgyny saýla',
-                      style: TextStyle(
-                        color: AppTheme.WHITE,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(RouteList.orders),
+                  padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
+                  child: CustomTextChildButton(
+                    borderRadius: AppTheme().radius15,
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    child: Text('Saýla', style: ktsButton18Text),
+                    onPressed: () {
+                      model.updatePaymentType();
+                      completer(SheetResponse());
+                    },
                   ),
                 ),
               )

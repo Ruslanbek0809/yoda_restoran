@@ -13,6 +13,11 @@ class CheckoutViewModel extends ReactiveViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
+  PaymentType? _tempSelectedPaymentType;
+  PaymentType get tempSelectedPaymentType => _tempSelectedPaymentType != null
+      ? _tempSelectedPaymentType!
+      : _checkoutService.paymentType!;
+
   PaymentType? get selectedPaymentType => _checkoutService.paymentType;
 
   Promocode? get promocode => _checkoutService.promocode;
@@ -78,11 +83,21 @@ class CheckoutViewModel extends ReactiveViewModel {
     );
   }
 
-  /// UPDATES paymentType ( uses _checkoutService reactivity)
-  void updatePaymentType(PaymentType selectedPaymentType) async {
-    log.v('selectedPaymentType: ${selectedPaymentType.name}');
+  /// Temporarily SETS paymentType
+  void updateTempSelectedPaymentType(PaymentType selectedPaymentType) {
+    log.v(
+        'updateTempSelectedPaymentType selectedPaymentType: ${selectedPaymentType.name}');
 
-    _checkoutService.updatePaymentType(selectedPaymentType);
+    _tempSelectedPaymentType = selectedPaymentType;
+    notifyListeners();
+  }
+
+  /// UPDATES paymentType ( uses _checkoutService reactivity)
+  void updatePaymentType() {
+    log.v(
+        'updatePaymentType() tempSelectedPaymentType: ${tempSelectedPaymentType.name}');
+
+    _checkoutService.updatePaymentType(tempSelectedPaymentType);
     notifyListeners();
   }
 
