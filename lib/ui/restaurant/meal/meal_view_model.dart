@@ -141,7 +141,7 @@ class MealViewModel extends ReactiveViewModel {
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-  /// Function to call MealBottomSheet
+  /// CALLS MealBottomSheet
   Future showCustomMealBottomSheet(
       Meal meal, Restaurant restaurant, MealViewModel mealViewModel) async {
     log.i('');

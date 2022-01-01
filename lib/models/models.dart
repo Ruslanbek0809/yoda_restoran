@@ -24,3 +24,4 @@ export 'meal_bottom_sheet_data.dart';
 export 'user.dart';
 export 'promocode.dart';
 export 'promocode_type.dart';
+export 'payment_type.dart';

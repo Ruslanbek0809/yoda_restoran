@@ -223,9 +223,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           Material(
                             color: AppTheme.WHITE,
                             child: InkWell(
-                              onTap: () {
-                                /// TODO: PaymentType
-                              },
+                              onTap: model.showCustomPaymentTypeBottomSheet,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Row(
@@ -296,7 +294,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     ),
                     CustomTextChildButton(
                       padding: EdgeInsets.symmetric(
-                          vertical: 17.w, horizontal: 0.2.sw),
+                        vertical: 17.w,
+                        horizontal: 0.2.sw,
+                      ),
                       child: Text(
                         'Sargyt et',
                         style: ktsButton18Text,

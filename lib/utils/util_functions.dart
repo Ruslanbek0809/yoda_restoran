@@ -9,20 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final List<String> drawerList = ["profile", "orders", "addresses", "about"];
 
-final List<String> imgList = [
-  'assets/foodbanner1.png',
-  'assets/foodbanner.jpg',
-  'assets/foodbanner2.png',
-];
-
-List<CategoryUI> homeCategories = [
-  CategoryUI(1, 'Halanlarym', 'assets/cat_fav.png'),
-  CategoryUI(2, 'Sushi', 'assets/cat_sushi.png'),
-  CategoryUI(3, 'Burger', 'assets/cat_burger.png'),
-  CategoryUI(4, 'Pizza', 'assets/cat_pizza.png'),
-  CategoryUI(5, 'Hemmesi', 'assets/cat_filter.png'),
-];
-
 List<RestaurantUI> restaurants = [
   RestaurantUI(
     1,
@@ -58,21 +44,17 @@ List<Order> orderList = [
   Order(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), mealList),
 ];
 
-List<CategoryUI> additionalCategories = [
-  CategoryUI(1, 'Çaý', 'assets/cat_add_chay.png'),
-  CategoryUI(2, 'Döner', 'assets/cat_add_doner.png'),
-  CategoryUI(3, 'Kofe', 'assets/cat_add_kofe.png'),
-  CategoryUI(4, 'Manty', 'assets/cat_add_manty.png'),
-  CategoryUI(5, 'Sagdyn', 'assets/cat_add_sagdyn.png'),
-  CategoryUI(6, 'Steýk', 'assets/cat_add_steyk.png'),
-];
-
 List<CategoryFilter> mainCatSortList = [
   CategoryFilter(1, 'Adaty'),
   CategoryFilter(2, 'Reýtingi boýunça'),
   CategoryFilter(3, 'Çalt'),
   CategoryFilter(4, 'Gymmatdan arzana'),
   CategoryFilter(5, 'Arzandan gymmada'),
+];
+
+List<PaymentType> paymentTypes = [
+  PaymentType(1, 'Nagt'),
+  PaymentType(2, 'Terminal'),
 ];
 
 /// Enum for FormValidation
@@ -85,7 +67,13 @@ enum BottomCartStatus { idle, forward, reverse }
 enum MainFilterAnimationStatus { idle, forward, reverse }
 
 /// Enum for bottom sheet types
-enum BottomSheetType { mainCategory, restaurantInfo, meal, checkout }
+enum BottomSheetType {
+  mainCategory,
+  restaurantInfo,
+  meal,
+  checkout,
+  paymentType
+}
 
 /// Enum for dialog types
 enum DialogType { mealCartClear, clearCart }

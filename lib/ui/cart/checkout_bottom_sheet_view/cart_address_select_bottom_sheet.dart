@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-import 'cart_address_add_edit_bottom_sheet.dart';
+import 'checkout_address_add_edit_bottom_sheet.dart';
 
 void cartAddressSelectBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -27,6 +29,25 @@ void cartAddressSelectBottomSheet(BuildContext context) {
       ),
     ),
   );
+}
+
+class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
+  const CheckoutPaymentTypeBottomSheetView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<CheckoutViewModel>.reactive(
+      builder: (context, model, child) => DraggableScrollableSheet(
+        initialChildSize: 0.4,
+        maxChildSize: 0.4,
+        builder: (context, scrollController) =>
+            CartAddressSelectBottomSheetWidget(
+          scrollController,
+        ),
+      ),
+      viewModelBuilder: () => CheckoutViewModel(),
+    );
+  }
 }
 
 class CartAddressSelectBottomSheetWidget extends StatefulWidget {

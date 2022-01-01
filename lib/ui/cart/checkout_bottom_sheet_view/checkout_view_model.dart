@@ -1,14 +1,17 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class CheckoutViewModel extends BaseViewModel {
   final log = getLogger('CheckoutViewModel');
 
   final _checkoutService = locator<CheckoutService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _bottomSheetService = locator<BottomSheetService>();
 
   Promocode? get promocode => _checkoutService.promocode;
 
@@ -58,5 +61,18 @@ class CheckoutViewModel extends BaseViewModel {
     });
 
     return totalCartSum;
+  }
+
+//------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
+
+  /// CALLS MealBottomSheet
+  Future showCustomPaymentTypeBottomSheet() async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.paymentType,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
   }
 }

@@ -33,6 +33,11 @@ void setupBottomSheet() {
           request: sheetRequest,
           completer: completer,
         ),
+    BottomSheetType.paymentType: (context, sheetRequest, completer) =>
+        CheckoutBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
+        ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);
