@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 import 'checkout_address_add_edit_bottom_sheet.dart';

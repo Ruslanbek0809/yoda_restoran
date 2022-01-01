@@ -8,7 +8,7 @@ import 'package:yoda_res/library/flutter_datetime_picker.dart';
 import 'package:yoda_res/library/src/datetime_picker_theme.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_note_hook.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_note_hook.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'checkout_promocode_hook.dart';
@@ -88,13 +88,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.DRAWER_DIVIDER,
                             indent: 0.111.sw,
                           ),
-// --------------- HOUSE PART -------------- //
+// --------------- ADDRESS -------------- //
                           Material(
                             color: AppTheme.WHITE,
                             child: InkWell(
-                              onTap: () {
-                                /// TODO: AddressBottomSheet
-                              },
+                              onTap: model.showCustomAddAddressBottomSheet,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Row(

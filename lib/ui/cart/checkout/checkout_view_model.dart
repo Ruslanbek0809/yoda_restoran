@@ -72,7 +72,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 
 //------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
 
-  /// CALLS MealBottomSheet
+  /// CALLS PaymentTypeBottomSheetView
   Future showCustomPaymentTypeBottomSheet() async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
@@ -99,6 +99,17 @@ class CheckoutViewModel extends ReactiveViewModel {
 
     _checkoutService.updatePaymentType(tempSelectedPaymentType);
     notifyListeners();
+  }
+
+  /// CALLS AddAddressBottomSheet
+  Future showCustomAddAddressBottomSheet() async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.addAddress,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
   }
 
   @override

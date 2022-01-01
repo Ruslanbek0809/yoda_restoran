@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,21 +12,15 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
           key: key,
         );
 
-  // final TextEditingController _cityController = TextEditingController();
-  // final TextEditingController _streetController = TextEditingController();
-  // final TextEditingController _apartmentController = TextEditingController();
-  // final TextEditingController _houseController = TextEditingController();
-  // final TextEditingController _floorController = TextEditingController();
-  // final TextEditingController _notesController = TextEditingController();
-  // final FocusNode _cityFocus = FocusNode();
-  // final FocusNode _streetFocus = FocusNode();
-  // final FocusNode _apartmentFocus = FocusNode();
-  // final FocusNode _houseFocus = FocusNode();
-  // final FocusNode _floorFocus = FocusNode();
-  // final FocusNode _notesFocus = FocusNode();
-
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
+    final _cityController = useTextEditingController();
+    final _streetController = useTextEditingController();
+    final _apartmentController = useTextEditingController();
+    final _houseController = useTextEditingController();
+    final _floorController = useTextEditingController();
+    final _notesController = useTextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

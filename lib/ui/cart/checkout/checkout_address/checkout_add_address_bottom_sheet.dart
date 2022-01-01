@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/checkout_bottom_sheet_view/checkout_view_model.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_address/add_address_bottom_sheet_hook.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
 import 'package:yoda_res/ui/widgets/custom_text_child_button.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse) completer;
-  const CheckoutAddAddressBottomSheetView({
+  CheckoutAddAddressBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
@@ -92,14 +93,14 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                         child: Form(
                           key: _cartAddressformKey,
                           autovalidateMode: AutovalidateMode.disabled,
-                          child: 
+                          child: AddAddressBottomSheetHook(),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              //--------------- FILTER BUTTONS -------------- //
+              //--------------- ADD ADDRESS BUTTON -------------- //
               Positioned(
                 bottom: 0,
                 left: 0,
