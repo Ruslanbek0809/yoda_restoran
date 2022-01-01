@@ -13,13 +13,6 @@ class CheckoutViewModel extends ReactiveViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
-  PaymentType? _tempSelectedPaymentType;
-  PaymentType get tempSelectedPaymentType => _tempSelectedPaymentType != null
-      ? _tempSelectedPaymentType!
-      : _checkoutService.paymentType!;
-
-  PaymentType? get selectedPaymentType => _checkoutService.paymentType;
-
   Promocode? get promocode => _checkoutService.promocode;
 
   /// DateTime vars
@@ -83,6 +76,14 @@ class CheckoutViewModel extends ReactiveViewModel {
     );
   }
 
+  PaymentType? get selectedPaymentType =>
+      _checkoutService.selectedPaymentType; // For CheckoutBottomSheetView
+
+  PaymentType? _tempSelectedPaymentType;
+  PaymentType get tempSelectedPaymentType => _tempSelectedPaymentType != null
+      ? _tempSelectedPaymentType!
+      : _checkoutService.selectedPaymentType!;
+
   /// Temporarily SETS paymentType
   void updateTempSelectedPaymentType(PaymentType selectedPaymentType) {
     log.v(
@@ -92,12 +93,12 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES paymentType ( uses _checkoutService reactivity)
-  void updatePaymentType() {
+  /// SAVES paymentType ( uses _checkoutService reactivity)
+  void savePaymentType() {
     log.v(
         'updatePaymentType() tempSelectedPaymentType: ${tempSelectedPaymentType.name}');
 
-    _checkoutService.updatePaymentType(tempSelectedPaymentType);
+    _checkoutService.savesPaymentType(tempSelectedPaymentType);
     notifyListeners();
   }
 
@@ -116,8 +117,13 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   List<Address>? get addresses => _checkoutService.addresses;
 
-  // String? _street;
-  // String? get street => _street;
+  Address? get selectedAddress =>
+      _checkoutService.selectedAddress; // For CheckoutBottomSheetView
+
+  Address? _tempSelectedAddress;
+  Address? get tempSelectedAddress => _tempSelectedAddress != null
+      ? _tempSelectedAddress!
+      : _checkoutService.selectedAddress!;
 
   /// SEARCHES and GETS promocode if found
   Future<void> getAddresses() async {
@@ -130,26 +136,23 @@ class CheckoutViewModel extends ReactiveViewModel {
     }
   }
 
-  // /// UPDATES _street
-  // String? updateStreet(String? value) {
-  //   log.v('updateStreet value: $value');
-  //   if (value!.isEmpty) {
-  //     return 'Köçäni giriziň';
-  //   }
+  /// Temporarily SETS _tempSelectedAddress
+  void updateTempSelectedAddress(Address selectedAddress) {
+    log.v(
+        'updateTempSelectedAddress selectedAddress: ${selectedAddress.street}');
 
-  //   _street = value;
-  //   notifyListeners();
-  // }
+    _tempSelectedAddress = selectedAddress;
+    notifyListeners();
+  }
 
-  // Future<void> onAddAddressPressed() async {
-  //   log.v('onAddAddressPressed()');
-  //   try {
-  //     await runBusyFuture(_checkoutService.addAddress(
-  //         _city, _street, _house, _apartment, _floor, _note));
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+  /// SAVES selectedAddress ( uses _checkoutService reactivity)
+  void saveSelectedAddress() {
+    log.v(
+        'saveSelectedAddress() _tempSelectedAddress: ${_tempSelectedAddress!.street}');
+
+    _checkoutService.saveSelectedAddress(_tempSelectedAddress!);
+    notifyListeners();
+  }
 
 //------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
 

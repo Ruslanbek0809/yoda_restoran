@@ -76,11 +76,9 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                         Material(
                                           color: AppTheme.WHITE,
                                           child: InkWell(
-                                            onTap: () {
-                                              model
-                                                  .updateTempSelectedPaymentType(
-                                                      paymentType);
-                                            },
+                                            onTap: () => model
+                                                .updateTempSelectedPaymentType(
+                                                    paymentType),
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 5.w),
@@ -146,7 +144,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     child: Text('Saýla', style: ktsButton18Text),
                     onPressed: () {
-                      model.updatePaymentType();
+                      model.savePaymentType();
                       completer(SheetResponse());
                     },
                   ),
