@@ -33,6 +33,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.4,
         maxChildSize: 0.4,
+        expand: false,
         builder: (context, scrollController) => Container(
           height: 0.4.sh,
           decoration: BoxDecoration(

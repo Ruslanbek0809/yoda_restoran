@@ -108,8 +108,17 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         ),
                                         SizedBox(width: 15.w),
                                         Text(
-                                          'A.Nowaýy 23, 64',
-                                          style: ktsDefault16Text,
+                                          model.selectedAddress!.id == -1
+                                              ? 'Salgyňyzy giriziň'
+                                              : model.selectedAddress!.street! +
+                                                  (model.selectedAddress!
+                                                              .house !=
+                                                          null
+                                                      ? ', ${model.selectedAddress!.house}'
+                                                      : ''),
+                                          style: model.selectedAddress!.id == -1
+                                              ? ktsDefault16HelperText
+                                              : ktsDefault16Text,
                                         ),
                                       ],
                                     ),

@@ -10,7 +10,7 @@ class CheckoutService with ReactiveServiceMixin {
 
   CheckoutService() {
     // 3
-    listenToReactiveValues([_selectedPaymentType]);
+    listenToReactiveValues([_selectedPaymentType, _selectedAddress]);
   }
 
   final _api = locator<ApiService>();

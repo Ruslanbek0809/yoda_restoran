@@ -128,9 +128,12 @@ class UserService {
       Response response = await _apiRoot.dio.get('api/user/');
       log.v('RESPONSE: api/user/ => ${response.data}');
 
+      /// Below data structure is like user list in each user and its addresses
       if (response.data != null) {
-        response.data.forEach((_address) {
-          _addresses.add(Address.fromJson(_address));
+        response.data.forEach((_user) {
+          _user['addresses'].forEach((_address) {
+            _addresses.add(Address.fromJson(_address));
+          });
         });
       }
 
