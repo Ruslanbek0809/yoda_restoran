@@ -14,8 +14,19 @@ class StartUpViewModel extends BaseViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();
 
+  bool _startAnimation = false;
+  bool get startAnimation => _startAnimation;
+
   Future<void> runStartupLogic() async {
     log.i('===== StartUpViewModel STARTED =====');
+    await Future.delayed(Duration(milliseconds: 100)).then((value) {
+      _startAnimation = true;
+      notifyListeners();
+      // Future.delayed(Duration(milliseconds: 700)).then((value) {
+      //   print('Hey I am finished :)');
+      //   // Navigator.push(context, ScaleRoute(page: (RedPage())));
+      // });
+    });
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()
@@ -29,14 +40,14 @@ class StartUpViewModel extends BaseViewModel {
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
     /// NAV next View based on condition
-    if (_userService.hasLoggedInUser) {
-      log.v(
-          'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
-      _navService.replaceWith(Routes.homeView);
-    } else {
-      log.v('USER NOTTTTT FOUND');
-      _navService.replaceWith(Routes.loginView);
-    }
+    // if (_userService.hasLoggedInUser) {
+    //   log.v(
+    //       'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+    //   _navService.replaceWith(Routes.homeView);
+    // } else {
+    //   log.v('USER NOTTTTT FOUND');
+    //   _navService.replaceWith(Routes.loginView);
+    // }
 
     log.i('===== StartUpViewModel ENDED =====');
   }
