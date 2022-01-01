@@ -6,6 +6,7 @@ import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/checkout/checkout_address/add_address_bottom_sheet_hook.dart';
 import 'package:yoda_res/ui/cart/checkout/checkout_view_model.dart';
 import 'package:yoda_res/ui/widgets/custom_text_child_button.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -92,12 +93,17 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                   child: CustomTextChildButton(
                     borderRadius: AppTheme().radius15,
                     padding: EdgeInsets.symmetric(vertical: 14.h),
-                    child: Text('Ýatda sakla', style: ktsButton18Text),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: model.isBusy
+                          ? ButtonLoading()
+                          : Text('Ýatda sakla', style: ktsButton18Text),
+                    ),
                     onPressed: () async {
-                      if (_addressformKey.currentState!.validate()) {
-                        await model.onAddAddressPressed();
-                        completer(SheetResponse());
-                      }
+                      if (!_addressformKey.currentState!.validate()) return;
+                      _addressformKey.currentState!.save();
+                      await model.onAddAddressPressed();
+                      completer(SheetResponse());
                     },
                   ),
                 ),
