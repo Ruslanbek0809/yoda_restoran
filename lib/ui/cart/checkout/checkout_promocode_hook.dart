@@ -55,11 +55,13 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
                       child: model.promocode != null
-                          ? SvgPicture.asset(
-                              'assets/check_outlined_circle.svg',
-                              color: AppTheme.MAIN,
-                              width: 16.w,
-                            )
+                          ? model.promocode!.id != -1
+                              ? SvgPicture.asset(
+                                  'assets/check_outlined_circle.svg',
+                                  color: AppTheme.MAIN,
+                                  width: 16.w,
+                                )
+                              : SizedBox()
                           : SizedBox(),
                       // SvgPicture.asset(
                       //   'assets/warning_circle.svg',

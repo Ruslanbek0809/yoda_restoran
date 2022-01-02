@@ -48,6 +48,7 @@ class CheckoutService with ReactiveServiceMixin {
     _searchPromocodeText = searchText;
     _promocode =
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
+    log.v('_promocode: $_promocode');
   }
 
   /// GETS all addresses
