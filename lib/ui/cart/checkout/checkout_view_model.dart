@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
@@ -21,22 +22,30 @@ class CheckoutViewModel extends ReactiveViewModel {
   Promocode? get promocode => _checkoutService.promocode;
 
   /// DateTime vars
-  final now = DateTime.now();
+  final now = DateTime.now().add(Duration(hours: 1));
   DateTime? tomorrow;
   DateTime? maxDateTime;
-  DateTime? deliverDateTime;
+  DateTime? deliveryDateTime;
   String? deliverDateFormatted = '';
 
+  /// ASSIGNS default value for dateTime
   void getOnModelReady() {
-    deliverDateTime = now;
+    deliveryDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
+  }
+
+  /// UPDATES deliveryDateTime
+  void updateDateTimeForDelivery(DateTime? newDeliveryDateTime) {
+    deliveryDateTime = newDeliveryDateTime;
+    deliverDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
+    notifyListeners();
   }
 
   /// SEARCHES and GETS promocode if found
   Future<void> searchPromocode(String? searchText) async {
     log.i('searchPromocode() searchText: $searchText');
-    if (searchText != null && searchText.isEmpty || searchText!.length < 3)
+    if (searchText != null && searchText.isEmpty || searchText!.length < 2)
       return;
 
     try {

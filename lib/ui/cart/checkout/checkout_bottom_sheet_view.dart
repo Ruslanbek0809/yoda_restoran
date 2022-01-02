@@ -146,19 +146,19 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.WHITE,
                             child: InkWell(
                               onTap: () async {
-                                model.deliverDateTime =
+                                model.deliveryDateTime =
                                     await DatePicker.showDateTimePicker(
                                           context,
                                           showTitleActions: true,
                                           minTime: model.now,
                                           maxTime: model.maxDateTime,
                                           onChanged: (date) {
-                                            model.log.i('Senä change $date');
+                                            model.log.v('Senä change $date');
                                           },
                                           onConfirm: (date) {
-                                            model.log.i('Senä confirm $date');
+                                            model.log.v('Senä confirm $date');
                                           },
-                                          currentTime: model.deliverDateTime,
+                                          currentTime: model.deliveryDateTime,
                                           locale: LocaleType.tk,
                                           theme: DatePickerTheme(
                                             doneStyle: ktsDefault20BoldText,
@@ -166,9 +166,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                 AppTheme.MAIN_LIGHT,
                                           ),
                                         ) ??
-                                        model.deliverDateTime;
-                                model.deliverDateFormatted = DateFormat('HH:mm')
-                                    .format(model.deliverDateTime!);
+                                        model.deliveryDateTime;
+                                model.updateDateTimeForDelivery(
+                                    model.deliveryDateTime);
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -191,16 +191,18 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                               style: ktsDefault16Text,
                                             ),
                                             Text(
-                                              model.deliverDateTime == model.now
+                                              model.deliveryDateTime ==
+                                                      model.now
                                                   ? 'Şu wagt'
-                                                  : model.deliverDateTime!
+                                                  : model.deliveryDateTime!
                                                               .isAfter(
                                                                   model.now) &&
-                                                          model.deliverDateTime!
+                                                          model
+                                                              .deliveryDateTime!
                                                               .isBefore(model
                                                                   .tomorrow!)
                                                       ? 'Şu gün ${model.deliverDateFormatted}'
-                                                      : model.deliverDateTime!
+                                                      : model.deliveryDateTime!
                                                               .isAfter(model
                                                                   .tomorrow!)
                                                           ? 'Ertir ${model.deliverDateFormatted}'
