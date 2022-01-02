@@ -43,7 +43,7 @@ class StartUpView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   StartUpAnimatedTextHook(
-                    delay: 3750,
+                    delay: 3800,
                     child: SvgPicture.asset(
                       'assets/title_yoda.svg',
                       color: kcSecondaryDarkColor,
@@ -54,7 +54,7 @@ class StartUpView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: StartUpAnimatedTextHook(
-                      delay: 4750,
+                      delay: 4800,
                       child: SvgPicture.asset(
                         'assets/title_restoran.svg',
                         color: kcSecondaryDarkColor,
