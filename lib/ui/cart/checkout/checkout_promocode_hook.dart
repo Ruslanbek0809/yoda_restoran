@@ -86,12 +86,14 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
             : Padding(
                 padding: EdgeInsets.only(
                     top: 8.h, bottom: 8.h, left: 0.15.sw, right: 20.w),
-                child: Text(
-                  model.promocode != null
-                      ? 'Siziň sargydyňyzdan 150 manat aýrylar.'
-                      : '', // Need to get its space here
-                  style: ktsDefault14HelperText,
-                ),
+                child: model.promocode != null
+                    ? Text(
+                        model.promocode!.promoType == 1
+                            ? 'Siziň sargydyňyzdan ${model.promocode!.discount} manat aýrylar'
+                            : 'Siziň sargydyňyzdan ${model.promocode!.discount}% aýrylar',
+                        style: ktsDefault14HelperText,
+                      )
+                    : SizedBox(),
               ),
       ],
     );
