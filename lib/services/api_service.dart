@@ -168,12 +168,12 @@ class ApiService {
       log.v('RESPONSE: api/promocode/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_resCategory) {
-          _promocodeList.add(Promocode.fromJson(_resCategory));
+        response.data.forEach((_promocode) {
+          _promocodeList.add(Promocode.fromJson(_promocode));
         });
       }
 
-      return _promocodeList[0];
+      return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];
     } on DioError catch (error) {
       log.v(error);
       // log.v(

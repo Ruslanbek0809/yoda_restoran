@@ -25,7 +25,7 @@ class Promocode {
   final int? quantity;
 
   @JsonKey(name: 'discount')
-  final int? discount;
+  final num? discount;
 
   @JsonKey(name: 'restaurant')
   final int? restaurant;

@@ -17,6 +17,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   HiveUser? get currentUser => _userService.currentUser;
 
+  String get searchPromocodeText => _checkoutService.searchPromocodeText;
   Promocode? get promocode => _checkoutService.promocode;
 
   /// DateTime vars
@@ -35,7 +36,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   /// SEARCHES and GETS promocode if found
   Future<void> searchPromocode(String? searchText) async {
     log.i('searchPromocode() searchText: $searchText');
-    if (searchText != null && searchText.isEmpty || searchText!.length < 2)
+    if (searchText != null && searchText.isEmpty || searchText!.length < 3)
       return;
 
     try {
@@ -64,6 +65,12 @@ class CheckoutViewModel extends ReactiveViewModel {
       totalCartSum *= _cartMeal.quantity!;
     });
 
+    // if (promocode != null) {
+    //   if (promocode!.promoType == 1)
+    //     totalCartSum -= promocode!.discount!;
+    //   else
+    //     totalCartSum = (totalCartSum / 100) * promocode!.discount!;
+    // }
     return totalCartSum;
   }
 

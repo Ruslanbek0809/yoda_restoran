@@ -27,6 +27,9 @@ class CheckoutService with ReactiveServiceMixin {
 
   Address? get selectedAddress => _selectedAddress.value;
 
+  String _searchPromocodeText = '';
+  String get searchPromocodeText => _searchPromocodeText;
+
   Promocode? _promocode;
 
   Promocode? get promocode => _promocode;
@@ -42,6 +45,7 @@ class CheckoutService with ReactiveServiceMixin {
   Future<void> searchPromocode(String searchText) async {
     log.v('searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}');
 
+    _searchPromocodeText = searchText;
     _promocode =
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
   }

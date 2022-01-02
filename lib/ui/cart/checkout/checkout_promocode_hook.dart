@@ -9,11 +9,12 @@ import 'checkout_view_model.dart';
 import '../../../utils/utils.dart';
 
 class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
-  const CheckoutPromocodeHook({Key? key}) : super(key: key, reactive: true);
+  const CheckoutPromocodeHook({Key? key}) : super(key: key);
 
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
-    final _promocodeController = useTextEditingController();
+    final _promocodeController =
+        useTextEditingController(text: model.searchPromocodeText);
     // model.log.v('CheckoutPromocodeHook =========');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +33,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                   controller: _promocodeController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  style: ktsButton18Text,
+                  style: ktsDefault18Text,
                   decoration: InputDecoration(
                     isDense: true, // MAKES it more denser
                     focusedBorder: OutlineInputBorder(
@@ -86,14 +87,16 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
             : Padding(
                 padding: EdgeInsets.only(
                     top: 8.h, bottom: 8.h, left: 0.15.sw, right: 20.w),
-                child: model.promocode != null
-                    ? Text(
-                        model.promocode!.promoType == 1
-                            ? 'Siziň sargydyňyzdan ${model.promocode!.discount} manat aýrylar'
-                            : 'Siziň sargydyňyzdan ${model.promocode!.discount}% aýrylar',
-                        style: ktsDefault14HelperText,
-                      )
-                    : SizedBox(),
+                child: Text(
+                  model.promocode != null
+                      ? model.promocode!.id != -1
+                          ? model.promocode!.promoType == 1
+                              ? 'Siziň sargydyňyzdan ${model.promocode!.discount} manat aýrylar'
+                              : 'Siziň sargydyňyzdan ${model.promocode!.discount}% aýrylar'
+                          : ''
+                      : '',
+                  style: ktsDefault14HelperText,
+                ),
               ),
       ],
     );

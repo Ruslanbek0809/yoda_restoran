@@ -10,7 +10,7 @@ Promocode _$PromocodeFromJson(Map<String, dynamic> json) => Promocode(
       id: json['id'] as int?,
       name: json['name'] as String?,
       quantity: json['quantity'] as int?,
-      discount: json['discount'] as int?,
+      discount: json['discount'] as num?,
       restaurant: json['restaurant'] as int?,
       promoType: json['promoType'] as int?,
       promocodeType: json['promoTypeJson'] == null
