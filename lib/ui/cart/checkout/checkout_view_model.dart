@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../models/models.dart';
@@ -12,6 +13,9 @@ class CheckoutViewModel extends ReactiveViewModel {
   final _checkoutService = locator<CheckoutService>();
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _userService = locator<UserService>();
+
+  HiveUser? get currentUser => _userService.currentUser;
 
   Promocode? get promocode => _checkoutService.promocode;
 
