@@ -27,7 +27,7 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
             ),
           ),
           SizedBox(height: 5.h),
-          TextField(
+          TextFormField(
             controller: _noteController,
             maxLines: 5,
             keyboardType: TextInputType.text,
@@ -40,6 +40,8 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
               filled: true,
               fillColor: AppTheme.MAIN_LIGHT,
             ),
+            onChanged: model.updateCheckoutNote,
+            onSaved: model.updateCheckoutNote,
           ),
         ],
       ),

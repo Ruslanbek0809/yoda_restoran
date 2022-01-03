@@ -31,7 +31,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   DateTime? tomorrow;
   DateTime? maxDateTime;
   DateTime? deliveryDateTime;
-  String? deliverDateFormatted = '';
+  String? deliveryDateFormatted = '';
 
   /// ASSIGNS default value for dateTime
   void getOnModelReady() {
@@ -49,20 +49,17 @@ class CheckoutViewModel extends ReactiveViewModel {
     var startMinute = int.parse(resStartWorkingHoursSplitted[1]);
     var endHour = int.parse(resEndWorkingHoursSplitted[0]);
     var endMinute = int.parse(resEndWorkingHoursSplitted[1]);
-    log.v(
-        'startHour: $startHour, startMinute: $startMinute, endHour: $endHour, endMinute: $endMinute');
     if ((deliveryDateTime!.hour < startHour ||
             deliveryDateTime!.minute < startMinute) ||
         (deliveryDateTime!.hour > endHour ||
             deliveryDateTime!.minute > endMinute))
-      log.v('SHOW DATE TIME WRONG SNACKBAR');
+      log.v('SHOW DATE TIME WRONG SNACKBAR'); // TODO: Add Snackbar
     deliveryDateTime = newDeliveryDateTime;
-    deliverDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
-    log.v('deliverDateFormatted: $deliverDateFormatted');
+    deliveryDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
     notifyListeners();
   }
 
-  /// SEARCHES and GETS promocode if found
+  /// SEARCHES and GETS promocode if FOUND
   Future<void> searchPromocode(String? searchText) async {
     log.i('searchPromocode() searchText: $searchText');
     if (searchText != null && searchText.isEmpty || searchText!.length < 2)
@@ -291,6 +288,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// ADDS new address
   Future<void> onAddAddressPressed() async {
     log.v('onAddAddressPressed()');
     try {
@@ -303,15 +301,28 @@ class CheckoutViewModel extends ReactiveViewModel {
 
 //------------------------ CREATE ORDER PART ----------------------------//
 
-  // Future<void> createOrder() async {
-  //   log.v('createOrder()');
-  //   try {
-  //     await runBusyFuture(_checkoutService.addAddress(
-  //         _city, _street, _house, _apartment, _floor, _note));
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+  String? _checkoutNote = '';
+  String? get checkoutNote => _checkoutNote;
+
+  /// UPDATES _street
+  String? updateCheckoutNote(String? value) {
+    log.v('updateCheckoutNote value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _checkoutNote = value;
+    notifyListeners();
+  }
+
+  /// CREATES new order
+  Future<void> createOrder() async {
+    log.v('createOrder()');
+    try {
+      await runBusyFuture(_checkoutService.createOrder(
+          _promocode, selectedAddress, _checkoutNote));
+    } catch (err) {
+      throw err;
+    }
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

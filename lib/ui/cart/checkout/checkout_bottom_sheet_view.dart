@@ -200,11 +200,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                               .deliveryDateTime!
                                                               .isBefore(model
                                                                   .tomorrow!)
-                                                      ? 'Şu gün ${model.deliverDateFormatted}'
+                                                      ? 'Şu gün ${model.deliveryDateFormatted}'
                                                       : model.deliveryDateTime!
                                                               .isAfter(model
                                                                   .tomorrow!)
-                                                          ? 'Ertir ${model.deliverDateFormatted}'
+                                                          ? 'Ertir ${model.deliveryDateFormatted}'
                                                           : '',
                                               style: ktsDefault16Text,
                                             ),

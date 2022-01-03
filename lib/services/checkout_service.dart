@@ -64,4 +64,13 @@ class CheckoutService with ReactiveServiceMixin {
       int? apartment, int? floor, String? note) async {
     _userService.addAddress(city, street, house, apartment, floor, note);
   }
+
+  /// CREATES ORDER
+  Future<void> createOrder(Promocode? promocode, Address? selectedAddress,
+      String? checkoutNote) async {
+    log.v(
+        'promocode: $promocode, selectedAddress: $selectedAddress, checkoutNote: $checkoutNote ');
+
+    // await
+  }
 }
