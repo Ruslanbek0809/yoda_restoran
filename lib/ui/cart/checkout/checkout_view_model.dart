@@ -326,8 +326,9 @@ class CheckoutViewModel extends ReactiveViewModel {
     ));
     if (resultSuccess) {
       await _hiveDbService.clearCart();
-      log.i('_hiveDbService.cartMeals length: ${_hiveDbService.cartMeals.length}');
-      // _navService.pushNamedAndRemoveUntil(Routes.homeView);
+      log.i(
+          '_hiveDbService.cartMeals length: ${_hiveDbService.cartMeals.length}');
+      _navService.pushNamedAndRemoveUntil(Routes.orderSuccessView);
     }
   }
 

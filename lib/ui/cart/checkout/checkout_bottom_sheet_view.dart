@@ -311,7 +311,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         'Sargyt et',
                         style: ktsButton18Text,
                       ),
-                      onPressed: model.navToOrder,
+                      onPressed: model.createOrder,
                     ),
                   ],
                 ),
