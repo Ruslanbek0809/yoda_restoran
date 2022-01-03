@@ -50,6 +50,11 @@ class CheckoutViewModel extends ReactiveViewModel {
     var endMinute = int.parse(resEndWorkingHoursSplitted[1]);
     log.v(
         'startHour: $startHour, startMinute: $startMinute, endHour: $endHour, endMinute: $endMinute');
+    if ((deliveryDateTime!.hour < startHour ||
+            deliveryDateTime!.minute < startMinute) ||
+        (deliveryDateTime!.hour > endHour ||
+            deliveryDateTime!.minute > endMinute))
+      log.v('SHOW DATE TIME WRONG SNACKBAR');
     deliveryDateTime = newDeliveryDateTime;
     deliverDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
     log.v('deliverDateFormatted: $deliverDateFormatted');
@@ -294,6 +299,8 @@ class CheckoutViewModel extends ReactiveViewModel {
       throw err;
     }
   }
+
+//------------------------ CREATE ORDER PART ----------------------------//
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
