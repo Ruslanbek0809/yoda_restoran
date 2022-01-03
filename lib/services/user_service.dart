@@ -187,23 +187,64 @@ class UserService {
     HiveRestaurant? cartRes,
     List<HiveMeal> cartMeals,
   ) async {
-    // Map<String, dynamic> _queryParams = {};
-    // _queryParams['city'] = city;
-    // _queryParams['street'] = street;
-    // if (house != null) _queryParams['house'] = house;
-    // if (apartment != null) _queryParams['apartment'] = apartment;
-    // if (floor != null) _queryParams['floor'] = floor;
-    // if (note != null) _queryParams['notes'] = note;
+    Map<String, dynamic> _orderParams = {};
 
-    // log.v('_queryParams at the END: $_queryParams');
-    // final FormData addressFormData = FormData.fromMap(_queryParams);
+    _orderParams['restaurant'] = cartRes!.id;
+    if (selfPickUp)
+      _orderParams['selfPickUp'] = selfPickUp;
+    else
+      _orderParams['address'] = selectedAddress!.id;
+    _orderParams['deliveryTime'] = deliveryDateTime;
+    _orderParams['paymentType'] = paymentType!.id;
+    if (promocode != null) _orderParams['promocode'] = promocode.id;
+    if (checkoutNote!.isNotEmpty) _orderParams['notes'] = checkoutNote;
+
+    /// CREATES orderItems part of _orderParams
+    var _orderItemParamList = cartMeals.map((_cartMeal) {
+      num totalCartMealSum = 0;
+
+      totalCartMealSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+          ? _cartMeal.discountedPrice!
+          : _cartMeal.price!;
+
+      _cartMeal.volumes!.forEach((vol) {
+        if (vol.id != -1) totalCartMealSum += vol.price!;
+      });
+      _cartMeal.customs!.forEach((cus) {
+        totalCartMealSum += cus.price!;
+      });
+
+      /// VOLUME DISSECTING into List<int> part
+      List<int> volList = [];
+      List<int> cusList = [];
+
+      _cartMeal.volumes!.forEach((vol) {
+        if (vol.id != -1) volList.add(vol.id!);
+      });
+      _cartMeal.customs!.forEach((cus) {
+        cusList.add(cus.id!);
+      });
+
+      return {
+        'meal': _cartMeal.id,
+        'price': totalCartMealSum,
+        'quantity': _cartMeal.quantity,
+        'volumePrices': volList,
+        'costumizedMeals': cusList,
+      };
+    }).toList();
+
+    _orderParams['orderItems'] = _orderItemParamList;
+
+    log.v('_orderParams at the END: $_orderParams');
+    final FormData orderFormData = FormData.fromMap(_orderParams);
 
     try {
       Response response = await _apiRoot.dio.post(
-        'api/address/',
-        // data: addressFormData,
+        'api/order/',
+        data: orderFormData,
       );
-      log.v('RESPONSE: api/address/ => ${response.data}');
+      log.v('RESPONSE: api/order/ => ${response.data}');
 
       if (response.data != null) {}
     } on DioError catch (error) {
