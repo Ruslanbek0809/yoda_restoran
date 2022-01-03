@@ -318,12 +318,17 @@ class CheckoutViewModel extends ReactiveViewModel {
   /// CREATES new order
   Future<void> createOrder() async {
     log.v('createOrder()');
-    await runBusyFuture(_checkoutService.createOrder(
+    var resultSuccess = await runBusyFuture(_checkoutService.createOrder(
       selectedAddress,
       deliveryDateTime,
       _promocode,
       _checkoutNote,
     ));
+    if (resultSuccess) {
+      await _hiveDbService.clearCart();
+      log.i('_hiveDbService.cartMeals length: ${_hiveDbService.cartMeals.length}');
+      // _navService.pushNamedAndRemoveUntil(Routes.homeView);
+    }
   }
 
   /// CREATES new order

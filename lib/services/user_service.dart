@@ -177,7 +177,7 @@ class UserService {
 
   //------------------ CREATE ORDER API ---------------------//
 
-  Future<void> createOrder(
+  Future<bool> createOrder(
     Address? selectedAddress,
     bool selfPickUp,
     DateTime? deliveryDateTime,
@@ -246,12 +246,15 @@ class UserService {
       );
       log.v('RESPONSE: api/order/ => ${response.data}');
 
-      if (response.data != null) {}
+      if (response.data != null && response.statusCode == 200)
+        return true;
+      else
+        return false;
     } on DioError catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/address/ :${error.response!.statusCode} and ${error.response!.data}');
-      rethrow;
+      return false;
     }
   }
 }

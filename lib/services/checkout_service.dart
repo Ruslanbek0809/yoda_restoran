@@ -67,7 +67,7 @@ class CheckoutService with ReactiveServiceMixin {
   }
 
   /// CREATES ORDER
-  Future<void> createOrder(
+  Future<bool> createOrder(
     Address? selectedAddress,
     DateTime? deliveryDateTime,
     Promocode? promocode,
@@ -76,7 +76,7 @@ class CheckoutService with ReactiveServiceMixin {
     log.v(
         'selectedAddress: $selectedAddress, deliveryDateTime: $deliveryDateTime, paymentType: ${selectedPaymentType!.id}, promocode: $promocode, checkoutNote: $checkoutNote, resId: ${_hiveDbService.cartRes!.id}, _hiveDbService.cartMeals.length: ${_hiveDbService.cartMeals.length}');
 
-    await _userService.createOrder(
+    return await _userService.createOrder(
       selectedAddress,
       _toggleButtonService.isDelivery,
       deliveryDateTime,
