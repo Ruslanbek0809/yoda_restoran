@@ -101,6 +101,21 @@ class CheckoutViewModel extends ReactiveViewModel {
     return totalCartSum;
   }
 
+  /// GETS getTotalCartSum with promocode
+  num get getTotalCartSumWithPromocode {
+    num totalCartSum = getTotalCartSum;
+
+    if (promocode != null) {
+      if (promocode!.id! != -1) {
+        if (promocode!.promoType == 1)
+          totalCartSum -= promocode!.discount!;
+        else
+          totalCartSum = (totalCartSum / 100) * promocode!.discount!;
+      }
+    }
+    return totalCartSum;
+  }
+
 //------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
 
   /// CALLS PaymentTypeBottomSheetView
