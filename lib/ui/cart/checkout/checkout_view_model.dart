@@ -18,8 +18,12 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   HiveUser? get currentUser => _userService.currentUser;
 
+  HiveRestaurant? get cartRes => _hiveDbService.cartRes;
+
   String get searchPromocodeText => _checkoutService.searchPromocodeText;
-  Promocode? get promocode => _checkoutService.promocode;
+  Promocode? _promocode;
+  Promocode? get promocode => _promocode;
+  // Promocode? get promocode => _checkoutService.promocode;
 
   /// DateTime vars
   final now = DateTime.now().add(Duration(hours: 1));
@@ -37,8 +41,18 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   /// UPDATES deliveryDateTime
   void updateDateTimeForDelivery(DateTime? newDeliveryDateTime) {
+    var resWorkingHoursSplitted = cartRes!.workingHours!.split('-');
+    var resStartWorkingHoursSplitted = resWorkingHoursSplitted[0].split(':');
+    var resEndWorkingHoursSplitted = resWorkingHoursSplitted[1].split(':');
+    var startHour = int.parse(resStartWorkingHoursSplitted[0]);
+    var startMinute = int.parse(resStartWorkingHoursSplitted[1]);
+    var endHour = int.parse(resEndWorkingHoursSplitted[0]);
+    var endMinute = int.parse(resEndWorkingHoursSplitted[1]);
+    log.v(
+        'startHour: $startHour, startMinute: $startMinute, endHour: $endHour, endMinute: $endMinute');
     deliveryDateTime = newDeliveryDateTime;
     deliverDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
+    log.v('deliverDateFormatted: $deliverDateFormatted');
     notifyListeners();
   }
 
@@ -49,7 +63,9 @@ class CheckoutViewModel extends ReactiveViewModel {
       return;
 
     try {
-      await runBusyFuture(_checkoutService.searchPromocode(searchText));
+      _promocode =
+          await runBusyFuture(_checkoutService.searchPromocode(searchText));
+      log.v('CHECKOUT VM _promocode: $_promocode');
     } catch (err) {
       throw err;
     }
@@ -265,5 +281,6 @@ class CheckoutViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_checkoutService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_checkoutService, _hiveDbService];
 }
