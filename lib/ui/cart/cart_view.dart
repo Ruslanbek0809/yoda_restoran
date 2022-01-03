@@ -17,7 +17,7 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Here it is reactive instead of nonReactive is just bc delete cartMeal when its quantity is 0
     return ViewModelBuilder<CartViewModel>.reactive(
-      onModelReady: (model) => model.getMoreMeals(),
+      // onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
         model.log.v('CartView ===================');
         return Scaffold(

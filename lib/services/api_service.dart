@@ -157,8 +157,8 @@ class ApiService {
 
   //------------------ CHECKOUT APIS ---------------------//
 
-  Future<Promocode> searchPromocode(String searchText, int resId) async {
-    List<Promocode> _promocodeList = [];
+  Future<Promocode?> searchPromocode(String searchText, int resId) async {
+    List<Promocode?> _promocodeList = [];
     try {
       Response response =
           await _apiRoot.dio.get('api/promocode/', queryParameters: {
@@ -173,7 +173,8 @@ class ApiService {
         });
       }
 
-      return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];
+      return _promocodeList[0];
+      // return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];
     } on DioError catch (error) {
       log.v(error);
       // log.v(

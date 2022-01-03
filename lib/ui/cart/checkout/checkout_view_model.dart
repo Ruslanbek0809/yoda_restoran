@@ -21,6 +21,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   String get searchPromocodeText => _checkoutService.searchPromocodeText;
+
   Promocode? _promocode;
   Promocode? get promocode => _promocode;
   // Promocode? get promocode => _checkoutService.promocode;
@@ -96,12 +97,12 @@ class CheckoutViewModel extends ReactiveViewModel {
     });
 
     if (promocode != null) {
-      if (promocode!.id! != -1) {
-        if (promocode!.promoType == 1)
-          totalCartSum -= promocode!.discount!;
-        else
-          totalCartSum = (totalCartSum / 100) * promocode!.discount!;
-      }
+      // if (promocode!.id! != -1) {
+      if (promocode!.promoType == 1)
+        totalCartSum -= promocode!.discount!;
+      else
+        totalCartSum = (totalCartSum / 100) * promocode!.discount!;
+      // }
     }
     return totalCartSum;
   }
@@ -301,6 +302,16 @@ class CheckoutViewModel extends ReactiveViewModel {
   }
 
 //------------------------ CREATE ORDER PART ----------------------------//
+
+  // Future<void> createOrder() async {
+  //   log.v('createOrder()');
+  //   try {
+  //     await runBusyFuture(_checkoutService.addAddress(
+  //         _city, _street, _house, _apartment, _floor, _note));
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

@@ -13,8 +13,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
-    final _promocodeController =
-        useTextEditingController(text: model.searchPromocodeText);
+    final _promocodeController = useTextEditingController();
     // model.log.v('CheckoutPromocodeHook =========');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,13 +54,15 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
                       child: model.promocode != null
-                          ? model.promocode!.id != -1
-                              ? SvgPicture.asset(
-                                  'assets/check_outlined_circle.svg',
-                                  color: AppTheme.MAIN,
-                                  width: 16.w,
-                                )
-                              : SizedBox()
+                          ?
+                          // model.promocode!.id != -1
+                          //     ?
+                          SvgPicture.asset(
+                              'assets/check_outlined_circle.svg',
+                              color: AppTheme.MAIN,
+                              width: 16.w,
+                            )
+                          // : SizedBox()
                           : SizedBox(),
                       // SvgPicture.asset(
                       //   'assets/warning_circle.svg',

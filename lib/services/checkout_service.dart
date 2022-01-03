@@ -27,12 +27,10 @@ class CheckoutService with ReactiveServiceMixin {
 
   Address? get selectedAddress => _selectedAddress.value;
 
+  // Promocode? _promocode;
+  // Promocode? get promocode => _promocode;
   String _searchPromocodeText = '';
   String get searchPromocodeText => _searchPromocodeText;
-
-  // Promocode? _promocode;
-
-  // Promocode? get promocode => _promocode;
 
   List<Address>? _addresses = [];
   List<Address>? get addresses => _addresses;
@@ -42,13 +40,12 @@ class CheckoutService with ReactiveServiceMixin {
       _selectedPaymentType.value = selectedPaymentType;
 
   /// SEARCHES promocodes and GETS first
-  Future<Promocode> searchPromocode(String searchText) async {
+  Future<Promocode?> searchPromocode(String searchText) async {
     log.v('searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}');
 
     _searchPromocodeText = searchText;
     final _promocode =
         await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
-    log.v('_promocode: $_promocode');
     return _promocode;
   }
 
