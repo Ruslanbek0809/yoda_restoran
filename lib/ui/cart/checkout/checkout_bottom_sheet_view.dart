@@ -283,7 +283,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                 ),
               ),
             ),
-            //--------------- FILTER BUTTONS -------------- //
+            //--------------- CHECKOUT BUTTON -------------- //
             Positioned(
               bottom: 0,
               left: 0,
@@ -294,24 +294,28 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   border: Border.all(
                       color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                 ),
-                padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
+                padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 25.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${model.getTotalCartSum} TMT',
-                      style: ktsDefault20BoldText,
-                    ),
-                    CustomTextChildButton(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 17.w,
-                        horizontal: 0.2.sw,
-                      ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 16.w),
                       child: Text(
-                        'Sargyt et',
-                        style: ktsButton18Text,
+                        '${model.getTotalCartSum} TMT',
+                        style: ktsDefault20BoldText,
                       ),
-                      onPressed: model.createOrder,
+                    ),
+                    Expanded(
+                      child: CustomTextChildButton(
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        child: model.isBusy
+                            ? ButtonLoading()
+                            : Text(
+                                'Sargyt et',
+                                style: ktsButton18Text,
+                              ),
+                        onPressed: model.createOrder,
+                      ),
                     ),
                   ],
                 ),
