@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -229,31 +230,35 @@ class UserService {
         'meal': _cartMeal.id,
         'price': totalCartMealSum,
         'quantity': _cartMeal.quantity,
-        'volumePrices': volList,
-        'costumizedMeals': cusList,
+        // 'volumePrices': volList,
+        // 'costumizedMeals': cusList,
       };
     }).toList();
 
     _orderParams['orderItems'] = _orderItemParamList;
 
     log.v('_orderParams at the END: $_orderParams');
-    final FormData orderFormData = FormData.fromMap(_orderParams);
+    final FormData orderFormData =
+        FormData.fromMap(_orderParams, ListFormat.multiCompatible);
+    log.v('orderFormData: ${orderFormData.fields}');
 
     try {
       Response response = await _apiRoot.dio.post(
         'api/order/',
-        data: orderFormData,
+        data: jsonEncode(_orderParams),
+        // data: orderFormData,
       );
       log.v('RESPONSE: api/order/ => ${response.data}');
+      log.v('RESPONSE: api/order/ => ${response.statusMessage}');
+      log.v('RESPONSE: api/order/ => ${response.statusCode}');
 
       if (response.data != null && response.statusCode == 200)
         return true;
       else
         return false;
     } on DioError catch (error) {
-      log.v(error);
-      // log.v(
-      //     'ERROR on api/address/ :${error.response!.statusCode} and ${error.response!.data}');
+      log.v('ERROR api/order/ with RESPONSE: $error');
+      // log.v('ERROR api/order/ with RESPONSE: ${error.response}');
       return false;
     }
   }
