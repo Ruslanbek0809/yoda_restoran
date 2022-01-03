@@ -174,4 +174,43 @@ class UserService {
       rethrow;
     }
   }
+
+  //------------------ CREATE ORDER API ---------------------//
+
+  Future<void> createOrder(
+    Address? selectedAddress,
+    bool selfPickUp,
+    DateTime? deliveryDateTime,
+    PaymentType? paymentType,
+    Promocode? promocode,
+    String? checkoutNote,
+    HiveRestaurant? cartRes,
+    List<HiveMeal> cartMeals,
+  ) async {
+    // Map<String, dynamic> _queryParams = {};
+    // _queryParams['city'] = city;
+    // _queryParams['street'] = street;
+    // if (house != null) _queryParams['house'] = house;
+    // if (apartment != null) _queryParams['apartment'] = apartment;
+    // if (floor != null) _queryParams['floor'] = floor;
+    // if (note != null) _queryParams['notes'] = note;
+
+    // log.v('_queryParams at the END: $_queryParams');
+    // final FormData addressFormData = FormData.fromMap(_queryParams);
+
+    try {
+      Response response = await _apiRoot.dio.post(
+        'api/address/',
+        // data: addressFormData,
+      );
+      log.v('RESPONSE: api/address/ => ${response.data}');
+
+      if (response.data != null) {}
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/address/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
 }

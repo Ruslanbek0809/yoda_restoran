@@ -311,10 +311,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         'Sargyt et',
                         style: ktsButton18Text,
                       ),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .popAndPushNamed(RouteList.orderSuccess);
-                      },
+                      onPressed: model.navToOrder,
                     ),
                   ],
                 ),

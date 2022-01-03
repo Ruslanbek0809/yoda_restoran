@@ -12,6 +12,7 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
+import '../ui/cart/order/orders_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/profile/login/login_view.dart';
 import '../ui/profile/otp/otp_view.dart';
@@ -27,6 +28,7 @@ class Routes {
   static const String loginView = '/login-view';
   static const String otpView = '/otp-view';
   static const String cartView = '/cart-view';
+  static const String ordersView = '/orders-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -35,6 +37,7 @@ class Routes {
     loginView,
     otpView,
     cartView,
+    ordersView,
   };
 }
 
@@ -49,6 +52,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.otpView, page: OtpView),
     RouteDef(Routes.cartView, page: CartView),
+    RouteDef(Routes.ordersView, page: OrdersView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -98,6 +102,12 @@ class StackedRouter extends RouterBase {
     CartView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const CartView(),
+        settings: data,
+      );
+    },
+    OrdersView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => OrdersView(),
         settings: data,
       );
     },

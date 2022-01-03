@@ -16,6 +16,7 @@ class CheckoutService with ReactiveServiceMixin {
   final _api = locator<ApiService>();
   final _userService = locator<UserService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _toggleButtonService = locator<ToggleButtonService>();
 
   ReactiveValue<PaymentType> _selectedPaymentType =
       ReactiveValue<PaymentType>(paymentTypes[0]);
@@ -66,11 +67,24 @@ class CheckoutService with ReactiveServiceMixin {
   }
 
   /// CREATES ORDER
-  Future<void> createOrder(Promocode? promocode, Address? selectedAddress,
-      String? checkoutNote) async {
+  Future<void> createOrder(
+    Address? selectedAddress,
+    DateTime? deliveryDateTime,
+    Promocode? promocode,
+    String? checkoutNote,
+  ) async {
     log.v(
-        'promocode: $promocode, selectedAddress: $selectedAddress, checkoutNote: $checkoutNote ');
+        'selectedAddress: $selectedAddress, deliveryDateTime: $deliveryDateTime, paymentType: ${selectedPaymentType!.id}, promocode: $promocode, checkoutNote: $checkoutNote, resId: ${_hiveDbService.cartRes!.id}, _hiveDbService.cartMeals.length: ${_hiveDbService.cartMeals.length}');
 
-    // await
+    await _userService.createOrder(
+      selectedAddress,
+      _toggleButtonService.isDelivery,
+      deliveryDateTime,
+      selectedPaymentType,
+      promocode,
+      checkoutNote,
+      _hiveDbService.cartRes,
+      _hiveDbService.cartMeals,
+    );
   }
 }

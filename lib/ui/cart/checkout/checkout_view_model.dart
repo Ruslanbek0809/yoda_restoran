@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
@@ -15,6 +16,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _userService = locator<UserService>();
+  final _navService = locator<NavigationService>();
 
   HiveUser? get currentUser => _userService.currentUser;
 
@@ -318,7 +320,21 @@ class CheckoutViewModel extends ReactiveViewModel {
     log.v('createOrder()');
     try {
       await runBusyFuture(_checkoutService.createOrder(
-          _promocode, selectedAddress, _checkoutNote));
+        selectedAddress,
+        deliveryDateTime,
+        _promocode,
+        _checkoutNote,
+      ));
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /// CREATES new order
+  Future<void> navToOrder() async {
+    log.v('createOrder()');
+    try {
+      await _navService.navigateTo(Routes.ordersView);
     } catch (err) {
       throw err;
     }
