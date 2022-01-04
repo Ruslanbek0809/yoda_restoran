@@ -17,20 +17,32 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
     final bottomCartOffset =
         Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
             .animate(bottomCartController);
+    model.log.v(
+        'ResDetailsBottomCart BEFORE bottomCartController.status: ${bottomCartController.status}, model.bottomCartStatus: ${model.bottomCartStatus}');
 
     /// BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)
       switch (bottomCartController.status) {
         case AnimationStatus.completed:
-          if (model.bottomCartStatus == BottomCartStatus.reverse)
-            bottomCartController.reverse();
+          {
+            if (model.bottomCartStatus == BottomCartStatus.forward)
+              bottomCartController.forward();
+            if (model.bottomCartStatus == BottomCartStatus.reverse)
+              bottomCartController.reverse();
+          }
           break;
         case AnimationStatus.dismissed:
-          if (model.bottomCartStatus == BottomCartStatus.forward)
-            bottomCartController.forward();
+          {
+            if (model.bottomCartStatus == BottomCartStatus.forward)
+              bottomCartController.forward();
+            if (model.bottomCartStatus == BottomCartStatus.reverse)
+              bottomCartController.reverse();
+          }
           break;
         default:
       }
+    model.log.v(
+        'ResDetailsBottomCart AFTER bottomCartController.status: ${bottomCartController.status}, model.bottomCartStatus: ${model.bottomCartStatus}');
 
     return Align(
       alignment: Alignment.bottomCenter,

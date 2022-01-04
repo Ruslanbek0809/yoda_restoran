@@ -126,29 +126,32 @@ class HomeViewModel extends MultipleFutureViewModel {
         ),
       );
 
-  //------------------ Custom overridden REACTIVE PART ---------------------//
-  late List<ReactiveServiceMixin> _reactiveServices;
-
-  HomeViewModel() {
-    _reactToServices([_bottomCartService, _homeService]);
-  }
-
-  void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {
-    _reactiveServices = reactiveServices;
-    for (var reactiveService in _reactiveServices) {
-      reactiveService.addListener(_indicateChange);
-    }
-  }
-
   @override
-  void dispose() {
-    for (var reactiveService in _reactiveServices) {
-      reactiveService.removeListener(_indicateChange);
-    }
-    super.dispose();
-  }
+  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 
-  void _indicateChange() {
-    notifyListeners();
-  }
+  //------------------ Custom overridden REACTIVE PART ---------------------//
+  // late List<ReactiveServiceMixin> _reactiveServices;
+
+  // HomeViewModel() {
+  //   _reactToServices([_bottomCartService, _homeService]);
+  // }
+
+  // void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {
+  //   _reactiveServices = reactiveServices;
+  //   for (var reactiveService in _reactiveServices) {
+  //     reactiveService.addListener(_indicateChange);
+  //   }
+  // }
+
+  // @override
+  // void dispose() {
+  //   for (var reactiveService in _reactiveServices) {
+  //     reactiveService.removeListener(_indicateChange);
+  //   }
+  //   super.dispose();
+  // }
+
+  // void _indicateChange() {
+  //   notifyListeners();
+  // }
 }

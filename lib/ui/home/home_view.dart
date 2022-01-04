@@ -33,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
+        model.log.v('HomeView called when CART is cleared');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
@@ -262,7 +263,8 @@ class _HomeViewState extends State<HomeView> {
                                                         EdgeInsets.symmetric(
                                                             vertical: 8.h,
                                                             horizontal: 22.w),
-                                                    onPressed: model.clearSelectedMainCatRess,
+                                                    onPressed: model
+                                                        .clearSelectedMainCatRess,
                                                   ),
                                                 ],
                                               ),

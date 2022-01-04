@@ -81,8 +81,7 @@ class ResDetailsViewModel extends ReactiveViewModel {
 
   Future<void> navToCartView() async {
     final _navResult = await _navService.navigateTo(Routes.cartView);
-    // if (_navResult != null && _navResult) 
-    
+    // if (_navResult != null && _navResult) await initialise();
   } // TODO: Change page transition here
 
   void navToResSearchView() => _navService.navigateTo(
@@ -90,4 +89,10 @@ class ResDetailsViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
+
+  // @override
+  // Future futureToRun() {
+  //   // TODO: implement futureToRun
+  //   throw UnimplementedError();
+  // }
 }
