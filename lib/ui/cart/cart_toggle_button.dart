@@ -39,11 +39,10 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                         onTap: () => Navigator.pop(context),
                         child: SvgPicture.asset(
                           'assets/delivery.svg',
-                          color: AppTheme.MAIN_DARK,
-                          width: 35.w,
+                          color: Colors.transparent,
+                          width: 10.w,
                         ),
                       ),
-                      SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
                           'Eltip bermek üçin töleg operator tarapyndan goşular.',

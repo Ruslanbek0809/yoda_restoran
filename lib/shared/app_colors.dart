@@ -11,3 +11,4 @@ const Color kcDividerColor = Color(0xFFCCCCCC);
 const Color kcGreenColor = Color(0xFF76C03F);
 const Color kcBottomDescColor = Color(0xFF787773);
 const Color kcDialogColor = Color(0xFF666666);
+const Color kcPromocodeColor = Color(0xFF747474);

@@ -34,6 +34,11 @@ TextStyle ktsTextButtonText = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle ktsDefault12Text = TextStyle(
+  fontSize: 12.sp,
+  color: kcPromocodeColor,
+);
+
 TextStyle ktsDefault14Text = TextStyle(
   fontSize: 14.sp,
   color: kcFontColor,
@@ -98,6 +103,12 @@ TextStyle ktsDefault20BoldText = TextStyle(
   fontSize: 20.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
+);
+
+TextStyle ktsDefault22BoldText = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.w600,
+  color: kcSecondaryDarkColor,
 );
 
 TextStyle ktsDefault22DarkText = TextStyle(

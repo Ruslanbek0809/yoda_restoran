@@ -98,14 +98,6 @@ class CheckoutViewModel extends ReactiveViewModel {
       totalCartSum *= _cartMeal.quantity!;
     });
 
-    if (promocode != null) {
-      // if (promocode!.id! != -1) {
-      if (promocode!.promoType == 1)
-        totalCartSum -= promocode!.discount!;
-      else
-        totalCartSum = (totalCartSum / 100) * promocode!.discount!;
-      // }
-    }
     return totalCartSum;
   }
 
@@ -114,14 +106,25 @@ class CheckoutViewModel extends ReactiveViewModel {
     num totalCartSum = getTotalCartSum;
 
     if (promocode != null) {
-      if (promocode!.id! != -1) {
-        if (promocode!.promoType == 1)
-          totalCartSum -= promocode!.discount!;
-        else
-          totalCartSum = (totalCartSum / 100) * promocode!.discount!;
-      }
+      if (promocode!.promoType == 1)
+        totalCartSum -= promocode!.discount!;
+      else
+        totalCartSum = (totalCartSum / 100) * promocode!.discount!;
     }
     return totalCartSum;
+  }
+
+  /// GETS getPromocodePrice
+  num get getPromocodePrice {
+    num totalPromocodePrice = 0;
+
+    if (promocode != null) {
+      if (promocode!.promoType == 1)
+        totalPromocodePrice = promocode!.discount!;
+      else
+        totalPromocodePrice = getTotalCartSum - getTotalCartSumWithPromocode;
+    }
+    return totalPromocodePrice;
   }
 
 //------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//

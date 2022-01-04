@@ -150,8 +150,8 @@ class CartView extends StatelessWidget {
 //------------------ TOGGLE BUTTON ---------------------//
                   CartToggleButton(),
                   SizedBox(
-                      height: 0.27
-                          .sw), // COMPENSATES height of Checkout Button Widget is taking
+                      height: 0.13
+                          .sh), // COMPENSATES height of Checkout Button Widget is taking
                 ],
               ),
 //------------------ BOTTOM CART WIDGET ---------------------//

@@ -324,13 +324,33 @@ class CheckoutBottomSheetView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 16.w),
-                      child: Text(
-                        '${model.getTotalCartSum} TMT',
-                        style: ktsDefault20BoldText,
-                      ),
-                    ),
+                    model.promocode != null
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 16.w),
+                                child: Text(
+                                  '${model.getTotalCartSum} TMT -${model.getPromocodePrice} TMT',
+                                  style: ktsDefault12Text,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: 16.w),
+                                child: Text(
+                                  '${model.getTotalCartSumWithPromocode} TMT',
+                                  style: ktsDefault22BoldText,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(right: 16.w),
+                            child: Text(
+                              '${model.getTotalCartSum} TMT',
+                              style: ktsDefault22BoldText,
+                            ),
+                          ),
                     Expanded(
                       child: CustomTextChildButton(
                         padding: EdgeInsets.symmetric(vertical: 14.h),
