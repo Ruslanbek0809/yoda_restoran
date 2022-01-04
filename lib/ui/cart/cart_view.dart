@@ -34,7 +34,7 @@ class CartView extends StatelessWidget {
                     color: AppTheme.FONT_COLOR,
                     size: 25.w,
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: model.navBack,
                 ),
               ),
               centerTitle: true,

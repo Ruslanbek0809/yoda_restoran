@@ -13,7 +13,8 @@ class ResDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResDetailsViewModel>.reactive(
-      onModelReady: (model) => model.getResCatsWithMeals(restaurant.id!),
+      // onModelReady: (model) => model.getResCatsWithMeals(restaurant.id!),
+      viewModelBuilder: () => ResDetailsViewModel(restaurant),
       builder: (context, model, child) => Scaffold(
         body: Stack(
           children: [
@@ -27,7 +28,6 @@ class ResDetailsView extends StatelessWidget {
           ],
         ),
       ),
-      viewModelBuilder: () => ResDetailsViewModel(),
     );
   }
 }

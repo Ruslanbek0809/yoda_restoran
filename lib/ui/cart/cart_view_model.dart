@@ -154,7 +154,7 @@ class CartViewModel extends ReactiveViewModel {
   }
 
 //------------------------ NAVIGATION ----------------------------//
-  void navBack() => _navService.back();
+  void navBack() => _navService.back(result: true);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

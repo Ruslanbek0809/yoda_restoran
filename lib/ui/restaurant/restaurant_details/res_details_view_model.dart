@@ -10,8 +10,10 @@ import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
 /// ReactiveViewModel is used to "react"
-class ResDetailsViewModel extends ReactiveViewModel {
+class ResDetailsViewModel extends FutureViewModel {
   final log = getLogger('ResDetailsViewModel');
+  final Restaurant? restaurant;
+  ResDetailsViewModel(this.restaurant);
 
   final _navService = locator<NavigationService>();
   final _resService = locator<ResService>();
@@ -57,10 +59,11 @@ class ResDetailsViewModel extends ReactiveViewModel {
     }
   }
 
-  // FETCHS Restaurant categories with their meals
+  // // FETCHS Restaurant categories with their meals
   Future getResCatsWithMeals(int resId) async {
     log.i('');
-    await runBusyFuture(_resService.getResCatsWithMeals(resId));
+    await _resService.getResCatsWithMeals(resId);
+    // await runBusyFuture(_resService.getResCatsWithMeals(resId));
     log.i('resCategories length: ${resCategories!.length}');
   }
 
@@ -80,8 +83,13 @@ class ResDetailsViewModel extends ReactiveViewModel {
 //------------------------ NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {
-    final _navResult = await _navService.navigateTo(Routes.cartView);
-    // if (_navResult != null && _navResult) await initialise();
+    bool _navResult = false;
+    _navResult = await _navService.navigateTo(Routes.cartView);
+    log.i('navToCartView with _navResult: $_navResult');
+    if (_navResult) {
+    log.i('TRUEEE _navResult: $_navResult');
+      await initialise();
+    }
   } // TODO: Change page transition here
 
   void navToResSearchView() => _navService.navigateTo(
@@ -90,9 +98,7 @@ class ResDetailsViewModel extends ReactiveViewModel {
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 
-  // @override
-  // Future futureToRun() {
-  //   // TODO: implement futureToRun
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<void> futureToRun() async =>
+      await getResCatsWithMeals(restaurant!.id!);
 }
