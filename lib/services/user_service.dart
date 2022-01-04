@@ -188,20 +188,63 @@ class UserService {
     HiveRestaurant? cartRes,
     List<HiveMeal> cartMeals,
   ) async {
-    Map<String, dynamic> _orderParams = {};
+    // Map<String, dynamic> _orderParams = {};
 
-    _orderParams['restaurant'] = cartRes!.id;
-    if (selfPickUp)
-      _orderParams['selfPickUp'] = selfPickUp;
-    else
-      _orderParams['address'] = selectedAddress!.id;
-    _orderParams['deliveryTime'] = deliveryDateTime;
-    _orderParams['paymentType'] = paymentType!.id;
-    if (promocode != null) _orderParams['promocode'] = promocode.id;
-    if (checkoutNote!.isNotEmpty) _orderParams['notes'] = checkoutNote;
+    // _orderParams['restaurant'] = cartRes!.id;
+    // if (selfPickUp)
+    //   _orderParams['selfPickUp'] = selfPickUp;
+    // else
+    //   _orderParams['address'] = selectedAddress!.id;
+    // _orderParams['deliveryTime'] = deliveryDateTime;
+    // _orderParams['paymentType'] = paymentType!.id;
+    // if (promocode != null) _orderParams['promocode'] = promocode.id;
+    // if (checkoutNote!.isNotEmpty) _orderParams['notes'] = checkoutNote;
 
-    /// CREATES orderItems part of _orderParams
-    var _orderItemParamList = cartMeals.map((_cartMeal) {
+    // /// CREATES orderItems part of _orderParams
+    // var _orderItemParamList = cartMeals.map((_cartMeal) {
+    //   num totalCartMealSum = 0;
+
+    //   totalCartMealSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+    //       ? _cartMeal.discountedPrice!
+    //       : _cartMeal.price!;
+
+    //   _cartMeal.volumes!.forEach((vol) {
+    //     if (vol.id != -1) totalCartMealSum += vol.price!;
+    //   });
+    //   _cartMeal.customs!.forEach((cus) {
+    //     totalCartMealSum += cus.price!;
+    //   });
+
+    //   /// VOLUME DISSECTING into List<int> part
+    //   List<int> volList = [];
+    //   List<int> cusList = [];
+
+    //   _cartMeal.volumes!.forEach((vol) {
+    //     if (vol.id != -1) volList.add(vol.id!);
+    //   });
+    //   _cartMeal.customs!.forEach((cus) {
+    //     cusList.add(cus.id!);
+    //   });
+
+    //   return {
+    //     'meal': _cartMeal.id,
+    //     'price': totalCartMealSum,
+    //     'quantity': _cartMeal.quantity,
+    //     // 'volumePrices': volList,
+    //     // 'costumizedMeals': cusList,
+    //   };
+    // }).toList();
+
+    // _orderParams['orderItems'] = _orderItemParamList;
+
+    // log.v('_orderParams at the END: $_orderParams');
+
+    // final FormData orderFormData =
+    //     FormData.fromMap(_orderParams, ListFormat.multiCompatible);
+    // log.v('orderFormData: ${orderFormData.fields}');
+
+    List<CreateOrderItem>? orderItemList = [];
+    cartMeals.forEach((_cartMeal) {
       num totalCartMealSum = 0;
 
       totalCartMealSum += _cartMeal.discount != null || _cartMeal.discount! > 0
@@ -226,26 +269,32 @@ class UserService {
         cusList.add(cus.id!);
       });
 
-      return {
-        'meal': _cartMeal.id,
-        'price': totalCartMealSum,
-        'quantity': _cartMeal.quantity,
-        // 'volumePrices': volList,
-        // 'costumizedMeals': cusList,
-      };
-    }).toList();
+      orderItemList.add(CreateOrderItem(
+        meal: _cartMeal.id,
+        price: totalCartMealSum,
+        quantity: _cartMeal.quantity,
+        volumePrices: volList,
+        costumizedMeals: cusList,
+      ));
+    });
 
-    _orderParams['orderItems'] = _orderItemParamList;
-
-    log.v('_orderParams at the END: $_orderParams');
-    final FormData orderFormData =
-        FormData.fromMap(_orderParams, ListFormat.multiCompatible);
-    log.v('orderFormData: ${orderFormData.fields}');
+    CreateOrder createOrder = CreateOrder(
+      restaurant: cartRes!.id,
+      address: !selfPickUp ? selectedAddress!.id : null,
+      selfPickUp: selfPickUp,
+      deliveryTime: deliveryDateTime,
+      paymentType: paymentType!.id,
+      promocode: promocode != null ? promocode.id : null,
+      notes: checkoutNote,
+      orderItems: orderItemList,
+    );
+    log.i('createOrder.toJson(): ${createOrder.toJson()}');
+    log.i('createOrder.toJson() with jsonEncode: ${jsonEncode(createOrder)}');
 
     try {
       Response response = await _apiRoot.dio.post(
         'api/order/',
-        data: jsonEncode(_orderParams),
+        data: jsonEncode(createOrder),
         // data: orderFormData,
       );
       log.v('RESPONSE: api/order/ => ${response.data}');
