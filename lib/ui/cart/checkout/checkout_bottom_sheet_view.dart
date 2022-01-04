@@ -141,31 +141,16 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         ],
                                       )
                                     : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/map_pin_bold.svg',
-                                                color: AppTheme.MAIN_DARK,
-                                                width: 25.w,
-                                              ),
-                                              SizedBox(width: 15.w),
-                                              Text(
-                                                model.cartRes!.name!,
-                                                style: ktsDefault16Text,
-                                              ),
-                                            ],
+                                          SvgPicture.asset(
+                                            'assets/map_pin_bold.svg',
+                                            color: AppTheme.MAIN_DARK,
+                                            width: 25.w,
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 20.w),
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              size: 20,
-                                              color: AppTheme.FONT_COLOR,
-                                            ),
+                                          SizedBox(width: 15.w),
+                                          Text(
+                                            model.cartRes!.name!,
+                                            style: ktsDefault16Text,
                                           ),
                                         ],
                                       ),
@@ -221,10 +206,15 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         SizedBox(width: 15.w),
                                         Row(
                                           children: [
-                                            Text(
-                                              'Eltmeli wagty: ',
-                                              style: ktsDefault16Text,
-                                            ),
+                                            model.isDelivery
+                                                ? Text(
+                                                    'Eltmeli wagty: ',
+                                                    style: ktsDefault16Text,
+                                                  )
+                                                : Text(
+                                                    'Taýýarlamaly wagty: ',
+                                                    style: ktsDefault16Text,
+                                                  ),
                                             Text(
                                               model.deliveryDateTime ==
                                                       model.now
