@@ -180,7 +180,7 @@ class UserService {
 
   Future<bool> createOrder(
     Address? selectedAddress,
-    bool selfPickUp,
+    bool isDelivery,
     DateTime? deliveryDateTime,
     PaymentType? paymentType,
     Promocode? promocode,
@@ -188,62 +188,9 @@ class UserService {
     HiveRestaurant? cartRes,
     List<HiveMeal> cartMeals,
   ) async {
-    // Map<String, dynamic> _orderParams = {};
-
-    // _orderParams['restaurant'] = cartRes!.id;
-    // if (selfPickUp)
-    //   _orderParams['selfPickUp'] = selfPickUp;
-    // else
-    //   _orderParams['address'] = selectedAddress!.id;
-    // _orderParams['deliveryTime'] = deliveryDateTime;
-    // _orderParams['paymentType'] = paymentType!.id;
-    // if (promocode != null) _orderParams['promocode'] = promocode.id;
-    // if (checkoutNote!.isNotEmpty) _orderParams['notes'] = checkoutNote;
-
-    // /// CREATES orderItems part of _orderParams
-    // var _orderItemParamList = cartMeals.map((_cartMeal) {
-    //   num totalCartMealSum = 0;
-
-    //   totalCartMealSum += _cartMeal.discount != null || _cartMeal.discount! > 0
-    //       ? _cartMeal.discountedPrice!
-    //       : _cartMeal.price!;
-
-    //   _cartMeal.volumes!.forEach((vol) {
-    //     if (vol.id != -1) totalCartMealSum += vol.price!;
-    //   });
-    //   _cartMeal.customs!.forEach((cus) {
-    //     totalCartMealSum += cus.price!;
-    //   });
-
-    //   /// VOLUME DISSECTING into List<int> part
-    //   List<int> volList = [];
-    //   List<int> cusList = [];
-
-    //   _cartMeal.volumes!.forEach((vol) {
-    //     if (vol.id != -1) volList.add(vol.id!);
-    //   });
-    //   _cartMeal.customs!.forEach((cus) {
-    //     cusList.add(cus.id!);
-    //   });
-
-    //   return {
-    //     'meal': _cartMeal.id,
-    //     'price': totalCartMealSum,
-    //     'quantity': _cartMeal.quantity,
-    //     // 'volumePrices': volList,
-    //     // 'costumizedMeals': cusList,
-    //   };
-    // }).toList();
-
-    // _orderParams['orderItems'] = _orderItemParamList;
-
-    // log.v('_orderParams at the END: $_orderParams');
-
-    // final FormData orderFormData =
-    //     FormData.fromMap(_orderParams, ListFormat.multiCompatible);
-    // log.v('orderFormData: ${orderFormData.fields}');
-
     List<CreateOrderItem>? orderItemList = [];
+
+    /// Step 1. For each cartMeal in cartMeals, creating and assigning to orderItemList
     cartMeals.forEach((_cartMeal) {
       num totalCartMealSum = 0;
 
@@ -278,10 +225,11 @@ class UserService {
       ));
     });
 
+    /// Step 2. Here we CREATE new order based on above params and conditions
     CreateOrder createOrder = CreateOrder(
       restaurant: cartRes!.id,
-      address: !selfPickUp ? selectedAddress!.id : null,
-      selfPickUp: selfPickUp,
+      address: isDelivery ? selectedAddress!.id : null,
+      selfPickUp: !isDelivery,
       deliveryTime: deliveryDateTime,
       paymentType: paymentType!.id,
       promocode: promocode != null ? promocode.id : null,
@@ -294,20 +242,18 @@ class UserService {
     try {
       Response response = await _apiRoot.dio.post(
         'api/order/',
-        data: jsonEncode(createOrder),
-        // data: orderFormData,
+        data: jsonEncode(
+            createOrder), // Step 3. Instead of using formData I used jsonSerializable's toJson with build-in jsonEncode func
       );
       log.v('RESPONSE: api/order/ => ${response.data}');
-      log.v('RESPONSE: api/order/ => ${response.statusMessage}');
-      log.v('RESPONSE: api/order/ => ${response.statusCode}');
 
-      if (response.data != null && response.statusCode == 200)
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
         return true;
       else
         return false;
     } on DioError catch (error) {
-      log.v('ERROR api/order/ with RESPONSE: $error');
-      // log.v('ERROR api/order/ with RESPONSE: ${error.response}');
+      log.v('ERROR api/order/ with RESPONSE: ${error.response}');
       return false;
     }
   }

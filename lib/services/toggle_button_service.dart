@@ -11,7 +11,7 @@ class ToggleButtonService with ReactiveServiceMixin {
   }
 
   // 2
-  ReactiveValue<bool> _isDelivery = ReactiveValue<bool>(false);
+  ReactiveValue<bool> _isDelivery = ReactiveValue<bool>(true);
 
   bool get isDelivery => _isDelivery.value;
 
