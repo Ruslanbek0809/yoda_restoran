@@ -98,43 +98,77 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   : null,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/house.svg',
-                                          color: AppTheme.MAIN_DARK,
-                                          width: 25.w,
-                                        ),
-                                        SizedBox(width: 15.w),
-                                        Text(
-                                          model.selectedAddress!.id == -1
-                                              ? 'Salgyňyzy giriziň'
-                                              : model.selectedAddress!.street! +
-                                                  (model.selectedAddress!
-                                                              .house !=
-                                                          null
-                                                      ? ', ${model.selectedAddress!.house}'
-                                                      : ''),
-                                          style: model.selectedAddress!.id == -1
-                                              ? ktsDefault16HelperText
-                                              : ktsDefault16Text,
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 20.w),
-                                      child: Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 20,
-                                        color: AppTheme.FONT_COLOR,
+                                child: model.isDelivery
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/house.svg',
+                                                color: AppTheme.MAIN_DARK,
+                                                width: 25.w,
+                                              ),
+                                              SizedBox(width: 15.w),
+                                              Text(
+                                                model.selectedAddress!.id == -1
+                                                    ? 'Salgyňyzy giriziň'
+                                                    : model.selectedAddress!
+                                                            .street! +
+                                                        (model.selectedAddress!
+                                                                    .house !=
+                                                                null
+                                                            ? ', ${model.selectedAddress!.house}'
+                                                            : ''),
+                                                style:
+                                                    model.selectedAddress!.id ==
+                                                            -1
+                                                        ? ktsDefault16HelperText
+                                                        : ktsDefault16Text,
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 20.w),
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 20,
+                                              color: AppTheme.FONT_COLOR,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                'assets/map_pin_bold.svg',
+                                                color: AppTheme.MAIN_DARK,
+                                                width: 25.w,
+                                              ),
+                                              SizedBox(width: 15.w),
+                                              Text(
+                                                model.cartRes!.name!,
+                                                style: ktsDefault16Text,
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 20.w),
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 20,
+                                              color: AppTheme.FONT_COLOR,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
                               ),
                             ),
                           ),
