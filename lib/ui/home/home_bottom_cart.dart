@@ -33,6 +33,22 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
               bottomCartController.reverse();
           }
           break;
+        case AnimationStatus.forward:
+          {
+            if (model.bottomCartStatus == BottomCartStatus.forward)
+              bottomCartController.forward();
+            if (model.bottomCartStatus == BottomCartStatus.reverse)
+              bottomCartController.reverse();
+          }
+          break;
+        case AnimationStatus.reverse:
+          {
+            if (model.bottomCartStatus == BottomCartStatus.forward)
+              bottomCartController.forward();
+            if (model.bottomCartStatus == BottomCartStatus.reverse)
+              bottomCartController.reverse();
+          }
+          break;
         case AnimationStatus.completed:
           {
             if (model.bottomCartStatus == BottomCartStatus.forward)
@@ -42,6 +58,7 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
           }
           break;
         default:
+          break;
       }
 
     model.log.v(
