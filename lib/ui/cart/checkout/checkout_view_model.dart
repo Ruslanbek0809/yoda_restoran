@@ -17,10 +17,13 @@ class CheckoutViewModel extends ReactiveViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+  final _toggleButtonService = locator<ToggleButtonService>();
 
   HiveUser? get currentUser => _userService.currentUser;
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
+
+  bool get isDelivery => _toggleButtonService.isDelivery;
 
   String get searchPromocodeText => _checkoutService.searchPromocodeText;
 

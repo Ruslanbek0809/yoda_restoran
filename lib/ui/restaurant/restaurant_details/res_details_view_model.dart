@@ -79,8 +79,11 @@ class ResDetailsViewModel extends ReactiveViewModel {
 
 //------------------------ NAVIGATIONS ----------------------------//
 
-  Future navToCartView() async => await _navService
-      .navigateTo(Routes.cartView); // TODO: Change page transition here
+  Future<void> navToCartView() async {
+    final _navResult = await _navService.navigateTo(Routes.cartView);
+    // if (_navResult != null && _navResult) 
+    
+  } // TODO: Change page transition here
 
   void navToResSearchView() => _navService.navigateTo(
       Routes.restaurantSearchView); // TODO: Change page transition here
