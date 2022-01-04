@@ -177,8 +177,8 @@ class ClearCartDialogView extends StatelessWidget {
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
-                      await model.clearCart();
                       completer(DialogResponse());
+                      await model.clearCart();
                     },
                   ),
                   SizedBox(width: 42.w),
