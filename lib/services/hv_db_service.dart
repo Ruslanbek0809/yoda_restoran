@@ -230,7 +230,7 @@ class HiveDbService with ReactiveServiceMixin {
       log.i('shouldAdd AFTER VOLUME ---------------------------- $shouldAdd');
 
       /// STEP 3.3. CHECK selectedCustoms and UPDATE isUnique var by condition ( ID COMPARISON )
-      /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison WORKAROUND
+      /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison Workaround
       if (!shouldAdd)
         for (Customizable cus in selectedCustoms) {
           log.v('cus.id in each selectedCustoms: ${cus.id}');

@@ -85,11 +85,7 @@ class ResDetailsViewModel extends FutureViewModel {
   Future<void> navToCartView() async {
     bool _navResult = false;
     _navResult = await _navService.navigateTo(Routes.cartView);
-    log.i('navToCartView with _navResult: $_navResult');
-    if (_navResult) {
-    log.i('TRUEEE _navResult: $_navResult');
-      await initialise();
-    }
+    if (_navResult) await initialise(); // Workaround
   } // TODO: Change page transition here
 
   void navToResSearchView() => _navService.navigateTo(

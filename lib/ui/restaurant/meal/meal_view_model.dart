@@ -27,7 +27,7 @@ class MealViewModel extends ReactiveViewModel {
   int quantityDraft = 1;
 
   /// Function to update isButtonToggled
-  // void updateButtonToggle() {
+  //  void updateButtonToggle() {
   //   _isButtonToggled = !_isButtonToggled;
   //   log.i('_isButtonToggled: $_isButtonToggled');
   //   notifyListeners();
