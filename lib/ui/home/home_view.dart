@@ -33,18 +33,17 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) {
-        model.log.v('HomeView called when CART is cleared');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
-            body: Stack(
-              children: [
-                model.anyObjectsBusy || model.fetchingSelectedMainCatsRes
-                    ? LoadingWidget()
-                    : SmartRefresher(
+            body: model.anyObjectsBusy || model.fetchingSelectedMainCatsRes
+                ? LoadingWidget()
+                : Stack(
+                    children: [
+                      SmartRefresher(
                         header: WaterDropMaterialHeader(
                           backgroundColor: AppTheme.MAIN,
                         ),
@@ -295,10 +294,10 @@ class _HomeViewState extends State<HomeView> {
                           ],
                         ),
                       ),
-                //------------------ BOTTOM CART ---------------------//
-                HomeBottomCart(),
-              ],
-            ),
+                      //------------------ BOTTOM CART ---------------------//
+                      HomeBottomCart(),
+                    ],
+                  ),
           ),
         );
       },

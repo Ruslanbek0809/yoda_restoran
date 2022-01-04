@@ -19,9 +19,6 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
         Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
             .animate(bottomCartController);
 
-    model.log.v(
-        'HomeBottomCart BEFORE bottomCartController.status: ${bottomCartController.status}, model.bottomCartStatus: ${model.bottomCartStatus}');
-
     /// BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)
       switch (bottomCartController.status) {
@@ -60,9 +57,6 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
         default:
           break;
       }
-
-    model.log.v(
-        'HomeBottomCart AFTER bottomCartController.status: ${bottomCartController.status}, model.bottomCartStatus: ${model.bottomCartStatus}');
 
     return Align(
       alignment: Alignment.bottomCenter,
