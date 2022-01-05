@@ -332,11 +332,13 @@ class CheckoutViewModel extends ReactiveViewModel {
     ));
     if (resultSuccess) {
       await _hiveDbService.clearCart();
-      log.i(
-          '_hiveDbService.cartMeals length: ${_hiveDbService.cartMeals.length}');
-      _navService.pushNamedAndRemoveUntil(Routes.orderSuccessView);
+      await _navService.pushNamedAndRemoveUntil(Routes.orderSuccessView);
     }
   }
+
+  /// NAVIGATES to Orders by removing all previous routes
+  Future<void> navToOrdersByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

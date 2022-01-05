@@ -62,7 +62,7 @@ class OrderSuccessView extends StatelessWidget {
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: AppTheme().radius10),
-                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                     ),
                     child: Text(
                       'Baş sahypa',
