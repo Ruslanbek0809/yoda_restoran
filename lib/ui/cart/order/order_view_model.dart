@@ -7,9 +7,9 @@ import 'package:yoda_res/app/app.router.dart';
 class OrderViewModel extends BaseViewModel {
   final log = getLogger('OrderViewModel');
 
-  // final _navService = locator<NavigationService>();
+  final _navService = locator<NavigationService>();
 
-  // /// NAVIGATES until it removes to given route
-  // Future<void> navByRemovingUntil() async =>
-  //     await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+  /// NAVIGATES until it removes to given route
+  Future<void> navByRemovingUntil() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }

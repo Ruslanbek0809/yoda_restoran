@@ -13,86 +13,92 @@ class OrderSuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<OrderViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 36.w,
-              child: SvgPicture.asset(
-                'assets/yoda_restoran.svg',
-                color: AppTheme.MAIN_DARK,
-              ),
-            ),
-            Lottie.asset(
-              'assets/success_check.json',
-              height: 0.4.sh,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text(
-                'Sargydyňyz restorana geçirildi',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: AppTheme.FONT_COLOR,
-                  fontWeight: FontWeight.w600,
+      builder: (context, model, child) => WillPopScope(
+        onWillPop: () async {
+          model.navByRemovingUntil(); // Workaround
+          return false;
+        },
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                height: 36.w,
+                child: SvgPicture.asset(
+                  'assets/yoda_restoran.svg',
+                  color: AppTheme.MAIN_DARK,
                 ),
               ),
-            ),
-            SizedBox(height: 10.w),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text(
-                'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: AppTheme.DIALOG_TITLE_COLOR,
-                ),
+              Lottie.asset(
+                'assets/success_check.json',
+                height: 0.4.sh,
               ),
-            ),
-            SizedBox(height: 50.w),
-            SizedBox(
-              width: 1.sw,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.w),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: AppTheme.MAIN_DARK,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: AppTheme().radius10),
-                    padding: EdgeInsets.symmetric(vertical: 15.w),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text(
+                  'Sargydyňyz restorana geçirildi',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    color: AppTheme.FONT_COLOR,
+                    fontWeight: FontWeight.w600,
                   ),
-                  child: Text(
-                    'Baş sahypa',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.normal,
+                ),
+              ),
+              SizedBox(height: 10.w),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text(
+                  'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: AppTheme.DIALOG_TITLE_COLOR,
+                  ),
+                ),
+              ),
+              SizedBox(height: 50.w),
+              SizedBox(
+                width: 1.sw,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.w),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppTheme.MAIN_DARK,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: AppTheme().radius10),
+                      padding: EdgeInsets.symmetric(vertical: 15.w),
                     ),
+                    child: Text(
+                      'Baş sahypa',
+                      style: TextStyle(
+                        color: AppTheme.WHITE,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamedAndRemoveUntil(
+                            RouteList.home, (route) => false),
                   ),
-                  onPressed: () => Navigator.of(context)
-                      .pushNamedAndRemoveUntil(
-                          RouteList.home, (route) => false),
                 ),
               ),
-            ),
-            SizedBox(height: 15.w),
-            TextButton(
-              child: Text(
-                'Sargytlar',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  color: AppTheme.FONT_COLOR,
+              SizedBox(height: 15.w),
+              TextButton(
+                child: Text(
+                  'Sargytlar',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: AppTheme.FONT_COLOR,
+                  ),
                 ),
+                onPressed: () => Navigator.of(context)
+                    .pushReplacementNamed(RouteList.orders),
               ),
-              onPressed: () =>
-                  Navigator.of(context).pushReplacementNamed(RouteList.orders),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => OrderViewModel(),
