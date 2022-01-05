@@ -338,16 +338,6 @@ class CheckoutViewModel extends ReactiveViewModel {
     }
   }
 
-  /// CREATES new order
-  Future<void> navToOrder() async {
-    log.v('createOrder()');
-    try {
-      await _navService.navigateTo(Routes.ordersView);
-    } catch (err) {
-      throw err;
-    }
-  }
-
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
       [_checkoutService, _hiveDbService];

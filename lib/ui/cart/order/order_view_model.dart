@@ -9,7 +9,13 @@ class OrderViewModel extends BaseViewModel {
 
   final _navService = locator<NavigationService>();
 
-  /// NAVIGATES until it removes to given route
-  Future<void> navByRemovingUntil() async =>
+//------------------------ ORDER SUCCESS PART ----------------------------//
+
+  /// NAVIGATES to Home by removing all previous routes
+  Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+
+  /// NAVIGATES to Orders by removing all previous routes
+  Future<void> navToOrdersByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 }

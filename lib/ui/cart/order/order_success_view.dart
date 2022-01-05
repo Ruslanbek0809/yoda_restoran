@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:yoda_res/shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-
 import 'order_view_model.dart';
 
 class OrderSuccessView extends StatelessWidget {
@@ -15,7 +15,7 @@ class OrderSuccessView extends StatelessWidget {
     return ViewModelBuilder<OrderViewModel>.reactive(
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {
-          model.navByRemovingUntil(); // Workaround
+          model.navToHomeByRemovingAll(); // Workaround
           return false;
         },
         child: Scaffold(
@@ -24,7 +24,7 @@ class OrderSuccessView extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.center,
-                height: 36.w,
+                height: 35.h,
                 child: SvgPicture.asset(
                   'assets/yoda_restoran.svg',
                   color: AppTheme.MAIN_DARK,
@@ -39,26 +39,19 @@ class OrderSuccessView extends StatelessWidget {
                 child: Text(
                   'Sargydyňyz restorana geçirildi',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    color: AppTheme.FONT_COLOR,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: ktsDefault20BoldText,
                 ),
               ),
-              SizedBox(height: 10.w),
+              SizedBox(height: 10.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Text(
                   'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: AppTheme.DIALOG_TITLE_COLOR,
-                  ),
+                  style: ktsDefault16HelperText,
                 ),
               ),
-              SizedBox(height: 50.w),
+              SizedBox(height: 50.h),
               SizedBox(
                 width: 1.sw,
                 child: Padding(
@@ -69,33 +62,23 @@ class OrderSuccessView extends StatelessWidget {
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: AppTheme().radius10),
-                      padding: EdgeInsets.symmetric(vertical: 15.w),
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
                     ),
                     child: Text(
                       'Baş sahypa',
-                      style: TextStyle(
-                        color: AppTheme.WHITE,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.normal,
-                      ),
+                      style: ktsButton18Text,
                     ),
-                    onPressed: () => Navigator.of(context)
-                        .pushNamedAndRemoveUntil(
-                            RouteList.home, (route) => false),
+                    onPressed: model.navToHomeByRemovingAll,
                   ),
                 ),
               ),
-              SizedBox(height: 15.w),
+              SizedBox(height: 15.h),
               TextButton(
                 child: Text(
                   'Sargytlar',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    color: AppTheme.FONT_COLOR,
-                  ),
+                  style: ktsDefault18Text,
                 ),
-                onPressed: () => Navigator.of(context)
-                    .pushReplacementNamed(RouteList.orders),
+                onPressed: model.navToOrdersByRemovingAll,
               ),
             ],
           ),
