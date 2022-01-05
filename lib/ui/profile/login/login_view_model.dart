@@ -21,7 +21,12 @@ class LoginViewModel extends FormViewModel {
           throwException: true);
 
       // Navigate to successful route
-      _navService.replaceWith(Routes.otpView, arguments: isCartView);
+      _navService.replaceWith(
+        Routes.otpView,
+        arguments: OtpViewArguments(
+          isCartView: true,
+        ),
+      );
       // await _handleResponse(response);
     } catch (e) {
       log.e(e.toString());

@@ -34,10 +34,11 @@ class StartUpViewModel extends BaseViewModel {
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
     await Future.delayed(Duration(milliseconds: 6500)).then((value) {
-      /// NAV next View based on condition
-      _navService.replaceWith(Routes.homeView);
       log.v(
-          'USER ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+          'USER ${_userService.currentUser?.mobile}, ${_userService.currentUser?.accessToken}');
+      _navService.replaceWith(Routes.homeView);
+
+      /// NAV next View based on condition
       // if (_userService.hasLoggedInUser) {
       //   log.v(
       //       'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
