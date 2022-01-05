@@ -30,3 +30,4 @@ export 'create_order.dart';
 export 'create_order_item.dart';
 export 'driver.dart';
 export 'order.dart';
+export 'order_item.dart';

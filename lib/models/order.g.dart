@@ -26,6 +26,9 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       driver: json['driver'] == null
           ? null
           : Driver.fromJson(json['driver'] as Map<String, dynamic>),
+      orderItems: (json['orderItems'] as List<dynamic>?)
+          ?.map((e) => OrderItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
@@ -40,4 +43,5 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'restaurant': instance.restaurant,
       'promocode': instance.promocode,
       'driver': instance.driver,
+      'orderItems': instance.orderItems,
     };
