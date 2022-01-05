@@ -102,8 +102,12 @@ class StackedRouter extends RouterBase {
       );
     },
     OtpView: (data) {
+      var args = data.getArgs<OtpViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => OtpView(),
+        builder: (context) => OtpView(
+          isCartView: args.isCartView,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -150,4 +154,11 @@ class LoginViewArguments {
   final bool isCartView;
   final Key? key;
   LoginViewArguments({required this.isCartView, this.key});
+}
+
+/// OtpView arguments holder class
+class OtpViewArguments {
+  final bool isCartView;
+  final Key? key;
+  OtpViewArguments({required this.isCartView, this.key});
 }

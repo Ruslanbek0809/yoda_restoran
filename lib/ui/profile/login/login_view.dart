@@ -31,6 +31,7 @@ class LoginView extends StatelessWidget with $LoginView {
     return ViewModelBuilder<LoginViewModel>.reactive(
       onModelReady: (model) =>
           listenToFormUpdated(model), // Needed when generating formFields
+      viewModelBuilder: () => LoginViewModel(isCartView),
       builder: (context, model, child) => Scaffold(
         body: SingleChildScrollView(
           child: Form(
@@ -162,7 +163,6 @@ class LoginView extends StatelessWidget with $LoginView {
           ),
         ),
       ),
-      viewModelBuilder: () => LoginViewModel(),
     );
   }
 }

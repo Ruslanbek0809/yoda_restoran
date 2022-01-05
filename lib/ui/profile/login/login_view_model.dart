@@ -8,17 +8,20 @@ import 'login_view.form.dart';
 
 class LoginViewModel extends FormViewModel {
   final log = getLogger('LoginViewModel');
+  final bool isCartView;
+  LoginViewModel(this.isCartView);
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
+  /// SAVES login data by posting data to login API
   Future saveLoginData() async {
     try {
       await runBusyFuture(_userService.loginUser(phoneValue!),
           throwException: true);
 
       // Navigate to successful route
-      _navService.replaceWith(Routes.otpView);
+      _navService.replaceWith(Routes.otpView, arguments: isCartView);
       // await _handleResponse(response);
     } catch (e) {
       log.e(e.toString());

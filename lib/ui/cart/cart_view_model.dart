@@ -137,7 +137,9 @@ class CartViewModel extends ReactiveViewModel {
       await showCustomCheckoutBottomSheet();
     } else {
       log.v('USER NOTTTTT FOUND');
-      await _navService.navigateTo(Routes.loginView, arguments: true);
+      await _navService.navigateTo(Routes.loginView,
+          arguments:
+              true); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
     }
   }
 
