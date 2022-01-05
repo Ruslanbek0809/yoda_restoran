@@ -35,14 +35,17 @@ class StartUpViewModel extends BaseViewModel {
 
     await Future.delayed(Duration(milliseconds: 6500)).then((value) {
       /// NAV next View based on condition
-      if (_userService.hasLoggedInUser) {
-        log.v(
-            'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
-        _navService.replaceWith(Routes.homeView);
-      } else {
-        log.v('USER NOTTTTT FOUND');
-        _navService.replaceWith(Routes.loginView);
-      }
+      _navService.replaceWith(Routes.homeView);
+      log.v(
+          'USER ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      // if (_userService.hasLoggedInUser) {
+      //   log.v(
+      //       'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      //   _navService.replaceWith(Routes.homeView);
+      // } else {
+      //   log.v('USER NOTTTTT FOUND');
+      //   _navService.replaceWith(Routes.loginView);
+      // }
     });
 
     log.i('===== StartUpViewModel ENDED =====');

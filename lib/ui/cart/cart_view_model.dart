@@ -137,7 +137,7 @@ class CartViewModel extends ReactiveViewModel {
       await showCustomCheckoutBottomSheet();
     } else {
       log.v('USER NOTTTTT FOUND');
-      await _navService.navigateTo(Routes.loginView);
+      await _navService.navigateTo(Routes.loginView, arguments: true);
     }
   }
 

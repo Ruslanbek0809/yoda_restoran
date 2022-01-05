@@ -92,8 +92,12 @@ class StackedRouter extends RouterBase {
       );
     },
     LoginView: (data) {
+      var args = data.getArgs<LoginViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => LoginView(),
+        builder: (context) => LoginView(
+          isCartView: args.isCartView,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -139,4 +143,11 @@ class ResDetailsViewArguments {
 class RestaurantSearchViewArguments {
   final AnimationController bottomCartController;
   RestaurantSearchViewArguments({required this.bottomCartController});
+}
+
+/// LoginView arguments holder class
+class LoginViewArguments {
+  final bool isCartView;
+  final Key? key;
+  LoginViewArguments({required this.isCartView, this.key});
 }

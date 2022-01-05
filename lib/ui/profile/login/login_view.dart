@@ -19,6 +19,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class LoginView extends StatelessWidget with $LoginView {
+  final bool isCartView;
+  LoginView({required this.isCartView, Key? key}) : super(key: key);
+
   final formKey = GlobalKey<FormState>();
   var maskFormatter = MaskTextInputFormatter(
       mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
@@ -142,8 +145,8 @@ class LoginView extends StatelessWidget with $LoginView {
                       onPressed: () {
                         if (!formKey.currentState!.validate()) return;
                         formKey.currentState!.save();
-                        
-                        model.saveData();
+
+                        model.saveLoginData();
                       }),
                 ),
                 verticalSpaceMedium,

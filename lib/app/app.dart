@@ -41,6 +41,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: ToggleButtonService),
     LazySingleton(classType: CheckoutService),
+    LazySingleton(classType: OrderService),
   ],
   logger: StackedLogger(),
 )
