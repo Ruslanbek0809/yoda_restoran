@@ -275,6 +275,7 @@ class UserService {
       if (_orders.isNotEmpty)
         _orders.sort((prev, next) => prev.status!
             .compareTo(next.status!)); // Sorting status ids in ascending order
+      log.v('_orders length in UserService: ${_orders.length}');
       return _orders;
     } on DioError catch (error) {
       log.v('ERROR api/order/ with RESPONSE: ${error.response}');

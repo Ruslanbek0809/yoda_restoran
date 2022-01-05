@@ -10,7 +10,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       id: json['id'] as int?,
       orderNumber: json['orderNumber'] as String?,
       discountedPrice: json['discountedPrice'] as num?,
-      totMeal: json['totMeal'] as num?,
+      totPrice: json['totPrice'] as num?,
       selfPickUp: json['selfPickUp'] as bool?,
       dostawkaPrice: json['dostawkaPrice'] as num?,
       deliveryTime: json['deliveryTime'] == null
@@ -35,7 +35,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'id': instance.id,
       'orderNumber': instance.orderNumber,
       'discountedPrice': instance.discountedPrice,
-      'totMeal': instance.totMeal,
+      'totPrice': instance.totPrice,
       'selfPickUp': instance.selfPickUp,
       'dostawkaPrice': instance.dostawkaPrice,
       'deliveryTime': instance.deliveryTime?.toIso8601String(),

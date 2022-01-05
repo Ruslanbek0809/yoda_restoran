@@ -3,13 +3,13 @@ import 'models.dart';
 
 part 'order.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class Order {
   Order({
     this.id,
     this.orderNumber,
     this.discountedPrice,
-    this.totMeal,
+    this.totPrice,
     this.selfPickUp,
     this.dostawkaPrice,
     this.deliveryTime,
@@ -29,8 +29,8 @@ class Order {
   @JsonKey(name: 'discountedPrice')
   final num? discountedPrice;
 
-  @JsonKey(name: 'totMeal')
-  final num? totMeal;
+  @JsonKey(name: 'totPrice')
+  final num? totPrice;
 
   @JsonKey(name: 'selfPickUp')
   final bool? selfPickUp;

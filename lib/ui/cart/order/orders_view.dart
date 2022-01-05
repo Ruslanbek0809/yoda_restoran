@@ -12,7 +12,7 @@ import 'order_view_model.dart';
 class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OrderViewModel>.nonReactive(
+    return ViewModelBuilder<OrderViewModel>.reactive(
       onModelReady: (model) => model.getOrders(),
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {

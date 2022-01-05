@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'models.dart';
 part 'order_item.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: true)
 class OrderItem {
   OrderItem({
     this.meal,
@@ -21,7 +21,7 @@ class OrderItem {
   final num? price;
 
   @JsonKey(name: 'quantity')
-  final int? quantity;
+  final num? quantity;
 
   @JsonKey(name: 'volumePrices')
   final List<int>? volumePrices;
