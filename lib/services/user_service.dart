@@ -264,7 +264,7 @@ class UserService {
     List<Order> _orders = [];
     try {
       Response response = await _apiRoot.dio.get('api/order/');
-      log.v('RESPONSE: api/order/ => ${response.data}');
+      // log.v('RESPONSE: api/order/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_order) {
@@ -275,7 +275,6 @@ class UserService {
       if (_orders.isNotEmpty)
         _orders.sort((prev, next) => prev.status!
             .compareTo(next.status!)); // Sorting status ids in ascending order
-      log.v('_orders length in UserService: ${_orders.length}');
       return _orders;
     } on DioError catch (error) {
       log.v('ERROR api/order/ with RESPONSE: ${error.response}');
