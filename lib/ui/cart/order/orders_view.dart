@@ -12,7 +12,7 @@ import 'order_view_model.dart';
 class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OrderViewModel>.reactive(
+    return ViewModelBuilder<OrderViewModel>.nonReactive(
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {
           model.navToHomeByRemovingAll(); // Workaround

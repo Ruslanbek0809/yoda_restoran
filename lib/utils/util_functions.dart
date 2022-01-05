@@ -37,11 +37,11 @@ List<AddressUI> addresses = [
   AddressUI(2, 'N.Andalyp 32'),
 ];
 
-List<Order> orderList = [
-  Order(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), mealList),
-  Order(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), mealList),
-  Order(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), mealList),
-  Order(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), mealList),
+List<OrderUI> orderList = [
+  OrderUI(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), mealList),
+  OrderUI(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), mealList),
+  OrderUI(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), mealList),
+  OrderUI(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), mealList),
 ];
 
 List<CategoryFilter> mainCatSortList = [
