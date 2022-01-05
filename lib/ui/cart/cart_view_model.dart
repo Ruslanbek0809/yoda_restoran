@@ -25,6 +25,8 @@ class CartViewModel extends ReactiveViewModel {
 
   bool get isDelivery => _toggleButtonService.isDelivery;
 
+  bool get hasLoggedInUser => _userService.hasLoggedInUser;
+
   /// FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
     await runBusyFuture(_cartService.getMoreMeals());
@@ -131,7 +133,7 @@ class CartViewModel extends ReactiveViewModel {
 
   /// CALLS navs based on user's login state.
   Future<void> onCartCheckoutButtonPressed() async {
-    if (_userService.hasLoggedInUser) {
+    if (hasLoggedInUser) {
       log.v(
           'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
       await showCustomCheckoutBottomSheet();

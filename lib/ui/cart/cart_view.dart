@@ -186,7 +186,7 @@ class CartView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: 17.w, horizontal: 0.2.sw),
                           child: Text(
-                            'Dowam et',
+                            model.hasLoggedInUser ? 'Giriş et' : 'Dowam et',
                             style: ktsButton18Text,
                           ),
                           onPressed: model.onCartCheckoutButtonPressed,
