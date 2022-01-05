@@ -22,7 +22,7 @@ class CartView extends StatelessWidget {
         model.log.v('CartView ===================');
         return WillPopScope(
           onWillPop: () async {
-            model.navBack(); /// Workaround
+            model.navBack(); // Workaround
             return false;
           },
           child: Scaffold(

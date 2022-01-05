@@ -37,8 +37,9 @@ class CartViewModel extends ReactiveViewModel {
 
     await _hiveDbService.clearCart();
     log.i('cartMeals length: ${cartMeals.length}');
-    navBack();
-    notifyListeners();
+    await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+
+    // notifyListeners();
   }
 
   /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
