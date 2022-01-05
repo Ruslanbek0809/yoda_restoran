@@ -3,11 +3,24 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
+import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/services/services.dart';
 
 class OrderViewModel extends BaseViewModel {
   final log = getLogger('OrderViewModel');
 
   final _navService = locator<NavigationService>();
+  final _orderService = locator<OrderService>();
+
+//------------------------ ORDER PART ----------------------------//
+
+  List<Order>? get orders => _orderService.orders;
+
+  /// GETS all orders
+  Future getOrders() async {
+    await runBusyFuture(_orderService.getOrders());
+    log.i('orders length: ${orders!.length} ');
+  }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//
 

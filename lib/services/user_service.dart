@@ -257,4 +257,27 @@ class UserService {
       return false;
     }
   }
+
+  //------------------ ORDERS ---------------------//
+
+  Future<List<Order>> getOrders() async {
+    List<Order> _orders = [];
+    try {
+      Response response = await _apiRoot.dio.get('api/order/');
+      log.v('RESPONSE: api/order/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_order) {
+          _orders.add(Order.fromJson(_order));
+        });
+      }
+
+      if (_orders.isNotEmpty)
+        _orders.sort((prev, next) => prev.status!.compareTo(next.status!));
+      return _orders;
+    } on DioError catch (error) {
+      log.v('ERROR api/order/ with RESPONSE: ${error.response}');
+      rethrow;
+    }
+  }
 }
