@@ -207,8 +207,7 @@ class MealBottomSheet extends StatelessWidget {
                                                 SizedBox(width: 7.w),
                                                 Text(
                                                   '+${mainCustomizable.customizables![pos].price} TMT',
-                                                  style:
-                                                      ktsDefault16HelperText,
+                                                  style: ktsDefault16HelperText,
                                                 ),
                                               ],
                                             ),

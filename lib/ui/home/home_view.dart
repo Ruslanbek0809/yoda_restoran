@@ -288,7 +288,9 @@ class _HomeViewState extends State<HomeView> {
                                             ),
                                           ],
                                         ),
-                                  SizedBox(height: 0.1.sh), // COMPENSATES HomeBottomCart
+                                  SizedBox(
+                                      height:
+                                          0.1.sh), // COMPENSATES HomeBottomCart
                                 ],
                               ),
                             ),

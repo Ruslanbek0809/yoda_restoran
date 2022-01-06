@@ -151,6 +151,41 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
+  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  Future<void> subtractOrRemoveMealInCart(int? mealId) async {
+    log.v('mealId: $mealId');
+
+    /// GETS lastMeal from these meals
+    HiveMeal? _lastMeal =
+        _cartMeals.value.lastWhere((_meal) => _meal.id == mealId);
+    int pos = _cartMeals.value.indexOf(_lastMeal);
+
+    /// UPDATING
+    if (_lastMeal.quantity! > 1) {
+      log.v('_lastMeal with ABOVE 1');
+
+      // _lastMeal.quantity = _lastMeal.quantity! - 1;
+      // cartMealsBox.putAt(pos, _lastMeal);
+      // cartMealsBox.putAt(pos, _cartMeals.value[pos]);
+      _cartMeals.value[pos].quantity = _cartMeals.value[pos].quantity! - 1;
+      cartMealsBox.putAt(pos, _cartMeals.value[pos]);
+      log.v('_lastMeal.quantity AFTER action: ${_lastMeal.quantity}');
+    }
+
+    /// ADDING
+    else {
+      log.v(
+          '_lastMeal with BELOW 1 with _cartMeals.value.length: ${_cartMeals.value.length}');
+      cartMealsBox.deleteAt(pos);
+      _cartMeals.value.removeAt(pos);
+
+      log.v('AFTER action _cartMeals.value.length: ${_cartMeals.value.length}');
+
+      if (_cartMeals.value.isEmpty)
+        _bottomCartService.hideBottomCart(); // HIDES BottomCart.
+    }
+  }
+
   Future<void> clearCart() async {
     log.v('BEFORE CLEAR _cartMeals.value length: ${_cartMeals.value.length}');
     await cartMealsBox.clear();
