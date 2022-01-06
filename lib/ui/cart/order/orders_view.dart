@@ -182,7 +182,38 @@ class OrdersView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20.h),
+                            SizedBox(height: 15.h),
+                            //------------------ PROMOCODE PART ---------------------//
+                            if (order.promocode != null)
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: 16.w, bottom: 10.h),
+                                child: Divider(color: kcDividerColor),
+                              ),
+                            if (order.promocode != null)
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Promo kod: ${order.promocode!.name}',
+                                      style: ktsDefault16Text,
+                                    ),
+                                    Text(
+                                      '${order.totPrice} TMT -$orderPromocodePrice TMT',
+                                      style: ktsDefault16Text,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (order.promocode != null)
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 16.w, top: 10.h, bottom: 15.h),
+                                child: Divider(color: kcDividerColor),
+                              ),
                             //------------------ ORDER PRODUCT LIST ---------------------//
                             Column(
                               children: orderList[pos]
