@@ -22,6 +22,21 @@ class OrderViewModel extends BaseViewModel {
     log.i('orders length: ${orders!.length} ');
   }
 
+  /// GETS total meal draft sum
+  num getTotalOrderSum(Order order) {
+    num totalOrderSum = order.totPrice!;
+
+    if (order.promocode != null) {
+      if (order.promocode!.promoType == 1)
+        totalOrderSum -= order.promocode!.discount!;
+      else
+        totalOrderSum = totalOrderSum -
+            ((totalOrderSum / 100) * order.promocode!.discount!);
+    }
+
+    return totalOrderSum;
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes

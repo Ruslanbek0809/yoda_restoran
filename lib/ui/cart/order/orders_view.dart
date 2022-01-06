@@ -72,7 +72,7 @@ class OrdersView extends StatelessWidget {
                         break;
                     }
                     return Padding(
-                      padding: EdgeInsets.only(top: 5.w),
+                      padding: EdgeInsets.only(top: 5.h),
                       child: Theme(
                         data: Theme.of(context).copyWith(
                           dividerColor: Colors.transparent,
