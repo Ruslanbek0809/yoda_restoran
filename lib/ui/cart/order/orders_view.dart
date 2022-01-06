@@ -54,6 +54,23 @@ class OrdersView extends StatelessWidget {
                   itemCount: model.orders!.length,
                   itemBuilder: (context, pos) {
                     Order order = model.orders![pos];
+                    String orderStatusText = '';
+                    switch (order.status) {
+                      case 1:
+                        orderStatusText = 'Garaşylýar';
+                        break;
+                      case 2:
+                        orderStatusText = 'Kabul edildi';
+                        break;
+                      case 3:
+                        orderStatusText = 'Ugradyldy';
+                        break;
+                      case 4:
+                        orderStatusText = 'Eltildi';
+                        break;
+                      default:
+                        break;
+                    }
                     return Padding(
                       padding: EdgeInsets.only(top: 5.w),
                       child: Theme(
@@ -91,7 +108,7 @@ class OrdersView extends StatelessWidget {
                                       style: ktsDefault14Text,
                                     ),
                                     Text(
-                                      ' - ${orderList[pos].orderStatus.name}',
+                                      ' - $orderStatusText',
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         color: AppTheme.STATUS_COLOR,
@@ -99,14 +116,6 @@ class OrdersView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                // if (orderList[pos].orderStatus.id == 3)
-                                //   Text(
-                                //     'Sürüji: Sultan +993 64 687171',
-                                //     style: TextStyle(
-                                //       fontSize: 14.sp,
-                                //       color: AppTheme.STATUS_COLOR,
-                                //     ),
-                                //   ),
                               ],
                             ),
                           ),
