@@ -172,7 +172,11 @@ class OrdersView extends StatelessWidget {
                                     style: ktsDefault16Text,
                                   ),
                                   Text(
-                                    '20 TMT',
+                                    order.selfPickUp!
+                                        ? '0 TMT'
+                                        : order.status == 1
+                                            ? 'Bellenmedi'
+                                            : '${order.dostawkaPrice.toString()} TMT',
                                     style: ktsDefault16Text,
                                   ),
                                 ],
