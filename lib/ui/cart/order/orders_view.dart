@@ -71,6 +71,7 @@ class OrdersView extends StatelessWidget {
                       default:
                         break;
                     }
+    // num? totalMealSum = model.getTotalMealSum(cartMeal); // Gets totalMealSum
                     return Padding(
                       padding: EdgeInsets.only(top: 5.h),
                       child: Theme(
