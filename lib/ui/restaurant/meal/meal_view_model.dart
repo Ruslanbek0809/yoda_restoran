@@ -114,6 +114,22 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  Future<void> subtractOrRemoveMealInCart(int? mealId) async {
+    log.i('subtractOrRemoveMealInCart() mealId: $mealId');
+
+    await _hiveDbService.subtractOrRemoveMealInCart(mealId);
+    quantity = _hiveDbService.getMealQuantity(mealId)!;
+    if (quantity >= 1)
+      _isButtonToggled = true;
+    else
+      _isButtonToggled = false;
+
+    log.i(
+        'subtractOrRemoveMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+    notifyListeners();
+  }
+
 //------------------------ MEAL CART DIALOG PART ----------------------------//
 
   /// SHOWS Clear or Navigate Cart Dialog
