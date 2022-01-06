@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
@@ -49,8 +51,9 @@ class OrdersView extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   padding:
                       EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.w),
-                  itemCount: orderList.length,
+                  itemCount: model.orders!.length,
                   itemBuilder: (context, pos) {
+                    Order order = model.orders![pos];
                     return Padding(
                       padding: EdgeInsets.only(top: 5.w),
                       child: Theme(
@@ -59,10 +62,10 @@ class OrdersView extends StatelessWidget {
                           dividerTheme: DividerThemeData(
                               color: Theme.of(context).colorScheme.background),
                         ),
+                        // DateFormat('dd-MM-yyyy HH:mm').format(deliveryTime!.toLocal())
                         child: ExpansionTile(
                           initiallyExpanded:
-                              orderList[pos].orderStatus.id == 2 ||
-                                  orderList[pos].orderStatus.id == 1,
+                              order.status == 2 || order.status == 1,
                           title: SizedBox(),
                           onExpansionChanged: (value) {
                             printLog('onExpansionChanged()');
@@ -75,23 +78,17 @@ class OrdersView extends StatelessWidget {
                               children: [
                                 //------------------ RESTAURANT NAME ---------------------//
                                 Text(
-                                  orderList[pos].restaurantName,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: AppTheme.FONT_COLOR,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  order.restaurant!.name!,
+                                  style: ktsDefault18SemiBoldText,
                                 ),
-                                SizedBox(height: 5.w),
+                                SizedBox(height: 5.h),
                                 //------------------ DATE and STATUS ---------------------//
                                 Row(
                                   children: [
                                     Text(
-                                      '9 Ýanwar, 2021',
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: AppTheme.FONT_COLOR,
-                                      ),
+                                      DateFormat('dd.MM.yyyy')
+                                          .format(order.deliveryTime!),
+                                      style: ktsDefault14Text,
                                     ),
                                     Text(
                                       ' - ${orderList[pos].orderStatus.name}',
