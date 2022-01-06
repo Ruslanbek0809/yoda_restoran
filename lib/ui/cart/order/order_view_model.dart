@@ -37,6 +37,33 @@ class OrderViewModel extends BaseViewModel {
     return totalOrderSum;
   }
 
+  /// GETS getPromocodePrice
+  num getPromocodePrice(Order order) {
+    num totalPromocodePrice = 0;
+
+    if (order.promocode != null) {
+      if (order.promocode!.promoType == 1)
+        totalPromocodePrice = order.promocode!.discount!;
+      else
+        totalPromocodePrice =
+            (order.totPrice! / 100) * order.promocode!.discount!;
+    }
+    return totalPromocodePrice;
+  }
+
+  /// GETS getTotalOrderSum with promocode
+  num getTotalOrderSumWithPromocode(Order order) {
+    num totalOrderSum = order.totPrice!;
+
+    if (order.promocode != null) {
+      if (order.promocode!.promoType == 1)
+        totalOrderSum -= order.promocode!.discount!;
+      else
+        totalOrderSum = order.totPrice! - getPromocodePrice(order);
+    }
+    return totalOrderSum;
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
