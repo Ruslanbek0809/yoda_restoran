@@ -54,6 +54,11 @@ class OrdersView extends StatelessWidget {
                   itemCount: model.orders!.length,
                   itemBuilder: (context, pos) {
                     Order order = model.orders![pos];
+                    num? orderPromocodePrice = model.getPromocodePrice(
+                        order); // GETS promocode price for this order
+                    num? orderTotalPriceWithPromocode =
+                        model.getTotalOrderSumWithPromocode(
+                            order); // GETS total order price with promocode price subtracted
                     String orderStatusText = '';
                     switch (order.status) {
                       case 1:
@@ -71,7 +76,6 @@ class OrdersView extends StatelessWidget {
                       default:
                         break;
                     }
-    // num? totalMealSum = model.getTotalMealSum(cartMeal); // Gets totalMealSum
                     return Padding(
                       padding: EdgeInsets.only(top: 5.h),
                       child: Theme(
@@ -125,12 +129,8 @@ class OrdersView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                orderList[pos].orderPrice.toString() + ' TMT',
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: AppTheme.FONT_COLOR,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                '${order.promocode != null ? orderTotalPriceWithPromocode : order.totPrice} TMT',
+                                style: ktsDefault18SemiBoldText,
                               ),
                               Expanded(child: SizedBox()),
                             ],
