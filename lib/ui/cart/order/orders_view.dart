@@ -142,12 +142,23 @@ class OrdersView extends StatelessWidget {
                             Padding(
                               padding:
                                   EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 5.h),
-                              child: Text(
-                                'Sürüji: +993 64 687171',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  color: AppTheme.FONT_COLOR,
-                                ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Sürüji:',
+                                    style: ktsDefault16Text,
+                                  ),
+                                  Text(
+                                    order.selfPickUp!
+                                        ? '-'
+                                        : order.status == 1
+                                            ? 'Bellenmedi'
+                                            : order.driver!.mobile!,
+                                    style: ktsDefault16Text,
+                                  ),
+                                ],
                               ),
                             ),
                             Padding(
@@ -158,17 +169,11 @@ class OrdersView extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Eltip bermek tölegi:',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                    ),
+                                    style: ktsDefault16Text,
                                   ),
                                   Text(
                                     '20 TMT',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                    ),
+                                    style: ktsDefault16Text,
                                   ),
                                 ],
                               ),
