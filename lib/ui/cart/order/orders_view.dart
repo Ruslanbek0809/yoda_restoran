@@ -244,7 +244,19 @@ class OrdersView extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                     
+                                      //------------------ OrderItem concatenated text ---------------------//
+                                      if (_orderItem.volumePrices!.isNotEmpty ||
+                                          _orderItem
+                                              .costumizedMeals!.isNotEmpty)
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 10.w, bottom: 5.h),
+                                          child: Text(
+                                            _orderItemConcatenatedText!,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: ktsDefault14HelperText,
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 );
