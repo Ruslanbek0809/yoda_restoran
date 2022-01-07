@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
@@ -122,6 +123,20 @@ class OrderViewModel extends BaseViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
+  }
+
+  /// MAKES a call to driver
+  Future<void> makePhoneCallToDriver(String phoneNumber) async {
+    // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+    // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+    // such as spaces in the input, which would cause `launch` to fail on some
+    // platforms.
+    log.v('phoneNumber: $phoneNumber');
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launch(launchUri.toString());
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//

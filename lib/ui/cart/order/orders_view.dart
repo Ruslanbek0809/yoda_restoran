@@ -285,105 +285,19 @@ class OrdersView extends StatelessWidget {
                                             : 'Sargydy ýatyr',
                                     style: ktsButton18Text,
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     switch (order.status) {
                                       case 1:
-                                        // model.showCancelAcceptedOrderDialog();
-                                        model.showCancelWaitingOrderDialog();
+                                        await model
+                                            .showCancelWaitingOrderDialog();
                                         break;
                                       case 2:
-                                        if (!Platform.isIOS)
-                                          showDialog(
-                                            context: context,
-                                            barrierDismissible: true,
-                                            builder: (context) => AlertDialog(
-                                              title: Text(
-                                                'Sargyt taýýarlanýar',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppTheme
-                                                      .DIALOG_TITLE_COLOR,
-                                                  fontSize: 16.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                              content: Text(
-                                                'Sargydy ýatyrmak üçin restorana jaň ediň!',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppTheme.FONT_COLOR,
-                                                  fontSize: 20.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        else
-                                          showCupertinoDialog(
-                                            context: context,
-                                            barrierDismissible: true,
-                                            builder: (context) =>
-                                                CupertinoAlertDialog(
-                                              title: Text(
-                                                'Sargyt taýýarlanylýar',
-                                                style: TextStyle(
-                                                  color: AppTheme
-                                                      .DIALOG_TITLE_COLOR,
-                                                  fontSize: 16.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                              content: Text(
-                                                'Sargydy ýatyrmak üçin restorana jaň ediň!',
-                                                style: TextStyle(
-                                                  color: AppTheme.FONT_COLOR,
-                                                  fontSize: 20.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                          );
+                                        await model
+                                            .showCancelAcceptedOrderDialog();
                                         break;
                                       case 3:
-                                        showDialog(
-                                          context: context,
-                                          barrierDismissible: true,
-                                          builder: (context) => AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: AppTheme().radius20,
-                                            ),
-                                            title: Column(
-                                              children: [
-                                                SvgPicture.asset(
-                                                  'assets/circle_wavy_check.svg',
-                                                  color: AppTheme.MAIN,
-                                                  width: 120.w,
-                                                  height: 120.w,
-                                                ),
-                                                SizedBox(height: 10.w),
-                                                Text(
-                                                  'Soltan Restoran',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: AppTheme.MAIN,
-                                                    fontSize: 22.sp,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            content: Text(
-                                              'Siziň sargydyňyz kabul edildi!',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: AppTheme.GREEN_COLOR,
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                        await model.makePhoneCallToDriver(
+                                            order.driver!.mobile!);
                                         break;
                                       case 4:
                                         showDialog(
