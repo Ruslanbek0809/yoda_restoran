@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import '../../utils/utils.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 import 'drawer_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,11 +107,13 @@ class DrawerView extends StatelessWidget {
                     endIndent: 0.1.sw,
                     color: AppTheme.DRAWER_DIVIDER,
                   ),
-                  //// Drawer Menu
+                  //------------------ MENU LIST ---------------------//
                   ...List.generate(
-                    drawerList.length,
+                    model.hasLoggedInUser
+                        ? drawerLoggedInList.length
+                        : drawerLogoutList.length,
                     (pos) {
-                      return menuList(drawerList[pos], context);
+                      return menuList(model.hasLoggedInUser ? drawerLoggedInList[pos] : drawerLogoutList[pos], context);
                     },
                   ),
                   Theme(

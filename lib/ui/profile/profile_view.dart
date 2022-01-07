@@ -6,10 +6,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import '../../library/flutter_datetime_picker.dart';
 import '../../library/src/i18n_model.dart';
-import '../drawer/drawer_view.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
 
+import 'drawer/drawer_view.dart';
 import 'profile_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

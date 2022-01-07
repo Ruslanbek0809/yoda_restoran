@@ -7,7 +7,14 @@ import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final List<String> drawerList = ["profile", "orders", "addresses", "about"];
+final List<String> drawerLogoutList = ["profile", "about"];
+
+final List<String> drawerLoggedInList = [
+  "login",
+  "orders",
+  "addresses",
+  "about"
+];
 
 List<RestaurantUI> restaurants = [
   RestaurantUI(
