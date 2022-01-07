@@ -216,32 +216,31 @@ class OrdersView extends StatelessWidget {
                               ),
                             //------------------ ORDER PRODUCT LIST ---------------------//
                             Column(
-                              children: orderList[pos]
-                                  .foodList
-                                  .map((orderFood) => Padding(
+                              children: order.orderItems!
+                                  .map((_order) => Padding(
                                         padding: EdgeInsets.only(
                                           left: 35.w,
-                                          bottom: 5.w,
+                                          bottom: 5.h,
                                           right: 15.w,
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                        child: Column(
                                           children: [
-                                            Text(
-                                              orderFood.name,
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  _order.mealJson!.name!,
+                                                  style: ktsDefault16Text,
+                                                ),
+                                                Text(
+                                                  '${_order.quantity} x ${_order.price} TMT',
+                                                  style: ktsDefault18Text,
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              '1 x ${orderFood.price} TMT',
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
-                                            ),
+                                            
                                           ],
                                         ),
                                       ))
