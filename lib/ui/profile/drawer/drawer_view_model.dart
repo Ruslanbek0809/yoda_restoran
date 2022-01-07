@@ -10,7 +10,7 @@ class DrawerViewModel extends BaseViewModel {
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  Future<void> navToLoginView() async => await _navService.navigateTo(
+  Future<void> navToLoginView() async => await _navService.replaceWith(
         Routes.loginView,
         arguments: LoginViewArguments(
           isCartView: false,
