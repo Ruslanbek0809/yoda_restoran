@@ -121,6 +121,12 @@ class UserService {
     }
   }
 
+  Future<void> logoutUser() async {
+    await userBox.clear();
+    _currentUser = userBox.get(Constants.userBox);
+    log.i('_currentUser and its ID: $_currentUser, ${_currentUser?.id}');
+  }
+
   //------------------ ADDRESS APIS ---------------------//
 
   Future<List<Address>> getAddresses() async {

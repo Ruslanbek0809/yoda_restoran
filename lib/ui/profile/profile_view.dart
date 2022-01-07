@@ -185,7 +185,7 @@ class _ProfileViewState extends State<ProfileView> {
               Padding(
                 padding: EdgeInsets.only(right: 5.w),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: model.logout,
                   child: Text(
                     'Ulgamdan çyk',
                     style: TextStyle(

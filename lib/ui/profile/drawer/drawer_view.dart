@@ -75,7 +75,7 @@ class DrawerView extends StatelessWidget {
           onTap: onTap,
         ),
         Divider(
-          thickness: 1,
+          thickness: 0.5,
           endIndent: 0.1.sw,
           indent: 0.17.sw,
           color: kcDividerColor,
@@ -98,16 +98,14 @@ class DrawerView extends StatelessWidget {
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(top: 15.w),
                     child: SvgPicture.asset(
-                      'assets/yoda_restoran.svg',
-                      color: AppTheme.MAIN_DARK,
-                      width: 0.6.sw,
+                      'assets/title_yoda_restoran.svg',
+                      width: 0.55.sw,
                     ),
                   ),
-
                   Divider(
-                    thickness: 1,
+                    thickness: 0.5,
                     endIndent: 0.1.sw,
-                    color: AppTheme.DRAWER_DIVIDER,
+                    color: kcDividerColor,
                   ),
                   //------------------ MENU LIST ---------------------//
                   ...List.generate(
@@ -159,10 +157,10 @@ class DrawerView extends StatelessWidget {
                           ),
                         ),
                         Divider(
-                          thickness: 1,
+                          thickness: 0.5,
                           endIndent: 0.1.sw,
-                          indent: 0.17.sw,
-                          color: AppTheme.DRAWER_DIVIDER,
+                          indent: 0.18.sw,
+                          color: kcDividerColor,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 66.w, top: 5.w),
