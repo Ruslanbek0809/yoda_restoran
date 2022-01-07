@@ -227,6 +227,8 @@ class OrdersView extends StatelessWidget {
                                     right: 15.w,
                                   ),
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         mainAxisAlignment:
@@ -237,22 +239,12 @@ class OrdersView extends StatelessWidget {
                                             style: ktsDefault16Text,
                                           ),
                                           Text(
-                                            '${_orderItem.quantity} x ${_orderItem.price} TMT',
+                                            '${_orderItem.quantity!.toInt()} x ${_orderItem.price} TMT',
                                             style: ktsDefault18Text,
                                           ),
                                         ],
                                       ),
-                                      if (_orderItem.volumePrices!.isNotEmpty ||
-                                          _orderItem
-                                              .costumizedMeals!.isNotEmpty)
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 38.w, bottom: 5.h),
-                                          child: Text(
-                                            _orderItemConcatenatedText!,
-                                            style: ktsDefault14HelperText,
-                                          ),
-                                        ),
+                                     
                                     ],
                                   ),
                                 );
@@ -263,7 +255,7 @@ class OrdersView extends StatelessWidget {
                               width: 1.sw,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 15.w, vertical: 10.w),
+                                    horizontal: 15.w, vertical: 10.h),
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                     backgroundColor: AppTheme.MAIN_DARK,

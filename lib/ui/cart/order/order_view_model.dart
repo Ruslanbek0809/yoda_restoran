@@ -60,7 +60,11 @@ class OrderViewModel extends BaseViewModel {
     if (_orderItem.volumePrices!.isNotEmpty)
       _orderItem.volumePrices!.forEach((vol) {
         _orderItem.mealJson!.gVolumes!.forEach((_mainVolume) {
-          _vols.add(_mainVolume.volumes!.firstWhere((_vol) => _vol.id == vol));
+          Volume? volFound = _mainVolume.volumes!.firstWhere(
+            (_vol) => _vol.id == vol,
+            orElse: () => Volume(id: -1),
+          );
+          if (volFound.id != -1) _vols.add(volFound);
         });
       });
 
@@ -68,8 +72,11 @@ class OrderViewModel extends BaseViewModel {
     if (_orderItem.costumizedMeals!.isNotEmpty)
       _orderItem.costumizedMeals!.forEach((cus) {
         _orderItem.mealJson!.gCustomizables!.forEach((_mainCus) {
-          _cuss.add(
-              _mainCus.customizables!.firstWhere((_cus) => _cus.id == cus));
+          Customizable? cusFound = _mainCus.customizables!.firstWhere(
+            (_cus) => _cus.id == cus,
+            orElse: () => Customizable(id: -1),
+          );
+          if (cusFound.id != -1) _cuss.add(cusFound);
         });
       });
 
