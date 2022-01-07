@@ -7,10 +7,10 @@ import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final List<String> drawerLogoutList = ["profile", "about"];
+final List<String> drawerLogoutList = ["login", "about"];
 
 final List<String> drawerLoggedInList = [
-  "login",
+  "profile",
   "orders",
   "addresses",
   "about"

@@ -15,8 +15,10 @@ import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/profile/addresses/addresses_view.dart';
 import '../ui/profile/login/login_view.dart';
 import '../ui/profile/otp/otp_view.dart';
+import '../ui/profile/profile_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
@@ -31,6 +33,8 @@ class Routes {
   static const String cartView = '/cart-view';
   static const String ordersView = '/orders-view';
   static const String orderSuccessView = '/order-success-view';
+  static const String profileView = '/profile-view';
+  static const String addressesView = '/addresses-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -41,6 +45,8 @@ class Routes {
     cartView,
     ordersView,
     orderSuccessView,
+    profileView,
+    addressesView,
   };
 }
 
@@ -57,6 +63,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.cartView, page: CartView),
     RouteDef(Routes.ordersView, page: OrdersView),
     RouteDef(Routes.orderSuccessView, page: OrderSuccessView),
+    RouteDef(Routes.profileView, page: ProfileView),
+    RouteDef(Routes.addressesView, page: AddressesView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -126,6 +134,18 @@ class StackedRouter extends RouterBase {
     OrderSuccessView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const OrderSuccessView(),
+        settings: data,
+      );
+    },
+    ProfileView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ProfileView(),
+        settings: data,
+      );
+    },
+    AddressesView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddressesView(),
         settings: data,
       );
     },

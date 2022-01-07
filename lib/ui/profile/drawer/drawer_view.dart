@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DrawerView extends StatelessWidget {
   const DrawerView({Key? key}) : super(key: key);
 
-  Widget menuList(String value) {
+  Widget menuList(String value, DrawerViewModel model) {
     String title;
     String svgName;
     Function() onTap;
@@ -19,35 +19,28 @@ class DrawerView extends StatelessWidget {
         {
           title = 'Login et';
           svgName = 'assets/user.svg';
-          onTap = () async {};
-      //   _navService.replaceWith(Routes.loginView);
-          // onTap = () async =>
-          //     await Navigator.pushReplacementNamed(context, RouteList.profile);
+          onTap = () async => model.navToLoginView();
           break;
         }
       case 'profile':
         {
           title = 'Profil';
           svgName = 'assets/user.svg';
-          onTap = () async {};
-          // onTap = () async =>
-          //     await Navigator.pushReplacementNamed(context, RouteList.profile);
+          onTap = () async => model.navToProfileView();
           break;
         }
       case 'orders':
         {
           title = 'Sargytlar';
           svgName = 'assets/list_bullets.svg';
-          onTap = () {};
+          onTap = () async => model.navToOrdersView();
           break;
         }
       case 'addresses':
         {
           title = 'Salgylar';
           svgName = 'assets/map_pin.svg';
-          onTap = () async {};
-          // onTap = () async => await Navigator.pushReplacementNamed(
-          //     context, RouteList.addresses);
+          onTap = () async => model.navToAddressesView();
           break;
         }
       case 'about':
@@ -126,6 +119,7 @@ class DrawerView extends StatelessWidget {
                         model.hasLoggedInUser
                             ? drawerLoggedInList[pos]
                             : drawerLogoutList[pos],
+                        model,
                       );
                     },
                   ),
@@ -156,8 +150,8 @@ class DrawerView extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(
                             left: 66.w,
-                            top: 5.w,
-                            bottom: 5.w,
+                            top: 5.h,
+                            bottom: 5.h,
                           ),
                           child: Text(
                             'Türkmen',
@@ -200,10 +194,7 @@ class DrawerView extends StatelessWidget {
                       SizedBox(width: 10.w),
                       Text(
                         'Biz bilen habarlaş',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: AppTheme.DRAWER_ICON,
-                        ),
+                        style: ktsDefault16HelperText,
                       ),
                     ],
                   ),

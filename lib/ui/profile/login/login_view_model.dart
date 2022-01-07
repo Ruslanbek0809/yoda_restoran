@@ -24,7 +24,7 @@ class LoginViewModel extends FormViewModel {
       _navService.replaceWith(
         Routes.otpView,
         arguments: OtpViewArguments(
-          isCartView: true,
+          isCartView: isCartView,
         ),
       );
       // await _handleResponse(response);
