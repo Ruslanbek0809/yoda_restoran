@@ -216,45 +216,47 @@ class OrdersView extends StatelessWidget {
                               ),
                             //------------------ ORDER PRODUCT LIST ---------------------//
                             Column(
-                              children: order.orderItems!
-                                  .map((_order) => Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 35.w,
-                                          bottom: 5.h,
-                                          right: 15.w,
+                              children: order.orderItems!.map((_orderItem) {
+                                String? _orderItemConcatenatedText =
+                                    model.getConcatenateVolsCustoms(_orderItem);
+
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 35.w,
+                                    bottom: 5.h,
+                                    right: 15.w,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            _orderItem.mealJson!.name!,
+                                            style: ktsDefault16Text,
+                                          ),
+                                          Text(
+                                            '${_orderItem.quantity} x ${_orderItem.price} TMT',
+                                            style: ktsDefault18Text,
+                                          ),
+                                        ],
+                                      ),
+                                      if (_orderItem.volumePrices!.isNotEmpty ||
+                                          _orderItem
+                                              .costumizedMeals!.isNotEmpty)
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 38.w, bottom: 5.h),
+                                          child: Text(
+                                            _orderItemConcatenatedText!,
+                                            style: ktsDefault14HelperText,
+                                          ),
                                         ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  _order.mealJson!.name!,
-                                                  style: ktsDefault16Text,
-                                                ),
-                                                Text(
-                                                  '${_order.quantity} x ${_order.price} TMT',
-                                                  style: ktsDefault18Text,
-                                                ),
-                                              ],
-                                            ),
-                                            
-                                          ],
-                                        ),
-                                      ))
-                                  .toList(),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 35.w, bottom: 5.w),
-                              child: Text(
-                                '+ Ajy sos',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: AppTheme.DRAWER_ICON,
-                                ),
-                              ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             ),
                             //------------------ ORDER BUTTON ---------------------//
                             SizedBox(

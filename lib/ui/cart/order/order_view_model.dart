@@ -49,6 +49,45 @@ class OrderViewModel extends BaseViewModel {
     return totalOrderSum;
   }
 
+  /// CONCATENATES all orderMeals' vols and customs into one string
+  String? getConcatenateVolsCustoms(OrderItem _orderItem) {
+    StringBuffer concatenatedString = StringBuffer();
+
+    List<Volume> _vols = [];
+    List<Customizable> _cuss = [];
+
+    /// Step 1. If there is any selected vols, here it FINDS and ADDS found volume with this id from volumes inside gVolumes
+    if (_orderItem.volumePrices!.isNotEmpty)
+      _orderItem.volumePrices!.forEach((vol) {
+        _orderItem.mealJson!.gVolumes!.forEach((_mainVolume) {
+          _vols.add(_mainVolume.volumes!.firstWhere((_vol) => _vol.id == vol));
+        });
+      });
+
+    /// Step 2. If there is any selected cuss, here it FINDS and ADDS found customizable with this id from customizables inside gCustomizedMeals
+    if (_orderItem.costumizedMeals!.isNotEmpty)
+      _orderItem.costumizedMeals!.forEach((cus) {
+        _orderItem.mealJson!.gCustomizables!.forEach((_mainCus) {
+          _cuss.add(
+              _mainCus.customizables!.firstWhere((_cus) => _cus.id == cus));
+        });
+      });
+
+    /// Step 3. For each found _vols concatenate its name to one text
+    if (_vols.isNotEmpty)
+      _vols.forEach((vol) {
+        concatenatedString.write('${vol.volumeName} ');
+      });
+
+    /// Step 3. For each found _cuss concatenate its name to one text
+    if (_cuss.isNotEmpty)
+      _cuss.forEach((cus) {
+        concatenatedString.write('${cus.customizableName} ');
+      });
+
+    return concatenatedString.toString();
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
