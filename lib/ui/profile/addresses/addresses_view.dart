@@ -18,8 +18,8 @@ class _AddressesViewState extends State<AddressesView> {
     return ViewModelBuilder<AddressesViewModel>.reactive(
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {
-          await Navigator.pushReplacementNamed(context, RouteList.home);
-          return true;
+          model.navToHomeByRemovingAll(); // Workaround
+          return false;
         },
         child: Scaffold(
           appBar: AppBar(
@@ -34,8 +34,7 @@ class _AddressesViewState extends State<AddressesView> {
                   color: AppTheme.FONT_COLOR,
                   size: 25.w,
                 ),
-                onPressed: () async => await Navigator.pushReplacementNamed(
-                    context, RouteList.home),
+                onPressed: model.navToHomeByRemovingAll,
               ),
             ),
             centerTitle: true,
