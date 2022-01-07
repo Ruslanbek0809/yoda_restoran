@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/cart/order/order_view_model.dart';
 import '../app/app.locator.dart';
 import '../shared/styles.dart';
 import 'cart/cart_view_model.dart';
@@ -24,6 +25,9 @@ void setupDialog() {
           completer: completer,
           cartViewModel: sheetRequest.data,
         ),
+    DialogType.cancelWaitingOrder: (context, sheetRequest, completer) =>
+        CancelWaitingOrderDialogView(
+            request: sheetRequest, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
@@ -177,8 +181,8 @@ class ClearCartDialogView extends StatelessWidget {
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
-                      completer(DialogResponse());
                       await model.clearCart();
+                      completer(DialogResponse());
                     },
                   ),
                   SizedBox(width: 42.w),
@@ -186,6 +190,172 @@ class ClearCartDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+}
+
+class CancelWaitingOrderDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const CancelWaitingOrderDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<OrderViewModel>.reactive(
+      viewModelBuilder: () => OrderViewModel(),
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!),
+                content: Text(request.description!),
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18SemiBoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      // await model.clearCart();
+                      completer(DialogResponse());
+                    },
+                  ),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18BoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ),
+                titleTextStyle: ktsDefault20BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      // await model.clearCart();
+                      completer(DialogResponse());
+                    },
+                  ),
+                  SizedBox(width: 42.w),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18SemiBoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+}
+
+class CancelAcceptedOrderDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const CancelAcceptedOrderDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<OrderViewModel>.reactive(
+      viewModelBuilder: () => OrderViewModel(),
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!),
+                content: Text(request.description!),
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18SemiBoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      // await model.clearCart();
+                      completer(DialogResponse());
+                    },
+                  ),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18BoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ),
+                titleTextStyle: ktsDefault20BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18SemiBoldText,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      // await model.clearCart();
+                      completer(DialogResponse());
+                    },
+                  ),
+                  SizedBox(width: 42.w),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18BoldText,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {

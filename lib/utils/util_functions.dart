@@ -7,6 +7,10 @@ import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// Method to round trailing zero based on its type
+RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
+// String s = num.toString().replaceAll(regex), "");
+
 final List<String> drawerLogoutList = ["login", "about"];
 
 final List<String> drawerLoggedInList = [
@@ -44,13 +48,6 @@ List<AddressUI> addresses = [
   AddressUI(2, 'N.Andalyp 32'),
 ];
 
-List<OrderUI> orderList = [
-  OrderUI(1, 'Kebapçy', 123, OrderStatus(1, 'Garaşylýar'), mealList),
-  OrderUI(2, 'Hotdost', 80, OrderStatus(2, 'Kabul edildi'), mealList),
-  OrderUI(3, 'Palawkom', 123, OrderStatus(3, 'Ugradyldy'), mealList),
-  OrderUI(4, 'Burger Zone', 80, OrderStatus(4, 'Eltildi'), mealList),
-];
-
 List<CategoryFilter> mainCatSortList = [
   CategoryFilter(1, 'Adaty'),
   CategoryFilter(2, 'Reýtingi boýunça'),
@@ -85,7 +82,12 @@ enum BottomSheetType {
 }
 
 /// Enum for dialog types
-enum DialogType { mealCartClear, clearCart }
+enum DialogType {
+  mealCartClear,
+  clearCart,
+  cancelWaitingOrder,
+  cancelAcceptedOrder
+}
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

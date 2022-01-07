@@ -275,158 +275,158 @@ class OrdersView extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: AppTheme().radius10),
                                     padding:
-                                        EdgeInsets.symmetric(vertical: 12.w),
+                                        EdgeInsets.symmetric(vertical: 12.h),
                                   ),
                                   child: Text(
-                                    orderList[pos].orderStatus.id == 3
-                                        ? 'Sürüji: Sultan +993 64 687171'
-                                        : orderList[pos].orderStatus.id == 4
+                                    order.status == 3
+                                        ? 'Sürüji: ${order.driver!.mobile}'
+                                        : order.status == 4
                                             ? 'Täzeden sargyt et'
                                             : 'Sargydy ýatyr',
-                                    style: TextStyle(
-                                      color: AppTheme.WHITE,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                    style: ktsButton18Text,
                                   ),
                                   onPressed: () {
-                                    //------------------ onPressed() ---------------------//
-                                    if (orderList[pos].orderStatus.id == 1) {
-                                      Navigator.of(context)
-                                          .pushNamed(RouteList.rateUs);
-                                    } else if (orderList[pos].orderStatus.id ==
-                                        2) {
-                                      if (!Platform.isIOS)
+                                    switch (order.status) {
+                                      case 1:
+                                        model.showCancelWaitingOrderDialog();
+                                        break;
+                                      case 2:
+                                        if (!Platform.isIOS)
+                                          showDialog(
+                                            context: context,
+                                            barrierDismissible: true,
+                                            builder: (context) => AlertDialog(
+                                              title: Text(
+                                                'Sargyt taýýarlanýar',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: AppTheme
+                                                      .DIALOG_TITLE_COLOR,
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              content: Text(
+                                                'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: AppTheme.FONT_COLOR,
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        else
+                                          showCupertinoDialog(
+                                            context: context,
+                                            barrierDismissible: true,
+                                            builder: (context) =>
+                                                CupertinoAlertDialog(
+                                              title: Text(
+                                                'Sargyt taýýarlanylýar',
+                                                style: TextStyle(
+                                                  color: AppTheme
+                                                      .DIALOG_TITLE_COLOR,
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              content: Text(
+                                                'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                                style: TextStyle(
+                                                  color: AppTheme.FONT_COLOR,
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        break;
+                                      case 3:
                                         showDialog(
                                           context: context,
                                           barrierDismissible: true,
                                           builder: (context) => AlertDialog(
-                                            title: Text(
-                                              'Sargyt taýýarlanýar',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color:
-                                                    AppTheme.DIALOG_TITLE_COLOR,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.normal,
-                                              ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: AppTheme().radius20,
+                                            ),
+                                            title: Column(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/circle_wavy_check.svg',
+                                                  color: AppTheme.MAIN,
+                                                  width: 120.w,
+                                                  height: 120.w,
+                                                ),
+                                                SizedBox(height: 10.w),
+                                                Text(
+                                                  'Soltan Restoran',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: AppTheme.MAIN,
+                                                    fontSize: 22.sp,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                             content: Text(
-                                              'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                              'Siziň sargydyňyz kabul edildi!',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: AppTheme.FONT_COLOR,
-                                                fontSize: 20.sp,
+                                                fontSize: 18.sp,
                                                 fontWeight: FontWeight.w600,
+                                                color: AppTheme.GREEN_COLOR,
                                               ),
                                             ),
                                           ),
                                         );
-                                      else
-                                        showCupertinoDialog(
+                                        break;
+                                      case 4:
+                                        showDialog(
                                           context: context,
                                           barrierDismissible: true,
-                                          builder: (context) =>
-                                              CupertinoAlertDialog(
-                                            title: Text(
-                                              'Sargyt taýýarlanylýar',
-                                              style: TextStyle(
-                                                color:
-                                                    AppTheme.DIALOG_TITLE_COLOR,
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.normal,
-                                              ),
+                                          builder: (context) => AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: AppTheme().radius20,
+                                            ),
+                                            title: Column(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/delivery.svg',
+                                                  color: AppTheme.MAIN,
+                                                  width: 90.w,
+                                                  height: 90.w,
+                                                ),
+                                                SizedBox(height: 15.h),
+                                                Text(
+                                                  'Soltan Restoran',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: AppTheme.MAIN,
+                                                    fontSize: 22.sp,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                             content: Text(
-                                              'Sargydy ýatyrmak üçin restorana jaň ediň!',
+                                              'Siziň sargydyňyz ugradyldy.',
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: AppTheme.FONT_COLOR,
-                                                fontSize: 20.sp,
+                                                fontSize: 18.sp,
                                                 fontWeight: FontWeight.w600,
+                                                color: AppTheme.GREEN_COLOR,
                                               ),
                                             ),
                                           ),
                                         );
-                                    } else if (orderList[pos].orderStatus.id ==
-                                        3) {
-                                      showDialog(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        builder: (context) => AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: AppTheme().radius20,
-                                          ),
-                                          title: Column(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/circle_wavy_check.svg',
-                                                color: AppTheme.MAIN,
-                                                width: 120.w,
-                                                height: 120.w,
-                                              ),
-                                              SizedBox(height: 10.w),
-                                              Text(
-                                                'Soltan Restoran',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppTheme.MAIN,
-                                                  fontSize: 22.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          content: Text(
-                                            'Siziň sargydyňyz kabul edildi!',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppTheme.GREEN_COLOR,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    } else if (orderList[pos].orderStatus.id ==
-                                        4) {
-                                      showDialog(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        builder: (context) => AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: AppTheme().radius20,
-                                          ),
-                                          title: Column(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/delivery.svg',
-                                                color: AppTheme.MAIN,
-                                                width: 90.w,
-                                                height: 90.w,
-                                              ),
-                                              SizedBox(height: 15.h),
-                                              Text(
-                                                'Soltan Restoran',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: AppTheme.MAIN,
-                                                  fontSize: 22.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          content: Text(
-                                            'Siziň sargydyňyz ugradyldy.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppTheme.GREEN_COLOR,
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                                        break;
+                                      default:
+                                        break;
                                     }
                                   },
                                 ),

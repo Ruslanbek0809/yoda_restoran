@@ -5,12 +5,14 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class OrderViewModel extends BaseViewModel {
   final log = getLogger('OrderViewModel');
 
   final _navService = locator<NavigationService>();
   final _orderService = locator<OrderService>();
+  final _dialogService = locator<DialogService>();
 
 //------------------------ ORDER PART ----------------------------//
 
@@ -93,6 +95,21 @@ class OrderViewModel extends BaseViewModel {
       });
 
     return concatenatedString.toString();
+  }
+
+//------------------------ DIALOGS ----------------------------//
+
+  /// SHOWS Clear CART Dialog
+  Future showCancelWaitingOrderDialog() async {
+    log.i('showCancelWaitingOrderDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.cancelWaitingOrder,
+      title: 'Siz sargydy ýatyrmakçymy?',
+      mainButtonTitle: 'Ýok',
+      secondaryButtonTitle: 'Hawa',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//
