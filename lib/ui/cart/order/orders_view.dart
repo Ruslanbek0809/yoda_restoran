@@ -288,6 +288,7 @@ class OrdersView extends StatelessWidget {
                                   onPressed: () {
                                     switch (order.status) {
                                       case 1:
+                                        // model.showCancelAcceptedOrderDialog();
                                         model.showCancelWaitingOrderDialog();
                                         break;
                                       case 2:

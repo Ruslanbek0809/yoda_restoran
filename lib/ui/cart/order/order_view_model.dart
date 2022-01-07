@@ -99,7 +99,7 @@ class OrderViewModel extends BaseViewModel {
 
 //------------------------ DIALOGS ----------------------------//
 
-  /// SHOWS Clear CART Dialog
+  /// SHOWS cancel waiting order Dialog
   Future showCancelWaitingOrderDialog() async {
     log.i('showCancelWaitingOrderDialog()');
     await _dialogService.showCustomDialog(
@@ -107,6 +107,18 @@ class OrderViewModel extends BaseViewModel {
       title: 'Siz sargydy ýatyrmakçymy?',
       mainButtonTitle: 'Ýok',
       secondaryButtonTitle: 'Hawa',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+  }
+
+  /// SHOWS cancel accepted order Dialog
+  Future showCancelAcceptedOrderDialog() async {
+    log.i('showCancelAcceptedOrderDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.cancelAcceptedOrder,
+      title: 'Sargyt taýýarlanýar.',
+      data: 'Sargydy ýatyrmak üçin restorana jaň ediň!',
       showIconInMainButton: false,
       barrierDismissible: true,
     );
