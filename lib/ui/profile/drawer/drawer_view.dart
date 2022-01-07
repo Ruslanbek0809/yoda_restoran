@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 import 'drawer_view_model.dart';
@@ -9,17 +10,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DrawerView extends StatelessWidget {
   const DrawerView({Key? key}) : super(key: key);
 
-  Widget menuList(String value, BuildContext context) {
+  Widget menuList(String value) {
     String title;
     String svgName;
     Function() onTap;
     switch (value) {
+      case 'login':
+        {
+          title = 'Login et';
+          svgName = 'assets/user.svg';
+          onTap = () async {};
+      //   _navService.replaceWith(Routes.loginView);
+          // onTap = () async =>
+          //     await Navigator.pushReplacementNamed(context, RouteList.profile);
+          break;
+        }
       case 'profile':
         {
           title = 'Profil';
           svgName = 'assets/user.svg';
-          onTap = () async =>
-              await Navigator.pushReplacementNamed(context, RouteList.profile);
+          onTap = () async {};
+          // onTap = () async =>
+          //     await Navigator.pushReplacementNamed(context, RouteList.profile);
           break;
         }
       case 'orders':
@@ -33,8 +45,9 @@ class DrawerView extends StatelessWidget {
         {
           title = 'Salgylar';
           svgName = 'assets/map_pin.svg';
-          onTap = () async => await Navigator.pushReplacementNamed(
-              context, RouteList.addresses);
+          onTap = () async {};
+          // onTap = () async => await Navigator.pushReplacementNamed(
+          //     context, RouteList.addresses);
           break;
         }
       case 'about':
@@ -64,11 +77,7 @@ class DrawerView extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: AppTheme.MAIN_DARK,
-              fontWeight: FontWeight.w600,
-            ),
+            style: kts16DarkSemiBoldText,
           ),
           onTap: onTap,
         ),
@@ -76,7 +85,7 @@ class DrawerView extends StatelessWidget {
           thickness: 1,
           endIndent: 0.1.sw,
           indent: 0.17.sw,
-          color: AppTheme.DRAWER_DIVIDER,
+          color: kcDividerColor,
         ),
       ],
     );
@@ -113,9 +122,14 @@ class DrawerView extends StatelessWidget {
                         ? drawerLoggedInList.length
                         : drawerLogoutList.length,
                     (pos) {
-                      return menuList(model.hasLoggedInUser ? drawerLoggedInList[pos] : drawerLogoutList[pos], context);
+                      return menuList(
+                        model.hasLoggedInUser
+                            ? drawerLoggedInList[pos]
+                            : drawerLogoutList[pos],
+                      );
                     },
                   ),
+                  //------------------ LANGUAGE ---------------------//
                   Theme(
                     data: Theme.of(context).copyWith(
                       dividerColor: Colors.transparent,
@@ -134,11 +148,7 @@ class DrawerView extends StatelessWidget {
                       ),
                       title: Text(
                         'Türkmen',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: AppTheme.MAIN_DARK,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: kts16DarkSemiBoldText,
                       ),
                       iconColor: AppTheme.CONTACT_COLOR,
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -151,10 +161,7 @@ class DrawerView extends StatelessWidget {
                           ),
                           child: Text(
                             'Türkmen',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppTheme.MAIN_DARK,
-                            ),
+                            style: kts16DarkText,
                           ),
                         ),
                         Divider(
@@ -167,10 +174,7 @@ class DrawerView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 66.w, top: 5.w),
                           child: Text(
                             'Rus dili',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppTheme.MAIN_DARK,
-                            ),
+                            style: kts16DarkText,
                           ),
                         ),
                       ],
