@@ -24,23 +24,25 @@ class _AddressesViewState extends State<AddressesView> {
           return false;
         },
         child: Scaffold(
-          appBar: AppBar(
-              backgroundColor: AppTheme.WHITE,
-              elevation: 1,
-              leadingWidth: 35.w,
-              leading: Padding(
-                padding: EdgeInsets.only(left: 10.w),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: AppTheme.FONT_COLOR,
-                    size: 25.w,
+          appBar: MyAppbar(
+            child: AppBar(
+                backgroundColor: AppTheme.WHITE,
+                elevation: 1,
+                leadingWidth: 35.w,
+                leading: Padding(
+                  padding: EdgeInsets.only(left: 10.w),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: AppTheme.FONT_COLOR,
+                      size: 25.w,
+                    ),
+                    onPressed: model.navToHomeByRemovingAll,
                   ),
-                  onPressed: model.navToHomeByRemovingAll,
                 ),
-              ),
-              centerTitle: true,
-              title: Text('Salgylar', style: ktsDefault22BoldText)),
+                centerTitle: true,
+                title: Text('Salgylar', style: ktsDefault22BoldText)),
+          ),
           body: model.isBusy
               ? LoadingWidget()
               : SingleChildScrollView(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/profile/address_add_edit/add_edit_address_hook.dart';
+import 'package:yoda_res/ui/widgets/my_app_bar.dart';
 import '../../../utils/utils.dart';
 
 import 'address_add_edit_view_model.dart';
@@ -65,83 +66,91 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressAddEditViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          backgroundColor: AppTheme.WHITE,
-          elevation: 1,
-          leadingWidth: 35.w,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 10.w),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: AppTheme.FONT_COLOR,
-                size: 25.w,
+      builder: (context, model, child) => WillPopScope(
+        onWillPop: () async {
+          model.navBack(); // Workaround
+          return false;
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: MyAppbar(
+            child: AppBar(
+              backgroundColor: AppTheme.WHITE,
+              elevation: 1,
+              leadingWidth: 35.w,
+              leading: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.FONT_COLOR,
+                    size: 25.w,
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                ),
               ),
-              onPressed: () => Navigator.pop(context),
+              centerTitle: true,
+              title: Text(
+                'Salgy',
+                style: TextStyle(
+                  color: AppTheme.MAIN_DARK,
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-          centerTitle: true,
-          title: Text(
-            'Salgy',
-            style: TextStyle(
-              color: AppTheme.MAIN_DARK,
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        body: Stack(
-          children: [
-            AddEditAddressHook(),
-            //--------------- ADDRESS BUTTONS -------------- //
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                color: AppTheme.WHITE,
-                padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
-                child: Column(
-                  children: [
-                    TextButton(
-                      child: Text(
-                        'Salgyny aýyr',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: AppTheme.FONT_COLOR,
-                        ),
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    SizedBox(height: 15.w),
-                    SizedBox(
-                      width: 1.sw,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppTheme.MAIN,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: AppTheme().radius10),
-                          padding: EdgeInsets.symmetric(vertical: 15.w),
-                        ),
+          body: Stack(
+            children: [
+              AddEditAddressHook(),
+              //--------------- ADDRESS BUTTONS -------------- //
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: AppTheme.WHITE,
+                  padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
+                  child: Column(
+                    children: [
+                      TextButton(
                         child: Text(
-                          'Salgyny goş',
+                          'Salgyny aýyr',
                           style: TextStyle(
-                            color: AppTheme.WHITE,
                             fontSize: 18.sp,
-                            fontWeight: FontWeight.w600,
+                            color: AppTheme.FONT_COLOR,
                           ),
                         ),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 15.w),
+                      SizedBox(
+                        width: 1.sw,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: AppTheme.MAIN,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(vertical: 15.w),
+                          ),
+                          child: Text(
+                            'Salgyny goş',
+                            style: TextStyle(
+                              color: AppTheme.WHITE,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => AddressAddEditViewModel(),
