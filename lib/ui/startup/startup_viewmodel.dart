@@ -1,18 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/utils/utils.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';
 import '../../services/services.dart';
 
-class StartUpViewModel extends BaseViewModel {
+class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final log = getLogger('StartUpViewModel');
+
   final _apiRootService = locator<ApiRootService>();
   final _navService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();
+  final _connectivityService = locator<ConnectivityService>();
+
+  ConnectivityStatus? get connectivityStatus => data;
 
   bool _startAnimation = false;
   bool get startAnimation => _startAnimation;
@@ -34,6 +39,18 @@ class StartUpViewModel extends BaseViewModel {
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
     _navService.replaceWith(Routes.homeView);
+    // await Future.delayed(Duration(milliseconds: 3009)).then((value) {
+    //   if (connectivityStatus == ConnectivityStatus.Offline) {
+    //     log.v('NO INTERNET SNACKBAR COMING: $data');
+    //   } else if (connectivityStatus == null) {
+    //     log.v('NO INTERNET NULLLLLLL: $data');
+    //   } else {
+    //     {
+    //       log.v('HAVE AN INTERNET: $data');
+    //       // _navService.replaceWith(Routes.homeView);
+    //     }
+    //   }
+    // });
     // await Future.delayed(Duration(milliseconds: 6500)).then((value) {
     //   _navService.replaceWith(Routes.homeView);
     //   // _navService.replaceWith(Routes.ordersView);
@@ -51,4 +68,21 @@ class StartUpViewModel extends BaseViewModel {
 
     log.i('===== StartUpViewModel ENDED =====');
   }
+
+  Future<void> navToHomeWithConnection() async {
+    log.i('navToHomeWithConnection: $connectivityStatus');
+
+    await Future.delayed(Duration(milliseconds: 1500));
+    await runStartupLogic();
+    await _navService.replaceWith(Routes.homeView);
+
+    // await Future.delayed(Duration(milliseconds: 1500)).then((value) async{
+    //   await runStartupLogic();
+    //   await _navService.replaceWith(Routes.homeView);
+    // });
+  }
+
+  @override
+  Stream<ConnectivityStatus> get stream =>
+      _connectivityService.connectionStatusController.stream;
 }

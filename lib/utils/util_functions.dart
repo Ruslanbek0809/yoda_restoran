@@ -89,6 +89,9 @@ enum DialogType {
   cancelAcceptedOrder
 }
 
+/// Enum for connectivity
+enum ConnectivityStatus { WiFi, Cellular, Offline }
+
 /// Platform Types
 final bool isIos = Platform.isIOS;
 final bool isAndroid = Platform.isAndroid;

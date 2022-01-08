@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/services/services.dart';
 import 'app/app.router.dart';
 import 'ui/widgets/widgets.dart';
 import 'utils/utils.dart';
@@ -23,7 +25,6 @@ class YodaResApp extends StatelessWidget {
         title: Constants.appName,
         navigatorObservers: [StackedService.routeObserver],
         navigatorKey: StackedService.navigatorKey, // For stacked_services
-
         onGenerateRoute: StackedRouter()
             .onGenerateRoute, // Auto generates all routes using stacked package
         localizationsDelegates: [
