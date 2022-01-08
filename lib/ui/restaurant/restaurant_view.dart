@@ -24,29 +24,30 @@ class RestaurantView extends StatelessWidget {
               Stack(
                 children: [
 //------------------ IMAGE with ripple effect ---------------------//
-                  Stack(
-                    children: [
-                      YodaImage(
-                        image: restaurant.image!,
-                        phImage: 'assets/ph_restaurant.png',
-                        height: 0.22.sh,
-                        width: 1.sw,
-                        borderRadius: Constants.BORDER_RADIUS_20,
-                      ),
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.transparent,
-                          borderRadius: AppTheme().radius20,
-                          child: InkWell(
-                            borderRadius: AppTheme().radius20,
-                            onTap: () {
-                              model.navToResDetailsView(restaurant);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () => model.navToResDetailsView(restaurant),
+                    child: YodaImage(
+                      image: restaurant.image!,
+                      phImage: 'assets/ph_restaurant.png',
+                      height: 0.22.sh,
+                      width: 1.sw,
+                      borderRadius: Constants.BORDER_RADIUS_20,
+                    ),
                   ),
+
+                  /// Used with Stack
+                  // Positioned.fill(
+                  //   child: Material(
+                  //     color: Colors.transparent,
+                  //     borderRadius: AppTheme().radius20,
+                  //     child: InkWell(
+                  //       borderRadius: AppTheme().radius20,
+                  //       onTap: () {
+                  //         model.navToResDetailsView(restaurant);
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   //------------------ DELIVERY TIME ---------------------//
                   Positioned(
                     bottom: 0,

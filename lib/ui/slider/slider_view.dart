@@ -29,26 +29,27 @@ class SliderView extends StatelessWidget {
           ),
           items: sliders
               .map(
-                (slider) => Stack(
-                  children: [
-                    YodaImage(
-                      image: slider.image!,
-                      phImage: 'assets/ph_slider.png',
-                      fit: BoxFit.fill,
-                      width: 1.sw,
-                      height: 0.625.sw,
-                      borderRadius: 0.0,
-                    ),
-                    Positioned.fill(
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () async {},
-                        ),
-                      ),
-                    ),
-                  ],
+                (slider) => GestureDetector(
+                  onTap: () async {},
+                  child: YodaImage(
+                    image: slider.image!,
+                    phImage: 'assets/ph_slider.png',
+                    fit: BoxFit.fill,
+                    width: 1.sw,
+                    height: 0.625.sw,
+                    borderRadius: 0.0,
+                  ),
                 ),
+
+                /// Used with Stack
+                // Positioned.fill(
+                //   child: Material(
+                //     color: Colors.transparent,
+                //     child: InkWell(
+                //       onTap: () async {},
+                //     ),
+                //   ),
+                // ),
               )
               .toList(),
         ),
