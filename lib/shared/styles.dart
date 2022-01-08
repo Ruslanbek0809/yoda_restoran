@@ -128,6 +128,12 @@ TextStyle ktsDefault22DarkText = TextStyle(
   color: kcSecondaryDarkColor,
 );
 
+TextStyle kts30DarkText = TextStyle(
+  fontSize: 30.sp,
+  fontWeight: FontWeight.bold,
+  color: kcSecondaryDarkColor,
+);
+
 TextStyle ktsDefault24DarkText = TextStyle(
   fontSize: 24.sp,
   fontWeight: FontWeight.w600,

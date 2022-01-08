@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/profile/drawer/drawer_view.dart';
+import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import '../../shared/shared.dart';
 import 'home_bottom_cart.dart';
 import 'main_category/main_cat_view.dart';
