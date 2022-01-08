@@ -1,11 +1,90 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/services/services.dart';
 
 class AddressAddEditViewModel extends BaseViewModel {
+  final log = getLogger('AddressAddEditViewModel');
+
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+
+  String? _city = 'Aşgabat';
+  String? get city => _city;
+
+  String? _street;
+  String? get street => _street;
+
+  int? _apartment;
+  int? get apartment => _apartment;
+
+  int? _house;
+  int? get house => _house;
+
+  int? _floor;
+  int? get floor => _floor;
+
+  String? _note;
+  String? get note => _note;
+
+  /// UPDATES _street
+  String? updateStreet(String? value) {
+    log.v('updateStreet value: $value');
+    if (value!.isEmpty) {
+      return 'Köçäni giriziň';
+    }
+
+    _street = value;
+    notifyListeners();
+  }
+
+  /// UPDATES _house
+  String? updateHouse(String? value) {
+    log.v('updateHouse value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _house = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _apartment
+  String? updateApartment(String? value) {
+    log.v('updateApartment value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _apartment = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _floor
+  String? updateFloor(String? value) {
+    log.v('updateFloor value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _floor = int.parse(value);
+    notifyListeners();
+  }
+
+  /// UPDATES _street
+  String? updateNote(String? value) {
+    log.v('updateNote value: $value');
+    if (value == null || value.isEmpty) return null;
+
+    _note = value;
+    notifyListeners();
+  }
+
+  /// ADDS new address
+  Future<void> onAddAddressPressed() async {
+    log.v('onAddAddressPressed()');
+    try {
+      await runBusyFuture(
+          _userService.addAddress(city, street, house, apartment, floor, note));
+    } catch (err) {
+      throw err;
+    }
+  }
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
