@@ -50,178 +50,178 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Profil', style: kts30DarkText),
-              // --------------- NAME -------------- //
-              Padding(
-                padding: EdgeInsets.only(top: 10.h),
-                child: TextFormField(
-                  controller: _nameController,
-                  style: ktsDefault18Text,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    labelText: 'Ady',
-                    labelStyle: ktsDefault14HelperText,
-                  ),
-                  validator: model.updateName,
-                ),
-              ),
-              // --------------- DATE TIME -------------- //
-              Padding(
-                padding: EdgeInsets.only(top: 8.w),
-                child: TextFormField(
-                  onTap: () async {
-                    DateTime? date;
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    date = await DatePicker.showDatePicker(
-                      context,
-                      showTitleActions: true,
-                      minTime: DateTime(1900, 1, 1),
-                      maxTime: DateTime.now(),
-                      onChanged: (date) {
-                        print('change $date');
-                      },
-                      onConfirm: (date) {
-                        print('confirm $date');
-                      },
-                      currentTime: DateTime.now(),
-                      locale: LocaleType.tk,
-                    );
-                    _birthdateController.text = date!.toIso8601String();
-                  },
-                  controller: _birthdateController,
-                  style: ktsDefault18Text,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    labelText: 'Doglan senesi',
-                    labelStyle: ktsDefault14HelperText,
-                  ),
-                  validator: model.updateDateTime,
-                  // validator: (value) {
-                  //   if (value!.isEmpty) {
-                  //     return 'Doglan senesini giriziň';
-                  //   }
-                  //   return null;
-                  // },
-                ),
-              ),
-              // --------------- GENDER -------------- //
-              Padding(
-                padding: EdgeInsets.only(top: 8.w),
-                child: GestureDetector(
-                  onTap: _onGenderPressed,
-                  child: Container(
-                    color: Colors.transparent,
-                    //// the red square would receive click events when tapping the blue square.
-                    child: TextFormField(
-                      controller: _genderController,
-                      style: ktsDefault18Text,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                        ),
-                        labelText: 'Jynsy',
-                        labelStyle: ktsDefault14HelperText,
-                      ),
-                      validator: model.updateGender,
-                      // validator: (value) {
-                      //   if (value!.isEmpty) {
-                      //     return 'Jynsy giriziň';
-                      //   }
-                      //   return null;
-                      // },
-                    ),
-                  ),
-                ),
-              ),
-              // --------------- EMAIL -------------- //
-              Padding(
-                padding: EdgeInsets.only(top: 8.w),
-                child: TextFormField(
-                  controller: _emailController,
-                  style: ktsDefault18Text,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                    ),
-                    labelText: 'Elektron poçtasy',
-                    labelStyle: ktsDefault14HelperText,
-                  ),
-                  validator: model.updateEmail,
-                  // validator: (value) {
-                  //   if (value!.isEmpty) {
-                  //     return 'Elektron poçtaňyzy giriziň';
-                  //   }
-                  //   return null;
-                  // },
-                ),
-              ),
-              // --------------- PHONE -------------- //
-              Padding(
-                padding: EdgeInsets.only(top: 8.w),
-                child: TextFormField(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                    labelText: 'Telefon belgiňiz',
-                    labelStyle: TextStyle(
-                      color: AppTheme.DRAWER_ICON,
-                    ),
-                  ),
-                  focusNode: _phoneFocus,
-                  onFieldSubmitted: (notUsed) {
-                    _phoneFocus.unfocus();
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Telefon belgiňizi giriziň';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(height: 0.2.sw),
-              CustomElevatedButton(
-                height: 1.sw / 9,
-                width: 1.sw,
-                color: AppTheme.MAIN,
-                borderRadius: 10.0,
-                text: 'Ýatda sakla',
-                isLoading: _isLoading,
-                onPressed: _onRememberButtonPressed,
-              ),
+              // Text('Profil', style: kts30DarkText),
+              // // --------------- NAME -------------- //
+              // Padding(
+              //   padding: EdgeInsets.only(top: 10.h),
+              //   child: TextFormField(
+              //     controller: _nameController,
+              //     style: ktsDefault18Text,
+              //     keyboardType: TextInputType.text,
+              //     textInputAction: TextInputAction.next,
+              //     decoration: InputDecoration(
+              //       border: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       focusedBorder: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       labelText: 'Ady',
+              //       labelStyle: ktsDefault14HelperText,
+              //     ),
+              //     validator: model.updateName,
+              //   ),
+              // ),
+              // // --------------- DATE TIME -------------- //
+              // Padding(
+              //   padding: EdgeInsets.only(top: 8.w),
+              //   child: TextFormField(
+              //     onTap: () async {
+              //       DateTime? date;
+              //       FocusScope.of(context).requestFocus(FocusNode());
+              //       date = await DatePicker.showDatePicker(
+              //         context,
+              //         showTitleActions: true,
+              //         minTime: DateTime(1900, 1, 1),
+              //         maxTime: DateTime.now(),
+              //         onChanged: (date) {
+              //           print('change $date');
+              //         },
+              //         onConfirm: (date) {
+              //           print('confirm $date');
+              //         },
+              //         currentTime: DateTime.now(),
+              //         locale: LocaleType.tk,
+              //       );
+              //       _birthdateController.text = date!.toIso8601String();
+              //     },
+              //     controller: _birthdateController,
+              //     style: ktsDefault18Text,
+              //     keyboardType: TextInputType.text,
+              //     textInputAction: TextInputAction.next,
+              //     decoration: InputDecoration(
+              //       border: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       focusedBorder: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       labelText: 'Doglan senesi',
+              //       labelStyle: ktsDefault14HelperText,
+              //     ),
+              //     validator: model.updateDateTime,
+              //     // validator: (value) {
+              //     //   if (value!.isEmpty) {
+              //     //     return 'Doglan senesini giriziň';
+              //     //   }
+              //     //   return null;
+              //     // },
+              //   ),
+              // ),
+              // // --------------- GENDER -------------- //
+              // Padding(
+              //   padding: EdgeInsets.only(top: 8.w),
+              //   child: GestureDetector(
+              //     onTap: _onGenderPressed,
+              //     child: Container(
+              //       color: Colors.transparent,
+              //       //// the red square would receive click events when tapping the blue square.
+              //       child: TextFormField(
+              //         controller: _genderController,
+              //         style: ktsDefault18Text,
+              //         keyboardType: TextInputType.text,
+              //         textInputAction: TextInputAction.next,
+              //         decoration: InputDecoration(
+              //           border: UnderlineInputBorder(
+              //             borderSide: BorderSide(
+              //                 color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //           ),
+              //           focusedBorder: UnderlineInputBorder(
+              //             borderSide: BorderSide(
+              //                 color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //           ),
+              //           labelText: 'Jynsy',
+              //           labelStyle: ktsDefault14HelperText,
+              //         ),
+              //         validator: model.updateGender,
+              //         // validator: (value) {
+              //         //   if (value!.isEmpty) {
+              //         //     return 'Jynsy giriziň';
+              //         //   }
+              //         //   return null;
+              //         // },
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // // --------------- EMAIL -------------- //
+              // Padding(
+              //   padding: EdgeInsets.only(top: 8.w),
+              //   child: TextFormField(
+              //     controller: _emailController,
+              //     style: ktsDefault18Text,
+              //     keyboardType: TextInputType.emailAddress,
+              //     textInputAction: TextInputAction.next,
+              //     decoration: InputDecoration(
+              //       border: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       focusedBorder: UnderlineInputBorder(
+              //         borderSide: BorderSide(
+              //             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              //       ),
+              //       labelText: 'Elektron poçtasy',
+              //       labelStyle: ktsDefault14HelperText,
+              //     ),
+              //     validator: model.updateEmail,
+              //     // validator: (value) {
+              //     //   if (value!.isEmpty) {
+              //     //     return 'Elektron poçtaňyzy giriziň';
+              //     //   }
+              //     //   return null;
+              //     // },
+              //   ),
+              // ),
+              // // --------------- PHONE -------------- //
+              // Padding(
+              //   padding: EdgeInsets.only(top: 8.w),
+              //   child: TextFormField(
+              //     controller: _phoneController,
+              //     keyboardType: TextInputType.phone,
+              //     textInputAction: TextInputAction.done,
+              //     decoration: InputDecoration(
+              //       labelText: 'Telefon belgiňiz',
+              //       labelStyle: TextStyle(
+              //         color: AppTheme.DRAWER_ICON,
+              //       ),
+              //     ),
+              //     focusNode: _phoneFocus,
+              //     onFieldSubmitted: (notUsed) {
+              //       _phoneFocus.unfocus();
+              //     },
+              //     validator: (value) {
+              //       if (value!.isEmpty) {
+              //         return 'Telefon belgiňizi giriziň';
+              //       }
+              //       return null;
+              //     },
+              //   ),
+              // ),
+              // SizedBox(height: 0.2.sw),
+              // CustomElevatedButton(
+              //   height: 1.sw / 9,
+              //   width: 1.sw,
+              //   color: AppTheme.MAIN,
+              //   borderRadius: 10.0,
+              //   text: 'Ýatda sakla',
+              //   isLoading: _isLoading,
+              //   onPressed: _onRememberButtonPressed,
+              // ),
             ],
           ),
         ),

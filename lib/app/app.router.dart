@@ -14,12 +14,12 @@ import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
+import '../ui/drawer/address_add_edit/address_add_edit_view.dart';
+import '../ui/drawer/addresses/addresses_view.dart';
+import '../ui/drawer/login/login_view.dart';
+import '../ui/drawer/otp/otp_view.dart';
+import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_view.dart';
-import '../ui/profile/address_add_edit/address_add_edit_view.dart';
-import '../ui/profile/addresses/addresses_view.dart';
-import '../ui/profile/login/login_view.dart';
-import '../ui/profile/otp/otp_view.dart';
-import '../ui/profile/profile_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
 import '../ui/startup/startup_view.dart';
@@ -142,8 +142,11 @@ class StackedRouter extends RouterBase {
       );
     },
     ProfileView: (data) {
+      var args = data.getArgs<ProfileViewArguments>(
+        orElse: () => ProfileViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const ProfileView(),
+        builder: (context) => ProfileView(key: args.key),
         settings: data,
       );
     },
@@ -194,6 +197,12 @@ class OtpViewArguments {
   final bool isCartView;
   final Key? key;
   OtpViewArguments({required this.isCartView, this.key});
+}
+
+/// ProfileView arguments holder class
+class ProfileViewArguments {
+  final Key? key;
+  ProfileViewArguments({this.key});
 }
 
 /// AddressAddEditView arguments holder class
