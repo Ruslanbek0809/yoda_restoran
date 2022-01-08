@@ -1,69 +1,15 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/profile/address_add_edit/add_edit_address_hook.dart';
-import 'package:yoda_res/ui/widgets/my_app_bar.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../utils/utils.dart';
-
 import 'address_add_edit_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddressAddEditView extends StatefulWidget {
-  const AddressAddEditView({Key? key}) : super(key: key);
-
-  @override
-  State<AddressAddEditView> createState() => _AddressAddEditViewState();
-}
-
-class _AddressAddEditViewState extends State<AddressAddEditView>
-    with SingleTickerProviderStateMixin {
-  bool _isLoading = false;
-  final GlobalKey<FormState> _cartAddressformKey = GlobalKey<FormState>();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _apartmentController = TextEditingController();
-  final TextEditingController _houseController = TextEditingController();
-  final TextEditingController _floorController = TextEditingController();
-  final TextEditingController _notesController = TextEditingController();
-  final FocusNode _cityFocus = FocusNode();
-  final FocusNode _streetFocus = FocusNode();
-  final FocusNode _apartmentFocus = FocusNode();
-  final FocusNode _houseFocus = FocusNode();
-  final FocusNode _floorFocus = FocusNode();
-  final FocusNode _notesFocus = FocusNode();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    _cityController.dispose();
-    _streetController.dispose();
-    _apartmentController.dispose();
-    _houseController.dispose();
-    _floorController.dispose();
-    _notesController.dispose();
-    _cityFocus.dispose();
-    _streetFocus.dispose();
-    _apartmentFocus.dispose();
-    _houseFocus.dispose();
-    _floorFocus.dispose();
-    _notesFocus.dispose();
-    super.dispose();
-  }
-
-  Future _onConfirmButtonPressed() async {
-    setState(() {
-      _isLoading = true;
-    });
-    if (_cartAddressformKey.currentState!.validate()) {
-      printLog('_contactformKey validated');
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
+class AddressAddEditView extends StatelessWidget {
   final GlobalKey<FormState> _addEditAddressformKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressAddEditViewModel>.reactive(
@@ -87,18 +33,11 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
                     color: AppTheme.FONT_COLOR,
                     size: 25.w,
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: model.navBack,
                 ),
               ),
               centerTitle: true,
-              title: Text(
-                'Salgy',
-                style: TextStyle(
-                  color: AppTheme.MAIN_DARK,
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              title: Text('Salgy', style: ktsDefault22BoldText),
             ),
           ),
           body: Stack(
@@ -124,20 +63,17 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
                 right: 0,
                 child: Container(
                   color: AppTheme.WHITE,
-                  padding: EdgeInsets.fromLTRB(30.w, 10.w, 30.w, 50.w),
+                  padding: EdgeInsets.fromLTRB(30.w, 10.h, 30.w, 50.h),
                   child: Column(
                     children: [
                       TextButton(
                         child: Text(
                           'Salgyny aýyr',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
+                          style: ktsDefault18Text,
                         ),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                      SizedBox(height: 15.w),
+                      SizedBox(height: 15.h),
                       SizedBox(
                         width: 1.sw,
                         child: TextButton(
@@ -146,17 +82,23 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: AppTheme().radius10),
-                            padding: EdgeInsets.symmetric(vertical: 15.w),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
-                          child: Text(
-                            'Salgyny goş',
-                            style: TextStyle(
-                              color: AppTheme.WHITE,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          onPressed: () => Navigator.of(context).pop(),
+                          child: model.isBusy
+                              ? ButtonLoading()
+                              : Text(
+                                  'Salgyny goş',
+                                  style: ktsButton18Text,
+                                ),
+                          onPressed: () async {
+                            FocusScope.of(context)
+                                .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                            if (!_addEditAddressformKey.currentState!
+                                .validate()) return;
+                            _addEditAddressformKey.currentState!.save();
+                            await model.onAddAddressPressed();
+                            model.navBack();
+                          },
                         ),
                       ),
                     ],
