@@ -7,14 +7,9 @@ import '../../../utils/utils.dart';
 import 'addresses_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddressesView extends StatefulWidget {
+class AddressesView extends StatelessWidget {
   const AddressesView({Key? key}) : super(key: key);
 
-  @override
-  State<AddressesView> createState() => _AddressesViewState();
-}
-
-class _AddressesViewState extends State<AddressesView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressesViewModel>.reactive(
@@ -41,14 +36,14 @@ class _AddressesViewState extends State<AddressesView> {
                   ),
                 ),
                 centerTitle: true,
-                title: Text('Salgylar', style: ktsDefault22BoldText)),
+                title: Text('Salgylar', style: ktsDefault22DarkText)),
           ),
           body: model.isBusy
               ? LoadingWidget()
               : SingleChildScrollView(
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -81,7 +76,8 @@ class _AddressesViewState extends State<AddressesView> {
                           child: InkWell(
                             onTap: model.navToAddEditAddressView,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              padding:
+                                  EdgeInsets.fromLTRB(0.w, 5.h, 0.5.sw, 5.h),
                               child: Text(
                                 'Täze salgy goş...',
                                 style: ktsDefault18Text,

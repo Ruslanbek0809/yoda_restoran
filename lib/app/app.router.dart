@@ -154,8 +154,11 @@ class StackedRouter extends RouterBase {
       );
     },
     AddressAddEditView: (data) {
+      var args = data.getArgs<AddressAddEditViewArguments>(
+        orElse: () => AddressAddEditViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AddressAddEditView(),
+        builder: (context) => AddressAddEditView(key: args.key),
         settings: data,
       );
     },
@@ -191,4 +194,10 @@ class OtpViewArguments {
   final bool isCartView;
   final Key? key;
   OtpViewArguments({required this.isCartView, this.key});
+}
+
+/// AddressAddEditView arguments holder class
+class AddressAddEditViewArguments {
+  final Key? key;
+  AddressAddEditViewArguments({this.key});
 }
