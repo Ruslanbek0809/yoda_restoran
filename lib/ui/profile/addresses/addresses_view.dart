@@ -77,8 +77,7 @@ class _AddressesViewState extends State<AddressesView> {
                         Material(
                           color: AppTheme.WHITE,
                           child: InkWell(
-                            onTap: () async => await Navigator.pushNamed(
-                                context, RouteList.addressAddEdit),
+                            onTap: model.navToAddEditAddressView,
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 5.h),
                               child: Text(

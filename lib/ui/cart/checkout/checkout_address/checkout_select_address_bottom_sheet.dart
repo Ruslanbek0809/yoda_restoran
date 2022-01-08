@@ -182,10 +182,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                             SizedBox(width: 10.w),
                                             Text(
                                               'Täze salgy goş...',
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
+                                              style: ktsDefault18Text,
                                             ),
                                           ],
                                         ),

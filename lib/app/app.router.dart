@@ -15,6 +15,7 @@ import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/profile/address_add_edit/address_add_edit_view.dart';
 import '../ui/profile/addresses/addresses_view.dart';
 import '../ui/profile/login/login_view.dart';
 import '../ui/profile/otp/otp_view.dart';
@@ -35,6 +36,7 @@ class Routes {
   static const String orderSuccessView = '/order-success-view';
   static const String profileView = '/profile-view';
   static const String addressesView = '/addresses-view';
+  static const String addressAddEditView = '/address-add-edit-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -47,6 +49,7 @@ class Routes {
     orderSuccessView,
     profileView,
     addressesView,
+    addressAddEditView,
   };
 }
 
@@ -65,6 +68,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.orderSuccessView, page: OrderSuccessView),
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.addressesView, page: AddressesView),
+    RouteDef(Routes.addressAddEditView, page: AddressAddEditView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -146,6 +150,12 @@ class StackedRouter extends RouterBase {
     AddressesView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddressesView(),
+        settings: data,
+      );
+    },
+    AddressAddEditView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddressAddEditView(),
         settings: data,
       );
     },

@@ -15,13 +15,20 @@ class AddressesViewModel extends FutureViewModel {
   List<Address>? _addresses = [];
   List<Address>? get addresses => _addresses;
 
-  /// NAVIGATES to Home by removing all previous routes
-  Future<void> navToHomeByRemovingAll() async =>
-      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
-
   @override
   Future<void> futureToRun() async {
     _addresses = await _userService.getAddresses();
     log.v('_addresses!.length: ${_addresses!.length}');
   }
+//------------------------ NAVIGATIONS ----------------------------//
+
+  /// NAVIGATES to Home by removing all previous routes
+  Future<void> navToHomeByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+
+  Future<void> navToAddEditAddressView() async {
+    bool _navResult = false;
+    _navResult = await _navService.navigateTo(Routes.addressAddEditView);
+    if (_navResult) await initialise(); // Workaround
+  } // TODO: Change page transition here
 }
