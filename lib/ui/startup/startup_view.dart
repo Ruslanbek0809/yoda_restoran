@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,31 +47,37 @@ class StartUpView extends StatelessWidget {
                   backgroundColor: kcSecondaryLightColor,
                   boxShadows: kElevationToShadow[0],
                   margin: EdgeInsets.only(
-                    left: 24.w,
-                    right: 24.w,
+                    left: 32.w,
+                    right: 32.w,
                     bottom: 0.075.sh,
                   ),
                   position: FlashPosition.bottom,
                   behavior: FlashBehavior.floating,
                   child: FlashBar(
-                    // icon: SvgPicture.asset(
-                    //   'assets/no_wifi.svg',
-                    //   // color: Colors.transparent,
-                    //   // width: 10.w,
+                    // padding: EdgeInsets.only(
+                    //   left: 24.w,
+                    //   right: 24.w,
                     // ),
-                    content: Center(
-                      child: Text('Internet ýok', style: ktsDefault20Text),
+                    icon: Padding(
+                      padding: EdgeInsets.only(left: 24.w, right: 12.w),
+                      child: SvgPicture.asset('assets/no_wifi.svg'),
                     ),
-                    // actions: [
-                    //   GestureDetector(
-                    //     onTap: () {},
-                    //     child: SvgPicture.asset(
-                    //       'assets/arrow_clockwise.svg',
-                    //       // color: Colors.transparent,
-                    //       // width: 10.w,
-                    //     ),
-                    //   ),
-                    // ],
+                    content: Text(
+                      'Internet ýok',
+                      style: ktsDefault20Text,
+                    ),
+                    primaryAction: Row(
+                      children: [
+                        VerticalDivider(
+                            indent: 8.h, endIndent: 8.h, thickness: 1),
+                        Padding(
+                          padding: EdgeInsets.only(right: 12.w, left: 4.w),
+                          child: SvgPicture.asset(
+                            'assets/arrow_clockwise.svg',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
