@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flash/flash.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -18,6 +19,11 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final _connectivityService = locator<ConnectivityService>();
 
   ConnectivityStatus? get connectivityStatus => data;
+
+  FlashController<Object?>? flashController;
+
+  // bool _isFlashPersistent = false;
+  // bool get startAnimation => _startAnimation;
 
   bool _startAnimation = false;
   bool get startAnimation => _startAnimation;

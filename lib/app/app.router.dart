@@ -75,7 +75,7 @@ class StackedRouter extends RouterBase {
   final _pagesMap = <Type, StackedRouteFactory>{
     StartUpView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const StartUpView(),
+        builder: (context) => StartUpView(),
         settings: data,
       );
     },

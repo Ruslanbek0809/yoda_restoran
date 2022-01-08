@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,8 +11,9 @@ import 'package:yoda_res/utils/utils.dart';
 import 'startup_viewmodel.dart';
 
 class StartUpView extends StatelessWidget {
-  const StartUpView({Key? key}) : super(key: key);
+  StartUpView({Key? key}) : super(key: key);
 
+  final completer = Completer<FlashController>();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
@@ -21,9 +24,64 @@ class StartUpView extends StatelessWidget {
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
         model.log.v('data: ${model.connectivityStatus}');
+
+        /// Called when user has internet connection
         if (model.connectivityStatus != null &&
             model.connectivityStatus != ConnectivityStatus.Offline)
           model.navToHomeWithConnection();
+
+        /// Called when No internet connection
+        if (model.connectivityStatus == null ||
+            model.connectivityStatus == ConnectivityStatus.Offline) {
+          Future.delayed(Duration.zero, () async {
+            await showFlash(
+              context: context,
+              persistent: true,
+              builder: (context, controller) {
+                model.flashController = controller;
+                return Flash(
+                  controller: controller,
+                  barrierDismissible: true,
+                  borderRadius: AppTheme().radius15,
+                  backgroundColor: kcSecondaryLightColor,
+                  boxShadows: kElevationToShadow[0],
+                  margin: EdgeInsets.only(
+                    left: 24.w,
+                    right: 24.w,
+                    bottom: 0.075.sh,
+                  ),
+                  position: FlashPosition.bottom,
+                  behavior: FlashBehavior.floating,
+                  child: FlashBar(
+                    // icon: SvgPicture.asset(
+                    //   'assets/no_wifi.svg',
+                    //   // color: Colors.transparent,
+                    //   // width: 10.w,
+                    // ),
+                    content: Center(
+                      child: Text('Internet ýok', style: ktsDefault20Text),
+                    ),
+                    // actions: [
+                    //   GestureDetector(
+                    //     onTap: () {},
+                    //     child: SvgPicture.asset(
+                    //       'assets/arrow_clockwise.svg',
+                    //       // color: Colors.transparent,
+                    //       // width: 10.w,
+                    //     ),
+                    //   ),
+                    // ],
+                  ),
+                );
+              },
+            );
+          });
+        }
+
+        /// It is called only when above showFlash called at least once
+        if ((model.connectivityStatus != null &&
+                model.connectivityStatus != ConnectivityStatus.Offline) &&
+            model.flashController != null) model.flashController!.dismiss();
 
         return Scaffold(
           body: Stack(
@@ -33,15 +91,17 @@ class StartUpView extends StatelessWidget {
                 height: 1.sh,
                 width: 1.sw,
               ),
-              Positioned(
-                bottom: 0.125.sh,
-                left: 0,
-                right: 0,
-                child: SpinKitChasingDots(
-                  size: 35.w,
-                  color: kcPrimaryColor,
+              if (model.connectivityStatus != null &&
+                  model.connectivityStatus != ConnectivityStatus.Offline)
+                Positioned(
+                  bottom: 0.125.sh,
+                  left: 0,
+                  right: 0,
+                  child: SpinKitChasingDots(
+                    size: 35.w,
+                    color: kcPrimaryColor,
+                  ),
                 ),
-              ),
             ],
           ),
           // OverflowBox(
