@@ -190,11 +190,9 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   onTap: meal.gVolumes!.isNotEmpty ||
                                           meal.gCustomizables!.isNotEmpty
                                       ? () async {
+                                          await _tweenController.forward();
                                           await model.showCustomMealBottomSheet(
                                               meal, restaurant, model);
-
-                                          /// Bouncing animation trigger
-                                          await _tweenController.forward();
                                         }
                                       : () async {
                                           await model.updateMealInCart(
@@ -228,19 +226,15 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               onTap: meal.gVolumes!.isNotEmpty ||
                                       meal.gCustomizables!.isNotEmpty
                                   ? () async {
+                                      await _tweenController.forward();
                                       await model.showCustomMealBottomSheet(
                                           meal, restaurant, model);
-
-                                      /// Bouncing animation trigger
-                                      await _tweenController.forward();
                                     }
                                   : () async {
                                       await model.addMealToCart(
                                         meal,
                                         restaurant,
                                       );
-
-                                      /// Bouncing animation trigger
                                       await _tweenController.forward();
                                     },
                               child: Ink(

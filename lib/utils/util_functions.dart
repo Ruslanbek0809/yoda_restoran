@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoda_res/shared/styles.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
 import 'utils.dart';
@@ -106,6 +108,37 @@ void printLog(dynamic data) {
     debugPrint('${data.toString()}');
   }
 }
+
+// void showOfflineFlashBar(
+//     {required BuildContext context,
+//     String? msg,
+//     Color? color,
+//     int milliseconds = 1500}) {
+//   showFlash(
+//     context: context,
+//     persistent: true,
+//     duration: Duration(milliseconds: milliseconds),
+//     builder: (context, controller) {
+//       return Flash(
+//         backgroundColor: color,
+//         controller: controller,
+//         boxShadows: kElevationToShadow[3],
+//         position: FlashPosition.top,
+//         barrierDismissible: true,
+//         behavior: FlashBehavior.floating,
+//         child: FlashBar(
+//           icon: const Icon(
+//             Icons.check,
+//             color: AppTheme.WHITE,
+//           ),
+//           content: Center(
+//             child: Text(msg!, style: ktsDefault20Text),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
 // SnackBar Widget
 snackBar(String? message, BuildContext context) {

@@ -127,7 +127,8 @@ class HomeViewModel extends MultipleFutureViewModel {
       );
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_bottomCartService, _homeService];
 
   //------------------ Custom overridden REACTIVE PART ---------------------//
   // late List<ReactiveServiceMixin> _reactiveServices;
