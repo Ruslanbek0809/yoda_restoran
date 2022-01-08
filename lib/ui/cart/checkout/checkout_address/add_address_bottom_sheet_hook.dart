@@ -41,6 +41,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                 borderSide:
                     BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
               ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              ),
               hintText: 'Aşgabat',
               hintStyle: ktsDefault18HelperText,
             ),
@@ -59,6 +63,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             border: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+            ),
+            focusedBorder: UnderlineInputBorder(
               borderSide:
                   BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
@@ -82,6 +90,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                  ),
                   labelText: 'Jaý',
                   labelStyle: ktsDefault14HelperText,
                 ),
@@ -100,6 +112,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                  ),
                   labelText: 'Otag',
                   labelStyle: ktsDefault14HelperText,
                 ),
@@ -115,6 +131,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
@@ -146,6 +166,10 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
             border: OutlineInputBorder(
               borderRadius: AppTheme().radius10,
               borderSide: BorderSide.none,
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
             filled: true,
             fillColor: AppTheme.MAIN_LIGHT,

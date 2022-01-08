@@ -63,6 +63,7 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
     }
   }
 
+  final GlobalKey<FormState> _addEditAddressformKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressAddEditViewModel>.reactive(
@@ -102,7 +103,20 @@ class _AddressAddEditViewState extends State<AddressAddEditView>
           ),
           body: Stack(
             children: [
-              AddEditAddressHook(),
+              //--------------- ADD/EDIT FORM HOOK -------------- //
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Form(
+                      key: _addEditAddressformKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: AddEditAddressHook(),
+                    ),
+                  ],
+                ),
+              ),
               //--------------- ADDRESS BUTTONS -------------- //
               Positioned(
                 bottom: 0,
