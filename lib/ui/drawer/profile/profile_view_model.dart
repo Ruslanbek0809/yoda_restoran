@@ -43,6 +43,9 @@ class ProfileViewModel extends BaseViewModel {
   String? _email;
   String? get email => _email;
 
+  String? _phone;
+  String? get phone => _phone;
+
   /// UPDATES _name
   String? updateName(String? value) {
     log.v('updateName value: $value');
@@ -87,16 +90,27 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// ADDS new address
-  Future<void> onAddAddressPressed() async {
-    log.v('onAddAddressPressed()');
-    try {
-      await runBusyFuture(
-          _userService.addAddress(city, street, house, apartment, floor, note));
-    } catch (err) {
-      throw err;
+  /// UPDATES _email
+  String? updatePhone(String? value) {
+    log.v('updatePhone value: $value');
+    if (value == null || value.isEmpty || value.length < 11) {
+      return 'Nomeri doly giriziň';
     }
+
+    _phone = value;
+    notifyListeners();
   }
+
+  /// ADDS new address
+  // Future<void> onAddAddressPressed() async {
+  //   log.v('onAddAddressPressed()');
+  //   try {
+  //     await runBusyFuture(
+  //         _userService.addAddress(city, street, house, apartment, floor, note));
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
   void navBack() => _navService.back();
 }

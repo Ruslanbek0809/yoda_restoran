@@ -35,7 +35,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
     final _emailController = useTextEditingController();
     final _phoneController = TextEditingController(text: '+993 ');
     var maskFormatter = MaskTextInputFormatter(
-        mask: '+993 ## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
+        mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
     return Container(
       decoration: BoxDecoration(
         color: AppTheme.WHITE,
@@ -119,30 +119,27 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
               // --------------- GENDER -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 8.w),
-                child: GestureDetector(
-                  onTap: _onGenderPressed,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: TextFormField(
-                      onTap: () async {
-                        model.updateGender(_genderController.text);
-                      },
-                      controller: _genderController,
-                      style: ktsDefault18Text,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-                        ),
-                        labelText: 'Jynsy',
-                        labelStyle: ktsDefault14HelperText,
+                child: Container(
+                  color: Colors.transparent,
+                  child: TextFormField(
+                    onTap: () async {
+                      model.updateGender(_genderController.text);
+                    },
+                    controller: _genderController,
+                    style: ktsDefault18Text,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                       ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                      ),
+                      labelText: 'Jynsy',
+                      labelStyle: ktsDefault14HelperText,
                     ),
                   ),
                 ),
@@ -175,35 +172,38 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
                   controller: _phoneController,
+                  style: ktsDefault18Text,
+                  inputFormatters: [maskFormatter],
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    labelText: 'Telefon belgiňiz',
-                    labelStyle: TextStyle(
-                      color: AppTheme.DRAWER_ICON,
+                    labelText: 'Tel',
+                    labelStyle: ktsDefault14HelperText,
+                    prefix: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Text('+993', style: ktsTextfieldText),
                     ),
                   ),
-                  focusNode: _phoneFocus,
-                  onFieldSubmitted: (notUsed) {
-                    _phoneFocus.unfocus();
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Telefon belgiňizi giriziň';
-                    }
-                    return null;
-                  },
+                  validator: model.updatePhone,
                 ),
               ),
               SizedBox(height: 0.2.sw),
-              CustomElevatedButton(
-                height: 1.sw / 9,
+              SizedBox(
                 width: 1.sw,
-                color: AppTheme.MAIN,
-                borderRadius: 10.0,
-                text: 'Ýatda sakla',
-                isLoading: _isLoading,
-                onPressed: _onRememberButtonPressed,
+                child: CustomTextChildButton(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: model.isBusy
+                          ? ButtonLoading()
+                          : Text(
+                              'Ýatda sakla',
+                              style: ktsButtonText,
+                            ),
+                    ),
+                    color: kcSecondaryDarkColor,
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    borderRadius: kbr10,
+                    onPressed: () {}),
               ),
             ],
           ),
