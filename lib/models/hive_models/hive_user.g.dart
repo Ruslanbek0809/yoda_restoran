@@ -23,7 +23,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       email: fields[3] as String?,
       mobile: fields[4] as String?,
       gender: fields[5] as String?,
-      birthday: fields[6] as String?,
+      birthday: fields[6] as DateTime?,
       accessToken: fields[7] as String?,
     );
   }

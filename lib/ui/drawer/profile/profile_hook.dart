@@ -19,12 +19,13 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
   Widget buildViewModelWidget(BuildContext context, ProfileViewModel model) {
     model.log.v(
         'name: ${model.currentUser!.firstName}, mobile: ${model.currentUser!.mobile}, email: ${model.currentUser!.email}, gender: ${model.currentUser!.gender}, birthday: ${model.currentUser!.birthday}');
+
     final _nameController = useTextEditingController(
         text: model.currentUser!.firstName != null
             ? model.currentUser!.firstName
             : '');
-    final _birthdateController =
-        useTextEditingController(text: model.currentUser!.birthday ?? '');
+    final _birthdateController = useTextEditingController(
+        text: model.currentUser!.birthday?.toIso8601String());
     final _genderController =
         useTextEditingController(text: model.currentUser!.gender ?? '');
     final _emailController =
@@ -68,7 +69,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
                     labelText: 'Ady',
-                    labelStyle: ktsDefault14HelperText,
+                    labelStyle: kts14HelperText,
                   ),
                   validator: model.updateName,
                 ),
@@ -111,7 +112,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
                     labelText: 'Doglan senesi',
-                    labelStyle: ktsDefault14HelperText,
+                    labelStyle: kts14HelperText,
                   ),
                 ),
               ),
@@ -138,7 +139,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                       ),
                       labelText: 'Jynsy',
-                      labelStyle: ktsDefault14HelperText,
+                      labelStyle: kts14HelperText,
                     ),
                   ),
                 ),
@@ -161,7 +162,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
                     labelText: 'Elektron poçtasy',
-                    labelStyle: ktsDefault14HelperText,
+                    labelStyle: kts14HelperText,
                   ),
                   validator: model.updateEmail,
                 ),
@@ -177,7 +178,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     labelText: 'Tel',
-                    labelStyle: ktsDefault14HelperText,
+                    labelStyle: kts14HelperText,
                     prefix: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Text('+993', style: ktsDefault18Text),
@@ -199,7 +200,13 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   color: kcSecondaryDarkColor,
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   borderRadius: kbr10,
-                  onPressed: () {},
+                  onPressed: () async {
+                    FocusScope.of(context)
+                        .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                    if (!_profileformKey.currentState!.validate()) return;
+                    _profileformKey.currentState!.save();
+                    await model.onUpdateUserPressed();
+                  },
                 ),
               ),
             ],

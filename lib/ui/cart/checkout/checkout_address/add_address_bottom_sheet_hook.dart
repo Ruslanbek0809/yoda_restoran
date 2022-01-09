@@ -28,7 +28,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
         // --------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w),
-          child: Text('Şäher', style: ktsDefault14HelperText),
+          child: Text('Şäher', style: kts14HelperText),
         ),
         IgnorePointer(
           child: TextFormField(
@@ -54,7 +54,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
         // --------------- STREET -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w, top: 25.h),
-          child: Text('Köçe', style: ktsDefault14HelperText),
+          child: Text('Köçe', style: kts14HelperText),
         ),
         TextFormField(
           controller: _streetController,
@@ -95,7 +95,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Jaý',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateHouse,
               ),
@@ -117,7 +117,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Otag',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateApartment,
               ),
@@ -139,7 +139,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Gat',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateFloor,
               ),
@@ -152,7 +152,7 @@ class AddAddressBottomSheetHook extends HookViewModelWidget<CheckoutViewModel> {
           padding: EdgeInsets.only(left: 5.w, top: 15.h),
           child: Text(
             'Bellik',
-            style: ktsDefault14HelperText,
+            style: kts14HelperText,
           ),
         ),
         SizedBox(height: 5.h),

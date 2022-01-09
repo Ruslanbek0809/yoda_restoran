@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class User {
   User({
     this.id,
@@ -32,7 +32,7 @@ class User {
   final String? gender;
 
   @JsonKey(name: 'birthday')
-  final String? birthday;
+  final DateTime? birthday;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

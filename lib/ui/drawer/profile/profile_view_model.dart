@@ -101,16 +101,16 @@ class ProfileViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// ADDS new address
-  // Future<void> onAddAddressPressed() async {
-  //   log.v('onAddAddressPressed()');
-  //   try {
-  //     await runBusyFuture(
-  //         _userService.addAddress(city, street, house, apartment, floor, note));
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+  /// UPDATES user info
+  Future<void> onUpdateUserPressed() async {
+    log.v('onUpdateUserPressed()');
+    try {
+      // await runBusyFuture(
+      //     _userService.addAddress(city, street, house, apartment, floor, note));
+    } catch (err) {
+      throw err;
+    }
+  }
 
   void navBack() => _navService.back();
 }

@@ -61,7 +61,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                   concatenateVolsCustoms,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: ktsDefault14HelperText,
+                  style: kts14HelperText,
                 ),
                 //------------------ BUTTONS ---------------------//
                 Row(

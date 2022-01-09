@@ -39,7 +39,7 @@ TextStyle ktsDefault14Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault14HelperText = TextStyle(
+TextStyle kts14HelperText = TextStyle(
   fontSize: 14.sp,
   color: kcHelperColor,
 );

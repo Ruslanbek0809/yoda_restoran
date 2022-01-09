@@ -74,8 +74,11 @@ class StackedRouter extends RouterBase {
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     StartUpView: (data) {
+      var args = data.getArgs<StartUpViewArguments>(
+        orElse: () => StartUpViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => StartUpView(),
+        builder: (context) => StartUpView(key: args.key),
         settings: data,
       );
     },
@@ -171,6 +174,12 @@ class StackedRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// StartUpView arguments holder class
+class StartUpViewArguments {
+  final Key? key;
+  StartUpViewArguments({this.key});
+}
 
 /// ResDetailsView arguments holder class
 class ResDetailsViewArguments {

@@ -112,11 +112,11 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               meal.discount != null || meal.discount! > 0
                                   ? '${meal.discountedPrice!.toInt()} TMT'
                                   : '${meal.price!.toInt()} TMT',
-                              style: ktsDefault14HelperText,
+                              style: kts14HelperText,
                             ),
                             Text(
                               ' * ${meal.value!.toInt()} ${meal.size!.name}',
-                              style: ktsDefault14HelperText,
+                              style: kts14HelperText,
                             ),
                           ],
                         )
@@ -133,13 +133,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 ),
                                 Text(
                                   ' * ${meal.value!.toInt()} ${meal.size!.name}',
-                                  style: ktsDefault14HelperText,
+                                  style: kts14HelperText,
                                 ),
                               ],
                             )
                           : Text(
                               '${meal.value!.toInt()} ${meal.size!.name}',
-                              style: ktsDefault14HelperText,
+                              style: kts14HelperText,
                             ),
                   Spacer(),
                   //------------------ BUTTONS ---------------------//

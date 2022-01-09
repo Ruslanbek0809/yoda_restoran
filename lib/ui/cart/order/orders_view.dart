@@ -254,7 +254,7 @@ class OrdersView extends StatelessWidget {
                                           child: Text(
                                             _orderItemConcatenatedText!,
                                             overflow: TextOverflow.ellipsis,
-                                            style: ktsDefault14HelperText,
+                                            style: kts14HelperText,
                                           ),
                                         ),
                                     ],

@@ -98,7 +98,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                               : 'Siziň sargydyňyzdan ${model.promocode!.discount}% aýrylar'
                           : ''
                       : '',
-                  style: ktsDefault14HelperText,
+                  style: kts14HelperText,
                 ),
               ),
       ],

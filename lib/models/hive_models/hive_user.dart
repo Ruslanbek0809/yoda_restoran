@@ -34,7 +34,7 @@ class HiveUser {
   final String? gender;
 
   @HiveField(6)
-  final String? birthday;
+  final DateTime? birthday;
 
   @HiveField(7)
   final String? accessToken;

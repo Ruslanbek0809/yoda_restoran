@@ -42,32 +42,21 @@ class LoginView extends StatelessWidget with $LoginView {
                 SizedBox(
                   height: 1.sh / 2.5,
                   child: SvgPicture.asset(
-                    'assets/yoda_restoran.svg',
-                    color: AppTheme.MAIN_DARK,
-                    width: 0.73.sw,
+                    'assets/title_yoda_restoran.svg',
+                    width: 0.6.sw,
                   ),
                 ),
-                Text(
-                  'Ulgama girmek',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.sp,
-                    color: AppTheme.MAIN_DARK,
-                  ),
-                ),
+                Text('Ulgama girmek', style: ktsDefault22DarkText),
                 verticalSpaceTiny,
                 verticalSpaceMedium,
                 Text(
                   'Telefon belgiňizi giriziň',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppTheme.DRAWER_ICON,
-                  ),
+                  style: kts14HelperText,
                 ),
                 verticalSpaceMedium,
                 //------------------ PHONE TEXTFIELD ---------------------//
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.10.sw),
+                  padding: EdgeInsets.symmetric(horizontal: 0.1.sw),
                   child: TextFormField(
                     controller: phoneController,
                     inputFormatters: [maskFormatter],
@@ -75,6 +64,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     textInputAction: TextInputAction.done,
                     style: ktsDefault18Text,
                     decoration: InputDecoration(
+                      isDense: true,
                       labelText: 'Tel',
                       labelStyle: kts16HelperText,
                       prefix: Padding(
@@ -130,7 +120,7 @@ class LoginView extends StatelessWidget with $LoginView {
                 verticalSpaceMedium,
                 //------------------ Login BUTTON ---------------------//
                 SizedBox(
-                  width: 0.88.sw,
+                  width: 0.8.sw,
                   child: CustomTextChildButton(
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),

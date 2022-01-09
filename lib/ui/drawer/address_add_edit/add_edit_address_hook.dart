@@ -25,7 +25,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
         // --------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(top: 10.h),
-          child: Text('Şäher', style: ktsDefault14HelperText),
+          child: Text('Şäher', style: kts14HelperText),
         ),
         IgnorePointer(
           child: TextFormField(
@@ -52,7 +52,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
         // --------------- STREET -------------- //
         Padding(
           padding: EdgeInsets.only(top: 15.h),
-          child: Text('Köçe', style: ktsDefault14HelperText),
+          child: Text('Köçe', style: kts14HelperText),
         ),
         TextFormField(
           controller: _streetController,
@@ -93,7 +93,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Jaý',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateHouse,
               ),
@@ -115,7 +115,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Otag',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateApartment,
               ),
@@ -137,7 +137,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
                   labelText: 'Gat',
-                  labelStyle: ktsDefault14HelperText,
+                  labelStyle: kts14HelperText,
                 ),
                 validator: model.updateFloor,
               ),
@@ -150,7 +150,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
           padding: EdgeInsets.only(top: 20.h),
           child: Text(
             'Bellik',
-            style: ktsDefault14HelperText,
+            style: kts14HelperText,
           ),
         ),
         SizedBox(height: 5.h),

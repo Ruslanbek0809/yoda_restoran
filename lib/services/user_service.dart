@@ -87,11 +87,11 @@ class UserService {
         'auth/verify/',
         data: otpFormData,
       );
-      log.v('RESPONSE CODE: auth/verify/ => ${response.statusCode}');
       log.v('RESPONSE: auth/verify/ => ${response.data}');
       if (response.statusCode == 200 || response.statusCode == 201) {
         /// Step 1. GETS and CONVERTS user json data to dart userModel
-        final User userModel = User.fromJson(response.data);
+        final User userModel = User.fromJson(response.data['user']);
+        log.v('userModel: $userModel, name: ');
 
         /// Step 2. SAVES userModel to Hive userBox
         await userBox.put(

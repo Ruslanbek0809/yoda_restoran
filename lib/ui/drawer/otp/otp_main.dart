@@ -52,27 +52,16 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
             SizedBox(
               height: 1.sh / 2.5,
               child: SvgPicture.asset(
-                'assets/yoda_restoran.svg',
-                color: AppTheme.MAIN_DARK,
-                width: 0.75.sw,
+                'assets/title_yoda_restoran.svg',
+                width: 0.6.sw,
               ),
             ),
-            Text(
-              'Tassyklamak',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22.sp,
-                color: AppTheme.MAIN_DARK,
-              ),
-            ),
+            Text('Tassyklamak', style: ktsDefault22DarkText),
             verticalSpaceTiny,
             verticalSpaceMedium,
             Text(
               'Telefon belgiňize gelen gizli kody giriziň',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: AppTheme.DRAWER_ICON,
-              ),
+              style: kts14HelperText,
             ),
             verticalSpaceMedium,
             //------------------ PinCodeTextField ---------------------//
@@ -80,6 +69,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
               padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
               child: PinCodeTextField(
                 appContext: context,
+                controller: otpController,
                 pastedTextStyle: TextStyle(
                   color: AppTheme.MAIN,
                   fontWeight: FontWeight.bold,
@@ -107,7 +97,6 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 enableActiveFill: true,
                 errorAnimationController: errorController,
                 errorTextSpace: 25.w,
-                controller: otpController,
                 keyboardType: TextInputType.number,
                 boxShadows: [
                   AppTheme().fillShadow,
@@ -144,7 +133,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
             verticalSpaceSmall,
             //------------------ Verify BUTTON ---------------------//
             SizedBox(
-              width: 0.88.sw,
+              width: 0.8.sw,
               child: CustomTextChildButton(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
