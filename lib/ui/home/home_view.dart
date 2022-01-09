@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                                         ],
                                       ),
                                     ),
-                                    //------------------ BANNERS ---------------------//
+                                    //------------------ SLIDERS ---------------------//
                                     if (model
                                         .selectedMainCatRestaurants.isEmpty)
                                       SliderView(sliders: model.sliders ?? []),
