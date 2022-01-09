@@ -18,21 +18,16 @@ TextStyle ktsButton18Text = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
-TextStyle ktsTextfieldText = TextStyle(
-  color: kcFontColor,
-  fontSize: 18.sp,
-);
+// TextStyle ktsTextfieldText = TextStyle(
+//   color: kcFontColor,
+//   fontSize: 18.sp,
+// );
 
-TextStyle ktsLabelText = TextStyle(
-  color: kcHelperColor,
-  fontSize: 16.sp,
-);
+// TextStyle ktsLabelText = TextStyle(
+//   color: kcHelperColor,
+//   fontSize: 16.sp,
+// );
 
-TextStyle ktsTextButtonText = TextStyle(
-  color: kcPrimaryColor,
-  fontSize: 16.sp,
-  fontWeight: FontWeight.bold,
-);
 
 TextStyle ktsDefault12Text = TextStyle(
   fontSize: 12.sp,
@@ -60,13 +55,19 @@ TextStyle ktsDefault16Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle ktsTextButtonText = TextStyle(
+  color: kcPrimaryColor,
+  fontSize: 16.sp,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle ktsDefault16BoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
 );
 
-TextStyle ktsDefault16HelperText = TextStyle(
+TextStyle kts16HelperText = TextStyle(
   fontSize: 16.sp,
   color: kcHelperColor,
 );

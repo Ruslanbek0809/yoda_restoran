@@ -92,7 +92,7 @@ enum DialogType {
 }
 
 /// Enum for connectivity
-enum ConnectivityStatus { WiFi, Cellular, Offline }
+enum ConnectivityStatus { Idle, WiFi, Cellular, Offline }
 
 /// Platform Types
 final bool isIos = Platform.isIOS;

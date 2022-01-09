@@ -24,22 +24,18 @@ class StartUpView extends StatelessWidget {
       //     }),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
-        model.log.v('data: ${model.connectivityStatus}');
-
-        /// Called when user has internet connection
-        if (model.connectivityStatus != null &&
-            model.connectivityStatus != ConnectivityStatus.Offline)
-          model.navToHomeWithConnection();
+        model.log.v('connectivityStatus: ${model.connectivityStatus}');
 
         /// Called when No internet connection
-        if (model.connectivityStatus == null ||
-            model.connectivityStatus == ConnectivityStatus.Offline) {
-          Future.delayed(Duration.zero, () async {
+        if (model.connectivityStatus == ConnectivityStatus.Offline ||
+            model.connectivityStatus == null) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) async {
             await showFlash(
               context: context,
               persistent: true,
               builder: (context, controller) {
                 model.flashController = controller;
+                model.log.v('In Offline: ${model.flashController}');
                 return Flash(
                   controller: controller,
                   barrierDismissible: true,
@@ -86,9 +82,14 @@ class StartUpView extends StatelessWidget {
         }
 
         /// It is called only when above showFlash called at least once
-        if ((model.connectivityStatus != null &&
-                model.connectivityStatus != ConnectivityStatus.Offline) &&
-            model.flashController != null) model.flashController!.dismiss();
+        if (model.connectivityStatus != ConnectivityStatus.Offline &&
+            model.connectivityStatus != null) {
+          if (model.flashController != null) model.dismissFlashController();
+        }
+
+        /// Called when user has internet connection
+        if (model.connectivityStatus != ConnectivityStatus.Offline &&
+            model.connectivityStatus != null) model.navToHomeWithConnection();
 
         return Scaffold(
           body: Stack(

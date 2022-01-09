@@ -192,7 +192,7 @@ class DrawerView extends StatelessWidget {
                       SizedBox(width: 10.w),
                       Text(
                         'Biz bilen habarlaş',
-                        style: ktsDefault16HelperText,
+                        style: kts16HelperText,
                       ),
                     ],
                   ),

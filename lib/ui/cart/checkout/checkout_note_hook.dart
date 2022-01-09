@@ -23,7 +23,7 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
             padding: EdgeInsets.only(left: 5.w),
             child: Text(
               'Bellik',
-              style: ktsDefault16HelperText,
+              style: kts16HelperText,
             ),
           ),
           SizedBox(height: 5.h),

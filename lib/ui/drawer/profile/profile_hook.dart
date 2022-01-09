@@ -15,33 +15,32 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
 
   final GlobalKey<FormState> _profileformKey = GlobalKey<FormState>();
 
-  // Future _onRememberButtonPressed() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   if (_profileformKey.currentState!.validate()) {
-  //     printLog('_profileformKey validated');
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget buildViewModelWidget(BuildContext context, ProfileViewModel model) {
-    final _nameController = useTextEditingController();
-    final _birthdateController = useTextEditingController();
-    final _genderController = useTextEditingController();
-    final _emailController = useTextEditingController();
-    final _phoneController = TextEditingController(text: '+993 ');
+    model.log.v(
+        'name: ${model.currentUser!.firstName}, mobile: ${model.currentUser!.mobile}, email: ${model.currentUser!.email}, gender: ${model.currentUser!.gender}, birthday: ${model.currentUser!.birthday}');
+    final _nameController = useTextEditingController(
+        text: model.currentUser!.firstName != null
+            ? model.currentUser!.firstName
+            : '');
+    final _birthdateController =
+        useTextEditingController(text: model.currentUser!.birthday ?? '');
+    final _genderController =
+        useTextEditingController(text: model.currentUser!.gender ?? '');
+    final _emailController =
+        useTextEditingController(text: model.currentUser!.email ?? '');
+    final _phoneController =
+        useTextEditingController(text: model.currentUser!.mobile ?? '');
+
     var maskFormatter = MaskTextInputFormatter(
         mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
+
     return Container(
       decoration: BoxDecoration(
         color: AppTheme.WHITE,
         borderRadius: AppTheme().radius10,
       ),
-      padding: EdgeInsets.only(top: 5.h, left: 25.w, right: 25.w),
+      padding: EdgeInsets.only(top: 5.h, left: 22.w, right: 22.w),
       child: Form(
         key: _profileformKey,
         autovalidateMode: AutovalidateMode.disabled,
@@ -181,7 +180,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     labelStyle: ktsDefault14HelperText,
                     prefix: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
-                      child: Text('+993', style: ktsTextfieldText),
+                      child: Text('+993', style: ktsDefault18Text),
                     ),
                   ),
                   validator: model.updatePhone,
@@ -191,19 +190,17 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
               SizedBox(
                 width: 1.sw,
                 child: CustomTextChildButton(
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: model.isBusy
-                          ? ButtonLoading()
-                          : Text(
-                              'Ýatda sakla',
-                              style: ktsButtonText,
-                            ),
-                    ),
-                    color: kcSecondaryDarkColor,
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    borderRadius: kbr10,
-                    onPressed: () {}),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: model.isBusy
+                        ? ButtonLoading()
+                        : Text('Ýatda sakla', style: ktsButton18Text),
+                  ),
+                  color: kcSecondaryDarkColor,
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
+                  borderRadius: kbr10,
+                  onPressed: () {},
+                ),
               ),
             ],
           ),

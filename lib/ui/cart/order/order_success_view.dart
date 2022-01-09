@@ -48,7 +48,7 @@ class OrderSuccessView extends StatelessWidget {
                 child: Text(
                   'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
                   textAlign: TextAlign.center,
-                  style: ktsDefault16HelperText,
+                  style: kts16HelperText,
                 ),
               ),
               SizedBox(height: 50.h),

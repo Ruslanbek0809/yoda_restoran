@@ -73,13 +73,13 @@ class LoginView extends StatelessWidget with $LoginView {
                     inputFormatters: [maskFormatter],
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
-                    style: ktsTextfieldText,
+                    style: ktsDefault18Text,
                     decoration: InputDecoration(
                       labelText: 'Tel',
-                      labelStyle: ktsLabelText,
+                      labelStyle: kts16HelperText,
                       prefix: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Text('+993', style: ktsTextfieldText),
+                        child: Text('+993', style: ktsDefault18Text),
                       ),
                       fillColor: AppTheme.FILL_COLOR,
                       filled: true,
@@ -136,10 +136,7 @@ class LoginView extends StatelessWidget with $LoginView {
                         duration: const Duration(milliseconds: 300),
                         child: model.isBusy
                             ? ButtonLoading()
-                            : Text(
-                                'Dowam et',
-                                style: ktsButtonText,
-                              ),
+                            : Text('Dowam et', style: ktsButton18Text),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,

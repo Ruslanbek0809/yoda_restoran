@@ -124,7 +124,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                 style:
                                                     model.selectedAddress!.id ==
                                                             -1
-                                                        ? ktsDefault16HelperText
+                                                        ? kts16HelperText
                                                         : ktsDefault16Text,
                                               ),
                                             ],

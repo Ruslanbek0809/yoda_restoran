@@ -146,7 +146,7 @@ class MealBottomSheet extends StatelessWidget {
                                                     Text(
                                                         '+${mainVolume.volumes![volumePos].price} TMT',
                                                         style:
-                                                            ktsDefault16HelperText),
+                                                            kts16HelperText),
                                                   ],
                                                 ),
                                                 activeColor: kcGreenColor,
@@ -207,7 +207,7 @@ class MealBottomSheet extends StatelessWidget {
                                                 SizedBox(width: 7.w),
                                                 Text(
                                                   '+${mainCustomizable.customizables![pos].price} TMT',
-                                                  style: ktsDefault16HelperText,
+                                                  style: kts16HelperText,
                                                 ),
                                               ],
                                             ),
@@ -268,7 +268,7 @@ class MealBottomSheet extends StatelessWidget {
                                 SizedBox(width: 10.w),
                                 Text(
                                     '${meal.value!.toInt()} ${meal.size!.name}',
-                                    style: ktsDefault16HelperText),
+                                    style: kts16HelperText),
                               ],
                             ),
                             Text(
