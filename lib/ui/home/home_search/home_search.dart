@@ -19,12 +19,12 @@ class HomeSearch extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeSearchView(),
-              ),
-            );
+            // await Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => HomeSearchView(),
+            //   ),
+            // );
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/shared.dart';
@@ -25,7 +26,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
             ? model.currentUser!.firstName
             : '');
     final _birthdateController = useTextEditingController(
-        text: model.currentUser!.birthday?.toIso8601String());
+        text: DateFormat('dd-MM-yyyy').format(model.currentUser!.birthday!));
     final _genderController =
         useTextEditingController(text: model.currentUser!.gender ?? '');
     final _emailController =
@@ -92,10 +93,11 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       onConfirm: (date) {
                         print('confirm $date');
                       },
-                      currentTime: DateTime.now(),
+                      currentTime: date ?? model.currentUser!.birthday!,
                       locale: LocaleType.tk,
                     );
-                    _birthdateController.text = date!.toIso8601String();
+                    _birthdateController.text =
+                        DateFormat('dd-MM-yyyy').format(date!);
                     model.updateBirthDate(_birthdateController.text);
                   },
                   controller: _birthdateController,
@@ -179,10 +181,6 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   decoration: InputDecoration(
                     labelText: 'Tel',
                     labelStyle: kts14HelperText,
-                    prefix: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
-                      child: Text('+993', style: ktsDefault18Text),
-                    ),
                   ),
                   validator: model.updatePhone,
                 ),

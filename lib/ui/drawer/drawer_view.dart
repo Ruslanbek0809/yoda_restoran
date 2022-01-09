@@ -180,8 +180,9 @@ class DrawerView extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: 0.25.sh, left: 20.w),
                 child: GestureDetector(
-                  onTap: () async => await Navigator.pushReplacementNamed(
-                      context, RouteList.contact),
+                  onTap: () {},
+                  // onTap: () async => await Navigator.pushReplacementNamed(
+                  //     context, RouteList.contact),
                   child: Row(
                     children: [
                       SvgPicture.asset(
