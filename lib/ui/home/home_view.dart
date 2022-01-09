@@ -59,11 +59,11 @@ class _HomeViewState extends State<HomeView> {
                             SliverAppBar(
                               expandedHeight:
                                   model.selectedMainCatRestaurants.isEmpty
-                                      ? 0.34.sh
+                                      ? 0.36.sh
                                       : 0.1.sh,
                               backgroundColor: Colors.transparent,
                               elevation: 0,
-                              toolbarHeight: 60.w,
+                              toolbarHeight: 60.h,
                               automaticallyImplyLeading: false,
                               flexibleSpace: FlexibleSpaceBar(
                                 background: Column(
