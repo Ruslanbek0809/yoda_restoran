@@ -121,6 +121,39 @@ class UserService {
     }
   }
 
+  Future<void> updateUser(
+    String? name,
+    String? birthDate,
+    String? gender,
+    String? email,
+    String? phone,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+    if (name != null) _queryParams['first_name'] = name;
+    if (birthDate != null) _queryParams['birthday'] = birthDate;
+    if (gender != null) _queryParams['gender'] = gender;
+    if (email != null) _queryParams['email'] = email;
+    _queryParams['mobile'] = phone;
+
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData userUpdateFormData = FormData.fromMap(_queryParams);
+
+    try {
+      Response response = await _apiRoot.dio.post(
+        'api/user/${_currentUser!.id}/',
+        data: userUpdateFormData,
+      );
+      log.v('RESPONSE: api/user/${_currentUser!.id}/ => ${response.data}');
+
+      if (response.data != null) {}
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/user/${_currentUser!.id}/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
+
   Future<void> logoutUser() async {
     await userBox.clear();
     _currentUser = userBox.get(Constants.userBox);
@@ -153,8 +186,14 @@ class UserService {
     }
   }
 
-  Future<void> addAddress(String? city, String? street, int? house,
-      int? apartment, int? floor, String? note) async {
+  Future<void> addAddress(
+    String? city,
+    String? street,
+    int? house,
+    int? apartment,
+    int? floor,
+    String? note,
+  ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['city'] = city;
     _queryParams['street'] = street;
