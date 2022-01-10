@@ -84,16 +84,22 @@ class ApiService {
   }
 
   Future<List<Restaurant>> getSelectedMainCats(
-      List<int> _selectedMainCats) async {
+    List<int> _selectedMainCats,
+    bool alphabet,
+    bool rating,
+  ) async {
     List<Restaurant> _selectedMainCatRestaurants = [];
     String _queryPars = 'mainCat=${_selectedMainCats[0]}';
     for (int i = 1; i < _selectedMainCats.length; i++)
       _queryPars += '&mainCat=${_selectedMainCats[i]}'; // Workaround
 
-    log.v('ApiService - $_queryPars');
+    log.v('ApiService - $_queryPars, alphabet: $alphabet, rating: $rating');
     try {
-      Response response =
-          await _apiRoot.dio.get('api/restaurants? = $_selectedMainCats');
+      Response response = await _apiRoot.dio
+          .get('api/restaurants? = $_selectedMainCats', queryParameters: {
+        'alphabet': alphabet,
+        'rating': rating,
+      });
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
 
       if (response.data != null)

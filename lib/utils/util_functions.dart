@@ -52,10 +52,8 @@ List<AddressUI> addresses = [
 
 List<CategoryFilter> mainCatSortList = [
   CategoryFilter(1, 'Adaty'),
-  CategoryFilter(2, 'Reýtingi boýunça'),
-  CategoryFilter(3, 'Çalt'),
-  CategoryFilter(4, 'Gymmatdan arzana'),
-  CategoryFilter(5, 'Arzandan gymmada'),
+  CategoryFilter(2, 'Ady boýunça'),
+  CategoryFilter(3, 'Ilki ýokary reýtingliler'),
 ];
 
 List<PaymentType> paymentTypes = [

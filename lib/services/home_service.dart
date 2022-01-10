@@ -74,11 +74,15 @@ class HomeService with ReactiveServiceMixin {
     return _proms;
   }
 
-  Future<void> getSelectedMainCats(List<int> selectedMainCats) async {
+  Future<void> getSelectedMainCats(
+      List<int> selectedMainCats, bool alphabet, bool rating) async {
     if (selectedMainCats.isNotEmpty) {
       _fetchingSelectedMainCats.value = true;
-      _selectedMainCatRestaurants =
-          await _api.getSelectedMainCats(selectedMainCats);
+      _selectedMainCatRestaurants = await _api.getSelectedMainCats(
+        selectedMainCats,
+        alphabet,
+        rating,
+      );
       _fetchingSelectedMainCats.value = false;
       log.v(
           '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');

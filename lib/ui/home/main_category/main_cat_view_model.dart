@@ -38,7 +38,10 @@ class MainCatViewModel extends ReactiveViewModel {
         mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
 
     await _homeService.getSelectedMainCats(
-        selectedMainCats); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
+      selectedMainCats,
+      false,
+      false,
+    ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
     // _mainFilterService.updateMainAnimationFilterStatus(
     //     _mainCatService.selectedSort,
@@ -103,9 +106,16 @@ class MainCatViewModel extends ReactiveViewModel {
   Future<void> updateAllSelectedTempMainCats() async {
     log.i('updateAllSelectedTempMainCats()');
 
+    bool _byAlphabet = false;
+    bool _byRating = false;
+    if (selectedSort!.id == 2) _byAlphabet = true;
+    if (selectedSort!.id == 3) _byRating = true;
+
     await runBusyFuture(
       _homeService.getSelectedMainCats(
         _tempSelectedMainCats,
+        _byAlphabet,
+        _byRating,
       ),
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService))
 
@@ -114,7 +124,7 @@ class MainCatViewModel extends ReactiveViewModel {
   }
 
 //------------------------ NAVIGATION ----------------------------//
-  void navBack() => _navService.back(result: true);
+  void navBack() => _navService.back();
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
