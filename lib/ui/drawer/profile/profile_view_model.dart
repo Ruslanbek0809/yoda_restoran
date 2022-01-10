@@ -117,8 +117,13 @@ class ProfileViewModel extends BaseViewModel {
   Future<void> onUpdateUserPressed() async {
     log.v('onUpdateUserPressed()');
     try {
-      // await runBusyFuture(
-      //     _userService.addAddress(city, street, house, apartment, floor, note));
+      await runBusyFuture(_userService.updateUser(
+        _name,
+        _birthDate,
+        _gender,
+        _email,
+        _phone,
+      ));
     } catch (err) {
       throw err;
     }
