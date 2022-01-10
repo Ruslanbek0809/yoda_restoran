@@ -9,6 +9,7 @@ import '../../../utils/utils.dart';
 class MainCatViewModel extends ReactiveViewModel {
   final log = getLogger('MainCatViewModel');
 
+  final _navService = locator<NavigationService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
@@ -88,16 +89,32 @@ class MainCatViewModel extends ReactiveViewModel {
 
   /// ADDS or REMOVES mainCatId to/from _tempSelectedMainCats Ids
   Future<void> updateTempSelectedMainCats(int? mainCatId) async {
-    log.i(
-        'updateTempSelectedMainCats() _tempSelectedMainCats length: ${_tempSelectedMainCats.length}');
-
     if (_tempSelectedMainCats.contains(mainCatId))
       _tempSelectedMainCats.remove(mainCatId);
     else
       _tempSelectedMainCats.add(mainCatId!);
+    log.i(
+        'updateTempSelectedMainCats() _tempSelectedMainCats length: ${_tempSelectedMainCats.length}');
 
     notifyListeners();
   }
+
+  /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
+  Future<void> updateAllSelectedTempMainCats() async {
+    log.i('updateAllSelectedTempMainCats()');
+
+    await runBusyFuture(
+      _homeService.getSelectedMainCats(
+        _tempSelectedMainCats,
+      ),
+    ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService))
+
+    _mainCatService.assignTempSelectedMainCats(
+        _tempSelectedMainCats); // ASSINGS all _tempSelectedMainCats to  _selectedMainCats (CALLED from _mainCatService)
+  }
+
+//------------------------ NAVIGATION ----------------------------//
+  void navBack() => _navService.back(result: true);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

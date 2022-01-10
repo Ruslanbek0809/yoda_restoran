@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/styles.dart';
+import 'package:yoda_res/ui/widgets/button_loading.dart';
 import '../main_category/main_cat_view_model.dart';
 import '../../../utils/utils.dart';
 
@@ -17,23 +19,23 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
         IntTween(begin: 0, end: 100).animate(mainFilterAnimationController);
 
     /// mainFilterAnimationController trigger
-    if (model.mainFilterAnimationStatus != MainFilterAnimationStatus.idle)
-      switch (mainFilterAnimationController.status) {
-        case AnimationStatus.completed:
-          if (model.mainFilterAnimationStatus ==
-              MainFilterAnimationStatus.reverse)
-            mainFilterAnimationController.reverse();
-          break;
-        case AnimationStatus.dismissed:
-          if (model.mainFilterAnimationStatus ==
-              MainFilterAnimationStatus.forward)
-            mainFilterAnimationController.forward();
-          break;
-        default:
-          break;
-      }
-    model.log.i(
-        'model.mainFilterAnimationStatus: ${model.mainFilterAnimationStatus}');
+    // if (model.mainFilterAnimationStatus != MainFilterAnimationStatus.idle)
+    //   switch (mainFilterAnimationController.status) {
+    //     case AnimationStatus.completed:
+    //       if (model.mainFilterAnimationStatus ==
+    //           MainFilterAnimationStatus.reverse)
+    //         mainFilterAnimationController.reverse();
+    //       break;
+    //     case AnimationStatus.dismissed:
+    //       if (model.mainFilterAnimationStatus ==
+    //           MainFilterAnimationStatus.forward)
+    //         mainFilterAnimationController.forward();
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // model.log.i(
+    //     'model.mainFilterAnimationStatus: ${model.mainFilterAnimationStatus}');
 
     return Positioned(
       bottom: 0,
@@ -83,17 +85,15 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         borderRadius: AppTheme().radius15),
-                    padding: EdgeInsets.symmetric(vertical: 17.w),
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
                   ),
-                  child: Text(
-                    'Tassykla',
-                    style: TextStyle(
-                      color: AppTheme.WHITE,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  onPressed: () {},
+                  child: model.isBusy
+                      ? ButtonLoading()
+                      : Text('Tassykla', style: ktsButton18Text),
+                  onPressed: () async {
+                    await model.updateAllSelectedTempMainCats();
+                    model.navBack();
+                  },
                 ),
               )
             ],

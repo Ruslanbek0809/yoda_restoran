@@ -65,12 +65,10 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
               Container(
                 margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
-                    horizontal: model.isMainCatSelected(mainCategory.id)
-                        ? 7.w
-                        : 0.0,
-                    vertical: model.isMainCatSelected(mainCategory.id)
-                        ? 2.h
-                        : 0.0),
+                    horizontal:
+                        model.isMainCatSelected(mainCategory.id) ? 7.w : 0.0,
+                    vertical:
+                        model.isMainCatSelected(mainCategory.id) ? 2.h : 0.0),
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
                   color: model.isMainCatSelected(mainCategory.id)

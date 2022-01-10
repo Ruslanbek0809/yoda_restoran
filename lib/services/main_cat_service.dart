@@ -37,4 +37,9 @@ class MainCatService with ReactiveServiceMixin {
   void clearSelectedMainCats() {
     _selectedMainCats.value.clear();
   }
+
+  /// ASSIGNS tempSelectedMainCats to _selectedMainCats
+  void assignTempSelectedMainCats(List<int>? tempSelectedMainCats) {
+    _selectedMainCats.value = tempSelectedMainCats!;
+  }
 }
