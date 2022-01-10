@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
@@ -125,6 +128,98 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   color: Colors.transparent,
                   child: TextFormField(
                     onTap: () async {
+                      // --------------- GENDER PopUp -------------- //
+                      if (Platform.isIOS) {
+                        await showCupertinoModalPopup(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) {
+                            return CupertinoActionSheet(
+                              actions: <Widget>[
+                                CupertinoActionSheetAction(
+                                  child: Text(
+                                    'Erkek',
+                                  ),
+                                  onPressed: () {
+                                    _genderController.text = 'Erkek';
+                                    model.navBack();
+                                  },
+                                ),
+                                CupertinoActionSheetAction(
+                                  child: Text(
+                                    'Aýal',
+                                  ),
+                                  onPressed: () {
+                                    _genderController.text = 'Aýal';
+                                    model.navBack();
+                                  },
+                                ),
+                              ],
+                              cancelButton: CupertinoActionSheetAction(
+                                isDestructiveAction: true,
+                                child: Text(
+                                  'Ýap',
+                                ),
+                                onPressed: () => model.navBack(),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        await showModalBottomSheet(
+                          context: context,
+                          isDismissible: true,
+                          builder: (BuildContext context) {
+                            return BottomSheet(
+                              onClosing: () {},
+                              builder: (BuildContext context) {
+                                return Container(
+                                  height: 186,
+                                  child: ListView(
+                                    children: <Widget>[
+                                      ListTile(
+                                        title: Center(
+                                          child: Text(
+                                            'Erkek',
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          _genderController.text = 'Erkek';
+                                          model.navBack();
+                                        },
+                                      ),
+                                      Divider(height: 8.h),
+                                      ListTile(
+                                        title: Center(
+                                          child: Text(
+                                            'Aýal',
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          _genderController.text = 'Aýal';
+                                          model.navBack();
+                                        },
+                                      ),
+                                      Divider(height: 8.h),
+                                      ListTile(
+                                        title: Center(
+                                          child: Text(
+                                            'Ýap',
+                                            style:
+                                                TextStyle(color: AppTheme.RED),
+                                          ),
+                                        ),
+                                        onTap: () => model.navBack(),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      }
+
                       model.updateGender(_genderController.text);
                     },
                     controller: _genderController,

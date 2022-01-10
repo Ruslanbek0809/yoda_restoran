@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -18,19 +19,6 @@ class ProfileViewModel extends BaseViewModel {
   HiveUser? get currentUser => _userService.currentUser;
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  /// NAVIGATES to Home by removing all previous routes
-  Future<void> navToHomeByRemovingAll() async =>
-      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
-
-  /// LOGOUTS a user from app
-  Future<void> logout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(Constants.accessToken);
-    await _userService.logoutUser();
-    await _hiveDbService.clearCart();
-    await navToHomeByRemovingAll();
-  }
-
   String? _name;
   String? get name => _name;
 
@@ -46,12 +34,36 @@ class ProfileViewModel extends BaseViewModel {
   String? _phone;
   String? get phone => _phone;
 
+  /// LOGOUTS a user from app
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(Constants.accessToken);
+    await _userService.logoutUser();
+    await _hiveDbService.clearCart();
+    await navToHomeByRemovingAll();
+  }
+
+  /// ASSIGNS currentUser value
+  void assignCurrentUserValues() {
+    log.v('assignCurrentUserValues()');
+
+    _name = currentUser!.firstName;
+
+    _birthDate = DateFormat('dd-MM-yyyy').format(currentUser!.birthday!);
+
+    _gender = currentUser!.gender;
+
+    _email = currentUser!.email;
+
+    _phone = currentUser!.mobile;
+  }
+
   /// UPDATES _name
   String? updateName(String? value) {
     log.v('updateName value: $value');
-    if (value!.isEmpty) {
-      return 'Ady giriziň';
-    }
+    // if (value!.isEmpty) {
+    //   return 'Ady giriziň';
+    // }
 
     _name = value;
     notifyListeners();
@@ -60,9 +72,9 @@ class ProfileViewModel extends BaseViewModel {
   /// UPDATES _birthDate
   String? updateBirthDate(String? value) {
     log.v('updateBirthDate value: $value');
-    if (value!.isEmpty) {
-      return 'Doglan senäňizi giriziň';
-    }
+    // if (value!.isEmpty) {
+    //   return 'Doglan senäňizi giriziň';
+    // }
 
     _birthDate = value;
     notifyListeners();
@@ -71,9 +83,9 @@ class ProfileViewModel extends BaseViewModel {
   /// UPDATES _gender
   String? updateGender(String? value) {
     log.v('updateGender value: $value');
-    if (value!.isEmpty) {
-      return 'Jynsy giriziň';
-    }
+    // if (value!.isEmpty) {
+    //   return 'Jynsy giriziň';
+    // }
 
     _gender = value;
     notifyListeners();
@@ -82,9 +94,9 @@ class ProfileViewModel extends BaseViewModel {
   /// UPDATES _email
   String? updateEmail(String? value) {
     log.v('updateEmail value: $value');
-    if (value!.isEmpty) {
-      return 'Elektron poçtaňyzy giriziň';
-    }
+    // if (value!.isEmpty) {
+    //   return 'Elektron poçtaňyzy giriziň';
+    // }
 
     _email = value;
     notifyListeners();
@@ -112,5 +124,11 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
+//------------------------ NAVIGATIONS ----------------------------//
+
   void navBack() => _navService.back();
+
+  /// NAVIGATES to Home by removing all previous routes
+  Future<void> navToHomeByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }
