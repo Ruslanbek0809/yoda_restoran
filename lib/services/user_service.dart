@@ -69,8 +69,8 @@ class UserService {
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
       }
-    } catch (error) {
-      log.v('ERROR on auth/login/ :$error');
+    } on DioError catch (error) {
+      log.v('ERROR on auth/login/ :${error.response}');
       throw DioErrorType.response;
     }
   }
@@ -115,7 +115,7 @@ class UserService {
         /// Step 4. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
       }
-    } catch (error) {
+    } on DioError catch (error) {
       log.v('ERROR on auth/verify/ :$error');
       throw DioErrorType.response;
     }

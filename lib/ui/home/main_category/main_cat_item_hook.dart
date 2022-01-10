@@ -65,15 +65,15 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
               Container(
                 margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
-                    horizontal: model.isMainCategorySelected(mainCategory.id)
+                    horizontal: model.isMainCatSelected(mainCategory.id)
                         ? 7.w
                         : 0.0,
-                    vertical: model.isMainCategorySelected(mainCategory.id)
+                    vertical: model.isMainCatSelected(mainCategory.id)
                         ? 2.h
                         : 0.0),
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
-                  color: model.isMainCategorySelected(mainCategory.id)
+                  color: model.isMainCatSelected(mainCategory.id)
                       ? AppTheme.MAIN
                       : AppTheme.WHITE,
                 ),
@@ -82,7 +82,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: model.isMainCategorySelected(mainCategory.id)
+                    color: model.isMainCatSelected(mainCategory.id)
                         ? AppTheme.WHITE
                         : AppTheme.FONT_COLOR,
                   ),

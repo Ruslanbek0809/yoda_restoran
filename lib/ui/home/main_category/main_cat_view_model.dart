@@ -24,9 +24,9 @@ class MainCatViewModel extends ReactiveViewModel {
   MainFilterAnimationStatus get mainFilterAnimationStatus =>
       _mainFilterService.mainFilterAnimationStatus;
 
-  /// CHECKS whether this mainCegory selected or NOT
-  bool isMainCategorySelected(int? mainCategoryId) =>
-      selectedMainCats.contains(mainCategoryId);
+  /// CHECKS whether this mainCat selected or NOT
+  bool isMainCatSelected(int? mainCatId) =>
+      selectedMainCats.contains(mainCatId);
 
   /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
   Future<void> updateSelectedMainCats(int? mainCatId) async {
@@ -39,10 +39,10 @@ class MainCatViewModel extends ReactiveViewModel {
     await _homeService.getSelectedMainCats(
         selectedMainCats); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
-    _mainFilterService.updateMainAnimationFilterStatus(
-        _mainCatService.selectedSort,
-        _mainCatService
-            .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
+    // _mainFilterService.updateMainAnimationFilterStatus(
+    //     _mainCatService.selectedSort,
+    //     _mainCatService
+    //         .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
 
     notifyListeners();
   }
@@ -54,10 +54,10 @@ class MainCatViewModel extends ReactiveViewModel {
     _mainCatService.updateSelectedSort(
         newSelectedSort); // UPDATES selectedSort (CALLED from _mainCatService)
 
-    _mainFilterService.updateMainAnimationFilterStatus(
-        _mainCatService.selectedSort,
-        _mainCatService
-            .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
+    // _mainFilterService.updateMainAnimationFilterStatus(
+    //     _mainCatService.selectedSort,
+    //     _mainCatService
+    //         .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
 
     notifyListeners();
   }
@@ -72,6 +72,31 @@ class MainCatViewModel extends ReactiveViewModel {
       enableDrag: true,
       isScrollControlled: true,
     );
+  }
+
+  List<int> _tempSelectedMainCats = [];
+  List<int> get tempSelectedMainCats => _tempSelectedMainCats;
+
+  /// ASSIGNS _tempSelectedMainCats (Used in onModelReady)
+  void assignTempList() {
+    _tempSelectedMainCats = _mainCatService.selectedMainCats;
+  }
+
+  /// CHECKS whether this mainCat selected or NOT
+  bool isTempMainCatSelected(int? mainCatId) =>
+      _tempSelectedMainCats.contains(mainCatId);
+
+  /// ADDS or REMOVES mainCatId to/from _tempSelectedMainCats Ids
+  Future<void> updateTempSelectedMainCats(int? mainCatId) async {
+    log.i(
+        'updateTempSelectedMainCats() _tempSelectedMainCats length: ${_tempSelectedMainCats.length}');
+
+    if (_tempSelectedMainCats.contains(mainCatId))
+      _tempSelectedMainCats.remove(mainCatId);
+    else
+      _tempSelectedMainCats.add(mainCatId!);
+
+    notifyListeners();
   }
 
   @override

@@ -12,7 +12,7 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
   MainCategoryItemBottomHook({
     Key? key,
     this.mainCategory,
-  }) : super(key: key, reactive: true);
+  }) : super(key: key);
 
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.95);
@@ -43,7 +43,7 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
       child: GestureDetector(
         onTap: () async {
           await _tweenController.forward();
-          await model.updateSelectedMainCats(mainCategory!.id);
+          await model.updateTempSelectedMainCats(mainCategory!.id);
         },
         child: Column(
           children: [
@@ -56,15 +56,15 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
             Container(
               margin: EdgeInsets.only(top: 7.w),
               padding: EdgeInsets.symmetric(
-                  horizontal: model.isMainCategorySelected(mainCategory!.id)
+                  horizontal: model.isTempMainCatSelected(mainCategory!.id)
                       ? 7.w
                       : 0.0,
-                  vertical: model.isMainCategorySelected(mainCategory!.id)
+                  vertical: model.isTempMainCatSelected(mainCategory!.id)
                       ? 2.h
                       : 0.0),
               decoration: BoxDecoration(
                 borderRadius: AppTheme().radius15,
-                color: model.isMainCategorySelected(mainCategory!.id)
+                color: model.isTempMainCatSelected(mainCategory!.id)
                     ? AppTheme.GREEN_COLOR
                     : Colors.transparent,
               ),
@@ -73,10 +73,7 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 14.sp,
-                  // fontWeight: model.isMainCategorySelected(mainCategory!.id)
-                  //     ? FontWeight.w400
-                  //     : FontWeight.w600,
-                  color: model.isMainCategorySelected(mainCategory!.id)
+                  color: model.isTempMainCatSelected(mainCategory!.id)
                       ? AppTheme.WHITE
                       : AppTheme.FONT_COLOR,
                 ),
