@@ -83,7 +83,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
                   onTap: () async {
-                    DateTime? date;
+                    DateTime? date = model.birthDate;
                     FocusScope.of(context).requestFocus(FocusNode());
                     date = await DatePicker.showDatePicker(
                       context,
@@ -96,12 +96,13 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       onConfirm: (date) {
                         print('confirm $date');
                       },
-                      currentTime: date ?? model.currentUser!.birthday!,
+                      currentTime: date,
                       locale: LocaleType.tk,
                     );
-                    _birthdateController.text =
-                        DateFormat('dd-MM-yyyy').format(date!);
-                    model.updateBirthDate(_birthdateController.text);
+                    _birthdateController.text = date != null
+                        ? DateFormat('dd-MM-yyyy').format(date)
+                        : '';
+                    model.updateBirthDate(date);
                   },
                   controller: _birthdateController,
                   style: ktsDefault18Text,

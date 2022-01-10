@@ -123,7 +123,7 @@ class UserService {
 
   Future<void> updateUser(
     String? name,
-    String? birthDate,
+    DateTime? birthDate,
     String? gender,
     String? email,
     String? phone,
@@ -139,15 +139,36 @@ class UserService {
     final FormData userUpdateFormData = FormData.fromMap(_queryParams);
 
     try {
-      Response response = await _apiRoot.dio.post(
+      Response response = await _apiRoot.dio.patch(
         'api/user/${_currentUser!.id}/',
         data: userUpdateFormData,
       );
-      log.v('RESPONSE: api/user/${_currentUser!.id}/ => ${response.data}');
+      log.v(
+          'RESPONSE: api/user/${_currentUser!.id}/ => ${response.data} and ${response.statusCode}');
 
-      if (response.data != null) {}
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        /// Step 1. GETS and CONVERTS user json data to dart userModel
+        final User? userModel = User.fromJson(response.data);
+
+        /// Step 2. UPDATES userModel to Hive userBox
+        await userBox.put(
+          Constants.userBox,
+          HiveUser(
+            id: userModel!.id,
+            firstName: userModel.firstName,
+            lastName: userModel.lastName,
+            email: userModel.email,
+            mobile: userModel.mobile,
+            gender: userModel.gender,
+            birthday: userModel.birthday,
+          ),
+        );
+
+        /// Step 3. GETS hiveUser from Hive userBox
+        _currentUser = userBox.get(Constants.userBox);
+      }
     } on DioError catch (error) {
-      log.v(error);
+      log.v('ERROR on auth/user/${_currentUser!.id}/ :${error.response}');
       // log.v(
       //     'ERROR on api/user/${_currentUser!.id}/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;

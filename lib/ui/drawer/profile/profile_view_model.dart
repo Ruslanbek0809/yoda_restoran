@@ -22,8 +22,8 @@ class ProfileViewModel extends BaseViewModel {
   String? _name;
   String? get name => _name;
 
-  String? _birthDate;
-  String? get birthDate => _birthDate;
+  DateTime? _birthDate;
+  DateTime? get birthDate => _birthDate;
 
   String? _gender;
   String? get gender => _gender;
@@ -49,7 +49,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _name = currentUser!.firstName;
 
-    _birthDate = DateFormat('dd-MM-yyyy').format(currentUser!.birthday!);
+    _birthDate = currentUser!.birthday!;
 
     _gender = currentUser!.gender;
 
@@ -70,7 +70,7 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   /// UPDATES _birthDate
-  String? updateBirthDate(String? value) {
+  String? updateBirthDate(DateTime? value) {
     log.v('updateBirthDate value: $value');
     // if (value!.isEmpty) {
     //   return 'Doglan senäňizi giriziň';
