@@ -5,8 +5,8 @@ import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class MainCatAllItem extends HookViewModelWidget<MainCatViewModel> {
-  MainCatAllItem({
+class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
+  MainCatAllItemHook({
     Key? key,
   }) : super(key: key, reactive: true);
 
@@ -51,8 +51,8 @@ class MainCatAllItem extends HookViewModelWidget<MainCatViewModel> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  width: 70.w,
-                  height: 70.w,
+                  width: 60.h,
+                  height: 60.h,
                   child: Material(
                     shape: CircleBorder(),
                     color: AppTheme.MAIN_LIGHT,

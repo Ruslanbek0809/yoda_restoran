@@ -58,8 +58,8 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
             children: [
               YodaImage(
                 image: mainCategory.image!,
-                width: 70.w,
-                height: 70.w,
+                width: 60.h,
+                height: 60.h,
                 borderRadius: 10.0,
               ),
               Container(
@@ -72,7 +72,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
                   color: model.isMainCatSelected(mainCategory.id)
-                      ? AppTheme.MAIN
+                      ? AppTheme.GREEN_COLOR
                       : AppTheme.WHITE,
                 ),
                 child: Text(

@@ -91,7 +91,8 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                       ? ButtonLoading()
                       : Text('Tassykla', style: ktsButton18Text),
                   onPressed: () async {
-                    await model.updateAllSelectedTempMainCats();
+                    if (model.tempSelectedMainCats.isNotEmpty)
+                      await model.updateAllSelectedTempMainCats();
                     model.navBack();
                   },
                 ),
