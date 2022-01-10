@@ -164,8 +164,7 @@ class _HomeViewState extends State<HomeView> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                left: 16.w,
-                                                                top: 12.h),
+                                                                left: 16.w),
                                                         child: Text(
                                                           model
                                                               .resWithProms![
