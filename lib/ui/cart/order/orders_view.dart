@@ -139,60 +139,57 @@ class OrdersView extends StatelessWidget {
                           children: <Widget>[
                             //------------------ INNER PART ---------------------//
                             //------------------ DRIVER and DELIVERY ---------------------//
-                            Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 5.h),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Sürüji:',
-                                    style: ktsDefault16Text,
-                                  ),
-                                  Text(
-                                    order.selfPickUp!
-                                        ? '-'
-                                        : order.status == 1
-                                            ? 'Bellenmedi'
-                                            : order.driver!.mobile!,
-                                    style: ktsDefault16Text,
-                                  ),
-                                ],
+                            if (!order.selfPickUp!)
+                              Padding(
+                                padding:
+                                    EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 5.h),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Sürüji:',
+                                      style: ktsDefault16Text,
+                                    ),
+                                    Text(
+                                      order.selfPickUp!
+                                          ? '-'
+                                          : order.status == 1
+                                              ? 'Bellenmedi'
+                                              : order.driver!.mobile!,
+                                      style: ktsDefault16Text,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Eltip bermek tölegi:',
-                                    style: ktsDefault16Text,
-                                  ),
-                                  Text(
-                                    order.selfPickUp!
-                                        ? '0 TMT'
-                                        : order.status == 1
-                                            ? 'Bellenmedi'
-                                            : '${order.dostawkaPrice.toString()} TMT',
-                                    style: ktsDefault16Text,
-                                  ),
-                                ],
+                            if (!order.selfPickUp!)
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Eltip bermek tölegi:',
+                                      style: ktsDefault16Text,
+                                    ),
+                                    Text(
+                                      order.selfPickUp!
+                                          ? '0 TMT'
+                                          : order.status == 1
+                                              ? 'Bellenmedi'
+                                              : '${order.dostawkaPrice.toString()} TMT',
+                                      style: ktsDefault16Text,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 15.h),
+                            if (!order.selfPickUp!) SizedBox(height: 5.h),
                             //------------------ PROMOCODE PART ---------------------//
                             if (order.promocode != null)
                               Padding(
-                                padding:
-                                    EdgeInsets.only(left: 16.w, bottom: 10.h),
-                                child: Divider(color: kcDividerColor),
-                              ),
-                            if (order.promocode != null)
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.w, vertical: 15.h),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -207,12 +204,6 @@ class OrdersView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              ),
-                            if (order.promocode != null)
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 16.w, top: 10.h, bottom: 15.h),
-                                child: Divider(color: kcDividerColor),
                               ),
                             //------------------ ORDER PRODUCT LIST ---------------------//
                             Column(

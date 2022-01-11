@@ -18,7 +18,6 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final _userService = locator<UserService>();
   final _connectivityService = locator<ConnectivityService>();
 
-  ConnectivityStatus? _connectivityStatus = ConnectivityStatus.Idle;
   ConnectivityStatus? get connectivityStatus => data;
 
   FlashController<Object?>? flashController;
@@ -91,10 +90,6 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
 
   Future<void> dismissFlashController() async {
     await flashController!.dismiss();
-  }
-
-  void updateConnectivityStatusIfIdle() {
-    _connectivityStatus = ConnectivityStatus.Offline;
   }
 
   @override
