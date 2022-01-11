@@ -189,14 +189,24 @@ class OrdersView extends StatelessWidget {
                             if (order.promocode != null)
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 15.w, vertical: 15.h),
+                                    horizontal: 15.w, vertical: 10.h),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Promo kod: ${order.promocode!.name}',
-                                      style: ktsDefault16Text,
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/percent.svg',
+                                          color: AppTheme.MAIN_DARK,
+                                          width: 22.w,
+                                        ),
+                                        SizedBox(width: 7.w),
+                                        Text(
+                                          '${order.promocode!.name}',
+                                          style: ktsDefault16Text,
+                                        ),
+                                      ],
                                     ),
                                     Text(
                                       '${order.totPrice} TMT -$orderPromocodePrice TMT',
@@ -231,7 +241,7 @@ class OrdersView extends StatelessWidget {
                                           ),
                                           Text(
                                             '${_orderItem.quantity!.toInt()} x ${_orderItem.price} TMT',
-                                            style: ktsDefault18Text,
+                                            style: ktsDefault16Text,
                                           ),
                                         ],
                                       ),
@@ -241,7 +251,10 @@ class OrdersView extends StatelessWidget {
                                               .costumizedMeals!.isNotEmpty)
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              left: 10.w, bottom: 5.h),
+                                            left: 10.w,
+                                            bottom: 5.h,
+                                            top: 2.h,
+                                          ),
                                           child: Text(
                                             _orderItemConcatenatedText!,
                                             overflow: TextOverflow.ellipsis,

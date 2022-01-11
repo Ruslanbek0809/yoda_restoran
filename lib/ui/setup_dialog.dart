@@ -225,7 +225,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
     return ViewModelBuilder<OrderViewModel>.reactive(
       viewModelBuilder: () => OrderViewModel(),
       builder: (context, model, child) {
-        return (!Platform.isIOS)
+        return (Platform.isIOS)
             ? CupertinoAlertDialog(
                 title: Text(request.title!, style: ktsDefault20BoldText),
                 actions: <Widget>[
