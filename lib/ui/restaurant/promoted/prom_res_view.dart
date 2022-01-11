@@ -33,24 +33,27 @@ class PromResView extends StatelessWidget {
 //------------------ IMAGE with ripple effect ---------------------//
                 Stack(
                   children: [
-                    YodaImage(
-                      image: restaurant.image!,
-                      height: 0.18.sh,
-                      width: 0.7.sw,
-                      borderRadius: Constants.BORDER_RADIUS_20,
-                    ),
-                    Positioned.fill(
-                      child: Material(
-                        color: Colors.transparent,
-                        borderRadius: AppTheme().radius20,
-                        child: InkWell(
-                          borderRadius: AppTheme().radius20,
-                          onTap: () {
-                            // model.navToResDetailsView(restaurant);
-                          },
-                        ),
+                    GestureDetector(
+                      onTap: () => model.navToResDetailsView(restaurant),
+                      child: YodaImage(
+                        image: restaurant.image!,
+                        height: 0.18.sh,
+                        width: 0.7.sw,
+                        borderRadius: Constants.BORDER_RADIUS_20,
                       ),
                     ),
+                    // Positioned.fill(
+                    //   child: Material(
+                    //     color: Colors.transparent,
+                    //     borderRadius: AppTheme().radius20,
+                    //     child: InkWell(
+                    //       borderRadius: AppTheme().radius20,
+                    //       onTap: () {
+                    //         // model.navToResDetailsView(restaurant);
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 //------------------ DELIVERY TIME ---------------------//
