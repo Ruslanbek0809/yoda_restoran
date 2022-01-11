@@ -30,6 +30,8 @@ class PushNotificationService {
 
     /// Here we subcscribe to topic so that we send specific message to specific devices
     _fcm.subscribeToTopic(Constants.topicAllDevices);
+    _fcm.subscribeToTopic(Constants.topicAndroidDevices);
+    _fcm.subscribeToTopic(Constants.topicIosDevices);
 
     /// When the app is open and it receives a push notification
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {

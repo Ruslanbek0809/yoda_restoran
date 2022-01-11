@@ -7,6 +7,8 @@ class Constants {
 
   /// Firebase topic name
   static const topicAllDevices = 'yoda_res';
+  static const topicAndroidDevices = 'yoda_res_android';
+  static const topicIosDevices = 'yoda_res_ios';
 
   // Hive
   static const userBox = 'userBox';
