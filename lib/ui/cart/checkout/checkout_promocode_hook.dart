@@ -49,7 +49,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                         width: 1,
                       ),
                     ),
-                    hintText: 'Promo kody giriziň',
+                    hintText: 'Promokod',
                     hintStyle: ktsDefault18HelperText,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),

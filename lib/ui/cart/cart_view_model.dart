@@ -73,7 +73,7 @@ class CartViewModel extends ReactiveViewModel {
       variant: DialogType.clearCart,
       title: 'Siz sebedi boşatmakçymy?',
       mainButtonTitle: 'Ýok',
-      secondaryButtonTitle: 'Hawa',
+      secondaryButtonTitle: 'Boşat',
       showIconInMainButton: false,
       barrierDismissible: true,
       data: cartViewModel,
