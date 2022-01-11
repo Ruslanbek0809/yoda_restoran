@@ -106,34 +106,34 @@ class _HomeViewState extends State<HomeView> {
                                 child: MainCatView(),
                               ),
                             ),
-                            //------------------ DISCOUNTS ---------------------//
-                            if (model.selectedMainCatRestaurants.isEmpty)
-                              SliverPersistentHeader(
-                                pinned: false,
-                                floating: false,
-                                delegate: ContestTabHeader(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 15.w, top: 12.h),
-                                        child: Text(
-                                          'Aksiýalar',
-                                          style: TextStyle(
-                                            fontSize: 24.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppTheme.MAIN_DARK,
-                                          ),
-                                        ),
-                                      ),
-                                      HomeDiscounts(discounts: discounts),
-                                    ],
-                                  ),
-                                  size: 135.h,
-                                ),
-                              ),
+                            // //------------------ DISCOUNTS ---------------------//
+                            // if (model.selectedMainCatRestaurants.isEmpty)
+                            //   SliverPersistentHeader(
+                            //     pinned: false,
+                            //     floating: false,
+                            //     delegate: ContestTabHeader(
+                            //       child: Column(
+                            //         crossAxisAlignment:
+                            //             CrossAxisAlignment.start,
+                            //         children: [
+                            //           Padding(
+                            //             padding: EdgeInsets.only(
+                            //                 left: 15.w, top: 12.h),
+                            //             child: Text(
+                            //               'Aksiýalar',
+                            //               style: TextStyle(
+                            //                 fontSize: 24.sp,
+                            //                 fontWeight: FontWeight.bold,
+                            //                 color: AppTheme.MAIN_DARK,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           HomeDiscounts(discounts: discounts),
+                            //         ],
+                            //       ),
+                            //       size: 135.h,
+                            //     ),
+                            //   ),
                             //------------------ BODY: RESTAURANTS ---------------------//
                             SliverList(
                               delegate: SliverChildListDelegate(
@@ -143,7 +143,9 @@ class _HomeViewState extends State<HomeView> {
                                           shrinkWrap: true,
                                           physics:
                                               NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.only(top: 10.h),
+                                          padding: EdgeInsets.only(
+                                              top: 20
+                                                  .h), // Changes based on exclusive part
                                           itemCount:
                                               model.resWithProms?.length ?? 0,
                                           itemBuilder: (ctx, pos) {

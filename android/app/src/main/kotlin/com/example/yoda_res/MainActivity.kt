@@ -1,4 +1,4 @@
-package tm.com.yoda_res
+package tm.com.restoran.yoda
 
 import io.flutter.embedding.android.FlutterActivity
 
