@@ -53,7 +53,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   ),
                   color: AppTheme.WHITE,
                 ),
-                padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 35.w),
+                padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 20.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
