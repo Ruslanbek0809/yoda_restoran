@@ -39,7 +39,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(Constants.BORDER_RADIUS_20)),
-            color: model.isBusy ? kcWhiteColor : Colors.transparent,
+            color: kcWhiteColor,
           ),
           child: model.isBusy
               ? LoadingWidget(width: 0.1.sw)

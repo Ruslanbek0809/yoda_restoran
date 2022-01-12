@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/shared/shared.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
 
@@ -19,14 +20,15 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.47,
-      maxChildSize: 0.95,
+      initialChildSize: 0.45,
+      maxChildSize: 1,
+      expand: false,
       builder: (context, scrollController) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
-          color: AppTheme.WHITE,
+          color: kcWhiteColor,
         ),
         child: SingleChildScrollView(
           controller: scrollController,
@@ -37,12 +39,11 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
             children: [
               // --------------- BOTTOM SHEET DRAGGER -------------- //
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.w),
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: SvgPicture.asset(
                   'assets/bottom_sheet_dragger.svg',
-                  color: AppTheme.MAIN_LIGHT,
-                  height: 8.w,
-                  width: 20.w,
+                  color: kcSecondaryLightColor,
+                  height: 6.h,
                 ),
               ),
               Container(
@@ -107,7 +108,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       thickness: 1,
                       color: AppTheme.DRAWER_DIVIDER,
                     ),
-                    SizedBox(height: 10.w),
+                    SizedBox(height: 10.h),
                     Text(
                       restaurant.description!,
                       maxLines: 5,

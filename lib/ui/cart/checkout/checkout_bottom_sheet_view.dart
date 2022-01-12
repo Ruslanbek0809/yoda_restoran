@@ -38,7 +38,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(Constants.BORDER_RADIUS_20),
                 ),
-                color: Colors.transparent,
+                color: kcWhiteColor,
               ),
               child: SingleChildScrollView(
                 controller: scrollController,
@@ -50,12 +50,12 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
 // --------------- BOTTOM SHEET DRAGGER -------------- //
-                    SizedBox(
-                      height: 17.5.w,
-                      width: 40.w,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
                       child: SvgPicture.asset(
                         'assets/bottom_sheet_dragger.svg',
-                        color: AppTheme.WHITE,
+                        color: kcSecondaryLightColor,
+                        height: 6.h,
                       ),
                     ),
                     Container(
@@ -65,7 +65,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         ),
                         color: AppTheme.WHITE,
                       ),
-                      padding: EdgeInsets.fromLTRB(20.w, 20.h, 0.w, 20.h),
+                      padding: EdgeInsets.fromLTRB(20.w, 15.h, 0.0, 20.h),
                       child: Column(
                         children: [
 // --------------- PHONE PART -------------- //
