@@ -85,6 +85,7 @@ enum BottomSheetType {
 enum DialogType {
   mealCartClear,
   clearCart,
+  removeCartMeal,
   cancelWaitingOrder,
   cancelAcceptedOrder
 }

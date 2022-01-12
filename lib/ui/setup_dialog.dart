@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
+import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/cart/order/order_view_model.dart';
 import '../app/app.locator.dart';
 import '../shared/styles.dart';
@@ -25,6 +27,12 @@ void setupDialog() {
           completer: completer,
           cartViewModel: sheetRequest.data,
         ),
+    DialogType.removeCartMeal: (context, sheetRequest, completer) =>
+        RemoveCartMealDialogView(
+          request: sheetRequest,
+          completer: completer,
+          cartMealDialogData: sheetRequest.data,
+        ),
     DialogType.cancelWaitingOrder: (context, sheetRequest, completer) =>
         CancelWaitingOrderDialogView(
             request: sheetRequest, completer: completer),
@@ -38,6 +46,8 @@ void setupDialog() {
 
   dialogService.registerCustomDialogBuilders(builders);
 }
+
+//------------------ MEAL and RESTAURANT DIALOGS ---------------------//
 
 class MealDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -126,6 +136,8 @@ class MealDialogView extends StatelessWidget {
   }
 }
 
+//------------------ CART DIALOGS ---------------------//
+
 class ClearCartDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
@@ -211,6 +223,99 @@ class ClearCartDialogView extends StatelessWidget {
   }
 }
 
+class RemoveCartMealDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  final CartMealDialogData cartMealDialogData;
+  const RemoveCartMealDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+    required this.cartMealDialogData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<CartViewModel>.reactive(
+      viewModelBuilder: () => cartMealDialogData.cartViewModel!,
+      disposeViewModel: false,
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!, style: ktsDefault20BoldText),
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.updateCartMealInCart(
+                        cartMealDialogData.cartMeal!,
+                        cartMealDialogData.cartMeal!.quantity! - 1,
+                      );
+                      completer(DialogResponse());
+                    },
+                  ),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ),
+                titleTextStyle: ktsDefault20BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.updateCartMealInCart(
+                        cartMealDialogData.cartMeal!,
+                        cartMealDialogData.cartMeal!.quantity! - 1,
+                      );
+                      completer(DialogResponse());
+                    },
+                  ),
+                  SizedBox(width: 42.w),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: ktsDefault18Text,
+                    ),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+}
+
+//------------------ ORDER DIALOGS ---------------------//
+
 class CancelWaitingOrderDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
@@ -280,7 +385,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: ktsDefault18SemiBoldText,
-                    ), 
+                    ),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());

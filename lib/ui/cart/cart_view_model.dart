@@ -80,6 +80,26 @@ class CartViewModel extends ReactiveViewModel {
     );
   }
 
+//------------------------ CART MEAL REMOVE DIALOG ----------------------------//
+
+  /// SHOWS CART MEAL REMOVE Dialog
+  Future showRemoveCartMealDialog(
+      CartViewModel cartViewModel, HiveMeal cartMeal) async {
+    log.i('showRemoveCartMealDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.removeCartMeal,
+      title: 'Harydy aýyrmakçymy?',
+      mainButtonTitle: 'Ýok',
+      secondaryButtonTitle: 'Aýyr',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+      data: CartMealDialogData(
+        cartViewModel: cartViewModel,
+        cartMeal: cartMeal,
+      ),
+    );
+  }
+
 //------------------------ CART MEAL ----------------------------//
 
   /// GETS total meal draft sum

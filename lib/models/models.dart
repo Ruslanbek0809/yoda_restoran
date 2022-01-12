@@ -31,3 +31,4 @@ export 'create_order_item.dart';
 export 'driver.dart';
 export 'order.dart';
 export 'order_item.dart';
+export 'cart_meal_dialog_data.dart';

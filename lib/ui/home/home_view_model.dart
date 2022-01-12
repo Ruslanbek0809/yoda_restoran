@@ -95,6 +95,10 @@ class HomeViewModel extends MultipleFutureViewModel {
     homeScaffoldKey.currentState!.openDrawer();
   }
 
+  void refresh() {
+    notifyListeners();
+  }
+
   @override
   Map<String, Future Function()> get futuresMap => {
         homeSlidersFuture: _homeService.getSliders,
