@@ -53,12 +53,12 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
               height: 70.w,
               borderRadius: 10.0,
             ),
-            Container(
-              margin: EdgeInsets.only(top: 7.w),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              margin: EdgeInsets.only(top: 3.h),
               padding: EdgeInsets.symmetric(
-                  horizontal: model.isTempMainCatSelected(mainCategory!.id)
-                      ? 7.w
-                      : 0.0,
+                  horizontal:
+                      model.isTempMainCatSelected(mainCategory!.id) ? 7.w : 0.0,
                   vertical: model.isTempMainCatSelected(mainCategory!.id)
                       ? 2.h
                       : 0.0),
@@ -68,14 +68,16 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
                     ? AppTheme.GREEN_COLOR
                     : Colors.transparent,
               ),
-              child: Text(
-                mainCategory!.name!,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: model.isTempMainCatSelected(mainCategory!.id)
-                      ? AppTheme.WHITE
-                      : AppTheme.FONT_COLOR,
+              child: FittedBox(
+                child: Text(
+                  mainCategory!.name!,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: model.isTempMainCatSelected(mainCategory!.id)
+                        ? AppTheme.WHITE
+                        : AppTheme.FONT_COLOR,
+                  ),
                 ),
               ),
             ),

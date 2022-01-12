@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
@@ -53,23 +54,25 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                 child: SizedBox(
                   width: 60.h,
                   height: 60.h,
-                  child: Material(
-                    shape: CircleBorder(),
-                    color: AppTheme.MAIN_LIGHT,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: AppTheme.FONT_COLOR,
+                  child: Padding(
+                    padding: EdgeInsets.all(6.h),
+                    child: Material(
+                      shape: CircleBorder(),
+                      color: AppTheme.MAIN_LIGHT,
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: AppTheme.FONT_COLOR,
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
-                child: Text(
-                  'Hemmesi',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppTheme.FONT_COLOR,
+                child: FittedBox(
+                  child: Text(
+                    'Hemmesi',
+                    style: ktsDefault14Text,
                   ),
                 ),
               ),

@@ -28,7 +28,6 @@ TextStyle ktsButton18Text = TextStyle(
 //   fontSize: 16.sp,
 // );
 
-
 TextStyle ktsDefault12Text = TextStyle(
   fontSize: 12.sp,
   color: kcPromocodeColor,
@@ -127,6 +126,12 @@ TextStyle ktsDefault22DarkText = TextStyle(
   fontSize: 22.sp,
   fontWeight: FontWeight.bold,
   color: kcSecondaryDarkColor,
+);
+
+TextStyle kts22Text = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.w500,
+  color: kcFontColor,
 );
 
 TextStyle kts30DarkText = TextStyle(

@@ -100,9 +100,7 @@ class _HomeViewState extends State<HomeView> {
                               pinned: false,
                               floating: false,
                               delegate: ContestTabHeader(
-                                size: model.selectedMainCatRestaurants.isEmpty
-                                    ? 87.h
-                                    : 90.h,
+                                size: 90.h,
                                 child: MainCatView(),
                               ),
                             ),

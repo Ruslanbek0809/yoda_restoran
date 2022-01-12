@@ -62,7 +62,8 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                 height: 60.h,
                 borderRadius: 10.0,
               ),
-              Container(
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
                 margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
                     horizontal:
@@ -75,14 +76,16 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                       ? AppTheme.GREEN_COLOR
                       : AppTheme.WHITE,
                 ),
-                child: Text(
-                  mainCategory.name!,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: model.isMainCatSelected(mainCategory.id)
-                        ? AppTheme.WHITE
-                        : AppTheme.FONT_COLOR,
+                child: FittedBox(
+                  child: Text(
+                    mainCategory.name!,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: model.isMainCatSelected(mainCategory.id)
+                          ? AppTheme.WHITE
+                          : AppTheme.FONT_COLOR,
+                    ),
                   ),
                 ),
               ),
