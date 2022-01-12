@@ -177,7 +177,7 @@ class CheckoutViewModel extends ReactiveViewModel {
       variant: BottomSheetType.selectAddress,
       enableDrag: true,
       barrierDismissible: true,
-      isScrollControlled: true,
+      isScrollControlled: true,    
     );
   }
 //------------------------ CREATE ORDER PART ----------------------------//

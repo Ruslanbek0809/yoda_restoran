@@ -21,113 +21,103 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.35,
-        maxChildSize: 0.35,
+        initialChildSize: 0.3,
+        maxChildSize: 0.3,
         expand: false,
         builder: (context, scrollController) => Container(
-          height: 0.35.sh,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(Constants.BORDER_RADIUS_20)),
-            color: Colors.transparent,
+            color: kcWhiteColor,
           ),
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(Constants.BORDER_RADIUS_20),
-                  ),
-                  color: Colors.transparent,
-                ),
-                child: SingleChildScrollView(
-                  controller: scrollController,
-                  padding: EdgeInsets.only(
+              SingleChildScrollView(
+                controller: scrollController,
+                padding: EdgeInsets.only(
 
-                      /// To resize screen when OnKeyboard opened
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    /// To resize screen when OnKeyboard opened
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
 // --------------- BOTTOM SHEET DRAGGER -------------- //
-                      SizedBox(
-                        height: 17.5.w,
-                        width: 40.w,
-                        child: SvgPicture.asset(
-                          'assets/bottom_sheet_dragger.svg',
-                          color: AppTheme.WHITE,
-                        ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: SvgPicture.asset(
+                        'assets/bottom_sheet_dragger.svg',
+                        color: kcSecondaryLightColor,
+                        height: 6.h,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(Constants.BORDER_RADIUS_20),
-                          ),
-                          color: AppTheme.WHITE,
+                    ),
+// --------------- PAYMENT TYPES -------------- //
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(Constants.BORDER_RADIUS_20),
                         ),
-                        padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 50.h),
-                        child: Column(
-                          children: [
-                            Column(
-                              children: paymentTypes
-                                  .map(
-                                    (paymentType) => Column(
-                                      children: [
-                                        Material(
-                                          color: AppTheme.WHITE,
-                                          child: InkWell(
-                                            onTap: () => model
-                                                .updateTempSelectedPaymentType(
-                                                    paymentType),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 5.w),
-                                              child: Row(
-                                                children: [
-                                                  AnimatedSwitcher(
-                                                    duration: const Duration(
-                                                        milliseconds: 300),
-                                                    child:
-                                                        model.tempSelectedPaymentType
-                                                                    .id ==
-                                                                paymentType.id
-                                                            ? SvgPicture.asset(
-                                                                'assets/checkCircle.svg',
-                                                                color: AppTheme
-                                                                    .GREEN_COLOR,
-                                                                width: 25.w,
-                                                              )
-                                                            : SvgPicture.asset(
-                                                                'assets/checkCircle.svg',
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 25.w,
-                                                              ),
+                        color: AppTheme.WHITE,
+                      ),
+                      padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
+                      child: Column(
+                        children: [
+                          if (paymentTypes.isNotEmpty)
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: paymentTypes.length,
+                              itemBuilder: (context, pos) {
+                                var paymentType = paymentTypes[pos];
+                                return Material(
+                                  color: AppTheme.WHITE,
+                                  child: InkWell(
+                                    onTap: () =>
+                                        model.updateTempSelectedPaymentType(
+                                            paymentType),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5.h),
+                                      child: Row(
+                                        children: [
+                                          AnimatedSwitcher(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            child: model.tempSelectedPaymentType
+                                                        .id ==
+                                                    paymentType.id
+                                                ? SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: AppTheme.GREEN_COLOR,
+                                                    width: 25.w,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: Colors.white,
+                                                    width: 25.w,
                                                   ),
-                                                  SizedBox(width: 10.w),
-                                                  Text(
-                                                    paymentType.name,
-                                                    style: ktsDefault18Text,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
                                           ),
-                                        ),
-                                        Divider(color: AppTheme.DRAWER_DIVIDER)
-                                      ],
+                                          SizedBox(width: 10.w),
+                                          Text(
+                                            paymentType.name,
+                                            style: ktsDefault18Text,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                  .toList(),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return Divider(color: kcDividerColor);
+                              },
                             ),
-                          ],
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              //--------------- FILTER BUTTONS -------------- //
+              //--------------- PAYMENT BUTTON -------------- //
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -135,8 +125,8 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.WHITE,
-                    border: Border.all(
-                        color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                    // border: Border.all(
+                    //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                   ),
                   padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                   child: CustomTextChildButton(
