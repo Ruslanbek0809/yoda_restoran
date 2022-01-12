@@ -124,10 +124,12 @@ class CartView extends StatelessWidget {
                     //     ],
                     //   ),
                     // ),
+                    //------------------ TOGGLE BUTTON ---------------------//
+                    CartToggleButton(),
                     //------------------ CART FOOD WIDGET TITLE ---------------------//
                     Padding(
                       padding: EdgeInsets.only(
-                          top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                          top: 10.h, bottom: 10.w, left: 16.w, right: 16.w),
                       child: Text(
                         'Ýene bir zat?',
                         style: ktsDefault24DarkText,
@@ -153,8 +155,6 @@ class CartView extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    //------------------ TOGGLE BUTTON ---------------------//
-                    CartToggleButton(),
                     SizedBox(
                         height: 0.13
                             .sh), // COMPENSATES height of Checkout Button Widget is taking
