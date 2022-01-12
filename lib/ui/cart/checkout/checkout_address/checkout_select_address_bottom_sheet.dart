@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/cart/checkout/checkout_address/checkout_address_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../../shared/shared.dart';
-import '../checkout_view_model.dart';
 import '../../../../utils/utils.dart';
 
 class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
@@ -17,25 +17,18 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
     required this.completer,
   }) : super(key: key);
 
-  // int selectedAddressID = -1;
-  // List<Address> addresses = [
-  //   Address(1, 'A.Nowaýy, 164'),
-  //   Address(2, 'N.Andalyp 32'),
-  // ];
-
-  // void _onCartAddressClicked() {
-  //   cartAddressAddEditBottomSheet(context);
-  // }
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckoutViewModel>.reactive(
-      onModelReady: (model) => model.getAddresses(),
+    return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
+      // onModelReady: (model) => model.getAddresses(),
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: model.isBusy
-            ? 0.3
-            : model.addresses!.isEmpty
-                ? 0.25
-                : 0.3,
+        initialChildSize: model.isBusy && model.addresses!.isEmpty
+            ? 0.25
+            : model.isBusy && model.addresses!.isNotEmpty
+                ? 0.3
+                : model.addresses!.isEmpty
+                    ? 0.25
+                    : 0.3,
         maxChildSize: 1,
         expand: false,
         builder: (context, scrollController) => Container(
@@ -153,30 +146,36 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                       return Divider(color: kcDividerColor);
                                     },
                                   ),
-                                Material(
-                                  color: kcWhiteColor,
-                                  child: InkWell(
-                                    onTap:
-                                        model.showCustomAddAddressBottomSheet,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 5.w),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add,
-                                            color: kcFontColor,
-                                            size: 27.w,
+                                Column(
+                                  children: [
+                                    if (model.addresses!.isNotEmpty)
+                                      Divider(color: kcDividerColor),
+                                    Material(
+                                      color: kcWhiteColor,
+                                      child: InkWell(
+                                        onTap: model
+                                            .showCustomAddAddressBottomSheet,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 7.h),
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.add,
+                                                color: kcFontColor,
+                                                size: 27.w,
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              Text(
+                                                'Täze salgy goş...',
+                                                style: ktsDefault18Text,
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(width: 10.w),
-                                          Text(
-                                            'Täze salgy goş...',
-                                            style: ktsDefault18Text,
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 )
                               ],
                             ),
@@ -223,7 +222,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                 ),
         ),
       ),
-      viewModelBuilder: () => CheckoutViewModel(),
+      viewModelBuilder: () => CheckoutAddressViewModel(),
     );
   }
 }

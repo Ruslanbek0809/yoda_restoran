@@ -9,9 +9,11 @@ import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'checkout_address_view_model.dart';
+
 class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   final SheetRequest request;
-  final Function(SheetResponse) completer;
+  final Function(SheetResponse<bool>) completer;
   CheckoutAddAddressBottomSheetView({
     Key? key,
     required this.request,
@@ -22,59 +24,50 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckoutViewModel>.reactive(
+    return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        maxChildSize: 0.7,
+        initialChildSize: 0.72,
+        maxChildSize: 1,
         expand: false,
         builder: (context, scrollController) => Container(
-          height: 0.7.sh,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(Constants.BORDER_RADIUS_20)),
-            color: Colors.transparent,
+            color: kcWhiteColor,
           ),
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(Constants.BORDER_RADIUS_20),
-                  ),
-                  color: Colors.transparent,
-                ),
-                child: SingleChildScrollView(
-                  controller: scrollController,
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // --------------- BOTTOM SHEET DRAGGER -------------- //
-                      SizedBox(
-                        height: 17.5.w,
-                        width: 40.w,
-                        child: SvgPicture.asset(
-                          'assets/bottom_sheet_dragger.svg',
-                          color: AppTheme.WHITE,
-                        ),
+              SingleChildScrollView(
+                controller: scrollController,
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // --------------- BOTTOM SHEET DRAGGER -------------- //
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: SvgPicture.asset(
+                        'assets/bottom_sheet_dragger.svg',
+                        color: kcSecondaryLightColor,
+                        height: 6.h,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(Constants.BORDER_RADIUS_20),
-                          ),
-                          color: AppTheme.WHITE,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(Constants.BORDER_RADIUS_20),
                         ),
-                        padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 50.h),
-                        child: Form(
-                          key: _addressformKey,
-                          autovalidateMode: AutovalidateMode.disabled,
-                          child: AddAddressBottomSheetHook(),
-                        ),
+                        color: AppTheme.WHITE,
                       ),
-                    ],
-                  ),
+                      padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
+                      child: Form(
+                        key: _addressformKey,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: AddAddressBottomSheetHook(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               //--------------- ADD ADDRESS BUTTON -------------- //
@@ -85,8 +78,8 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.WHITE,
-                    border: Border.all(
-                        color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                    // border: Border.all(
+                    //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                   ),
                   padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                   child: CustomTextChildButton(
@@ -96,7 +89,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       child: model.isBusy
                           ? ButtonLoading()
-                          : Text('Ýatda sakla', style: ktsButton18Text),
+                          : Text('Salgyny goş', style: ktsButton18Text),
                     ),
                     onPressed: () async {
                       FocusScope.of(context)
@@ -104,7 +97,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                       if (!_addressformKey.currentState!.validate()) return;
                       _addressformKey.currentState!.save();
                       await model.onAddAddressPressed();
-                      completer(SheetResponse());
+                      await completer(SheetResponse(data: true));
                     },
                   ),
                 ),
@@ -113,7 +106,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => CheckoutViewModel(),
+      viewModelBuilder: () => CheckoutAddressViewModel(),
     );
   }
 }
