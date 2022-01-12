@@ -280,7 +280,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: ktsDefault18SemiBoldText,
-                    ),
+                    ), 
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());

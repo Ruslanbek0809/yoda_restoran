@@ -235,9 +235,8 @@ class UserService {
 
       if (response.data != null) {}
     } on DioError catch (error) {
-      log.v(error);
-      // log.v(
-      //     'ERROR on api/address/ :${error.response!.statusCode} and ${error.response!.data}');
+      // log.v(error);
+      log.v('ERROR on api/address/ ${error.response!.data}');
       rethrow;
     }
   }
