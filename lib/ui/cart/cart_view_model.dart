@@ -104,12 +104,32 @@ class CartViewModel extends ReactiveViewModel {
   String getConcatenateVolsCustoms(HiveMeal cartMeal) {
     StringBuffer concatenatedString = StringBuffer();
 
+    List<HiveVolCus>? tempVolList = [];
+
     cartMeal.volumes!.forEach((vol) {
-      if (vol.id != -1) concatenatedString.write('${vol.name} ');
+      if (vol.id != -1)
+        tempVolList.add(
+            vol); // This part is used to put ,(comma) after each concatenated and doesn't put for the latest one
+    });
+
+    tempVolList.forEach((vol) {
+      var pos = tempVolList.indexOf(
+          vol); // This part is used to put ,(comma) after each concatenated and doesn't put for the latest one
+
+      if (pos == tempVolList.length - 1 && cartMeal.customs!.isEmpty)
+        concatenatedString.write('${vol.name}');
+      else
+        concatenatedString.write('${vol.name}, ');
     });
 
     cartMeal.customs!.forEach((cus) {
-      concatenatedString.write('${cus.name} ');
+      var pos = cartMeal.customs!.indexOf(
+          cus); // This part is used to put ,(comma) after each concatenated and doesn't put for the latest one
+
+      if (pos == cartMeal.customs!.length - 1)
+        concatenatedString.write('${cus.name}');
+      else
+        concatenatedString.write('${cus.name}, ');
     });
 
     return concatenatedString.toString();

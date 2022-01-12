@@ -86,13 +86,25 @@ class OrderViewModel extends BaseViewModel {
     /// Step 3. For each found _vols concatenate its name to one text
     if (_vols.isNotEmpty)
       _vols.forEach((vol) {
-        concatenatedString.write('${vol.volumeName} ');
+        var pos = _vols.indexOf(
+            vol); // This part is used to put ,(comma) after each concatenated and doesn't put for the latest one
+
+        if (pos == _vols.length - 1 && _cuss.isEmpty)
+          concatenatedString.write('${vol.volumeName}');
+        else
+          concatenatedString.write('${vol.volumeName}, ');
       });
 
     /// Step 3. For each found _cuss concatenate its name to one text
     if (_cuss.isNotEmpty)
       _cuss.forEach((cus) {
-        concatenatedString.write('${cus.customizableName} ');
+        var pos = _cuss.indexOf(
+            cus); // This part is used to put ,(comma) after each concatenated and doesn't put for the latest one
+
+        if (pos == _cuss.length - 1)
+          concatenatedString.write('${cus.customizableName}');
+        else
+          concatenatedString.write('${cus.customizableName}, ');
       });
 
     return concatenatedString.toString();
