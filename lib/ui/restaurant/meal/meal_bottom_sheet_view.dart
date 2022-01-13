@@ -46,186 +46,208 @@ class MealBottomSheet extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(Constants.BORDER_RADIUS_20)),
-            color: kcWhiteColor,
+            color: Colors.transparent,
           ),
           child: Stack(
             children: [
-              SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //----------- IMAGE --------------//
-                    ClipRRect(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(Constants.BORDER_RADIUS_20),
-                      ),
-                      child: Stack(
-                        children: [
-                          YodaImage(
-                            image: meal.image!,
-                            height: 1.sw,
-                            width: 1.sw,
-                          ),
-                          Positioned(
-                            top: 8.h,
-                            left: 0,
-                            right: 0,
-                            child: SvgPicture.asset(
-                              'assets/bottom_sheet_dragger.svg',
-                              color: kcSecondaryLightColor.withOpacity(0.5),
-                              height: 6.h,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //----------- DESCRIPTION --------------//
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15.w, 15.h, 10.w, 15.h),
-                          child: Text(
-                            meal.description!,
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: kcBottomDescColor,
-                            ),
-                          ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(Constants.BORDER_RADIUS_20),
+                  ),
+                  color: Colors.transparent,
+                ),
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 17.5.w,
+                        width: 40.w,
+                        child: SvgPicture.asset(
+                          'assets/bottom_sheet_dragger.svg',
+                          color: AppTheme.WHITE,
                         ),
-                        //----------- MAIN VOLUME LIST --------------//
-                        if (meal.gVolumes!.isNotEmpty)
-                          ...meal.gVolumes!
-                              .mapIndexed<Widget>(
-                                (MainVolume mainVolume, mainVolumePos) =>
-                                    Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 10.h,
-                                        horizontal: 15.w,
+                      ),
+                      //----------- IMAGE --------------//
+                      // ClipRRect(
+                      //   borderRadius: BorderRadius.vertical(
+                      //     top: Radius.circular(Constants.BORDER_RADIUS_20),
+                      //   ),
+                      //   child:
+                      //   Stack(
+                      //     children: [
+                      YodaImage(
+                        image: meal.image!,
+                        height: 1.sw,
+                        width: 1.sw,
+                      ),
+                      //       Positioned(
+                      //         top: 8.h,
+                      //         left: 0,
+                      //         right: 0,
+                      //         child: SvgPicture.asset(
+                      //           'assets/bottom_sheet_dragger.svg',
+                      //           color: kcSecondaryLightColor.withOpacity(0.5),
+                      //           height: 6.h,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      //----------- DESCRIPTION --------------//
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(15.w, 15.h, 10.w, 15.h),
+                            child: Text(
+                              meal.description!,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                color: kcBottomDescColor,
+                              ),
+                            ),
+                          ),
+                          //----------- MAIN VOLUME LIST --------------//
+                          if (meal.gVolumes!.isNotEmpty)
+                            ...meal.gVolumes!
+                                .mapIndexed<Widget>(
+                                  (MainVolume mainVolume, mainVolumePos) =>
+                                      Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 15.w,
+                                        ),
+                                        child: Text(
+                                          mainVolume.name!,
+                                          style: kts14HelperText,
+                                        ),
                                       ),
-                                      child: Text(
-                                        mainVolume.name!,
-                                        style: kts14HelperText,
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: mainVolume.volumes!.length,
+                                          separatorBuilder: (ctx, volumePos) =>
+                                              Divider(
+                                                color: kcDividerColor,
+                                                indent: 0.175.sw,
+                                              ),
+                                          itemBuilder: (ctx, volumePos) {
+                                            return RadioListTile<Volume?>(
+                                              value: mainVolume
+                                                  .volumes![volumePos],
+                                              groupValue: model
+                                                  .selectedVols[mainVolumePos],
+                                              onChanged: (selectedVolume) {
+                                                if (selectedVolume != null)
+                                                  model.updateSelectedVols(
+                                                      mainVolumePos,
+                                                      selectedVolume);
+                                              },
+                                              title: Row(
+                                                children: [
+                                                  Text(
+                                                    '${mainVolume.volumes![volumePos].volumeName} ml',
+                                                    style: ktsDefault14Text,
+                                                  ),
+                                                  SizedBox(width: 7.w),
+                                                  Text(
+                                                      '+${mainVolume.volumes![volumePos].price} TMT',
+                                                      style: kts16HelperText),
+                                                ],
+                                              ),
+                                              activeColor: kcGreenColor,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
+                                              toggleable: true,
+                                            );
+                                          }),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          if (meal.gCustomizables!.isNotEmpty)
+                            Divider(color: kcDividerColor),
+                          //----------- MAIN CUSTOMIZE LIST --------------//
+                          if (meal.gCustomizables!.isNotEmpty)
+                            ...meal.gCustomizables!
+                                .mapIndexed<Widget>(
+                                  (MainCustomizable mainCustomizable,
+                                          int mainCustomizablePos) =>
+                                      Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10.h,
+                                          horizontal: 15.w,
+                                        ),
+                                        child: Text(
+                                          mainCustomizable.name!,
+                                          style: kts14HelperText,
+                                        ),
                                       ),
-                                    ),
-                                    //----------- VOLUME LIST for each MAIN VOLUME --------------//
-                                    ListView.separated(
+                                      //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                      ListView.separated(
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
-                                        itemCount: mainVolume.volumes!.length,
-                                        separatorBuilder: (ctx, volumePos) =>
-                                            Divider(
-                                              color: kcDividerColor,
-                                              indent: 0.175.sw,
-                                            ),
-                                        itemBuilder: (ctx, volumePos) {
-                                          return RadioListTile<Volume?>(
-                                            value:
-                                                mainVolume.volumes![volumePos],
-                                            groupValue: model
-                                                .selectedVols[mainVolumePos],
-                                            onChanged: (selectedVolume) {
-                                              if (selectedVolume != null)
-                                                model.updateSelectedVols(
-                                                    mainVolumePos,
-                                                    selectedVolume);
-                                            },
-                                            title: Row(
-                                              children: [
-                                                Text(
-                                                  '${mainVolume.volumes![volumePos].volumeName} ml',
-                                                  style: ktsDefault14Text,
-                                                ),
-                                                SizedBox(width: 7.w),
-                                                Text(
-                                                    '+${mainVolume.volumes![volumePos].price} TMT',
-                                                    style: kts16HelperText),
-                                              ],
-                                            ),
-                                            activeColor: kcGreenColor,
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            toggleable: true,
-                                          );
-                                        }),
-                                  ],
-                                ),
-                              )
-                              .toList(),
-                        if (meal.gCustomizables!.isNotEmpty)
-                          Divider(color: kcDividerColor),
-                        //----------- MAIN CUSTOMIZE LIST --------------//
-                        if (meal.gCustomizables!.isNotEmpty)
-                          ...meal.gCustomizables!
-                              .mapIndexed<Widget>(
-                                (MainCustomizable mainCustomizable,
-                                        int mainCustomizablePos) =>
-                                    Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 10.h,
-                                        horizontal: 15.w,
-                                      ),
-                                      child: Text(
-                                        mainCustomizable.name!,
-                                        style: kts14HelperText,
-                                      ),
-                                    ),
-                                    //----------- VOLUME LIST for each MAIN VOLUME --------------//
-                                    ListView.separated(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: mainCustomizable
-                                          .customizables!.length,
-                                      separatorBuilder: (ctx, pos) => Divider(
-                                        color: AppTheme.DRAWER_DIVIDER,
-                                        indent: 0.175.sw,
-                                      ),
-                                      itemBuilder: (ctx, pos) =>
-                                          CheckboxListTile(
-                                        title: Row(
-                                          children: [
-                                            Text(
-                                              mainCustomizable
-                                                  .customizables![pos]
-                                                  .customizableName!,
-                                              style: ktsDefault14Text,
-                                            ),
-                                            SizedBox(width: 7.w),
-                                            Text(
-                                              '+${mainCustomizable.customizables![pos].price} TMT',
-                                              style: kts16HelperText,
-                                            ),
-                                          ],
+                                        itemCount: mainCustomizable
+                                            .customizables!.length,
+                                        separatorBuilder: (ctx, pos) => Divider(
+                                          color: AppTheme.DRAWER_DIVIDER,
+                                          indent: 0.175.sw,
                                         ),
-                                        value: model.isCustomSelected(
-                                            mainCustomizable
-                                                .customizables![pos]),
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        activeColor: kcGreenColor,
-                                        onChanged: (bool? value) {
-                                          model.updateSelectedCustoms(
-                                            mainCustomizable
-                                                .customizables![pos],
-                                          );
-                                        },
+                                        itemBuilder: (ctx, pos) =>
+                                            CheckboxListTile(
+                                          title: Row(
+                                            children: [
+                                              Text(
+                                                mainCustomizable
+                                                    .customizables![pos]
+                                                    .customizableName!,
+                                                style: ktsDefault14Text,
+                                              ),
+                                              SizedBox(width: 7.w),
+                                              Text(
+                                                '+${mainCustomizable.customizables![pos].price} TMT',
+                                                style: kts16HelperText,
+                                              ),
+                                            ],
+                                          ),
+                                          value: model.isCustomSelected(
+                                              mainCustomizable
+                                                  .customizables![pos]),
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          activeColor: kcGreenColor,
+                                          onChanged: (bool? value) {
+                                            model.updateSelectedCustoms(
+                                              mainCustomizable
+                                                  .customizables![pos],
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                              .toList(),
-                        SizedBox(height: 0.175.sh)
-                      ],
-                    ),
-                  ],
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          SizedBox(height: 0.175.sh)
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               //----------- BOTTOM CART PART --------------//
@@ -367,18 +389,31 @@ class MealBottomSheet extends StatelessWidget {
                               flex: 3,
                               child: CustomTextChildButton(
                                 child: Text(
-                                  'Goş',
-                                  style: ktsButton18Text,
+                                  model.isAllVolSelected &&
+                                          meal.gVolumes!.isNotEmpty
+                                      ? 'Goş'
+                                      : 'Atribut saýla',
+                                  style: model.isAllVolSelected &&
+                                          meal.gVolumes!.isNotEmpty
+                                      ? ktsButton18Text
+                                      : ktsButton18RedText,
                                 ),
+                                color: model.isAllVolSelected &&
+                                        meal.gVolumes!.isNotEmpty
+                                    ? kcPrimaryColor
+                                    : kcSecondaryLightColor,
                                 borderRadius: AppTheme().radius15,
                                 padding: EdgeInsets.symmetric(vertical: 17.h),
-                                onPressed: () async {
-                                  await model
-                                      .addUpdateMealInCartFromBottomSheet(
-                                          meal, restaurant);
+                                onPressed: model.isAllVolSelected &&
+                                        meal.gVolumes!.isNotEmpty
+                                    ? () async {
+                                        await model
+                                            .addUpdateMealInCartFromBottomSheet(
+                                                meal, restaurant);
 
-                                  completer(SheetResponse());
-                                },
+                                        completer(SheetResponse());
+                                      }
+                                    : () {},
                               ),
                             ),
                           ],

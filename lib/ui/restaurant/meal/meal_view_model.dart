@@ -57,7 +57,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// ADDS or UPDATES a restaurant in CART in condition
+  /// ADDS or UPDATES a restaurant in CART with condition
   /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
   Future<void> addMealToCart(
     Meal? meal,
@@ -174,6 +174,9 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
+  bool _isAllVolSelected = false;
+  bool get isAllVolSelected => _isAllVolSelected;
+
   List<Volume> _selectedVols = [];
   List<Volume> get selectedVols => _selectedVols;
 
@@ -217,6 +220,14 @@ class MealViewModel extends ReactiveViewModel {
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(int mainVolPos, Volume? volume) {
     _selectedVols[mainVolPos] = volume!;
+
+    /// Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
+    var _volWithMinus = _selectedVols.firstWhere(
+      (vol) => vol.id == -1,
+      orElse: () => Volume(id: -2),
+    );
+
+    if (_volWithMinus.id == -2) _isAllVolSelected = true;
     notifyListeners();
   }
 
