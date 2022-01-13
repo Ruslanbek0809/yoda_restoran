@@ -29,7 +29,7 @@ class ResDetailsViewModel extends FutureViewModel {
   int get activeTab => _activeTab;
   bool get isTabPressed => _isTabPressed;
   bool get isShrink => _isShrink;
-  
+
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   BottomCartStatus get bottomCartStatus => _bottomCartService

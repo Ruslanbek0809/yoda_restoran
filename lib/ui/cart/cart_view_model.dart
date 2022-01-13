@@ -164,7 +164,8 @@ class CartViewModel extends ReactiveViewModel {
     await _hiveDbService.updateCartMealInCart(
         hiveMeal: cartMeal, quantity: mealQuantity);
 
-    if (cartMeals.isEmpty) navBack();
+    if (cartMeals.isEmpty)
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
     notifyListeners();
   }
