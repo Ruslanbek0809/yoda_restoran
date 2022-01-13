@@ -69,7 +69,7 @@ class AddressAddEditView extends StatelessWidget {
                               TextButton(
                                 child: Text(
                                   'Salgyny aýyr',
-                                  style: ktsDefault18Text,
+                                  style: kts18Text,
                                 ),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),

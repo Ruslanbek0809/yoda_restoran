@@ -1,11 +1,10 @@
-import 'package:yoda_res/ui/cart/cart_view_model.dart';
-import 'hive_models/hive_models.dart';
-
-class CartMealDialogData {
-  CartMealDialogData({
-    this.cartViewModel,
-    this.cartMeal,
+class NotificationDialogData {
+  NotificationDialogData({
+    required this.lottie,
+    required this.restaurant,
+    required this.content,
   });
-  final CartViewModel? cartViewModel;
-  final HiveMeal? cartMeal;
+  final String lottie;
+  final String restaurant;
+  final String content;
 }

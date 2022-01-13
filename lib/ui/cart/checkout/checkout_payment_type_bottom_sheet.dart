@@ -99,7 +99,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                           SizedBox(width: 10.w),
                                           Text(
                                             paymentType.name,
-                                            style: ktsDefault18Text,
+                                            style: kts18Text,
                                           ),
                                         ],
                                       ),

@@ -32,7 +32,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                   controller: _promocodeController,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                   decoration: InputDecoration(
                     isDense: true, // MAKES it more denser
                     focusedBorder: OutlineInputBorder(

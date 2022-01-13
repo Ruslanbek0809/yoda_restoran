@@ -127,7 +127,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                                                   null
                                                               ? ', ${_address.house}'
                                                               : ''),
-                                                      style: ktsDefault18Text,
+                                                      style: kts18Text,
                                                     ),
                                                   ],
                                                 ),
@@ -168,7 +168,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                               SizedBox(width: 10.w),
                                               Text(
                                                 'Täze salgy goş...',
-                                                style: ktsDefault18Text,
+                                                style: kts18Text,
                                               ),
                                             ],
                                           ),

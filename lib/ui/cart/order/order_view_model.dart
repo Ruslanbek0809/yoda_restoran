@@ -115,14 +115,25 @@ class OrderViewModel extends BaseViewModel {
   /// SHOWS cancel waiting order Dialog
   Future showCancelWaitingOrderDialog() async {
     log.i('showCancelWaitingOrderDialog()');
+
     await _dialogService.showCustomDialog(
-      variant: DialogType.cancelWaitingOrder,
-      title: 'Siz sargydy ýatyrmakçymy?',
-      mainButtonTitle: 'Ýok',
-      secondaryButtonTitle: 'Hawa',
+      variant: DialogType.notification,
       showIconInMainButton: false,
       barrierDismissible: true,
+      data: NotificationDialogData(
+        lottie: 'assets/success_check.json',
+        restaurant: 'Restaurant',
+        content: 'Siziň sargydyňyz kabul edildi.',
+      ),
     );
+    // await _dialogService.showCustomDialog(
+    //   variant: DialogType.cancelWaitingOrder,
+    //   title: 'Siz sargydy ýatyrmakçymy?',
+    //   mainButtonTitle: 'Ýok',
+    //   secondaryButtonTitle: 'Hawa',
+    //   showIconInMainButton: false,
+    //   barrierDismissible: true,
+    // );
   }
 
   /// SHOWS cancel accepted order Dialog

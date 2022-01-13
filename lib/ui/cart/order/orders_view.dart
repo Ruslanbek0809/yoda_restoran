@@ -304,6 +304,8 @@ class OrdersView extends StatelessWidget {
                                             order.driver!.mobile!);
                                         break;
                                       case 4:
+                                        await model
+                                            .showCancelWaitingOrderDialog();
                                         break;
                                       default:
                                         break;

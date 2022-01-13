@@ -62,18 +62,18 @@ class StartUpView extends StatelessWidget {
                       'Internet ýok',
                       style: ktsDefault20Text,
                     ),
-                    primaryAction: Row(
-                      children: [
-                        VerticalDivider(
-                            indent: 8.h, endIndent: 8.h, thickness: 1),
-                        Padding(
-                          padding: EdgeInsets.only(right: 12.w, left: 4.w),
-                          child: SvgPicture.asset(
-                            'assets/arrow_clockwise.svg',
-                          ),
-                        ),
-                      ],
-                    ),
+                    // primaryAction: Row(
+                    //   children: [
+                    //     VerticalDivider(
+                    //         indent: 8.h, endIndent: 8.h, thickness: 1),
+                    //     Padding(
+                    //       padding: EdgeInsets.only(right: 12.w, left: 4.w),
+                    //       child: SvgPicture.asset(
+                    //         'assets/arrow_clockwise.svg',
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
                 );
               },

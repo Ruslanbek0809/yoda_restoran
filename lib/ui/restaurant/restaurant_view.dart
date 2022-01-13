@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/app_colors.dart';
 import '../../models/models.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
@@ -70,15 +71,15 @@ class RestaurantView extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.access_time_rounded,
-                            color: AppTheme.WHITE,
-                            size: 22.w,
+                            color: kcWhiteColor,
+                            size: 18.w,
                           ),
                           SizedBox(width: 3.w),
                           Text(
                             restaurant.workingHours!,
                             style: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppTheme.WHITE,
+                              fontSize: 14.sp,
+                              color: kcWhiteColor,
                             ),
                           ),
                         ],

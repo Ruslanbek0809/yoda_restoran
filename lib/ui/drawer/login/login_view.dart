@@ -62,14 +62,14 @@ class LoginView extends StatelessWidget with $LoginView {
                     inputFormatters: [maskFormatter],
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
-                    style: ktsDefault18Text,
+                    style: kts18Text,
                     decoration: InputDecoration(
                       isDense: true,
                       labelText: 'Tel',
                       labelStyle: kts16HelperText,
                       prefix: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Text('+993', style: ktsDefault18Text),
+                        child: Text('+993', style: kts18Text),
                       ),
                       fillColor: AppTheme.FILL_COLOR,
                       filled: true,

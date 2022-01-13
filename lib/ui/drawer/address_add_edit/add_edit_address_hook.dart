@@ -30,7 +30,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
         IgnorePointer(
           child: TextFormField(
             controller: _cityController,
-            style: ktsDefault18Text,
+            style: kts18Text,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
@@ -56,7 +56,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
         ),
         TextFormField(
           controller: _streetController,
-          style: ktsDefault18Text,
+          style: kts18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
@@ -80,7 +80,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
             Flexible(
               child: TextFormField(
                 controller: _houseController,
-                style: ktsDefault18Text,
+                style: kts18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -102,7 +102,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
             Flexible(
               child: TextFormField(
                 controller: _apartmentController,
-                style: ktsDefault18Text,
+                style: kts18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -124,7 +124,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
             Flexible(
               child: TextFormField(
                 controller: _floorController,
-                style: ktsDefault18Text,
+                style: kts18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(

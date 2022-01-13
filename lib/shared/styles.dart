@@ -88,7 +88,7 @@ TextStyle kts16DarkSemiBoldText = TextStyle(
   color: kcSecondaryDarkColor,
 );
 
-TextStyle ktsDefault18Text = TextStyle(
+TextStyle kts18Text = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.normal,
   color: kcFontColor,

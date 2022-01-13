@@ -177,7 +177,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               ),
                               Text(
                                 model.quantity.toString(),
-                                style: ktsDefault18Text,
+                                style: kts18Text,
                               ),
                               Material(
                                 color: AppTheme.WHITE,
@@ -249,7 +249,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       ? '${meal.discountedPrice!.toInt()} TMT'
                                       : '${meal.price!.toInt()} TMT',
                                   textAlign: TextAlign.center,
-                                  style: ktsDefault18Text,
+                                  style: kts18Text,
                                 ),
                               ),
                             ),

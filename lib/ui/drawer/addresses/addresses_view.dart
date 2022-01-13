@@ -61,7 +61,7 @@ class AddressesView extends StatelessWidget {
                                             (address.house != null
                                                 ? ', ${address.house}'
                                                 : ''),
-                                        style: ktsDefault18Text,
+                                        style: kts18Text,
                                       ),
                                       SizedBox(height: 10.h),
                                       Divider(color: kcDividerColor)
@@ -80,7 +80,7 @@ class AddressesView extends StatelessWidget {
                                   EdgeInsets.fromLTRB(0.w, 5.h, 0.5.sw, 5.h),
                               child: Text(
                                 'Täze salgy goş...',
-                                style: ktsDefault18Text,
+                                style: kts18Text,
                               ),
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
@@ -42,23 +43,11 @@ void setupDialog() {
           completer: completer,
           content: sheetRequest.data,
         ),
-    DialogType.notReceived: (context, sheetRequest, completer) =>
-        NotReceivedDialogView(
+    DialogType.notification: (context, sheetRequest, completer) =>
+        NotificationDialogView(
           request: sheetRequest,
           completer: completer,
-          content: sheetRequest.data,
-        ),
-    DialogType.notReady: (context, sheetRequest, completer) =>
-        NotReceivedDialogView(
-          request: sheetRequest,
-          completer: completer,
-          content: sheetRequest.data,
-        ),
-    DialogType.notSent: (context, sheetRequest, completer) =>
-        NotReceivedDialogView(
-          request: sheetRequest,
-          completer: completer,
-          content: sheetRequest.data,
+          notificationData: sheetRequest.data,
         ),
   };
 
@@ -98,7 +87,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.mainButtonTitle!,
-                    style: ktsDefault18Text,
+                    style: kts18Text,
                   ),
                   color: Colors.transparent,
                   onPressed: () async {
@@ -139,7 +128,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.mainButtonTitle!,
-                    style: ktsDefault18Text,
+                    style: kts18Text,
                   ),
                   color: Colors.transparent,
                   onPressed: () async {
@@ -180,7 +169,7 @@ class ClearCartDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -191,7 +180,7 @@ class ClearCartDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.mainButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -215,7 +204,7 @@ class ClearCartDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -227,7 +216,7 @@ class ClearCartDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.mainButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -265,7 +254,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -279,7 +268,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.mainButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -303,7 +292,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -318,7 +307,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.mainButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -355,7 +344,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -390,7 +379,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
-                      style: ktsDefault18Text,
+                      style: kts18Text,
                     ),
                     color: Colors.transparent,
                     onPressed: () async {
@@ -435,7 +424,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
                 title: Text(request.title!, style: ktsDefault20BoldText),
-                content: Text(content, style: ktsDefault18Text),
+                content: Text(content, style: kts18Text),
               )
             : AlertDialog(
                 shape:
@@ -452,7 +441,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
                   content,
                   textAlign: TextAlign.center,
                 ),
-                contentTextStyle: ktsDefault18Text,
+                contentTextStyle: kts18Text,
               );
       },
     );
@@ -461,15 +450,15 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
 
 //------------------ NOTIFICATION DIALOGS ---------------------//
 
-class NotReceivedDialogView extends StatelessWidget {
+class NotificationDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
-  final String content;
-  const NotReceivedDialogView({
+  final NotificationDialogData notificationData;
+  const NotificationDialogView({
     Key? key,
     required this.request,
     required this.completer,
-    required this.content,
+    required this.notificationData,
   });
 
   @override
@@ -479,34 +468,61 @@ class NotReceivedDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: kts22PrimaryText),
-                content: Text(content, style: kts18NotificationText),
-              )
-            : AlertDialog(
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppTheme().radius20),
-                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-                contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-                actionsAlignment: MainAxisAlignment.center,
                 title: Column(
                   children: [
-                    SvgPicture.asset(
-                      'assets/delivery.svg',
-                      color: AppTheme.MAIN,
-                      width: 90.w,
-                      height: 90.w,
+                    Lottie.asset(
+                      notificationData.lottie,
+                      height: 85.h,
+                      width: 85.w,
                     ),
+                    // SvgPicture.asset(
+                    //   notificationData.svg,
+                    //   color: AppTheme.MAIN,
+                    //   width: 90.w,
+                    //   height: 90.w,
+                    // ),
                     SizedBox(height: 15.h),
                     Text(
-                      request.title!,
+                      notificationData.restaurant,
                       textAlign: TextAlign.center,
                       style: kts22PrimaryText,
                     )
                   ],
                 ),
-                // titleTextStyle: kts22PrimaryText,
                 content: Text(
-                  content,
+                  notificationData.content,
+                  textAlign: TextAlign.center,
+                  style: kts18NotificationText,
+                ),
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius20),
+                titlePadding: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 0.h),
+                contentPadding: EdgeInsets.fromLTRB(20.w, 6.h, 20.w, 24.h),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Column(
+                  children: [
+                    Lottie.asset(
+                      notificationData.lottie,
+                      height: 0.2.sh,
+                    ),
+                    // SvgPicture.asset(
+                    //   notificationData.lottie,
+                    //   color: AppTheme.MAIN,
+                    //   width: 90.w,
+                    //   height: 90.w,
+                    // ),
+                    SizedBox(height: 15.h),
+                    Text(
+                      notificationData.restaurant,
+                      textAlign: TextAlign.center,
+                      style: kts22PrimaryText,
+                    )
+                  ],
+                ),
+                content: Text(
+                  notificationData.content,
                   textAlign: TextAlign.center,
                 ),
                 contentTextStyle: kts18NotificationText,

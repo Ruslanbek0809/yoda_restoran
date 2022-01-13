@@ -60,7 +60,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 10.h),
                 child: TextFormField(
                   controller: _nameController,
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -105,7 +105,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     model.updateBirthDate(date);
                   },
                   controller: _birthdateController,
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -224,7 +224,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       model.updateGender(_genderController.text);
                     },
                     controller: _genderController,
-                    style: ktsDefault18Text,
+                    style: kts18Text,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
@@ -247,7 +247,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
                   controller: _emailController,
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -270,7 +270,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
                   controller: _phoneController,
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                   inputFormatters: [maskFormatter],
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.done,

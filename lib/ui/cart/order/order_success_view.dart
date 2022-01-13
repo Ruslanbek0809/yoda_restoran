@@ -76,7 +76,7 @@ class OrderSuccessView extends StatelessWidget {
               TextButton(
                 child: Text(
                   'Sargytlar',
-                  style: ktsDefault18Text,
+                  style: kts18Text,
                 ),
                 onPressed: model.navToOrdersByRemovingAll,
               ),

@@ -284,7 +284,7 @@ class MealBottomSheet extends StatelessWidget {
                               children: [
                                 Text(
                                   meal.name!,
-                                  style: ktsDefault18Text,
+                                  style: kts18Text,
                                 ),
                                 SizedBox(width: 10.w),
                                 Text(

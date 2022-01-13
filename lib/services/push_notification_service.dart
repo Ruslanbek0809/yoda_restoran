@@ -47,8 +47,6 @@ class PushNotificationService {
         log.v('Message also contained a notification: ${message.notification}');
       }
 
-      var notificationData = message.data;
-
       var noti = Notification.fromJson(message.data);
       log.v('notificationData JSON status: ${noti.status}');
       log.v('notificationData JSON title: ${noti.title}');
@@ -57,82 +55,44 @@ class PushNotificationService {
         case '2':
           log.v('INSIDE STATUS 2');
           await _dialogService.showCustomDialog(
-            variant: DialogType.notReceived,
-            title: notificationData['title'],
+            variant: DialogType.notification,
             showIconInMainButton: false,
             barrierDismissible: true,
-            data: 'Siziň sargydyňyz kabul edildi.',
+            data: NotificationDialogData(
+              lottie: 'assets/success_check.json',
+              restaurant: noti.title!,
+              content: 'Siziň sargydyňyz kabul edildi.',
+            ),
           );
           break;
         case '3':
           log.v('INSIDE STATUS 3');
           await _dialogService.showCustomDialog(
-            variant: DialogType.notReceived,
-            title: notificationData['title'],
+            variant: DialogType.notification,
             showIconInMainButton: false,
             barrierDismissible: true,
-            data: 'Siziň sargydyňyz taýýar.',
+            data: NotificationDialogData(
+              lottie: 'assets/success_check.json',
+              restaurant: noti.title!,
+              content: 'Siziň sargydyňyz taýýar.',
+            ),
           );
           break;
         case '4':
           log.v('INSIDE STATUS 4');
           await _dialogService.showCustomDialog(
-            variant: DialogType.notReceived,
-            title: notificationData['title'],
+            variant: DialogType.notification,
             showIconInMainButton: false,
             barrierDismissible: true,
-            data: 'Siziň sargydyňyz ugradyldy.',
+            data: NotificationDialogData(
+              lottie: 'assets/success_check.json',
+              restaurant: noti.title!,
+              content: 'Siziň sargydyňyz ugradyldy.',
+            ),
           );
           break;
         default:
       }
-      // if (noti.status == 2) {
-      // } else if (notificationData['status'] == 3) {
-      //   log.v('INSIDE STATUS 3');
-      //   await _dialogService.showCustomDialog(
-      //     variant: DialogType.notReady,
-      //     title: notificationData['title'],
-      //     showIconInMainButton: false,
-      //     barrierDismissible: true,
-      //     data: 'Siziň sargydyňyz taýýar.',
-      //   );
-      // } else if (notificationData['status'] == 4) {
-      //   log.v('INSIDE STATUS 4');
-      //   await _dialogService.showCustomDialog(
-      //     variant: DialogType.notSent,
-      //     title: notificationData['title'],
-      //     showIconInMainButton: false,
-      //     barrierDismissible: true,
-      //     data: 'Siziň sargydyňyz ugradyldy.',
-      //   );
-      // }
-
-      // switch (notificationData['status']) {
-      //   case 2:
-      //     break;
-      //   case 3:
-      //     log.v('INSIDE STATUS 3');
-      //     await _dialogService.showCustomDialog(
-      //       variant: DialogType.notReady,
-      //       title: notificationData['title'],
-      //       showIconInMainButton: false,
-      //       barrierDismissible: true,
-      //       data: 'Siziň sargydyňyz taýýar.',
-      //     );
-      //     break;
-      //   case 4:
-      //     log.v('INSIDE STATUS 4');
-      //     await _dialogService.showCustomDialog(
-      //       variant: DialogType.notSent,
-      //       title: notificationData['title'],
-      //       showIconInMainButton: false,
-      //       barrierDismissible: true,
-      //       data: 'Siziň sargydyňyz ugradyldy.',
-      //     );
-      //     break;
-      //   default:
-      //     break;
-      // }
     });
 
     /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
