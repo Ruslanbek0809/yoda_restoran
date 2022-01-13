@@ -28,7 +28,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
-          color: kcWhiteColor,
+          color: kcSecondaryLightColor,
         ),
         child: SingleChildScrollView(
           controller: scrollController,
@@ -42,7 +42,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: SvgPicture.asset(
                   'assets/bottom_sheet_dragger.svg',
-                  color: kcSecondaryLightColor,
+                  color: kcSecondaryDarkColor,
                   height: 6.h,
                 ),
               ),
@@ -51,7 +51,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(Constants.BORDER_RADIUS_20),
                   ),
-                  color: AppTheme.WHITE,
+                  color: kcSecondaryLightColor,
                 ),
                 padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 20.h),
                 child: Column(
@@ -92,7 +92,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     Divider(
-                      thickness: 1,
+                      thickness: 0.5,
                       color: AppTheme.DRAWER_DIVIDER,
                     ),
                     SizedBox(height: 10.h),
@@ -105,7 +105,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     Divider(
-                      thickness: 1,
+                      thickness: 0.5,
                       color: AppTheme.DRAWER_DIVIDER,
                     ),
                     SizedBox(height: 10.h),

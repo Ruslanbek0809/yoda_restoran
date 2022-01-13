@@ -32,3 +32,4 @@ export 'driver.dart';
 export 'order.dart';
 export 'order_item.dart';
 export 'cart_meal_dialog_data.dart';
+export 'notification.dart';

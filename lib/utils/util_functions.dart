@@ -87,7 +87,11 @@ enum DialogType {
   clearCart,
   removeCartMeal,
   cancelWaitingOrder,
-  cancelAcceptedOrder
+  cancelAcceptedOrder,
+  notReceived,
+  notReady,
+  notSent,
+  notRate,
 }
 
 /// Enum for connectivity

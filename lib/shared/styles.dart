@@ -94,6 +94,12 @@ TextStyle ktsDefault18Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle kts18NotificationText = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w600,
+  color: kcGreenColor,
+);
+
 TextStyle ktsDefault18SemiBoldText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
@@ -138,6 +144,12 @@ TextStyle kts22Text = TextStyle(
   fontSize: 22.sp,
   fontWeight: FontWeight.w500,
   color: kcFontColor,
+);
+
+TextStyle kts22PrimaryText = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.normal,
+  color: kcPrimaryColor,
 );
 
 TextStyle kts30DarkText = TextStyle(

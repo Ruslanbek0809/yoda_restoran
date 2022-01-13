@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/cart/order/order_view_model.dart';
 import '../app/app.locator.dart';
@@ -38,6 +38,24 @@ void setupDialog() {
             request: sheetRequest, completer: completer),
     DialogType.cancelAcceptedOrder: (context, sheetRequest, completer) =>
         CancelAcceptedOrderDialogView(
+          request: sheetRequest,
+          completer: completer,
+          content: sheetRequest.data,
+        ),
+    DialogType.notReceived: (context, sheetRequest, completer) =>
+        NotReceivedDialogView(
+          request: sheetRequest,
+          completer: completer,
+          content: sheetRequest.data,
+        ),
+    DialogType.notReady: (context, sheetRequest, completer) =>
+        NotReceivedDialogView(
+          request: sheetRequest,
+          completer: completer,
+          content: sheetRequest.data,
+        ),
+    DialogType.notSent: (context, sheetRequest, completer) =>
+        NotReceivedDialogView(
           request: sheetRequest,
           completer: completer,
           content: sheetRequest.data,
@@ -435,6 +453,63 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 contentTextStyle: ktsDefault18Text,
+              );
+      },
+    );
+  }
+}
+
+//------------------ NOTIFICATION DIALOGS ---------------------//
+
+class NotReceivedDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  final String content;
+  const NotReceivedDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+    required this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<OrderViewModel>.reactive(
+      viewModelBuilder: () => OrderViewModel(),
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!, style: kts22PrimaryText),
+                content: Text(content, style: kts18NotificationText),
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius20),
+                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
+                contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Column(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/delivery.svg',
+                      color: AppTheme.MAIN,
+                      width: 90.w,
+                      height: 90.w,
+                    ),
+                    SizedBox(height: 15.h),
+                    Text(
+                      request.title!,
+                      textAlign: TextAlign.center,
+                      style: kts22PrimaryText,
+                    )
+                  ],
+                ),
+                // titleTextStyle: kts22PrimaryText,
+                content: Text(
+                  content,
+                  textAlign: TextAlign.center,
+                ),
+                contentTextStyle: kts18NotificationText,
               );
       },
     );

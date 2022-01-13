@@ -1,9 +1,14 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/models/models.dart';
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
 
 class PushNotificationService {
   final log = getLogger('PushNotificationService');
+
+  final _dialogService = locator<DialogService>();
 
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   String? _fcmToken;
@@ -34,13 +39,100 @@ class PushNotificationService {
     _fcm.subscribeToTopic(Constants.topicIosDevices);
 
     /// When the app is open and it receives a push notification
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       log.v('Got a message whilst in the foreground onMessage!');
       log.v('Message data: ${message.data}');
 
       if (message.notification != null) {
         log.v('Message also contained a notification: ${message.notification}');
       }
+
+      var notificationData = message.data;
+
+      var noti = Notification.fromJson(message.data);
+      log.v('notificationData JSON status: ${noti.status}');
+      log.v('notificationData JSON title: ${noti.title}');
+
+      switch (noti.status) {
+        case '2':
+          log.v('INSIDE STATUS 2');
+          await _dialogService.showCustomDialog(
+            variant: DialogType.notReceived,
+            title: notificationData['title'],
+            showIconInMainButton: false,
+            barrierDismissible: true,
+            data: 'Siziň sargydyňyz kabul edildi.',
+          );
+          break;
+        case '3':
+          log.v('INSIDE STATUS 3');
+          await _dialogService.showCustomDialog(
+            variant: DialogType.notReceived,
+            title: notificationData['title'],
+            showIconInMainButton: false,
+            barrierDismissible: true,
+            data: 'Siziň sargydyňyz taýýar.',
+          );
+          break;
+        case '4':
+          log.v('INSIDE STATUS 4');
+          await _dialogService.showCustomDialog(
+            variant: DialogType.notReceived,
+            title: notificationData['title'],
+            showIconInMainButton: false,
+            barrierDismissible: true,
+            data: 'Siziň sargydyňyz ugradyldy.',
+          );
+          break;
+        default:
+      }
+      // if (noti.status == 2) {
+      // } else if (notificationData['status'] == 3) {
+      //   log.v('INSIDE STATUS 3');
+      //   await _dialogService.showCustomDialog(
+      //     variant: DialogType.notReady,
+      //     title: notificationData['title'],
+      //     showIconInMainButton: false,
+      //     barrierDismissible: true,
+      //     data: 'Siziň sargydyňyz taýýar.',
+      //   );
+      // } else if (notificationData['status'] == 4) {
+      //   log.v('INSIDE STATUS 4');
+      //   await _dialogService.showCustomDialog(
+      //     variant: DialogType.notSent,
+      //     title: notificationData['title'],
+      //     showIconInMainButton: false,
+      //     barrierDismissible: true,
+      //     data: 'Siziň sargydyňyz ugradyldy.',
+      //   );
+      // }
+
+      // switch (notificationData['status']) {
+      //   case 2:
+      //     break;
+      //   case 3:
+      //     log.v('INSIDE STATUS 3');
+      //     await _dialogService.showCustomDialog(
+      //       variant: DialogType.notReady,
+      //       title: notificationData['title'],
+      //       showIconInMainButton: false,
+      //       barrierDismissible: true,
+      //       data: 'Siziň sargydyňyz taýýar.',
+      //     );
+      //     break;
+      //   case 4:
+      //     log.v('INSIDE STATUS 4');
+      //     await _dialogService.showCustomDialog(
+      //       variant: DialogType.notSent,
+      //       title: notificationData['title'],
+      //       showIconInMainButton: false,
+      //       barrierDismissible: true,
+      //       data: 'Siziň sargydyňyz ugradyldy.',
+      //     );
+      //     break;
+      //   default:
+      //     break;
+      // }
     });
 
     /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM

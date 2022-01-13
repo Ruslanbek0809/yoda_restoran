@@ -77,7 +77,7 @@ class SliderView extends StatelessWidget {
                 spacing: 6,
                 dotHeight: 6.h,
                 dotWidth: 6.h,
-                activeDotScale: 1.3,
+                activeDotScale: 1.2,
               ),
             ),
           )

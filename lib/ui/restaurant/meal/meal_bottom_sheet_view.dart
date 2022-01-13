@@ -27,8 +27,7 @@ class MealBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) =>
-          model.setOnModelReadyVolsCustoms(meal),
+      onModelReady: (model) => model.setOnModelReadyVolsCustoms(meal),
       // viewModelBuilder: () => MealViewModel(),
       viewModelBuilder: () => mealViewModel,
       disposeViewModel: false,
@@ -36,7 +35,7 @@ class MealBottomSheet extends StatelessWidget {
         initialChildSize:
             meal.gVolumes!.isNotEmpty || meal.gCustomizables!.isNotEmpty
                 ? 0.9
-                : 0.7,
+                : 0.65,
         maxChildSize:
             meal.gVolumes!.isNotEmpty || meal.gCustomizables!.isNotEmpty
                 ? 1
@@ -67,7 +66,7 @@ class MealBottomSheet extends StatelessWidget {
                         width: 40.w,
                         child: SvgPicture.asset(
                           'assets/bottom_sheet_dragger.svg',
-                          color: AppTheme.WHITE,
+                          color: kcSecondaryLightColor,
                         ),
                       ),
                       //----------- IMAGE --------------//
@@ -98,7 +97,7 @@ class MealBottomSheet extends StatelessWidget {
                       ),
                       //----------- DESCRIPTION --------------//
                       Container(
-                        color: kcWhiteColor,
+                        color: kcSecondaryLightColor,
                         width: 1.sw,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
