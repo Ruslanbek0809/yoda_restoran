@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
@@ -19,6 +20,7 @@ class ResDetailsViewModel extends FutureViewModel {
   final _resService = locator<ResService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
+  final _hiveDbService = locator<HiveDbService>();
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -27,6 +29,8 @@ class ResDetailsViewModel extends FutureViewModel {
   int get activeTab => _activeTab;
   bool get isTabPressed => _isTabPressed;
   bool get isShrink => _isShrink;
+  
+  HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity

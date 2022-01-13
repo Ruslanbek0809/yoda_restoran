@@ -14,7 +14,6 @@ import '../../utils/utils.dart';
 import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'main_category/home_discounts.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -33,6 +32,10 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
+      onModelReady: (model) =>
+          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+        await _refreshController.requestRefresh();
+      }),
       builder: (context, model, child) {
         return SafeArea(
           child: Scaffold(
@@ -48,11 +51,11 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 SmartRefresher(
                   header: CustomHeader(
-                    // height: 50.h,
+                    height: 50.h,
                     builder: (BuildContext context, RefreshStatus? mode) {
-                      if (mode == RefreshStatus.completed) {
-                        return SizedBox();
-                      }
+                      // if (mode == RefreshStatus.completed) {
+                      //   return SizedBox();
+                      // }
                       return SpinKitChasingDots(
                         size: 27,
                         color: kcPrimaryColor,
