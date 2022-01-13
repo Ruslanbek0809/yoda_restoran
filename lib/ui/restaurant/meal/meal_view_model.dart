@@ -184,12 +184,18 @@ class MealViewModel extends ReactiveViewModel {
   List<Customizable> get selectedCustoms => _selectedCustoms;
 
   /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
-  void setOnModelReadyVolsCustoms(int gVolsLength) {
+  void setOnModelReadyVolsCustoms(Meal meal) {
     log.i('setOnModelReadyVolsCustoms()');
     _selectedVols = List.generate(
-      gVolsLength,
+      meal.gVolumes!.length,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
+
+    /// ASSINGS initial value to _isAllVolSelected based on 
+    if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty)
+      _isAllVolSelected = true;
+    else
+      _isAllVolSelected = false;
   }
 
   // /// CHECKS wether this vol in _selectedVols or NOT
