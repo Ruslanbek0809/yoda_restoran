@@ -47,13 +47,13 @@ class ProfileViewModel extends BaseViewModel {
   void assignCurrentUserValues() {
     log.v('assignCurrentUserValues()');
 
-    _name = currentUser!.firstName;
+    _name = currentUser?.firstName;
 
-    _birthDate = currentUser!.birthday!;
+    _birthDate = currentUser?.birthday;
 
-    _gender = currentUser!.gender;
+    _gender = currentUser?.gender;
 
-    _email = currentUser!.email;
+    _email = currentUser?.email;
 
     _phone = currentUser!.mobile;
   }

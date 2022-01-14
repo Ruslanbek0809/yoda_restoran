@@ -29,7 +29,9 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
             ? model.currentUser!.firstName
             : '');
     final _birthdateController = useTextEditingController(
-        text: DateFormat('dd-MM-yyyy').format(model.currentUser!.birthday!));
+        text: model.currentUser!.birthday != null
+            ? DateFormat('dd-MM-yyyy').format(model.currentUser!.birthday!)
+            : '');
     final _genderController =
         useTextEditingController(text: model.currentUser!.gender ?? '');
     final _emailController =

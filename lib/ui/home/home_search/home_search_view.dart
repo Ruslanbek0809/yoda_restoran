@@ -7,7 +7,7 @@ import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'home_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'search_box.dart';
+import 'home_search_hook.dart';
 
 class HomeSearchView extends StatelessWidget {
   @override
@@ -34,7 +34,7 @@ class HomeSearchView extends StatelessWidget {
                 ),
                 onPressed: () {},
               ),
-              title: SearchBox(),
+              title: HomeSearchHook(),
               actions: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),

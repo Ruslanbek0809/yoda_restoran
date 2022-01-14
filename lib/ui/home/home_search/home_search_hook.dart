@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'home_search_view_model.dart';
 
-class SearchBox extends HookViewModelWidget<HomeSearchViewModel> {
+class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
     model.log.i('model.searchText: ${model.searchText}');

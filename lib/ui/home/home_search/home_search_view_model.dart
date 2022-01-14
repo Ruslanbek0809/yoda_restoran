@@ -33,6 +33,7 @@ class HomeSearchViewModel extends BaseViewModel {
   void clearSearch() {
     log.i('clearSearch()');
     _searchText = '';
+    _searchRestaurants = [];
     notifyListeners();
   }
 

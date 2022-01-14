@@ -17,7 +17,7 @@ class DrawerView extends StatelessWidget {
     switch (value) {
       case 'login':
         {
-          title = 'Login et';
+          title = 'Ulgama gir';
           svgName = 'assets/user.svg';
           onTap = () async => model.navToLoginView();
           break;
