@@ -47,9 +47,10 @@ class UserService {
         '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser');
   }
 
-  Future<void> loginUser(String phone) async {
+  Future<void> loginUser(
+      {String? phone, Function()? onSuccess, Function()? onFail}) async {
     log.v(
-        'Phone: +993${phone.replaceAll(' ', '')}, type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
+        'Phone: +993${phone!.replaceAll(' ', '')}, type: ${Platform.isAndroid ? 'android' : 'ios'}, registration_id: ${_pushNotificationService.fcmToken}');
 
     final FormData userFormData = FormData.fromMap({
       'mobile': '+993${phone.replaceAll(' ', '')}',
@@ -63,14 +64,18 @@ class UserService {
       );
       log.v('RESPONSE: auth/login/ => ${response.data}');
 
-      if (response.data != null) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        onSuccess!();
         _otp = response.data['otp']; // This _otp var is used for testing ONLY
 
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
+      } else {
+        onFail!();
       }
     } on DioError catch (error) {
       log.v('ERROR on auth/login/ :${error.response}');
+      onFail!();
       throw DioErrorType.response;
     }
   }

@@ -38,7 +38,7 @@ class StartUpView extends StatelessWidget {
                 model.log.v('In Offline: ${model.flashController}');
                 return Flash(
                   controller: controller,
-                  barrierDismissible: true,
+                  barrierDismissible: false,
                   borderRadius: AppTheme().radius15,
                   backgroundColor: kcSecondaryLightColor,
                   boxShadows: kElevationToShadow[0],

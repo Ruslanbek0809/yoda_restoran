@@ -14,24 +14,26 @@ class LoginViewModel extends FormViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
-  /// SAVES login data by posting data to login API
-  Future saveLoginData() async {
-    try {
-      await runBusyFuture(_userService.loginUser(phoneValue!),
-          throwException: true);
-
-      // Navigate to successful route
-      _navService.replaceWith(
-        Routes.otpView,
-        arguments: OtpViewArguments(
-          isCartView: isCartView,
-        ),
-      );
-      // await _handleResponse(response);
-    } catch (e) {
-      log.e(e.toString());
-      setValidationMessage(e.toString());
-    }
+  /// SAVES login data by posting data to login API (onFailForView() is used to show FlashBar ONLY)
+  Future saveLoginData({Function()? onFailForView}) async {
+    await runBusyFuture(
+      _userService.loginUser(
+        phone: phoneValue,
+        onSuccess: () async {
+          // Navigate to successful route
+          await _navService.replaceWith(
+            Routes.otpView,
+            arguments: OtpViewArguments(
+              isCartView: isCartView,
+            ),
+          );
+        },
+        onFail: () {
+          onFailForView!();
+          // setValidationMessage(e.toString());
+        },
+      ),
+    );
   }
 
   @override

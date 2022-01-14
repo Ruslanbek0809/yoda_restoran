@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/shared/styles.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
@@ -109,36 +111,36 @@ void printLog(dynamic data) {
   }
 }
 
-// void showOfflineFlashBar(
-//     {required BuildContext context,
-//     String? msg,
-//     Color? color,
-//     int milliseconds = 1500}) {
-//   showFlash(
-//     context: context,
-//     persistent: true,
-//     duration: Duration(milliseconds: milliseconds),
-//     builder: (context, controller) {
-//       return Flash(
-//         backgroundColor: color,
-//         controller: controller,
-//         boxShadows: kElevationToShadow[3],
-//         position: FlashPosition.top,
-//         barrierDismissible: true,
-//         behavior: FlashBehavior.floating,
-//         child: FlashBar(
-//           icon: const Icon(
-//             Icons.check,
-//             color: AppTheme.WHITE,
-//           ),
-//           content: Center(
-//             child: Text(msg!, style: ktsDefault20Text),
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
+void showErrorFlashBar({required BuildContext context}) {
+  showFlash(
+    context: context,
+    persistent: true,
+    duration: Duration(milliseconds: 2000),
+    builder: (context, controller) {
+      return Flash(
+        backgroundColor: kcSecondaryDarkColor,
+        controller: controller,
+        borderRadius: AppTheme().radius15,
+        boxShadows: kElevationToShadow[0],
+        position: FlashPosition.bottom,
+        barrierDismissible: true,
+        behavior: FlashBehavior.floating,
+        margin: EdgeInsets.only(
+          left: 0.1.sw,
+          right: 0.1.sw,
+          bottom: 0.05.sh,
+        ),
+        child: FlashBar(
+          icon: Padding(
+            padding: EdgeInsets.only(left: 24.w, right: 12.w),
+            child: SvgPicture.asset('assets/warning.svg'),
+          ),
+          content: Text('Näsazlyk ýüze çykdy', style: ktsButton18Text),
+        ),
+      );
+    },
+  );
+}
 
 // SnackBar Widget
 snackBar(String? message, BuildContext context) {
