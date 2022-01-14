@@ -191,20 +191,20 @@ class ApiService {
 
   //------------------ SEARCH APIS ---------------------//
 
-  Future<Promocode?> startMainSearch(String searchText) async {
-    List<Promocode?> _promocodeList = [];
+  Future<List<SearchRestaurant?>> startMainSearch(String searchText) async {
+    List<SearchRestaurant?> _searchRestaurants = [];
     try {
       Response response = await _apiRoot.dio
           .get('api/restaurants/', queryParameters: {'search': searchText});
       log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
-      // if (response.data != null) {
-      //   response.data.forEach((_promocode) {
-      //     _promocodeList.add(Promocode.fromJson(_promocode));
-      //   });
-      // }
+      if (response.data != null) {
+        response.data.forEach((_searchRestaurant) {
+          _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
+        });
+      }
 
-      return _promocodeList[0];
+      return _searchRestaurants;
     } on DioError catch (error) {
       log.v(error);
       // log.v(

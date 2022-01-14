@@ -64,7 +64,16 @@ class HomeSearchView extends StatelessWidget {
                 ],
               ),
               //------------------ ListView builder ---------------------//
-              body: model.isBusy ? LoadingWidget() : SizedBox()
+              body: model.searchRestaurants.isEmpty
+                  ? EmptyWidget(
+                      text: 'Hiç zat tapylmady',
+                      svg: 'assets/empty_search.svg',
+                    )
+                  : model.isBusy
+                      ? LoadingWidget()
+                      : model.hasError
+                          ? ViewErrorWidget()
+                          : SizedBox()
               // ListView.builder(
               //     padding: EdgeInsets.only(top: 10.w),
               //     itemCount: restaurants.length,

@@ -10,9 +10,9 @@ class SearchService {
   final _hiveDbService = locator<HiveDbService>();
 
   /// STARTS MAIN SEARCH and GETS result
-  Future<Promocode?> startMainSearch(String searchText) async {
+  Future<List<SearchRestaurant?>> startMainSearch(String searchText) async {
     await Future.delayed(Duration(seconds: 1));
-    final _promocode = await _api.startMainSearch(searchText);
-    return _promocode;
+    final result = await _api.startMainSearch(searchText);
+    return result;
   }
 }
