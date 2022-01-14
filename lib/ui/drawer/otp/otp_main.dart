@@ -148,20 +148,20 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     if (currentOtp.length != 6) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      /// TODO: Add SnackBar Kody doly giriziň
+                      showErrorFlashBar(context: context, msg: 'Kody giriziň');
                       return;
                     }
 
                     if (currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      /// TODO: Add SnackBar Kody dogry giriziň
+                      showErrorFlashBar(context: context, msg: 'Kody giriziň');
                       return;
                     }
 
-                    /// TODO: Add SnackBar
-
-                    await model.saveOtpData();
+                    await model.saveOtpData(
+                        onFailForView: () =>
+                            showErrorFlashBar(context: context));
                   }),
             ),
             verticalSpaceMedium,

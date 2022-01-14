@@ -65,11 +65,11 @@ class UserService {
       log.v('RESPONSE: auth/login/ => ${response.data}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        onSuccess!();
         _otp = response.data['otp']; // This _otp var is used for testing ONLY
 
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
+        onSuccess!();
       } else {
         onFail!();
       }
@@ -80,7 +80,7 @@ class UserService {
     }
   }
 
-  Future<void> verifyUser() async {
+  Future<void> verifyUser({Function()? onSuccess, Function()? onFail}) async {
     log.v('Otp: $otp, Phone: $_phone');
 
     final FormData otpFormData = FormData.fromMap({
@@ -119,9 +119,14 @@ class UserService {
 
         /// Step 4. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
+
+        onSuccess!();
+      } else {
+        onFail!();
       }
     } on DioError catch (error) {
       log.v('ERROR on auth/verify/ :$error');
+      onFail!();
       throw DioErrorType.response;
     }
   }

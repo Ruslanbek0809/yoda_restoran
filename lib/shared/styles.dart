@@ -54,6 +54,12 @@ TextStyle ktsDefault14DialogText = TextStyle(
   color: kcDialogColor,
 );
 
+TextStyle kts16ButtonText = TextStyle(
+  color: kcWhiteColor,
+  fontSize: 16.sp,
+  fontWeight: FontWeight.normal,
+);
+
 TextStyle ktsDefault16Text = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.normal,

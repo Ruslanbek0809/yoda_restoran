@@ -130,20 +130,19 @@ class LoginView extends StatelessWidget with $LoginView {
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
-                      onPressed: () {
+                      onPressed: () async {
                         if (!formKey.currentState!.validate()) return;
                         formKey.currentState!.save();
 
-                        model.saveLoginData(onFailForView: () => showErrorFlashBar(context: context));
+                        await model.saveLoginData(
+                            onFailForView: () =>
+                                showErrorFlashBar(context: context));
                       }),
                 ),
                 verticalSpaceMedium,
                 Text(
                   'Siziň telefon belgiňize gizlin SMS kody geler.',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppTheme.DRAWER_ICON,
-                  ),
+                  style: kts14HelperText,
                 ),
               ],
             ),

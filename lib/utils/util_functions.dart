@@ -111,8 +111,9 @@ void printLog(dynamic data) {
   }
 }
 
-void showErrorFlashBar({required BuildContext context}) {
-  showFlash(
+Future<void> showErrorFlashBar(
+    {required BuildContext context, String msg = 'Näsazlyk ýüze çykdy'}) async {
+  await showFlash(
     context: context,
     persistent: true,
     duration: Duration(milliseconds: 2000),
@@ -135,7 +136,7 @@ void showErrorFlashBar({required BuildContext context}) {
             padding: EdgeInsets.only(left: 24.w, right: 12.w),
             child: SvgPicture.asset('assets/warning.svg'),
           ),
-          content: Text('Näsazlyk ýüze çykdy', style: ktsButton18Text),
+          content: Text(msg, style: ktsButton18Text),
         ),
       );
     },

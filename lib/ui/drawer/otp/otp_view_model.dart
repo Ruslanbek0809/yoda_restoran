@@ -31,17 +31,20 @@ class OtpViewModel extends FormViewModel {
   }
 
   /// SAVES otp data by posting otpCode to verify API
-  Future saveOtpData() async {
-    try {
-      await runBusyFuture(_userService.verifyUser(), throwException: true);
-
-      // Navigate to successful route
-      _navService.replaceWith(isCartView ? Routes.cartView : Routes.homeView);
-      // await _handleResponse(response);
-    } catch (e) {
-      log.e(e.toString());
-      setValidationMessage(e.toString());
-    }
+  Future saveOtpData({Function()? onFailForView}) async {
+    await runBusyFuture(
+      _userService.verifyUser(
+        onSuccess: () async {
+          // Navigate to successful route
+          _navService
+              .replaceWith(isCartView ? Routes.cartView : Routes.homeView);
+        },
+        onFail: () {
+          onFailForView!();
+          // setValidationMessage(e.toString());
+        },
+      ),
+    );
   }
 
   @override
