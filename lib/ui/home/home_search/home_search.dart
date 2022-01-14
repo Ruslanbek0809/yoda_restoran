@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/home/home_view_model.dart';
 import '../../../utils/utils.dart';
 
-import 'home_search_view.dart';
-
-class HomeSearch extends StatelessWidget {
+class HomeSearch extends ViewModelWidget<HomeViewModel> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomeViewModel model) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 10.w),
@@ -18,14 +19,7 @@ class HomeSearch extends StatelessWidget {
           boxShadow: [AppTheme().searchShadow],
         ),
         child: InkWell(
-          onTap: () async {
-            // await Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => HomeSearchView(),
-            //   ),
-            // );
-          },
+          onTap: model.navToHomeSearchView,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -33,7 +27,7 @@ class HomeSearch extends StatelessWidget {
                 'Gözleg',
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: AppTheme.FONT_GREY_COLOR,
+                  color: kcSecondFontColor,
                 ),
               ),
               Icon(

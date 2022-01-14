@@ -19,6 +19,7 @@ import '../ui/drawer/addresses/addresses_view.dart';
 import '../ui/drawer/login/login_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
+import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
@@ -37,6 +38,7 @@ class Routes {
   static const String profileView = '/profile-view';
   static const String addressesView = '/addresses-view';
   static const String addressAddEditView = '/address-add-edit-view';
+  static const String homeSearchView = '/home-search-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -50,6 +52,7 @@ class Routes {
     profileView,
     addressesView,
     addressAddEditView,
+    homeSearchView,
   };
 }
 
@@ -69,6 +72,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.addressesView, page: AddressesView),
     RouteDef(Routes.addressAddEditView, page: AddressAddEditView),
+    RouteDef(Routes.homeSearchView, page: HomeSearchView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -165,6 +169,12 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddressAddEditView(key: args.key),
+        settings: data,
+      );
+    },
+    HomeSearchView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const HomeSearchView(),
         settings: data,
       );
     },

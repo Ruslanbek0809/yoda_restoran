@@ -124,7 +124,12 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
-  void navToResDetailsView() => _navService.navigateTo(
+  //------------------ NAVIGATIOn ---------------------//
+
+  void navToHomeSearchView() async =>
+      await _navService.navigateTo(Routes.homeSearchView);
+
+  void navToResDetailsView() async => await _navService.navigateTo(
         Routes.resDetailsView,
         arguments: ResDetailsViewArguments(
           restaurant: Restaurant(
