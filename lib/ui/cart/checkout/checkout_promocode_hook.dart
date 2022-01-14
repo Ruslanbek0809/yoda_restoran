@@ -14,7 +14,6 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
     final _promocodeController = useTextEditingController();
-    // model.log.v('CheckoutPromocodeHook =========');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

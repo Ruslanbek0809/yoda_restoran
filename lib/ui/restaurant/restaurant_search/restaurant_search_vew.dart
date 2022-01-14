@@ -100,106 +100,112 @@ class _RestaurantSearchViewState extends State<RestaurantSearchView>
 
   @override
   Widget build(BuildContext context) {
-    double itemWidth = (1.sw - 5.w * 2 - 20.w) / 2;
-    double itemHeight = itemWidth + 0.3.sw; // 0.4.sw is for item height
-    return ViewModelBuilder<RestaurantSearchViewModel>.reactive(
-      builder: (context, model, child) => Padding(
-        padding: const EdgeInsets.only(top: kToolbarHeight / 4),
-        child: Semantics(
-          explicitChildNodes: true,
-          scopesRoute: true,
-          namesRoute: true,
-          child: Scaffold(
-            backgroundColor: AppTheme.WHITE,
-            resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              backgroundColor: AppTheme.WHITE,
-              elevation: 0.5,
-              titleSpacing: 0,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppTheme.FONT_COLOR,
-                  size: 20.w,
-                ),
-                onPressed: close,
-              ),
-              title: SearchBox(
-                autoFocus: true,
-                controller: _searchFieldController,
-                focusNode: _searchFieldNode,
-                onChanged: _onSearchTextChangeCallBack,
-                onSubmitted: _onSubmitCallBack,
-              ),
-              actions: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: _searchFieldController.text.isEmpty
-                      ? IconButton(
-                          tooltip: 'Search',
-                          // tooltip: i18n(currentLang, ki18nSearch),
-                          icon: Icon(
-                            Icons.search,
-                            size: 22.w,
-                            color: AppTheme.DRAWER_DIVIDER,
-                          ),
-                          onPressed: () {},
-                        )
-                      : IconButton(
-                          tooltip: 'Clear',
-                          // tooltip: i18n(currentLang, ki18nClearCart),
-                          icon: Icon(
-                            Icons.clear,
-                            size: 22.w,
-                            color: AppTheme.DRAWER_DIVIDER,
-                          ),
-                          onPressed: () {
-                            _searchFieldController.clear();
-                            _searchFieldNode.requestFocus();
-                          },
-                        ),
-                ),
-              ],
-            ),
-            //------------------ FOOD ListView builder ---------------------//
-            body: GridView.builder(
-              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12.h, //spaceTopBottom
-                crossAxisSpacing: 8.w, //spaceLeftRight
-                childAspectRatio: itemWidth / itemHeight,
-              ),
-              itemCount: mealList.length,
-              itemBuilder: (context, pos) {
-                // return FoodView(
-                //   food: foodList[pos],
-                //   animationController: widget.bottomCartController,
-                // );
-                return SizedBox(); // TODO: Change it to above one
-              },
-            ),
-            // AnimatedSwitcher(
-            //   duration: const Duration(milliseconds: 300),
-            //   reverseDuration: const Duration(milliseconds: 300),
-            //   child: _showProductsResult
-            //       ? SizedBox() // In production change to SearchProductsResultWidget()
-            //       // SearchProductsResultWidget(
-            //       //     searchName: _searchKeyword,
-            //       //   )
-            //       : Align(
-            //           alignment: Alignment.topCenter,
-            //           child:
-            //               SizedBox() // In production change to RecentSearchesWidget()
-            //           // RecentSearchesWidget(onTap: _onSubmitCallBack),
-            //           ),
-            // ),
-          ),
-        ),
-      ),
-      viewModelBuilder: () => RestaurantSearchViewModel(),
-    );
+    // TODO: implement build
+    throw UnimplementedError();
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   double itemWidth = (1.sw - 5.w * 2 - 20.w) / 2;
+  //   double itemHeight = itemWidth + 0.3.sw; // 0.4.sw is for item height
+  //   return ViewModelBuilder<RestaurantSearchViewModel>.reactive(
+  //     builder: (context, model, child) => Padding(
+  //       padding: const EdgeInsets.only(top: kToolbarHeight / 4),
+  //       child: Semantics(
+  //         explicitChildNodes: true,
+  //         scopesRoute: true,
+  //         namesRoute: true,
+  //         child: Scaffold(
+  //           backgroundColor: AppTheme.WHITE,
+  //           resizeToAvoidBottomInset: false,
+  //           appBar: AppBar(
+  //             backgroundColor: AppTheme.WHITE,
+  //             elevation: 0.5,
+  //             titleSpacing: 0,
+  //             leading: IconButton(
+  //               icon: Icon(
+  //                 Icons.arrow_back_ios,
+  //                 color: AppTheme.FONT_COLOR,
+  //                 size: 20.w,
+  //               ),
+  //               onPressed: close,
+  //             ),
+  //             title: SearchBox(
+  //               autoFocus: true,
+  //               controller: _searchFieldController,
+  //               focusNode: _searchFieldNode,
+  //               onChanged: _onSearchTextChangeCallBack,
+  //               onSubmitted: _onSubmitCallBack,
+  //             ),
+  //             actions: [
+  //               AnimatedSwitcher(
+  //                 duration: const Duration(milliseconds: 300),
+  //                 child: _searchFieldController.text.isEmpty
+  //                     ? IconButton(
+  //                         tooltip: 'Search',
+  //                         // tooltip: i18n(currentLang, ki18nSearch),
+  //                         icon: Icon(
+  //                           Icons.search,
+  //                           size: 22.w,
+  //                           color: AppTheme.DRAWER_DIVIDER,
+  //                         ),
+  //                         onPressed: () {},
+  //                       )
+  //                     : IconButton(
+  //                         tooltip: 'Clear',
+  //                         // tooltip: i18n(currentLang, ki18nClearCart),
+  //                         icon: Icon(
+  //                           Icons.clear,
+  //                           size: 22.w,
+  //                           color: AppTheme.DRAWER_DIVIDER,
+  //                         ),
+  //                         onPressed: () {
+  //                           _searchFieldController.clear();
+  //                           _searchFieldNode.requestFocus();
+  //                         },
+  //                       ),
+  //               ),
+  //             ],
+  //           ),
+  //           //------------------ FOOD ListView builder ---------------------//
+  //           body: GridView.builder(
+  //             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+  //             shrinkWrap: true,
+  //             physics: NeverScrollableScrollPhysics(),
+  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //               crossAxisCount: 2,
+  //               mainAxisSpacing: 12.h, //spaceTopBottom
+  //               crossAxisSpacing: 8.w, //spaceLeftRight
+  //               childAspectRatio: itemWidth / itemHeight,
+  //             ),
+  //             itemCount: mealList.length,
+  //             itemBuilder: (context, pos) {
+  //               // return FoodView(
+  //               //   food: foodList[pos],
+  //               //   animationController: widget.bottomCartController,
+  //               // );
+  //               return SizedBox(); // TODO: Change it to above one
+  //             },
+  //           ),
+  //           // AnimatedSwitcher(
+  //           //   duration: const Duration(milliseconds: 300),
+  //           //   reverseDuration: const Duration(milliseconds: 300),
+  //           //   child: _showProductsResult
+  //           //       ? SizedBox() // In production change to SearchProductsResultWidget()
+  //           //       // SearchProductsResultWidget(
+  //           //       //     searchName: _searchKeyword,
+  //           //       //   )
+  //           //       : Align(
+  //           //           alignment: Alignment.topCenter,
+  //           //           child:
+  //           //               SizedBox() // In production change to RecentSearchesWidget()
+  //           //           // RecentSearchesWidget(onTap: _onSubmitCallBack),
+  //           //           ),
+  //           // ),
+  //         ),
+  //       ),
+  //     ),
+  //     viewModelBuilder: () => RestaurantSearchViewModel(),
+  //   );
+  // }
 }

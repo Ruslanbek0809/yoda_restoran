@@ -50,6 +50,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: CheckoutService),
     LazySingleton(classType: OrderService),
     LazySingleton(classType: ConnectivityService),
+    LazySingleton(classType: SearchService),
   ],
   logger: StackedLogger(),
 )

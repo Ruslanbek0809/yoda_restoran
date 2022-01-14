@@ -174,7 +174,7 @@ class StackedRouter extends RouterBase {
     },
     HomeSearchView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const HomeSearchView(),
+        builder: (context) => HomeSearchView(),
         settings: data,
       );
     },

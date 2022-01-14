@@ -13,3 +13,4 @@ export 'toggle_button_service.dart';
 export 'checkout_service.dart';
 export 'order_service.dart';
 export 'connectivity_service.dart';
+export 'search_service.dart';
