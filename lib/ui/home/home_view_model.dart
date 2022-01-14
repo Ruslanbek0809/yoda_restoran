@@ -49,6 +49,9 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchingPromotedRes => busy(homePromsFuture);
   bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
 
+  bool _hasFutureError = false;
+  bool get hasFutureError => _hasFutureError;
+
   /// GETTER for combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get resWithProms {
     List<HomeResPromo> _resWithProms = [];
@@ -106,6 +109,16 @@ class HomeViewModel extends MultipleFutureViewModel {
         homeRandomRessFuture: _homeService.getRandomRess,
         homePromsFuture: _homeService.getProms,
       };
+
+  /// Below lines are custom error part
+  @override
+  void onError({error, key}) {
+    _hasFutureError = true;
+  }
+
+  void updateHasFutureError() {
+    _hasFutureError = false;
+  }
 
   //------------------ BOTTOM CART ---------------------//
 
