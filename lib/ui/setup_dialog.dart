@@ -498,7 +498,7 @@ class NotificationDialogView extends StatelessWidget {
             : AlertDialog(
                 shape:
                     RoundedRectangleBorder(borderRadius: AppTheme().radius20),
-                titlePadding: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 0.h),
+                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 0.h),
                 contentPadding: EdgeInsets.fromLTRB(20.w, 6.h, 20.w, 24.h),
                 actionsAlignment: MainAxisAlignment.center,
                 title: Column(

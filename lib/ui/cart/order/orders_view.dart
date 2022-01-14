@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -45,7 +43,7 @@ class OrdersView extends StatelessWidget {
               ),
             ),
           ),
-          body: model.isBusy
+          body: model.isBusy || model.isFetchingOrders
               ? LoadingWidget()
               : ListView.separated(
                   physics: BouncingScrollPhysics(),

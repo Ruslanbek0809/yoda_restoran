@@ -72,7 +72,7 @@ class PushNotificationService {
             showIconInMainButton: false,
             barrierDismissible: true,
             data: NotificationDialogData(
-              lottie: 'assets/success_check.json',
+              lottie: 'assets/pizzabox.json',
               restaurant: noti.title!,
               content: 'Siziň sargydyňyz taýýar.',
             ),
@@ -85,7 +85,7 @@ class PushNotificationService {
             showIconInMainButton: false,
             barrierDismissible: true,
             data: NotificationDialogData(
-              lottie: 'assets/success_check.json',
+              lottie: 'assets/foodbag.json',
               restaurant: noti.title!,
               content: 'Siziň sargydyňyz ugradyldy.',
             ),

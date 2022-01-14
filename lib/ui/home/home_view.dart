@@ -143,7 +143,7 @@ class _HomeViewState extends State<HomeView> {
                                 SliderView(sliders: model.sliders ?? []),
                             ],
                           ),
-                        ), 
+                        ),
                       ),
                       //------------------ HOME CATEGORIES ---------------------//
                       SliverPersistentHeader(

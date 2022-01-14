@@ -8,7 +8,7 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class OrderViewModel extends BaseViewModel {
+class OrderViewModel extends ReactiveViewModel {
   final log = getLogger('OrderViewModel');
 
   final _navService = locator<NavigationService>();
@@ -18,6 +18,8 @@ class OrderViewModel extends BaseViewModel {
 //------------------------ ORDER PART ----------------------------//
 
   List<Order>? get orders => _orderService.orders;
+
+  bool get isFetchingOrders => _orderService.isFetchingOrders;
 
   /// GETS all orders
   Future getOrders() async {
@@ -115,25 +117,14 @@ class OrderViewModel extends BaseViewModel {
   /// SHOWS cancel waiting order Dialog
   Future showCancelWaitingOrderDialog() async {
     log.i('showCancelWaitingOrderDialog()');
-
     await _dialogService.showCustomDialog(
-      variant: DialogType.notification,
+      variant: DialogType.cancelWaitingOrder,
+      title: 'Siz sargydy ýatyrmakçymy?',
+      mainButtonTitle: 'Ýok',
+      secondaryButtonTitle: 'Hawa',
       showIconInMainButton: false,
       barrierDismissible: true,
-      data: NotificationDialogData(
-        lottie: 'assets/success_check.json',
-        restaurant: 'Restaurant',
-        content: 'Siziň sargydyňyz kabul edildi.',
-      ),
     );
-    // await _dialogService.showCustomDialog(
-    //   variant: DialogType.cancelWaitingOrder,
-    //   title: 'Siz sargydy ýatyrmakçymy?',
-    //   mainButtonTitle: 'Ýok',
-    //   secondaryButtonTitle: 'Hawa',
-    //   showIconInMainButton: false,
-    //   barrierDismissible: true,
-    // );
   }
 
   /// SHOWS cancel accepted order Dialog
@@ -171,4 +162,7 @@ class OrderViewModel extends BaseViewModel {
   /// NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_orderService];
 }

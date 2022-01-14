@@ -50,10 +50,6 @@ class StartUpView extends StatelessWidget {
                   position: FlashPosition.bottom,
                   behavior: FlashBehavior.floating,
                   child: FlashBar(
-                    // padding: EdgeInsets.only(
-                    //   left: 24.w,
-                    //   right: 24.w,
-                    // ),
                     icon: Padding(
                       padding: EdgeInsets.only(left: 24.w, right: 12.w),
                       child: SvgPicture.asset('assets/no_wifi.svg'),
@@ -62,18 +58,6 @@ class StartUpView extends StatelessWidget {
                       'Internet ýok',
                       style: ktsDefault20Text,
                     ),
-                    // primaryAction: Row(
-                    //   children: [
-                    //     VerticalDivider(
-                    //         indent: 8.h, endIndent: 8.h, thickness: 1),
-                    //     Padding(
-                    //       padding: EdgeInsets.only(right: 12.w, left: 4.w),
-                    //       child: SvgPicture.asset(
-                    //         'assets/arrow_clockwise.svg',
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                 );
               },
