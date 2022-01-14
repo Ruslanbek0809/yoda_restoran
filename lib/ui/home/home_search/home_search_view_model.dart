@@ -8,9 +8,13 @@ class HomeSearchViewModel extends BaseViewModel {
 
   final _searchService = locator<SearchService>();
 
+  String? _searchText = '';
+  String? get searchText => _searchText;
+
   /// STARTS MAIN SEARCH and GETS result
   Future<void> startMainSearch(String? searchText) async {
     log.i('startMainSearch() searchText: $searchText');
+    _searchText = searchText;
     if (searchText != null && searchText.isEmpty || searchText!.length < 3)
       return;
 
@@ -20,5 +24,12 @@ class HomeSearchViewModel extends BaseViewModel {
     } catch (err) {
       throw err;
     }
+  }
+
+  /// STARTS MAIN SEARCH and GETS result
+  void clearSearch() {
+    log.i('clearSearch()');
+    _searchText = '';
+    notifyListeners();
   }
 }

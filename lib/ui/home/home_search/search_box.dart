@@ -10,7 +10,10 @@ import 'home_search_view_model.dart';
 class SearchBox extends HookViewModelWidget<HomeSearchViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
-    final _searchController = useTextEditingController();
+    model.log.i('model.searchText: ${model.searchText}');
+
+    final _searchController = useTextEditingController(text: model.searchText);
+    if (model.searchText!.isEmpty) _searchController.clear();
     return Container(
       decoration: BoxDecoration(
         color: kcWhiteColor,

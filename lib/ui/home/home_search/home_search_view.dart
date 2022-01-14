@@ -34,34 +34,33 @@ class HomeSearchView extends StatelessWidget {
                 title: SearchBox(),
                 actions: [
                   AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child:
-                          // _searchFieldController.text.isEmpty
-                          //     ?
-                          IconButton(
-                        tooltip: 'Search',
-                        // tooltip: i18n(currentLang, ki18nSearch),
-                        icon: Icon(
-                          Icons.search,
-                          size: 22.w,
-                          color: AppTheme.DRAWER_DIVIDER,
-                        ),
-                        onPressed: () {},
-                      )
-                      // : IconButton(
-                      //     tooltip: 'Clear',
-                      //     // tooltip: i18n(currentLang, ki18nClearCart),
-                      //     icon: Icon(
-                      //       Icons.clear,
-                      //       size: 22.w,
-                      //       color: AppTheme.DRAWER_DIVIDER,
-                      //     ),
-                      //     onPressed: () {
-                      //       _searchFieldController.clear();
-                      //       _searchFieldNode.requestFocus();
-                      //     },
-                      //   ),
-                      ),
+                    duration: const Duration(milliseconds: 300),
+                    child: model.searchText!.isEmpty
+                        ? IconButton(
+                            tooltip: 'Search',
+                            // tooltip: i18n(currentLang, ki18nSearch),
+                            icon: Icon(
+                              Icons.search,
+                              size: 22.w,
+                              color: AppTheme.DRAWER_DIVIDER,
+                            ),
+                            onPressed: () {},
+                          )
+                        : IconButton(
+                            tooltip: 'Clear',
+                            // tooltip: i18n(currentLang, ki18nClearCart),
+                            icon: Icon(
+                              Icons.clear,
+                              size: 22.w,
+                              color: AppTheme.DRAWER_DIVIDER,
+                            ),
+                            onPressed: () {
+                              FocusScope.of(context)
+                                  .unfocus(); // UNFOCUSES all textfield b4 clear
+                              model.clearSearch();
+                            },
+                          ),
+                  ),
                 ],
               ),
               //------------------ ListView builder ---------------------//
