@@ -28,7 +28,7 @@ class SearchRestaurant {
   @JsonKey(name: 'image')
   final String? image;
 
-  @JsonKey(name: 'meal')
+  @JsonKey(name: 'meals')
   final List<Meal>? meals;
 
   @JsonKey(name: 'name')

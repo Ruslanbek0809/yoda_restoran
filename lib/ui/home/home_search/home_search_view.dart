@@ -138,77 +138,84 @@ class HomeSearchView extends StatelessWidget {
                                       ),
                                     ),
                                     //------------------ RESTAURANT MEALS ---------------------//
-                                    ListView.separated(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      padding: EdgeInsets.only(
-                                          top: 15.h, left: 24.w + 35.h),
-                                      itemCount:
-                                          _searchRestaurant.meals!.length,
-                                      itemBuilder: (context, pos) =>
-                                          GestureDetector(
-                                        onTap: () {},
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              mealList[pos].name,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: 16.w, left: 5.w),
-                                              child: Text(
-                                                mealList[pos].price.toString() +
-                                                    ' TMT',
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: AppTheme.FONT_COLOR,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      separatorBuilder: (context, index) {
-                                        return Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5.h),
-                                          child: Divider(
-                                            thickness: 0.5,
-                                            color: AppTheme
-                                                .DRAWER_SECOND_DIVIDER_COLOR,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    //------------------ FOOD MORE ---------------------//
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Padding(
+                                    if (_searchRestaurant.meals != null)
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
                                         padding: EdgeInsets.only(
-                                          left: 24.w + 35.h,
-                                          top: 15.h,
-                                          bottom: 5.h,
-                                        ),
-                                        child: Text(
-                                          'Ýene ' + '${mealList.length - 3}',
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: AppTheme.DRAWER_ICON,
+                                            top: 15.h, left: 24.w + 35.h),
+                                        itemCount:
+                                            _searchRestaurant.meals!.length,
+                                        itemBuilder: (context, pos) {
+                                          var _meal =
+                                              _searchRestaurant.meals![pos];
+                                          model.log.i(
+                                              '_searchRestaurant meals length: ${_searchRestaurant.meals!.length}');
+                                          return GestureDetector(
+                                            onTap: () {},
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  _meal.name!,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 18.sp,
+                                                    color: AppTheme.FONT_COLOR,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 16.w, left: 5.w),
+                                                  child: Text(
+                                                    _meal.discount != null ||
+                                                            _meal.discount! > 0
+                                                        ? '${_meal.discountedPrice!.toInt()} TMT'
+                                                        : '${_meal.price!.toInt()} TMT',
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: ktsDefault16Text,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 5.h),
+                                            child: Divider(
+                                              thickness: 0.5,
+                                              color: AppTheme
+                                                  .DRAWER_SECOND_DIVIDER_COLOR,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    //------------------ MEAL MORE ---------------------//
+                                    if (_searchRestaurant.meals != null &&
+                                        _searchRestaurant.meals!.length > 3)
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 24.w + 35.h,
+                                            top: 15.h,
+                                            bottom: 5.h,
+                                          ),
+                                          child: Text(
+                                            'Ýene ' +
+                                                '${model.searchRestaurants.length - 3}',
+                                            style: ktsDefault18HelperText,
                                           ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               );
