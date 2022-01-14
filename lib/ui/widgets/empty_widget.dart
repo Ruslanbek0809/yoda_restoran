@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyWidget extends StatelessWidget {
   final String? text;
   final String? svg;
-  const EmptyWidget({this.text, this.svg, Key? key}) : super(key: key);
+  final double? leftPadding;
+  const EmptyWidget({
+    this.text,
+    this.svg,
+    this.leftPadding,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      alignment: Alignment.centerRight,
       children: [
-        Text(text!, style: kts18Text),
-        SvgPicture.asset(
-          svg!,
-          width: 1.sw,
-          height: 0.6.sh,
+        Positioned(
+          left: leftPadding,
+          child: SvgPicture.asset(svg!),
         ),
       ],
     );
