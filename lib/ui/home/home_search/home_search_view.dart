@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/restaurant.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../widgets/widgets.dart';
@@ -89,7 +90,25 @@ class HomeSearchView extends StatelessWidget {
                                   children: [
                                     //------------------ RESTAURANT PART ---------------------//
                                     GestureDetector(
-                                      onTap: () {},
+                                      onTap: () =>
+                                          model.navToResDetailsView(Restaurant(
+                                        id: _searchRestaurant!.id,
+                                        image: _searchRestaurant.image,
+                                        name: _searchRestaurant.name,
+                                        address: _searchRestaurant.address,
+                                        rated: _searchRestaurant.rated,
+                                        rating: _searchRestaurant.rating,
+                                        workingHours:
+                                            _searchRestaurant.workingHours,
+                                        deliveryPrice:
+                                            _searchRestaurant.deliveryPrice,
+                                        description:
+                                            _searchRestaurant.description,
+                                        phoneNumber:
+                                            _searchRestaurant.phoneNumber,
+                                        prepareTime:
+                                            _searchRestaurant.prepareTime,
+                                      )),
                                       child: Row(
                                         children: [
                                           //------------------ IMAGE ---------------------//
@@ -144,15 +163,34 @@ class HomeSearchView extends StatelessWidget {
                                         physics: NeverScrollableScrollPhysics(),
                                         padding: EdgeInsets.only(
                                             top: 15.h, left: 24.w + 35.h),
-                                        itemCount:
-                                            _searchRestaurant.meals!.length,
+                                        itemCount: _searchRestaurant.meals!
+                                            .take(3)
+                                            .toList()
+                                            .length,
                                         itemBuilder: (context, pos) {
                                           var _meal =
                                               _searchRestaurant.meals![pos];
-                                          model.log.i(
-                                              '_searchRestaurant meals length: ${_searchRestaurant.meals!.length}');
                                           return GestureDetector(
-                                            onTap: () {},
+                                            onTap: () => model
+                                                .navToResDetailsView(Restaurant(
+                                              id: _searchRestaurant.id,
+                                              image: _searchRestaurant.image,
+                                              name: _searchRestaurant.name,
+                                              address:
+                                                  _searchRestaurant.address,
+                                              rated: _searchRestaurant.rated,
+                                              rating: _searchRestaurant.rating,
+                                              workingHours: _searchRestaurant
+                                                  .workingHours,
+                                              deliveryPrice: _searchRestaurant
+                                                  .deliveryPrice,
+                                              description:
+                                                  _searchRestaurant.description,
+                                              phoneNumber:
+                                                  _searchRestaurant.phoneNumber,
+                                              prepareTime:
+                                                  _searchRestaurant.prepareTime,
+                                            )),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment

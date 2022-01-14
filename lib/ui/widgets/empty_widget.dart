@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyWidget extends StatelessWidget {
   final String? text;
@@ -15,6 +14,7 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Below was implemented Workaround bc SvgPicture makes its svg smaller when padding is applied
     return Stack(
       alignment: Alignment.centerRight,
       children: [

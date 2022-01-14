@@ -1,6 +1,8 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 
@@ -8,6 +10,7 @@ class HomeSearchViewModel extends BaseViewModel {
   final log = getLogger('HomeSearchViewModel');
 
   final _searchService = locator<SearchService>();
+  final _navService = locator<NavigationService>();
 
   String? _searchText = '';
   String? get searchText => _searchText;
@@ -32,4 +35,11 @@ class HomeSearchViewModel extends BaseViewModel {
     _searchText = '';
     notifyListeners();
   }
+
+//------------------------ NAVIGATION ----------------------------//
+
+  void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
+        Routes.resDetailsView,
+        arguments: ResDetailsViewArguments(restaurant: restaurant),
+      );
 }

@@ -37,7 +37,6 @@ class _HomeViewState extends State<HomeView> {
         await _refreshController.requestRefresh();
       }),
       builder: (context, model, child) {
-        model.log.i('model.hasFutureError: ${model.hasFutureError}');
         return SafeArea(
           child: Scaffold(
             /// Resize according to Onscreen keyboard

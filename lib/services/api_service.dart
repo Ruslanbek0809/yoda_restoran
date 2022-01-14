@@ -196,7 +196,7 @@ class ApiService {
     try {
       Response response = await _apiRoot.dio
           .get('api/restaurants/', queryParameters: {'search': searchText});
-      log.v('RESPONSE: api/restaurants/ => ${response.data}');
+      // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_searchRestaurant) {
