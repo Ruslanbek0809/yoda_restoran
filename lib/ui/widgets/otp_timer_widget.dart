@@ -36,7 +36,7 @@ class OtpTimerWidget extends StatelessWidget {
               SizedBox(width: 5.w),
               Text(
                 'Kody $timerString dan täzeden ugrat',
-                style: ktsTextButtonText,
+                style: kts16PrimaryText,
               ),
             ],
           );

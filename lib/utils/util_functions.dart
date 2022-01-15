@@ -115,7 +115,6 @@ Future<void> showErrorFlashBar(
     {required BuildContext context, String msg = 'Näsazlyk ýüze çykdy'}) async {
   await showFlash(
     context: context,
-    persistent: true,
     duration: Duration(milliseconds: 2000),
     builder: (context, controller) {
       return Flash(
@@ -134,9 +133,13 @@ Future<void> showErrorFlashBar(
         child: FlashBar(
           icon: Padding(
             padding: EdgeInsets.only(left: 24.w, right: 12.w),
-            child: SvgPicture.asset('assets/warning.svg'),
+            child: SvgPicture.asset(
+              'assets/warning.svg',
+              width: 20.w,
+              height: 20.h,
+            ),
           ),
-          content: Text(msg, style: ktsButton18Text),
+          content: Text(msg, style: kts16ButtonText),
         ),
       );
     },

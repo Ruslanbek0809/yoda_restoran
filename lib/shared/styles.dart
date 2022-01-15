@@ -60,16 +60,16 @@ TextStyle kts16ButtonText = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
+TextStyle kts16PrimaryText = TextStyle(
+  color: kcPrimaryColor,
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle ktsDefault16Text = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.normal,
   color: kcFontColor,
-);
-
-TextStyle ktsTextButtonText = TextStyle(
-  color: kcPrimaryColor,
-  fontSize: 16.sp,
-  fontWeight: FontWeight.bold,
 );
 
 TextStyle ktsDefault16BoldText = TextStyle(

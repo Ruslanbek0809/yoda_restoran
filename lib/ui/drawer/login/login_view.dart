@@ -46,13 +46,10 @@ class LoginView extends StatelessWidget with $LoginView {
                     width: 0.6.sw,
                   ),
                 ),
-                Text('Ulgama girmek', style: ktsDefault22DarkText),
+                Text('Ulgama giriň', style: ktsDefault22DarkText),
                 verticalSpaceTiny,
                 verticalSpaceMedium,
-                Text(
-                  'Telefon belgiňizi giriziň',
-                  style: kts14HelperText,
-                ),
+                Text('Telefon belgiňizi giriziň', style: kts14HelperText),
                 verticalSpaceMedium,
                 //------------------ PHONE TEXTFIELD ---------------------//
                 Padding(
@@ -65,7 +62,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     style: kts18Text,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'Tel',
+                      labelText: 'Telefon',
                       labelStyle: kts16HelperText,
                       prefix: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -111,7 +108,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 11) {
-                        return 'Nomeri doly giriziň';
+                        return 'Telefon belgiňizi doly giriziň';
                       }
                       return null;
                     },
@@ -141,7 +138,7 @@ class LoginView extends StatelessWidget with $LoginView {
                 ),
                 verticalSpaceMedium,
                 Text(
-                  'Siziň telefon belgiňize gizlin SMS kody geler.',
+                  'Siziň telefon belgiňize gizlin kodly SMS geler.',
                   style: kts14HelperText,
                 ),
               ],

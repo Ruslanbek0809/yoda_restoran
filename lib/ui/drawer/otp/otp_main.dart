@@ -56,7 +56,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 width: 0.6.sw,
               ),
             ),
-            Text('Tassyklamak', style: ktsDefault22DarkText),
+            Text('Tassyklaň', style: ktsDefault22DarkText),
             verticalSpaceTiny,
             verticalSpaceMedium,
             Text(
@@ -139,7 +139,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text('Tassyklamak', style: ktsButton18Text),
+                        : Text('Tassykla', style: ktsButton18Text),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   borderRadius: kbr10,
@@ -167,24 +167,26 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
             verticalSpaceMedium,
             //------------------ RESEND BUTTON and TIMER ---------------------//
             AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 300),
               child: model.hideResendButton
                   ? Offstage(
                       offstage: !model.hideResendButton,
                       child: OtpTimerWidget(timeController))
-                  : GestureDetector(
-                      onTap: model.updateResentButton,
+                  : CustomTextChildButton(
+                      onPressed: model.updateResentButton,
+                      color: kcWhiteColor,
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
                             Icons.refresh,
-                            color: AppTheme.MAIN,
+                            color: kcPrimaryColor,
                           ),
                           SizedBox(width: 5.w),
                           Text(
                             'Kody gaýtadan ugrat',
-                            style: ktsTextButtonText,
+                            style: kts16PrimaryText,
                           ),
                         ],
                       ),
