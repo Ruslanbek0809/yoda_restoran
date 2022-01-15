@@ -124,35 +124,35 @@ class CartView extends StatelessWidget {
                     //     ],
                     //   ),
                     // ),
-                    //------------------ CART FOOD WIDGET TITLE ---------------------//
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
-                      child: Text(
-                        'Ýene bir zat?',
-                        style: ktsDefault24DarkText,
-                      ),
-                    ),
-                    //------------------ CART FOOD WIDGET LIST ---------------------//
-                    SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: mealList.map((food) {
-                          return mealList.indexOf(food) == 0
-                              ? Padding(
-                                  padding:
-                                      EdgeInsets.only(right: 6.w, left: 16.w),
-                                  child: CartResFoodView(food: food),
-                                )
-                              : Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 5.w),
-                                  child: CartResFoodView(food: food),
-                                );
-                        }).toList(),
-                      ),
-                    ),
+                    // //------------------ CART FOOD WIDGET TITLE ---------------------//
+                    // Padding(
+                    //   padding: EdgeInsets.only(
+                    //       top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                    //   child: Text(
+                    //     'Ýene bir zat?',
+                    //     style: ktsDefault24DarkText,
+                    //   ),
+                    // ),
+                    // //------------------ CART FOOD WIDGET LIST ---------------------//
+                    // SingleChildScrollView(
+                    //   physics: BouncingScrollPhysics(),
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: Row(
+                    //     children: mealList.map((food) {
+                    //       return mealList.indexOf(food) == 0
+                    //           ? Padding(
+                    //               padding:
+                    //                   EdgeInsets.only(right: 6.w, left: 16.w),
+                    //               child: CartResFoodView(food: food),
+                    //             )
+                    //           : Padding(
+                    //               padding:
+                    //                   EdgeInsets.symmetric(horizontal: 5.w),
+                    //               child: CartResFoodView(food: food),
+                    //             );
+                    //     }).toList(),
+                    //   ),
+                    // ),
                     //------------------ TOGGLE BUTTON ---------------------//
                     CartToggleButton(),
                     SizedBox(
