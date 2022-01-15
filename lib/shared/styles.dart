@@ -18,8 +18,8 @@ TextStyle ktsButton18Text = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
-TextStyle ktsButton18RedText = TextStyle(
-  color: kcRedColor,
+TextStyle ktsButton18ContactText = TextStyle(
+  color: kcContactColor,
   fontSize: 18.sp,
   fontWeight: FontWeight.normal,
 );

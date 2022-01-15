@@ -315,8 +315,8 @@ class MealBottomSheet extends StatelessWidget {
                                   color: AppTheme.WHITE,
                                   borderRadius: AppTheme().radius15,
                                   border: Border.all(
-                                    color: AppTheme.BUTTON_BORDER_COLOR,
-                                    width: 0.5,
+                                    color: kcDividerSecondaryColor,
+                                    width: 0.75,
                                   ),
                                 ),
                                 child: Row(
@@ -397,12 +397,10 @@ class MealBottomSheet extends StatelessWidget {
                               flex: 3,
                               child: CustomTextChildButton(
                                 child: Text(
-                                  model.isAllVolSelected
-                                      ? 'Goş'
-                                      : 'Atribut saýla',
+                                  model.isAllVolSelected ? 'Goş' : 'Kesgitläň',
                                   style: model.isAllVolSelected
                                       ? ktsButton18Text
-                                      : ktsButton18RedText,
+                                      : ktsButton18ContactText,
                                 ),
                                 color: model.isAllVolSelected
                                     ? kcPrimaryColor
