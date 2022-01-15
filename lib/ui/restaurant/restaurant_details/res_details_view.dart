@@ -15,30 +15,6 @@ class ResDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResDetailsViewModel>.reactive(
-      // onModelReady: (model) async => await model.getResCatsWithMeals(
-      //   resId: restaurant.id!,
-      //   onFailForView: () async {
-      //     if (restaurant.id == model.cartRes!.id)
-      //       await showErrorFlashBar(
-      //         context: context,
-      //         margin: EdgeInsets.only(
-      //           left: 16.w,
-      //           right: 16.w,
-      //           bottom: 0.11.sh,
-      //         ),
-      //       );
-      //     else {
-      //       await showErrorFlashBar(
-      //         context: context,
-      //         margin: EdgeInsets.only(
-      //           left: 16.w,
-      //           right: 16.w,
-      //           bottom: 0.05.sh,
-      //         ),
-      //       );
-      //     }
-      //   },
-      // ),
       viewModelBuilder: () => ResDetailsViewModel(restaurant),
       builder: (context, model, child) {
         // model.log.i('model.isBusy: ${model.isBusy}');

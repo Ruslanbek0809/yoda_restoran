@@ -67,16 +67,18 @@ class CheckoutService with ReactiveServiceMixin {
   }
 
   /// CREATES ORDER
-  Future<bool> createOrder(
+  Future<void> createOrder(
     Address? selectedAddress,
     DateTime? deliveryDateTime,
     Promocode? promocode,
     String? checkoutNote,
+    Function()? onSuccess,
+    Function()? onFail,
   ) async {
     log.v(
         'selectedAddress: $selectedAddress, deliveryDateTime: $deliveryDateTime, paymentType: ${selectedPaymentType!.id}, promocode: $promocode, checkoutNote: $checkoutNote, resId: ${_hiveDbService.cartRes!.id}, _hiveDbService.cartMeals.length: ${_hiveDbService.cartMeals.length}');
 
-    return await _userService.createOrder(
+    await _userService.createOrder(
       selectedAddress,
       _toggleButtonService.isDelivery,
       deliveryDateTime,
@@ -85,6 +87,8 @@ class CheckoutService with ReactiveServiceMixin {
       checkoutNote,
       _hiveDbService.cartRes,
       _hiveDbService.cartMeals,
+      () => onSuccess!(),
+      () => onFail!(),
     );
   }
 }

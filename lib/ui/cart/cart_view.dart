@@ -178,18 +178,22 @@ class CartView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          '${model.getTotalCartSum} TMT',
-                          style: ktsDefault20BoldText,
-                        ),
-                        CustomTextChildButton(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 17.w, horizontal: 0.2.sw),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.w),
                           child: Text(
-                            model.hasLoggedInUser ? 'Dowam et' : 'Ulgama gir',
-                            style: ktsButton18Text,
+                            '${model.getTotalCartSum} TMT',
+                            style: ktsDefault22BoldText,
                           ),
-                          onPressed: model.onCartCheckoutButtonPressed,
+                        ),
+                        Expanded(
+                          child: CustomTextChildButton(
+                            padding: EdgeInsets.symmetric(vertical: 17.w),
+                            child: Text(
+                              model.hasLoggedInUser ? 'Dowam et' : 'Ulgama gir',
+                              style: ktsButton18Text,
+                            ),
+                            onPressed: model.onCartCheckoutButtonPressed,
+                          ),
                         ),
                       ],
                     ),

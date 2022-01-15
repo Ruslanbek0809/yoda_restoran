@@ -195,18 +195,19 @@ class CheckoutViewModel extends ReactiveViewModel {
   }
 
   /// CREATES new order
-  Future<void> createOrder() async {
+  Future<void> createOrder({Function()? onFailForView}) async {
     log.v('createOrder()');
-    var resultSuccess = await runBusyFuture(_checkoutService.createOrder(
+    await runBusyFuture(_checkoutService.createOrder(
       selectedAddress,
       deliveryDateTime,
       _promocode,
       _checkoutNote,
+      () async {
+        await _hiveDbService.clearCart();
+        await _navService.pushNamedAndRemoveUntil(Routes.orderSuccessView);
+      },
+      () => onFailForView!(),
     ));
-    if (resultSuccess) {
-      await _hiveDbService.clearCart();
-      await _navService.pushNamedAndRemoveUntil(Routes.orderSuccessView);
-    }
   }
 
   /// NAVIGATES to Orders by removing all previous routes

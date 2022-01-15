@@ -361,7 +361,30 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 style: ktsButton18Text,
                               ),
                         // onPressed: model.navToOrdersByRemovingAll,
-                        onPressed: model.createOrder,
+                        onPressed: () async {
+                          if (model.selectedAddress!.id == -1)
+                            await showErrorFlashBar(
+                              context: context,
+                              msg: 'Salgyňyzy giriziň',
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.13.sh,
+                              ),
+                            );
+                          else
+                            await model.createOrder(
+                              onFailForView: () async =>
+                                  await showErrorFlashBar(
+                                context: context,
+                                margin: EdgeInsets.only(
+                                  left: 16.w,
+                                  right: 16.w,
+                                  bottom: 0.13.sh,
+                                ),
+                              ),
+                            );
+                        },
                       ),
                     ),
                   ],

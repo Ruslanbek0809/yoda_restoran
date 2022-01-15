@@ -70,9 +70,8 @@ class UserService {
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
         onSuccess!();
-      } else {
+      } else
         onFail!();
-      }
     } on DioError catch (error) {
       log.v('ERROR on auth/login/ :${error.response}');
       onFail!();
@@ -253,7 +252,7 @@ class UserService {
 
   //------------------ CREATE ORDER API ---------------------//
 
-  Future<bool> createOrder(
+  Future<void> createOrder(
     Address? selectedAddress,
     bool isDelivery,
     DateTime? deliveryDateTime,
@@ -262,6 +261,8 @@ class UserService {
     String? checkoutNote,
     HiveRestaurant? cartRes,
     List<HiveMeal> cartMeals,
+    Function()? onSuccess,
+    Function()? onFail,
   ) async {
     List<CreateOrderItem>? orderItemList = [];
 
@@ -324,12 +325,13 @@ class UserService {
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
-        return true;
+        onSuccess!();
       else
-        return false;
+        onFail!();
     } on DioError catch (error) {
       log.v('ERROR api/order/ with RESPONSE: ${error.response}');
-      return false;
+      onFail!();
+      throw DioErrorType.response;
     }
   }
 
