@@ -195,10 +195,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                               meal, restaurant, model);
                                         }
                                       : () async {
-                                          await model.updateMealInCart(
-                                            mealId: meal.id,
-                                            mealQuantity: model.quantity + 1,
-                                          );
+                                          await model
+                                              .addUpdateMealInCartFromBottomSheet(
+                                                  meal, restaurant);
+                                          // await model.updateMealInCart(
+                                          //   mealId: meal.id,
+                                          //   mealQuantity: model.quantity + 1,
+                                          // );
                                           await _tweenController.forward();
                                         },
                                   child: Padding(
@@ -231,10 +234,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           meal, restaurant, model);
                                     }
                                   : () async {
-                                      await model.addMealToCart(
-                                        meal,
-                                        restaurant,
-                                      );
+                                      await model
+                                          .addUpdateMealInCartFromBottomSheet(
+                                              meal, restaurant);
+                                      // await model.addMealToCart(
+                                      //   meal,
+                                      //   restaurant,
+                                      // );
                                       await _tweenController.forward();
                                     },
                               child: Ink(

@@ -191,7 +191,7 @@ class MealViewModel extends ReactiveViewModel {
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
 
-    /// ASSINGS initial value to _isAllVolSelected based on 
+    /// ASSINGS initial value to _isAllVolSelected based on
     if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty)
       _isAllVolSelected = true;
     else

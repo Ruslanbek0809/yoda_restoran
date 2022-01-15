@@ -172,7 +172,7 @@ class HiveDbService with ReactiveServiceMixin {
       log.v('_lastMeal.quantity AFTER action: ${_lastMeal.quantity}');
     }
 
-    /// ADDING
+    /// REMOVING
     else {
       log.v(
           '_lastMeal with BELOW 1 with _cartMeals.value.length: ${_cartMeals.value.length}');
