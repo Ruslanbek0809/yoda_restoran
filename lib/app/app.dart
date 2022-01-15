@@ -41,7 +41,6 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: HomeService),
     LazySingleton(classType: BottomCartService),
-    LazySingleton(classType: ResService),
     LazySingleton(classType: MainCatService),
     LazySingleton(classType: CartService),
     LazySingleton(classType: MainFilterService),
@@ -51,6 +50,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: OrderService),
     LazySingleton(classType: ConnectivityService),
     LazySingleton(classType: SearchService),
+    LazySingleton(classType: SnackbarService),
   ],
   logger: StackedLogger(),
 )

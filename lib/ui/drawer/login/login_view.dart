@@ -132,8 +132,15 @@ class LoginView extends StatelessWidget with $LoginView {
                         formKey.currentState!.save();
 
                         await model.saveLoginData(
-                            onFailForView: () =>
-                                showErrorFlashBar(context: context));
+                          onFailForView: () => showErrorFlashBar(
+                            context: context,
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          ),
+                        );
                       }),
                 ),
                 verticalSpaceMedium,

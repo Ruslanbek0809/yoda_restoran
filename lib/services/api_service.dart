@@ -116,24 +116,30 @@ class ApiService {
 
   //------------------ RESTAURANT APIS ---------------------//
 
-  Future<List<ResCategory>> getResCatsWithMeals(int restaurantId) async {
+  Future<void> getResCatsWithMeals({
+    required int restaurantId,
+    Function(List<ResCategory>)? onSuccess,
+    Function()? onFail,
+  }) async {
     List<ResCategory> _resCategories = [];
     try {
       Response response = await _apiRoot.dio.get('api/categories/',
           queryParameters: {'restaurant': restaurantId});
       // log.v('RESPONSE: api/categories/ => ${response.data}');
 
-      if (response.data != null) {
+      if (response.data != null && response.statusCode == 200) {
         response.data.forEach((_resCategory) {
           _resCategories.add(ResCategory.fromJson(_resCategory));
         });
+
+        onSuccess!(_resCategories);
+      } else {
+        onFail!();
       }
-      return _resCategories;
     } on DioError catch (error) {
-      log.v(error);
-      // log.v(
-      //     'ERROR on api/categories/ :${error.response!.statusCode} and ${error.response!.data}');
-      rethrow;
+      log.v('ERROR on api/categories/ :${error.response}');
+      onFail!();
+      throw DioErrorType.response;
     }
   }
 

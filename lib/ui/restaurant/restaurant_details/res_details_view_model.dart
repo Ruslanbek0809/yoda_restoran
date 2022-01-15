@@ -10,17 +10,17 @@ import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
-/// ReactiveViewModel is used to "react"
 class ResDetailsViewModel extends FutureViewModel {
   final log = getLogger('ResDetailsViewModel');
   final Restaurant? restaurant;
   ResDetailsViewModel(this.restaurant);
 
+  final _api = locator<ApiService>();
   final _navService = locator<NavigationService>();
-  final _resService = locator<ResService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _snackBarService = locator<SnackbarService>();
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -34,7 +34,14 @@ class ResDetailsViewModel extends FutureViewModel {
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
-  List<ResCategory>? get resCategories => _resService.resCategories;
+
+  /// _isCustomError and updateCustomError func are used to show error flash bar once. Workaround
+  bool _isCustomError = false;
+  bool get isCustomError => _isCustomError;
+  List<ResCategory>? _resCategories = [];
+  List<ResCategory>? get resCategories => _resCategories;
+
+  // List<ResCategory>? get resCategories => _resService.resCategories;
 
   /// Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
@@ -64,11 +71,36 @@ class ResDetailsViewModel extends FutureViewModel {
   }
 
   // // FETCHS Restaurant categories with their meals
-  Future getResCatsWithMeals(int resId) async {
+  Future getResCatsWithMeals(
+      //   {
+      //   // Function()? onFailForView,
+      // }
+      ) async {
     log.i('');
-    await _resService.getResCatsWithMeals(resId);
-    // await runBusyFuture(_resService.getResCatsWithMeals(resId));
-    log.i('resCategories length: ${resCategories!.length}');
+    await _api.getResCatsWithMeals(
+      restaurantId: restaurant!.id!,
+      onSuccess: (result) async {
+        _resCategories = result;
+      },
+      onFail: () {
+        _isCustomError = true;
+        // _snackBarService.showCustomSnackBar(
+        //   variant: SnackBarType.restaurantDetailsError,
+        //   message: 'This is a snack bar',
+        //   // title: 'The title',
+        //   duration: Duration(seconds: 2),
+        // );
+      },
+    );
+
+    log.i('_resCategories length: ${_resCategories!.length}');
+  }
+
+  /// Workaround to show error flash bar once
+  void updateCustomError() {
+    log.i('updateCustomError()');
+
+    _isCustomError = false;
   }
 
 //------------------------ RESTAURANT BOTTOM SHEET ----------------------------//
@@ -99,6 +131,7 @@ class ResDetailsViewModel extends FutureViewModel {
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
 
   @override
-  Future<void> futureToRun() async =>
-      await getResCatsWithMeals(restaurant!.id!);
+  Future<void> futureToRun() async => await getResCatsWithMeals();
+  // @override
+  // Future<void> futureToRun() async => await Future.delayed(Duration.zero);
 }

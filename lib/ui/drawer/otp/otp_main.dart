@@ -148,20 +148,43 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     if (currentOtp.length != 6) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      showErrorFlashBar(context: context, msg: 'Kody giriziň');
+                      showErrorFlashBar(
+                        context: context,
+                        msg: 'Kody giriziň',
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      );
                       return;
                     }
 
                     if (currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      showErrorFlashBar(context: context, msg: 'Kody giriziň');
+                      showErrorFlashBar(
+                        context: context,
+                        msg: 'Kody giriziň',
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      );
                       return;
                     }
 
                     await model.saveOtpData(
-                        onFailForView: () =>
-                            showErrorFlashBar(context: context));
+                      onFailForView: () => showErrorFlashBar(
+                        context: context,
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      ),
+                    );
                   }),
             ),
             verticalSpaceMedium,

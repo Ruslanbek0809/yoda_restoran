@@ -7,6 +7,7 @@ import 'app/app.locator.dart';
 import 'models/hive_models/hive_models.dart';
 import 'ui/setup_bottom_sheet.dart';
 import 'ui/setup_dialog.dart';
+import 'ui/setup_snackbar.dart';
 import 'yoda_res_app.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -27,6 +28,7 @@ void main() async {
   setupLocator();
   setupBottomSheet();
   setupDialog();
+  setupSnackbar();
 
   // When the app is completely closed (not in the background) and opened directly from the push notification
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

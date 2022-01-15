@@ -29,7 +29,6 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => HomeService());
   locator.registerLazySingleton(() => BottomCartService());
-  locator.registerLazySingleton(() => ResService());
   locator.registerLazySingleton(() => MainCatService());
   locator.registerLazySingleton(() => CartService());
   locator.registerLazySingleton(() => MainFilterService());
@@ -39,4 +38,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => OrderService());
   locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton(() => SearchService());
+  locator.registerLazySingleton(() => SnackbarService());
 }

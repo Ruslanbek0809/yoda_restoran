@@ -93,6 +93,11 @@ enum DialogType {
   notification,
 }
 
+/// Enum for snackbar types
+enum SnackBarType {
+  restaurantDetailsError,
+}
+
 /// Enum for connectivity
 enum ConnectivityStatus { Idle, WiFi, Cellular, Offline }
 
@@ -111,8 +116,11 @@ void printLog(dynamic data) {
   }
 }
 
-Future<void> showErrorFlashBar(
-    {required BuildContext context, String msg = 'Näsazlyk ýüze çykdy'}) async {
+Future<void> showErrorFlashBar({
+  required BuildContext context,
+  String msg = 'Näsazlyk ýüze çykdy',
+  required EdgeInsets margin,
+}) async {
   await showFlash(
     context: context,
     duration: Duration(milliseconds: 2000),
@@ -125,11 +133,7 @@ Future<void> showErrorFlashBar(
         position: FlashPosition.bottom,
         barrierDismissible: true,
         behavior: FlashBehavior.floating,
-        margin: EdgeInsets.only(
-          left: 0.1.sw,
-          right: 0.1.sw,
-          bottom: 0.05.sh,
-        ),
+        margin: margin,
         child: FlashBar(
           icon: Padding(
             padding: EdgeInsets.only(left: 24.w, right: 12.w),
