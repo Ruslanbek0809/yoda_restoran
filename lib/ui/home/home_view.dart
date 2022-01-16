@@ -45,369 +45,417 @@ class _HomeViewState extends State<HomeView> {
             key: model.homeScaffoldKey,
             drawer: DrawerView(),
             body:
-                // model.anyObjectsBusy || model.fetchingSelectedMainCatsRes
-                //     ? LoadingWidget()
-                //     :
-                Stack(
-              children: [
-                SmartRefresher(
-                  header: CustomHeader(
-                    height: 50.h,
-                    builder: (BuildContext context, RefreshStatus? mode) {
-                      // if (mode == RefreshStatus.failed) {
-                      //   return SizedBox();
-                      // }
-                      return SpinKitChasingDots(
-                        size: 27,
-                        color: kcPrimaryColor,
-                      );
-                    },
-                  ),
-                  // header: ClassicHeader(
-                  //   // CustomHeader
-                  //   refreshingText: '',
-                  //   // onOffsetChange: (offset) {
-                  //   //   if (_refreshController.headerMode.value !=
-                  //   //       RefreshStatus.refreshing)
-                  //   //     _scaleController.value = offset / 80.0;
-                  //   // },
-                  //   // builder: (c, m) {
-                  //   //   return Container(
-                  //   //     child: FadeTransition(
-                  //   //       opacity: _scaleController,
-                  //   //       child: ScaleTransition(
-                  //   //         child: SpinKitFadingCircle(
-                  //   //           size: 30.0,
-                  //   //           animationController: _anicontroller,
-                  //   //           itemBuilder: (_, int index) {
-                  //   //             return DecoratedBox(
-                  //   //               decoration: BoxDecoration(
-                  //   //                 color: index.isEven
-                  //   //                     ? Colors.red
-                  //   //                     : Colors.green,
-                  //   //               ),
-                  //   //             );
-                  //   //           },
-                  //   //         ),
-                  //   //         scale: _scaleController,
-                  //   //       ),
-                  //   //     ),
-                  //   //     alignment: Alignment.center,
-                  //   //   );
-                  //   // },
-                  // ),
-                  // header: WaterDropMaterialHeader(
-                  //   backgroundColor: AppTheme.MAIN,
-                  // ),
-                  controller: _refreshController,
-                  enablePullDown: true,
-                  onRefresh: () async {
-                    await model
-                        .initialise(); // This reinitializes whole HomeView
-                    _refreshController.refreshCompleted();
-                  },
-                  //------------------ CUSTOM ERROR ---------------------//
-                  child: model.hasFutureError
-                      ? CustomScrollView(
-                          slivers: [
-                            SliverAppBar(
-                              expandedHeight:
-                                  model.selectedMainCatRestaurants.isEmpty
-                                      ? 0.36.sh
-                                      : 0.1.sh,
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              toolbarHeight: 60.h,
-                              automaticallyImplyLeading: false,
-                              flexibleSpace: FlexibleSpaceBar(
-                                background: Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15.h),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          //------------------ MENU ---------------------//
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.menu,
-                                              size: 24.w,
-                                            ),
-                                            onPressed: model.homeMenuPressed,
-                                            tooltip: 'Drawer',
+                //------------------ CUSTOM MAIN CATS LOADING ---------------------//
+                model.fetchingSelectedMainCatsRes
+                    ? CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            expandedHeight: 0.1.sh,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            toolbarHeight: 60.h,
+                            automaticallyImplyLeading: false,
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 15.h),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        //------------------ MENU ---------------------//
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.menu,
+                                            size: 24.w,
                                           ),
-                                          //------------------ SEARCH ---------------------//
-                                          HomeSearch(),
-                                        ],
-                                      ),
+                                          onPressed: model.homeMenuPressed,
+                                          tooltip: 'Drawer',
+                                        ),
+                                        //------------------ SEARCH ---------------------//
+                                        HomeSearch(),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  ViewErrorWidget(
-                                    modelCallBack: () async {
-                                      await _refreshController.requestRefresh();
-                                      model.updateHasFutureError();
-                                      _refreshController.refreshCompleted();
-                                    },
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
-                          ],
-                        )
-                      : CustomScrollView(
-                          slivers: [
-                            SliverAppBar(
-                              expandedHeight:
-                                  model.selectedMainCatRestaurants.isEmpty
-                                      ? 0.36.sh
-                                      : 0.1.sh,
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              toolbarHeight: 60.h,
-                              automaticallyImplyLeading: false,
-                              flexibleSpace: FlexibleSpaceBar(
-                                background: Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15.h),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          //------------------ MENU ---------------------//
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.menu,
-                                              size: 24.w,
-                                            ),
-                                            onPressed: model.homeMenuPressed,
-                                            tooltip: 'Drawer',
+                          ),
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 0.4.sh),
+                                  child: LoadingWidget(),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Stack(
+                        children: [
+                          SmartRefresher(
+                            header: CustomHeader(
+                              height: 50.h,
+                              builder:
+                                  (BuildContext context, RefreshStatus? mode) {
+                                return SpinKitChasingDots(
+                                  size: 27,
+                                  color: kcPrimaryColor,
+                                );
+                              },
+                            ),
+                            // header: WaterDropMaterialHeader(
+                            //   backgroundColor: AppTheme.MAIN,
+                            // ),
+                            controller: _refreshController,
+                            enablePullDown: true,
+                            onRefresh: () async {
+                              await model.initialise();
+                              _refreshController.refreshCompleted();
+                            },
+                            //------------------ CUSTOM ERROR ---------------------//
+                            child: model.hasFutureError
+                                ? CustomScrollView(
+                                    slivers: [
+                                      SliverAppBar(
+                                        expandedHeight: 0.1.sh,
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        toolbarHeight: 60.h,
+                                        automaticallyImplyLeading: false,
+                                        flexibleSpace: FlexibleSpaceBar(
+                                          background: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 15.h),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    //------------------ MENU ---------------------//
+                                                    IconButton(
+                                                      icon: Icon(
+                                                        Icons.menu,
+                                                        size: 24.w,
+                                                      ),
+                                                      onPressed:
+                                                          model.homeMenuPressed,
+                                                      tooltip: 'Drawer',
+                                                    ),
+                                                    //------------------ SEARCH ---------------------//
+                                                    HomeSearch(),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          //------------------ SEARCH ---------------------//
-                                          HomeSearch(),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                    //------------------ SLIDERS ---------------------//
-                                    if (model
-                                        .selectedMainCatRestaurants.isEmpty)
-                                      SliderView(sliders: model.sliders ?? []),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            //------------------ HOME CATEGORIES ---------------------//
-                            SliverPersistentHeader(
-                              pinned: false,
-                              floating: false,
-                              delegate: ContestTabHeader(
-                                size: 90.h,
-                                child: MainCatView(),
-                              ),
-                            ),
-                            // //------------------ DISCOUNTS ---------------------//
-                            // if (model.selectedMainCatRestaurants.isEmpty)
-                            //   SliverPersistentHeader(
-                            //     pinned: false,
-                            //     floating: false,
-                            //     delegate: ContestTabHeader(
-                            //       child: Column(
-                            //         crossAxisAlignment:
-                            //             CrossAxisAlignment.start,
-                            //         children: [
-                            //           Padding(
-                            //             padding: EdgeInsets.only(
-                            //                 left: 15.w, top: 12.h),
-                            //             child: Text(
-                            //               'Aksiýalar',
-                            //               style: TextStyle(
-                            //                 fontSize: 24.sp,
-                            //                 fontWeight: FontWeight.bold,
-                            //                 color: AppTheme.MAIN_DARK,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //           HomeDiscounts(discounts: discounts),
-                            //         ],
-                            //       ),
-                            //       size: 135.h,
-                            //     ),
-                            //   ),
-                            //------------------ BODY: RESTAURANTS ---------------------//
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  model.selectedMainCatRestaurants.isEmpty
-                                      ? ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.only(
-                                              top: 20
-                                                  .h), // Changes based on exclusive part
-                                          itemCount:
-                                              model.resWithProms?.length ?? 0,
-                                          itemBuilder: (ctx, pos) {
-                                            //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                                            if ((pos + 1) % 5 == 0 &&
-                                                model.resWithProms![pos].prom !=
-                                                    null)
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                      SliverList(
+                                        delegate: SliverChildListDelegate(
+                                          [
+                                            ViewErrorWidget(
+                                              modelCallBack: () async {
+                                                await _refreshController
+                                                    .requestRefresh();
+                                                model.updateHasFutureError();
+                                              },
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                //------------------ CUSTOM SUCCESS ---------------------//
+                                : CustomScrollView(
+                                    slivers: [
+                                      SliverAppBar(
+                                        expandedHeight: model
+                                                .selectedMainCatRestaurants
+                                                .isEmpty
+                                            ? 0.36.sh
+                                            : 0.1.sh,
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        toolbarHeight: 60.h,
+                                        automaticallyImplyLeading: false,
+                                        flexibleSpace: FlexibleSpaceBar(
+                                          background: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 15.h),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    //------------------ MENU ---------------------//
+                                                    IconButton(
+                                                      icon: Icon(
+                                                        Icons.menu,
+                                                        size: 24.w,
+                                                      ),
+                                                      onPressed:
+                                                          model.homeMenuPressed,
+                                                      tooltip: 'Drawer',
+                                                    ),
+                                                    //------------------ SEARCH ---------------------//
+                                                    HomeSearch(),
+                                                  ],
+                                                ),
+                                              ),
+                                              //------------------ SLIDERS ---------------------//
+                                              if (model
+                                                  .selectedMainCatRestaurants
+                                                  .isEmpty)
+                                                SliderView(
+                                                    sliders:
+                                                        model.sliders ?? []),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      //------------------ HOME CATEGORIES ---------------------//
+                                      SliverPersistentHeader(
+                                        pinned: false,
+                                        floating: false,
+                                        delegate: ContestTabHeader(
+                                          size: 90.h,
+                                          child: MainCatView(),
+                                        ),
+                                      ),
+                                      // //------------------ DISCOUNTS ---------------------//
+                                      // if (model.selectedMainCatRestaurants.isEmpty)
+                                      //   SliverPersistentHeader(
+                                      //     pinned: false,
+                                      //     floating: false,
+                                      //     delegate: ContestTabHeader(
+                                      //       child: Column(
+                                      //         crossAxisAlignment:
+                                      //             CrossAxisAlignment.start,
+                                      //         children: [
+                                      //           Padding(
+                                      //             padding: EdgeInsets.only(
+                                      //                 left: 15.w, top: 12.h),
+                                      //             child: Text(
+                                      //               'Aksiýalar',
+                                      //               style: TextStyle(
+                                      //                 fontSize: 24.sp,
+                                      //                 fontWeight: FontWeight.bold,
+                                      //                 color: AppTheme.MAIN_DARK,
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //           HomeDiscounts(discounts: discounts),
+                                      //         ],
+                                      //       ),
+                                      //       size: 135.h,
+                                      //     ),
+                                      //   ),
+                                      //------------------ BODY: RESTAURANTS ---------------------//
+                                      SliverList(
+                                        delegate: SliverChildListDelegate(
+                                          [
+                                            model.selectedMainCatRestaurants
+                                                    .isEmpty
+                                                ? ListView.builder(
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    padding: EdgeInsets.only(
+                                                        top: 20
+                                                            .h), // Changes based on exclusive part
+                                                    itemCount: model
+                                                            .resWithProms
+                                                            ?.length ??
+                                                        0,
+                                                    itemBuilder: (ctx, pos) {
+                                                      //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
+                                                      if ((pos + 1) % 5 == 0 &&
+                                                          model
+                                                                  .resWithProms![
+                                                                      pos]
+                                                                  .prom !=
+                                                              null)
+                                                        return Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              16.w),
+                                                                  child: Text(
+                                                                    model
+                                                                        .resWithProms![
+                                                                            pos]
+                                                                        .prom!
+                                                                        .name!,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          24.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: AppTheme
+                                                                          .MAIN_DARK,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SingleChildScrollView(
+                                                                  physics:
+                                                                      BouncingScrollPhysics(),
+                                                                  scrollDirection:
+                                                                      Axis.horizontal,
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: model
+                                                                        .resWithProms![
+                                                                            pos]
+                                                                        .prom!
+                                                                        .restaurants!
+                                                                        .map(
+                                                                            (promRes) {
+                                                                      return PromResView(
+                                                                        restaurant:
+                                                                            promRes,
+                                                                        promRess: model
+                                                                            .resWithProms![pos]
+                                                                            .prom!
+                                                                            .restaurants!,
+                                                                      );
+                                                                    }).toList(),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            //------------------ RESTAURANTS ---------------------//
+                                                            RestaurantView(
+                                                              restaurant: model
+                                                                  .resWithProms![
+                                                                      pos]
+                                                                  .restaurant,
+                                                            ),
+                                                          ],
+                                                        );
+                                                      return RestaurantView(
+                                                        restaurant: model
+                                                            .resWithProms![pos]
+                                                            .restaurant,
+                                                      );
+                                                    },
+                                                  )
+                                                : Column(
                                                     children: [
                                                       Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 16.w),
-                                                        child: Text(
-                                                          model
-                                                              .resWithProms![
-                                                                  pos]
-                                                              .prom!
-                                                              .name!,
-                                                          style: TextStyle(
-                                                            fontSize: 24.sp,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: AppTheme
-                                                                .MAIN_DARK,
-                                                          ),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    16.w,
+                                                                vertical: 5.h),
+                                                        child: Divider(
+                                                          thickness: 1,
                                                         ),
                                                       ),
-                                                      SingleChildScrollView(
-                                                        physics:
-                                                            BouncingScrollPhysics(),
-                                                        scrollDirection:
-                                                            Axis.horizontal,
+                                                      //------------------ FOUND TITLE and CLEAR part ---------------------//
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    16.w,
+                                                                vertical: 3.h),
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .start,
-                                                          children: model
-                                                              .resWithProms![
-                                                                  pos]
-                                                              .prom!
-                                                              .restaurants!
-                                                              .map((promRes) {
-                                                            return PromResView(
-                                                              restaurant:
-                                                                  promRes,
-                                                              promRess: model
-                                                                  .resWithProms![
-                                                                      pos]
-                                                                  .prom!
-                                                                  .restaurants!,
-                                                            );
-                                                          }).toList(),
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              '${model.selectedMainCatRestaurants.length} restoran tapyldy',
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style:
+                                                                  ktsDefault20BoldText,
+                                                            ),
+                                                            CustomTextChildButton(
+                                                                child: Text(
+                                                                  'Arassala',
+                                                                  style:
+                                                                      ktsDefault16Text,
+                                                                ),
+                                                                color:
+                                                                    kcSecondaryLightColor,
+                                                                borderRadius:
+                                                                    AppTheme()
+                                                                        .radius20,
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        vertical:
+                                                                            8.h,
+                                                                        horizontal: 22
+                                                                            .w),
+                                                                onPressed:
+                                                                    () async {
+                                                                  await model
+                                                                      .clearSelectedMainCatRess();
+                                                                  await _refreshController
+                                                                      .requestRefresh();
+                                                                  model
+                                                                      .updateHasFutureError();
+                                                                }),
+                                                          ],
                                                         ),
+                                                      ),
+                                                      //------------------ RESULT SELECTED MAIN CATS RES LIST ---------------------//
+                                                      ListView.builder(
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 10.h),
+                                                        itemCount: model
+                                                            .selectedMainCatRestaurants
+                                                            .length,
+                                                        itemBuilder:
+                                                            (ctx, pos) {
+                                                          return RestaurantView(
+                                                            restaurant: model
+                                                                    .selectedMainCatRestaurants[
+                                                                pos],
+                                                          );
+                                                        },
                                                       ),
                                                     ],
                                                   ),
-                                                  //------------------ RESTAURANTS ---------------------//
-                                                  RestaurantView(
-                                                    restaurant: model
-                                                        .resWithProms![pos]
-                                                        .restaurant,
-                                                  ),
-                                                ],
-                                              );
-                                            return RestaurantView(
-                                              restaurant: model
-                                                  .resWithProms![pos]
-                                                  .restaurant,
-                                            );
-                                          },
-                                        )
-                                      : Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16.w,
-                                                  vertical: 5.h),
-                                              child: Divider(
-                                                thickness: 1,
-                                              ),
-                                            ),
-                                            //------------------ FOUND TITLE and CLEAR part ---------------------//
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16.w,
-                                                  vertical: 3.h),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    '${model.selectedMainCatRestaurants.length} restoran tapyldy',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: ktsDefault20BoldText,
-                                                  ),
-                                                  CustomTextChildButton(
-                                                    child: Text(
-                                                      'Arassala',
-                                                      style: ktsDefault16Text,
-                                                    ),
-                                                    color:
-                                                        kcSecondaryLightColor,
-                                                    borderRadius:
-                                                        AppTheme().radius20,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 8.h,
-                                                            horizontal: 22.w),
-                                                    onPressed: model
-                                                        .clearSelectedMainCatRess,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            //------------------ RESULT SELECTED MAIN CATS RES LIST ---------------------//
-                                            ListView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              padding:
-                                                  EdgeInsets.only(top: 10.h),
-                                              itemCount: model
-                                                  .selectedMainCatRestaurants
-                                                  .length,
-                                              itemBuilder: (ctx, pos) {
-                                                return RestaurantView(
-                                                  restaurant: model
-                                                          .selectedMainCatRestaurants[
-                                                      pos],
-                                                );
-                                              },
-                                            ),
+                                            SizedBox(
+                                                height: 0.1
+                                                    .sh), // COMPENSATES HomeBottomCart
                                           ],
                                         ),
-                                  SizedBox(
-                                      height:
-                                          0.1.sh), // COMPENSATES HomeBottomCart
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                ),
-                //------------------ BOTTOM CART ---------------------//
-                HomeBottomCart(),
-              ],
-            ),
+                                      ),
+                                    ],
+                                  ),
+                          ),
+                          //------------------ BOTTOM CART ---------------------//
+                          HomeBottomCart(),
+                        ],
+                      ),
           ),
         );
       },

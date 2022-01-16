@@ -44,7 +44,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   Future<void> navToHomeWithConnection() async {
     log.i('===== navToHomeWithConnection() STARTED =====');
 
-    await flashController!.dismiss(); // DISMISSES no internet flashbar
+    await flashController?.dismiss(); // DISMISSES no internet flashbar
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()

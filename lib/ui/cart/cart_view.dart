@@ -181,7 +181,7 @@ class CartView extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(right: 16.w),
                           child: Text(
-                            '${model.getTotalCartSum} TMT',
+                            '${model.getTotalCartSum.toInt()} TMT',
                             style: ktsDefault22BoldText,
                           ),
                         ),

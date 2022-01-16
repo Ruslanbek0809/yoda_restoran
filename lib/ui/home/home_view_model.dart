@@ -88,7 +88,6 @@ class HomeViewModel extends MultipleFutureViewModel {
   Future<void> clearSelectedMainCatRess() async {
     _homeService.clearSelectedMainCatRess();
     _mainCatService.clearSelectedMainCats();
-    await initialise();
   }
 
   //------------------ DRAWER ---------------------//

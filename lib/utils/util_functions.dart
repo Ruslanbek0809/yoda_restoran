@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/shared/styles.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
 import 'utils.dart';
@@ -24,18 +23,6 @@ final List<String> drawerLoggedInList = [
   "about"
 ];
 
-List<RestaurantUI> restaurants = [
-  RestaurantUI(
-    1,
-    'Sushi',
-    'Sushi we başgalar',
-    'assets/sushi.png',
-  ),
-  RestaurantUI(2, 'Hotdost', 'Hotdog we başgalar', 'assets/hotdost.jpg'),
-  RestaurantUI(3, 'Burger Zone', 'Burger we başgalar', 'assets/burgerzone.jpg'),
-  RestaurantUI(4, 'Palawkom', 'Palaw we başgalar', 'assets/palawkom.jpg'),
-];
-
 List<Discount> discounts = [
   Discount(1, 'assets/discount1.png'),
   Discount(2, 'assets/discount2.png'),
@@ -45,11 +32,6 @@ List<Discount> discounts = [
   Discount(6, 'assets/discount2.png'),
   Discount(7, 'assets/discount3.png'),
   Discount(8, 'assets/discount4.png'),
-];
-
-List<AddressUI> addresses = [
-  AddressUI(1, 'A.Nowaýy, 164'),
-  AddressUI(2, 'N.Andalyp 32'),
 ];
 
 List<CategoryFilter> mainCatSortList = [
@@ -120,7 +102,7 @@ Future<void> showErrorFlashBar({
   required BuildContext context,
   String msg = 'Näsazlyk ýüze çykdy',
   required EdgeInsets margin,
-}) async { 
+}) async {
   await showFlash(
     context: context,
     duration: Duration(milliseconds: 2000),
