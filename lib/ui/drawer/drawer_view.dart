@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 import 'drawer_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DrawerView extends StatelessWidget {
   const DrawerView({Key? key}) : super(key: key);
@@ -17,35 +19,35 @@ class DrawerView extends StatelessWidget {
     switch (value) {
       case 'login':
         {
-          title = 'Ulgama gir';
+          title = LocaleKeys.login;
           svgName = 'assets/user.svg';
           onTap = () async => model.navToLoginView();
           break;
         }
       case 'profile':
         {
-          title = 'Profil';
+          title = LocaleKeys.profile;
           svgName = 'assets/user.svg';
           onTap = () async => model.navToProfileView();
           break;
         }
       case 'orders':
         {
-          title = 'Sargytlar';
+          title = LocaleKeys.orders;
           svgName = 'assets/list_bullets.svg';
           onTap = () async => model.navToOrdersView();
           break;
         }
       case 'addresses':
         {
-          title = 'Salgylar';
+          title = LocaleKeys.addresses;
           svgName = 'assets/map_pin.svg';
           onTap = () async => model.navToAddressesView();
           break;
         }
       case 'about':
         {
-          title = 'Biz barada';
+          title = LocaleKeys.about_us;
           svgName = 'assets/info.svg';
           onTap = () {};
           break;
@@ -53,7 +55,7 @@ class DrawerView extends StatelessWidget {
 
       default:
         {
-          title = 'Default';
+          title = LocaleKeys.about_us;
           svgName = 'assets/info.svg';
           onTap = () async {};
           break;
@@ -71,7 +73,7 @@ class DrawerView extends StatelessWidget {
           title: Text(
             title,
             style: kts16DarkSemiBoldText,
-          ),
+          ).tr(),
           onTap: onTap,
         ),
         Divider(

@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'app/app.locator.dart';
 import 'models/hive_models/hive_models.dart';
 import 'ui/setup_bottom_sheet.dart';
@@ -19,6 +19,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
   Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
@@ -33,5 +34,12 @@ void main() async {
   // When the app is completely closed (not in the background) and opened directly from the push notification
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  runApp(YodaResApp());
+  runApp(
+    EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: [Locale('en', 'US'), Locale('ru', 'RU')],
+      fallbackLocale: Locale('en', 'US'),
+      child: YodaResApp(),
+    ),
+  );
 }
