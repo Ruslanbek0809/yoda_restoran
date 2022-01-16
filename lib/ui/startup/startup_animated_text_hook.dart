@@ -19,24 +19,15 @@ class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
     Animation<double> _fadeInFadeOut;
     _fadeInFadeOut = Tween<double>(begin: 0.0, end: 1).animate(_animController);
 
-    Animation<Offset> _animOffset;
-
-    final curve =
-        CurvedAnimation(curve: Curves.decelerate, parent: _animController);
-    // _animOffset =
-    //     Tween<Offset>(begin: const Offset(0.0, 0.35), end: Offset.zero)
-    //         .animate(curve);
-
-    Timer(Duration(milliseconds: delay!), () {
-      _animController.forward();
-    });
+    /// Animation will be PLAYED only for the first time
+    if (model.startAnimation == true)
+      Timer(Duration(milliseconds: delay!), () {
+        model.log.v('_animController CALLED');
+        _animController.forward();
+      });
 
     return FadeTransition(
       child: child,
-      // child: SlideTransition(
-      //   position: _animOffset,
-      //   child: child,
-      // ),
       opacity: _fadeInFadeOut,
     );
   }

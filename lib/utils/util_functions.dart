@@ -120,7 +120,7 @@ Future<void> showErrorFlashBar({
   required BuildContext context,
   String msg = 'Näsazlyk ýüze çykdy',
   required EdgeInsets margin,
-}) async {
+}) async { 
   await showFlash(
     context: context,
     duration: Duration(milliseconds: 2000),

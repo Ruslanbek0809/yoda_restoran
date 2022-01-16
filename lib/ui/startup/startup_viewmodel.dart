@@ -22,16 +22,29 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
 
   FlashController<Object?>? flashController;
 
-  // bool _isFlashPersistent = false;
-  // bool get startAnimation => _startAnimation;
-
-  bool _startAnimation = false;
+  bool _startAnimation = true;
   bool get startAnimation => _startAnimation;
 
+  bool _startCircleAnimation = false;
+  bool get startCircleAnimation => _startCircleAnimation;
+
   Future<void> runStartupLogic() async {
-    log.i('===== StartUpViewModel STARTED =====');
-    // _startAnimation = true;
-    // notifyListeners();
+    log.i('===== runStartupLogic() STARTED =====');
+    _startCircleAnimation = true;
+    notifyListeners();
+
+    await Future.delayed(Duration(milliseconds: 3300)).then((value) {
+      _startAnimation = false;
+      notifyListeners();
+    });
+
+    log.i('===== runStartupLogic() ENDED =====');
+  }
+
+  Future<void> navToHomeWithConnection() async {
+    log.i('===== navToHomeWithConnection() STARTED =====');
+
+    await flashController!.dismiss(); // DISMISSES no internet flashbar
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()
@@ -44,52 +57,8 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
-    _navService.replaceWith(Routes.homeView);
-    // await Future.delayed(Duration(milliseconds: 3009)).then((value) {
-    //   if (connectivityStatus == ConnectivityStatus.Offline) {
-    //     log.v('NO INTERNET SNACKBAR COMING: $data');
-    //   } else if (connectivityStatus == null) {
-    //     log.v('NO INTERNET NULLLLLLL: $data');
-    //   } else {
-    //     {
-    //       log.v('HAVE AN INTERNET: $data');
-    //       // _navService.replaceWith(Routes.homeView);
-    //     }
-    //   }
-    // });
-    // await Future.delayed(Duration(milliseconds: 6500)).then((value) {
-    //   _navService.replaceWith(Routes.homeView);
-    //   // _navService.replaceWith(Routes.ordersView);
-
-    //   /// NAV next View based on condition
-    //   // if (_userService.hasLoggedInUser) {
-    //   //   log.v(
-    //   //       'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
-    //   //   _navService.replaceWith(Routes.homeView);
-    //   // } else {
-    //   //   log.v('USER NOTTTTT FOUND');
-    //   //   _navService.replaceWith(Routes.loginView);
-    //   // }
-    // });
-
-    log.i('===== StartUpViewModel ENDED =====');
-  }
-
-  Future<void> navToHomeWithConnection() async {
-    log.i('navToHomeWithConnection: $connectivityStatus');
-
-    await Future.delayed(Duration(milliseconds: 1500));
-    await runStartupLogic();
+    log.i('===== navToHomeWithConnection() ENDED =====');
     await _navService.replaceWith(Routes.homeView);
-
-    // await Future.delayed(Duration(milliseconds: 1500)).then((value) async{
-    //   await runStartupLogic();
-    //   await _navService.replaceWith(Routes.homeView);
-    // });
-  }
-
-  Future<void> dismissFlashController() async {
-    await flashController!.dismiss();
   }
 
   @override
