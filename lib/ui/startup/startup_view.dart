@@ -25,7 +25,6 @@ class StartUpView extends StatelessWidget {
       }),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
-        
         /// CALLED when user has NO Internet Connection
         if (model.startAnimation == false &&
             (model.connectivityStatus == ConnectivityStatus.Offline ||
@@ -39,6 +38,7 @@ class StartUpView extends StatelessWidget {
                 return Flash(
                   controller: controller,
                   barrierDismissible: false,
+                  enableVerticalDrag: false,
                   borderRadius: AppTheme().radius15,
                   backgroundColor: kcSecondaryLightColor,
                   boxShadows: kElevationToShadow[0],

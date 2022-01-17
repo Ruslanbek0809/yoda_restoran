@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../models/models.dart';
 import '../../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RestaurantInfoBottomSheet extends StatelessWidget {
   final Restaurant restaurant;
@@ -96,12 +98,23 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       color: AppTheme.DRAWER_DIVIDER,
                     ),
                     SizedBox(height: 10.h),
-                    Text(
-                      'Sargyt alýan wagty: ${restaurant.workingHours}',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: AppTheme.FONT_COLOR,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          LocaleKeys.workingHours,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ).tr(),
+                        Text(
+                          ': ${restaurant.workingHours}',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 10.h),
                     Divider(

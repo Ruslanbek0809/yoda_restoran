@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 
 import 'contact_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ContactView extends StatefulWidget {
   const ContactView({Key? key}) : super(key: key);
@@ -72,11 +74,11 @@ class _ContactViewState extends State<ContactView> {
               ),
             ),
             title: Text(
-              'Biz bilen habarlaşyň',
+              LocaleKeys.contact_us,
               style: TextStyle(
                 color: AppTheme.MAIN_DARK,
               ),
-            ),
+            ).tr(),
             centerTitle: true,
           ),
           body: Padding(
@@ -110,7 +112,7 @@ class _ContactViewState extends State<ContactView> {
                           topRight: Radius.circular(10.0),
                         ),
                       ),
-                      hintText: 'Ady',
+                      hintText: LocaleKeys.name.tr(),
                       hintStyle: TextStyle(
                           fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
                       filled: true,
@@ -119,7 +121,7 @@ class _ContactViewState extends State<ContactView> {
                     focusNode: _nameFocus,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Ady giriziň';
+                        return LocaleKeys.your_name.tr();
                       }
                       return null;
                     },
@@ -139,7 +141,7 @@ class _ContactViewState extends State<ContactView> {
                         borderSide: BorderSide(
                             color: AppTheme.CONTACT_COLOR, width: 0.5),
                       ),
-                      hintText: 'Telefon belgiňiz',
+                      hintText: LocaleKeys.phone.tr(),
                       hintStyle: TextStyle(
                           fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
                       filled: true,
@@ -148,7 +150,7 @@ class _ContactViewState extends State<ContactView> {
                     focusNode: _phoneFocus,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Telefon belgiňizi giriziň';
+                        return LocaleKeys.phone.tr();
                       }
                       return null;
                     },
@@ -166,7 +168,7 @@ class _ContactViewState extends State<ContactView> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
-                      hintText: 'Tekst',
+                      hintText: LocaleKeys.text.tr(),
                       hintStyle: TextStyle(
                           fontSize: 18.sp, color: AppTheme.DRAWER_ICON),
                       filled: true,
@@ -175,7 +177,7 @@ class _ContactViewState extends State<ContactView> {
                     focusNode: _infoFocus,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Teksti hökman dolduryň';
+                        return LocaleKeys.enter_text.tr();
                       }
                       return null;
                     },
@@ -183,7 +185,7 @@ class _ContactViewState extends State<ContactView> {
                   SizedBox(
                     width: 1.sw,
                     child: CustomTextButton(
-                      text: 'Ugrat',
+                      text: LocaleKeys.send.tr(),
                       padding: EdgeInsets.symmetric(
                           vertical: 13.w, horizontal: 16.w),
                       textStyle: TextStyle(
@@ -199,31 +201,31 @@ class _ContactViewState extends State<ContactView> {
                   ),
                   SizedBox(height: 0.35.sw),
                   Text(
-                    'Telefon: +99363 687171',
+                    LocaleKeys.our_phone,
                     style: TextStyle(
                       color: AppTheme.CONTACT_COLOR,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  SizedBox(height: 2.w),
+                  ).tr(),
+                  SizedBox(height: 2.h),
                   Text(
-                    'Salgy: G.Kulyýew köç.29 (Rowana), 2-nji gat',
+                    LocaleKeys.our_address,
                     style: TextStyle(
                       color: AppTheme.CONTACT_COLOR,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  SizedBox(height: 2.w),
-                  Text(
-                    'Instagram: @yoda.restoran',
-                    style: TextStyle(
-                      color: AppTheme.CONTACT_COLOR,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  ).tr(),
+                  SizedBox(height: 2.h),
+                  // Text(
+                  //   'Instagram: @yoda.restoran',
+                  //   style: TextStyle(
+                  //     color: AppTheme.CONTACT_COLOR,
+                  //     fontSize: 16.sp,
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ).tr(),
                 ],
               ),
             ),

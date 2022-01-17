@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -13,6 +14,7 @@ import 'profile_view_model.dart';
 import 'package:yoda_res/library/flutter_datetime_picker.dart';
 import 'package:yoda_res/library/src/i18n_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
   ProfileHook({Key? key}) : super(key: key);
@@ -56,7 +58,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Profil', style: kts30DarkText),
+              Text(LocaleKeys.profile, style: kts30DarkText).tr(),
               // --------------- NAME -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 10.h),
@@ -74,7 +76,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       borderSide: BorderSide(
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
-                    labelText: 'Ady',
+                    labelText: LocaleKeys.name.tr(),
                     labelStyle: kts14HelperText,
                   ),
                   validator: model.updateName,
@@ -119,7 +121,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       borderSide: BorderSide(
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
-                    labelText: 'Doglan senesi',
+                    labelText: LocaleKeys.birthday.tr(),
                     labelStyle: kts14HelperText,
                   ),
                 ),
@@ -182,12 +184,22 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                     children: <Widget>[
                                       ListTile(
                                         title: Center(
-                                          child: Text(
-                                            'Erkek',
-                                          ),
+                                          child: Text(LocaleKeys.malee).tr(),
                                         ),
                                         onTap: () {
-                                          _genderController.text = 'Erkek';
+                                          _genderController.text =
+                                              LocaleKeys.malee.tr();
+                                          model.navBack();
+                                        },
+                                      ),
+                                      Divider(height: 8.h),
+                                      ListTile(
+                                        title: Center(
+                                          child: Text(LocaleKeys.femalee.tr()),
+                                        ),
+                                        onTap: () {
+                                          _genderController.text =
+                                              LocaleKeys.femalee.tr();
                                           model.navBack();
                                         },
                                       ),
@@ -195,22 +207,10 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                       ListTile(
                                         title: Center(
                                           child: Text(
-                                            'Aýal',
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          _genderController.text = 'Aýal';
-                                          model.navBack();
-                                        },
-                                      ),
-                                      Divider(height: 8.h),
-                                      ListTile(
-                                        title: Center(
-                                          child: Text(
-                                            'Ýap',
+                                            LocaleKeys.close,
                                             style:
                                                 TextStyle(color: AppTheme.RED),
-                                          ),
+                                          ).tr(),
                                         ),
                                         onTap: () => model.navBack(),
                                       )
@@ -238,7 +238,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                         borderSide: BorderSide(
                             color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                       ),
-                      labelText: 'Jynsy',
+                      labelText: LocaleKeys.gender.tr(),
                       labelStyle: kts14HelperText,
                     ),
                   ),
@@ -261,7 +261,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                       borderSide: BorderSide(
                           color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                     ),
-                    labelText: 'Elektron poçtasy',
+                    labelText: LocaleKeys.email.tr(),
                     labelStyle: kts14HelperText,
                   ),
                   validator: model.updateEmail,
@@ -277,7 +277,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    labelText: 'Tel',
+                    labelText: LocaleKeys.phone.tr(),
                     labelStyle: kts14HelperText,
                   ),
                   validator: model.updatePhone,
@@ -291,7 +291,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text('Ýatda sakla', style: ktsButton18Text),
+                        : Text(LocaleKeys.save, style: ktsButton18Text).tr(),
                   ),
                   color: kcSecondaryDarkColor,
                   padding: EdgeInsets.symmetric(vertical: 14.h),

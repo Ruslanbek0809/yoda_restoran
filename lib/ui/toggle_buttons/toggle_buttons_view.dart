@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../utils/utils.dart';
 
 import 'toggle_buttons_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ToggleButtonView extends StatelessWidget {
   const ToggleButtonView({Key? key}) : super(key: key);
@@ -41,14 +43,14 @@ class ToggleButtonView extends StatelessWidget {
                           width: constraints.maxWidth / 2,
                           alignment: Alignment.center,
                           child: Text(
-                            'Eltip bermek',
+                            LocaleKeys.delivery,
                             style: TextStyle(
                               fontSize: 17.sp,
                               color: model.isDelivery
                                   ? AppTheme.FONT_COLOR
                                   : AppTheme.FONT_GREY_COLOR,
                             ),
-                          ),
+                          ).tr(),
                         ),
                       ),
                       Align(
@@ -57,14 +59,14 @@ class ToggleButtonView extends StatelessWidget {
                           width: constraints.maxWidth / 2,
                           alignment: Alignment.center,
                           child: Text(
-                            'Özüm aljak',
+                            LocaleKeys.selfPickUp,
                             style: TextStyle(
                               fontSize: 17.sp,
                               color: model.isDelivery
                                   ? AppTheme.FONT_GREY_COLOR
                                   : AppTheme.FONT_COLOR,
                             ),
-                          ),
+                          ).tr(),
                         ),
                       ),
                     ],

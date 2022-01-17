@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/drawer/profile/profile_hook.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../drawer_view.dart';
 import 'profile_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.only(right: 5.w),
                 child: TextButton(
                   onPressed: model.logout,
-                  child: Text('Ulgamdan çyk', style: ktsDefault16Text),
+                  child: Text(LocaleKeys.logout, style: ktsDefault16Text).tr(),
                 ),
               ),
             ],

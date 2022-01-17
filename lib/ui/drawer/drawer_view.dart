@@ -17,35 +17,35 @@ class DrawerView extends StatelessWidget {
     String svgName;
     Function() onTap;
     switch (value) {
-      case 'login':
+      case LocaleKeys.login:
         {
           title = LocaleKeys.login;
           svgName = 'assets/user.svg';
           onTap = () async => model.navToLoginView();
           break;
         }
-      case 'profile':
+      case LocaleKeys.profile:
         {
           title = LocaleKeys.profile;
           svgName = 'assets/user.svg';
           onTap = () async => model.navToProfileView();
           break;
         }
-      case 'orders':
+      case LocaleKeys.orders:
         {
           title = LocaleKeys.orders;
           svgName = 'assets/list_bullets.svg';
           onTap = () async => model.navToOrdersView();
           break;
         }
-      case 'addresses':
+      case LocaleKeys.addresses:
         {
           title = LocaleKeys.addresses;
           svgName = 'assets/map_pin.svg';
           onTap = () async => model.navToAddressesView();
           break;
         }
-      case 'about':
+      case LocaleKeys.about_us:
         {
           title = LocaleKeys.about_us;
           svgName = 'assets/info.svg';
@@ -141,21 +141,30 @@ class DrawerView extends StatelessWidget {
                         width: 33.w,
                       ),
                       title: Text(
-                        'Türkmen',
+                        context.locale == context.supportedLocales[0]
+                            ? LocaleKeys.lang_en
+                            : LocaleKeys.lang_ru,
+                        // context.locale.toString(),
                         style: kts16DarkSemiBoldText,
-                      ),
+                      ).tr(),
                       iconColor: AppTheme.CONTACT_COLOR,
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 66.w,
-                            top: 5.h,
-                            bottom: 5.h,
-                          ),
-                          child: Text(
-                            'Türkmen',
-                            style: kts16DarkText,
+                        GestureDetector(
+                          onTap: () async {
+                            await context.setLocale(context
+                                .supportedLocales[0]); // ASSIGNS turkmen lang
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 66.w,
+                              top: 5.h,
+                              bottom: 5.h,
+                            ),
+                            child: Text(
+                              LocaleKeys.lang_en,
+                              style: kts16DarkText,
+                            ).tr(),
                           ),
                         ),
                         Divider(
@@ -164,11 +173,17 @@ class DrawerView extends StatelessWidget {
                           indent: 0.18.sw,
                           color: kcDividerColor,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 66.w, top: 5.w),
-                          child: Text(
-                            'Rus dili',
-                            style: kts16DarkText,
+                        GestureDetector(
+                          onTap: () async {
+                            await context.setLocale(context
+                                .supportedLocales[1]); // ASSIGNS russian lang
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 66.w, top: 5.w),
+                            child: Text(
+                              LocaleKeys.lang_ru,
+                              style: kts16DarkText,
+                            ).tr(),
                           ),
                         ),
                       ],

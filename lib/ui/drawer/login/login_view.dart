@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
@@ -10,6 +11,7 @@ import '../../../utils/utils.dart';
 import 'login_view.form.dart';
 import 'login_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @FormView(
   fields: [
@@ -46,10 +48,10 @@ class LoginView extends StatelessWidget with $LoginView {
                     width: 0.6.sw,
                   ),
                 ),
-                Text('Ulgama giriň', style: ktsDefault22DarkText),
+                Text(LocaleKeys.login, style: ktsDefault22DarkText).tr(),
                 verticalSpaceTiny,
                 verticalSpaceMedium,
-                Text('Telefon belgiňizi giriziň', style: kts14HelperText),
+                Text(LocaleKeys.enter_phone, style: kts14HelperText).tr(),
                 verticalSpaceMedium,
                 //------------------ PHONE TEXTFIELD ---------------------//
                 Padding(
@@ -62,7 +64,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     style: kts18Text,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'Telefon',
+                      labelText: LocaleKeys.phone.tr(),
                       labelStyle: kts16HelperText,
                       prefix: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -108,7 +110,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 11) {
-                        return 'Telefon belgiňizi doly giriziň';
+                        return LocaleKeys.enter_phone.tr();
                       }
                       return null;
                     },
@@ -123,7 +125,8 @@ class LoginView extends StatelessWidget with $LoginView {
                         duration: const Duration(milliseconds: 300),
                         child: model.isBusy
                             ? ButtonLoading()
-                            : Text('Dowam et', style: ktsButton18Text),
+                            : Text(LocaleKeys.continuee, style: ktsButton18Text)
+                                .tr(),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
@@ -145,9 +148,9 @@ class LoginView extends StatelessWidget with $LoginView {
                 ),
                 verticalSpaceMedium,
                 Text(
-                  'Siziň telefon belgiňize gizlin kodly SMS geler.',
+                  LocaleKeys.you_will_receive_sms,
                   style: kts14HelperText,
-                ),
+                ).tr(),
               ],
             ),
           ),

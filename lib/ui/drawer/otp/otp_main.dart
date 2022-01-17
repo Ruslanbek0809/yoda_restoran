@@ -4,10 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'otp_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OtpMain extends HookViewModelWidget<OtpViewModel> {
   OtpMain({Key? key}) : super(key: key, reactive: true);
@@ -56,13 +58,13 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 width: 0.6.sw,
               ),
             ),
-            Text('Tassyklaň', style: ktsDefault22DarkText),
+            Text(LocaleKeys.title_confirm, style: ktsDefault22DarkText).tr(),
             verticalSpaceTiny,
             verticalSpaceMedium,
             Text(
-              'Telefon belgiňize gelen gizli kody giriziň',
+              LocaleKeys.enter_otp_code,
               style: kts14HelperText,
-            ),
+            ).tr(),
             verticalSpaceMedium,
             //------------------ PinCodeTextField ---------------------//
             Padding(
@@ -139,7 +141,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text('Tassykla', style: ktsButton18Text),
+                        : Text(LocaleKeys.confirm, style: ktsButton18Text).tr(),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   borderRadius: kbr10,
@@ -150,7 +152,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                           .shake); // Triggering error shake animation
                       showErrorFlashBar(
                         context: context,
-                        msg: 'Kody giriziň',
+                        msg: LocaleKeys.enter_otp_code_error.tr(),
                         margin: EdgeInsets.only(
                           left: 0.1.sw,
                           right: 0.1.sw,
@@ -165,7 +167,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                           .shake); // Triggering error shake animation
                       showErrorFlashBar(
                         context: context,
-                        msg: 'Kody giriziň',
+                        msg: LocaleKeys.incorrect_code.tr(),
                         margin: EdgeInsets.only(
                           left: 0.1.sw,
                           right: 0.1.sw,
@@ -208,9 +210,9 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                           ),
                           SizedBox(width: 5.w),
                           Text(
-                            'Kody gaýtadan ugrat',
+                            LocaleKeys.resend_code,
                             style: kts16PrimaryText,
-                          ),
+                          ).tr(),
                         ],
                       ),
                     ),
