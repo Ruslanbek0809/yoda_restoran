@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';
@@ -20,6 +21,8 @@ class CartViewModel extends ReactiveViewModel {
   final _toggleButtonService = locator<ToggleButtonService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+
+  HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   List<Meal>? get moreMeals => _cartService.moreMeals;
 
@@ -71,9 +74,9 @@ class CartViewModel extends ReactiveViewModel {
     log.i('showClearCartDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.clearCart,
-      title: 'Siz sebedi boşatmakçymy?',
-      mainButtonTitle: 'Ýok',
-      secondaryButtonTitle: 'Boşat',
+      title: LocaleKeys.wannaClearCart,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.letsClearCart,
       showIconInMainButton: false,
       barrierDismissible: true,
       data: cartViewModel,

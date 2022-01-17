@@ -34,8 +34,9 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
-        await _refreshController.requestRefresh(needCallback: false);
-        _refreshController.refreshCompleted();
+        await _refreshController.requestRefresh();
+        // await _refreshController.requestRefresh(needCallback: false);
+        // _refreshController.refreshCompleted();
       }),
       builder: (context, model, child) {
         return SafeArea(

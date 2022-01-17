@@ -49,18 +49,19 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   /// UPDATES deliveryDateTime
   void updateDateTimeForDelivery(DateTime? newDeliveryDateTime) {
-    var resWorkingHoursSplitted = cartRes!.workingHours!.split('-');
-    var resStartWorkingHoursSplitted = resWorkingHoursSplitted[0].split(':');
-    var resEndWorkingHoursSplitted = resWorkingHoursSplitted[1].split(':');
-    var startHour = int.parse(resStartWorkingHoursSplitted[0]);
-    var startMinute = int.parse(resStartWorkingHoursSplitted[1]);
-    var endHour = int.parse(resEndWorkingHoursSplitted[0]);
-    var endMinute = int.parse(resEndWorkingHoursSplitted[1]);
-    if ((deliveryDateTime!.hour < startHour ||
-            deliveryDateTime!.minute < startMinute) ||
-        (deliveryDateTime!.hour > endHour ||
-            deliveryDateTime!.minute > endMinute))
-      log.v('SHOW DATE TIME WRONG SNACKBAR'); // TODO: Add Snackbar
+    log.v('updateDateTimeForDelivery()');
+    // var resWorkingHoursSplitted = cartRes!.workingHours!.split('-');
+    // var resStartWorkingHoursSplitted = resWorkingHoursSplitted[0].split(':');
+    // var resEndWorkingHoursSplitted = resWorkingHoursSplitted[1].split(':');
+    // var startHour = int.parse(resStartWorkingHoursSplitted[0]);
+    // var startMinute = int.parse(resStartWorkingHoursSplitted[1]);
+    // var endHour = int.parse(resEndWorkingHoursSplitted[0]);
+    // var endMinute = int.parse(resEndWorkingHoursSplitted[1]);
+    // if ((deliveryDateTime!.hour < startHour ||
+    //         deliveryDateTime!.minute < startMinute) ||
+    //     (deliveryDateTime!.hour > endHour ||
+    //         deliveryDateTime!.minute > endMinute))
+    //   log.v('SHOW DATE TIME WRONG SNACKBAR'); // TODO: Add Snackbar
     deliveryDateTime = newDeliveryDateTime;
     deliveryDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
     notifyListeners();

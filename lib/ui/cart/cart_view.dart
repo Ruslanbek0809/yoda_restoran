@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
 import 'cart_toggle_button.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
 import 'cart_meal/cart_meal_item.dart';
-import 'cart_res_food/cart_res_food_view.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CartView extends StatelessWidget {
   const CartView({Key? key}) : super(key: key);
@@ -44,9 +45,9 @@ class CartView extends StatelessWidget {
                 ),
                 centerTitle: true,
                 title: Text(
-                  'Sargyt',
+                  LocaleKeys.order,
                   style: ktsDefault22DarkText,
-                ),
+                ).tr(),
                 actions: [
                   Padding(
                     padding: EdgeInsets.only(right: 10.w),
@@ -129,9 +130,9 @@ class CartView extends StatelessWidget {
                     //   padding: EdgeInsets.only(
                     //       top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
                     //   child: Text(
-                    //     'Ýene bir zat?',
+                    // LocaleKeys.oneMore,
                     //     style: ktsDefault24DarkText,
-                    //   ),
+                    //   ).tr(),
                     // ),
                     // //------------------ CART FOOD WIDGET LIST ---------------------//
                     // SingleChildScrollView(
@@ -189,9 +190,11 @@ class CartView extends StatelessWidget {
                           child: CustomTextChildButton(
                             padding: EdgeInsets.symmetric(vertical: 17.w),
                             child: Text(
-                              model.hasLoggedInUser ? 'Dowam et' : 'Ulgama gir',
+                              model.hasLoggedInUser
+                                  ? LocaleKeys.continuee
+                                  : LocaleKeys.register,
                               style: ktsButton18Text,
-                            ),
+                            ).tr(),
                             onPressed: model.onCartCheckoutButtonPressed,
                           ),
                         ),

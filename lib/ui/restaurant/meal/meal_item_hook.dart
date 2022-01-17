@@ -115,7 +115,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               style: kts14HelperText,
                             ),
                             Text(
-                              ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                              ' • ${meal.value!.toInt()} ${meal.size!.name}',
                               style: kts14HelperText,
                             ),
                           ],
@@ -132,7 +132,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   ),
                                 ),
                                 Text(
-                                  ' * ${meal.value!.toInt()} ${meal.size!.name}',
+                                  ' • ${meal.value!.toInt()} ${meal.size!.name}',
                                   style: kts14HelperText,
                                 ),
                               ],

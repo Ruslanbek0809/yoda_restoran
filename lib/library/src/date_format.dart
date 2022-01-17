@@ -1,11 +1,14 @@
+import 'package:yoda_res/generated/locale_keys.g.dart';
+
 import 'i18n_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Outputs year as four digits
 ///
 /// Example:
 ///     formatDate(new DateTime(2018,8,31), [ymdw]);
 ///     // => Today
-const String ymdw = 'Ertir';
+String ymdw = LocaleKeys.tomorrow.tr();
 
 ///
 /// Example:

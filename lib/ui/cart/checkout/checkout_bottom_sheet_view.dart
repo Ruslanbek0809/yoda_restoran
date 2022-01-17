@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../library/flutter_datetime_picker.dart';
 import '../../../library/src/datetime_picker_theme.dart';
 import '../../../library/src/i18n_model.dart';
@@ -12,6 +13,7 @@ import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'checkout_promocode_hook.dart';
 import 'checkout_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -111,22 +113,22 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                 width: 25.w,
                                               ),
                                               SizedBox(width: 15.w),
-                                              Text(
-                                                model.selectedAddress!.id == -1
-                                                    ? 'Salgyňyzy giriziň'
-                                                    : model.selectedAddress!
-                                                            .street! +
-                                                        (model.selectedAddress!
-                                                                    .house !=
-                                                                null
-                                                            ? ', ${model.selectedAddress!.house}'
-                                                            : ''),
-                                                style:
-                                                    model.selectedAddress!.id ==
-                                                            -1
-                                                        ? kts16HelperText
-                                                        : ktsDefault16Text,
-                                              ),
+                                              model.selectedAddress!.id == -1
+                                                  ? Text(
+                                                      LocaleKeys
+                                                          .selectAddressPls,
+                                                      style: kts16HelperText,
+                                                    ).tr()
+                                                  : Text(
+                                                      model.selectedAddress!
+                                                              .street! +
+                                                          (model.selectedAddress!
+                                                                      .house !=
+                                                                  null
+                                                              ? ', ${model.selectedAddress!.house}'
+                                                              : ''),
+                                                      style: ktsDefault16Text,
+                                                    ),
                                             ],
                                           ),
                                           Padding(
@@ -166,7 +168,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             color: AppTheme.WHITE,
                             child: InkWell(
                               onTap: () async {
-                                model.deliveryDateTime =
+                                DateTime? _tempDateTime =
                                     await DatePicker.showDateTimePicker(
                                           context,
                                           showTitleActions: true,
@@ -179,7 +181,10 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                             model.log.v('Senä confirm $date');
                                           },
                                           currentTime: model.deliveryDateTime,
-                                          locale: LocaleType.tk,
+                                          locale: context.locale ==
+                                                  context.supportedLocales[0]
+                                              ? LocaleType.tk
+                                              : LocaleType.ru,
                                           theme: DatePickerTheme(
                                             doneStyle: ktsDefault20BoldText,
                                             backgroundColor:
@@ -187,8 +192,47 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           ),
                                         ) ??
                                         model.deliveryDateTime;
-                                model.updateDateTimeForDelivery(
-                                    model.deliveryDateTime);
+
+                                /// Below we have condition whether selected _tempDateTime inside workingHours
+                                var resWorkingHoursSplitted =
+                                    model.cartRes!.workingHours!.split('-');
+                                var resStartWorkingHoursSplitted =
+                                    resWorkingHoursSplitted[0].split(':');
+                                var resEndWorkingHoursSplitted =
+                                    resWorkingHoursSplitted[1].split(':');
+                                var startHour =
+                                    int.parse(resStartWorkingHoursSplitted[0]);
+                                var startMinute =
+                                    int.parse(resStartWorkingHoursSplitted[1]);
+                                var endHour =
+                                    int.parse(resEndWorkingHoursSplitted[0]);
+                                var endMinute =
+                                    int.parse(resEndWorkingHoursSplitted[1]);
+
+                                if (_tempDateTime != model.deliveryDateTime &&
+                                    ((_tempDateTime!.hour < startHour ||
+                                            _tempDateTime.minute <
+                                                startMinute) ||
+                                        (_tempDateTime.hour > endHour ||
+                                            _tempDateTime.minute > endMinute)))
+                                  await showDateRaangeErrorFlashBar(
+                                    context: context,
+                                    msg: Text(
+                                            LocaleKeys
+                                                .requiredWorkingHoursForRes,
+                                            style: kts16ButtonText)
+                                        .tr(args: [
+                                      model.cartRes!.workingHours!
+                                    ]),
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.13.sh,
+                                    ),
+                                  );
+                                else
+                                  model
+                                      .updateDateTimeForDelivery(_tempDateTime);
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -208,32 +252,57 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           children: [
                                             model.isDelivery
                                                 ? Text(
-                                                    'Eltmeli wagty: ',
+                                                    LocaleKeys.deliveryTime,
                                                     style: ktsDefault16Text,
-                                                  )
+                                                  ).tr()
                                                 : Text(
-                                                    'Taýýarlamaly wagty: ',
+                                                    LocaleKeys.preparationTime,
                                                     style: ktsDefault16Text,
-                                                  ),
-                                            Text(
-                                              model.deliveryDateTime ==
-                                                      model.now
-                                                  ? 'Şu wagt'
-                                                  : model.deliveryDateTime!
-                                                              .isAfter(
-                                                                  model.now) &&
-                                                          model
-                                                              .deliveryDateTime!
-                                                              .isBefore(model
-                                                                  .tomorrow!)
-                                                      ? 'Şu gün ${model.deliveryDateFormatted}'
-                                                      : model.deliveryDateTime!
-                                                              .isAfter(model
-                                                                  .tomorrow!)
-                                                          ? 'Ertir ${model.deliveryDateFormatted}'
-                                                          : '',
-                                              style: ktsDefault16Text,
-                                            ),
+                                                  ).tr(),
+                                            model.deliveryDateTime == model.now
+                                                ? Text(
+                                                    LocaleKeys.now,
+                                                    style: ktsDefault16Text,
+                                                  ).tr()
+                                                : model.deliveryDateTime!
+                                                            .isAfter(
+                                                                model.now) &&
+                                                        model.deliveryDateTime!
+                                                            .isBefore(
+                                                                model.tomorrow!)
+                                                    ? Row(
+                                                        children: [
+                                                          Text(
+                                                            LocaleKeys.today,
+                                                            style:
+                                                                ktsDefault16Text,
+                                                          ).tr(),
+                                                          Text(
+                                                            ' ${model.deliveryDateFormatted}',
+                                                            style:
+                                                                ktsDefault16Text,
+                                                          ).tr(),
+                                                        ],
+                                                      )
+                                                    : model.deliveryDateTime!
+                                                            .isAfter(
+                                                                model.tomorrow!)
+                                                        ? Row(
+                                                            children: [
+                                                              Text(
+                                                                LocaleKeys
+                                                                    .tomorrow,
+                                                                style:
+                                                                    ktsDefault16Text,
+                                                              ).tr(),
+                                                              Text(
+                                                                ' ${model.deliveryDateFormatted}',
+                                                                style:
+                                                                    ktsDefault16Text,
+                                                              ).tr(),
+                                                            ],
+                                                          )
+                                                        : SizedBox(),
                                           ],
                                         ),
                                       ],
@@ -274,9 +343,17 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           width: 25.w,
                                         ),
                                         SizedBox(width: 15.w),
-                                        Text(
-                                          'Töleg görnüşi: ${model.selectedPaymentType!.name}',
-                                          style: ktsDefault16Text,
+                                        Row(
+                                          children: [
+                                            Text(
+                                              LocaleKeys.paymentType,
+                                              style: ktsDefault16Text,
+                                            ).tr(),
+                                            Text(
+                                              model.selectedPaymentType!.name,
+                                              style: ktsDefault16Text,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -357,15 +434,15 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         child: model.isBusy
                             ? ButtonLoading()
                             : Text(
-                                'Sargyt et',
+                                LocaleKeys.orderNow,
                                 style: ktsButton18Text,
-                              ),
+                              ).tr(),
                         // onPressed: model.navToOrdersByRemovingAll,
                         onPressed: () async {
                           if (model.selectedAddress!.id == -1)
                             await showErrorFlashBar(
                               context: context,
-                              msg: 'Salgyňyzy giriziň',
+                              msg: LocaleKeys.selectAddressPls,
                               margin: EdgeInsets.only(
                                 left: 16.w,
                                 right: 16.w,

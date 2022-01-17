@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
 import 'cart_view_model.dart';
 import '../toggle_buttons/toggle_buttons_view.dart';
 import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CartToggleButton extends ViewModelWidget<CartViewModel> {
   const CartToggleButton({Key? key}) : super(key: key, reactive: true);
@@ -21,9 +23,9 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
           padding:
               EdgeInsets.only(top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
           child: Text(
-            'Almak usuly',
+            LocaleKeys.howToTake,
             style: ktsDefault24DarkText,
-          ),
+          ).tr(),
         ),
 //------------------ DELIVERY TOGGLE ---------------------//
         ToggleButtonView(),
@@ -45,12 +47,9 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                       ),
                       Expanded(
                         child: Text(
-                          'Eltip bermek üçin töleg operator tarapyndan goşular.',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
-                        ),
+                          LocaleKeys.deliveryPriceWillAddByOperator,
+                          style: ktsDefault16Text,
+                        ).tr(),
                       ),
                     ],
                   )
@@ -67,11 +66,8 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                       SizedBox(width: 5.w),
                       Expanded(
                         child: Text(
-                          'Alişer Nowaýy köç. 171',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
+                          model.cartRes!.address!,
+                          style: ktsDefault16Text,
                         ),
                       ),
                     ],

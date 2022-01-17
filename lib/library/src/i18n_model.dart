@@ -39,7 +39,7 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
   },
   LocaleType.ru: {
     'cancel': 'Отмена',
-    'done': 'Готово',
+    'done': 'Подтвердить',
     'today': 'Сегодня',
     'monthShort': [
       'Янв',

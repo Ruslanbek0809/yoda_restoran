@@ -9,6 +9,7 @@ import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Method to round trailing zero based on its type
 RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
@@ -125,7 +126,41 @@ Future<void> showErrorFlashBar({
               height: 20.h,
             ),
           ),
-          content: Text(msg, style: kts16ButtonText),
+          content: Text(msg, style: kts16ButtonText).tr(),
+        ),
+      );
+    },
+  );
+}
+
+Future<void> showDateRaangeErrorFlashBar({
+  required BuildContext context,
+  Text? msg,
+  required EdgeInsets margin,
+}) async {
+  await showFlash(
+    context: context,
+    duration: Duration(milliseconds: 3000),
+    builder: (context, controller) {
+      return Flash(
+        backgroundColor: kcSecondaryDarkColor,
+        controller: controller,
+        borderRadius: AppTheme().radius15,
+        boxShadows: kElevationToShadow[0],
+        position: FlashPosition.bottom,
+        barrierDismissible: true,
+        behavior: FlashBehavior.floating,
+        margin: margin,
+        child: FlashBar(
+          icon: Padding(
+            padding: EdgeInsets.only(left: 24.w, right: 12.w),
+            child: SvgPicture.asset(
+              'assets/warning.svg',
+              width: 20.w,
+              height: 20.h,
+            ),
+          ),
+          content: msg!,
         ),
       );
     },

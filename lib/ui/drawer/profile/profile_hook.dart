@@ -101,7 +101,9 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                         print('confirm $date');
                       },
                       currentTime: date,
-                      locale: LocaleType.tk,
+                      locale: context.locale == context.supportedLocales[0]
+                          ? LocaleType.tk
+                          : LocaleType.ru,
                     );
                     _birthdateController.text = date != null
                         ? DateFormat('dd-MM-yyyy').format(date)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/shared/styles.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 
@@ -184,14 +185,10 @@ class _ContactViewState extends State<ContactView> {
                   ),
                   SizedBox(
                     width: 1.sw,
-                    child: CustomTextButton(
-                      text: LocaleKeys.send.tr(),
+                    child: CustomTextChildButton(
+                      child: Text(LocaleKeys.send, style: ktsButton18Text).tr(),
                       padding: EdgeInsets.symmetric(
                           vertical: 13.w, horizontal: 16.w),
-                      textStyle: TextStyle(
-                        color: AppTheme.WHITE,
-                        fontSize: 18.sp,
-                      ),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10.0),
                         bottomRight: Radius.circular(10.0),

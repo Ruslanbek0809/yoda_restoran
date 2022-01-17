@@ -14,6 +14,7 @@ import 'restaurant/meal/meal_view_model.dart';
 import 'widgets/widgets.dart';
 import '../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void setupDialog() {
   var dialogService = locator<DialogService>();
@@ -70,13 +71,13 @@ class MealDialogView extends StatelessWidget {
               content: Text(
                 request.description!,
                 style: ktsDefault14DialogText,
-              ),
+              ).tr(),
               actions: <Widget>[
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
                     style: ktsDefault18SemiBoldText,
-                  ),
+                  ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
                     await model.navToCartView();
@@ -87,7 +88,7 @@ class MealDialogView extends StatelessWidget {
                   child: Text(
                     request.mainButtonTitle!,
                     style: kts18Text,
-                  ),
+                  ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
                     await model.clearCart();
@@ -104,19 +105,19 @@ class MealDialogView extends StatelessWidget {
               title: Text(
                 request.title!,
                 textAlign: TextAlign.center,
-              ),
+              ).tr(),
               titleTextStyle: ktsDefault20BoldText,
               content: Text(
                 request.description!,
                 textAlign: TextAlign.center,
                 style: ktsDefault14DialogText,
-              ),
+              ).tr(),
               actions: <Widget>[
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
                     style: ktsDefault18SemiBoldText,
-                  ),
+                  ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
                     await model.navToCartView();
@@ -128,7 +129,7 @@ class MealDialogView extends StatelessWidget {
                   child: Text(
                     request.mainButtonTitle!,
                     style: kts18Text,
-                  ),
+                  ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
                     await model.clearCart();
@@ -169,7 +170,7 @@ class ClearCartDialogView extends StatelessWidget {
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       await model.clearCart();
@@ -180,7 +181,7 @@ class ClearCartDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());
@@ -197,14 +198,14 @@ class ClearCartDialogView extends StatelessWidget {
                 title: Text(
                   request.title!,
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
                 titleTextStyle: ktsDefault20BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       await model.clearCart();
@@ -216,7 +217,7 @@ class ClearCartDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());

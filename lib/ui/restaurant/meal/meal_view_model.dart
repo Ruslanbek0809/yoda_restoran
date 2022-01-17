@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
@@ -137,11 +138,10 @@ class MealViewModel extends ReactiveViewModel {
     log.i('');
     await _dialogService.showCustomDialog(
       variant: DialogType.mealCartClear,
-      title: 'Sebedi boşadyň',
-      description:
-          'Sebetde başga restorandan goşulan haryt bar. Täze sargyt etmek üçin ilki restorana sargydyňyzy ugradyň ýa-da sebedi boşadyň.',
-      mainButtonTitle: 'Sebedi boşat',
-      secondaryButtonTitle: 'Sebede geç',
+      title: LocaleKeys.clearCartPls,
+      description: LocaleKeys.cart_is_full_with_other_restaurant,
+      mainButtonTitle: LocaleKeys.clearCart,
+      secondaryButtonTitle: LocaleKeys.goToCart,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
