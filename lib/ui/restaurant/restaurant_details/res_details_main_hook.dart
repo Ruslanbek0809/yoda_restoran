@@ -375,8 +375,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 model.updateOnTapRipple();
                 double offset = model.resCategories!.getRange(0, index).fold(
                   0,
-                  (prev, category) {
-                    int rows = (mealList.length / 2).ceil();
+                  (prev, resCategory) {
+                    int rows = (resCategory.meals!.length / 2).ceil();
                     return prev += rows *
                         (itemHeight +
                             20.h); // GridView mainAxisSpacing * 2 SECOND MAIN COMPENSATION HERE

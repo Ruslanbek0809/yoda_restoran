@@ -115,6 +115,12 @@ class HomeViewModel extends MultipleFutureViewModel {
     _hasFutureError = true;
   }
 
+  /// Below lines are custom error part
+  @override
+  void onData(key) {
+    _hasFutureError = false;
+  }
+
   void updateHasFutureError() {
     _hasFutureError = false;
   }

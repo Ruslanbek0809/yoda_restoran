@@ -323,32 +323,6 @@ List<FoodCategory> foodCategoryList = [
   FoodCategory(9, 'FInallll'),
 ];
 
-List<MealUI> mealList = [
-  MealUI(0, 'Sandwich', 120, 'g', 25, 'assets/breakfast_sandwich.jpg', [
-    AdditionalFoodModel('Peýnir', 10, false),
-    AdditionalFoodModel('Ýumurtga', 10, false),
-    AdditionalFoodModel('Bet zat', 15, false),
-  ]),
-  MealUI(1, 'Egg', 120, 'g', 10, 'assets/breakfast_egg.jpg', [
-    AdditionalFoodModel('Peýnir', 10, false),
-    AdditionalFoodModel('Ýumurtga', 10, false),
-    AdditionalFoodModel('Bet zat', 15, false),
-  ]),
-  MealUI(2, 'Sandwich', 300, 'ml', 15, 'assets/breakfast_latte.jpg', [
-    AdditionalFoodModel('Peýnir', 10, false),
-    AdditionalFoodModel('Ýumurtga', 10, false),
-    AdditionalFoodModel('Bet zat', 15, false),
-  ]),
-  MealUI(3, 'Burger', 150, 'g', 25, 'assets/burgerzone.jpg', [
-    AdditionalFoodModel('Peýnir', 10, false),
-    AdditionalFoodModel('Ýumurtga', 10, false),
-    AdditionalFoodModel('Bet zat', 15, false),
-  ]),
-];
-
-
-
-
   // late AnimationController _buttonController;
   
   // _buttonController = AnimationController(

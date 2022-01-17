@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                                 ? CustomScrollView(
                                     slivers: [
                                       SliverAppBar(
-                                        expandedHeight: 0.1.sh,
+                                        expandedHeight: 0.2.sh,
                                         backgroundColor: Colors.transparent,
                                         elevation: 0,
                                         toolbarHeight: 60.h,
@@ -162,7 +162,7 @@ class _HomeViewState extends State<HomeView> {
                                               modelCallBack: () async {
                                                 await _refreshController
                                                     .requestRefresh();
-                                                model.updateHasFutureError();
+                                                // model.updateHasFutureError();
                                               },
                                             )
                                           ],
@@ -416,8 +416,8 @@ class _HomeViewState extends State<HomeView> {
                                                                       .clearSelectedMainCatRess();
                                                                   await _refreshController
                                                                       .requestRefresh();
-                                                                  model
-                                                                      .updateHasFutureError();
+                                                                  // model
+                                                                  //     .updateHasFutureError();
                                                                 }),
                                                           ],
                                                         ),
@@ -454,7 +454,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                           ),
                           //------------------ BOTTOM CART ---------------------//
-                          HomeBottomCart(),
+                          if (!model.hasFutureError) HomeBottomCart(),
                         ],
                       ),
           ),
