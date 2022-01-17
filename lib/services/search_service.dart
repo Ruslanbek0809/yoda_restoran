@@ -11,7 +11,7 @@ class SearchService {
 
   /// STARTS MAIN SEARCH and GETS result
   Future<List<SearchRestaurant?>> startMainSearch(String searchText) async {
-    await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 1));
     final result = await _api.startMainSearch(searchText);
     return result;
   }

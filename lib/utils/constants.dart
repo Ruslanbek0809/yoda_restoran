@@ -2,8 +2,7 @@ class Constants {
   static const appName = "YodaRestoran";
 
   static const baseUrlTk = 'https://yodarestoran.com/';
-  // static const baseUrlTk = 'http://yodarestoran.com:7000/';
-  static const baseUrlRu = 'https://yodarestoran.com/';
+  static const baseUrlRu = 'https://yodarestoran.com/ru/';
 
   /// Firebase topic name
   static const topicAllDevices = 'yoda_res';
@@ -18,6 +17,9 @@ class Constants {
 
   /// SharedPreferences
   static const accessToken = 'accessToken';
+
+  /// Saved lang
+  static const savedLang = 'locale';
 
   /// Device Types
   static const TABLET = "tablet";

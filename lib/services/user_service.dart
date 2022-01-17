@@ -44,7 +44,7 @@ class UserService {
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
-        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser');
+        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser!.accessToken}');
   }
 
   Future<void> loginUser(
@@ -108,13 +108,16 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
-            accessToken: response.data['access'],
+            accessToken: response.data['access'] as String,
           ),
         );
 
         /// Step 3. SETS accessToken to Constants.accessToken var
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString(Constants.accessToken, response.data['access']);
+        await prefs.setString(
+            Constants.accessToken, response.data['access'] as String);
+        final String? _accessToken = prefs.getString(Constants.accessToken);
+        log.i('ACCESS TOKEN after setString: $_accessToken');
 
         /// Step 4. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);

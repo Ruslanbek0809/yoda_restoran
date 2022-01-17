@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                                 ? CustomScrollView(
                                     slivers: [
                                       SliverAppBar(
-                                        expandedHeight: 0.2.sh,
+                                        expandedHeight: 0.3.sh,
                                         backgroundColor: Colors.transparent,
                                         elevation: 0,
                                         toolbarHeight: 60.h,

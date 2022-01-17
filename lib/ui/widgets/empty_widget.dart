@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:yoda_res/shared/shared.dart';
 
 class EmptyWidget extends StatelessWidget {
   final String? text;
   final String? svg;
-  final double? leftPadding;
   const EmptyWidget({
     this.text,
     this.svg,
-    this.leftPadding,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    /// Below was implemented Workaround bc SvgPicture makes its svg smaller when padding is applied
-    return Stack(
-      alignment: Alignment.centerRight,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Positioned(
-          left: leftPadding,
-          child: SvgPicture.asset(svg!),
+        Center(child: SvgPicture.asset(svg!)),
+        SizedBox(height: 0.075.sh),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Text(
+            text!,
+            style: kts18ErrorEmptyText,
+            textAlign: TextAlign.center,
+          ).tr(),
         ),
       ],
     );

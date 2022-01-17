@@ -63,8 +63,12 @@
     "selectAddressPls": "Salgyňyzy saýlaň",
     "selectAddress": "Salgyny saýla",
     "addNewAddress": "Täze salgy goş",
+    "reload": "Täzele",
+    "errorOccured": "Näsazlyk ýüze çykdy",
     "smthWentWrong": "Bula bolmady... :(",
-    "reload": "Täzeden",
+    "nothingFound": "Hiç zat tapylmady",
+    "noOrdersYet": "Siz entek sargyt etmediňiz",
+    "noAddressesYet": "Siz entek salgy goşmadyňyz",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

@@ -100,9 +100,9 @@ TextStyle kts18Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle kts18ErrorText = TextStyle(
+TextStyle kts18ErrorEmptyText = TextStyle(
   fontSize: 18.sp,
-  color: kcErrorColor,
+  color: kcErrorEmptyColor,
 );
 
 TextStyle kts18NotificationText = TextStyle(

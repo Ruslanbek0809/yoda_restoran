@@ -159,6 +159,7 @@ class DrawerView extends StatelessWidget {
                             await context.setLocale(context
                                 .supportedLocales[0]); // ASSIGNS turkmen lang
                             model.collapseExpansionTile(expansionTile);
+                            model.reinitializeDio();
                           },
                           child: Padding(
                             padding: EdgeInsets.only(
@@ -183,6 +184,7 @@ class DrawerView extends StatelessWidget {
                             await context.setLocale(context
                                 .supportedLocales[1]); // ASSIGNS russian lang
                             model.collapseExpansionTile(expansionTile);
+                            model.reinitializeDio();
                           },
                           child: Padding(
                             padding: EdgeInsets.only(left: 66.w, top: 5.w),

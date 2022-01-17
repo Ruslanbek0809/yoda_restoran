@@ -9,6 +9,7 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 class DrawerViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+  final _apiRootService = locator<ApiRootService>();
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
@@ -33,4 +34,7 @@ class DrawerViewModel extends BaseViewModel {
     expansionTile.currentState?.collapse();
     notifyListeners();
   }
+
+  /// REINITIALIZES app api url
+  Future<void> reinitializeDio() async => await _apiRootService.initDio();
 }

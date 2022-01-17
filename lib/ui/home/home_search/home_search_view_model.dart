@@ -22,11 +22,14 @@ class HomeSearchViewModel extends BaseViewModel {
   Future<void> startMainSearch(String? searchText) async {
     log.i('startMainSearch() searchText: $searchText');
     _searchText = searchText;
-    if (searchText != null && searchText.isEmpty || searchText!.length < 3)
-      return;
+
+    if (_searchText!.isEmpty) clearSearch();
+
+    if (searchText!.isEmpty || searchText.length < 3) return;
 
     _searchRestaurants =
         await runBusyFuture(_searchService.startMainSearch(searchText));
+    log.i('startMainSearch() RESULT: ${_searchRestaurants.length}');
   }
 
   /// STARTS MAIN SEARCH and GETS result

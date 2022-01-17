@@ -38,6 +38,8 @@ class ProfileViewModel extends BaseViewModel {
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(Constants.accessToken);
+    final String? _accessToken = prefs.getString(Constants.accessToken);
+    log.i('ACCESS TOKEN after remove: $_accessToken');
     await _userService.logoutUser();
     await _hiveDbService.clearCart();
     await navToHomeByRemovingAll();

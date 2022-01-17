@@ -4,6 +4,7 @@ import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
@@ -101,7 +102,7 @@ void printLog(dynamic data) {
 
 Future<void> showErrorFlashBar({
   required BuildContext context,
-  String msg = 'Näsazlyk ýüze çykdy',
+  String msg = LocaleKeys.errorOccured,
   required EdgeInsets margin,
 }) async {
   await showFlash(

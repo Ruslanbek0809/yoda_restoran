@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,20 +15,20 @@ class ViewErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          YodaImage(
-            image: 'assets/error.jpg',
-            height: 0.4.sh,
-            width: 0.7.sw,
+          SvgPicture.asset(
+            'assets/error.svg',
+            width: 0.65.sw,
           ),
+          SizedBox(height: 0.075.sh),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
               LocaleKeys.smthWentWrong,
-              style: kts18ErrorText,
+              style: kts18ErrorEmptyText,
               textAlign: TextAlign.center,
             ).tr(),
           ),
-          SizedBox(height: 35.h),
+          SizedBox(height: 0.05.sh),
           SizedBox(
             width: 0.7.sw,
             child: CustomTextChildButton(

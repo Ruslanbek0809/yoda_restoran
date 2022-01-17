@@ -19,13 +19,14 @@ class ApiRootService {
     /// Reason for usage of SharedPreferences is that ERROR is occuring in _userService.currentUser.accessToken (Stacked itself error related to services)
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? accessToken = prefs.getString(Constants.accessToken);
+    final savedLocale = prefs.getString(
+        Constants.savedLang); // GETS saved locale. In package feature
 
     if (accessToken != null)
       _headers["Authorization"] = "Bearer " + accessToken;
 
-    // dio.options.baseUrl =
-    //     lang == 'tm' ? MyConstants.baseUrlTk : MyConstants.baseUrlRu;
-    dio.options.baseUrl = Constants.baseUrlTk;
+    dio.options.baseUrl =
+        savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
     dio.options.headers = _headers;
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
