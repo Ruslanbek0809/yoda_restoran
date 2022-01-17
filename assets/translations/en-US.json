@@ -34,8 +34,8 @@
     "contact_us": "Biziň bilen habarlaşyň",
     "lang_en": "Türkmen",
     "lang_ru": "Русский",
-    "selfPickUp": "Eltip bermek",
-    "delivery": "Özüm aljak",
+    "selfPickUp": "Özüm aljak",
+    "delivery": "Eltip bermek",
     "workingHours": "Sargyt alýan wagty",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"

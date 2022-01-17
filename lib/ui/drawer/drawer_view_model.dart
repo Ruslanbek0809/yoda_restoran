@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/services/services.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 
 class DrawerViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
@@ -25,4 +27,10 @@ class DrawerViewModel extends BaseViewModel {
 
   Future<void> navToAddressesView() async =>
       await _navService.navigateTo(Routes.addressesView);
+
+  void collapseExpansionTile(
+      GlobalKey<CustomExpansionTileState> expansionTile) {
+    expansionTile.currentState?.collapse();
+    notifyListeners();
+  }
 }

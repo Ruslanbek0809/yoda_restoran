@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 import 'drawer_view_model.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class DrawerView extends StatelessWidget {
-  const DrawerView({Key? key}) : super(key: key);
+  DrawerView({Key? key}) : super(key: key);
 
   Widget menuList(String value, DrawerViewModel model) {
     String title;
@@ -86,6 +87,8 @@ class DrawerView extends StatelessWidget {
     );
   }
 
+  final GlobalKey<CustomExpansionTileState> expansionTile = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DrawerViewModel>.reactive(
@@ -130,7 +133,8 @@ class DrawerView extends StatelessWidget {
                       dividerTheme: DividerThemeData(
                           color: Theme.of(context).colorScheme.background),
                     ),
-                    child: ExpansionTile(
+                    child: CustomExpansionTile(
+                      key: expansionTile,
                       initiallyExpanded: false,
                       onExpansionChanged: (value) {
                         printLog('onExpansionChanged()');
@@ -147,13 +151,14 @@ class DrawerView extends StatelessWidget {
                         // context.locale.toString(),
                         style: kts16DarkSemiBoldText,
                       ).tr(),
-                      iconColor: AppTheme.CONTACT_COLOR,
-                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                      // iconColor: AppTheme.CONTACT_COLOR,
+                      // expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () async {
                             await context.setLocale(context
                                 .supportedLocales[0]); // ASSIGNS turkmen lang
+                            model.collapseExpansionTile(expansionTile);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(
@@ -177,6 +182,7 @@ class DrawerView extends StatelessWidget {
                           onTap: () async {
                             await context.setLocale(context
                                 .supportedLocales[1]); // ASSIGNS russian lang
+                            model.collapseExpansionTile(expansionTile);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(left: 66.w, top: 5.w),
