@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import 'checkout_view_model.dart';
 import '../../widgets/custom_text_child_button.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -132,7 +134,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                   child: CustomTextChildButton(
                     borderRadius: AppTheme().radius15,
                     padding: EdgeInsets.symmetric(vertical: 14.h),
-                    child: Text('Saýla', style: ktsButton18Text),
+                    child: Text(LocaleKeys.select, style: ktsButton18Text).tr(),
                     onPressed: () {
                       model.savePaymentType();
                       completer(SheetResponse());

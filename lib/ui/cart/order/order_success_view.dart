@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'order_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OrderSuccessView extends StatelessWidget {
   const OrderSuccessView({Key? key}) : super(key: key);
@@ -37,19 +39,19 @@ class OrderSuccessView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Text(
-                  'Sargydyňyz restorana geçirildi',
+                  LocaleKeys.yourOrderWasPassedToRes,
                   textAlign: TextAlign.center,
                   style: ktsDefault20BoldText,
-                ),
+                ).tr(),
               ),
               SizedBox(height: 10.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Text(
-                  'Sargydy tassyklamak üçin restorandan geljek jaňa garaşyň',
+                  LocaleKeys.toConfirmOrderWairForCallFromRes,
                   textAlign: TextAlign.center,
                   style: kts16HelperText,
-                ),
+                ).tr(),
               ),
               SizedBox(height: 50.h),
               SizedBox(
@@ -65,9 +67,9 @@ class OrderSuccessView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                     ),
                     child: Text(
-                      'Baş sahypa',
+                      LocaleKeys.homeScreen,
                       style: ktsButton18Text,
-                    ),
+                    ).tr(),
                     onPressed: model.navToHomeByRemovingAll,
                   ),
                 ),
@@ -75,9 +77,9 @@ class OrderSuccessView extends StatelessWidget {
               SizedBox(height: 15.h),
               TextButton(
                 child: Text(
-                  'Sargytlar',
+                  LocaleKeys.orders,
                   style: kts18Text,
-                ),
+                ).tr(),
                 onPressed: model.navToOrdersByRemovingAll,
               ),
             ],

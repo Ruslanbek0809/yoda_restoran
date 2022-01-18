@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -119,9 +120,9 @@ class OrderViewModel extends ReactiveViewModel {
     log.i('showCancelWaitingOrderDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.cancelWaitingOrder,
-      title: 'Siz sargydy ýatyrmakçymy?',
-      mainButtonTitle: 'Ýok',
-      secondaryButtonTitle: 'Hawa',
+      title: LocaleKeys.wannaCancelOrder,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.yes,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
@@ -132,8 +133,8 @@ class OrderViewModel extends ReactiveViewModel {
     log.i('showCancelAcceptedOrderDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.cancelAcceptedOrder,
-      title: 'Sargyt taýýarlanýar.',
-      data: 'Sargydy ýatyrmak üçin restorana jaň ediň!',
+      title: LocaleKeys.orderIsPreparing,
+      data: LocaleKeys.toCancelOrderCallRes,
       showIconInMainButton: false,
       barrierDismissible: true,
     );

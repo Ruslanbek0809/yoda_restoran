@@ -439,7 +439,8 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               ).tr(),
                         // onPressed: model.navToOrdersByRemovingAll,
                         onPressed: () async {
-                          if (model.selectedAddress!.id == -1)
+                          if (model.selectedAddress!.id == -1 &&
+                              model.isDelivery)
                             await showErrorFlashBar(
                               context: context,
                               msg: LocaleKeys.selectAddressPls,

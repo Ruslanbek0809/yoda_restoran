@@ -67,7 +67,7 @@ class MealDialogView extends StatelessWidget {
     return ViewModelBuilder<MealViewModel>.reactive(
       builder: (context, model, child) => (Platform.isIOS)
           ? CupertinoAlertDialog(
-              title: Text(request.title!, style: ktsDefault20BoldText),
+              title: Text(request.title!, style: ktsDefault20BoldText).tr(),
               content: Text(
                 request.description!,
                 style: ktsDefault14DialogText,
@@ -164,7 +164,7 @@ class ClearCartDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText),
+                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -249,13 +249,13 @@ class RemoveCartMealDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText),
+                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       await model.updateCartMealInCart(
@@ -269,7 +269,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());
@@ -286,14 +286,14 @@ class RemoveCartMealDialogView extends StatelessWidget {
                 title: Text(
                   request.title!,
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
                 titleTextStyle: ktsDefault20BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       await model.updateCartMealInCart(
@@ -308,7 +308,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());
@@ -339,13 +339,13 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText),
+                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       // await model.clearCart();
@@ -356,7 +356,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: ktsDefault18SemiBoldText,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());
@@ -373,14 +373,14 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                 title: Text(
                   request.title!,
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
                 titleTextStyle: ktsDefault20BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       // await model.clearCart();
@@ -392,7 +392,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     child: Text(
                       request.mainButtonTitle!,
                       style: ktsDefault18SemiBoldText,
-                    ),
+                    ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
                       completer(DialogResponse());
@@ -423,8 +423,8 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText),
-                content: Text(content, style: kts18Text),
+                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                content: Text(content, style: kts18Text).tr(),
               )
             : AlertDialog(
                 shape:
@@ -435,12 +435,12 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
                 title: Text(
                   request.title!,
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
                 titleTextStyle: ktsDefault20BoldText,
                 content: Text(
                   content,
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
                 contentTextStyle: kts18Text,
               );
       },

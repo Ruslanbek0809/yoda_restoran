@@ -1,9 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_services/stacked_services.dart' hide Trans;
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PushNotificationService {
   final log = getLogger('PushNotificationService');
@@ -61,7 +63,7 @@ class PushNotificationService {
             data: NotificationDialogData(
               lottie: 'assets/success_check.json',
               restaurant: noti.title!,
-              content: 'Siziň sargydyňyz kabul edildi.',
+              content: LocaleKeys.yourOrderAccepted.tr(),
             ),
           );
           break;
@@ -74,7 +76,7 @@ class PushNotificationService {
             data: NotificationDialogData(
               lottie: 'assets/pizzabox.json',
               restaurant: noti.title!,
-              content: 'Siziň sargydyňyz taýýar.',
+              content: LocaleKeys.yourOrderReady.tr(),
             ),
           );
           break;
@@ -87,7 +89,7 @@ class PushNotificationService {
             data: NotificationDialogData(
               lottie: 'assets/foodbag.json',
               restaurant: noti.title!,
-              content: 'Siziň sargydyňyz ugradyldy.',
+              content: LocaleKeys.yourOrderSent.tr(),
             ),
           );
           break;
