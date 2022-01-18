@@ -361,4 +361,28 @@ class UserService {
       rethrow;
     }
   }
+
+  Future<void> cancelOrder(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'status': 0}),
+      );
+      log.v('RESPONSE: api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
 }

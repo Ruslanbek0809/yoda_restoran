@@ -339,15 +339,43 @@ class OrdersView extends StatelessWidget {
                                               //         LocaleKeys.reOrder,
                                               //         style: ktsButton18Text,
                                               //       ).tr()
-                                              : Text(
-                                                  LocaleKeys.cancelOrder,
-                                                  style: ktsButton18Text,
-                                                ).tr(),
+                                              : model.isCancelingOrder &&
+                                                      order.status == 1
+                                                  ? ButtonLoading()
+                                                  : Text(
+                                                      LocaleKeys.cancelOrder,
+                                                      style: ktsButton18Text,
+                                                    ).tr(),
                                           onPressed: () async {
                                             switch (order.status) {
                                               case 1:
                                                 await model
-                                                    .showCancelWaitingOrderDialog();
+                                                    .showCancelWaitingOrderDialog(
+                                                  order.id!,
+                                                  () async {
+                                                    showErrorFlashBar(
+                                                      context: context,
+                                                      msg: LocaleKeys
+                                                          .orderCancelSuccess
+                                                          .tr(),
+                                                      margin: EdgeInsets.only(
+                                                        left: 0.1.sw,
+                                                        right: 0.1.sw,
+                                                        bottom: 0.05.sh,
+                                                      ),
+                                                    );
+                                                  },
+                                                  () async {
+                                                    showErrorFlashBar(
+                                                      context: context,
+                                                      margin: EdgeInsets.only(
+                                                        left: 0.1.sw,
+                                                        right: 0.1.sw,
+                                                        bottom: 0.05.sh,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
                                                 break;
                                               case 2:
                                                 await model
@@ -361,8 +389,6 @@ class OrdersView extends StatelessWidget {
                                                               .driver!.mobile!);
                                                 break;
                                               case 4:
-                                                await model
-                                                    .showCancelWaitingOrderDialog();
                                                 break;
                                               default:
                                                 break;

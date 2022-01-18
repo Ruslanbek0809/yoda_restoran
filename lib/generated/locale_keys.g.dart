@@ -103,6 +103,7 @@ abstract class  LocaleKeys {
   static const yourOrderAccepted = 'yourOrderAccepted';
   static const yourOrderReady = 'yourOrderReady';
   static const yourOrderSent = 'yourOrderSent';
+  static const orderCancelSuccess = 'orderCancelSuccess';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

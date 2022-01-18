@@ -101,6 +101,7 @@
     "yourOrderAccepted": "Siziň sargydyňyz kabul edildi.",
     "yourOrderReady": "Siziň sargydyňyz taýýar.",
     "yourOrderSent": "Siziň sargydyňyz ugradyldy.",
+    "orderCancelSuccess": "Sargyt üstünlikli ýatyryldy",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

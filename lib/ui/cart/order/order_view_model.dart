@@ -15,6 +15,7 @@ class OrderViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _orderService = locator<OrderService>();
   final _dialogService = locator<DialogService>();
+  final _userService = locator<UserService>();
 
 //------------------------ ORDER PART ----------------------------//
 
@@ -115,10 +116,17 @@ class OrderViewModel extends ReactiveViewModel {
 
 //------------------------ DIALOGS ----------------------------//
 
+  bool _isCancelingOrder = false;
+  bool get isCancelingOrder => _isCancelingOrder;
+
   /// SHOWS cancel waiting order Dialog
-  Future showCancelWaitingOrderDialog() async {
+  Future showCancelWaitingOrderDialog(
+    int orderId,
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
     log.i('showCancelWaitingOrderDialog()');
-    await _dialogService.showCustomDialog(
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.cancelWaitingOrder,
       title: LocaleKeys.wannaCancelOrder,
       mainButtonTitle: LocaleKeys.no,
@@ -126,6 +134,24 @@ class OrderViewModel extends ReactiveViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
+    if (respData!.data == true) {
+      _isCancelingOrder = true;
+      notifyListeners();
+      await _userService.cancelOrder(
+        orderId,
+        () {
+          _isCancelingOrder = false;
+          notifyListeners();
+          onSuccessForView!();
+          getOrders();
+        },
+        () {
+          _isCancelingOrder = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      );
+    }
   }
 
   /// SHOWS cancel accepted order Dialog

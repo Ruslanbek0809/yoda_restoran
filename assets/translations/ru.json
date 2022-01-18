@@ -101,6 +101,7 @@
     "yourOrderAccepted": "Ваш заказ принят.",
     "yourOrderReady": "Ваш заказ готов.",
     "yourOrderSent": "Ваш заказ отправлен.",
+    "orderCancelSuccess": "Заказ успешно отменен",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

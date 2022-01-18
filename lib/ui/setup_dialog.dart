@@ -36,7 +36,9 @@ void setupDialog() {
         ),
     DialogType.cancelWaitingOrder: (context, sheetRequest, completer) =>
         CancelWaitingOrderDialogView(
-            request: sheetRequest, completer: completer),
+          request: sheetRequest,
+          completer: completer,
+        ),
     DialogType.cancelAcceptedOrder: (context, sheetRequest, completer) =>
         CancelAcceptedOrderDialogView(
           request: sheetRequest,
@@ -348,8 +350,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
-                      // await model.clearCart();
-                      completer(DialogResponse());
+                      completer(DialogResponse(data: true));
                     },
                   ),
                   CustomTextChildButton(
@@ -359,7 +360,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
-                      completer(DialogResponse());
+                      completer(DialogResponse(data: false));
                     },
                   ),
                 ],
@@ -383,8 +384,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
-                      // await model.clearCart();
-                      completer(DialogResponse());
+                      completer(DialogResponse(data: true));
                     },
                   ),
                   SizedBox(width: 42.w),
@@ -395,7 +395,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     ).tr(),
                     color: Colors.transparent,
                     onPressed: () async {
-                      completer(DialogResponse());
+                      completer(DialogResponse(data: false));
                     },
                   ),
                 ],
