@@ -118,18 +118,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
                   return true;
                 },
-                dialogConfig: DialogConfig(
-                  affirmativeText: 'Doldur',
-                  negativeText: 'Ýok',
-                  dialogTitle: 'Kody doldur',
-                  dialogContent: 'Bu kody doldurmak isleýärsiňizmi?',
-                ),
-                // obscureText: false,
-                // obscuringCharacter: '*',
-                // obscuringWidget: FlutterLogo(
-                //   size: 24,
-                // ),
-                // blinkWhenObscuring: true,
+                enablePinAutofill: false,
               ),
             ),
             verticalSpaceSmall,

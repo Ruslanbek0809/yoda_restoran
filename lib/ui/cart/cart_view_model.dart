@@ -91,9 +91,9 @@ class CartViewModel extends ReactiveViewModel {
     log.i('showRemoveCartMealDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.removeCartMeal,
-      title: 'Harydy aýyrmakçymy?',
-      mainButtonTitle: 'Ýok',
-      secondaryButtonTitle: 'Aýyr',
+      title: LocaleKeys.wannaRemoveMeal,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.remove,
       showIconInMainButton: false,
       barrierDismissible: true,
       data: CartMealDialogData(

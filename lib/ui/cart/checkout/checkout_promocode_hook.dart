@@ -55,15 +55,11 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
                       child: model.promocode != null
-                          ?
-                          // model.promocode!.id != -1
-                          //     ?
-                          SvgPicture.asset(
+                          ? SvgPicture.asset(
                               'assets/check_outlined_circle.svg',
                               color: AppTheme.MAIN,
                               width: 16.w,
                             )
-                          // : SizedBox()
                           : SizedBox(),
                       // SvgPicture.asset(
                       //   'assets/warning_circle.svg',
@@ -91,16 +87,17 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
             : Padding(
                 padding: EdgeInsets.only(
                     top: 8.h, bottom: 8.h, left: 0.15.sw, right: 20.w),
-                child: Text(
-                  model.promocode != null
-                      ? model.promocode!.id != -1
-                          ? model.promocode!.promoType == 1
-                              ? 'Siziň sargydyňyzdan ${model.promocode!.discount} manat aýrylar'
-                              : 'Siziň sargydyňyzdan ${model.promocode!.discount}% aýrylar'
-                          : ''
-                      : '',
-                  style: kts14HelperText,
-                ),
+                child: model.promocode != null
+                    ? model.promocode!.promoType == 1
+                        ? Text(
+                            LocaleKeys.promocodeRemoveTMT,
+                            style: kts14HelperText,
+                          ).tr(args: [model.promocode!.discount.toString()])
+                        : Text(
+                            LocaleKeys.promocodeRemoveDiscount,
+                            style: kts14HelperText,
+                          ).tr(args: [model.promocode!.discount.toString()])
+                    : SizedBox(),
               ),
       ],
     );

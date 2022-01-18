@@ -102,6 +102,10 @@
     "yourOrderReady": "Ваш заказ готов.",
     "yourOrderSent": "Ваш заказ отправлен.",
     "orderCancelSuccess": "Заказ успешно отменен",
+    "wannaRemoveMeal": "Хотите убрать?",
+    "remove": "Убрать",
+    "promocodeRemoveTMT": "{} TMT будут списаны с вашего заказа.",
+    "promocodeRemoveDiscount": "{} % будут списаны с вашего заказа.",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

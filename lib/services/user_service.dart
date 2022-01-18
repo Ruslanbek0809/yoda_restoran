@@ -44,7 +44,7 @@ class UserService {
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
-        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser!.accessToken}');
+        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser?.accessToken}');
   }
 
   Future<void> loginUser(
