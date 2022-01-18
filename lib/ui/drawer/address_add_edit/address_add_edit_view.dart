@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'add_edit_address_hook.dart';
 import 'address_add_edit_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddressAddEditView extends StatelessWidget {
   AddressAddEditView({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ class AddressAddEditView extends StatelessWidget {
                 ),
               ),
               centerTitle: true,
-              title: Text('Salgy', style: ktsDefault22DarkText),
+              title: Text(LocaleKeys.address, style: ktsDefault22DarkText).tr(),
             ),
           ),
           body: Stack(
@@ -68,9 +70,9 @@ class AddressAddEditView extends StatelessWidget {
                             children: [
                               TextButton(
                                 child: Text(
-                                  'Salgyny aýyr',
+                                  LocaleKeys.removeAddressButton,
                                   style: kts18Text,
-                                ),
+                                ).tr(),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               SizedBox(height: 15.h),
@@ -88,9 +90,9 @@ class AddressAddEditView extends StatelessWidget {
                                   child: model.isBusy
                                       ? ButtonLoading()
                                       : Text(
-                                          'Salgyny goş',
+                                          LocaleKeys.addNewAddressButton,
                                           style: ktsButton18Text,
-                                        ),
+                                        ).tr(),
                                   onPressed: () async {
                                     FocusScope.of(context)
                                         .unfocus(); // UNFOCUSES all textfield b4 data fetch

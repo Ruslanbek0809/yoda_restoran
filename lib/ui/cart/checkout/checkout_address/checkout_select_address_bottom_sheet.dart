@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/ui/cart/checkout/checkout_address/checkout_address_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -167,9 +169,9 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                               ),
                                               SizedBox(width: 10.w),
                                               Text(
-                                                'Täze salgy goş...',
+                                                LocaleKeys.addNewAddress,
                                                 style: kts18Text,
-                                              ),
+                                              ).tr(),
                                             ],
                                           ),
                                         ),
@@ -204,13 +206,13 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 17.w),
                           ),
                           child: Text(
-                            'Salgyny saýla',
+                            LocaleKeys.selectAddress,
                             style: TextStyle(
                               color: AppTheme.WHITE,
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w400,
                             ),
-                          ),
+                          ).tr(),
                           onPressed: () {
                             model.saveSelectedAddress();
                             completer(SheetResponse());

@@ -65,12 +65,23 @@ abstract class  LocaleKeys {
   static const selectAddressPls = 'selectAddressPls';
   static const selectAddress = 'selectAddress';
   static const addNewAddress = 'addNewAddress';
+  static const addNewAddressButton = 'addNewAddressButton';
+  static const address = 'address';
+  static const removeAddressButton = 'removeAddressButton';
+  static const ashgabat = 'ashgabat';
+  static const city = 'city';
+  static const street = 'street';
+  static const enterStreet = 'enterStreet';
+  static const house = 'house';
+  static const apartment = 'apartment';
+  static const floor = 'floor';
   static const reload = 'reload';
   static const errorOccured = 'errorOccured';
   static const smthWentWrong = 'smthWentWrong';
   static const nothingFound = 'nothingFound';
   static const noOrdersYet = 'noOrdersYet';
   static const noAddressesYet = 'noAddressesYet';
+  static const myOrders = 'myOrders';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

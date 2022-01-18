@@ -7,6 +7,7 @@ import '../../../utils/utils.dart';
 
 import 'addresses_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddressesView extends StatelessWidget {
   const AddressesView({Key? key}) : super(key: key);
@@ -37,7 +38,10 @@ class AddressesView extends StatelessWidget {
                   ),
                 ),
                 centerTitle: true,
-                title: Text('Salgylar', style: ktsDefault22DarkText)),
+                title: Text(
+                  LocaleKeys.addresses,
+                  style: ktsDefault22DarkText,
+                ).tr()),
           ),
           body: model.isBusy
               ? LoadingWidget()
@@ -82,9 +86,9 @@ class AddressesView extends StatelessWidget {
                               padding:
                                   EdgeInsets.fromLTRB(0.w, 5.h, 0.5.sw, 5.h),
                               child: Text(
-                                'Täze salgy goş...',
+                                LocaleKeys.addNewAddress,
                                 style: kts18Text,
-                              ),
+                              ).tr(),
                             ),
                           ),
                         ),

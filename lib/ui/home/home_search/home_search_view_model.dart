@@ -41,6 +41,7 @@ class HomeSearchViewModel extends BaseViewModel {
   }
 
 //------------------------ NAVIGATION ----------------------------//
+  void navBack() => _navService.back();
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
         Routes.resDetailsView,

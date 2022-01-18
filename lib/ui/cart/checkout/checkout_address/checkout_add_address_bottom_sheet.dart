@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import 'add_address_bottom_sheet_hook.dart';
-import '../checkout_view_model.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'checkout_address_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -89,7 +89,10 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       child: model.isBusy
                           ? ButtonLoading()
-                          : Text('Salgyny goş', style: ktsButton18Text),
+                          : Text(
+                              LocaleKeys.addNewAddressButton,
+                              style: ktsButton18Text,
+                            ).tr(),
                     ),
                     onPressed: () async {
                       FocusScope.of(context)

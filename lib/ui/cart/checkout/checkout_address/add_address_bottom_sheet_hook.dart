@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/utils.dart';
 import 'checkout_address_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddAddressBottomSheetHook
     extends HookViewModelWidget<CheckoutAddressViewModel> {
@@ -17,7 +19,8 @@ class AddAddressBottomSheetHook
   @override
   Widget buildViewModelWidget(
       BuildContext context, CheckoutAddressViewModel model) {
-    final _cityController = useTextEditingController(text: 'Aşgabat');
+    final _cityController =
+        useTextEditingController(text: LocaleKeys.ashgabat.tr());
     final _streetController = useTextEditingController();
     final _apartmentController = useTextEditingController();
     final _houseController = useTextEditingController();
@@ -30,7 +33,7 @@ class AddAddressBottomSheetHook
         // --------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w),
-          child: Text('Şäher', style: kts14HelperText),
+          child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
         ),
         IgnorePointer(
           child: TextFormField(
@@ -47,7 +50,7 @@ class AddAddressBottomSheetHook
                 borderSide:
                     BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
               ),
-              hintText: 'Aşgabat',
+              hintText: LocaleKeys.ashgabat.tr(),
               hintStyle: ktsDefault18HelperText,
             ),
             validator: (value) => null,
@@ -56,7 +59,7 @@ class AddAddressBottomSheetHook
         // --------------- STREET -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w, top: 25.h),
-          child: Text('Köçe', style: kts14HelperText),
+          child: Text(LocaleKeys.street, style: kts14HelperText).tr(),
         ),
         TextFormField(
           controller: _streetController,
@@ -96,7 +99,7 @@ class AddAddressBottomSheetHook
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
-                  labelText: 'Jaý',
+                  labelText: LocaleKeys.apartment.tr(),
                   labelStyle: kts14HelperText,
                 ),
                 validator: model.updateHouse,
@@ -118,7 +121,7 @@ class AddAddressBottomSheetHook
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
-                  labelText: 'Otag',
+                  labelText: LocaleKeys.house.tr(),
                   labelStyle: kts14HelperText,
                 ),
                 validator: model.updateApartment,
@@ -140,7 +143,7 @@ class AddAddressBottomSheetHook
                     borderSide:
                         BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
                   ),
-                  labelText: 'Gat',
+                  labelText: LocaleKeys.floor.tr(),
                   labelStyle: kts14HelperText,
                 ),
                 validator: model.updateFloor,
@@ -152,10 +155,7 @@ class AddAddressBottomSheetHook
         // --------------- NOTE -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w, top: 15.h),
-          child: Text(
-            'Bellik',
-            style: kts14HelperText,
-          ),
+          child: Text(LocaleKeys.note, style: kts14HelperText).tr(),
         ),
         SizedBox(height: 5.h),
         TextFormField(

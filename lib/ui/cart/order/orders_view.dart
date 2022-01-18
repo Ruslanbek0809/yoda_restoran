@@ -9,6 +9,7 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'order_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OrdersView extends StatelessWidget {
   @override
@@ -39,9 +40,9 @@ class OrdersView extends StatelessWidget {
               ),
               centerTitle: true,
               title: Text(
-                'Sargytlarym',
+                LocaleKeys.myOrders,
                 style: ktsDefault22DarkText,
-              ),
+              ).tr(),
             ),
           ),
           body: model.isBusy || model.isFetchingOrders

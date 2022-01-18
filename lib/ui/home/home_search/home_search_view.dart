@@ -35,7 +35,7 @@ class HomeSearchView extends StatelessWidget {
                     color: AppTheme.FONT_COLOR,
                     size: 20.w,
                   ),
-                  onPressed: () {},
+                  onPressed: model.navBack,
                 ),
                 title: HomeSearchHook(),
                 actions: [
