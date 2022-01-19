@@ -11,7 +11,9 @@ import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
-  const CheckoutPromocodeHook({Key? key}) : super(key: key);
+  CheckoutPromocodeHook({Key? key}) : super(key: key);
+
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
@@ -68,8 +70,10 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                       // ),
                     ),
                   ),
-                  onChanged: model.searchPromocode,
-                  onSubmitted: model.searchPromocode,
+                  onChanged: (value) =>
+                      _debouncer.run(() => model.searchPromocode(value)),
+                  onSubmitted: (value) =>
+                      _debouncer.run(() => model.searchPromocode(value)),
                 ),
               ),
             ),
