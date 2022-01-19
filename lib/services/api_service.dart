@@ -209,6 +209,7 @@ class ApiService {
           _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
         });
       }
+      log.v('RESPONSE: _searchRestaurants => ${_searchRestaurants.length}');
 
       return _searchRestaurants;
     } on DioError catch (error) {

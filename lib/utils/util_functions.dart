@@ -11,6 +11,7 @@ import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:async';
 
 /// Method to round trailing zero based on its type
 RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
@@ -281,48 +282,23 @@ Future<dynamic> showAlertDialog({
   );
 }
 
-/// Keyboard Actions
-// KeyboardActionsConfig buildKeyboardActionsConfig(
-//     BuildContext context, List<FocusNode> list) {
-//   String currentLang =
-//       Provider.of<LangProvider>(context, listen: false).currentLang;
-//   return KeyboardActionsConfig(
-//     keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
-//     keyboardBarColor: Colors.grey[200],
-//     nextFocus: true,
-//     actions: list
-//         .map((e) => KeyboardActionsItem(focusNode: e, toolbarButtons: [
-//               (node) {
-//                 return GestureDetector(
-//                   onTap: () => node.unfocus(),
-//                   child: Container(
-//                     padding: EdgeInsets.all(8.0),
-//                     child: Text(
-//                       i18n(currentLang, ki18nKbrdClose),
-//                       style: TextStyle(
-//                           color: AppTheme.textColor,
-//                           fontWeight: FontWeight.w800),
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ]))
-//         .toList(),
-//   );
-// }
+/// DEBOUNCE for search
 
-List<FoodCategory> foodCategoryList = [
-  FoodCategory(0, 'Ertirlikler'),
-  FoodCategory(1, 'Işdäaçarlar'),
-  FoodCategory(2, 'Desertler'),
-  FoodCategory(3, 'Steak'),
-  FoodCategory(4, 'Burgerlar'),
-  FoodCategory(5, 'Bbashgalar'),
-  FoodCategory(6, 'Yene bashgalar'),
-  FoodCategory(7, 'Sonkylar'),
-  FoodCategory(8, 'We sonkylar'),
-  FoodCategory(9, 'FInallll'),
-];
+class Debouncer {
+  final int milliseconds;
+  VoidCallback? action;
+  Timer? _timer;
+
+  Debouncer({required this.milliseconds});
+
+  run(VoidCallback action) {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+}
 
   // late AnimationController _buttonController;
   

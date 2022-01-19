@@ -4,10 +4,13 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:async';
 
 import 'home_search_view_model.dart';
 
 class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
+  final _debouncer = Debouncer(milliseconds: 500);
+
   @override
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
     model.log.i('model.searchText: ${model.searchText}');
@@ -33,8 +36,12 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
         ),
         controller: _searchController,
         autofocus: true,
-        onChanged: model.startMainSearch,
-        onSubmitted: model.startMainSearch,
+        onChanged: (value) {
+          _debouncer.run(() => model.startMainSearch(value));
+        },
+        onSubmitted: (value) {
+          _debouncer.run(() => model.startMainSearch(value));
+        },
       ),
     );
   }
