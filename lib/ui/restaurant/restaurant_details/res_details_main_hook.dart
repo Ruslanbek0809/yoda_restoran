@@ -166,8 +166,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
                     child: InkWell(
                       customBorder: CircleBorder(),
-                      onTap: () {},
-                      // onTap: model.navToResSearchView,
+                      onTap: () => model.navToResSearchView(restaurant.id!),
                       child: Padding(
                         padding: EdgeInsets.all(8.w),
                         child: Icon(

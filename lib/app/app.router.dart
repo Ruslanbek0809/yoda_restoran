@@ -22,7 +22,7 @@ import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
-import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
+import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
 import '../ui/startup/startup_view.dart';
 
 class Routes {
@@ -106,7 +106,9 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<RestaurantSearchViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => RestaurantSearchView(
-            bottomCartController: args.bottomCartController),
+          resId: args.resId,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -200,8 +202,9 @@ class ResDetailsViewArguments {
 
 /// RestaurantSearchView arguments holder class
 class RestaurantSearchViewArguments {
-  final AnimationController bottomCartController;
-  RestaurantSearchViewArguments({required this.bottomCartController});
+  final int resId;
+  final Key? key;
+  RestaurantSearchViewArguments({required this.resId, this.key});
 }
 
 /// LoginView arguments holder class

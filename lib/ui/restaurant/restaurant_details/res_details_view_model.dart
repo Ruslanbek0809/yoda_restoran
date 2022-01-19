@@ -124,8 +124,9 @@ class ResDetailsViewModel extends FutureViewModel {
     if (_navResult) await initialise(); // Workaround
   } // TODO: Change page transition here
 
-  void navToResSearchView() => _navService.navigateTo(
-      Routes.restaurantSearchView); // TODO: Change page transition here
+  void navToResSearchView(int resId) =>
+      _navService.navigateTo(Routes.restaurantSearchView,
+          arguments: RestaurantSearchViewArguments(resId: resId));
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];

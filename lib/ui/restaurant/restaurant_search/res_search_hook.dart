@@ -4,13 +4,14 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'home_search_view_model.dart';
+import 'restaurant_search_view_model.dart';
 
-class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
+class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
   final _debouncer = Debouncer(milliseconds: 500);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
+  Widget buildViewModelWidget(
+      BuildContext context, RestaurantSearchViewModel model) {
     final _searchController = useTextEditingController(text: model.searchText);
     if (model.searchText!.isEmpty) _searchController.clear();
     return Container(
@@ -32,10 +33,9 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
           ),
           controller: _searchController,
           autofocus: true,
-          onChanged: (value) =>
-              _debouncer.run(() => model.startMainSearch(value)),
+          onChanged: (value) => _debouncer.run(() => model.searchMeals(value)),
           onSubmitted: (value) =>
-              _debouncer.run(() => model.startMainSearch(value))),
+              _debouncer.run(() => model.searchMeals(value))),
     );
   }
 }

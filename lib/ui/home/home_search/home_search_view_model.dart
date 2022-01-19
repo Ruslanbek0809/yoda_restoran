@@ -32,7 +32,7 @@ class HomeSearchViewModel extends BaseViewModel {
     log.i('startMainSearch() RESULT: ${_searchRestaurants.length}');
   }
 
-  /// STARTS MAIN SEARCH and GETS result
+  /// CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
     _searchText = '';

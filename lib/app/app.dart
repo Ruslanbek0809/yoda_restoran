@@ -12,7 +12,7 @@ import '../services/services.dart';
 import '../ui/cart/cart_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
-import '../ui/restaurant/restaurant_search/restaurant_search_vew.dart';
+import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
 import '../ui/startup/startup_view.dart';
 
 @StackedApp(

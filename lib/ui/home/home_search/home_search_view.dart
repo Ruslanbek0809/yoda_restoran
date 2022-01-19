@@ -14,8 +14,6 @@ class HomeSearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeSearchViewModel>.reactive(
       builder: (context, model, child) {
-        model.log.v('model.isBusy: ${model.isBusy}');
-
         return Padding(
           padding: const EdgeInsets.only(top: kToolbarHeight / 4),
           child: Semantics(

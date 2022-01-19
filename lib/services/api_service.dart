@@ -219,4 +219,31 @@ class ApiService {
       rethrow;
     }
   }
+
+  //------------------ SEARCH APIS ---------------------//
+
+  Future<List<SearchRestaurant?>> searchMeals(
+      String searchText, int resId) async {
+    List<SearchRestaurant?> _searchRestaurants = [];
+    try {
+      Response response =
+          await _apiRoot.dio.get('api/restaurantMeals/', queryParameters: {
+        'restaurant': resId,
+        'search': searchText,
+      });
+      log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
+
+      // if (response.data != null) {
+      //   response.data.forEach((_searchRestaurant) {
+      //     _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
+      //   });
+      // }
+      log.v('RESPONSE: _searchRestaurants => ${_searchRestaurants.length}');
+
+      return _searchRestaurants;
+    } on DioError catch (error) {
+      log.v('ERROR on api/restaurantMeals/: ${error.response!.data}');
+      rethrow;
+    }
+  }
 }
