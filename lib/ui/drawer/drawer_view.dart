@@ -154,24 +154,33 @@ class DrawerView extends StatelessWidget {
                       // iconColor: AppTheme.CONTACT_COLOR,
                       // expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        GestureDetector(
-                          onTap: () async {
-                            await context.setLocale(context
-                                .supportedLocales[0]); // ASSIGNS turkmen lang
-                            model.collapseExpansionTile(expansionTile);
-                            model.reinitializeDio();
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: 66.w,
-                              top: 5.h,
-                              bottom: 5.h,
-                            ),
-                            child: Text(
-                              LocaleKeys.lang_en,
-                              style: kts16DarkText,
-                            ).tr(),
+                        CustomTextChildButton(
+                          padding: EdgeInsets.only(
+                            left: 66.w,
+                            right: 66.w,
+                            top: 5.h,
+                            bottom: 5.h,
                           ),
+                          child: Text(
+                            LocaleKeys.lang_en,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.normal,
+                              color: kcSecondaryDarkColor,
+                            ),
+                          ).tr(),
+                          color: Colors.transparent,
+                          onPressed: context.locale ==
+                                  context.supportedLocales[0]
+                              ? () {}
+                              : () async {
+                                  await context.setLocale(
+                                      context.supportedLocales[
+                                          0]); // ASSIGNS turkmen lang
+                                  model.collapseExpansionTile(expansionTile);
+                                  model.reinitializeDio();
+                                  model.navToHomeByRemovingAll();
+                                },
                         ),
                         Divider(
                           thickness: 0.5,
@@ -179,20 +188,33 @@ class DrawerView extends StatelessWidget {
                           indent: 0.18.sw,
                           color: kcDividerColor,
                         ),
-                        GestureDetector(
-                          onTap: () async {
-                            await context.setLocale(context
-                                .supportedLocales[1]); // ASSIGNS russian lang
-                            model.collapseExpansionTile(expansionTile);
-                            model.reinitializeDio();
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 66.w, top: 5.w),
-                            child: Text(
-                              LocaleKeys.lang_ru,
-                              style: kts16DarkText,
-                            ).tr(),
+                        CustomTextChildButton(
+                          padding: EdgeInsets.only(
+                            left: 66.w,
+                            right: 66.w,
+                            top: 5.h,
+                            bottom: 5.h,
                           ),
+                          child: Text(
+                            LocaleKeys.lang_ru,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.normal,
+                              color: kcSecondaryDarkColor,
+                            ),
+                          ).tr(),
+                          color: Colors.transparent,
+                          onPressed: context.locale ==
+                                  context.supportedLocales[1]
+                              ? () {}
+                              : () async {
+                                  await context.setLocale(
+                                      context.supportedLocales[
+                                          1]); // ASSIGNS russian lang
+                                  model.collapseExpansionTile(expansionTile);
+                                  model.reinitializeDio();
+                                  model.navToHomeByRemovingAll();
+                                },
                         ),
                       ],
                     ),

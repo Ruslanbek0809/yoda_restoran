@@ -37,4 +37,10 @@ class DrawerViewModel extends BaseViewModel {
 
   /// REINITIALIZES app api url
   Future<void> reinitializeDio() async => await _apiRootService.initDio();
+
+//------------------------ NAVIGATIONS ----------------------------//
+
+  /// NAVIGATES to Home by removing all previous routes
+  Future<void> navToHomeByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }
