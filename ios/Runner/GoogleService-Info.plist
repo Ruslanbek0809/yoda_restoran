@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>574423215778-fe1fmuo6a5qphh5t60nic60ke91spr4n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.574423215778-fe1fmuo6a5qphh5t60nic60ke91spr4n</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>574423215778-6eov23knapej9pqu2jt7kq4j9bl0d235.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBS4xgToc8fRrn7NnXkVuZZeLwsSZQb8_Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>574423215778</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.restoran.yoda</string>
+	<key>PROJECT_ID</key>
+	<string>restoran-39c7f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>restoran-39c7f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:574423215778:ios:05de6fe56569bf46a771fb</string>
+</dict>
+</plist>
