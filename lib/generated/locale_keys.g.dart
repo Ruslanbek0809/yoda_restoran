@@ -108,6 +108,9 @@ abstract class  LocaleKeys {
   static const remove = 'remove';
   static const promocodeRemoveTMT = 'promocodeRemoveTMT';
   static const promocodeRemoveDiscount = 'promocodeRemoveDiscount';
+  static const search = 'search';
+  static const searchEx = 'searchEx';
+  static const searchExMeal = 'searchExMeal';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

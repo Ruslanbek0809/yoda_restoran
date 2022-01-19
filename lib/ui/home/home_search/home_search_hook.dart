@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/app_colors.dart';
+import 'package:yoda_res/shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home_search_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
   final _debouncer = Debouncer(milliseconds: 500);
@@ -29,6 +32,8 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             fillColor: AppTheme.WHITE,
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
+            hintText: LocaleKeys.searchEx.tr(),
+            hintStyle: kts14HelperText,
           ),
           controller: _searchController,
           autofocus: true,

@@ -204,7 +204,7 @@ class ApiService {
           .get('api/restaurants/', queryParameters: {'search': searchText});
       // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
-      if (response.data != null) {
+      if (response.data != null && response.statusCode == 200) {
         response.data.forEach((_searchRestaurant) {
           _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
         });
@@ -222,25 +222,24 @@ class ApiService {
 
   //------------------ SEARCH APIS ---------------------//
 
-  Future<List<SearchRestaurant?>> searchMeals(
-      String searchText, int resId) async {
-    List<SearchRestaurant?> _searchRestaurants = [];
+  Future<List<Meal?>> searchMeals(String searchText, int resId) async {
+    List<Meal?> _searchMeals = [];
     try {
       Response response =
           await _apiRoot.dio.get('api/restaurantMeals/', queryParameters: {
         'restaurant': resId,
         'search': searchText,
       });
-      log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
+      // log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
 
-      // if (response.data != null) {
-      //   response.data.forEach((_searchRestaurant) {
-      //     _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
-      //   });
-      // }
-      log.v('RESPONSE: _searchRestaurants => ${_searchRestaurants.length}');
+      if (response.data != null && response.statusCode == 200) {
+        response.data.forEach((_searchMeal) {
+          _searchMeals.add(Meal.fromJson(_searchMeal));
+        });
+      }
+      log.v('RESPONSE: _searchMeals => ${_searchMeals.length}');
 
-      return _searchRestaurants;
+      return _searchMeals;
     } on DioError catch (error) {
       log.v('ERROR on api/restaurantMeals/: ${error.response!.data}');
       rethrow;

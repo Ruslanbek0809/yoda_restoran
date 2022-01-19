@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 
@@ -13,12 +14,15 @@ class RestaurantSearchViewModel extends BaseViewModel {
 
   final _searchService = locator<SearchService>();
   final _navService = locator<NavigationService>();
+  final _hiveDbService = locator<HiveDbService>();
+
+  HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   String? _searchText = '';
   String? get searchText => _searchText;
 
-  List<SearchRestaurant?> _searchRestaurants = [];
-  List<SearchRestaurant?> get searchRestaurants => _searchRestaurants;
+  List<Meal?> _searchMealss = [];
+  List<Meal?> get searchMealss => _searchMealss;
 
   /// SEARCHES for meals and GETS result
   Future<void> searchMeals(String? searchText) async {
@@ -29,16 +33,16 @@ class RestaurantSearchViewModel extends BaseViewModel {
 
     if (searchText!.isEmpty || searchText.length < 3) return;
 
-    _searchRestaurants =
+    _searchMealss =
         await runBusyFuture(_searchService.searchMeals(searchText, resId));
-    log.i('searchMeals() RESULT: ${_searchRestaurants.length}');
+    log.i('searchMeals() RESULT: ${_searchMealss.length}');
   }
 
   /// CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
     _searchText = '';
-    _searchRestaurants = [];
+    _searchMealss = [];
     notifyListeners();
   }
 

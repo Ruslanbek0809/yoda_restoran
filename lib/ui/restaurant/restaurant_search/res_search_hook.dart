@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/shared/app_colors.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'restaurant_search_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
   final _debouncer = Debouncer(milliseconds: 500);
@@ -30,6 +32,8 @@ class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
             fillColor: AppTheme.WHITE,
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
+            hintText: LocaleKeys.searchExMeal.tr(),
+            hintStyle: kts14HelperText,
           ),
           controller: _searchController,
           autofocus: true,

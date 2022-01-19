@@ -106,7 +106,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<RestaurantSearchViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => RestaurantSearchView(
-          resId: args.resId,
+          restaurant: args.restaurant,
           key: args.key,
         ),
         settings: data,
@@ -202,9 +202,9 @@ class ResDetailsViewArguments {
 
 /// RestaurantSearchView arguments holder class
 class RestaurantSearchViewArguments {
-  final int resId;
+  final Restaurant restaurant;
   final Key? key;
-  RestaurantSearchViewArguments({required this.resId, this.key});
+  RestaurantSearchViewArguments({required this.restaurant, this.key});
 }
 
 /// LoginView arguments holder class

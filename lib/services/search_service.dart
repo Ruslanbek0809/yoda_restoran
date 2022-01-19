@@ -14,7 +14,7 @@ class SearchService {
   }
 
   /// SEARCHES for meals and GETS result
-  Future<List<SearchRestaurant?>> searchMeals(
+  Future<List<Meal?>> searchMeals(
     String searchText,
     int resId,
   ) async {
