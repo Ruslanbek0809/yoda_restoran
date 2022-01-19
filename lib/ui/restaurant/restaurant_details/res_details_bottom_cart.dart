@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import '../../../shared/styles.dart';
+import 'res_bottom_cart/res_bottom_cart_total_view.dart';
 import 'res_details_view_model.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,13 +78,7 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
                 borderRadius: AppTheme().radius10,
               ),
               alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Sargyt', style: ktsButton18Text),
-                  Text('35 TMT', style: ktsButton18Text),
-                ],
-              ),
+              child: ResBottomCartTotalView(),
             ),
           ),
         ),

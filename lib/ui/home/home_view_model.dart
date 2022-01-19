@@ -129,6 +129,28 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
+  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  num get getTotalCartSum {
+    num totalCartSum = 0;
+
+    _hiveDbService.cartMeals.forEach((_cartMeal) {
+      totalCartSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+          ? _cartMeal.discountedPrice!
+          : _cartMeal.price!;
+
+      _cartMeal.volumes!.forEach((vol) {
+        if (vol.id != -1) totalCartSum += vol.price!;
+      });
+      _cartMeal.customs!.forEach((cus) {
+        totalCartSum += cus.price!;
+      });
+
+      totalCartSum *= _cartMeal.quantity!;
+    });
+
+    return totalCartSum;
+  }
+
   //------------------ NAVIGATIOn ---------------------//
 
   void navToHomeSearchView() async =>
@@ -155,7 +177,7 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [_bottomCartService, _homeService];
+      [_bottomCartService, _homeService, _hiveDbService];
 
   //------------------ Custom overridden REACTIVE PART ---------------------//
   // late List<ReactiveServiceMixin> _reactiveServices;

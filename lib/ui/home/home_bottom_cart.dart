@@ -83,7 +83,10 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(model.cartRes!.name!, style: ktsButton18Text),
-                  Text('35 TMT', style: ktsButton18Text),
+                  Text(
+                    '${formatNum(model.getTotalCartSum)} TMT',
+                    style: ktsButton18Text,
+                  ),
                 ],
               ),
             ),

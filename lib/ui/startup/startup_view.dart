@@ -1,14 +1,9 @@
-import 'dart:async';
-
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'startup_animated_text_hook.dart';
 import 'startup_viewmodel.dart';
@@ -91,7 +86,7 @@ class StartUpView extends StatelessWidget {
                     ),
                     SizedBox(height: 25.h),
                     StartUpAnimatedTextHook(
-                      delay: 2500,
+                      delay: 2400,
                       child: SvgPicture.asset(
                         'assets/title_yoda_restoran_start.svg',
                         color: kcSecondaryDarkColor,

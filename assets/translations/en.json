@@ -108,6 +108,7 @@
     "search": "Gözleg",
     "searchEx": "Şabaz",
     "searchExMeal": "Burger",
+    "sendCodeIn": "{} Kody gaýtadan ugrat",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

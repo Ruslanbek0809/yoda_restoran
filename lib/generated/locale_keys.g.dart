@@ -111,6 +111,7 @@ abstract class  LocaleKeys {
   static const search = 'search';
   static const searchEx = 'searchEx';
   static const searchExMeal = 'searchExMeal';
+  static const sendCodeIn = 'sendCodeIn';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

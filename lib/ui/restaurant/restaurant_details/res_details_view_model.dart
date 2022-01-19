@@ -20,7 +20,6 @@ class ResDetailsViewModel extends FutureViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
-  final _snackBarService = locator<SnackbarService>();
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -31,6 +30,8 @@ class ResDetailsViewModel extends FutureViewModel {
   bool get isShrink => _isShrink;
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
+
+  int get cartMealLenght => _hiveDbService.cartMeals.length;
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
@@ -103,6 +104,29 @@ class ResDetailsViewModel extends FutureViewModel {
     _isCustomError = false;
   }
 
+  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  num get getTotalCartSum {
+    log.i('RES DETAILS getTotalCartSum CALLEd ');
+    num totalCartSum = 0;
+
+    _hiveDbService.cartMeals.forEach((_cartMeal) {
+      totalCartSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+          ? _cartMeal.discountedPrice!
+          : _cartMeal.price!;
+
+      _cartMeal.volumes!.forEach((vol) {
+        if (vol.id != -1) totalCartSum += vol.price!;
+      });
+      _cartMeal.customs!.forEach((cus) {
+        totalCartSum += cus.price!;
+      });
+
+      totalCartSum *= _cartMeal.quantity!;
+    });
+
+    return totalCartSum;
+  }
+
 //------------------------ RESTAURANT BOTTOM SHEET ----------------------------//
 
   /// SHOWS RestaurantDetailsInfoBottomSheet
@@ -129,7 +153,8 @@ class ResDetailsViewModel extends FutureViewModel {
           arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_bottomCartService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_bottomCartService, _hiveDbService];
 
   @override
   Future<void> futureToRun() async => await getResCatsWithMeals();
