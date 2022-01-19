@@ -148,9 +148,12 @@ class ResDetailsViewModel extends FutureViewModel {
     if (_navResult) await initialise(); // Workaround
   }
 
-  void navToResSearchView() =>
-      _navService.navigateTo(Routes.restaurantSearchView,
-          arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
+  void navToResSearchView() async {
+    bool _navResult = false;
+    _navResult = await _navService.navigateTo(Routes.restaurantSearchView,
+        arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
+    if (_navResult) await initialise(); // Workaround
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

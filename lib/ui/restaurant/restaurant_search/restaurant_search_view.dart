@@ -24,8 +24,11 @@ class RestaurantSearchView extends StatelessWidget {
     return ViewModelBuilder<RestaurantSearchViewModel>.reactive(
       viewModelBuilder: () => RestaurantSearchViewModel(restaurant.id!),
       builder: (context, model, child) {
-        return Padding(
-          padding: const EdgeInsets.only(top: kToolbarHeight / 4),
+        return WillPopScope(
+          onWillPop: () async {
+            model.navBack(); // Workaround
+            return false;
+          },
           child: Scaffold(
             backgroundColor: kcWhiteColor,
             resizeToAvoidBottomInset: false,

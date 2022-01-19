@@ -52,7 +52,7 @@ class RestaurantSearchViewModel extends BaseViewModel {
   }
 
 //------------------------ NAVIGATION ----------------------------//
-  void navBack() => _navService.back();
+  void navBack() => _navService.back(result: true);
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
         Routes.resDetailsView,
