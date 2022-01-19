@@ -33,9 +33,14 @@ class RestaurantSearchViewModel extends BaseViewModel {
 
     if (searchText!.isEmpty || searchText.length < 3) return;
 
-    _searchMealss =
+    dynamic result =
         await runBusyFuture(_searchService.searchMeals(searchText, resId));
-    log.i('searchMeals() RESULT: ${_searchMealss.length}');
+    log.v(
+        'searchMeals() result: $result and _searchMealss: ${_searchMealss.length}');
+    if (result != null) {
+      _searchMealss.clear();
+      _searchMealss = result;
+    }
   }
 
   /// CLEARS Search

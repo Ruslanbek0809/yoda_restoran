@@ -68,205 +68,189 @@ class HomeSearchView extends StatelessWidget {
                 ],
               ),
               //------------------ ListView builder ---------------------//
-              body: model.searchRestaurants.isEmpty
+              body: model.searchRestaurants.isEmpty || model.hasError
                   ? EmptyWidget(
                       text: LocaleKeys.nothingFound,
                       svg: 'assets/empty_search.svg',
                     )
                   : model.isBusy
                       ? LoadingWidget()
-                      : model.hasError
-                          ? ViewErrorWidget()
-                          : ListView.builder(
-                              padding: EdgeInsets.only(top: 10.h),
-                              itemCount: model.searchRestaurants.length,
-                              itemBuilder: (ctx, pos) {
-                                var _searchRestaurant =
-                                    model.searchRestaurants[pos];
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      //------------------ RESTAURANT PART ---------------------//
-                                      GestureDetector(
-                                        onTap: () => model
-                                            .navToResDetailsView(Restaurant(
-                                          id: _searchRestaurant!.id,
-                                          image: _searchRestaurant.image,
-                                          name: _searchRestaurant.name,
-                                          address: _searchRestaurant.address,
-                                          rated: _searchRestaurant.rated,
-                                          rating: _searchRestaurant.rating,
-                                          workingHours:
-                                              _searchRestaurant.workingHours,
-                                          deliveryPrice:
-                                              _searchRestaurant.deliveryPrice,
-                                          description:
-                                              _searchRestaurant.description,
-                                          phoneNumber:
-                                              _searchRestaurant.phoneNumber,
-                                          prepareTime:
-                                              _searchRestaurant.prepareTime,
-                                        )),
-                                        child: Row(
-                                          children: [
-                                            //------------------ IMAGE ---------------------//
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 12.w),
-                                                child: YodaImage(
-                                                  image:
-                                                      _searchRestaurant!.image!,
-                                                  height: 35.h,
-                                                  width: 35.h,
-                                                  borderRadius: Constants
-                                                      .BORDER_RADIUS_10,
-                                                ),
-                                              ),
-                                            ),
-                                            //------------------ NAME and ADDRESS ---------------------//
-                                            Expanded(
-                                              flex: 3,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    _searchRestaurant.name!,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: 22.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color:
-                                                          kcSecondaryDarkColor,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 3.h),
-                                                  Text(
-                                                    _searchRestaurant.address!,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: kts14HelperText,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      //------------------ RESTAURANT MEALS ---------------------//
-                                      if (_searchRestaurant.meals != null)
-                                        ListView.separated(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.only(
-                                              top: 15.h, left: 24.w + 35.h),
-                                          itemCount: _searchRestaurant.meals!
-                                              .take(3)
-                                              .toList()
-                                              .length,
-                                          itemBuilder: (context, pos) {
-                                            var _meal =
-                                                _searchRestaurant.meals![pos];
-                                            return GestureDetector(
-                                              onTap: () =>
-                                                  model.navToResDetailsView(
-                                                      Restaurant(
-                                                id: _searchRestaurant.id,
-                                                image: _searchRestaurant.image,
-                                                name: _searchRestaurant.name,
-                                                address:
-                                                    _searchRestaurant.address,
-                                                rated: _searchRestaurant.rated,
-                                                rating:
-                                                    _searchRestaurant.rating,
-                                                workingHours: _searchRestaurant
-                                                    .workingHours,
-                                                deliveryPrice: _searchRestaurant
-                                                    .deliveryPrice,
-                                                description: _searchRestaurant
-                                                    .description,
-                                                phoneNumber: _searchRestaurant
-                                                    .phoneNumber,
-                                                prepareTime: _searchRestaurant
-                                                    .prepareTime,
-                                              )),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    _meal.name!,
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: 18.sp,
-                                                      color:
-                                                          AppTheme.FONT_COLOR,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: 16.w, left: 5.w),
-                                                    child: Text(
-                                                      _meal.discount != null ||
-                                                              _meal.discount! >
-                                                                  0
-                                                          ? '${formatNum(_meal.discountedPrice!)} TMT'
-                                                          : '${formatNum(_meal.price!)} TMT',
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: ktsDefault16Text,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 5.h),
-                                              child: Divider(
-                                                thickness: 0.5,
-                                                color: AppTheme
-                                                    .DRAWER_SECOND_DIVIDER_COLOR,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      //------------------ MEAL MORE ---------------------//
-                                      if (_searchRestaurant.meals != null &&
-                                          _searchRestaurant.meals!.length > 3)
-                                        GestureDetector(
-                                          onTap: () {},
+                      : ListView.builder(
+                          padding: EdgeInsets.only(top: 10.h),
+                          itemCount: model.searchRestaurants.length,
+                          itemBuilder: (ctx, pos) {
+                            var _searchRestaurant =
+                                model.searchRestaurants[pos];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //------------------ RESTAURANT PART ---------------------//
+                                  GestureDetector(
+                                    onTap: () =>
+                                        model.navToResDetailsView(Restaurant(
+                                      id: _searchRestaurant!.id,
+                                      image: _searchRestaurant.image,
+                                      name: _searchRestaurant.name,
+                                      address: _searchRestaurant.address,
+                                      rated: _searchRestaurant.rated,
+                                      rating: _searchRestaurant.rating,
+                                      workingHours:
+                                          _searchRestaurant.workingHours,
+                                      deliveryPrice:
+                                          _searchRestaurant.deliveryPrice,
+                                      description:
+                                          _searchRestaurant.description,
+                                      phoneNumber:
+                                          _searchRestaurant.phoneNumber,
+                                      prepareTime:
+                                          _searchRestaurant.prepareTime,
+                                    )),
+                                    child: Row(
+                                      children: [
+                                        //------------------ IMAGE ---------------------//
+                                        Flexible(
                                           child: Padding(
-                                            padding: EdgeInsets.only(
-                                              left: 24.w + 35.h,
-                                              top: 15.h,
-                                              bottom: 5.h,
-                                            ),
-                                            child: Text(
-                                              'Ýene ' +
-                                                  '${model.searchRestaurants.length - 3}',
-                                              style: ktsDefault18HelperText,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 12.w),
+                                            child: YodaImage(
+                                              image: _searchRestaurant!.image!,
+                                              height: 35.h,
+                                              width: 35.h,
+                                              borderRadius:
+                                                  Constants.BORDER_RADIUS_10,
                                             ),
                                           ),
                                         ),
-                                    ],
+                                        //------------------ NAME and ADDRESS ---------------------//
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                _searchRestaurant.name!,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 22.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: kcSecondaryDarkColor,
+                                                ),
+                                              ),
+                                              SizedBox(height: 3.h),
+                                              Text(
+                                                _searchRestaurant.address!,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: kts14HelperText,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                );
-                              },
-                            ),
+                                  //------------------ RESTAURANT MEALS ---------------------//
+                                  if (_searchRestaurant.meals != null)
+                                    ListView.separated(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      padding: EdgeInsets.only(
+                                          top: 15.h, left: 24.w + 35.h),
+                                      itemCount: _searchRestaurant.meals!
+                                          .take(3)
+                                          .toList()
+                                          .length,
+                                      itemBuilder: (context, pos) {
+                                        var _meal =
+                                            _searchRestaurant.meals![pos];
+                                        return GestureDetector(
+                                          onTap: () => model
+                                              .navToResDetailsView(Restaurant(
+                                            id: _searchRestaurant.id,
+                                            image: _searchRestaurant.image,
+                                            name: _searchRestaurant.name,
+                                            address: _searchRestaurant.address,
+                                            rated: _searchRestaurant.rated,
+                                            rating: _searchRestaurant.rating,
+                                            workingHours:
+                                                _searchRestaurant.workingHours,
+                                            deliveryPrice:
+                                                _searchRestaurant.deliveryPrice,
+                                            description:
+                                                _searchRestaurant.description,
+                                            phoneNumber:
+                                                _searchRestaurant.phoneNumber,
+                                            prepareTime:
+                                                _searchRestaurant.prepareTime,
+                                          )),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                _meal.name!,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 18.sp,
+                                                  color: AppTheme.FONT_COLOR,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 16.w, left: 5.w),
+                                                child: Text(
+                                                  _meal.discount != null ||
+                                                          _meal.discount! > 0
+                                                      ? '${formatNum(_meal.discountedPrice!)} TMT'
+                                                      : '${formatNum(_meal.price!)} TMT',
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: ktsDefault16Text,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5.h),
+                                          child: Divider(
+                                            thickness: 0.5,
+                                            color: AppTheme
+                                                .DRAWER_SECOND_DIVIDER_COLOR,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  //------------------ MEAL MORE ---------------------//
+                                  if (_searchRestaurant.meals != null &&
+                                      _searchRestaurant.meals!.length > 3)
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 24.w + 35.h,
+                                          top: 15.h,
+                                          bottom: 5.h,
+                                        ),
+                                        child: Text(
+                                          'Ýene ' +
+                                              '${model.searchRestaurants.length - 3}',
+                                          style: ktsDefault18HelperText,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
               // AnimatedSwitcher(
               //   duration: const Duration(milliseconds: 300),
               //   reverseDuration: const Duration(milliseconds: 300),
