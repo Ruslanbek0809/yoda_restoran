@@ -408,14 +408,14 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(right: 16.w),
                                 child: Text(
-                                  '${model.getTotalCartSum.toInt()} TMT -${model.getPromocodePrice.toInt()} TMT',
+                                  '${formatNum(model.getTotalCartSum)} TMT -${formatNum(model.getPromocodePrice)} TMT',
                                   style: ktsDefault12Text,
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(right: 16.w),
                                 child: Text(
-                                  '${model.getTotalCartSumWithPromocode.toInt()} TMT',
+                                  '${formatNum(model.getTotalCartSumWithPromocode)} TMT',
                                   style: ktsDefault22BoldText,
                                 ),
                               ),
@@ -424,7 +424,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         : Padding(
                             padding: EdgeInsets.only(right: 16.w),
                             child: Text(
-                              '${model.getTotalCartSum.toInt()} TMT',
+                              '${formatNum(model.getTotalCartSum)} TMT',
                               style: ktsDefault22BoldText,
                             ),
                           ),

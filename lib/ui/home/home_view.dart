@@ -69,7 +69,8 @@ class _HomeViewState extends State<HomeView> {
                       background: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 15.h),
+                            padding: EdgeInsets.only(
+                                top: 15.h + MediaQuery.of(context).padding.top),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -138,7 +139,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(top: 15.h),
+                                        padding: EdgeInsets.only(
+                                            top: 15.h +
+                                                MediaQuery.of(context)
+                                                    .padding
+                                                    .top),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -191,7 +196,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(top: 15.h),
+                                        padding: EdgeInsets.only(
+                                            top: 15.h +
+                                                MediaQuery.of(context)
+                                                    .padding
+                                                    .top),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -436,22 +445,20 @@ class _HomeViewState extends State<HomeView> {
                   if (!model.hasFutureError) HomeBottomCart(),
                 ],
               );
-        return SafeArea(
-          child: Scaffold(
-            /// Resize according to Onscreen keyboard
-            resizeToAvoidBottomInset: true,
-            key: model.homeScaffoldKey,
-            drawer: DrawerView(),
-            body: Platform.isIOS
-                ? UpgradeAlert(
-                    child: body,
-                    shouldPopScope: () => true,
-                    messages: context.locale == context.supportedLocales[0]
-                        ? MyTurkmenMessages()
-                        : MyRussianMessages(),
-                  )
-                : body,
-          ),
+        return Scaffold(
+          /// Resize according to Onscreen keyboard
+          resizeToAvoidBottomInset: true,
+          key: model.homeScaffoldKey,
+          drawer: DrawerView(),
+          body: Platform.isIOS
+              ? UpgradeAlert(
+                  child: body,
+                  shouldPopScope: () => true,
+                  messages: context.locale == context.supportedLocales[0]
+                      ? MyTurkmenMessages()
+                      : MyRussianMessages(),
+                )
+              : body,
         );
       },
       viewModelBuilder: () => HomeViewModel(),

@@ -13,9 +13,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
 
-/// Method to round trailing zero based on its type
-RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
-// String s = num.toString().replaceAll(regex), "");
+/// Method to round trailing zero based on its type.
+
+// toStringAsFixed guarantees the specified number of fractional
+// digits, so the regular expression is simpler than it would need to
+// be for more general cases.
+String formatNum(num value) =>
+    value.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '');
 
 final List<String> drawerLogoutList = ["login", "about"];
 
@@ -300,29 +304,29 @@ class Debouncer {
   }
 }
 
-  // late AnimationController _buttonController;
-  
-  // _buttonController = AnimationController(
-  //     duration: const Duration(milliseconds: 2000), vsync: this);
+// late AnimationController _buttonController;
 
-  // Future _playAnimation() async {
-  //   try {
-  //     await _buttonController.forward();
-  //   } on TickerCanceled {
-  //     printLog('[_playAnimation] error');
-  //   }
-  // }
+// _buttonController = AnimationController(
+//     duration: const Duration(milliseconds: 2000), vsync: this);
 
-  // Future _stopAnimation() async {
-  //   try {
-  //     await _buttonController.reverse();
-  //   } on TickerCanceled {
-  //     printLog('[_stopAnimation] error');
-  //   }
-  // }
+// Future _playAnimation() async {
+//   try {
+//     await _buttonController.forward();
+//   } on TickerCanceled {
+//     printLog('[_playAnimation] error');
+//   }
+// }
 
-  // StaggerAnimationButtonWidget(
-  //   titleButton: 'Dowam',
-  //   buttonController: _buttonController.view as AnimationController,
-  //   onTap: _onContinueButtonPressed,
-  // ),
+// Future _stopAnimation() async {
+//   try {
+//     await _buttonController.reverse();
+//   } on TickerCanceled {
+//     printLog('[_stopAnimation] error');
+//   }
+// }
+
+// StaggerAnimationButtonWidget(
+//   titleButton: 'Dowam',
+//   buttonController: _buttonController.view as AnimationController,
+//   onTap: _onContinueButtonPressed,
+// ),

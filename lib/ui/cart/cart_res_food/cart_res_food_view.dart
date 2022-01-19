@@ -175,7 +175,7 @@ class _CartResFoodViewState extends State<CartResFoodView>
                             ),
                             padding: EdgeInsets.symmetric(vertical: 10.w),
                             child: Text(
-                              '${food.price.toInt()} TMT',
+                              '${formatNum(food.price)} TMT',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16.sp,

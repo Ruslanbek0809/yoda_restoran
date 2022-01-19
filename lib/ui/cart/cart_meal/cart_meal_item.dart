@@ -50,7 +50,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                     Padding(
                       padding: EdgeInsets.only(left: 5.w),
                       child: Text(
-                        '${totalMealSum.toInt()} TMT',
+                        '${formatNum(totalMealSum)} TMT',
                         style: kts18Text,
                       ),
                     ),

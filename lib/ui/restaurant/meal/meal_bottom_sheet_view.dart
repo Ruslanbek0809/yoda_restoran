@@ -164,7 +164,7 @@ class MealBottomSheet extends StatelessWidget {
                                                     ),
                                                     SizedBox(width: 7.w),
                                                     Text(
-                                                        '+${mainVolume.volumes![volumePos].price} TMT',
+                                                        '+${formatNum(mainVolume.volumes![volumePos].price!)} TMT',
                                                         style: kts16HelperText),
                                                   ],
                                                 ),
@@ -225,7 +225,7 @@ class MealBottomSheet extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 7.w),
                                                 Text(
-                                                  '+${mainCustomizable.customizables![pos].price} TMT',
+                                                  '+${formatNum(mainCustomizable.customizables![pos].price!)} TMT',
                                                   style: kts16HelperText,
                                                 ),
                                               ],
@@ -288,12 +288,12 @@ class MealBottomSheet extends StatelessWidget {
                                 ),
                                 SizedBox(width: 10.w),
                                 Text(
-                                    '${meal.value!.toInt()} ${meal.size!.name}',
+                                    '${formatNum(meal.value!)} ${meal.size!.name}',
                                     style: kts16HelperText),
                               ],
                             ),
                             Text(
-                              '${model.totalDraftSum(meal.discount != null || meal.discount! > 0 ? meal.discountedPrice! : meal.price!).toInt()} TMT',
+                              '${formatNum(model.totalDraftSum(meal.discount != null || meal.discount! > 0 ? meal.discountedPrice! : meal.price!))} TMT',
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 color: AppTheme.FONT_COLOR,

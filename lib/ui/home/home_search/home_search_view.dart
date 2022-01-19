@@ -220,8 +220,8 @@ class HomeSearchView extends StatelessWidget {
                                                       _meal.discount != null ||
                                                               _meal.discount! >
                                                                   0
-                                                          ? '${_meal.discountedPrice!.toInt()} TMT'
-                                                          : '${_meal.price!.toInt()} TMT',
+                                                          ? '${formatNum(_meal.discountedPrice!)} TMT'
+                                                          : '${formatNum(_meal.price!)} TMT',
                                                       maxLines: 1,
                                                       overflow:
                                                           TextOverflow.ellipsis,

@@ -143,7 +143,7 @@ class OrdersView extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      '${order.promocode != null ? orderTotalPriceWithPromocode.toInt() : order.totPrice!.toInt()} TMT',
+                                      '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
                                       style: ktsDefault18SemiBoldText,
                                     ),
                                     Expanded(child: SizedBox()),
@@ -200,7 +200,7 @@ class OrdersView extends StatelessWidget {
                                                       style: ktsDefault16Text,
                                                     ).tr()
                                                   : Text(
-                                                      '${order.dostawkaPrice!.toInt()} TMT',
+                                                      '${formatNum(order.dostawkaPrice!)} TMT',
                                                       style: ktsDefault16Text,
                                                     ),
                                         ],
@@ -231,7 +231,7 @@ class OrdersView extends StatelessWidget {
                                             ],
                                           ),
                                           Text(
-                                            '${order.totPrice!.toInt()} TMT -${orderPromocodePrice.toInt()} TMT',
+                                            '${formatNum(order.totPrice!)} TMT -${formatNum(orderPromocodePrice)} TMT',
                                             style: ktsDefault16Text,
                                           ),
                                         ],
@@ -265,7 +265,7 @@ class OrdersView extends StatelessWidget {
                                                   style: ktsDefault16Text,
                                                 ),
                                                 Text(
-                                                  '${_orderItem.quantity!.toInt()} x ${_orderItem.price!.toInt()} TMT',
+                                                  '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
                                                   style: ktsDefault16Text,
                                                 ),
                                               ],
