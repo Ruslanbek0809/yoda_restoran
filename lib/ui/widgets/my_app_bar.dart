@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,5 +18,5 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(86.h);
+  Size get preferredSize => Size.fromHeight(Platform.isIOS ? 96.h : 86.h);
 }

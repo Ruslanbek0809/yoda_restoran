@@ -32,7 +32,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
         Expanded(
           child: Container(
             height: 0.3.sw, // MAKES Column apply MainAxisAlignment.spaceBetween
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+            padding: EdgeInsets.fromLTRB(10.w, 2.h, 0.w, 2.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +51,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       padding: EdgeInsets.only(left: 5.w),
                       child: Text(
                         '${formatNum(totalMealSum)} TMT',
-                        style: kts18Text,
+                        style: kts18SemiBoldText,
                       ),
                     ),
                   ],

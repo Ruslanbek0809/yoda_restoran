@@ -253,11 +253,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                             model.isDelivery
                                                 ? Text(
                                                     LocaleKeys.deliveryTime,
-                                                    style: ktsDefault16Text,
+                                                    style: ktsDefault16BoldText,
                                                   ).tr()
                                                 : Text(
                                                     LocaleKeys.preparationTime,
-                                                    style: ktsDefault16Text,
+                                                    style: ktsDefault16BoldText,
                                                   ).tr(),
                                             model.deliveryDateTime == model.now
                                                 ? Text(
@@ -347,7 +347,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           children: [
                                             Text(
                                               LocaleKeys.paymentType,
-                                              style: ktsDefault16Text,
+                                              style: ktsDefault16BoldText,
                                             ).tr(),
                                             Text(
                                               model.selectedPaymentType!.name,

@@ -44,6 +44,12 @@ TextStyle ktsDefault14Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle kts14SemiBoldText = TextStyle(
+  fontSize: 14.sp,
+  color: kcFontColor,
+  fontWeight: FontWeight.w500,
+);
+
 TextStyle kts14HelperText = TextStyle(
   fontSize: 14.sp,
   color: kcHelperColor,
@@ -100,6 +106,12 @@ TextStyle kts18Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle kts18SemiBoldText = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w600,
+  color: kcFontColor,
+);
+
 TextStyle kts18ErrorEmptyText = TextStyle(
   fontSize: 18.sp,
   color: kcErrorEmptyColor,
@@ -119,7 +131,7 @@ TextStyle ktsDefault18SemiBoldText = TextStyle(
 
 TextStyle ktsDefault18BoldText = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w600,
   color: kcFontColor,
 );
 
@@ -147,7 +159,7 @@ TextStyle ktsDefault22BoldText = TextStyle(
 
 TextStyle ktsDefault22DarkText = TextStyle(
   fontSize: 22.sp,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
 );
 
@@ -165,7 +177,7 @@ TextStyle kts22PrimaryText = TextStyle(
 
 TextStyle kts30DarkText = TextStyle(
   fontSize: 30.sp,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
 );
 
@@ -173,39 +185,4 @@ TextStyle ktsDefault24DarkText = TextStyle(
   fontSize: 24.sp,
   fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
-);
-
-const TextStyle heading1Style = TextStyle(
-  fontSize: 34,
-  fontWeight: FontWeight.w400,
-);
-
-const TextStyle heading2Style = TextStyle(
-  fontSize: 28,
-  fontWeight: FontWeight.w600,
-);
-
-const TextStyle heading3Style = TextStyle(
-  fontSize: 24,
-  fontWeight: FontWeight.w600,
-);
-
-const TextStyle headlineStyle = TextStyle(
-  fontSize: 30,
-  fontWeight: FontWeight.w700,
-);
-
-const TextStyle bodyStyle = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w400,
-);
-
-const TextStyle subheadingStyle = TextStyle(
-  fontSize: 20,
-  fontWeight: FontWeight.w400,
-);
-
-const TextStyle captionStyle = TextStyle(
-  fontSize: 12,
-  fontWeight: FontWeight.w400,
 );

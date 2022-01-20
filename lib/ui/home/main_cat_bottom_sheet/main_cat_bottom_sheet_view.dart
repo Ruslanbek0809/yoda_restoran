@@ -63,7 +63,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Aşhana', style: kts22Text),
+                          Text('Aşhana', style: ktsDefault24DarkText),
                           GridView.builder(
                             padding: EdgeInsets.only(top: 8.h),
                             shrinkWrap: true,
@@ -94,7 +94,8 @@ class MainCatBottomSheetView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text('Görkezmeli tertibi', style: kts22Text),
+                            child: Text('Görkezmeli tertibi',
+                                style: ktsDefault24DarkText),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

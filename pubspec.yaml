@@ -114,6 +114,18 @@ flutter:
   assets:
     - assets/
     - assets/translations/
+    
+  fonts:
+    - family: Segoe
+      fonts:
+        - asset: assets/fonts/SegoeUILight.ttf
+          weight: 400
+        - asset: assets/fonts/SegoeUIRegular.ttf
+          weight: 500
+        - asset: assets/fonts/SegoeUISemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SegoeUIBold.ttf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

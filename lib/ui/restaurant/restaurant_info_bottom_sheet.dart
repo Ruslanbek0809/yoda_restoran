@@ -30,7 +30,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
-          color: kcSecondaryLightColor,
+          color: kcWhiteColor,
         ),
         child: SingleChildScrollView(
           controller: scrollController,
@@ -44,7 +44,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: SvgPicture.asset(
                   'assets/bottom_sheet_dragger.svg',
-                  color: kcSecondaryDarkColor,
+                  color: kcSecondaryLightColor,
                   height: 6.h,
                 ),
               ),
@@ -53,7 +53,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(Constants.BORDER_RADIUS_20),
                   ),
-                  color: kcSecondaryLightColor,
+                  color: kcWhiteColor,
                 ),
                 padding: EdgeInsets.fromLTRB(16.w, 5.w, 16.w, 20.h),
                 child: Column(
@@ -102,10 +102,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       children: [
                         Text(
                           LocaleKeys.workingHours,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
+                          style: ktsDefault16BoldText,
                         ).tr(),
                         Text(
                           ': ${restaurant.workingHours}',

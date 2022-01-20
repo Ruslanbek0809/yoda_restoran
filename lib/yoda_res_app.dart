@@ -35,6 +35,7 @@ class YodaResApp extends StatelessWidget {
           primaryColor: AppTheme.MAIN,
           scaffoldBackgroundColor: AppTheme.WHITE,
           splashColor: AppTheme.MAIN_LIGHT,
+          fontFamily: 'Segoe',
           appBarTheme: AppBarTheme(
             elevation: 0,
           ),
@@ -45,6 +46,7 @@ class YodaResApp extends StatelessWidget {
           primaryColor: AppTheme.MAIN,
           scaffoldBackgroundColor: AppTheme.WHITE,
           splashColor: AppTheme.MAIN_LIGHT,
+          fontFamily: 'Segoe',
           appBarTheme: AppBarTheme(
             elevation: 0,
           ),

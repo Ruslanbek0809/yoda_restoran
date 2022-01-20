@@ -166,14 +166,20 @@ class OrdersView extends StatelessWidget {
                                             LocaleKeys.driver,
                                             style: ktsDefault16Text,
                                           ).tr(),
-                                          Text(
-                                            order.selfPickUp!
-                                                ? '-'
-                                                : order.status == 1
-                                                    ? 'Bellenmedi'
-                                                    : order.driver!.mobile!,
-                                            style: ktsDefault16Text,
-                                          ),
+                                          order.selfPickUp!
+                                              ? Text(
+                                                  '-',
+                                                  style: ktsDefault16Text,
+                                                )
+                                              : order.status == 1
+                                                  ? Text(
+                                                      LocaleKeys.notAssignedYet,
+                                                      style: ktsDefault16Text,
+                                                    )
+                                                  : Text(
+                                                      order.driver!.mobile!,
+                                                      style: ktsDefault16Text,
+                                                    ),
                                         ],
                                       ),
                                     ),
@@ -197,6 +203,8 @@ class OrdersView extends StatelessWidget {
                                               : order.status == 1
                                                   ? Text(
                                                       LocaleKeys.notAssignedYet,
+                                                      overflow:
+                                                          TextOverflow.visible,
                                                       style: ktsDefault16Text,
                                                     ).tr()
                                                   : Text(

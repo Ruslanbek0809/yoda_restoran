@@ -73,6 +73,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       style: TextStyle(
                         fontSize: 20.sp,
                         color: AppTheme.FONT_COLOR,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   )
@@ -364,7 +365,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           alignment: Alignment.center,
                           child: Text(
                             resCategory.resCategoryModel!.name!,
-                            style: ktsDefault14Text,
+                            style: kts14SemiBoldText,
                           ),
                         ),
                       ))

@@ -87,18 +87,21 @@ class CheckoutViewModel extends ReactiveViewModel {
     num totalCartSum = 0;
 
     _hiveDbService.cartMeals.forEach((_cartMeal) {
-      totalCartSum += _cartMeal.discount != null || _cartMeal.discount! > 0
+      num _totalCartMealSum = 0;
+      _totalCartMealSum += _cartMeal.discount != null || _cartMeal.discount! > 0
           ? _cartMeal.discountedPrice!
           : _cartMeal.price!;
 
       _cartMeal.volumes!.forEach((vol) {
-        if (vol.id != -1) totalCartSum += vol.price!;
+        if (vol.id != -1) _totalCartMealSum += vol.price!;
       });
       _cartMeal.customs!.forEach((cus) {
-        totalCartSum += cus.price!;
+        _totalCartMealSum += cus.price!;
       });
 
-      totalCartSum *= _cartMeal.quantity!;
+      _totalCartMealSum *= _cartMeal.quantity!;
+
+      totalCartSum += _totalCartMealSum;
     });
 
     return totalCartSum;
