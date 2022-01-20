@@ -110,6 +110,14 @@
     "searchEx": "Шабаз",
     "searchExMeal": "Бургер",
     "sendCodeIn": "{} Отправить код заново",
+    "foundRestaurants": "Найдено ресторанов: 15 {}",
+    "clear": "Сбросить",
+    "kitchen": "Кухни",
+    "showOrder": "Показать сначала",
+    "defaultt": "По умолчанию",
+    "byName": "По названию",
+    "byRatings": "С высоким рейтингом",
+    "confirmSortButton": "Применить",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

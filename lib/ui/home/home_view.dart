@@ -4,10 +4,10 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:in_app_update/in_app_update.dart';
-import 'package:keyboard_actions/external/platform_check/platform_check.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/library/upgrader_translations.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import '../../shared/shared.dart';
@@ -380,18 +380,24 @@ class _HomeViewState extends State<HomeView> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      '${model.selectedMainCatRestaurants.length} restoran tapyldy',
+                                                      LocaleKeys
+                                                          .foundRestaurants,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style:
                                                           ktsDefault20BoldText,
-                                                    ),
+                                                    ).tr(args: [
+                                                      model
+                                                          .selectedMainCatRestaurants
+                                                          .length
+                                                          .toString()
+                                                    ]),
                                                     CustomTextChildButton(
                                                         child: Text(
-                                                          'Arassala',
+                                                          LocaleKeys.clear,
                                                           style:
                                                               ktsDefault16Text,
-                                                        ),
+                                                        ).tr(),
                                                         color:
                                                             kcSecondaryLightColor,
                                                         borderRadius:

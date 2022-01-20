@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/widgets/button_loading.dart';
 import '../main_category/main_cat_view_model.dart';
 import '../../../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
   const MainCatSortBottom({Key? key}) : super(key: key, reactive: true);
@@ -64,13 +66,13 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                     ),
                     child: FittedBox(
                       child: Text(
-                        'Arassala',
+                        LocaleKeys.clear,
                         style: TextStyle(
                           color: AppTheme.FONT_COLOR,
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                         ),
-                      ),
+                      ).tr(),
                     ),
                     onPressed: () {},
                   ),
@@ -89,7 +91,10 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                   ),
                   child: model.isBusy
                       ? ButtonLoading()
-                      : Text('Tassykla', style: ktsButton18Text),
+                      : Text(
+                          LocaleKeys.confirmSortButton,
+                          style: ktsButton18Text,
+                        ).tr(),
                   onPressed: () async {
                     if (model.tempSelectedMainCats.isNotEmpty)
                       await model.updateAllSelectedTempMainCats();

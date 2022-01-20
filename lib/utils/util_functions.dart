@@ -42,9 +42,9 @@ List<Discount> discounts = [
 ];
 
 List<CategoryFilter> mainCatSortList = [
-  CategoryFilter(1, 'Adaty'),
-  CategoryFilter(2, 'Ady boýunça'),
-  CategoryFilter(3, 'Ilki ýokary reýtingliler'),
+  CategoryFilter(1, LocaleKeys.defaultt),
+  CategoryFilter(2, LocaleKeys.byName),
+  CategoryFilter(3, LocaleKeys.byRatings),
 ];
 
 List<PaymentType> paymentTypes = [

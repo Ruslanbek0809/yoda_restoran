@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../models/models.dart';
 import '../main_category/main_cat_view_model.dart';
@@ -9,6 +10,7 @@ import '../../../utils/utils.dart';
 import 'main_cat_bottom_sort.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'main_cat_item_bottom_hook.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainCatBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -63,7 +65,10 @@ class MainCatBottomSheetView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Aşhana', style: ktsDefault24DarkText),
+                          Text(
+                            LocaleKeys.clear,
+                            style: ktsDefault24DarkText,
+                          ).tr(),
                           GridView.builder(
                             padding: EdgeInsets.only(top: 8.h),
                             shrinkWrap: true,
@@ -94,8 +99,10 @@ class MainCatBottomSheetView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text('Görkezmeli tertibi',
-                                style: ktsDefault24DarkText),
+                            child: Text(
+                              LocaleKeys.showOrder,
+                              style: ktsDefault24DarkText,
+                            ).tr(),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +122,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                                             color: AppTheme.FONT_COLOR,
                                             fontSize: 16.sp,
                                           ),
-                                        ),
+                                        ).tr(),
                                         activeColor: AppTheme.GREEN_COLOR,
                                         controlAffinity:
                                             ListTileControlAffinity.trailing,

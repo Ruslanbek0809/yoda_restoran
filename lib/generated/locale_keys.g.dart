@@ -112,6 +112,14 @@ abstract class  LocaleKeys {
   static const searchEx = 'searchEx';
   static const searchExMeal = 'searchExMeal';
   static const sendCodeIn = 'sendCodeIn';
+  static const foundRestaurants = 'foundRestaurants';
+  static const clear = 'clear';
+  static const kitchen = 'kitchen';
+  static const showOrder = 'showOrder';
+  static const defaultt = 'defaultt';
+  static const byName = 'byName';
+  static const byRatings = 'byRatings';
+  static const confirmSortButton = 'confirmSortButton';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

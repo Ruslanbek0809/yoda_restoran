@@ -110,6 +110,14 @@
     "searchEx": "Şabaz",
     "searchExMeal": "Burger",
     "sendCodeIn": "{} Kody gaýtadan ugrat",
+    "foundRestaurants": "{} restoran tapyldy",
+    "clear": "Arassala",
+    "kitchen": "Aşhana",
+    "showOrder": "Görkezmeli tertibi",
+    "defaultt": "Adaty",
+    "byName": "Ady boýunça",
+    "byRatings": "Ilki ýokary reýtingliler",
+    "confirmSortButton": "Tassykla",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }
