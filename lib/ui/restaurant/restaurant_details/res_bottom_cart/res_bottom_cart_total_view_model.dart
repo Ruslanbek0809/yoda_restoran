@@ -4,12 +4,15 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/services/services.dart';
 
+/// This VM just to update quantity in realtime
 class ResBottomCartTotalViewModel extends ReactiveViewModel {
   final log = getLogger('ResBottomCartTotalViewModel');
 
   final _hiveDbService = locator<HiveDbService>();
+  final _bottomCartService = locator<BottomCartService>();
 
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
+  bool get isUpdateQuantity => _bottomCartService.isUpdateQuantity;
 
   /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
   num get getTotalCartSum {
@@ -35,5 +38,6 @@ class ResBottomCartTotalViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_hiveDbService, _bottomCartService];
 }

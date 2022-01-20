@@ -8,13 +8,32 @@ class BottomCartService with ReactiveServiceMixin {
 
   BottomCartService() {
     // 3
-    listenToReactiveValues([_bottomCartStatus]);
+    listenToReactiveValues([_bottomCartStatus, _isUpdateQuantity]);
   }
 
   // 2
   ReactiveValue<BottomCartStatus> _bottomCartStatus =
       ReactiveValue<BottomCartStatus>(BottomCartStatus.idle);
   BottomCartStatus get bottomCartStatus => _bottomCartStatus.value;
+
+  // To update quantity of bottomCart
+  ReactiveValue<bool> _isUpdateQuantity = ReactiveValue<bool>(false);
+  bool get isUpdateQuantity => _isUpdateQuantity.value;
+
+  /// HIDES BottomCart
+  void hideBottomCart() {
+    switch (_bottomCartStatus.value) {
+      case BottomCartStatus.forward:
+        _bottomCartStatus.value = BottomCartStatus.reverse;
+        break;
+      case BottomCartStatus.reverse:
+        break;
+      default:
+        _bottomCartStatus.value = BottomCartStatus.reverse;
+        break;
+    }
+    log.i(_bottomCartStatus.value);
+  }
 
   /// SHOWS BottomCart
   void showBottomCart() {
@@ -34,18 +53,10 @@ class BottomCartService with ReactiveServiceMixin {
     log.i(_bottomCartStatus.value);
   }
 
-  /// HIDES BottomCart
-  void hideBottomCart() {
-    switch (_bottomCartStatus.value) {
-      case BottomCartStatus.forward:
-        _bottomCartStatus.value = BottomCartStatus.reverse;
-        break;
-      case BottomCartStatus.reverse:
-        break;
-      default:
-        _bottomCartStatus.value = BottomCartStatus.reverse;
-        break;
-    }
-    log.i(_bottomCartStatus.value);
+  /// UPDATE ResDetailsBottomCart QUANTITY (Workaround)
+  Future<void> updateResBottomCartQuantity() async {
+    _isUpdateQuantity.value = true;
+    await Future.delayed(Duration(seconds: 1));
+    _isUpdateQuantity.value = false;
   }
 }

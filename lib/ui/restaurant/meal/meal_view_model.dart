@@ -126,6 +126,9 @@ class MealViewModel extends ReactiveViewModel {
     else
       _isButtonToggled = false;
 
+    /// UPDATES ResBottomCart's quantity
+    _bottomCartService.updateResBottomCartQuantity();
+
     log.i(
         'subtractOrRemoveMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
@@ -294,6 +297,9 @@ class MealViewModel extends ReactiveViewModel {
 
     quantity = _hiveDbService.getMealQuantity(meal.id)!;
     if (quantity >= 1) _isButtonToggled = true;
+
+    /// UPDATES ResBottomCart's quantity
+    _bottomCartService.updateResBottomCartQuantity();
 
     quantityDraft = 1;
     _selectedCustoms.clear();
