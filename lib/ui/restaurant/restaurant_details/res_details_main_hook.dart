@@ -191,7 +191,6 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(restaurant.image!),
                   fit: BoxFit.cover,
-                  // AssetImage('assets/burgerlist.jpg'),
                 ),
               ),
               //// NOTE: Instead of direct Container Column is used to make child work properly

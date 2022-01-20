@@ -51,7 +51,6 @@ class ResDetailsView extends StatelessWidget {
                   // || model.isCustomBusy
                   ? ResDetailsMainBusy(restaurant: restaurant)
                   : ResDetailsMainHook(restaurant: restaurant),
-              // ResDetailsMainWidget(restaurant: restaurant),
               //------------------ BOTTOM CART ---------------------//
               if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
             ],
