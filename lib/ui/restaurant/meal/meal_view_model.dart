@@ -25,7 +25,6 @@ class MealViewModel extends ReactiveViewModel {
   bool get isButtonToggled => _isButtonToggled;
 
   int quantity = 0;
-  int quantityDraft = 1;
 
   /// Function to update isButtonToggled
   //  void updateButtonToggle() {
@@ -33,21 +32,6 @@ class MealViewModel extends ReactiveViewModel {
   //   log.i('_isButtonToggled: $_isButtonToggled');
   //   notifyListeners();
   // }
-
-  /// ADDS to quantityInDraft
-  void addQuantityDraft() {
-    quantityDraft += 1;
-    log.i('addQuantityDraft() quantityDraft: $quantityDraft');
-    notifyListeners();
-  }
-
-  /// SUBTRACTS quantityInDraft
-  void subtractQuantityDraft() {
-    if (quantityDraft <= 1) return;
-    quantityDraft -= 1;
-    log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
-    notifyListeners();
-  }
 
   //----------- HIVE DB PART ------------//
 
@@ -177,6 +161,9 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
+  int quantityDraft = 1;
+  num totalSumDraft = 0;
+
   bool _isAllVolSelected = false;
   bool get isAllVolSelected => _isAllVolSelected;
 
@@ -186,19 +173,61 @@ class MealViewModel extends ReactiveViewModel {
   List<Customizable> _selectedCustoms = [];
   List<Customizable> get selectedCustoms => _selectedCustoms;
 
-  /// CREATES initial list for selectedVolumes and selectedMultiCustomizables
+  /// CREATES INITIAL list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolsCustoms(Meal meal) {
     log.i('setOnModelReadyVolsCustoms()');
+
+    _selectedCustoms.clear();
     _selectedVols = List.generate(
       meal.gVolumes!.length,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
 
+    /// ASSINGS initial value to totalSumDraft and quantityDraft
+    if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) {
+      if (quantity != 0)
+        quantityDraft = quantity;
+      else
+        quantityDraft = 1;
+
+      totalSumDraft = meal.discount != null && meal.discount! > 0
+          ? meal.discountedPrice!
+          : meal.price!;
+      totalSumDraft *= quantityDraft;
+    } else {
+      quantityDraft = 1;
+      totalSumDraft = meal.discount != null && meal.discount! > 0
+          ? meal.discountedPrice!
+          : meal.price!;
+    }
+
     /// ASSINGS initial value to _isAllVolSelected based on
-    if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty)
-      _isAllVolSelected = true;
-    else
-      _isAllVolSelected = false;
+    if (meal.gVolumes!.isEmpty) _isAllVolSelected = true;
+  }
+
+  /// ADDS to quantityInDraft
+  void addQuantityDraft(Meal meal) {
+    quantityDraft += 1;
+
+    /// ADDS a meal from totalDraftSum
+    totalSumDraft += meal.discount != null && meal.discount! > 0
+        ? meal.discountedPrice!
+        : meal.price!;
+    log.i('addQuantityDraft() quantityDraft: $quantityDraft');
+    notifyListeners();
+  }
+
+  /// SUBTRACTS quantityInDraft
+  void subtractQuantityDraft(Meal meal) {
+    if (quantityDraft <= 1) return;
+    quantityDraft -= 1;
+
+    /// SUBTRACTS a meal from totalDraftSum
+    totalSumDraft -= meal.discount != null && meal.discount! > 0
+        ? meal.discountedPrice!
+        : meal.price!;
+    log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
+    notifyListeners();
   }
 
   // /// CHECKS wether this vol in _selectedVols or NOT
@@ -211,24 +240,18 @@ class MealViewModel extends ReactiveViewModel {
   /// CHECKS wether this cus in _selectedCustoms or NOT
   bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);
 
-  /// GETS total meal draft sum
-  num totalDraftSum(num mealPrice) {
-    num totalDraftPrice = 0;
-    totalDraftPrice += mealPrice;
-    _selectedVols.forEach((vol) {
-      if (vol.id != -1) totalDraftPrice += vol.price!;
-    });
-    _selectedCustoms.forEach((cus) {
-      totalDraftPrice += cus.price!;
-    });
-
-    totalDraftPrice *= quantity;
-    return totalDraftPrice;
-  }
-
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(int mainVolPos, Volume? volume) {
+    if (_selectedVols[mainVolPos].id != -1)
+
+      /// Step 1. SUBTRACTS selected vol's price from totalDraftSum
+      totalSumDraft -= _selectedVols[mainVolPos].price!;
+
+    /// Step 2. ASSIGNS selected volume to _selectedVols[mainVolPos]
     _selectedVols[mainVolPos] = volume!;
+
+    /// Step 3. ADDS selected vol's price to totalDraftSum
+    totalSumDraft += _selectedVols[mainVolPos].price!;
 
     /// Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
     var _volWithMinus = _selectedVols.firstWhere(
@@ -242,10 +265,17 @@ class MealViewModel extends ReactiveViewModel {
 
   /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
   void updateSelectedCustoms(Customizable? selectedCus) {
-    if (_selectedCustoms.contains(selectedCus))
+    if (_selectedCustoms.contains(selectedCus)) {
       _selectedCustoms.remove(selectedCus);
-    else
+
+      /// SUBTRACTS selectedCus's price from totalDraftSum
+      totalSumDraft -= selectedCus!.price!;
+    } else {
       _selectedCustoms.add(selectedCus!);
+
+      /// ADDS selectedCus's price to totalDraftSum
+      totalSumDraft += selectedCus.price!;
+    }
     notifyListeners();
   }
 

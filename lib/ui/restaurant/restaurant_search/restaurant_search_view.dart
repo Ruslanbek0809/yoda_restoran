@@ -79,7 +79,8 @@ class RestaurantSearchView extends StatelessWidget {
             //------------------ ListView builder ---------------------//
             body: model.searchMealss.isEmpty || model.hasError
                 ? EmptyWidget(
-                    text: LocaleKeys.nothingFound,
+                    text: '',
+                    // text: LocaleKeys.nothingFound,
                     svg: 'assets/empty_search.svg',
                   )
                 : model.isBusy

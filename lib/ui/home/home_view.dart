@@ -50,12 +50,12 @@ class _HomeViewState extends State<HomeView> {
           var info = await InAppUpdate.checkForUpdate();
 
           model.log.v('InAppUpdate Info: $info');
-          if (info.flexibleUpdateAllowed == true) {
+          if (info.flexibleUpdateAllowed == true)
             await InAppUpdate.startFlexibleUpdate();
-          }
         }
       }),
       builder: (context, model, child) {
+        //------------------ MAIN CATS LOADING PART ---------------------//
         Widget body = model.fetchingSelectedMainCatsRes
             ? CustomScrollView(
                 slivers: [
@@ -104,6 +104,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               )
+            //------------------ MAIN PART ---------------------//
             : Stack(
                 children: [
                   SmartRefresher(
@@ -232,7 +233,7 @@ class _HomeViewState extends State<HomeView> {
                                 pinned: false,
                                 floating: false,
                                 delegate: ContestTabHeader(
-                                  size: 90.h,
+                                  size: 92.h,
                                   child: MainCatView(),
                                 ),
                               ),
@@ -439,7 +440,7 @@ class _HomeViewState extends State<HomeView> {
                                             ],
                                           ),
                                     SizedBox(
-                                        height: 0.1
+                                        height: 0.11
                                             .sh), // COMPENSATES HomeBottomCart
                                   ],
                                 ),

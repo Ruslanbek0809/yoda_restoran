@@ -68,7 +68,8 @@ class HomeSearchView extends StatelessWidget {
             //------------------ ListView builder ---------------------//
             body: model.searchRestaurants.isEmpty || model.hasError
                 ? EmptyWidget(
-                    text: LocaleKeys.nothingFound,
+                    text: '',
+                    // text: LocaleKeys.nothingFound,
                     svg: 'assets/empty_search.svg',
                   )
                 : model.isBusy

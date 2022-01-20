@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'package:stacked/stacked.dart';
 import 'meal_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MealBottomSheet extends StatelessWidget {
   final Meal meal;
@@ -293,11 +295,12 @@ class MealBottomSheet extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              '${formatNum(model.totalDraftSum(meal.discount != null || meal.discount! > 0 ? meal.discountedPrice! : meal.price!))} TMT',
+                              '${formatNum(model.totalSumDraft)} TMT',
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 color: AppTheme.FONT_COLOR,
                               ),
+                              // style: kts18SemiBoldText,
                             ),
                           ],
                         ),
@@ -338,7 +341,8 @@ class MealBottomSheet extends StatelessWidget {
                                           //   topLeft: Radius.circular(15.0),
                                           //   bottomLeft: Radius.circular(15.0),
                                           // ),
-                                          onTap: model.subtractQuantityDraft,
+                                          onTap: () =>
+                                              model.subtractQuantityDraft(meal),
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 15.h),
@@ -375,7 +379,8 @@ class MealBottomSheet extends StatelessWidget {
                                           //   topRight: Radius.circular(15.0),
                                           //   bottomRight: Radius.circular(15.0),
                                           // ),
-                                          onTap: model.addQuantityDraft,
+                                          onTap: () =>
+                                              model.addQuantityDraft(meal),
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 15.h),
@@ -397,11 +402,13 @@ class MealBottomSheet extends StatelessWidget {
                               flex: 3,
                               child: CustomTextChildButton(
                                 child: Text(
-                                  model.isAllVolSelected ? 'Goş' : 'Kesgitläň',
+                                  model.isAllVolSelected
+                                      ? LocaleKeys.Add
+                                      : LocaleKeys.choose,
                                   style: model.isAllVolSelected
                                       ? ktsButton18Text
                                       : ktsButton18ContactText,
-                                ),
+                                ).tr(),
                                 color: model.isAllVolSelected
                                     ? kcPrimaryColor
                                     : kcSecondaryLightColor,

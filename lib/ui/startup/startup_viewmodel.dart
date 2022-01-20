@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flash/flash.dart';
+import 'package:keyboard_actions/external/platform_check/platform_check.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/home/home_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -58,7 +62,12 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
     log.i('===== navToHomeWithConnection() ENDED =====');
-    await _navService.replaceWith(Routes.homeView);
+    Platform.isIOS
+        ? await _navService.replaceWithTransition(
+            HomeView(),
+            transition: NavigationTransition.Fade,
+          )
+        : await _navService.replaceWith(Routes.homeView);
   }
 
   @override
