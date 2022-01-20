@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:in_app_update/in_app_update.dart';
@@ -21,6 +19,7 @@ import '../../utils/utils.dart';
 import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -47,13 +46,14 @@ class _HomeViewState extends State<HomeView> {
         // _refreshController.refreshCompleted();
 
         /// InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
-        if (Platform.isAndroid)
-          InAppUpdate.checkForUpdate().then((info) {
-            model.log.v('InAppUpdate Info: $info');
-            if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-              InAppUpdate.startFlexibleUpdate().then((_) {}).catchError((e) {});
-            }
-          }).catchError((e) {});
+        if (Platform.isAndroid) {
+          var info = await InAppUpdate.checkForUpdate();
+
+          model.log.v('InAppUpdate Info: $info');
+          if (info.flexibleUpdateAllowed == true) {
+            await InAppUpdate.startFlexibleUpdate();
+          }
+        }
       }),
       builder: (context, model, child) {
         Widget body = model.fetchingSelectedMainCatsRes

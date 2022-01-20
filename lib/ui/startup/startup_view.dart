@@ -2,11 +2,13 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
 import 'startup_animated_text_hook.dart';
 import 'startup_viewmodel.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class StartUpView extends StatelessWidget {
   StartUpView({Key? key}) : super(key: key);
@@ -50,9 +52,9 @@ class StartUpView extends StatelessWidget {
                       child: SvgPicture.asset('assets/no_wifi.svg'),
                     ),
                     content: Text(
-                      'Internet ýok',
+                      LocaleKeys.noInternet,
                       style: ktsDefault20Text,
-                    ),
+                    ).tr(),
                   ),
                 );
               },

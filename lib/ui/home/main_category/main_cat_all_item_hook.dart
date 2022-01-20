@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
   MainCatAllItemHook({
@@ -71,9 +73,9 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                 padding: EdgeInsets.only(top: 2.h),
                 child: FittedBox(
                   child: Text(
-                    'Hemmesi',
+                    LocaleKeys.all,
                     style: ktsDefault14Text,
-                  ),
+                  ).tr(),
                 ),
               ),
             ],

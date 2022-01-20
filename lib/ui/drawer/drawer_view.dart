@@ -239,9 +239,9 @@ class DrawerView extends StatelessWidget {
                       ),
                       SizedBox(width: 10.w),
                       Text(
-                        'Biz bilen habarlaş',
+                        LocaleKeys.contact_us,
                         style: kts16HelperText,
-                      ),
+                      ).tr(),
                     ],
                   ),
                 ),

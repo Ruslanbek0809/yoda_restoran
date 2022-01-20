@@ -144,20 +144,18 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                             return CupertinoActionSheet(
                               actions: <Widget>[
                                 CupertinoActionSheetAction(
-                                  child: Text(
-                                    'Erkek',
-                                  ),
+                                  child: Text(LocaleKeys.malee).tr(),
                                   onPressed: () {
-                                    _genderController.text = 'Erkek';
+                                    _genderController.text =
+                                        LocaleKeys.malee.tr();
                                     model.navBack();
                                   },
                                 ),
                                 CupertinoActionSheetAction(
-                                  child: Text(
-                                    'Aýal',
-                                  ),
+                                  child: Text(LocaleKeys.femalee).tr(),
                                   onPressed: () {
-                                    _genderController.text = 'Aýal';
+                                    _genderController.text =
+                                        LocaleKeys.femalee.tr();
                                     model.navBack();
                                   },
                                 ),
@@ -165,8 +163,8 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                               cancelButton: CupertinoActionSheetAction(
                                 isDestructiveAction: true,
                                 child: Text(
-                                  'Ýap',
-                                ),
+                                  LocaleKeys.close,
+                                ).tr(),
                                 onPressed: () => model.navBack(),
                               ),
                             );

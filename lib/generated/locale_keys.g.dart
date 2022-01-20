@@ -120,6 +120,11 @@ abstract class  LocaleKeys {
   static const byName = 'byName';
   static const byRatings = 'byRatings';
   static const confirmSortButton = 'confirmSortButton';
+  static const all = 'all';
+  static const noInternet = 'noInternet';
+  static const Add = 'Add';
+  static const choose = 'choose';
+  static const streetEx = 'streetEx';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

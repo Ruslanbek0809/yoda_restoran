@@ -35,7 +35,7 @@ class MealBottomSheet extends StatelessWidget {
         initialChildSize:
             meal.gVolumes!.isNotEmpty || meal.gCustomizables!.isNotEmpty
                 ? 0.9
-                : 0.65,
+                : 0.675,
         maxChildSize:
             meal.gVolumes!.isNotEmpty || meal.gCustomizables!.isNotEmpty
                 ? 1

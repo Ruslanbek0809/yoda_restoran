@@ -117,6 +117,11 @@
     "byName": "Ady boýunça",
     "byRatings": "Ilki ýokary reýtingliler",
     "confirmSortButton": "Tassykla",
+    "all": "Hemmesi",
+    "noInternet": "Internet ýok",
+    "Add": "Goş",
+    "choose": "Kesgitläň",
+    "streetEx": "G. Kylyýew köç., 29",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

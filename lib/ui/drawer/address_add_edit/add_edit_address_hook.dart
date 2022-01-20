@@ -71,7 +71,7 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
               borderSide:
                   BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
-            hintText: 'A.Nowaýy 23, 64',
+            hintText: LocaleKeys.streetEx.tr(),
             hintStyle: ktsDefault18HelperText,
           ),
           validator: model.updateStreet,
