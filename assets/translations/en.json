@@ -93,7 +93,7 @@
     "reOrder": "Täzeden sargyt et",
     "rate": "Baha ber",
     "deliveryPrice": "Eltip bermek tölegi:",
-    "notAssignedYet": "Bellenmedi...",
+    "notAssignedYet": "Bellenmedi",
     "wannaCancelOrder": "Siz sargydy ýatyrmakçymy?",
     "yes": "Hawa",
     "orderIsPreparing": "Sargyt taýýarlanýar.",
@@ -122,6 +122,7 @@
     "Add": "Goş",
     "choose": "Kesgitläň",
     "streetEx": "G. Kylyýew köç., 29",
+    "noOrder": "Ýok",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

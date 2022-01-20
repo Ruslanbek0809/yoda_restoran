@@ -28,8 +28,8 @@ class OrderSuccessView extends StatelessWidget {
                 alignment: Alignment.center,
                 height: 35.h,
                 child: SvgPicture.asset(
-                  'assets/yoda_restoran.svg',
-                  color: AppTheme.MAIN_DARK,
+                  'assets/title_yoda_restoran_start.svg',
+                  width: 0.6.sw,
                 ),
               ),
               Lottie.asset(

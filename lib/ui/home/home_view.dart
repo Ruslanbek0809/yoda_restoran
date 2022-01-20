@@ -386,13 +386,14 @@ class _HomeViewState extends State<HomeView> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style:
-                                                          ktsDefault20BoldText,
+                                                          ktsDefault18BoldText,
                                                     ).tr(args: [
                                                       model
                                                           .selectedMainCatRestaurants
                                                           .length
                                                           .toString()
                                                     ]),
+                                                    SizedBox(width: 5.w),
                                                     CustomTextChildButton(
                                                         child: Text(
                                                           LocaleKeys.clear,
@@ -405,9 +406,9 @@ class _HomeViewState extends State<HomeView> {
                                                             AppTheme().radius20,
                                                         padding: EdgeInsets
                                                             .symmetric(
-                                                                vertical: 8.h,
+                                                                vertical: 6.h,
                                                                 horizontal:
-                                                                    22.w),
+                                                                    20.w),
                                                         onPressed: () async {
                                                           await model
                                                               .clearSelectedMainCatRess();

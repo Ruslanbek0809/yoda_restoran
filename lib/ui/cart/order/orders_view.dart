@@ -175,7 +175,9 @@ class OrdersView extends StatelessWidget {
                                                   ? Text(
                                                       LocaleKeys.notAssignedYet,
                                                       style: ktsDefault16Text,
-                                                    )
+                                                      overflow:
+                                                          TextOverflow.visible,
+                                                    ).tr()
                                                   : Text(
                                                       order.driver!.mobile!,
                                                       style: ktsDefault16Text,
@@ -204,7 +206,7 @@ class OrdersView extends StatelessWidget {
                                                   ? Text(
                                                       LocaleKeys.notAssignedYet,
                                                       overflow:
-                                                          TextOverflow.visible,
+                                                          TextOverflow.fade,
                                                       style: ktsDefault16Text,
                                                     ).tr()
                                                   : Text(
