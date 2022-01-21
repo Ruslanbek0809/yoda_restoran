@@ -28,28 +28,26 @@ class OrdersView extends StatelessWidget {
             return false;
           },
           child: Scaffold(
-            appBar: MyAppbar(
-              child: AppBar(
-                backgroundColor: AppTheme.WHITE,
-                elevation: 1,
-                leadingWidth: 35.w,
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 10.w),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: AppTheme.FONT_COLOR,
-                      size: 25.w,
-                    ),
-                    onPressed: model.navToHomeByRemovingAll,
+            appBar: AppBar(
+              backgroundColor: AppTheme.WHITE,
+              elevation: 1,
+              leadingWidth: 35.w,
+              leading: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.FONT_COLOR,
+                    size: 25.w,
                   ),
+                  onPressed: model.navToHomeByRemovingAll,
                 ),
-                centerTitle: true,
-                title: Text(
-                  LocaleKeys.myOrders,
-                  style: ktsDefault22DarkText,
-                ).tr(),
               ),
+              centerTitle: true,
+              title: Text(
+                LocaleKeys.myOrders,
+                style: ktsDefault22DarkText,
+              ).tr(),
             ),
             body: model.isBusy || model.isFetchingOrders
                 ? LoadingWidget()

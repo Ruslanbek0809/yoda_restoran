@@ -27,41 +27,39 @@ class CartView extends StatelessWidget {
             return false;
           },
           child: Scaffold(
-            appBar: MyAppbar(
-              child: AppBar(
-                backgroundColor: AppTheme.WHITE,
-                elevation: 1,
-                leadingWidth: 35.w,
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 10.w),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: AppTheme.FONT_COLOR,
-                      size: 25.w,
+            appBar: AppBar(
+              backgroundColor: AppTheme.WHITE,
+              elevation: 1,
+              leadingWidth: 35.w,
+              leading: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.FONT_COLOR,
+                    size: 25.w,
+                  ),
+                  onPressed: model.navBack,
+                ),
+              ),
+              centerTitle: true,
+              title: Text(
+                LocaleKeys.order,
+                style: ktsDefault22DarkText,
+              ).tr(),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w),
+                  child: GestureDetector(
+                    onTap: () async => await model.showClearCartDialog(model),
+                    child: SvgPicture.asset(
+                      'assets/trash.svg',
+                      color: AppTheme.MAIN_DARK,
+                      width: 25.w,
                     ),
-                    onPressed: model.navBack,
                   ),
                 ),
-                centerTitle: true,
-                title: Text(
-                  LocaleKeys.order,
-                  style: ktsDefault22DarkText,
-                ).tr(),
-                actions: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 10.w),
-                    child: GestureDetector(
-                      onTap: () async => await model.showClearCartDialog(model),
-                      child: SvgPicture.asset(
-                        'assets/trash.svg',
-                        color: AppTheme.MAIN_DARK,
-                        width: 25.w,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              ],
             ),
             body: Stack(
               children: [
