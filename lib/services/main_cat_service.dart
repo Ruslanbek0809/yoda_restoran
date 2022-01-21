@@ -22,6 +22,7 @@ class MainCatService with ReactiveServiceMixin {
 
   /// ADDS or REMOVES mainCategory to/from _selectedMainCats
   void updateSelectedMainCats(int? mainCatId) {
+    log.v('');
     if (_selectedMainCats.value.contains(mainCatId))
       _selectedMainCats.value.remove(mainCatId);
     else

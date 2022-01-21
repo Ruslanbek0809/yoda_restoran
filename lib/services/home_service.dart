@@ -11,7 +11,7 @@ class HomeService with ReactiveServiceMixin {
 
   HomeService() {
     // 3
-    listenToReactiveValues([_fetchingSelectedMainCats]);
+    listenToReactiveValues([_fetchingSelectedMainCats, _fetchingSelectError]);
   }
 
   final _api = locator<ApiService>();
@@ -50,6 +50,11 @@ class HomeService with ReactiveServiceMixin {
       ReactiveValue<bool>(false); // Custom busy for HomeView
   bool get fetchingSelectedMainCats => _fetchingSelectedMainCats.value;
 
+  // CUSTOM ERROR for selectedMainCats fetch
+  ReactiveValue<bool> _fetchingSelectError =
+      ReactiveValue<bool>(false); // Custom busy for HomeView
+  bool get fetchingSelectError => _fetchingSelectError.value;
+
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
     log.v(_sliders!.length);
@@ -75,7 +80,7 @@ class HomeService with ReactiveServiceMixin {
     return _proms;
   }
 
-  Future<void> getSelectedMainCats(
+  Future<bool> getSelectedMainCats(
     List<int> selectedMainCats,
     bool alphabet,
     bool rating,
@@ -93,11 +98,15 @@ class HomeService with ReactiveServiceMixin {
       if (result.runtimeType != DioError) {
         _selectedMainCatRestaurants = result;
         _fetchingSelectedMainCats.value = false;
+        log.v(
+            'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+        return true;
       } else {
         _fetchingSelectedMainCats.value = false;
+        _fetchingSelectError.value =
+            true; // When error occurs, it activates this error
+        return false;
       }
-      log.v(
-          'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
     } else {
       _fetchingSelectedMainCats.value = true;
       _selectedMainCatRestaurants!.clear();
@@ -105,6 +114,7 @@ class HomeService with ReactiveServiceMixin {
       _fetchingSelectedMainCats.value = false;
       log.v(
           '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+      return true;
     }
   }
 
@@ -112,5 +122,12 @@ class HomeService with ReactiveServiceMixin {
     _selectedMainCatRestaurants!.clear();
     log.v(
         '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+  }
+
+  /// Workaround to disable custom select error
+  void disableSelectError() {
+    log.i('');
+
+    _fetchingSelectError.value = false;
   }
 }

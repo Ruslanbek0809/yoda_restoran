@@ -34,6 +34,8 @@ class HomeViewModel extends MultipleFutureViewModel {
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
+  List<int> get selectedMainCats =>
+      _mainCatService.selectedMainCats; // NEEDS only for UI cases
   // List<int> get selectedMainCats => _mainCatService.selectedMainCats;
   List<Restaurant> get selectedMainCatRestaurants =>
       _homeService.selectedMainCatRestaurants!;
@@ -48,6 +50,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchingRandomRes => busy(homeRandomRessFuture);
   bool get fetchingPromotedRes => busy(homePromsFuture);
   bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
+  bool get fetchingSelectError => _homeService.fetchingSelectError;
 
   bool _hasFutureError = false;
   bool get hasFutureError => _hasFutureError;
@@ -124,6 +127,8 @@ class HomeViewModel extends MultipleFutureViewModel {
   void updateHasFutureError() {
     _hasFutureError = false;
   }
+
+  void updateFetchingSelectedError() => _homeService.disableSelectError();
 
   //------------------ BOTTOM CART ---------------------//
 

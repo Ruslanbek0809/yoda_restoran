@@ -26,7 +26,7 @@ class ResDetailsView extends StatelessWidget {
               margin: EdgeInsets.only(
                 left: 16.w,
                 right: 16.w,
-                bottom: 0.11.sh,
+                bottom: 0.12.sh,
               ),
             );
           });

@@ -37,11 +37,15 @@ class MainCatViewModel extends ReactiveViewModel {
     _mainCatService.updateSelectedMainCats(
         mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
 
-    await _homeService.getSelectedMainCats(
+    bool isSelectedFetched = await _homeService.getSelectedMainCats(
       selectedMainCats,
       false,
       false,
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
+
+    if (!isSelectedFetched)
+      _mainCatService.updateSelectedMainCats(
+          mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
 
     // _mainFilterService.updateMainAnimationFilterStatus(
     //     _mainCatService.selectedSort,

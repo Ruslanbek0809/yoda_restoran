@@ -55,6 +55,30 @@ class _HomeViewState extends State<HomeView> {
         }
       }),
       builder: (context, model, child) {
+        if (model.fetchingSelectError && model.cartRes!.id != -1)
+          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+            model.updateFetchingSelectedError();
+            await showErrorFlashBar(
+              context: context,
+              margin: EdgeInsets.only(
+                left: 16.w,
+                right: 16.w,
+                bottom: 0.12.sh,
+              ),
+            );
+          });
+        else if (model.fetchingSelectError)
+          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+            model.updateFetchingSelectedError();
+            await showErrorFlashBar(
+              context: context,
+              margin: EdgeInsets.only(
+                left: 16.w,
+                right: 16.w,
+                bottom: 0.05.sh,
+              ),
+            );
+          });
         //------------------ MAIN CATS LOADING PART ---------------------//
         Widget body = model.fetchingSelectedMainCatsRes
             ? CustomScrollView(
@@ -70,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 15.h + MediaQuery.of(context).padding.top),
+                                top: 10.h + MediaQuery.of(context).padding.top),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -141,7 +165,7 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 15.h +
+                                            top: 10.h +
                                                 MediaQuery.of(context)
                                                     .padding
                                                     .top),
@@ -185,10 +209,9 @@ class _HomeViewState extends State<HomeView> {
                         : CustomScrollView(
                             slivers: [
                               SliverAppBar(
-                                expandedHeight:
-                                    model.selectedMainCatRestaurants.isEmpty
-                                        ? 0.36.sh
-                                        : 0.1.sh,
+                                expandedHeight: model.selectedMainCats.isEmpty
+                                    ? 0.36.sh
+                                    : 0.1.sh,
                                 backgroundColor: Colors.transparent,
                                 elevation: 0,
                                 toolbarHeight: 60.h,
@@ -198,7 +221,7 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 15.h +
+                                            top: 10.h +
                                                 MediaQuery.of(context)
                                                     .padding
                                                     .top),
@@ -220,8 +243,7 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                       ),
                                       //------------------ SLIDERS ---------------------//
-                                      if (model
-                                          .selectedMainCatRestaurants.isEmpty)
+                                      if (model.selectedMainCats.isEmpty)
                                         SliderView(
                                             sliders: model.sliders ?? []),
                                     ],
@@ -269,7 +291,7 @@ class _HomeViewState extends State<HomeView> {
                               SliverList(
                                 delegate: SliverChildListDelegate(
                                   [
-                                    model.selectedMainCatRestaurants.isEmpty
+                                    model.selectedMainCats.isEmpty
                                         ? ListView.builder(
                                             shrinkWrap: true,
                                             physics:
@@ -450,7 +472,8 @@ class _HomeViewState extends State<HomeView> {
                           ),
                   ),
                   //------------------ BOTTOM CART ---------------------//
-                  if (!model.hasFutureError) HomeBottomCart(),
+                  if (!model.hasFutureError && model.cartRes!.id != -1)
+                    HomeBottomCart(),
                 ],
               );
         return Scaffold(
