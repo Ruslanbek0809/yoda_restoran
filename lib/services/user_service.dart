@@ -30,8 +30,59 @@ class UserService {
 
   bool get hasLoggedInUser => _currentUser != null ? true : false;
 
+  Future<void> getInitialUser(
+      {Function()? onSuccess, Function()? onFail}) async {
+    log.v('====== getInitialUser() STARTED ======');
+    try {
+      Response response = await _apiRoot.dio.get('api/user/');
+      log.v('RESPONSE: api/user/ => ${response.data}');
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        /// Step 1. GETS and CONVERTS user json data to dart userModel
+        User? userModel;
+        response.data.forEach((_user) {
+          userModel = User.fromJson(_user);
+          // log.v('userModel: $userModel');
+        });
+
+        /// Step 2. OPENS userBox
+        await Hive.openBox<HiveUser>(Constants.userBox);
+
+        /// Step 3. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
+        userBox = Hive.box<HiveUser>(Constants.userBox);
+
+        /// Step 4. SAVES userModel to Hive userBox.
+        /// NOTE: Don't rewrite accessToken here.
+        await userBox.put(
+          Constants.userBox,
+          HiveUser(
+            id: userModel!.id,
+            firstName: userModel!.firstName,
+            lastName: userModel!.lastName,
+            email: userModel!.email,
+            mobile: userModel!.mobile,
+            gender: userModel!.gender,
+            birthday: userModel!.birthday,
+            favs: userModel!.favourites,
+          ),
+        );
+
+        /// Step 5. GETS hiveUser from Hive userBox
+        _currentUser = userBox.get(Constants.userBox);
+
+        log.v(
+            '_currentUser in getInitialUser(): $_currentUser and its accessToken: ${_currentUser!.accessToken}');
+        onSuccess!();
+      } else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR on api/user/ :${error.response}');
+      onFail!();
+      throw DioErrorType.response;
+    }
+  }
+
   /// INITIALIZE in StartUpViewModel
-  Future initUser() async {
+  Future clearUser() async {
     log.v('====== UserService STARTED opening boxes ======');
 
     /// Step 1. OPENS userBox
@@ -40,12 +91,32 @@ class UserService {
     /// Step 2. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
     userBox = Hive.box<HiveUser>(Constants.userBox);
 
-    /// Step 3. GETS hiveUser from Hive userBox
+    /// Step 3. CLEARS user data from hiveBox
+    await userBox.clear();
+
+    /// Step 4.GETS user data from hiveBox for loggedIn variables
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
         '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser?.accessToken}');
   }
+
+  /// INITIALIZE in StartUpViewModel
+  // Future initUser() async {
+  //   log.v('====== UserService STARTED opening boxes ======');
+
+  //   /// Step 1. OPENS userBox
+  //   await Hive.openBox<HiveUser>(Constants.userBox);
+
+  //   /// Step 2. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
+  //   userBox = Hive.box<HiveUser>(Constants.userBox);
+
+  //   /// Step 3. GETS hiveUser from Hive userBox
+  //   _currentUser = userBox.get(Constants.userBox);
+
+  //   log.v(
+  //       '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser?.accessToken}');
+  // }
 
   Future<void> loginUser(
       {String? phone, Function()? onSuccess, Function()? onFail}) async {
@@ -95,7 +166,6 @@ class UserService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         /// Step 1. GETS and CONVERTS user json data to dart userModel
         final User userModel = User.fromJson(response.data['user']);
-        log.v('userModel: $userModel, name: ');
 
         /// Step 2. SAVES userModel to Hive userBox
         await userBox.put(
@@ -108,6 +178,7 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
+            favs: userModel.favourites,
             accessToken: response.data['access'] as String,
           ),
         );

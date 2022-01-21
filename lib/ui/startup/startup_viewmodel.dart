@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flash/flash.dart';
-import 'package:keyboard_actions/external/platform_check/platform_check.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/ui/home/home_view.dart';
@@ -56,18 +56,40 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
 
     await _apiRootService.initDio();
     await _hiveDbService.initDB();
-    await _userService.initUser();
-
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
-    log.i('===== navToHomeWithConnection() ENDED =====');
-    Platform.isIOS
-        ? await _navService.replaceWithTransition(
-            HomeView(),
-            transition: NavigationTransition.Fade,
-          )
-        : await _navService.replaceWith(Routes.homeView);
+    /// USER part
+    await _userService.getInitialUser(
+      onSuccess: () async {
+        log.v('==== SUCCESS User ====');
+
+        Platform.isIOS
+            ? await _navService.replaceWithTransition(
+                HomeView(),
+                transition: NavigationTransition.Fade,
+              )
+            : await _navService.replaceWith(Routes.homeView);
+      },
+      onFail: () async {
+        log.v('====== FAIL User ======');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? _accessToken = prefs.getString(Constants.accessToken);
+        if (_accessToken != null) {
+          await prefs.remove(Constants.accessToken);
+          _accessToken = prefs.getString(Constants.accessToken);
+          log.i('ACCESS TOKEN after remove: $_accessToken');
+        }
+        await _userService.clearUser();
+
+        Platform.isIOS
+            ? await _navService.replaceWithTransition(
+                HomeView(),
+                transition: NavigationTransition.Fade,
+              )
+            : await _navService.replaceWith(Routes.homeView);
+      },
+    );
   }
 
   @override

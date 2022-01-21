@@ -19,6 +19,7 @@ class ApiRootService {
     /// Reason for usage of SharedPreferences is that ERROR is occuring in _userService.currentUser.accessToken (Stacked itself error related to services)
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? accessToken = prefs.getString(Constants.accessToken);
+    log.v('ApiRootService ACCESSTOKEN: $accessToken');
     final savedLocale = prefs.getString(
         Constants.savedLang); // GETS saved locale. In package feature
 

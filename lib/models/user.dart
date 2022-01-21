@@ -11,6 +11,7 @@ class User {
     this.mobile,
     this.gender,
     this.birthday,
+    this.favourites,
   });
 
   @JsonKey(name: 'id')
@@ -33,6 +34,9 @@ class User {
 
   @JsonKey(name: 'birthday')
   final DateTime? birthday;
+
+  @JsonKey(name: 'favourites')
+  final List<int>? favourites;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
