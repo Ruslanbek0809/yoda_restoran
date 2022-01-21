@@ -32,7 +32,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             fillColor: AppTheme.WHITE,
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
-            hintText: LocaleKeys.searchEx.tr(),
+            hintText: LocaleKeys.search.tr(),
             hintStyle: kts14HelperText,
           ),
           controller: _searchController,

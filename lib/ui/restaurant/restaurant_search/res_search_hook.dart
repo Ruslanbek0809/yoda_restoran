@@ -32,7 +32,7 @@ class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
             fillColor: AppTheme.WHITE,
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
-            hintText: LocaleKeys.searchExMeal.tr(),
+            hintText: LocaleKeys.search.tr(),
             hintStyle: kts14HelperText,
           ),
           controller: _searchController,
