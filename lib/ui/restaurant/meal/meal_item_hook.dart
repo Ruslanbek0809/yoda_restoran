@@ -97,14 +97,15 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 7.h, bottom: 3.h),
+                    padding: EdgeInsets.only(top: 5.h, bottom: 1.h),
                     child: Text(
                       meal.name!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: ktsDefault16Text,
+                      style: ktsDefault14Text,
                     ),
                   ),
+                  //------------------ MEAL PRICE ---------------------//
                   model.isButtonToggled
                       ? Row(
                           children: [

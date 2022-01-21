@@ -177,7 +177,8 @@ class MealViewModel extends ReactiveViewModel {
   void setOnModelReadyVolsCustoms(Meal meal) {
     log.i('setOnModelReadyVolsCustoms()');
 
-    _selectedCustoms.clear();
+    _isAllVolSelected = false; // RESETS vols to default
+    _selectedCustoms.clear(); // CLEARS all selectedCustoms
     _selectedVols = List.generate(
       meal.gVolumes!.length,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),

@@ -41,6 +41,7 @@ TextStyle ktsDefault12Text = TextStyle(
 
 TextStyle ktsDefault14Text = TextStyle(
   fontSize: 14.sp,
+  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 

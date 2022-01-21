@@ -122,10 +122,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                     Text(
                       restaurant.description!,
                       maxLines: 5,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: AppTheme.FONT_COLOR,
-                      ),
+                      style: ktsDefault14Text,
                     ),
                   ],
                 ),
