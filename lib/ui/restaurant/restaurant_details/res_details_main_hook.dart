@@ -52,7 +52,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     return CustomScrollView(
       controller: customScrollController,
-      physics: const BouncingScrollPhysics(),
+      // physics: const BouncingScrollPhysics(),
       slivers: [
         //------------------ ARROW BACK ---------------------//
         SliverAppBar(
@@ -191,7 +191,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(restaurant.image!),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.topCenter,
                 ),
               ),
               //// NOTE: Instead of direct Container Column is used to make child work properly
@@ -207,7 +208,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 17.h, bottom: 50.h),
+                    padding: EdgeInsets.only(top: 7.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

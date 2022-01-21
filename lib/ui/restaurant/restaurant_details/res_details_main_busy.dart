@@ -122,8 +122,8 @@ class ResDetailsMainBusy extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(restaurant.image!),
-                  fit: BoxFit.cover,
-                  // AssetImage('assets/burgerlist.jpg'),
+                  fit: BoxFit.contain,
+                  alignment: Alignment.topCenter,
                 ),
               ),
               //// NOTE: Instead of direct Container Column is used to make child work properly
@@ -139,7 +139,7 @@ class ResDetailsMainBusy extends StatelessWidget {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 17.h, bottom: 50.h),
+                    padding: EdgeInsets.only(top: 7.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

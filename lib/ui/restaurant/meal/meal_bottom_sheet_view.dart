@@ -161,7 +161,9 @@ class MealBottomSheet extends StatelessWidget {
                                                 title: Row(
                                                   children: [
                                                     Text(
-                                                      '${mainVolume.volumes![volumePos].volumeName} ml',
+                                                      mainVolume
+                                                          .volumes![volumePos]
+                                                          .volumeName!,
                                                       style: ktsDefault14Text,
                                                     ),
                                                     SizedBox(width: 7.w),

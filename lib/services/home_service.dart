@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
@@ -75,17 +76,28 @@ class HomeService with ReactiveServiceMixin {
   }
 
   Future<void> getSelectedMainCats(
-      List<int> selectedMainCats, bool alphabet, bool rating) async {
+    List<int> selectedMainCats,
+    bool alphabet,
+    bool rating,
+  ) async {
     if (selectedMainCats.isNotEmpty) {
       _fetchingSelectedMainCats.value = true;
-      _selectedMainCatRestaurants = await _api.getSelectedMainCats(
+      await Future.delayed(Duration(seconds: 1));
+      dynamic result = await _api.getSelectedMainCats(
         selectedMainCats,
         alphabet,
         rating,
       );
-      _fetchingSelectedMainCats.value = false;
+
+      /// This line "result.runtimeType != DioError" is Workaround
+      if (result.runtimeType != DioError) {
+        _selectedMainCatRestaurants = result;
+        _fetchingSelectedMainCats.value = false;
+      } else {
+        _fetchingSelectedMainCats.value = false;
+      }
       log.v(
-          '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+          'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
     } else {
       _fetchingSelectedMainCats.value = true;
       _selectedMainCatRestaurants!.clear();

@@ -83,7 +83,7 @@ class ApiService {
     }
   }
 
-  Future<List<Restaurant>> getSelectedMainCats(
+  Future<dynamic> getSelectedMainCats(
     List<int> _selectedMainCats,
     bool alphabet,
     bool rating,
@@ -93,13 +93,12 @@ class ApiService {
     for (int i = 1; i < _selectedMainCats.length; i++)
       _queryPars += '&mainCat=${_selectedMainCats[i]}'; // Workaround
 
+    if (alphabet) _queryPars += '&alphabet=$alphabet'; // Workaround
+    if (rating) _queryPars += '&rating=$rating'; // Workaround
+
     log.v('ApiService - $_queryPars, alphabet: $alphabet, rating: $rating');
     try {
-      Response response = await _apiRoot.dio
-          .get('api/restaurants? = $_selectedMainCats', queryParameters: {
-        'alphabet': alphabet,
-        'rating': rating,
-      });
+      Response response = await _apiRoot.dio.get('api/restaurants?$_queryPars');
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
 
       if (response.data != null)
@@ -108,9 +107,9 @@ class ApiService {
         });
 
       return _selectedMainCatRestaurants;
-    } catch (error) {
-      log.v('ERROR on api/promoted/ :$error');
-      rethrow;
+    } on DioError catch (error) {
+      log.v('ERROR on api/promoted/ :${error.response}');
+      return error;
     }
   }
 
