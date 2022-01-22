@@ -36,6 +36,6 @@ class HiveUser {
   @HiveField(6)
   final DateTime? birthday;
 
-  @HiveField(7)
+  @HiveField(7, defaultValue: const [])
   final List<int>? favs;
 }

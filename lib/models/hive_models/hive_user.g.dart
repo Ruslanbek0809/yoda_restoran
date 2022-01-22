@@ -24,7 +24,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       mobile: fields[4] as String?,
       gender: fields[5] as String?,
       birthday: fields[6] as DateTime?,
-      favs: (fields[7] as List?)?.cast<int>(),
+      favs: fields[7] == null ? [] : (fields[7] as List?)?.cast<int>(),
     );
   }
 

@@ -40,8 +40,7 @@ class UserService {
         /// Step 1. GETS and CONVERTS user json data to dart userModel
         User? userModel;
         response.data.forEach((_user) {
-          userModel = User.fromJson(_user);
-          // log.v('userModel: $userModel');
+          // userModel = User.fromJson(_user);
         });
 
         /// Step 2. OPENS userBox
@@ -50,27 +49,27 @@ class UserService {
         /// Step 3. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
         userBox = Hive.box<HiveUser>(Constants.userBox);
 
-        /// Step 4. SAVES userModel to Hive userBox.
-        /// NOTE: Don't rewrite accessToken here.
-        await userBox.put(
-          Constants.userBox,
-          HiveUser(
-            id: userModel!.id,
-            firstName: userModel!.firstName,
-            lastName: userModel!.lastName,
-            email: userModel!.email,
-            mobile: userModel!.mobile,
-            gender: userModel!.gender,
-            birthday: userModel!.birthday,
-            favs: userModel!.favourites,
-          ),
-        );
+        // /// Step 4. SAVES userModel to Hive userBox.
+        // /// NOTE: Don't rewrite accessToken here.
+        // await userBox.put(
+        //   Constants.userBox,
+        //   HiveUser(
+        //     id: userModel!.id,
+        //     firstName: userModel!.firstName,
+        //     lastName: userModel!.lastName,
+        //     email: userModel!.email,
+        //     mobile: userModel!.mobile,
+        //     gender: userModel!.gender,
+        //     birthday: userModel!.birthday,
+        //     favs: userModel!.favourites,
+        //   ),
+        // );
 
         /// Step 5. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
 
         log.v(
-            '_currentUser in getInitialUser() with his/her phone: ${_currentUser!.mobile}');
+            '_currentUser in getInitialUser() with his/her phone: ${_currentUser!.mobile} and favs: ${_currentUser!.favs}');
         onSuccess!();
       } else
         onFail!();
@@ -98,7 +97,7 @@ class UserService {
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
-        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and his/her phone: ${_currentUser!.mobile}');
+        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and his/her phone: ${_currentUser?.mobile}');
   }
 
   /// INITIALIZE in StartUpViewModel

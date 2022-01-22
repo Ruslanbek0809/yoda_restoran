@@ -59,7 +59,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
-    /// USER part
+    /// USER part. GETS initial user with condition and behaves with that in mind
     await _userService.getInitialUser(
       onSuccess: () async {
         log.v('==== SUCCESS User ====');

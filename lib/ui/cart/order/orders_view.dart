@@ -59,7 +59,7 @@ class OrdersView extends StatelessWidget {
                     : ListView.separated(
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(
-                            horizontal: 5.w, vertical: 10.w),
+                            horizontal: 12.w, vertical: 10.h),
                         itemCount: model.orders!.length,
                         itemBuilder: (context, pos) {
                           Order order = model.orders![pos];
@@ -96,316 +96,338 @@ class OrdersView extends StatelessWidget {
                                         .background),
                               ),
                               // DateFormat('dd-MM-yyyy HH:mm').format(deliveryTime!.toLocal())
-                              child: ExpansionTile(
-                                initiallyExpanded:
-                                    order.status == 2 || order.status == 1,
-                                title: SizedBox(),
-                                onExpansionChanged: (value) {
-                                  printLog('onExpansionChanged()');
-                                },
-                                //// have to use SizedBox in leading bc of tileWidth issue
-                                leading: SizedBox(
-                                  width: 0.7.sw,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      //------------------ RESTAURANT NAME ---------------------//
-                                      Text(
-                                        order.restaurant!.name!,
-                                        style: ktsDefault18SemiBoldText,
-                                      ),
-                                      SizedBox(height: 5.h),
-                                      //------------------ DATE and STATUS ---------------------//
-                                      Row(
-                                        children: [
-                                          Text(
-                                            DateFormat('dd.MM.yyyy')
-                                                .format(order.deliveryTime!),
-                                            style: ktsDefault14Text,
+                              child: ClipRRect(
+                                borderRadius: AppTheme().radius16,
+                                child: ExpansionTile(
+                                  backgroundColor: kcSecondaryLightColor,
+                                  collapsedBackgroundColor:
+                                      kcSecondaryLightColor,
+                                  initiallyExpanded:
+                                      order.status == 2 || order.status == 1,
+                                  title: SizedBox(),
+                                  onExpansionChanged: (value) {
+                                    printLog('onExpansionChanged()');
+                                  },
+                                  //// have to use SizedBox in leading bc of tileWidth issue
+                                  leading: SizedBox(
+                                    width: 0.7.sw,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        //------------------ RESTAURANT NAME ---------------------//
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 3.h, bottom: 1.h),
+                                          child: Text(
+                                            order.restaurant!.name!,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: ktsDefault18SemiBoldText,
                                           ),
-                                          Text(
-                                            ' - $orderStatusText',
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              color: AppTheme.STATUS_COLOR,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                //------------------ PROMOCODE ---------------------//
-                                trailing: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
-                                      style: ktsDefault18SemiBoldText,
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                  ],
-                                ),
-                                expandedCrossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  //------------------ INNER PART ---------------------//
-                                  //------------------ DRIVER and DELIVERY ---------------------//
-                                  if (!order.selfPickUp!)
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          15.w, 10.h, 15.w, 5.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            LocaleKeys.driver,
-                                            style: ktsDefault16Text,
-                                          ).tr(),
-                                          order.selfPickUp!
-                                              ? Text(
-                                                  '-',
-                                                  style: ktsDefault16Text,
-                                                )
-                                              : order.status == 1
-                                                  ? Text(
-                                                      LocaleKeys.notAssignedYet,
-                                                      style: ktsDefault16Text,
-                                                      overflow:
-                                                          TextOverflow.visible,
-                                                    ).tr()
-                                                  : Text(
-                                                      order.driver!.mobile!,
-                                                      style: ktsDefault16Text,
-                                                    ),
-                                        ],
-                                      ),
-                                    ),
-                                  if (!order.selfPickUp!)
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 15.w),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            LocaleKeys.deliveryPrice,
-                                            style: ktsDefault16Text,
-                                          ).tr(),
-                                          order.selfPickUp!
-                                              ? Text(
-                                                  '0 TMT',
-                                                  style: ktsDefault16Text,
-                                                )
-                                              : order.status == 1
-                                                  ? Text(
-                                                      LocaleKeys.notAssignedYet,
-                                                      overflow:
-                                                          TextOverflow.fade,
-                                                      style: ktsDefault16Text,
-                                                    ).tr()
-                                                  : Text(
-                                                      '${formatNum(order.dostawkaPrice!)} TMT',
-                                                      style: ktsDefault16Text,
-                                                    ),
-                                        ],
-                                      ),
-                                    ),
-                                  if (!order.selfPickUp!) SizedBox(height: 5.h),
-                                  //------------------ PROMOCODE PART ---------------------//
-                                  if (order.promocode != null)
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 15.w, vertical: 10.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
+                                        ),
+                                        //------------------ DATE and STATUS ---------------------//
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 2.h),
+                                          child: Row(
                                             children: [
-                                              SvgPicture.asset(
-                                                'assets/percent.svg',
-                                                color: AppTheme.MAIN_DARK,
-                                                width: 22.w,
-                                              ),
-                                              SizedBox(width: 7.w),
                                               Text(
-                                                '${order.promocode!.name}',
-                                                style: ktsDefault16Text,
+                                                DateFormat('dd.MM.yyyy').format(
+                                                    order.deliveryTime!),
+                                                style: ktsDefault14Text,
+                                              ),
+                                              Text(
+                                                ' - $orderStatusText',
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  color: AppTheme.STATUS_COLOR,
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          Text(
-                                            '${formatNum(order.totPrice!)} TMT -${formatNum(orderPromocodePrice)} TMT',
-                                            style: ktsDefault16Text,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  //------------------ ORDER PRODUCT LIST ---------------------//
-                                  Column(
-                                    children:
-                                        order.orderItems!.map((_orderItem) {
-                                      String? _orderItemConcatenatedText =
-                                          model.getConcatenateVolsCustoms(
-                                              _orderItem);
-
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 35.w,
-                                          bottom: 5.h,
-                                          right: 15.w,
                                         ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                      ],
+                                    ),
+                                  ),
+                                  //------------------ PROMOCODE ---------------------//
+                                  trailing: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 4.h),
+                                        child: Text(
+                                          '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
+                                          style: ktsDefault18SemiBoldText,
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                    ],
+                                  ),
+                                  expandedCrossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    //------------------ INNER PART ---------------------//
+                                    //------------------ DRIVER and DELIVERY ---------------------//
+                                    if (!order.selfPickUp!)
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            15.w, 10.h, 15.w, 5.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              LocaleKeys.driver,
+                                              style: ktsDefault16Text,
+                                            ).tr(),
+                                            order.selfPickUp!
+                                                ? Text(
+                                                    '-',
+                                                    style: ktsDefault16Text,
+                                                  )
+                                                : order.status == 1
+                                                    ? Text(
+                                                        LocaleKeys
+                                                            .notAssignedYet,
+                                                        style: ktsDefault16Text,
+                                                        overflow: TextOverflow
+                                                            .visible,
+                                                      ).tr()
+                                                    : Text(
+                                                        order.driver!.mobile!,
+                                                        style: ktsDefault16Text,
+                                                      ),
+                                          ],
+                                        ),
+                                      ),
+                                    if (!order.selfPickUp!)
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              LocaleKeys.deliveryPrice,
+                                              style: ktsDefault16Text,
+                                            ).tr(),
+                                            order.selfPickUp!
+                                                ? Text(
+                                                    '0 TMT',
+                                                    style: ktsDefault16Text,
+                                                  )
+                                                : order.status == 1
+                                                    ? Text(
+                                                        LocaleKeys
+                                                            .notAssignedYet,
+                                                        overflow:
+                                                            TextOverflow.fade,
+                                                        style: ktsDefault16Text,
+                                                      ).tr()
+                                                    : Text(
+                                                        '${formatNum(order.dostawkaPrice!)} TMT',
+                                                        style: ktsDefault16Text,
+                                                      ),
+                                          ],
+                                        ),
+                                      ),
+                                    if (!order.selfPickUp!)
+                                      SizedBox(height: 5.h),
+                                    //------------------ PROMOCODE PART ---------------------//
+                                    if (order.promocode != null)
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w, vertical: 10.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
                                               children: [
-                                                Text(
-                                                  _orderItem.mealJson!.name!,
-                                                  style: ktsDefault16Text,
+                                                SvgPicture.asset(
+                                                  'assets/percent.svg',
+                                                  color: AppTheme.MAIN_DARK,
+                                                  width: 22.w,
                                                 ),
+                                                SizedBox(width: 7.w),
                                                 Text(
-                                                  '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
+                                                  '${order.promocode!.name}',
                                                   style: ktsDefault16Text,
                                                 ),
                                               ],
                                             ),
-                                            //------------------ OrderItem concatenated text ---------------------//
-                                            if (_orderItem
-                                                    .volumePrices!.isNotEmpty ||
-                                                _orderItem.costumizedMeals!
-                                                    .isNotEmpty)
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 10.w,
-                                                  bottom: 5.h,
-                                                  top: 2.h,
-                                                ),
-                                                child: Text(
-                                                  _orderItemConcatenatedText!,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: kts14HelperText,
-                                                ),
-                                              ),
+                                            Text(
+                                              '${formatNum(order.totPrice!)} TMT -${formatNum(orderPromocodePrice)} TMT',
+                                              style: ktsDefault16Text,
+                                            ),
                                           ],
                                         ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                  //------------------ ORDER BUTTON ---------------------//
-                                  if (order.status != 4)
-                                    SizedBox(
-                                      width: 1.sw,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w, vertical: 10.h),
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            backgroundColor: AppTheme.MAIN_DARK,
-                                            elevation: 0,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    AppTheme().radius10),
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 12.h),
+                                      ),
+                                    //------------------ ORDER PRODUCT LIST ---------------------//
+                                    Column(
+                                      children:
+                                          order.orderItems!.map((_orderItem) {
+                                        String? _orderItemConcatenatedText =
+                                            model.getConcatenateVolsCustoms(
+                                                _orderItem);
+
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 35.w,
+                                            bottom: 5.h,
+                                            right: 15.w,
                                           ),
-                                          child: order.status == 3
-                                              ? Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    !order.selfPickUp!
-                                                        ? Text(
-                                                            LocaleKeys.driver,
-                                                            style:
-                                                                ktsButton18Text,
-                                                          ).tr()
-                                                        : Text(
-                                                            LocaleKeys
-                                                                .selfPickUp,
-                                                            style:
-                                                                ktsButton18Text,
-                                                          ).tr(),
-                                                    if (!order.selfPickUp!)
-                                                      Text(
-                                                        ' ${order.driver!.mobile}',
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    _orderItem.mealJson!.name!,
+                                                    style: ktsDefault16Text,
+                                                  ),
+                                                  Text(
+                                                    '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
+                                                    style: ktsDefault16Text,
+                                                  ),
+                                                ],
+                                              ),
+                                              //------------------ OrderItem concatenated text ---------------------//
+                                              if (_orderItem.volumePrices!
+                                                      .isNotEmpty ||
+                                                  _orderItem.costumizedMeals!
+                                                      .isNotEmpty)
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    left: 10.w,
+                                                    bottom: 5.h,
+                                                    top: 2.h,
+                                                  ),
+                                                  child: Text(
+                                                    _orderItemConcatenatedText!,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: kts14HelperText,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                    //------------------ ORDER BUTTON ---------------------//
+                                    if (order.status != 4)
+                                      SizedBox(
+                                        width: 1.sw,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w, vertical: 10.h),
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  AppTheme.MAIN_DARK,
+                                              elevation: 0,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      AppTheme().radius10),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 11.h),
+                                            ),
+                                            child: order.status == 3
+                                                ? Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      !order.selfPickUp!
+                                                          ? Text(
+                                                              LocaleKeys.driver,
+                                                              style:
+                                                                  ktsButton18Text,
+                                                            ).tr()
+                                                          : Text(
+                                                              LocaleKeys
+                                                                  .selfPickUp,
+                                                              style:
+                                                                  ktsButton18Text,
+                                                            ).tr(),
+                                                      if (!order.selfPickUp!)
+                                                        Text(
+                                                          ' ${order.driver!.mobile}',
+                                                          style:
+                                                              ktsButton18Text,
+                                                        ).tr(),
+                                                    ],
+                                                  )
+                                                // : order.status == 4
+                                                //     ? Text(
+                                                //         LocaleKeys.reOrder,
+                                                //         style: ktsButton18Text,
+                                                //       ).tr()
+                                                : model.isCancelingOrder &&
+                                                        order.status == 1
+                                                    ? ButtonLoading()
+                                                    : Text(
+                                                        LocaleKeys.cancelOrder,
                                                         style: ktsButton18Text,
                                                       ).tr(),
-                                                  ],
-                                                )
-                                              // : order.status == 4
-                                              //     ? Text(
-                                              //         LocaleKeys.reOrder,
-                                              //         style: ktsButton18Text,
-                                              //       ).tr()
-                                              : model.isCancelingOrder &&
-                                                      order.status == 1
-                                                  ? ButtonLoading()
-                                                  : Text(
-                                                      LocaleKeys.cancelOrder,
-                                                      style: ktsButton18Text,
-                                                    ).tr(),
-                                          onPressed: () async {
-                                            switch (order.status) {
-                                              case 1:
-                                                await model
-                                                    .showCancelWaitingOrderDialog(
-                                                  order.id!,
-                                                  () async {
-                                                    showErrorFlashBar(
-                                                      context: context,
-                                                      msg: LocaleKeys
-                                                          .orderCancelSuccess
-                                                          .tr(),
-                                                      margin: EdgeInsets.only(
-                                                        left: 0.1.sw,
-                                                        right: 0.1.sw,
-                                                        bottom: 0.05.sh,
-                                                      ),
-                                                    );
-                                                  },
-                                                  () async {
-                                                    showErrorFlashBar(
-                                                      context: context,
-                                                      margin: EdgeInsets.only(
-                                                        left: 0.1.sw,
-                                                        right: 0.1.sw,
-                                                        bottom: 0.05.sh,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                                break;
-                                              case 2:
-                                                await model
-                                                    .showCancelAcceptedOrderDialog();
-                                                break;
-                                              case 3:
-                                                if (!order.selfPickUp!)
+                                            onPressed: () async {
+                                              switch (order.status) {
+                                                case 1:
                                                   await model
-                                                      .makePhoneCallToDriver(
-                                                          order
-                                                              .driver!.mobile!);
-                                                break;
-                                              case 4:
-                                                break;
-                                              default:
-                                                break;
-                                            }
-                                          },
+                                                      .showCancelWaitingOrderDialog(
+                                                    order.id!,
+                                                    () async {
+                                                      showErrorFlashBar(
+                                                        context: context,
+                                                        msg: LocaleKeys
+                                                            .orderCancelSuccess
+                                                            .tr(),
+                                                        margin: EdgeInsets.only(
+                                                          left: 0.1.sw,
+                                                          right: 0.1.sw,
+                                                          bottom: 0.05.sh,
+                                                        ),
+                                                      );
+                                                    },
+                                                    () async {
+                                                      showErrorFlashBar(
+                                                        context: context,
+                                                        margin: EdgeInsets.only(
+                                                          left: 0.1.sw,
+                                                          right: 0.1.sw,
+                                                          bottom: 0.05.sh,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                  break;
+                                                case 2:
+                                                  await model
+                                                      .showCancelAcceptedOrderDialog();
+                                                  break;
+                                                case 3:
+                                                  if (!order.selfPickUp!)
+                                                    await model
+                                                        .makePhoneCallToDriver(
+                                                            order.driver!
+                                                                .mobile!);
+                                                  break;
+                                                case 4:
+                                                  break;
+                                                default:
+                                                  break;
+                                              }
+                                            },
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           );
