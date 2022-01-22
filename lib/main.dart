@@ -22,10 +22,11 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
+  Hive.registerAdapter<HiveUser>(HiveUserAdapter());
   Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
+  Hive.registerAdapter<HiveResPaymentType>(HiveResPaymentTypeAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
-  Hive.registerAdapter<HiveUser>(HiveUserAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();

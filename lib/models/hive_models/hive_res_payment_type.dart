@@ -1,10 +1,10 @@
 import 'package:hive/hive.dart';
 
-part 'hive_payment_type.g.dart';
+part 'hive_res_payment_type.g.dart';
 
 @HiveType(typeId: 4)
-class HivePaymentType {
-  HivePaymentType({
+class HiveResPaymentType {
+  HiveResPaymentType({
     this.id,
     this.nameTk,
     this.nameRu,

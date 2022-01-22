@@ -11,8 +11,9 @@ class Constants {
 
   // Hive
   static const userBox = 'userBox';
-  static const cartMealsBox = 'cartMealsBox';
   static const cartResBox = 'cartResBox';
+  static const resPaymentTypeBox = 'resPaymentTypeBox';
+  static const cartMealsBox = 'cartMealsBox';
   static const volCartBox = 'volCartBox';
 
   /// SharedPreferences

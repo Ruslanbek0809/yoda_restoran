@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 
 part 'hive_restaurant.g.dart';
 
-/// TODO: Add payments list here
 @HiveType(typeId: 1)
 class HiveRestaurant {
   HiveRestaurant({
@@ -17,6 +17,7 @@ class HiveRestaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
+    this.resPaymentTypes,
   });
 
   @HiveField(0)
@@ -51,4 +52,7 @@ class HiveRestaurant {
 
   @HiveField(10)
   final String? prepareTime;
+
+  @HiveField(11)
+  final List<HiveResPaymentType>? resPaymentTypes;
 }

@@ -28,13 +28,14 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       workingHours: fields[8] as String?,
       phoneNumber: fields[9] as String?,
       prepareTime: fields[10] as String?,
+      resPaymentTypes: (fields[11] as List?)?.cast<HiveResPaymentType>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveRestaurant obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       ..writeByte(9)
       ..write(obj.phoneNumber)
       ..writeByte(10)
-      ..write(obj.prepareTime);
+      ..write(obj.prepareTime)
+      ..writeByte(11)
+      ..write(obj.resPaymentTypes);
   }
 
   @override

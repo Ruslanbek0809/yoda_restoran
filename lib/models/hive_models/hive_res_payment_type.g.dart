@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hive_payment_type.dart';
+part of 'hive_res_payment_type.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HivePaymentTypeAdapter extends TypeAdapter<HivePaymentType> {
+class HiveResPaymentTypeAdapter extends TypeAdapter<HiveResPaymentType> {
   @override
   final int typeId = 4;
 
   @override
-  HivePaymentType read(BinaryReader reader) {
+  HiveResPaymentType read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HivePaymentType(
+    return HiveResPaymentType(
       id: fields[0] as int?,
       nameTk: fields[1] as String?,
       nameRu: fields[2] as String?,
@@ -24,7 +24,7 @@ class HivePaymentTypeAdapter extends TypeAdapter<HivePaymentType> {
   }
 
   @override
-  void write(BinaryWriter writer, HivePaymentType obj) {
+  void write(BinaryWriter writer, HiveResPaymentType obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class HivePaymentTypeAdapter extends TypeAdapter<HivePaymentType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HivePaymentTypeAdapter &&
+      other is HiveResPaymentTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

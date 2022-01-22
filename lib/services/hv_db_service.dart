@@ -19,8 +19,8 @@ class HiveDbService with ReactiveServiceMixin {
   final _bottomCartService = locator<BottomCartService>();
 
   static late Box<HiveRestaurant> cartResBox;
-  static late Box<HiveMeal> cartMealsBox;
-  static late Box<HiveVolCus> volCartBox;
+  static late Box<HiveMeal>
+      cartMealsBox; // Also we don't need other 2 meal and res related boxes here
 
   HiveRestaurant? cartRes;
 
@@ -33,6 +33,7 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('====== HiveDbService STARTED opening boxes ======');
 
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
+    await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
 
@@ -66,6 +67,21 @@ class HiveDbService with ReactiveServiceMixin {
     log.i('resId: ${restaurant!.id}');
 
     try {
+      List<HiveResPaymentType> _hiveResPaymentTypes = [];
+
+      /// Adds all payment types of a restaurant to _hiveResPaymentTypes and ASSIGNS it to hive res
+      for (PaymentType paymentType in restaurant.paymentTypes!)
+        _hiveResPaymentTypes.add(
+          HiveResPaymentType(
+            id: paymentType.id,
+            nameTk: paymentType.nameTk,
+            nameRu: paymentType.nameRu,
+          ),
+        );
+
+      log.i(
+          '_hiveResPaymentTypes length BEFORE updateResInCart: ${_hiveResPaymentTypes.length}');
+
       final HiveRestaurant _restaurant = HiveRestaurant(
         id: restaurant.id,
         image: restaurant.image,
@@ -78,7 +94,9 @@ class HiveDbService with ReactiveServiceMixin {
         phoneNumber: restaurant.phoneNumber,
         address: restaurant.address,
         deliveryPrice: restaurant.deliveryPrice,
+        resPaymentTypes: _hiveResPaymentTypes,
       );
+
       await cartResBox.put('cartRes', _restaurant);
       cartRes = cartResBox.get('cartRes',
           defaultValue: HiveRestaurant(id: -1, name: 'Default'));
