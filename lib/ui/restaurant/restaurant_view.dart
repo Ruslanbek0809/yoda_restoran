@@ -99,7 +99,7 @@ class RestaurantView extends StatelessWidget {
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        onPressed: model.updateResFavorite,
+                        onPressed: ()=> model.updateResFav(restaurant.id!),
                         icon: Icon(
                           model.isFavorited
                               ? Icons.favorite

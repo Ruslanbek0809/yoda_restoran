@@ -181,8 +181,7 @@ class CartViewModel extends ReactiveViewModel {
   /// CALLS navs based on user's login state.
   Future<void> onCartCheckoutButtonPressed() async {
     if (hasLoggedInUser) {
-      log.v(
-          'USER FOUND: ${_userService.currentUser!.mobile}, ${_userService.currentUser!.accessToken}');
+      log.v('USER FOUND with his/her phone: ${_userService.currentUser!.mobile}');
       await showCustomCheckoutBottomSheet();
     } else {
       log.v('USER NOTTTTT FOUND');

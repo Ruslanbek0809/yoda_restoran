@@ -70,7 +70,7 @@ class UserService {
         _currentUser = userBox.get(Constants.userBox);
 
         log.v(
-            '_currentUser in getInitialUser(): $_currentUser and its accessToken: ${_currentUser!.accessToken}');
+            '_currentUser in getInitialUser() with his/her phone: ${_currentUser!.mobile}');
         onSuccess!();
       } else
         onFail!();
@@ -98,7 +98,7 @@ class UserService {
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
-        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and its ACCESS TOKEN: ${_currentUser?.accessToken}');
+        '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and his/her phone: ${_currentUser!.mobile}');
   }
 
   /// INITIALIZE in StartUpViewModel
@@ -179,7 +179,6 @@ class UserService {
             gender: userModel.gender,
             birthday: userModel.birthday,
             favs: userModel.favourites,
-            accessToken: response.data['access'] as String,
           ),
         );
 
@@ -453,6 +452,29 @@ class UserService {
     } on DioError catch (error) {
       log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
+      rethrow;
+    }
+  }
+
+  Future<void> patchUserFavs(int resId) async {
+    if (_currentUser!.favs!.contains(resId))
+      _currentUser?.favs!.remove(resId);
+    else
+      _currentUser?.favs!.add(resId);
+
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/user/${_currentUser!.id}/',
+        data: FormData.fromMap({'favourites': _currentUser?.favs ?? []}),
+      );
+      log.v(
+          'RESPONSE: api/user/${_currentUser!.id}/ with favs: ${_currentUser?.favs ?? []} => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {}
+    } on DioError catch (error) {
+      log.v(
+          'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
       rethrow;
     }
   }

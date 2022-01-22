@@ -1,5 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/services/services.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';
@@ -9,14 +10,28 @@ class ResViewModel extends BaseViewModel {
   final log = getLogger('ResViewModel');
 
   final _navService = locator<NavigationService>();
+  final _userService = locator<UserService>();
+
+  bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
   bool _isFavorited = false;
   bool get isFavorited => _isFavorited;
 
-  void updateResFavorite() {
-    _isFavorited = !_isFavorited;
-    log.i('_isFavorited: $_isFavorited');
-    notifyListeners();
+  Future<void> updateResFav(int resId) async {
+    if (hasLoggedInUser) {
+      log.v(
+          'updateResFav() USER FOUND with his/her phone and favs: ${_userService.currentUser!.mobile} and ${_userService.currentUser!.favs}');
+      _isFavorited = !_isFavorited;
+      log.i('_isFavorited: $_isFavorited');
+      notifyListeners();
+      await _userService.patchUserFavs(resId);
+    } else {
+      log.v('updateResFav() USER NOTTTTT FOUND');
+      await _navService.navigateTo(
+        Routes.loginView,
+        arguments: LoginViewArguments(isCartView: false),
+      ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
+    }
   }
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(

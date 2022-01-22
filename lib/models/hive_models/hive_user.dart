@@ -12,7 +12,6 @@ class HiveUser {
     this.mobile,
     this.gender,
     this.birthday,
-    this.accessToken,
     this.favs,
   });
 
@@ -38,8 +37,5 @@ class HiveUser {
   final DateTime? birthday;
 
   @HiveField(7)
-  final String? accessToken;
-
-  @HiveField(8)
   final List<int>? favs;
 }
