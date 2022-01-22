@@ -146,16 +146,16 @@ class CheckoutViewModel extends ReactiveViewModel {
     );
   }
 
-  PaymentType? get selectedPaymentType =>
+  PaymentTypee? get selectedPaymentType =>
       _checkoutService.selectedPaymentType; // For CheckoutBottomSheetView
 
-  PaymentType? _tempSelectedPaymentType;
-  PaymentType get tempSelectedPaymentType => _tempSelectedPaymentType != null
+  PaymentTypee? _tempSelectedPaymentType;
+  PaymentTypee get tempSelectedPaymentType => _tempSelectedPaymentType != null
       ? _tempSelectedPaymentType!
       : _checkoutService.selectedPaymentType!;
 
   /// Temporarily SETS paymentType
-  void updateTempSelectedPaymentType(PaymentType selectedPaymentType) {
+  void updateTempSelectedPaymentType(PaymentTypee selectedPaymentType) {
     log.v(
         'updateTempSelectedPaymentType selectedPaymentType: ${selectedPaymentType.name}');
 

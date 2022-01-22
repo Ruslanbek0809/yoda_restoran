@@ -328,7 +328,7 @@ class UserService {
     Address? selectedAddress,
     bool isDelivery,
     DateTime? deliveryDateTime,
-    PaymentType? paymentType,
+    PaymentTypee? paymentType,
     Promocode? promocode,
     String? checkoutNote,
     HiveRestaurant? cartRes,

@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:yoda_res/models/models.dart';
 
 part 'restaurant.g.dart';
 
-/// TODO: Add payments list here
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class Restaurant {
   Restaurant({
     this.id,
@@ -17,6 +17,7 @@ class Restaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
+    this.paymentTypes,
   });
 
   @JsonKey(name: 'id')
@@ -51,6 +52,9 @@ class Restaurant {
 
   @JsonKey(name: 'prepareTime')
   final String? prepareTime;
+
+  @JsonKey(name: 'paymentTypes')
+  final List<PaymentType>? paymentTypes;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
       _$RestaurantFromJson(json);

@@ -47,9 +47,9 @@ List<CategoryFilter> mainCatSortList = [
   CategoryFilter(3, LocaleKeys.byRatings),
 ];
 
-List<PaymentType> paymentTypes = [
-  PaymentType(1, 'Nagt'),
-  PaymentType(2, 'Terminal'),
+List<PaymentTypee> paymentTypes = [
+  PaymentTypee(1, 'Nagt'),
+  PaymentTypee(2, 'Terminal'),
 ];
 
 /// Enum for FormValidation

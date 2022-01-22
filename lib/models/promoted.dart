@@ -3,7 +3,7 @@ import 'models.dart';
 
 part 'promoted.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class Promoted {
   Promoted({
     this.id,

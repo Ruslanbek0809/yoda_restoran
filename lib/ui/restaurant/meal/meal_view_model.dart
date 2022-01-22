@@ -234,7 +234,7 @@ class MealViewModel extends ReactiveViewModel {
     totalSumDraft -= meal.discount != null && meal.discount! > 0
         ? meal.discountedPrice!
         : meal.price!;
-    
+
     _selectedVols.forEach((vol) {
       if (vol.id != -1) totalSumDraft -= vol.price!;
     });

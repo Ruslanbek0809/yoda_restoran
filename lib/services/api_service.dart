@@ -77,8 +77,8 @@ class ApiService {
         });
       }
       return _promotedList;
-    } catch (error) {
-      log.v('ERROR on api/promoted/ :$error');
+    } on DioError catch (error) {
+      log.v('ERROR on api/promoted/ :${error.response}');
       rethrow;
     }
   }

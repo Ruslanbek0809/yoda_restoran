@@ -18,10 +18,10 @@ class CheckoutService with ReactiveServiceMixin {
   final _hiveDbService = locator<HiveDbService>();
   final _toggleButtonService = locator<ToggleButtonService>();
 
-  ReactiveValue<PaymentType> _selectedPaymentType =
-      ReactiveValue<PaymentType>(paymentTypes[0]);
+  ReactiveValue<PaymentTypee> _selectedPaymentType =
+      ReactiveValue<PaymentTypee>(paymentTypes[0]);
 
-  PaymentType? get selectedPaymentType => _selectedPaymentType.value;
+  PaymentTypee? get selectedPaymentType => _selectedPaymentType.value;
 
   ReactiveValue<Address> _selectedAddress =
       ReactiveValue<Address>(Address(id: -1));
@@ -37,7 +37,7 @@ class CheckoutService with ReactiveServiceMixin {
   List<Address>? get addresses => _addresses;
 
   /// SAVES paymentType
-  void savesPaymentType(PaymentType selectedPaymentType) =>
+  void savesPaymentType(PaymentTypee selectedPaymentType) =>
       _selectedPaymentType.value = selectedPaymentType;
 
   /// SEARCHES promocodes and GETS first
