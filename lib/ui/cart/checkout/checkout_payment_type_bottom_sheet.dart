@@ -67,9 +67,10 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                             ListView.separated(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: paymentTypes.length,
+                              itemCount: model.cartRes!.resPaymentTypes!.length,
                               itemBuilder: (context, pos) {
-                                var paymentType = paymentTypes[pos];
+                                var paymentType =
+                                    model.cartRes!.resPaymentTypes![pos];
                                 return Material(
                                   color: AppTheme.WHITE,
                                   child: InkWell(
@@ -84,23 +85,28 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                           AnimatedSwitcher(
                                             duration: const Duration(
                                                 milliseconds: 300),
-                                            child: model.tempSelectedPaymentType
-                                                        .id ==
-                                                    paymentType.id
-                                                ? SvgPicture.asset(
-                                                    'assets/checkCircle.svg',
-                                                    color: AppTheme.GREEN_COLOR,
-                                                    width: 25.w,
-                                                  )
-                                                : SvgPicture.asset(
-                                                    'assets/checkCircle.svg',
-                                                    color: Colors.white,
-                                                    width: 25.w,
-                                                  ),
+                                            child:
+                                                model.tempSelectedPaymentType!
+                                                            .id ==
+                                                        paymentType.id
+                                                    ? SvgPicture.asset(
+                                                        'assets/checkCircle.svg',
+                                                        color: AppTheme
+                                                            .GREEN_COLOR,
+                                                        width: 25.w,
+                                                      )
+                                                    : SvgPicture.asset(
+                                                        'assets/checkCircle.svg',
+                                                        color: Colors.white,
+                                                        width: 25.w,
+                                                      ),
                                           ),
                                           SizedBox(width: 10.w),
                                           Text(
-                                            paymentType.name,
+                                            context.locale ==
+                                                    context.supportedLocales[0]
+                                                ? paymentType.nameTk!
+                                                : paymentType.nameRu!,
                                             style: kts18Text,
                                           ),
                                         ],

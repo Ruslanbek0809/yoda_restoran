@@ -1,9 +1,9 @@
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
 import 'services.dart';
-import '../utils/util_functions.dart';
 
 class CheckoutService with ReactiveServiceMixin {
   final log = getLogger('CheckoutService');
@@ -15,13 +15,19 @@ class CheckoutService with ReactiveServiceMixin {
 
   final _api = locator<ApiService>();
   final _userService = locator<UserService>();
-  final _hiveDbService = locator<HiveDbService>();
+  HiveDbService _hiveDbService = locator<HiveDbService>();
   final _toggleButtonService = locator<ToggleButtonService>();
 
-  ReactiveValue<PaymentTypee> _selectedPaymentType =
-      ReactiveValue<PaymentTypee>(paymentTypes[0]);
+  ReactiveValue<HiveResPaymentType> _selectedPaymentType =
+      ReactiveValue<HiveResPaymentType>(
+    HiveResPaymentType(
+      id: -1,
+      nameRu: 'Default',
+      nameTk: 'Default',
+    ),
+  );
 
-  PaymentTypee? get selectedPaymentType => _selectedPaymentType.value;
+  HiveResPaymentType? get selectedPaymentType => _selectedPaymentType.value;
 
   ReactiveValue<Address> _selectedAddress =
       ReactiveValue<Address>(Address(id: -1));
@@ -37,8 +43,16 @@ class CheckoutService with ReactiveServiceMixin {
   List<Address>? get addresses => _addresses;
 
   /// SAVES paymentType
-  void savesPaymentType(PaymentTypee selectedPaymentType) =>
+  void saveSelectedPaymentType(HiveResPaymentType selectedPaymentType) =>
       _selectedPaymentType.value = selectedPaymentType;
+
+  /// SETS default value to _selectedPaymentType (Used to clear when new cartRes is set)
+  void setDefaultValueToSelectedPaymentType() =>
+      _selectedPaymentType.value = HiveResPaymentType(
+        id: -1,
+        nameRu: 'Default',
+        nameTk: 'Default',
+      );
 
   /// SEARCHES promocodes and GETS first
   Future<Promocode?> searchPromocode(String searchText) async {

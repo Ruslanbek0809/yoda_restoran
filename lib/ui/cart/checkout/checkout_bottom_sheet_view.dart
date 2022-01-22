@@ -350,7 +350,13 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                               style: ktsDefault16BoldText,
                                             ).tr(),
                                             Text(
-                                              model.selectedPaymentType!.name,
+                                              context.locale ==
+                                                      context
+                                                          .supportedLocales[0]
+                                                  ? model.selectedPaymentType!
+                                                      .nameTk!
+                                                  : model.selectedPaymentType!
+                                                      .nameRu!,
                                               style: ktsDefault16Text,
                                             ),
                                           ],

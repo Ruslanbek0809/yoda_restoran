@@ -45,6 +45,11 @@ class CheckoutViewModel extends ReactiveViewModel {
     deliveryDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
+
+    /// Workaround to give default first hive resPaymentTypes
+    if (!cartRes!.resPaymentTypes!.contains(selectedPaymentType))
+      _checkoutService
+          .saveSelectedPaymentType(_hiveDbService.cartRes!.resPaymentTypes![0]);
   }
 
   /// UPDATES deliveryDateTime
@@ -146,18 +151,19 @@ class CheckoutViewModel extends ReactiveViewModel {
     );
   }
 
-  PaymentTypee? get selectedPaymentType =>
+  HiveResPaymentType? get selectedPaymentType =>
       _checkoutService.selectedPaymentType; // For CheckoutBottomSheetView
 
-  PaymentTypee? _tempSelectedPaymentType;
-  PaymentTypee get tempSelectedPaymentType => _tempSelectedPaymentType != null
-      ? _tempSelectedPaymentType!
-      : _checkoutService.selectedPaymentType!;
+  HiveResPaymentType? _tempSelectedPaymentType;
+  HiveResPaymentType? get tempSelectedPaymentType =>
+      _tempSelectedPaymentType != null
+          ? _tempSelectedPaymentType!
+          : _checkoutService.selectedPaymentType;
 
   /// Temporarily SETS paymentType
-  void updateTempSelectedPaymentType(PaymentTypee selectedPaymentType) {
+  void updateTempSelectedPaymentType(HiveResPaymentType selectedPaymentType) {
     log.v(
-        'updateTempSelectedPaymentType selectedPaymentType: ${selectedPaymentType.name}');
+        'updateTempSelectedPaymentType() selectedPaymentType with id: ${selectedPaymentType.id}');
 
     _tempSelectedPaymentType = selectedPaymentType;
     notifyListeners();
@@ -166,9 +172,9 @@ class CheckoutViewModel extends ReactiveViewModel {
   /// SAVES paymentType ( uses _checkoutService reactivity)
   void savePaymentType() {
     log.v(
-        'updatePaymentType() tempSelectedPaymentType: ${tempSelectedPaymentType.name}');
+        'savePaymentType() tempSelectedPaymentType: ${tempSelectedPaymentType!.id}');
 
-    _checkoutService.savesPaymentType(tempSelectedPaymentType);
+    _checkoutService.saveSelectedPaymentType(tempSelectedPaymentType!);
     notifyListeners();
   }
 
