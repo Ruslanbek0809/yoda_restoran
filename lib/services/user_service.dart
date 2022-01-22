@@ -40,7 +40,7 @@ class UserService {
         /// Step 1. GETS and CONVERTS user json data to dart userModel
         User? userModel;
         response.data.forEach((_user) {
-          // userModel = User.fromJson(_user);
+          userModel = User.fromJson(_user);
         });
 
         /// Step 2. OPENS userBox
@@ -49,21 +49,21 @@ class UserService {
         /// Step 3. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
         userBox = Hive.box<HiveUser>(Constants.userBox);
 
-        // /// Step 4. SAVES userModel to Hive userBox.
-        // /// NOTE: Don't rewrite accessToken here.
-        // await userBox.put(
-        //   Constants.userBox,
-        //   HiveUser(
-        //     id: userModel!.id,
-        //     firstName: userModel!.firstName,
-        //     lastName: userModel!.lastName,
-        //     email: userModel!.email,
-        //     mobile: userModel!.mobile,
-        //     gender: userModel!.gender,
-        //     birthday: userModel!.birthday,
-        //     favs: userModel!.favourites,
-        //   ),
-        // );
+        /// Step 4. SAVES userModel to Hive userBox.
+        /// NOTE: Don't rewrite accessToken here.
+        await userBox.put(
+          Constants.userBox,
+          HiveUser(
+            id: userModel!.id,
+            firstName: userModel!.firstName,
+            lastName: userModel!.lastName,
+            email: userModel!.email,
+            mobile: userModel!.mobile,
+            gender: userModel!.gender,
+            birthday: userModel!.birthday,
+            favs: userModel!.favourites,
+          ),
+        );
 
         /// Step 5. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
@@ -455,11 +455,17 @@ class UserService {
     }
   }
 
-  Future<void> patchUserFavs(int resId) async {
+  Future<void> patchUserFavs(
+    int resId,
+    bool isTempFavourited,
+    Function()? onFail,
+  ) async {
     if (_currentUser!.favs!.contains(resId))
       _currentUser?.favs!.remove(resId);
     else
       _currentUser?.favs!.add(resId);
+
+    log.v('BEFORE fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
 
     try {
       Response response = await _apiRoot.dio.patch(
@@ -470,10 +476,27 @@ class UserService {
           'RESPONSE: api/user/${_currentUser!.id}/ with favs: ${_currentUser?.favs ?? []} => ${response.data}');
 
       if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201)) {}
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        log.v(
+            'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+      } else {
+        if (isTempFavourited)
+          _currentUser?.favs!.remove(resId);
+        else
+          _currentUser?.favs!.add(resId);
+        log.v(
+            'AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+        onFail!();
+      }
     } on DioError catch (error) {
       log.v(
           'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
+      if (isTempFavourited)
+        _currentUser?.favs!.remove(resId);
+      else
+        _currentUser?.favs!.add(resId);
+      log.v('AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+      onFail!();
       rethrow;
     }
   }

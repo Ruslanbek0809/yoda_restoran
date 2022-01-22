@@ -17,14 +17,29 @@ class ResViewModel extends BaseViewModel {
   bool _isFavorited = false;
   bool get isFavorited => _isFavorited;
 
+  /// CHECKS and ASSIGNS initial res fav state
+  void checkResFav(int resId) =>
+      _isFavorited = _userService.currentUser!.favs!.contains(resId);
+
+  /// UPDATES res fav state
   Future<void> updateResFav(int resId) async {
     if (hasLoggedInUser) {
       log.v(
           'updateResFav() USER FOUND with his/her phone and favs: ${_userService.currentUser!.mobile} and ${_userService.currentUser!.favs}');
-      _isFavorited = !_isFavorited;
+      _isFavorited =
+          !_isFavorited; // The reason for fav update before actual patch func is not to keep user from waiting for update patch time
       log.i('_isFavorited: $_isFavorited');
       notifyListeners();
-      await _userService.patchUserFavs(resId);
+
+      await _userService.patchUserFavs(
+        resId,
+        _isFavorited,
+        () {
+          log.i('FAIL fav update');
+          _isFavorited = !_isFavorited; // Update it back.
+          notifyListeners();
+        },
+      );
     } else {
       log.v('updateResFav() USER NOTTTTT FOUND');
       await _navService.navigateTo(

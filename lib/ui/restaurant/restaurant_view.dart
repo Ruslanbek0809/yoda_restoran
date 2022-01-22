@@ -14,6 +14,7 @@ class RestaurantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResViewModel>.reactive(
+      onModelReady: (model) => model.checkResFav(restaurant.id!),
       builder: (context, model, child) {
         return Container(
           height: 0.3.sh,
@@ -99,7 +100,7 @@ class RestaurantView extends StatelessWidget {
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        onPressed: ()=> model.updateResFav(restaurant.id!),
+                        onPressed: () => model.updateResFav(restaurant.id!),
                         icon: Icon(
                           model.isFavorited
                               ? Icons.favorite

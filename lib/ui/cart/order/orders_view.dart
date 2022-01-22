@@ -30,7 +30,7 @@ class OrdersView extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: AppTheme.WHITE,
-              elevation: 1,
+              elevation: 0.5,
               leadingWidth: 35.w,
               leading: Padding(
                 padding: EdgeInsets.only(left: 10.w),
@@ -59,7 +59,9 @@ class OrdersView extends StatelessWidget {
                     : ListView.separated(
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(
-                            horizontal: 12.w, vertical: 10.h),
+                          horizontal: 5.w,
+                          vertical: 10.h,
+                        ),
                         itemCount: model.orders!.length,
                         itemBuilder: (context, pos) {
                           Order order = model.orders![pos];
@@ -99,9 +101,9 @@ class OrdersView extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: AppTheme().radius16,
                                 child: ExpansionTile(
-                                  backgroundColor: kcSecondaryLightColor,
-                                  collapsedBackgroundColor:
-                                      kcSecondaryLightColor,
+                                  // backgroundColor: kcSecondaryLightColor,
+                                  // collapsedBackgroundColor:
+                                  //     kcSecondaryLightColor,
                                   initiallyExpanded:
                                       order.status == 2 || order.status == 1,
                                   title: SizedBox(),
@@ -116,34 +118,29 @@ class OrdersView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         //------------------ RESTAURANT NAME ---------------------//
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 3.h, bottom: 1.h),
-                                          child: Text(
-                                            order.restaurant!.name!,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: ktsDefault18SemiBoldText,
-                                          ),
+                                        Text(
+                                          order.restaurant!.name!,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: ktsDefault18SemiBoldText,
                                         ),
+
+                                        SizedBox(height: 5.h),
                                         //------------------ DATE and STATUS ---------------------//
-                                        Padding(
-                                          padding: EdgeInsets.only(bottom: 2.h),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                DateFormat('dd.MM.yyyy').format(
-                                                    order.deliveryTime!),
-                                                style: ktsDefault14Text,
+                                        Row(
+                                          children: [
+                                            Text(
+                                              DateFormat('dd.MM.yyyy')
+                                                  .format(order.deliveryTime!),
+                                              style: ktsDefault14Text,
+                                            ),
+                                            Text(
+                                              ' - $orderStatusText',
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: AppTheme.STATUS_COLOR,
                                               ),
-                                              Text(
-                                                ' - $orderStatusText',
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  color: AppTheme.STATUS_COLOR,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -231,13 +228,14 @@ class OrdersView extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    if (!order.selfPickUp!)
-                                      SizedBox(height: 5.h),
                                     //------------------ PROMOCODE PART ---------------------//
                                     if (order.promocode != null)
                                       Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w, vertical: 10.h),
+                                        padding: EdgeInsets.fromLTRB(
+                                            15.w,
+                                            order.selfPickUp! ? 15.h : 17.h,
+                                            15.w,
+                                            order.selfPickUp! ? 0.h : 2.h),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -251,7 +249,7 @@ class OrdersView extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 7.w),
                                                 Text(
-                                                  '${order.promocode!.name}',
+                                                  'SOWGAT',
                                                   style: ktsDefault16Text,
                                                 ),
                                               ],
@@ -263,7 +261,8 @@ class OrdersView extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    //------------------ ORDER PRODUCT LIST ---------------------//
+                                    SizedBox(height: 15.h),
+                                    //------------------ ORDER MEAL LIST ---------------------//
                                     Column(
                                       children:
                                           order.orderItems!.map((_orderItem) {
@@ -273,7 +272,7 @@ class OrdersView extends StatelessWidget {
 
                                         return Padding(
                                           padding: EdgeInsets.only(
-                                            left: 35.w,
+                                            left: 16.w,
                                             bottom: 5.h,
                                             right: 15.w,
                                           ),
@@ -286,9 +285,15 @@ class OrdersView extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    _orderItem.mealJson!.name!,
-                                                    style: ktsDefault16Text,
+                                                  Expanded(
+                                                    child: Text(
+                                                      _orderItem
+                                                          .mealJson!.name!,
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: ktsDefault16Text,
+                                                    ),
                                                   ),
                                                   Text(
                                                     '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
@@ -304,7 +309,7 @@ class OrdersView extends StatelessWidget {
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                     left: 10.w,
-                                                    bottom: 5.h,
+                                                    bottom: 0.h,
                                                     top: 2.h,
                                                   ),
                                                   child: Text(
@@ -320,6 +325,8 @@ class OrdersView extends StatelessWidget {
                                       }).toList(),
                                     ),
                                     //------------------ ORDER BUTTON ---------------------//
+                                    if (order.status != 4)
+                                      SizedBox(height: 5.h),
                                     if (order.status != 4)
                                       SizedBox(
                                         width: 1.sw,
@@ -434,7 +441,7 @@ class OrdersView extends StatelessWidget {
                         },
                         separatorBuilder: (context, index) {
                           return Divider(
-                            thickness: 1,
+                            thickness: 0.5,
                             color: AppTheme.DRAWER_DIVIDER,
                           );
                         },
