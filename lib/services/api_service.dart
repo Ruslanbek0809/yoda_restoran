@@ -96,6 +96,10 @@ class ApiService {
     if (alphabet) _queryPars += '&alphabet=$alphabet'; // Workaround
     if (rating) _queryPars += '&rating=$rating'; // Workaround
 
+    /// Favourite add part
+    if (_selectedMainCats.contains(14))
+      _queryPars += '&favourite=True'; // Workaround
+
     log.v('ApiService - $_queryPars, alphabet: $alphabet, rating: $rating');
     try {
       Response response = await _apiRoot.dio.get('api/restaurants?$_queryPars');

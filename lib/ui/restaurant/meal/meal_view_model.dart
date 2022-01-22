@@ -214,6 +214,13 @@ class MealViewModel extends ReactiveViewModel {
     totalSumDraft += meal.discount != null && meal.discount! > 0
         ? meal.discountedPrice!
         : meal.price!;
+
+    _selectedVols.forEach((vol) {
+      if (vol.id != -1) totalSumDraft += vol.price!;
+    });
+    _selectedCustoms.forEach((cus) {
+      totalSumDraft += cus.price!;
+    });
     log.i('addQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
   }
@@ -227,6 +234,13 @@ class MealViewModel extends ReactiveViewModel {
     totalSumDraft -= meal.discount != null && meal.discount! > 0
         ? meal.discountedPrice!
         : meal.price!;
+    
+    _selectedVols.forEach((vol) {
+      if (vol.id != -1) totalSumDraft -= vol.price!;
+    });
+    _selectedCustoms.forEach((cus) {
+      totalSumDraft -= cus.price!;
+    });
     log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
   }
@@ -246,13 +260,14 @@ class MealViewModel extends ReactiveViewModel {
     if (_selectedVols[mainVolPos].id != -1)
 
       /// Step 1. SUBTRACTS selected vol's price from totalDraftSum
-      totalSumDraft -= _selectedVols[mainVolPos].price!;
+      totalSumDraft -= _selectedVols[mainVolPos].price! *
+          quantityDraft; // If already selected vol from group then remove it first
 
     /// Step 2. ASSIGNS selected volume to _selectedVols[mainVolPos]
     _selectedVols[mainVolPos] = volume!;
 
     /// Step 3. ADDS selected vol's price to totalDraftSum
-    totalSumDraft += _selectedVols[mainVolPos].price!;
+    totalSumDraft += _selectedVols[mainVolPos].price! * quantityDraft;
 
     /// Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
     var _volWithMinus = _selectedVols.firstWhere(
@@ -270,12 +285,12 @@ class MealViewModel extends ReactiveViewModel {
       _selectedCustoms.remove(selectedCus);
 
       /// SUBTRACTS selectedCus's price from totalDraftSum
-      totalSumDraft -= selectedCus!.price!;
+      totalSumDraft -= selectedCus!.price! * quantityDraft;
     } else {
       _selectedCustoms.add(selectedCus!);
 
       /// ADDS selectedCus's price to totalDraftSum
-      totalSumDraft += selectedCus.price!;
+      totalSumDraft += selectedCus.price! * quantityDraft;
     }
     notifyListeners();
   }

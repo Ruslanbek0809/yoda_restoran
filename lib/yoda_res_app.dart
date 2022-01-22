@@ -29,7 +29,7 @@ class YodaResApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.light,
+        // themeMode: ThemeMode.light,
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: AppTheme.MAIN,
