@@ -29,7 +29,7 @@ class CartView extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: AppTheme.WHITE,
-              elevation: 1,
+              elevation: 0.5,
               leadingWidth: 35.w,
               leading: Padding(
                 padding: EdgeInsets.only(left: 10.w),
