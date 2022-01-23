@@ -51,8 +51,15 @@ class _HomeViewState extends State<HomeView> {
           var info = await InAppUpdate.checkForUpdate();
 
           model.log.v('InAppUpdate Info: $info');
-          if (info.flexibleUpdateAllowed == true)
+          print('InAppUpdate Info: $info');
+          model.log.v(
+              'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
+          print(
+              'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
+          if (info.updateAvailability == 2) {
             await InAppUpdate.startFlexibleUpdate();
+            print('I AM IN startFlexibleUpdate(): ');
+          }
         }
       }),
       builder: (context, model, child) {
