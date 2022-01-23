@@ -66,7 +66,6 @@ class CheckoutViewModel extends ReactiveViewModel {
     //         deliveryDateTime!.minute < startMinute) ||
     //     (deliveryDateTime!.hour > endHour ||
     //         deliveryDateTime!.minute > endMinute))
-    //   log.v('SHOW DATE TIME WRONG SNACKBAR'); // TODO: Add Snackbar
     deliveryDateTime = newDeliveryDateTime;
     deliveryDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
     notifyListeners();
