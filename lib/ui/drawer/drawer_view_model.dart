@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
@@ -11,7 +12,14 @@ class DrawerViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _apiRootService = locator<ApiRootService>();
 
+  PackageInfo? packageInfo;
+
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
+
+  Future<void> getAppVersion() async {
+    packageInfo = await PackageInfo.fromPlatform();
+    notifyListeners();
+  }
 
   Future<void> navToLoginView() async => await _navService.replaceWith(
         Routes.loginView,

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
@@ -92,6 +95,7 @@ class DrawerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DrawerViewModel>.reactive(
+      onModelReady: (model) => model.getAppVersion(),
       builder: (context, model, child) => Drawer(
         child: Stack(
           children: [
@@ -223,25 +227,34 @@ class DrawerView extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0.20.sw,
+              bottom: 0.175.sw - 10.h,
               child: Padding(
                 padding: EdgeInsets.only(top: 0.25.sh, left: 20.w),
-                child: GestureDetector(
-                  onTap: model.navToContactUsView,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/chat_circle.svg',
-                        color: AppTheme.DRAWER_ICON,
-                        width: 50.w,
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: model.navToContactUsView,
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/chat_circle.svg',
+                            color: AppTheme.DRAWER_ICON,
+                            width: 50.w,
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                            LocaleKeys.contact_us,
+                            style: kts16HelperText,
+                          ).tr(),
+                        ],
                       ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        LocaleKeys.contact_us,
-                        style: kts16HelperText,
-                      ).tr(),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      'V ${model.packageInfo?.version ?? '1.0.0'}',
+                      style: kts16HelperText,
+                    ),
+                  ],
                 ),
               ),
             ),
