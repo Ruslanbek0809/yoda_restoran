@@ -500,4 +500,38 @@ class UserService {
       rethrow;
     }
   }
+
+  Future<void> contactUs(
+    String? name,
+    String? phone,
+    String? info,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['name'] = name;
+    _queryParams['mobile'] = phone;
+    _queryParams['text'] = info;
+
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData userContactFormData = FormData.fromMap(_queryParams);
+
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/messages/',
+        data: userContactFormData,
+      );
+      log.v(
+          'RESPONSE: api/messages/ => ${response.data} and ${response.statusCode}');
+
+      if (response.statusCode == 200 || response.statusCode == 201)
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR api/messages/ with RESPONSE: ${error.response}');
+      onFail!();
+      throw DioErrorType.response;
+    }
+  }
 }

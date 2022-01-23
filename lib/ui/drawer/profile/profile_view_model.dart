@@ -1,12 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_services/stacked_services.dart' hide Trans;
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final log = getLogger('ProfileViewModel');
@@ -107,7 +109,7 @@ class ProfileViewModel extends BaseViewModel {
   String? updatePhone(String? value) {
     log.v('updatePhone value: $value');
     if (value == null || value.isEmpty || value.length < 11) {
-      return 'Nomeri doly giriziň';
+      return LocaleKeys.enter_phone.tr();
     }
 
     _phone = value;

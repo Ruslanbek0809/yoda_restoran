@@ -4,6 +4,7 @@ import 'package:yoda_res/ui/cart/order/order_success_view.dart';
 import 'package:yoda_res/ui/cart/order/orders_view.dart';
 import 'package:yoda_res/ui/drawer/address_add_edit/address_add_edit_view.dart';
 import 'package:yoda_res/ui/drawer/addresses/addresses_view.dart';
+import 'package:yoda_res/ui/drawer/contact_us/contact_us_view.dart';
 import 'package:yoda_res/ui/drawer/login/login_view.dart';
 import 'package:yoda_res/ui/drawer/otp/otp_view.dart';
 import 'package:yoda_res/ui/drawer/profile/profile_view.dart';
@@ -30,6 +31,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: AddressesView),
     MaterialRoute(page: AddressAddEditView),
     MaterialRoute(page: HomeSearchView),
+    MaterialRoute(page: ContactUsView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

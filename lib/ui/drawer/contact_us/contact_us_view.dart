@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../utils/utils.dart';
 
-import 'contact_hook.dart';
-import 'contact_view_model.dart';
+import 'contact_us_hook.dart';
+import 'contact_us_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ContactView extends StatelessWidget {
+class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ContactViewModel>.reactive(
+    return ViewModelBuilder<ContactUsViewModel>.reactive(
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {
-          await Navigator.pushReplacementNamed(context, RouteList.home);
-          return true;
+          model.navToHomeByRemovingAll(); // Workaround
+          return false;
         },
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppTheme.WHITE,
             elevation: 0,
-            leading: GestureDetector(
-              onTap: () async =>
-                  await Navigator.pushReplacementNamed(context, RouteList.home),
-              child: Icon(
+            leading: IconButton(
+              icon: Icon(
                 Icons.arrow_back,
                 color: AppTheme.FONT_COLOR,
                 size: 25.w,
               ),
+              onPressed: model.navToHomeByRemovingAll,
             ),
             title: Text(
               LocaleKeys.contact_us,
@@ -39,10 +37,10 @@ class ContactView extends StatelessWidget {
             ).tr(),
             centerTitle: true,
           ),
-          body: ContactHook(),
+          body: ContactUsHook(),
         ),
       ),
-      viewModelBuilder: () => ContactViewModel(),
+      viewModelBuilder: () => ContactUsViewModel(),
     );
   }
 }

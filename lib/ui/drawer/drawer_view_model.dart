@@ -43,4 +43,7 @@ class DrawerViewModel extends BaseViewModel {
   /// NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+
+  Future<void> navToContactUsView() async =>
+      await _navService.navigateTo(Routes.contactUsView);
 }

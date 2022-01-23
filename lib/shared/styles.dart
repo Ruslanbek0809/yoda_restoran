@@ -61,6 +61,11 @@ TextStyle ktsDefault14DialogText = TextStyle(
   color: kcDialogColor,
 );
 
+TextStyle kts16ContactText = TextStyle(
+  fontSize: 16.sp,
+  color: kcContactColor,
+);
+
 TextStyle kts16ButtonText = TextStyle(
   color: kcWhiteColor,
   fontSize: 16.sp,
