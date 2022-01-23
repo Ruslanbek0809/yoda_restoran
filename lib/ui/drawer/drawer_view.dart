@@ -50,7 +50,7 @@ class DrawerView extends StatelessWidget {
         {
           title = LocaleKeys.about_us;
           svgName = 'assets/info.svg';
-          onTap = () {};
+          onTap = () async => model.navToAboutUsView();
           break;
         }
 
@@ -58,7 +58,7 @@ class DrawerView extends StatelessWidget {
         {
           title = LocaleKeys.about_us;
           svgName = 'assets/info.svg';
-          onTap = () async {};
+          onTap = () async => model.navToAboutUsView();
           break;
         }
     }

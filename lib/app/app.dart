@@ -2,6 +2,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/ui/cart/order/order_success_view.dart';
 import 'package:yoda_res/ui/cart/order/orders_view.dart';
+import 'package:yoda_res/ui/drawer/about_us/about_us_view.dart';
 import 'package:yoda_res/ui/drawer/address_add_edit/address_add_edit_view.dart';
 import 'package:yoda_res/ui/drawer/addresses/addresses_view.dart';
 import 'package:yoda_res/ui/drawer/contact_us/contact_us_view.dart';
@@ -32,6 +33,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: AddressAddEditView),
     MaterialRoute(page: HomeSearchView),
     MaterialRoute(page: ContactUsView),
+    MaterialRoute(page: AboutUsView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

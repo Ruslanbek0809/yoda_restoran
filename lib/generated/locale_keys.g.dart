@@ -129,6 +129,10 @@ abstract class  LocaleKeys {
   static const msgSentSuccessfully = 'msgSentSuccessfully';
   static const msgDidntSent = 'msgDidntSent';
   static const profileUpdatedSuccessfully = 'profileUpdatedSuccessfully';
+  static const aboutUsHello = 'aboutUsHello';
+  static const aboutUsContent = 'aboutUsContent';
+  static const aboutUsBonApetite = 'aboutUsBonApetite';
+  static const aboutUsIg = 'aboutUsIg';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

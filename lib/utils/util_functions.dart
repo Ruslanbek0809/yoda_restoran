@@ -21,13 +21,13 @@ import 'dart:async';
 String formatNum(num value) =>
     value.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '');
 
-final List<String> drawerLogoutList = ["login", "about"];
+final List<String> drawerLogoutList = ["login", "about_us"];
 
 final List<String> drawerLoggedInList = [
   "profile",
   "orders",
   "addresses",
-  "about"
+  "about_us"
 ];
 
 List<Discount> discounts = [

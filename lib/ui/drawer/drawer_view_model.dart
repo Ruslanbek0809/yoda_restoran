@@ -29,6 +29,9 @@ class DrawerViewModel extends BaseViewModel {
   Future<void> navToAddressesView() async =>
       await _navService.navigateTo(Routes.addressesView);
 
+  Future<void> navToAboutUsView() async =>
+      await _navService.navigateTo(Routes.aboutUsView);
+
   void collapseExpansionTile(
       GlobalKey<CustomExpansionTileState> expansionTile) {
     expansionTile.currentState?.collapse();
