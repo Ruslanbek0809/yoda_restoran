@@ -394,7 +394,7 @@ class UserService {
       Response response = await _apiRoot.dio.post(
         'api/order/',
         data: jsonEncode(
-            createOrder), // Step 3. Instead of using formData I used jsonSerializable's toJson with build-in jsonEncode func
+            createOrder), // Step 3. Instead of using formData I used jsonSerializable's toJson with built-in jsonEncode func
       );
       log.v('RESPONSE: api/order/ => ${response.data}');
 
@@ -468,12 +468,18 @@ class UserService {
     else
       _currentUser?.favs!.add(resId);
 
-    log.v('BEFORE fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+    final _formData = FormData.fromMap({'favourites': _currentUser!.favs!});
 
+    log.v(
+        'BEFORE fav patch _currentUser?.favs! with result: ${_currentUser?.favs!} and ${_formData.fields}');
+    // Map<String, dynamic> _queryParams = {};
+    // if (name != null) _queryParams['first_name'] = name;
     try {
       Response response = await _apiRoot.dio.patch(
         'api/user/${_currentUser!.id}/',
-        data: FormData.fromMap({'favourites': _currentUser?.favs ?? []}),
+        data: _currentUser!.favs!.isNotEmpty
+            ? _formData
+            : <String, dynamic>{'favourites': []},
       );
       log.v(
           'RESPONSE: api/user/${_currentUser!.id}/ with favs: ${_currentUser?.favs ?? []} => ${response.data}');
