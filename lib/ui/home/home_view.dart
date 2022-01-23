@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -84,6 +85,15 @@ class _HomeViewState extends State<HomeView> {
             ? CustomScrollView(
                 slivers: [
                   SliverAppBar(
+                    // systemOverlayStyle: SystemUiOverlayStyle(
+                    //   // Status bar color
+                    //   statusBarColor: kcPrimaryColor,
+                    //   // Status bar brightness (optional)
+                    //   statusBarIconBrightness: Brightness
+                    //       .light, // For Android (dark icons)
+                    //   statusBarBrightness:
+                    //       Brightness.light, // For iOS (dark icons)
+                    // ),
                     expandedHeight: 0.1.sh,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
