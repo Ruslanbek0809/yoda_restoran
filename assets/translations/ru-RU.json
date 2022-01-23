@@ -124,6 +124,9 @@
     "choose": "Выберите опции",
     "streetEx": "ул. Г. Кулиева, 29",
     "noOrder": "Нет",
+    "msgSentSuccessfully": "Сообщение доставлено",
+    "msgDidntSent": "Сообщение не доставлено",
+    "profileUpdatedSuccessfully": "Ваш профиль обновлен",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

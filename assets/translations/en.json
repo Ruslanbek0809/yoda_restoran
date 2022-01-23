@@ -123,6 +123,9 @@
     "choose": "Kesgitläň",
     "streetEx": "G. Kylyýew köç., 29",
     "noOrder": "Ýok",
+    "msgSentSuccessfully": "Habaryňyz ugradyldy",
+    "msgDidntSent": "Habaryňyz ugradylmady",
+    "profileUpdatedSuccessfully": "Siziň profiliňiz täzelendi",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

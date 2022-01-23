@@ -208,6 +208,8 @@ class UserService {
     String? gender,
     String? email,
     String? phone,
+    Function()? onSuccess,
+    Function()? onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     if (name != null) _queryParams['first_name'] = name;
@@ -247,12 +249,13 @@ class UserService {
 
         /// Step 3. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
-      }
+        onSuccess!();
+      } else
+        onFail!();
     } on DioError catch (error) {
-      log.v('ERROR on auth/user/${_currentUser!.id}/ :${error.response}');
-      // log.v(
-      //     'ERROR on api/user/${_currentUser!.id}/ :${error.response!.statusCode} and ${error.response!.data}');
-      rethrow;
+      log.v('ERROR on api/user/${_currentUser!.id}/ :${error.response}');
+      onFail!();
+      throw DioErrorType.response;
     }
   }
 
@@ -517,7 +520,7 @@ class UserService {
     final FormData userContactFormData = FormData.fromMap(_queryParams);
 
     try {
-      Response response = await _apiRoot.dio.patch(
+      Response response = await _apiRoot.dio.post(
         'api/messages/',
         data: userContactFormData,
       );

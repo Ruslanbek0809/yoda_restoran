@@ -126,6 +126,9 @@ abstract class  LocaleKeys {
   static const choose = 'choose';
   static const streetEx = 'streetEx';
   static const noOrder = 'noOrder';
+  static const msgSentSuccessfully = 'msgSentSuccessfully';
+  static const msgDidntSent = 'msgDidntSent';
+  static const profileUpdatedSuccessfully = 'profileUpdatedSuccessfully';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

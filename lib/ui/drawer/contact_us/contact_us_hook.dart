@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
-
 import 'contact_us_view_model.dart';
 
 class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
@@ -46,10 +45,26 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       topLeft: Radius.circular(10.0),
                       topRight: Radius.circular(10.0),
                     ),
-                    borderSide: BorderSide.none,
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10.0),
                       topRight: Radius.circular(10.0),
@@ -62,10 +77,6 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                 ),
                 validator: model.updateName,
               ),
-              Container(
-                height: 0.5,
-                color: kcDividerColor,
-              ),
               TextFormField(
                 controller: _phoneController,
                 style: ktsDefault16Text,
@@ -74,13 +85,23 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(12, 17, 12, 17),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
+                  ),
                   border: UnderlineInputBorder(
-                    // borderRadius: AppTheme().containerRadius,
-                    borderSide: BorderSide.none,
-                    // borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                   ),
                   prefix: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -93,10 +114,6 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                 ),
                 validator: model.updatePhone,
               ),
-              Container(
-                height: 0.5,
-                color: kcDividerColor,
-              ),
               TextFormField(
                 controller: _infoController,
                 style: ktsDefault16Text,
@@ -104,12 +121,23 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    // borderRadius: AppTheme().containerRadius,
-                    borderSide: BorderSide.none,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kcDividerColor,
+                      width: 0.75,
+                    ),
                   ),
                   hintText: LocaleKeys.text.tr(),
                   hintStyle: kts16ContactText,
@@ -137,27 +165,30 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                     if (!_contactformKey.currentState!.validate()) return;
                     _contactformKey.currentState!.save();
                     await model.onContactPressed(
-                        onFailForView: () async => await showErrorFlashBar(
-                              context: context,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
-                              ),
-                            ),
-                        onSuccessForView: () async {
-                          _nameController.clear();
-                          _phoneController.clear();
-                          _infoController.clear();
-                          await showErrorFlashBar(
-                            context: context,
-                            margin: EdgeInsets.only(
-                              left: 16.w,
-                              right: 16.w,
-                              bottom: 0.05.sh,
-                            ),
-                          );
-                        });
+                      onFailForView: () async => await showErrorFlashBar(
+                        context: context,
+                        msg: LocaleKeys.msgDidntSent,
+                        margin: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: 0.025.sh,
+                        ),
+                      ),
+                      onSuccessForView: () async {
+                        _nameController.clear();
+                        _phoneController.clear();
+                        _infoController.clear();
+                        await showErrorFlashBar(
+                          context: context,
+                          msg: LocaleKeys.msgSentSuccessfully,
+                          margin: EdgeInsets.only(
+                            left: 16.w,
+                            right: 16.w,
+                            bottom: 0.025.sh,
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
               ),

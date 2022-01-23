@@ -117,7 +117,10 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   /// UPDATES user info
-  Future<void> onUpdateUserPressed() async {
+  Future<void> onUpdateUserPressed({
+    Function()? onFailForView,
+    Function()? onSuccessForView,
+  }) async {
     log.v('onUpdateUserPressed()');
     try {
       await runBusyFuture(_userService.updateUser(
@@ -126,6 +129,8 @@ class ProfileViewModel extends BaseViewModel {
         _gender,
         _email,
         _phone,
+        () => onSuccessForView!(),
+        () => onFailForView!(),
       ));
     } catch (err) {
       throw err;

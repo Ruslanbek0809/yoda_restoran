@@ -67,13 +67,23 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     labelText: LocaleKeys.name.tr(),
                     labelStyle: kts14HelperText,
@@ -114,13 +124,23 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     labelText: LocaleKeys.birthday.tr(),
                     labelStyle: kts14HelperText,
@@ -229,13 +249,23 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: kcDividerColor,
+                          width: 0.5,
+                        ),
+                      ),
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(
-                            color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          color: kcDividerColor,
+                          width: 0.5,
+                        ),
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                            color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                          color: kcDividerColor,
+                          width: 0.5,
+                        ),
                       ),
                       labelText: LocaleKeys.gender.tr(),
                       labelStyle: kts14HelperText,
@@ -252,13 +282,23 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
                     ),
                     labelText: LocaleKeys.email.tr(),
                     labelStyle: kts14HelperText,
@@ -278,6 +318,24 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   decoration: InputDecoration(
                     labelText: LocaleKeys.phone.tr(),
                     labelStyle: kts14HelperText,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kcDividerColor,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   validator: model.updatePhone,
                 ),
@@ -300,7 +358,25 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                         .unfocus(); // UNFOCUSES all textfield b4 data fetch
                     if (!_profileformKey.currentState!.validate()) return;
                     _profileformKey.currentState!.save();
-                    await model.onUpdateUserPressed();
+                    await model.onUpdateUserPressed(
+                      onFailForView: () async => await showErrorFlashBar(
+                        context: context,
+                        margin: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: 0.05.sh,
+                        ),
+                      ),
+                      onSuccessForView: () async => await showErrorFlashBar(
+                        context: context,
+                        msg: LocaleKeys.profileUpdatedSuccessfully,
+                        margin: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: 0.05.sh,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
