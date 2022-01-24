@@ -61,7 +61,7 @@ class UserService {
             mobile: userModel!.mobile,
             gender: userModel!.gender,
             birthday: userModel!.birthday,
-            favs: userModel!.favourites,
+            favs: userModel!.favourites ?? [],
           ),
         );
 
@@ -177,7 +177,7 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
-            favs: userModel.favourites,
+            favs: userModel.favourites ?? [],
           ),
         );
 
@@ -244,6 +244,7 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
+            favs: userModel.favourites ?? [],
           ),
         );
 
@@ -463,21 +464,21 @@ class UserService {
     bool isTempFavourited,
     Function()? onFail,
   ) async {
-    if (_currentUser!.favs!.contains(resId))
-      _currentUser?.favs!.remove(resId);
+    if (_currentUser!.favs.contains(resId))
+      _currentUser?.favs.remove(resId);
     else
-      _currentUser?.favs!.add(resId);
+      _currentUser?.favs.add(resId);
 
-    final _formData = FormData.fromMap({'favourites': _currentUser!.favs!});
+    final _formData = FormData.fromMap({'favourites': _currentUser!.favs});
 
     log.v(
-        'BEFORE fav patch _currentUser?.favs! with result: ${_currentUser?.favs!} and ${_formData.fields}');
+        'BEFORE fav patch _currentUser?.favs! with result: ${_currentUser?.favs} and ${_formData.fields}');
     // Map<String, dynamic> _queryParams = {};
     // if (name != null) _queryParams['first_name'] = name;
     try {
       Response response = await _apiRoot.dio.patch(
         'api/user/${_currentUser!.id}/',
-        data: _currentUser!.favs!.isNotEmpty
+        data: _currentUser!.favs.isNotEmpty
             ? _formData
             : <String, dynamic>{'favourites': []},
       );
@@ -487,24 +488,24 @@ class UserService {
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201)) {
         log.v(
-            'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+            'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs}');
       } else {
         if (isTempFavourited)
-          _currentUser?.favs!.remove(resId);
+          _currentUser?.favs.remove(resId);
         else
-          _currentUser?.favs!.add(resId);
+          _currentUser?.favs.add(resId);
         log.v(
-            'AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+            'AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs}');
         onFail!();
       }
     } on DioError catch (error) {
       log.v(
           'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
       if (isTempFavourited)
-        _currentUser?.favs!.remove(resId);
+        _currentUser?.favs.remove(resId);
       else
-        _currentUser?.favs!.add(resId);
-      log.v('AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs!}');
+        _currentUser?.favs.add(resId);
+      log.v('AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs}');
       onFail!();
       rethrow;
     }

@@ -50,10 +50,10 @@ class _HomeViewState extends State<HomeView> {
         if (Platform.isAndroid) {
           var info = await InAppUpdate.checkForUpdate();
 
-          model.log.v('InAppUpdate Info: $info');
+          // model.log.v('InAppUpdate Info: $info');
           print('InAppUpdate Info: $info');
-          model.log.v(
-              'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
+          // model.log.v(
+          //     'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           print(
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
                     //   // Status bar color
                     //   statusBarColor: kcPrimaryColor,
                     //   // Status bar brightness (optional)
-                    //   statusBarIconBrightness: Brightness
+                    //   statusBarIconBrightness: Brightnessf
                     //       .light, // For Android (dark icons)
                     //   statusBarBrightness:
                     //       Brightness.light, // For iOS (dark icons)

@@ -19,7 +19,7 @@ class ResViewModel extends BaseViewModel {
 
   /// CHECKS and ASSIGNS initial res fav state
   void checkResFav(int resId) =>
-      _isFavorited = _userService.currentUser!.favs!.contains(resId);
+      _isFavorited = _userService.currentUser!.favs.contains(resId);
 
   /// UPDATES res fav state
   Future<void> updateResFav(int resId) async {
