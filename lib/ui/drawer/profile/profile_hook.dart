@@ -99,21 +99,22 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     DateTime? date = model.birthDate;
                     FocusScope.of(context).requestFocus(FocusNode());
                     date = await DatePicker.showDatePicker(
-                      context,
-                      showTitleActions: true,
-                      minTime: DateTime(1900, 1, 1),
-                      maxTime: DateTime.now(),
-                      onChanged: (date) {
-                        print('change $date');
-                      },
-                      onConfirm: (date) {
-                        print('confirm $date');
-                      },
-                      currentTime: date,
-                      locale: context.locale == context.supportedLocales[0]
-                          ? LocaleType.tk
-                          : LocaleType.ru,
-                    );
+                          context,
+                          showTitleActions: true,
+                          minTime: DateTime(1900, 1, 1),
+                          maxTime: DateTime.now(),
+                          onChanged: (date) {
+                            print('change $date');
+                          },
+                          onConfirm: (date) {
+                            print('confirm $date');
+                          },
+                          currentTime: date,
+                          locale: context.locale == context.supportedLocales[0]
+                              ? LocaleType.tk
+                              : LocaleType.ru,
+                        ) ??
+                        model.birthDate;
                     _birthdateController.text = date != null
                         ? DateFormat('dd-MM-yyyy').format(date)
                         : '';
@@ -153,6 +154,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 child: Container(
                   color: Colors.transparent,
                   child: TextFormField(
+                    readOnly: true,
                     onTap: () async {
                       // --------------- GENDER PopUp -------------- //
                       if (Platform.isIOS) {
