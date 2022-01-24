@@ -250,9 +250,12 @@ class DrawerView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    Text(
-                      'V ${model.packageInfo?.version ?? '1.0.0'}',
-                      style: kts16HelperText,
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.w),
+                      child: Text(
+                        'V ${model.packageInfo?.version ?? '1.0.0'}',
+                        style: kts14HelperText,
+                      ),
                     ),
                   ],
                 ),
