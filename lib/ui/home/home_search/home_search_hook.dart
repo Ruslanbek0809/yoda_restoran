@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

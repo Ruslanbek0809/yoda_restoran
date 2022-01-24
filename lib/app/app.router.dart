@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../models/models.dart';
+import '../models/restaurant.dart';
 import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
@@ -25,6 +25,7 @@ import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
+import '../ui/startup/onboarding/onboarding_view.dart';
 import '../ui/startup/startup_view.dart';
 
 class Routes {
@@ -43,6 +44,7 @@ class Routes {
   static const String homeSearchView = '/home-search-view';
   static const String contactUsView = '/contact-us-view';
   static const String aboutUsView = '/about-us-view';
+  static const String onBoardingView = '/on-boarding-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -59,6 +61,7 @@ class Routes {
     homeSearchView,
     contactUsView,
     aboutUsView,
+    onBoardingView,
   };
 }
 
@@ -81,6 +84,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.homeSearchView, page: HomeSearchView),
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
+    RouteDef(Routes.onBoardingView, page: OnBoardingView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -200,6 +204,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    OnBoardingView: (data) {
+      var args = data.getArgs<OnBoardingViewArguments>(
+        orElse: () => OnBoardingViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => OnBoardingView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -251,4 +264,10 @@ class ProfileViewArguments {
 class AddressAddEditViewArguments {
   final Key? key;
   AddressAddEditViewArguments({this.key});
+}
+
+/// OnBoardingView arguments holder class
+class OnBoardingViewArguments {
+  final Key? key;
+  OnBoardingViewArguments({this.key});
 }
