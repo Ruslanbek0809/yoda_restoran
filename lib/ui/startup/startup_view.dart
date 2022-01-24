@@ -1,5 +1,6 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
@@ -97,18 +98,18 @@ class StartUpView extends StatelessWidget {
                   ],
                 ),
               ),
-              // if (model.startAnimation == false &&
-              //     (model.connectivityStatus != ConnectivityStatus.Offline &&
-              //         model.connectivityStatus != null))
-              //   Positioned(
-              //     bottom: 0.125.sh,
-              //     left: 0,
-              //     right: 0,
-              //     child: SpinKitChasingDots(
-              //       size: 35.w,
-              //       color: kcPrimaryColor,
-              //     ),
-              //   ),
+              if (model.startAnimation == false &&
+                  (model.connectivityStatus != ConnectivityStatus.Offline &&
+                      model.connectivityStatus != null))
+                Positioned(
+                  bottom: 0.125.sh,
+                  left: 0,
+                  right: 0,
+                  child: SpinKitChasingDots(
+                    size: 35.w,
+                    color: kcPrimaryColor,
+                  ),
+                ),
             ],
           ),
           //----------- STYLE 2 --------------//

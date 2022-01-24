@@ -47,7 +47,8 @@ class DrawerViewModel extends BaseViewModel {
   }
 
   /// REINITIALIZES app api url
-  Future<void> reinitializeDio() async => await _apiRootService.initDio();
+  Future<void> reinitializeDio() async =>
+      await _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
 
 //------------------------ NAVIGATIONS ----------------------------//
 

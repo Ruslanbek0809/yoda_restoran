@@ -13,6 +13,7 @@ class OtpViewModel extends FormViewModel {
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+  final _apiRootService = locator<ApiRootService>();
 
   String? get successOtp => _userService.otp;
 
@@ -35,7 +36,8 @@ class OtpViewModel extends FormViewModel {
     await runBusyFuture(
       _userService.verifyUser(
         onSuccess: () async {
-          // Navigate to successful route
+          _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
+          /// Navigate to successful route
           _navService
               .replaceWith(isCartView ? Routes.cartView : Routes.homeView);
         },
