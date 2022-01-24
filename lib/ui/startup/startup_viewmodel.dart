@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/ui/home/home_view.dart';
+import 'package:yoda_res/ui/startup/onboarding/onboarding_view.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -59,17 +60,31 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
 
+    /// CHECKS whether onBoarding was SEEN or NOT
+    var prefs = await SharedPreferences.getInstance();
+    var _isOnBoardingSeen = prefs.getBool(Constants.isOnBoardingSeen) ?? false;
+    log.v('==== IS ONBOARDING SEEN: $_isOnBoardingSeen ====');
+
     /// USER part. GETS initial user with condition and behaves with that in mind
     await _userService.getInitialUser(
       onSuccess: () async {
         log.v('==== SUCCESS User ====');
 
-        Platform.isIOS
-            ? await _navService.replaceWithTransition(
-                HomeView(),
-                transition: NavigationTransition.Fade,
-              )
-            : await _navService.replaceWith(Routes.homeView);
+        if (_isOnBoardingSeen) {
+          Platform.isIOS
+              ? await _navService.replaceWithTransition(
+                  HomeView(),
+                  transition: NavigationTransition.Fade,
+                )
+              : await _navService.replaceWith(Routes.homeView);
+        } else {
+          Platform.isIOS
+              ? await _navService.replaceWithTransition(
+                  OnBoardingView(),
+                  transition: NavigationTransition.Fade,
+                )
+              : await _navService.replaceWith(Routes.onBoardingView);
+        }
       },
       onFail: () async {
         log.v('====== FAIL User ======');
@@ -82,12 +97,21 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
         }
         await _userService.clearUser();
 
-        Platform.isIOS
-            ? await _navService.replaceWithTransition(
-                HomeView(),
-                transition: NavigationTransition.Fade,
-              )
-            : await _navService.replaceWith(Routes.homeView);
+        if (_isOnBoardingSeen) {
+          Platform.isIOS
+              ? await _navService.replaceWithTransition(
+                  HomeView(),
+                  transition: NavigationTransition.Fade,
+                )
+              : await _navService.replaceWith(Routes.homeView);
+        } else {
+          Platform.isIOS
+              ? await _navService.replaceWithTransition(
+                  OnBoardingView(),
+                  transition: NavigationTransition.Fade,
+                )
+              : await _navService.replaceWith(Routes.onBoardingView);
+        }
       },
     );
   }

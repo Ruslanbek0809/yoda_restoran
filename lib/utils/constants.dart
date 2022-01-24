@@ -22,6 +22,9 @@ class Constants {
   /// Saved lang
   static const savedLang = 'locale';
 
+  /// Onboarding
+  static const isOnBoardingSeen = 'isOnBoardingSeen';
+
   /// Device Types
   static const TABLET = "tablet";
   static const PHONE = "phone";

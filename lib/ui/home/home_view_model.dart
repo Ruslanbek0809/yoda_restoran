@@ -162,7 +162,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   //------------------ NAVIGATIOn ---------------------//
 
   void navToHomeSearchView() async =>
-      await _navService.navigateTo(Routes.onBoardingView);
+      await _navService.navigateTo(Routes.homeSearchView);
 
   void navToResDetailsView() async => await _navService.navigateTo(
         Routes.resDetailsView,

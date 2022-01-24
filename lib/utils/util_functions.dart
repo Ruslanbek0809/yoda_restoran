@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/library/onboarding/onboarding.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
@@ -20,6 +21,23 @@ import 'dart:async';
 // be for more general cases.
 String formatNum(num value) =>
     value.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '');
+
+final List<EachIntroWidget> onBoardingList = [
+  EachIntroWidget(
+    subTitle: 'Söýgüli restoranlaryňyzyň tagamlaryny sargyt ediň',
+    imageUrl: 'assets/onboard1.jpg',
+  ),
+  EachIntroWidget(
+    subTitle:
+        'Sargydyňyz kabul edilenden eltip berilýänçä her ädimden habarly boluň',
+    imageUrl: 'assets/onboard2.jpg',
+  ),
+  EachIntroWidget(
+    subTitle:
+        'Ýörite promokod bilen restoranlardan sargydyňyza arzanladyş alyň',
+    imageUrl: 'assets/onboard3.jpg',
+  ),
+];
 
 final List<String> drawerLogoutList = ["login", "about_us"];
 
