@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -52,6 +54,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     return CustomScrollView(
       controller: customScrollController,
+      physics: Platform.isIOS
+          ? ClampingScrollPhysics()
+          : ClampingScrollPhysics(), // In case it takes IOS scrolling
       // physics: const BouncingScrollPhysics(),
       slivers: [
         //------------------ ARROW BACK ---------------------//
