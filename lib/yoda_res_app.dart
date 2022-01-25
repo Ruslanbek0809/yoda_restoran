@@ -41,12 +41,12 @@ class YodaResApp extends StatelessWidget {
             elevation: 0,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: ZoomPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoWillPopScopePageTransionsBuilder(),
-            },
-          ),
+          // pageTransitionsTheme: PageTransitionsTheme(
+          //   builders: {
+          //     TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          //     TargetPlatform.iOS: CupertinoWillPopScopePageTransionsBuilder(),
+          //   },
+          // ),
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
@@ -58,6 +58,12 @@ class YodaResApp extends StatelessWidget {
             elevation: 0,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          // pageTransitionsTheme: PageTransitionsTheme(
+          //   builders: {
+          //     TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          //     TargetPlatform.iOS: CupertinoWillPopScopePageTransionsBuilder(),
+          //   },
+          // ),
         ),
         builder: (context, child) {
           return ScrollConfiguration(

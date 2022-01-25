@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../models/restaurant.dart';
+import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
@@ -27,6 +27,7 @@ import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
 import '../ui/startup/onboarding/onboarding_view.dart';
 import '../ui/startup/startup_view.dart';
+import 'custom_material_page_route.dart';
 
 class Routes {
   static const String startUpView = '/';
@@ -166,7 +167,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<ProfileViewArguments>(
         orElse: () => ProfileViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => ProfileView(key: args.key),
         settings: data,
       );
