@@ -188,9 +188,10 @@ class CartView extends StatelessWidget {
                           child: CustomTextChildButton(
                             padding: EdgeInsets.symmetric(vertical: 17.w),
                             child: Text(
-                              model.hasLoggedInUser
-                                  ? LocaleKeys.continuee
-                                  : LocaleKeys.register,
+                              LocaleKeys.continuee,
+                              // model.hasLoggedInUser
+                              //     ? LocaleKeys.continuee
+                              //     : LocaleKeys.register,
                               style: ktsButton18Text,
                             ).tr(),
                             onPressed: model.onCartCheckoutButtonPressed,

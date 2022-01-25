@@ -21,7 +21,7 @@ class LoginViewModel extends FormViewModel {
         phone: phoneValue,
         onSuccess: () async {
           // Navigate to successful route
-          await _navService.replaceWith(
+          await _navService.navigateTo(
             Routes.otpView,
             arguments: OtpViewArguments(
               isCartView: isCartView,

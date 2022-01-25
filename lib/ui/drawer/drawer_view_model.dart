@@ -26,7 +26,7 @@ class DrawerViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> navToLoginView() async => await _navService.replaceWith(
+  Future<void> navToLoginView() async => await _navService.navigateTo(
         Routes.loginView,
         arguments: LoginViewArguments(
           isCartView: false,

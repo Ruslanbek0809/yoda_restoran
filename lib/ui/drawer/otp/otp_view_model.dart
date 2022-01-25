@@ -38,8 +38,9 @@ class OtpViewModel extends FormViewModel {
         onSuccess: () async {
           _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
           /// Navigate to successful route
-          _navService
-              .replaceWith(isCartView ? Routes.cartView : Routes.homeView);
+          isCartView
+              ? _navService.popRepeated(2)
+              : _navService.pushNamedAndRemoveUntil(Routes.homeView);
         },
         onFail: () {
           onFailForView!();
