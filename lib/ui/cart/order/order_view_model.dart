@@ -129,7 +129,7 @@ class OrderViewModel extends ReactiveViewModel {
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.cancelWaitingOrder,
       title: LocaleKeys.wannaCancelOrder,
-      mainButtonTitle: LocaleKeys.no,
+      mainButtonTitle: LocaleKeys.noOrder,
       secondaryButtonTitle: LocaleKeys.yes,
       showIconInMainButton: false,
       barrierDismissible: true,
