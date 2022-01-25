@@ -178,12 +178,14 @@ class DrawerView extends StatelessWidget {
                                   context.supportedLocales[0]
                               ? () {}
                               : () async {
+                                  model.collapseExpansionTile(expansionTile);
                                   await context.setLocale(
                                       context.supportedLocales[
                                           0]); // ASSIGNS turkmen lang
-                                  model.collapseExpansionTile(expansionTile);
-                                  model.reinitializeDio();
-                                  model.navToHomeByRemovingAll();
+                                  await model.setLocale(
+                                      context.supportedLocales[0].toString());
+                                  await model.reinitializeDio();
+                                  await model.navToHomeByRemovingAll();
                                 },
                         ),
                         Divider(
@@ -212,12 +214,14 @@ class DrawerView extends StatelessWidget {
                                   context.supportedLocales[1]
                               ? () {}
                               : () async {
+                                  model.collapseExpansionTile(expansionTile);
+                                  await model.setLocale(
+                                      context.supportedLocales[1].toString());
                                   await context.setLocale(
                                       context.supportedLocales[
                                           1]); // ASSIGNS russian lang
-                                  model.collapseExpansionTile(expansionTile);
-                                  model.reinitializeDio();
-                                  model.navToHomeByRemovingAll();
+                                  await model.reinitializeDio();
+                                  await model.navToHomeByRemovingAll();
                                 },
                         ),
                       ],

@@ -19,8 +19,8 @@ class Constants {
   /// SharedPreferences
   static const accessToken = 'accessToken';
 
-  /// Saved lang
-  static const savedLang = 'locale';
+  /// Saved locale
+  static const savedLocale = 'savedLocale';
 
   /// Onboarding
   static const isOnBoardingSeen = 'isOnBoardingSeen';

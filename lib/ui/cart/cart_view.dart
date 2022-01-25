@@ -20,7 +20,7 @@ class CartView extends StatelessWidget {
     return ViewModelBuilder<CartViewModel>.reactive(
       // onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
-        model.log.v('CartView ===================');
+        model.log.v('=================== CartView ===================');
         return WillPopScope(
           onWillPop: () async {
             model.navBack(); // Workaround

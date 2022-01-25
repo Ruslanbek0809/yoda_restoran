@@ -20,14 +20,17 @@ class ApiRootService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? accessToken = prefs.getString(Constants.accessToken);
     log.v('ApiRootService ACCESS TOKEN: $accessToken');
-    final savedLocale = prefs.getString(
-        Constants.savedLang); // GETS saved locale. In package feature
+
+    final _savedLocale =
+        prefs.getString(Constants.savedLocale) ?? 'en_US'; // GETS saved locale.
 
     if (accessToken != null)
-      _headers["Authorization"] = "Bearer " + accessToken;
+      _headers["Authorization"] = "Bearer " + accessToken;  
+
+    dio.options.baseUrl = Constants.baseUrlTk;
 
     dio.options.baseUrl =
-        savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
+        _savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
     dio.options.headers = _headers;
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {

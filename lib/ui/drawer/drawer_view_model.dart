@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
+import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
+import 'package:yoda_res/utils/utils.dart';
 
 class DrawerViewModel extends BaseViewModel {
+  final log = getLogger('DrawerViewModel');
+
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
   final _apiRootService = locator<ApiRootService>();
@@ -44,6 +49,14 @@ class DrawerViewModel extends BaseViewModel {
       GlobalKey<CustomExpansionTileState> expansionTile) {
     expansionTile.currentState?.collapse();
     notifyListeners();
+  }
+
+  /// SETS LOCALE of an app's baseUrl
+  Future<void> setLocale(String locale) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(Constants.savedLocale, locale);
+    final String? _savedLocale = prefs.getString(Constants.accessToken);
+    log.i('LOCALE AFTER setString: $_savedLocale');
   }
 
   /// REINITIALIZES app api url
