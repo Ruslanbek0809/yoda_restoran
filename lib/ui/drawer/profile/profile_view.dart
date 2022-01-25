@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/drawer/profile/profile_hook.dart';
 import 'package:yoda_res/utils/utils.dart';
@@ -24,7 +25,7 @@ class ProfileView extends StatelessWidget {
         child: Scaffold(
           drawer: DrawerView(),
           appBar: AppBar(
-            backgroundColor: AppTheme.WHITE,
+            backgroundColor: kcWhiteColor,
             elevation: 0,
             leading: IconButton(
               icon: Icon(

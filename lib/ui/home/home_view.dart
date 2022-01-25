@@ -101,9 +101,8 @@ class _HomeViewState extends State<HomeView> {
                       background: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 10.h
-                                //  + MediaQuery.of(context).padding.top
-                                ),
+                            padding: EdgeInsets.only(
+                                top: 10.h + MediaQuery.of(context).padding.top),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -173,11 +172,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(top: 10.h
-                                            // + MediaQuery.of(context)
-                                            //         .padding
-                                            //         .top
-                                            ),
+                                        padding: EdgeInsets.only(
+                                            top: 10.h +
+                                                MediaQuery.of(context)
+                                                    .padding
+                                                    .top),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -229,11 +228,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(top: 10.h
-                                            // + MediaQuery.of(context)
-                                            //         .padding
-                                            //         .top
-                                            ),
+                                        padding: EdgeInsets.only(
+                                            top: 10.h +
+                                                MediaQuery.of(context)
+                                                    .padding
+                                                    .top),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -485,28 +484,31 @@ class _HomeViewState extends State<HomeView> {
                     HomeBottomCart(),
                 ],
               );
-        return AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light.copyWith(
-            statusBarColor: kcWhiteColor,
-          ),
-          child: SafeArea(
-            child: Scaffold(
-              /// Resize according to Onscreen keyboard
-              resizeToAvoidBottomInset: true,
-              key: model.homeScaffoldKey,
-              drawer: DrawerView(),
-              body: Platform.isIOS
-                  ? UpgradeAlert(
-                      child: body,
-                      shouldPopScope: () => true,
-                      messages: context.locale == context.supportedLocales[0]
-                          ? MyTurkmenMessages()
-                          : MyRussianMessages(),
-                    )
-                  : body,
-            ),
-          ),
+        return
+            // AnnotatedRegion<SystemUiOverlayStyle>(
+            //   value: SystemUiOverlayStyle.light.copyWith(
+            //     statusBarColor: Colors.transparent,
+            //   ),
+            //   child:
+            // SafeArea(
+            //   child:
+            Scaffold(
+          /// Resize according to Onscreen keyboard
+          resizeToAvoidBottomInset: true,
+          key: model.homeScaffoldKey,
+          drawer: DrawerView(),
+          body: Platform.isIOS
+              ? UpgradeAlert(
+                  child: body,
+                  shouldPopScope: () => true,
+                  messages: context.locale == context.supportedLocales[0]
+                      ? MyTurkmenMessages()
+                      : MyRussianMessages(),
+                )
+              : body,
         );
+        // ),
+        // );
       },
       viewModelBuilder: () => HomeViewModel(),
     );
