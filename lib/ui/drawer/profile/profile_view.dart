@@ -1,4 +1,3 @@
-import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
@@ -22,7 +21,6 @@ class ProfileView extends StatelessWidget {
           model.navToHomeByRemovingAll(); // Workaround
           return false;
         },
-        // shouldAddCallback: true,
         child: Scaffold(
           drawer: DrawerView(),
           appBar: AppBar(

@@ -117,7 +117,7 @@ class StackedRouter extends RouterBase {
     },
     RestaurantSearchView: (data) {
       var args = data.getArgs<RestaurantSearchViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => RestaurantSearchView(
           restaurant: args.restaurant,
           key: args.key,
@@ -146,19 +146,19 @@ class StackedRouter extends RouterBase {
       );
     },
     CartView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const CartView(),
         settings: data,
       );
     },
     OrdersView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => OrdersView(),
         settings: data,
       );
     },
     OrderSuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const OrderSuccessView(),
         settings: data,
       );
@@ -173,7 +173,7 @@ class StackedRouter extends RouterBase {
       );
     },
     AddressesView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const AddressesView(),
         settings: data,
       );
@@ -182,7 +182,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<AddressAddEditViewArguments>(
         orElse: () => AddressAddEditViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => AddressAddEditView(key: args.key),
         settings: data,
       );
@@ -194,13 +194,13 @@ class StackedRouter extends RouterBase {
       );
     },
     ContactUsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => ContactUsView(),
         settings: data,
       );
     },
     AboutUsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const AboutUsView(),
         settings: data,
       );

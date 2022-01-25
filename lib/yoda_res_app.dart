@@ -1,4 +1,3 @@
-import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,12 +40,6 @@ class YodaResApp extends StatelessWidget {
             elevation: 0,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          // pageTransitionsTheme: PageTransitionsTheme(
-          //   builders: {
-          //     TargetPlatform.android: ZoomPageTransitionsBuilder(),
-          //     TargetPlatform.iOS: CupertinoWillPopScopePageTransionsBuilder(),
-          //   },
-          // ),
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
@@ -58,12 +51,6 @@ class YodaResApp extends StatelessWidget {
             elevation: 0,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          // pageTransitionsTheme: PageTransitionsTheme(
-          //   builders: {
-          //     TargetPlatform.android: ZoomPageTransitionsBuilder(),
-          //     TargetPlatform.iOS: CupertinoWillPopScopePageTransionsBuilder(),
-          //   },
-          // ),
         ),
         builder: (context, child) {
           return ScrollConfiguration(
