@@ -92,15 +92,6 @@ class _HomeViewState extends State<HomeView> {
             ? CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    // systemOverlayStyle: SystemUiOverlayStyle(
-                    //   // Status bar color
-                    //   statusBarColor: kcPrimaryColor,
-                    //   // Status bar brightness (optional)
-                    //   statusBarIconBrightness: Brightnessf
-                    //       .light, // For Android (dark icons)
-                    //   statusBarBrightness:
-                    //       Brightness.light, // For iOS (dark icons)
-                    // ),
                     expandedHeight: 0.1.sh,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
@@ -110,8 +101,9 @@ class _HomeViewState extends State<HomeView> {
                       background: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
-                                top: 10.h + MediaQuery.of(context).padding.top),
+                            padding: EdgeInsets.only(top: 10.h
+                                //  + MediaQuery.of(context).padding.top
+                                ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -181,11 +173,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 10.h +
-                                                MediaQuery.of(context)
-                                                    .padding
-                                                    .top),
+                                        padding: EdgeInsets.only(top: 10.h
+                                            // + MediaQuery.of(context)
+                                            //         .padding
+                                            //         .top
+                                            ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -237,11 +229,11 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 10.h +
-                                                MediaQuery.of(context)
-                                                    .padding
-                                                    .top),
+                                        padding: EdgeInsets.only(top: 10.h
+                                            // + MediaQuery.of(context)
+                                            //         .padding
+                                            //         .top
+                                            ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -493,20 +485,27 @@ class _HomeViewState extends State<HomeView> {
                     HomeBottomCart(),
                 ],
               );
-        return Scaffold(
-          /// Resize according to Onscreen keyboard
-          resizeToAvoidBottomInset: true,
-          key: model.homeScaffoldKey,
-          drawer: DrawerView(),
-          body: Platform.isIOS
-              ? UpgradeAlert(
-                  child: body,
-                  shouldPopScope: () => true,
-                  messages: context.locale == context.supportedLocales[0]
-                      ? MyTurkmenMessages()
-                      : MyRussianMessages(),
-                )
-              : body,
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light.copyWith(
+            statusBarColor: kcWhiteColor,
+          ),
+          child: SafeArea(
+            child: Scaffold(
+              /// Resize according to Onscreen keyboard
+              resizeToAvoidBottomInset: true,
+              key: model.homeScaffoldKey,
+              drawer: DrawerView(),
+              body: Platform.isIOS
+                  ? UpgradeAlert(
+                      child: body,
+                      shouldPopScope: () => true,
+                      messages: context.locale == context.supportedLocales[0]
+                          ? MyTurkmenMessages()
+                          : MyRussianMessages(),
+                    )
+                  : body,
+            ),
+          ),
         );
       },
       viewModelBuilder: () => HomeViewModel(),
