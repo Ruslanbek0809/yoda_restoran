@@ -139,7 +139,7 @@ class ResDetailsMainBusy extends StatelessWidget {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 7.h, bottom: 50.h),
+                    padding: EdgeInsets.only(top: 9.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

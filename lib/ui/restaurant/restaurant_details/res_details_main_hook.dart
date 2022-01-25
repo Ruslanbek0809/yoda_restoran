@@ -210,10 +210,10 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       color: AppTheme.WHITE,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0), 
+                        topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 7.h, bottom: 50.h),
+                    padding: EdgeInsets.only(top: 9.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
