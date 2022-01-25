@@ -120,15 +120,17 @@ class ResDetailsViewModel extends FutureViewModel {
 //------------------------ NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {
-    bool _navResult = false;
-    _navResult = await _navService.navigateTo(Routes.cartView);
+    dynamic _navResult;
+    _navResult = await _navService.navigateTo(Routes.cartView) ?? true;
     if (_navResult) await initialise(); // Workaround
   }
 
   void navToResSearchView() async {
-    bool _navResult = false;
+    dynamic _navResult;
     _navResult = await _navService.navigateTo(Routes.restaurantSearchView,
-        arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
+            arguments:
+                RestaurantSearchViewArguments(restaurant: restaurant!)) ??
+        true;
     if (_navResult) await initialise(); // Workaround
   }
 
