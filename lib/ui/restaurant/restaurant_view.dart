@@ -103,7 +103,7 @@ class RestaurantView extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         onPressed: () => model.hasLoggedInUser
                             ? model.updateResFav(restaurant.id!)
-                            : () {},
+                            : model.navToLoginView(),
                         icon: Icon(
                           model.isFavorited
                               ? Icons.favorite
