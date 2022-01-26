@@ -146,7 +146,7 @@ TextStyle ktsDefault18HelperText = TextStyle(
   color: kcHelperColor,
 );
 
-TextStyle ktsDefault20Text = TextStyle(
+TextStyle kts20Text = TextStyle(
   fontSize: 20.sp,
   color: kcFontColor,
 );

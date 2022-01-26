@@ -54,7 +54,9 @@ class StartUpView extends StatelessWidget {
                     ),
                     content: Text(
                       LocaleKeys.noInternet,
-                      style: ktsDefault20Text,
+                      style: context.locale == context.supportedLocales[0]
+                          ? kts20Text
+                          : kts18Text,
                     ).tr(),
                   ),
                 );

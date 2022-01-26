@@ -383,7 +383,7 @@ class MealBottomSheet extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         model.quantityDraft.toString(),
-                                        style: ktsDefault20Text,
+                                        style: kts20Text,
                                         textAlign: TextAlign.center,
                                       ),
                                     ),

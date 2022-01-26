@@ -91,7 +91,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
                         cartMeal.quantity.toString(),
-                        style: ktsDefault20Text,
+                        style: kts20Text,
                       ),
                     ),
                     Material(
