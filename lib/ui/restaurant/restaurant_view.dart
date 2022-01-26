@@ -101,9 +101,7 @@ class RestaurantView extends StatelessWidget {
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        onPressed: () => model.hasLoggedInUser
-                            ? model.updateResFav(restaurant.id!)
-                            : model.navToLoginView(),
+                        onPressed: () => model.updateResFav(restaurant.id!),
                         icon: Icon(
                           model.isFavorited
                               ? Icons.favorite

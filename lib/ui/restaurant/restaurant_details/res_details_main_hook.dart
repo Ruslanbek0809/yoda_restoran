@@ -139,13 +139,17 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 : AppTheme.WHITE,
                             child: InkWell(
                               customBorder: CircleBorder(),
-                              onTap: () {},
+                              onTap: () => model.updateResFav(restaurant.id!),
                               child: Padding(
                                 padding: EdgeInsets.all(8.w),
                                 child: Icon(
-                                  Icons.favorite_outline_outlined,
+                                  model.isFavorited
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
                                   size: 27.w,
-                                  color: AppTheme.BLACK,
+                                  color: model.isFavorited
+                                      ? AppTheme.RED
+                                      : AppTheme.BLACK,
                                 ),
                               ),
                             ),
