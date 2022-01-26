@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/styles.dart';
 import 'package:yoda_res/ui/widgets/button_loading.dart';
 import '../main_category/main_cat_view_model.dart';
@@ -83,7 +84,9 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                 flex: 100,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: AppTheme.MAIN,
+                    backgroundColor: model.tempSelectedMainCats.isNotEmpty
+                        ? kcPrimaryColor
+                        : kcSecondaryLightColor,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         borderRadius: AppTheme().radius15),
@@ -92,14 +95,19 @@ class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
                   child: model.isBusy
                       ? ButtonLoading()
                       : Text(
-                          LocaleKeys.confirmSortButton,
-                          style: ktsButton18Text,
+                          model.tempSelectedMainCats.isNotEmpty
+                              ? LocaleKeys.confirmSortButton
+                              : LocaleKeys.chooseMainCat,
+                          style: model.tempSelectedMainCats.isNotEmpty
+                              ? ktsButton18Text
+                              : ktsButton18ContactText,
                         ).tr(),
-                  onPressed: () async {
-                    if (model.tempSelectedMainCats.isNotEmpty)
-                      await model.updateAllSelectedTempMainCats();
-                    model.navBack();
-                  },
+                  onPressed: model.tempSelectedMainCats.isNotEmpty
+                      ? () async {
+                          await model.updateAllSelectedTempMainCats();
+                          model.navBack();
+                        }
+                      : null,
                 ),
               )
             ],

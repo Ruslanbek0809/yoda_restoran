@@ -133,6 +133,7 @@ abstract class  LocaleKeys {
   static const aboutUsContent = 'aboutUsContent';
   static const aboutUsBonApetite = 'aboutUsBonApetite';
   static const aboutUsIg = 'aboutUsIg';
+  static const chooseMainCat = 'chooseMainCat';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 
