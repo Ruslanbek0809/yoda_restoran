@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/restaurant.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../widgets/widgets.dart';
@@ -8,6 +7,8 @@ import '../../../utils/utils.dart';
 import 'home_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home_search_hook.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeSearchView extends StatelessWidget {
   @override
@@ -225,17 +226,44 @@ class HomeSearchView extends StatelessWidget {
                                 if (_searchRestaurant.meals != null &&
                                     _searchRestaurant.meals!.length > 3)
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () =>
+                                        model.navToResDetailsView(Restaurant(
+                                      id: _searchRestaurant.id,
+                                      image: _searchRestaurant.image,
+                                      name: _searchRestaurant.name,
+                                      address: _searchRestaurant.address,
+                                      rated: _searchRestaurant.rated,
+                                      rating: _searchRestaurant.rating,
+                                      workingHours:
+                                          _searchRestaurant.workingHours,
+                                      deliveryPrice:
+                                          _searchRestaurant.deliveryPrice,
+                                      description:
+                                          _searchRestaurant.description,
+                                      phoneNumber:
+                                          _searchRestaurant.phoneNumber,
+                                      prepareTime:
+                                          _searchRestaurant.prepareTime,
+                                    )),
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                         left: 24.w + 35.h,
                                         top: 15.h,
                                         bottom: 5.h,
                                       ),
-                                      child: Text(
-                                        'Ýene ' +
-                                            '${model.searchRestaurants.length - 3}',
-                                        style: ktsDefault18HelperText,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            LocaleKeys.more,
+                                            style: ktsDefault18HelperText,
+                                          ).tr(),
+                                          Text(
+                                            (_searchRestaurant.meals!.length -
+                                                    3)
+                                                .toString(),
+                                            style: ktsDefault18HelperText,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),

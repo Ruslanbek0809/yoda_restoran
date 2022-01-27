@@ -30,7 +30,7 @@ class HomeSearchViewModel extends BaseViewModel {
     dynamic result =
         await runBusyFuture(_searchService.startMainSearch(searchText));
     log.v(
-        'startMainSearch() result: $result and _searchRestaurants: ${_searchRestaurants.length}');
+        'startMainSearch() result: $result and _searchRestaurants: ${result.length}');
     if (result != null) {
       _searchRestaurants.clear();
       _searchRestaurants = result;
