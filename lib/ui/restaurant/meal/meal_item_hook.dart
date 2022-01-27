@@ -115,33 +115,36 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   : '${formatNum(meal.price!)} TMT',
                               style: kts14HelperText,
                             ),
-                            Text(
-                              ' • ${formatNum(meal.value!)} ${meal.size!.name}',
-                              style: kts14HelperText,
-                            ),
+                            if (meal.value != null)
+                              Text(
+                                ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                style: kts14HelperText,
+                              ),
                           ],
                         )
-                      : meal.discount != null && meal.discount! > 0
-                          ? Row(
-                              children: [
-                                Text(
-                                  '${formatNum(meal.price!)} TMT',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: kcHelperColor,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                                Text(
-                                  ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                      : meal.value != null
+                          ? meal.discount != null && meal.discount! > 0
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      '${formatNum(meal.price!)} TMT',
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: kcHelperColor,
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                    ),
+                                    Text(
+                                      ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                      style: kts14HelperText,
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  '${formatNum(meal.value!)} ${meal.size!.name}',
                                   style: kts14HelperText,
-                                ),
-                              ],
-                            )
-                          : Text(
-                              '${formatNum(meal.value!)} ${meal.size!.name}',
-                              style: kts14HelperText,
-                            ),
+                                )
+                          : SizedBox(),
                   Spacer(),
                   //------------------ BUTTONS ---------------------//
                   AnimatedSwitcher(

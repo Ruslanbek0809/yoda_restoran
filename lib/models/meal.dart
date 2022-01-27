@@ -3,7 +3,7 @@ import 'models.dart';
 
 part 'meal.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class Meal {
   Meal({
     this.id,

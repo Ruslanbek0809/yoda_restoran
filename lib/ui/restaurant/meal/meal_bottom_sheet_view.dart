@@ -298,26 +298,27 @@ class MealBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                                child: RichText(
-                              text: TextSpan(
-                                text: meal.name!,
-                                style: ktsDefault16Text,
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text:
-                                        ' ${formatNum(meal.value!)} ${meal.size!.name}',
-                                    style: kts14HelperText,
-                                  ),
-                                ],
-                              ),
-                            )
-                                // Text(
-                                //                             '${meal.name!} ${formatNum(meal.value!)} ${meal.size!.name}',
-                                //                             style: ktsDefault16Text,
-                                //                             maxLines: 2,
-                                //                             overflow: TextOverflow.ellipsis,
-                                //                           ),
-                                ),
+                              child: meal.value != null
+                                  ? RichText(
+                                      text: TextSpan(
+                                        text: meal.name!,
+                                        style: ktsDefault16Text,
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text:
+                                                ' ${formatNum(meal.value!)} ${meal.size!.name}',
+                                            style: kts14HelperText,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Text(
+                                      meal.name!,
+                                      style: ktsDefault16Text,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                            ),
                             Padding(
                               padding: EdgeInsets.only(left: 5.w),
                               child: Text(
