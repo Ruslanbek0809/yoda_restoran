@@ -62,7 +62,7 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
       child: SlideTransition(
         position: bottomCartOffset,
         child: GestureDetector(
-          onTap: model.navToCartView,
+          onTap: model.isUpdateQuantity ? () {} : model.navToCartView,
           child: Container(
             height: 0.24.sw,
             width: 1.sw,

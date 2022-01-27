@@ -36,6 +36,7 @@ class ResDetailsViewModel extends FutureViewModel {
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
+  bool get isUpdateQuantity => _bottomCartService.isUpdateQuantity; // custom loading of res bottom cart
 
   /// _isCustomError and updateCustomError func are used to show error flash bar once. Workaround
   bool _isCustomError = false;
