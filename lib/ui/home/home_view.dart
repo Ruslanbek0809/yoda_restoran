@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
             await InAppUpdate.startFlexibleUpdate();
+            await InAppUpdate.completeFlexibleUpdate();
             print('I AM IN startFlexibleUpdate(): ');
           }
         }
@@ -93,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
                 slivers: [
                   SliverAppBar(
                     expandedHeight: 0.1.sh,
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: kcWhiteColor,
                     elevation: 0,
                     toolbarHeight: 60.h,
                     automaticallyImplyLeading: false,
@@ -164,7 +165,7 @@ class _HomeViewState extends State<HomeView> {
                             slivers: [
                               SliverAppBar(
                                 expandedHeight: 0.3.sh,
-                                backgroundColor: Colors.transparent,
+                                backgroundColor: kcWhiteColor,
                                 elevation: 0,
                                 toolbarHeight: 60.h,
                                 automaticallyImplyLeading: false,
@@ -220,7 +221,7 @@ class _HomeViewState extends State<HomeView> {
                                 expandedHeight: model.selectedMainCats.isEmpty
                                     ? 0.36.sh
                                     : 0.1.sh,
-                                backgroundColor: Colors.transparent,
+                                backgroundColor: kcWhiteColor,
                                 elevation: 0,
                                 toolbarHeight: 60.h,
                                 automaticallyImplyLeading: false,
@@ -484,30 +485,33 @@ class _HomeViewState extends State<HomeView> {
                     HomeBottomCart(),
                 ],
               );
-        return
-            // AnnotatedRegion<SystemUiOverlayStyle>(
-            //   value: SystemUiOverlayStyle.light.copyWith(
-            //     statusBarColor: Colors.transparent,
-            //   ),
-            //   child:
-            // SafeArea(
-            //   child:
-            Scaffold(
-          /// Resize according to Onscreen keyboard
-          resizeToAvoidBottomInset: true,
-          key: model.homeScaffoldKey,
-          drawer: DrawerView(),
-          body: Platform.isIOS
-              ? UpgradeAlert(
-                  child: body,
-                  shouldPopScope: () => true,
-                  messages: context.locale == context.supportedLocales[0]
-                      ? MyTurkmenMessages()
-                      : MyRussianMessages(),
-                )
-              : body,
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+              statusBarColor: Colors
+                  .transparent, // Statusbar transparent
+              statusBarIconBrightness:
+                  Brightness.light, // For Android: (dark icons)
+              statusBarBrightness: Brightness.light // For iOS: (dark icons)
+              ),
+          child:
+              // SafeArea( 
+              //     child:
+              Scaffold(
+            /// Resize according to Onscreen keyboard
+            resizeToAvoidBottomInset: true,
+            key: model.homeScaffoldKey,
+            drawer: DrawerView(),
+            body: Platform.isIOS
+                ? UpgradeAlert(
+                    child: body,
+                    shouldPopScope: () => true,
+                    messages: context.locale == context.supportedLocales[0]
+                        ? MyTurkmenMessages()
+                        : MyRussianMessages(),
+                  )
+                : body,
+          ),
         );
-        // ),
         // );
       },
       viewModelBuilder: () => HomeViewModel(),
