@@ -8,7 +8,7 @@ import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class CheckoutAddressViewModel extends FutureViewModel {
+class CheckoutAddressViewModel extends ReactiveViewModel {
   final log = getLogger('CheckoutAddressViewModel');
 
   final _checkoutService = locator<CheckoutService>();
@@ -24,15 +24,15 @@ class CheckoutAddressViewModel extends FutureViewModel {
       : _checkoutService.selectedAddress!;
 
   // /// SEARCHES and GETS promocode if found
-  // Future<void> getAddresses() async {
-  //   log.i('getAddresses()');
+  Future<void> getAddresses() async {
+    log.i('getAddresses()');
 
-  //   try {
-  //     await runBusyFuture(_checkoutService.getAddresses());
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+    try {
+      await runBusyFuture(_checkoutService.getAddresses());
+    } catch (err) {
+      throw err;
+    }
+  }
 
   /// Temporarily SETS _tempSelectedAddress
   void updateTempSelectedAddress(Address selectedAddress) {
@@ -52,8 +52,8 @@ class CheckoutAddressViewModel extends FutureViewModel {
     notifyListeners();
   }
 
-  @override
-  Future futureToRun() => _checkoutService.getAddresses();
+  // @override
+  // Future futureToRun() => _checkoutService.getAddresses();
 
 //------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
 
@@ -69,10 +69,14 @@ class CheckoutAddressViewModel extends FutureViewModel {
     );
 
     if (_navResult != null && _navResult.data == true) {
-      log.v('Added and response: ${_navResult.data}');
-      await initialise(); // Workaround
+      log.i('_navResult: $_navResult');
+      await runBusyFuture(_checkoutService.getAddresses());
+      // notifyListeners();
     }
   }
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   String? _city = LocaleKeys.ashgabat.tr();
   String? get city => _city;
@@ -140,14 +144,32 @@ class CheckoutAddressViewModel extends FutureViewModel {
   }
 
   /// ADDS new address
-  Future<void> onAddAddressPressed() async {
+  Future<void> onAddAddressPressed(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
     log.v('onAddAddressPressed()');
-    try {
-      await runBusyFuture(_checkoutService.addAddress(
-          _city, _street, _house, _apartment, _floor, _note));
-    } catch (err) {
-      throw err;
-    }
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(_checkoutService.addAddress(
+      _city,
+      _street,
+      _house,
+      _apartment,
+      _floor,
+      _note,
+      () {
+        _isLoading = false;
+        onSuccessForView!();
+      },
+      () {
+        _isLoading = false;
+        notifyListeners();
+        onFailForView!();
+      },
+    ));
   }
 
   @override

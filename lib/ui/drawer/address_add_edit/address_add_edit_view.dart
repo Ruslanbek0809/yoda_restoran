@@ -97,8 +97,10 @@ class AddressAddEditView extends StatelessWidget {
                                     if (!_addEditAddressformKey.currentState!
                                         .validate()) return;
                                     _addEditAddressformKey.currentState!.save();
-                                    await model.onAddAddressPressed();
-                                    model.navBack();
+                                    await model.onAddAddressPressed(
+                                      () => model.navBack(),
+                                      () => model.navBack(),
+                                    );
                                   },
                                 ),
                               ),

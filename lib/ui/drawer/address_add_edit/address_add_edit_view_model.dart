@@ -78,11 +78,22 @@ class AddressAddEditViewModel extends BaseViewModel {
   }
 
   /// ADDS new address
-  Future<void> onAddAddressPressed() async {
+  Future<void> onAddAddressPressed(
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
     log.v('onAddAddressPressed()');
     try {
-      await runBusyFuture(
-          _userService.addAddress(city, street, house, apartment, floor, note));
+      await runBusyFuture(_userService.addAddress(
+        city,
+        street,
+        house,
+        apartment,
+        floor,
+        note,
+        () => onSuccess!(),
+        () => onFail!(),
+      ));
     } catch (err) {
       throw err;
     }

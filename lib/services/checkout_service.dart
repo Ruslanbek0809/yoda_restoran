@@ -75,9 +75,26 @@ class CheckoutService with ReactiveServiceMixin {
       _selectedAddress.value = selectedAddress;
 
   /// ADDS new address
-  Future<void> addAddress(String? city, String? street, int? house,
-      int? apartment, int? floor, String? note) async {
-    _userService.addAddress(city, street, house, apartment, floor, note);
+  Future<void> addAddress(
+    String? city,
+    String? street,
+    int? house,
+    int? apartment,
+    int? floor,
+    String? note,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    _userService.addAddress(
+      city,
+      street,
+      house,
+      apartment,
+      floor,
+      note,
+      () => onSuccess!(),
+      () => onFail!(),
+    );
   }
 
   /// CREATES ORDER

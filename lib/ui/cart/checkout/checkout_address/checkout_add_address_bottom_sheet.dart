@@ -26,89 +26,111 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.72,
-        maxChildSize: 1,
-        expand: false,
-        builder: (context, scrollController) => Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-                top: Radius.circular(Constants.BORDER_RADIUS_20)),
-            color: kcWhiteColor,
-          ),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                controller: scrollController,
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // --------------- BOTTOM SHEET DRAGGER -------------- //
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      child: SvgPicture.asset(
-                        'assets/bottom_sheet_dragger.svg',
-                        color: kcSecondaryLightColor,
-                        height: 6.h,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(Constants.BORDER_RADIUS_20),
-                        ),
-                        color: AppTheme.WHITE,
-                      ),
-                      padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
-                      child: Form(
-                        key: _addressformKey,
-                        autovalidateMode: AutovalidateMode.disabled,
-                        child: AddAddressBottomSheetHook(),
-                      ),
-                    ),
-                  ],
-                ),
+          initialChildSize: 0.72,
+          maxChildSize: 1,
+          expand: false,
+          builder: (context, scrollController) {
+            model.log.v('model.isBusy: ${model.isBusy}');
+
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(Constants.BORDER_RADIUS_20)),
+                color: kcWhiteColor,
               ),
-              //--------------- ADD ADDRESS BUTTON -------------- //
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppTheme.WHITE,
-                    // border: Border.all(
-                    //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
-                  ),
-                  padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
-                  child: CustomTextChildButton(
-                    borderRadius: AppTheme().radius15,
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: model.isBusy
-                          ? ButtonLoading()
-                          : Text(
-                              LocaleKeys.addNewAddressButton,
-                              style: ktsButton18Text,
-                            ).tr(),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    controller: scrollController,
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // --------------- BOTTOM SHEET DRAGGER -------------- //
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.h),
+                          child: SvgPicture.asset(
+                            'assets/bottom_sheet_dragger.svg',
+                            color: kcSecondaryLightColor,
+                            height: 6.h,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(Constants.BORDER_RADIUS_20),
+                            ),
+                            color: AppTheme.WHITE,
+                          ),
+                          padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
+                          child: Form(
+                            key: _addressformKey,
+                            autovalidateMode: AutovalidateMode.disabled,
+                            child: AddAddressBottomSheetHook(),
+                          ),
+                        ),
+                      ],
                     ),
-                    onPressed: () async {
-                      FocusScope.of(context)
-                          .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                      if (!_addressformKey.currentState!.validate()) return;
-                      _addressformKey.currentState!.save();
-                      await model.onAddAddressPressed();
-                      await completer(SheetResponse(data: true));
-                    },
                   ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+                  //--------------- ADD ADDRESS BUTTON -------------- //
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.WHITE,
+                        // border: Border.all(
+                        //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                      ),
+                      padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
+                      child: CustomTextChildButton(
+                        borderRadius: AppTheme().radius15,
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: model.isLoading
+                              ? ButtonLoading()
+                              : Text(
+                                  LocaleKeys.addNewAddressButton,
+                                  style: ktsButton18Text,
+                                ).tr(),
+                        ),
+                        onPressed: () async {
+                          FocusScope.of(context)
+                              .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                          if (!_addressformKey.currentState!.validate()) return;
+                          _addressformKey.currentState!.save();
+                          await model.onAddAddressPressed(() async {
+                            await completer(SheetResponse(data: true));
+                            await showErrorFlashBar(
+                              context: context,
+                              msg: LocaleKeys.addAddedSuccessfully,
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
+                          }, () async {
+                            await showErrorFlashBar(
+                              context: context,
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
+                          });
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
       viewModelBuilder: () => CheckoutAddressViewModel(),
     );
   }

@@ -22,7 +22,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
-      // onModelReady: (model) => model.getAddresses(),
+      onModelReady: (model) => model.getAddresses(),
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: model.isBusy && model.addresses!.isEmpty
             ? 0.25

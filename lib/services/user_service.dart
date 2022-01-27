@@ -299,6 +299,8 @@ class UserService {
     int? apartment,
     int? floor,
     String? note,
+    Function()? onSuccess,
+    Function()? onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['city'] = city;
@@ -318,10 +320,14 @@ class UserService {
       );
       log.v('RESPONSE: api/address/ => ${response.data}');
 
-      if (response.data != null) {}
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
     } on DioError catch (error) {
-      // log.v(error);
-      log.v('ERROR on api/address/ ${error.response!.data}');
+      log.v('ERROR on api/address/ ${error.response}');
+      onFail!();
       rethrow;
     }
   }
