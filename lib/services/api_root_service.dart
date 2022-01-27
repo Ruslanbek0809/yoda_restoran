@@ -24,10 +24,10 @@ class ApiRootService {
     final _savedLocale =
         prefs.getString(Constants.savedLocale) ?? 'en_US'; // GETS saved locale.
 
-    if (accessToken != null)
-      _headers["Authorization"] = "Bearer " + accessToken;  
+    log.v('ApiRootService _savedLocale: $_savedLocale');
 
-    dio.options.baseUrl = Constants.baseUrlTk;
+    if (accessToken != null)
+      _headers["Authorization"] = "Bearer " + accessToken;
 
     dio.options.baseUrl =
         _savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;

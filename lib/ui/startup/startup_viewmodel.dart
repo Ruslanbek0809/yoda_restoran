@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flash/flash.dart';
@@ -46,10 +47,20 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     log.i('===== runStartupLogic() ENDED =====');
   }
 
-  Future<void> navToHomeWithConnection() async {
+  Future<void> navToHomeWithConnection(Locale initLocale) async {
     log.i('===== navToHomeWithConnection() STARTED =====');
 
     await flashController?.dismiss(); // DISMISSES no internet flashbar
+
+    /// So this below condition is to change lang of API initialization to ru lang when app is opened for the first time. Drawback of easy_localization. Workaround
+    if (initLocale.toString() == 'ru_RU') {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final _savedLocale = prefs.getString(Constants.savedLocale) ??
+          'en_US'; // GETS saved locale.
+
+      if (_savedLocale != 'ru_RU')
+        await prefs.setString(Constants.savedLocale, initLocale.toString());
+    }
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()

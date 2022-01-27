@@ -55,8 +55,6 @@ class DrawerViewModel extends BaseViewModel {
   Future<void> setLocale(String locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(Constants.savedLocale, locale);
-    final String? _savedLocale = prefs.getString(Constants.accessToken);
-    log.i('LOCALE AFTER setString: $_savedLocale');
   }
 
   /// REINITIALIZES app api url

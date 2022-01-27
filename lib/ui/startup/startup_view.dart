@@ -69,7 +69,7 @@ class StartUpView extends StatelessWidget {
         if (model.startAnimation == false &&
             (model.connectivityStatus != ConnectivityStatus.Offline &&
                 model.connectivityStatus != null))
-          model.navToHomeWithConnection();
+          model.navToHomeWithConnection(context.locale);
 
         return Scaffold(
           body: Stack(
