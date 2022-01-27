@@ -487,14 +487,14 @@ class _HomeViewState extends State<HomeView> {
               );
         return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
-              statusBarColor: Colors
-                  .transparent, // Statusbar transparent
+              // statusBarColor: Colors
+              //     .transparent, // Statusbar transparent
               statusBarIconBrightness:
                   Brightness.light, // For Android: (dark icons)
               statusBarBrightness: Brightness.light // For iOS: (dark icons)
               ),
           child:
-              // SafeArea( 
+              // SafeArea(
               //     child:
               Scaffold(
             /// Resize according to Onscreen keyboard

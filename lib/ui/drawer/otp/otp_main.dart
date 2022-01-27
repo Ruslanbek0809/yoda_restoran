@@ -166,6 +166,8 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                       return;
                     }
 
+                    FocusScope.of(context)
+                        .unfocus(); // UNFOCUSES all textfield b4 data fetch
                     await model.saveOtpData(
                       onFailForView: () => showErrorFlashBar(
                         context: context,
