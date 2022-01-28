@@ -11,6 +11,7 @@ Notification _$NotificationFromJson(Map<String, dynamic> json) => Notification(
       option: json['option'] as String?,
       title: json['title'] as String?,
       status: json['status'] as String?,
+      selfPickUp: json['selfPickUp'] as bool?,
     );
 
 Map<String, dynamic> _$NotificationToJson(Notification instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$NotificationToJson(Notification instance) =>
       'option': instance.option,
       'title': instance.title,
       'status': instance.status,
+      'selfPickUp': instance.selfPickUp,
     };

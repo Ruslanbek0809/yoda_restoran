@@ -8,6 +8,7 @@ class Notification {
     this.option,
     this.title,
     this.status,
+    this.selfPickUp,
   });
 
   @JsonKey(name: 'id')
@@ -21,6 +22,10 @@ class Notification {
 
   @JsonKey(name: 'status')
   final String? status;
+
+  @JsonKey(name: 'selfPickUp')
+  final bool? selfPickUp;
+
 
   factory Notification.fromJson(Map<String, dynamic> json) =>
       _$NotificationFromJson(json);

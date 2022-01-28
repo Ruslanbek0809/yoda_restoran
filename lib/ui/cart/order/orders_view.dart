@@ -249,7 +249,7 @@ class OrdersView extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 7.w),
                                                 Text(
-                                                  'SOWGAT',
+                                                  order.promocode!.name!,
                                                   style: ktsDefault16Text,
                                                 ),
                                               ],
