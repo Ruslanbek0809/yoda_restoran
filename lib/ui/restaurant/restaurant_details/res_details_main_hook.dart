@@ -23,7 +23,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.31.sw; // 0.31.sw is for item height
+    double itemHeight = itemWidth + 0.32.sw; // 0.32.sw is for item height
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
@@ -46,7 +46,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
       void _customScrollListener() =>
           model.updateLastScrollStatus(customScrollController.hasClients &&
               customScrollController.offset >
-                  (0.55.sh - kToolbarHeight - 40.h)); // - 40 for Tab height
+                  (0.55.sh - kToolbarHeight - 53.h)); // - 53.h for Tab height
 
       customScrollController.addListener(_customScrollListener);
       return () => customScrollController.removeListener(_customScrollListener);
@@ -92,11 +92,13 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               margin: EdgeInsets.only(left: 10.w, top: 5.w),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
+                color: kcWhiteColor,
+                // color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
                 // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
               ),
               child: Material(
-                color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
+                color: kcWhiteColor,
+                // color: model.isShrink ? Colors.transparent : kcWhiteColor,
                 shape: CircleBorder(),
                 elevation: 0,
                 child: InkWell(
@@ -126,7 +128,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             shape: BoxShape.circle,
                             color: model.isShrink
                                 ? Colors.transparent
-                                : AppTheme.WHITE,
+                                : kcWhiteColor,
                             // boxShadow: _isShrink
                             //     ? []
                             //     : [AppTheme().buttonShadow],
@@ -136,7 +138,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             elevation: 0,
                             color: model.isShrink
                                 ? Colors.transparent
-                                : AppTheme.WHITE,
+                                : kcWhiteColor,
                             child: InkWell(
                               customBorder: CircleBorder(),
                               onTap: () => model.updateResFav(restaurant.id!),
@@ -167,13 +169,15 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
+                    color: kcWhiteColor,
+                    // color: model.isShrink ? Colors.transparent : kcWhiteColor,
                     // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                   ),
                   child: Material(
                     shape: CircleBorder(),
                     elevation: 0,
-                    color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
+                    color: kcWhiteColor,
+                    // color: model.isShrink ? Colors.transparent : kcWhiteColor,
                     child: InkWell(
                       customBorder: CircleBorder(),
                       onTap: () => model.navToResSearchView(),
@@ -347,7 +351,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
           //------------------ TABBAR ---------------------//
           bottom: ColoredTabBar(
-            color: AppTheme.WHITE,
+            color: kcWhiteColor,
             tabBar: TabBar(
               controller: tabController,
               isScrollable: true,
@@ -393,8 +397,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 );
 
                 customScrollController.animateTo(
-                  offset + ((index - 1) * 30.h) + 0.55.sh - 40.h,
-                  // * 30.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate 0.55.sh expanded height // + 45.h is for tab title
+                  offset + ((index - 1) * 30.h) + 0.55.sh - 53.h,
+                  // * 30.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate 0.55.sh expanded height // + 53.h is for tab height
                   duration: Duration(milliseconds: 300),
                   curve: Curves.linear,
                 );
@@ -403,7 +407,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
             ),
           ),
         ),
-//------------------ FOOD LIST with NAME ---------------------//
+//------------------ MEAL LIST ---------------------//
         SliverList(
           delegate: SliverChildListDelegate(
             [
@@ -411,6 +415,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: model.resCategories!.length,
+                padding: EdgeInsets.only(
+                    bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+                // SizedBox(height: 0.11.sh), // COMPENSATES ResDetailsBottomCart
                 itemBuilder: (context, index) {
                   final resCategory = model.resCategories![index];
                   final resCategoryMeals = resCategory.meals;
@@ -418,7 +425,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 12.w, top: 7.h),
+                        padding: EdgeInsets.only(left: 12.w, top: 5.h),
                         child: Text(
                           resCategory.resCategoryModel!.name!,
                           style: TextStyle(

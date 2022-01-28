@@ -52,7 +52,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
             color: AppTheme.MAIN_LIGHT,
             borderRadius: AppTheme().radius20,
           ),
-          padding: EdgeInsets.fromLTRB(7.w, 7.w, 7.w, 7.w),
+          padding: EdgeInsets.fromLTRB(6.w, 6.w, 6.w, 6.h),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return Column(
@@ -97,7 +97,12 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5.h, bottom: 1.h),
+                    padding: EdgeInsets.only(
+                      top: 5.h,
+                      bottom: 2.h,
+                      left: 2.w,
+                      right: 2.w,
+                    ),
                     child: Text(
                       meal.name!,
                       maxLines: 2,
@@ -107,42 +112,61 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                   ),
                   //------------------ MEAL PRICE ---------------------//
                   model.isButtonToggled
-                      ? Row(
-                          children: [
-                            Text(
-                              meal.discount != null || meal.discount! > 0
-                                  ? '${formatNum(meal.discountedPrice!)} TMT'
-                                  : '${formatNum(meal.price!)} TMT',
-                              style: kts14HelperText,
-                            ),
-                            if (meal.value != null)
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                            left: 2.w,
+                            right: 2.w,
+                          ),
+                          child: Row(
+                            children: [
                               Text(
-                                ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                meal.discount != null || meal.discount! > 0
+                                    ? '${formatNum(meal.discountedPrice!)} TMT'
+                                    : '${formatNum(meal.price!)} TMT',
                                 style: kts14HelperText,
                               ),
-                          ],
+                              if (meal.value != null)
+                                Text(
+                                  ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                  style: kts14HelperText,
+                                ),
+                            ],
+                          ),
                         )
                       : meal.value != null
                           ? meal.discount != null && meal.discount! > 0
-                              ? Row(
-                                  children: [
-                                    Text(
-                                      '${formatNum(meal.price!)} TMT',
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: kcHelperColor,
-                                        decoration: TextDecoration.lineThrough,
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${formatNum(meal.price!)} TMT',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: kcHelperColor,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      ' • ${formatNum(meal.value!)} ${meal.size!.name}',
-                                      style: kts14HelperText,
-                                    ),
-                                  ],
+                                      Text(
+                                        ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                        style: kts14HelperText,
+                                      ),
+                                    ],
+                                  ),
                                 )
-                              : Text(
-                                  '${formatNum(meal.value!)} ${meal.size!.name}',
-                                  style: kts14HelperText,
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Text(
+                                    '${formatNum(meal.value!)} ${meal.size!.name}',
+                                    style: kts14HelperText,
+                                  ),
                                 )
                           : SizedBox(),
                   Spacer(),
