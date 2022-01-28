@@ -51,7 +51,8 @@ class PushNotificationService {
 
       var noti = Notification.fromJson(message.data);
       log.v('notificationData JSON status: ${noti.status}');
-      log.v('notificationData JSON title: ${noti.title}');
+      log.v(
+          'notificationData JSON title: ${noti.title} and test ${noti.selfPickUp == 'False'}, ${noti.selfPickUp == 'True'}');
 
       switch (noti.status) {
         case '2':
@@ -69,29 +70,32 @@ class PushNotificationService {
           break;
         case '3':
           log.v('INSIDE STATUS 3');
-          await _dialogService.showCustomDialog(
-            variant: DialogType.notification,
-            showIconInMainButton: false,
-            barrierDismissible: true,
-            data: NotificationDialogData(
-              lottie: 'assets/pizzabox.json',
-              restaurant: noti.title!,
-              content: LocaleKeys.yourOrderReady.tr(),
-            ),
-          );
+          if (noti.selfPickUp == 'True')
+            await _dialogService.showCustomDialog(
+              variant: DialogType.notification,
+              showIconInMainButton: false,
+              barrierDismissible: true,
+              data: NotificationDialogData(
+                lottie: 'assets/pizzabox.json',
+                restaurant: noti.title!,
+                content: LocaleKeys.yourOrderReady.tr(),
+              ),
+            );
+          if (noti.selfPickUp != null && noti.selfPickUp == 'False')
+            await _dialogService.showCustomDialog(
+              variant: DialogType.notification,
+              showIconInMainButton: false,
+              barrierDismissible: true,
+              data: NotificationDialogData(
+                lottie: 'assets/foodbag.json',
+                restaurant: noti.title!,
+                content: LocaleKeys.yourOrderSent.tr(),
+              ),
+            );
           break;
         case '4':
           log.v('INSIDE STATUS 4');
-          await _dialogService.showCustomDialog(
-            variant: DialogType.notification,
-            showIconInMainButton: false,
-            barrierDismissible: true,
-            data: NotificationDialogData(
-              lottie: 'assets/foodbag.json',
-              restaurant: noti.title!,
-              content: LocaleKeys.yourOrderSent.tr(),
-            ),
-          );
+
           break;
         default:
       }

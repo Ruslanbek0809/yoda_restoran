@@ -88,6 +88,8 @@
     "orderAccepted": "Принят",
     "orderSent": "Отправлен",
     "orderDelivered": "Доставлен",
+    "orderReady": "Готов",
+    "orderTaken": "Получен",
     "cancelOrder": "Отменить заказ",
     "driver": "Водитель:",
     "reOrder": "Заказать повторно",

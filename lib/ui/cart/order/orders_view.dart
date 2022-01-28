@@ -79,10 +79,14 @@ class OrdersView extends StatelessWidget {
                               orderStatusText = LocaleKeys.orderAccepted.tr();
                               break;
                             case 3:
-                              orderStatusText = LocaleKeys.orderSent.tr();
+                              orderStatusText = order.selfPickUp!
+                                  ? LocaleKeys.orderReady.tr()
+                                  : LocaleKeys.orderSent.tr();
                               break;
                             case 4:
-                              orderStatusText = LocaleKeys.orderDelivered.tr();
+                              orderStatusText = order.selfPickUp!
+                                  ? LocaleKeys.orderTaken.tr()
+                                  : LocaleKeys.orderDelivered.tr();
                               break;
                             default:
                               break;

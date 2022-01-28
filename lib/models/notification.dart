@@ -24,7 +24,7 @@ class Notification {
   final String? status;
 
   @JsonKey(name: 'selfPickUp')
-  final bool? selfPickUp;
+  final String? selfPickUp;
 
 
   factory Notification.fromJson(Map<String, dynamic> json) =>

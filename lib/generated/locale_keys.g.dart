@@ -90,6 +90,8 @@ abstract class  LocaleKeys {
   static const orderAccepted = 'orderAccepted';
   static const orderSent = 'orderSent';
   static const orderDelivered = 'orderDelivered';
+  static const orderReady = 'orderReady';
+  static const orderTaken = 'orderTaken';
   static const cancelOrder = 'cancelOrder';
   static const driver = 'driver';
   static const reOrder = 'reOrder';

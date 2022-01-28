@@ -88,6 +88,8 @@
     "orderAccepted": "Kabul edildi",
     "orderSent": "Ugradyldy",
     "orderDelivered": "Eltildi",
+    "orderReady": "Taýýar",
+    "orderTaken": "Alyndy",
     "cancelOrder": "Sargydy ýatyr",
     "driver": "Sürüji:",
     "reOrder": "Täzeden sargyt et",
