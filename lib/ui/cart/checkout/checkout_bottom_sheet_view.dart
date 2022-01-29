@@ -446,31 +446,33 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 style: ktsButton18Text,
                               ).tr(),
                         // onPressed: model.navToOrdersByRemovingAll,
-                        onPressed: () async {
-                          if (model.selectedAddress!.id == -1 &&
-                              model.isDelivery)
-                            await showErrorFlashBar(
-                              context: context,
-                              msg: LocaleKeys.selectAddressPls,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.13.sh,
-                              ),
-                            );
-                          else
-                            await model.createOrder(
-                              onFailForView: () async =>
+                        onPressed: model.isBusy
+                            ? () {}
+                            : () async {
+                                if (model.selectedAddress!.id == -1 &&
+                                    model.isDelivery)
                                   await showErrorFlashBar(
-                                context: context,
-                                margin: EdgeInsets.only(
-                                  left: 16.w,
-                                  right: 16.w,
-                                  bottom: 0.13.sh,
-                                ),
-                              ),
-                            );
-                        },
+                                    context: context,
+                                    msg: LocaleKeys.selectAddressPls,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.13.sh,
+                                    ),
+                                  );
+                                else
+                                  await model.createOrder(
+                                    onFailForView: () async =>
+                                        await showErrorFlashBar(
+                                      context: context,
+                                      margin: EdgeInsets.only(
+                                        left: 16.w,
+                                        right: 16.w,
+                                        bottom: 0.13.sh,
+                                      ),
+                                    ),
+                                  );
+                              },
                       ),
                     ),
                   ],

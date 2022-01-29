@@ -78,8 +78,11 @@ class CheckoutViewModel extends ReactiveViewModel {
       return;
 
     try {
-      _promocode =
-          await runBusyFuture(_checkoutService.searchPromocode(searchText));
+      _promocode = await runBusyFuture(
+        _checkoutService.searchPromocode(searchText),
+        busyObject:
+            searchText, // This makes it busy only for this view in a whole VM
+      );
       log.v('CHECKOUT VM _promocode: $_promocode');
     } catch (err) {
       throw err;

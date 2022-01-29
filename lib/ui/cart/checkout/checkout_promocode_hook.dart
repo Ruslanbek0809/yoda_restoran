@@ -80,7 +80,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
           ],
         ),
         //------------------ PROMOCODE RESULT TEXT ---------------------//
-        model.isBusy
+        model.busy(_promocodeController.text)
             ? Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: SpinKitThreeBounce(
