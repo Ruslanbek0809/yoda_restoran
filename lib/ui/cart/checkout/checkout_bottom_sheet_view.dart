@@ -193,6 +193,8 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         ) ??
                                         model.deliveryDateTime;
 
+                                model.log.v('_tempDateTime: $_tempDateTime');
+
                                 /// Below we have condition whether selected _tempDateTime inside workingHours
                                 var resWorkingHoursSplitted =
                                     model.cartRes!.workingHours!.split('-');

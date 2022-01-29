@@ -313,6 +313,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
                   controller: _phoneController,
+                  readOnly: true,
                   style: kts18Text,
                   inputFormatters: [maskFormatter],
                   keyboardType: TextInputType.phone,
