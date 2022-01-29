@@ -379,7 +379,7 @@ class OrdersView extends StatelessWidget {
                                                 //         LocaleKeys.reOrder,
                                                 //         style: ktsButton18Text,
                                                 //       ).tr()
-                                                : model.isCancelingOrder &&
+                                                : model.busy(order.id) &&
                                                         order.status == 1
                                                     ? ButtonLoading()
                                                     : Text(

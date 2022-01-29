@@ -135,21 +135,16 @@ class OrderViewModel extends ReactiveViewModel {
       barrierDismissible: true,
     );
     if (respData!.data == true) {
-      _isCancelingOrder = true;
-      notifyListeners();
-      await _userService.cancelOrder(
-        orderId,
-        () {
-          _isCancelingOrder = false;
-          notifyListeners();
-          onSuccessForView!();
-          getOrders();
-        },
-        () {
-          _isCancelingOrder = false;
-          notifyListeners();
-          onFailForView!();
-        },
+      await runBusyFuture(
+        _userService.cancelOrder(
+          orderId,
+          () {
+            onSuccessForView!();
+            getOrders();
+          },
+          () => onFailForView!(),
+        ),
+        busyObject: orderId,
       );
     }
   }
