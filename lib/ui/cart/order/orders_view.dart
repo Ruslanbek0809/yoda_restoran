@@ -122,45 +122,69 @@ class OrdersView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         //------------------ RESTAURANT NAME ---------------------//
+                                        SizedBox(height: 2.h),
                                         Text(
                                           order.restaurant!.name!,
                                           overflow: TextOverflow.ellipsis,
                                           style: ktsDefault18SemiBoldText,
                                         ),
-
-                                        SizedBox(height: 5.h),
+                                        SizedBox(height: 2.h),
                                         //------------------ DATE and STATUS ---------------------//
                                         Row(
                                           children: [
-                                            Text(
-                                              DateFormat('HH:mm, dd.MM.yyyy')
-                                                  .format(order.deliveryTime!),
-                                              style: ktsDefault14Text,
-                                            ),
-                                            Text(
-                                              ' - $orderStatusText',
-                                              style: TextStyle(
-                                                fontSize: 14.sp,
-                                                color: AppTheme.STATUS_COLOR,
-                                              ),
+                                            Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/clock.svg',
+                                                  color: AppTheme.MAIN_DARK,
+                                                  width: 22.w,
+                                                ),
+                                                SizedBox(width: 7.w),
+                                                Text(
+                                                  DateFormat(
+                                                          'HH:mm, dd.MM.yyyy')
+                                                      .format(
+                                                          order.deliveryTime!),
+                                                  style: ktsDefault14Text,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                  //------------------ PROMOCODE ---------------------//
+                                  //------------------ ORDER PRICE and STATUS  ---------------------//
                                   trailing: Column(
                                     mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 4.h),
+                                      Text(
+                                        '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
+                                        style: ktsDefault18SemiBoldText,
+                                      ),
+                                      SizedBox(height: 2.h),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 7.w,
+                                          vertical: 1.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius5,
+                                          color: order.status == 4
+                                              ? kcSecondaryLightColor
+                                              : kcPrimaryColor,
+                                        ),
                                         child: Text(
-                                          '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
-                                          style: ktsDefault18SemiBoldText,
+                                          orderStatusText,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: order.status == 4
+                                                ? kcFontColor
+                                                : kcWhiteColor,
+                                          ),
                                         ),
                                       ),
-                                      Expanded(child: SizedBox()),
                                     ],
                                   ),
                                   expandedCrossAxisAlignment:
