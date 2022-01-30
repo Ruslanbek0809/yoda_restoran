@@ -66,7 +66,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            LocaleKeys.clear,
+                            LocaleKeys.kitchen,
                             style: ktsDefault24DarkText,
                           ).tr(),
                           GridView.builder(
