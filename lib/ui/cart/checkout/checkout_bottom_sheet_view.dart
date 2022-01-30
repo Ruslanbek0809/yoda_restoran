@@ -405,7 +405,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   border: Border.all(
                       color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                 ),
-                padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 25.h),
+                padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 15.h + 0.02.sw),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

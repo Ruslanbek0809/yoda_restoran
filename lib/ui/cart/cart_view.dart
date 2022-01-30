@@ -173,7 +173,8 @@ class CartView extends StatelessWidget {
                       ),
                       boxShadow: [AppTheme().bottomCartShadow],
                     ),
-                    padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
+                    padding:
+                        EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 15.h + 0.02.sw),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -186,7 +187,7 @@ class CartView extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextChildButton(
-                            padding: EdgeInsets.symmetric(vertical: 17.w),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
                             child: Text(
                               LocaleKeys.continuee,
                               // model.hasLoggedInUser

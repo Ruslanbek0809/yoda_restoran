@@ -118,7 +118,7 @@ class RestaurantView extends StatelessWidget {
               ),
               //------------------ NAME ---------------------//
               Padding(
-                padding: EdgeInsets.only(top: 6.h),
+                padding: EdgeInsets.only(top: 2.h),
                 child: Text(
                   restaurant.name!,
                   overflow: TextOverflow.ellipsis,

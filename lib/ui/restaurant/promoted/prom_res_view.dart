@@ -99,7 +99,7 @@ class PromResView extends StatelessWidget {
                   right: 8.w,
                   child: Container(
                     width: 0.09.sw,
-                    height: 0.09.sw,
+                    height: 0.09.sw, 
                     decoration: BoxDecoration(
                       color: AppTheme.WHITE.withOpacity(0.8),
                       shape: BoxShape.circle,
@@ -123,7 +123,7 @@ class PromResView extends StatelessWidget {
             ),
             //------------------ NAME ---------------------//
             Padding(
-              padding: EdgeInsets.only(top: 5.h),
+              padding: EdgeInsets.only(top: 2.h),
               child: Text(
                 restaurant.name!,
                 overflow: TextOverflow.ellipsis,
