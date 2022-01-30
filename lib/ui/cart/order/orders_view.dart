@@ -133,7 +133,7 @@ class OrdersView extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              DateFormat('dd.MM.yyyy')
+                                              DateFormat('HH:mm, dd.MM.yyyy')
                                                   .format(order.deliveryTime!),
                                               style: ktsDefault14Text,
                                             ),
