@@ -22,88 +22,66 @@ class AddressesView extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-              backgroundColor: kcWhiteColor,
-              elevation: 0.5,
-              leadingWidth: 35.w,
-              leading: Padding(
-                padding: EdgeInsets.only(left: 10.w),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: AppTheme.FONT_COLOR,
-                    size: 25.w,
-                  ),
-                  onPressed: model.navToHomeByRemovingAll,
+            backgroundColor: kcWhiteColor,
+            elevation: 0.5,
+            leadingWidth: 35.w,
+            leading: Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppTheme.FONT_COLOR,
+                  size: 25.w,
                 ),
+                onPressed: model.navToHomeByRemovingAll,
               ),
-              centerTitle: true,
-              title: Text(
-                LocaleKeys.addresses,
-                style: ktsDefault22DarkText,
-              ).tr()),
+            ),
+            centerTitle: true,
+            title: Text(
+              LocaleKeys.addresses,
+              style: ktsDefault22DarkText,
+            ).tr(),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: kcSecondaryDarkColor,
+                  size: 25.w,
+                ),
+                onPressed: model.navToAddEditAddressView,
+              ),
+            ],
+          ),
           body: model.isBusy
               ? LoadingWidget()
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (model.addresses!.isNotEmpty)
-                          Column(
-                            children: model.addresses!
-                                .map(
-                                  (address) => Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 5.w),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          address.street! +
-                                              (address.house != null
-                                                  ? ', ${address.house}'
-                                                  : ''),
-                                          style: kts18Text,
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        Divider(color: kcDividerColor)
-                                      ],
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        Material(
-                          color: AppTheme.WHITE,
-                          child: InkWell(
-                            onTap: model.navToAddEditAddressView,
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(0.w, 5.h, 0.5.sw, 5.h),
-                              child: Text(
-                                LocaleKeys.addNewAddress,
-                                style: kts18Text,
-                              ).tr(),
+              : model.addresses!.isEmpty
+                  ? EmptyWidget(
+                      text: LocaleKeys.noAddressesYet,
+                      svg: 'assets/empty_addresses.svg',
+                    )
+                  : Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 10.h),
+                      child: ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: model.addresses!.length,
+                        itemBuilder: (context, pos) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: Text(
+                              model.addresses![pos].street! +
+                                  (model.addresses![pos].house != null
+                                      ? ', ${model.addresses![pos].house}'
+                                      : ''),
+                              style: kts18Text,
                             ),
-                          ),
-                        ),
-                        SizedBox(height: 5.h),
-                        Divider(color: kcDividerColor),
-                        if (model.addresses!.isEmpty)
-                          Padding(
-                            padding: EdgeInsets.only(top: 0.2.sh),
-                            child: EmptyWidget(
-                              text: LocaleKeys.noAddressesYet,
-                              svg: 'assets/empty_addresses.svg',
-                            ),
-                          )
-                      ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider(color: kcDividerColor);
+                        },
+                      ),
                     ),
-                  ),
-                ),
         ),
       ),
       viewModelBuilder: () => AddressesViewModel(),
