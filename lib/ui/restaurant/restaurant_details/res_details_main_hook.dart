@@ -23,7 +23,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.32.sw; // 0.32.sw is for item height
+    double itemHeight = itemWidth + 0.15.sh; // 0.32.sw is for item height
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
@@ -46,7 +46,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
       void _customScrollListener() =>
           model.updateLastScrollStatus(customScrollController.hasClients &&
               customScrollController.offset >
-                  (0.55.sh - kToolbarHeight - 53.h)); // - 53.h for Tab height
+                  (0.55.sh - kToolbarHeight - 56.h)); // - 53.h for Tab height
 
       customScrollController.addListener(_customScrollListener);
       return () => customScrollController.removeListener(_customScrollListener);
@@ -351,6 +351,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
           //------------------ TABBAR ---------------------//
           bottom: ColoredTabBar(
+            // color: Colors.blue,
             color: kcWhiteColor,
             tabBar: TabBar(
               controller: tabController,
@@ -397,7 +398,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 );
 
                 customScrollController.animateTo(
-                  offset + ((index - 1) * 30.h) + 0.55.sh - 53.h,
+                  offset + ((index - 1) * 30.h) + 0.55.sh - 56.h,
                   // * 30.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate 0.55.sh expanded height // + 53.h is for tab height
                   duration: Duration(milliseconds: 300),
                   curve: Curves.linear,

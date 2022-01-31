@@ -285,34 +285,6 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                       model.updateDateTimeForDelivery(
                                           _tempDateTime);
                                     }
-                                    // if ((_tempDateTime.minute != 0 &&
-                                    //         startMinute == 0 &&
-                                    //         endMinute == 0) ||
-                                    //     (_tempDateTime.minute < startMinute ||
-                                    //         _tempDateTime.minute > endMinute)) {
-                                    //   model.log.v(
-                                    //       'MINUTE Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
-                                    //   await showDateRangeErrorFlashBar(
-                                    //     context: context,
-                                    //     msg: Text(
-                                    //             LocaleKeys
-                                    //                 .requiredWorkingHoursForRes,
-                                    //             style: kts16ButtonText)
-                                    //         .tr(args: [
-                                    //       model.cartRes!.workingHours!
-                                    //     ]),
-                                    //     margin: EdgeInsets.only(
-                                    //       left: 16.w,
-                                    //       right: 16.w,
-                                    //       bottom: 0.13.sh,
-                                    //     ),
-                                    //   );
-                                    // } else {
-                                    //   model.log.v(
-                                    //       'PASSED MINUTE and HOUR Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
-                                    //   model.updateDateTimeForDelivery(
-                                    //       _tempDateTime);
-                                    // }
                                   }
                                 }
                               },

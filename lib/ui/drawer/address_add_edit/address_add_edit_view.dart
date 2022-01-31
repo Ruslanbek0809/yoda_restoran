@@ -66,14 +66,14 @@ class AddressAddEditView extends StatelessWidget {
                           padding: EdgeInsets.fromLTRB(30.w, 10.h, 30.w, 50.h),
                           child: Column(
                             children: [
-                              TextButton(
-                                child: Text(
-                                  LocaleKeys.removeAddressButton,
-                                  style: kts18Text,
-                                ).tr(),
-                                onPressed: () => Navigator.of(context).pop(),
-                              ),
-                              SizedBox(height: 15.h),
+                              // TextButton(
+                              //   child: Text(
+                              //     LocaleKeys.removeAddressButton,
+                              //     style: kts18Text,
+                              //   ).tr(),
+                              //   onPressed: () => Navigator.of(context).pop(),
+                              // ),
+                              // SizedBox(height: 15.h),
                               SizedBox(
                                 width: 1.sw,
                                 child: TextButton(
