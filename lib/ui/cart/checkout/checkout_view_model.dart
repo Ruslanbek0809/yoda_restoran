@@ -34,7 +34,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   Promocode? get promocode => _promocode;
 
   /// DateTime vars
-  final now = DateTime.now().add(Duration(hours: 1));
+  final now = DateTime.now();
   DateTime? tomorrow;
   DateTime? maxDateTime;
   DateTime? deliveryDateTime;
@@ -42,7 +42,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   /// ASSIGNS default value for dateTime
   void getOnModelReady() {
-    deliveryDateTime = now;
+    // deliveryDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
 

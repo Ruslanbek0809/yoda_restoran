@@ -170,71 +170,111 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               onTap: () async {
                                 DateTime? _tempDateTime =
                                     await DatePicker.showDateTimePicker(
-                                          context,
-                                          showTitleActions: true,
-                                          minTime: model.now,
-                                          maxTime: model.maxDateTime,
-                                          onChanged: (date) {
-                                            model.log.v('Senä change $date');
-                                          },
-                                          onConfirm: (date) {
-                                            model.log.v('Senä confirm $date');
-                                          },
-                                          currentTime: model.deliveryDateTime,
-                                          locale: context.locale ==
-                                                  context.supportedLocales[0]
-                                              ? LocaleType.tk
-                                              : LocaleType.ru,
-                                          theme: DatePickerTheme(
-                                            doneStyle: ktsDefault20BoldText,
-                                            backgroundColor:
-                                                AppTheme.MAIN_LIGHT,
-                                          ),
-                                        ) ??
-                                        model.deliveryDateTime;
+                                  context,
+                                  showTitleActions: true,
+                                  minTime: model.now.add(Duration(hours: 1)),
+                                  maxTime: model.maxDateTime,
+                                  currentTime: model.deliveryDateTime
+                                          ?.add(Duration(minutes: 1)) ??
+                                      model.now.add(Duration(
+                                          hours:
+                                              1)), // Here model.deliveryDateTime?.add(Duration(minutes: 1) ADDING a min is a Workaround
+                                  // currentTime: model.deliveryDateTime,
+                                  onChanged: (date) {
+                                    // model.log.v('Senä change $date');
+                                  },
+                                  onConfirm: (date) {
+                                    // model.log.v('Senä confirm $date');
+                                  },
+                                  locale: context.locale ==
+                                          context.supportedLocales[0]
+                                      ? LocaleType.tk
+                                      : LocaleType.ru,
+                                  theme: DatePickerTheme(
+                                    doneStyle: ktsDefault20BoldText,
+                                    backgroundColor: kcWhiteColor,
+                                  ),
+                                );
+                                // ??
+                                // model.deliveryDateTime;
 
                                 model.log.v('_tempDateTime: $_tempDateTime');
+                                model.log.v('model.now: ${model.now}');
 
-                                /// Below we have condition whether selected _tempDateTime inside workingHours
-                                var resWorkingHoursSplitted =
-                                    model.cartRes!.workingHours!.split('-');
-                                var resStartWorkingHoursSplitted =
-                                    resWorkingHoursSplitted[0].split(':');
-                                var resEndWorkingHoursSplitted =
-                                    resWorkingHoursSplitted[1].split(':');
-                                var startHour =
-                                    int.parse(resStartWorkingHoursSplitted[0]);
-                                var startMinute =
-                                    int.parse(resStartWorkingHoursSplitted[1]);
-                                var endHour =
-                                    int.parse(resEndWorkingHoursSplitted[0]);
-                                var endMinute =
-                                    int.parse(resEndWorkingHoursSplitted[1]);
+                                /// If _tempDateTime is SELECTED go inside this condition
+                                if (_tempDateTime != null) {
+                                  /// Below we have condition whether selected _tempDateTime inside workingHours
+                                  var resWorkingHoursSplitted =
+                                      model.cartRes!.workingHours!.split('-');
+                                  var resStartWorkingHoursSplitted =
+                                      resWorkingHoursSplitted[0].split(':');
+                                  var resEndWorkingHoursSplitted =
+                                      resWorkingHoursSplitted[1].split(':');
+                                  var startHour = int.parse(
+                                      resStartWorkingHoursSplitted[0]);
+                                  var startMinute = int.parse(
+                                      resStartWorkingHoursSplitted[1]);
+                                  var endHour =
+                                      int.parse(resEndWorkingHoursSplitted[0]);
+                                  var endMinute =
+                                      int.parse(resEndWorkingHoursSplitted[1]);
 
-                                if (_tempDateTime != model.deliveryDateTime &&
-                                    ((_tempDateTime!.hour < startHour &&
-                                            _tempDateTime.minute <
-                                                startMinute) ||
-                                        (_tempDateTime.hour > endHour &&
-                                            _tempDateTime.minute > endMinute)))
-                                  await showDateRangeErrorFlashBar(
-                                    context: context,
-                                    msg: Text(
-                                            LocaleKeys
-                                                .requiredWorkingHoursForRes,
-                                            style: kts16ButtonText)
-                                        .tr(args: [
-                                      model.cartRes!.workingHours!
-                                    ]),
-                                    margin: EdgeInsets.only(
-                                      left: 16.w,
-                                      right: 16.w,
-                                      bottom: 0.13.sh,
-                                    ),
-                                  );
-                                else
-                                  model
-                                      .updateDateTimeForDelivery(_tempDateTime);
+                                  model.log.v(
+                                      '_tempDateTime and model.deliveryDateTime: $_tempDateTime and ${model.deliveryDateTime}');
+
+                                  if (_tempDateTime.hour < startHour ||
+                                      _tempDateTime.hour > endHour) {
+                                    model.log.v(
+                                        'HOUR Inconvenience _tempDateTime.hour:${_tempDateTime.hour}, startHour:$startHour, endHour:$endHour');
+
+                                    await showDateRangeErrorFlashBar(
+                                      context: context,
+                                      msg: Text(
+                                              LocaleKeys
+                                                  .requiredWorkingHoursForRes,
+                                              style: kts16ButtonText)
+                                          .tr(args: [
+                                        model.cartRes!.workingHours!
+                                      ]),
+                                      margin: EdgeInsets.only(
+                                        left: 16.w,
+                                        right: 16.w,
+                                        bottom: 0.13.sh,
+                                      ),
+                                    );
+                                  } else {
+                                    model.log.v(
+                                        'PASSED HOUR Inconvenience _tempDateTime.hour:${_tempDateTime.hour}, startHour:$startHour, endHour:$endHour');
+                                    if ((_tempDateTime.minute != 0 &&
+                                            startMinute == 0 &&
+                                            endMinute == 0) ||
+                                        (_tempDateTime.minute < startMinute ||
+                                            _tempDateTime.minute > endMinute)) {
+                                      model.log.v(
+                                          'MINUTE Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                      await showDateRangeErrorFlashBar(
+                                        context: context,
+                                        msg: Text(
+                                                LocaleKeys
+                                                    .requiredWorkingHoursForRes,
+                                                style: kts16ButtonText)
+                                            .tr(args: [
+                                          model.cartRes!.workingHours!
+                                        ]),
+                                        margin: EdgeInsets.only(
+                                          left: 16.w,
+                                          right: 16.w,
+                                          bottom: 0.13.sh,
+                                        ),
+                                      );
+                                    } else {
+                                      model.log.v(
+                                          'PASSED MINUTE and HOUR Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                      model.updateDateTimeForDelivery(
+                                          _tempDateTime);
+                                    }
+                                  }
+                                }
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -261,7 +301,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                     LocaleKeys.preparationTime,
                                                     style: ktsDefault16BoldText,
                                                   ).tr(),
-                                            model.deliveryDateTime == model.now
+                                            model.deliveryDateTime == null
                                                 ? Text(
                                                     LocaleKeys.now,
                                                     style: ktsDefault16Text,
@@ -304,7 +344,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                               ).tr(),
                                                             ],
                                                           )
-                                                        : SizedBox(),
+                                                        : Text(
+                                                            ' ${model.deliveryDateFormatted}',
+                                                            style:
+                                                                ktsDefault16Text,
+                                                          ).tr(),
                                           ],
                                         ),
                                       ],
