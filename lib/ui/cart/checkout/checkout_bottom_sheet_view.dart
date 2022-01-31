@@ -222,6 +222,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   model.log.v(
                                       '_tempDateTime and model.deliveryDateTime: $_tempDateTime and ${model.deliveryDateTime}');
 
+                                  /// =========== CHECKS HOURS PART =========== ///
                                   if (_tempDateTime.hour < startHour ||
                                       _tempDateTime.hour > endHour) {
                                     model.log.v(
@@ -242,16 +243,27 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         bottom: 0.13.sh,
                                       ),
                                     );
-                                  } else {
+                                  }
+
+                                  /// ========== CHECKS MINUTES PART =========== ///
+                                  else {
                                     model.log.v(
                                         'PASSED HOUR Inconvenience _tempDateTime.hour:${_tempDateTime.hour}, startHour:$startHour, endHour:$endHour');
-                                    if ((_tempDateTime.minute != 0 &&
-                                            startMinute == 0 &&
-                                            endMinute == 0) ||
-                                        (_tempDateTime.minute < startMinute ||
-                                            _tempDateTime.minute > endMinute)) {
+
+                                    var tempHourMin =
+                                        (_tempDateTime.hour * 60) +
+                                            _tempDateTime.minute;
+                                    var startTempHourMin =
+                                        (startHour * 60) + startMinute;
+                                    var endTempHourMin =
+                                        (endHour * 60) + endMinute;
+                                    model.log.v(
+                                        'tempHourMin: $tempHourMin,startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
+
+                                    if (tempHourMin < startTempHourMin ||
+                                        tempHourMin > endTempHourMin) {
                                       model.log.v(
-                                          'MINUTE Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                          'MINUTE EQUAL Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
                                       await showDateRangeErrorFlashBar(
                                         context: context,
                                         msg: Text(
@@ -269,10 +281,38 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                       );
                                     } else {
                                       model.log.v(
-                                          'PASSED MINUTE and HOUR Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                          'PASSED MINUTE EQUAL _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
                                       model.updateDateTimeForDelivery(
                                           _tempDateTime);
                                     }
+                                    // if ((_tempDateTime.minute != 0 &&
+                                    //         startMinute == 0 &&
+                                    //         endMinute == 0) ||
+                                    //     (_tempDateTime.minute < startMinute ||
+                                    //         _tempDateTime.minute > endMinute)) {
+                                    //   model.log.v(
+                                    //       'MINUTE Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                    //   await showDateRangeErrorFlashBar(
+                                    //     context: context,
+                                    //     msg: Text(
+                                    //             LocaleKeys
+                                    //                 .requiredWorkingHoursForRes,
+                                    //             style: kts16ButtonText)
+                                    //         .tr(args: [
+                                    //       model.cartRes!.workingHours!
+                                    //     ]),
+                                    //     margin: EdgeInsets.only(
+                                    //       left: 16.w,
+                                    //       right: 16.w,
+                                    //       bottom: 0.13.sh,
+                                    //     ),
+                                    //   );
+                                    // } else {
+                                    //   model.log.v(
+                                    //       'PASSED MINUTE and HOUR Inconvenience _tempDateTime.minute:${_tempDateTime.minute}, startMinute:$startMinute, endMinute:$endMinute');
+                                    //   model.updateDateTimeForDelivery(
+                                    //       _tempDateTime);
+                                    // }
                                   }
                                 }
                               },

@@ -306,7 +306,7 @@ class _HomeViewState extends State<HomeView> {
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             padding: EdgeInsets.only(
-                                                top: 20
+                                                top: 16
                                                     .h), // Changes based on exclusive part
                                             itemCount:
                                                 model.resWithProms?.length ?? 0,
