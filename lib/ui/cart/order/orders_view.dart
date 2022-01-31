@@ -128,7 +128,7 @@ class OrdersView extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                           style: ktsDefault18SemiBoldText,
                                         ),
-                                        SizedBox(height: 2.h),
+                                        SizedBox(height: 3.h),
                                         //------------------ DATE and STATUS ---------------------//
                                         Row(
                                           children: [
@@ -136,16 +136,21 @@ class OrdersView extends StatelessWidget {
                                               children: [
                                                 SvgPicture.asset(
                                                   'assets/clock_light.svg',
-                                                  width: 22.w,
+                                                  width: 18.w,
                                                 ),
-                                                SizedBox(width: 7.w),
-                                                Text(
-                                                  DateFormat(
-                                                          'HH:mm, dd.MM.yyyy')
-                                                      .format(
-                                                          order.deliveryTime!),
-                                                  style: ktsDefault14Text,
-                                                ),
+                                                SizedBox(width: 5.w),
+                                                order.deliveryTime == null
+                                                    ? Text(
+                                                        LocaleKeys.now,
+                                                        style: ktsDefault14Text,
+                                                      ).tr()
+                                                    : Text(
+                                                        DateFormat(
+                                                                'HH:mm, dd.MM.yyyy')
+                                                            .format(order
+                                                                .deliveryTime!),
+                                                        style: ktsDefault14Text,
+                                                      ),
                                               ],
                                             ),
                                           ],
@@ -170,17 +175,13 @@ class OrdersView extends StatelessWidget {
                                         ),
                                         decoration: BoxDecoration(
                                           borderRadius: AppTheme().radius5,
-                                          color: order.status == 4
-                                              ? kcSecondaryLightColor
-                                              : kcPrimaryColor,
+                                          color: kcSecondaryLightColor,
                                         ),
                                         child: Text(
                                           orderStatusText,
                                           style: TextStyle(
                                             fontSize: 14.sp,
-                                            color: order.status == 4
-                                                ? kcFontColor
-                                                : kcWhiteColor,
+                                            color: kcFontColor,
                                           ),
                                         ),
                                       ),
@@ -216,10 +217,21 @@ class OrdersView extends StatelessWidget {
                                                         overflow: TextOverflow
                                                             .visible,
                                                       ).tr()
-                                                    : Text(
-                                                        order.driver!.mobile!,
-                                                        style: ktsDefault16Text,
-                                                      ),
+                                                    : order.driver == null ||
+                                                            (order.driver!
+                                                                        .mobile ==
+                                                                    null ||
+                                                                order
+                                                                    .driver!
+                                                                    .mobile!
+                                                                    .isEmpty)
+                                                        ? SizedBox()
+                                                        : Text(
+                                                            order.driver!
+                                                                .mobile!,
+                                                            style:
+                                                                ktsDefault16Text,
+                                                          ),
                                           ],
                                         ),
                                       ),
@@ -248,10 +260,14 @@ class OrdersView extends StatelessWidget {
                                                             TextOverflow.fade,
                                                         style: ktsDefault16Text,
                                                       ).tr()
-                                                    : Text(
-                                                        '${formatNum(order.dostawkaPrice!)} TMT',
-                                                        style: ktsDefault16Text,
-                                                      ),
+                                                    : order.dostawkaPrice ==
+                                                            null
+                                                        ? SizedBox()
+                                                        : Text(
+                                                            '${formatNum(order.dostawkaPrice!)} TMT',
+                                                            style:
+                                                                ktsDefault16Text,
+                                                          ),
                                           ],
                                         ),
                                       ),
@@ -271,7 +287,7 @@ class OrdersView extends StatelessWidget {
                                               children: [
                                                 SvgPicture.asset(
                                                   'assets/percent.svg',
-                                                  color: kcGreenColor,
+                                                  color: kcSecondaryDarkColor,
                                                   width: 22.w,
                                                 ),
                                                 SizedBox(width: 7.w),
