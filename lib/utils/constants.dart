@@ -3,6 +3,7 @@ class Constants {
 
   static const baseUrlTk = 'https://yodarestoran.com/';
   static const baseUrlRu = 'https://yodarestoran.com/ru/';
+  // static const baseUrlPort = 'http://yodarestoran.com:8000/';
 
   /// Firebase topic name
   static const topicAllDevices = 'yoda_res';
