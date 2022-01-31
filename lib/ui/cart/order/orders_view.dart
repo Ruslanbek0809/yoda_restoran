@@ -135,8 +135,7 @@ class OrdersView extends StatelessWidget {
                                             Row(
                                               children: [
                                                 SvgPicture.asset(
-                                                  'assets/clock.svg',
-                                                  color: AppTheme.MAIN_DARK,
+                                                  'assets/clock_light.svg',
                                                   width: 22.w,
                                                 ),
                                                 SizedBox(width: 7.w),
@@ -272,7 +271,7 @@ class OrdersView extends StatelessWidget {
                                               children: [
                                                 SvgPicture.asset(
                                                   'assets/percent.svg',
-                                                  color: AppTheme.MAIN_DARK,
+                                                  color: kcGreenColor,
                                                   width: 22.w,
                                                 ),
                                                 SizedBox(width: 7.w),

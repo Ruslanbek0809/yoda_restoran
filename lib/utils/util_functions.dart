@@ -157,7 +157,7 @@ Future<void> showErrorFlashBar({
   );
 }
 
-Future<void> showDateRaangeErrorFlashBar({
+Future<void> showDateRangeErrorFlashBar({
   required BuildContext context,
   Text? msg,
   required EdgeInsets margin,

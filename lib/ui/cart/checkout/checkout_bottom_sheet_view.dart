@@ -211,13 +211,16 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 var endMinute =
                                     int.parse(resEndWorkingHoursSplitted[1]);
 
+                                model.log.v(
+                                    'startHour: $startHour, startMinute: $startMinute and endHour: $endHour, endMinute:$endMinute ');
+
                                 if (_tempDateTime != model.deliveryDateTime &&
                                     ((_tempDateTime!.hour < startHour ||
                                             _tempDateTime.minute <
                                                 startMinute) ||
                                         (_tempDateTime.hour > endHour ||
                                             _tempDateTime.minute > endMinute)))
-                                  await showDateRaangeErrorFlashBar(
+                                  await showDateRangeErrorFlashBar(
                                     context: context,
                                     msg: Text(
                                             LocaleKeys
