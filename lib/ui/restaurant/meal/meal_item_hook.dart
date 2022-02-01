@@ -73,7 +73,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                           right: 0,
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 5.0),
+                                horizontal: 12.0, vertical: 3.h),
                             decoration: BoxDecoration(
                               color: AppTheme.GREEN_COLOR,
                               borderRadius: BorderRadius.only(

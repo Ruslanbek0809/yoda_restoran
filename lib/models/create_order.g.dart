@@ -12,7 +12,7 @@ CreateOrder _$CreateOrderFromJson(Map<String, dynamic> json) => CreateOrder(
       selfPickUp: json['selfPickUp'] as bool?,
       deliveryTime: json['deliveryTime'] == null
           ? null
-          : DateTime.parse(json['deliveryTime'] as String),
+          : DateTime.parse(json['deliveryTime'] as String).toLocal(),
       promocode: json['promocode'] as int?,
       paymentType: json['paymentType'] as int?,
       notes: json['notes'] as String?,

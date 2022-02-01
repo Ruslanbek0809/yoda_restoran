@@ -351,8 +351,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
           //------------------ TABBAR ---------------------//
           bottom: ColoredTabBar(
-            color: Colors.blue,
-            // color: kcWhiteColor,
+            // color: Colors.blue,
+            color: kcWhiteColor,
             tabBar: TabBar(
               controller: tabController,
               isScrollable: true,
@@ -393,12 +393,12 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     int rows = (resCategory.meals!.length / 2).ceil();
                     return prev += rows *
                         (itemHeight +
-                            20.h); // GridView mainAxisSpacing * 2 SECOND MAIN COMPENSATION HERE
+                            17.9.h); // GridView mainAxisSpacing * 2 SECOND MAIN COMPENSATION HERE
                   },
                 );
 
                 customScrollController.animateTo(
-                  offset + ((index - 1) * 30.h) + 0.55.sh - 56.h,
+                  offset + ((index - 1) * 30.h) + 0.55.sh - 57.h,
                   // * 30.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate 0.55.sh expanded height // + 53.h is for tab height
                   duration: Duration(milliseconds: 300),
                   curve: Curves.linear,

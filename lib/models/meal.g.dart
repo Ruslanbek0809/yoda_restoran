@@ -18,10 +18,10 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       available: json['available'] as bool?,
       dateBegin: json['date_begin'] == null
           ? null
-          : DateTime.parse(json['date_begin'] as String),
+          : DateTime.parse(json['date_begin'] as String).toLocal(),
       dateEnd: json['date_end'] == null
           ? null
-          : DateTime.parse(json['date_end'] as String),
+          : DateTime.parse(json['date_end'] as String).toLocal(),
       value: json['value'] as num?,
       restaurantId: json['restaurant'] as int?,
       categoryId: json['category'] as int?,

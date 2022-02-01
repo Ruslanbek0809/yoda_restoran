@@ -15,7 +15,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       dostawkaPrice: json['dostawkaPrice'] as num?,
       deliveryTime: json['deliveryTime'] == null
           ? null
-          : DateTime.parse(json['deliveryTime'] as String),
+          : DateTime.parse(json['deliveryTime'] as String).toLocal(),
       status: json['status'] as int?,
       restaurant: json['restaurant'] == null
           ? null
