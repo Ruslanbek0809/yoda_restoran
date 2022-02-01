@@ -57,9 +57,9 @@ class _HomeViewState extends State<HomeView> {
           print(
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
-            await InAppUpdate.startFlexibleUpdate();
-            await InAppUpdate.completeFlexibleUpdate();
             print('I AM IN startFlexibleUpdate(): ');
+            await InAppUpdate.startFlexibleUpdate(); 
+            await InAppUpdate.completeFlexibleUpdate();
           }
         }
       }),

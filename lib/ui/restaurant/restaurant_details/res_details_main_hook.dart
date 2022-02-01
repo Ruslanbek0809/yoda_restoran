@@ -351,8 +351,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
           //------------------ TABBAR ---------------------//
           bottom: ColoredTabBar(
-            // color: Colors.blue,
-            color: kcWhiteColor,
+            color: Colors.blue,
+            // color: kcWhiteColor,
             tabBar: TabBar(
               controller: tabController,
               isScrollable: true,

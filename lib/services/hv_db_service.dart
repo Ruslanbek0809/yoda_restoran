@@ -117,7 +117,7 @@ class HiveDbService with ReactiveServiceMixin {
     for (var _cartMeal in _cartMeals.value)
       if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
 
-    log.v(' _quantity: $_quantity');
+    // log.v(' _quantity: $_quantity');
     return _quantity;
   }
 

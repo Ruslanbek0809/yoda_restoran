@@ -168,7 +168,22 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     style: kts14HelperText,
                                   ),
                                 )
-                          : SizedBox(),
+                          : meal.discount != null && meal.discount! > 0
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Text(
+                                    '${formatNum(meal.price!)} TMT',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: kcHelperColor,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
                   Spacer(),
                   //------------------ BUTTONS ---------------------//
                   AnimatedSwitcher(
