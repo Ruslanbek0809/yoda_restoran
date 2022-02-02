@@ -195,7 +195,52 @@ class CartView extends StatelessWidget {
                               //     : LocaleKeys.register,
                               style: ktsButton18Text,
                             ).tr(),
-                            onPressed: model.onCartCheckoutButtonPressed,
+                            onPressed: () async {
+                              /// Below res workingHours are splitted
+                              var resWorkingHoursSplitted =
+                                  model.cartRes!.workingHours!.split('-');
+                              var resStartWorkingHoursSplitted =
+                                  resWorkingHoursSplitted[0].split(':');
+                              var resEndWorkingHoursSplitted =
+                                  resWorkingHoursSplitted[1].split(':');
+                              var startHour =
+                                  int.parse(resStartWorkingHoursSplitted[0]);
+                              var startMinute =
+                                  int.parse(resStartWorkingHoursSplitted[1]);
+                              var endHour =
+                                  int.parse(resEndWorkingHoursSplitted[0]);
+                              var endMinute =
+                                  int.parse(resEndWorkingHoursSplitted[1]);
+
+                              var nowHourMin = (DateTime.now().hour * 60) +
+                                  DateTime.now().minute;
+                              var startTempHourMin =
+                                  (startHour * 60) + startMinute;
+                              var endTempHourMin = (endHour * 60) + endMinute;
+
+                              if (nowHourMin < startTempHourMin ||
+                                  nowHourMin > endTempHourMin) {
+                                model.log.v(
+                                    'TIME Inconvenience nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
+                                await showDateRangeErrorFlashBar(
+                                  context: context,
+                                  msg: Text(
+                                          LocaleKeys.requiredWorkingHoursForRes,
+                                          style: kts16ButtonText)
+                                      .tr(args: [model.cartRes!.workingHours!]),
+                                  margin: EdgeInsets.only(
+                                    left: 16.w,
+                                    right: 16.w,
+                                    bottom: 0.13.sh,
+                                  ),
+                                );
+                              } else {
+                                model.log.v(
+                                    'PASSED TIME nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
+
+                                await model.onCartCheckoutButtonPressed();
+                              }
+                            },
                           ),
                         ),
                       ],
