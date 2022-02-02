@@ -148,7 +148,8 @@ class OrdersView extends StatelessWidget {
                                                         DateFormat(
                                                                 'HH:mm, dd.MM.yyyy')
                                                             .format(order
-                                                                .deliveryTime!.toLocal()),
+                                                                .deliveryTime!
+                                                                .toLocal()),
                                                         style: ktsDefault14Text,
                                                       ),
                                               ],

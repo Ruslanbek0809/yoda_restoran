@@ -173,6 +173,7 @@ class MealBottomSheet extends StatelessWidget {
                                               onChanged: (selectedVolume) {
                                                 if (selectedVolume != null)
                                                   model.updateSelectedVols(
+                                                      meal,
                                                       mainVolumePos,
                                                       selectedVolume);
                                               },
@@ -186,7 +187,7 @@ class MealBottomSheet extends StatelessWidget {
                                                   ),
                                                   SizedBox(width: 7.w),
                                                   Text(
-                                                      '+${formatNum(mainVolume.volumes![volumePos].price!)} TMT',
+                                                      '+${formatNum(meal.discount != null || meal.discount! > 0 ? (mainVolume.volumes![volumePos].price! / 100) * (100 - meal.discount!) : mainVolume.volumes![volumePos].price!)} TMT',
                                                       style: kts16HelperText),
                                                 ],
                                               ),
@@ -245,7 +246,7 @@ class MealBottomSheet extends StatelessWidget {
                                               ),
                                               SizedBox(width: 7.w),
                                               Text(
-                                                '+${formatNum(mainCustomizable.customizables![pos].price!)} TMT',
+                                                '+${formatNum(meal.discount != null || meal.discount! > 0 ? (mainCustomizable.customizables![pos].price! / 100) * (100 - meal.discount!) : mainCustomizable.customizables![pos].price!)} TMT',
                                                 style: kts16HelperText,
                                               ),
                                             ],
@@ -258,6 +259,7 @@ class MealBottomSheet extends StatelessWidget {
                                           activeColor: kcGreenColor,
                                           onChanged: (bool? value) {
                                             model.updateSelectedCustoms(
+                                              meal,
                                               mainCustomizable
                                                   .customizables![pos],
                                             );

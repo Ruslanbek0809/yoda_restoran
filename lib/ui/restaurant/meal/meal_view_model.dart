@@ -216,10 +216,15 @@ class MealViewModel extends ReactiveViewModel {
         : meal.price!;
 
     _selectedVols.forEach((vol) {
-      if (vol.id != -1) totalSumDraft += vol.price!;
+      if (vol.id != -1)
+        totalSumDraft += meal.discount != null || meal.discount! > 0
+            ? (vol.price! / 100) * (100 - meal.discount!)
+            : vol.price!;
     });
     _selectedCustoms.forEach((cus) {
-      totalSumDraft += cus.price!;
+      totalSumDraft += meal.discount != null || meal.discount! > 0
+          ? (cus.price! / 100) * (100 - meal.discount!)
+          : cus.price!;
     });
     log.i('addQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
@@ -236,10 +241,15 @@ class MealViewModel extends ReactiveViewModel {
         : meal.price!;
 
     _selectedVols.forEach((vol) {
-      if (vol.id != -1) totalSumDraft -= vol.price!;
+      if (vol.id != -1)
+        totalSumDraft -= meal.discount != null || meal.discount! > 0
+            ? (vol.price! / 100) * (100 - meal.discount!)
+            : vol.price!;
     });
     _selectedCustoms.forEach((cus) {
-      totalSumDraft -= cus.price!;
+      totalSumDraft -= meal.discount != null || meal.discount! > 0
+          ? (cus.price! / 100) * (100 - meal.discount!)
+          : cus.price!;
     });
     log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
@@ -256,18 +266,22 @@ class MealViewModel extends ReactiveViewModel {
   bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);
 
   /// UPDATES _selectedVolumes's mainVolumePos value to volume
-  void updateSelectedVols(int mainVolPos, Volume? volume) {
+  void updateSelectedVols(Meal meal, int mainVolPos, Volume? volume) {
     if (_selectedVols[mainVolPos].id != -1)
 
       /// Step 1. SUBTRACTS selected vol's price from totalDraftSum
-      totalSumDraft -= _selectedVols[mainVolPos].price! *
-          quantityDraft; // If already selected vol from group then remove it first
+      totalSumDraft -= meal.discount != null || meal.discount! > 0
+          ? (_selectedVols[mainVolPos].price! / 100) * (100 - meal.discount!)
+          : _selectedVols[mainVolPos].price! *
+              quantityDraft; // If already selected vol from group then remove it first
 
     /// Step 2. ASSIGNS selected volume to _selectedVols[mainVolPos]
     _selectedVols[mainVolPos] = volume!;
 
     /// Step 3. ADDS selected vol's price to totalDraftSum
-    totalSumDraft += _selectedVols[mainVolPos].price! * quantityDraft;
+    totalSumDraft += meal.discount! > 0
+        ? (_selectedVols[mainVolPos].price! / 100) * (100 - meal.discount!)
+        : _selectedVols[mainVolPos].price! * quantityDraft;
 
     /// Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
     var _volWithMinus = _selectedVols.firstWhere(
@@ -280,17 +294,21 @@ class MealViewModel extends ReactiveViewModel {
   }
 
   /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
-  void updateSelectedCustoms(Customizable? selectedCus) {
+  void updateSelectedCustoms(Meal meal, Customizable? selectedCus) {
     if (_selectedCustoms.contains(selectedCus)) {
       _selectedCustoms.remove(selectedCus);
 
       /// SUBTRACTS selectedCus's price from totalDraftSum
-      totalSumDraft -= selectedCus!.price! * quantityDraft;
+      totalSumDraft -= meal.discount != null || meal.discount! > 0
+          ? (selectedCus!.price! / 100) * (100 - meal.discount!)
+          : selectedCus!.price! * quantityDraft;
     } else {
       _selectedCustoms.add(selectedCus!);
 
       /// ADDS selectedCus's price to totalDraftSum
-      totalSumDraft += selectedCus.price! * quantityDraft;
+      totalSumDraft += meal.discount != null || meal.discount! > 0
+          ? (selectedCus.price! / 100) * (100 - meal.discount!)
+          : selectedCus.price! * quantityDraft;
     }
     notifyListeners();
   }

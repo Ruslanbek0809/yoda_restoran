@@ -317,7 +317,10 @@ class HiveDbService with ReactiveServiceMixin {
         _cartMealVolumes.add(HiveVolCus(
           id: vol.id,
           name: vol.volumeName,
-          price: vol.price,
+          price: meal.discount != null || meal.discount! > 0
+              ? (vol.price! / 100) * (100 - meal.discount!)
+              : vol
+                  .price!, // If discount is TRUE, then add vol's discount price
         ));
 
       /// STEP 4.2. ADD all selectedCustoms to _cartMeal.customs
@@ -325,7 +328,10 @@ class HiveDbService with ReactiveServiceMixin {
         _cartMealCustoms.add(HiveVolCus(
           id: cus.id,
           name: cus.customizableName,
-          price: cus.price,
+          price: meal.discount != null || meal.discount! > 0
+              ? (cus.price! / 100) * (100 - meal.discount!)
+              : cus
+                  .price!, // If discount is TRUE, then add cus's discount price
         ));
 
       log.v(
