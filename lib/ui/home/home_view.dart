@@ -58,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
             print('I AM IN startFlexibleUpdate(): ');
-            await InAppUpdate.startFlexibleUpdate(); 
+            await InAppUpdate.startFlexibleUpdate();
             await InAppUpdate.completeFlexibleUpdate();
           }
         }
@@ -219,7 +219,7 @@ class _HomeViewState extends State<HomeView> {
                             slivers: [
                               SliverAppBar(
                                 expandedHeight: model.selectedMainCats.isEmpty
-                                    ? 0.36.sh
+                                    ? 0.075.sh + 0.6.sw
                                     : 0.1.sh,
                                 backgroundColor: kcWhiteColor,
                                 elevation: 0,

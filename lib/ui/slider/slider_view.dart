@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
+import 'package:yoda_res/utils/utils.dart';
 import '../../models/slider.dart';
 import '../widgets/widgets.dart';
 
@@ -17,6 +18,8 @@ class SliderView extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    printLog(
+        '1.sw: ${1.sw} 0.6.sw: ${0.6.sw}, 0.075.sh + 0.6.sw: ${0.075.sh + 0.6.sw}, 0.36.sh: ${0.36.sh}');
     return ViewModelBuilder<SliderViewModel>.reactive(
       builder: (context, model, child) => Column(
         children: [
