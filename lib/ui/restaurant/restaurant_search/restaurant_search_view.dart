@@ -85,7 +85,6 @@ class RestaurantSearchView extends StatelessWidget {
                 : model.isBusy
                     ? LoadingWidget()
                     : GridView.builder(
-                        // shrinkWrap: true,
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(
                           vertical: 12.h,

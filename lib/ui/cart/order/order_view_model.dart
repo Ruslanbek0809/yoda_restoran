@@ -53,6 +53,7 @@ class OrderViewModel extends ReactiveViewModel {
       else
         totalOrderSum = order.totPrice! - getPromocodePrice(order);
     }
+    if (order.dostawkaPrice != null) totalOrderSum += order.dostawkaPrice!;
     return totalOrderSum;
   }
 

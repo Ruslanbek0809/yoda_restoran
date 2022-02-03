@@ -16,6 +16,9 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       deliveryTime: json['deliveryTime'] == null
           ? null
           : DateTime.parse(json['deliveryTime'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       status: json['status'] as int?,
       restaurant: json['restaurant'] == null
           ? null
@@ -39,6 +42,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'selfPickUp': instance.selfPickUp,
       'dostawkaPrice': instance.dostawkaPrice,
       'deliveryTime': instance.deliveryTime?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
       'status': instance.status,
       'restaurant': instance.restaurant,
       'promocode': instance.promocode,

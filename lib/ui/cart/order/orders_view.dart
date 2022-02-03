@@ -165,7 +165,7 @@ class OrdersView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.totPrice!)} TMT',
+                                        '${order.promocode != null ? formatNum(orderTotalPriceWithPromocode) : formatNum(order.dostawkaPrice != null ? (order.totPrice! + order.dostawkaPrice!) : order.totPrice!)} TMT',
                                         style: ktsDefault18SemiBoldText,
                                       ),
                                       SizedBox(height: 2.h),

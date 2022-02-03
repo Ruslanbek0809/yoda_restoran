@@ -13,6 +13,7 @@ class Order {
     this.selfPickUp,
     this.dostawkaPrice,
     this.deliveryTime,
+    this.createdAt,
     this.status,
     this.restaurant,
     this.promocode,
@@ -40,6 +41,9 @@ class Order {
 
   @JsonKey(name: 'deliveryTime')
   final DateTime? deliveryTime;
+
+  @JsonKey(name: 'createdAt')
+  final DateTime? createdAt;
 
   @JsonKey(name: 'status')
   final int? status;

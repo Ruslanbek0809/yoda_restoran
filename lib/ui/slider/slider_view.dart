@@ -18,8 +18,6 @@ class SliderView extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    printLog(
-        '1.sw: ${1.sw} 0.6.sw: ${0.6.sw}, 0.075.sh + 0.6.sw: ${0.075.sh + 0.6.sw}, 0.36.sh: ${0.36.sh}');
     return ViewModelBuilder<SliderViewModel>.reactive(
       builder: (context, model, child) => Column(
         children: [
