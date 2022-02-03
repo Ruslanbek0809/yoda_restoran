@@ -363,8 +363,6 @@ class UserService {
         totalCartMealSum += cus.price!;
       });
 
-      totalCartMealSum *= _cartMeal.quantity!;
-
       /// VOLUME DISSECTING into List<int> part
       List<int> volList = [];
       List<int> cusList = [];
