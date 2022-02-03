@@ -140,10 +140,21 @@ class OrdersView extends StatelessWidget {
                                                 ),
                                                 SizedBox(width: 5.w),
                                                 order.deliveryTime == null
-                                                    ? Text(
-                                                        LocaleKeys.now,
-                                                        style: ktsDefault14Text,
-                                                      ).tr()
+                                                    ? order.status == 4
+                                                        ? Text(
+                                                            DateFormat(
+                                                                    'HH:mm, dd.MM.yyyy')
+                                                                .format(order
+                                                                    .createdAt!
+                                                                    .toLocal()),
+                                                            style:
+                                                                ktsDefault14Text,
+                                                          )
+                                                        : Text(
+                                                            LocaleKeys.now,
+                                                            style:
+                                                                ktsDefault14Text,
+                                                          ).tr()
                                                     : Text(
                                                         DateFormat(
                                                                 'HH:mm, dd.MM.yyyy')
