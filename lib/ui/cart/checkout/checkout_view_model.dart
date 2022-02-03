@@ -192,6 +192,7 @@ class CheckoutViewModel extends ReactiveViewModel {
       isScrollControlled: true,
     );
   }
+
 //------------------------ CREATE ORDER PART ----------------------------//
 
   String? _checkoutNote = '';
