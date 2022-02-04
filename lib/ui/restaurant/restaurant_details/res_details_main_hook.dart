@@ -13,6 +13,7 @@ import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:math' as math;
 
 class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   final Restaurant restaurant;
@@ -409,62 +410,76 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
         ),
 //------------------ MEAL LIST ---------------------//
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: model.resCategories!.length,
-                padding: EdgeInsets.only(
-                    bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
-                // SizedBox(height: 0.11.sh), // COMPENSATES ResDetailsBottomCart
-                itemBuilder: (context, index) {
-                  final resCategory = model.resCategories![index];
-                  final resCategoryMeals = resCategory.meals;
-                  return Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 12.w, top: 5.h),
-                        child: Text(
-                          resCategory.resCategoryModel!.name!,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: kcSecondFontColor,
-                          ),
+        SliverPadding(
+          padding: EdgeInsets.only(
+              bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                final resCategory = model.resCategories![index];
+                final resCategoryMeals = resCategory.meals;
+                return Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: 12.w, top: 5.h),
+                      child: Text(
+                        resCategory.resCategoryModel!.name!,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: kcSecondFontColor,
                         ),
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12.h,
-                          horizontal: 10.w,
-                        ),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10.h, //spaceTopBottom
-                          crossAxisSpacing: 6.w, //spaceLeftRight
-                          childAspectRatio: itemWidth / itemHeight,
-                        ),
-                        itemCount: resCategoryMeals!.length,
-                        itemBuilder: (context, pos) {
-                          return MealView(
-                            meal: resCategoryMeals[pos],
-                            restaurant:
-                                restaurant, // Needed for add meal with conditions only in CART
-                          );
-                        },
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12.h,
+                        horizontal: 10.w,
                       ),
-                    ],
-                  );
-                },
-              ),
-            ],
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10.h, //spaceTopBottom
+                        crossAxisSpacing: 6.w, //spaceLeftRight
+                        childAspectRatio: itemWidth / itemHeight,
+                      ),
+                      itemCount: resCategoryMeals!.length,
+                      itemBuilder: (context, pos) {
+                        return MealView(
+                          meal: resCategoryMeals[pos],
+                          restaurant:
+                              restaurant, // Needed for add meal with conditions only in CART
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+              childCount: model.resCategories!.length,
+            ),
           ),
         ),
       ],
     );
   }
+
+  Widget listItem(Color color, String title) => Container(
+        height: 100.0,
+        color: color,
+        margin: EdgeInsets.all(5),
+        child: Center(
+          child: Text(
+            "$title",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+  static getRandomColor() =>
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+          .withOpacity(1.0);
 }
