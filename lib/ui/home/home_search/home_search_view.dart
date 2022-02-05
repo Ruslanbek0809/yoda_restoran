@@ -138,6 +138,7 @@ class HomeSearchView extends StatelessWidget {
                                             SizedBox(height: 3.h),
                                             Text(
                                               _searchRestaurant.address!,
+                                              maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: kts14HelperText,
                                             ),
@@ -184,18 +185,20 @@ class HomeSearchView extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              _meal.name!,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 18.sp,
-                                                color: AppTheme.FONT_COLOR,
+                                            Expanded(
+                                              child: Text(
+                                                _meal.name!,
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 18.sp,
+                                                  color: AppTheme.FONT_COLOR,
+                                                ),
                                               ),
                                             ),
                                             Padding(
                                               padding: EdgeInsets.only(
-                                                  right: 16.w, left: 5.w),
+                                                  right: 16.w, left: 3.w),
                                               child: Text(
                                                 _meal.discount != null ||
                                                         _meal.discount! > 0
