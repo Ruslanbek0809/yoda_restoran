@@ -6,7 +6,7 @@ import '../../shared/shared.dart';
 import 'cart_toggle_button.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
-import 'cart_meal/cart_meal_item.dart';
+import 'cart_meal_item.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
