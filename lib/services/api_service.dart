@@ -93,14 +93,14 @@ class ApiService {
     for (int i = 1; i < _selectedMainCats.length; i++)
       _queryPars += '&mainCat=${_selectedMainCats[i]}'; // Workaround
 
-    if (alphabet) _queryPars += '&alphabet=$alphabet'; // Workaround
-    if (rating) _queryPars += '&rating=$rating'; // Workaround
+    if (alphabet) _queryPars += '&alphabetical=True'; // Workaround
+    if (rating) _queryPars += '&rating=True'; // Workaround
 
     /// Favourite add part
     if (_selectedMainCats.contains(14))
       _queryPars += '&favourite=True'; // Workaround
 
-    log.v('ApiService - $_queryPars, alphabet: $alphabet, rating: $rating');
+    log.v('ApiService - $_queryPars, alphabetical: $alphabet, rating: $rating');
     try {
       Response response = await _apiRoot.dio.get('api/restaurants?$_queryPars');
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
