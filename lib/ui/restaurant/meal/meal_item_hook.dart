@@ -220,6 +220,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               ),
                               Text(
                                 model.quantity.toString(),
+                                // model.mealQuantity.toString(),
                                 style: kts18Text,
                               ),
                               Material(

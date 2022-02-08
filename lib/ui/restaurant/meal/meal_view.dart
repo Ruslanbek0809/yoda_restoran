@@ -21,7 +21,7 @@ class MealView extends StatelessWidget {
       onModelReady: (model) => model.getMealQuantity(meal.id),
       builder: (context, model, child) =>
           MealItemHook(meal: meal, restaurant: restaurant),
-      viewModelBuilder: () => MealViewModel(),
+      viewModelBuilder: () => MealViewModel(mealId: meal.id),
     );
   }
 }

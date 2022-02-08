@@ -11,6 +11,8 @@ import '../../../utils/utils.dart';
 /// ReactiveViewModel is used to "react"
 class MealViewModel extends ReactiveViewModel {
   final log = getLogger('MealViewModel');
+  final int? mealId;
+  MealViewModel({this.mealId});
 
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
@@ -41,6 +43,8 @@ class MealViewModel extends ReactiveViewModel {
     if (quantity >= 1) _isButtonToggled = true;
     notifyListeners();
   }
+
+  // int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
 
   /// ADDS or UPDATES a restaurant in CART with condition
   /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled

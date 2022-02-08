@@ -32,8 +32,6 @@ class ResDetailsViewModel extends FutureViewModel {
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
-  int get cartMealLenght => _hiveDbService.cartMeals.length;
-
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
   bool get isUpdateQuantity =>
@@ -161,9 +159,8 @@ class ResDetailsViewModel extends FutureViewModel {
 
 //------------------------ NAVIGATIONS ----------------------------//
 
-  bool _navResult = false;
-  bool get navResult => _navResult;
   Future<void> navToCartView() async {
+    dynamic _navResult;
     _navResult = await _navService.navigateTo(Routes.cartView) ?? true;
     if (_navResult) await initialise(); // Workaround
   }
