@@ -29,10 +29,7 @@ class LoginViewModel extends FormViewModel {
             ),
           );
         },
-        onFail: () {
-          onFailForView!();
-          // setValidationMessage(e.toString());
-        },
+        onFail: () => onFailForView!(),
       ),
     );
   }

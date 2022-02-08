@@ -26,10 +26,18 @@ class OtpViewModel extends FormViewModel {
   String? _currentOtp = '';
   String? get currentOtp => _currentOtp;
 
+  /// RESENDS otp code using phone number from previous LoginView
   Future<void> updateResentButton({Function()? onFailForView}) async {
     _hideResendButton = !_hideResendButton;
-    log.i('_hideResendButton: $_hideResendButton');
-    notifyListeners();
+    log.i('_hideResendButton: $_hideResendButton, phone: $phone');
+    await runBusyFuture(
+      _userService.loginUser(
+        phone: phone,
+        onSuccess: () async {},
+        onFail: () => onFailForView!(),
+      ),
+    );
+    // notifyListeners();
   }
 
   /// SAVES otp data by posting otpCode to verify API
