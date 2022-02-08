@@ -9,7 +9,8 @@ import '../../../services/services.dart';
 class OtpViewModel extends FormViewModel {
   final log = getLogger('OtpViewModel');
   final bool isCartView;
-  OtpViewModel(this.isCartView);
+  final String phone; // Needed for resend feature in OtpView
+  OtpViewModel(this.isCartView, this.phone);
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
@@ -25,7 +26,7 @@ class OtpViewModel extends FormViewModel {
   String? _currentOtp = '';
   String? get currentOtp => _currentOtp;
 
-  void updateResentButton() {
+  Future<void> updateResentButton({Function()? onFailForView}) async {
     _hideResendButton = !_hideResendButton;
     log.i('_hideResendButton: $_hideResendButton');
     notifyListeners();

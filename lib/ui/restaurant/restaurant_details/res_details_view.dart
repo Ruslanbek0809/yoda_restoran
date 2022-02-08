@@ -19,7 +19,6 @@ class ResDetailsView extends StatelessWidget {
           model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
       viewModelBuilder: () => ResDetailsViewModel(restaurant),
       builder: (context, model, child) {
-        // model.log.i('model.isBusy: ${model.isBusy}');
         if (model.isCustomError && restaurant.id == model.cartRes!.id)
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
             model.updateCustomError();
@@ -50,7 +49,6 @@ class ResDetailsView extends StatelessWidget {
             children: [
               //------------------ RESTAURANT MAIN PART ---------------------//
               model.isBusy
-                  // || model.isCustomBusy
                   ? ResDetailsMainBusy(restaurant: restaurant)
                   : ResDetailsMainHook(restaurant: restaurant),
               //------------------ BOTTOM CART ---------------------//

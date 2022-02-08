@@ -148,7 +148,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                           bottom: 0.05.sh,
                         ),
                       );
-                      return; 
+                      return;
                     }
 
                     if (currentOtp != model.successOtp) {
@@ -189,7 +189,18 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                       offstage: !model.hideResendButton,
                       child: OtpTimerWidget(timeController))
                   : CustomTextChildButton(
-                      onPressed: model.updateResentButton,
+                      onPressed: () async {
+                        await model.updateResentButton(
+                          onFailForView: () => showErrorFlashBar(
+                            context: context,
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          ),
+                        );
+                      },
                       color: kcWhiteColor,
                       padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Row(

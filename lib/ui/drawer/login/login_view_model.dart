@@ -25,6 +25,7 @@ class LoginViewModel extends FormViewModel {
             Routes.otpView,
             arguments: OtpViewArguments(
               isCartView: isCartView,
+              phone: phoneValue!, // Needed for resend feature in OtpView
             ),
           );
         },
