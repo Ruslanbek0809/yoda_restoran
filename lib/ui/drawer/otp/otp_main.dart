@@ -33,7 +33,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to update isResend
         if (status == AnimationStatus.dismissed) {
-          model.updateResentButton();
+          model.updateResendButton();
         }
       }
 
@@ -190,7 +190,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                       child: OtpTimerWidget(timeController))
                   : CustomTextChildButton(
                       onPressed: () async {
-                        await model.updateResentButton(
+                        await model.updateResendButtonWithCode(
                           onFailForView: () => showErrorFlashBar(
                             context: context,
                             margin: EdgeInsets.only(
