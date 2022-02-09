@@ -176,7 +176,7 @@ class ResDetailsViewModel extends FutureViewModel {
 
   /// NAVIGATES to LoginView if not logged in yet
   // Future<void> navToLoginView() async => await _navService.navigateTo(
-  //       Routes.loginView,
+  //       Routes.loginView,  
   //       arguments: LoginViewArguments(
   //         isCartView: true,
   //       ), // Workaround.
