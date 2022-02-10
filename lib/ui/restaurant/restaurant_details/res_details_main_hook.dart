@@ -239,91 +239,127 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             style: TextStyle(
                               fontSize: 32.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppTheme.MAIN_DARK,
+                              color: kcSecondaryDarkColor,
                             ),
                           ),
                         ),
                         //------------------ RATE / WORK TIME / INFO---------------------//
-                        Row(
-                          children: [
-                            //------------------ RATE ---------------------//
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppTheme.MAIN_LIGHT,
-                                borderRadius: AppTheme().radius20,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 7.h),
-                              margin: EdgeInsets.only(
-                                top: 5.w,
-                                bottom: 5.w,
-                                left: 16.w,
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.star_rounded,
-                                    color: AppTheme.MAIN_DARK,
-                                    size: 22.w,
-                                  ),
-                                  SizedBox(width: 3.w),
-                                  Text(
-                                    restaurant.rating.toString(),
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //------------------ WORK TIME ---------------------//
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppTheme.MAIN_LIGHT,
-                                borderRadius: AppTheme().radius20,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 7.h),
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 5.h, horizontal: 10.w),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.access_time_rounded,
-                                    color: AppTheme.MAIN_DARK,
-                                    size: 22.w,
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  Text(
-                                    restaurant.workingHours!,
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: AppTheme.FONT_COLOR,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // //------------------ INFO ---------------------//
-                            GestureDetector(
-                              onTap: () {
-                                model.showCustomBottomSheet(restaurant);
-                              },
-                              child: Container(
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              //------------------ RATE ---------------------//
+                              Container(
                                 decoration: BoxDecoration(
                                   color: AppTheme.MAIN_LIGHT,
-                                  shape: BoxShape.circle,
+                                  borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 5.w, vertical: 5.h),
-                                child: SvgPicture.asset(
-                                  'assets/restaurant_info.svg',
-                                  color: AppTheme.MAIN_DARK,
+                                    horizontal: 10.w, vertical: 7.h),
+                                margin: EdgeInsets.only(
+                                  top: 5.h,
+                                  bottom: 5.h,
+                                  left: 16.w,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_rounded,
+                                      color: kcSecondaryDarkColor,
+                                      size: 22.w,
+                                    ),
+                                    SizedBox(width: 3.w),
+                                    Text(
+                                      restaurant.rating.toString(),
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
+                              //------------------ WORK TIME ---------------------//
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: AppTheme.MAIN_LIGHT,
+                                  borderRadius: AppTheme().radius20,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w, vertical: 7.h),
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 5.h, horizontal: 10.w),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_rounded,
+                                      color: kcSecondaryDarkColor,
+                                      size: 22.w,
+                                    ),
+                                    SizedBox(width: 5.w),
+                                    Text(
+                                      restaurant.workingHours!,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //------------------ LOCATION ---------------------//
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: AppTheme.MAIN_LIGHT,
+                                  borderRadius: AppTheme().radius20,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w, vertical: 7.h),
+                                margin: EdgeInsets.only(
+                                  top: 5.h,
+                                  bottom: 5.h,
+                                  right: 10.w,
+                                ),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/map_pin_bold.svg',
+                                      color: kcSecondaryDarkColor,
+                                      width: 20.w,
+                                    ),
+                                    SizedBox(width: 3.w),
+                                    Text(
+                                      'Aşgabat (3.48 km)',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppTheme.FONT_COLOR,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //------------------ INFO ---------------------//
+                              GestureDetector(
+                                onTap: () {
+                                  model.showCustomBottomSheet(restaurant);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.MAIN_LIGHT,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5.w, vertical: 5.h),
+                                  margin: EdgeInsets.only(right: 16.w),
+                                  child: SvgPicture.asset(
+                                    'assets/restaurant_info.svg',
+                                    color: AppTheme.MAIN_DARK,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
