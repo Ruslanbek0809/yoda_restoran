@@ -141,7 +141,7 @@ class RestaurantView extends StatelessWidget {
                         SvgPicture.asset(
                           'assets/map_pin_bold.svg',
                           color: kcDialogColor,
-                          width: 20.w,
+                          width: 18.w,
                         ),
                         SizedBox(width: 3.w),
                         Text(
@@ -158,9 +158,10 @@ class RestaurantView extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.star_rounded,
-                          size: 20.w,
+                          size: 22.w,
                           color: AppTheme.GREEN_COLOR,
                         ),
+                        SizedBox(width: 3.w),
                         Text(
                           '${restaurant.rating} (${restaurant.rated})',
                           overflow: TextOverflow.ellipsis,
