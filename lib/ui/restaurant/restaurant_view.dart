@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import '../../models/models.dart';
@@ -20,7 +21,7 @@ class RestaurantView extends StatelessWidget {
         return Container(
           height: 0.3.sh,
           width: 1.sw,
-          margin: EdgeInsets.fromLTRB(16.w, 2.h, 16.w, 8.h),
+          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 8.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -129,23 +130,49 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ),
               ),
-              //------------------ RATE ---------------------//
-              Row(
-                children: [
-                  Icon(
-                    Icons.star_rounded,
-                    size: 20.w,
-                    color: AppTheme.GREEN_COLOR,
-                  ),
-                  Text(
-                    '${restaurant.rating} (${restaurant.rated})',
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppTheme.MAIN_DARK,
+              //------------------ RATE and LOCATION ---------------------//
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/map_pin_bold.svg',
+                          color: kcDialogColor,
+                          width: 20.w,
+                        ),
+                        SizedBox(width: 3.w),
+                        Text(
+                          'Aşgabat (3.48 km)',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: kcIconColor,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star_rounded,
+                          size: 20.w,
+                          color: AppTheme.GREEN_COLOR,
+                        ),
+                        Text(
+                          '${restaurant.rating} (${restaurant.rated})',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: kcIconColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
