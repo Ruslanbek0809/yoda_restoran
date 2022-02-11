@@ -39,4 +39,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton(() => SearchService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton(() => GeolocatorService());
 }

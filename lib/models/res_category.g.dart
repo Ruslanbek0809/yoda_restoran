@@ -11,10 +11,10 @@ ResCategory _$ResCategoryFromJson(Map<String, dynamic> json) => ResCategory(
       discount: json['discount'] as num?,
       dateBegin: json['date_begin'] == null
           ? null
-          : DateTime.parse(json['date_begin'] as String).toLocal(),
+          : DateTime.parse(json['date_begin'] as String),
       dateEnd: json['date_end'] == null
           ? null
-          : DateTime.parse(json['date_end'] as String).toLocal(),
+          : DateTime.parse(json['date_end'] as String),
       order: json['order'] as int?,
       restaurantId: json['restaurant'] as int?,
       categoryId: json['category'] as int?,

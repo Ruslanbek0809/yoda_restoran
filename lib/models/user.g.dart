@@ -15,7 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       gender: json['gender'] as String?,
       birthday: json['birthday'] == null
           ? null
-          : DateTime.parse(json['birthday'] as String).toLocal(),
+          : DateTime.parse(json['birthday'] as String),
       favourites:
           (json['favourites'] as List<dynamic>?)?.map((e) => e as int).toList(),
     );

@@ -13,3 +13,4 @@ export 'checkout_service.dart';
 export 'order_service.dart';
 export 'connectivity_service.dart';
 export 'search_service.dart';
+export 'geolocator_service.dart';
