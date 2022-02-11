@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/utils/utils.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void setupSnackbar() {
   final service = locator<SnackbarService>();

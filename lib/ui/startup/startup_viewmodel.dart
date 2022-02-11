@@ -23,6 +23,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();
   final _connectivityService = locator<ConnectivityService>();
+  final _geolocatorService = locator<GeolocatorService>();
 
   ConnectivityStatus? get connectivityStatus => data;
 
@@ -65,6 +66,9 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp()
         .then((value) => _pushNotificationService.initialise());
+   
+    /// GETS user's location      
+    await _geolocatorService.getUserLocation();
 
     await _apiRootService.initDio();
     await _hiveDbService.initDB();
