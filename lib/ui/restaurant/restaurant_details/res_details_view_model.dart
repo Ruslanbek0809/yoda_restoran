@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
@@ -21,6 +22,9 @@ class ResDetailsViewModel extends FutureViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();
+  final _geolocatorService = locator<GeolocatorService>();
+
+  Position? get locationPosition => _geolocatorService.locationPosition;
 
   int _activeTab = 0;
   bool _isTabPressed = false;
@@ -176,7 +180,7 @@ class ResDetailsViewModel extends FutureViewModel {
 
   /// NAVIGATES to LoginView if not logged in yet
   // Future<void> navToLoginView() async => await _navService.navigateTo(
-  //       Routes.loginView,  
+  //       Routes.loginView,
   //       arguments: LoginViewArguments(
   //         isCartView: true,
   //       ), // Workaround.

@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/services/services.dart';
@@ -11,6 +12,9 @@ class ResViewModel extends BaseViewModel {
 
   final _navService = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final _geolocatorService = locator<GeolocatorService>();
+
+  Position? get locationPosition => _geolocatorService.locationPosition;
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 

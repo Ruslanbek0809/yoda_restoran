@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../models/models.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
@@ -8,13 +9,15 @@ import '../../widgets/loading_widget.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResDetailsMainBusy extends StatelessWidget {
+import 'res_details_view_model.dart';
+
+class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
   final Restaurant restaurant;
   const ResDetailsMainBusy({required this.restaurant, Key? key})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ResDetailsViewModel model) {
     return CustomScrollView(
       physics: const NeverScrollableScrollPhysics(),
       slivers: [
@@ -225,38 +228,40 @@ class ResDetailsMainBusy extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              //------------------ LOCATION ---------------------//
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
-                                  borderRadius: AppTheme().radius20,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 7.h),
-                                margin: EdgeInsets.only(
-                                  top: 5.h,
-                                  bottom: 5.h,
-                                  right: 10.w,
-                                ),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/map_pin_bold.svg',
-                                      color: kcSecondaryDarkColor,
-                                      width: 20.w,
-                                    ),
-                                    SizedBox(width: 3.w),
-                                    Text(
-                                      '${restaurant.city} (${restaurant.distance} km)',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppTheme.FONT_COLOR,
+
+                              if (model.locationPosition != null)
+                                //------------------ LOCATION ---------------------//
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.MAIN_LIGHT,
+                                    borderRadius: AppTheme().radius20,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 7.h),
+                                  margin: EdgeInsets.only(
+                                    top: 5.h,
+                                    bottom: 5.h,
+                                    right: 10.w,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/map_pin_bold.svg',
+                                        color: kcSecondaryDarkColor,
+                                        width: 20.w,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        '${restaurant.city} (${restaurant.distance} km)',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: AppTheme.FONT_COLOR,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
                               //------------------ INFO ---------------------//
                               GestureDetector(
                                 onTap: () {},

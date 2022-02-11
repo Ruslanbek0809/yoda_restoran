@@ -307,38 +307,39 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ LOCATION ---------------------//
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
-                                  borderRadius: AppTheme().radius20,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 7.h),
-                                margin: EdgeInsets.only(
-                                  top: 5.h,
-                                  bottom: 5.h,
-                                  right: 10.w,
-                                ),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/map_pin_bold.svg',
-                                      color: kcSecondaryDarkColor,
-                                      width: 20.w,
-                                    ),
-                                    SizedBox(width: 3.w),
-                                    Text(
-                                      '${restaurant.city} (${restaurant.distance} km)',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppTheme.FONT_COLOR,
+                              if (model.locationPosition != null)
+                                //------------------ LOCATION ---------------------//
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.MAIN_LIGHT,
+                                    borderRadius: AppTheme().radius20,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 7.h),
+                                  margin: EdgeInsets.only(
+                                    top: 5.h,
+                                    bottom: 5.h,
+                                    right: 10.w,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/map_pin_bold.svg',
+                                        color: kcSecondaryDarkColor,
+                                        width: 20.w,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        '${restaurant.city} (${restaurant.distance} km)',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: AppTheme.FONT_COLOR,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
                               //------------------ INFO ---------------------//
                               GestureDetector(
                                 onTap: () {

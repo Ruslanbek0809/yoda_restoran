@@ -136,24 +136,25 @@ class RestaurantView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/map_pin_bold.svg',
-                          color: kcDialogColor,
-                          width: 18.w,
-                        ),
-                        SizedBox(width: 3.w),
-                        Text(
-                          '${restaurant.city} (${restaurant.distance} km)',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: kcIconColor,
+                    if (model.locationPosition != null)
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/map_pin_bold.svg',
+                            color: kcDialogColor,
+                            width: 18.w,
                           ),
-                        ),
-                      ],
-                    ),
+                          SizedBox(width: 3.w),
+                          Text(
+                            '${restaurant.city} (${restaurant.distance} km)',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: kcIconColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     Row(
                       children: [
                         Icon(
