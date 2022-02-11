@@ -329,7 +329,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     ),
                                     SizedBox(width: 3.w),
                                     Text(
-                                      'Aşgabat (3.48 km)',
+                                      '${restaurant.city} (${restaurant.distance} km)',
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontSize: 16.sp,
