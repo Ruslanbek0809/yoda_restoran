@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/services/services.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
-import 'api_service.dart';
 
 // 1 For Reactive View
 class HomeService with ReactiveServiceMixin {

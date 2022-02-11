@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:yoda_res/services/services.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
-import 'api_root_service.dart';
 
 class ApiService {
   final log = getLogger('ApiService');
 
   final _apiRoot = locator<ApiRootService>();
+  final _geolocatorService = locator<GeolocatorService>();
 
   //------------------ HOME APIS ---------------------//
 
@@ -48,9 +49,21 @@ class ApiService {
   }
 
   Future<List<Restaurant>> getRandomRess() async {
+    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
     List<Restaurant> _randomRestaurants = [];
     try {
-      Response response = await _apiRoot.dio.get('api/restaurants/');
+      Response response;
+      if (_geolocatorService.locationPosition != null)
+        response = await _apiRoot.dio.get(
+          'api/restaurants/',
+          // 'api/restaurants?markerY=${_geolocatorService.locationPosition!.longitude}&markerX=${_geolocatorService.locationPosition!.latitude}',
+          queryParameters: {
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+          },
+        );
+      else
+        response = await _apiRoot.dio.get('api/restaurants/');
       // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
       if (response.data != null) {
