@@ -145,7 +145,7 @@ class RestaurantView extends StatelessWidget {
                         ),
                         SizedBox(width: 3.w),
                         Text(
-                          'Aşgabat (3.48 km)',
+                          '${restaurant.city} (${restaurant.distance} km)',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 14.sp,

@@ -18,6 +18,8 @@ class Restaurant {
     this.phoneNumber,
     this.prepareTime,
     this.paymentTypes,
+    this.city,
+    this.distance,
   });
 
   @JsonKey(name: 'id')
@@ -52,6 +54,12 @@ class Restaurant {
 
   @JsonKey(name: 'prepareTime')
   final String? prepareTime;
+
+  @JsonKey(name: 'city')
+  final String? city;
+
+  @JsonKey(name: 'distance')
+  final num? distance;
 
   @JsonKey(name: 'paymentTypes')
   final List<PaymentType>? paymentTypes;
