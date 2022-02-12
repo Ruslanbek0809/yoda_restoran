@@ -251,14 +251,23 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                         width: 20.w,
                                       ),
                                       SizedBox(width: 3.w),
-                                      Text(
-                                        '${restaurant.city} (${restaurant.distance} km)',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          color: AppTheme.FONT_COLOR,
-                                        ),
-                                      ),
+                                      restaurant.paymentTypes != null
+                                          ? Text(
+                                              '${restaurant.city} (${restaurant.distance} km)',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                color: AppTheme.FONT_COLOR,
+                                              ),
+                                            )
+                                          : Text(
+                                              restaurant.city!,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                color: AppTheme.FONT_COLOR,
+                                              ),
+                                            ),
                                     ],
                                   ),
                                 ),

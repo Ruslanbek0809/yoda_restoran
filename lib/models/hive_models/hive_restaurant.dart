@@ -17,6 +17,8 @@ class HiveRestaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
+    this.city,
+    this.distance,
     this.resPaymentTypes,
   });
 
@@ -54,5 +56,11 @@ class HiveRestaurant {
   final String? prepareTime;
 
   @HiveField(11)
+  final String? city;
+
+  @HiveField(12)
+  final num? distance;
+
+  @HiveField(13)
   final List<HiveResPaymentType>? resPaymentTypes;
 }

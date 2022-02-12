@@ -180,6 +180,8 @@ class HomeViewModel extends MultipleFutureViewModel {
             phoneNumber: cartRes!.phoneNumber,
             prepareTime: cartRes!.prepareTime,
             workingHours: cartRes!.workingHours,
+            city: cartRes!.city,
+            distance: cartRes!.distance,
           ),
         ),
       );

@@ -94,6 +94,8 @@ class HiveDbService with ReactiveServiceMixin {
         phoneNumber: restaurant.phoneNumber,
         address: restaurant.address,
         deliveryPrice: restaurant.deliveryPrice,
+        city: restaurant.city,
+        distance: restaurant.distance,
         resPaymentTypes: _hiveResPaymentTypes,
       );
 
