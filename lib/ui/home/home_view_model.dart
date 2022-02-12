@@ -65,7 +65,7 @@ class HomeViewModel extends MultipleFutureViewModel {
           int pos = _homeService.randomRess!.indexOf(_randomRes);
 
           /// Here in 5th restaurant we will add new Promoted from promotedList
-          if ((pos + 1) % 5 == 0 && _homeService.proms!.isNotEmpty) {
+          if ((pos + 1) % 2 == 0 && _homeService.proms!.isNotEmpty) {
             if (promoPosCount <= _homeService.proms!.length - 1 &&
                 _homeService.proms![promoPosCount].restaurants!.isNotEmpty)
               _resWithProms.add(

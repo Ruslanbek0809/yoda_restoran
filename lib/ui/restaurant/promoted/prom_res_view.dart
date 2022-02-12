@@ -99,7 +99,7 @@ class PromResView extends StatelessWidget {
                   right: 8.w,
                   child: Container(
                     width: 0.09.sw,
-                    height: 0.09.sw, 
+                    height: 0.09.sw,
                     decoration: BoxDecoration(
                       color: AppTheme.WHITE.withOpacity(0.8),
                       shape: BoxShape.circle,

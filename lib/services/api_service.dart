@@ -56,7 +56,6 @@ class ApiService {
       if (_geolocatorService.locationPosition != null)
         response = await _apiRoot.dio.get(
           'api/restaurants/',
-          // 'api/restaurants?markerY=${_geolocatorService.locationPosition!.longitude}&markerX=${_geolocatorService.locationPosition!.latitude}',
           queryParameters: {
             'markerY': _geolocatorService.locationPosition!.longitude,
             'markerX': _geolocatorService.locationPosition!.latitude,
@@ -79,9 +78,20 @@ class ApiService {
   }
 
   Future<List<Promoted>> getProms() async {
+    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
     List<Promoted> _promotedList = [];
     try {
-      Response response = await _apiRoot.dio.get('api/promoted/');
+      Response response;
+      if (_geolocatorService.locationPosition != null)
+        response = await _apiRoot.dio.get(
+          'api/promoted/',
+          queryParameters: {
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+          },
+        );
+      else
+        response = await _apiRoot.dio.get('api/promoted/');
       // log.v('RESPONSE: api/promoted/ => ${response.data}');
 
       if (response.data != null) {
