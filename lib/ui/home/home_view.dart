@@ -312,7 +312,7 @@ class _HomeViewState extends State<HomeView> {
                                                 model.resWithProms?.length ?? 0,
                                             itemBuilder: (ctx, pos) {
                                               //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                                              if ((pos + 1) % 2 == 0 &&
+                                              if ((pos + 1) % 5 == 0 &&
                                                   model.resWithProms![pos]
                                                           .prom !=
                                                       null)

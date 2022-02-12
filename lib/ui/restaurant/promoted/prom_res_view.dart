@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
 import '../../../models/models.dart';
 import 'prom_res_view_model.dart';
 import '../../widgets/widgets.dart';
@@ -136,19 +138,43 @@ class PromResView extends StatelessWidget {
             ),
             //------------------ RATE ---------------------//
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.star_rounded,
-                  size: 18.w,
-                  color: AppTheme.GREEN_COLOR,
-                ),
-                Text(
-                  '${restaurant.rating} (${restaurant.rated})',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: AppTheme.MAIN_DARK,
+                if (model.locationPosition != null)
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/map_pin_bold.svg',
+                        color: kcDialogColor,
+                        width: 14.w,
+                      ),
+                      SizedBox(width: 3.w),
+                      Text(
+                        '${restaurant.city} (${restaurant.distance} km)',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: kcIconColor,
+                        ),
+                      ),
+                    ],
                   ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star_rounded,
+                      size: 18.w,
+                      color: AppTheme.GREEN_COLOR,
+                    ),
+                    Text(
+                      '${restaurant.rating} (${restaurant.rated})',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: AppTheme.MAIN_DARK,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
