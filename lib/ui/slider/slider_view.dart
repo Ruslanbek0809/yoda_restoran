@@ -26,7 +26,9 @@ class SliderView extends StatelessWidget {
             child: CarouselSlider(
               carouselController: model.carouselController,
               options: CarouselOptions(
-                  autoPlay: false,
+                  autoPlay: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 1250),
+                  autoPlayInterval: const Duration(seconds: 3),
                   aspectRatio: 2,
                   viewportFraction:
                       0.92, // The fraction of the viewport that each page should occupy
