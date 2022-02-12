@@ -131,40 +131,20 @@ class RestaurantView extends StatelessWidget {
                 ),
               ),
               //------------------ RATE and LOCATION ---------------------//
-              Padding(
-                padding: EdgeInsets.only(top: 2.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (model.locationPosition != null)
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/map_pin_bold.svg',
-                            color: kcDialogColor,
-                            width: 18.w,
-                          ),
-                          SizedBox(width: 3.w),
-                          Text(
-                            '${restaurant.city} (${restaurant.distance} km)',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: kcIconColor,
-                            ),
-                          ),
-                        ],
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (model.locationPosition != null)
                     Row(
                       children: [
-                        Icon(
-                          Icons.star_rounded,
-                          size: 22.w,
-                          color: AppTheme.GREEN_COLOR,
+                        SvgPicture.asset(
+                          'assets/map_pin_bold.svg',
+                          color: kcDialogColor,
+                          width: 18.w,
                         ),
                         SizedBox(width: 3.w),
                         Text(
-                          '${restaurant.rating} (${restaurant.rated})',
+                          '${restaurant.city} (${restaurant.distance} km)',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 14.sp,
@@ -173,8 +153,25 @@ class RestaurantView extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star_rounded,
+                        size: 22.w,
+                        color: AppTheme.GREEN_COLOR,
+                      ),
+                      SizedBox(width: 3.w),
+                      Text(
+                        '${restaurant.rating} (${restaurant.rated})',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: kcIconColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

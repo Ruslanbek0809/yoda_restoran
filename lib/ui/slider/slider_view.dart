@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
-import 'package:yoda_res/utils/utils.dart';
 import '../../models/slider.dart';
 import '../widgets/widgets.dart';
 
