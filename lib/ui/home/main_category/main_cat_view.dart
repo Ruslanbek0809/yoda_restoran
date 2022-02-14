@@ -16,9 +16,9 @@ class MainCatView extends StatelessWidget {
           padding: EdgeInsets.only(top: 3.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: model.mainCats!.take(6).map((mainCategory) {
+            children: model.mainCats!.take(10).map((mainCategory) {
               return model.mainCats!.indexOf(mainCategory) !=
-                      model.mainCats!.take(6).length - 1
+                      model.mainCats!.take(10).length - 1
                   ? MainCatItemHook(mainCategory: mainCategory)
                   : MainCatAllItemHook();
             }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
