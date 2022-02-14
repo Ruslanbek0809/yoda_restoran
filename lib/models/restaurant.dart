@@ -17,9 +17,9 @@ class Restaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
-    this.paymentTypes,
     this.city,
     this.distance,
+    this.paymentTypes,
   });
 
   @JsonKey(name: 'id')

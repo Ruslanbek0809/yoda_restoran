@@ -137,6 +137,7 @@ abstract class  LocaleKeys {
   static const aboutUsIg = 'aboutUsIg';
   static const chooseMainCat = 'chooseMainCat';
   static const addAddedSuccessfully = 'addAddedSuccessfully';
+  static const km = 'km';
   static const more = 'more';
   static const msg = 'msg';
   static const msg_named = 'msg_named';

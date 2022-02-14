@@ -160,7 +160,7 @@ class HomeViewModel extends MultipleFutureViewModel {
     return totalCartSum;
   }
 
-  //------------------ NAVIGATIOn ---------------------//
+  //------------------ NAVIGATION ---------------------//
 
   void navToHomeSearchView() async =>
       await _navService.navigateTo(Routes.homeSearchView);

@@ -20,6 +20,9 @@ class SearchRestaurant {
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
+    this.city,
+    this.distance,
+    this.paymentTypes,
   });
 
   @JsonKey(name: 'id')
@@ -57,6 +60,15 @@ class SearchRestaurant {
 
   @JsonKey(name: 'prepareTime')
   final String? prepareTime;
+
+  @JsonKey(name: 'city')
+  final String? city;
+
+  @JsonKey(name: 'distance')
+  final num? distance;
+
+  @JsonKey(name: 'paymentTypes')
+  final List<PaymentType>? paymentTypes;
 
   factory SearchRestaurant.fromJson(Map<String, dynamic> json) =>
       _$SearchRestaurantFromJson(json);

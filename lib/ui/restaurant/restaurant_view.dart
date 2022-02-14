@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import '../../models/models.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
 import 'restaurant_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RestaurantView extends StatelessWidget {
   final Restaurant restaurant;
@@ -144,7 +146,23 @@ class RestaurantView extends StatelessWidget {
                         ),
                         SizedBox(width: 3.w),
                         Text(
-                          '${restaurant.city} (${restaurant.distance} km)',
+                          '${restaurant.city} (${restaurant.distance} ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: kcIconColor,
+                          ),
+                        ),
+                        Text(
+                          LocaleKeys.km,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: kcIconColor,
+                          ),
+                        ).tr(),
+                        Text(
+                          ')',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 14.sp,

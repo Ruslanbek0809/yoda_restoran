@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../models/models.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/loading_widget.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'res_details_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
   final Restaurant restaurant;
@@ -252,13 +253,36 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                       ),
                                       SizedBox(width: 3.w),
                                       restaurant.paymentTypes != null
-                                          ? Text(
-                                              '${restaurant.city} (${restaurant.distance} km)',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: AppTheme.FONT_COLOR,
-                                              ),
+                                          ? Row(
+                                              children: [
+                                                Text(
+                                                  '${restaurant.city} (${restaurant.distance} ',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.sp,
+                                                    color: AppTheme.FONT_COLOR,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  LocaleKeys.km,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.sp,
+                                                    color: AppTheme.FONT_COLOR,
+                                                  ),
+                                                ).tr(),
+                                                Text(
+                                                  ')',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 16.sp,
+                                                    color: AppTheme.FONT_COLOR,
+                                                  ),
+                                                ),
+                                              ],
                                             )
                                           : Text(
                                               restaurant.city!,

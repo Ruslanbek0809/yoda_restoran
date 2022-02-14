@@ -102,6 +102,10 @@ class HomeSearchView extends StatelessWidget {
                                     description: _searchRestaurant.description,
                                     phoneNumber: _searchRestaurant.phoneNumber,
                                     prepareTime: _searchRestaurant.prepareTime,
+                                    city: _searchRestaurant.city,
+                                    distance: _searchRestaurant.distance,
+                                    paymentTypes:
+                                        _searchRestaurant.paymentTypes,
                                   )),
                                   child: Row(
                                     children: [
@@ -180,6 +184,10 @@ class HomeSearchView extends StatelessWidget {
                                               _searchRestaurant.phoneNumber,
                                           prepareTime:
                                               _searchRestaurant.prepareTime,
+                                          city: _searchRestaurant.city,
+                                          distance: _searchRestaurant.distance,
+                                          paymentTypes:
+                                              _searchRestaurant.paymentTypes,
                                         )),
                                         child: Row(
                                           mainAxisAlignment:
@@ -247,6 +255,10 @@ class HomeSearchView extends StatelessWidget {
                                           _searchRestaurant.phoneNumber,
                                       prepareTime:
                                           _searchRestaurant.prepareTime,
+                                      city: _searchRestaurant.city,
+                                      distance: _searchRestaurant.distance,
+                                      paymentTypes:
+                                          _searchRestaurant.paymentTypes,
                                     )),
                                     child: Padding(
                                       padding: EdgeInsets.only(
