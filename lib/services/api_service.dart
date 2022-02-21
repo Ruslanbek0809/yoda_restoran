@@ -111,6 +111,7 @@ class ApiService {
     bool alphabet,
     bool rating,
   ) async {
+    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
     List<Restaurant> _selectedMainCatRestaurants = [];
     String _queryPars = 'mainCat=${_selectedMainCats[0]}';
     for (int i = 1; i < _selectedMainCats.length; i++)
@@ -125,7 +126,24 @@ class ApiService {
 
     log.v('ApiService - $_queryPars, alphabetical: $alphabet, rating: $rating');
     try {
-      Response response = await _apiRoot.dio.get('api/restaurants?$_queryPars');
+      Response response;
+
+      if (_geolocatorService.locationPosition != null)
+        response = await _apiRoot.dio.get(
+          'api/restaurants/',
+          queryParameters: {
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+          },
+        );
+      else
+        response = await _apiRoot.dio.get(
+          'api/restaurants?$_queryPars',
+          queryParameters: {
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+          },
+        );
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
 
       if (response.data != null)

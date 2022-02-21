@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
                     toolbarHeight: 60.h,
                     automaticallyImplyLeading: false,
                     flexibleSpace: FlexibleSpaceBar(
-                      background: Column(
+                      background: Column( 
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
