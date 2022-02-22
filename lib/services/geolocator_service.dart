@@ -66,4 +66,16 @@ class GeolocatorService {
       log.v('=> ERROR _locationPosition: $e');
     }
   }
+
+  /// GETS user's current location before FETCH
+  Future<void> getUserCurrentLocationOnly() async {
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    try {
+      _locationPosition = await Geolocator.getCurrentPosition();
+      log.v('=> SUCCESS _locationPosition: $_locationPosition');
+    } catch (e) {
+      log.v('=> ERROR _locationPosition: $e');
+    }
+  }
 }

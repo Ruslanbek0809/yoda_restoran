@@ -53,7 +53,8 @@ class ApiService {
     List<Restaurant> _randomRestaurants = [];
     try {
       Response response;
-      if (_geolocatorService.locationPosition != null)
+      if (_geolocatorService.locationPosition != null) {
+        await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/restaurants/',
           queryParameters: {
@@ -61,7 +62,7 @@ class ApiService {
             'markerX': _geolocatorService.locationPosition!.latitude,
           },
         );
-      else
+      } else
         response = await _apiRoot.dio.get('api/restaurants/');
       // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
@@ -82,7 +83,8 @@ class ApiService {
     List<Promoted> _promotedList = [];
     try {
       Response response;
-      if (_geolocatorService.locationPosition != null)
+      if (_geolocatorService.locationPosition != null) {
+        await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/promoted/',
           queryParameters: {
@@ -90,7 +92,7 @@ class ApiService {
             'markerX': _geolocatorService.locationPosition!.latitude,
           },
         );
-      else
+      } else
         response = await _apiRoot.dio.get('api/promoted/');
       // log.v('RESPONSE: api/promoted/ => ${response.data}');
 
@@ -128,7 +130,8 @@ class ApiService {
     try {
       Response response;
 
-      if (_geolocatorService.locationPosition != null)
+      if (_geolocatorService.locationPosition != null) {
+        await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/restaurants/',
           queryParameters: {
@@ -136,7 +139,7 @@ class ApiService {
             'markerX': _geolocatorService.locationPosition!.latitude,
           },
         );
-      else
+      } else
         response = await _apiRoot.dio.get(
           'api/restaurants?$_queryPars',
           queryParameters: {
