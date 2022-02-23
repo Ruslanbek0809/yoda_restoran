@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -504,13 +505,53 @@ class _HomeViewState extends State<HomeView> {
             drawer: DrawerView(),
             body: Platform.isIOS
                 ? UpgradeAlert(
-                    child: body,
+                    child: DoubleBackToCloseApp(
+                      snackBar: SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: 0.05.sh,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppTheme().radius10,
+                        ),
+                        content: Text(
+                          LocaleKeys.doubleBackToCloseApp,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                          ),
+                        ).tr(),
+                      ),
+                      child: body,
+                    ),
                     shouldPopScope: () => true,
                     messages: context.locale == context.supportedLocales[0]
                         ? MyTurkmenMessages()
                         : MyRussianMessages(),
                   )
-                : body,
+                : DoubleBackToCloseApp(
+                    snackBar: SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        bottom: 0.05.sh,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: AppTheme().radius10,
+                      ),
+                      content: Text(
+                        LocaleKeys.doubleBackToCloseApp,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                        ),
+                      ).tr(),
+                    ),
+                    child: body,
+                  ),
           ),
         );
         // );

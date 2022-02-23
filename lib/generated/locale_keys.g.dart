@@ -139,6 +139,7 @@ abstract class  LocaleKeys {
   static const addAddedSuccessfully = 'addAddedSuccessfully';
   static const km = 'km';
   static const more = 'more';
+  static const doubleBackToCloseApp = 'doubleBackToCloseApp';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 
