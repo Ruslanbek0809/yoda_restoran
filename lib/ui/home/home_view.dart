@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
                     toolbarHeight: 60.h,
                     automaticallyImplyLeading: false,
                     flexibleSpace: FlexibleSpaceBar(
-                      background: Column( 
+                      background: Column(
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
@@ -330,7 +330,8 @@ class _HomeViewState extends State<HomeView> {
                                                         Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  left: 16.w),
+                                                                  left: 16.w,
+                                                                  top: 2.h),
                                                           child: Text(
                                                             model
                                                                 .resWithProms![

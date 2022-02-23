@@ -27,7 +27,7 @@ class PromResView extends StatelessWidget {
           promRess.indexOf(restaurant) == 0 ? 16.w : 8.w,
           4.h,
           promRess.indexOf(restaurant) == promRess.length - 1 ? 16.w : 0.w,
-          10.h,
+          20.h,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
