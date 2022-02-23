@@ -508,6 +508,7 @@ class _HomeViewState extends State<HomeView> {
                     child: DoubleBackToCloseApp(
                       snackBar: SnackBar(
                         behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2),
                         margin: EdgeInsets.only(
                           left: 16.w,
                           right: 16.w,
@@ -534,6 +535,7 @@ class _HomeViewState extends State<HomeView> {
                 : DoubleBackToCloseApp(
                     snackBar: SnackBar(
                       behavior: SnackBarBehavior.floating,
+                      duration: Duration(seconds: 2),
                       margin: EdgeInsets.only(
                         left: 16.w,
                         right: 16.w,
