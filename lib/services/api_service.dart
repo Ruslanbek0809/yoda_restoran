@@ -133,20 +133,14 @@ class ApiService {
       if (_geolocatorService.locationPosition != null) {
         await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
-          'api/restaurants/',
-          queryParameters: {
-            'markerY': _geolocatorService.locationPosition!.longitude,
-            'markerX': _geolocatorService.locationPosition!.latitude,
-          },
-        );
-      } else
-        response = await _apiRoot.dio.get(
           'api/restaurants?$_queryPars',
           queryParameters: {
             'markerY': _geolocatorService.locationPosition!.longitude,
             'markerX': _geolocatorService.locationPosition!.latitude,
           },
         );
+      } else
+        response = await _apiRoot.dio.get('api/restaurants?$_queryPars');
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
 
       if (response.data != null)
