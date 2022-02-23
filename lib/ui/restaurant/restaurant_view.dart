@@ -17,9 +17,10 @@ class RestaurantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResViewModel>.reactive(
-      onModelReady: (model) =>
-          model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
+      // onModelReady: (model) =>
+      //     model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
       builder: (context, model, child) {
+        if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
           height: 0.3.sh,
           width: 1.sw,
