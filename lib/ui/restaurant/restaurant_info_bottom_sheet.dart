@@ -45,6 +45,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                 child: SvgPicture.asset(
                   'assets/bottom_sheet_dragger.svg',
                   color: kcSecondaryLightColor,
+                  // height: 6.h,
                 ),
               ),
               Container(
