@@ -265,12 +265,12 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.star_rounded,
-                                      color: kcSecondaryDarkColor,
-                                      size: 22.w,
+                                    SvgPicture.asset(
+                                      'assets/star.svg',
+                                      color: AppTheme.MAIN_DARK,
+                                      width: 20.w,
                                     ),
-                                    SizedBox(width: 3.w),
+                                    SizedBox(width: 5.w),
                                     Text(
                                       restaurant.rating.toString(),
                                       style: TextStyle(
@@ -293,10 +293,10 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     vertical: 5.h, horizontal: 10.w),
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.access_time_rounded,
-                                      color: kcSecondaryDarkColor,
-                                      size: 22.w,
+                                    SvgPicture.asset(
+                                      'assets/clock.svg',
+                                      color: AppTheme.MAIN_DARK,
+                                      width: 20.w,
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
