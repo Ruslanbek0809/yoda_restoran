@@ -45,7 +45,6 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                 child: SvgPicture.asset(
                   'assets/bottom_sheet_dragger.svg',
                   color: kcSecondaryLightColor,
-                  height: 6.h,
                 ),
               ),
               Container(
@@ -64,19 +63,19 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       restaurant.name!,
                       maxLines: 2,
                       style: TextStyle(
-                        fontSize: 26.sp,
+                        fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
                         color: AppTheme.MAIN_DARK,
                       ),
                     ),
-                    SizedBox(height: 15.h),
+                    SizedBox(height: 12.h),
                     // --------------- NAME -------------- //
                     Row(
                       children: [
                         SvgPicture.asset(
-                          'assets/map_pin.svg',
-                          color: AppTheme.MAIN_DARK,
-                          width: 25.w,
+                          'assets/map_pin_bold.svg',
+                          color: kcSecondaryDarkColor,
+                          width: 22.w,
                         ),
                         SizedBox(width: 5.w),
                         Flexible(
@@ -85,29 +84,33 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               color: AppTheme.FONT_COLOR,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 7.h),
                     Divider(
                       thickness: 0.5,
                       color: AppTheme.DRAWER_DIVIDER,
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 7.h),
                     Row(
                       children: [
                         Text(
                           LocaleKeys.workingHours,
-                          style: ktsDefault16BoldText,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: kcFontColor,
+                          ),
                         ).tr(),
                         Text(
                           ': ${restaurant.workingHours}',
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             color: AppTheme.FONT_COLOR,
                           ),
                         ),
@@ -121,7 +124,6 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                     SizedBox(height: 10.h),
                     Text(
                       restaurant.description!,
-                      maxLines: 5,
                       style: ktsDefault14Text,
                     ),
                   ],

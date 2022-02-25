@@ -48,7 +48,10 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                       Expanded(
                         child: Text(
                           LocaleKeys.deliveryPriceWillAddByOperator,
-                          style: ktsDefault16Text,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
                         ).tr(),
                       ),
                     ],
@@ -58,16 +61,21 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: SvgPicture.asset(
-                          'assets/map_pin.svg',
-                          color: AppTheme.MAIN_DARK,
-                          width: 25.w,
+                          'assets/map_pin_bold.svg',
+                          color: kcSecondaryDarkColor,
+                          width: 22.w,
                         ),
                       ),
                       SizedBox(width: 5.w),
                       Expanded(
                         child: Text(
                           model.cartRes!.address!,
-                          style: ktsDefault16Text,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
                         ),
                       ),
                     ],
