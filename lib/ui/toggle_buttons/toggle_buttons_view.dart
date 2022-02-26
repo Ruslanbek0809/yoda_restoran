@@ -17,28 +17,44 @@ class ToggleButtonView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ToggleButtonViewModel>.reactive(
       // If in a restaurant selfPickUp TRUE and delivery is FALSE then toggle's initial value must be SELFPICKUP
-      onModelReady: (model) => restaurant.selfPickUp! && !restaurant.delivery!
-          ? model.updateToggleButton()
-          : () {},
+      onModelReady: (model) =>
+          model.isDelivery && (restaurant.selfPickUp! && !restaurant.delivery!)
+              ? model.updateToggleToSelfPickUp()
+              : (!model.isDelivery &&
+                          (!restaurant.selfPickUp! && restaurant.delivery!)) ||
+                      (!model.isDelivery &&
+                          (restaurant.selfPickUp! && restaurant.delivery!))
+                  ? model.updateToggleToDelivery()
+                  : () {},
       viewModelBuilder: () => ToggleButtonViewModel(),
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
                 onTap: () async {
                   // If restaurant's both options are TRUE, then it can SWITCH between it
                   if (restaurant.selfPickUp! && restaurant.delivery!)
-                    model.updateToggleButton();
+                    model.switchToggleButton();
 
                   if (!restaurant.selfPickUp! && restaurant.delivery!)
-                    model.updateToggleButton();
-                  await showErrorFlashBar(
-                    context: context,
-                    msg: '',
-                    margin: EdgeInsets.only(
-                      left: 16.w,
-                      right: 16.w,
-                      bottom: 0.12.sh,
-                    ),
-                  );
+                    await showErrorFlashBar(
+                      context: context,
+                      msg: LocaleKeys.toggleDeliveryOnly,
+                      margin: EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        bottom: 0.12.sh,
+                      ),
+                    );
+
+                  if (restaurant.selfPickUp! && !restaurant.delivery!)
+                    await showErrorFlashBar(
+                      context: context,
+                      msg: LocaleKeys.toggleSelfPickUpOnly,
+                      margin: EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        bottom: 0.12.sh,
+                      ),
+                    );
                 },
                 child: Container(
                   decoration: BoxDecoration(
