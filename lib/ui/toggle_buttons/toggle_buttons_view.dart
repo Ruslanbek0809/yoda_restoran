@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/models/models.dart';
 import '../../utils/utils.dart';
 
 import 'toggle_buttons_view_model.dart';
@@ -8,14 +9,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ToggleButtonView extends StatelessWidget {
-  const ToggleButtonView({Key? key}) : super(key: key);
+  final Restaurant restaurant;
+  const ToggleButtonView({required this.restaurant, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ToggleButtonViewModel>.reactive(
+      // If in a restaurant selfPickUp TRUE and delivery is FALSE then toggle's initial value must be SELFPICKUP
+      onModelReady: (model) => restaurant.selfPickUp! && !restaurant.delivery!
+          ? model.updateToggleButton()
+          : () {},
+      viewModelBuilder: () => ToggleButtonViewModel(),
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
-                onTap: model.updateToggleButton,
+                onTap: () {
+                  // If restaurant's both options are TRUE, then it can SWITCH between it
+                  if (restaurant.selfPickUp! && restaurant.delivery!)
+                    model.updateToggleButton();
+                  
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.MAIN_LIGHT,
@@ -73,7 +86,6 @@ class ToggleButtonView extends StatelessWidget {
                   ),
                 ),
               )),
-      viewModelBuilder: () => ToggleButtonViewModel(),
     );
   }
 }

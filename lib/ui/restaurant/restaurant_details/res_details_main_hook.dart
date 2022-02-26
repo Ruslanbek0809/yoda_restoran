@@ -407,7 +407,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           ),
                         ),
 //------------------ DELIVERY/SELF-PICKUP ---------------------//
-                        ToggleButtonView(),
+                        ToggleButtonView(restaurant: restaurant),
                         //------------------ MAIN DIVIDER ---------------------//
                         Container(
                           color: AppTheme.MAIN_DIVIDER_COLOR,

@@ -20,6 +20,8 @@ Restaurant _$RestaurantFromJson(Map<String, dynamic> json) => Restaurant(
       prepareTime: json['prepareTime'] as String?,
       city: json['city'] as String?,
       distance: json['distance'] as num?,
+      selfPickUp: json['selfPickUp'] as bool?,
+      delivery: json['delivery'] as bool?,
       paymentTypes: (json['paymentTypes'] as List<dynamic>?)
           ?.map((e) => PaymentType.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -40,5 +42,7 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'prepareTime': instance.prepareTime,
       'city': instance.city,
       'distance': instance.distance,
+      'selfPickUp': instance.selfPickUp,
+      'delivery': instance.delivery,
       'paymentTypes': instance.paymentTypes,
     };

@@ -28,7 +28,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
           ).tr(),
         ),
 //------------------ DELIVERY TOGGLE ---------------------//
-        ToggleButtonView(),
+        // ToggleButtonView(),
 //------------------ DELIVERY TYPE TEXT based on condition ---------------------//
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
