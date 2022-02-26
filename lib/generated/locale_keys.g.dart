@@ -140,6 +140,8 @@ abstract class  LocaleKeys {
   static const km = 'km';
   static const more = 'more';
   static const doubleBackToCloseApp = 'doubleBackToCloseApp';
+  static const toggleDeliveryOnly = 'toggleDeliveryOnly';
+  static const toggleSelfPickUpOnly = 'toggleSelfPickUpOnly';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

@@ -23,11 +23,22 @@ class ToggleButtonView extends StatelessWidget {
       viewModelBuilder: () => ToggleButtonViewModel(),
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
-                onTap: () {
+                onTap: () async {
                   // If restaurant's both options are TRUE, then it can SWITCH between it
                   if (restaurant.selfPickUp! && restaurant.delivery!)
                     model.updateToggleButton();
-                  
+
+                  if (!restaurant.selfPickUp! && restaurant.delivery!)
+                    model.updateToggleButton();
+                  await showErrorFlashBar(
+                    context: context,
+                    msg: '',
+                    margin: EdgeInsets.only(
+                      left: 16.w,
+                      right: 16.w,
+                      bottom: 0.12.sh,
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(
