@@ -104,6 +104,8 @@ class HomeSearchView extends StatelessWidget {
                                     prepareTime: _searchRestaurant.prepareTime,
                                     city: _searchRestaurant.city,
                                     distance: _searchRestaurant.distance,
+                                    selfPickUp: _searchRestaurant.selfPickUp,
+                                    delivery: _searchRestaurant.delivery,
                                     paymentTypes:
                                         _searchRestaurant.paymentTypes,
                                   )),
@@ -186,6 +188,9 @@ class HomeSearchView extends StatelessWidget {
                                               _searchRestaurant.prepareTime,
                                           city: _searchRestaurant.city,
                                           distance: _searchRestaurant.distance,
+                                          selfPickUp:
+                                              _searchRestaurant.selfPickUp,
+                                          delivery: _searchRestaurant.delivery,
                                           paymentTypes:
                                               _searchRestaurant.paymentTypes,
                                         )),
@@ -257,6 +262,8 @@ class HomeSearchView extends StatelessWidget {
                                           _searchRestaurant.prepareTime,
                                       city: _searchRestaurant.city,
                                       distance: _searchRestaurant.distance,
+                                      selfPickUp: _searchRestaurant.selfPickUp,
+                                      delivery: _searchRestaurant.delivery,
                                       paymentTypes:
                                           _searchRestaurant.paymentTypes,
                                     )),

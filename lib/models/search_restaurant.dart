@@ -22,6 +22,8 @@ class SearchRestaurant {
     this.prepareTime,
     this.city,
     this.distance,
+    this.selfPickUp,
+    this.delivery,
     this.paymentTypes,
   });
 
@@ -66,6 +68,12 @@ class SearchRestaurant {
 
   @JsonKey(name: 'distance')
   final num? distance;
+
+  @JsonKey(name: 'selfPickUp')
+  final bool? selfPickUp;
+
+  @JsonKey(name: 'delivery')
+  final bool? delivery;
 
   @JsonKey(name: 'paymentTypes')
   final List<PaymentType>? paymentTypes;

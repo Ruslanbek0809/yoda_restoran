@@ -96,6 +96,8 @@ class HiveDbService with ReactiveServiceMixin {
         deliveryPrice: restaurant.deliveryPrice,
         city: restaurant.city,
         distance: restaurant.distance,
+        selfPickUp: restaurant.selfPickUp,
+        delivery: restaurant.delivery,
         resPaymentTypes: _hiveResPaymentTypes,
       );
 

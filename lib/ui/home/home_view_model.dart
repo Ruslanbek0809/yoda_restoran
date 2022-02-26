@@ -182,6 +182,8 @@ class HomeViewModel extends MultipleFutureViewModel {
             workingHours: cartRes!.workingHours,
             city: cartRes!.city,
             distance: cartRes!.distance,
+            selfPickUp: cartRes!.selfPickUp,
+            delivery: cartRes!.delivery,
           ),
         ),
       );

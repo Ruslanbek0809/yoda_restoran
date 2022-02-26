@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/models/models.dart';
 import '../../shared/shared.dart';
 import 'cart_view_model.dart';
 import '../toggle_buttons/toggle_buttons_view.dart';
@@ -28,7 +29,25 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
           ).tr(),
         ),
 //------------------ DELIVERY TOGGLE ---------------------//
-        // ToggleButtonView(),
+        ToggleButtonView(
+          restaurant: Restaurant(
+            id: model.cartRes!.id,
+            name: model.cartRes!.name,
+            image: model.cartRes!.image,
+            rated: model.cartRes!.rated,
+            rating: model.cartRes!.rating,
+            description: model.cartRes!.description,
+            deliveryPrice: model.cartRes!.deliveryPrice,
+            address: model.cartRes!.address,
+            phoneNumber: model.cartRes!.phoneNumber,
+            prepareTime: model.cartRes!.prepareTime,
+            workingHours: model.cartRes!.workingHours,
+            city: model.cartRes!.city,
+            distance: model.cartRes!.distance,
+            selfPickUp: model.cartRes!.selfPickUp,
+            delivery: model.cartRes!.delivery,
+          ),
+        ),
 //------------------ DELIVERY TYPE TEXT based on condition ---------------------//
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),

@@ -19,6 +19,8 @@ class HiveRestaurant {
     this.prepareTime,
     this.city,
     this.distance,
+    this.selfPickUp,
+    this.delivery,
     this.resPaymentTypes,
   });
 
@@ -62,5 +64,11 @@ class HiveRestaurant {
   final num? distance;
 
   @HiveField(13)
+  final bool? selfPickUp;
+
+  @HiveField(14)
+  final bool? delivery;
+
+  @HiveField(15)
   final List<HiveResPaymentType>? resPaymentTypes;
 }
