@@ -67,7 +67,7 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
           child: Container(
             height: 0.24.sw,
             width: 1.sw,
-            decoration: BoxDecoration( 
+            decoration: BoxDecoration(
               color: AppTheme.WHITE,
               boxShadow: [AppTheme().bottomCartShadow],
             ),

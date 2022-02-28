@@ -164,18 +164,20 @@ class ResDetailsViewModel extends FutureViewModel {
 //------------------------ NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {
-    dynamic _navResult;
-    _navResult = await _navService.navigateTo(Routes.cartView) ?? true;
-    if (_navResult) await initialise(); // Workaround
+    // dynamic _navResult;
+    // _navResult =
+    await _navService.navigateTo(Routes.cartView);
+    // ?? true;
+    // if (_navResult) await initialise(); // Workaround
   }
 
   void navToResSearchView() async {
-    dynamic _navResult;
-    _navResult = await _navService.navigateTo(Routes.restaurantSearchView,
-            arguments:
-                RestaurantSearchViewArguments(restaurant: restaurant!)) ??
-        true;
-    if (_navResult) await initialise(); // Workaround
+    // dynamic _navResult;
+    // _navResult =
+    await _navService.navigateTo(Routes.restaurantSearchView,
+        arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
+    // ?? true;
+    // if (_navResult) await initialise(); // Workaround
   }
 
   /// NAVIGATES to LoginView if not logged in yet

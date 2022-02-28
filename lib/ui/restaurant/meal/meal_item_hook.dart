@@ -111,7 +111,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                     ),
                   ),
                   //------------------ MEAL PRICE ---------------------//
-                  model.isButtonToggled
+                  model.mealQuantity > 0
                       ? Padding(
                           padding: EdgeInsets.only(
                             left: 2.w,
@@ -188,7 +188,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                   //------------------ BUTTONS ---------------------//
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child: model.isButtonToggled
+                    child: model.mealQuantity > 0
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -219,8 +219,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 ),
                               ),
                               Text(
-                                model.quantity.toString(),
-                                // model.mealQuantity.toString(),
+                                // model.quantity.toString(),
+                                model.mealQuantity.toString(),
                                 style: kts18Text,
                               ),
                               Material(

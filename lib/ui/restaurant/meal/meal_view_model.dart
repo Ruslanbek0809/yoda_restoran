@@ -23,10 +23,10 @@ class MealViewModel extends ReactiveViewModel {
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
 
-  bool _isButtonToggled = false;
-  bool get isButtonToggled => _isButtonToggled;
+  // bool _isButtonToggled = false;
+  // bool get isButtonToggled => _isButtonToggled;
 
-  int quantity = 0;
+  // int quantity = 0;
 
   /// Function to update isButtonToggled
   //  void updateButtonToggle() {
@@ -37,14 +37,15 @@ class MealViewModel extends ReactiveViewModel {
 
   //----------- HIVE DB PART ------------//
 
-  /// GETS quantity of cartMeal for this meal if this meal exist in CART and TOGGLES _isButtonToggled
-  void getMealQuantity(int? mealId) {
-    quantity = _hiveDbService.getMealQuantity(mealId)!;
-    if (quantity >= 1) _isButtonToggled = true;
-    notifyListeners();
-  }
+  /// This mealQuantity is used in UI part instead of quantity var so that UI to be updated without any Workarounds
+  int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
 
-  // int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
+  /// GETS quantity of cartMeal for this meal if this meal exists in CART and TOGGLES _isButtonToggled
+  // void getMealQuantity(int? mealId) {
+  //   quantity = _hiveDbService.getMealQuantity(mealId)!;
+  //   if (quantity >= 1) _isButtonToggled = true;
+  //   notifyListeners();
+  // }
 
   /// ADDS or UPDATES a restaurant in CART with condition
   /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
@@ -78,11 +79,11 @@ class MealViewModel extends ReactiveViewModel {
       }
     }
 
-    quantity = _hiveDbService.getMealQuantity(meal.id)!;
-    if (quantity >= 1) _isButtonToggled = true;
+    // quantity = _hiveDbService.getMealQuantity(meal.id)!;
+    // if (quantity >= 1) _isButtonToggled = true;
 
-    log.i(
-        'addMealToCartWithCondition() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+    // log.i(
+    //     'addMealToCartWithCondition() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
@@ -92,14 +93,14 @@ class MealViewModel extends ReactiveViewModel {
 
     await _hiveDbService.updateMealInCart(
         mealId: mealId, quantity: mealQuantity);
-    quantity = _hiveDbService.getMealQuantity(mealId)!;
-    if (quantity >= 1)
-      _isButtonToggled = true;
-    else
-      _isButtonToggled = false;
+    // quantity = _hiveDbService.getMealQuantity(mealId)!;
+    // if (quantity >= 1)
+    //   _isButtonToggled = true;
+    // else
+    //   _isButtonToggled = false;
 
-    log.i(
-        'updateMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+    // log.i(
+    //     'updateMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
@@ -108,17 +109,17 @@ class MealViewModel extends ReactiveViewModel {
     log.i('subtractOrRemoveMealInCart() mealId: $mealId');
 
     await _hiveDbService.subtractOrRemoveMealInCart(mealId);
-    quantity = _hiveDbService.getMealQuantity(mealId)!;
-    if (quantity >= 1)
-      _isButtonToggled = true;
-    else
-      _isButtonToggled = false;
+    // quantity = _hiveDbService.getMealQuantity(mealId)!;
+    // if (quantity >= 1)
+    //   _isButtonToggled = true;
+    // else
+    //   _isButtonToggled = false;
 
     /// UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
 
-    log.i(
-        'subtractOrRemoveMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+    // log.i(
+    //     'subtractOrRemoveMealInCart() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 
@@ -190,8 +191,8 @@ class MealViewModel extends ReactiveViewModel {
 
     /// ASSINGS initial value to totalSumDraft and quantityDraft
     if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) {
-      if (quantity != 0)
-        quantityDraft = quantity;
+      if (mealQuantity != 0)
+        quantityDraft = mealQuantity;
       else
         quantityDraft = 1;
 
@@ -363,8 +364,8 @@ class MealViewModel extends ReactiveViewModel {
       }
     }
 
-    quantity = _hiveDbService.getMealQuantity(meal.id)!;
-    if (quantity >= 1) _isButtonToggled = true;
+    // quantity = _hiveDbService.getMealQuantity(meal.id)!;
+    // if (quantity >= 1) _isButtonToggled = true;
 
     /// UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
@@ -376,8 +377,8 @@ class MealViewModel extends ReactiveViewModel {
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
     // _selectedVols.clear();
-    log.i(
-        'addUpdateMealInCartFromBottomSheet() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+    // log.i(
+    //     'addUpdateMealInCartFromBottomSheet() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
     notifyListeners();
   }
 

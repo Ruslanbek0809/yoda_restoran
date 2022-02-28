@@ -18,7 +18,7 @@ class MealView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) => model.getMealQuantity(meal.id),
+      // onModelReady: (model) => model.getMealQuantity(meal.id), // This getMealQuantity is needed to update isButtonToggle part which UPDATES UI
       builder: (context, model, child) =>
           MealItemHook(meal: meal, restaurant: restaurant),
       viewModelBuilder: () => MealViewModel(mealId: meal.id),
