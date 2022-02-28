@@ -20,20 +20,10 @@ class MealViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
 
-  BottomCartStatus get bottomCartStatus => _bottomCartService
-      .bottomCartStatus; // Here I retrieved bottomCartStatus for log ONLY
-
   // bool _isButtonToggled = false;
   // bool get isButtonToggled => _isButtonToggled;
 
   // int quantity = 0;
-
-  /// Function to update isButtonToggled
-  //  void updateButtonToggle() {
-  //   _isButtonToggled = !_isButtonToggled;
-  //   log.i('_isButtonToggled: $_isButtonToggled');
-  //   notifyListeners();
-  // }
 
   //----------- HIVE DB PART ------------//
 
@@ -164,9 +154,15 @@ class MealViewModel extends ReactiveViewModel {
         mealViewModel: mealViewModel,
       ),
     );
+
+    /// These below 2 lines are implemented for rare issue cases: when user dismisses mealBottomSheet without action it preserves meal's quantity. It solves this issue.
+    quantityDraft = 1;
+    quantityDraftTempNoAttribute = 0;
   }
 
   int quantityDraft = 1;
+  int quantityDraftTempNoAttribute =
+      0; // Here quantityDraftTempNoAttribute is used in a meal with NO attributes
   num totalSumDraft = 0;
 
   bool _isAllVolSelected = false;
@@ -191,9 +187,10 @@ class MealViewModel extends ReactiveViewModel {
 
     /// ASSINGS initial value to totalSumDraft and quantityDraft
     if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) {
-      if (mealQuantity != 0)
+      if (mealQuantity != 0) {
         quantityDraft = mealQuantity;
-      else
+        quantityDraftTempNoAttribute = mealQuantity;
+      } else
         quantityDraft = 1;
 
       totalSumDraft = meal.discount != null && meal.discount! > 0
@@ -334,7 +331,8 @@ class MealViewModel extends ReactiveViewModel {
         meal,
         _selectedVols,
         _selectedCustoms,
-        quantityDraft: quantityDraft,
+        quantityDraft: quantityDraft -
+            quantityDraftTempNoAttribute, // Here quantityDraftTempNoAttribute is subtracted from quantityDraft to UPDATE a meal's quantity properly when meal doesn't have attributes
       );
     } else if (_hiveDbService.cartRes!.id == -1) {
       await _hiveDbService.updateResInCart(restaurant);
@@ -371,6 +369,7 @@ class MealViewModel extends ReactiveViewModel {
     _bottomCartService.updateResBottomCartQuantity();
 
     quantityDraft = 1;
+    quantityDraftTempNoAttribute = 0;
     _selectedCustoms.clear();
     _selectedVols = List.generate(
       _selectedVols.length,

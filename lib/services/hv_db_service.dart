@@ -370,8 +370,11 @@ class HiveDbService with ReactiveServiceMixin {
 
       // similarUpdateMeal.quantity = similarUpdateMeal.quantity! +
       //     quantityDraft!; // This is the same as below commented line
+
       _cartMeals.value[pos].quantity =
           _cartMeals.value[pos].quantity! + quantityDraft!;
+      // _cartMeals.value[pos].quantity =
+      //     _cartMeals.value[pos].quantity! + quantityDraft!;
       cartMealsBox.putAt(pos, _cartMeals.value[pos]);
       log.v(
           'similarUpdateMeal.quantity: ${similarUpdateMeal.quantity} and ${_cartMeals.value[pos].quantity}');
