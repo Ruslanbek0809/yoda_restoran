@@ -17,7 +17,7 @@ class CartService {
   List<Meal>? get moreMeals => _moreMeals;
 
   /// GETS More meals for this res
-  Future<void> getMoreMeals() async {
-    _moreMeals = await _api.getMoreMeals();
+  Future<void> getMoreMeals(int mealId, int resId) async {
+    _moreMeals = await _api.getMoreMeals(mealId, resId);
   }
 }

@@ -81,6 +81,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   flash: ^2.0.1
   smooth_page_indicator: ^1.0.0+2
+  shimmer: ^2.0.0
 
   # IMAGE
   cached_network_image: ^3.1.0

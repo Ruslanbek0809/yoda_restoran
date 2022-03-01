@@ -186,12 +186,15 @@ class ApiService {
 
   //------------------ CART APIS ---------------------//
 
-  Future<List<Meal>> getMoreMeals() async {
+  Future<List<Meal>> getMoreMeals(int mealId, int resId) async {
     List<Meal> _moreMeals = [];
     try {
-      Response response = await _apiRoot.dio
-          .get('api/restaurantMeals/', queryParameters: {'another': true});
-      // log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
+      Response response =
+          await _apiRoot.dio.get('api/restaurantMeals/', queryParameters: {
+        'another': mealId,
+        'restaurant': resId,
+      });
+      log.v('RESPONSE: api/restaurantMeals/ $mealId => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {

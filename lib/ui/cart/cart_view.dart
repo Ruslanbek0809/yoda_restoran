@@ -18,7 +18,7 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Here it is reactive instead of nonReactive is just bc delete cartMeal when its quantity is 0
     return ViewModelBuilder<CartViewModel>.reactive(
-      // onModelReady: (model) => model.getMoreMeals(),
+      onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
         model.log.v('=================== CartView ===================');
         return WillPopScope(
@@ -123,16 +123,16 @@ class CartView extends StatelessWidget {
                     //     ],
                     //   ),
                     // ),
-                    // //------------------ CART FOOD WIDGET TITLE ---------------------//
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //       top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
-                    //   child: Text(
-                    // LocaleKeys.oneMore,
-                    //     style: ktsDefault24DarkText,
-                    //   ).tr(),
-                    // ),
-                    // //------------------ CART FOOD WIDGET LIST ---------------------//
+                    //------------------ CART FOOD WIDGET TITLE ---------------------//
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                      child: Text(
+                        LocaleKeys.oneMore,
+                        style: ktsDefault24DarkText,
+                      ).tr(),
+                    ),
+                    //------------------ CART FOOD WIDGET LIST ---------------------//
                     // SingleChildScrollView(
                     //   physics: BouncingScrollPhysics(),
                     //   scrollDirection: Axis.horizontal,
