@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:yoda_res/models/hive_models/hive_models.dart';
 import 'package:yoda_res/services/services.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
@@ -186,15 +187,17 @@ class ApiService {
 
   //------------------ CART APIS ---------------------//
 
-  Future<List<Meal>> getMoreMeals(int mealId, int resId) async {
+  Future<List<Meal>> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
     List<Meal> _moreMeals = [];
+
+    String _queryPars = 'restaurant=$resId';
+    for (int i = 0; i < cartMeals.length; i++)
+      _queryPars += '&another=${cartMeals[i].id}'; // Workaround
+
     try {
       Response response =
-          await _apiRoot.dio.get('api/restaurantMeals/', queryParameters: {
-        'another': mealId,
-        'restaurant': resId,
-      });
-      log.v('RESPONSE: api/restaurantMeals/ $mealId => ${response.data}');
+          await _apiRoot.dio.get('api/restaurantMeals/?$_queryPars');
+      log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {

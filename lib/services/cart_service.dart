@@ -1,3 +1,5 @@
+import 'package:yoda_res/models/hive_models/hive_models.dart';
+
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
@@ -17,7 +19,7 @@ class CartService {
   List<Meal>? get moreMeals => _moreMeals;
 
   /// GETS More meals for this res
-  Future<void> getMoreMeals(int mealId, int resId) async {
-    _moreMeals = await _api.getMoreMeals(mealId, resId);
+  Future<void> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
+    _moreMeals = await _api.getMoreMeals(resId, cartMeals);
   }
 }
