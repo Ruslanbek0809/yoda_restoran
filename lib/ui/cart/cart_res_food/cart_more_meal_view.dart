@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'cart_more_meal_hook.dart';
 import 'cart_more_meal_view_model.dart';
 
@@ -8,10 +9,13 @@ class CartMoreMealView extends StatelessWidget {
   final Meal meal;
   final Restaurant
       restaurant; // Needed for add meal with conditions only in CART
+  final CartViewModel
+      cartViewModel; // Needed for add meal with conditions only in CART
   const CartMoreMealView({
     Key? key,
     required this.meal,
     required this.restaurant,
+    required this.cartViewModel,
   }) : super(key: key);
 
   @override
@@ -21,7 +25,8 @@ class CartMoreMealView extends StatelessWidget {
         restaurant: restaurant,
         meal: meal,
       ),
-      viewModelBuilder: () => CartMoreMealViewModel(mealId: meal.id),
+      viewModelBuilder: () =>
+          CartMoreMealViewModel(mealId: meal.id, cartViewModel: cartViewModel),
     );
   }
 }

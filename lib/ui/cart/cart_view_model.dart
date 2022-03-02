@@ -32,10 +32,8 @@ class CartViewModel extends ReactiveViewModel {
 
   /// FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
-    await runBusyFuture(
-        _cartService.getMoreMeals(cartRes!.id!, cartMeals));
-    log.i(
-        'moreMeals length: ${moreMeals!.length} ');
+    await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals));
+    log.i('moreMeals length: ${moreMeals!.length} ');
   }
 
   /// CLEARS CART
@@ -45,6 +43,12 @@ class CartViewModel extends ReactiveViewModel {
     await _hiveDbService.clearCart();
     log.i('cartMeals length: ${cartMeals.length}');
     await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+  }
+
+  /// UPDATES UI from CartMoreMealVM
+  void updateUIfromCartMoreMealVM() {
+    log.i('updateUIfromCartMoreMealVM()');
+    notifyListeners();
   }
 
   /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity

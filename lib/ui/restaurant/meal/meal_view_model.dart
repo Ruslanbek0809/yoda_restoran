@@ -320,7 +320,7 @@ class MealViewModel extends ReactiveViewModel {
   Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, Restaurant? restaurant) async {
     log.i(
-        'addMealToCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
+        'addUpdateMealInCartFromBottomSheet() mealId: ${meal!.id}, resId: ${restaurant!.id}');
 
     if (_hiveDbService.cartMeals.isEmpty)
       await _hiveDbService

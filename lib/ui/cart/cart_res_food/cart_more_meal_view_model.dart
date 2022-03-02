@@ -6,12 +6,14 @@ import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
+import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
 class CartMoreMealViewModel extends BaseViewModel {
   final log = getLogger('CartMoreMealViewModel');
   final int? mealId;
-  CartMoreMealViewModel({this.mealId});
+  final CartViewModel cartViewModel;
+  CartMoreMealViewModel({this.mealId, required this.cartViewModel});
 
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
@@ -33,6 +35,7 @@ class CartMoreMealViewModel extends BaseViewModel {
     /// UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
 
+    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel
     notifyListeners();
   }
 
@@ -290,6 +293,7 @@ class CartMoreMealViewModel extends BaseViewModel {
 
     /// UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
+    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel
 
     quantityDraft = 1;
     quantityDraftTempNoAttribute = 0;

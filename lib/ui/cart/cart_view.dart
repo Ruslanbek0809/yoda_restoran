@@ -170,6 +170,7 @@ class CartView extends StatelessWidget {
                                   selfPickUp: model.cartRes!.selfPickUp,
                                   delivery: model.cartRes!.delivery,
                                 ),
+                                cartViewModel: model,
                               ),
                             );
                           }).toList(),
