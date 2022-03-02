@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/models.dart';
-import '../../restaurant/meal/meal_bottom_sheet_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 
-import 'cart_res_food_view_model.dart';
+import 'cart_more_meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CartResFoodView extends StatefulWidget {
-  final MealUI food;
-  const CartResFoodView({Key? key, required this.food}) : super(key: key);
+class CartMoreMealHook extends StatefulWidget {
+  final Meal meal;
+  const CartMoreMealHook({Key? key, required this.meal}) : super(key: key);
 
   @override
-  State<CartResFoodView> createState() => _CartResFoodViewState();
+  State<CartMoreMealHook> createState() => _CartMoreMealHookState();
 }
 
-class _CartResFoodViewState extends State<CartResFoodView>
+class _CartMoreMealHookState extends State<CartMoreMealHook>
     with TickerProviderStateMixin {
   late AnimationController _tweenController;
   Tween<double> _tween = Tween(begin: 1, end: 0.98);
 
-  late MealUI food;
+  late Meal food;
   bool isButtonToggled = false;
 
   @override
@@ -45,13 +44,9 @@ class _CartResFoodViewState extends State<CartResFoodView>
     super.dispose();
   }
 
-  void _onProductBottomSheetClicked(MealUI food) {
-    // showFoodBottomSheet(context, food);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CartResFoodViewModel>.reactive(
+    return ViewModelBuilder<CartMoreMealViewModel>.reactive(
       builder: (context, model, child) => ScaleTransition(
         scale: _tween.animate(CurvedAnimation(
             parent: _tweenController, curve: Curves.bounceInOut)),
@@ -190,7 +185,7 @@ class _CartResFoodViewState extends State<CartResFoodView>
           ),
         ),
       ),
-      viewModelBuilder: () => CartResFoodViewModel(),
+      viewModelBuilder: () => CartMoreMealViewModel(),
     );
   }
 }

@@ -35,7 +35,7 @@ class CartViewModel extends ReactiveViewModel {
     await runBusyFuture(
         _cartService.getMoreMeals(cartRes!.id!, cartMeals));
     log.i(
-        '${cartMeals[0].id!}, ${cartMeals[1].id!}, moreMeals length: ${moreMeals!.length} ');
+        'moreMeals length: ${moreMeals!.length} ');
   }
 
   /// CLEARS CART

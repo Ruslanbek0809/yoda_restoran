@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meal_view.dart';
 import '../../shared/shared.dart';
+import 'cart_res_food/cart_more_meal_hook.dart';
 import 'cart_toggle_button.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
@@ -124,34 +126,36 @@ class CartView extends StatelessWidget {
                     //   ),
                     // ),
                     //------------------ CART FOOD WIDGET TITLE ---------------------//
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
-                      child: Text(
-                        LocaleKeys.oneMore,
-                        style: ktsDefault24DarkText,
-                      ).tr(),
-                    ),
+                    if (!model.hasError)
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                        child: Text(
+                          LocaleKeys.oneMore,
+                          style: ktsDefault24DarkText,
+                        ).tr(),
+                      ),
                     //------------------ CART FOOD WIDGET LIST ---------------------//
-                    // SingleChildScrollView(
-                    //   physics: BouncingScrollPhysics(),
-                    //   scrollDirection: Axis.horizontal,
-                    //   child: Row(
-                    //     children: mealList.map((food) {
-                    //       return mealList.indexOf(food) == 0
-                    //           ? Padding(
-                    //               padding:
-                    //                   EdgeInsets.only(right: 6.w, left: 16.w),
-                    //               child: CartResFoodView(food: food),
-                    //             )
-                    //           : Padding(
-                    //               padding:
-                    //                   EdgeInsets.symmetric(horizontal: 5.w),
-                    //               child: CartResFoodView(food: food),
-                    //             );
-                    //     }).toList(),
-                    //   ),
-                    // ),
+                    SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: model.moreMeals!.map((meal) {
+                          return model.moreMeals!.indexOf(meal) == 0
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      right: 6.w,
+                                      left: 16.w), // For proper padding
+                                  child: CartMoreMealView(meal: meal),
+                                )
+                              : Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.w),
+                                  child: CartMoreMealView(meal: meal),
+                                );
+                        }).toList(),
+                      ),
+                    ),
                     //------------------ TOGGLE BUTTON ---------------------//
                     CartToggleButton(),
                     SizedBox(
