@@ -3,13 +3,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/ui/cart/cart_view_model.dart';
 import 'package:yoda_res/utils/utils.dart';
 
-class CartMoreMealViewModel extends BaseViewModel {
+class CartMoreMealViewModel extends ReactiveViewModel {
   final log = getLogger('CartMoreMealViewModel');
   final int? mealId;
   final CartViewModel cartViewModel;
@@ -17,7 +16,6 @@ class CartMoreMealViewModel extends BaseViewModel {
 
   final _bottomCartService = locator<BottomCartService>();
   final _bottomSheetService = locator<BottomSheetService>();
-  final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
 
@@ -25,43 +23,6 @@ class CartMoreMealViewModel extends BaseViewModel {
 
   /// This mealQuantity is used in UI part instead of quantity var so that UI to be updated without any Workarounds
   int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
-
-  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
-  Future<void> subtractOrRemoveMealInCart(int? mealId) async {
-    log.i('subtractOrRemoveMealInCart() mealId: $mealId');
-
-    await _hiveDbService.subtractOrRemoveMealInCart(mealId);
-
-    /// UPDATES ResBottomCart's quantity
-    _bottomCartService.updateResBottomCartQuantity();
-
-    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel
-    notifyListeners();
-  }
-
-//------------------------ MEAL CART DIALOG PART ----------------------------//
-
-  /// SHOWS Clear or Navigate Cart Dialog
-  Future showClearOrNavigateCartDialog() async {
-    log.i('');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.mealCartClear,
-      title: LocaleKeys.clearCartPls,
-      description: LocaleKeys.cart_is_full_with_other_restaurant,
-      mainButtonTitle: LocaleKeys.clearCart,
-      secondaryButtonTitle: LocaleKeys.goToCart,
-      showIconInMainButton: false,
-      barrierDismissible: true,
-    );
-  }
-
-  /// CLEAR CART
-  Future<void> clearCart() async {
-    log.i('clearCart()');
-
-    await _hiveDbService.clearCart();
-    notifyListeners();
-  }
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
@@ -260,40 +221,10 @@ class CartMoreMealViewModel extends BaseViewModel {
         quantityDraft: quantityDraft -
             quantityDraftTempNoAttribute, // Here quantityDraftTempNoAttribute is subtracted from quantityDraft to UPDATE a meal's quantity properly when meal doesn't have attributes
       );
-    } else if (_hiveDbService.cartRes!.id == -1) {
-      await _hiveDbService.updateResInCart(restaurant);
-      await _hiveDbService.addUpdateMealInCartFromBottomSheet(
-        meal,
-        _selectedVols,
-        _selectedCustoms,
-        quantityDraft: quantityDraft,
-      );
-      _bottomCartService
-          .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
-    } else if (_hiveDbService.cartRes!.id != meal.restaurantId &&
-        _hiveDbService.cartRes!.id != -1) {
-      await showClearOrNavigateCartDialog(); // CALLS MealDialogView
-
-      /// If user CLEARS cart then START below functions
-      if (_hiveDbService.cartMeals.isEmpty) {
-        _bottomCartService
-            .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
-        await _hiveDbService.updateResInCart(restaurant);
-        await _hiveDbService.addUpdateMealInCartFromBottomSheet(
-          meal,
-          _selectedVols,
-          _selectedCustoms,
-          quantityDraft: quantityDraft,
-        );
-      }
     }
 
-    // quantity = _hiveDbService.getMealQuantity(meal.id)!;
-    // if (quantity >= 1) _isButtonToggled = true;
-
-    /// UPDATES ResBottomCart's quantity
-    _bottomCartService.updateResBottomCartQuantity();
-    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel
+    _bottomCartService
+        .updateResBottomCartQuantity(); // UPDATES ResBottomCart's quantity
 
     quantityDraft = 1;
     quantityDraftTempNoAttribute = 0;
@@ -302,16 +233,27 @@ class CartMoreMealViewModel extends BaseViewModel {
       _selectedVols.length,
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
-    // _selectedVols.clear();
-    // log.i(
-    //     'addUpdateMealInCartFromBottomSheet() quantity: $quantity, _isButtonToggled: $_isButtonToggled');
+
     notifyListeners();
+    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel UI
+  }
+
+  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  Future<void> subtractOrRemoveMealInCart(int? mealId) async {
+    log.i('subtractOrRemoveMealInCart() mealId: $mealId');
+
+    await _hiveDbService.subtractOrRemoveMealInCart(mealId);
+
+    /// UPDATES ResBottomCart's quantity
+    _bottomCartService.updateResBottomCartQuantity();
+
+    notifyListeners();
+    cartViewModel.updateUIfromCartMoreMealVM(); // UPDATES CartViewModel UI
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
 
-  Future navToCartView() async => await _navService
-      .navigateTo(Routes.cartView); // TODO: Change page transition here
+  Future navToCartView() async => await _navService.navigateTo(Routes.cartView);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meal_view.dart';
+import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meals_shimmer.dart';
 import '../../shared/shared.dart';
 import 'cart_toggle_button.dart';
 import '../widgets/widgets.dart';
@@ -125,56 +126,69 @@ class CartView extends StatelessWidget {
                     //     ],
                     //   ),
                     // ),
-                    //------------------ CART FOOD WIDGET TITLE ---------------------//
+                    //------------------ CART MEAL WIDGET TITLE ---------------------//
                     if (!model.hasError)
                       Padding(
                         padding: EdgeInsets.only(
-                            top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
+                            top: 20.h, bottom: 10.h, left: 16.w, right: 16.w),
                         child: Text(
                           LocaleKeys.oneMore,
                           style: ktsDefault24DarkText,
                         ).tr(),
                       ),
-                    //------------------ CART FOOD WIDGET LIST ---------------------//
-                    if (model.moreMeals!.isNotEmpty)
-                      SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: model.moreMeals!.map((meal) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                  right: model.moreMeals!.indexOf(meal) ==
-                                          model.moreMeals!.length - 1
-                                      ? 16.w
-                                      : 4.w,
-                                  left: model.moreMeals!.indexOf(meal) == 0
-                                      ? 16.w
-                                      : 4.w), // For proper padding
-                              child: CartMoreMealView(
-                                meal: meal,
-                                restaurant: Restaurant(
-                                  id: model.cartRes!.id,
-                                  name: model.cartRes!.name,
-                                  image: model.cartRes!.image,
-                                  rated: model.cartRes!.rated,
-                                  rating: model.cartRes!.rating,
-                                  description: model.cartRes!.description,
-                                  deliveryPrice: model.cartRes!.deliveryPrice,
-                                  address: model.cartRes!.address,
-                                  phoneNumber: model.cartRes!.phoneNumber,
-                                  prepareTime: model.cartRes!.prepareTime,
-                                  workingHours: model.cartRes!.workingHours,
-                                  city: model.cartRes!.city,
-                                  distance: model.cartRes!.distance,
-                                  selfPickUp: model.cartRes!.selfPickUp,
-                                  delivery: model.cartRes!.delivery,
+                    //------------------ CART MEAL WIDGET LIST ---------------------//
+                    if (!model.hasError)
+                      AnimatedSwitcher(
+                        duration: Duration(milliseconds: 300),
+                        child: model.isBusy
+                            ? CartMoreMealsShimmerWidget()
+                            : SingleChildScrollView(
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: model.moreMeals!.map((meal) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          right: model.moreMeals!
+                                                      .indexOf(meal) ==
+                                                  model.moreMeals!.length - 1
+                                              ? 16.w
+                                              : 4.w,
+                                          left:
+                                              model.moreMeals!.indexOf(meal) ==
+                                                      0
+                                                  ? 16.w
+                                                  : 4.w), // For proper padding
+                                      child: CartMoreMealView(
+                                        meal: meal,
+                                        restaurant: Restaurant(
+                                          id: model.cartRes!.id,
+                                          name: model.cartRes!.name,
+                                          image: model.cartRes!.image,
+                                          rated: model.cartRes!.rated,
+                                          rating: model.cartRes!.rating,
+                                          description:
+                                              model.cartRes!.description,
+                                          deliveryPrice:
+                                              model.cartRes!.deliveryPrice,
+                                          address: model.cartRes!.address,
+                                          phoneNumber:
+                                              model.cartRes!.phoneNumber,
+                                          prepareTime:
+                                              model.cartRes!.prepareTime,
+                                          workingHours:
+                                              model.cartRes!.workingHours,
+                                          city: model.cartRes!.city,
+                                          distance: model.cartRes!.distance,
+                                          selfPickUp: model.cartRes!.selfPickUp,
+                                          delivery: model.cartRes!.delivery,
+                                        ),
+                                        cartViewModel: model,
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
-                                cartViewModel: model,
                               ),
-                            );
-                          }).toList(),
-                        ),
                       ),
                     //------------------ TOGGLE BUTTON ---------------------//
                     CartToggleButton(),
