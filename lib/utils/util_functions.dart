@@ -84,6 +84,7 @@ enum BottomSheetType {
   mainCategory,
   restaurantInfo,
   meal,
+  cartMoreMeal,
   checkout,
   paymentType,
   selectAddress,

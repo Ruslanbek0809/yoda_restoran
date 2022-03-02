@@ -45,14 +45,16 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         ),
       ),
       child: GestureDetector(
-        onTap: () async =>
-            await model.showCustomMealBottomSheet(meal, restaurant, model),
+        onTap: () async {
+          await _tweenController.forward();
+          await model.showCustomMealBottomSheet(meal, restaurant, model);
+        },
         child: Container(
           decoration: BoxDecoration(
-            color: AppTheme.MAIN_LIGHT,
+            color: kcSecondaryLightColor,
             borderRadius: AppTheme().radius20,
           ),
-          padding: EdgeInsets.fromLTRB(6.w, 6.w, 6.w, 6.h),
+          padding: EdgeInsets.fromLTRB(6.w, 6.h, 6.w, 6.h),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return Column(
@@ -242,10 +244,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           await model
                                               .addUpdateMealInCartFromBottomSheet(
                                                   meal, restaurant);
-                                          // await model.updateMealInCart(
-                                          //   mealId: meal.id,
-                                          //   mealQuantity: model.quantity + 1,
-                                          // );
                                           await _tweenController.forward();
                                         },
                                   child: Padding(

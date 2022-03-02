@@ -1,5 +1,4 @@
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/models.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../services/services.dart';

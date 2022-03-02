@@ -6,13 +6,22 @@ import 'cart_more_meal_view_model.dart';
 
 class CartMoreMealView extends StatelessWidget {
   final Meal meal;
-  const CartMoreMealView({Key? key, required this.meal}) : super(key: key);
+  final Restaurant
+      restaurant; // Needed for add meal with conditions only in CART
+  const CartMoreMealView({
+    Key? key,
+    required this.meal,
+    required this.restaurant,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartMoreMealViewModel>.reactive(
-      builder: (context, model, child) => CartMoreMealHook(meal: meal),
-      viewModelBuilder: () => CartMoreMealViewModel(),
+      builder: (context, model, child) => CartMoreMealHook(
+        restaurant: restaurant,
+        meal: meal,
+      ),
+      viewModelBuilder: () => CartMoreMealViewModel(mealId: meal.id),
     );
   }
 }

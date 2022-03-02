@@ -473,7 +473,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 padding: EdgeInsets.only(right: 16.w),
                                 child: Text(
                                   '${formatNum(model.getTotalCartSum)} TMT -${formatNum(model.getPromocodePrice)} TMT',
-                                  style: ktsDefault12Text,
+                                  style: kts12PromocodeText,
                                 ),
                               ),
                               Padding(

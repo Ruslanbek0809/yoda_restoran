@@ -1,5 +1,6 @@
 import 'package:stacked_services/stacked_services.dart';
 import '../app/app.locator.dart';
+import 'cart/cart_res_food/cart_more_meal_bottom_sheet_view.dart';
 import 'cart/checkout/checkout_address/checkout_select_address_bottom_sheet.dart';
 import 'restaurant/meal/meal_bottom_sheet_view.dart';
 import '../utils/utils.dart';
@@ -30,6 +31,14 @@ void setupBottomSheet() {
           meal: sheetRequest.data.meal,
           restaurant: sheetRequest.data.restaurant,
           mealViewModel: sheetRequest.data.mealViewModel,
+        ),
+    BottomSheetType.cartMoreMeal: (context, sheetRequest, completer) =>
+        CartMoreMealBottomSheet(
+          request: sheetRequest,
+          completer: completer,
+          meal: sheetRequest.data.meal,
+          restaurant: sheetRequest.data.restaurant,
+          cartMoreMealViewModel: sheetRequest.data.cartMoreMealViewModel,
         ),
     BottomSheetType.checkout: (context, sheetRequest, completer) =>
         CheckoutBottomSheetView(

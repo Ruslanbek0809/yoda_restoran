@@ -36,6 +36,17 @@ TextStyle ktsButton18ContactText = TextStyle(
 
 TextStyle ktsDefault12Text = TextStyle(
   fontSize: 12.sp,
+  fontWeight: FontWeight.normal,
+  color: kcFontColor,
+);
+
+TextStyle kts12HelperText = TextStyle(
+  fontSize: 12.sp,
+  color: kcHelperColor,
+);
+
+TextStyle kts12PromocodeText = TextStyle(
+  fontSize: 12.sp,
   color: kcPromocodeColor,
 );
 

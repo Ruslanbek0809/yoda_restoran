@@ -1,191 +1,323 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/shared/app_colors.dart';
+import 'package:yoda_res/shared/styles.dart';
+import 'package:yoda_res/ui/restaurant/meal/meal_view_model.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
-
-import 'cart_more_meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'cart_more_meal_view_model.dart';
 
-class CartMoreMealHook extends StatefulWidget {
+class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
   final Meal meal;
-  const CartMoreMealHook({Key? key, required this.meal}) : super(key: key);
+  final Restaurant
+      restaurant; // Needed for add meal with conditions only in CART
+  const CartMoreMealHook({
+    Key? key,
+    required this.meal,
+    required this.restaurant,
+  }) : super(key: key);
 
   @override
-  State<CartMoreMealHook> createState() => _CartMoreMealHookState();
-}
+  Widget buildViewModelWidget(BuildContext context, CartMoreMealViewModel model) {
+    double itemWidth = 0.35.sw + 10.w;
+    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
+    double itemHeight = itemWidth * 1.75; // 0.32.sw is for item height
 
-class _CartMoreMealHookState extends State<CartMoreMealHook>
-    with TickerProviderStateMixin {
-  late AnimationController _tweenController;
-  Tween<double> _tween = Tween(begin: 1, end: 0.98);
+    Tween<double> _tween = Tween(begin: 1, end: 0.98);
+    final _tweenController = useAnimationController(
+      duration: const Duration(milliseconds: 100),
+    );
 
-  late Meal food;
-  bool isButtonToggled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    food = widget.food;
-//// Container bounce back
-    _tweenController = AnimationController(
-        duration: const Duration(milliseconds: 50), vsync: this)
-      ..addStatusListener((status) {
-//// This listener was used to repeat animation once
+    /// To dispose a status listener attached to _tweenController
+    useEffect(() {
+      void _listenerStatus(AnimationStatus status) {
+        // This listener was used to repeat animation once
         if (status == AnimationStatus.completed) {
           _tweenController.reverse();
         }
-      });
-  }
+      }
 
-  @override
-  void dispose() {
-    _tweenController.dispose();
-    super.dispose();
-  }
+      _tweenController..addStatusListener(_listenerStatus);
+      return () => _tweenController.removeStatusListener(_listenerStatus);
+    }, [_tweenController]);
 
-  @override
-  Widget build(BuildContext context) {
-    return ViewModelBuilder<CartMoreMealViewModel>.reactive(
+    return ViewModelBuilder<MealViewModel>.reactive(
       builder: (context, model, child) => ScaleTransition(
-        scale: _tween.animate(CurvedAnimation(
-            parent: _tweenController, curve: Curves.bounceInOut)),
-        child: Container(
-          width: 0.33.sw +
-              10.w, // this width is used to make spaceBetween work in Row Button widgets
-          decoration: BoxDecoration(
-            color: AppTheme.MAIN_LIGHT,
-            borderRadius: AppTheme().radius20,
+        scale: _tween.animate(
+          CurvedAnimation(
+            parent: _tweenController,
+            curve: Curves.bounceInOut,
           ),
-          padding: EdgeInsets.all(6.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              YodaImage(
-                image: food.image,
-                height: 0.33.sw,
-                width: 0.33.sw,
-                borderRadius: Constants.BORDER_RADIUS_20,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 7.w, bottom: 2.w),
-                child: Text(
-                  food.name,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppTheme.FONT_COLOR,
-                  ),
-                ),
-              ),
-              Text(
-                '${food.weight} ${food.weightType}',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: AppTheme.DRAWER_ICON,
-                ),
-              ),
-              SizedBox(height: 15.w),
-//// Button Widget
-              AnimatedSwitcher(
-                duration: Duration(milliseconds: 300),
-                child: isButtonToggled
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Material(
-                            color: AppTheme.WHITE,
-                            borderRadius: AppTheme().radius15,
-                            elevation: 3,
-                            shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                            child: InkWell(
-                              borderRadius: AppTheme().radius15,
-                              onTap: () async {
-                                _tweenController.forward();
-                                if (isButtonToggled)
-                                  setState(() {
-                                    isButtonToggled = !isButtonToggled;
-                                  });
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.all(8.w),
-                                child: Icon(
-                                  Icons.remove,
-                                  size: 22.w,
-                                  color: AppTheme.FONT_COLOR,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            '1',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppTheme.FONT_COLOR,
-                            ),
-                          ),
-                          Material(
-                            color: AppTheme.WHITE,
-                            borderRadius: AppTheme().radius15,
-                            elevation: 3,
-                            shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                            child: InkWell(
-                              borderRadius: AppTheme().radius15,
-                              onTap: () {
-                                _tweenController.forward();
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.all(8.w),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 22.w,
-                                  color: AppTheme.FONT_COLOR,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Material(
-                        color: Colors.transparent,
-                        borderRadius: AppTheme().radius15,
-                        elevation: 3,
-                        shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
-                        child: InkWell(
-                          borderRadius: AppTheme().radius15,
-                          onTap: () async {
-                            //// Bouncing animation trigger
-                            _tweenController.forward();
-                            //// Toggle switch animation between price and quantity
-                            if (!isButtonToggled)
-                              setState(() {
-                                isButtonToggled = !isButtonToggled;
-                              });
-                          },
-                          child: Ink(
-                            width: 0.33.sw,
+        ),
+        child: GestureDetector(
+          onTap: () async {
+            await _tweenController.forward();
+            await model.showCustomMealBottomSheet(meal, restaurant, model);
+          },
+          child: Container(
+            width: itemWidth,
+            height: itemHeight,
+            decoration: BoxDecoration(
+              color: kcSecondaryLightColor,
+              borderRadius: AppTheme().radius20,
+            ),
+            padding: EdgeInsets.fromLTRB(5.w, 5.h, 5.w, 5.h),
+            child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      YodaImage(
+                        image: meal.image!,
+                        height: constraints.maxWidth,
+                        width: constraints.maxWidth,
+                        borderRadius: Constants.BORDER_RADIUS_20,
+                      ),
+                      if (meal.discount != null && meal.discount! > 0)
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 3.h),
                             decoration: BoxDecoration(
-                              color: AppTheme.WHITE,
-                              borderRadius: AppTheme().radius15,
+                              color: AppTheme.GREEN_COLOR,
+                              borderRadius: BorderRadius.only(
+                                topLeft:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                                bottomRight:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                              ),
                             ),
-                            padding: EdgeInsets.symmetric(vertical: 10.w),
-                            child: Text(
-                              '${formatNum(food.price)} TMT',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: AppTheme.FONT_COLOR,
+                            child: FittedBox(
+                              child: Text(
+                                '-${formatNum(meal.discount!)}%',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: kcWhiteColor,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-              ),
-            ],
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 4.h,
+                      bottom: 2.h,
+                      left: 2.w,
+                      right: 2.w,
+                    ),
+                    child: Text(
+                      'Americano expresso mexpresso',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: ktsDefault12Text,
+                    ),
+                  ),
+                  //------------------ MEAL PRICE ---------------------//
+                  model.mealQuantity > 0
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                            left: 2.w,
+                            right: 2.w,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                meal.discount != null || meal.discount! > 0
+                                    ? '${formatNum(meal.discountedPrice!)} TMT'
+                                    : '${formatNum(meal.price!)} TMT',
+                                style: kts12HelperText,
+                              ),
+                              if (meal.value != null)
+                                Text(
+                                  ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                  style: kts12HelperText,
+                                ),
+                            ],
+                          ),
+                        )
+                      : meal.value != null
+                          ? meal.discount != null && meal.discount! > 0
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${formatNum(meal.price!)} TMT',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: kcHelperColor,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
+                                      ),
+                                      Text(
+                                        ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                        style: kts12HelperText,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Text(
+                                    '${formatNum(meal.value!)} ${meal.size!.name}',
+                                    style: kts12HelperText,
+                                  ),
+                                )
+                          : meal.discount != null && meal.discount! > 0
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2.w,
+                                    right: 2.w,
+                                  ),
+                                  child: Text(
+                                    '${formatNum(meal.price!)} TMT',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: kcHelperColor,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                  Spacer(), //------------------ BUTTONS ---------------------//
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: model.mealQuantity > 0
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Material(
+                                color: AppTheme.WHITE,
+                                borderRadius: AppTheme().radius15,
+                                elevation: 3,
+                                shadowColor:
+                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                child: InkWell(
+                                  borderRadius: AppTheme().radius15,
+                                  onTap: () async {
+                                    await model
+                                        .subtractOrRemoveMealInCart(meal.id);
+                                    await _tweenController.forward();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 8.h,
+                                    ),
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 18.w,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                model.mealQuantity.toString(),
+                                style: ktsDefault16Text,
+                              ),
+                              Material(
+                                color: AppTheme.WHITE,
+                                borderRadius: AppTheme().radius15,
+                                elevation: 3,
+                                shadowColor:
+                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                child: InkWell(
+                                  borderRadius: AppTheme().radius15,
+                                  onTap: meal.gVolumes!.isNotEmpty ||
+                                          meal.gCustomizables!.isNotEmpty
+                                      ? () async {
+                                          await _tweenController.forward();
+                                          await model.showCustomMealBottomSheet(
+                                              meal, restaurant, model);
+                                        }
+                                      : () async {
+                                          await model
+                                              .addUpdateMealInCartFromBottomSheet(
+                                                  meal, restaurant);
+                                          await _tweenController.forward();
+                                        },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 8.h,
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 18.w,
+                                      color: AppTheme.FONT_COLOR,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Material(
+                            color: Colors.transparent,
+                            borderRadius: AppTheme().radius15,
+                            elevation: 3,
+                            shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                            child: InkWell(
+                              borderRadius: AppTheme().radius15,
+                              onTap: meal.gVolumes!.isNotEmpty ||
+                                      meal.gCustomizables!.isNotEmpty
+                                  ? () async {
+                                      await _tweenController.forward();
+                                      await model.showCustomMealBottomSheet(
+                                          meal, restaurant, model);
+                                    }
+                                  : () async {
+                                      await model
+                                          .addUpdateMealInCartFromBottomSheet(
+                                              meal, restaurant);
+                                      await model.addMealToCart(
+                                        meal,
+                                        restaurant,
+                                      );
+                                      await _tweenController.forward();
+                                    },
+                              child: Ink(
+                                width: constraints.maxWidth,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.WHITE,
+                                  borderRadius: AppTheme().radius15,
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Text(
+                                  meal.discount != null && meal.discount! > 0
+                                      ? '${formatNum(meal.discountedPrice!)} TMT'
+                                      : '${formatNum(meal.price!)} TMT',
+                                  textAlign: TextAlign.center,
+                                  style: ktsDefault16Text,
+                                ),
+                              ),
+                            ),
+                          ),
+                  )
+                ],
+              );
+            }),
           ),
         ),
       ),
-      viewModelBuilder: () => CartMoreMealViewModel(),
+      viewModelBuilder: () => MealViewModel(),
     );
   }
 }

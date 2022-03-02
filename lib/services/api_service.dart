@@ -197,7 +197,7 @@ class ApiService {
     try {
       Response response =
           await _apiRoot.dio.get('api/restaurantMeals/?$_queryPars');
-      log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
+      // log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_resCategory) {
