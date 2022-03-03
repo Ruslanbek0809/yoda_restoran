@@ -10,7 +10,7 @@ class Exclusive {
     this.id,
     this.name,
     this.order,
-    this.restaurants,
+    this.exclusiveSingles,
   });
 
   @JsonKey(name: 'id')
@@ -23,7 +23,7 @@ class Exclusive {
   final int? order;
 
   @JsonKey(name: 'exclusives')
-  final List<ExclusiveSingle>? restaurants;
+  final List<ExclusiveSingle>? exclusiveSingles;
 
   factory Exclusive.fromJson(Map<String, dynamic> json) =>
       _$ExclusiveFromJson(json);

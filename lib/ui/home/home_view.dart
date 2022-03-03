@@ -12,6 +12,7 @@ import 'package:yoda_res/library/upgrader_translations.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import '../../shared/shared.dart';
 import 'home_bottom_cart.dart';
+import 'home_exclusives/home_exclusives.dart';
 import 'main_category/main_cat_view.dart';
 import '../restaurant/promoted/prom_res_view.dart';
 import '../restaurant/restaurant_view.dart';
@@ -269,34 +270,62 @@ class _HomeViewState extends State<HomeView> {
                                   child: MainCatView(),
                                 ),
                               ),
-                              // //------------------ DISCOUNTS ---------------------//
-                              // if (model.selectedMainCatRestaurants.isEmpty)
-                              //   SliverPersistentHeader(
-                              //     pinned: false,
-                              //     floating: false,
-                              //     delegate: ContestTabHeader(
-                              //       child: Column(
-                              //         crossAxisAlignment:
-                              //             CrossAxisAlignment.start,
-                              //         children: [
-                              //           Padding(
-                              //             padding: EdgeInsets.only(
-                              //                 left: 15.w, top: 12.h),
-                              //             child: Text(
-                              //               'Aksiýalar',
-                              //               style: TextStyle(
-                              //                 fontSize: 24.sp,
-                              //                 fontWeight: FontWeight.bold,
-                              //                 color: AppTheme.MAIN_DARK,
-                              //               ),
-                              //             ),
-                              //           ),
-                              //           HomeDiscounts(discounts: discounts),
-                              //         ],
-                              //       ),
-                              //       size: 135.h,
-                              //     ),
-                              //   ),
+                              //------------------ EXCLUSIVES ---------------------//
+                              if (model.selectedMainCatRestaurants.isEmpty &&
+                                  model.exclusives!.isNotEmpty)
+                                SliverPersistentHeader(
+                                  pinned: false,
+                                  floating: false,
+                                  delegate: ContestTabHeader(
+                                    size: 135.h,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 16.w, top: 12.h),
+                                          child: Text(
+                                            model.exclusives![0].name!,
+                                            style: TextStyle(
+                                              fontSize: 24.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppTheme.MAIN_DARK,
+                                            ),
+                                          ),
+                                        ),
+                                        HomeExclusives(
+                                            exlusiveSingles: model
+                                                .exclusives![0]
+                                                .exclusiveSingles!),
+                                      ],
+
+                                      // model.exclusives!
+                                      //     .map((_exclusive) => Column(
+                                      //           children: [
+                                      //             Padding(
+                                      //               padding: EdgeInsets.only(
+                                      //                   left: 16.w, top: 12.h),
+                                      //               child: Text(
+                                      //                 _exclusive.name!,
+                                      //                 style: TextStyle(
+                                      //                   fontSize: 24.sp,
+                                      //                   fontWeight:
+                                      //                       FontWeight.bold,
+                                      //                   color:
+                                      //                       AppTheme.MAIN_DARK,
+                                      //                 ),
+                                      //               ),
+                                      //             ),
+                                      //             HomeExclusives(
+                                      //                 exlusiveSingles: _exclusive
+                                      //                     .exclusiveSingles!),
+                                      //           ],
+                                      //         ))
+                                      //     .toList(),
+                                    ),
+                                  ),
+                                ),
                               //------------------ BODY: RESTAURANTS ---------------------//
                               SliverList(
                                 delegate: SliverChildListDelegate(

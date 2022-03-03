@@ -109,6 +109,36 @@ class ApiService {
     }
   }
 
+  Future<List<Exclusive>> getExclusives() async {
+    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
+    List<Exclusive> _exclusives = [];
+    try {
+      Response response;
+      // if (_geolocatorService.locationPosition != null) {
+      //   await _geolocatorService.getUserCurrentLocationOnly();
+      //   response = await _apiRoot.dio.get(
+      //     'api/promoted/',
+      //     queryParameters: {
+      //       'markerY': _geolocatorService.locationPosition!.longitude,
+      //       'markerX': _geolocatorService.locationPosition!.latitude,
+      //     },
+      //   );
+      // } else
+      response = await _apiRoot.dio.get('api/groupexclusive/');
+      // log.v('RESPONSE: api/groupexclusive/ => ${response.data}');
+
+      if (response.data != null) {
+        response.data.forEach((_exclusive) {
+          _exclusives.add(Exclusive.fromJson(_exclusive));
+        });
+      }
+      return _exclusives;
+    } on DioError catch (error) {
+      log.v('ERROR on api/groupexclusive/ :${error.response}');
+      rethrow;
+    }
+  }
+
   Future<dynamic> getSelectedMainCats(
     List<int> _selectedMainCats,
     bool alphabet,

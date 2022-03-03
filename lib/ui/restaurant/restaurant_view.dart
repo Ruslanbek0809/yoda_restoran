@@ -24,7 +24,7 @@ class RestaurantView extends StatelessWidget {
         return Container(
           height: 0.3.sh,
           width: 1.sw,
-          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 8.h),
+          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 10.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

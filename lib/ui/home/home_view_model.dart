@@ -14,6 +14,7 @@ const String homeSlidersFuture = 'homeSlidersFuture';
 const String homeMainCatsFuture = 'homeMainCatsFuture';
 const String homeRandomRessFuture = 'homeRandomRessFuture';
 const String homePromsFuture = 'homePromsFuture';
+const String homeExclusivesFuture = 'homeExclusivesFuture';
 
 class HomeViewModel extends MultipleFutureViewModel {
   final log = getLogger('HomeViewModel');
@@ -30,6 +31,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<MainCategory>? get mainCats => _homeService.mainCats;
   List<Restaurant>? get randomRess => _homeService.randomRess;
   List<Promoted>? get proms => _homeService.proms;
+  List<Exclusive>? get exclusives => _homeService.exclusives;
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
@@ -49,6 +51,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
   bool get fetchingRandomRes => busy(homeRandomRessFuture);
   bool get fetchingPromotedRes => busy(homePromsFuture);
+  bool get fetchingExclusives => busy(homeExclusivesFuture);
   bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
   bool get fetchingSelectError => _homeService.fetchingSelectError;
 
@@ -111,6 +114,7 @@ class HomeViewModel extends MultipleFutureViewModel {
         homeMainCatsFuture: _homeService.getMainCategs,
         homeRandomRessFuture: _homeService.getRandomRess,
         homePromsFuture: _homeService.getProms,
+        homeExclusivesFuture: _homeService.getExclusives,
       };
 
   /// Below lines are custom error part

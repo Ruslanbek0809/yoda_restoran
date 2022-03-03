@@ -13,8 +13,8 @@ class ExclusiveSingle {
     this.option,
     this.url,
     this.richText,
-    this.restaurant,
-    this.restaurants,
+    // this.restaurant,
+    // this.restaurants,
   });
 
   @JsonKey(name: 'id')
@@ -38,11 +38,11 @@ class ExclusiveSingle {
   @JsonKey(name: 'reachText')
   final String? richText;
 
-  @JsonKey(name: 'restaurant')
-  final Restaurant? restaurant;
+  // @JsonKey(name: 'restaurant')
+  // final Restaurant? restaurant;
 
-  @JsonKey(name: 'restaurants')
-  final List<Restaurant>? restaurants;
+  // @JsonKey(name: 'restaurants')
+  // final List<Restaurant>? restaurants;
 
   factory ExclusiveSingle.fromJson(Map<String, dynamic> json) =>
       _$ExclusiveSingleFromJson(json);

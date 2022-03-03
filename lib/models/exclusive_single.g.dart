@@ -15,12 +15,12 @@ ExclusiveSingle _$ExclusiveSingleFromJson(Map<String, dynamic> json) =>
       option: json['option'] as String?,
       url: json['url'] as String?,
       richText: json['reachText'] as String?,
-      restaurant: json['restaurant'] == null
-          ? null
-          : Restaurant.fromJson(json['restaurant'] as Map<String, dynamic>),
-      restaurants: (json['restaurants'] as List<dynamic>?)
-          ?.map((e) => Restaurant.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      // restaurant: json['restaurant'] == null
+      //     ? null
+      //     : Restaurant.fromJson(json['restaurant'] as Map<String, dynamic>),
+      // restaurants: (json['restaurants'] as List<dynamic>?)
+      //     ?.map((e) => Restaurant.fromJson(e as Map<String, dynamic>))
+      //     .toList(),
     );
 
 Map<String, dynamic> _$ExclusiveSingleToJson(ExclusiveSingle instance) =>
@@ -32,6 +32,6 @@ Map<String, dynamic> _$ExclusiveSingleToJson(ExclusiveSingle instance) =>
       'option': instance.option,
       'url': instance.url,
       'reachText': instance.richText,
-      'restaurant': instance.restaurant,
-      'restaurants': instance.restaurants,
+      // 'restaurant': instance.restaurant,
+      // 'restaurants': instance.restaurants,
     };

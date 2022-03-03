@@ -28,6 +28,9 @@ class HomeService with ReactiveServiceMixin {
   List<Promoted>? _proms = [];
   List<Promoted>? get proms => _proms;
 
+  List<Exclusive>? _exclusives = [];
+  List<Exclusive>? get exclusives => _exclusives;
+
   bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
 
   bool get hasMainCats => _mainCats != null && _mainCats!.isNotEmpty;
@@ -78,6 +81,12 @@ class HomeService with ReactiveServiceMixin {
     _proms = await _api.getProms();
     log.v(_proms!.length);
     return _proms;
+  }
+
+  Future<List<Exclusive>?> getExclusives() async {
+    _exclusives = await _api.getExclusives();
+    log.v(_exclusives!.length);
+    return _exclusives;
   }
 
   Future<bool> getSelectedMainCats(
