@@ -288,7 +288,7 @@ class _HomeViewState extends State<HomeView> {
                                           child: Text(
                                             model.exclusives![0].name!,
                                             style: TextStyle(
-                                              fontSize: 24.sp,
+                                              fontSize: 20.sp,
                                               fontWeight: FontWeight.bold,
                                               color: AppTheme.MAIN_DARK,
                                             ),
@@ -361,7 +361,7 @@ class _HomeViewState extends State<HomeView> {
                                                           padding:
                                                               EdgeInsets.only(
                                                                   left: 16.w,
-                                                                  top: 2.h),
+                                                                  top: 4.h),
                                                           child: Text(
                                                             model
                                                                 .resWithProms![
@@ -369,7 +369,7 @@ class _HomeViewState extends State<HomeView> {
                                                                 .prom!
                                                                 .name!,
                                                             style: TextStyle(
-                                                              fontSize: 24.sp,
+                                                              fontSize: 20.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -508,6 +508,188 @@ class _HomeViewState extends State<HomeView> {
                                   ],
                                 ),
                               ),
+
+                              // model.selectedMainCats.isEmpty
+                              //     ? SliverPadding(
+                              //         padding: EdgeInsets.only(
+                              //           top: 16.h,
+                              //           bottom: 0.11
+                              //               .sh, // COMPENSATES HomeBottomCart
+                              //         ), // Changes based on exclusive part
+                              //         sliver: SliverList(
+                              //           delegate: SliverChildBuilderDelegate(
+                              //             (BuildContext context, int pos) {
+                              //               //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
+                              //               if ((pos + 1) % 5 == 0 &&
+                              //                   model.resWithProms![pos].prom !=
+                              //                       null)
+                              //                 return Column(
+                              //                   mainAxisSize: MainAxisSize.min,
+                              //                   crossAxisAlignment:
+                              //                       CrossAxisAlignment.start,
+                              //                   children: [
+                              //                     Column(
+                              //                       crossAxisAlignment:
+                              //                           CrossAxisAlignment
+                              //                               .start,
+                              //                       children: [
+                              //                         Padding(
+                              //                           padding:
+                              //                               EdgeInsets.only(
+                              //                                   left: 16.w,
+                              //                                   top: 2.h),
+                              //                           child: Text(
+                              //                             model
+                              //                                 .resWithProms![
+                              //                                     pos]
+                              //                                 .prom!
+                              //                                 .name!,
+                              //                             style: TextStyle(
+                              //                               fontSize: 24.sp,
+                              //                               fontWeight:
+                              //                                   FontWeight.bold,
+                              //                               color: AppTheme
+                              //                                   .MAIN_DARK,
+                              //                             ),
+                              //                           ),
+                              //                         ),
+                              //                         SingleChildScrollView(
+                              //                           physics:
+                              //                               BouncingScrollPhysics(),
+                              //                           scrollDirection:
+                              //                               Axis.horizontal,
+                              //                           child: Row(
+                              //                             mainAxisAlignment:
+                              //                                 MainAxisAlignment
+                              //                                     .start,
+                              //                             children: model
+                              //                                 .resWithProms![
+                              //                                     pos]
+                              //                                 .prom!
+                              //                                 .restaurants!
+                              //                                 .map((promRes) {
+                              //                               return PromResView(
+                              //                                 restaurant:
+                              //                                     promRes,
+                              //                                 promRess: model
+                              //                                     .resWithProms![
+                              //                                         pos]
+                              //                                     .prom!
+                              //                                     .restaurants!,
+                              //                               );
+                              //                             }).toList(),
+                              //                           ),
+                              //                         ),
+                              //                       ],
+                              //                     ),
+                              //                     //------------------ RESTAURANTS ---------------------//
+                              //                     RestaurantView(
+                              //                       restaurant: model
+                              //                           .resWithProms![pos]
+                              //                           .restaurant,
+                              //                     ),
+                              //                   ],
+                              //                 );
+                              //               return RestaurantView(
+                              //                 restaurant: model
+                              //                     .resWithProms![pos]
+                              //                     .restaurant,
+                              //               );
+                              //             },
+                              //             childCount:
+                              //                 model.resWithProms?.length ?? 0,
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : SliverList(
+                              //         delegate: SliverChildListDelegate(
+                              //           [
+                              //             Column(
+                              //               children: [
+                              //                 Padding(
+                              //                   padding: EdgeInsets.symmetric(
+                              //                       horizontal: 16.w,
+                              //                       vertical: 5.h),
+                              //                   child: Divider(
+                              //                     thickness: 1,
+                              //                   ),
+                              //                 ),
+                              //                 //------------------ FOUND TITLE and CLEAR part ---------------------//
+                              //                 Padding(
+                              //                   padding: EdgeInsets.symmetric(
+                              //                       horizontal: 16.w,
+                              //                       vertical: 3.h),
+                              //                   child: Row(
+                              //                     mainAxisAlignment:
+                              //                         MainAxisAlignment
+                              //                             .spaceBetween,
+                              //                     children: [
+                              //                       Text(
+                              //                         LocaleKeys
+                              //                             .foundRestaurants,
+                              //                         overflow:
+                              //                             TextOverflow.ellipsis,
+                              //                         style:
+                              //                             ktsDefault18BoldText,
+                              //                       ).tr(args: [
+                              //                         model
+                              //                             .selectedMainCatRestaurants
+                              //                             .length
+                              //                             .toString()
+                              //                       ]),
+                              //                       SizedBox(width: 5.w),
+                              //                       CustomTextChildButton(
+                              //                           child: Text(
+                              //                             LocaleKeys.clear,
+                              //                             style:
+                              //                                 ktsDefault16Text,
+                              //                           ).tr(),
+                              //                           color:
+                              //                               kcSecondaryLightColor,
+                              //                           borderRadius:
+                              //                               AppTheme().radius20,
+                              //                           padding: EdgeInsets
+                              //                               .symmetric(
+                              //                                   vertical: 6.h,
+                              //                                   horizontal:
+                              //                                       20.w),
+                              //                           onPressed: () async {
+                              //                             await model
+                              //                                 .clearSelectedMainCatRess();
+                              //                             await _refreshController
+                              //                                 .requestRefresh();
+                              //                             // model
+                              //                             //     .updateHasFutureError();
+                              //                           }),
+                              //                     ],
+                              //                   ),
+                              //                 ),
+                              //                 //------------------ RESULT SELECTED MAIN CATS RES LIST ---------------------//
+                              //                 ListView.builder(
+                              //                   shrinkWrap: true,
+                              //                   physics:
+                              //                       NeverScrollableScrollPhysics(),
+                              //                   padding:
+                              //                       EdgeInsets.only(top: 10.h),
+                              //                   itemCount: model
+                              //                       .selectedMainCatRestaurants
+                              //                       .length,
+                              //                   itemBuilder: (ctx, pos) {
+                              //                     return RestaurantView(
+                              //                       restaurant: model
+                              //                               .selectedMainCatRestaurants[
+                              //                           pos],
+                              //                     );
+                              //                   },
+                              //                 ),
+                              //               ],
+                              //             ),
+                              //             SizedBox(
+                              //                 height: 0.11
+                              //                     .sh), // COMPENSATES HomeBottomCart
+                              //           ],
+                              //         ),
+                              //       ),
                             ],
                           ),
                   ),

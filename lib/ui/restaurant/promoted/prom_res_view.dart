@@ -29,9 +29,9 @@ class PromResView extends StatelessWidget {
           width: 0.7.sw,
           margin: EdgeInsets.fromLTRB(
             promRess.indexOf(restaurant) == 0 ? 16.w : 8.w,
-            4.h,
+            6.h,
             promRess.indexOf(restaurant) == promRess.length - 1 ? 16.w : 0.w,
-            20.h,
+            22.h,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

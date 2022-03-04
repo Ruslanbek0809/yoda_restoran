@@ -501,6 +501,19 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         ),
                       ),
                     ),
+
+                    // Container(
+                    //   alignment: Alignment.centerLeft,
+                    //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
+                    //   child: Text(
+                    //     resCategory.resCategoryModel!.name!,
+                    //     style: TextStyle(
+                    //       fontSize: 22.sp,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: AppTheme.MAIN_DARK,
+                    //     ),
+                    //   ),
+                    // ),
                     GridView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

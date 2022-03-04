@@ -16,7 +16,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
-    Tween<double> _tween = Tween(begin: 1, end: 0.95);
+    Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
     );
@@ -71,7 +71,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                     vertical:
                         model.isMainCatSelected(mainCategory.id) ? 2.h : 0.0),
                 decoration: BoxDecoration(
-                  borderRadius: AppTheme().radius15,
+                  borderRadius: AppTheme().radius12,
                   color: model.isMainCatSelected(mainCategory.id)
                       ? AppTheme.GREEN_COLOR
                       : AppTheme.WHITE,

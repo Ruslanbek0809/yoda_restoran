@@ -15,7 +15,7 @@ class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
   }) : super(key: key);
 
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
-    Tween<double> _tween = Tween(begin: 1, end: 0.95);
+    Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),
     );

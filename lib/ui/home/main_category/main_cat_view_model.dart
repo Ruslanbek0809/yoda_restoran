@@ -37,6 +37,10 @@ class MainCatViewModel extends ReactiveViewModel {
     _mainCatService.updateSelectedMainCats(
         mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
 
+    notifyListeners(); // This notifyListeners() is put here instead of last line because of Yandex like animation before starting fetch
+    await Future.delayed(
+        Duration(milliseconds: 300)); // For Yandex like animation
+
     bool isSelectedFetched = await _homeService.getSelectedMainCats(
       selectedMainCats,
       false,
@@ -52,7 +56,7 @@ class MainCatViewModel extends ReactiveViewModel {
     //     _mainCatService
     //         .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
 
-    notifyListeners();
+    // notifyListeners();
   }
 
   /// UPDATES _selectedSort
