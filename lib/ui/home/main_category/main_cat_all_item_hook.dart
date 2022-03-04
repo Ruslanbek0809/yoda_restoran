@@ -39,7 +39,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(
-            top: 5.w,
+            top: 5.h,
             left: 12.w,
             right: 12.w), // margin on top of persistent header
         color: AppTheme.WHITE,

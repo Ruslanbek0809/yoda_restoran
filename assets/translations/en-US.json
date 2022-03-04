@@ -140,6 +140,7 @@
     "doubleBackToCloseApp": "Çykmak üçin ýene bir sapar yza basyň",
     "toggleDeliveryOnly": "Restoran diňe eltip bermek tertibinde işleýär",
     "toggleSelfPickUpOnly": "Restoran eltip bermek hyzmatyny hödürlemeýär.",
+    "sortByGeolocation": "Ýakynlygy boýunça",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

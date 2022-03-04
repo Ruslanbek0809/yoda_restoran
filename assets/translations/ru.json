@@ -140,6 +140,7 @@
     "doubleBackToCloseApp": "Нажмите еще раз для выхода",
     "toggleDeliveryOnly": "Ресторан работает только в режиме доставки",
     "toggleSelfPickUpOnly": "Ресторан работает только на вынос",
+    "sortByGeolocation": "По геолокации",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }
