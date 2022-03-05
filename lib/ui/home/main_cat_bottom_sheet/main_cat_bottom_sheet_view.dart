@@ -5,10 +5,10 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import '../../../models/models.dart';
-import '../main_category/main_cat_view_model.dart';
 import '../../../utils/utils.dart';
 import 'main_cat_bottom_sort.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'main_cat_bottom_view_model.dart';
 import 'main_cat_item_bottom_hook.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -23,9 +23,10 @@ class MainCatBottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MainCatViewModel>.reactive(
+    return ViewModelBuilder<MainCatBottomViewModel>.reactive(
       onModelReady: (model) => model.assignTempList(),
-      viewModelBuilder: () => MainCatViewModel(),
+      viewModelBuilder: () => MainCatBottomViewModel(),
+      // onDispose: (model) => model,
       builder: (context, model, child) => DraggableScrollableSheet(
         initialChildSize: 0.9,
         maxChildSize: 1,

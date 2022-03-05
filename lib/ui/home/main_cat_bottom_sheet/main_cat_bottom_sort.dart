@@ -5,16 +5,17 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/styles.dart';
+import 'package:yoda_res/ui/home/main_cat_bottom_sheet/main_cat_bottom_view_model.dart';
 import 'package:yoda_res/ui/widgets/button_loading.dart';
-import '../main_category/main_cat_view_model.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class MainCatSortBottom extends HookViewModelWidget<MainCatViewModel> {
+class MainCatSortBottom extends HookViewModelWidget<MainCatBottomViewModel> {
   const MainCatSortBottom({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
+  Widget buildViewModelWidget(
+      BuildContext context, MainCatBottomViewModel model) {
     final mainFilterAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );

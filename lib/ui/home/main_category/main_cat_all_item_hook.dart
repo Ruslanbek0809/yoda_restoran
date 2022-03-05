@@ -17,7 +17,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
   Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 75),
     );
 
     /// To dispose a status listener attached to _tweenController

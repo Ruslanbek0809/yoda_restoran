@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/ui/home/main_cat_bottom_sheet/main_cat_bottom_view_model.dart';
 import '../../../models/models.dart';
-import '../main_category/main_cat_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MainCategoryItemBottomHook extends HookViewModelWidget<MainCatViewModel> {
+class MainCategoryItemBottomHook
+    extends HookViewModelWidget<MainCatBottomViewModel> {
   final MainCategory? mainCategory;
   MainCategoryItemBottomHook({
     Key? key,
     this.mainCategory,
   }) : super(key: key);
 
-  Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
+  Widget buildViewModelWidget(
+      BuildContext context, MainCatBottomViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 75),
     );
 
     /// To dispose a status listener attached to _tweenController
