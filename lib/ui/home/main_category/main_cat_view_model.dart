@@ -13,7 +13,6 @@ class MainCatViewModel extends ReactiveViewModel {
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
       MainCatService>(); // To update _selectedMainCats in realtime(reactive)
-  final _mainFilterService = locator<MainFilterService>();
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
@@ -66,6 +65,5 @@ class MainCatViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
-      [_mainCatService, _mainFilterService];
+  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
 }

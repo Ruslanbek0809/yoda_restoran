@@ -45,7 +45,7 @@ class MainCategoryItemBottomHook
       child: GestureDetector(
         onTap: () async {
           await _tweenController.forward();
-          await model.updateTempSelectedMainCats(mainCategory!.id);
+          model.updateTempSelectedMainCats(mainCategory!.id);
         },
         child: Column(
           children: [

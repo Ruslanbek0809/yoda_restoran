@@ -17,8 +17,8 @@ class MainCatBottomViewModel extends ReactiveViewModel {
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
+  List<int> get selectedMainCats => _mainCatService.selectedMainCats;
   CategoryFilter? get selectedSort => _mainCatService.selectedSort;
-
   MainFilterAnimationStatus get mainFilterAnimationStatus =>
       _mainFilterService.mainFilterAnimationStatus;
 
@@ -26,8 +26,10 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   List<int> get tempSelectedMainCats => _tempSelectedMainCats;
 
   /// ASSIGNS _tempSelectedMainCats (Used in onModelReady)
-  void assignTempList() {
-    _tempSelectedMainCats = _mainCatService.selectedMainCats;
+  void assignTempCats() {
+    _tempSelectedMainCats = [...selectedMainCats];
+    // _tempSelectedMainCats = selectedMainCats; /// DON'T ASSIGN reactive value directly. Which makes temp value reactive as well.
+
     log.i(
         'assignTempList() _tempSelectedMainCats length: ${_tempSelectedMainCats.length}');
   }
@@ -37,7 +39,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
       _tempSelectedMainCats.contains(mainCatId);
 
   /// ADDS or REMOVES mainCatId to/from _tempSelectedMainCats Ids
-  Future<void> updateTempSelectedMainCats(int? mainCatId) async {
+  void updateTempSelectedMainCats(int? mainCatId) async {
     if (_tempSelectedMainCats.contains(mainCatId))
       _tempSelectedMainCats.remove(mainCatId);
     else
