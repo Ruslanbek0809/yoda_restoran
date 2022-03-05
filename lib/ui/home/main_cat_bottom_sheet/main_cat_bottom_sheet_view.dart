@@ -117,7 +117,12 @@ class MainCatBottomSheetView extends StatelessWidget {
                                         groupValue: model.selectedSort,
                                         onChanged: model.updateSelectedSort,
                                         title: Text(
-                                          categoryFilter.name,
+                                          mainCatSortList.indexOf(
+                                                          categoryFilter) ==
+                                                      0 &&
+                                                  model.locationPosition != null
+                                              ? LocaleKeys.sortByGeolocation
+                                              : categoryFilter.name, // Changes name of first element if location is enabled
                                           style: TextStyle(
                                             color: AppTheme.FONT_COLOR,
                                             fontSize: 16.sp,

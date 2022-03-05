@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
@@ -14,6 +15,9 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   final _mainCatService = locator<
       MainCatService>(); // To update _selectedMainCats in realtime(reactive)
   final _mainFilterService = locator<MainFilterService>();
+  final _geolocatorService = locator<GeolocatorService>();
+
+  Position? get locationPosition => _geolocatorService.locationPosition;
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
