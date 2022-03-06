@@ -105,31 +105,39 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/house.svg',
-                                                color: AppTheme.MAIN_DARK,
-                                                width: 25.w,
-                                              ),
-                                              SizedBox(width: 15.w),
-                                              model.selectedAddress!.id == -1
-                                                  ? Text(
-                                                      LocaleKeys
-                                                          .selectAddressPls,
-                                                      style: kts16HelperText,
-                                                    ).tr()
-                                                  : Text(
-                                                      model.selectedAddress!
-                                                              .street! +
-                                                          (model.selectedAddress!
-                                                                      .house !=
-                                                                  null
-                                                              ? ', ${model.selectedAddress!.house}'
-                                                              : ''),
-                                                      style: ktsDefault16Text,
-                                                    ),
-                                            ],
+                                          Flexible(
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/house.svg',
+                                                  color: AppTheme.MAIN_DARK,
+                                                  width: 25.w,
+                                                ),
+                                                SizedBox(width: 15.w),
+                                                model.selectedAddress!.id == -1
+                                                    ? Text(
+                                                        LocaleKeys
+                                                            .selectAddressPls,
+                                                        style: kts16HelperText,
+                                                      ).tr()
+                                                    : Flexible(
+                                                        child: Text(
+                                                          model.selectedAddress!
+                                                                  .street! +
+                                                              (model.selectedAddress!
+                                                                          .house !=
+                                                                      null
+                                                                  ? ', ${model.selectedAddress!.house}'
+                                                                  : ''),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style:
+                                                              ktsDefault16Text,
+                                                        ),
+                                                      ),
+                                              ],
+                                            ),
                                           ),
                                           Padding(
                                             padding:

@@ -95,43 +95,51 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    AnimatedSwitcher(
-                                                      duration: const Duration(
-                                                          milliseconds: 300),
-                                                      child:
-                                                          model.tempSelectedAddress!
-                                                                      .id ==
-                                                                  _address.id
-                                                              ? SvgPicture
-                                                                  .asset(
-                                                                  'assets/checkCircle.svg',
-                                                                  color: AppTheme
-                                                                      .GREEN_COLOR,
-                                                                  width: 25.w,
-                                                                )
-                                                              : SvgPicture
-                                                                  .asset(
-                                                                  'assets/checkCircle.svg',
-                                                                  color: Colors
-                                                                      .white,
-                                                                  width: 25.w,
-                                                                ),
-                                                    ),
-                                                    SizedBox(width: 10.w),
-                                                    Text(
-                                                      _address.street! +
-                                                          (_address.house !=
-                                                                  null
-                                                              ? ', ${_address.house}'
-                                                              : ''),
-                                                      style: kts18Text,
-                                                    ),
-                                                  ],
+                                                Flexible(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      AnimatedSwitcher(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        child:
+                                                            model.tempSelectedAddress!
+                                                                        .id ==
+                                                                    _address.id
+                                                                ? SvgPicture
+                                                                    .asset(
+                                                                    'assets/checkCircle.svg',
+                                                                    color: AppTheme
+                                                                        .GREEN_COLOR,
+                                                                    width: 25.w,
+                                                                  )
+                                                                : SvgPicture
+                                                                    .asset(
+                                                                    'assets/checkCircle.svg',
+                                                                    color: Colors
+                                                                        .white,
+                                                                    width: 25.w,
+                                                                  ),
+                                                      ),
+                                                      SizedBox(width: 10.w),
+                                                      Flexible(
+                                                        child: Text(
+                                                          _address.street! +
+                                                              (_address.house !=
+                                                                      null
+                                                                  ? ', ${_address.house}'
+                                                                  : ''),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: kts18Text,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 SvgPicture.asset(
                                                   'assets/addressFilter.svg',
