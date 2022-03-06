@@ -81,7 +81,7 @@ class ToggleButtonView extends StatelessWidget {
                       Align(
                         alignment: Alignment(-1, 0),
                         child: Container(
-                          width: constraints.maxWidth / 2,
+                          width: constraints.maxWidth / 2.1,
                           alignment: Alignment.center,
                           child: Text(
                             LocaleKeys.delivery,
@@ -97,7 +97,7 @@ class ToggleButtonView extends StatelessWidget {
                       Align(
                         alignment: Alignment(1, 0),
                         child: Container(
-                          width: constraints.maxWidth / 2,
+                          width: constraints.maxWidth / 2.1,
                           alignment: Alignment.center,
                           child: Text(
                             LocaleKeys.selfPickUp,
