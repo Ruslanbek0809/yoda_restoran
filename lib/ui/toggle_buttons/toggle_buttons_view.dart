@@ -25,7 +25,7 @@ class ToggleButtonView extends StatelessWidget {
                       (!model.isDelivery &&
                           (restaurant.selfPickUp! && restaurant.delivery!))
                   ? model.updateToggleToDelivery()
-                  : () {},  
+                  : () {},
       viewModelBuilder: () => ToggleButtonViewModel(),
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
@@ -70,10 +70,11 @@ class ToggleButtonView extends StatelessWidget {
                         alignment: Alignment(model.isDelivery ? -1 : 1, 0),
                         duration: Duration(milliseconds: 300),
                         child: Container(
-                          width: constraints.maxWidth / 2,
+                          width: constraints.maxWidth / 2.2,
                           decoration: BoxDecoration(
                             color: AppTheme.WHITE,
                             borderRadius: AppTheme().radius15,
+                            boxShadow: [AppTheme().toggleShadow],
                           ),
                         ),
                       ),

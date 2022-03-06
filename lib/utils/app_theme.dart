@@ -80,6 +80,12 @@ class AppTheme {
         offset: const Offset(1.1, 1.1),
       );
 
+  BoxShadow get toggleShadow => BoxShadow(
+        color: AppTheme.MAIN_DARK.withOpacity(0.075),
+        blurRadius: 2.0,
+        offset: const Offset(1, 1),
+      );
+
   BoxShadow get bottomCartShadow => BoxShadow(
         color: AppTheme.MAIN_DARK.withOpacity(0.2),
         blurRadius: 4.0,
