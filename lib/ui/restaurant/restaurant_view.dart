@@ -133,45 +133,63 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ),
               ),
-              //------------------ RATE and LOCATION ---------------------//
+              //------------------ LOCATION and RATE ---------------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (model.locationPosition != null)
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/map_pin_bold.svg',
-                          color: kcDialogColor,
-                          width: 18.w,
+                  model.locationPosition != null
+                      ? Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/map_pin_bold.svg',
+                              color: kcDialogColor,
+                              width: 18.w,
+                            ),
+                            SizedBox(width: 3.w),
+                            Text(
+                              '${restaurant.city} (${restaurant.distance} ',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: kcIconColor,
+                              ),
+                            ),
+                            Text(
+                              LocaleKeys.km,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: kcIconColor,
+                              ),
+                            ).tr(),
+                            Text(
+                              ')',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/map_pin_bold.svg',
+                              color: kcDialogColor,
+                              width: 18.w,
+                            ),
+                            SizedBox(width: 3.w),
+                            Text(
+                              restaurant.city!,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 3.w),
-                        Text(
-                          '${restaurant.city} (${restaurant.distance} ',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: kcIconColor,
-                          ),
-                        ),
-                        Text(
-                          LocaleKeys.km,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: kcIconColor,
-                          ),
-                        ).tr(),
-                        Text(
-                          ')',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: kcIconColor,
-                          ),
-                        ),
-                      ],
-                    ),
                   Row(
                     children: [
                       Icon(
