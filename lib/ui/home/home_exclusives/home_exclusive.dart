@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:yoda_res/ui/home/home_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
 
-class HomeExclusives extends StatelessWidget {
+class HomeExclusive extends ViewModelWidget<HomeViewModel> {
   final List<ExclusiveSingle> exlusiveSingles;
-  const HomeExclusives({Key? key, required this.exlusiveSingles})
+  const HomeExclusive({Key? key, required this.exlusiveSingles})
       : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomeViewModel model) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
@@ -20,7 +22,7 @@ class HomeExclusives extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(pos == 0 ? 16.w : 4.w, 6.h,
                 pos == exlusiveSingles.length - 1 ? 16.w : 4.w, 0.h),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => model.navToExclusiveSingleView(_exclusiveSingle),
               child: YodaImage(
                 image: _exclusiveSingle.image!,
                 fit: BoxFit.cover,

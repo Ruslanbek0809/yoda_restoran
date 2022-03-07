@@ -35,3 +35,4 @@ export 'payment_type.dart';
 export 'cart_more_meal_bottom_sheet_data.dart';
 export 'exclusive.dart';
 export 'exclusive_single.dart';
+export 'es_rich.dart';

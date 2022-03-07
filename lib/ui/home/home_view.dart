@@ -12,7 +12,7 @@ import 'package:yoda_res/library/upgrader_translations.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import '../../shared/shared.dart';
 import 'home_bottom_cart.dart';
-import 'home_exclusives/home_exclusives.dart';
+import 'home_exclusives/home_exclusive.dart';
 import 'main_category/main_cat_view.dart';
 import '../restaurant/promoted/prom_res_view.dart';
 import '../restaurant/restaurant_view.dart';
@@ -294,7 +294,7 @@ class _HomeViewState extends State<HomeView> {
                                             ),
                                           ),
                                         ),
-                                        HomeExclusives(
+                                        HomeExclusive(
                                             exlusiveSingles: model
                                                 .exclusives![0]
                                                 .exclusiveSingles!),

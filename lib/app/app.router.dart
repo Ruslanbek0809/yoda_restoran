@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:yoda_res/ui/home/home_exclusives/exclusive_single_view.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -46,6 +47,7 @@ class Routes {
   static const String contactUsView = '/contact-us-view';
   static const String aboutUsView = '/about-us-view';
   static const String onBoardingView = '/on-boarding-view';
+  static const String exclusiveSingleView = '/exclusive-single-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -63,6 +65,7 @@ class Routes {
     contactUsView,
     aboutUsView,
     onBoardingView,
+    exclusiveSingleView,
   };
 }
 
@@ -86,6 +89,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
+    RouteDef(Routes.exclusiveSingleView, page: ExclusiveSingleView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -215,6 +219,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    ExclusiveSingleView: (data) {
+      var args = data.getArgs<ExclusiveSingleViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ExclusiveSingleView(
+          exclusiveSingle: args.exclusiveSingle,
+          key: args.key,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -273,4 +287,10 @@ class AddressAddEditViewArguments {
 class OnBoardingViewArguments {
   final Key? key;
   OnBoardingViewArguments({this.key});
+}
+
+class ExclusiveSingleViewArguments {
+  final ExclusiveSingle exclusiveSingle;
+  final Key? key;
+  ExclusiveSingleViewArguments({required this.exclusiveSingle, this.key});
 }

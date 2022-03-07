@@ -169,6 +169,13 @@ class HomeViewModel extends MultipleFutureViewModel {
   void navToHomeSearchView() async =>
       await _navService.navigateTo(Routes.homeSearchView);
 
+  void navToExclusiveSingleView(ExclusiveSingle exclusiveSingle) =>
+      _navService.navigateTo(
+        Routes.exclusiveSingleView,
+        arguments:
+            ExclusiveSingleViewArguments(exclusiveSingle: exclusiveSingle),
+      );
+
   void navToResDetailsView() async => await _navService.navigateTo(
         Routes.resDetailsView,
         arguments: ResDetailsViewArguments(
