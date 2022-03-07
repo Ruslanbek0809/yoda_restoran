@@ -8,6 +8,7 @@ part 'exclusive.g.dart';
 class Exclusive {
   Exclusive({
     this.id,
+    this.position,
     this.name,
     this.order,
     this.exclusiveSingles,
@@ -15,6 +16,9 @@ class Exclusive {
 
   @JsonKey(name: 'id')
   final int? id;
+
+  @JsonKey(name: 'position')
+  final int? position;
 
   @JsonKey(name: 'name')
   final String? name;

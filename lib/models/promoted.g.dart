@@ -8,6 +8,7 @@ part of 'promoted.dart';
 
 Promoted _$PromotedFromJson(Map<String, dynamic> json) => Promoted(
       id: json['id'] as int?,
+      position: json['position'] as int?,
       name: json['name'] as String?,
       order: json['order'] as int?,
       restaurants: (json['restaurant'] as List<dynamic>?)
@@ -17,6 +18,7 @@ Promoted _$PromotedFromJson(Map<String, dynamic> json) => Promoted(
 
 Map<String, dynamic> _$PromotedToJson(Promoted instance) => <String, dynamic>{
       'id': instance.id,
+      'position': instance.position,
       'name': instance.name,
       'order': instance.order,
       'restaurant': instance.restaurants,

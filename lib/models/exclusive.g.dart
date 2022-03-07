@@ -8,6 +8,7 @@ part of 'exclusive.dart';
 
 Exclusive _$ExclusiveFromJson(Map<String, dynamic> json) => Exclusive(
       id: json['id'] as int?,
+      position: json['position'] as int?,
       name: json['name'] as String?,
       order: json['order'] as int?,
       exclusiveSingles: (json['exclusives'] as List<dynamic>?)
@@ -17,6 +18,7 @@ Exclusive _$ExclusiveFromJson(Map<String, dynamic> json) => Exclusive(
 
 Map<String, dynamic> _$ExclusiveToJson(Exclusive instance) => <String, dynamic>{
       'id': instance.id,
+      'position': instance.position,
       'name': instance.name,
       'order': instance.order,
       'exclusives': instance.exclusiveSingles,

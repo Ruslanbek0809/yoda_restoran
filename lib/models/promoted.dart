@@ -7,6 +7,7 @@ part 'promoted.g.dart';
 class Promoted {
   Promoted({
     this.id,
+    this.position,
     this.name,
     this.order,
     this.restaurants,
@@ -14,6 +15,9 @@ class Promoted {
 
   @JsonKey(name: 'id')
   final int? id;
+
+  @JsonKey(name: 'position')
+  final int? position;
 
   @JsonKey(name: 'name')
   final String? name;
