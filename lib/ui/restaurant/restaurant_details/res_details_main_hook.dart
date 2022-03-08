@@ -545,23 +545,4 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
       ],
     );
   }
-
-  Widget listItem(Color color, String title) => Container(
-        height: 100.0,
-        color: color,
-        margin: EdgeInsets.all(5),
-        child: Center(
-          child: Text(
-            "$title",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
-  static getRandomColor() =>
-      Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-          .withOpacity(1.0);
 }

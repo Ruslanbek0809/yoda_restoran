@@ -88,6 +88,7 @@ class HomeViewModel extends MultipleFutureViewModel {
           }
         },
       );
+    // log.v('_resWithProms.length: ${_resWithProms.length}');
     return _resWithProms;
   }
 

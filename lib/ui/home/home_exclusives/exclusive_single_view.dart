@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/models.dart';
 
+import 'exclusive_single_hook.dart';
 import 'exclusive_single_view_model.dart';
 
 class ExclusiveSingleView extends StatelessWidget {
@@ -42,6 +43,7 @@ class ExclusiveSingleView extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
+              ExclusiveSingleHook(exclusiveSingle: exclusiveSingle),
               //------------------ RESTAURANT MAIN PART ---------------------//
               // model.isBusy
               //     ? ResDetailsMainBusy(restaurant: restaurant)
