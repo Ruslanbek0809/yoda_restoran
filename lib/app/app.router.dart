@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:yoda_res/ui/home/home_exclusives/exclusive_single_view.dart';
+import 'package:yoda_res/ui/home/home_exclusives/ex_single_view.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -89,7 +89,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
-    RouteDef(Routes.exclusiveSingleView, page: ExclusiveSingleView),
+    RouteDef(Routes.exclusiveSingleView, page: ExSingleView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -219,10 +219,10 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    ExclusiveSingleView: (data) {
+    ExSingleView: (data) {
       var args = data.getArgs<ExclusiveSingleViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ExclusiveSingleView(
+        builder: (context) => ExSingleView(
           exclusiveSingle: args.exclusiveSingle,
           key: args.key,
         ),

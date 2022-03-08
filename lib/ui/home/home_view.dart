@@ -144,7 +144,7 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   SmartRefresher(
                     header: CustomHeader(
-                      height: 50.h,
+                      height: 50.h, 
                       builder: (BuildContext context, RefreshStatus? mode) {
                         return SpinKitChasingDots(
                           size: 27,

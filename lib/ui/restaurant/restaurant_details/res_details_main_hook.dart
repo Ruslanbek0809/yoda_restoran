@@ -14,7 +14,6 @@ import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'dart:math' as math;
 import 'package:easy_localization/easy_localization.dart';
 
 class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
@@ -66,7 +65,6 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           expandedHeight: 0.55.sh,
           pinned: true,
           stretch: true,
-          floating: false,
           backgroundColor: AppTheme.WHITE,
           centerTitle: true,
           title: AnimatedSwitcher(

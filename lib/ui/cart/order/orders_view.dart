@@ -46,7 +46,7 @@ class OrdersView extends StatelessWidget {
               centerTitle: true,
               title: Text(
                 LocaleKeys.myOrders,
-                style: ktsDefault22DarkText,
+                style: kts22DarkText,
               ).tr(),
             ),
             body: model.isBusy || model.isFetchingOrders

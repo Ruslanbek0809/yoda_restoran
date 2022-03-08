@@ -11,10 +11,10 @@ import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
-class ExclusiveSingleViewModel extends FutureViewModel {
-  final log = getLogger('ExclusiveSingleViewModel');
+class ExSingleViewModel extends FutureViewModel {
+  final log = getLogger('ExSingleViewModel');
   final ExclusiveSingle? exclusiveSingle;
-  ExclusiveSingleViewModel(this.exclusiveSingle);
+  ExSingleViewModel(this.exclusiveSingle);
 
   final _api = locator<ApiService>();
   final _navService = locator<NavigationService>();

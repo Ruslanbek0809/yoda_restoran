@@ -9,7 +9,7 @@ import 'package:yoda_res/ui/drawer/contact_us/contact_us_view.dart';
 import 'package:yoda_res/ui/drawer/login/login_view.dart';
 import 'package:yoda_res/ui/drawer/otp/otp_view.dart';
 import 'package:yoda_res/ui/drawer/profile/profile_view.dart';
-import 'package:yoda_res/ui/home/home_exclusives/exclusive_single_view.dart';
+import 'package:yoda_res/ui/home/home_exclusives/ex_single_view.dart';
 import 'package:yoda_res/ui/home/home_search/home_search_view.dart';
 import 'package:yoda_res/ui/startup/onboarding/onboarding_view.dart';
 import '../services/services.dart';
@@ -37,7 +37,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: ContactUsView),
     MaterialRoute(page: AboutUsView),
     MaterialRoute(page: OnBoardingView),
-    MaterialRoute(page: ExclusiveSingleView),
+    MaterialRoute(page: ExSingleView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

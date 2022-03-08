@@ -41,7 +41,7 @@ class AddressAddEditView extends StatelessWidget {
               ),
             ),
             centerTitle: true,
-            title: Text(LocaleKeys.address, style: ktsDefault22DarkText).tr(),
+            title: Text(LocaleKeys.address, style: kts22DarkText).tr(),
           ),
           body: Stack(
             children: [

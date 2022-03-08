@@ -48,7 +48,7 @@ class LoginView extends StatelessWidget with $LoginView {
                     width: 0.6.sw,
                   ),
                 ),
-                Text(LocaleKeys.login, style: ktsDefault22DarkText).tr(),
+                Text(LocaleKeys.login, style: kts22DarkText).tr(),
                 verticalSpaceTiny,
                 verticalSpaceMedium,
                 Text(LocaleKeys.enter_phone, style: kts14HelperText).tr(),

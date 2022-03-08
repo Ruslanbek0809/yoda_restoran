@@ -39,7 +39,7 @@ class AddressesView extends StatelessWidget {
             centerTitle: true,
             title: Text(
               LocaleKeys.addresses,
-              style: ktsDefault22DarkText,
+              style: kts22DarkText,
             ).tr(),
             actions: [
               IconButton(

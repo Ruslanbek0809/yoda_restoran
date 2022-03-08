@@ -48,7 +48,7 @@ class CartView extends StatelessWidget {
               centerTitle: true,
               title: Text(
                 LocaleKeys.order,
-                style: ktsDefault22DarkText,
+                style: kts22DarkText,
               ).tr(),
               actions: [
                 Padding(

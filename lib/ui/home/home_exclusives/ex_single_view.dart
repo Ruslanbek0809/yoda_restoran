@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/models.dart';
 
-import 'exclusive_single_hook.dart';
-import 'exclusive_single_view_model.dart';
+import 'ex_single_widget.dart';
+import 'ex_single_view_model.dart';
 
-class ExclusiveSingleView extends StatelessWidget {
+class ExSingleView extends StatelessWidget {
   final ExclusiveSingle exclusiveSingle;
-  const ExclusiveSingleView({required this.exclusiveSingle, Key? key})
+  const ExSingleView({required this.exclusiveSingle, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ExclusiveSingleViewModel>.reactive(
-      viewModelBuilder: () => ExclusiveSingleViewModel(exclusiveSingle),
+    return ViewModelBuilder<ExSingleViewModel>.reactive(
+      viewModelBuilder: () => ExSingleViewModel(exclusiveSingle),
       builder: (context, model, child) {
         // if (model.isCustomError && restaurant.id == model.cartRes!.id)
         //   WidgetsBinding.instance!.addPostFrameCallback((_) async {
@@ -43,7 +43,7 @@ class ExclusiveSingleView extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-              ExclusiveSingleHook(exclusiveSingle: exclusiveSingle),
+              ExSingleWidget(exclusiveSingle: exclusiveSingle),
               //------------------ RESTAURANT MAIN PART ---------------------//
               // model.isBusy
               //     ? ResDetailsMainBusy(restaurant: restaurant)

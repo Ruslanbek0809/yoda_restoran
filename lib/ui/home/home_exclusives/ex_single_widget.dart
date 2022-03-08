@@ -1,18 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/home/home_exclusives/exclusive_single_view_model.dart';
+import 'package:stacked/stacked.dart';
+import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/home/home_exclusives/ex_single_view_model.dart';
+import 'package:yoda_res/ui/widgets/widgets.dart';
+import 'package:yoda_res/utils/utils.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ExclusiveSingleHook
-    extends HookViewModelWidget<ExclusiveSingleViewModel> {
+class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
   final ExclusiveSingle exclusiveSingle;
-  const ExclusiveSingleHook({required this.exclusiveSingle, Key? key})
+  const ExSingleWidget({required this.exclusiveSingle, Key? key})
       : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, ExclusiveSingleViewModel model) {
+  Widget build(BuildContext context, ExSingleViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.32.sw is for item height
@@ -20,18 +23,30 @@ class ExclusiveSingleHook
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          expandedHeight: 150,
+          expandedHeight: 0.175.sh,
           pinned: true,
           stretch: true,
+          backgroundColor: AppTheme.WHITE,
+          leading: BackButtonWidget(),
           flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.fromLTRB(48, 16, 16,
-                16), // left padding 48 moves title a bit to give a size for leading back icon
-            // centerTitle: true,
+            titlePadding: EdgeInsets.fromLTRB(48.w, 16.h, 16.w,
+                12.h), // left padding 48.w moves title a bit to give a size for leading back icon
             title: Text(
-              'Maslahat beryaris',
-              style: TextStyle(fontSize: 22),
+              exclusiveSingle.name!,
+              style: kts22DarkText,
             ),
           ),
+          //------------------ ACTIONS FAV ---------------------//
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.share,
+                size: 24.w,
+                color: kcSecondaryDarkColor,
+              ),
+            )
+          ],
         ),
         SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {

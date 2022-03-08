@@ -58,7 +58,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 width: 0.6.sw,
               ),
             ),
-            Text(LocaleKeys.title_confirm, style: ktsDefault22DarkText).tr(),
+            Text(LocaleKeys.title_confirm, style: kts22DarkText).tr(),
             verticalSpaceTiny,
             verticalSpaceMedium,
             Text(

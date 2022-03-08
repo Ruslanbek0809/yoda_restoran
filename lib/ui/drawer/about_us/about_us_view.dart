@@ -39,7 +39,7 @@ class AboutUsView extends StatelessWidget {
             centerTitle: true,
             title: Text(
               LocaleKeys.about_us,
-              style: ktsDefault22DarkText,
+              style: kts22DarkText,
             ).tr(),
           ),
           body: Padding(
