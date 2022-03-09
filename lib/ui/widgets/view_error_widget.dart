@@ -36,9 +36,7 @@ class ViewErrorWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 14.h),
               borderRadius: kbr15,
               color: kcSecondaryLightColor,
-              onPressed: () {
-                modelCallBack!();
-              },
+              onPressed: () async => await modelCallBack!(),
             ),
           ),
         ],

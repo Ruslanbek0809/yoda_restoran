@@ -28,11 +28,8 @@ class SingleExViewModel extends FutureViewModel {
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
-  /// _isCustomError and updateCustomError func are used to show error flash bar once. Workaround
-  bool _isCustomError = false;
-  bool get isCustomError => _isCustomError;
-  List<EsRich>? _seRiches = [];
-  List<EsRich>? get seRiches => _seRiches;
+  List<EsRich> _seRiches = [];
+  List<EsRich> get seRiches => _seRiches;
 
   // // FETCHS Restaurant categories with their meals
   Future getSingleExRiches() async {
@@ -40,25 +37,9 @@ class SingleExViewModel extends FutureViewModel {
     await _api.getSingleExRiches(
       singleExId: singleEx!.id!,
       onSuccess: (result) => _seRiches = result,
-      onFail: () {
-        _isCustomError = true;
-        // _snackBarService.showCustomSnackBar(
-        //   variant: SnackBarType.restaurantDetailsError,
-        //   message: 'This is a snack bar',
-        //   // title: 'The title',
-        //   duration: Duration(seconds: 2),
-        // );
-      },
     );
 
-    log.i('_seRiches length: ${_seRiches!.length}');
-  }
-
-  /// Workaround to show error flash bar once
-  void updateCustomError() {
-    log.i('updateCustomError()');
-
-    _isCustomError = false;
+    log.i('_seRiches length: ${_seRiches.length}');
   }
 
 //------------------------ NAVIGATIONS ----------------------------//

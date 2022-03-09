@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../../../models/models.dart';
@@ -70,17 +71,41 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 0.2.sh),
                       child: ViewErrorWidget(
-                        modelCallBack: () async {},
+                        modelCallBack: () async => await model.initialise(),
                       ),
                     ),
                   )
-                : SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                    return Container(
-                        child: ListTile(
-                      title: Text("${index}a"),
-                    ));
-                  }, childCount: 25))
+                :
+                // SliverList(
+                //     delegate: SliverChildBuilderDelegate((context, index) {
+                //     return Container(
+                //         child: ListTile(
+                //       title: Text("${index}a"),
+                //     ));
+                //   }, childCount: 25)),
+                SliverPadding(
+                    padding: EdgeInsets.only(
+                      top: 16.h,
+                      bottom: 0.11.sh, // COMPENSATES HomeBottomCart
+                    ), // Changes based on exclusive part
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int pos) {
+                          final seRich = model.seRiches[pos];
+                          return
+
+                              // seRich restaurant
+                              seRich.restaurant != null
+                                  ? RestaurantView(
+                                      restaurant: seRich.restaurant!,
+                                    )
+                                  // seRich reachText
+                                  : SizedBox();
+                        },
+                        childCount: model.seRiches.length,
+                      ),
+                    ),
+                  ),
 //------------------ MEAL LIST ---------------------//
         // SliverPadding(
         //   padding: EdgeInsets.only(

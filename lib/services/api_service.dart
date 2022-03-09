@@ -179,7 +179,6 @@ class ApiService {
   Future<void> getSingleExRiches({
     required int singleExId,
     Function(List<EsRich>)? onSuccess,
-    Function()? onFail,
   }) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<EsRich> _seRiches = [];
@@ -207,12 +206,9 @@ class ApiService {
         });
 
         onSuccess!(_seRiches);
-      } else {
-        onFail!();
       }
     } on DioError catch (error) {
       log.v('ERROR on api/richRes?exclusive=$singleExId :${error.response}');
-      onFail!();
       throw DioErrorType.response;
     }
   }
