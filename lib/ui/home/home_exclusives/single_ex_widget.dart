@@ -30,21 +30,23 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
         // ),
 
         SliverAppBar(
-          expandedHeight: 0.175.sh,
+          expandedHeight: model.isBusy || model.hasError ? 0.05.sh : 0.175.sh,
           pinned: true,
           stretch: true,
           backgroundColor: AppTheme.WHITE,
           leading: BackButtonWidget(),
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
-                12.h), // left padding 54.w moves title a bit to give a size for leading back icon
-            title: Text(
-              'Maslahat beryaris',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: kts20DarkText,
-            ),
-          ),
+          flexibleSpace: model.isBusy || model.hasError
+              ? SizedBox()
+              : FlexibleSpaceBar(
+                  titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
+                      12.h), // left padding 54.w moves title a bit to give a size for leading back icon
+                  title: Text(
+                    'Maslahat beryaris',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: kts20DarkText,
+                  ),
+                ),
           //------------------ ACTIONS FAV ---------------------//
           actions: [
             IconButton(
@@ -57,13 +59,28 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
             )
           ],
         ),
-        SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-          return Container(
-              child: ListTile(
-            title: Text("${index}a"),
-          ));
-        }, childCount: 25))
+        model.isBusy
+            ? SliverToBoxAdapter(
+                child: Padding(
+                padding: EdgeInsets.only(top: 0.4.sh),
+                child: LoadingWidget(),
+              ))
+            : model.hasError
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 0.2.sh),
+                      child: ViewErrorWidget(
+                        modelCallBack: () async {},
+                      ),
+                    ),
+                  )
+                : SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                    return Container(
+                        child: ListTile(
+                      title: Text("${index}a"),
+                    ));
+                  }, childCount: 25))
 //------------------ MEAL LIST ---------------------//
         // SliverPadding(
         //   padding: EdgeInsets.only(

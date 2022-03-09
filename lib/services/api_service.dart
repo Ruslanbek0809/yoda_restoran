@@ -199,7 +199,7 @@ class ApiService {
         response = await _apiRoot.dio
             .get('api/richRes/', queryParameters: {'exclusive': singleExId});
 
-      log.v('RESPONSE: api/richRes/ => ${response.data}');
+      // log.v('RESPONSE: api/richRes/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
         response.data.forEach((_resCategory) {
