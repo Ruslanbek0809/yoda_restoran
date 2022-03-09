@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/restaurant/restaurant_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'single_ex_view_model.dart';
 
 class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
   final ExclusiveSingle singleEx;
   const SingleExWidget({required this.singleEx, Key? key})
       : super(key: key, reactive: true);
-
   @override
   Widget build(BuildContext context, SingleExViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
@@ -42,7 +42,7 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                   titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
                       12.h), // left padding 54.w moves title a bit to give a size for leading back icon
                   title: Text(
-                    'Maslahat beryaris',
+                    singleEx.name!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: kts20DarkText,
@@ -85,7 +85,7 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                 //   }, childCount: 25)),
                 SliverPadding(
                     padding: EdgeInsets.only(
-                      top: 16.h,
+                      top: 0.h,
                       bottom: 0.11.sh, // COMPENSATES HomeBottomCart
                     ), // Changes based on exclusive part
                     sliver: SliverList(
@@ -94,13 +94,46 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                           final seRich = model.seRiches[pos];
                           return
 
-                              // seRich restaurant
+                              // seRich restaurant widget
                               seRich.restaurant != null
                                   ? RestaurantView(
                                       restaurant: seRich.restaurant!,
                                     )
-                                  // seRich reachText
-                                  : SizedBox();
+                                  // seRich reachText widget
+                                  : Html(
+                                      data: seRich.richText,
+                                      // shrinkWrap: true,
+                                      style: {
+                                        "body": Style(
+                                            margin: EdgeInsets.zero,
+                                            padding: EdgeInsets.zero),
+                                        "p": Style(
+                                            fontSize: FontSize(14.sp),
+                                            margin: EdgeInsets.fromLTRB(
+                                                16.w, 0.h, 16.w, 10.h),
+                                            padding: EdgeInsets.zero),
+                                      },
+                                      onLinkTap: (url, _, __, ___) async {
+                                        final Uri launchUri = Uri(
+                                          scheme: 'https',
+                                          path: url,
+                                        );
+                                        await launch(launchUri.toString());
+                                      },
+                                      onImageTap: (src, _, __, ___) {
+                                        print(src);
+                                      },
+                                      onImageError: (exception, stackTrace) {
+                                        print(exception);
+                                      },
+                                      onCssParseError: (css, messages) {
+                                        print("css that errored: $css");
+                                        print("error messages:");
+                                        messages.forEach((element) {
+                                          print(element);
+                                        });
+                                      },
+                                    );
                         },
                         childCount: model.seRiches.length,
                       ),
