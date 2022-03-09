@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:stacked/stacked.dart';
@@ -22,44 +24,44 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
 
     return CustomScrollView(
       slivers: [
-        // SliverPersistentHeader(
-        //   pinned: true,
-        //   delegate: _TransitionAppBarDelegate(
-        //     title: 'Maslahat beryaris',
-        //     extent: 250,
-        //   ),
-        // ),
-
-        SliverAppBar(
-          expandedHeight: model.isBusy || model.hasError ? 0.05.sh : 0.175.sh,
+        SliverPersistentHeader(
           pinned: true,
-          stretch: true,
-          backgroundColor: AppTheme.WHITE,
-          leading: BackButtonWidget(),
-          flexibleSpace: model.isBusy || model.hasError
-              ? SizedBox()
-              : FlexibleSpaceBar(
-                  titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
-                      12.h), // left padding 54.w moves title a bit to give a size for leading back icon
-                  title: Text(
-                    singleEx.name!,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: kts20DarkText,
-                  ),
-                ),
-          //------------------ ACTIONS FAV ---------------------//
-          actions: [
-            IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.share,
-                size: 24.w,
-                color: kcSecondaryDarkColor,
-              ),
-            )
-          ],
+          delegate: _TransitionAppBarDelegate(
+            title: model.isBusy || model.hasError ? '' : singleEx.name!,
+            extent: model.isBusy || model.hasError ? 62.h : 0.175.sh,
+          ),
         ),
+
+        // SliverAppBar(
+        //   expandedHeight: model.isBusy || model.hasError ? 0.05.sh : 0.175.sh,
+        //   pinned: true,
+        //   stretch: true,
+        //   backgroundColor: AppTheme.WHITE,
+        //   leading: BackButtonWidget(),
+        //   flexibleSpace: model.isBusy || model.hasError
+        //       ? SizedBox()
+        //       : FlexibleSpaceBar(
+        //           titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
+        //               12.h), // left padding 54.w moves title a bit to give a size for leading back icon
+        //           title: Text(
+        //             singleEx.name!,
+        //             maxLines: 2,
+        //             overflow: TextOverflow.ellipsis,
+        //             style: kts20DarkText,
+        //           ),
+        //         ),
+        //   //------------------ ACTIONS FAV ---------------------//
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () => Navigator.pop(context),
+        //       icon: Icon(
+        //         Icons.share,
+        //         size: 24.w,
+        //         color: kcSecondaryDarkColor,
+        //       ),
+        //     )
+        //   ],
+        // ),
         model.isBusy
             ? SliverToBoxAdapter(
                 child: Padding(
@@ -225,20 +227,23 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
 
 class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   final _titleMarginTween = EdgeInsetsTween(
-    begin: EdgeInsets.only(bottom: 20),
-    end: EdgeInsets.only(left: 64.0, top: 45.0),
+    begin: EdgeInsets.only(bottom: 5.h, left: 16.w, right: 16.w),
+    end: EdgeInsets.only(left: 48.w, right: 48.w, top: 28.h),
   );
-
+  final _leftIconMarginTween = EdgeInsetsTween(
+    begin: EdgeInsets.only(bottom: 18.h),
+    end: EdgeInsets.only(top: 22.h),
+  );
   final _rightIconMarginTween = EdgeInsetsTween(
-    begin: EdgeInsets.only(bottom: 20),
-    end: EdgeInsets.only(top: 45.0),
+    begin: EdgeInsets.only(bottom: 18.h),
+    end: EdgeInsets.only(top: 22.h),
   );
 
   final _titleAlignTween =
-      AlignmentTween(begin: Alignment.bottomCenter, end: Alignment.topLeft);
-  final _rightIconAlignTween =
       AlignmentTween(begin: Alignment.bottomLeft, end: Alignment.topLeft);
-  final _iconAlignTween =
+  final _leftIconAlignTween =
+      AlignmentTween(begin: Alignment.bottomLeft, end: Alignment.topLeft);
+  final _rightIconAlignTween =
       AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
 
   final String title;
@@ -249,37 +254,44 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    double tempVal = 72 * maxExtent / 100;
+    double tempVal = 50 * maxExtent / 100;
     final progress = shrinkOffset > tempVal ? 1.0 : shrinkOffset / tempVal;
 
-    final titleMargin = _titleMarginTween.lerp(progress);
-    final rightIconMargin = _rightIconMarginTween.lerp(progress);
+    final titleMargin = _titleMarginTween
+        .lerp(progress); // for animated title change 1.0 to progress
 
-    final avatarAlign = _titleAlignTween.lerp(progress);
-    final rightIconAlign = _rightIconAlignTween.lerp(progress);
-    final iconAlign = _iconAlignTween.lerp(progress);
+    final rightIconMargin = _rightIconMarginTween
+        .lerp(1.0); // for animated title change 1.0 to progress
+    final leftIconMargin = _leftIconMarginTween
+        .lerp(1.0); // for animated icon change 1.0 to progress
+
+    final titleAlign = _titleAlignTween.lerp(progress);
+    final leftIconAlign = _leftIconAlignTween
+        .lerp(1.0); // for animated title change 1.0 to progress
+    final rightIconAlign = _rightIconAlignTween
+        .lerp(1.0); // for animated icon change 1.0 to progress
 
     return Stack(
       children: <Widget>[
         AnimatedContainer(
           duration: Duration(milliseconds: 100),
-          height: 80,
+          height: 62.h,
           constraints: BoxConstraints(maxHeight: minExtent),
-          color: Colors.white,
+          color: AppTheme.WHITE,
         ),
         Padding(
-          padding: rightIconMargin,
+          padding: leftIconMargin,
           child: Align(
-            alignment: rightIconAlign,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: Colors.black,
-                  // color: progress < 0.4 ? Colors.white : Colors.black,
-                ),
+            alignment: leftIconAlign,
+            child: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(
+                Platform.isIOS
+                    ? Icons.arrow_back_ios_rounded
+                    : Icons.arrow_back_rounded,
+                size: 22.w,
+                color: kcFontColor,
+                // color: progress < 0.4 ? Colors.white : Colors.black,
               ),
             ),
           ),
@@ -287,32 +299,32 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
         Padding(
           padding: titleMargin,
           child: Align(
-            alignment: avatarAlign,
+            alignment: titleAlign,
             child: Text(
               title,
+              // 'Birini alana 2nji gaty beter mugt indi nm edeli',
+              maxLines: shrinkOffset > tempVal ? 1 : 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: Colors.black,
+                color: kcFontColor,
                 // color: progress < 0.4 ? Colors.white : Colors.black,
-                fontSize: 18 + (5 * (1 - progress)),
+                fontSize: 20.sp + (4 * (1 - progress)),
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
         ),
         Padding(
-          padding: titleMargin,
+          padding: rightIconMargin,
           child: Align(
-            alignment: iconAlign,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.search,
-                  size: 30,
-                  color: Colors.black,
-                  // color: progress < 0.4 ? Colors.white : Colors.black,
-                ),
+            alignment: rightIconAlign,
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.share,
+                size: 22.w,
+                color: kcFontColor,
+                // color: progress < 0.4 ? Colors.white : Colors.black,
               ),
             ),
           ),
@@ -325,7 +337,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => extent;
 
   @override
-  double get minExtent => 80;
+  double get minExtent => extent;
 
   @override
   bool shouldRebuild(_TransitionAppBarDelegate oldDelegate) {
