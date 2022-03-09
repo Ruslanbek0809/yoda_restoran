@@ -92,48 +92,63 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int pos) {
                           final seRich = model.seRiches[pos];
-                          return
-
-                              // seRich restaurant widget
-                              seRich.restaurant != null
-                                  ? RestaurantView(
-                                      restaurant: seRich.restaurant!,
-                                    )
-                                  // seRich reachText widget
-                                  : Html(
-                                      data: seRich.richText,
-                                      // shrinkWrap: true,
-                                      style: {
-                                        "body": Style(
-                                            margin: EdgeInsets.zero,
-                                            padding: EdgeInsets.zero),
-                                        "p": Style(
-                                            fontSize: FontSize(14.sp),
-                                            margin: EdgeInsets.fromLTRB(
-                                                16.w, 0.h, 16.w, 10.h),
-                                            padding: EdgeInsets.zero),
-                                      },
-                                      onLinkTap: (url, _, __, ___) async {
-                                        final Uri launchUri = Uri(
-                                          scheme: 'https',
-                                          path: url,
-                                        );
-                                        await launch(launchUri.toString());
-                                      },
-                                      onImageTap: (src, _, __, ___) {
-                                        print(src);
-                                      },
-                                      onImageError: (exception, stackTrace) {
-                                        print(exception);
-                                      },
-                                      onCssParseError: (css, messages) {
-                                        print("css that errored: $css");
-                                        print("error messages:");
-                                        messages.forEach((element) {
-                                          print(element);
-                                        });
-                                      },
+                          return seRich.restaurant != null
+                              ? RestaurantView(
+                                  restaurant: seRich.restaurant!,
+                                )
+                              : Html(
+                                  data: seRich.richText,
+                                  style: {
+                                    "body": Style(
+                                        margin: EdgeInsets.zero,
+                                        padding:
+                                            EdgeInsets.zero), // GENERAL BODY
+                                    "p": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero), // NORMAL
+                                    "pre": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero), // FORMATTED
+                                    "h1": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero),
+                                    "h2": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero),
+                                    "h3": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero),
+                                    "h4": Style(
+                                        margin: EdgeInsets.fromLTRB(
+                                            16.w, 0.h, 16.w, 10.h),
+                                        padding: EdgeInsets.zero),
+                                  },
+                                  onLinkTap: (url, _, __, ___) async {
+                                    final Uri launchUri = Uri(
+                                      scheme: 'https',
+                                      path: url,
                                     );
+                                    await launch(launchUri.toString());
+                                  },
+                                  onImageTap: (src, _, __, ___) {
+                                    print(src);
+                                  },
+                                  onImageError: (exception, stackTrace) {
+                                    print(exception);
+                                  },
+                                  onCssParseError: (css, messages) {
+                                    print("css that errored: $css");
+                                    print("error messages:");
+                                    messages.forEach((element) {
+                                      print(element);
+                                    });
+                                  },
+                                );
                         },
                         childCount: model.seRiches.length,
                       ),
