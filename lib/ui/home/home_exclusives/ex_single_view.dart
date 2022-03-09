@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/models.dart';
-
-import 'ex_single_widget.dart';
 import 'ex_single_view_model.dart';
+import 'ex_single_widget.dart';
 
 class ExSingleView extends StatelessWidget {
   final ExclusiveSingle exclusiveSingle;

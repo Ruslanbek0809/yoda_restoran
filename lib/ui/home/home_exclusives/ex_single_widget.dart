@@ -1,13 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/home/home_exclusives/ex_single_view_model.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import 'package:yoda_res/utils/utils.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'ex_single_view_model.dart';
 
 class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
   final ExclusiveSingle exclusiveSingle;
@@ -22,6 +21,14 @@ class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
 
     return CustomScrollView(
       slivers: [
+        // SliverPersistentHeader(
+        //   pinned: true,
+        //   delegate: _TransitionAppBarDelegate(
+        //     title: 'Maslahat beryaris',
+        //     extent: 250,
+        //   ),
+        // ),
+
         SliverAppBar(
           expandedHeight: 0.175.sh,
           pinned: true,
@@ -29,11 +36,13 @@ class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
           backgroundColor: AppTheme.WHITE,
           leading: BackButtonWidget(),
           flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.fromLTRB(48.w, 16.h, 16.w,
-                12.h), // left padding 48.w moves title a bit to give a size for leading back icon
+            titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
+                12.h), // left padding 54.w moves title a bit to give a size for leading back icon
             title: Text(
-              exclusiveSingle.name!,
-              style: kts22DarkText,
+              'Maslahat beryaris',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: kts20DarkText,
             ),
           ),
           //------------------ ACTIONS FAV ---------------------//
@@ -161,5 +170,115 @@ class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
         // ),
       ],
     );
+  }
+}
+
+class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final _titleMarginTween = EdgeInsetsTween(
+    begin: EdgeInsets.only(bottom: 20),
+    end: EdgeInsets.only(left: 64.0, top: 45.0),
+  );
+
+  final _rightIconMarginTween = EdgeInsetsTween(
+    begin: EdgeInsets.only(bottom: 20),
+    end: EdgeInsets.only(top: 45.0),
+  );
+
+  final _titleAlignTween =
+      AlignmentTween(begin: Alignment.bottomCenter, end: Alignment.topLeft);
+  final _rightIconAlignTween =
+      AlignmentTween(begin: Alignment.bottomLeft, end: Alignment.topLeft);
+  final _iconAlignTween =
+      AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
+
+  final String title;
+  final double extent;
+
+  _TransitionAppBarDelegate({required this.title, this.extent = 250});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    double tempVal = 72 * maxExtent / 100;
+    final progress = shrinkOffset > tempVal ? 1.0 : shrinkOffset / tempVal;
+
+    final titleMargin = _titleMarginTween.lerp(progress);
+    final rightIconMargin = _rightIconMarginTween.lerp(progress);
+
+    final avatarAlign = _titleAlignTween.lerp(progress);
+    final rightIconAlign = _rightIconAlignTween.lerp(progress);
+    final iconAlign = _iconAlignTween.lerp(progress);
+
+    return Stack(
+      children: <Widget>[
+        AnimatedContainer(
+          duration: Duration(milliseconds: 100),
+          height: 80,
+          constraints: BoxConstraints(maxHeight: minExtent),
+          color: Colors.white,
+        ),
+        Padding(
+          padding: rightIconMargin,
+          child: Align(
+            alignment: rightIconAlign,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: Colors.black,
+                  // color: progress < 0.4 ? Colors.white : Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: titleMargin,
+          child: Align(
+            alignment: avatarAlign,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.black,
+                // color: progress < 0.4 ? Colors.white : Colors.black,
+                fontSize: 18 + (5 * (1 - progress)),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: titleMargin,
+          child: Align(
+            alignment: iconAlign,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.search,
+                  size: 30,
+                  color: Colors.black,
+                  // color: progress < 0.4 ? Colors.white : Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  double get maxExtent => extent;
+
+  @override
+  double get minExtent => 80;
+
+  @override
+  bool shouldRebuild(_TransitionAppBarDelegate oldDelegate) {
+    return title != oldDelegate.title;
   }
 }

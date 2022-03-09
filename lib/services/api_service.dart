@@ -50,7 +50,7 @@ class ApiService {
   }
 
   Future<List<Restaurant>> getRandomRess() async {
-    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
+    log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Restaurant> _randomRestaurants = [];
     try {
       Response response;
@@ -80,7 +80,7 @@ class ApiService {
   }
 
   Future<List<Promoted>> getProms() async {
-    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
+    log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Promoted> _promotedList = [];
     try {
       Response response;
@@ -110,21 +110,9 @@ class ApiService {
   }
 
   Future<List<Exclusive>> getExclusives() async {
-    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
     List<Exclusive> _exclusives = [];
     try {
-      Response response;
-      // if (_geolocatorService.locationPosition != null) {
-      //   await _geolocatorService.getUserCurrentLocationOnly();
-      //   response = await _apiRoot.dio.get(
-      //     'api/promoted/',
-      //     queryParameters: {
-      //       'markerY': _geolocatorService.locationPosition!.longitude,
-      //       'markerX': _geolocatorService.locationPosition!.latitude,
-      //     },
-      //   );
-      // } else
-      response = await _apiRoot.dio.get('api/groupexclusive/');
+      Response response = await _apiRoot.dio.get('api/groupexclusive/');
       // log.v('RESPONSE: api/groupexclusive/ => ${response.data}');
 
       if (response.data != null) {
@@ -144,7 +132,7 @@ class ApiService {
     bool alphabet,
     bool rating,
   ) async {
-    log.v('Position OF RESTAURANTSSS: ${_geolocatorService.locationPosition}');
+    log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Restaurant> _selectedMainCatRestaurants = [];
     String _queryPars = 'mainCat=${_selectedMainCats[0]}';
     for (int i = 1; i < _selectedMainCats.length; i++)
@@ -183,6 +171,49 @@ class ApiService {
     } on DioError catch (error) {
       log.v('ERROR on api/promoted/ :${error.response}');
       return error;
+    }
+  }
+
+  //------------------ SINGLE EXCLUSIVE APIS ---------------------//
+
+  Future<void> getSingleExRiches({
+    required int singleExId,
+    Function(List<EsRich>)? onSuccess,
+    Function()? onFail,
+  }) async {
+    log.v('My loc: ${_geolocatorService.locationPosition}');
+    List<EsRich> _esRiches = [];
+    try {
+      Response response;
+      if (_geolocatorService.locationPosition != null) {
+        await _geolocatorService.getUserCurrentLocationOnly();
+        response = await _apiRoot.dio.get(
+          'api/richRes/',
+          queryParameters: {
+            'exclusive': singleExId,
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+          },
+        );
+      } else
+        response = await _apiRoot.dio
+            .get('api/richRes/', queryParameters: {'exclusive': singleExId});
+
+      // log.v('RESPONSE: api/richRes/ => ${response.data}');
+
+      if (response.data != null && response.statusCode == 200) {
+        response.data.forEach((_resCategory) {
+          _esRiches.add(EsRich.fromJson(_resCategory));
+        });
+
+        onSuccess!(_esRiches);
+      } else {
+        onFail!();
+      }
+    } on DioError catch (error) {
+      log.v('ERROR on api/richRes?exclusive=$singleExId :${error.response}');
+      onFail!();
+      throw DioErrorType.response;
     }
   }
 

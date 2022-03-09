@@ -35,27 +35,23 @@ class ExSingleViewModel extends FutureViewModel {
   List<ResCategory>? get resCategories => _resCategories;
 
   // // FETCHS Restaurant categories with their meals
-  Future getResCatsWithMeals(
-      //   {
-      //   // Function()? onFailForView,
-      // }
-      ) async {
+  Future getResCatsWithMeals({Function()? onFailForView}) async {
     log.i('');
-    // await _api.getResCatsWithMeals(
-    //   restaurantId: restaurant!.id!,
-    //   onSuccess: (result) async {
-    //     _resCategories = result;
-    //   },
-    //   onFail: () {
-    //     _isCustomError = true;
-    //     // _snackBarService.showCustomSnackBar(
-    //     //   variant: SnackBarType.restaurantDetailsError,
-    //     //   message: 'This is a snack bar',
-    //     //   // title: 'The title',
-    //     //   duration: Duration(seconds: 2),
-    //     // );
-    //   },
-    // );
+    await _api.getResCatsWithMeals(
+      restaurantId: exclusiveSingle!.id!,
+      onSuccess: (result) async {
+        _resCategories = result;
+      },
+      onFail: () {
+        _isCustomError = true;
+        // _snackBarService.showCustomSnackBar(
+        //   variant: SnackBarType.restaurantDetailsError,
+        //   message: 'This is a snack bar',
+        //   // title: 'The title',
+        //   duration: Duration(seconds: 2),
+        // );
+      },
+    );
 
     log.i('_resCategories length: ${_resCategories!.length}');
   }
@@ -75,6 +71,4 @@ class ExSingleViewModel extends FutureViewModel {
 
   @override
   Future<void> futureToRun() async => await getResCatsWithMeals();
-  // @override
-  // Future<void> futureToRun() async => await Future.delayed(Duration.zero);
 }
