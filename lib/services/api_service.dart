@@ -182,7 +182,7 @@ class ApiService {
     Function()? onFail,
   }) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
-    List<EsRich> _esRiches = [];
+    List<EsRich> _seRiches = [];
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
@@ -199,14 +199,14 @@ class ApiService {
         response = await _apiRoot.dio
             .get('api/richRes/', queryParameters: {'exclusive': singleExId});
 
-      // log.v('RESPONSE: api/richRes/ => ${response.data}');
+      log.v('RESPONSE: api/richRes/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
         response.data.forEach((_resCategory) {
-          _esRiches.add(EsRich.fromJson(_resCategory));
+          _seRiches.add(EsRich.fromJson(_resCategory));
         });
 
-        onSuccess!(_esRiches);
+        onSuccess!(_seRiches);
       } else {
         onFail!();
       }

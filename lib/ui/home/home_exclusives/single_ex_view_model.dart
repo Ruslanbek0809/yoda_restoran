@@ -11,10 +11,10 @@ import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
-class ExSingleViewModel extends FutureViewModel {
-  final log = getLogger('ExSingleViewModel');
-  final ExclusiveSingle? exclusiveSingle;
-  ExSingleViewModel(this.exclusiveSingle);
+class SingleExViewModel extends FutureViewModel {
+  final log = getLogger('SingleExViewModel');
+  final ExclusiveSingle? singleEx;
+  SingleExViewModel(this.singleEx);
 
   final _api = locator<ApiService>();
   final _navService = locator<NavigationService>();
@@ -31,17 +31,15 @@ class ExSingleViewModel extends FutureViewModel {
   /// _isCustomError and updateCustomError func are used to show error flash bar once. Workaround
   bool _isCustomError = false;
   bool get isCustomError => _isCustomError;
-  List<ResCategory>? _resCategories = [];
-  List<ResCategory>? get resCategories => _resCategories;
+  List<EsRich>? _seRiches = [];
+  List<EsRich>? get seRiches => _seRiches;
 
   // // FETCHS Restaurant categories with their meals
-  Future getResCatsWithMeals({Function()? onFailForView}) async {
+  Future getSingleExRiches() async {
     log.i('');
-    await _api.getResCatsWithMeals(
-      restaurantId: exclusiveSingle!.id!,
-      onSuccess: (result) async {
-        _resCategories = result;
-      },
+    await _api.getSingleExRiches(
+      singleExId: singleEx!.id!,
+      onSuccess: (result) => _seRiches = result,
       onFail: () {
         _isCustomError = true;
         // _snackBarService.showCustomSnackBar(
@@ -53,7 +51,7 @@ class ExSingleViewModel extends FutureViewModel {
       },
     );
 
-    log.i('_resCategories length: ${_resCategories!.length}');
+    log.i('_seRiches length: ${_seRiches!.length}');
   }
 
   /// Workaround to show error flash bar once
@@ -70,5 +68,5 @@ class ExSingleViewModel extends FutureViewModel {
       [_bottomCartService, _hiveDbService];
 
   @override
-  Future<void> futureToRun() async => await getResCatsWithMeals();
+  Future<void> futureToRun() async => await getSingleExRiches();
 }

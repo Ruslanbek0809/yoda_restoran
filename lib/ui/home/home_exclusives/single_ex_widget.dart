@@ -6,15 +6,15 @@ import 'package:yoda_res/utils/utils.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'ex_single_view_model.dart';
+import 'single_ex_view_model.dart';
 
-class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
-  final ExclusiveSingle exclusiveSingle;
-  const ExSingleWidget({required this.exclusiveSingle, Key? key})
+class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
+  final ExclusiveSingle singleEx;
+  const SingleExWidget({required this.singleEx, Key? key})
       : super(key: key, reactive: true);
 
   @override
-  Widget build(BuildContext context, ExSingleViewModel model) {
+  Widget build(BuildContext context, SingleExViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.32.sw is for item height
@@ -64,46 +64,6 @@ class ExSingleWidget extends ViewModelWidget<ExSingleViewModel> {
             title: Text("${index}a"),
           ));
         }, childCount: 25))
-        //------------------ ARROW BACK ---------------------//
-        // SliverAppBar(
-        //   expandedHeight: 0.55.sh,
-        //   pinned: true,
-        //   stretch: true,
-        //   floating: false,
-        //   backgroundColor: AppTheme.WHITE,
-        //   centerTitle: true,
-        //   title: SizedBox(),
-        //   leading: AnimatedSwitcher(
-        //     duration: Duration(milliseconds: 300),
-        //     child: Container(
-        //       height: 50.w,
-        //       width: 50.w,
-        //       margin: EdgeInsets.only(left: 10.w, top: 5.w),
-        //       decoration: BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         color: kcWhiteColor,
-        //         // color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
-        //         // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
-        //       ),
-        //       child: Material(
-        //         color: kcWhiteColor,
-        //         // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-        //         shape: CircleBorder(),
-        //         elevation: 0,
-        //         child: InkWell(
-        //           customBorder: CircleBorder(),
-        //           onTap: () => Navigator.pop(context),
-        //           child: Icon(
-        //             Icons.arrow_back,
-        //             size: 27.w,
-        //             color: AppTheme.BLACK,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        //   actions: [],
-        // ),
 //------------------ MEAL LIST ---------------------//
         // SliverPadding(
         //   padding: EdgeInsets.only(
