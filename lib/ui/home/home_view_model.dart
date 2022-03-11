@@ -69,10 +69,10 @@ class HomeViewModel extends MultipleFutureViewModel {
 
       /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
       if ((_randomResPos + 1) % 5 == 0) {
-        /// Here it CHECK whether there is promPosCount's position PROMOTED EXISTS or NOT.
+        /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
         /// If yes, then ADDS promPosCount's positioned PROMOTED. Else it ADDS 5th randomRes
         if (_homeService.proms.isNotEmpty &&
-            _homeService.proms[promPosCount] != null) {
+            _homeService.proms.length > promPosCount) {
           _homeRess.add(
             HomeResPromo(
               _randomRes,
