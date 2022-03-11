@@ -341,64 +341,73 @@ class _HomeViewState extends State<HomeView> {
                                             final _homeRes =
                                                 model.homeRess![pos];
 
-                                            /// ----------- RESTAURANT with PROMOTED INCLUDED in every 5th position --------------//
-                                            if ((pos + 1) % 5 == 0 &&
-                                                _homeRes.prom != null)
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  //------------------ RESTAURANT with PROMOTED ---------------------//
-                                                  RestaurantView(
+                                            // /// ----------- RESTAURANT with PROMOTED INCLUDED in every 5th position --------------//
+                                            // if ((pos + 1) % 5 == 0 &&
+                                            //     _homeRes.prom != null)
+
+                                            // /// ----------- RESTAURANT with PROMOTED INCLUDED in every manual position --------------//
+                                            return _homeRes.prom != null
+                                                ? Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      //------------------ RESTAURANT with PROMOTED ---------------------//
+                                                      RestaurantView(
+                                                        restaurant:
+                                                            _homeRes.restaurant,
+                                                      ),
+                                                      // PROMOTED Title
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 16.w,
+                                                                top: 2.h),
+                                                        child: Text(
+                                                          _homeRes.prom!.name!,
+                                                          style: TextStyle(
+                                                            fontSize: 24.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: AppTheme
+                                                                .MAIN_DARK,
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      /// List of restaurants of pos'th PROMOTED
+                                                      SingleChildScrollView(
+                                                        physics:
+                                                            BouncingScrollPhysics(),
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: _homeRes
+                                                              .prom!
+                                                              .restaurants!
+                                                              .map((promRes) {
+                                                            return PromResView(
+                                                              restaurant:
+                                                                  promRes,
+                                                              promRess: _homeRes
+                                                                  .prom!
+                                                                  .restaurants!,
+                                                            );
+                                                          }).toList(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                //------------------ RESTAURANT without Promoted ---------------------//
+                                                : RestaurantView(
                                                     restaurant:
                                                         _homeRes.restaurant,
-                                                  ),
-                                                  // PROMOTED Title
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 16.w, top: 2.h),
-                                                    child: Text(
-                                                      _homeRes.prom!.name!,
-                                                      style: TextStyle(
-                                                        fontSize: 24.sp,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color:
-                                                            AppTheme.MAIN_DARK,
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                  /// List of restaurants of pos'th PROMOTED
-                                                  SingleChildScrollView(
-                                                    physics:
-                                                        BouncingScrollPhysics(),
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: _homeRes
-                                                          .prom!.restaurants!
-                                                          .map((promRes) {
-                                                        return PromResView(
-                                                          restaurant: promRes,
-                                                          promRess: _homeRes
-                                                              .prom!
-                                                              .restaurants!,
-                                                        );
-                                                      }).toList(),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            //------------------ RESTAURANT without Promoted ---------------------//
-                                            else
-                                              return RestaurantView(
-                                                restaurant: _homeRes.restaurant,
-                                              );
+                                                  );
                                           },
                                           childCount:
                                               model.homeRess?.length ?? 0,

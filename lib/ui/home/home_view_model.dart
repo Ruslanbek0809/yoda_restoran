@@ -67,12 +67,12 @@ class HomeViewModel extends MultipleFutureViewModel {
     for (final _randomRes in _homeService.randomRess!) {
       int _randomResPos = _homeService.randomRess!.indexOf(_randomRes);
 
-      /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
-      if ((_randomResPos + 1) % 5 == 0) {
-        /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
-        /// If yes, then ADDS promPosCount's positioned PROMOTED. Else it ADDS 5th randomRes
-        if (_homeService.proms.isNotEmpty &&
-            _homeService.proms.length > promPosCount) {
+      /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
+      if (_homeService.proms.isNotEmpty &&
+          _homeService.proms.length > promPosCount) {
+        /// Here it CHECKS whether this PROMOTED's position is equal to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
+        /// If it positions are EQUAL, then ADDS this PROMOTED to this RESTAURANT
+        if (_homeService.proms[promPosCount]!.position == _randomResPos + 1) {
           _homeRess.add(
             HomeResPromo(
               _randomRes,
@@ -91,21 +91,25 @@ class HomeViewModel extends MultipleFutureViewModel {
         _homeRess.add(HomeResPromo(_randomRes, null));
 
       // /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
-      // if ((_randomResPos + 1) % 5 == 0 && _homeService.proms!.isNotEmpty) {
-      //   if (promPosCount <= _homeService.proms!.length - 1 &&
-      //       _homeService.proms![promPosCount].restaurants!.isNotEmpty)
+      // if ((_randomResPos + 1) % 5 == 0) {
+      //   /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
+      //   /// If yes, then ADDS promPosCount's positioned PROMOTED. Else it ADDS 5th randomRes
+      //   if (_homeService.proms.isNotEmpty &&
+      //       _homeService.proms.length > promPosCount) {
       //     _homeRess.add(
       //       HomeResPromo(
       //         _randomRes,
       //         Promoted(
-      //           id: _homeService.proms![promPosCount].id,
-      //           name: _homeService.proms![promPosCount].name,
-      //           order: _homeService.proms![promPosCount].order,
-      //           restaurants: _homeService.proms![promPosCount].restaurants,
+      //           id: _homeService.proms[promPosCount]!.id,
+      //           name: _homeService.proms[promPosCount]!.name,
+      //           order: _homeService.proms[promPosCount]!.order,
+      //           restaurants: _homeService.proms[promPosCount]!.restaurants,
       //         ),
       //       ),
       //     );
-      //   promPosCount++;
+      //     promPosCount++;
+      //   } else
+      //     _homeRess.add(HomeResPromo(_randomRes, null));
       // } else
       //   _homeRess.add(HomeResPromo(_randomRes, null));
     }
