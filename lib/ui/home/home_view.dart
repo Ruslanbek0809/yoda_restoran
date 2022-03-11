@@ -327,102 +327,88 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 ),
                               //------------------ BODY: RESTAURANTS ---------------------//
-                              SliverList(
-                                delegate: SliverChildListDelegate(
-                                  [
-                                    model.selectedMainCats.isEmpty
-                                        ? ListView.builder(
-                                            shrinkWrap: true,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            padding: EdgeInsets.only(
-                                                top: 16
-                                                    .h), // Changes based on exclusive part
-                                            itemCount:
-                                                model.resWithProms?.length ?? 0,
-                                            itemBuilder: (ctx, pos) {
-                                              //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                                              if ((pos + 1) % 5 == 0 &&
-                                                  model.resWithProms![pos]
-                                                          .prom !=
-                                                      null)
-                                                return Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
+                              // OPTIMIZED ONE
+                              model.selectedMainCats.isEmpty
+                                  ? SliverPadding(
+                                      padding: EdgeInsets.only(
+                                        top: 16.h,
+                                        bottom: 0.11
+                                            .sh, // COMPENSATES HomeBottomCart
+                                      ), // Changes based on exclusive part
+                                      sliver: SliverList(
+                                        delegate: SliverChildBuilderDelegate(
+                                          (BuildContext context, int pos) {
+                                            final _homeRes =
+                                                model.homeRess![pos];
+
+                                            /// ----------- RESTAURANT with PROMOTED INCLUDED in every 5th position --------------//
+                                            if ((pos + 1) % 5 == 0 &&
+                                                _homeRes.prom != null)
+                                              return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  //------------------ RESTAURANT with PROMOTED ---------------------//
+                                                  RestaurantView(
+                                                    restaurant:
+                                                        _homeRes.restaurant,
+                                                  ),
+                                                  // PROMOTED Title
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.w, top: 2.h),
+                                                    child: Text(
+                                                      _homeRes.prom!.name!,
+                                                      style: TextStyle(
+                                                        fontSize: 24.sp,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            AppTheme.MAIN_DARK,
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                  /// List of restaurants of pos'th PROMOTED
+                                                  SingleChildScrollView(
+                                                    physics:
+                                                        BouncingScrollPhysics(),
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
                                                               .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 16.w,
-                                                                  top: 4.h),
-                                                          child: Text(
-                                                            model
-                                                                .resWithProms![
-                                                                    pos]
-                                                                .prom!
-                                                                .name!,
-                                                            style: TextStyle(
-                                                              fontSize: 20.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: AppTheme
-                                                                  .MAIN_DARK,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SingleChildScrollView(
-                                                          physics:
-                                                              BouncingScrollPhysics(),
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: model
-                                                                .resWithProms![
-                                                                    pos]
-                                                                .prom!
-                                                                .restaurants!
-                                                                .map((promRes) {
-                                                              return PromResView(
-                                                                restaurant:
-                                                                    promRes,
-                                                                promRess: model
-                                                                    .resWithProms![
-                                                                        pos]
-                                                                    .prom!
-                                                                    .restaurants!,
-                                                              );
-                                                            }).toList(),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                      children: _homeRes
+                                                          .prom!.restaurants!
+                                                          .map((promRes) {
+                                                        return PromResView(
+                                                          restaurant: promRes,
+                                                          promRess: _homeRes
+                                                              .prom!
+                                                              .restaurants!,
+                                                        );
+                                                      }).toList(),
                                                     ),
-                                                    //------------------ RESTAURANTS ---------------------//
-                                                    RestaurantView(
-                                                      restaurant: model
-                                                          .resWithProms![pos]
-                                                          .restaurant,
-                                                    ),
-                                                  ],
-                                                );
-                                              return RestaurantView(
-                                                restaurant: model
-                                                    .resWithProms![pos]
-                                                    .restaurant,
+                                                  ),
+                                                ],
                                               );
-                                            },
-                                          )
-                                        : Column(
+                                            //------------------ RESTAURANT without Promoted ---------------------//
+                                            else
+                                              return RestaurantView(
+                                                restaurant: _homeRes.restaurant,
+                                              );
+                                          },
+                                          childCount:
+                                              model.homeRess?.length ?? 0,
+                                        ),
+                                      ),
+                                    )
+                                  : SliverList(
+                                      delegate: SliverChildListDelegate(
+                                        [
+                                          Column(
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
@@ -502,109 +488,110 @@ class _HomeViewState extends State<HomeView> {
                                               ),
                                             ],
                                           ),
-                                    SizedBox(
-                                        height: 0.11
-                                            .sh), // COMPENSATES HomeBottomCart
-                                  ],
-                                ),
-                              ),
+                                          SizedBox(
+                                              height: 0.11
+                                                  .sh), // COMPENSATES HomeBottomCart
+                                        ],
+                                      ),
+                                    ),
 
-                              // model.selectedMainCats.isEmpty
-                              //     ? SliverPadding(
-                              //         padding: EdgeInsets.only(
-                              //           top: 16.h,
-                              //           bottom: 0.11
-                              //               .sh, // COMPENSATES HomeBottomCart
-                              //         ), // Changes based on exclusive part
-                              //         sliver: SliverList(
-                              //           delegate: SliverChildBuilderDelegate(
-                              //             (BuildContext context, int pos) {
-                              //               //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
-                              //               if ((pos + 1) % 5 == 0 &&
-                              //                   model.resWithProms![pos].prom !=
-                              //                       null)
-                              //                 return Column(
-                              //                   mainAxisSize: MainAxisSize.min,
-                              //                   crossAxisAlignment:
-                              //                       CrossAxisAlignment.start,
-                              //                   children: [
-                              //                     Column(
-                              //                       crossAxisAlignment:
-                              //                           CrossAxisAlignment
-                              //                               .start,
-                              //                       children: [
-                              //                         Padding(
-                              //                           padding:
-                              //                               EdgeInsets.only(
-                              //                                   left: 16.w,
-                              //                                   top: 2.h),
-                              //                           child: Text(
-                              //                             model
-                              //                                 .resWithProms![
-                              //                                     pos]
-                              //                                 .prom!
-                              //                                 .name!,
-                              //                             style: TextStyle(
-                              //                               fontSize: 24.sp,
-                              //                               fontWeight:
-                              //                                   FontWeight.bold,
-                              //                               color: AppTheme
-                              //                                   .MAIN_DARK,
+                              // /// NOT Optimized ONE
+                              // SliverList(
+                              //   delegate: SliverChildListDelegate(
+                              //     [
+                              //       model.selectedMainCats.isEmpty
+                              //           ? ListView.builder(
+                              //               shrinkWrap: true,
+                              //               physics:
+                              //                   NeverScrollableScrollPhysics(),
+                              //               padding: EdgeInsets.only(
+                              //                   top: 16
+                              //                       .h), // Changes based on exclusive part
+                              //               itemCount:
+                              //                   model.resWithProms?.length ?? 0,
+                              //               itemBuilder: (ctx, pos) {
+                              //                 //------------------ RESTAURANTS with PROMOTEDS in every 5th place ---------------------//
+                              //                 if ((pos + 1) % 5 == 0 &&
+                              //                     model.resWithProms![pos]
+                              //                             .prom !=
+                              //                         null)
+                              //                   return Column(
+                              //                     mainAxisSize:
+                              //                         MainAxisSize.min,
+                              //                     crossAxisAlignment:
+                              //                         CrossAxisAlignment.start,
+                              //                     children: [
+                              //                       Column(
+                              //                         crossAxisAlignment:
+                              //                             CrossAxisAlignment
+                              //                                 .start,
+                              //                         children: [
+                              //                           Padding(
+                              //                             padding:
+                              //                                 EdgeInsets.only(
+                              //                                     left: 16.w,
+                              //                                     top: 4.h),
+                              //                             child: Text(
+                              //                               model
+                              //                                   .resWithProms![
+                              //                                       pos]
+                              //                                   .prom!
+                              //                                   .name!,
+                              //                               style: TextStyle(
+                              //                                 fontSize: 20.sp,
+                              //                                 fontWeight:
+                              //                                     FontWeight
+                              //                                         .bold,
+                              //                                 color: AppTheme
+                              //                                     .MAIN_DARK,
+                              //                               ),
                               //                             ),
                               //                           ),
-                              //                         ),
-                              //                         SingleChildScrollView(
-                              //                           physics:
-                              //                               BouncingScrollPhysics(),
-                              //                           scrollDirection:
-                              //                               Axis.horizontal,
-                              //                           child: Row(
-                              //                             mainAxisAlignment:
-                              //                                 MainAxisAlignment
-                              //                                     .start,
-                              //                             children: model
-                              //                                 .resWithProms![
-                              //                                     pos]
-                              //                                 .prom!
-                              //                                 .restaurants!
-                              //                                 .map((promRes) {
-                              //                               return PromResView(
-                              //                                 restaurant:
-                              //                                     promRes,
-                              //                                 promRess: model
-                              //                                     .resWithProms![
-                              //                                         pos]
-                              //                                     .prom!
-                              //                                     .restaurants!,
-                              //                               );
-                              //                             }).toList(),
+                              //                           SingleChildScrollView(
+                              //                             physics:
+                              //                                 BouncingScrollPhysics(),
+                              //                             scrollDirection:
+                              //                                 Axis.horizontal,
+                              //                             child: Row(
+                              //                               mainAxisAlignment:
+                              //                                   MainAxisAlignment
+                              //                                       .start,
+                              //                               children: model
+                              //                                   .resWithProms![
+                              //                                       pos]
+                              //                                   .prom!
+                              //                                   .restaurants!
+                              //                                   .map((promRes) {
+                              //                                 return PromResView(
+                              //                                   restaurant:
+                              //                                       promRes,
+                              //                                   promRess: model
+                              //                                       .resWithProms![
+                              //                                           pos]
+                              //                                       .prom!
+                              //                                       .restaurants!,
+                              //                                 );
+                              //                               }).toList(),
+                              //                             ),
                               //                           ),
-                              //                         ),
-                              //                       ],
-                              //                     ),
-                              //                     //------------------ RESTAURANTS ---------------------//
-                              //                     RestaurantView(
-                              //                       restaurant: model
-                              //                           .resWithProms![pos]
-                              //                           .restaurant,
-                              //                     ),
-                              //                   ],
+                              //                         ],
+                              //                       ),
+                              //                       //------------------ RESTAURANTS ---------------------//
+                              //                       RestaurantView(
+                              //                         restaurant: model
+                              //                             .resWithProms![pos]
+                              //                             .restaurant,
+                              //                       ),
+                              //                     ],
+                              //                   );
+                              //                 return RestaurantView(
+                              //                   restaurant: model
+                              //                       .resWithProms![pos]
+                              //                       .restaurant,
                               //                 );
-                              //               return RestaurantView(
-                              //                 restaurant: model
-                              //                     .resWithProms![pos]
-                              //                     .restaurant,
-                              //               );
-                              //             },
-                              //             childCount:
-                              //                 model.resWithProms?.length ?? 0,
-                              //           ),
-                              //         ),
-                              //       )
-                              //     : SliverList(
-                              //         delegate: SliverChildListDelegate(
-                              //           [
-                              //             Column(
+                              //               },
+                              //             )
+                              //           : Column(
                               //               children: [
                               //                 Padding(
                               //                   padding: EdgeInsets.symmetric(
@@ -684,12 +671,12 @@ class _HomeViewState extends State<HomeView> {
                               //                 ),
                               //               ],
                               //             ),
-                              //             SizedBox(
-                              //                 height: 0.11
-                              //                     .sh), // COMPENSATES HomeBottomCart
-                              //           ],
-                              //         ),
-                              //       ),
+                              //       SizedBox(
+                              //           height: 0.11
+                              //               .sh), // COMPENSATES HomeBottomCart
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                   ),

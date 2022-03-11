@@ -30,7 +30,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<SliderModel>? get sliders => _homeService.sliders;
   List<MainCategory>? get mainCats => _homeService.mainCats;
   List<Restaurant>? get randomRess => _homeService.randomRess;
-  List<Promoted>? get proms => _homeService.proms;
+  List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
@@ -59,37 +59,58 @@ class HomeViewModel extends MultipleFutureViewModel {
   bool get hasFutureError => _hasFutureError;
 
   /// GETTER for combined list of randomRestaurants and promotedRestaurants
-  List<HomeResPromo>? get resWithProms {
-    List<HomeResPromo> _resWithProms = [];
-    int promoPosCount = 0;
-    if (_homeService.randomRess!.isNotEmpty)
-      _homeService.randomRess!.forEach(
-        (_randomRes) {
-          int pos = _homeService.randomRess!.indexOf(_randomRes);
+  List<HomeResPromo>? get homeRess {
+    List<HomeResPromo> _homeRess = [];
+    int promPosCount = 0;
 
-          /// Here in 5th restaurant we will add new Promoted from promotedList
-          if ((pos + 1) % 5 == 0 && _homeService.proms!.isNotEmpty) {
-            if (promoPosCount <= _homeService.proms!.length - 1 &&
-                _homeService.proms![promoPosCount].restaurants!.isNotEmpty)
-              _resWithProms.add(
-                HomeResPromo(
-                  _randomRes,
-                  Promoted(
-                    id: _homeService.proms![promoPosCount].id,
-                    name: _homeService.proms![promoPosCount].name,
-                    order: _homeService.proms![promoPosCount].order,
-                    restaurants: _homeService.proms![promoPosCount].restaurants,
-                  ),
-                ),
-              );
-            promoPosCount++;
-          } else {
-            _resWithProms.add(HomeResPromo(_randomRes, null));
-          }
-        },
-      );
+    /// Looping random restaurants
+    for (final _randomRes in _homeService.randomRess!) {
+      int _randomResPos = _homeService.randomRess!.indexOf(_randomRes);
+
+      /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
+      if ((_randomResPos + 1) % 5 == 0) {
+        /// Here it CHECK whether there is promPosCount's position PROMOTED EXISTS or NOT.
+        /// If yes, then ADDS promPosCount's positioned PROMOTED. Else it ADDS 5th randomRes
+        if (_homeService.proms.isNotEmpty &&
+            _homeService.proms[promPosCount] != null) {
+          _homeRess.add(
+            HomeResPromo(
+              _randomRes,
+              Promoted(
+                id: _homeService.proms[promPosCount]!.id,
+                name: _homeService.proms[promPosCount]!.name,
+                order: _homeService.proms[promPosCount]!.order,
+                restaurants: _homeService.proms[promPosCount]!.restaurants,
+              ),
+            ),
+          );
+          promPosCount++;
+        } else
+          _homeRess.add(HomeResPromo(_randomRes, null));
+      } else
+        _homeRess.add(HomeResPromo(_randomRes, null));
+
+      // /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
+      // if ((_randomResPos + 1) % 5 == 0 && _homeService.proms!.isNotEmpty) {
+      //   if (promPosCount <= _homeService.proms!.length - 1 &&
+      //       _homeService.proms![promPosCount].restaurants!.isNotEmpty)
+      //     _homeRess.add(
+      //       HomeResPromo(
+      //         _randomRes,
+      //         Promoted(
+      //           id: _homeService.proms![promPosCount].id,
+      //           name: _homeService.proms![promPosCount].name,
+      //           order: _homeService.proms![promPosCount].order,
+      //           restaurants: _homeService.proms![promPosCount].restaurants,
+      //         ),
+      //       ),
+      //     );
+      //   promPosCount++;
+      // } else
+      //   _homeRess.add(HomeResPromo(_randomRes, null));
+    }
     // log.v('_resWithProms.length: ${_resWithProms.length}');
-    return _resWithProms;
+    return _homeRess;
   }
 
   /// CLEARS and UPDATES HomeView to its default

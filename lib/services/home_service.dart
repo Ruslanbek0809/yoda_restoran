@@ -25,8 +25,8 @@ class HomeService with ReactiveServiceMixin {
   List<Restaurant>? _randomRess = [];
   List<Restaurant>? get randomRess => _randomRess;
 
-  List<Promoted>? _proms = [];
-  List<Promoted>? get proms => _proms;
+  List<Promoted?> _proms = [];
+  List<Promoted?> get proms => _proms;
 
   List<Exclusive>? _exclusives = [];
   List<Exclusive>? get exclusives => _exclusives;
@@ -37,7 +37,7 @@ class HomeService with ReactiveServiceMixin {
 
   bool get hasRandomRess => _randomRess != null && _randomRess!.isNotEmpty;
 
-  bool get hasProms => _proms != null && _proms!.isNotEmpty;
+  bool get hasProms => _proms.isNotEmpty;
 
   // ------- SELECTECTED MAIN CAT RESTAURANTS --------//
   List<Restaurant>? _selectedMainCatRestaurants = [];
@@ -77,9 +77,9 @@ class HomeService with ReactiveServiceMixin {
     return _randomRess;
   }
 
-  Future<List<Promoted>?> getProms() async {
+  Future<List<Promoted?>> getProms() async {
     _proms = await _api.getProms();
-    log.v(_proms!.length);
+    log.v(_proms.length);
     return _proms;
   }
 
