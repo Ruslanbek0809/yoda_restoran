@@ -38,9 +38,9 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   List<int> get selectedMainCats =>
       _mainCatService.selectedMainCats; // NEEDS only for UI cases
-  // List<int> get selectedMainCats => _mainCatService.selectedMainCats;
-  List<Restaurant> get selectedMainCatRestaurants =>
-      _homeService.selectedMainCatRestaurants!;
+
+  List<Restaurant> get selectedMainCatRestaurants => _homeService
+      .selectedMainCatRestaurants!; // FOUND restaurants of selectedMainCats
 
   // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
   // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];

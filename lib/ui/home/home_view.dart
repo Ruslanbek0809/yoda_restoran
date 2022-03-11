@@ -144,7 +144,7 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   SmartRefresher(
                     header: CustomHeader(
-                      height: 50.h, 
+                      height: 50.h,
                       builder: (BuildContext context, RefreshStatus? mode) {
                         return SpinKitChasingDots(
                           size: 27,
@@ -271,7 +271,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               //------------------ EXCLUSIVES ---------------------//
-                              if (model.selectedMainCatRestaurants.isEmpty &&
+                              if (model.selectedMainCats.isEmpty &&
                                   model.exclusives!.isNotEmpty)
                                 SliverPersistentHeader(
                                   pinned: false,
