@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/home/home_exclusives/single_ex_bottom_cart.dart';
+import 'package:yoda_res/ui/home/home_exclusives/single_ex_webview.dart';
 import '../../../models/models.dart';
 import 'single_ex_view_model.dart';
-import 'single_ex_widget.dart';
+import 'single_ex_reachText.dart';
 
 class SingleExView extends StatelessWidget {
   final ExclusiveSingle singleEx;
@@ -17,9 +18,13 @@ class SingleExView extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-              SingleExWidget(singleEx: singleEx),
+              singleEx.option == 'reachText'
+                  ? SingleExReachText(singleEx: singleEx)
+                  : SingleExWebview(singleEx: singleEx),
               //------------------ BOTTOM CART ---------------------//
-              if (!model.hasError && model.cartRes!.id != -1)
+              if (!model.hasError &&
+                  model.cartRes!.id != -1 &&
+                  singleEx.option == 'reachText')
                 SingleExBottomCart(),
             ],
           ),

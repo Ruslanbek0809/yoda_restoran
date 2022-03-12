@@ -44,16 +44,16 @@ class OrderSuccessView extends StatelessWidget {
                   style: ktsDefault20BoldText,
                 ).tr(),
               ),
-              SizedBox(height: 10.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Text(
-                  LocaleKeys.toConfirmOrderWairForCallFromRes,
-                  textAlign: TextAlign.center,
-                  style: kts16HelperText,
-                ).tr(),
-              ),
-              SizedBox(height: 50.h),
+              // SizedBox(height: 10.h),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+              //   child: Text(
+              //     LocaleKeys.toConfirmOrderWairForCallFromRes,
+              //     textAlign: TextAlign.center,
+              //     style: kts16HelperText,
+              //   ).tr(),
+              // ),
+              SizedBox(height: 60.h),
               SizedBox(
                 width: 1.sw,
                 child: Padding(

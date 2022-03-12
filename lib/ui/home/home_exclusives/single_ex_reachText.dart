@@ -12,22 +12,21 @@ import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'single_ex_view_model.dart';
 
-class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
+class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
   final ExclusiveSingle singleEx;
-  const SingleExWidget({required this.singleEx, Key? key})
+  const SingleExReachText({required this.singleEx, Key? key})
       : super(key: key, reactive: true);
   @override
   Widget build(BuildContext context, SingleExViewModel model) {
-    double itemWidth = (1.sw - 12.w - 20.h) / 2;
-    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.15.sh; // 0.32.sw is for item height
-
     return CustomScrollView(
       slivers: [
         SliverPersistentHeader(
           pinned: true,
           delegate: _TransitionAppBarDelegate(
-            title: model.isBusy || model.hasError ? '' : singleEx.name!,
+            title: model.isBusy || model.hasError
+                ? ''
+                : singleEx
+                    .name!, // for test: 'Birini alana 2 nji mugt aksiya edyas gelda'
             extent: model.isBusy || model.hasError ? 62.h : 0.175.sh,
           ),
         ),

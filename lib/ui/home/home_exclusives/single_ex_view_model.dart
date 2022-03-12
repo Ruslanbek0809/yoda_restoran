@@ -38,6 +38,24 @@ class SingleExViewModel extends FutureViewModel {
     log.i('_seRiches length: ${_seRiches.length}');
   }
 
+  //------------------ SINGLE EX WEBVIEW ---------------------//
+
+  String _url = '';
+  String get url => _url;
+
+  double _progress = 0;
+  double get progress => _progress;
+
+  void onLoadStart(Uri? onLoadUrl) {
+    _url = onLoadUrl.toString();
+    // notifyListeners();
+  }
+
+  void onProgressChanged(int progress) {
+    _progress = progress / 100;
+    // notifyListeners();
+  }
+
   //------------------ BOTTOM CART ---------------------//
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
