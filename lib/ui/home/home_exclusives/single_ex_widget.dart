@@ -88,7 +88,7 @@ class SingleExWidget extends ViewModelWidget<SingleExViewModel> {
                 SliverPadding(
                     padding: EdgeInsets.only(
                       top: 0.h,
-                      bottom: 0.11.sh, // COMPENSATES HomeBottomCart
+                      bottom: 0.11.sh, // COMPENSATES SingleExBottomCart
                     ), // Changes based on exclusive part
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate(

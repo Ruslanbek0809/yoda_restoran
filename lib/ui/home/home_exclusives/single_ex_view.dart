@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import 'package:yoda_res/ui/home/home_exclusives/single_ex_bottom_cart.dart';
 import '../../../models/models.dart';
 import 'single_ex_view_model.dart';
 import 'single_ex_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingleExView extends StatelessWidget {
   final ExclusiveSingle singleEx;
@@ -21,7 +19,8 @@ class SingleExView extends StatelessWidget {
             children: [
               SingleExWidget(singleEx: singleEx),
               //------------------ BOTTOM CART ---------------------//
-              // if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
+              if (!model.hasError && model.cartRes!.id != -1)
+                SingleExBottomCart(),
             ],
           ),
         );

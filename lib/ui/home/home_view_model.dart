@@ -33,9 +33,6 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
 
-  BottomCartStatus get bottomCartStatus => _bottomCartService
-      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
-
   List<int> get selectedMainCats =>
       _mainCatService.selectedMainCats; // NEEDS only for UI cases
 
@@ -163,6 +160,8 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   //------------------ BOTTOM CART ---------------------//
 
+  BottomCartStatus get bottomCartStatus => _bottomCartService
+      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
   /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
