@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,6 +13,7 @@ import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
+import '../restaurant_info_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -370,11 +372,26 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ INFO ---------------------//
+                              //------------------ RESTAURANT INFO BOTTOM SHEET ---------------------//
+                              //------------------ CUSTOM PACKAGE ---------------------//
                               GestureDetector(
-                                onTap: () {
-                                  model.showCustomBottomSheet(restaurant);
-                                },
+                                onTap: () async =>
+                                    await showFlexibleBottomSheet(
+                                  minHeight: 0,
+                                  initHeight: 0.45,
+                                  maxHeight: 0.975,
+                                  context: context,
+                                  builder: (context, scrollController, offset) {
+                                    return CustomBarBottomSheet(
+                                      child: RestaurantInfoBottomSheet(
+                                        scrollController: scrollController,
+                                        offset: offset,
+                                        restaurant: restaurant,
+                                      ),
+                                    );
+                                  },
+                                  anchors: [0, 0.45, 0.975],
+                                ),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: AppTheme.MAIN_LIGHT,

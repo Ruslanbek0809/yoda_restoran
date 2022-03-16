@@ -112,15 +112,15 @@ class ResDetailsViewModel extends FutureViewModel {
 //------------------------ RESTAURANT BOTTOM SHEET ----------------------------//
 
   /// SHOWS RestaurantDetailsInfoBottomSheet
-  Future showCustomBottomSheet(Restaurant restaurant) async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.restaurantInfo,
-      enableDrag: true,
-      isScrollControlled: true,
-      data: restaurant,
-    );
-  }
+  // Future showCustomBottomSheet(Restaurant restaurant) async {
+  //   log.i('');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.restaurantInfo,
+  //     enableDrag: true,
+  //     isScrollControlled: true,
+  //     data: restaurant,
+  //   );
+  // }
 
 //------------------------ FAVOURITE PART ----------------------------//
 

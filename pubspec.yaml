@@ -62,6 +62,8 @@ dependencies:
   double_back_to_close_app: ^2.1.0
   flutter_html: ^2.2.1
   flutter_inappwebview: ^5.3.2
+  platform: ^3.1.0 # Native settings package
+  bottom_sheet: ^2.0.0 # For custom bottom sheet
 
   # NETWORK
   dio: ^4.0.4
