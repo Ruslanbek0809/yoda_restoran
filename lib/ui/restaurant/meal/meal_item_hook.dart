@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
@@ -5,6 +6,7 @@ import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
+import 'meal_bottom_sheet_view.dart';
 import 'meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,7 +49,46 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
       child: GestureDetector(
         onTap: () async {
           await _tweenController.forward();
-          await model.showCustomMealBottomSheet(meal, restaurant, model);
+
+          //------------------ MEAL BOTTOM SHEET ---------------------//
+          //------------------ CUSTOM PACKAGE ---------------------//
+          await showFlexibleBottomSheet(
+            minHeight: 0,
+            initHeight: (meal.gVolumes!.isEmpty &&
+                        meal.gCustomizables!.isEmpty) &&
+                    meal.description!.isEmpty
+                ? 0.625
+                : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
+                        meal.description!.isNotEmpty
+                    ? 0.703
+                    : 0.975,
+            maxHeight:
+                (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
+                        meal.description!.isEmpty
+                    ? 0.625
+                    : 0.975,
+            context: context,
+            builder: (context, scrollController, offset) {
+              return CustomBarBottomSheet(
+                isMealBottomSheet: true,
+                child: MealBottomSheet(
+                  scrollController: scrollController,
+                  offset: offset,
+                  meal: meal,
+                  restaurant: restaurant,
+                  mealViewModel: model,
+                ),
+              );
+            },
+            anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
+                    meal.description!.isEmpty
+                ? [0, 0.625]
+                : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
+                        meal.description!.isNotEmpty
+                    ? [0, 0.703, 0.975]
+                    : [0, 0.975],
+          );
+          // await model.showCustomMealBottomSheet(meal, restaurant, model);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -237,8 +278,58 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           meal.gCustomizables!.isNotEmpty
                                       ? () async {
                                           await _tweenController.forward();
-                                          await model.showCustomMealBottomSheet(
-                                              meal, restaurant, model);
+                                          //------------------ MEAL BOTTOM SHEET ---------------------//
+                                          //------------------ CUSTOM PACKAGE ---------------------//
+                                          await showFlexibleBottomSheet(
+                                            minHeight: 0,
+                                            initHeight: (meal.gVolumes!
+                                                            .isEmpty &&
+                                                        meal.gCustomizables!
+                                                            .isEmpty) &&
+                                                    meal.description!.isEmpty
+                                                ? 0.625
+                                                : (meal.gVolumes!.isEmpty &&
+                                                            meal.gCustomizables!
+                                                                .isEmpty) &&
+                                                        meal.description!
+                                                            .isNotEmpty
+                                                    ? 0.703
+                                                    : 0.975,
+                                            maxHeight: (meal.gVolumes!
+                                                            .isEmpty &&
+                                                        meal.gCustomizables!
+                                                            .isEmpty) &&
+                                                    meal.description!.isEmpty
+                                                ? 0.625
+                                                : 0.975,
+                                            context: context,
+                                            builder: (context, scrollController,
+                                                offset) {
+                                              return CustomBarBottomSheet(
+                                                isMealBottomSheet: true,
+                                                child: MealBottomSheet(
+                                                  scrollController:
+                                                      scrollController,
+                                                  offset: offset,
+                                                  meal: meal,
+                                                  restaurant: restaurant,
+                                                  mealViewModel: model,
+                                                ),
+                                              );
+                                            },
+                                            anchors: (meal.gVolumes!.isEmpty &&
+                                                        meal.gCustomizables!
+                                                            .isEmpty) &&
+                                                    meal.description!.isEmpty
+                                                ? [0, 0.625]
+                                                : (meal.gVolumes!.isEmpty &&
+                                                            meal.gCustomizables!
+                                                                .isEmpty) &&
+                                                        meal.description!
+                                                            .isNotEmpty
+                                                    ? [0, 0.703, 0.975]
+                                                    : [0, 0.975],
+                                          );
                                         }
                                       : () async {
                                           await model
@@ -272,8 +363,54 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       meal.gCustomizables!.isNotEmpty
                                   ? () async {
                                       await _tweenController.forward();
-                                      await model.showCustomMealBottomSheet(
-                                          meal, restaurant, model);
+                                      //------------------ MEAL BOTTOM SHEET ---------------------//
+                                      //------------------ CUSTOM PACKAGE ---------------------//
+                                      await showFlexibleBottomSheet(
+                                        minHeight: 0,
+                                        initHeight: (meal.gVolumes!.isEmpty &&
+                                                    meal.gCustomizables!
+                                                        .isEmpty) &&
+                                                meal.description!.isEmpty
+                                            ? 0.625
+                                            : (meal.gVolumes!.isEmpty &&
+                                                        meal.gCustomizables!
+                                                            .isEmpty) &&
+                                                    meal.description!.isNotEmpty
+                                                ? 0.703
+                                                : 0.975,
+                                        maxHeight: (meal.gVolumes!.isEmpty &&
+                                                    meal.gCustomizables!
+                                                        .isEmpty) &&
+                                                meal.description!.isEmpty
+                                            ? 0.625
+                                            : 0.975,
+                                        context: context,
+                                        builder: (context, scrollController,
+                                            offset) {
+                                          return CustomBarBottomSheet(
+                                            isMealBottomSheet: true,
+                                            child: MealBottomSheet(
+                                              scrollController:
+                                                  scrollController,
+                                              offset: offset,
+                                              meal: meal,
+                                              restaurant: restaurant,
+                                              mealViewModel: model,
+                                            ),
+                                          );
+                                        },
+                                        anchors: (meal.gVolumes!.isEmpty &&
+                                                    meal.gCustomizables!
+                                                        .isEmpty) &&
+                                                meal.description!.isEmpty
+                                            ? [0, 0.625]
+                                            : (meal.gVolumes!.isEmpty &&
+                                                        meal.gCustomizables!
+                                                            .isEmpty) &&
+                                                    meal.description!.isNotEmpty
+                                                ? [0, 0.703, 0.975]
+                                                : [0, 0.975],
+                                      );
                                     }
                                   : () async {
                                       await model

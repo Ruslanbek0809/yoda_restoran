@@ -277,7 +277,7 @@ class _HomeViewState extends State<HomeView> {
                                   pinned: false,
                                   floating: false,
                                   delegate: ContestTabHeader(
-                                    size: 135.h,
+                                    size: 138.h,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -288,7 +288,7 @@ class _HomeViewState extends State<HomeView> {
                                           child: Text(
                                             model.exclusives![0].name!,
                                             style: TextStyle(
-                                              fontSize: 20.sp,
+                                              fontSize: 24.sp,
                                               fontWeight: FontWeight.bold,
                                               color: AppTheme.MAIN_DARK,
                                             ),

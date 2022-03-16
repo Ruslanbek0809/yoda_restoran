@@ -5,9 +5,11 @@ import '../../utils/utils.dart';
 
 class CustomBarBottomSheet extends StatelessWidget {
   final Widget child;
+  final bool isMealBottomSheet;
   const CustomBarBottomSheet({
     Key? key,
     required this.child,
+    this.isMealBottomSheet = false,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class CustomBarBottomSheet extends StatelessWidget {
             // --------------- BODY Part -------------- //
             Expanded(
               child: Material(
-                color: kcWhiteColor,
+                color: isMealBottomSheet ? kcSecondaryLightColor : kcWhiteColor,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(Constants.BORDER_RADIUS_20),
                 ),

@@ -2,7 +2,6 @@ import 'package:stacked_services/stacked_services.dart';
 import '../app/app.locator.dart';
 import 'cart/cart_res_food/cart_more_meal_bottom_sheet_view.dart';
 import 'cart/checkout/checkout_address/checkout_select_address_bottom_sheet.dart';
-import 'restaurant/meal/meal_bottom_sheet_view.dart';
 import '../utils/utils.dart';
 import 'cart/checkout/checkout_address/checkout_add_address_bottom_sheet.dart';
 import 'cart/checkout/checkout_bottom_sheet_view.dart';
@@ -23,13 +22,13 @@ void setupBottomSheet() {
     //       // completer: completer,
     //       restaurant: sheetRequest.data,
     //     ),
-    BottomSheetType.meal: (context, sheetRequest, completer) => MealBottomSheet(
-          request: sheetRequest,
-          completer: completer,
-          meal: sheetRequest.data.meal,
-          restaurant: sheetRequest.data.restaurant,
-          mealViewModel: sheetRequest.data.mealViewModel,
-        ),
+    // BottomSheetType.meal: (context, sheetRequest, completer) => MealBottomSheet(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //       meal: sheetRequest.data.meal,
+    //       restaurant: sheetRequest.data.restaurant,
+    //       mealViewModel: sheetRequest.data.mealViewModel,
+    //     ),
     BottomSheetType.cartMoreMeal: (context, sheetRequest, completer) =>
         CartMoreMealBottomSheet(
           request: sheetRequest,

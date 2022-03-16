@@ -49,6 +49,8 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
+            //------------------ MAIN CAT BOTTOM SHEET ---------------------//
+            //------------------ CUSTOM PACKAGE ---------------------//
             await showFlexibleBottomSheet(
               minHeight: 0,
               initHeight: 0.975,

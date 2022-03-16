@@ -223,7 +223,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 9.h, bottom: 50.h),
+                    padding: EdgeInsets.only(top: 12.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -238,7 +238,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           child: Text(
                             restaurant.name!,
                             style: TextStyle(
-                              fontSize: 32.sp,
+                              fontSize: 30.sp,
                               fontWeight: FontWeight.bold,
                               color: kcSecondaryDarkColor,
                             ),
@@ -261,6 +261,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   top: 5.h,
                                   bottom: 5.h,
                                   left: 16.w,
+                                  right: 10.w,
                                 ),
                                 child: Row(
                                   children: [
@@ -281,33 +282,33 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 ),
                               ),
                               //------------------ WORK TIME ---------------------//
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
-                                  borderRadius: AppTheme().radius20,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 7.h),
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 5.h, horizontal: 10.w),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/clock.svg',
-                                      color: AppTheme.MAIN_DARK,
-                                      width: 20.w,
-                                    ),
-                                    SizedBox(width: 5.w),
-                                    Text(
-                                      restaurant.workingHours!,
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppTheme.FONT_COLOR,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //     color: AppTheme.MAIN_LIGHT,
+                              //     borderRadius: AppTheme().radius20,
+                              //   ),
+                              //   padding: EdgeInsets.symmetric(
+                              //       horizontal: 10.w, vertical: 7.h),
+                              //   margin: EdgeInsets.symmetric(
+                              //       vertical: 5.h, horizontal: 10.w),
+                              //   child: Row(
+                              //     children: [
+                              //       SvgPicture.asset(
+                              //         'assets/clock.svg',
+                              //         color: AppTheme.MAIN_DARK,
+                              //         width: 20.w,
+                              //       ),
+                              //       SizedBox(width: 5.w),
+                              //       Text(
+                              //         restaurant.workingHours!,
+                              //         style: TextStyle(
+                              //           fontSize: 16.sp,
+                              //           color: AppTheme.FONT_COLOR,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               // if (model.locationPosition != null)
                               //------------------ LOCATION ---------------------//
                               Container(
