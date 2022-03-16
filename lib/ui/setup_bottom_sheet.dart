@@ -7,17 +7,16 @@ import '../utils/utils.dart';
 import 'cart/checkout/checkout_address/checkout_add_address_bottom_sheet.dart';
 import 'cart/checkout/checkout_bottom_sheet_view.dart';
 import 'cart/checkout/checkout_payment_type_bottom_sheet.dart';
-import 'home/main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 
 void setupBottomSheet() {
   final _bottomSheetService = locator<BottomSheetService>();
 
   final bottomSheetBuilders = {
-    BottomSheetType.mainCategory: (context, sheetRequest, completer) =>
-        MainCatBottomSheetView(
-          request: sheetRequest,
-          completer: completer,
-        ),
+    // BottomSheetType.mainCategory: (context, sheetRequest, completer) =>
+    //     MainCatBottomSheetView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //     ),
     // BottomSheetType.restaurantInfo: (context, sheetRequest, completer) =>
     //     RestaurantInfoBottomSheet(
     //       // request: sheetRequest,

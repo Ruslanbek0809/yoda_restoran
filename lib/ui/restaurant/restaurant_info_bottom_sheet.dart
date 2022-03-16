@@ -25,13 +25,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(Constants.BORDER_RADIUS_20),
-              ),
-              color: kcWhiteColor,
-            ),
+          Padding(
             padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 20.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

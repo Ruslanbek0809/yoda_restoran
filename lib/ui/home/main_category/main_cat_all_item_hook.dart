@@ -1,8 +1,11 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
+import '../../widgets/widgets.dart';
+import '../main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/utils.dart';
@@ -46,7 +49,21 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
-            await model.showCustomBottomSheet();
+            await showFlexibleBottomSheet(
+              minHeight: 0,
+              initHeight: 0.975,
+              maxHeight: 0.975,
+              context: context,
+              builder: (context, scrollController, offset) {
+                return CustomBarBottomSheet(
+                  child: MainCatBottomSheetView(
+                    scrollController: scrollController,
+                    offset: offset,
+                  ),
+                );
+              },
+              anchors: [0, 0.975],
+            );
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -54,15 +54,15 @@ class MainCatViewModel extends ReactiveViewModel {
 
   //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-  /// CALLS MainCategoryBottomSheetView
-  Future showCustomBottomSheet() async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.mainCategory,
-      enableDrag: true,
-      isScrollControlled: true,
-    );
-  }
+  // /// CALLS MainCategoryBottomSheetView
+  // Future showCustomBottomSheet() async {
+  //   log.i('');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.mainCategory,
+  //     enableDrag: true,
+  //     isScrollControlled: true,
+  //   );
+  // }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];

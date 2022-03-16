@@ -33,18 +33,11 @@ class CustomBarBottomSheet extends StatelessWidget {
             // --------------- BODY Part -------------- //
             Expanded(
               child: Material(
+                color: kcWhiteColor,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(Constants.BORDER_RADIUS_20),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(Constants.BORDER_RADIUS_20),
-                    ),
-                    color: kcWhiteColor,
-                  ),
-                  child: child,
-                ),
+                child: child,
               ),
             ),
           ],
