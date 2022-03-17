@@ -6,7 +6,7 @@ import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 import 'package:yoda_res/ui/cart/cart_view_model.dart';
-import 'package:yoda_res/utils/utils.dart';
+// import 'package:yoda_res/utils/utils.dart';
 
 class CartMoreMealViewModel extends ReactiveViewModel {
   final log = getLogger('CartMoreMealViewModel');
@@ -15,7 +15,7 @@ class CartMoreMealViewModel extends ReactiveViewModel {
   CartMoreMealViewModel({this.mealId, required this.cartViewModel});
 
   final _bottomCartService = locator<BottomCartService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  // final _bottomSheetService = locator<BottomSheetService>();
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
 
@@ -26,26 +26,26 @@ class CartMoreMealViewModel extends ReactiveViewModel {
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-  /// CALLS MealBottomSheet
-  Future showCustomMealBottomSheet(Meal meal, Restaurant restaurant,
-      CartMoreMealViewModel cartMoreMealViewModel) async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.cartMoreMeal,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-      data: CartMoreMealBottomSheetData(
-        meal: meal,
-        restaurant: restaurant,
-        cartMoreMealViewModel: cartMoreMealViewModel,
-      ),
-    );
+  // /// CALLS MealBottomSheet
+  // Future showCustomMealBottomSheet(Meal meal, Restaurant restaurant,
+  //     CartMoreMealViewModel cartMoreMealViewModel) async {
+  //   log.i('');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.cartMoreMeal,
+  //     enableDrag: true,
+  //     barrierDismissible: true,
+  //     isScrollControlled: true,
+  //     data: CartMoreMealBottomSheetData(
+  //       meal: meal,
+  //       restaurant: restaurant,
+  //       cartMoreMealViewModel: cartMoreMealViewModel,
+  //     ),
+  //   );
 
-    /// These below 2 lines are implemented for rare issue cases: when user dismisses mealBottomSheet without action it preserves meal's quantity. It solves this issue.
-    quantityDraft = 1;
-    quantityDraftTempNoAttribute = 0;
-  }
+  //   /// These below 2 lines are implemented for rare issue cases: when user dismisses mealBottomSheet without action it preserves meal's quantity. It solves this issue.
+  //   quantityDraft = 1;
+  //   quantityDraftTempNoAttribute = 0;
+  // }
 
   int quantityDraft = 1;
   int quantityDraftTempNoAttribute =

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
@@ -40,6 +39,11 @@ class MealBottomSheet extends StatelessWidget {
             ),
             child: SingleChildScrollView(
               controller: scrollController,
+              // physics:
+              //     (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
+              //             meal.description!.isEmpty
+              //         ? NeverScrollableScrollPhysics()
+              //         : BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

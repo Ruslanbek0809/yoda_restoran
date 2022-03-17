@@ -29,14 +29,14 @@ void setupBottomSheet() {
     //       restaurant: sheetRequest.data.restaurant,
     //       mealViewModel: sheetRequest.data.mealViewModel,
     //     ),
-    BottomSheetType.cartMoreMeal: (context, sheetRequest, completer) =>
-        CartMoreMealBottomSheet(
-          request: sheetRequest,
-          completer: completer,
-          meal: sheetRequest.data.meal,
-          restaurant: sheetRequest.data.restaurant,
-          cartMoreMealViewModel: sheetRequest.data.cartMoreMealViewModel,
-        ),
+    // BottomSheetType.cartMoreMeal: (context, sheetRequest, completer) =>
+    //     CartMoreMealBottomSheet(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //       meal: sheetRequest.data.meal,
+    //       restaurant: sheetRequest.data.restaurant,
+    //       cartMoreMealViewModel: sheetRequest.data.cartMoreMealViewModel,
+    //     ),
     BottomSheetType.checkout: (context, sheetRequest, completer) =>
         CheckoutBottomSheetView(
           request: sheetRequest,

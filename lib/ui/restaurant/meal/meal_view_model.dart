@@ -15,7 +15,7 @@ class MealViewModel extends ReactiveViewModel {
   MealViewModel({this.mealId});
 
   final _bottomCartService = locator<BottomCartService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  // final _bottomSheetService = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();

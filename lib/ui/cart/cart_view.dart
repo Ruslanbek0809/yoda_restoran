@@ -136,7 +136,7 @@ class CartView extends StatelessWidget {
                           style: ktsDefault24DarkText,
                         ).tr(),
                       ),
-                    //------------------ CART MEAL WIDGET LIST ---------------------//
+                    //------------------ CART MORE MEAL LIST ---------------------//
                     if (!model.hasError)
                       AnimatedSwitcher(
                         duration: Duration(milliseconds: 300),
