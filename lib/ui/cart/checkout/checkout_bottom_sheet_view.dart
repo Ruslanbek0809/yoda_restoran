@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +11,7 @@ import '../../../shared/shared.dart';
 import 'checkout_note_hook.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
+import 'checkout_payment_type_bottom_sheet.dart';
 import 'checkout_promocode_hook.dart';
 import 'checkout_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -371,7 +373,22 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         Material(
                           color: AppTheme.WHITE,
                           child: InkWell(
-                            onTap: model.showCustomPaymentTypeBottomSheet,
+                            onTap: () async => await showFlexibleBottomSheet(
+                              minHeight: 0,
+                              initHeight: 0.3,
+                              maxHeight: 0.3,
+                              context: context,
+                              builder: (context, scrollController, offset) {
+                                return CustomBarBottomSheet(
+                                  child: CheckoutPaymentTypeBottomSheetView(
+                                    scrollController: scrollController,
+                                    offset: offset,
+                                  ),
+                                );
+                              },
+                              anchors: [0, 0.3],
+                            ),
+                            // onTap: model.showCustomPaymentTypeBottomSheet,
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Row(

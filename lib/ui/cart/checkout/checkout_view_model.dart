@@ -142,16 +142,16 @@ class CheckoutViewModel extends ReactiveViewModel {
 
 //------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
 
-  /// CALLS PaymentTypeBottomSheetView
-  Future<void> showCustomPaymentTypeBottomSheet() async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.paymentType,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-    );
-  }
+  // /// CALLS PaymentTypeBottomSheetView
+  // Future<void> showCustomPaymentTypeBottomSheet() async {
+  //   log.i('');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.paymentType,
+  //     enableDrag: true,
+  //     barrierDismissible: true,
+  //     isScrollControlled: true,
+  //   );
+  // }
 
   HiveResPaymentType? get selectedPaymentType =>
       _checkoutService.selectedPaymentType; // For CheckoutBottomSheetView
