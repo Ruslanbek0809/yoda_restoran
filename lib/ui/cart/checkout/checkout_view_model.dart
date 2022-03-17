@@ -183,15 +183,15 @@ class CheckoutViewModel extends ReactiveViewModel {
 //------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
 
   /// CALLS SelectAddressBottomSheet
-  Future<void> showCustomSelectAddressBottomSheet() async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.selectAddress,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-    );
-  }
+  // Future<void> showCustomSelectAddressBottomSheet() async {
+  //   log.i('');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.selectAddress,
+  //     enableDrag: true,
+  //     barrierDismissible: true,
+  //     isScrollControlled: true,
+  //   );
+  // }
 
 //------------------------ CREATE ORDER PART ----------------------------//
 

@@ -8,6 +8,7 @@ import '../../../library/flutter_datetime_picker.dart';
 import '../../../library/src/datetime_picker_theme.dart';
 import '../../../library/src/i18n_model.dart';
 import '../../../shared/shared.dart';
+import 'checkout_address/checkout_select_address_bottom_sheet.dart';
 import 'checkout_note_hook.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
@@ -79,7 +80,24 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           color: AppTheme.WHITE,
                           child: InkWell(
                             onTap: model.isDelivery
-                                ? model.showCustomSelectAddressBottomSheet
+                                ? () async => await showFlexibleBottomSheet(
+                                      minHeight: 0,
+                                      initHeight: 0.3,
+                                      maxHeight: 1,
+                                      context: context,
+                                      builder:
+                                          (context, scrollController, offset) {
+                                        return CustomBarBottomSheet(
+                                          child:
+                                              CheckoutSelectAddressBottomSheetView(
+                                            scrollController: scrollController,
+                                            offset: offset,
+                                          ),
+                                        );
+                                      },
+                                      anchors: [0, 0.3, 1],
+                                    )
+                                // model.showCustomSelectAddressBottomSheet
                                 : null,
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.h),

@@ -46,14 +46,6 @@ class CartMoreMealBottomSheet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // SizedBox(
-                  //   height: 17.5.w,
-                  //   width: 40.w,
-                  //   child: SvgPicture.asset(
-                  //     'assets/bottom_sheet_dragger.svg',
-                  //     color: kcSecondaryLightColor,
-                  //   ),
-                  // ),
                   //----------- IMAGE --------------//
                   ClipRRect(
                     borderRadius: BorderRadius.vertical(
