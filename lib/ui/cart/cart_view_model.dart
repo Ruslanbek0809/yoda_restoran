@@ -16,7 +16,7 @@ class CartViewModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
   final _navService = locator<NavigationService>();
   final _cartService = locator<CartService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  // final _bottomSheetService = locator<BottomSheetService>();
   final _userService = locator<UserService>();
   final _toggleButtonService = locator<ToggleButtonService>();
 
@@ -185,33 +185,42 @@ class CartViewModel extends ReactiveViewModel {
 //------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
 
   /// CALLS navs based on user's login state.
-  Future<void> onCartCheckoutButtonPressed() async {
-    if (hasLoggedInUser) {
-      log.v(
-          'USER FOUND with his/her phone: ${_userService.currentUser!.mobile}');
-      await showCustomCheckoutBottomSheet();
-    } else {
-      log.v('USER NOTTTTT FOUND');
-      await _navService.navigateTo(
-        Routes.loginView,
-        arguments: LoginViewArguments(isCartView: true),
-      ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
-    }
-  }
+  // Future<void> onCartCheckoutButtonPressed() async {
+  //   if (hasLoggedInUser) {
+  //     log.v(
+  //         'USER FOUND with his/her phone: ${_userService.currentUser!.mobile}');
+  //     await showCustomCheckoutBottomSheet();
+  //   } else {
+  //     log.v('USER NOTTTTT FOUND');
+  //     await _navService.navigateTo(
+  //       Routes.loginView,
+  //       arguments: LoginViewArguments(isCartView: true),
+  //     ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
+  //   }
+  // }
 
   /// CALLS CheckoutBottomSheetView
-  Future showCustomCheckoutBottomSheet() async {
-    log.i('showCustomCheckoutBottomSheet()');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.checkout,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-    );
-  }
+  // Future showCustomCheckoutBottomSheet() async {
+  //   log.i('showCustomCheckoutBottomSheet()');
+  //   await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.checkout,
+  //     enableDrag: true,
+  //     barrierDismissible: true,
+  //     isScrollControlled: true,
+  //   );
+  // }
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
+
+  /// NAVIGATES to LoginView
+  Future<void> navToLoginView() async {
+    log.v('USER NOTTTTT FOUND');
+    await _navService.navigateTo(
+      Routes.loginView,
+      arguments: LoginViewArguments(isCartView: true),
+    ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>

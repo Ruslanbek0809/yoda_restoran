@@ -32,12 +32,9 @@ class CartMoreMealBottomSheet extends StatelessWidget {
       disposeViewModel: false,
       builder: (context, model, child) => Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(Constants.BORDER_RADIUS_20),
-              ),
-              color: kcSecondaryLightColor,
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(Constants.BORDER_RADIUS_20),
             ),
             child: SingleChildScrollView(
               controller: scrollController,

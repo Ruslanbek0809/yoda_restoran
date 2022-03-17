@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +14,8 @@ import 'cart_meal_item.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import 'checkout/checkout_bottom_sheet_view.dart';
 
 class CartView extends StatelessWidget {
   const CartView({Key? key}) : super(key: key);
@@ -276,7 +279,28 @@ class CartView extends StatelessWidget {
                                 model.log.v(
                                     'PASSED TIME nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
 
-                                await model.onCartCheckoutButtonPressed();
+                                if (model.hasLoggedInUser) {
+                                  await showFlexibleBottomSheet(
+                                    minHeight: 0,
+                                    initHeight: 0.8,
+                                    maxHeight: 0.8,
+                                    context: context,
+                                    builder:
+                                        (context, scrollController, offset) {
+                                      return CustomBarBottomSheet(
+                                        child: CheckoutBottomSheetView(
+                                          scrollController: scrollController,
+                                          offset: offset,
+                                        ),
+                                      );
+                                    },
+                                    anchors: [0, 0.8],
+                                  );
+                                  // await showCustomCheckoutBottomSheet();
+                                } else
+                                  model.navToLoginView();
+
+                                // await model.onCartCheckoutButtonPressed();
                               }
                             },
                           ),

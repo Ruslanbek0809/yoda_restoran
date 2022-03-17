@@ -37,11 +37,11 @@ void setupBottomSheet() {
     //       restaurant: sheetRequest.data.restaurant,
     //       cartMoreMealViewModel: sheetRequest.data.cartMoreMealViewModel,
     //     ),
-    BottomSheetType.checkout: (context, sheetRequest, completer) =>
-        CheckoutBottomSheetView(
-          request: sheetRequest,
-          completer: completer,
-        ),
+    // BottomSheetType.checkout: (context, sheetRequest, completer) =>
+    //     CheckoutBottomSheetView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //     ),
     BottomSheetType.paymentType: (context, sheetRequest, completer) =>
         CheckoutPaymentTypeBottomSheetView(
           request: sheetRequest,
