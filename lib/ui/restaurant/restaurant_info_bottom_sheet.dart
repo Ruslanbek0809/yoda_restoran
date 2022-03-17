@@ -20,6 +20,21 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Below part COMBINES all paymentTypes' name and displays it
+    String paymentTypesText = '';
+    if (restaurant.paymentTypes != null) {
+      if (context.locale == context.supportedLocales[0])
+        paymentTypesText = restaurant.paymentTypes![0].nameTk!;
+      else
+        paymentTypesText = restaurant.paymentTypes![0].nameRu!;
+    }
+    if (restaurant.paymentTypes != null)
+      for (int i = 1; i < restaurant.paymentTypes!.length; i++)
+        if (context.locale == context.supportedLocales[0])
+          paymentTypesText += ', ${restaurant.paymentTypes![i].nameTk!}';
+        else
+          paymentTypesText += ', ${restaurant.paymentTypes![i].nameRu!}';
+
     return ClipRRect(
       borderRadius: BorderRadius.vertical(
           top: Radius.circular(Constants.BORDER_RADIUS_20)),
@@ -44,7 +59,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  // --------------- NAME -------------- //
+                  // --------------- ADDRESS -------------- //
                   Row(
                     children: [
                       SvgPicture.asset(
@@ -66,14 +81,22 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 7.h),
-                  Divider(
-                    thickness: 0.5,
-                    color: AppTheme.DRAWER_DIVIDER,
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 7.h),
+                    child: Divider(
+                      thickness: 0.5,
+                      color: AppTheme.DRAWER_DIVIDER,
+                    ),
                   ),
-                  SizedBox(height: 7.h),
+                  // --------------- WORKING HOURS -------------- //
                   Row(
                     children: [
+                      SvgPicture.asset(
+                        'assets/clock.svg',
+                        color: kcSecondaryDarkColor,
+                        width: 22.w,
+                      ),
+                      SizedBox(width: 5.w),
                       Text(
                         LocaleKeys.workingHours,
                         style: TextStyle(
@@ -91,12 +114,47 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.h),
-                  Divider(
-                    thickness: 0.5,
-                    color: AppTheme.DRAWER_DIVIDER,
+                  if (restaurant.paymentTypes != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 7.h),
+                      child: Divider(
+                        thickness: 0.5,
+                        color: AppTheme.DRAWER_DIVIDER,
+                      ),
+                    ),
+                  if (restaurant.paymentTypes != null)
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/wallet.svg',
+                          color: kcSecondaryDarkColor,
+                          width: 22.w,
+                        ),
+                        SizedBox(width: 5.w),
+                        Text(
+                          LocaleKeys.paymentType,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: kcFontColor,
+                          ),
+                        ).tr(),
+                        Text(
+                          paymentTypesText,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                        ),
+                      ],
+                    ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    child: Divider(
+                      thickness: 0.5,
+                      color: AppTheme.DRAWER_DIVIDER,
+                    ),
                   ),
-                  SizedBox(height: 10.h),
                   Text(
                     restaurant.description!,
                     style: ktsDefault14Text,
