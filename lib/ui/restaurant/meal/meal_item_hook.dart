@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -57,15 +59,21 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
             initHeight: (meal.gVolumes!.isEmpty &&
                         meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
-                ? 0.625
+                ? Platform.isIOS
+                    ? 0.62
+                    : 0.625
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
-                    ? 0.703
+                    ? Platform.isIOS
+                        ? 0.74
+                        : 0.75
                     : 0.975,
             maxHeight:
                 (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isEmpty
-                    ? 0.625
+                    ? Platform.isIOS
+                        ? 0.62
+                        : 0.625
                     : 0.975,
             context: context,
             builder: (context, scrollController, offset) {
@@ -82,10 +90,10 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
             },
             anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
-                ? [0, 0.625]
+                ? [0, Platform.isIOS ? 0.62 : 0.625]
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
-                    ? [0, 0.703, 0.975]
+                    ? [0, Platform.isIOS ? 0.74 : 0.75, 0.975]
                     : [0, 0.975],
           );
           // await model.showCustomMealBottomSheet(meal, restaurant, model);
@@ -278,6 +286,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           meal.gCustomizables!.isNotEmpty
                                       ? () async {
                                           await _tweenController.forward();
+
                                           //------------------ MEAL BOTTOM SHEET ---------------------//
                                           //------------------ CUSTOM PACKAGE ---------------------//
                                           await showFlexibleBottomSheet(
@@ -287,20 +296,26 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
                                                     meal.description!.isEmpty
-                                                ? 0.625
+                                                ? Platform.isIOS
+                                                    ? 0.62
+                                                    : 0.625
                                                 : (meal.gVolumes!.isEmpty &&
                                                             meal.gCustomizables!
                                                                 .isEmpty) &&
                                                         meal.description!
                                                             .isNotEmpty
-                                                    ? 0.703
+                                                    ? Platform.isIOS
+                                                        ? 0.74
+                                                        : 0.75
                                                     : 0.975,
                                             maxHeight: (meal.gVolumes!
                                                             .isEmpty &&
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
                                                     meal.description!.isEmpty
-                                                ? 0.625
+                                                ? Platform.isIOS
+                                                    ? 0.62
+                                                    : 0.625
                                                 : 0.975,
                                             context: context,
                                             builder: (context, scrollController,
@@ -321,15 +336,27 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
                                                     meal.description!.isEmpty
-                                                ? [0, 0.625]
+                                                ? [
+                                                    0,
+                                                    Platform.isIOS
+                                                        ? 0.62
+                                                        : 0.625
+                                                  ]
                                                 : (meal.gVolumes!.isEmpty &&
                                                             meal.gCustomizables!
                                                                 .isEmpty) &&
                                                         meal.description!
                                                             .isNotEmpty
-                                                    ? [0, 0.703, 0.975]
+                                                    ? [
+                                                        0,
+                                                        Platform.isIOS
+                                                            ? 0.74
+                                                            : 0.75,
+                                                        0.975
+                                                      ]
                                                     : [0, 0.975],
                                           );
+                                          // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                         }
                                       : () async {
                                           await model
@@ -363,6 +390,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       meal.gCustomizables!.isNotEmpty
                                   ? () async {
                                       await _tweenController.forward();
+
                                       //------------------ MEAL BOTTOM SHEET ---------------------//
                                       //------------------ CUSTOM PACKAGE ---------------------//
                                       await showFlexibleBottomSheet(
@@ -371,18 +399,24 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                     meal.gCustomizables!
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
-                                            ? 0.625
+                                            ? Platform.isIOS
+                                                ? 0.62
+                                                : 0.625
                                             : (meal.gVolumes!.isEmpty &&
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
                                                     meal.description!.isNotEmpty
-                                                ? 0.703
+                                                ? Platform.isIOS
+                                                    ? 0.74
+                                                    : 0.75
                                                 : 0.975,
                                         maxHeight: (meal.gVolumes!.isEmpty &&
                                                     meal.gCustomizables!
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
-                                            ? 0.625
+                                            ? Platform.isIOS
+                                                ? 0.62
+                                                : 0.625
                                             : 0.975,
                                         context: context,
                                         builder: (context, scrollController,
@@ -403,14 +437,21 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                     meal.gCustomizables!
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
-                                            ? [0, 0.625]
+                                            ? [0, Platform.isIOS ? 0.62 : 0.625]
                                             : (meal.gVolumes!.isEmpty &&
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
                                                     meal.description!.isNotEmpty
-                                                ? [0, 0.703, 0.975]
+                                                ? [
+                                                    0,
+                                                    Platform.isIOS
+                                                        ? 0.74
+                                                        : 0.75,
+                                                    0.975
+                                                  ]
                                                 : [0, 0.975],
                                       );
+                                      // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                     }
                                   : () async {
                                       await model
