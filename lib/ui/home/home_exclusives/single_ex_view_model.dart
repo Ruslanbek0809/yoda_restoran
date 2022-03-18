@@ -21,6 +21,7 @@ class SingleExViewModel extends FutureViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
   final _geolocatorService = locator<GeolocatorService>();
+  final _dynamicLinkService = locator<DynamicLinkService>();
 
   Position? get locationPosition => _geolocatorService.locationPosition;
 
@@ -37,6 +38,10 @@ class SingleExViewModel extends FutureViewModel {
 
     log.i('_seRiches length: ${_seRiches.length}');
   }
+
+  // CREATES dynamic link for this singleEx using dynamicLinkService
+  Future createDynamicLink() async =>
+      await _dynamicLinkService.createDynamicLink(false, singleEx!);
 
   //------------------ SINGLE EX WEBVIEW ---------------------//
 

@@ -28,6 +28,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                 : singleEx
                     .name!, // for test: 'Birini alana 2 nji mugt aksiya edyas gelda'
             extent: model.isBusy || model.hasError ? 62.h : 0.175.sh,
+            singleExViewModel: model,
           ),
         ),
 
@@ -247,8 +248,12 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   final String title;
   final double extent;
+  final SingleExViewModel singleExViewModel;
 
-  _TransitionAppBarDelegate({required this.title, this.extent = 250});
+  _TransitionAppBarDelegate(
+      {required this.title,
+      this.extent = 250,
+      required this.singleExViewModel});
 
   @override
   Widget build(
@@ -318,7 +323,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
           child: Align(
             alignment: rightIconAlign,
             child: IconButton(
-              onPressed: () {},
+              onPressed: singleExViewModel.createDynamicLink,
               icon: Icon(
                 Icons.share,
                 size: 22.w,
