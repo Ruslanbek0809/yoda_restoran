@@ -60,6 +60,7 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: SearchService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: GeolocatorService),
+    LazySingleton(classType: DynamicLinkService),
   ],
   logger: StackedLogger(),
 )

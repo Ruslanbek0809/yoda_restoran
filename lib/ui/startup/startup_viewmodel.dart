@@ -24,6 +24,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final _userService = locator<UserService>();
   final _connectivityService = locator<ConnectivityService>();
   final _geolocatorService = locator<GeolocatorService>();
+  final _dynamicLinkService = locator<DynamicLinkService>();
 
   ConnectivityStatus? get connectivityStatus => data;
 
@@ -64,8 +65,12 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     }
 
     /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
-    await Firebase.initializeApp()
-        .then((value) => _pushNotificationService.initialise());
+    await Firebase.initializeApp().then((value) {
+      _pushNotificationService
+          .initialise(); // INITIALIZATION of FB Push notification
+      _dynamicLinkService
+          .handleDynamicLinks(); // INITIALIZATION of FB Dynamic Link
+    });
 
     /// GETS user's location
     await _geolocatorService.getUserLocation();
