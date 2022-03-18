@@ -48,6 +48,11 @@ void setupBottomSheet() {
           request: sheetRequest,
           completer: completer,
         ),
+    // BottomSheetType.selectAddress: (context, sheetRequest, completer) =>
+    //     CheckoutSelectAddressBottomSheetView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //     ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);

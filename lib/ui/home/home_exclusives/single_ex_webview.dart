@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
+import '../../widgets/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingleExWebview extends StatefulWidget {
   final ExclusiveSingle singleEx;
@@ -61,6 +64,22 @@ class _SingleExWebviewState extends State<SingleExWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppTheme.WHITE,
+        elevation: 0.5,
+        leading: BackButtonWidget(),
+        //------------------ ACTIONS FAV ---------------------//
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.share,
+              size: 24.w,
+              color: kcSecondaryDarkColor,
+            ),
+          )
+        ],
+      ),
       body: SafeArea(
         child: Stack(
           children: [
