@@ -20,7 +20,10 @@ class SingleExView extends StatelessWidget {
             children: [
               singleEx.option == 'reachText'
                   ? SingleExReachText(singleEx: singleEx)
-                  : SingleExWebview(singleEx: singleEx),
+                  : SingleExWebview(
+                      singleEx: singleEx,
+                      singleExViewModel: model,
+                    ),
               //------------------ BOTTOM CART ---------------------//
               if (!model.hasError &&
                   model.cartRes!.id != -1 &&

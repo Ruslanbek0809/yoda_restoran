@@ -14,7 +14,7 @@ class DynamicLinkService {
 
   /// HANDLES Foreground/Background dynamic link
   Future handleBFDynamicLinks() async {
-    log.v('====== DynamicLinkService handleBFDynamicLinks() STARTED ======');
+    // log.v('====== DynamicLinkService handleBFDynamicLinks() STARTED ======');
 
     // /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
     // final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
@@ -24,7 +24,7 @@ class DynamicLinkService {
 
     /// #2 GETS dynamic link in Background / Foreground State
     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLinkData) {
-      log.v('====== DynamicLinkService Background / Foreground State ======');
+      // log.v('====== DynamicLinkService Background / Foreground State ======');
       // 3a. handle link that has been retrieved
       if (dynamicLinkData != null) _handleDeepLink(dynamicLinkData);
     }).onError((error) {
@@ -34,7 +34,7 @@ class DynamicLinkService {
 
   /// HANDLES clicked terminated dynamic link
   Future handleClickedDynamicLinks() async {
-    log.v('====== DynamicLinkService handleClickDynamicLinks() STARTED ======');
+    // log.v('====== DynamicLinkService handleClickDynamicLinks() STARTED ======');
 
     /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
     final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();

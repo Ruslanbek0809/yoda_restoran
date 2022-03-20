@@ -8,9 +8,14 @@ import 'package:yoda_res/utils/utils.dart';
 import '../../widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'single_ex_view_model.dart';
+
 class SingleExWebview extends StatefulWidget {
   final ExclusiveSingle singleEx;
-  const SingleExWebview({required this.singleEx, Key? key}) : super(key: key);
+  final SingleExViewModel singleExViewModel;
+  const SingleExWebview(
+      {required this.singleEx, required this.singleExViewModel, Key? key})
+      : super(key: key);
 
   @override
   State<SingleExWebview> createState() => _SingleExWebviewState();
@@ -71,7 +76,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
         //------------------ ACTIONS FAV ---------------------//
         actions: [
           IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: widget.singleExViewModel.createDynamicLink,
             icon: Icon(
               Icons.share,
               size: 24.w,
