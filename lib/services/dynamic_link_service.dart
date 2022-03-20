@@ -94,12 +94,12 @@ class DynamicLinkService {
     );
 
     Uri uri;
-    if (shortLink)
-      uri = await dynamicLinks.buildLink(parameters);
-    else {
+    if (shortLink) {
       final ShortDynamicLink shortDynamicLink =
           await FirebaseDynamicLinks.instance.buildShortLink(parameters);
       uri = shortDynamicLink.shortUrl;
+    } else {
+      uri = await dynamicLinks.buildLink(parameters);
     }
 
     log.v('createDynamicLink() with uri => ${uri.toString()}');

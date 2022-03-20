@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/hive_models/hive_models.dart';
@@ -40,8 +41,12 @@ class SingleExViewModel extends FutureViewModel {
   }
 
   // CREATES dynamic link for this singleEx using dynamicLinkService
-  Future createDynamicLink() async =>
-      await _dynamicLinkService.createDynamicLink(false, singleEx!);
+  Future createDynamicLink() async {
+    String singleExDynamicLink = '';
+    singleExDynamicLink =
+        await _dynamicLinkService.createDynamicLink(false, singleEx!);
+    await Share.share(singleExDynamicLink);
+  }
 
   //------------------ SINGLE EX WEBVIEW ---------------------//
 
