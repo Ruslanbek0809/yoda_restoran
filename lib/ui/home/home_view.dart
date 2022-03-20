@@ -64,6 +64,9 @@ class _HomeViewState extends State<HomeView> {
             await InAppUpdate.completeFlexibleUpdate();
           }
         }
+
+        /// HANDLES clicked terminated dynamic link
+        await model.handleClickedDynamicLink();
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)

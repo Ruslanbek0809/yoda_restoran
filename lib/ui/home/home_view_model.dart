@@ -24,6 +24,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
+  final _dynamicLinkService = locator<DynamicLinkService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -188,6 +189,12 @@ class HomeViewModel extends MultipleFutureViewModel {
 
     return totalCartSum;
   }
+
+  //------------------ DYNAMIC LINK ---------------------//
+
+  /// HANDLES clicked terminated dynamic link
+  Future<void> handleClickedDynamicLink() async =>
+      await _dynamicLinkService.handleClickedDynamicLinks();
 
   //------------------ NAVIGATION ---------------------//
 

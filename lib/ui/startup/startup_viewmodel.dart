@@ -69,7 +69,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
       _pushNotificationService
           .initialise(); // INITIALIZATION of FB Push notification
       _dynamicLinkService
-          .handleDynamicLinks(); // INITIALIZATION of FB Dynamic Link
+          .handleBFDynamicLinks(); // INITIALIZATION of FB Dynamic Link
     });
 
     /// GETS user's location

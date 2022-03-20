@@ -12,14 +12,15 @@ class DynamicLinkService {
 
   FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
-  Future handleDynamicLinks() async {
-    log.v('====== DynamicLinkService STARTED ======');
+  /// HANDLES Foreground/Background dynamic link
+  Future handleBFDynamicLinks() async {
+    log.v('====== DynamicLinkService handleBFDynamicLinks() STARTED ======');
 
-    /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
-    final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
+    // /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
+    // final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
 
-    /// HANDLES clicked dynamic link
-    if (data != null) _handleDeepLink(data);
+    // /// HANDLES clicked dynamic link
+    // if (data != null) _handleDeepLink(data);
 
     /// #2 GETS dynamic link in Background / Foreground State
     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLinkData) {
@@ -29,6 +30,17 @@ class DynamicLinkService {
     }).onError((error) {
       print('Link Failed: ${error.message}');
     });
+  }
+
+  /// HANDLES clicked terminated dynamic link
+  Future handleClickedDynamicLinks() async {
+    log.v('====== DynamicLinkService handleClickDynamicLinks() STARTED ======');
+
+    /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
+    final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
+
+    /// HANDLES clicked dynamic link
+    if (data != null) _handleDeepLink(data);
   }
 
   void _handleDeepLink(PendingDynamicLinkData? data) {
