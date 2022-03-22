@@ -27,7 +27,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.15.sh; // 0.32.sw is for item height
+    double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
 
     //-------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
@@ -50,7 +50,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
       void _customScrollListener() =>
           model.updateLastScrollStatus(customScrollController.hasClients &&
               customScrollController.offset >
-                  (0.55.sh - kToolbarHeight - 56.h)); // - 53.h for Tab height
+                  (0.55.sh - kToolbarHeight - 56.h));
 
       customScrollController.addListener(_customScrollListener);
       return () => customScrollController.removeListener(_customScrollListener);
@@ -479,13 +479,13 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     int rows = (resCategory.meals!.length / 2).ceil();
                     return prev += rows *
                         (itemHeight +
-                            17.9.h); // GridView mainAxisSpacing * 2 SECOND MAIN COMPENSATION HERE
+                            15.h); // itemHeight + GridView mainAxisSpacing
                   },
                 );
 
                 customScrollController.animateTo(
-                  offset + ((index - 1) * 30.h) + 0.55.sh - 57.h,
-                  // * 30.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate 0.55.sh expanded height // + 53.h is for tab height
+                  offset + ((index - 1) * 88.h) + 0.55.sh,
+                  // * 88.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate Expanded height
                   duration: Duration(milliseconds: 300),
                   curve: Curves.linear,
                 );
@@ -507,12 +507,13 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 12.w, top: 5.h),
+                      padding: EdgeInsets.only(left: 12.w, top: 40.h),
                       child: Text(
                         resCategory.resCategoryModel!.name!,
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          color: kcSecondFontColor,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.MAIN_DARK,
                         ),
                       ),
                     ),

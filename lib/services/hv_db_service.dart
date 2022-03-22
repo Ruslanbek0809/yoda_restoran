@@ -360,10 +360,10 @@ class HiveDbService with ReactiveServiceMixin {
         log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
       }
     }
-
+  
     /// UPDATE PART
     else {
-      log.v('UPDATES with isNew: $isNew');
+      log.v('UPDATES with isNew: $isNew');  
       int pos = _cartMeals.value.indexOf(similarUpdateMeal!);
       log.v('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;
