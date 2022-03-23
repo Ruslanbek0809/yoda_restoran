@@ -62,5 +62,10 @@
 		<string>https</string>
 		<string>http</string>
 	</array>
+		<key>FirebaseDynamicLinksCustomDomains</key>
+  <array>
+    <string>https://yodarestoran.page.link/pizza88</string>
+    <string>https://yodarestoran.page.link/single-exclusive</string>
+  </array>
 </dict>
 </plist>

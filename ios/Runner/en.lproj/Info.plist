@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>ru</string>
-		<string>en</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -15,6 +10,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ru</string>
+		<string>en</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>Ýoda Restoran</string>
 	<key>CFBundlePackageType</key>
@@ -23,10 +23,32 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle Id</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.restoran.yoda</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>“Yoda Restoran” uses this to display nearest restaurants. You can always change this later in your device settings.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>“Yoda Restoran” uses this to display nearest restaurants. You can always change this later in your device settings.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -53,14 +75,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>“Yoda Restoran” uses this to display nearest restaurants. You can always change this later in your device settings.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>“Yoda Restoran” uses this to display nearest restaurants. You can always change this later in your device settings.</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>https</string>
-		<string>http</string>
-	</array>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+  <array>
+    <string>https://yodarestoran.page.link/pizza88</string>
+    <string>https://yodarestoran.page.link/single-exclusive</string>
+  </array>
+
 </dict>
 </plist>
