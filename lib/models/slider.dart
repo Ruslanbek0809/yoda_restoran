@@ -1,19 +1,25 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'models.dart';
+
 part 'slider.g.dart';
 
 @JsonSerializable()
 class SliderModel {
   SliderModel({
     this.id,
+    this.order,
     this.image,
     this.option,
+    this.restaurant,
     this.url,
-    this.order,
   });
 
   @JsonKey(name: 'id')
   final int? id;
+
+  @JsonKey(name: 'order')
+  final int? order;
 
   @JsonKey(name: 'image')
   final String? image;
@@ -24,8 +30,8 @@ class SliderModel {
   @JsonKey(name: 'url')
   final String? url;
 
-  @JsonKey(name: 'order')
-  final int? order;
+  @JsonKey(name: 'restaurant')
+  final Restaurant? restaurant;
 
   factory SliderModel.fromJson(Map<String, dynamic> json) =>
       _$SliderModelFromJson(json);

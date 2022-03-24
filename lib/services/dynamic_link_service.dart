@@ -66,9 +66,9 @@ class DynamicLinkService {
         if (singleExId != null) {
           //------------------ NAVIGATION to SingleExclusive ---------------------//
           _navService.navigateTo(
-            Routes.exclusiveSingleView,
-            arguments: ExclusiveSingleViewArguments(
-                exclusiveSingle: ExclusiveSingle(
+            Routes.singleExView,
+            arguments: SingleExViewArguments(
+                singleEx: ExclusiveSingle(
               id: int.parse(singleExId),
               order: int.parse(singleExOrder!),
               name: singleExName,

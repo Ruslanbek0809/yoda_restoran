@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
-import '../../models/slider.dart';
-import '../widgets/widgets.dart';
-
+import '../../../models/models.dart';
+import '../../widgets/widgets.dart';
 import 'slider_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,7 +40,9 @@ class SliderView extends StatelessWidget {
                     (slider) => Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: GestureDetector(
-                        onTap: () async {},
+                        onTap: () async => slider.option == 'restoran'
+                            ? model.navToResDetailsView(slider.restaurant!)
+                            : model.navToSliderWebview(slider.url!),
                         child: YodaImage(
                           image: slider.image!,
                           phImage: 'assets/ph_slider.png',

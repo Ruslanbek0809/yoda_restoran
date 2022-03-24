@@ -16,13 +16,14 @@ import 'home_exclusives/home_exclusive.dart';
 import 'main_category/main_cat_view.dart';
 import '../restaurant/promoted/prom_res_view.dart';
 import '../restaurant/restaurant_view.dart';
-import '../slider/slider_view.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
 import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import 'slider/slider_view.dart';
 
 class HomeView extends StatefulWidget {
   @override

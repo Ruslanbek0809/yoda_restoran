@@ -24,6 +24,7 @@ import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/home/slider/slider_webview.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
 import '../ui/startup/onboarding/onboarding_view.dart';
@@ -47,7 +48,8 @@ class Routes {
   static const String contactUsView = '/contact-us-view';
   static const String aboutUsView = '/about-us-view';
   static const String onBoardingView = '/on-boarding-view';
-  static const String exclusiveSingleView = '/exclusive-single-view';
+  static const String singleExView = '/single-ex-view';
+  static const String sliderWebview = '/slider-webview';
   static const all = <String>{
     startUpView,
     homeView,
@@ -65,7 +67,8 @@ class Routes {
     contactUsView,
     aboutUsView,
     onBoardingView,
-    exclusiveSingleView,
+    singleExView,
+    sliderWebview,
   };
 }
 
@@ -89,7 +92,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
-    RouteDef(Routes.exclusiveSingleView, page: SingleExView),
+    RouteDef(Routes.singleExView, page: SingleExView),
+    RouteDef(Routes.sliderWebview, page: SliderWebview),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -220,10 +224,20 @@ class StackedRouter extends RouterBase {
       );
     },
     SingleExView: (data) {
-      var args = data.getArgs<ExclusiveSingleViewArguments>(nullOk: false);
+      var args = data.getArgs<SingleExViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => SingleExView(
-          singleEx: args.exclusiveSingle,
+          singleEx: args.singleEx,
+          key: args.key,
+        ),
+        settings: data,
+      );
+    },
+    SliderWebview: (data) {
+      var args = data.getArgs<SliderWebviewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SliderWebview(
+          sliderUrl: args.sliderUrl,
           key: args.key,
         ),
         settings: data,
@@ -289,8 +303,15 @@ class OnBoardingViewArguments {
   OnBoardingViewArguments({this.key});
 }
 
-class ExclusiveSingleViewArguments {
-  final ExclusiveSingle exclusiveSingle;
+class SingleExViewArguments {
+  final ExclusiveSingle singleEx;
   final Key? key;
-  ExclusiveSingleViewArguments({required this.exclusiveSingle, this.key});
+  SingleExViewArguments({required this.singleEx, this.key});
+}
+
+/// SliderWebview arguments holder class
+class SliderWebviewArguments {
+  final String sliderUrl;
+  final Key? key;
+  SliderWebviewArguments({required this.sliderUrl, this.key});
 }

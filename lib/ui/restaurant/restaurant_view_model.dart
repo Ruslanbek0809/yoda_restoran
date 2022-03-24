@@ -61,6 +61,8 @@ class ResViewModel extends BaseViewModel {
     }
   }
 
+  //------------------ NAVIGATION ---------------------//
+  
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
         Routes.resDetailsView,
         arguments: ResDetailsViewArguments(restaurant: restaurant),
