@@ -29,7 +29,7 @@ class AddressesViewModel extends FutureViewModel {
   Future<void> navToAddEditAddressView() async {
     dynamic _navResult;
     _navResult =
-        await _navService.navigateTo(Routes.addressAddEditView) ?? true;
+        await _navService.navigateTo(Routes.addressAddEditView) ?? false;
     if (_navResult) await initialise(); // Workaround
   }
 }

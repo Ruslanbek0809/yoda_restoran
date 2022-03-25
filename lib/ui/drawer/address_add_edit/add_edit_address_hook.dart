@@ -30,31 +30,28 @@ class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
           padding: EdgeInsets.only(top: 10.h),
           child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
         ),
-        IgnorePointer(
-          child: TextFormField(
-            controller: _cityController,
-            style: kts18Text,
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-              border: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide:
-                    BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-              ),
-              hintText: LocaleKeys.ashgabat.tr(),
-              hintStyle: ktsDefault18HelperText,
+        TextFormField(
+          controller: _cityController,
+          style: kts18Text,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            border: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
-            validator: (value) => null,
+            focusedBorder: UnderlineInputBorder(
+              borderSide:
+                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+            ),
+            hintText: LocaleKeys.ashgabat.tr(),
+            hintStyle: ktsDefault18HelperText,
           ),
+          validator: model.updateCity,
         ),
-        SizedBox(height: 10.w),
         // --------------- STREET -------------- //
         Padding(
-          padding: EdgeInsets.only(top: 15.h),
+          padding: EdgeInsets.only(top: 25.h),
           child: Text(LocaleKeys.street, style: kts14HelperText).tr(),
         ),
         TextFormField(
