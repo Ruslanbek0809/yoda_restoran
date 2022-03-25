@@ -38,7 +38,7 @@ class OtpTimerWidget extends StatelessWidget {
             SizedBox(width: 5.w),
             Text(
               LocaleKeys.sendCodeIn,
-              style: kts16PrimaryText,
+              style: kts16PrimaryBoldText,
             ).tr(args: [timerString]),
           ],
         );

@@ -74,10 +74,11 @@ class AddressesView extends StatelessWidget {
                             ),
                             margin: EdgeInsets.symmetric(vertical: 5.h),
                             padding: EdgeInsets.fromLTRB(12.w, 10.h, 7.w, 10.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Flexible(
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 10.h),
                                   child: Text(
                                     model.addresses![pos].street! +
                                         (model.addresses![pos].house != null
@@ -85,15 +86,58 @@ class AddressesView extends StatelessWidget {
                                             : ''),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
-                                    style: kts18Text,
+                                    style: ktsDefault16Text,
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: kcSecondaryDarkColor,
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: CustomIconTextButton(
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          color: kcSecondaryDarkColor,
+                                        ),
+                                        text: Text(
+                                          'Üýtget',
+                                          style: kts16DarkText,
+                                        ),
+                                        backgroundColor: kcSecondaryLightColor,
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Expanded(
+                                      child: CustomIconTextButton(
+                                        icon: Icon(
+                                          Icons.delete_outline_rounded,
+                                          color: kcSecondaryDarkColor,
+                                        ),
+                                        text: Text(
+                                          'Poz',
+                                          style: kts16DarkText,
+                                        ),
+                                        backgroundColor: kcSecondaryLightColor,
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Expanded(
+                                      child: CustomIconTextButton(
+                                        icon: Icon(
+                                          Icons.check_circle_outline_rounded,
+                                          color: kcSecondaryDarkColor,
+                                        ),
+                                        text: Text(
+                                          'Saýla',
+                                          style: kts16DarkText,
+                                        ),
+                                        backgroundColor: kcSecondaryLightColor,
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),

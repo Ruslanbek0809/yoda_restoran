@@ -213,7 +213,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                           SizedBox(width: 5.w),
                           Text(
                             LocaleKeys.resend_code,
-                            style: kts16PrimaryText,
+                            style: kts16PrimaryBoldText,
                           ).tr(),
                         ],
                       ),
