@@ -21,6 +21,7 @@ class AddressesView extends StatelessWidget {
           return false;
         },
         child: Scaffold(
+          backgroundColor: kcSecondaryLightColor,
           appBar: AppBar(
             backgroundColor: kcWhiteColor,
             elevation: 0.5,
@@ -62,23 +63,41 @@ class AddressesView extends StatelessWidget {
                   : Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 10.h),
-                      child: ListView.separated(
+                      child: ListView.builder(
                         physics: BouncingScrollPhysics(),
                         itemCount: model.addresses!.length,
                         itemBuilder: (context, pos) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5.h),
-                            child: Text(
-                              model.addresses![pos].street! +
-                                  (model.addresses![pos].house != null
-                                      ? ', ${model.addresses![pos].house}'
-                                      : ''),
-                              style: kts18Text,
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: kcWhiteColor,
+                              borderRadius: AppTheme().radius10,
+                            ),
+                            margin: EdgeInsets.symmetric(vertical: 5.h),
+                            padding: EdgeInsets.fromLTRB(12.w, 10.h, 7.w, 10.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    model.addresses![pos].street! +
+                                        (model.addresses![pos].house != null
+                                            ? ', ${model.addresses![pos].house}'
+                                            : ''),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                    style: kts18Text,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: kcSecondaryDarkColor,
+                                  ),
+                                )
+                              ],
                             ),
                           );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(color: kcDividerColor);
                         },
                       ),
                     ),

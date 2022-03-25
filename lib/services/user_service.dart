@@ -39,9 +39,8 @@ class UserService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         /// Step 1. GETS and CONVERTS user json data to dart userModel
         User? userModel;
-        response.data.forEach((_user) {
-          userModel = User.fromJson(_user);
-        });
+        for (final _userJson in response.data)
+          userModel = User.fromJson(_userJson);
 
         /// Step 2. OPENS userBox
         await Hive.openBox<HiveUser>(Constants.userBox);
@@ -55,13 +54,13 @@ class UserService {
           Constants.userBox,
           HiveUser(
             id: userModel!.id,
-            firstName: userModel!.firstName,
-            lastName: userModel!.lastName,
-            email: userModel!.email,
-            mobile: userModel!.mobile,
-            gender: userModel!.gender,
-            birthday: userModel!.birthday,
-            favs: userModel!.favourites ?? [],
+            firstName: userModel.firstName,
+            lastName: userModel.lastName,
+            email: userModel.email,
+            mobile: userModel.mobile,
+            gender: userModel.gender,
+            birthday: userModel.birthday,
+            favs: userModel.favourites ?? [],
           ),
         );
 
@@ -74,7 +73,8 @@ class UserService {
       } else
         onFail!();
     } on DioError catch (error) {
-      log.v('ERROR on api/user/ :${error.response}');
+      log.v(
+          'ERROR on api/user/ :${error.response} and its error status code: ${error.response!.statusCode}');
       onFail!();
       throw DioErrorType.response;
     }

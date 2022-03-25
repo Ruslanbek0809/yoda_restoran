@@ -11,7 +11,6 @@ import 'package:yoda_res/ui/drawer/otp/otp_view.dart';
 import 'package:yoda_res/ui/drawer/profile/profile_view.dart';
 import 'package:yoda_res/ui/home/home_exclusives/single_ex_view.dart';
 import 'package:yoda_res/ui/home/home_search/home_search_view.dart';
-import 'package:yoda_res/ui/home/slider/slider_view.dart';
 import 'package:yoda_res/ui/home/slider/slider_webview.dart';
 import 'package:yoda_res/ui/startup/onboarding/onboarding_view.dart';
 import '../services/services.dart';

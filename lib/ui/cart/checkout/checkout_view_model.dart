@@ -7,14 +7,12 @@ import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
-import '../../../utils/utils.dart';
 
 class CheckoutViewModel extends ReactiveViewModel {
   final log = getLogger('CheckoutViewModel');
 
   final _checkoutService = locator<CheckoutService>();
   final _hiveDbService = locator<HiveDbService>();
-  final _bottomSheetService = locator<BottomSheetService>();
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
   final _toggleButtonService = locator<ToggleButtonService>();

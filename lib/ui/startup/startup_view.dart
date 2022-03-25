@@ -17,10 +17,8 @@ class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      onModelReady: (model) =>
-          WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-        model.runStartupLogic();
-      }),
+      onModelReady: (model) => WidgetsBinding.instance!
+          .addPostFrameCallback((_) => model.runStartupLogic()),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
         /// CALLED when user has NO Internet Connection

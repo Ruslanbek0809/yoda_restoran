@@ -7,9 +7,6 @@ import 'app/app.router.dart';
 import 'ui/widgets/widgets.dart';
 import 'utils/utils.dart';
 
-// final mainScaffoldKey = GlobalKey();
-// final GlobalKey<NavigatorState> yodaResNavigatorKey = GlobalKey();
-
 class YodaResApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
