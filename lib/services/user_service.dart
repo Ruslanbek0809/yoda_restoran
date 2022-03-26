@@ -332,6 +332,23 @@ class UserService {
     }
   }
 
+  Future<void> deleteAddress(
+      {int? addressID, Function()? onSuccess, Function()? onFail}) async {
+    try {
+      Response response = await _apiRoot.dio.delete('api/address/$addressID/');
+      log.v('RESPONSE: api/address/$addressID/ => ${response.statusCode}');
+
+      if (response.data != null && response.statusCode == 204)
+        onSuccess!();
+      else
+        onFail!();
+    } catch (error) {
+      log.v('ERROR on api/address/$addressID/: $error');
+      onFail!();
+      rethrow;
+    }
+  }
+
   //------------------ CREATE ORDER API ---------------------//
 
   Future<void> createOrder(

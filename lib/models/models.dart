@@ -36,3 +36,4 @@ export 'cart_more_meal_bottom_sheet_data.dart';
 export 'exclusive.dart';
 export 'exclusive_single.dart';
 export 'es_rich.dart';
+export 'address_dialog_data.dart';

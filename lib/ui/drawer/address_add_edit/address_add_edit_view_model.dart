@@ -35,12 +35,11 @@ class AddressAddEditViewModel extends BaseViewModel {
     log.v('updateCity value: $value');
     if (value!.isEmpty) {
       log.v('updateCity value: $value');
-      // return LocaleKeys.enterStreet.tr();
+      return LocaleKeys.enterStreet.tr();
     }
 
     _city = value;
     notifyListeners();
-    return '';
   }
 
   /// UPDATES _street
@@ -52,7 +51,6 @@ class AddressAddEditViewModel extends BaseViewModel {
 
     _street = value;
     notifyListeners();
-    return '';
   }
 
   /// UPDATES _house
@@ -62,7 +60,6 @@ class AddressAddEditViewModel extends BaseViewModel {
 
     _house = int.parse(value);
     notifyListeners();
-    return '';
   }
 
   /// UPDATES _apartment
@@ -72,7 +69,6 @@ class AddressAddEditViewModel extends BaseViewModel {
 
     _apartment = int.parse(value);
     notifyListeners();
-    return '';
   }
 
   /// UPDATES _floor
@@ -82,7 +78,6 @@ class AddressAddEditViewModel extends BaseViewModel {
 
     _floor = int.parse(value);
     notifyListeners();
-    return '';
   }
 
   /// UPDATES _street
@@ -92,7 +87,6 @@ class AddressAddEditViewModel extends BaseViewModel {
 
     _note = value;
     notifyListeners();
-    return '';
   }
 
   /// ADDS new address

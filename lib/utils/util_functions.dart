@@ -99,6 +99,7 @@ enum DialogType {
   cancelWaitingOrder,
   cancelAcceptedOrder,
   notification,
+  removeAddress,
 }
 
 /// Enum for snackbar types

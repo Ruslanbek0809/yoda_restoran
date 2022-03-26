@@ -73,12 +73,13 @@ class AddressesView extends StatelessWidget {
                               borderRadius: AppTheme().radius10,
                             ),
                             margin: EdgeInsets.symmetric(vertical: 5.h),
-                            padding: EdgeInsets.fromLTRB(12.w, 10.h, 7.w, 10.h),
+                            padding:
+                                EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 10.h),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 10.h),
+                                  padding: EdgeInsets.only(bottom: 12.h),
                                   child: Text(
                                     model.addresses![pos].street! +
                                         (model.addresses![pos].house != null
@@ -119,7 +120,9 @@ class AddressesView extends StatelessWidget {
                                           style: kts16DarkText,
                                         ),
                                         backgroundColor: kcSecondaryLightColor,
-                                        onPressed: () {},
+                                        onPressed: () async =>
+                                            await model.showAddressRemoveDialog(
+                                                model, model.addresses![pos]),
                                       ),
                                     ),
                                     SizedBox(width: 10.w),

@@ -74,7 +74,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       child: InkWell(
                         borderRadius: AppTheme().radius15,
                         onTap: () async => cartMeal.quantity! == 1
-                            ? model.showRemoveCartMealDialog(model, cartMeal)
+                            ? await model.showRemoveCartMealDialog(model, cartMeal)
                             : await model.updateCartMealInCart(
                                 cartMeal, cartMeal.quantity! - 1),
                         child: Padding(

@@ -191,7 +191,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<AddressAddEditViewArguments>(
         orElse: () => AddressAddEditViewArguments(),
       );
-      return CustomMaterialPageRoute(
+      return MaterialPageRoute<dynamic>(
         builder: (context) => AddressAddEditView(key: args.key),
         settings: data,
       );

@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/cart/order/order_view_model.dart';
+import 'package:yoda_res/ui/drawer/addresses/addresses_view_model.dart';
 import '../app/app.locator.dart';
 import '../shared/styles.dart';
 import 'cart/cart_view_model.dart';
@@ -50,6 +51,12 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
           notificationData: sheetRequest.data,
+        ),
+    DialogType.removeAddress: (context, sheetRequest, completer) =>
+        RemoveAddressDialogView(
+          request: sheetRequest,
+          completer: completer,
+          addressDialogData: sheetRequest.data,
         ),
   };
 
@@ -526,6 +533,117 @@ class NotificationDialogView extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 contentTextStyle: kts18NotificationText,
+              );
+      },
+    );
+  }
+}
+//------------------ ADDRESS DIALOGS ---------------------//
+
+class RemoveAddressDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  final AddressDialogData addressDialogData;
+  const RemoveAddressDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+    required this.addressDialogData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<AddressesViewModel>.reactive(
+      viewModelBuilder: () => addressDialogData.addressesViewModel!,
+      disposeViewModel: false,
+      builder: (context, model, child) {
+        return (Platform.isIOS)
+            ? CupertinoAlertDialog(
+                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ).tr(),
+                titleTextStyle: ktsDefault20BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child:
+                        //  model.busy(addressDialogData.address!.id) ?
+                        Text(
+                      request.secondaryButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.onDeleteAddressPressed(
+                        addressDialogData.address!,
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            msg: 'Address deleted successfully', // TODO: Lang
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                          completer(DialogResponse());
+                        },
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                          completer(DialogResponse());
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(width: 42.w),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      completer(DialogResponse());
+                    },
+                  ),
+                ],
               );
       },
     );

@@ -6,11 +6,15 @@ import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 
+import '../../../generated/locale_keys.g.dart';
+import '../../../utils/utils.dart';
+
 class AddressesViewModel extends FutureViewModel {
   final log = getLogger('AddressesViewModel');
 
   final _navService = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final _dialogService = locator<DialogService>();
 
   List<Address>? _addresses = [];
   List<Address>? get addresses => _addresses;
@@ -19,6 +23,45 @@ class AddressesViewModel extends FutureViewModel {
   Future<void> futureToRun() async {
     _addresses = await _userService.getAddresses();
     log.v('_addresses!.length: ${_addresses!.length}');
+  }
+
+  /// DELETES selected address
+  Future<void> onDeleteAddressPressed(
+    Address address,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    log.v('onDeleteAddressPressed()');
+    await runBusyFuture(
+      _userService.deleteAddress(
+        addressID: address.id,
+        onSuccess: () => onSuccess!(),
+        onFail: () => onFail!(),
+      ),
+      busyObject: address.id,
+    );
+  }
+
+//------------------------ ADDRESS REMOVE DIALOG ----------------------------//
+
+  /// SHOWS ADDRESS REMOVE Dialog
+  Future showAddressRemoveDialog(
+    AddressesViewModel addressesViewModel,
+    Address address,
+  ) async {
+    log.i('showAddressRemoveDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.removeAddress,
+      title: 'Wanna delete an address?', // TODO: Lang
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.remove,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+      data: AddressDialogData(
+        addressesViewModel: addressesViewModel,
+        address: address,
+      ),
+    );
   }
 //------------------------ NAVIGATIONS ----------------------------//
 
