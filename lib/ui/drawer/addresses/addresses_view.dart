@@ -62,7 +62,7 @@ class AddressesView extends StatelessWidget {
                       svg: 'assets/empty_addresses.svg',
                     )
                   : Padding(
-                      padding: EdgeInsets.fromLTRB(10.w, 10.h, 0.0, 10.h),
+                      padding: EdgeInsets.only(left: 10.w, top: 5.h),
                       child: ListView.separated(
                         physics: BouncingScrollPhysics(),
                         itemCount: model.addresses!.length,
@@ -100,8 +100,12 @@ class AddressesView extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(6.w, 5.h, 16.w, 5.h),
+                                  padding: EdgeInsets.fromLTRB(
+                                    6.w,
+                                    pos == 0 ? 10.h : 15.h,
+                                    16.w,
+                                    15.h,
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -113,7 +117,7 @@ class AddressesView extends StatelessWidget {
                                                       null
                                                   ? ', ${model.addresses![pos].house}'
                                                   : ''),
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: kts18Text,
                                         ),
@@ -131,9 +135,10 @@ class AddressesView extends StatelessWidget {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 6.w),
-                            child: Divider(color: kcDividerColor),
+                          return Container(
+                            margin: EdgeInsets.only(left: 6.w),
+                            color: kcDividerColor,
+                            height: 0.5.h,
                           );
                         },
                       ),
