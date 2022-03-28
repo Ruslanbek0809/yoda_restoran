@@ -1,9 +1,8 @@
 import 'dart:io';
-
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import '../../../library/flexible_bottom_sheet_route.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';

@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/styles.dart';
+import '../../../library/flexible_bottom_sheet_route.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
