@@ -33,6 +33,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: AddressesView),
     MaterialRoute(page: AddressAddView),
+    MaterialRoute(page: AddressEditView),
     MaterialRoute(page: HomeSearchView),
     MaterialRoute(page: ContactUsView),
     MaterialRoute(page: AboutUsView),

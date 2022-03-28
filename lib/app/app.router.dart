@@ -40,7 +40,8 @@ class Routes {
   static const String orderSuccessView = '/order-success-view';
   static const String profileView = '/profile-view';
   static const String addressesView = '/addresses-view';
-  static const String addressAddView = '/address-add-edit-view';
+  static const String addressAddView = '/address-add-view';
+  static const String addressEditView = '/address-edit-view';
   static const String homeSearchView = '/home-search-view';
   static const String contactUsView = '/contact-us-view';
   static const String aboutUsView = '/about-us-view';
@@ -60,6 +61,7 @@ class Routes {
     profileView,
     addressesView,
     addressAddView,
+    addressEditView,
     homeSearchView,
     contactUsView,
     aboutUsView,
@@ -85,6 +87,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.addressesView, page: AddressesView),
     RouteDef(Routes.addressAddView, page: AddressAddView),
+    RouteDef(Routes.addressEditView, page: AddressEditView),
     RouteDef(Routes.homeSearchView, page: HomeSearchView),
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
@@ -185,11 +188,21 @@ class StackedRouter extends RouterBase {
       );
     },
     AddressAddView: (data) {
-      var args = data.getArgs<AddressAddEditViewArguments>(
-        orElse: () => AddressAddEditViewArguments(),
+      var args = data.getArgs<AddressAddViewArguments>(
+        orElse: () => AddressAddViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddressAddView(key: args.key),
+        settings: data,
+      );
+    },
+    AddressEditView: (data) {
+      var args = data.getArgs<AddressEditViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddressEditView(
+          address: args.address,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -288,10 +301,17 @@ class ProfileViewArguments {
   ProfileViewArguments({this.key});
 }
 
-/// AddressAddEditView arguments holder class
-class AddressAddEditViewArguments {
+/// AddressAddView arguments holder class
+class AddressAddViewArguments {
   final Key? key;
-  AddressAddEditViewArguments({this.key});
+  AddressAddViewArguments({this.key});
+}
+
+/// AddressEditView arguments holder class
+class AddressEditViewArguments {
+  final Address address;
+  final Key? key;
+  AddressEditViewArguments({required this.address, this.key});
 }
 
 /// OnBoardingView arguments holder class

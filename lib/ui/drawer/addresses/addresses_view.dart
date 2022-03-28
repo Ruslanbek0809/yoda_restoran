@@ -69,45 +69,46 @@ class AddressesView extends StatelessWidget {
                         itemBuilder: (context, pos) {
                           return ClipRRect(
                             borderRadius: BorderRadius.circular(6.r),
-                            child: Slidable(
-                              // Specify a key if the Slidable is dismissible.
-                              key: ValueKey(model.addresses![pos].id),
+                            child: GestureDetector(
+                              onTap: () => model
+                                  .navToAddressEditView(model.addresses![pos]),
+                              child: Slidable(
+                                // Specify a key if the Slidable is dismissible.
+                                key: ValueKey(model.addresses![pos].id),
 
-                              // The start action pane is the one at the left or the top side.
-                              startActionPane: ActionPane(
-                                dragDismissible: false,
-                                extentRatio: 0.25,
-                                // A motion is a widget used to control how the pane animates.
-                                motion: const ScrollMotion(),
+                                // The start action pane is the one at the left or the top side.
+                                startActionPane: ActionPane(
+                                  dragDismissible: false,
+                                  extentRatio: 0.25,
+                                  // A motion is a widget used to control how the pane animates.
+                                  motion: const ScrollMotion(),
 
-                                // // A pane can dismiss the Slidable.
-                                // dismissible: DismissiblePane(onDismissed: () {}),
+                                  // // A pane can dismiss the Slidable.
+                                  // dismissible: DismissiblePane(onDismissed: () {}),
 
-                                // All actions are defined in the children parameter.
-                                children: [
-                                  // A SlidableAction can have an icon and/or a label.
-                                  SlidableAction(
-                                    onPressed: (BuildContext context) =>
-                                        WidgetsBinding.instance!
-                                            .addPostFrameCallback((_) =>
-                                                model.showAddressRemoveDialog(
-                                                    model,
-                                                    model.addresses![pos])),
+                                  // All actions are defined in the children parameter.
+                                  children: [
+                                    // A SlidableAction can have an icon and/or a label.
+                                    SlidableAction(
+                                      onPressed: (BuildContext context) =>
+                                          WidgetsBinding.instance!
+                                              .addPostFrameCallback((_) =>
+                                                  model.showAddressRemoveDialog(
+                                                      model,
+                                                      model.addresses![pos])),
 
-                                    // async =>
-                                    //     await model.showAddressRemoveDialog(
-                                    //         model, model.addresses![pos]),
-                                    backgroundColor: kcRedColor,
-                                    foregroundColor: kcWhiteColor,
-                                    icon: Icons.delete_outline_rounded,
-                                  ),
-                                ],
-                              ),
+                                      // async =>
+                                      //     await model.showAddressRemoveDialog(
+                                      //         model, model.addresses![pos]),
+                                      backgroundColor: kcRedColor,
+                                      foregroundColor: kcWhiteColor,
+                                      icon: Icons.delete_outline_rounded,
+                                    ),
+                                  ],
+                                ),
 
-                              // The child of the Slidable is what the user sees when the
-                              // component is not dragged.
-                              child: GestureDetector(
-                                onTap: () {},
+                                // The child of the Slidable is what the user sees when the
+                                // component is not dragged.
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(
                                     6.w,

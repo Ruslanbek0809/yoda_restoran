@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
 import 'address_edit_hook.dart';
 import 'address_edit_view_model.dart';
@@ -10,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class AddressEditView extends StatelessWidget {
-  AddressEditView({Key? key}) : super(key: key);
+  final Address address;
+  AddressEditView({required this.address, Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _addEditAddressformKey = GlobalKey<FormState>();
 
