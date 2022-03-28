@@ -15,13 +15,15 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
   @override
   Widget buildViewModelWidget(
       BuildContext context, AddressEditViewModel model) {
-    final _cityController =
-        useTextEditingController(text: LocaleKeys.ashgabat.tr());
-    final _streetController = useTextEditingController();
-    final _apartmentController = useTextEditingController();
-    final _houseController = useTextEditingController();
-    final _floorController = useTextEditingController();
-    final _notesController = useTextEditingController();
+    final _cityController = useTextEditingController(text: model.city);
+    final _streetController = useTextEditingController(text: model.street);
+    final _apartmentController = useTextEditingController(
+        text: model.apartment != null ? model.apartment.toString() : '');
+    final _houseController = useTextEditingController(
+        text: model.house != null ? model.house.toString() : '');
+    final _floorController = useTextEditingController(
+        text: model.floor != null ? model.floor.toString() : '');
+    final _notesController = useTextEditingController(text: model.note);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

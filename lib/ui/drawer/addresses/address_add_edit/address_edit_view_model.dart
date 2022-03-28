@@ -6,13 +6,17 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/services/services.dart';
 
+import '../../../../models/models.dart';
+
 class AddressEditViewModel extends BaseViewModel {
   final log = getLogger('AddressEditViewModel');
+  final Address address;
+  AddressEditViewModel({required this.address});
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
-  String? _city = LocaleKeys.ashgabat.tr();
+  String? _city;
   String? get city => _city;
 
   String? _street;
@@ -30,27 +34,36 @@ class AddressEditViewModel extends BaseViewModel {
   String? _note;
   String? get note => _note;
 
+  /// SETS initial address values for edit
+  void setInitialAddress() {
+    log.v('setInitialAddress address: $address');
+    if (address.city == 'Aşgabat' || address.city == 'Ашхабад')
+      _city = LocaleKeys.ashgabat.tr();
+    _street = address.street;
+    _apartment = address.apartment;
+    _house = address.house;
+    _floor = address.floor;
+    _note = address.notes;
+  }
+
   /// UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
-    if (value!.isEmpty) {
-      log.v('updateCity value: $value');
-      return LocaleKeys.enterStreet.tr();
-    }
+    if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
 
     _city = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
-    if (value!.isEmpty) {
-      return LocaleKeys.enterStreet.tr();
-    }
+    if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
 
     _street = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _house
@@ -60,6 +73,7 @@ class AddressEditViewModel extends BaseViewModel {
 
     _house = int.parse(value);
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _apartment
@@ -69,6 +83,7 @@ class AddressEditViewModel extends BaseViewModel {
 
     _apartment = int.parse(value);
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _floor
@@ -78,6 +93,7 @@ class AddressEditViewModel extends BaseViewModel {
 
     _floor = int.parse(value);
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _street
@@ -87,22 +103,24 @@ class AddressEditViewModel extends BaseViewModel {
 
     _note = value;
     notifyListeners();
+    return null;
   }
 
-  /// ADDS new address
-  Future<void> onAddAddressPressed(
+  /// EDITS selected address
+  Future<void> onEditAddressPressed(
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-    log.v('onAddAddressPressed()');
+    log.v('onEditAddressPressed()');
     try {
-      await runBusyFuture(_userService.addAddress(
-        city,
-        street,
-        house,
-        apartment,
-        floor,
-        note,
+      await runBusyFuture(_userService.editAddress(
+        address.id,
+        _city,
+        _street,
+        _house,
+        _apartment,
+        _floor,
+        _note,
         () => onSuccess!(),
         () => onFail!(),
       ));

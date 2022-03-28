@@ -54,15 +54,12 @@ class CartView extends StatelessWidget {
                 style: kts22DarkText,
               ).tr(),
               actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 10.w),
-                  child: GestureDetector(
-                    onTap: () async => await model.showClearCartDialog(model),
-                    child: SvgPicture.asset(
-                      'assets/trash.svg',
-                      color: AppTheme.MAIN_DARK,
-                      width: 25.w,
-                    ),
+                IconButton(
+                  onPressed: () async => await model.showClearCartDialog(model),
+                  icon: SvgPicture.asset(
+                    'assets/trash.svg',
+                    color: kcSecondaryDarkColor,
+                    width: 25.w,
                   ),
                 ),
               ],

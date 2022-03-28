@@ -37,51 +37,53 @@ class AddressAddView extends StatelessWidget {
           centerTitle: true,
           title: Text(LocaleKeys.address, style: kts22DarkText).tr(),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-          child: Column(
-            children: [
-              Form(
-                key: _addEditAddressformKey,
-                autovalidateMode: AutovalidateMode.disabled,
-                child: AddressAddHook(),
-              ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            child: Column(
+              children: [
+                Form(
+                  key: _addEditAddressformKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: AddressAddHook(),
+                ),
 
-              /// ADDRESS ADD BUTTON
-              Container(
-                color: kcWhiteColor,
-                padding: EdgeInsets.fromLTRB(30.w, 50.h, 30.w, 50.h),
-                child: SizedBox(
-                  width: 1.sw,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppTheme.MAIN,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().radius10),
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                /// ADDRESS ADD BUTTON
+                Container(
+                  color: kcWhiteColor,
+                  padding: EdgeInsets.fromLTRB(30.w, 75.h, 30.w, 50.h),
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kcPrimaryColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: AppTheme().radius10),
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                      ),
+                      child: model.isBusy
+                          ? ButtonLoading()
+                          : Text(
+                              LocaleKeys.addNewAddressButton,
+                              style: ktsButton18Text,
+                            ).tr(),
+                      onPressed: () async {
+                        FocusScope.of(context)
+                            .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                        if (!_addEditAddressformKey.currentState!.validate())
+                          return;
+                        _addEditAddressformKey.currentState!.save();
+                        await model.onAddAddressPressed(
+                          () => model.navBack(),
+                          () => model.navBack(),
+                        );
+                      },
                     ),
-                    child: model.isBusy
-                        ? ButtonLoading()
-                        : Text(
-                            LocaleKeys.addNewAddressButton,
-                            style: ktsButton18Text,
-                          ).tr(),
-                    onPressed: () async {
-                      FocusScope.of(context)
-                          .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                      if (!_addEditAddressformKey.currentState!.validate())
-                        return;
-                      _addEditAddressformKey.currentState!.save();
-                      await model.onAddAddressPressed(
-                        () => model.navBack(),
-                        () => model.navBack(),
-                      );
-                    },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

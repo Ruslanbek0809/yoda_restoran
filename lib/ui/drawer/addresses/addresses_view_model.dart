@@ -34,7 +34,7 @@ class AddressesViewModel extends FutureViewModel {
     log.v('onDeleteAddressPressed()');
     await runBusyFuture(
       _userService.deleteAddress(
-        addressID: address.id,
+        addressId: address.id,
         onSuccess: () => onSuccess!(),
         onFail: () => onFail!(),
       ),
@@ -79,8 +79,13 @@ class AddressesViewModel extends FutureViewModel {
     if (_navResult) await initialise(); // Workaround
   }
 
-  void navToAddressEditView(Address address) => _navService.navigateTo(
-        Routes.addressEditView,
-        arguments: AddressEditViewArguments(address: address),
-      );
+  void navToAddressEditView(Address address) async {
+    dynamic _navResult;
+    _navResult = await _navService.navigateTo(
+          Routes.addressEditView,
+          arguments: AddressEditViewArguments(address: address),
+        ) ??
+        false;
+    if (_navResult) await initialise(); // Workaround
+  }
 }

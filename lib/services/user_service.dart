@@ -332,18 +332,59 @@ class UserService {
     }
   }
 
-  Future<void> deleteAddress(
-      {int? addressID, Function()? onSuccess, Function()? onFail}) async {
+  Future<void> editAddress(
+    int? addressId,
+    String? city,
+    String? street,
+    int? house,
+    int? apartment,
+    int? floor,
+    String? note,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['city'] = city;
+    _queryParams['street'] = street;
+    if (house != null) _queryParams['house'] = house;
+    if (apartment != null) _queryParams['apartment'] = apartment;
+    if (floor != null) _queryParams['floor'] = floor;
+    if (note != null) _queryParams['notes'] = note;
+
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData addressFormData = FormData.fromMap(_queryParams);
+
     try {
-      Response response = await _apiRoot.dio.delete('api/address/$addressID/');
-      log.v('RESPONSE: api/address/$addressID/ => ${response.statusCode}');
+      Response response = await _apiRoot.dio.patch(
+        'api/address/$addressId/',
+        data: addressFormData,
+      );
+      log.v('RESPONSE: api/address/$addressId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR on api/address/$addressId/ ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteAddress(
+      {int? addressId, Function()? onSuccess, Function()? onFail}) async {
+    try {
+      Response response = await _apiRoot.dio.delete('api/address/$addressId/');
+      log.v('RESPONSE: api/address/$addressId/ => ${response.statusCode}');
 
       if (response.data != null && response.statusCode == 204)
         onSuccess!();
       else
         onFail!();
     } catch (error) {
-      log.v('ERROR on api/address/$addressID/: $error');
+      log.v('ERROR on api/address/$addressId/: $error');
       onFail!();
       rethrow;
     }
