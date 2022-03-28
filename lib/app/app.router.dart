@@ -201,6 +201,7 @@ class StackedRouter extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddressEditView(
           address: args.address,
+          addressesViewModel: args.addressesViewModel,
           key: args.key,
         ),
         settings: data,
@@ -310,8 +311,13 @@ class AddressAddViewArguments {
 /// AddressEditView arguments holder class
 class AddressEditViewArguments {
   final Address address;
+  final AddressesViewModel addressesViewModel;
   final Key? key;
-  AddressEditViewArguments({required this.address, this.key});
+  AddressEditViewArguments({
+    required this.address,
+    required this.addressesViewModel,
+    this.key,
+  });
 }
 
 /// OnBoardingView arguments holder class

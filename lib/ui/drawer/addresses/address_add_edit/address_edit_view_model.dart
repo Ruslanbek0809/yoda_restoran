@@ -7,14 +7,19 @@ import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/services/services.dart';
 
 import '../../../../models/models.dart';
+import '../../../../utils/utils.dart';
+import '../addresses.dart';
 
 class AddressEditViewModel extends BaseViewModel {
   final log = getLogger('AddressEditViewModel');
   final Address address;
-  AddressEditViewModel({required this.address});
+  final AddressesViewModel addressesViewModel;
+  AddressEditViewModel(
+      {required this.address, required this.addressesViewModel});
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
 
   String? _city;
   String? get city => _city;
@@ -127,6 +132,30 @@ class AddressEditViewModel extends BaseViewModel {
     } catch (err) {
       throw err;
     }
+  }
+
+//------------------------ ADDRESS REMOVE DIALOG ----------------------------//
+
+  /// SHOWS ADDRESS REMOVE Dialog
+  Future showAddressRemoveDialog(
+    AddressesViewModel addressesViewModel,
+    Address address,
+  ) async {
+    log.i('showAddressRemoveDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.removeAddress,
+      title: 'Wanna delete an address?', // TODO: Lang
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.remove,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+      data: AddressDialogData(
+        addressesViewModel: addressesViewModel,
+        address: address,
+      ),
+    );
+
+    if (respData != null && respData.data == true) navBack();
   }
 
 //------------------------ NAVIGATION ----------------------------//

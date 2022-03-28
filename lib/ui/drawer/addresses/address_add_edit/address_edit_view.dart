@@ -6,14 +6,16 @@ import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
-import 'address_edit_hook.dart';
-import 'address_edit_view_model.dart';
+import '../addresses.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class AddressEditView extends StatelessWidget {
   final Address address;
-  AddressEditView({required this.address, Key? key}) : super(key: key);
+  final AddressesViewModel addressesViewModel;
+  AddressEditView(
+      {required this.address, required this.addressesViewModel, Key? key})
+      : super(key: key);
 
   final GlobalKey<FormState> _addEditAddressformKey = GlobalKey<FormState>();
 
@@ -21,7 +23,10 @@ class AddressEditView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressEditViewModel>.reactive(
       onModelReady: (model) => model.setInitialAddress(),
-      viewModelBuilder: () => AddressEditViewModel(address: address),
+      viewModelBuilder: () => AddressEditViewModel(
+        address: address,
+        addressesViewModel: addressesViewModel,
+      ),
       builder: (context, model, child) => Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -43,8 +48,10 @@ class AddressEditView extends StatelessWidget {
           title: Text(LocaleKeys.address, style: kts22DarkText).tr(),
           actions: [
             IconButton(
-              onPressed: () async {},
-              // onTap: () async => await model.showClearCartDialog(model),
+              onPressed: () async => await model.showAddressRemoveDialog(
+                addressesViewModel,
+                address,
+              ),
               icon: SvgPicture.asset(
                 'assets/trash.svg',
                 color: kcSecondaryDarkColor,

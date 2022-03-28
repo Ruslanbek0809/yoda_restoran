@@ -67,6 +67,7 @@ class AddressesViewModel extends FutureViewModel {
       await initialise();
     }
   }
+
 //------------------------ NAVIGATIONS ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
@@ -79,11 +80,15 @@ class AddressesViewModel extends FutureViewModel {
     if (_navResult) await initialise(); // Workaround
   }
 
-  void navToAddressEditView(Address address) async {
+  void navToAddressEditView(
+      Address address, AddressesViewModel addressesViewModel) async {
     dynamic _navResult;
     _navResult = await _navService.navigateTo(
           Routes.addressEditView,
-          arguments: AddressEditViewArguments(address: address),
+          arguments: AddressEditViewArguments(
+            address: address,
+            addressesViewModel: addressesViewModel,
+          ),
         ) ??
         false;
     if (_navResult) await initialise(); // Workaround

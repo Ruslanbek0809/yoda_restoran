@@ -70,8 +70,8 @@ class AddressesView extends StatelessWidget {
                           return ClipRRect(
                             borderRadius: BorderRadius.circular(6.r),
                             child: GestureDetector(
-                              onTap: () => model
-                                  .navToAddressEditView(model.addresses![pos]),
+                              onTap: () => model.navToAddressEditView(
+                                  model.addresses![pos], model),
                               child: Slidable(
                                 // Specify a key if the Slidable is dismissible.
                                 key: ValueKey(model.addresses![pos].id),
@@ -90,12 +90,9 @@ class AddressesView extends StatelessWidget {
                                   children: [
                                     // A SlidableAction can have an icon and/or a label.
                                     SlidableAction(
-                                      onPressed: (BuildContext context) =>
-                                          WidgetsBinding.instance!
-                                              .addPostFrameCallback((_) =>
-                                                  model.showAddressRemoveDialog(
-                                                      model,
-                                                      model.addresses![pos])),
+                                      onPressed: (BuildContext context) async =>
+                                          await model.showAddressRemoveDialog(
+                                              model, model.addresses![pos]),
 
                                       // async =>
                                       //     await model.showAddressRemoveDialog(
