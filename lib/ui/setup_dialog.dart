@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/order/order_view_model.dart';
 import 'package:yoda_res/ui/drawer/addresses/addresses_view_model.dart';
 import '../app/app.locator.dart';
-import '../shared/styles.dart';
 import 'cart/cart_view_model.dart';
 import 'restaurant/meal/meal_view_model.dart';
 import 'widgets/widgets.dart';
@@ -76,7 +77,7 @@ class MealDialogView extends StatelessWidget {
     return ViewModelBuilder<MealViewModel>.reactive(
       builder: (context, model, child) => (Platform.isIOS)
           ? CupertinoAlertDialog(
-              title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+              title: Text(request.title!, style: ktsDefault18BoldText).tr(),
               content: Text(
                 request.description!,
                 style: ktsDefault14DialogText,
@@ -115,7 +116,7 @@ class MealDialogView extends StatelessWidget {
                 request.title!,
                 textAlign: TextAlign.center,
               ).tr(),
-              titleTextStyle: ktsDefault20BoldText,
+              titleTextStyle: ktsDefault18BoldText,
               content: Text(
                 request.description!,
                 textAlign: TextAlign.center,
@@ -173,7 +174,7 @@ class ClearCartDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -208,7 +209,7 @@ class ClearCartDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault20BoldText,
+                titleTextStyle: ktsDefault18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -258,7 +259,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -296,7 +297,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault20BoldText,
+                titleTextStyle: ktsDefault18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -348,7 +349,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -382,7 +383,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault20BoldText,
+                titleTextStyle: ktsDefault18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -430,7 +431,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
                 content: Text(content, style: kts18Text).tr(),
               )
             : AlertDialog(
@@ -443,7 +444,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault20BoldText,
+                titleTextStyle: ktsDefault18BoldText,
                 content: Text(
                   content,
                   textAlign: TextAlign.center,
@@ -559,46 +560,10 @@ class RemoveAddressDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault20BoldText).tr(),
+                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
-                      request.secondaryButtonTitle!,
-                      style: kts18Text,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse());
-                    },
-                  ),
-                  CustomTextChildButton(
-                    child: Text(
-                      request.mainButtonTitle!,
-                      style: kts18Text,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse());
-                    },
-                  ),
-                ],
-              )
-            : AlertDialog(
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                actionsAlignment: MainAxisAlignment.center,
-                title: Text(
-                  request.title!,
-                  textAlign: TextAlign.center,
-                ).tr(),
-                titleTextStyle: ktsDefault20BoldText,
-                actions: <Widget>[
-                  CustomTextChildButton(
-                    child:
-                        //  model.busy(addressDialogData.address!.id) ?
-                        Text(
                       request.secondaryButtonTitle!,
                       style: kts18Text,
                     ).tr(),
@@ -616,7 +581,7 @@ class RemoveAddressDialogView extends StatelessWidget {
                               bottom: 0.05.sh,
                             ),
                           );
-                          completer(DialogResponse());
+                          await completer(DialogResponse(data: true));
                         },
                         () async {
                           showErrorFlashBar(
@@ -627,7 +592,77 @@ class RemoveAddressDialogView extends StatelessWidget {
                               bottom: 0.05.sh,
                             ),
                           );
-                          completer(DialogResponse());
+                          await completer(DialogResponse(data: false));
+                        },
+                      );
+                    },
+                  ),
+                  CustomTextChildButton(
+                    child: Text(
+                      request.mainButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async =>
+                        await completer(DialogResponse(data: false)),
+                  ),
+                ],
+              )
+            : AlertDialog(
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+                titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                actionsAlignment: MainAxisAlignment.center,
+                title: Column(
+                  children: [
+                    Text(
+                      request.title!,
+                      textAlign: TextAlign.center,
+                    ).tr(),
+                    if (model.busy(addressDialogData.address!.id))
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.h),
+                        child: SpinKitChasingDots(
+                          size: 22,
+                          color: kcPrimaryColor,
+                        ),
+                      ),
+                  ],
+                ),
+                titleTextStyle: ktsDefault18BoldText,
+                actions: <Widget>[
+                  CustomTextChildButton(
+                    child: Text(
+                      request.secondaryButtonTitle!,
+                      style: kts18Text,
+                    ).tr(),
+                    color: Colors.transparent,
+                    onPressed: () async {
+                      await model.onDeleteAddressPressed(
+                        addressDialogData.address!,
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            msg: 'Address deleted successfully', // TODO: Lang
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                          await completer(DialogResponse(data: true));
+                        },
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                          await completer(DialogResponse(data: false));
                         },
                       );
                     },
@@ -639,9 +674,8 @@ class RemoveAddressDialogView extends StatelessWidget {
                       style: kts18Text,
                     ).tr(),
                     color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse());
-                    },
+                    onPressed: () async =>
+                        await completer(DialogResponse(data: false)),
                   ),
                 ],
               );

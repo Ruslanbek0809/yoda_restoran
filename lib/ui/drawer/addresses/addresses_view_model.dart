@@ -50,7 +50,7 @@ class AddressesViewModel extends FutureViewModel {
     Address address,
   ) async {
     log.i('showAddressRemoveDialog()');
-    await _dialogService.showCustomDialog(
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.removeAddress,
       title: 'Wanna delete an address?', // TODO: Lang
       mainButtonTitle: LocaleKeys.no,
@@ -62,6 +62,10 @@ class AddressesViewModel extends FutureViewModel {
         address: address,
       ),
     );
+
+    if (respData != null && respData.data == true) {
+      await initialise();
+    }
   }
 //------------------------ NAVIGATIONS ----------------------------//
 
