@@ -8,16 +8,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:yoda_res/ui/home/home_exclusives/single_ex_view.dart';
-
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
 import '../ui/cart/order/order_success_view.dart';
 import '../ui/cart/order/orders_view.dart';
 import '../ui/drawer/about_us/about_us_view.dart';
-import '../ui/drawer/address_add_edit/address_add_edit_view.dart';
-import '../ui/drawer/addresses/addresses_view.dart';
+import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
 import '../ui/drawer/login/login_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
@@ -43,7 +40,7 @@ class Routes {
   static const String orderSuccessView = '/order-success-view';
   static const String profileView = '/profile-view';
   static const String addressesView = '/addresses-view';
-  static const String addressAddEditView = '/address-add-edit-view';
+  static const String addressAddView = '/address-add-edit-view';
   static const String homeSearchView = '/home-search-view';
   static const String contactUsView = '/contact-us-view';
   static const String aboutUsView = '/about-us-view';
@@ -62,7 +59,7 @@ class Routes {
     orderSuccessView,
     profileView,
     addressesView,
-    addressAddEditView,
+    addressAddView,
     homeSearchView,
     contactUsView,
     aboutUsView,
@@ -87,7 +84,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.orderSuccessView, page: OrderSuccessView),
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.addressesView, page: AddressesView),
-    RouteDef(Routes.addressAddEditView, page: AddressAddEditView),
+    RouteDef(Routes.addressAddView, page: AddressAddView),
     RouteDef(Routes.homeSearchView, page: HomeSearchView),
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.aboutUsView, page: AboutUsView),
@@ -187,12 +184,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    AddressAddEditView: (data) {
+    AddressAddView: (data) {
       var args = data.getArgs<AddressAddEditViewArguments>(
         orElse: () => AddressAddEditViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddressAddEditView(key: args.key),
+        builder: (context) => AddressAddView(key: args.key),
         settings: data,
       );
     },

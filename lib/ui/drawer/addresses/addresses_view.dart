@@ -50,7 +50,7 @@ class AddressesView extends StatelessWidget {
                   color: kcSecondaryDarkColor,
                   size: 25.w,
                 ),
-                onPressed: model.navToAddEditAddressView,
+                onPressed: model.navToAddressAddView,
               ),
             ],
           ),
@@ -87,7 +87,7 @@ class AddressesView extends StatelessWidget {
                                 children: [
                                   // A SlidableAction can have an icon and/or a label.
                                   SlidableAction(
-                                    onPressed: (BuildContext context) =>  
+                                    onPressed: (BuildContext context) =>
                                         WidgetsBinding.instance!
                                             .addPostFrameCallback((_) =>
                                                 model.showAddressRemoveDialog(

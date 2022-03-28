@@ -73,10 +73,10 @@ class AddressesViewModel extends FutureViewModel {
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
-  Future<void> navToAddEditAddressView() async {
+  Future<void> navToAddressAddView() async {
     dynamic _navResult;
     _navResult =
-        await _navService.navigateTo(Routes.addressAddEditView) ?? false;
+        await _navService.navigateTo(Routes.addressAddView) ?? false;
     if (_navResult) await initialise(); // Workaround
   }
 }

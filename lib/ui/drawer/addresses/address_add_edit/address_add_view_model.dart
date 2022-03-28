@@ -6,8 +6,8 @@ import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/services/services.dart';
 
-class AddressAddEditViewModel extends BaseViewModel {
-  final log = getLogger('AddressAddEditViewModel');
+class AddressAddViewModel extends BaseViewModel {
+  final log = getLogger('AddressAddViewModel');
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();

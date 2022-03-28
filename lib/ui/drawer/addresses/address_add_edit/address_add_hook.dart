@@ -5,16 +5,14 @@ import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/utils/utils.dart';
-
-import 'address_add_edit_view_model.dart';
+import 'address_add_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class AddEditAddressHook extends HookViewModelWidget<AddressAddEditViewModel> {
-  const AddEditAddressHook({Key? key}) : super(key: key);
+class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
+  const AddressAddHook({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, AddressAddEditViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, AddressAddViewModel model) {
     final _cityController =
         useTextEditingController(text: LocaleKeys.ashgabat.tr());
     final _streetController = useTextEditingController();
