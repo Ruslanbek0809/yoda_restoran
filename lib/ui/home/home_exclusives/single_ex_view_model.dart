@@ -44,7 +44,7 @@ class SingleExViewModel extends FutureViewModel {
   Future createDynamicLink() async {
     String singleExDynamicLink = '';
     singleExDynamicLink =
-        await _dynamicLinkService.createDynamicLink(false, singleEx!);
+        await _dynamicLinkService.createDynamicLink(true, singleEx!);
     await Share.share(singleExDynamicLink);
   }
 

@@ -82,7 +82,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             onTap: model.isDelivery
                                 ? () async => await showFlexibleBottomSheet(
                                       minHeight: 0,
-                                      initHeight: 0.3,
+                                      initHeight: 0.31,
                                       maxHeight: 0.975,
                                       context: context,
                                       builder:
@@ -95,7 +95,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           ),
                                         );
                                       },
-                                      anchors: [0, 0.3, 0.975],
+                                      anchors: [0, 0.31, 0.975],
                                     )
                                 // model.showCustomSelectAddressBottomSheet
                                 : null,

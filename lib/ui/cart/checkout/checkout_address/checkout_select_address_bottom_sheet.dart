@@ -35,134 +35,98 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
 
                         /// To resize screen when OnKeyboard opened
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // --------------- ADDRESSES -------------- //
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(
-                                    Constants.BORDER_RADIUS_20)),
-                            color: AppTheme.WHITE,
-                          ),
-                          padding: EdgeInsets.fromLTRB(16.w, 18.h, 16.w, 10.h),
-                          child: Column(
-                            children: [
-                              if (model.addresses!.isNotEmpty)
-                                ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: model.addresses!.length,
-                                  itemBuilder: (context, pos) {
-                                    var _address = model.addresses![pos];
-                                    return Material(
-                                      color: kcWhiteColor,
-                                      child: InkWell(
-                                        onTap: () =>
-                                            model.updateTempSelectedAddress(
-                                                _address),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    AnimatedSwitcher(
-                                                      duration: const Duration(
-                                                          milliseconds: 300),
-                                                      child:
-                                                          model.tempSelectedAddress!
-                                                                      .id ==
-                                                                  _address.id
-                                                              ? SvgPicture
-                                                                  .asset(
-                                                                  'assets/checkCircle.svg',
-                                                                  color: AppTheme
-                                                                      .GREEN_COLOR,
-                                                                  width: 25.w,
-                                                                )
-                                                              : SvgPicture
-                                                                  .asset(
-                                                                  'assets/checkCircle.svg',
-                                                                  color: Colors
-                                                                      .white,
-                                                                  width: 25.w,
-                                                                ),
-                                                    ),
-                                                    SizedBox(width: 10.w),
-                                                    Flexible(
-                                                      child: Text(
-                                                        _address.street! +
-                                                            (_address.house !=
-                                                                    null
-                                                                ? ', ${_address.house}'
-                                                                : ''),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: kts18Text,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SvgPicture.asset(
-                                                'assets/addressFilter.svg',
-                                                color: AppTheme.MAIN_DARK,
-                                                width: 25.w,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return Divider(color: kcDividerColor);
-                                  },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(16.w, 18.h, 16.w, 10.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // --------------- ADD NEW ADDRESS -------------- //
+                          Material(
+                            color: kcWhiteColor,
+                            child: InkWell(
+                              onTap: model.showCustomAddAddressBottomSheet,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.h),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.add,
+                                      color: kcSecondaryDarkColor,
+                                      size: 27.w,
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      LocaleKeys.addNewAddress,
+                                      style: kts18Text,
+                                    ).tr(),
+                                  ],
                                 ),
-                              Column(
-                                children: [
-                                  if (model.addresses!.isNotEmpty)
-                                    Divider(color: kcDividerColor),
-                                  Material(
-                                    color: kcWhiteColor,
-                                    child: InkWell(
-                                      onTap:
-                                          model.showCustomAddAddressBottomSheet,
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 7.h),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.add,
-                                              color: kcFontColor,
-                                              size: 27.w,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            Text(
-                                              LocaleKeys.addNewAddress,
+                              ),
+                            ),
+                          ),
+                          if (model.addresses!.isNotEmpty)
+                            Divider(color: kcDividerColor),
+                          // --------------- ADDRESSES -------------- //
+                          if (model.addresses!.isNotEmpty)
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: model.addresses!.length,
+                              itemBuilder: (context, pos) {
+                                var _address = model.addresses![pos];
+                                return Material(
+                                  color: kcWhiteColor,
+                                  child: InkWell(
+                                    onTap: () => model
+                                        .updateTempSelectedAddress(_address),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          AnimatedSwitcher(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            child: model.tempSelectedAddress!
+                                                        .id ==
+                                                    _address.id
+                                                ? SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: AppTheme.GREEN_COLOR,
+                                                    width: 25.w,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: kcActiveDotColor,
+                                                    width: 25.w,
+                                                  ),
+                                          ),
+                                          SizedBox(width: 10.w),
+                                          Flexible(
+                                            child: Text(
+                                              _address.street! +
+                                                  (_address.house != null
+                                                      ? ', ${_address.house}'
+                                                      : ''),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: kts18Text,
-                                            ).tr(),
-                                          ],
-                                        ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return Divider(color: kcDividerColor);
+                              },
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
