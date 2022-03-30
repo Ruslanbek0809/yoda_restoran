@@ -74,7 +74,7 @@ class UserService {
         onFail!();
     } on DioError catch (error) {
       log.v(
-          'ERROR on api/user/ :${error.response} and its error status code: ${error.response!.statusCode}');
+          'ERROR on api/user/ :${error.response}');
       onFail!();
       throw DioErrorType.response;
     }

@@ -8,6 +8,7 @@ class ExclusiveSingle {
     this.order,
     this.name,
     this.image,
+    this.imageRu,
     this.option,
     this.url,
   });
@@ -23,6 +24,9 @@ class ExclusiveSingle {
 
   @JsonKey(name: 'image')
   final String? image;
+
+  @JsonKey(name: 'imageRu')
+  final String? imageRu;
 
   @JsonKey(name: 'option')
   final String? option;

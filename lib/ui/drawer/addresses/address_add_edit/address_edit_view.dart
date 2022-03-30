@@ -41,7 +41,7 @@ class AddressEditView extends StatelessWidget {
                 color: kcFontColor,
                 size: 25.w,
               ),
-              onPressed: model.navBack,
+              onPressed: model.navBackWithFalse,
             ),
           ),
           centerTitle: true,

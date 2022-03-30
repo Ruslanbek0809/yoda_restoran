@@ -12,6 +12,7 @@ ExclusiveSingle _$ExclusiveSingleFromJson(Map<String, dynamic> json) =>
       order: json['order'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
+      imageRu: json['imageRu'] as String?,
       option: json['option'] as String?,
       url: json['url'] as String?,
     );
@@ -22,6 +23,7 @@ Map<String, dynamic> _$ExclusiveSingleToJson(ExclusiveSingle instance) =>
       'order': instance.order,
       'name': instance.name,
       'image': instance.image,
+      'imageRu': instance.imageRu,
       'option': instance.option,
       'url': instance.url,
     };

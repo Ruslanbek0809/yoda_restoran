@@ -44,6 +44,8 @@ class AddressEditViewModel extends BaseViewModel {
     log.v('setInitialAddress address: $address');
     if (address.city == 'Aşgabat' || address.city == 'Ашхабад')
       _city = LocaleKeys.ashgabat.tr();
+    else
+      _city = address.city;
     _street = address.street;
     _apartment = address.apartment;
     _house = address.house;
@@ -54,7 +56,7 @@ class AddressEditViewModel extends BaseViewModel {
   /// UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
-    if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
+    if (value!.isEmpty) return LocaleKeys.enterStreet.tr(); // TODO: Lang
 
     _city = value;
     notifyListeners();
@@ -160,4 +162,6 @@ class AddressEditViewModel extends BaseViewModel {
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
+
+  void navBackWithFalse() => _navService.back(result: false);
 }

@@ -96,6 +96,16 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   String? _note;
   String? get note => _note;
 
+  /// UPDATES _city
+  String? updateCity(String? value) {
+    log.v('updateCity value: $value');
+    if (value!.isEmpty) return LocaleKeys.enterStreet.tr(); // TODO: Lang
+
+    _city = value;
+    notifyListeners();
+    return null;
+  }
+  
   /// UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
@@ -105,6 +115,8 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
 
     _street = value;
     notifyListeners();
+
+    return null;
   }
 
   /// UPDATES _house
@@ -114,6 +126,8 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
 
     _house = int.parse(value);
     notifyListeners();
+
+    return null;
   }
 
   /// UPDATES _apartment
@@ -123,6 +137,8 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
 
     _apartment = int.parse(value);
     notifyListeners();
+
+    return null;
   }
 
   /// UPDATES _floor
@@ -132,6 +148,8 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
 
     _floor = int.parse(value);
     notifyListeners();
+
+    return null;
   }
 
   /// UPDATES _street
@@ -141,6 +159,8 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
 
     _note = value;
     notifyListeners();
+
+    return null;
   }
 
   /// ADDS new address

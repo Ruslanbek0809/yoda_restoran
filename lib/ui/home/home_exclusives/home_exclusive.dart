@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
@@ -24,7 +25,9 @@ class HomeExclusive extends ViewModelWidget<HomeViewModel> {
             child: GestureDetector(
               onTap: () => model.navToSingleExView(_singleEx),
               child: YodaImage(
-                image: _singleEx.image!,
+                image: context.locale == context.supportedLocales[0]
+                    ? _singleEx.image!
+                    : _singleEx.imageRu!,
                 fit: BoxFit.cover,
                 width: 100.w,
                 height: 100.w,
