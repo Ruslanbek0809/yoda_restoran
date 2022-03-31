@@ -58,7 +58,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
     return CustomScrollView(
       controller: customScrollController,
       physics: Platform.isIOS
-          ? AlwaysScrollableScrollPhysics() // Needs testing
+          ? AlwaysScrollableScrollPhysics()
           : ClampingScrollPhysics(),
       slivers: [
         //------------------ ARROW BACK ---------------------//

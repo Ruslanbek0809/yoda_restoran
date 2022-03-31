@@ -71,7 +71,6 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     if (_navResult != null && _navResult.data == true) {
       log.i('_navResult: $_navResult');
       await runBusyFuture(_checkoutService.getAddresses());
-      // notifyListeners();
     }
   }
 
