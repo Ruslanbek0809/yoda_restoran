@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/ui/cart/order/order_view_model.dart';
@@ -574,7 +575,7 @@ class RemoveAddressDialogView extends StatelessWidget {
                         () async {
                           showErrorFlashBar(
                             context: context,
-                            msg: 'Address deleted successfully', // TODO: Lang
+                            msg: LocaleKeys.yourAddressDeletedSuccessfully,
                             margin: EdgeInsets.only(
                               left: 0.1.sw,
                               right: 0.1.sw,
@@ -644,7 +645,7 @@ class RemoveAddressDialogView extends StatelessWidget {
                         () async {
                           showErrorFlashBar(
                             context: context,
-                            msg: 'Address deleted successfully', // TODO: Lang
+                            msg: LocaleKeys.yourAddressDeletedSuccessfully,
                             margin: EdgeInsets.only(
                               left: 0.1.sw,
                               right: 0.1.sw,

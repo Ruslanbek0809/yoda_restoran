@@ -30,8 +30,6 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
           maxChildSize: 1,
           expand: false,
           builder: (context, scrollController) {
-            model.log.v('model.isBusy: ${model.isBusy}');
-
             return Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(

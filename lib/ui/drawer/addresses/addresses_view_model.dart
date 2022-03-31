@@ -52,7 +52,7 @@ class AddressesViewModel extends FutureViewModel {
     log.i('showAddressRemoveDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.removeAddress,
-      title: 'Wanna delete an address?', // TODO: Lang
+      title: LocaleKeys.wannaDeleteAddress,
       mainButtonTitle: LocaleKeys.no,
       secondaryButtonTitle: LocaleKeys.remove,
       showIconInMainButton: false,

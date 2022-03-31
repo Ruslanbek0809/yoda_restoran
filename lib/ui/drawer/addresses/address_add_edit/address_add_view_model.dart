@@ -33,7 +33,7 @@ class AddressAddViewModel extends BaseViewModel {
   /// UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
-    if (value!.isEmpty) return LocaleKeys.enterStreet.tr(); // TODO: Lang
+    if (value!.isEmpty) return LocaleKeys.enterCity.tr();
 
     _city = value;
     notifyListeners();

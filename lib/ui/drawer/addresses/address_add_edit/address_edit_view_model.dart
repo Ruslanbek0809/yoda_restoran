@@ -56,8 +56,7 @@ class AddressEditViewModel extends BaseViewModel {
   /// UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
-    if (value!.isEmpty) return LocaleKeys.enterStreet.tr(); // TODO: Lang
-
+    if (value!.isEmpty) return LocaleKeys.enterCity.tr();
     _city = value;
     notifyListeners();
     return null;
@@ -146,7 +145,7 @@ class AddressEditViewModel extends BaseViewModel {
     log.i('showAddressRemoveDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.removeAddress,
-      title: 'Wanna delete an address?', // TODO: Lang
+      title: LocaleKeys.wannaDeleteAddress,
       mainButtonTitle: LocaleKeys.no,
       secondaryButtonTitle: LocaleKeys.remove,
       showIconInMainButton: false,

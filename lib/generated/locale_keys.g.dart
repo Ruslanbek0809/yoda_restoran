@@ -71,7 +71,10 @@ abstract class  LocaleKeys {
   static const ashgabat = 'ashgabat';
   static const city = 'city';
   static const street = 'street';
+  static const enterCity = 'enterCity';
   static const enterStreet = 'enterStreet';
+  static const wannaDeleteAddress = 'wannaDeleteAddress';
+  static const yourAddressDeletedSuccessfully = 'yourAddressDeletedSuccessfully';
   static const house = 'house';
   static const apartment = 'apartment';
   static const floor = 'floor';

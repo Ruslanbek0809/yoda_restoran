@@ -99,13 +99,13 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   /// UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
-    if (value!.isEmpty) return LocaleKeys.enterStreet.tr(); // TODO: Lang
+    if (value!.isEmpty) return LocaleKeys.enterCity.tr();
 
     _city = value;
     notifyListeners();
     return null;
   }
-  
+
   /// UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
