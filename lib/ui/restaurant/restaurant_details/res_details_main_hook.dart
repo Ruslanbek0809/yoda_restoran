@@ -1,11 +1,11 @@
 import 'dart:io';
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
-import '../../../library/flexible_bottom_sheet_route.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';
@@ -380,6 +380,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   minHeight: 0,
                                   initHeight: 0.45,
                                   maxHeight: 0.975,
+                                  duration: Duration(milliseconds: 250),
                                   context: context,
                                   builder: (context, scrollController, offset) {
                                     return CustomBarBottomSheet(

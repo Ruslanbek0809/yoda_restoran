@@ -306,7 +306,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 5.w, vertical: 5.h),
                                   margin: EdgeInsets.only(right: 16.w),
-                                  child: SvgPicture.asset(
+                                  child: SvgPicture.asset( 
                                     'assets/restaurant_info.svg',
                                     color: AppTheme.MAIN_DARK,
                                   ),

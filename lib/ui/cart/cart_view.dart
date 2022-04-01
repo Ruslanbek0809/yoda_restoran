@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
@@ -5,7 +6,6 @@ import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meal_view.dart';
 import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meals_shimmer.dart';
-import '../../library/flexible_bottom_sheet_route.dart';
 import '../../shared/shared.dart';
 import 'cart_toggle_button.dart';
 import '../widgets/widgets.dart';
@@ -281,6 +281,7 @@ class CartView extends StatelessWidget {
                                     minHeight: 0,
                                     initHeight: 0.8,
                                     maxHeight: 0.8,
+                                    duration: Duration(milliseconds: 250),
                                     context: context,
                                     builder:
                                         (context, scrollController, offset) {

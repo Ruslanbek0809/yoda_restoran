@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/shared/styles.dart';
-import '../../../library/flexible_bottom_sheet_route.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
@@ -81,6 +81,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                         ? 0.62
                         : 0.625
                     : 0.975,
+            duration: Duration(milliseconds: 250),
             context: context,
             builder: (context, scrollController, offset) {
               return CustomBarBottomSheet(
@@ -317,6 +318,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                   ? 0.62
                                                   : 0.625
                                               : 0.975,
+                                          duration: Duration(milliseconds: 250),
                                           context: context,
                                           builder: (context, scrollController,
                                               offset) {
@@ -417,6 +419,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                               : 0.625
                                           : 0.975,
                                       context: context,
+                                      duration: Duration(milliseconds: 250),
                                       builder:
                                           (context, scrollController, offset) {
                                         return CustomBarBottomSheet(

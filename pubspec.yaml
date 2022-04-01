@@ -64,7 +64,7 @@ dependencies:
   flutter_html: ^2.2.1
   flutter_inappwebview: ^5.3.2
   platform: ^3.1.0 # Native settings package
-  bottom_sheet: ^2.0.0 # For custom bottom sheet
+  bottom_sheet: ^2.1.0 # For custom bottom sheet
   share_plus: ^3.0.1
 
   # NETWORK
