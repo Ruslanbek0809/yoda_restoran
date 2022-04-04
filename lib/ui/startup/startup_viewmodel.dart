@@ -76,64 +76,83 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     await _geolocatorService.getUserLocation();
 
     await _apiRootService.initDio();
-    await _hiveDbService.initDB();
+    await _hiveDbService.initHiveBoxes();
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
+
+    /// USE _userService.getInitialUser OR _userService.initUser
+    await _userService.initUser();
 
     /// CHECKS whether onBoarding was SEEN or NOT
     var prefs = await SharedPreferences.getInstance();
     var _isOnBoardingSeen = prefs.getBool(Constants.isOnBoardingSeen) ?? false;
     log.v('==== IS ONBOARDING SEEN: $_isOnBoardingSeen ====');
 
-    /// USER part. GETS initial user with condition and behaves with that in mind
-    await _userService.getInitialUser(
-      onSuccess: () async {
-        log.v('==== SUCCESS User ====');
+    if (_isOnBoardingSeen) {
+      Platform.isIOS
+          ? await _navService.replaceWithTransition(
+              HomeView(),
+              transition: NavigationTransition.Fade,
+            )
+          : await _navService.replaceWith(Routes.homeView);
+    } else {
+      Platform.isIOS
+          ? await _navService.replaceWithTransition(
+              OnBoardingView(),
+              transition: NavigationTransition.Fade,
+            )
+          : await _navService.replaceWith(Routes.onBoardingView);
+    }
 
-        if (_isOnBoardingSeen) {
-          Platform.isIOS
-              ? await _navService.replaceWithTransition(
-                  HomeView(),
-                  transition: NavigationTransition.Fade,
-                )
-              : await _navService.replaceWith(Routes.homeView);
-        } else {
-          Platform.isIOS
-              ? await _navService.replaceWithTransition(
-                  OnBoardingView(),
-                  transition: NavigationTransition.Fade,
-                )
-              : await _navService.replaceWith(Routes.onBoardingView);
-        }
-      },
-      onFail: () async {
-        log.v('====== FAIL User ======');
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        String? _accessToken = prefs.getString(Constants.accessToken);
-        if (_accessToken != null) {
-          await prefs.remove(Constants.accessToken);
-          _accessToken = prefs.getString(Constants.accessToken);
-          log.i('ACCESS TOKEN after remove: $_accessToken');
-        }
-        await _userService.clearUser();
+    // /// USER part. GETS initial user with condition and behaves with that in mind
+    // await _userService.getInitialUser(
+    //   onSuccess: () async {
+    //     log.v('==== SUCCESS User ====');
 
-        if (_isOnBoardingSeen) {
-          Platform.isIOS
-              ? await _navService.replaceWithTransition(
-                  HomeView(),
-                  transition: NavigationTransition.Fade,
-                )
-              : await _navService.replaceWith(Routes.homeView);
-        } else {
-          Platform.isIOS
-              ? await _navService.replaceWithTransition(
-                  OnBoardingView(),
-                  transition: NavigationTransition.Fade,
-                )
-              : await _navService.replaceWith(Routes.onBoardingView);
-        }
-      },
-    );
+    //     if (_isOnBoardingSeen) {
+    //       Platform.isIOS
+    //           ? await _navService.replaceWithTransition(
+    //               HomeView(),
+    //               transition: NavigationTransition.Fade,
+    //             )
+    //           : await _navService.replaceWith(Routes.homeView);
+    //     } else {
+    //       Platform.isIOS
+    //           ? await _navService.replaceWithTransition(
+    //               OnBoardingView(),
+    //               transition: NavigationTransition.Fade,
+    //             )
+    //           : await _navService.replaceWith(Routes.onBoardingView);
+    //     }
+    //   },
+    //   onFail: () async {
+    //     log.v('====== FAIL User ======');
+    //     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //     String? _accessToken = prefs.getString(Constants.accessToken);
+    //     if (_accessToken != null) {
+    //       await prefs.remove(Constants.accessToken);
+    //       _accessToken = prefs.getString(Constants.accessToken);
+    //       log.i('ACCESS TOKEN after remove: $_accessToken');
+    //     }
+    //     await _userService.clearUser();
+
+    //     if (_isOnBoardingSeen) {
+    //       Platform.isIOS
+    //           ? await _navService.replaceWithTransition(
+    //               HomeView(),
+    //               transition: NavigationTransition.Fade,
+    //             )
+    //           : await _navService.replaceWith(Routes.homeView);
+    //     } else {
+    //       Platform.isIOS
+    //           ? await _navService.replaceWithTransition(
+    //               OnBoardingView(),
+    //               transition: NavigationTransition.Fade,
+    //             )
+    //           : await _navService.replaceWith(Routes.onBoardingView);
+    //     }
+    //   },
+    // );
   }
 
   @override

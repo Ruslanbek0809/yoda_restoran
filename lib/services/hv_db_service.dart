@@ -29,9 +29,10 @@ class HiveDbService with ReactiveServiceMixin {
   List<HiveMeal> get cartMeals => _cartMeals.value;
 
   /// INITIALIZE in StartUpViewModel
-  Future initDB() async {
+  Future initHiveBoxes() async {
     log.v('====== HiveDbService STARTED opening boxes ======');
 
+    await Hive.openBox<HiveUser>(Constants.userBox);
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
@@ -360,10 +361,10 @@ class HiveDbService with ReactiveServiceMixin {
         log.v('Couldn\'t ADD a meal to CART from BOTTOM SHEET: $e');
       }
     }
-  
+
     /// UPDATE PART
     else {
-      log.v('UPDATES with isNew: $isNew');  
+      log.v('UPDATES with isNew: $isNew');
       int pos = _cartMeals.value.indexOf(similarUpdateMeal!);
       log.v('pos of similarUpdateMeal: $pos');
       if (pos == -1) return;

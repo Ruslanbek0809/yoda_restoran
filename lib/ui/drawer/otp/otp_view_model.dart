@@ -51,6 +51,7 @@ class OtpViewModel extends FormViewModel {
     await runBusyFuture(
       _userService.verifyUser(
         onSuccess: () async {
+          log.i('onSuccess verifyUser: $_hideResendButton, phone: $phone');
           _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
           /// Navigate to successful route
           isCartView
@@ -58,6 +59,7 @@ class OtpViewModel extends FormViewModel {
               : _navService.pushNamedAndRemoveUntil(Routes.homeView);
         },
         onFail: () {
+          log.i('onFail verifyUser: $_hideResendButton, phone: $phone');
           onFailForView!();
           // setValidationMessage(e.toString());
         },
