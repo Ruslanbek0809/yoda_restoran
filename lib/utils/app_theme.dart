@@ -93,7 +93,7 @@ class AppTheme {
       );
 
   BoxShadow get tabBarShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.05),
+        color: AppTheme.MAIN_DARK.withOpacity(0.045),
         blurRadius: 20,
         spreadRadius: 5,
         offset: const Offset(0, 20),
