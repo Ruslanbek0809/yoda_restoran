@@ -57,9 +57,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     return CustomScrollView(
       controller: customScrollController,
-      physics: Platform.isIOS
-          ? AlwaysScrollableScrollPhysics()
-          : ClampingScrollPhysics(),
+      physics: ClampingScrollPhysics(),
       slivers: [
         //------------------ ARROW BACK ---------------------//
         SliverAppBar(
@@ -484,7 +482,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 );
 
                 customScrollController.animateTo(
-                  offset + ((index - 1) * 88.h) + 0.55.sh,
+                  offset + ((index - 1) * 72.h) + 0.55.sh,
                   // * 88.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate Expanded height
                   duration: Duration(milliseconds: 300),
                   curve: Curves.linear,
@@ -507,7 +505,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 12.w, top: 40.h),
+                      padding: EdgeInsets.only(left: 12.w, top: 25.h),
                       child: Text(
                         resCategory.resCategoryModel!.name!,
                         style: TextStyle(
