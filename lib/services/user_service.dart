@@ -543,6 +543,16 @@ class UserService {
           (response.statusCode == 200 || response.statusCode == 201)) {
         log.v(
             'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs}');
+
+        /// If success then updates local _currentUser's favs
+        /// Step 2. UPDATES userModel to Hive userBox
+        await userBox.put(
+          Constants.userBox,
+          _currentUser!,
+        );
+
+        /// Step 3. GETS hiveUser from Hive userBox
+        _currentUser = userBox.get(Constants.userBox);
       } else {
         if (isTempFavourited)
           _currentUser?.favs.remove(resId);
