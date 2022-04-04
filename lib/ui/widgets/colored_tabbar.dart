@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class ColoredTabBar extends Container implements PreferredSizeWidget {
-  ColoredTabBar({required this.color, required this.tabBar});
+import '../../utils/utils.dart';
 
-  final Color color;
+class ColoredTabBar extends Container implements PreferredSizeWidget {
+  ColoredTabBar({required this.tabBar, required this.isShrink});
+
   final TabBar tabBar;
+  final bool isShrink;
 
   @override
   Size get preferredSize => tabBar.preferredSize;
 
   @override
   Widget build(BuildContext context) => Container(
-        color: color,
-        child: Row(children: [Flexible(child: tabBar)]), // Here to fix tab issue, done workaround
+        decoration: BoxDecoration(
+          color: AppTheme.WHITE,
+          boxShadow: isShrink ? [AppTheme().tabBarShadow] : [],
+        ),
+        child: Row(children: [
+          Flexible(child: tabBar)
+        ]), // Here to fix tab issue, done workaround
       );
 }

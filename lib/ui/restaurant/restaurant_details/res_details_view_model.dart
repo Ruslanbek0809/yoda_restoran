@@ -18,7 +18,6 @@ class ResDetailsViewModel extends FutureViewModel {
 
   final _api = locator<ApiService>();
   final _navService = locator<NavigationService>();
-  final _bottomSheetService = locator<BottomSheetService>();
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();

@@ -92,6 +92,19 @@ class AppTheme {
         offset: const Offset(0.0, 1.1),
       );
 
+  BoxShadow get tabBarShadow => BoxShadow(
+        color: AppTheme.MAIN_DARK.withOpacity(0.05),
+        blurRadius: 20,
+        spreadRadius: 5,
+        offset: const Offset(0, 20),
+      );
+
+  BoxShadow get resBottomShadow => BoxShadow(
+        color: AppTheme.MAIN_DARK.withOpacity(0.2),
+        blurRadius: 2.0,
+        offset: const Offset(0.0, 1.1),
+      );
+
   /// Radiuses
   BorderRadius get radius20 => BorderRadius.circular(20.0);
   BorderRadius get radius15 => BorderRadius.circular(15.0);

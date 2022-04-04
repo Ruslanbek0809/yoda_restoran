@@ -68,7 +68,7 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
             width: 1.sw,
             decoration: BoxDecoration(
               color: AppTheme.WHITE,
-              boxShadow: [AppTheme().bottomCartShadow],
+              boxShadow: [AppTheme().resBottomShadow],
             ),
             child: Container(
               margin: EdgeInsets.fromLTRB(10.w, 8.h, 10.w, 15.h + 0.02.sw),

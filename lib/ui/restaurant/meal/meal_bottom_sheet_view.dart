@@ -45,7 +45,7 @@ class MealBottomSheet extends StatelessWidget {
               //         ? NeverScrollableScrollPhysics()
               //         : BouncingScrollPhysics(),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //----------- IMAGE --------------//
                   ClipRRect(
