@@ -59,8 +59,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                         meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
                 ? Platform.isIOS
-                    ? 0.62
-                    : 0.625
+                    ? 0.635
+                    : 0.63
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
                     ? Platform.isIOS
@@ -71,8 +71,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                 (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isEmpty
                     ? Platform.isIOS
-                        ? 0.62
-                        : 0.625
+                        ? 0.635
+                        : 0.63
                     : 0.975,
             duration: Duration(milliseconds: 250),
             context: context,
@@ -90,7 +90,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
             },
             anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
-                ? [0, Platform.isIOS ? 0.62 : 0.625]
+                ? [0, Platform.isIOS ? 0.635 : 0.63]
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
                     ? [0, Platform.isIOS ? 0.74 : 0.75, 0.975]
@@ -297,8 +297,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                             .isEmpty) &&
                                                     meal.description!.isEmpty
                                                 ? Platform.isIOS
-                                                    ? 0.62
-                                                    : 0.625
+                                                    ? 0.635
+                                                    : 0.63
                                                 : (meal.gVolumes!.isEmpty &&
                                                             meal.gCustomizables!
                                                                 .isEmpty) &&
@@ -314,8 +314,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                             .isEmpty) &&
                                                     meal.description!.isEmpty
                                                 ? Platform.isIOS
-                                                    ? 0.62
-                                                    : 0.625
+                                                    ? 0.635
+                                                    : 0.63
                                                 : 0.975,
                                             duration:
                                                 Duration(milliseconds: 250),
@@ -341,8 +341,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                 ? [
                                                     0,
                                                     Platform.isIOS
-                                                        ? 0.62
-                                                        : 0.625
+                                                        ? 0.635
+                                                        : 0.63
                                                   ]
                                                 : (meal.gVolumes!.isEmpty &&
                                                             meal.gCustomizables!
@@ -402,8 +402,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
                                             ? Platform.isIOS
-                                                ? 0.62
-                                                : 0.625
+                                                ? 0.635
+                                                : 0.63
                                             : (meal.gVolumes!.isEmpty &&
                                                         meal.gCustomizables!
                                                             .isEmpty) &&
@@ -417,8 +417,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
                                             ? Platform.isIOS
-                                                ? 0.62
-                                                : 0.625
+                                                ? 0.635
+                                                : 0.63
                                             : 0.975,
                                         duration: Duration(milliseconds: 250),
                                         context: context,
@@ -440,7 +440,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                                     meal.gCustomizables!
                                                         .isEmpty) &&
                                                 meal.description!.isEmpty
-                                            ? [0, Platform.isIOS ? 0.62 : 0.625]
+                                            ? [0, Platform.isIOS ? 0.635 : 0.63]
                                             : (meal.gVolumes!.isEmpty &&
                                                         meal.gCustomizables!
                                                             .isEmpty) &&

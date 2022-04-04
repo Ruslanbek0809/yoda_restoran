@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yoda_res/shared/shared.dart';
@@ -28,7 +27,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                 ? ''
                 : singleEx
                     .name!, // for test: 'Birini alana 2 nji mugt aksiya edyas gelda'
-            extent: model.isBusy || model.hasError ? 62.h : 0.175.sh,
+            extent: model.isBusy || model.hasError ? 66.h : 0.175.sh,
             singleExViewModel: model,
           ),
         ),
@@ -229,15 +228,15 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
 class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   final _titleMarginTween = EdgeInsetsTween(
     begin: EdgeInsets.only(bottom: 5.h, left: 16.w, right: 16.w),
-    end: EdgeInsets.only(left: 48.w, right: 48.w, top: 28.h),
+    end: EdgeInsets.only(left: 48.w, right: 48.w, top: 32.h),
   );
   final _leftIconMarginTween = EdgeInsetsTween(
     begin: EdgeInsets.only(bottom: 18.h),
-    end: EdgeInsets.only(top: 22.h),
+    end: EdgeInsets.only(top: 27.h),
   );
   final _rightIconMarginTween = EdgeInsetsTween(
     begin: EdgeInsets.only(bottom: 18.h),
-    end: EdgeInsets.only(top: 22.h),
+    end: EdgeInsets.only(top: 27.h),
   );
 
   final _titleAlignTween =
@@ -280,7 +279,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
       children: <Widget>[
         AnimatedContainer(
           duration: Duration(milliseconds: 100),
-          height: 62.h,
+          height: 65.h,
           constraints: BoxConstraints(maxHeight: minExtent),
           color: AppTheme.WHITE,
         ),

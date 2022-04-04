@@ -16,34 +16,31 @@ class CustomBarBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // --------------- BOTTOM SHEET DRAGGER -------------- //
-            Padding(
-              padding: EdgeInsets.only(top: 12, bottom: 8),
-              child: Container(
-                height: 5,
-                width: 48,
-                decoration: BoxDecoration(
-                    color: kcWhiteColor,
-                    borderRadius: BorderRadius.circular(6)),
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // --------------- BOTTOM SHEET DRAGGER -------------- //
+          Padding(
+            padding: EdgeInsets.only(top: 12, bottom: 8),
+            child: Container(
+              height: 5,
+              width: 48,
+              decoration: BoxDecoration(
+                  color: kcWhiteColor, borderRadius: BorderRadius.circular(6)),
             ),
-            // --------------- BODY Part -------------- //
-            Expanded(
-              child: Material(
-                color: isMealBottomSheet ? kcSecondaryLightColor : kcWhiteColor,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(Constants.BORDER_RADIUS_20),
-                ),
-                child: child,
+          ),
+          // --------------- BODY Part -------------- //
+          Expanded(
+            child: Material(
+              color: isMealBottomSheet ? kcSecondaryLightColor : kcWhiteColor,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(Constants.BORDER_RADIUS_20),
               ),
+              child: child,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

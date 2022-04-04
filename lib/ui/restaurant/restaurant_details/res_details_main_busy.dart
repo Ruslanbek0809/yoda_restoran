@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -144,7 +146,8 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 12.h, bottom: 50.h),
+                    padding: EdgeInsets.only(
+                        top: Platform.isIOS ? 14.h : 12.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -152,7 +155,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                         //------------------ TITLE NAME ---------------------//
                         Padding(
                           padding: EdgeInsets.only(
-                            bottom: 10.h,
+                            bottom: Platform.isIOS ? 12.h : 10.h,
                             left: 16.w,
                             right: 16.w,
                           ),
@@ -306,7 +309,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 5.w, vertical: 5.h),
                                   margin: EdgeInsets.only(right: 16.w),
-                                  child: SvgPicture.asset( 
+                                  child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
                                     color: AppTheme.MAIN_DARK,
                                   ),

@@ -222,7 +222,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         topRight: Radius.circular(20.0),
                       ),
                     ),
-                    padding: EdgeInsets.only(top: 12.h, bottom: 50.h),
+                    padding: EdgeInsets.only(
+                        top: Platform.isIOS ? 14.h : 12.h, bottom: 50.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -230,7 +231,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         //------------------ TITLE NAME ---------------------//
                         Padding(
                           padding: EdgeInsets.only(
-                            bottom: 10.h,
+                            bottom: Platform.isIOS ? 12.h : 10.h,
                             left: 16.w,
                             right: 16.w,
                           ),

@@ -66,8 +66,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                         meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
                 ? Platform.isIOS
-                    ? 0.62
-                    : 0.625
+                    ? 0.635
+                    : 0.63
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
                     ? Platform.isIOS
@@ -78,8 +78,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                 (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isEmpty
                     ? Platform.isIOS
-                        ? 0.62
-                        : 0.625
+                        ? 0.635
+                        : 0.63
                     : 0.975,
             duration: Duration(milliseconds: 250),
             context: context,
@@ -97,7 +97,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
             },
             anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                     meal.description!.isEmpty
-                ? [0, Platform.isIOS ? 0.62 : 0.625]
+                ? [0, Platform.isIOS ? 0.635 : 0.63]
                 : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
                         meal.description!.isNotEmpty
                     ? [0, Platform.isIOS ? 0.74 : 0.75, 0.975]
@@ -299,8 +299,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                           .isEmpty) &&
                                                   meal.description!.isEmpty
                                               ? Platform.isIOS
-                                                  ? 0.62
-                                                  : 0.625
+                                                  ? 0.635
+                                                  : 0.63
                                               : (meal.gVolumes!.isEmpty &&
                                                           meal.gCustomizables!
                                                               .isEmpty) &&
@@ -315,8 +315,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                           .isEmpty) &&
                                                   meal.description!.isEmpty
                                               ? Platform.isIOS
-                                                  ? 0.62
-                                                  : 0.625
+                                                  ? 0.635
+                                                  : 0.63
                                               : 0.975,
                                           duration: Duration(milliseconds: 250),
                                           context: context,
@@ -340,7 +340,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                   meal.description!.isEmpty
                                               ? [
                                                   0,
-                                                  Platform.isIOS ? 0.62 : 0.625
+                                                  Platform.isIOS ? 0.635 : 0.63
                                                 ]
                                               : (meal.gVolumes!.isEmpty &&
                                                           meal.gCustomizables!
@@ -400,8 +400,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                       .isEmpty) &&
                                               meal.description!.isEmpty
                                           ? Platform.isIOS
-                                              ? 0.62
-                                              : 0.625
+                                              ? 0.635
+                                              : 0.63
                                           : (meal.gVolumes!.isEmpty &&
                                                       meal.gCustomizables!
                                                           .isEmpty) &&
@@ -415,8 +415,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                       .isEmpty) &&
                                               meal.description!.isEmpty
                                           ? Platform.isIOS
-                                              ? 0.62
-                                              : 0.625
+                                              ? 0.635
+                                              : 0.63
                                           : 0.975,
                                       context: context,
                                       duration: Duration(milliseconds: 250),
@@ -437,7 +437,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                                   meal.gCustomizables!
                                                       .isEmpty) &&
                                               meal.description!.isEmpty
-                                          ? [0, Platform.isIOS ? 0.62 : 0.625]
+                                          ? [0, Platform.isIOS ? 0.635 : 0.63]
                                           : (meal.gVolumes!.isEmpty &&
                                                       meal.gCustomizables!
                                                           .isEmpty) &&
