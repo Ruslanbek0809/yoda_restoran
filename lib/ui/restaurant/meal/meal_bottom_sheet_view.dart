@@ -200,13 +200,13 @@ class MealBottomSheet extends StatelessWidget {
                             )
                             .toList(),
 
-                      // /// When there is no any other data than image
-                      // if (meal.gVolumes!.isNotEmpty ||
-                      //     meal.gCustomizables!.isNotEmpty ||
-                      //     meal.description!.isNotEmpty)
-                      //   Container(
-                      //     height: 0.175.sh,
-                      //   )
+                      /// When there is no any other data than image
+                      if (meal.gVolumes!.isNotEmpty ||
+                          meal.gCustomizables!.isNotEmpty ||
+                          meal.description!.isNotEmpty)
+                        Container(
+                          height: 0.175.sh,
+                        )
                     ],
                   ),
                 ],
