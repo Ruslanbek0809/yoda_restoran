@@ -11,6 +11,7 @@ class HiveMeal {
   HiveMeal({
     this.id,
     this.image,
+    this.imageCard,
     this.name,
     this.price,
     this.discount,
@@ -27,23 +28,26 @@ class HiveMeal {
   final String? image;
 
   @HiveField(2)
-  final String? name;
+  final String? imageCard;
 
   @HiveField(3)
-  final num? price;
+  final String? name;
 
   @HiveField(4)
-  final int? discount;
+  final num? price;
 
   @HiveField(5)
-  final num? discountedPrice;
+  final int? discount;
 
   @HiveField(6)
-  int? quantity;
+  final num? discountedPrice;
 
   @HiveField(7)
-  final List<HiveVolCus>? volumes;
+  int? quantity;
 
   @HiveField(8)
+  final List<HiveVolCus>? volumes;
+
+  @HiveField(9)
   final List<HiveVolCus>? customs;
 }

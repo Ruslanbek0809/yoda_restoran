@@ -48,17 +48,6 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
-List<Discount> discounts = [
-  Discount(1, 'assets/discount1.png'),
-  Discount(2, 'assets/discount2.png'),
-  Discount(3, 'assets/discount3.png'),
-  Discount(4, 'assets/discount4.png'),
-  Discount(5, 'assets/discount1.png'),
-  Discount(6, 'assets/discount2.png'),
-  Discount(7, 'assets/discount3.png'),
-  Discount(8, 'assets/discount4.png'),
-];
-
 List<CategoryFilter> mainCatSortList = [
   CategoryFilter(1, LocaleKeys.defaultt),
   CategoryFilter(2, LocaleKeys.byName),

@@ -19,37 +19,40 @@ class HiveMealAdapter extends TypeAdapter<HiveMeal> {
     return HiveMeal(
       id: fields[0] as int?,
       image: fields[1] as String?,
-      name: fields[2] as String?,
-      price: fields[3] as num?,
-      discount: fields[4] as int?,
-      discountedPrice: fields[5] as num?,
-      quantity: fields[6] as int?,
-      volumes: (fields[7] as List?)?.cast<HiveVolCus>(),
-      customs: (fields[8] as List?)?.cast<HiveVolCus>(),
+      imageCard: fields[2] as String?,
+      name: fields[3] as String?,
+      price: fields[4] as num?,
+      discount: fields[5] as int?,
+      discountedPrice: fields[6] as num?,
+      quantity: fields[7] as int?,
+      volumes: (fields[8] as List?)?.cast<HiveVolCus>(),
+      customs: (fields[9] as List?)?.cast<HiveVolCus>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveMeal obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.image)
       ..writeByte(2)
-      ..write(obj.name)
+      ..write(obj.imageCard)
       ..writeByte(3)
-      ..write(obj.price)
+      ..write(obj.name)
       ..writeByte(4)
-      ..write(obj.discount)
+      ..write(obj.price)
       ..writeByte(5)
-      ..write(obj.discountedPrice)
+      ..write(obj.discount)
       ..writeByte(6)
-      ..write(obj.quantity)
+      ..write(obj.discountedPrice)
       ..writeByte(7)
-      ..write(obj.volumes)
+      ..write(obj.quantity)
       ..writeByte(8)
+      ..write(obj.volumes)
+      ..writeByte(9)
       ..write(obj.customs);
   }
 

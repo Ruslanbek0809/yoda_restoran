@@ -134,6 +134,7 @@ class HiveDbService with ReactiveServiceMixin {
       final HiveMeal _cartMeal = HiveMeal(
         id: meal.id,
         image: meal.image,
+        imageCard: meal.imageCard,
         name: meal.name,
         price: meal.price,
         discount: meal.discount!.toInt(),
@@ -346,6 +347,7 @@ class HiveDbService with ReactiveServiceMixin {
         final HiveMeal _cartMeal = HiveMeal(
           id: meal.id,
           image: meal.image,
+          imageCard: meal.imageCard,
           name: meal.name,
           price: meal.price,
           discount: meal.discount!.toInt(),

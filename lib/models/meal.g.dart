@@ -9,6 +9,7 @@ part of 'meal.dart';
 Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       id: json['id'] as int?,
       image: json['image'] as String?,
+      imageCard: json['image_card'] as String?,
       name: json['name'] as String?,
       description: json['description'] as String?,
       approved: json['approved'] as bool?,
@@ -40,6 +41,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
 Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
       'id': instance.id,
       'image': instance.image,
+      'image_card': instance.imageCard,
       'name': instance.name,
       'description': instance.description,
       'approved': instance.approved,

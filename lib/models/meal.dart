@@ -8,6 +8,7 @@ class Meal {
   Meal({
     this.id,
     this.image,
+    this.imageCard,
     this.name,
     this.description,
     this.approved,
@@ -31,6 +32,9 @@ class Meal {
 
   @JsonKey(name: 'image')
   final String? image;
+
+  @JsonKey(name: 'image_card')
+  final String? imageCard;
 
   @JsonKey(name: 'name')
   final String? name;

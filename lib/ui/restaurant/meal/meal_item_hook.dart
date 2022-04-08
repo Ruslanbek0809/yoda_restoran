@@ -113,7 +113,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                   Stack(
                     children: [
                       YodaImage(
-                        image: meal.image!,
+                        image: meal.imageCard!,
                         height: constraints.maxWidth,
                         width: constraints.maxWidth,
                         borderRadius: Constants.BORDER_RADIUS_20,
