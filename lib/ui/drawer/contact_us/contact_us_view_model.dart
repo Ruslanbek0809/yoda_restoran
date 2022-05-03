@@ -51,7 +51,7 @@ class ContactUsViewModel extends BaseViewModel {
       return LocaleKeys.enter_text.tr();
     }
 
-    _name = value;
+    _info = value;
     notifyListeners();
   }
 
