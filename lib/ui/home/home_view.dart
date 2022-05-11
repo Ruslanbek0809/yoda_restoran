@@ -44,11 +44,9 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
-        await _refreshController.requestRefresh();
-
-        // await _refreshController.requestRefresh(needCallback: false);
-        // _refreshController.refreshCompleted();
-
+        /// This condition is put to ignore requestRefresh for _refreshController for the first time when entered to app or when nav from drawer screens to homeScreen
+        if (!model.anyObjectsBusy) await _refreshController.requestRefresh();
+  
         /// InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
         if (Platform.isAndroid) {
           var info = await InAppUpdate.checkForUpdate();
