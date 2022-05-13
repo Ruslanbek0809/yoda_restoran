@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
         /// This condition is put to ignore requestRefresh for _refreshController for the first time when entered to app or when nav from drawer screens to homeScreen
         if (!model.anyObjectsBusy) await _refreshController.requestRefresh();
-  
+
         /// InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
         if (Platform.isAndroid) {
           var info = await InAppUpdate.checkForUpdate();
@@ -154,14 +154,31 @@ class _HomeViewState extends State<HomeView> {
                         );
                       },
                     ),
-                    // header: WaterDropMaterialHeader(
-                    //   backgroundColor: AppTheme.MAIN,
-                    // ),
+
+                    /// TODO: PAG
+                    footer: CustomFooter(
+                      height: 50.h,
+                      builder: (BuildContext context, LoadStatus? mode) {
+                        return SpinKitChasingDots(
+                          size: 27,
+                          color: kcPrimaryColor,
+                        );
+                      },
+                    ),
                     controller: _refreshController,
-                    enablePullDown: true,
+                    enablePullDown: model.isPullUpEnabled,
+
+                    /// TODO: PAG
+                    enablePullUp: model.isPullUpEnabled,
                     onRefresh: () async {
                       await model.initialise();
                       _refreshController.refreshCompleted();
+                    },
+
+                    /// TODO: PAG
+                    onLoading: () async {
+                      await model.getMorePaginatedRestaurants();
+                      _refreshController.loadComplete();
                     },
                     //------------------ CUSTOM ERROR ---------------------//
                     child: model.hasFutureError

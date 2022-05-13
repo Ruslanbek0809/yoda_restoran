@@ -34,6 +34,11 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
 
+  /// TODO: PAG
+  int _page = 1;
+  int get page => _page;
+  bool get isPullUpEnabled => _homeService.isPullUpEnabled;
+
   List<int> get selectedMainCats =>
       _mainCatService.selectedMainCats; // NEEDS only for UI cases
 
@@ -136,7 +141,8 @@ class HomeViewModel extends MultipleFutureViewModel {
   Map<String, Future Function()> get futuresMap => {
         homeSlidersFuture: _homeService.getSliders,
         homeMainCatsFuture: _homeService.getMainCategs,
-        homeRandomRessFuture: _homeService.getRandomRess,
+        // homeRandomRessFuture: _homeService.getRandomRess,
+        homeRandomRessFuture: _homeService.getPaginatedRess,
         homePromsFuture: _homeService.getProms,
         homeExclusivesFuture: _homeService.getExclusives,
       };
@@ -158,6 +164,16 @@ class HomeViewModel extends MultipleFutureViewModel {
   }
 
   void updateFetchingSelectedError() => _homeService.disableSelectError();
+
+  /// TODO: PAG
+  Future<void> getMorePaginatedRestaurants(
+      // Function()? onSuccess,
+      // Function()? onFail,
+      ) async {
+    _page++;
+    log.v('getMorePaginatedRestaurants() with _page: $_page');
+    await runBusyFuture(_homeService.getPaginatedRess(page: _page));
+  }
 
   //------------------ BOTTOM CART ---------------------//
 

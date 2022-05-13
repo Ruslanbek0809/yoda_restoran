@@ -31,6 +31,10 @@ class HomeService with ReactiveServiceMixin {
   List<Exclusive>? _exclusives = [];
   List<Exclusive>? get exclusives => _exclusives;
 
+  /// TODO: PAG
+  bool _isPullUpEnabled = true;
+  bool get isPullUpEnabled => _isPullUpEnabled;
+
   bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
 
   bool get hasMainCats => _mainCats != null && _mainCats!.isNotEmpty;
@@ -71,9 +75,26 @@ class HomeService with ReactiveServiceMixin {
     return _mainCats;
   }
 
-  Future<List<Restaurant>?> getRandomRess() async {
-    _randomRess = await _api.getRandomRess();
-    log.v(_randomRess!.length);
+  // Future<List<Restaurant>?> getRandomRess() async {
+  //   _randomRess = await _api.getRandomRess();
+  //   log.v(_randomRess!.length);
+  //   return _randomRess;
+  // }
+
+  /// TODO: PAG
+  Future<List<Restaurant>?> getPaginatedRess({int page = 1}) async {
+    final _fetchedRandomRess = await _api.getPaginatedRess(page);
+    log.v('_fetchedRandomRess!.length: ${_fetchedRandomRess.length}');
+
+    if (_fetchedRandomRess.isEmpty) _isPullUpEnabled = false;
+
+    if (page == 1)
+      _randomRess = _fetchedRandomRess;
+    else
+      _randomRess = [..._randomRess!, ..._fetchedRandomRess];
+
+    log.v(
+        '_randomRess!.length: ${_randomRess!.length}; _isPullUpEnabled:$_isPullUpEnabled');
     return _randomRess;
   }
 

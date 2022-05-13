@@ -49,32 +49,65 @@ class ApiService {
     }
   }
 
-  Future<List<Restaurant>> getRandomRess() async {
+  // Future<List<Restaurant>> getRandomRess() async {
+  //   log.v('My loc: ${_geolocatorService.locationPosition}');
+  //   List<Restaurant> _randomRestaurants = [];
+  //   try {
+  //     Response response;
+  //     if (_geolocatorService.locationPosition != null) {
+  //       await _geolocatorService.getUserCurrentLocationOnly();
+  //       response = await _apiRoot.dio.get(
+  //         'api/restaurants/',
+  //         queryParameters: {
+  //           'markerY': _geolocatorService.locationPosition!.longitude,
+  //           'markerX': _geolocatorService.locationPosition!.latitude,
+  //         },
+  //       );
+  //     } else
+  //       response = await _apiRoot.dio.get('api/restaurants/');
+  //     // log.v('RESPONSE: api/restaurants/ => ${response.data}');
+
+  //     if (response.data != null) {
+  //       response.data.forEach((_randomRestaurant) {
+  //         _randomRestaurants.add(Restaurant.fromJson(_randomRestaurant));
+  //       });
+  //     }
+  //     return _randomRestaurants;
+  //   } catch (error) {
+  //     log.v('ERROR on api/restaurants/ :$error');
+  //     rethrow;
+  //   }
+  // }
+
+  /// TODO: PAG
+  Future<List<Restaurant>> getPaginatedRess(int page) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
-    List<Restaurant> _randomRestaurants = [];
+    List<Restaurant> _paginatedRestaurants = [];
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
         await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
-          'api/restaurants/',
+          'api/paginatedRestaurants/',
           queryParameters: {
             'markerY': _geolocatorService.locationPosition!.longitude,
             'markerX': _geolocatorService.locationPosition!.latitude,
+            'page': page,
           },
         );
       } else
-        response = await _apiRoot.dio.get('api/restaurants/');
-      // log.v('RESPONSE: api/restaurants/ => ${response.data}');
+        response =
+            await _apiRoot.dio.get('api/paginatedRestaurants?page=$page');
+      // log.v('RESPONSE: api/paginatedRestaurants/ => ${response.data}');
 
-      if (response.data != null) {
-        response.data.forEach((_randomRestaurant) {
-          _randomRestaurants.add(Restaurant.fromJson(_randomRestaurant));
+      if (response.data['results'] != null) {
+        response.data['results'].forEach((_randomRestaurant) {
+          _paginatedRestaurants.add(Restaurant.fromJson(_randomRestaurant));
         });
       }
-      return _randomRestaurants;
+      return _paginatedRestaurants;
     } catch (error) {
-      log.v('ERROR on api/restaurants/ :$error');
+      log.v('ERROR on api/paginatedRestaurants/ :$error');
       rethrow;
     }
   }
