@@ -44,6 +44,9 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
+        /// TODO: PAG
+        if (model.isPullUpEnabled == false) model.enablePullUp();
+
         /// This condition is put to ignore requestRefresh for _refreshController for the first time when entered to app or when nav from drawer screens to homeScreen
         if (!model.anyObjectsBusy) await _refreshController.requestRefresh();
 
@@ -166,7 +169,6 @@ class _HomeViewState extends State<HomeView> {
                       },
                     ),
                     controller: _refreshController,
-                    enablePullDown: model.isPullUpEnabled,
 
                     /// TODO: PAG
                     enablePullUp: model.isPullUpEnabled,
@@ -516,6 +518,7 @@ class _HomeViewState extends State<HomeView> {
                                               ),
                                             ],
                                           ),
+                                          // if(!model.hasFutureError && model.cartRes!.id != -1 && model.isPullUpEnabled == false)
                                           SizedBox(
                                               height: 0.11
                                                   .sh), // COMPENSATES HomeBottomCart

@@ -83,10 +83,19 @@ class HomeService with ReactiveServiceMixin {
 
   /// TODO: PAG
   Future<List<Restaurant>?> getPaginatedRess({int page = 1}) async {
-    final _fetchedRandomRess = await _api.getPaginatedRess(page);
-    log.v('_fetchedRandomRess!.length: ${_fetchedRandomRess.length}');
+    List<Restaurant> _fetchedRandomRess = [];
+    String? _pagNext;
+    await _api.getPaginatedRess(
+      page,
+      (pagRess, pagNext) {
+        if (pagRess != null && pagRess.isNotEmpty) _fetchedRandomRess = pagRess;
+        if (pagNext != null) _pagNext = pagNext;
+      },
+    );
+    log.v(
+        '_fetchedRandomRess!.length: ${_fetchedRandomRess.length}, _pagNext:$_pagNext');
 
-    if (_fetchedRandomRess.isEmpty) _isPullUpEnabled = false;
+    if (_pagNext == null) _isPullUpEnabled = false;
 
     if (page == 1)
       _randomRess = _fetchedRandomRess;
@@ -97,6 +106,9 @@ class HomeService with ReactiveServiceMixin {
         '_randomRess!.length: ${_randomRess!.length}; _isPullUpEnabled:$_isPullUpEnabled');
     return _randomRess;
   }
+
+  /// TODO: PAG
+  void enablePullUp() => _isPullUpEnabled = true;
 
   Future<List<Promoted?>> getProms() async {
     _proms = await _api.getProms();

@@ -175,6 +175,9 @@ class HomeViewModel extends MultipleFutureViewModel {
     await runBusyFuture(_homeService.getPaginatedRess(page: _page));
   }
 
+  /// TODO: PAG
+  void enablePullUp() => _homeService.enablePullUp();
+
   //------------------ BOTTOM CART ---------------------//
 
   BottomCartStatus get bottomCartStatus => _bottomCartService

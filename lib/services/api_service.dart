@@ -80,7 +80,10 @@ class ApiService {
   // }
 
   /// TODO: PAG
-  Future<List<Restaurant>> getPaginatedRess(int page) async {
+  Future<void> getPaginatedRess(
+    int page,
+    Function(List<Restaurant>?, String?)? onSuccess,
+  ) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Restaurant> _paginatedRestaurants = [];
     try {
@@ -105,7 +108,7 @@ class ApiService {
           _paginatedRestaurants.add(Restaurant.fromJson(_randomRestaurant));
         });
       }
-      return _paginatedRestaurants;
+      onSuccess!(_paginatedRestaurants, response.data['next']);
     } catch (error) {
       log.v('ERROR on api/paginatedRestaurants/ :$error');
       rethrow;
