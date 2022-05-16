@@ -173,6 +173,9 @@ class _HomeViewState extends State<HomeView> {
                     /// TODO: PAG
                     enablePullUp: model.isPullUpEnabled,
                     onRefresh: () async {
+                      /// TODO: PAG
+                      if (model.isPullUpEnabled == false) model.enablePullUp();
+
                       await model.initialise();
                       _refreshController.refreshCompleted();
                     },

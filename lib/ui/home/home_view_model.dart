@@ -155,7 +155,7 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   /// Below lines are custom error part
   @override
-  void onData(key) {
+  void onData(key) {  
     _hasFutureError = false;
   }
 
@@ -176,7 +176,10 @@ class HomeViewModel extends MultipleFutureViewModel {
   }
 
   /// TODO: PAG
-  void enablePullUp() => _homeService.enablePullUp();
+  void enablePullUp() {
+    _page = 1;
+    _homeService.enablePullUp();
+  }
 
   //------------------ BOTTOM CART ---------------------//
 
