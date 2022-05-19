@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/library/upgrader_translations.dart';
 import 'package:yoda_res/ui/drawer/drawer_view.dart';
 import '../../shared/shared.dart';
+import '../cart/order/rate_us_screen.dart';
 import 'home_bottom_cart.dart';
 import 'home_exclusives/home_exclusive.dart';
 import 'main_category/main_cat_view.dart';
@@ -69,6 +71,23 @@ class _HomeViewState extends State<HomeView> {
 
         /// HANDLES clicked terminated dynamic link
         await model.handleClickedDynamicLink();
+
+        await showFlexibleBottomSheet(
+          minHeight: 0,
+          initHeight: 0.95,
+          maxHeight: 0.95,
+          duration: Duration(milliseconds: 250),
+          context: context,
+          builder: (context, scrollController, offset) {
+            return CustomBarBottomSheet(
+              child: RateUsScreen(
+                scrollController: scrollController,
+                offset: offset,
+              ),
+            );
+          },
+          anchors: [0, 0.95],
+        );
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)
@@ -95,6 +114,11 @@ class _HomeViewState extends State<HomeView> {
               ),
             );
           });
+
+        //------------------ RATING BOTTOM SHEET before everything in BUILDER ---------------------//
+        // WidgetsBinding.instance!.addPostFrameCallback((_) async {
+
+        // });
         //------------------ MAIN CATS LOADING PART ---------------------//
         Widget body = model.fetchingSelectedMainCatsRes
             ? CustomScrollView(
