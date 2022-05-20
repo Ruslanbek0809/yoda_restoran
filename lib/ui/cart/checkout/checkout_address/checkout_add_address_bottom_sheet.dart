@@ -26,7 +26,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.72,
+          initialChildSize: 0.8,
           maxChildSize: 1,
           expand: false,
           builder: (context, scrollController) {
