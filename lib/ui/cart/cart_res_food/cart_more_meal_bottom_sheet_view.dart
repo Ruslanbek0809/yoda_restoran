@@ -119,10 +119,13 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                                     .volumeName!,
                                                 style: ktsDefault14Text,
                                               ),
-                                              SizedBox(width: 7.w),
-                                              Text(
-                                                  '+${formatNum(meal.discount != null || meal.discount! > 0 ? (mainVolume.volumes![volumePos].price! / 100) * (100 - meal.discount!) : mainVolume.volumes![volumePos].price!)} TMT',
-                                                  style: kts16HelperText),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 7.w),
+                                                child: Text(
+                                                    '+${formatNum(meal.discount != null || meal.discount! > 0 ? (mainVolume.volumes![volumePos].price! / 100) * (100 - meal.discount!) : mainVolume.volumes![volumePos].price!)} TMT',
+                                                    style: kts16HelperText),
+                                              ),
                                             ],
                                           ),
                                           activeColor: kcGreenColor,
