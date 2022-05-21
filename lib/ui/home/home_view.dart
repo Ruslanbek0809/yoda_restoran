@@ -72,22 +72,22 @@ class _HomeViewState extends State<HomeView> {
         /// HANDLES clicked terminated dynamic link
         await model.handleClickedDynamicLink();
 
-        await showFlexibleBottomSheet(
-          minHeight: 0,
-          initHeight: 0.95,
-          maxHeight: 0.95,
-          duration: Duration(milliseconds: 250),
-          context: context,
-          builder: (context, scrollController, offset) {
-            return CustomBarBottomSheet(
-              child: RateUsScreen(
-                scrollController: scrollController,
-                offset: offset,
-              ),
-            );
-          },
-          anchors: [0, 0.95],
-        );
+        // await showFlexibleBottomSheet(
+        //   minHeight: 0,
+        //   initHeight: 0.95,
+        //   maxHeight: 0.95,
+        //   duration: Duration(milliseconds: 250),
+        //   context: context,
+        //   builder: (context, scrollController, offset) {
+        //     return CustomBarBottomSheet(
+        //       child: RateUsScreen(
+        //         scrollController: scrollController,
+        //         offset: offset,
+        //       ),
+        //     );
+        //   },
+        //   anchors: [0, 0.95],
+        // );
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)

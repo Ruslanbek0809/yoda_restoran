@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/cart/order/order_view_model.dart';
 import 'package:yoda_res/ui/drawer/addresses/addresses_view_model.dart';
 import '../app/app.locator.dart';
 import 'cart/cart_view_model.dart';
@@ -59,6 +60,10 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
           addressDialogData: sheetRequest.data,
+        ),
+    DialogType.rateUs: (context, sheetRequest, completer) => RateUsDialogView(
+          request: sheetRequest,
+          completer: completer,
         ),
   };
 
@@ -345,72 +350,66 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OrderViewModel>.reactive(
-      viewModelBuilder: () => OrderViewModel(),
-      builder: (context, model, child) {
-        return (Platform.isIOS)
-            ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
-                actions: <Widget>[
-                  CustomTextChildButton(
-                    child: Text(
-                      request.secondaryButtonTitle!,
-                      style: kts18Text,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse(data: true));
-                    },
-                  ),
-                  CustomTextChildButton(
-                    child: Text(
-                      request.mainButtonTitle!,
-                      style: ktsDefault18SemiBoldText,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse(data: false));
-                    },
-                  ),
-                ],
-              )
-            : AlertDialog(
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 8.h),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                actionsAlignment: MainAxisAlignment.center,
-                title: Text(
-                  request.title!,
-                  textAlign: TextAlign.center,
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
                 ).tr(),
-                titleTextStyle: ktsDefault18BoldText,
-                actions: <Widget>[
-                  CustomTextChildButton(
-                    child: Text(
-                      request.secondaryButtonTitle!,
-                      style: kts18Text,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse(data: true));
-                    },
-                  ),
-                  SizedBox(width: 42.w),
-                  CustomTextChildButton(
-                    child: Text(
-                      request.mainButtonTitle!,
-                      style: ktsDefault18SemiBoldText,
-                    ).tr(),
-                    color: Colors.transparent,
-                    onPressed: () async {
-                      completer(DialogResponse(data: false));
-                    },
-                  ),
-                ],
-              );
-      },
-    );
+                color: Colors.transparent,
+                onPressed: () async {
+                  completer(DialogResponse(data: true));
+                },
+              ),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: ktsDefault18SemiBoldText,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async {
+                  completer(DialogResponse(data: false));
+                },
+              ),
+            ],
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 8.h),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Text(
+              request.title!,
+              textAlign: TextAlign.center,
+            ).tr(),
+            titleTextStyle: ktsDefault18BoldText,
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async {
+                  completer(DialogResponse(data: true));
+                },
+              ),
+              SizedBox(width: 42.w),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: ktsDefault18SemiBoldText,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async {
+                  completer(DialogResponse(data: false));
+                },
+              ),
+            ],
+          );
   }
 }
 
@@ -427,33 +426,27 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OrderViewModel>.reactive(
-      viewModelBuilder: () => OrderViewModel(),
-      builder: (context, model, child) {
-        return (Platform.isIOS)
-            ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
-                content: Text(content, style: kts18Text).tr(),
-              )
-            : AlertDialog(
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-                contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-                actionsAlignment: MainAxisAlignment.center,
-                title: Text(
-                  request.title!,
-                  textAlign: TextAlign.center,
-                ).tr(),
-                titleTextStyle: ktsDefault18BoldText,
-                content: Text(
-                  content,
-                  textAlign: TextAlign.center,
-                ).tr(),
-                contentTextStyle: kts18Text,
-              );
-      },
-    );
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            content: Text(content, style: kts18Text).tr(),
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
+            contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Text(
+              request.title!,
+              textAlign: TextAlign.center,
+            ).tr(),
+            titleTextStyle: ktsDefault18BoldText,
+            content: Text(
+              content,
+              textAlign: TextAlign.center,
+            ).tr(),
+            contentTextStyle: kts18Text,
+          );
   }
 }
 
@@ -472,72 +465,66 @@ class NotificationDialogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<OrderViewModel>.reactive(
-      viewModelBuilder: () => OrderViewModel(),
-      builder: (context, model, child) {
-        return (Platform.isIOS)
-            ? CupertinoAlertDialog(
-                title: Column(
-                  children: [
-                    Lottie.asset(
-                      notificationData.lottie,
-                      height: 85.h,
-                      width: 85.w,
-                    ),
-                    // SvgPicture.asset(
-                    //   notificationData.svg,
-                    //   color: AppTheme.MAIN,
-                    //   width: 90.w,
-                    //   height: 90.w,
-                    // ),
-                    SizedBox(height: 15.h),
-                    Text(
-                      notificationData.restaurant,
-                      textAlign: TextAlign.center,
-                      style: kts22PrimaryText,
-                    )
-                  ],
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Column(
+              children: [
+                Lottie.asset(
+                  notificationData.lottie,
+                  height: 85.h,
+                  width: 85.w,
                 ),
-                content: Text(
-                  notificationData.content,
+                // SvgPicture.asset(
+                //   notificationData.svg,
+                //   color: AppTheme.MAIN,
+                //   width: 90.w,
+                //   height: 90.w,
+                // ),
+                SizedBox(height: 15.h),
+                Text(
+                  notificationData.restaurant,
                   textAlign: TextAlign.center,
-                  style: kts18NotificationText,
+                  style: kts22PrimaryText,
+                )
+              ],
+            ),
+            content: Text(
+              notificationData.content,
+              textAlign: TextAlign.center,
+              style: kts18NotificationText,
+            ),
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius20),
+            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 0.h),
+            contentPadding: EdgeInsets.fromLTRB(20.w, 6.h, 20.w, 24.h),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Column(
+              children: [
+                Lottie.asset(
+                  notificationData.lottie,
+                  height: 0.2.sh,
                 ),
-              )
-            : AlertDialog(
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppTheme().radius20),
-                titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 0.h),
-                contentPadding: EdgeInsets.fromLTRB(20.w, 6.h, 20.w, 24.h),
-                actionsAlignment: MainAxisAlignment.center,
-                title: Column(
-                  children: [
-                    Lottie.asset(
-                      notificationData.lottie,
-                      height: 0.2.sh,
-                    ),
-                    // SvgPicture.asset(
-                    //   notificationData.lottie,
-                    //   color: AppTheme.MAIN,
-                    //   width: 90.w,
-                    //   height: 90.w,
-                    // ),
-                    SizedBox(height: 15.h),
-                    Text(
-                      notificationData.restaurant,
-                      textAlign: TextAlign.center,
-                      style: kts22PrimaryText,
-                    )
-                  ],
-                ),
-                content: Text(
-                  notificationData.content,
+                // SvgPicture.asset(
+                //   notificationData.lottie,
+                //   color: AppTheme.MAIN,
+                //   width: 90.w,
+                //   height: 90.w,
+                // ),
+                SizedBox(height: 15.h),
+                Text(
+                  notificationData.restaurant,
                   textAlign: TextAlign.center,
-                ),
-                contentTextStyle: kts18NotificationText,
-              );
-      },
-    );
+                  style: kts22PrimaryText,
+                )
+              ],
+            ),
+            content: Text(
+              notificationData.content,
+              textAlign: TextAlign.center,
+            ),
+            contentTextStyle: kts18NotificationText,
+          );
   }
 }
 //------------------ ADDRESS DIALOGS ---------------------//
@@ -681,6 +668,264 @@ class RemoveAddressDialogView extends StatelessWidget {
                 ],
               );
       },
+    );
+  }
+}
+
+class RateUsDialogView extends StatefulWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const RateUsDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+  });
+  @override
+  _RateUsDialogViewState createState() => _RateUsDialogViewState();
+}
+
+class _RateUsDialogViewState extends State<RateUsDialogView>
+    with SingleTickerProviderStateMixin {
+  bool _isLoading = false;
+  final GlobalKey<FormState> _rateFormKey = GlobalKey<FormState>();
+  final TextEditingController _notesController = TextEditingController();
+  final FocusNode _notesFocus = FocusNode();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _notesController.dispose();
+    _notesFocus.dispose();
+    super.dispose();
+  }
+
+  Future _onConfirmButtonPressed() async {
+    setState(() {
+      _isLoading = true;
+    });
+    if (_rateFormKey.currentState!.validate()) {
+      printLog('_contactformKey validated');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: EdgeInsets.zero,
+      alignment: Alignment.bottomCenter,
+      insetAnimationCurve: Curves.ease,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(Constants.BORDER_RADIUS_20),
+        ),
+      ),
+      child: Container(
+        height: 0.95.sh,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+
+              /// To resize screen when OnKeyboard opened
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Form(
+                  key: _rateFormKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Column(
+                    children: [
+                      // --------------- YODA RES Title -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.h),
+                        child: SvgPicture.asset(
+                          'assets/rate_yoda_res.svg',
+                          color: AppTheme.MAIN,
+                          width: 0.35.sw,
+                        ),
+                      ),
+                      // --------------- RES NAME -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
+                        child: Text(
+                          'Soltan Restoran',
+                          style: TextStyle(
+                            fontSize: 30.sp,
+                            color: AppTheme.MAIN_DARK,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      // --------------- TEXT -------------- //
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: Text(
+                          'Sargyt edeniňiz üçin sag boluň!',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            color: AppTheme.FONT_COLOR,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      // --------------- TEXT -------------- //
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                        child: Text(
+                          'Işimiziň hilini ýokarlandyrmak üçin tagamlarymyza we hyzmatymyza berjek bahaňyz biziň üçin wajyp.',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppTheme.FONT_COLOR,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      // --------------- RATING -------------- //
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: RatingBar.builder(
+                          initialRating: 0,
+                          minRating: 0,
+                          direction: Axis.horizontal,
+                          allowHalfRating: false,
+                          itemCount: 5,
+                          glow: false,
+                          unratedColor: AppTheme.MAIN.withOpacity(0.4),
+                          itemSize: 60,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: AppTheme.MAIN,
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
+                        ),
+                      ),
+                      // --------------- COMMENT -------------- //
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        child: TextFormField(
+                          controller: _notesController,
+                          minLines: 8,
+                          maxLines: null,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: AppTheme().radius10,
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: AppTheme.MAIN_LIGHT,
+                            hintText: 'Teswir',
+                            hintStyle: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppTheme.TEXTFIELD_HINT_COLOR,
+                            ),
+                          ),
+                          validator: (value) {
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 50.h),
+                      //--------------- SEND Button -------------- //
+                      SizedBox(
+                        width: 1.sw,
+                        child: CustomTextChildButton(
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child:
+                                // model.isBusy
+                                //     ? ButtonLoading()
+                                //     :
+                                Text(
+                              'Ugrat',
+                              style: ktsButton18Text,
+                            ),
+                          ),
+                          onPressed: () => showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) => AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius20,
+                              ),
+                              title: Column(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/success_rate_star.svg',
+                                    color: AppTheme.MAIN,
+                                    width: 120.w,
+                                    height: 120.w,
+                                  ),
+                                  SizedBox(height: 15.h),
+                                  Text(
+                                    'Soltan Restoran',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: AppTheme.MAIN,
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              content: Text(
+                                'Pikiriňizi paýlaşanyňyz üçin sag boluň!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppTheme.GREEN_COLOR,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // onPressed:
+                          // model.isBusy
+                          //     ? () {}
+                          //     : () async {
+                          //         if (model.selectedAddress!.id == -1 &&
+                          //             model.isDelivery)
+                          //           await showErrorFlashBar(
+                          //             context: context,
+                          //             msg: LocaleKeys.selectAddressPls,
+                          //             margin: EdgeInsets.only(
+                          //               left: 16.w,
+                          //               right: 16.w,
+                          //               bottom: 0.13.sh,
+                          //             ),
+                          //           );
+                          //         else
+                          //           await model.createOrder(
+                          //             onFailForView: () async =>
+                          //                 await showErrorFlashBar(
+                          //               context: context,
+                          //               margin: EdgeInsets.only(
+                          //                 left: 16.w,
+                          //                 right: 16.w,
+                          //                 bottom: 0.13.sh,
+                          //               ),
+                          //             ),
+                          //           );
+                          //       },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

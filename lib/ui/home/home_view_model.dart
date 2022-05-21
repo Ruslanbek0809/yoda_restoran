@@ -25,6 +25,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
   final _dynamicLinkService = locator<DynamicLinkService>();
+  final _dialogService = locator<DialogService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -155,7 +156,7 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   /// Below lines are custom error part
   @override
-  void onData(key) {  
+  void onData(key) {
     _hasFutureError = false;
   }
 
@@ -210,6 +211,16 @@ class HomeViewModel extends MultipleFutureViewModel {
     });
 
     return totalCartSum;
+  }
+
+  /// SHOWS cancel accepted order Dialog
+  Future showRateUsDialog() async {
+    log.i('showRateUsDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.rateUs,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
   }
 
   //------------------ DYNAMIC LINK ---------------------//
