@@ -276,7 +276,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                             ),
                             Text(
                               model.mealQuantity.toString(),
-                              style: ktsDefault16Text,
+                              style: kts16Text,
                             ),
                             Material(
                               color: AppTheme.WHITE,
@@ -469,7 +469,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                     ? '${formatNum(meal.discountedPrice!)} TMT'
                                     : '${formatNum(meal.price!)} TMT',
                                 textAlign: TextAlign.center,
-                                style: ktsDefault16Text,
+                                style: kts16Text,
                               ),
                             ),
                           ),

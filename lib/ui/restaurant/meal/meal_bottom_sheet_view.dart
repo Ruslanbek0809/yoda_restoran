@@ -243,7 +243,7 @@ class MealBottomSheet extends StatelessWidget {
                               ? RichText(
                                   text: TextSpan(
                                     text: meal.name!,
-                                    style: ktsDefault16Text,
+                                    style: kts16Text,
                                     children: <TextSpan>[
                                       TextSpan(
                                         text:
@@ -255,7 +255,7 @@ class MealBottomSheet extends StatelessWidget {
                                 )
                               : Text(
                                   meal.name!,
-                                  style: ktsDefault16Text,
+                                  style: kts16Text,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),

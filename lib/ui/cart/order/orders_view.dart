@@ -214,18 +214,18 @@ class OrdersView extends StatelessWidget {
                                           children: [
                                             Text(
                                               LocaleKeys.driver,
-                                              style: ktsDefault16Text,
+                                              style: kts16Text,
                                             ).tr(),
                                             order.selfPickUp!
                                                 ? Text(
                                                     '-',
-                                                    style: ktsDefault16Text,
+                                                    style: kts16Text,
                                                   )
                                                 : order.status == 1
                                                     ? Text(
                                                         LocaleKeys
                                                             .notAssignedYet,
-                                                        style: ktsDefault16Text,
+                                                        style: kts16Text,
                                                         overflow: TextOverflow
                                                             .visible,
                                                       ).tr()
@@ -241,8 +241,7 @@ class OrdersView extends StatelessWidget {
                                                         : Text(
                                                             order.driver!
                                                                 .mobile!,
-                                                            style:
-                                                                ktsDefault16Text,
+                                                            style: kts16Text,
                                                           ),
                                           ],
                                         ),
@@ -257,12 +256,12 @@ class OrdersView extends StatelessWidget {
                                           children: [
                                             Text(
                                               LocaleKeys.deliveryPrice,
-                                              style: ktsDefault16Text,
+                                              style: kts16Text,
                                             ).tr(),
                                             order.selfPickUp!
                                                 ? Text(
                                                     '0 TMT',
-                                                    style: ktsDefault16Text,
+                                                    style: kts16Text,
                                                   )
                                                 : order.status == 1
                                                     ? Text(
@@ -270,15 +269,14 @@ class OrdersView extends StatelessWidget {
                                                             .notAssignedYet,
                                                         overflow:
                                                             TextOverflow.fade,
-                                                        style: ktsDefault16Text,
+                                                        style: kts16Text,
                                                       ).tr()
                                                     : order.dostawkaPrice ==
                                                             null
                                                         ? SizedBox()
                                                         : Text(
                                                             '${formatNum(order.dostawkaPrice!)} TMT',
-                                                            style:
-                                                                ktsDefault16Text,
+                                                            style: kts16Text,
                                                           ),
                                           ],
                                         ),
@@ -305,13 +303,13 @@ class OrdersView extends StatelessWidget {
                                                 SizedBox(width: 7.w),
                                                 Text(
                                                   order.promocode!.name!,
-                                                  style: ktsDefault16Text,
+                                                  style: kts16Text,
                                                 ),
                                               ],
                                             ),
                                             Text(
                                               '${formatNum(order.totPrice!)} TMT -${formatNum(orderPromocodePrice)} TMT',
-                                              style: ktsDefault16Text,
+                                              style: kts16Text,
                                             ),
                                           ],
                                         ),
@@ -347,12 +345,12 @@ class OrdersView extends StatelessWidget {
                                                       maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      style: ktsDefault16Text,
+                                                      style: kts16Text,
                                                     ),
                                                   ),
                                                   Text(
                                                     '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
-                                                    style: ktsDefault16Text,
+                                                    style: kts16Text,
                                                   ),
                                                 ],
                                               ),

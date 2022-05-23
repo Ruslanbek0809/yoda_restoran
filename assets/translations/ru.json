@@ -144,6 +144,11 @@
     "toggleDeliveryOnly": "Ресторан работает только в режиме доставки",
     "toggleSelfPickUpOnly": "Ресторан работает только на вынос",
     "sortByGeolocation": "По геолокации",
+    "ratingThanksForTheOrder": "Спасибо за Ваш заказ!",
+    "ratingImportantForUs": "Для улучшения качества нашей работы оцените нашу кухню и сервис!",
+    "ratingComment": "Комментарий",
+    "ratingSend": "Отправить",
+    "ratingConfirmation": "Спасибо за отзыв!",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

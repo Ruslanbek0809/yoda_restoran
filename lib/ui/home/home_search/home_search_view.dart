@@ -219,7 +219,7 @@ class HomeSearchView extends StatelessWidget {
                                                     : '${formatNum(_meal.price!)} TMT',
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
-                                                style: ktsDefault16Text,
+                                                style: kts16Text,
                                               ),
                                             ),
                                           ],

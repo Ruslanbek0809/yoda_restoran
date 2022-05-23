@@ -502,8 +502,7 @@ class _HomeViewState extends State<HomeView> {
                                                     CustomTextChildButton(
                                                         child: Text(
                                                           LocaleKeys.clear,
-                                                          style:
-                                                              ktsDefault16Text,
+                                                          style: kts16Text,
                                                         ).tr(),
                                                         color:
                                                             kcSecondaryLightColor,

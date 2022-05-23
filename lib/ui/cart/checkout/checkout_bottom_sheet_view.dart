@@ -134,7 +134,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                         maxLines: 2,
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                        style: ktsDefault16Text,
+                                                        style: kts16Text,
                                                       ),
                                                     ),
                                             ],
@@ -160,7 +160,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         SizedBox(width: 15.w),
                                         Text(
                                           model.cartRes!.name!,
-                                          style: ktsDefault16Text,
+                                          style: kts16Text,
                                         ),
                                       ],
                                     ),
@@ -323,7 +323,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                           model.deliveryDateTime == null
                                               ? Text(
                                                   LocaleKeys.now,
-                                                  style: ktsDefault16Text,
+                                                  style: kts16Text,
                                                 ).tr()
                                               : model.deliveryDateTime!
                                                           .isAfter(model.now) &&
@@ -334,13 +334,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           LocaleKeys.today,
-                                                          style:
-                                                              ktsDefault16Text,
+                                                          style: kts16Text,
                                                         ).tr(),
                                                         Text(
                                                           ' ${model.deliveryDateFormatted}',
-                                                          style:
-                                                              ktsDefault16Text,
+                                                          style: kts16Text,
                                                         ).tr(),
                                                       ],
                                                     )
@@ -352,20 +350,17 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                             Text(
                                                               LocaleKeys
                                                                   .tomorrow,
-                                                              style:
-                                                                  ktsDefault16Text,
+                                                              style: kts16Text,
                                                             ).tr(),
                                                             Text(
                                                               ' ${model.deliveryDateFormatted}',
-                                                              style:
-                                                                  ktsDefault16Text,
+                                                              style: kts16Text,
                                                             ).tr(),
                                                           ],
                                                         )
                                                       : Text(
                                                           ' ${model.deliveryDateFormatted}',
-                                                          style:
-                                                              ktsDefault16Text,
+                                                          style: kts16Text,
                                                         ).tr(),
                                         ],
                                       ),
@@ -436,7 +431,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                     .nameTk!
                                                 : model.selectedPaymentType!
                                                     .nameRu!,
-                                            style: ktsDefault16Text,
+                                            style: kts16Text,
                                           ),
                                         ],
                                       ),

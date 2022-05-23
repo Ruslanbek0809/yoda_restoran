@@ -739,36 +739,25 @@ class RateUsDialogView extends StatelessWidget {
                         padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
                         child: Text(
                           'Soltan Restoran',
-                          style: TextStyle(
-                            fontSize: 30.sp,
-                            color: AppTheme.MAIN_DARK,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: kts30DarkBoldText,
                         ),
                       ),
                       // --------------- TEXT -------------- //
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         child: Text(
-                          'Sargyt edeniňiz üçin sag boluň!',
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            color: AppTheme.FONT_COLOR,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                          LocaleKeys.ratingThanksForTheOrder,
+                          style: kts20DarkText,
+                        ).tr(),
                       ),
                       // --------------- TEXT -------------- //
                       Padding(
                         padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                         child: Text(
-                          'Işimiziň hilini ýokarlandyrmak üçin tagamlarymyza we hyzmatymyza berjek bahaňyz biziň üçin wajyp.',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppTheme.FONT_COLOR,
-                          ),
+                          LocaleKeys.ratingImportantForUs,
+                          style: kts16Text,
                           textAlign: TextAlign.center,
-                        ),
+                        ).tr(),
                       ),
                       // --------------- RATING -------------- //
                       Padding(
@@ -808,9 +797,9 @@ class RateUsDialogView extends StatelessWidget {
                                 //     ? ButtonLoading()
                                 //     :
                                 Text(
-                              'Ugrat',
+                              LocaleKeys.ratingSend,
                               style: ktsButton18Text,
-                            ),
+                            ).tr(),
                           ),
                           onPressed: () => showDialog(
                             context: context,
@@ -840,14 +829,14 @@ class RateUsDialogView extends StatelessWidget {
                                 ],
                               ),
                               content: Text(
-                                'Pikiriňizi paýlaşanyňyz üçin sag boluň!',
+                                LocaleKeys.ratingConfirmation,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppTheme.GREEN_COLOR,
                                 ),
-                              ),
+                              ).tr(),
                             ),
                           ),
                           // onPressed:

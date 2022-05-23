@@ -6,12 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // To make it clear which weight we are using, we'll define the weight even for regular
 // fonts
 
-TextStyle ktsButtonText = TextStyle(
-  color: kcWhiteColor,
-  fontSize: 20.sp,
-  fontWeight: FontWeight.normal,
-);
-
 TextStyle ktsButton18Text = TextStyle(
   color: kcWhiteColor,
   fontSize: 18.sp,
@@ -89,7 +83,7 @@ TextStyle kts16PrimaryBoldText = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-TextStyle ktsDefault16Text = TextStyle(
+TextStyle kts16Text = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.normal,
   color: kcFontColor,
@@ -173,10 +167,10 @@ TextStyle ktsDefault20BoldText = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault22BoldText = TextStyle(
-  fontSize: 22.sp,
-  fontWeight: FontWeight.w600,
-  color: kcFontColor,
+TextStyle ktsButtonText = TextStyle(
+  color: kcWhiteColor,
+  fontSize: 20.sp,
+  fontWeight: FontWeight.normal,
 );
 
 TextStyle kts20DarkText = TextStyle(
@@ -197,16 +191,21 @@ TextStyle kts22Text = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle ktsDefault22BoldText = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.w600,
+  color: kcFontColor,
+);
+
 TextStyle kts22PrimaryText = TextStyle(
   fontSize: 22.sp,
   fontWeight: FontWeight.normal,
   color: kcPrimaryColor,
 );
-
-TextStyle kts30DarkText = TextStyle(
-  fontSize: 30.sp,
+TextStyle kts22BoldWhiteText = TextStyle(
+  fontSize: 22.sp,
   fontWeight: FontWeight.w600,
-  color: kcSecondaryDarkColor,
+  color: kcWhiteColor,
 );
 
 TextStyle ktsDefault24DarkText = TextStyle(
@@ -215,8 +214,14 @@ TextStyle ktsDefault24DarkText = TextStyle(
   color: kcSecondaryDarkColor,
 );
 
-TextStyle kts22BoldWhiteText = TextStyle(
-  fontSize: 22.sp,
+TextStyle kts30DarkText = TextStyle(
+  fontSize: 30.sp,
   fontWeight: FontWeight.w600,
-  color: kcWhiteColor,
+  color: kcSecondaryDarkColor,
+);
+
+TextStyle kts30DarkBoldText = TextStyle(
+  fontSize: 30.sp,
+  fontWeight: FontWeight.bold,
+  color: kcSecondaryDarkColor,
 );

@@ -40,7 +40,7 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.only(right: 5.w),
                 child: TextButton(
                   onPressed: model.logout,
-                  child: Text(LocaleKeys.logout, style: ktsDefault16Text).tr(),
+                  child: Text(LocaleKeys.logout, style: kts16Text).tr(),
                 ),
               ),
             ],

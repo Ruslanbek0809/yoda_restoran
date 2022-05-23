@@ -144,6 +144,11 @@
     "toggleDeliveryOnly": "Restoran diňe eltip bermek tertibinde işleýär",
     "toggleSelfPickUpOnly": "Restoran eltip bermek hyzmatyny hödürlemeýär.",
     "sortByGeolocation": "Ýakynlygy boýunça",
+    "ratingThanksForTheOrder": "Sargyt edeniňiz üçin sag buluň!",
+    "ratingImportantForUs": "Işimiziň hilini ýokarlandyrmak üçin tagamlarymyza we hyzmatymyza baha beriň!",
+    "ratingComment": "Teswir",
+    "ratingSend": "Ugrat",
+    "ratingConfirmation": "Pikiriňizi paýlaşanyňyz üçin sag boluň!",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

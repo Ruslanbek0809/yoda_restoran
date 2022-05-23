@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/shared/shared.dart';
 import 'package:yoda_res/utils/utils.dart';
+import '../generated/locale_keys.g.dart';
 import 'rate_us_dialog_view_model.dart';
 
 class RateUsDialogHook extends HookViewModelWidget<RateUsDialogViewModel> {
@@ -23,12 +25,9 @@ class RateUsDialogHook extends HookViewModelWidget<RateUsDialogViewModel> {
           borderRadius: AppTheme().radius10,
           borderSide: BorderSide.none,
         ),
-        // focusedBorder: UnderlineInputBorder(
-        //   borderSide: BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
-        // ),
         filled: true,
         fillColor: AppTheme.MAIN_LIGHT,
-        hintText: 'Teswir',
+        hintText: LocaleKeys.ratingComment.tr(),
         hintStyle: kts16HelperText,
       ),
       validator: model.updateNote,

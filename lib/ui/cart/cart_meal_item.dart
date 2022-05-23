@@ -45,7 +45,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       cartMeal.name!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: ktsDefault16Text,
+                      style: kts16Text,
                     )),
                     Padding(
                       padding: EdgeInsets.only(left: 5.w),

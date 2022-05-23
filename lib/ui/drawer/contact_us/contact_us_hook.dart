@@ -35,7 +35,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               SizedBox(height: 25.h),
               TextFormField(
                 controller: _nameController,
-                style: ktsDefault16Text,
+                style: kts16Text,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -79,7 +79,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               ),
               TextFormField(
                 controller: _phoneController,
-                style: ktsDefault16Text,
+                style: kts16Text,
                 inputFormatters: [maskFormatter],
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.done,
@@ -105,7 +105,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                   ),
                   prefix: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Text('+993', style: ktsDefault16Text),
+                    child: Text('+993', style: kts16Text),
                   ),
                   labelText: LocaleKeys.phone.tr(),
                   labelStyle: kts16ContactText,
@@ -116,7 +116,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               ),
               TextFormField(
                 controller: _infoController,
-                style: ktsDefault16Text,
+                style: kts16Text,
                 maxLines: 8,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
