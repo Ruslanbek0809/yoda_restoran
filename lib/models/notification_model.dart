@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'notification.g.dart';
+part 'notification_model.g.dart';
 
 @JsonSerializable(includeIfNull: true)
-class Notification {
-  Notification({
+class NotificationModel {
+  NotificationModel({
     this.id,
     this.option,
     this.title,
@@ -27,7 +27,7 @@ class Notification {
   final String? selfPickUp;
 
 
-  factory Notification.fromJson(Map<String, dynamic> json) =>
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$NotificationFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificationToJson(this);

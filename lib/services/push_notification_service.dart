@@ -49,7 +49,7 @@ class PushNotificationService {
         log.v('Message also contained a notification: ${message.notification}');
       }
 
-      var noti = Notification.fromJson(message.data);
+      final noti = NotificationModel.fromJson(message.data);
       log.v('notificationData JSON status: ${noti.status}');
       log.v(
           'notificationData JSON title: ${noti.title} and test ${noti.selfPickUp == 'False'}, ${noti.selfPickUp == 'True'}');
@@ -95,6 +95,12 @@ class PushNotificationService {
           break;
         case '4':
           log.v('INSIDE STATUS 4');
+          await _dialogService.showCustomDialog(
+            variant: DialogType.rateUs,
+            showIconInMainButton: false,
+            barrierDismissible: true,
+            data: noti,
+          );
 
           break;
         default:
