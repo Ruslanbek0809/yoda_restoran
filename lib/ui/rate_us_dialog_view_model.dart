@@ -23,7 +23,6 @@ class RateUsDialogViewModel extends BaseViewModel {
   void updateRating(double rating) {
     log.v('updateRating value: $rating');
     _rating = rating;
-    // notifyListeners();
   }
 
   /// UPDATES _note
@@ -36,21 +35,24 @@ class RateUsDialogViewModel extends BaseViewModel {
     return null;
   }
 
-  /// ADDS new address
-  Future<void> onAddAddressPressed(
+  /// SENDS user rating
+  Future<void> onRatingSendPressed(
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-    log.v('onAddAddressPressed()');
-    // try {
-    //   await runBusyFuture(_userService.addAddress(
-    //     note,
-    //     () => onSuccess!(),
-    //     () => onFail!(),
-    //   ));
-    // } catch (err) {
-    //   throw err;
-    // }
+    log.v('onRatingSendPressed()');
+    try {
+      await runBusyFuture(_userService.orderRating(
+        int.parse(notificationModel.id!),
+        int.parse(notificationModel.id!), // TODO: Need to change to restaurant ID
+        _rating,
+        _note,
+        () => onSuccess!(),
+        () => onFail!(),
+      ));
+    } catch (err) {
+      throw err;
+    }
   }
 
 //------------------------ NAVIGATION ----------------------------//

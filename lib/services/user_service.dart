@@ -575,6 +575,47 @@ class UserService {
     }
   }
 
+  //------------------ RATINGS ---------------------//
+
+  Future<void> orderRating(
+    int? orderId,
+    int? restaurantId,
+    double? value,
+    String? feedback,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['order'] = orderId;
+    _queryParams['restaurant'] = restaurantId;
+    _queryParams['value'] = value;
+    _queryParams['feedback'] = feedback;
+
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData orderRatingFormData = FormData.fromMap(_queryParams);
+
+    try {
+      Response response = await _apiRoot.dio.post(
+        'api/ratings/',
+        data: orderRatingFormData,
+      );
+      log.v(
+          'RESPONSE: api/ratings/ => ${response.data} and ${response.statusCode}');
+
+      if (response.statusCode == 200 || response.statusCode == 201)
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR api/ratings/ with RESPONSE: ${error.response}');
+      onFail!();
+      throw DioErrorType.response;
+    }
+  }
+
+  //------------------ CONTACT US ---------------------//
+
   Future<void> contactUs(
     String? name,
     String? phone,

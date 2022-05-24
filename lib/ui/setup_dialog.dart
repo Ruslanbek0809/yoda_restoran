@@ -739,6 +739,8 @@ class RateUsDialogView extends StatelessWidget {
                         padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
                         child: Text(
                           'Soltan Restoran',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: kts30DarkBoldText,
                         ),
                       ),
@@ -747,6 +749,8 @@ class RateUsDialogView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         child: Text(
                           LocaleKeys.ratingThanksForTheOrder,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: kts20DarkText,
                         ).tr(),
                       ),
@@ -756,6 +760,8 @@ class RateUsDialogView extends StatelessWidget {
                         child: Text(
                           LocaleKeys.ratingImportantForUs,
                           style: kts16Text,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ).tr(),
                       ),
@@ -792,16 +798,40 @@ class RateUsDialogView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 14.h),
                           child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
-                            child:
-                                // model.isBusy
-                                //     ? ButtonLoading()
-                                //     :
-                                Text(
-                              LocaleKeys.ratingSend,
-                              style: ktsButton18Text,
-                            ).tr(),
+                            child: model.isBusy
+                                ? ButtonLoading()
+                                : Text(
+                                    LocaleKeys.ratingSend,
+                                    style: ktsButton18Text,
+                                  ).tr(),
                           ),
-                          onPressed: () => showDialog(
+                          onPressed: () async =>
+                              //     await model.onRatingSendPressed(
+                              //   () async {
+                              //     showErrorFlashBar(
+                              //       context: context,
+                              //       msg: LocaleKeys.yourAddressDeletedSuccessfully,
+                              //       margin: EdgeInsets.only(
+                              //         left: 0.1.sw,
+                              //         right: 0.1.sw,
+                              //         bottom: 0.05.sh,
+                              //       ),
+                              //     );
+                              //     await completer(DialogResponse(data: true));
+                              //   },
+                              //   () async {
+                              //     showErrorFlashBar(
+                              //       context: context,
+                              //       margin: EdgeInsets.only(
+                              //         left: 0.1.sw,
+                              //         right: 0.1.sw,
+                              //         bottom: 0.05.sh,
+                              //       ),
+                              //     );
+                              //     await completer(DialogResponse(data: false));
+                              //   },
+                              // ),
+                              showDialog(
                             context: context,
                             barrierDismissible: true,
                             builder: (context) => AlertDialog(
@@ -810,65 +840,43 @@ class RateUsDialogView extends StatelessWidget {
                               ),
                               title: Column(
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/success_rate_star.svg',
-                                    color: AppTheme.MAIN,
-                                    width: 120.w,
-                                    height: 120.w,
-                                  ),
-                                  SizedBox(height: 15.h),
                                   Text(
                                     'Soltan Restoran',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: kts22PrimaryText,
+                                  ),
+                                  SizedBox(height: 15.h),
+                                  RatingBar.builder(
+                                    initialRating: model.rating,
+                                    direction: Axis.horizontal,
+                                    itemCount: 5,
+                                    allowHalfRating: false,
+                                    ignoreGestures: true,
+                                    glow: false,
+                                    unratedColor:
+                                        AppTheme.MAIN.withOpacity(0.4),
+                                    itemSize: 50,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
                                       color: AppTheme.MAIN,
-                                      fontSize: 22.sp,
-                                      fontWeight: FontWeight.normal,
                                     ),
-                                  )
+                                    onRatingUpdate: model.updateRating,
+                                  ),
                                 ],
                               ),
                               content: Text(
                                 LocaleKeys.ratingConfirmation,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppTheme.GREEN_COLOR,
-                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts18NotificationText,
                               ).tr(),
                             ),
                           ),
-                          // onPressed:
-                          // model.isBusy
-                          //     ? () {}
-                          //     : () async {
-                          //         if (model.selectedAddress!.id == -1 &&
-                          //             model.isDelivery)
-                          //           await showErrorFlashBar(
-                          //             context: context,
-                          //             msg: LocaleKeys.selectAddressPls,
-                          //             margin: EdgeInsets.only(
-                          //               left: 16.w,
-                          //               right: 16.w,
-                          //               bottom: 0.13.sh,
-                          //             ),
-                          //           );
-                          //         else
-                          //           await model.createOrder(
-                          //             onFailForView: () async =>
-                          //                 await showErrorFlashBar(
-                          //               context: context,
-                          //               margin: EdgeInsets.only(
-                          //                 left: 16.w,
-                          //                 right: 16.w,
-                          //                 bottom: 0.13.sh,
-                          //               ),
-                          //             ),
-                          //           );
-                          //       },
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],

@@ -202,6 +202,7 @@ TextStyle kts22PrimaryText = TextStyle(
   fontWeight: FontWeight.normal,
   color: kcPrimaryColor,
 );
+
 TextStyle kts22BoldWhiteText = TextStyle(
   fontSize: 22.sp,
   fontWeight: FontWeight.w600,

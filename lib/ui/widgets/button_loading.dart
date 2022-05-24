@@ -6,7 +6,7 @@ class ButtonLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpinKitChasingDots(
-      size: 23,
+      size: 26,
       color: kcWhiteColor,
     );
   }
