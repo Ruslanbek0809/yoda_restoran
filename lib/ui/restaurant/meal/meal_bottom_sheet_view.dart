@@ -119,7 +119,7 @@ class MealBottomSheet extends StatelessWidget {
                                                 child: Text(
                                                   mainVolume.volumes![volumePos]
                                                       .volumeName!,
-                                                  style: ktsDefault14Text,
+                                                  style: kts14Text,
                                                 ),
                                               ),
                                               Padding(
@@ -178,7 +178,7 @@ class MealBottomSheet extends StatelessWidget {
                                           Text(
                                             mainCustomizable.customizables![pos]
                                                 .customizableName!,
-                                            style: ktsDefault14Text,
+                                            style: kts14Text,
                                           ),
                                           SizedBox(width: 7.w),
                                           Text(

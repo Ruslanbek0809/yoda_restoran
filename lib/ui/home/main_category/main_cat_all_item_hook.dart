@@ -94,7 +94,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                 child: FittedBox(
                   child: Text(
                     LocaleKeys.all,
-                    style: ktsDefault14Text,
+                    style: kts14Text,
                   ).tr(),
                 ),
               ),

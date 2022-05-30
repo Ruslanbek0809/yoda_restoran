@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -63,7 +62,8 @@ void setupDialog() {
           completer: completer,
           addressDialogData: sheetRequest.data,
         ),
-    DialogType.rateUs: (context, sheetRequest, completer) => RateUsDialogView(
+    DialogType.rateOrder: (context, sheetRequest, completer) =>
+        RateOrderDialogView(
           request: sheetRequest,
           completer: completer,
           notificationModel: sheetRequest.data,
@@ -675,212 +675,205 @@ class RemoveAddressDialogView extends StatelessWidget {
   }
 }
 
-class RateUsDialogView extends StatelessWidget {
+class RateOrderDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
   final NotificationModel notificationModel;
-  const RateUsDialogView({
+  const RateOrderDialogView({
     Key? key,
     required this.request,
     required this.completer,
     required this.notificationModel,
   });
 
-  // Future _onConfirmButtonPressed() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   if (_rateFormKey.currentState!.validate()) {
-  //     printLog('_contactformKey validated');
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.zero,
-      alignment: Alignment.bottomCenter,
+      // insetPadding: EdgeInsets.zero,
+      insetPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.0),
+      alignment: Alignment.center,
       insetAnimationCurve: Curves.ease,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(Constants.BORDER_RADIUS_20),
-        ),
+        borderRadius:
+            BorderRadius.all(Radius.circular(Constants.BORDER_RADIUS_20)),
+        // borderRadius: BorderRadius.vertical(
+        //   top: Radius.circular(Constants.BORDER_RADIUS_20),
+        // ),
       ),
-      child: Container(
-        height: 0.95.sh,
-        child: ViewModelBuilder<RateUsDialogViewModel>.reactive(
-          viewModelBuilder: () => RateUsDialogViewModel(notificationModel),
-          builder: (context, model, child) => SingleChildScrollView(
-            padding: EdgeInsets.only(
+      child: ViewModelBuilder<RateUsDialogViewModel>.reactive(
+        viewModelBuilder: () => RateUsDialogViewModel(notificationModel),
+        builder: (context, model, child) => SingleChildScrollView(
+          padding: EdgeInsets.only(
 
-                /// To resize screen when OnKeyboard opened
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      // --------------- YODA RES Title -------------- //
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.h),
-                        child: SvgPicture.asset(
-                          'assets/rate_yoda_res.svg',
-                          color: AppTheme.MAIN,
-                          width: 0.35.sw,
-                        ),
-                      ),
-                      // --------------- RES NAME -------------- //
-                      Padding(
-                        padding: EdgeInsets.only(top: 35.h, bottom: 10.h),
-                        child: Text(
-                          'Soltan Restoran',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: kts30DarkBoldText,
-                        ),
-                      ),
-                      // --------------- TEXT -------------- //
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        child: Text(
-                          LocaleKeys.ratingThanksForTheOrder,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: kts20DarkText,
-                        ).tr(),
-                      ),
-                      // --------------- TEXT -------------- //
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                        child: Text(
-                          LocaleKeys.ratingImportantForUs,
-                          style: kts16Text,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                        ).tr(),
-                      ),
-                      // --------------- RATING -------------- //
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        child: RatingBar.builder(
-                          initialRating: 0,
-                          minRating: 0,
-                          direction: Axis.horizontal,
-                          allowHalfRating: false,
-                          itemCount: 5,
-                          glow: false,
-                          unratedColor: AppTheme.MAIN.withOpacity(0.4),
-                          itemSize: 60,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: AppTheme.MAIN,
-                          ),
-                          onRatingUpdate: model.updateRating,
-                        ),
-                      ),
-                      // --------------- NOTES HOOK -------------- //
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15.h),
-                        child: RateUsDialogHook(),
-                      ),
-                      SizedBox(height: 50.h),
-                      //--------------- SEND Button -------------- //
-                      SizedBox(
-                        width: 1.sw,
-                        child: CustomTextChildButton(
-                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                          child: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 300),
-                            child: model.isBusy
-                                ? ButtonLoading()
-                                : Text(
-                                    LocaleKeys.ratingSend,
-                                    style: ktsButton18Text,
-                                  ).tr(),
-                          ),
-                          onPressed: () async =>
-                              //     await model.onRatingSendPressed(
-                              //   () async {
-                              //     showErrorFlashBar(
-                              //       context: context,
-                              //       msg: LocaleKeys.yourAddressDeletedSuccessfully,
-                              //       margin: EdgeInsets.only(
-                              //         left: 0.1.sw,
-                              //         right: 0.1.sw,
-                              //         bottom: 0.05.sh,
-                              //       ),
-                              //     );
-                              //     await completer(DialogResponse(data: true));
-                              //   },
-                              //   () async {
-                              //     showErrorFlashBar(
-                              //       context: context,
-                              //       margin: EdgeInsets.only(
-                              //         left: 0.1.sw,
-                              //         right: 0.1.sw,
-                              //         bottom: 0.05.sh,
-                              //       ),
-                              //     );
-                              //     await completer(DialogResponse(data: false));
-                              //   },
-                              // ),
-                              showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: AppTheme().radius20,
-                              ),
-                              title: Column(
-                                children: [
-                                  Text(
-                                    'Soltan Restoran',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                    style: kts22PrimaryText,
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  RatingBar.builder(
-                                    initialRating: model.rating,
-                                    direction: Axis.horizontal,
-                                    itemCount: 5,
-                                    allowHalfRating: false,
-                                    ignoreGestures: true,
-                                    glow: false,
-                                    unratedColor:
-                                        AppTheme.MAIN.withOpacity(0.4),
-                                    itemSize: 50,
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: AppTheme.MAIN,
-                                    ),
-                                    onRatingUpdate: model.updateRating,
-                                  ),
-                                ],
-                              ),
-                              content: Text(
-                                LocaleKeys.ratingConfirmation,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts18NotificationText,
-                              ).tr(),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+              /// To resize screen when OnKeyboard opened
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
+            child: Column(
+              children: [
+                // --------------- YODA RES Title -------------- //
+                Padding(
+                  padding: EdgeInsets.only(top: 10.h),
+                  child: SvgPicture.asset(
+                    'assets/title_yoda_restoran.svg',
+                    width: 0.35.sw,
                   ),
-                ],
-              ),
+                ),
+                // --------------- RES NAME -------------- //
+                Padding(
+                  padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
+                  child: Text(
+                    notificationModel.title ?? 'Sultan Restoran',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: kts28DarkBoldText,
+                    // style: kts30DarkBoldText,
+                  ),
+                ),
+                // --------------- TEXT -------------- //
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: Text(
+                    LocaleKeys.ratingThanksForTheOrder,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: kts18DarkText,
+                    // style: kts20DarkText,
+                  ).tr(),
+                ),
+                // --------------- TEXT -------------- //
+                Padding(
+                  padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                  child: Text(
+                    LocaleKeys.ratingImportantForUs,
+                    style: kts14Text,
+                    // style: kts16Text,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ).tr(),
+                ),
+                // --------------- RATING -------------- //
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: RatingBar.builder(
+                    initialRating: 0,
+                    minRating: 0,
+                    direction: Axis.horizontal,
+                    allowHalfRating: false,
+                    itemCount: 5,
+                    glow: false,
+                    unratedColor: AppTheme.MAIN.withOpacity(0.4),
+                    itemSize: 50,
+                    // itemSize: 60,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: AppTheme.MAIN,
+                    ),
+                    onRatingUpdate: model.updateRating,
+                  ),
+                ),
+                // --------------- NOTES HOOK -------------- //
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15.h),
+                  child: RateUsDialogHook(),
+                ),
+                //--------------- SEND Button -------------- //
+                Padding(
+                  padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: CustomTextChildButton(
+                      color: model.rating == 0
+                          ? kcSecondaryLightColor
+                          : kcPrimaryColor,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        child: model.isBusy
+                            ? ButtonLoading()
+                            : Text(
+                                LocaleKeys.ratingSend,
+                                style: model.rating == 0
+                                    ? ktsButton18ContactText
+                                    : ktsButton18Text,
+                              ).tr(),
+                      ),
+                      onPressed: model.rating == 0
+                          ? () {}
+                          : () async => await model.onRatingSendPressed(
+                                () async {
+                                  Navigator.of(context).pop();
+                                  await showDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      builder: (context) {
+                                        model.dismissDialogs();
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: AppTheme().radius20,
+                                          ),
+                                          title: Column(
+                                            children: [
+                                              Text(
+                                                notificationModel.title ??
+                                                    'Sultan Restoran',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                                style: kts22PrimaryText,
+                                              ),
+                                              SizedBox(height: 15.h),
+                                              RatingBar.builder(
+                                                initialRating: model.rating,
+                                                direction: Axis.horizontal,
+                                                itemCount: 5,
+                                                allowHalfRating: false,
+                                                ignoreGestures: true,
+                                                glow: false,
+                                                unratedColor: AppTheme.MAIN
+                                                    .withOpacity(0.4),
+                                                itemSize: 45,
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: AppTheme.MAIN,
+                                                ),
+                                                onRatingUpdate:
+                                                    model.updateRating,
+                                              ),
+                                            ],
+                                          ),
+                                          content: Text(
+                                            LocaleKeys.ratingConfirmation,
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: kts18NotificationText,
+                                          ).tr(),
+                                        );
+                                      }).then((value) {
+                                    if (model.timer.isActive)
+                                      model.cancelTimer();
+                                  });
+                                },
+                                () async {
+                                  showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 0.1.sw,
+                                      right: 0.1.sw,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                  await completer(DialogResponse(data: false));
+                                },
+                              ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

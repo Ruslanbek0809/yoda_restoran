@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
 import 'package:yoda_res/app/app.locator.dart';
@@ -20,19 +22,31 @@ class RateUsDialogViewModel extends BaseViewModel {
   String? _note;
   String? get note => _note;
 
+  late Timer _timer;
+  Timer get timer => _timer;
+
   void updateRating(double rating) {
     log.v('updateRating value: $rating');
     _rating = rating;
+    notifyListeners();
   }
 
+  // /// UPDATES _note
+  // String? updateNote(String? value) {
+  //   log.v('updateNote value: $value');
+  //   if (value == null || value.isEmpty) return null;
+
+  //   _note = value;
+  //   notifyListeners();
+  //   return null;
+  // }
+
   /// UPDATES _note
-  String? updateNote(String? value) {
+  void updateNote(String? value) {
     log.v('updateNote value: $value');
-    if (value == null || value.isEmpty) return null;
 
     _note = value;
     notifyListeners();
-    return null;
   }
 
   /// SENDS user rating
@@ -40,11 +54,11 @@ class RateUsDialogViewModel extends BaseViewModel {
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-    log.v('onRatingSendPressed()');
+    log.v('onRatingSendPressed(): $_note, $note');
     try {
       await runBusyFuture(_userService.orderRating(
         int.parse(notificationModel.id!),
-        int.parse(notificationModel.id!), // TODO: Need to change to restaurant ID
+        int.parse(notificationModel.resId!),
         _rating,
         _note,
         () => onSuccess!(),
@@ -54,6 +68,13 @@ class RateUsDialogViewModel extends BaseViewModel {
       throw err;
     }
   }
+
+  /// DISMISSES Dialog after assigned time duratin
+  void dismissDialogs() =>
+      _timer = Timer(Duration(seconds: 2), () => _navService.back());
+
+  /// CANCELS timer if user taps outside of this dialog
+  void cancelTimer() => _timer.cancel();
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);

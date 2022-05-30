@@ -44,7 +44,7 @@ TextStyle kts12PromocodeText = TextStyle(
   color: kcPromocodeColor,
 );
 
-TextStyle ktsDefault14Text = TextStyle(
+TextStyle kts14Text = TextStyle(
   fontSize: 14.sp,
   fontWeight: FontWeight.normal,
   color: kcFontColor,
@@ -151,6 +151,12 @@ TextStyle ktsDefault18BoldText = TextStyle(
   color: kcFontColor,
 );
 
+TextStyle kts18DarkText = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w600,
+  color: kcSecondaryDarkColor,
+);
+
 TextStyle ktsDefault18HelperText = TextStyle(
   fontSize: 18.sp,
   color: kcHelperColor,
@@ -212,6 +218,12 @@ TextStyle kts22BoldWhiteText = TextStyle(
 TextStyle ktsDefault24DarkText = TextStyle(
   fontSize: 24.sp,
   fontWeight: FontWeight.w600,
+  color: kcSecondaryDarkColor,
+);
+
+TextStyle kts28DarkBoldText = TextStyle(
+  fontSize: 28.sp,
+  fontWeight: FontWeight.bold,
   color: kcSecondaryDarkColor,
 );
 

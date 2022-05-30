@@ -21,7 +21,7 @@ class HomeSearch extends ViewModelWidget<HomeViewModel> {
           boxShadow: [AppTheme().searchShadow],
         ),
         child: InkWell(
-          onTap: model.showRateUsDialog,
+          onTap: model.showRateOrderDialog,
           // onTap: model.navToHomeSearchView,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -5,6 +5,7 @@ part 'notification_model.g.dart';
 class NotificationModel {
   NotificationModel({
     this.id,
+    this.resId,
     this.option,
     this.title,
     this.status,
@@ -13,6 +14,9 @@ class NotificationModel {
 
   @JsonKey(name: 'id')
   final String? id;
+
+  @JsonKey(name: 'resId')
+  final String? resId;
 
   @JsonKey(name: 'option')
   final String? option;

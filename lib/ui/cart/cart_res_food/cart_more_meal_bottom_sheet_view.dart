@@ -117,7 +117,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                               Text(
                                                 mainVolume.volumes![volumePos]
                                                     .volumeName!,
-                                                style: ktsDefault14Text,
+                                                style: kts14Text,
                                               ),
                                               Padding(
                                                 padding:
@@ -175,7 +175,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                           Text(
                                             mainCustomizable.customizables![pos]
                                                 .customizableName!,
-                                            style: ktsDefault14Text,
+                                            style: kts14Text,
                                           ),
                                           SizedBox(width: 7.w),
                                           Text(

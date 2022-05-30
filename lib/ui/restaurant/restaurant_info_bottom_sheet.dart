@@ -157,7 +157,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   ),
                   Text(
                     restaurant.description!,
-                    style: ktsDefault14Text,
+                    style: kts14Text,
                   ),
                 ],
               ),

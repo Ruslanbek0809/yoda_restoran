@@ -214,10 +214,10 @@ class HomeViewModel extends MultipleFutureViewModel {
   }
 
   /// SHOWS cancel accepted order Dialog
-  Future showRateUsDialog() async {
-    log.i('showRateUsDialog()');
+  Future showRateOrderDialog() async {
+    log.i('showRateOrderDialog()');
     await _dialogService.showCustomDialog(
-      variant: DialogType.rateUs,
+      variant: DialogType.rateOrder,
       showIconInMainButton: false,
       barrierDismissible: true,
     );

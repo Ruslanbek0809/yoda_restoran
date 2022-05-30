@@ -147,13 +147,11 @@ class OrdersView extends StatelessWidget {
                                                                 .format(order
                                                                     .createdAt!
                                                                     .toLocal()),
-                                                            style:
-                                                                ktsDefault14Text,
+                                                            style: kts14Text,
                                                           )
                                                         : Text(
                                                             LocaleKeys.now,
-                                                            style:
-                                                                ktsDefault14Text,
+                                                            style: kts14Text,
                                                           ).tr()
                                                     : Text(
                                                         DateFormat(
@@ -161,7 +159,7 @@ class OrdersView extends StatelessWidget {
                                                             .format(order
                                                                 .deliveryTime!
                                                                 .toLocal()),
-                                                        style: ktsDefault14Text,
+                                                        style: kts14Text,
                                                       ),
                                               ],
                                             ),

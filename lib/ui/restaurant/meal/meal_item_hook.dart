@@ -158,7 +158,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                       meal.name!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: ktsDefault14Text,
+                      style: kts14Text,
                     ),
                   ),
                   //------------------ MEAL PRICE ---------------------//

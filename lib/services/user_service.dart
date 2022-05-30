@@ -471,7 +471,7 @@ class UserService {
     List<Order> _orders = [];
     try {
       Response response = await _apiRoot.dio.get('api/order/');
-      log.v('RESPONSE: api/order/ => ${response.data}');
+      // log.v('RESPONSE: api/order/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_order) {
@@ -585,7 +585,6 @@ class UserService {
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-
     Map<String, dynamic> _queryParams = {};
     _queryParams['order'] = orderId;
     _queryParams['restaurant'] = restaurantId;

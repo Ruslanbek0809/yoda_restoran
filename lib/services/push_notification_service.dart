@@ -47,6 +47,10 @@ class PushNotificationService {
 
       if (message.notification != null) {
         log.v('Message also contained a notification: ${message.notification}');
+        log.v(
+            'Message also contained a notification\' title: ${message.notification!.title}');
+        log.v(
+            'Message also contained a notification\' body: ${message.notification!.body}');
       }
 
       final noti = NotificationModel.fromJson(message.data);
@@ -96,12 +100,11 @@ class PushNotificationService {
         case '4':
           log.v('INSIDE STATUS 4');
           await _dialogService.showCustomDialog(
-            variant: DialogType.rateUs,
+            variant: DialogType.rateOrder,
             showIconInMainButton: false,
             barrierDismissible: true,
             data: noti,
           );
-
           break;
         default:
       }
@@ -114,6 +117,10 @@ class PushNotificationService {
 
       if (message.notification != null) {
         log.v('Message also contained a notification: ${message.notification}');
+        log.v(
+            'Message also contained a notification\' title: ${message.notification!.title}');
+        log.v(
+            'Message also contained a notification\' body: ${message.notification!.body}');
       }
     });
 
