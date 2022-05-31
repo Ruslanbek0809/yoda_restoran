@@ -21,6 +21,7 @@ class HiveDbService with ReactiveServiceMixin {
   static late Box<HiveRestaurant> cartResBox;
   static late Box<HiveMeal>
       cartMealsBox; // Also we don't need other 2 meal and res related boxes here
+  static late Box<HiveRating> hiveRatingBox; // TODO: HiveRating
 
   HiveRestaurant? cartRes;
 
@@ -37,6 +38,7 @@ class HiveDbService with ReactiveServiceMixin {
     await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
+    await Hive.openBox<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
 
     log.v('====== HiveDbService ENDED opening boxes ======');
   }
@@ -44,9 +46,15 @@ class HiveDbService with ReactiveServiceMixin {
   /// GETS CART restaurant from cartResBox
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
+    hiveRatingBox =
+        Hive.box<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
+
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.v('cartRes ${cartRes!.id}');
+
+    log.v(
+        'hiveRatingBox.value length: ${hiveRatingBox.values.toList().length}'); // TODO: HiveRating
   }
 
   /// GETS all CART meals from cartMealsBox
@@ -416,5 +424,44 @@ class HiveDbService with ReactiveServiceMixin {
       if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.
     }
+  }
+
+  // TODO: HiveRating
+  /// ADDS rating notification data into hiveRatingBox
+  Future<void> addRatingNotificationToHive(NotificationModel noti) async {
+    Box<HiveRating> hiveRatingBox =
+        Hive.box<HiveRating>(Constants.hiveRatingBox);
+    List<HiveRating> hiveRatingList = hiveRatingBox.values.toList();
+
+    /// CHECHKS whether order with this id exists in hiveRatingBox
+    int _indexHiveRatingNotification = hiveRatingList
+        .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
+
+    log.v(
+        'METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingOrder: $_indexHiveRatingNotification');
+
+    /// IF this order EXISTS
+    if (_indexHiveRatingNotification != -1) {
+      hiveRatingBox.deleteAt(_indexHiveRatingNotification);
+      hiveRatingList.removeAt(_indexHiveRatingNotification);
+    }
+
+    /// ADDS this order to hiveRatingBox
+    final HiveRating _hiveRatingNotification = HiveRating(
+      id: noti.id,
+      option: noti.option,
+      resId: noti.resId,
+      title: noti.title,
+      status: noti.status,
+      selfPickUp: noti.selfPickUp,
+    );
+    await hiveRatingBox.add(_hiveRatingNotification);
+
+    /// TO CHECK
+    hiveRatingList = hiveRatingBox.values.toList();
+    _indexHiveRatingNotification = hiveRatingList
+        .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
+    log.v(
+        'TO CHECK => METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingNotification: $_indexHiveRatingNotification');
   }
 }

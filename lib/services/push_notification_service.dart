@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart' hide Trans;
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
+import 'package:yoda_res/services/services.dart';
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,6 +12,7 @@ class PushNotificationService {
   final log = getLogger('PushNotificationService');
 
   final _dialogService = locator<DialogService>();
+  final _hiveDbService = locator<HiveDbService>(); // TODO: HiveRating
 
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   String? _fcmToken;
@@ -99,6 +101,8 @@ class PushNotificationService {
           break;
         case '4':
           log.v('INSIDE STATUS 4');
+          // TODO: HiveRating
+          _hiveDbService.addRatingNotificationToHive(noti);
           await _dialogService.showCustomDialog(
             variant: DialogType.rateOrder,
             showIconInMainButton: false,
