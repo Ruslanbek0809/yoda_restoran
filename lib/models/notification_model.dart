@@ -30,9 +30,8 @@ class NotificationModel {
   @JsonKey(name: 'selfPickUp')
   final String? selfPickUp;
 
-
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>
-      _$NotificationFromJson(json);
+      _$NotificationModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificationToJson(this);
+  Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
 }

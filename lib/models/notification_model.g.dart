@@ -6,7 +6,7 @@ part of 'notification_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificationModel _$NotificationFromJson(Map<String, dynamic> json) =>
+NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
     NotificationModel(
       id: json['id'] as String?,
       resId: json['resId'] as String?,
@@ -16,7 +16,7 @@ NotificationModel _$NotificationFromJson(Map<String, dynamic> json) =>
       selfPickUp: json['selfPickUp'] as String?,
     );
 
-Map<String, dynamic> _$NotificationToJson(NotificationModel instance) =>
+Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'resId': instance.resId,

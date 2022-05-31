@@ -53,7 +53,7 @@ class RateUsDialogViewModel extends BaseViewModel {
   Future<void> onRatingSendPressed(
     Function()? onSuccess,
     Function()? onFail,
-  ) async {
+  ) async { 
     log.v('onRatingSendPressed(): $_note, $note');
     try {
       await runBusyFuture(_userService.orderRating(

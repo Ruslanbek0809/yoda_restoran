@@ -134,9 +134,7 @@ class HomeViewModel extends MultipleFutureViewModel {
     homeScaffoldKey.currentState!.openDrawer();
   }
 
-  void refresh() {
-    notifyListeners();
-  }
+  void refresh() => notifyListeners();
 
   @override
   Map<String, Future Function()> get futuresMap => {
@@ -211,16 +209,6 @@ class HomeViewModel extends MultipleFutureViewModel {
     });
 
     return totalCartSum;
-  }
-
-  /// SHOWS cancel accepted order Dialog
-  Future showRateOrderDialog() async {
-    log.i('showRateOrderDialog()');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.rateOrder,
-      showIconInMainButton: false,
-      barrierDismissible: true,
-    );
   }
 
   //------------------ DYNAMIC LINK ---------------------//

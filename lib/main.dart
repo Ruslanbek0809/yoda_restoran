@@ -41,8 +41,8 @@ void main() async {
   Hive.registerAdapter<HiveResPaymentType>(HiveResPaymentTypeAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
-  setupLocator();
-  setupBottomSheet();
+  setupLocator(); 
+  setupBottomSheet(); 
   setupDialog();
   setupSnackbar();
 
