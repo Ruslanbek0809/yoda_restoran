@@ -176,6 +176,24 @@ class OrderViewModel extends ReactiveViewModel {
     await launch(launchUri.toString());
   }
 
+  /// SHOWS rate order Dialog
+  Future showRateOrderDialog(Order order) async {
+    log.i('showRateOrderDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.rateOrder,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+      data: NotificationModel(
+        id: order.id.toString(),
+        resId: order.restaurant!.id.toString(),
+        title: order.restaurant!.name,
+        status: order.status.toString(),
+        selfPickUp: order.selfPickUp.toString(),
+      ),
+    );
+    if (respData!.data == true) getOrders();
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes

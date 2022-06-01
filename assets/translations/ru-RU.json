@@ -149,6 +149,8 @@
     "ratingComment": "Комментарий",
     "ratingSend": "Отправить",
     "ratingConfirmation": "Спасибо за отзыв!",
+    "ratingYourFeedback": "Ваш комментарий",
+    "rateOrder": "Оцените",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

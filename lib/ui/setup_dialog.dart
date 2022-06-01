@@ -363,9 +363,8 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   style: kts18Text,
                 ).tr(),
                 color: Colors.transparent,
-                onPressed: () async {
-                  completer(DialogResponse(data: true));
-                },
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
               ),
               CustomTextChildButton(
                 child: Text(
@@ -373,9 +372,8 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   style: ktsDefault18SemiBoldText,
                 ).tr(),
                 color: Colors.transparent,
-                onPressed: () async {
-                  completer(DialogResponse(data: false));
-                },
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
               ),
             ],
           )
@@ -396,9 +394,8 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   style: kts18Text,
                 ).tr(),
                 color: Colors.transparent,
-                onPressed: () async {
-                  completer(DialogResponse(data: true));
-                },
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
               ),
               SizedBox(width: 42.w),
               CustomTextChildButton(
@@ -407,9 +404,8 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                   style: ktsDefault18SemiBoldText,
                 ).tr(),
                 color: Colors.transparent,
-                onPressed: () async {
-                  completer(DialogResponse(data: false));
-                },
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
               ),
             ],
           );
@@ -763,13 +759,28 @@ class RateOrderDialogView extends StatelessWidget {
                     allowHalfRating: false,
                     itemCount: 5,
                     glow: false,
-                    unratedColor: AppTheme.MAIN.withOpacity(0.4),
+                    unratedColor: model.ratingError
+                        ? AppTheme.RED.withOpacity(0.85)
+                        : AppTheme.MAIN.withOpacity(0.4),
                     itemSize: 50,
-                    // itemSize: 60,
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: AppTheme.MAIN,
+                    itemBuilder: (context, _) => AnimatedCrossFade(
+                      crossFadeState: model.ratingError
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
+                      firstChild: Icon(
+                        Icons.star_border,
+                        size: 26,
+                        color: AppTheme.RED,
+                      ),
+                      duration: const Duration(milliseconds: 300),
+                      secondChild: Icon(
+                        Icons.star,
+                        color: AppTheme.MAIN,
+                      ),
+                      // child: model.ratingError
+                      //     ?
+                      //     : ,
                     ),
                     onRatingUpdate: model.updateRating,
                   ),
@@ -801,10 +812,11 @@ class RateOrderDialogView extends StatelessWidget {
                               ).tr(),
                       ),
                       onPressed: model.rating == 0
-                          ? () {}
+                          ? model.ratingVal
                           : () async => await model.onRatingSendPressed(
                                 () async {
-                                  Navigator.of(context).pop();
+                                  /// TO initialise getOrders() API
+                                  await completer(DialogResponse(data: true));
                                   await showDialog(
                                       context: context,
                                       barrierDismissible: true,

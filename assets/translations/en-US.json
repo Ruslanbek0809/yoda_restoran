@@ -149,6 +149,8 @@
     "ratingComment": "Teswir",
     "ratingSend": "Ugrat",
     "ratingConfirmation": "Pikiriňizi paýlaşanyňyz üçin sag boluň!",
+    "ratingYourFeedback": "Siziň teswiriňiz",
+    "rateOrder": "Baha ber",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

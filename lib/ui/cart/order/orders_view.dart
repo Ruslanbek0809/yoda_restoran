@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
@@ -132,43 +133,46 @@ class OrdersView extends StatelessWidget {
                                         //------------------ DATE and STATUS ---------------------//
                                         Row(
                                           children: [
-                                            Row(
-                                              children: [
-                                                SvgPicture.asset(
-                                                  'assets/clock_light.svg',
-                                                  width: 18.w,
-                                                ),
-                                                SizedBox(width: 5.w),
-                                                order.deliveryTime == null
-                                                    ? order.status == 4
-                                                        ? Text(
-                                                            DateFormat(
-                                                                    'HH:mm, dd.MM.yyyy')
-                                                                .format(order
-                                                                    .createdAt!
-                                                                    .toLocal()),
-                                                            style: kts14Text,
-                                                          )
-                                                        : Text(
-                                                            LocaleKeys.now,
-                                                            style: kts14Text,
-                                                          ).tr()
-                                                    : Text(
+                                            SvgPicture.asset(
+                                              'assets/clock_light.svg',
+                                              width: 18.w,
+                                            ),
+                                            SizedBox(width: 5.w),
+                                            order.deliveryTime == null
+                                                ? order.status == 4
+                                                    ? Text(
                                                         DateFormat(
                                                                 'HH:mm, dd.MM.yyyy')
                                                             .format(order
-                                                                .deliveryTime!
+                                                                .createdAt!
                                                                 .toLocal()),
                                                         style: kts14Text,
-                                                      ),
-                                              ],
-                                            ),
+                                                      )
+                                                    : Text(
+                                                        LocaleKeys.now,
+                                                        style: kts14Text,
+                                                      ).tr()
+                                                : Text(
+                                                    DateFormat(
+                                                            'HH:mm, dd.MM.yyyy')
+                                                        .format(order
+                                                            .deliveryTime!
+                                                            .toLocal()),
+                                                    style: kts14Text,
+                                                  ),
+
+                                            /// if order.rating NOT null, SHOW orderStatusText here
+                                            if (order.rating != null)
+                                              Text(
+                                                ' - $orderStatusText',
+                                                style: kts14HelperText,
+                                              ),
                                           ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                  //------------------ ORDER PRICE and STATUS  ---------------------//
+                                  //------------------ ORDER PRICE and STATUS/RATING  ---------------------//
                                   trailing: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -178,23 +182,44 @@ class OrdersView extends StatelessWidget {
                                         style: ktsDefault18SemiBoldText,
                                       ),
                                       SizedBox(height: 2.h),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w,
-                                          vertical: 1.h,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius: AppTheme().radius5,
-                                          color: kcSecondaryLightColor,
-                                        ),
-                                        child: Text(
-                                          orderStatusText,
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            color: kcFontColor,
-                                          ),
-                                        ),
-                                      ),
+
+                                      /// if order.rating NOT null
+                                      order.rating != null
+                                          ? RatingBar.builder(
+                                              initialRating:
+                                                  order.rating!.value!,
+                                              direction: Axis.horizontal,
+                                              itemCount: 5,
+                                              allowHalfRating: false,
+                                              ignoreGestures: true,
+                                              glow: false,
+                                              unratedColor: AppTheme.MAIN
+                                                  .withOpacity(0.4),
+                                              itemSize: 14.sp,
+                                              itemBuilder: (context, _) => Icon(
+                                                Icons.star,
+                                                color: AppTheme.MAIN,
+                                              ),
+                                              onRatingUpdate: (val) {},
+                                            )
+                                          : Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 7.w,
+                                                vertical: 1.h,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    AppTheme().radius5,
+                                                color: kcSecondaryLightColor,
+                                              ),
+                                              child: Text(
+                                                orderStatusText,
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  color: kcFontColor,
+                                                ),
+                                              ),
+                                            ),
                                     ],
                                   ),
                                   expandedCrossAxisAlignment:
@@ -375,10 +400,56 @@ class OrdersView extends StatelessWidget {
                                         );
                                       }).toList(),
                                     ),
+                                    //------------------ ORDER RATING BUTTON/FEEDBACK ---------------------//
+                                    if (order.rating != null &&
+                                        order.rating!.feedback!.isNotEmpty)
+                                      Container(
+                                        width: 1.sw,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 15.w,
+                                          vertical: 5.h,
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12.w,
+                                          vertical: 7.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius10,
+                                          color: kcSecondaryLightColor,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              LocaleKeys.ratingYourFeedback,
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                color: kcErrorEmptyColor,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ).tr(),
+                                            SizedBox(height: 5.h),
+                                            Text(
+                                              order.rating!.feedback!,
+                                              maxLines: null,
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: kcErrorEmptyColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     //------------------ ORDER BUTTON ---------------------//
-                                    if (order.status != 4)
+
+                                    if (order.status != 4 ||
+                                        (order.status == 4 &&
+                                            order.rating == null))
                                       SizedBox(height: 5.h),
-                                    if (order.status != 4)
+                                    if (order.status != 4 ||
+                                        (order.status == 4 &&
+                                            order.rating == null))
                                       SizedBox(
                                         width: 1.sw,
                                         child: Padding(
@@ -395,44 +466,67 @@ class OrdersView extends StatelessWidget {
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 11.h),
                                             ),
-                                            child: order.status == 3
+                                            child: order.status == 4
                                                 ? Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
                                                     children: [
-                                                      !order.selfPickUp!
-                                                          ? Text(
-                                                              LocaleKeys.driver,
-                                                              style:
-                                                                  ktsButton18Text,
-                                                            ).tr()
-                                                          : Text(
-                                                              LocaleKeys
-                                                                  .selfPickUp,
+                                                      Icon(
+                                                        Icons
+                                                            .star_border_rounded,
+                                                        size: 26.0,
+                                                        color: kcWhiteColor,
+                                                      ),
+                                                      SizedBox(width: 5.w),
+                                                      Text(
+                                                        LocaleKeys.rateOrder,
+                                                        style: ktsButton18Text,
+                                                      ).tr()
+                                                    ],
+                                                  )
+                                                : order.status == 3
+                                                    ? Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          !order.selfPickUp!
+                                                              ? Text(
+                                                                  LocaleKeys
+                                                                      .driver,
+                                                                  style:
+                                                                      ktsButton18Text,
+                                                                ).tr()
+                                                              : Text(
+                                                                  LocaleKeys
+                                                                      .selfPickUp,
+                                                                  style:
+                                                                      ktsButton18Text,
+                                                                ).tr(),
+                                                          if (!order
+                                                              .selfPickUp!)
+                                                            Text(
+                                                              ' ${order.driver!.mobile}',
                                                               style:
                                                                   ktsButton18Text,
                                                             ).tr(),
-                                                      if (!order.selfPickUp!)
-                                                        Text(
-                                                          ' ${order.driver!.mobile}',
-                                                          style:
-                                                              ktsButton18Text,
-                                                        ).tr(),
-                                                    ],
-                                                  )
-                                                // : order.status == 4
-                                                //     ? Text(
-                                                //         LocaleKeys.reOrder,
-                                                //         style: ktsButton18Text,
-                                                //       ).tr()
-                                                : model.busy(order.id) &&
-                                                        order.status == 1
-                                                    ? ButtonLoading()
-                                                    : Text(
-                                                        LocaleKeys.cancelOrder,
-                                                        style: ktsButton18Text,
-                                                      ).tr(),
+                                                        ],
+                                                      )
+                                                    // : order.status == 4
+                                                    //     ? Text(
+                                                    //         LocaleKeys.reOrder,
+                                                    //         style: ktsButton18Text,
+                                                    //       ).tr()
+                                                    : model.busy(order.id) &&
+                                                            order.status == 1
+                                                        ? ButtonLoading()
+                                                        : Text(
+                                                            LocaleKeys
+                                                                .cancelOrder,
+                                                            style:
+                                                                ktsButton18Text,
+                                                          ).tr(),
                                             onPressed: () async {
                                               switch (order.status) {
                                                 case 1:
@@ -476,6 +570,9 @@ class OrdersView extends StatelessWidget {
                                                                 .mobile!);
                                                   break;
                                                 case 4:
+                                                  await model
+                                                      .showRateOrderDialog(
+                                                          order);
                                                   break;
                                                 default:
                                                   break;

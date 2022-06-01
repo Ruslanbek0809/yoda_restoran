@@ -25,7 +25,6 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
   final _dynamicLinkService = locator<DynamicLinkService>();
-  final _dialogService = locator<DialogService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 

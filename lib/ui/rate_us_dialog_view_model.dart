@@ -16,6 +16,9 @@ class RateUsDialogViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
+  bool _ratingError = false;
+  bool get ratingError => _ratingError;
+
   double _rating = 0;
   double get rating => _rating;
 
@@ -25,8 +28,20 @@ class RateUsDialogViewModel extends BaseViewModel {
   late Timer _timer;
   Timer get timer => _timer;
 
+  void ratingVal() {
+    _ratingError = true;
+    notifyListeners();
+    log.v('ratingVal _ratingError: $_ratingError');
+    Timer(Duration(seconds: 2), () {
+      _ratingError = false;
+      notifyListeners();
+      log.v('ratingVal _ratingError: $_ratingError');
+    });
+  }
+
   void updateRating(double rating) {
     log.v('updateRating value: $rating');
+    _ratingError = false;
     _rating = rating;
     notifyListeners();
   }
@@ -53,7 +68,7 @@ class RateUsDialogViewModel extends BaseViewModel {
   Future<void> onRatingSendPressed(
     Function()? onSuccess,
     Function()? onFail,
-  ) async { 
+  ) async {
     log.v('onRatingSendPressed(): $_note, $note');
     try {
       await runBusyFuture(_userService.orderRating(

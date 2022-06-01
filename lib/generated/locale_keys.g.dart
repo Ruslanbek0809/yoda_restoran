@@ -151,6 +151,8 @@ abstract class  LocaleKeys {
   static const ratingComment = 'ratingComment';
   static const ratingSend = 'ratingSend';
   static const ratingConfirmation = 'ratingConfirmation';
+  static const ratingYourFeedback = 'ratingYourFeedback';
+  static const rateOrder = 'rateOrder';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 
