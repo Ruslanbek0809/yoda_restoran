@@ -32,6 +32,9 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       orderItems: (json['orderItems'] as List<dynamic>?)
           ?.map((e) => OrderItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      rating: json['rating'] == null
+          ? null
+          : RatingModel.fromJson(json['rating'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
@@ -48,4 +51,5 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'promocode': instance.promocode,
       'driver': instance.driver,
       'orderItems': instance.orderItems,
+      'rating': instance.rating,
     };

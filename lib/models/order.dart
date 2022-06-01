@@ -19,6 +19,7 @@ class Order {
     this.promocode,
     this.driver,
     this.orderItems,
+    this.rating,
   });
 
   @JsonKey(name: 'id')
@@ -59,6 +60,9 @@ class Order {
 
   @JsonKey(name: 'orderItems')
   final List<OrderItem>? orderItems;
+
+  @JsonKey(name: 'rating')
+  final RatingModel? rating;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 

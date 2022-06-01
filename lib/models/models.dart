@@ -34,3 +34,4 @@ export 'exclusive.dart';
 export 'exclusive_single.dart';
 export 'es_rich.dart';
 export 'address_dialog_data.dart';
+export 'rating_model.dart';
