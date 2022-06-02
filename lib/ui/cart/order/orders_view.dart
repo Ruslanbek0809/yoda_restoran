@@ -21,7 +21,15 @@ class OrdersView extends StatelessWidget {
         /// When the app is open and it receives a push notification
         FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
           model.log.v('OrdersView OnMESSAGE with data ${message.data}');
-          model.getOrders();
+          await model.getOrders();
+        });
+
+        /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
+        FirebaseMessaging.onMessageOpenedApp
+            .listen((RemoteMessage message) async {
+          model.log
+              .v('OrdersView OnMESSAGE_OPENEDAPP with data ${message.data}');
+          await model.getOrders();
         });
         return WillPopScope(
           onWillPop: () async {

@@ -1,18 +1,24 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/library/onboarding/onboarding.dart';
 import 'package:yoda_res/shared/shared.dart';
+import '../models/hive_models/hive_models.dart';
 import '../models/models.dart';
 import '../ui/widgets/widgets.dart';
 import 'utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
+
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
 /// Method to round trailing zero based on its type.
 
@@ -314,29 +320,81 @@ class Debouncer {
   }
 }
 
-// late AnimationController _buttonController;
+//------------------ FB BACKGROUND ---------------------//
 
-// _buttonController = AnimationController(
-//     duration: const Duration(milliseconds: 2000), vsync: this);
+// TODO: HiveRating
+Future<void> fbBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print('Got a message whilst in the onBackgroundMessage!');
+  print('Message data: ${message.data}');
 
-// Future _playAnimation() async {
-//   try {
-//     await _buttonController.forward();
-//   } on TickerCanceled {
-//     printLog('[_playAnimation] error');
-//   }
-// }
+  if (message.notification != null) {
+    print('Message also contained a notification: ${message.notification}');
+    print(
+        'Message also contained a notification\' title: ${message.notification!.title}');
+    print(
+        'Message also contained a notification\' body: ${message.notification!.body}');
+  }
+  print('Handling a background message ${message.messageId}');
 
-// Future _stopAnimation() async {
-//   try {
-//     await _buttonController.reverse();
-//   } on TickerCanceled {
-//     printLog('[_stopAnimation] error');
-//   }
-// }
+  //------------------ HIVE RATING PART ---------------------//
 
-// StaggerAnimationButtonWidget(
-//   titleButton: 'Dowam',
-//   buttonController: _buttonController.view as AnimationController,
-//   onTap: _onContinueButtonPressed,
-// ),
+  /// HIVE DIR
+  Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+
+  /// CHECKS whether it this adapter with this type registered or NOT
+  if (!Hive.isAdapterRegistered(5))
+    // HIVE registerAdapter
+    Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
+
+  /// CHECKS whether hive box with this name is already OPEN or NOT
+  if (!Hive.isBoxOpen(Constants.hiveRatingBox))
+    // HIVE openBox
+    await Hive.openBox<HiveRating>(Constants.hiveRatingBox);
+
+  // Convert message.data to notification model
+  final noti = NotificationModel.fromJson(message.data);
+  print('notificationData JSON title: ${noti.title}, status: ${noti.status}');
+
+  if (noti.status == '4') {
+    print('BACKGROUND NOTIFICATION INSIDE STATUS 4');
+
+    Box<HiveRating> _hiveRatingBox =
+        Hive.box<HiveRating>(Constants.hiveRatingBox);
+    List<HiveRating> _hiveRatingList = _hiveRatingBox.values.toList();
+
+    /// CHECHKS whether order with this id exists in hiveRatingBox
+    int _indexHiveRatingNotification = _hiveRatingList
+        .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
+
+    print(
+        'METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingOrder: $_indexHiveRatingNotification');
+
+    /// IF this order EXISTS
+    if (_indexHiveRatingNotification != -1) {
+      _hiveRatingBox.deleteAt(_indexHiveRatingNotification);
+      _hiveRatingList.removeAt(_indexHiveRatingNotification);
+    }
+
+    /// ADDS this order to hiveRatingBox
+    final HiveRating _hiveRatingNotification = HiveRating(
+      id: noti.id,
+      option: noti.option,
+      resId: noti.resId,
+      title: noti.title,
+      status: noti.status,
+      selfPickUp: noti.selfPickUp,
+    );
+    await _hiveRatingBox.add(_hiveRatingNotification);
+
+    // /// TO CHECK WHETHER IT WORKS
+    // _hiveRatingList = _hiveRatingBox.values.toList();
+    // _indexHiveRatingNotification = _hiveRatingList
+    //     .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
+    // print(
+    //     'TO CHECK => METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingNotification: $_indexHiveRatingNotification');
+  }
+}

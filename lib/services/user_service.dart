@@ -473,11 +473,10 @@ class UserService {
       Response response = await _apiRoot.dio.get('api/order/');
       // log.v('RESPONSE: api/order/ => ${response.data}');
 
-      if (response.data != null) {
+      if (response.data != null)
         response.data.forEach((_order) {
           _orders.add(Order.fromJson(_order));
         });
-      }
 
       if (_orders.isNotEmpty)
         _orders.sort((prev, next) => prev.status!

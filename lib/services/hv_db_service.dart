@@ -29,6 +29,10 @@ class HiveDbService with ReactiveServiceMixin {
   ReactiveValue<List<HiveMeal>> _cartMeals = ReactiveValue<List<HiveMeal>>([]);
   List<HiveMeal> get cartMeals => _cartMeals.value;
 
+  // TODO: HiveRating
+  ReactiveValue<List<HiveRating>> _hiveRatings =
+      ReactiveValue<List<HiveRating>>([]);
+
   /// INITIALIZE in StartUpViewModel
   Future initHiveBoxes() async {
     log.v('====== HiveDbService STARTED opening boxes ======');
@@ -46,15 +50,10 @@ class HiveDbService with ReactiveServiceMixin {
   /// GETS CART restaurant from cartResBox
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
-    hiveRatingBox =
-        Hive.box<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
 
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.v('cartRes ${cartRes!.id}');
-
-    log.v(
-        'hiveRatingBox.value length: ${hiveRatingBox.values.toList().length}'); // TODO: HiveRating
   }
 
   /// GETS all CART meals from cartMealsBox
@@ -65,6 +64,14 @@ class HiveDbService with ReactiveServiceMixin {
       _bottomCartService.showBottomCart(); // SHOWS BottomCart.
 
     log.v('_cartMeals.value length: ${_cartMeals.value.length}');
+  }
+
+  /// TODO: HiveRating
+  void getHiveRatings() {
+    hiveRatingBox = Hive.box<HiveRating>(Constants.hiveRatingBox);
+    _hiveRatings.value = hiveRatingBox.values.toList();
+
+    log.v('_hiveRatings.value length: ${_hiveRatings.value.length}');
   }
 
 //---------------------------------------//
@@ -389,9 +396,7 @@ class HiveDbService with ReactiveServiceMixin {
   }
 
 //---------------------------------------//
-//---------------------------------------//
 //----------------------- CART VIEW PART --------------------------//
-//---------------------------------------//
 //---------------------------------------//
 
   /// GETS quantity of this hiveMeal from cartMeals
@@ -426,42 +431,27 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-  // TODO: HiveRating
-  /// ADDS rating notification data into hiveRatingBox
-  Future<void> addRatingNotificationToHive(NotificationModel noti) async {
-    Box<HiveRating> hiveRatingBox =
-        Hive.box<HiveRating>(Constants.hiveRatingBox);
-    List<HiveRating> hiveRatingList = hiveRatingBox.values.toList();
+//---------------------------------------//
+//----------------------- HIVE RATING --------------------------//
+//---------------------------------------//
+
+  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  Future<void> removeRatingNotiFromHive(int? orderId) async {
+    log.v('orderId: $orderId');
 
     /// CHECHKS whether order with this id exists in hiveRatingBox
-    int _indexHiveRatingNotification = hiveRatingList
-        .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
+    int _indexHiveRatingNotification = _hiveRatings.value
+        .indexWhere((_hiveRating) => _hiveRating.id == orderId.toString());
 
-    log.v(
-        'METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingOrder: $_indexHiveRatingNotification');
-
-    /// IF this order EXISTS
+    /// IF this hiveRating EXISTS
     if (_indexHiveRatingNotification != -1) {
+      log.v(
+          'BEFORE delete action for _hiveRatings.value.length: ${_hiveRatings.value.length}');
       hiveRatingBox.deleteAt(_indexHiveRatingNotification);
-      hiveRatingList.removeAt(_indexHiveRatingNotification);
+      _hiveRatings.value.removeAt(_indexHiveRatingNotification);
     }
 
-    /// ADDS this order to hiveRatingBox
-    final HiveRating _hiveRatingNotification = HiveRating(
-      id: noti.id,
-      option: noti.option,
-      resId: noti.resId,
-      title: noti.title,
-      status: noti.status,
-      selfPickUp: noti.selfPickUp,
-    );
-    await hiveRatingBox.add(_hiveRatingNotification);
-
-    /// TO CHECK
-    hiveRatingList = hiveRatingBox.values.toList();
-    _indexHiveRatingNotification = hiveRatingList
-        .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
     log.v(
-        'TO CHECK => METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingNotification: $_indexHiveRatingNotification');
+        'AFTER delete action for _hiveRatings.value.length: ${_hiveRatings.value.length}');
   }
 }

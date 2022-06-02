@@ -760,7 +760,8 @@ class RateOrderDialogView extends StatelessWidget {
                     itemCount: 5,
                     glow: false,
                     unratedColor: model.ratingError
-                        ? AppTheme.RED.withOpacity(0.85)
+                        ? AppTheme.MAIN
+                        // ? AppTheme.RED.withOpacity(0.85)
                         : AppTheme.MAIN.withOpacity(0.4),
                     itemSize: 50,
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
@@ -769,18 +770,16 @@ class RateOrderDialogView extends StatelessWidget {
                           ? CrossFadeState.showFirst
                           : CrossFadeState.showSecond,
                       firstChild: Icon(
-                        Icons.star_border,
-                        size: 26,
-                        color: AppTheme.RED,
+                        Icons.star,
+                        // Icons.star_border,
+                        // size: 26,
+                        color: AppTheme.MAIN,
                       ),
-                      duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 200),
                       secondChild: Icon(
                         Icons.star,
                         color: AppTheme.MAIN,
                       ),
-                      // child: model.ratingError
-                      //     ?
-                      //     : ,
                     ),
                     onRatingUpdate: model.updateRating,
                   ),

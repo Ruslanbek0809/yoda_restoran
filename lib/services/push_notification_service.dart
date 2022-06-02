@@ -56,9 +56,8 @@ class PushNotificationService {
       }
 
       final noti = NotificationModel.fromJson(message.data);
-      log.v('notificationData JSON status: ${noti.status}');
       log.v(
-          'notificationData JSON title: ${noti.title} and test ${noti.selfPickUp == 'False'}, ${noti.selfPickUp == 'True'}');
+          'notificationData JSON title: ${noti.title}, status: ${noti.status}');
 
       switch (noti.status) {
         case '2':
@@ -101,8 +100,6 @@ class PushNotificationService {
           break;
         case '4':
           log.v('INSIDE STATUS 4');
-          // TODO: HiveRating
-          _hiveDbService.addRatingNotificationToHive(noti);
           await _dialogService.showCustomDialog(
             variant: DialogType.rateOrder,
             showIconInMainButton: false,
@@ -114,19 +111,19 @@ class PushNotificationService {
       }
     });
 
-    /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      log.v('Got a message whilst in the foreground onMessageOpenedApp!');
-      log.v('Message data: ${message.data}');
+    // /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   log.v('Got a message whilst in the foreground onMessageOpenedApp!');
+    //   log.v('Message data: ${message.data}');
 
-      if (message.notification != null) {
-        log.v('Message also contained a notification: ${message.notification}');
-        log.v(
-            'Message also contained a notification\' title: ${message.notification!.title}');
-        log.v(
-            'Message also contained a notification\' body: ${message.notification!.body}');
-      }
-    });
+    //   if (message.notification != null) {
+    //     log.v('Message also contained a notification: ${message.notification}');
+    //     log.v(
+    //         'Message also contained a notification\' title: ${message.notification!.title}');
+    //     log.v(
+    //         'Message also contained a notification\' body: ${message.notification!.body}');
+    //   }
+    // });
 
     log.v('====== PushNotificationService ENDED Fcm Token ======');
   }

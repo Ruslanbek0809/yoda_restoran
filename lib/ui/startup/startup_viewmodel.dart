@@ -79,6 +79,9 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     await _hiveDbService.initHiveBoxes();
     _hiveDbService.getCartMeals(); // GETS all CART meals inside cartMealBox
     _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
+    _hiveDbService.getHiveRatings();
+
+    /// TODO: HiveRating
 
     /// USE _userService.getInitialUser OR _userService.initUser
     await _userService.initUser();
