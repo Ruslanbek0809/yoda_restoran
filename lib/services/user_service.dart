@@ -454,7 +454,10 @@ class UserService {
       log.v('RESPONSE: api/order/ => ${response.data}');
 
       if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201))
+          (response.statusCode == 200 ||
+              response.statusCode == 201 ||
+              response.statusCode == 502 ||
+              response.statusCode == 503))
         onSuccess!();
       else
         onFail!();

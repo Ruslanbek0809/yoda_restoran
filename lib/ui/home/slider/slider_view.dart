@@ -46,7 +46,6 @@ class SliderView extends StatelessWidget {
                         child: YodaImage(
                           image: slider.image!,
                           phImage: 'assets/ph_slider.png',
-                          fit: BoxFit.cover,
                           width: 1.sw,
                           height: 0.6.sw,
                           borderRadius: 20.0,

@@ -36,8 +36,8 @@ void main() async {
   runApp(
     EasyLocalization(
       path: 'assets/translations',
-      supportedLocales: [Locale('en', 'US'), Locale('ru', 'RU')],
-      fallbackLocale: Locale('en', 'US'),
+      supportedLocales: const [Locale('en', 'US'), Locale('ru', 'RU')],
+      fallbackLocale: const Locale('en', 'US'),
       child: YodaResApp(),
     ),
   );
