@@ -110,19 +110,33 @@ class PushNotificationService {
       }
     });
 
-    // /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
-    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    //   log.v('Got a message whilst in the foreground onMessageOpenedApp!');
-    //   log.v('Message data: ${message.data}');
+    /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      log.v('Got a message whilst in the foreground onMessageOpenedApp!');
+      log.v('Message data: ${message.data}');
 
-    //   if (message.notification != null) {
-    //     log.v('Message also contained a notification: ${message.notification}');
-    //     log.v(
-    //         'Message also contained a notification\' title: ${message.notification!.title}');
-    //     log.v(
-    //         'Message also contained a notification\' body: ${message.notification!.body}');
-    //   }
-    // });
+      if (message.notification != null) {
+        log.v('Message also contained a notification: ${message.notification}');
+        log.v(
+            'Message also contained a notification\' title: ${message.notification!.title}');
+        log.v(
+            'Message also contained a notification\' body: ${message.notification!.body}');
+      }
+      final noti = NotificationModel.fromJson(message.data);
+      log.v(
+          'notificationData JSON title: ${noti.title}, status: ${noti.status}');
+
+      /// NO need to reload when notification status is 4. Else, RELOAD
+      if (noti.status == '4') {
+        log.v('INSIDE STATUS 4');
+        await _dialogService.showCustomDialog(
+          variant: DialogType.rateOrder,
+          showIconInMainButton: false,
+          barrierDismissible: true,
+          data: noti,
+        );
+      }
+    });
 
     log.v('====== PushNotificationService ENDED Fcm Token ======');
   }
