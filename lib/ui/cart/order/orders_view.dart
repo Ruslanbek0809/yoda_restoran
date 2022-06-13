@@ -21,7 +21,22 @@ class OrdersView extends StatelessWidget {
         /// When the app is open and it receives a push notification
         FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
           model.log.v('OrdersView OnMESSAGE with data ${message.data}');
-          await model.getOrders();
+
+          if (message.notification != null) {
+            model.log.v(
+                'Message also contained a notification: ${message.notification}');
+            model.log.v(
+                'Message also contained a notification\' title: ${message.notification!.title}');
+            model.log.v(
+                'Message also contained a notification\' body: ${message.notification!.body}');
+          }
+
+          final noti = NotificationModel.fromJson(message.data);
+          model.log.v(
+              'notificationData JSON title: ${noti.title}, status: ${noti.status}');
+
+          /// NO need to reload when notification status is 4. Else, RELOAD
+          if (noti.status != '4') await model.getOrders();
         });
 
         /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM

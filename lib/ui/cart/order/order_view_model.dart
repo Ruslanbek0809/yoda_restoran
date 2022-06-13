@@ -191,7 +191,7 @@ class OrderViewModel extends ReactiveViewModel {
         selfPickUp: order.selfPickUp.toString(),
       ),
     );
-    if (respData!.data == true) getOrders();
+    if (respData!.data != null && respData.data == true) await getOrders();
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//

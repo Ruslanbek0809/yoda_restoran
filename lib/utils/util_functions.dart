@@ -375,8 +375,8 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
 
     /// IF this order EXISTS
     if (_indexHiveRatingNotification != -1) {
-      _hiveRatingBox.deleteAt(_indexHiveRatingNotification);
-      _hiveRatingList.removeAt(_indexHiveRatingNotification);
+      await _hiveRatingBox.deleteAt(_indexHiveRatingNotification);
+      await _hiveRatingList.removeAt(_indexHiveRatingNotification);
     }
 
     /// ADDS this order to hiveRatingBox
