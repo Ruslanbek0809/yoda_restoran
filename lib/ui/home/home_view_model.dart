@@ -25,6 +25,7 @@ class HomeViewModel extends MultipleFutureViewModel {
   final _hiveDbService = locator<HiveDbService>(); // For BOTTOM CART part ONLY
   final _navService = locator<NavigationService>();
   final _dynamicLinkService = locator<DynamicLinkService>();
+  final _dialogService = locator<DialogService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -278,4 +279,26 @@ class HomeViewModel extends MultipleFutureViewModel {
   // void _indicateChange() {
   //   notifyListeners();
   // }
+
+  // TODO: HiveRating
+  //------------------ HIVE RATING PART ---------------------//
+
+  /// GETS very first hiveRating
+  HiveRating get hiveRating => _hiveDbService.hiveRatings.first;
+
+  Future<void> checkAndShowFirstHiveRating() async {
+    await _dialogService.showCustomDialog(
+      variant: DialogType.rateOrder,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+      data: NotificationModel(
+        id: hiveRating.id,
+        option: hiveRating.option,
+        resId: hiveRating.resId,
+        title: hiveRating.title,
+        status: hiveRating.status,
+        selfPickUp: hiveRating.selfPickUp,
+      ),
+    );
+  }
 }

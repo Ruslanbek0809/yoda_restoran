@@ -15,6 +15,7 @@ class RateUsDialogViewModel extends BaseViewModel {
 
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
+  final _hiveDbService = locator<HiveDbService>(); // TODO: HiveRating
 
   bool _ratingError = false;
   bool get ratingError => _ratingError;
@@ -63,6 +64,11 @@ class RateUsDialogViewModel extends BaseViewModel {
     _note = value;
     notifyListeners();
   }
+
+  /// TODO: HiveRating
+  /// CLEARS hiveRating with this orderId if it EXISTS in hiveRatings
+  Future<void> removeHiveRatingFromHiveRatings(int? orderId) async =>
+      await _hiveDbService.removeHiveRatingFromHiveRatings(orderId);
 
   /// SENDS user rating
   Future<void> onRatingSendPressed(

@@ -814,6 +814,10 @@ class RateOrderDialogView extends StatelessWidget {
                           ? model.ratingVal
                           : () async => await model.onRatingSendPressed(
                                 () async {
+                                  /// TODO: HiveRating
+                                  await model.removeHiveRatingFromHiveRatings(
+                                      int.parse(notificationModel.id!));
+
                                   /// TO initialise getOrders() API
                                   await completer(DialogResponse(data: true));
                                   await showDialog(

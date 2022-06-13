@@ -50,7 +50,8 @@ class _HomeViewState extends State<HomeView> {
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
         /// This condition is put to ignore requestRefresh for _refreshController for the first time when entered to app or when nav from drawer screens to homeScreen
-        if (!model.anyObjectsBusy) await _refreshController.requestRefresh();
+        // if (!model.anyObjectsBusy) await _refreshController.requestRefresh();
+        await _refreshController.requestRefresh();
 
         /// InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
         if (Platform.isAndroid) {
@@ -72,22 +73,9 @@ class _HomeViewState extends State<HomeView> {
         /// HANDLES clicked terminated dynamic link
         await model.handleClickedDynamicLink();
 
-        // await showFlexibleBottomSheet(
-        //   minHeight: 0,
-        //   initHeight: 0.95,
-        //   maxHeight: 0.95,
-        //   duration: Duration(milliseconds: 250),
-        //   context: context,
-        //   builder: (context, scrollController, offset) {
-        //     return CustomBarBottomSheet(
-        //       child: RateUsScreen(
-        //         scrollController: scrollController,
-        //         offset: offset,
-        //       ),
-        //     );
-        //   },
-        //   anchors: [0, 0.95],
-        // );
+        // TODO: HiveRating
+        /// HANDLES hiveRatings
+        await model.checkAndShowFirstHiveRating();
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)

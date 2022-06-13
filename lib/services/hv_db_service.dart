@@ -13,7 +13,7 @@ class HiveDbService with ReactiveServiceMixin {
 
   HiveDbService() {
     // 3
-    listenToReactiveValues([_cartMeals]);
+    listenToReactiveValues([_cartMeals, _hiveRatings]);
   }
 
   final _bottomCartService = locator<BottomCartService>();
@@ -32,6 +32,7 @@ class HiveDbService with ReactiveServiceMixin {
   // TODO: HiveRating
   ReactiveValue<List<HiveRating>> _hiveRatings =
       ReactiveValue<List<HiveRating>>([]);
+  List<HiveRating> get hiveRatings => _hiveRatings.value;
 
   /// INITIALIZE in StartUpViewModel
   Future initHiveBoxes() async {
@@ -435,8 +436,9 @@ class HiveDbService with ReactiveServiceMixin {
 //----------------------- HIVE RATING --------------------------//
 //---------------------------------------//
 
+  // TODO: HiveRating
   /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
-  Future<void> removeRatingNotiFromHive(int? orderId) async {
+  Future<void> removeHiveRatingFromHiveRatings(int? orderId) async {
     log.v('orderId: $orderId');
 
     /// CHECHKS whether order with this id exists in hiveRatingBox

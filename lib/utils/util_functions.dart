@@ -322,7 +322,6 @@ class Debouncer {
 
 //------------------ FB BACKGROUND ---------------------//
 
-// TODO: HiveRating
 Future<void> fbBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -339,6 +338,7 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
   }
   print('Handling a background message ${message.messageId}');
 
+  // TODO: HiveRating
   //------------------ HIVE RATING PART ---------------------//
 
   /// HIVE DIR
@@ -376,7 +376,7 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
     /// IF this order EXISTS
     if (_indexHiveRatingNotification != -1) {
       await _hiveRatingBox.deleteAt(_indexHiveRatingNotification);
-      await _hiveRatingList.removeAt(_indexHiveRatingNotification);
+      _hiveRatingList.removeAt(_indexHiveRatingNotification);
     }
 
     /// ADDS this order to hiveRatingBox
