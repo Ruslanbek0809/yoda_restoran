@@ -284,7 +284,9 @@ class HomeViewModel extends MultipleFutureViewModel {
   //------------------ HIVE RATING PART ---------------------//
 
   /// GETS very first hiveRating
-  HiveRating get hiveRating => _hiveDbService.hiveRatings.first;
+  HiveRating? get hiveRating => _hiveDbService.hiveRatings.isNotEmpty
+      ? _hiveDbService.hiveRatings.first
+      : null;
 
   Future<void> checkAndShowFirstHiveRating() async {
     await _dialogService.showCustomDialog(
@@ -292,12 +294,12 @@ class HomeViewModel extends MultipleFutureViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
       data: NotificationModel(
-        id: hiveRating.id,
-        option: hiveRating.option,
-        resId: hiveRating.resId,
-        title: hiveRating.title,
-        status: hiveRating.status,
-        selfPickUp: hiveRating.selfPickUp,
+        id: hiveRating!.id,
+        option: hiveRating!.option,
+        resId: hiveRating!.resId,
+        title: hiveRating!.title,
+        status: hiveRating!.status,
+        selfPickUp: hiveRating!.selfPickUp,
       ),
     );
   }

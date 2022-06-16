@@ -13,6 +13,7 @@ class PushNotificationService {
   final _dialogService = locator<DialogService>();
 
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
   String? _fcmToken;
   String? get fcmToken => _fcmToken;
 
@@ -33,7 +34,7 @@ class PushNotificationService {
 
     /// Here we get fcmToken and store it in _fcmToken
     _fcmToken = await _fcm.getToken();
-    log.v('FCM Token: $_fcmToken');
+    log.v('FCM Token: $_fcmToken}');
 
     /// Here we subcscribe to topic so that we send specific message to specific devices
     _fcm.subscribeToTopic(Constants.topicAllDevices);

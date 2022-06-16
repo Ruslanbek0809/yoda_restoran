@@ -406,7 +406,7 @@ packages:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.5"
+    version: "4.4.0"
   firebase_core_web:
     dependency: transitive
     description:
@@ -428,6 +428,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2+1"
+  firebase_in_app_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_in_app_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0+15"
+  firebase_in_app_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_in_app_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1+7"
+  firebase_installations_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_installations_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
+  firebase_installations_web:
+    dependency: transitive
+    description:
+      name: firebase_installations_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -595,6 +623,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutterfire_installations:
+    dependency: "direct main"
+    description:
+      name: flutterfire_installations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   frontend_server_client:
     dependency: transitive
     description:

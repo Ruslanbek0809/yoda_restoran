@@ -75,7 +75,7 @@ class _HomeViewState extends State<HomeView> {
 
         // TODO: HiveRating
         /// HANDLES hiveRatings
-        await model.checkAndShowFirstHiveRating();
+        if (model.hiveRating != null) await model.checkAndShowFirstHiveRating();
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)
