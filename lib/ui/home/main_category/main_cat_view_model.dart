@@ -1,15 +1,12 @@
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
-import '../../../utils/utils.dart';
 
 class MainCatViewModel extends ReactiveViewModel {
   final log = getLogger('MainCatViewModel');
 
-  final _bottomSheetService = locator<BottomSheetService>();
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
       MainCatService>(); // To update _selectedMainCats in realtime(reactive)

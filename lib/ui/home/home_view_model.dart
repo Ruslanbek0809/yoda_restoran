@@ -82,10 +82,8 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   /// TODO: PAG
-  Future<void> getMorePaginatedRestaurants(
-      // Function()? onSuccess,
-      // Function()? onFail,
-      ) async {
+  /// GETS more home restaurants
+  Future<void> getMorePaginatedRestaurants() async {
     _page++;
     log.v('getMorePaginatedRestaurants() with _page: $_page');
     await runBusyFuture(_homeService.getPaginatedRess(page: _page));
@@ -193,7 +191,8 @@ class HomeViewModel extends ReactiveViewModel {
   void navToHomeSearchView() async =>
       await _navService.navigateTo(Routes.homeSearchView);
 
-  void navToSingleExView(ExclusiveSingle singleEx) => _navService.navigateTo(
+  void navToSingleExView(ExclusiveSingle singleEx) async =>
+      await _navService.navigateTo(
         Routes.singleExView,
         arguments: SingleExViewArguments(singleEx: singleEx),
       );
@@ -221,32 +220,6 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
-  //------------------ Custom overridden REACTIVE PART ---------------------//
-  // late List<ReactiveServiceMixin> _reactiveServices;
-
-  // HomeViewModel() {
-  //   _reactToServices([_bottomCartService, _homeService]);
-  // }
-
-  // void _reactToServices(List<ReactiveServiceMixin> reactiveServices) {
-  //   _reactiveServices = reactiveServices;
-  //   for (var reactiveService in _reactiveServices) {
-  //     reactiveService.addListener(_indicateChange);
-  //   }
-  // }
-
-  // @override
-  // void dispose() {
-  //   for (var reactiveService in _reactiveServices) {
-  //     reactiveService.removeListener(_indicateChange);
-  //   }
-  //   super.dispose();
-  // }
-
-  // void _indicateChange() {
-  //   notifyListeners();
-  // }
-
   // TODO: HiveRating
   //------------------ HIVE RATING PART ---------------------//
 
@@ -273,5 +246,5 @@ class HomeViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [_bottomCartService, _homeService, _hiveDbService];
+      [_mainCatService, _bottomCartService, _homeService, _hiveDbService];
 }
