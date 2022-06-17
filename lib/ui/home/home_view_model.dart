@@ -16,7 +16,8 @@ const String homeRandomRessFuture = 'homeRandomRessFuture';
 const String homePromsFuture = 'homePromsFuture';
 const String homeExclusivesFuture = 'homeExclusivesFuture';
 
-class HomeViewModel extends MultipleFutureViewModel {
+/// NOTE: Here, instead of using MultiFutureViewModel, different viewModel is used so that model.initialise doesn't trigger when I already trigger _refreshController.requestRefresh()
+class HomeViewModel extends ReactiveViewModel {
   final log = getLogger('HomeViewModel');
 
   final _homeService = locator<HomeService>();
@@ -35,32 +36,70 @@ class HomeViewModel extends MultipleFutureViewModel {
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
 
-  /// TODO: PAG
-  int _page = 1;
-  int get page => _page;
-  bool get isPullUpEnabled => _homeService.isPullUpEnabled;
-
   List<int> get selectedMainCats =>
       _mainCatService.selectedMainCats; // NEEDS only for UI cases
 
   List<Restaurant> get selectedMainCatRestaurants => _homeService
       .selectedMainCatRestaurants!; // FOUND restaurants of selectedMainCats
 
-  // List<SliderModel>? get sliders => dataMap![homeSlidersFuture];
-  // List<MainCategory>? get mainCategories => dataMap![homeMainCatFuture];
-  // List<Restaurant>? get randomRestaurants => dataMap![homeRandomResFuture];
-  // List<Promoted>? get promotedRes => dataMap![homePromotedResFuture];
-
-  bool get fetchinghomeSliders => busy(homeSlidersFuture);
-  bool get fetchinghomeMainCat => busy(homeMainCatsFuture);
-  bool get fetchingRandomRes => busy(homeRandomRessFuture);
-  bool get fetchingPromotedRes => busy(homePromsFuture);
-  bool get fetchingExclusives => busy(homeExclusivesFuture);
   bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
   bool get fetchingSelectError => _homeService.fetchingSelectError;
 
-  bool _hasFutureError = false;
-  bool get hasFutureError => _hasFutureError;
+  /// TODO: PAG
+  int _page = 1;
+  int get page => _page;
+  bool get isPullUpEnabled => _homeService.isPullUpEnabled;
+
+  /// Custom boolean busy indicator
+  bool get busyForKeys =>
+      busy(homeSlidersFuture) ||
+      busy(homeMainCatsFuture) ||
+      busy(homeRandomRessFuture) ||
+      busy(homePromsFuture) ||
+      busy(homeExclusivesFuture);
+
+  /// Custom boolean error indicator
+  bool get hasErrorForKeys =>
+      hasErrorForKey(homeSlidersFuture) ||
+      hasErrorForKey(homeMainCatsFuture) ||
+      hasErrorForKey(homeRandomRessFuture) ||
+      hasErrorForKey(homePromsFuture) ||
+      hasErrorForKey(homeExclusivesFuture);
+
+  //------------------ HOME FETCH ---------------------//
+
+  /// GETS all home data
+  Future getHomeData() async {
+    await runBusyFuture(_homeService.getSliders(),
+        busyObject: homeSlidersFuture);
+    await runBusyFuture(_homeService.getMainCategs(),
+        busyObject: homeMainCatsFuture);
+    await runBusyFuture(_homeService.getPaginatedRess(),
+        busyObject: homeRandomRessFuture);
+    await runBusyFuture(_homeService.getProms(), busyObject: homePromsFuture);
+    await runBusyFuture(_homeService.getExclusives(),
+        busyObject: homeExclusivesFuture);
+  }
+
+  /// TODO: PAG
+  Future<void> getMorePaginatedRestaurants(
+      // Function()? onSuccess,
+      // Function()? onFail,
+      ) async {
+    _page++;
+    log.v('getMorePaginatedRestaurants() with _page: $_page');
+    await runBusyFuture(_homeService.getPaginatedRess(page: _page));
+  }
+
+  //------------------ PAGINATION ---------------------//
+
+  /// TODO: PAG
+  void enablePullUp() {
+    _page = 1;
+    _homeService.enablePullUp();
+  }
+
+  //------------------ HOME GETTER ---------------------//
 
   /// GETTER for combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get homeRess {
@@ -93,31 +132,7 @@ class HomeViewModel extends MultipleFutureViewModel {
           _homeRess.add(HomeResPromo(_randomRes, null));
       } else
         _homeRess.add(HomeResPromo(_randomRes, null));
-
-      // /// Here in 5th restaurant we will add new PROMOTED with its restaurants from promotedList
-      // if ((_randomResPos + 1) % 5 == 0) {
-      //   /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
-      //   /// If yes, then ADDS promPosCount's positioned PROMOTED. Else it ADDS 5th randomRes
-      //   if (_homeService.proms.isNotEmpty &&
-      //       _homeService.proms.length > promPosCount) {
-      //     _homeRess.add(
-      //       HomeResPromo(
-      //         _randomRes,
-      //         Promoted(
-      //           id: _homeService.proms[promPosCount]!.id,
-      //           name: _homeService.proms[promPosCount]!.name,
-      //           order: _homeService.proms[promPosCount]!.order,
-      //           restaurants: _homeService.proms[promPosCount]!.restaurants,
-      //         ),
-      //       ),
-      //     );
-      //     promPosCount++;
-      //   } else
-      //     _homeRess.add(HomeResPromo(_randomRes, null));
-      // } else
-      //   _homeRess.add(HomeResPromo(_randomRes, null));
     }
-    // log.v('_resWithProms.length: ${_resWithProms.length}');
     return _homeRess;
   }
 
@@ -127,58 +142,7 @@ class HomeViewModel extends MultipleFutureViewModel {
     _mainCatService.clearSelectedMainCats();
   }
 
-  //------------------ DRAWER ---------------------//
-
-  void homeMenuPressed() {
-    log.i('openDrawer()');
-    homeScaffoldKey.currentState!.openDrawer();
-  }
-
-  void refresh() => notifyListeners();
-
-  @override
-  Map<String, Future Function()> get futuresMap => {
-        homeSlidersFuture: _homeService.getSliders,
-        homeMainCatsFuture: _homeService.getMainCategs,
-        // homeRandomRessFuture: _homeService.getRandomRess,
-        homeRandomRessFuture: _homeService.getPaginatedRess,
-        homePromsFuture: _homeService.getProms,
-        homeExclusivesFuture: _homeService.getExclusives,
-      };
-
-  /// Below lines are custom error part
-  @override
-  void onError({error, key}) {
-    _hasFutureError = true;
-  }
-
-  /// Below lines are custom error part
-  @override
-  void onData(key) {
-    _hasFutureError = false;
-  }
-
-  void updateHasFutureError() {
-    _hasFutureError = false;
-  }
-
   void updateFetchingSelectedError() => _homeService.disableSelectError();
-
-  /// TODO: PAG
-  Future<void> getMorePaginatedRestaurants(
-      // Function()? onSuccess,
-      // Function()? onFail,
-      ) async {
-    _page++;
-    log.v('getMorePaginatedRestaurants() with _page: $_page');
-    await runBusyFuture(_homeService.getPaginatedRess(page: _page));
-  }
-
-  /// TODO: PAG
-  void enablePullUp() {
-    _page = 1;
-    _homeService.enablePullUp();
-  }
 
   //------------------ BOTTOM CART ---------------------//
 
@@ -209,6 +173,13 @@ class HomeViewModel extends MultipleFutureViewModel {
     });
 
     return totalCartSum;
+  }
+
+  //------------------ DRAWER ---------------------//
+
+  void homeMenuPressed() {
+    log.i('openDrawer()');
+    homeScaffoldKey.currentState!.openDrawer();
   }
 
   //------------------ DYNAMIC LINK ---------------------//
@@ -249,10 +220,6 @@ class HomeViewModel extends MultipleFutureViewModel {
           ),
         ),
       );
-
-  @override
-  List<ReactiveServiceMixin> get reactiveServices =>
-      [_bottomCartService, _homeService, _hiveDbService];
 
   //------------------ Custom overridden REACTIVE PART ---------------------//
   // late List<ReactiveServiceMixin> _reactiveServices;
@@ -303,4 +270,8 @@ class HomeViewModel extends MultipleFutureViewModel {
       ),
     );
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_bottomCartService, _homeService, _hiveDbService];
 }
