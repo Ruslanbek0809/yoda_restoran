@@ -25,7 +25,7 @@ class PromResView extends StatelessWidget {
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
-          height: 0.24.sh,
+          height: 0.245.sh,
           width: 0.7.sw,
           margin: EdgeInsets.fromLTRB(
             promRess.indexOf(restaurant) == 0 ? 16.w : 8.w,

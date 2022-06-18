@@ -278,7 +278,9 @@ class _HomeViewState extends State<HomeView> {
                                 pinned: false,
                                 floating: false,
                                 delegate: ContestTabHeader(
-                                  size: 92.h,
+                                  size: model.selectedMainCats.isEmpty
+                                      ? 92.h
+                                      : 95.h,
                                   child: MainCatView(),
                                 ),
                               ),
@@ -289,7 +291,7 @@ class _HomeViewState extends State<HomeView> {
                                   pinned: false,
                                   floating: false,
                                   delegate: ContestTabHeader(
-                                    size: 138.h,
+                                    size: 150.h,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

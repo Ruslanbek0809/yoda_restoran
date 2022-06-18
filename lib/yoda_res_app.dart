@@ -16,7 +16,8 @@ class YodaResApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return ScreenUtilInit(
-      builder: () => MaterialApp(
+      minTextAdapt: true,
+      builder: (context, child) => MaterialApp(
         title: Constants.appName,
         navigatorObservers: [StackedService.routeObserver],
         navigatorKey: StackedService.navigatorKey, // For stacked_services
