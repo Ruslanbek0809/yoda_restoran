@@ -31,6 +31,7 @@ class ContactUsViewModel extends BaseViewModel {
 
     _name = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _email
@@ -42,6 +43,7 @@ class ContactUsViewModel extends BaseViewModel {
 
     _phone = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _info
@@ -53,6 +55,7 @@ class ContactUsViewModel extends BaseViewModel {
 
     _info = value;
     notifyListeners();
+    return null;
   }
 
   Future<void> onContactPressed({

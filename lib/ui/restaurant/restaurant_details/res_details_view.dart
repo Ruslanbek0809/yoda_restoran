@@ -20,7 +20,7 @@ class ResDetailsView extends StatelessWidget {
       viewModelBuilder: () => ResDetailsViewModel(restaurant),
       builder: (context, model, child) {
         if (model.isCustomError && restaurant.id == model.cartRes!.id)
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateCustomError();
             await showErrorFlashBar(
               context: context,
@@ -32,7 +32,7 @@ class ResDetailsView extends StatelessWidget {
             );
           });
         else if (model.isCustomError)
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateCustomError();
             await showErrorFlashBar(
               context: context,

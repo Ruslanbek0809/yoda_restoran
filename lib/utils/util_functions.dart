@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/library/onboarding/onboarding.dart';
 import 'package:yoda_res/shared/shared.dart';
@@ -202,7 +201,7 @@ snackBar(String? message, BuildContext context) {
 
 /// Device Type
 String getDeviceType() {
-  final data = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   printLog('getDeviceType(): ${data.size.shortestSide}');
   return data.size.shortestSide < 600 ? Constants.PHONE : Constants.TABLET;
 }

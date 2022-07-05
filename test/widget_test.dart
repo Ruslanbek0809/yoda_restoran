@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:yoda_res/main.dart';
 import 'package:yoda_res/yoda_res_app.dart';
 
 void main() {

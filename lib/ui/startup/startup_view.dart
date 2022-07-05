@@ -17,7 +17,7 @@ class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      onModelReady: (model) => WidgetsBinding.instance!
+      onModelReady: (model) => WidgetsBinding.instance
           .addPostFrameCallback((_) => model.runStartupLogic()),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
@@ -25,7 +25,7 @@ class StartUpView extends StatelessWidget {
         if (model.startAnimation == false &&
             (model.connectivityStatus == ConnectivityStatus.Offline ||
                 model.connectivityStatus == null)) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             await showFlash(
               context: context,
               persistent: true,

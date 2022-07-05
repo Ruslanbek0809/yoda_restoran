@@ -70,6 +70,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _name = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _birthDate
@@ -81,6 +82,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _birthDate = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _gender
@@ -92,6 +94,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _gender = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _email
@@ -103,6 +106,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _email = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES _email
@@ -114,6 +118,7 @@ class ProfileViewModel extends BaseViewModel {
 
     _phone = value;
     notifyListeners();
+    return null;
   }
 
   /// UPDATES user info

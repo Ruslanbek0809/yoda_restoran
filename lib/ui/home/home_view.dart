@@ -3,7 +3,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
         /// TODO: PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
@@ -75,7 +75,7 @@ class _HomeViewState extends State<HomeView> {
       }),
       builder: (context, model, child) {
         if (model.fetchingSelectError && model.cartRes!.id != -1)
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
             await showErrorFlashBar(
               context: context,
@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
             );
           });
         else if (model.fetchingSelectError)
-          WidgetsBinding.instance!.addPostFrameCallback((_) async {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
             await showErrorFlashBar(
               context: context,
@@ -513,6 +513,12 @@ class _HomeViewState extends State<HomeView> {
             drawer: DrawerView(),
             body: Platform.isIOS
                 ? UpgradeAlert(
+                    upgrader: Upgrader(
+                      shouldPopScope: () => true,
+                      messages: context.locale == context.supportedLocales[0]
+                          ? MyTurkmenMessages()
+                          : MyRussianMessages(),
+                    ),
                     child: DoubleBackToCloseApp(
                       snackBar: SnackBar(
                         behavior: SnackBarBehavior.floating,
@@ -535,10 +541,6 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       child: body,
                     ),
-                    shouldPopScope: () => true,
-                    messages: context.locale == context.supportedLocales[0]
-                        ? MyTurkmenMessages()
-                        : MyRussianMessages(),
                   )
                 : DoubleBackToCloseApp(
                     snackBar: SnackBar(

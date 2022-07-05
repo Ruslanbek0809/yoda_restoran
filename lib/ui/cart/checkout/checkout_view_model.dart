@@ -203,6 +203,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 
     _checkoutNote = value;
     notifyListeners();
+    return null;
   }
 
   /// CREATES new order

@@ -149,6 +149,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                                     messages.forEach((element) {
                                       print(element);
                                     });
+                                    return null;
                                   },
                                 );
                         },
