@@ -83,6 +83,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                     : 0.975,
             duration: Duration(milliseconds: 250),
             context: context,
+            bottomSheetColor: Colors.transparent,
             builder: (context, scrollController, offset) {
               return CustomBarBottomSheet(
                 isMealBottomSheet: true,
@@ -320,6 +321,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                               : 0.975,
                                           duration: Duration(milliseconds: 250),
                                           context: context,
+                                          bottomSheetColor: Colors.transparent,
                                           builder: (context, scrollController,
                                               offset) {
                                             return CustomBarBottomSheet(
@@ -419,6 +421,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                               : 0.63
                                           : 0.975,
                                       context: context,
+                                      bottomSheetColor: Colors.transparent,
                                       duration: Duration(milliseconds: 250),
                                       builder:
                                           (context, scrollController, offset) {

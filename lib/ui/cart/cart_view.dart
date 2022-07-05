@@ -289,6 +289,7 @@ class CartView extends StatelessWidget {
                                     maxHeight: 0.8,
                                     duration: Duration(milliseconds: 250),
                                     context: context,
+                                    bottomSheetColor: Colors.transparent,
                                     builder:
                                         (context, scrollController, offset) {
                                       return CustomBarBottomSheet(

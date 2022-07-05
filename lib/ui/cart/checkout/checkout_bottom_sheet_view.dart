@@ -86,6 +86,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                       maxHeight: 0.975,
                                       duration: Duration(milliseconds: 250),
                                       context: context,
+                                      bottomSheetColor: Colors.transparent,
                                       builder:
                                           (context, scrollController, offset) {
                                         return CustomBarBottomSheet(
@@ -393,6 +394,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               maxHeight: 0.3,
                               duration: Duration(milliseconds: 250),
                               context: context,
+                              bottomSheetColor: Colors.transparent,
                               builder: (context, scrollController, offset) {
                                 return CustomBarBottomSheet(
                                   child: CheckoutPaymentTypeBottomSheetView(

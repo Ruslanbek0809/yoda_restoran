@@ -57,6 +57,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
               maxHeight: 0.975,
               context: context,
               duration: Duration(milliseconds: 250),
+              bottomSheetColor: Colors.transparent,
               builder: (context, scrollController, offset) {
                 return CustomBarBottomSheet(
                   child: MainCatBottomSheetView(

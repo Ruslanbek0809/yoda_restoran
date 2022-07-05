@@ -76,6 +76,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                     : 0.975,
             duration: Duration(milliseconds: 250),
             context: context,
+            bottomSheetColor: Colors.transparent,
             builder: (context, scrollController, offset) {
               return CustomBarBottomSheet(
                 isMealBottomSheet: true,
@@ -320,6 +321,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                             duration:
                                                 Duration(milliseconds: 250),
                                             context: context,
+                                            bottomSheetColor:
+                                                Colors.transparent,
                                             builder: (context, scrollController,
                                                 offset) {
                                               return CustomBarBottomSheet(
@@ -422,6 +425,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                             : 0.975,
                                         duration: Duration(milliseconds: 250),
                                         context: context,
+                                        bottomSheetColor: Colors.transparent,
                                         builder: (context, scrollController,
                                             offset) {
                                           return CustomBarBottomSheet(

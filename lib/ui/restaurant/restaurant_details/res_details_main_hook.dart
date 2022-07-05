@@ -381,6 +381,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   maxHeight: 0.975,
                                   duration: Duration(milliseconds: 250),
                                   context: context,
+                                  bottomSheetColor: Colors.transparent,
                                   builder: (context, scrollController, offset) {
                                     return CustomBarBottomSheet(
                                       child: RestaurantInfoBottomSheet(
