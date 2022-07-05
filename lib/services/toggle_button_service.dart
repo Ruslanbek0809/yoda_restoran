@@ -18,18 +18,15 @@ class ToggleButtonService with ReactiveServiceMixin {
   void updateToggleToDelivery() {
     _isDelivery.value = true;
     log.i('_isDelivery.value: ${_isDelivery.value}');
-    notifyListeners();
   }
 
   void updateToggleToSelfPickUp() {
     _isDelivery.value = false;
     log.i('_isDelivery.value: ${_isDelivery.value}');
-    notifyListeners();
   }
 
   void switchToggleButton() {
     _isDelivery.value = !_isDelivery.value;
     log.i('_isDelivery.value: ${_isDelivery.value}');
-    notifyListeners();
   }
 }

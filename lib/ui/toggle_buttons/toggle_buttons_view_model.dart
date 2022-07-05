@@ -11,22 +11,15 @@ class ToggleButtonViewModel extends ReactiveViewModel {
   bool get isDelivery => _toggleButtonService.isDelivery;
 
   /// UPDATES isDelivery to FALSE (USES _toggleButtonService)
-  void updateToggleToDelivery() {
-    _toggleButtonService.updateToggleToDelivery();
-    notifyListeners();
-  }
+  void updateToggleToDelivery() =>
+      _toggleButtonService.updateToggleToDelivery();
 
   /// UPDATES isDelivery to TRUE (USES _toggleButtonService)
-  void updateToggleToSelfPickUp() {
-    _toggleButtonService.updateToggleToSelfPickUp();
-    notifyListeners();
-  }
+  void updateToggleToSelfPickUp() =>
+      _toggleButtonService.updateToggleToSelfPickUp();
 
   /// SWITCHES isDelivery (USES _toggleButtonService)
-  void switchToggleButton() {
-    _toggleButtonService.switchToggleButton();
-    notifyListeners();
-  }
+  void switchToggleButton() => _toggleButtonService.switchToggleButton();
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_toggleButtonService];

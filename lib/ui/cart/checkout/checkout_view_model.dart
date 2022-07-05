@@ -228,5 +228,5 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [_checkoutService, _hiveDbService];
+      [_checkoutService, _hiveDbService, _toggleButtonService];
 }
