@@ -27,6 +27,7 @@ class HomeViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _dynamicLinkService = locator<DynamicLinkService>();
   final _dialogService = locator<DialogService>();
+  final _geolocatorService = locator<GeolocatorService>();
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -70,6 +71,8 @@ class HomeViewModel extends ReactiveViewModel {
 
   /// GETS all home data
   Future getHomeData() async {
+    /// GETS user's location
+    await _geolocatorService.getUserLocation();
     await runBusyFuture(_homeService.getSliders(),
         busyObject: homeSlidersFuture);
     await runBusyFuture(_homeService.getMainCategs(),

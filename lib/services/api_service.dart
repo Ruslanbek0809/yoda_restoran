@@ -55,6 +55,7 @@ class ApiService {
   //   try {
   //     Response response;
   //     if (_geolocatorService.locationPosition != null) {
+        /// DEPRECATED after 2.3.0+35
   //       await _geolocatorService.getUserCurrentLocationOnly();
   //       response = await _apiRoot.dio.get(
   //         'api/restaurants/',
@@ -89,7 +90,8 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        await _geolocatorService.getUserCurrentLocationOnly();
+        /// DEPRECATED after 2.3.0+35
+        // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/paginatedRestaurants/',
           queryParameters: {
@@ -121,7 +123,8 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        await _geolocatorService.getUserCurrentLocationOnly();
+        /// DEPRECATED after 2.3.0+35
+        // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/promoted/',
           queryParameters: {
@@ -186,7 +189,8 @@ class ApiService {
       Response response;
 
       if (_geolocatorService.locationPosition != null) {
-        await _geolocatorService.getUserCurrentLocationOnly();
+        /// DEPRECATED after 2.3.0+35
+        // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/restaurants?$_queryPars',
           queryParameters: {
@@ -221,7 +225,8 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        await _geolocatorService.getUserCurrentLocationOnly();
+        /// DEPRECATED after 2.3.0+35
+        // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/richRes/',
           queryParameters: {

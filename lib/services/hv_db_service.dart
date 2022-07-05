@@ -68,6 +68,7 @@ class HiveDbService with ReactiveServiceMixin {
   }
 
   /// TODO: HiveRating
+  /// GETS all hive ratings from hiveRatingBox
   void getHiveRatings() {
     hiveRatingBox = Hive.box<HiveRating>(Constants.hiveRatingBox);
     _hiveRatings.value = hiveRatingBox.values.toList();

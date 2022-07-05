@@ -23,7 +23,6 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final _hiveDbService = locator<HiveDbService>();
   final _userService = locator<UserService>();
   final _connectivityService = locator<ConnectivityService>();
-  final _geolocatorService = locator<GeolocatorService>();
   final _dynamicLinkService = locator<DynamicLinkService>();
 
   ConnectivityStatus? get connectivityStatus => data;
@@ -72,8 +71,9 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
           .handleBFDynamicLinks(); // INITIALIZATION of FB Dynamic Link
     });
 
-    /// GETS user's location
-    await _geolocatorService.getUserLocation();
+    /// DEPRECATED after 2.3.0+35
+    // /// GETS user's location
+    // await _geolocatorService.getUserLocation();
 
     await _apiRootService.initDio();
     await _hiveDbService.initHiveBoxes();
@@ -93,14 +93,14 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
       Platform.isIOS
           ? await _navService.replaceWithTransition(
               HomeView(),
-              transition: NavigationTransition.Fade,
+              transitionStyle: Transition.fade,
             )
           : await _navService.replaceWith(Routes.homeView);
     } else {
       Platform.isIOS
           ? await _navService.replaceWithTransition(
               OnBoardingView(),
-              transition: NavigationTransition.Fade,
+              transitionStyle: Transition.fade,
             )
           : await _navService.replaceWith(Routes.onBoardingView);
     }
