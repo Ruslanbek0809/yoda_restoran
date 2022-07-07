@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'main_cat_all_item_hook.dart';
+import 'main_cat_filter_item_hook.dart';
 import 'main_cat_item_hook.dart';
 import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,10 +18,12 @@ class MainCatView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: model.mainCats!.take(10).map((mainCategory) {
-              return model.mainCats!.indexOf(mainCategory) !=
-                      model.mainCats!.take(10).length - 1
-                  ? MainCatItemHook(mainCategory: mainCategory)
-                  : MainCatAllItemHook();
+              return model.mainCats!.indexOf(mainCategory) == 0
+                  ? MainCatFilterItemHook()
+                  : model.mainCats!.indexOf(mainCategory) ==
+                          model.mainCats!.take(10).length - 1
+                      ? MainCatAllItemHook()
+                      : MainCatItemHook(mainCategory: mainCategory);
             }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
           ),
         ),

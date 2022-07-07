@@ -75,14 +75,17 @@ class MainCatBottomViewModel extends ReactiveViewModel {
 
     bool _byAlphabet = false;
     bool _byRating = false;
+    bool _byOpenRestaurants = false;
     if (selectedSort!.id == 2) _byAlphabet = true;
     if (selectedSort!.id == 3) _byRating = true;
+    if (selectedSort!.id == 4) _byOpenRestaurants = true;
 
     await runBusyFuture(
       _homeService.getSelectedMainCats(
         _tempSelectedMainCats,
         _byAlphabet,
         _byRating,
+        _byOpenRestaurants,
       ),
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService))
 

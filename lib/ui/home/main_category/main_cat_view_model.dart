@@ -35,6 +35,7 @@ class MainCatViewModel extends ReactiveViewModel {
       selectedMainCats,
       false,
       false,
+      false,
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
     if (!isSelectedFetched)

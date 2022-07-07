@@ -62,7 +62,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                     ],
                   ),
                 ),
-                //--------------- MAIN CATEGORY SORT -------------- //
+                //--------------- MAIN CATEGORY SORT MANUAL -------------- //
                 Container(
                   color: AppTheme.WHITE,
                   padding: EdgeInsets.symmetric(horizontal: 5.h),

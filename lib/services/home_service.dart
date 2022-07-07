@@ -70,6 +70,16 @@ class HomeService with ReactiveServiceMixin {
 
   Future<List<MainCategory>?> getMainCategs() async {
     _mainCats = await _api.getMainCats();
+
+    /// NOTE: Filter added manually
+    _mainCats!.add(
+      MainCategory(
+        id: -1,
+        order: -1,
+        name: 'Filter',
+        image: 'assets/ph_product.png',
+      ),
+    );
     _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
     log.v(_mainCats!.length);
     return _mainCats;
@@ -126,6 +136,7 @@ class HomeService with ReactiveServiceMixin {
     List<int> selectedMainCats,
     bool alphabet,
     bool rating,
+    bool openRestaurants,
   ) async {
     if (selectedMainCats.isNotEmpty) {
       _fetchingSelectedMainCats.value = true;
@@ -134,6 +145,7 @@ class HomeService with ReactiveServiceMixin {
         selectedMainCats,
         alphabet,
         rating,
+        openRestaurants,
       );
 
       /// This line "result.runtimeType != DioError" is Workaround

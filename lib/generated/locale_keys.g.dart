@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const login = 'login';
   static const enter_phone = 'enter_phone';
   static const continuee = 'continuee';
@@ -40,15 +40,13 @@ abstract class LocaleKeys {
   static const delivery = 'delivery';
   static const workingHours = 'workingHours';
   static const clearCartPls = 'clearCartPls';
-  static const cart_is_full_with_other_restaurant =
-      'cart_is_full_with_other_restaurant';
+  static const cart_is_full_with_other_restaurant = 'cart_is_full_with_other_restaurant';
   static const goToCart = 'goToCart';
   static const clearCart = 'clearCart';
   static const order = 'order';
   static const oneMore = 'oneMore';
   static const howToTake = 'howToTake';
-  static const deliveryPriceWillAddByOperator =
-      'deliveryPriceWillAddByOperator';
+  static const deliveryPriceWillAddByOperator = 'deliveryPriceWillAddByOperator';
   static const wannaClearCart = 'wannaClearCart';
   static const letsClearCart = 'letsClearCart';
   static const no = 'no';
@@ -76,8 +74,7 @@ abstract class LocaleKeys {
   static const enterCity = 'enterCity';
   static const enterStreet = 'enterStreet';
   static const wannaDeleteAddress = 'wannaDeleteAddress';
-  static const yourAddressDeletedSuccessfully =
-      'yourAddressDeletedSuccessfully';
+  static const yourAddressDeletedSuccessfully = 'yourAddressDeletedSuccessfully';
   static const house = 'house';
   static const apartment = 'apartment';
   static const floor = 'floor';
@@ -90,8 +87,7 @@ abstract class LocaleKeys {
   static const select = 'select';
   static const myOrders = 'myOrders';
   static const yourOrderWasPassedToRes = 'yourOrderWasPassedToRes';
-  static const toConfirmOrderWairForCallFromRes =
-      'toConfirmOrderWairForCallFromRes';
+  static const toConfirmOrderWairForCallFromRes = 'toConfirmOrderWairForCallFromRes';
   static const homeScreen = 'homeScreen';
   static const orderWaiting = 'orderWaiting';
   static const orderAccepted = 'orderAccepted';
@@ -128,8 +124,10 @@ abstract class LocaleKeys {
   static const defaultt = 'defaultt';
   static const byName = 'byName';
   static const byRatings = 'byRatings';
+  static const byOpenRestaurants = 'byOpenRestaurants';
   static const confirmSortButton = 'confirmSortButton';
   static const all = 'all';
+  static const filter = 'filter';
   static const noInternet = 'noInternet';
   static const Add = 'Add';
   static const choose = 'choose';
@@ -159,4 +157,5 @@ abstract class LocaleKeys {
   static const rateOrder = 'rateOrder';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
+
 }

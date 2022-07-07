@@ -58,6 +58,7 @@ List<CategoryFilter> mainCatSortList = [
   CategoryFilter(1, LocaleKeys.defaultt),
   CategoryFilter(2, LocaleKeys.byName),
   CategoryFilter(3, LocaleKeys.byRatings),
+  CategoryFilter(4, LocaleKeys.byOpenRestaurants),
 ];
 
 List<PaymentTypee> paymentTypes = [

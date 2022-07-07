@@ -55,7 +55,7 @@ class ApiService {
   //   try {
   //     Response response;
   //     if (_geolocatorService.locationPosition != null) {
-        /// DEPRECATED after 2.3.0+35
+  /// DEPRECATED after 2.3.0+35
   //       await _geolocatorService.getUserCurrentLocationOnly();
   //       response = await _apiRoot.dio.get(
   //         'api/restaurants/',
@@ -170,6 +170,7 @@ class ApiService {
     List<int> _selectedMainCats,
     bool alphabet,
     bool rating,
+    bool openRestaurants,
   ) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Restaurant> _selectedMainCatRestaurants = [];
@@ -179,12 +180,14 @@ class ApiService {
 
     if (alphabet) _queryPars += '&alphabetical=True'; // Workaround
     if (rating) _queryPars += '&rating=True'; // Workaround
+    if (openRestaurants) _queryPars += '&open=True'; // Workaround
 
     /// Favourite add part
     if (_selectedMainCats.contains(14))
       _queryPars += '&favourite=True'; // Workaround
 
-    log.v('ApiService - $_queryPars, alphabetical: $alphabet, rating: $rating');
+    log.v(
+        'ApiService - $_queryPars, alphabetical: $alphabet, rating: $rating, open: $openRestaurants');
     try {
       Response response;
 
