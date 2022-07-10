@@ -43,6 +43,8 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
+        print('model.isFilterApplied: ${model.isFilterApplied}');
+
         /// TODO: PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
@@ -74,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
         if (model.hiveRating != null) await model.checkAndShowFirstHiveRating();
       }),
       builder: (context, model, child) {
-        if (model.fetchingSelectError && model.cartRes!.id != -1)
+        if (model.fetchingFilterError && model.cartRes!.id != -1)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
             await showErrorFlashBar(
@@ -86,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             );
           });
-        else if (model.fetchingSelectError)
+        else if (model.fetchingFilterError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
             await showErrorFlashBar(
@@ -100,7 +102,7 @@ class _HomeViewState extends State<HomeView> {
           });
 
         //------------------ SELECTED CATS LOADING VIEW ---------------------//
-        Widget body = model.fetchingSelectedMainCatsRes
+        Widget body = model.fetchingFilter
             ? CustomScrollView(
                 slivers: [
                   SliverAppBar(
@@ -148,8 +150,9 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               )
+            :
             //------------------ HOME MAIN VIEW ---------------------//
-            : Stack(
+            Stack(
                 children: [
                   SmartRefresher(
                     header: CustomHeaderWidget(),
@@ -231,9 +234,12 @@ class _HomeViewState extends State<HomeView> {
                         : CustomScrollView(
                             slivers: [
                               SliverAppBar(
-                                expandedHeight: model.selectedMainCats.isEmpty
-                                    ? 0.075.sh + 0.6.sw
-                                    : 0.1.sh,
+                                expandedHeight:
+
+                                    /// If MAIN CAT FILTER is APPLIED
+                                    !model.isFilterApplied
+                                        ? 0.075.sh + 0.6.sw
+                                        : 0.1.sh,
                                 backgroundColor: kcWhiteColor,
                                 elevation: 0,
                                 toolbarHeight: 60.h,
@@ -265,7 +271,8 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                       ),
                                       //------------------ SLIDERS ---------------------//
-                                      if (model.selectedMainCats.isEmpty)
+                                      /// If MAIN CAT FILTER is APPLIED
+                                      if (!model.isFilterApplied)
                                         SliderView(
                                             sliders: model.sliders ?? []),
                                     ],
@@ -277,14 +284,14 @@ class _HomeViewState extends State<HomeView> {
                                 pinned: false,
                                 floating: false,
                                 delegate: ContestTabHeader(
-                                  size: model.selectedMainCats.isEmpty
-                                      ? 92.h
-                                      : 95.h,
+                                  /// If MAIN CAT FILTER is APPLIED
+                                  size: !model.isFilterApplied ? 92.h : 95.h,
                                   child: MainCatView(),
                                 ),
                               ),
                               //------------------ EXCLUSIVES ---------------------//
-                              if (model.selectedMainCats.isEmpty &&
+                              /// If MAIN CAT FILTER is APPLIED
+                              if (!model.isFilterApplied &&
                                   model.exclusives!.isNotEmpty)
                                 SliverPersistentHeader(
                                   pinned: false,
@@ -317,7 +324,8 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               //------------------ BODY: RESTAURANTS ---------------------//
                               //------------------ DEFAULT BODY VIEW ---------------------//
-                              model.selectedMainCats.isEmpty
+                              /// If MAIN CAT FILTER is APPLIED
+                              !model.isFilterApplied
                                   ? SliverPadding(
                                       padding: EdgeInsets.only(
                                         top: 16.h,

@@ -54,11 +54,11 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
-List<CategoryFilter> mainCatSortList = [
-  CategoryFilter(1, LocaleKeys.defaultt),
-  CategoryFilter(2, LocaleKeys.byName),
-  CategoryFilter(3, LocaleKeys.byRatings),
-  CategoryFilter(4, LocaleKeys.byOpenRestaurants),
+List<FilterSort> mainCatSortList = [
+  FilterSort(1, LocaleKeys.defaultt),
+  FilterSort(2, LocaleKeys.byName),
+  FilterSort(3, LocaleKeys.byRatings),
+  FilterSort(4, LocaleKeys.byOpenRestaurants),
 ];
 
 List<PaymentTypee> paymentTypes = [

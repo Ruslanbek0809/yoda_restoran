@@ -53,7 +53,6 @@ import '../ui/startup/startup_view.dart';
     LazySingleton(classType: BottomCartService),
     LazySingleton(classType: MainCatService),
     LazySingleton(classType: CartService),
-    LazySingleton(classType: MainFilterService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: ToggleButtonService),
     LazySingleton(classType: CheckoutService),

@@ -80,10 +80,10 @@ class MainCatBottomSheetView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: mainCatSortList
                             .map<Widget>(
-                              (CategoryFilter categoryFilter) => Column(
+                              (FilterSort categoryFilter) => Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RadioListTile<CategoryFilter>(
+                                  RadioListTile<FilterSort>(
                                     value: categoryFilter,
                                     groupValue: model.selectedSort,
                                     onChanged: model.updateSelectedSort,

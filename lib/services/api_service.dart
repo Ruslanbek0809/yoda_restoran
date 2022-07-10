@@ -166,25 +166,35 @@ class ApiService {
     }
   }
 
-  Future<dynamic> getSelectedMainCats(
-    List<int> _selectedMainCats,
+  Future<dynamic> getFilterResult(
+    List<int> selectedMainCats,
     bool alphabet,
     bool rating,
     bool openRestaurants,
   ) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<Restaurant> _selectedMainCatRestaurants = [];
-    String _queryPars = 'mainCat=${_selectedMainCats[0]}';
-    for (int i = 1; i < _selectedMainCats.length; i++)
-      _queryPars += '&mainCat=${_selectedMainCats[i]}'; // Workaround
 
-    if (alphabet) _queryPars += '&alphabetical=True'; // Workaround
-    if (rating) _queryPars += '&rating=True'; // Workaround
-    if (openRestaurants) _queryPars += '&open=True'; // Workaround
+    String _queryPars = '';
 
-    /// Favourite add part
-    if (_selectedMainCats.contains(14))
-      _queryPars += '&favourite=True'; // Workaround
+    /// IF selectedMainCats IS NOT EMPTY
+    if (selectedMainCats.isNotEmpty) {
+      _queryPars = 'mainCat=${selectedMainCats[0]}';
+      for (int i = 1; i < selectedMainCats.length; i++)
+        _queryPars += '&mainCat=${selectedMainCats[i]}'; // Workaround
+
+      if (alphabet) _queryPars += '&alphabetical=True'; // Workaround
+      if (rating) _queryPars += '&rating=True'; // Workaround
+      if (openRestaurants) _queryPars += '&open=True'; // Workaround
+
+      /// Favourite add part
+      if (selectedMainCats.contains(14))
+        _queryPars += '&favourite=True'; // Workaround
+    } else {
+      if (alphabet) _queryPars += 'alphabetical=True'; // Workaround
+      if (rating) _queryPars += 'rating=True'; // Workaround
+      if (openRestaurants) _queryPars += 'open=True'; // Workaround 
+    }
 
     log.v(
         'ApiService - $_queryPars, alphabetical: $alphabet, rating: $rating, open: $openRestaurants');
@@ -225,7 +235,7 @@ class ApiService {
   }) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<EsRich> _seRiches = [];
-    try {
+    try {   
       Response response;
       if (_geolocatorService.locationPosition != null) {
         /// DEPRECATED after 2.3.0+35

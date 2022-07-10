@@ -11,7 +11,7 @@ class HomeService with ReactiveServiceMixin {
 
   HomeService() {
     // 3
-    listenToReactiveValues([_fetchingSelectedMainCats, _fetchingSelectError]);
+    listenToReactiveValues([_fetchingFilter, _fetchingFilterError]);
   }
 
   final _api = locator<ApiService>();
@@ -53,14 +53,14 @@ class HomeService with ReactiveServiceMixin {
       _selectedMainCatRestaurants!.isNotEmpty;
 
   // 2
-  ReactiveValue<bool> _fetchingSelectedMainCats =
+  ReactiveValue<bool> _fetchingFilter =
       ReactiveValue<bool>(false); // Custom busy for HomeView
-  bool get fetchingSelectedMainCats => _fetchingSelectedMainCats.value;
+  bool get fetchingFilter => _fetchingFilter.value;
 
   // CUSTOM ERROR for selectedMainCats fetch
-  ReactiveValue<bool> _fetchingSelectError =
+  ReactiveValue<bool> _fetchingFilterError =
       ReactiveValue<bool>(false); // Custom busy for HomeView
-  bool get fetchingSelectError => _fetchingSelectError.value;
+  bool get fetchingFilterError => _fetchingFilterError.value;
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
@@ -132,43 +132,33 @@ class HomeService with ReactiveServiceMixin {
     return _exclusives;
   }
 
-  Future<bool> getSelectedMainCats(
+  Future<bool> getFilterResult(
     List<int> selectedMainCats,
     bool alphabet,
     bool rating,
     bool openRestaurants,
   ) async {
-    if (selectedMainCats.isNotEmpty) {
-      _fetchingSelectedMainCats.value = true;
-      await Future.delayed(Duration(seconds: 1));
-      dynamic result = await _api.getSelectedMainCats(
-        selectedMainCats,
-        alphabet,
-        rating,
-        openRestaurants,
-      );
+    _fetchingFilter.value = true;
+    await Future.delayed(Duration(milliseconds: 500));
+    dynamic result = await _api.getFilterResult(
+      selectedMainCats,
+      alphabet,
+      rating,
+      openRestaurants,
+    );
 
-      /// This line "result.runtimeType != DioError" is Workaround
-      if (result.runtimeType != DioError) {
-        _selectedMainCatRestaurants = result;
-        _fetchingSelectedMainCats.value = false;
-        log.v(
-            'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
-        return true;
-      } else {
-        _fetchingSelectedMainCats.value = false;
-        _fetchingSelectError.value =
-            true; // When error occurs, it activates this error
-        return false;
-      }
-    } else {
-      _fetchingSelectedMainCats.value = true;
-      _selectedMainCatRestaurants!.clear();
-      await Future.delayed(Duration(seconds: 1));
-      _fetchingSelectedMainCats.value = false;
+    /// This line "result.runtimeType != DioError" is Workaround
+    if (result.runtimeType != DioError) {
+      _selectedMainCatRestaurants = result;
+      _fetchingFilter.value = false;
       log.v(
-          '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+          'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
       return true;
+    } else {
+      _fetchingFilter.value = false;
+      _fetchingFilterError.value =
+          true; // When error occurs, it activates this error
+      return false;
     }
   }
 
@@ -182,6 +172,6 @@ class HomeService with ReactiveServiceMixin {
   void disableSelectError() {
     log.i('');
 
-    _fetchingSelectError.value = false;
+    _fetchingFilterError.value = false;
   }
 }

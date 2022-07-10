@@ -5,7 +5,6 @@ import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
-import '../../../utils/utils.dart';
 
 class MainCatBottomViewModel extends ReactiveViewModel {
   final log = getLogger('MainCatBottomViewModel');
@@ -14,7 +13,6 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   final _homeService = locator<HomeService>();
   final _mainCatService = locator<
       MainCatService>(); // To update _selectedMainCats in realtime(reactive)
-  final _mainFilterService = locator<MainFilterService>();
   final _geolocatorService = locator<GeolocatorService>();
 
   Position? get locationPosition => _geolocatorService.locationPosition;
@@ -22,9 +20,8 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
   List<int> get selectedMainCats => _mainCatService.selectedMainCats;
-  CategoryFilter? get selectedSort => _mainCatService.selectedSort;
-  MainFilterAnimationStatus get mainFilterAnimationStatus =>
-      _mainFilterService.mainFilterAnimationStatus;
+  FilterSort? get selectedSort => _mainCatService.selectedSort;
+  bool get isFilterApplied => _mainCatService.isFilterApplied;
 
   List<int> _tempSelectedMainCats = [];
   List<int> get tempSelectedMainCats => _tempSelectedMainCats;
@@ -55,23 +52,18 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   }
 
   /// UPDATES _selectedSort
-  void updateSelectedSort(CategoryFilter? newSelectedSort) {
+  void updateSelectedSort(FilterSort? newSelectedSort) {
     log.i('updateSelectedSort(): ${selectedSort!.name}');
 
     _mainCatService.updateSelectedSort(
         newSelectedSort); // UPDATES selectedSort (CALLED from _mainCatService)
 
-    // _mainFilterService.updateMainAnimationFilterStatus(
-    //     _mainCatService.selectedSort,
-    //     _mainCatService
-    //         .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
-
     notifyListeners();
   }
 
   /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
-  Future<void> updateAllSelectedTempMainCats() async {
-    log.i('updateAllSelectedTempMainCats()');
+  Future<void> fireFilterAPI() async {
+    log.i('fireFilterAPI()');
 
     bool _byAlphabet = false;
     bool _byRating = false;
@@ -81,7 +73,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     if (selectedSort!.id == 4) _byOpenRestaurants = true;
 
     await runBusyFuture(
-      _homeService.getSelectedMainCats(
+      _homeService.getFilterResult(
         _tempSelectedMainCats,
         _byAlphabet,
         _byRating,
@@ -91,12 +83,14 @@ class MainCatBottomViewModel extends ReactiveViewModel {
 
     _mainCatService.assignTempSelectedMainCats(
         _tempSelectedMainCats); // ASSINGS all _tempSelectedMainCats to  _selectedMainCats (CALLED from _mainCatService)
+
+    /// CHECKS whether isFilterApplied var SET to TRUE before or NOT
+    if (!isFilterApplied) _mainCatService.filterApplied();
   }
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back();
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
-      [_mainCatService, _mainFilterService];
+  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
 }

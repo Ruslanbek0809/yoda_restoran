@@ -14,6 +14,7 @@ class MainCatViewModel extends ReactiveViewModel {
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
   List<int> get selectedMainCats => _mainCatService.selectedMainCats;
+  bool get isFilterApplied => _mainCatService.isFilterApplied;
 
   /// CHECKS whether this mainCat selected or NOT
   bool isMainCatSelected(int? mainCatId) =>
@@ -31,23 +32,22 @@ class MainCatViewModel extends ReactiveViewModel {
     await Future.delayed(
         Duration(milliseconds: 300)); // For Yandex like animation
 
-    bool isSelectedFetched = await _homeService.getSelectedMainCats(
+    bool isSelectedFetched = await _homeService.getFilterResult(
       selectedMainCats,
       false,
       false,
       false,
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
-    if (!isSelectedFetched)
+    /// If selected cat is not FETCHED bc of ERROR, then remove last added mainCat from the existing list
+    if (!isSelectedFetched) {
       _mainCatService.updateSelectedMainCats(
           mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
-
-    // _mainFilterService.updateMainAnimationFilterStatus(
-    //     _mainCatService.selectedSort,
-    //     _mainCatService
-    //         .selectedMainCats); // UPDATES main filter animation status (CALLED from _mainFilterService)
-
-    // notifyListeners();
+      /// If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
+      if (isFilterApplied && selectedMainCats.isEmpty)
+        _mainCatService.filterDisabled();
+    } else
+      _mainCatService.filterApplied();
   }
 
   //------------------------ MEAL BOTTOM SHEET PART ----------------------------//

@@ -37,14 +37,20 @@ class HomeViewModel extends ReactiveViewModel {
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
 
-  List<int> get selectedMainCats =>
-      _mainCatService.selectedMainCats; // NEEDS only for UI cases
+  // List<int> get selectedMainCats =>
+  //     _mainCatService.selectedMainCats; // NEEDS only for UI cases
+
+  // FilterSort get selectedSort =>
+  //     _mainCatService.selectedSort; // NEEDS only for UI cases
+
+  bool get isFilterApplied =>
+      _mainCatService.isFilterApplied; // NEEDS only for UI cases
 
   List<Restaurant> get selectedMainCatRestaurants => _homeService
       .selectedMainCatRestaurants!; // FOUND restaurants of selectedMainCats
 
-  bool get fetchingSelectedMainCatsRes => _homeService.fetchingSelectedMainCats;
-  bool get fetchingSelectError => _homeService.fetchingSelectError;
+  bool get fetchingFilter => _homeService.fetchingFilter;
+  bool get fetchingFilterError => _homeService.fetchingFilterError;
 
   /// TODO: PAG
   int _page = 1;
@@ -141,6 +147,7 @@ class HomeViewModel extends ReactiveViewModel {
   Future<void> clearSelectedMainCatRess() async {
     _homeService.clearSelectedMainCatRess();
     _mainCatService.clearSelectedMainCats();
+    _mainCatService.filterDisabled();
   }
 
   void updateFetchingSelectedError() => _homeService.disableSelectError();
