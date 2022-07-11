@@ -21,6 +21,8 @@ class MainCatBottomViewModel extends ReactiveViewModel {
 
   List<int> get selectedMainCats => _mainCatService.selectedMainCats;
   FilterSort? get selectedSort => _mainCatService.selectedSort;
+  bool get isByOpenRestaurantsChecked =>
+      _mainCatService.isByOpenRestaurantsChecked;
   bool get isFilterApplied => _mainCatService.isFilterApplied;
 
   List<int> _tempSelectedMainCats = [];
@@ -51,13 +53,21 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  /// UPDATES _isByOpenRestaurantsChecked
+  void updateIsOpenByRestaurants(bool newValue) {
+    log.i('updateIsOpenByRestaurants(): $isByOpenRestaurantsChecked');
+
+    _mainCatService.updateIsOpenByRestaurants(
+        newValue); // UPDATES isByOpenRestaurantsChecked (CALLED from _mainCatService)
+    notifyListeners();
+  }
+
   /// UPDATES _selectedSort
   void updateSelectedSort(FilterSort? newSelectedSort) {
     log.i('updateSelectedSort(): ${selectedSort!.name}');
 
     _mainCatService.updateSelectedSort(
         newSelectedSort); // UPDATES selectedSort (CALLED from _mainCatService)
-
     notifyListeners();
   }
 
@@ -70,7 +80,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     bool _byOpenRestaurants = false;
     if (selectedSort!.id == 2) _byAlphabet = true;
     if (selectedSort!.id == 3) _byRating = true;
-    if (selectedSort!.id == 4) _byOpenRestaurants = true;
+    if (isByOpenRestaurantsChecked) _byOpenRestaurants = true;
 
     await runBusyFuture(
       _homeService.getFilterResult(

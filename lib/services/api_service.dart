@@ -193,7 +193,10 @@ class ApiService {
     } else {
       if (alphabet) _queryPars += 'alphabetical=True'; // Workaround
       if (rating) _queryPars += 'rating=True'; // Workaround
-      if (openRestaurants) _queryPars += 'open=True'; // Workaround 
+      if (openRestaurants && (alphabet || rating))
+        _queryPars += '&open=True'; // Workaround
+      else
+        _queryPars += 'open=True';
     }
 
     log.v(
@@ -235,7 +238,7 @@ class ApiService {
   }) async {
     log.v('My loc: ${_geolocatorService.locationPosition}');
     List<EsRich> _seRiches = [];
-    try {   
+    try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
         /// DEPRECATED after 2.3.0+35

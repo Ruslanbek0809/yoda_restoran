@@ -9,12 +9,20 @@ class MainCatService with ReactiveServiceMixin {
 
   MainCatService() {
     // 3
-    listenToReactiveValues([_selectedMainCats, selectedSort, _isFilterApplied]);
+    listenToReactiveValues([
+      _selectedMainCats,
+      _isByOpenRestaurantsChecked,
+      _selectedSort,
+      _isFilterApplied,
+    ]);
   }
 
   // 2
   ReactiveValue<List<int>> _selectedMainCats = ReactiveValue<List<int>>([]);
   List<int> get selectedMainCats => _selectedMainCats.value;
+
+  ReactiveValue<bool> _isByOpenRestaurantsChecked = ReactiveValue<bool>(false);
+  bool get isByOpenRestaurantsChecked => _isByOpenRestaurantsChecked.value;
 
   ReactiveValue<FilterSort> _selectedSort =
       ReactiveValue<FilterSort>(mainCatSortList[0]);
@@ -62,6 +70,15 @@ class MainCatService with ReactiveServiceMixin {
   void updateSelectedSort(FilterSort? newSelectedSort) {
     _selectedSort.value = newSelectedSort!;
     log.v('_selectedSort.value.id: ${_selectedSort.value.id}');
+  }
+
+  //------------------ BY OPEN RESTAURANTS PART ---------------------//
+
+  /// UPDATES _isByOpenRestaurantsChecked
+  void updateIsOpenByRestaurants(bool newValue) {
+    _isByOpenRestaurantsChecked.value = newValue;
+    log.v(
+        '_isByOpenRestaurantsChecked.value: ${_isByOpenRestaurantsChecked.value}');
   }
 
   //------------------ FILTER PART ---------------------//

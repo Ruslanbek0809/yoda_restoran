@@ -58,7 +58,6 @@ List<FilterSort> mainCatSortList = [
   FilterSort(1, LocaleKeys.defaultt),
   FilterSort(2, LocaleKeys.byName),
   FilterSort(3, LocaleKeys.byRatings),
-  FilterSort(4, LocaleKeys.byOpenRestaurants),
 ];
 
 List<PaymentTypee> paymentTypes = [
