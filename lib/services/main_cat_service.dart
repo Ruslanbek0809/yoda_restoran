@@ -26,12 +26,24 @@ class MainCatService with ReactiveServiceMixin {
   //------------------ SELECTED MAIN CATS PART ---------------------//
 
   /// ADDS or REMOVES mainCategory to/from _selectedMainCats
-  void updateSelectedMainCats(int? mainCatId) {
-    log.v('');
-    if (_selectedMainCats.value.contains(mainCatId))
-      _selectedMainCats.value.remove(mainCatId);
-    else
-      _selectedMainCats.value.add(mainCatId!);
+  void updateSelectedMainCats(int mainCatId) {
+    log.v('updateSelectedMainCats');
+    if (_selectedMainCats.value.contains(mainCatId)) {
+      /// This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
+      // _selectedMainCats.value.remove(mainCatId);
+
+      /// This Method 2 WORKS to update UI. Stacked reactivity thing
+      var _tempSelectedMainCats = _selectedMainCats.value;
+      _tempSelectedMainCats.remove(mainCatId);
+      _selectedMainCats.value = [];
+      _selectedMainCats.value = [..._tempSelectedMainCats];
+    } else {
+      /// This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
+      // _selectedMainCats.value.add(mainCatId);
+
+      /// This Method 2 WORKS to update UI. Stacked reactivity thing
+      _selectedMainCats.value = [..._selectedMainCats.value, mainCatId];
+    }
   }
 
   /// CLEARS _selectedMainCats.value (CALLED from _homeService)
@@ -52,9 +64,24 @@ class MainCatService with ReactiveServiceMixin {
     log.v('_selectedSort.value.id: ${_selectedSort.value.id}');
   }
 
+  //------------------ FILTER PART ---------------------//
+
   /// SETS _isFilterApplied to TRUE
-  void filterApplied() => _isFilterApplied.value = true;
+  void filterApplied() {
+    if (!_isFilterApplied.value) {
+      log.v('filterApplied FIRED');
+      _isFilterApplied.value = true;
+    }
+  }
 
   /// SETS _isFilterApplied to FALSE
-  void filterDisabled() => _isFilterApplied.value = false;
+  void filterDisabled() {
+    if (_isFilterApplied.value) {
+      log.v('filterDisabled FIRED');
+      _isFilterApplied.value = false;
+    }
+  }
+
+  // /// SETS _isFilterApplied to FALSE
+  // void filterDisabled() => _isFilterApplied.value = false;
 }

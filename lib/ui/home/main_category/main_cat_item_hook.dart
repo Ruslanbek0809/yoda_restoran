@@ -51,7 +51,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
-            await model.updateSelectedMainCats(mainCategory.id);
+            await model.updateSelectedMainCats(mainCategory.id!);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -21,14 +21,15 @@ class MainCatViewModel extends ReactiveViewModel {
       selectedMainCats.contains(mainCatId);
 
   /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
-  Future<void> updateSelectedMainCats(int? mainCatId) async {
+  Future<void> updateSelectedMainCats(int mainCatId) async {
     log.i(
         'updateSelectedMainCats() _selectedMainCats length: ${selectedMainCats.length}');
 
     _mainCatService.updateSelectedMainCats(
         mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
+    log.i(
+        'AFTER updateSelectedMainCats() _selectedMainCats length: ${selectedMainCats.length}');
 
-    notifyListeners(); // This notifyListeners() is put here instead of last line because of Yandex like animation before starting fetch
     await Future.delayed(
         Duration(milliseconds: 300)); // For Yandex like animation
 
@@ -40,14 +41,19 @@ class MainCatViewModel extends ReactiveViewModel {
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
     /// If selected cat is not FETCHED bc of ERROR, then remove last added mainCat from the existing list
-    if (!isSelectedFetched) {
+    if (!isSelectedFetched)
       _mainCatService.updateSelectedMainCats(
           mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
-      /// If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
-      if (isFilterApplied && selectedMainCats.isEmpty)
-        _mainCatService.filterDisabled();
-    } else
+    else
       _mainCatService.filterApplied();
+
+    log.i('selectedMainCats length: ${selectedMainCats.length}');
+
+    /// If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
+    if (isFilterApplied && selectedMainCats.isEmpty)
+      _mainCatService.filterDisabled();
+
+    log.i('LAST selectedMainCats length: ${selectedMainCats.length}');
   }
 
   //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
