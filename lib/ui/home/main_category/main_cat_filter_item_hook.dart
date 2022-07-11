@@ -42,10 +42,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
         CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut),
       ),
       child: Container(
-        margin: EdgeInsets.only(
-            top: 5.h,
-            left: 12.w,
-            right: 4.w), // margin on top of persistent header
+        margin: EdgeInsets.only(left: 12.w, right: 2.w),
         color: AppTheme.WHITE,
         child: GestureDetector(
           onTap: () async {
@@ -81,7 +78,9 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
                   child: Padding(
                     padding: EdgeInsets.all(6.h),
                     child: Material(
-                      shape: CircleBorder(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: AppTheme().radius16,
+                      ),
                       color: AppTheme.MAIN_LIGHT,
                       child: Padding(
                         padding: EdgeInsets.all(14.w),

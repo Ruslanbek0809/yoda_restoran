@@ -14,17 +14,25 @@ class MainCatView extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: EdgeInsets.only(top: 3.h),
+          padding: EdgeInsets.only(top: 8.h),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: model.mainCats!.take(10).map((mainCategory) {
-              return model.mainCats!.indexOf(mainCategory) == 0
-                  ? MainCatFilterItemHook()
-                  : model.mainCats!.indexOf(mainCategory) ==
-                          model.mainCats!.take(10).length - 1
-                      ? MainCatAllItemHook()
-                      : MainCatItemHook(mainCategory: mainCategory);
-            }).toList(), // mainCategories!.take(6) is used to take only 6 from the list
+            children: [
+              //------------------ FILTER MAIN CAT (NOTE: Manually added) ---------------------//
+              if (model.mainCats!.isNotEmpty) MainCatFilterItemHook(),
+              //------------------ Fetched MAIN CATS ---------------------//
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: model.mainCats!
+                    .take(10)
+                    .map(
+                      (mainCategory) =>
+                          MainCatItemHook(mainCategory: mainCategory),
+                    )
+                    .toList(), // mainCategories!.take(10) is used to take only 6 from the list
+              ),
+              //------------------ ALL MAIN CAT (NOTE: Manually added) ---------------------//
+              if (model.mainCats!.isNotEmpty) MainCatAllItemHook(),
+            ],
           ),
         ),
       ),

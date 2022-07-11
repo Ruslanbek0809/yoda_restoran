@@ -42,11 +42,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.only(
-            top: 5.h,
-            left: model.mainCats!.indexOf(mainCategory) == 0
-                ? 12.w
-                : 5.w), // margin on top of persistent header
+        margin: EdgeInsets.only(left: 4.w),
         color: AppTheme.WHITE,
         child: GestureDetector(
           onTap: () async {
