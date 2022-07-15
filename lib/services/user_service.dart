@@ -454,16 +454,17 @@ class UserService {
       log.v('RESPONSE: api/order/ => ${response.data}');
 
       if (response.data != null &&
-          (response.statusCode == 200 ||
-              response.statusCode == 201 ||
-              response.statusCode == 502 ||
-              response.statusCode == 503))
+          (response.statusCode == 200 || response.statusCode == 201))
         onSuccess!();
       else
         onFail!();
     } on DioError catch (error) {
-      log.v('ERROR api/order/ with RESPONSE: ${error.response}');
-      onFail!();
+      log.v('ERROR api/order/ with RESPONSE: ${error.response!.statusCode}');
+      if (error.response!.statusCode == 502 ||
+          error.response!.statusCode == 503)
+        onSuccess!();
+      else
+        onFail!();
       throw DioErrorType.response;
     }
   }
