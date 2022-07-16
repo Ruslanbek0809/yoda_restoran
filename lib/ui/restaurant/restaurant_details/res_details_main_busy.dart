@@ -196,7 +196,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      formatNum(restaurant.rating!),
+                                      formatNumRating(restaurant.rating!),
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: AppTheme.FONT_COLOR,

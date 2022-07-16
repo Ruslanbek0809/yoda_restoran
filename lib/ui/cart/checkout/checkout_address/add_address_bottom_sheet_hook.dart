@@ -55,10 +55,7 @@ class AddAddressBottomSheetHook
           validator: model.updateCity,
         ),
         // --------------- STREET -------------- //
-        Padding(
-          padding: EdgeInsets.only(left: 5.w, top: 25.h),
-          child: Text(LocaleKeys.street, style: kts14HelperText).tr(),
-        ),
+        SizedBox(height: 15.h),
         TextFormField(
           controller: _streetController,
           style: kts18Text,
@@ -73,8 +70,8 @@ class AddAddressBottomSheetHook
               borderSide:
                   BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
             ),
-            hintText: LocaleKeys.streetEx.tr(),
-            hintStyle: ktsDefault18HelperText,
+            labelText: LocaleKeys.streetEx.tr(),
+            labelStyle: ktsDefault18HelperText,
           ),
           validator: model.updateStreet,
         ),

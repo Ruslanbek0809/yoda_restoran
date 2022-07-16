@@ -84,7 +84,10 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
                       color: AppTheme.MAIN_LIGHT,
                       child: Padding(
                         padding: EdgeInsets.all(14.w),
-                        child: SvgPicture.asset('assets/filter.svg'),
+                        child: SvgPicture.asset(
+                          'assets/filter.svg',
+                          color: AppTheme.FONT_COLOR,
+                        ),
                       ),
                     ),
                   ),

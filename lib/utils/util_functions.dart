@@ -28,6 +28,9 @@ import 'package:path_provider/path_provider.dart' as pathProvider;
 String formatNum(num value) =>
     value.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '');
 
+String formatNumRating(num value) =>
+    value.ceilToDouble().toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '');
+
 final List<EachIntroWidget> onBoardingList = [
   EachIntroWidget(
     subTitle: 'Söýgüli restoranlaryňyzyň tagamlaryny sargyt ediň',

@@ -199,7 +199,7 @@ class RestaurantView extends StatelessWidget {
                       ),
                       SizedBox(width: 3.w),
                       Text(
-                        '${formatNum(restaurant.rating!)} (${restaurant.rated})',
+                        '${formatNumRating(restaurant.rating!)} (${restaurant.rated})',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14.sp,

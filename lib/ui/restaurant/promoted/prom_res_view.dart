@@ -207,7 +207,7 @@ class PromResView extends StatelessWidget {
                         color: AppTheme.GREEN_COLOR,
                       ),
                       Text(
-                        '${restaurant.rating} (${restaurant.rated})',
+                        '${formatNumRating(restaurant.rating!)} (${restaurant.rated})',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 12.sp,
