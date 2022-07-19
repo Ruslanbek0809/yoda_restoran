@@ -56,18 +56,23 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     hintStyle: ktsDefault18HelperText,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
-                      child: model.promocode != null
+
+                      /// If promocode is NOT NULL and promocode's quantity is NOT equal to -1 which means ERROR then proceed SUCCESS
+                      child: model.promocode != null &&
+                              model.promocode!.quantity != -1
                           ? SvgPicture.asset(
                               'assets/check_outlined_circle.svg',
                               color: AppTheme.MAIN,
                               width: 16.w,
                             )
-                          : SizedBox(),
-                      // SvgPicture.asset(
-                      //   'assets/warning_circle.svg',
-                      //   color: AppTheme.MAIN,
-                      //   width: 25.w,
-                      // ),
+                          : model.promocode != null &&
+                                  model.promocode!.quantity == -1
+                              ? SvgPicture.asset(
+                                  'assets/warning_circle.svg',
+                                  color: AppTheme.MAIN,
+                                  width: 25.w,
+                                )
+                              : SizedBox(),
                     ),
                   ),
                   onChanged: (value) =>
@@ -90,8 +95,13 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
               )
             : Padding(
                 padding: EdgeInsets.only(
-                    top: 8.h, bottom: 8.h, left: 0.15.sw, right: 20.w),
-                child: model.promocode != null
+                  top: 8.h,
+                  bottom: 8.h,
+                  left: 0.15.sw,
+                  right: 20.w,
+                ),
+                child: model.promocode != null &&
+                        model.promocode!.quantity != -1
                     ? model.promocode!.promoType == 1
                         ? Text(
                             LocaleKeys.promocodeRemoveTMT,
@@ -101,7 +111,12 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                             LocaleKeys.promocodeRemoveDiscount,
                             style: kts14HelperText,
                           ).tr(args: [model.promocode!.discount.toString()])
-                    : SizedBox(),
+                    : model.promocode != null && model.promocode!.quantity == -1
+                        ? Text(
+                            model.promocode!.text!,
+                            style: kts14HelperText,
+                          )
+                        : SizedBox(),
               ),
       ],
     );

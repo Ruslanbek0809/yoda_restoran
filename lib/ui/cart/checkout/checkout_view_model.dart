@@ -75,7 +75,7 @@ class CheckoutViewModel extends ReactiveViewModel {
 
     try {
       _promocode = await runBusyFuture(
-        _checkoutService.searchPromocode(searchText),
+        _checkoutService.searchPromocode(searchText, getTotalCartSum),
         busyObject:
             searchText, // This makes it busy only for this view in a whole VM
       );

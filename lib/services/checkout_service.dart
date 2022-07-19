@@ -50,11 +50,13 @@ class CheckoutService with ReactiveServiceMixin {
       );
 
   /// SEARCHES promocodes and GETS first
-  Future<Promocode?> searchPromocode(String searchText) async {
-    log.v('searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}');
+  Future<Promocode?> searchPromocode(
+      String searchText, num getTotalCartSum) async {
+    log.v(
+        'searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}, getTotalCartSum: $getTotalCartSum');
 
-    final _promocode =
-        await _api.searchPromocode(searchText, _hiveDbService.cartRes!.id!);
+    final _promocode = await _api.searchPromocode(
+        searchText, _hiveDbService.cartRes!.id!, getTotalCartSum);
     return _promocode;
   }
 

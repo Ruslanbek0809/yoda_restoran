@@ -330,27 +330,30 @@ class ApiService {
 
   //------------------ CHECKOUT APIS ---------------------//
 
-  Future<Promocode?> searchPromocode(String searchText, int resId) async {
+  Future<Promocode?> searchPromocode(
+      String searchText, int resId, num getTotalCartSum) async {
     List<Promocode?> _promocodeList = [];
     try {
       Response response =
           await _apiRoot.dio.get('api/promocode/', queryParameters: {
         'search': searchText,
         'restaurant': resId,
+        'amount': getTotalCartSum,
       });
       log.v('RESPONSE: api/promocode/ => ${response.data}');
 
       if (response.data != null)
-        response.data.forEach((_promocode) {
+        for (final _promocode in response.data)
           _promocodeList.add(Promocode.fromJson(_promocode));
-        });
+      log.v(
+          'RESPONSE: api/promocode/ _promocodeList[0] => ${_promocodeList[0]}');
 
       return _promocodeList[0];
       // return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];
     } on DioError catch (error) {
       log.v(error);
-      // log.v(
-      //     'ERROR on api/promocode/ :${error.response!.statusCode} and ${error.response!.data}');
+      log.v(
+          'ERROR on api/promocode/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }

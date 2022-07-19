@@ -11,7 +11,8 @@ Promocode _$PromocodeFromJson(Map<String, dynamic> json) => Promocode(
       name: json['name'] as String?,
       quantity: json['quantity'] as int?,
       discount: json['discount'] as num?,
-      restaurant: json['restaurant'] as int?,
+      text: json['text'] as String?,
+      minLimit: json['minLimit'] as num?,
       promoType: json['promoType'] as int?,
       promocodeType: json['promoTypeJson'] == null
           ? null
@@ -24,7 +25,8 @@ Map<String, dynamic> _$PromocodeToJson(Promocode instance) => <String, dynamic>{
       'name': instance.name,
       'quantity': instance.quantity,
       'discount': instance.discount,
-      'restaurant': instance.restaurant,
+      'text': instance.text,
+      'minLimit': instance.minLimit,
       'promoType': instance.promoType,
       'promoTypeJson': instance.promocodeType,
     };

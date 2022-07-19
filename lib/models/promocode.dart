@@ -10,7 +10,8 @@ class Promocode {
     this.name,
     this.quantity,
     this.discount,
-    this.restaurant,
+    this.text,
+    this.minLimit,
     this.promoType,
     this.promocodeType,
   });
@@ -27,8 +28,11 @@ class Promocode {
   @JsonKey(name: 'discount')
   final num? discount;
 
-  @JsonKey(name: 'restaurant')
-  final int? restaurant;
+  @JsonKey(name: 'text')
+  final String? text;
+
+  @JsonKey(name: 'minLimit')
+  final num? minLimit;
 
   @JsonKey(name: 'promoType')
   final int? promoType;

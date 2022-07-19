@@ -483,7 +483,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  model.promocode != null
+                  model.promocode != null && model.promocode!.quantity != -1
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
