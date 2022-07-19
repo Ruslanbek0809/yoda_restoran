@@ -340,11 +340,10 @@ class ApiService {
       });
       log.v('RESPONSE: api/promocode/ => ${response.data}');
 
-      if (response.data != null) {
+      if (response.data != null)
         response.data.forEach((_promocode) {
           _promocodeList.add(Promocode.fromJson(_promocode));
         });
-      }
 
       return _promocodeList[0];
       // return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];

@@ -26,8 +26,6 @@ class CheckoutViewModel extends ReactiveViewModel {
 
   bool get isDelivery => _toggleButtonService.isDelivery;
 
-  String get searchPromocodeText => _checkoutService.searchPromocodeText;
-
   Promocode? _promocode;
   Promocode? get promocode => _promocode;
 
