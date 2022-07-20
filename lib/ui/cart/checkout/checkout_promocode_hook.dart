@@ -58,14 +58,16 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                       padding: EdgeInsets.only(right: 12.w),
 
                       /// If promocode is NOT NULL and promocode's quantity is NOT equal to -1 which means ERROR then proceed SUCCESS
-                      child: model.promocode != null &&
+                      child: _promocodeController.text.length > 2 &&
+                              model.promocode != null &&
                               model.promocode!.quantity != -1
                           ? SvgPicture.asset(
                               'assets/check_outlined_circle.svg',
                               color: AppTheme.MAIN,
                               width: 16.w,
                             )
-                          : model.promocode != null &&
+                          : _promocodeController.text.length > 2 &&
+                                  model.promocode != null &&
                                   model.promocode!.quantity == -1
                               ? SvgPicture.asset(
                                   'assets/warning_circle.svg',
@@ -75,10 +77,12 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                               : SizedBox(),
                     ),
                   ),
-                  onChanged: (value) =>
-                      _debouncer.run(() => model.searchPromocode(value)),
-                  onSubmitted: (value) =>
-                      _debouncer.run(() => model.searchPromocode(value)),
+                  onChanged: (value) => value.length > 2
+                      ? _debouncer.run(() => model.searchPromocode(value))
+                      : model.resetPromocode(),
+                  onSubmitted: (value) => value.length > 2
+                      ? _debouncer.run(() => model.searchPromocode(value))
+                      : model.resetPromocode(),
                 ),
               ),
             ),
@@ -100,7 +104,8 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                   left: 0.15.sw,
                   right: 20.w,
                 ),
-                child: model.promocode != null &&
+                child: _promocodeController.text.length > 2 &&
+                        model.promocode != null &&
                         model.promocode!.quantity != -1
                     ? model.promocode!.promoType == 1
                         ? Text(
@@ -111,7 +116,9 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                             LocaleKeys.promocodeRemoveDiscount,
                             style: kts14HelperText,
                           ).tr(args: [model.promocode!.discount.toString()])
-                    : model.promocode != null && model.promocode!.quantity == -1
+                    : _promocodeController.text.length > 2 &&
+                            model.promocode != null &&
+                            model.promocode!.quantity == -1
                         ? Text(
                             model.promocode!.text!,
                             style: kts14HelperText,

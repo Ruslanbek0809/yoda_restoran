@@ -438,7 +438,8 @@ class UserService {
       selfPickUp: !isDelivery,
       deliveryTime: deliveryDateTime,
       paymentType: paymentType!.id,
-      promocode: promocode != null ? promocode.id : null,
+      promocode:
+          promocode != null && promocode.quantity != -1 ? promocode.id : null,
       notes: checkoutNote,
       orderItems: orderItemList,
     );

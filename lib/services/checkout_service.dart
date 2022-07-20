@@ -51,7 +51,7 @@ class CheckoutService with ReactiveServiceMixin {
 
   /// SEARCHES promocodes and GETS first
   Future<Promocode?> searchPromocode(
-      String searchText, num getTotalCartSum) async {
+      String searchText, int getTotalCartSum) async {
     log.v(
         'searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}, getTotalCartSum: $getTotalCartSum');
 

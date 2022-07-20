@@ -70,12 +70,12 @@ class CheckoutViewModel extends ReactiveViewModel {
   /// SEARCHES and GETS promocode if FOUND
   Future<void> searchPromocode(String? searchText) async {
     log.i('searchPromocode() searchText: $searchText');
-    if (searchText != null && searchText.isEmpty || searchText!.length < 2)
+    if (searchText != null && searchText.isEmpty || searchText!.length < 3)
       return;
 
     try {
       _promocode = await runBusyFuture(
-        _checkoutService.searchPromocode(searchText, getTotalCartSum),
+        _checkoutService.searchPromocode(searchText, getTotalCartSum.floor()),
         busyObject:
             searchText, // This makes it busy only for this view in a whole VM
       );
@@ -83,6 +83,13 @@ class CheckoutViewModel extends ReactiveViewModel {
     } catch (err) {
       throw err;
     }
+  }
+
+  /// UPDATES _promocode
+  void resetPromocode() {
+    log.v('resetPromocode()');
+    _promocode = null;
+    notifyListeners();
   }
 
   /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity

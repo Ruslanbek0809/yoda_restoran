@@ -331,7 +331,7 @@ class ApiService {
   //------------------ CHECKOUT APIS ---------------------//
 
   Future<Promocode?> searchPromocode(
-      String searchText, int resId, num getTotalCartSum) async {
+      String searchText, int resId, int getTotalCartSum) async {
     List<Promocode?> _promocodeList = [];
     try {
       Response response =
@@ -349,7 +349,6 @@ class ApiService {
           'RESPONSE: api/promocode/ _promocodeList[0] => ${_promocodeList[0]}');
 
       return _promocodeList[0];
-      // return _promocodeList.isEmpty ? Promocode(id: -1) : _promocodeList[0];
     } on DioError catch (error) {
       log.v(error);
       log.v(
