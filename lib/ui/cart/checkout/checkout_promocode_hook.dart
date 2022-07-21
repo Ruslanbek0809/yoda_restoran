@@ -101,24 +101,32 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                 padding: EdgeInsets.only(
                   top: 8.h,
                   bottom: 8.h,
-                  left: 0.15.sw,
+                  left: 45.w,
                   right: 20.w,
                 ),
-                child: _promocodeController.text.length > 2 &&
-                        model.promocode != null &&
-                        model.promocode!.quantity != -1
-                    ? model.promocode!.promoType == 1
-                        ? Text(
-                            LocaleKeys.promocodeRemoveTMT,
-                            style: kts14HelperText,
-                          ).tr(args: [model.promocode!.discount.toString()])
-                        : Text(
-                            LocaleKeys.promocodeRemoveDiscount,
-                            style: kts14HelperText,
-                          ).tr(args: [model.promocode!.discount.toString()])
-                    : _promocodeController.text.length > 2 &&
-                            model.promocode != null &&
-                            model.promocode!.quantity == -1
+                child:
+                    // _promocodeController.text.length > 2 &&
+                    //         model.promocode != null &&
+                    //         model.promocode!.quantity != -1
+                    //     ? model.promocode!.promoType == 1
+                    //         ? Text(
+                    //             LocaleKeys.promocodeRemoveTMT,
+                    //             style: kts14HelperText,
+                    //           ).tr(args: [model.promocode!.discount.toString()])
+                    //         : Text(
+                    //             LocaleKeys.promocodeRemoveDiscount,
+                    //             style: kts14HelperText,
+                    //           ).tr(args: [model.promocode!.discount.toString()])
+                    //     : _promocodeController.text.length > 2 &&
+                    //             model.promocode != null &&
+                    //             model.promocode!.quantity == -1
+                    //         ? Text(
+                    //             model.promocode!.text!,
+                    //             style: kts14HelperText,
+                    //           )
+                    //         : SizedBox(),
+                    _promocodeController.text.length > 2 &&
+                            model.promocode != null
                         ? Text(
                             model.promocode!.text!,
                             style: kts14HelperText,

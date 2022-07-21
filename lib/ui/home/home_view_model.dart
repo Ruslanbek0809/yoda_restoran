@@ -120,7 +120,7 @@ class HomeViewModel extends ReactiveViewModel {
       /// Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
       if (_homeService.proms.isNotEmpty &&
           _homeService.proms.length > promPosCount) {
-        /// Here it CHECKS whether this PROMOTED's position is equal to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
+        /// Here it CHECKS whether this PROMOTED's position is equa to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
         /// If it positions are EQUAL, then ADDS this PROMOTED to this RESTAURANT
         if (_homeService.proms[promPosCount]!.position == _randomResPos + 1) {
           _homeRess.add(

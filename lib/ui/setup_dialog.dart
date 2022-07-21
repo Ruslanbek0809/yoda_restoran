@@ -705,186 +705,210 @@ class RateOrderDialogView extends StatelessWidget {
               bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
-            child: Column(
+            child: Stack(
               children: [
-                // --------------- YODA RES Title -------------- //
-                Padding(
-                  padding: EdgeInsets.only(top: 10.h),
-                  child: SvgPicture.asset(
-                    'assets/title_yoda_restoran.svg',
-                    width: 0.35.sw,
-                  ),
-                ),
-                // --------------- RES NAME -------------- //
-                Padding(
-                  padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
-                  child: Text(
-                    notificationModel.title ?? 'Sultan Restoran',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: kts28DarkBoldText,
-                    // style: kts30DarkBoldText,
-                  ),
-                ),
-                // --------------- TEXT -------------- //
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: Text(
-                    LocaleKeys.ratingThanksForTheOrder,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: kts18DarkText,
-                    // style: kts20DarkText,
-                  ).tr(),
-                ),
-                // --------------- TEXT -------------- //
-                Padding(
-                  padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                  child: Text(
-                    LocaleKeys.ratingImportantForUs,
-                    style: kts14Text,
-                    // style: kts16Text,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ).tr(),
-                ),
-                // --------------- RATING -------------- //
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: RatingBar.builder(
-                    initialRating: 0,
-                    minRating: 0,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    glow: false,
-                    unratedColor: model.ratingError
-                        ? AppTheme.MAIN
-                        // ? AppTheme.RED.withOpacity(0.85)
-                        : AppTheme.MAIN.withOpacity(0.4),
-                    itemSize: 50,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => AnimatedCrossFade(
-                      crossFadeState: model.ratingError
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      firstChild: Icon(
-                        Icons.star,
-                        // Icons.star_border,
-                        // size: 26,
-                        color: AppTheme.MAIN,
-                      ),
-                      duration: const Duration(milliseconds: 200),
-                      secondChild: Icon(
-                        Icons.star,
-                        color: AppTheme.MAIN,
+                Column(
+                  children: [
+                    // --------------- YODA RES Title -------------- //
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: SvgPicture.asset(
+                        'assets/title_yoda_restoran.svg',
+                        width: 0.35.sw,
                       ),
                     ),
-                    onRatingUpdate: model.updateRating,
-                  ),
-                ),
-                // --------------- NOTES HOOK -------------- //
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15.h),
-                  child: RateUsDialogHook(),
-                ),
-                //--------------- SEND Button -------------- //
-                Padding(
-                  padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
-                  child: SizedBox(
-                    width: 1.sw,
-                    child: CustomTextChildButton(
-                      color: model.rating == 0
-                          ? kcSecondaryLightColor
-                          : kcPrimaryColor,
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 300),
-                        child: model.isBusy
-                            ? ButtonLoading()
-                            : Text(
-                                LocaleKeys.ratingSend,
-                                style: model.rating == 0
-                                    ? ktsButton18ContactText
-                                    : ktsButton18Text,
-                              ).tr(),
+                    // --------------- RES NAME -------------- //
+                    Padding(
+                      padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
+                      child: Text(
+                        notificationModel.title ?? 'Sultan Restoran',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: kts28DarkBoldText,
+                        // style: kts30DarkBoldText,
                       ),
-                      onPressed: model.rating == 0
-                          ? model.ratingVal
-                          : () async => await model.onRatingSendPressed(
-                                () async {
-                                  /// TODO: HiveRating
-                                  await model.removeHiveRatingFromHiveRatings(
-                                      int.parse(notificationModel.id!));
+                    ),
+                    // --------------- TEXT -------------- //
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Text(
+                        LocaleKeys.ratingThanksForTheOrder,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: kts18DarkText,
+                        // style: kts20DarkText,
+                      ).tr(),
+                    ),
+                    // --------------- TEXT -------------- //
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                      child: Text(
+                        LocaleKeys.ratingImportantForUs,
+                        style: kts14Text,
+                        // style: kts16Text,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ).tr(),
+                    ),
+                    // --------------- RATING -------------- //
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: RatingBar.builder(
+                        initialRating: 0,
+                        minRating: 0,
+                        direction: Axis.horizontal,
+                        allowHalfRating: false,
+                        itemCount: 5,
+                        glow: false,
+                        unratedColor: model.ratingError
+                            ? AppTheme.MAIN
+                            // ? AppTheme.RED.withOpacity(0.85)
+                            : AppTheme.MAIN.withOpacity(0.4),
+                        itemSize: 50,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                        itemBuilder: (context, _) => AnimatedCrossFade(
+                          crossFadeState: model.ratingError
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                          firstChild: Icon(
+                            Icons.star,
+                            // Icons.star_border,
+                            // size: 26,
+                            color: AppTheme.MAIN,
+                          ),
+                          duration: const Duration(milliseconds: 200),
+                          secondChild: Icon(
+                            Icons.star,
+                            color: AppTheme.MAIN,
+                          ),
+                        ),
+                        onRatingUpdate: model.updateRating,
+                      ),
+                    ),
+                    // --------------- NOTES HOOK -------------- //
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15.h),
+                      child: RateUsDialogHook(),
+                    ),
+                    //--------------- SEND Button -------------- //
+                    Padding(
+                      padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                      child: SizedBox(
+                        width: 1.sw,
+                        child: CustomTextChildButton(
+                          color: model.rating == 0
+                              ? kcSecondaryLightColor
+                              : kcPrimaryColor,
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: model.isBusy
+                                ? ButtonLoading()
+                                : Text(
+                                    LocaleKeys.ratingSend,
+                                    style: model.rating == 0
+                                        ? ktsButton18ContactText
+                                        : ktsButton18Text,
+                                  ).tr(),
+                          ),
+                          onPressed: model.rating == 0
+                              ? model.ratingVal
+                              : () async => await model.onRatingSendPressed(
+                                    () async {
+                                      /// TODO: HiveRating
+                                      await model
+                                          .removeHiveRatingFromHiveRatings(
+                                              int.parse(notificationModel.id!));
 
-                                  /// TO initialise getOrders() API
-                                  await completer(DialogResponse(data: true));
-                                  await showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        model.dismissDialogs();
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: AppTheme().radius20,
-                                          ),
-                                          title: Column(
-                                            children: [
-                                              Text(
-                                                notificationModel.title ??
-                                                    'Sultan Restoran',
+                                      /// TO initialise getOrders() API
+                                      await completer(
+                                          DialogResponse(data: true));
+                                      await showDialog(
+                                          context: context,
+                                          barrierDismissible: true,
+                                          builder: (context) {
+                                            model.dismissDialogs();
+                                            return AlertDialog(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    AppTheme().radius20,
+                                              ),
+                                              title: Column(
+                                                children: [
+                                                  Text(
+                                                    notificationModel.title ??
+                                                        'Sultan Restoran',
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                    style: kts22PrimaryText,
+                                                  ),
+                                                  SizedBox(height: 15.h),
+                                                  RatingBar.builder(
+                                                    initialRating: model.rating,
+                                                    direction: Axis.horizontal,
+                                                    itemCount: 5,
+                                                    allowHalfRating: false,
+                                                    ignoreGestures: true,
+                                                    glow: false,
+                                                    unratedColor: AppTheme.MAIN
+                                                        .withOpacity(0.4),
+                                                    itemSize: 45,
+                                                    itemBuilder: (context, _) =>
+                                                        Icon(
+                                                      Icons.star,
+                                                      color: AppTheme.MAIN,
+                                                    ),
+                                                    onRatingUpdate:
+                                                        model.updateRating,
+                                                  ),
+                                                ],
+                                              ),
+                                              content: Text(
+                                                LocaleKeys.ratingConfirmation,
+                                                textAlign: TextAlign.center,
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                                style: kts22PrimaryText,
-                                              ),
-                                              SizedBox(height: 15.h),
-                                              RatingBar.builder(
-                                                initialRating: model.rating,
-                                                direction: Axis.horizontal,
-                                                itemCount: 5,
-                                                allowHalfRating: false,
-                                                ignoreGestures: true,
-                                                glow: false,
-                                                unratedColor: AppTheme.MAIN
-                                                    .withOpacity(0.4),
-                                                itemSize: 45,
-                                                itemBuilder: (context, _) =>
-                                                    Icon(
-                                                  Icons.star,
-                                                  color: AppTheme.MAIN,
-                                                ),
-                                                onRatingUpdate:
-                                                    model.updateRating,
-                                              ),
-                                            ],
-                                          ),
-                                          content: Text(
-                                            LocaleKeys.ratingConfirmation,
-                                            textAlign: TextAlign.center,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: kts18NotificationText,
-                                          ).tr(),
-                                        );
-                                      }).then((value) {
-                                    if (model.timer.isActive)
-                                      model.cancelTimer();
-                                  });
-                                },
-                                () async {
-                                  showErrorFlashBar(
-                                    context: context,
-                                    margin: EdgeInsets.only(
-                                      left: 0.1.sw,
-                                      right: 0.1.sw,
-                                      bottom: 0.05.sh,
-                                    ),
-                                  );
-                                  await completer(DialogResponse(data: false));
-                                },
-                              ),
+                                                style: kts18NotificationText,
+                                              ).tr(),
+                                            );
+                                          }).then((value) {
+                                        if (model.timer.isActive)
+                                          model.cancelTimer();
+                                      });
+                                    },
+                                    () async {
+                                      showErrorFlashBar(
+                                        context: context,
+                                        margin: EdgeInsets.only(
+                                          left: 0.1.sw,
+                                          right: 0.1.sw,
+                                          bottom: 0.05.sh,
+                                        ),
+                                      );
+                                      await completer(
+                                          DialogResponse(data: false));
+                                    },
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: IconButton(
+                    onPressed: () async {
+                      await model.removeHiveRatingFromHiveRatings(
+                          int.parse(notificationModel.id!));
+                      await completer(DialogResponse(data: false));
+                    },
+                    icon: Icon(
+                      Icons.clear,
+                      color: AppTheme.FONT_COLOR,
                     ),
                   ),
                 ),

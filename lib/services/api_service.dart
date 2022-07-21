@@ -106,9 +106,8 @@ class ApiService {
       // log.v('RESPONSE: api/paginatedRestaurants/ => ${response.data}');
 
       if (response.data['results'] != null) {
-        response.data['results'].forEach((_randomRestaurant) {
+        for (final _randomRestaurant in response.data['results'])
           _paginatedRestaurants.add(Restaurant.fromJson(_randomRestaurant));
-        });
       }
       onSuccess!(_paginatedRestaurants, response.data['next']);
     } catch (error) {
