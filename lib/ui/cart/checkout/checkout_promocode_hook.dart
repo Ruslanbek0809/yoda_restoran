@@ -129,7 +129,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                             model.promocode != null
                         ? Text(
                             model.promocode!.text!,
-                            style: kts14HelperText,
+                            style: kts14Text,
                           )
                         : SizedBox(),
               ),

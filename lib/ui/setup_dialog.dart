@@ -814,84 +814,96 @@ class RateOrderDialogView extends StatelessWidget {
                           ),
                           onPressed: model.rating == 0
                               ? model.ratingVal
-                              : () async => await model.onRatingSendPressed(
-                                    () async {
-                                      /// TODO: HiveRating
-                                      await model
-                                          .removeHiveRatingFromHiveRatings(
-                                              int.parse(notificationModel.id!));
+                              : model.isBusy
+                                  ? () {}
+                                  : () async => await model.onRatingSendPressed(
+                                        () async {
+                                          /// TODO: HiveRating
+                                          await model
+                                              .removeHiveRatingFromHiveRatings(
+                                                  int.parse(
+                                                      notificationModel.id!));
 
-                                      /// TO initialise getOrders() API
-                                      await completer(
-                                          DialogResponse(data: true));
-                                      await showDialog(
-                                          context: context,
-                                          barrierDismissible: true,
-                                          builder: (context) {
-                                            model.dismissDialogs();
-                                            return AlertDialog(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    AppTheme().radius20,
-                                              ),
-                                              title: Column(
-                                                children: [
-                                                  Text(
-                                                    notificationModel.title ??
-                                                        'Sultan Restoran',
+                                          /// TO initialise getOrders() API
+                                          await completer(
+                                              DialogResponse(data: true));
+                                          await showDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              builder: (context) {
+                                                model.dismissDialogs();
+                                                return AlertDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        AppTheme().radius20,
+                                                  ),
+                                                  title: Column(
+                                                    children: [
+                                                      Text(
+                                                        notificationModel
+                                                                .title ??
+                                                            'Sultan Restoran',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: kts22PrimaryText,
+                                                      ),
+                                                      SizedBox(height: 15.h),
+                                                      RatingBar.builder(
+                                                        initialRating:
+                                                            model.rating,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                        itemCount: 5,
+                                                        allowHalfRating: false,
+                                                        ignoreGestures: true,
+                                                        glow: false,
+                                                        unratedColor: AppTheme
+                                                            .MAIN
+                                                            .withOpacity(0.4),
+                                                        itemSize: 45,
+                                                        itemBuilder:
+                                                            (context, _) =>
+                                                                Icon(
+                                                          Icons.star,
+                                                          color: AppTheme.MAIN,
+                                                        ),
+                                                        onRatingUpdate:
+                                                            model.updateRating,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  content: Text(
+                                                    LocaleKeys
+                                                        .ratingConfirmation,
+                                                    textAlign: TextAlign.center,
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.center,
-                                                    style: kts22PrimaryText,
-                                                  ),
-                                                  SizedBox(height: 15.h),
-                                                  RatingBar.builder(
-                                                    initialRating: model.rating,
-                                                    direction: Axis.horizontal,
-                                                    itemCount: 5,
-                                                    allowHalfRating: false,
-                                                    ignoreGestures: true,
-                                                    glow: false,
-                                                    unratedColor: AppTheme.MAIN
-                                                        .withOpacity(0.4),
-                                                    itemSize: 45,
-                                                    itemBuilder: (context, _) =>
-                                                        Icon(
-                                                      Icons.star,
-                                                      color: AppTheme.MAIN,
-                                                    ),
-                                                    onRatingUpdate:
-                                                        model.updateRating,
-                                                  ),
-                                                ],
-                                              ),
-                                              content: Text(
-                                                LocaleKeys.ratingConfirmation,
-                                                textAlign: TextAlign.center,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: kts18NotificationText,
-                                              ).tr(),
-                                            );
-                                          }).then((value) {
-                                        if (model.timer.isActive)
-                                          model.cancelTimer();
-                                      });
-                                    },
-                                    () async {
-                                      showErrorFlashBar(
-                                        context: context,
-                                        margin: EdgeInsets.only(
-                                          left: 0.1.sw,
-                                          right: 0.1.sw,
-                                          bottom: 0.05.sh,
-                                        ),
-                                      );
-                                      await completer(
-                                          DialogResponse(data: false));
-                                    },
-                                  ),
+                                                    style:
+                                                        kts18NotificationText,
+                                                  ).tr(),
+                                                );
+                                              }).then((value) {
+                                            if (model.timer.isActive)
+                                              model.cancelTimer();
+                                          });
+                                        },
+                                        () async {
+                                          showErrorFlashBar(
+                                            context: context,
+                                            margin: EdgeInsets.only(
+                                              left: 0.1.sw,
+                                              right: 0.1.sw,
+                                              bottom: 0.05.sh,
+                                            ),
+                                          );
+                                          await completer(
+                                              DialogResponse(data: false));
+                                        },
+                                      ),
                         ),
                       ),
                     ),
