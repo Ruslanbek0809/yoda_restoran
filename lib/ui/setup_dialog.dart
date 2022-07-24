@@ -703,11 +703,11 @@ class RateOrderDialogView extends StatelessWidget {
 
               /// To resize screen when OnKeyboard opened
               bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
-            child: Stack(
-              children: [
-                Column(
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                child: Column(
                   children: [
                     // --------------- YODA RES Title -------------- //
                     Padding(
@@ -909,23 +909,24 @@ class RateOrderDialogView extends StatelessWidget {
                     ),
                   ],
                 ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: IconButton(
-                    onPressed: () async {
-                      await model.removeHiveRatingFromHiveRatings(
-                          int.parse(notificationModel.id!));
-                      await completer(DialogResponse(data: false));
-                    },
-                    icon: Icon(
-                      Icons.clear,
-                      color: AppTheme.FONT_COLOR,
-                    ),
+              ),
+              Positioned(
+                top: 4.h,
+                right: 4.w,
+                child: IconButton(
+                  onPressed: () async { 
+                    await model.removeHiveRatingFromHiveRatings(
+                        int.parse(notificationModel.id!));
+                    await completer(DialogResponse(data: false));
+                  },
+                  icon: Icon(
+                    Icons.clear,
+                    color: AppTheme.FONT_COLOR,
+                    size: 24.sp,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
