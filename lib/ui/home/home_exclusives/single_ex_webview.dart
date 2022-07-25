@@ -78,7 +78,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
           IconButton(
             onPressed: widget.singleExViewModel.createDynamicLink,
             icon: Icon(
-              Icons.share,
+              Icons.share_rounded,
               size: 24.w,
               color: kcSecondaryDarkColor,
             ),

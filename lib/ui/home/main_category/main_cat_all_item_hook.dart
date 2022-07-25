@@ -80,7 +80,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                       shape: CircleBorder(),
                       color: AppTheme.MAIN_LIGHT,
                       child: Icon(
-                        Icons.arrow_forward,
+                        Icons.arrow_forward_rounded,
                         color: AppTheme.FONT_COLOR,
                       ),
                     ),

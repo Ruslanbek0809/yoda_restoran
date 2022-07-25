@@ -28,7 +28,7 @@ class HomeSearchView extends StatelessWidget {
               titleSpacing: 0,
               leading: IconButton(
                 icon: Icon(
-                  Icons.arrow_back_ios,
+                  Icons.arrow_back_ios_rounded,
                   color: AppTheme.FONT_COLOR,
                   size: 20.w,
                 ),
@@ -43,7 +43,7 @@ class HomeSearchView extends StatelessWidget {
                           tooltip: 'Search',
                           // tooltip: i18n(currentLang, ki18nSearch),
                           icon: Icon(
-                            Icons.search,
+                            Icons.search_rounded,
                             size: 22.w,
                             color: AppTheme.DRAWER_DIVIDER,
                           ),
@@ -53,7 +53,7 @@ class HomeSearchView extends StatelessWidget {
                           tooltip: 'Clear',
                           // tooltip: i18n(currentLang, ki18nClearCart),
                           icon: Icon(
-                            Icons.clear,
+                            Icons.clear_rounded,
                             size: 22.w,
                             color: AppTheme.DRAWER_DIVIDER,
                           ),

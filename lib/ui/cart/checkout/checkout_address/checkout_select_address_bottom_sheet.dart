@@ -50,7 +50,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.add,
+                                      Icons.add_rounded,
                                       color: kcSecondaryDarkColor,
                                       size: 27.w,
                                     ),

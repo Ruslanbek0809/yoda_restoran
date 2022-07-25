@@ -23,7 +23,7 @@ class ContactUsView extends StatelessWidget {
             elevation: 0,
             leading: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_rounded,
                 color: AppTheme.FONT_COLOR,
                 size: 25.w,
               ),

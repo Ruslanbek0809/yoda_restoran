@@ -91,8 +91,8 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                     },
                     icon: Icon(
                       _currentPage == widget.introductionList.length - 1
-                          ? Icons.check
-                          : Icons.arrow_forward_ios,
+                          ? Icons.check_rounded
+                          : Icons.arrow_forward_ios_rounded,
                       color: kcWhiteColor,
                     ),
                     iconSize: 20.w,

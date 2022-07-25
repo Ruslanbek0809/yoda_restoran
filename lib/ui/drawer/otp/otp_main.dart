@@ -207,7 +207,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            Icons.refresh,
+                            Icons.refresh_rounded,
                             color: kcPrimaryColor,
                           ),
                           SizedBox(width: 5.w),

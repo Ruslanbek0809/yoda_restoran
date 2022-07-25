@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                                 //------------------ MENU ---------------------//
                                 IconButton(
                                   icon: Icon(
-                                    Icons.menu,
+                                    Icons.menu_rounded,
                                     size: 24.w,
                                   ),
                                   onPressed: model.homeMenuPressed,
@@ -199,7 +199,7 @@ class _HomeViewState extends State<HomeView> {
                                             //------------------ MENU ---------------------//
                                             IconButton(
                                               icon: Icon(
-                                                Icons.menu,
+                                                Icons.menu_rounded,
                                                 size: 24.w,
                                               ),
                                               onPressed: model.homeMenuPressed,
@@ -257,7 +257,7 @@ class _HomeViewState extends State<HomeView> {
                                             //------------------ MENU ---------------------//
                                             IconButton(
                                               icon: Icon(
-                                                Icons.menu,
+                                                Icons.menu_rounded,
                                                 size: 24.w,
                                               ),
                                               onPressed: model.homeMenuPressed,

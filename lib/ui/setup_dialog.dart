@@ -911,18 +911,18 @@ class RateOrderDialogView extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 4.h,
+                top: 2.h,
                 right: 4.w,
                 child: IconButton(
-                  onPressed: () async { 
+                  onPressed: () async {
                     await model.removeHiveRatingFromHiveRatings(
                         int.parse(notificationModel.id!));
                     await completer(DialogResponse(data: false));
                   },
                   icon: Icon(
-                    Icons.clear,
-                    color: AppTheme.FONT_COLOR,
-                    size: 24.sp,
+                    Icons.clear_rounded,
+                    color: AppTheme.MAIN_DARK,
+                    size: 22.sp,
                   ),
                 ),
               ),

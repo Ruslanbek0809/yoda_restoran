@@ -55,7 +55,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
         //     IconButton(
         //       onPressed: () => Navigator.pop(context),
         //       icon: Icon(
-        //         Icons.share,
+        //         Icons.share_rounded,
         //         size: 24.w,
         //         color: kcSecondaryDarkColor,
         //       ),
@@ -326,7 +326,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
             child: IconButton(
               onPressed: singleExViewModel.createDynamicLink,
               icon: Icon(
-                Icons.share,
+                Icons.share_rounded,
                 size: 22.w,
                 color: kcFontColor,
                 // color: progress < 0.4 ? Colors.white : Colors.black,

@@ -104,7 +104,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   customBorder: CircleBorder(),
                   onTap: () => Navigator.pop(context),
                   child: Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_back_rounded,
                     size: 27.w,
                     color: AppTheme.BLACK,
                   ),
@@ -183,7 +183,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       child: Padding(
                         padding: EdgeInsets.all(8.w),
                         child: Icon(
-                          Icons.search,
+                          Icons.search_rounded,
                           size: 27.w,
                           color: AppTheme.BLACK,
                         ),

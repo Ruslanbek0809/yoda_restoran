@@ -51,7 +51,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   customBorder: CircleBorder(),
                   onTap: () => Navigator.pop(context),
                   child: Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_back_rounded,
                     size: 27.w,
                     color: AppTheme.BLACK,
                   ),
@@ -110,7 +110,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                     child: Padding(
                       padding: EdgeInsets.all(8.w),
                       child: Icon(
-                        Icons.search,
+                        Icons.search_rounded,
                         size: 27.w,
                         color: AppTheme.BLACK,
                       ),

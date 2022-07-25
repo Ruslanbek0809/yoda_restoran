@@ -483,7 +483,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               padding:
                   EdgeInsets.only(left: 16, top: 0), // Change top: 0 to top:10
               child: Icon(
-                Icons.keyboard_arrow_down,
+                Icons.keyboard_arrow_down_rounded,
                 size: 45,
                 color: AppTheme.DIALOG_TITLE_COLOR,
               ), // Change Text Widget to Icon Widget

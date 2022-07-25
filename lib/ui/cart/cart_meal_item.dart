@@ -81,7 +81,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                         child: Padding(
                           padding: EdgeInsets.all(10.w),
                           child: Icon(
-                            Icons.remove,
+                            Icons.remove_rounded,
                             size: 25.w,
                             color: AppTheme.FONT_COLOR,
                           ),
@@ -106,7 +106,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                         child: Padding(
                           padding: EdgeInsets.all(10.w),
                           child: Icon(
-                            Icons.add,
+                            Icons.add_rounded,
                             size: 25.w,
                             color: AppTheme.FONT_COLOR,
                           ),

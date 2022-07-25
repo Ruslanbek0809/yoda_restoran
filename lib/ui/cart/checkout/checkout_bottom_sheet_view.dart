@@ -144,7 +144,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         Padding(
                                           padding: EdgeInsets.only(right: 20.w),
                                           child: Icon(
-                                            Icons.arrow_forward_ios,
+                                            Icons.arrow_forward_ios_rounded,
                                             size: 20,
                                             color: AppTheme.FONT_COLOR,
                                           ),
@@ -370,7 +370,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(right: 20.w),
                                     child: Icon(
-                                      Icons.arrow_forward_ios,
+                                      Icons.arrow_forward_ios_rounded,
                                       size: 20,
                                       color: AppTheme.FONT_COLOR,
                                     ),
@@ -442,7 +442,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(right: 20.w),
                                     child: Icon(
-                                      Icons.arrow_forward_ios,
+                                      Icons.arrow_forward_ios_rounded,
                                       size: 20,
                                       color: AppTheme.FONT_COLOR,
                                     ),

@@ -31,7 +31,7 @@ class AddressesView extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.w),
               child: IconButton(
                 icon: Icon(
-                  Icons.arrow_back,
+                  Icons.arrow_back_rounded,
                   color: AppTheme.FONT_COLOR,
                   size: 25.w,
                 ),
@@ -46,7 +46,7 @@ class AddressesView extends StatelessWidget {
             actions: [
               IconButton(
                 icon: Icon(
-                  Icons.add,
+                  Icons.add_rounded,
                   color: kcSecondaryDarkColor,
                   size: 25.w,
                 ),

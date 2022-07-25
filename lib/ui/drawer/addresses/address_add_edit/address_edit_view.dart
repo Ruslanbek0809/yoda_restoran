@@ -37,7 +37,7 @@ class AddressEditView extends StatelessWidget {
             padding: EdgeInsets.only(left: 10.w),
             child: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_rounded,
                 color: kcFontColor,
                 size: 25.w,
               ),

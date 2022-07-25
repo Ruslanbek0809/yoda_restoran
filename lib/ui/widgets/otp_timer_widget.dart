@@ -32,7 +32,7 @@ class OtpTimerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              Icons.access_time,
+              Icons.access_time_rounded,
               color: AppTheme.MAIN,
             ),
             SizedBox(width: 5.w),

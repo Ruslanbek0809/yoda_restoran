@@ -29,7 +29,7 @@ class AboutUsView extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.w),
               child: IconButton(
                 icon: Icon(
-                  Icons.arrow_back,
+                  Icons.arrow_back_rounded,
                   color: AppTheme.FONT_COLOR,
                   size: 25.w,
                 ),

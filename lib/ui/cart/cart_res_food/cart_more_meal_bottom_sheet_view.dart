@@ -308,7 +308,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(
                                             vertical: 14.h),
                                         child: Icon(
-                                          Icons.remove,
+                                          Icons.remove_rounded,
                                           size: 23.w,
                                           color: model.quantityDraft == 1
                                               ? kcHelperColor
@@ -345,7 +345,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(
                                             vertical: 14.h),
                                         child: Icon(
-                                          Icons.add,
+                                          Icons.add_rounded,
                                           size: 23.w,
                                           color: AppTheme.FONT_COLOR,
                                         ),
