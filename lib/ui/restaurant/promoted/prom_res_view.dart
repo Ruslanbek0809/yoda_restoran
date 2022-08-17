@@ -68,38 +68,114 @@ class PromResView extends StatelessWidget {
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 5.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppTheme.MAIN_DARK.withOpacity(0.9),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
-                          bottomRight:
-                              Radius.circular(Constants.BORDER_RADIUS_20),
-                        ),
-                      ),
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.access_time_rounded,
-                            color: AppTheme.WHITE,
-                            size: 14.w,
-                          ),
-                          SizedBox(width: 3.w),
-                          Text(
-                            restaurant.workingHours!,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: AppTheme.WHITE,
+                    child: restaurant.discount != null &&
+                            restaurant.discount! > 0
+                        //------------------ WORKING HOURS with DISCOUNT ---------------------//
+                        ? Row(
+                            children: [
+                              Container(
+                                transform: Matrix4.translationValues(16.w, 0.0,
+                                    0.0), // Stacks container into another container
+                                padding:
+                                    EdgeInsets.fromLTRB(14.w, 4.h, 24.w, 4.h),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.GREEN_COLOR.withOpacity(0.85),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                        Constants.BORDER_RADIUS_20),
+                                    bottomRight: Radius.circular(
+                                        Constants.BORDER_RADIUS_20),
+                                  ),
+                                ),
+                                child: FittedBox(
+                                  child: Text(
+                                    '-${formatNum(restaurant.discount!)}%',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: kcWhiteColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 4.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                        Constants.BORDER_RADIUS_20),
+                                    bottomRight: Radius.circular(
+                                        Constants.BORDER_RADIUS_20),
+                                  ),
+                                ),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        right: 4.w,
+                                        top: 2.h,
+                                      ),
+                                      child: Icon(
+                                        Icons.access_time_rounded,
+                                        color: kcWhiteColor,
+                                        size: 12.sp,
+                                      ),
+                                    ),
+                                    Text(
+                                      restaurant.workingHours!,
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: kcWhiteColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        //------------------ WORKING HOURS ---------------------//
+                        : Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 4.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppTheme.MAIN_DARK.withOpacity(0.9),
+                              borderRadius: BorderRadius.only(
+                                topLeft:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                                bottomRight:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
+                              ),
+                            ),
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 4.w,
+                                    top: 2.h,
+                                  ),
+                                  child: Icon(
+                                    Icons.access_time_rounded,
+                                    color: kcWhiteColor,
+                                    size: 12.sp,
+                                  ),
+                                ),
+                                Text(
+                                  restaurant.workingHours!,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: kcWhiteColor,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
                   ),
                   //------------------ FAVOURITE ---------------------//
                   Positioned(

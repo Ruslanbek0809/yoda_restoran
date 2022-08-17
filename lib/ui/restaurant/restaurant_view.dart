@@ -74,6 +74,8 @@ class RestaurantView extends StatelessWidget {
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(
                                         Constants.BORDER_RADIUS_20),
+                                    bottomRight: Radius.circular(
+                                        Constants.BORDER_RADIUS_20),
                                   ),
                                 ),
                                 child: FittedBox(
@@ -130,7 +132,7 @@ class RestaurantView extends StatelessWidget {
                         : Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: 10.w,
-                              vertical: 5.h,
+                              vertical: 4.h,
                             ),
                             decoration: BoxDecoration(
                               color: AppTheme.MAIN_DARK.withOpacity(0.85),
