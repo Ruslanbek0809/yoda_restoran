@@ -14,6 +14,7 @@ class Restaurant {
     this.rating,
     this.deliveryPrice,
     this.description,
+    this.discount,
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
@@ -47,6 +48,9 @@ class Restaurant {
 
   @JsonKey(name: 'description')
   final String? description;
+
+  @JsonKey(name: 'discount')
+  final num? discount;
 
   @JsonKey(name: 'workingHours')
   final String? workingHours;
