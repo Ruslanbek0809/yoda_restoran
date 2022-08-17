@@ -21,11 +21,17 @@ class OrderViewModel extends ReactiveViewModel {
 
   List<Order>? get orders => _orderService.orders;
 
+  /// ORDER PAG
+  int _page = 1;
+  int get page => _page;
   bool get isFetchingOrders => _orderService.isFetchingOrders;
 
+  /// ORDER PAG
   /// GETS all orders
-  Future getOrders() async {
-    await runBusyFuture(_orderService.getOrders());
+  Future getMorePaginatedOrders() async {
+    _page++;
+    log.v('getMorePaginatedOrders() with _page: $_page');
+    await runBusyFuture(_orderService.getPaginatedOrders(page: _page));
     log.i('orders length: ${orders!.length} ');
   }
 

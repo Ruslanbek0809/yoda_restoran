@@ -23,6 +23,10 @@ class OrderService with ReactiveServiceMixin {
   List<Order>? _orders = [];
   List<Order>? get orders => _orders;
 
+  /// ORDER PAG
+  bool _isPullUpEnabled = true;
+  bool get isPullUpEnabled => _isPullUpEnabled;
+
   // 3
   ReactiveValue<bool> _isFetchingOrders =
       ReactiveValue<bool>(false); // Custom busy for HomeView
@@ -34,8 +38,30 @@ class OrderService with ReactiveServiceMixin {
     _isFetchingOrders.value = false;
   }
 
-  /// GETS orders for this user
-  Future<void> getOrders() async {
-    _orders = await _userService.getOrders();
+  /// ORDER PAG
+  Future<void> getPaginatedOrders({int page = 1}) async {
+    List<Order> _fetchedOrders = [];
+    String? _pagNext;
+    await _userService.getPaginatedOrders(
+      page,
+      (pagOrders, pagNext) {
+        if (pagOrders != null && pagOrders.isNotEmpty)
+          _fetchedOrders = pagOrders;
+        if (pagNext != null) _pagNext = pagNext;
+      },
+    );
+
+    log.v(
+        '_fetchedOrders.length: ${_fetchedOrders.length}, _pagNext:$_pagNext');
+
+    if (_pagNext == null) _isPullUpEnabled = false;
+
+    if (page == 1)
+      _orders = _fetchedOrders;
+    else
+      _orders = [..._orders!, ..._fetchedOrders];
+
+    log.v(
+        '_orders!.length: ${_orders!.length}; _isPullUpEnabled:$_isPullUpEnabled');
   }
 }

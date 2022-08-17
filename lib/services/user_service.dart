@@ -493,6 +493,31 @@ class UserService {
     }
   }
 
+  /// ORDER PAG
+  Future<void> getPaginatedOrders(
+    int page,
+    Function(List<Order>?, String?)? onSuccess,
+  ) async {
+    List<Order> _paginatedOrders = [];
+    try {
+      Response response =
+          await _apiRoot.dio.get('api/paginatedorder?page=$page');
+      log.v('RESPONSE: api/paginatedorder/ => ${response.data}');
+
+      if (response.data['results'] != null) {
+        for (final _paginatedOrder in response.data['results'])
+          _paginatedOrders.add(Order.fromJson(_paginatedOrder));
+      }
+      if (_paginatedOrders.isNotEmpty)
+        _paginatedOrders.sort((prev, next) => prev.status!
+            .compareTo(next.status!)); // Sorting status ids in ascending order
+      onSuccess!(_paginatedOrders, response.data['next']);
+    } catch (error) {
+      log.v('ERROR on api/paginatedorder/ :$error');
+      rethrow;
+    }
+  }
+
   Future<void> cancelOrder(
     int orderId,
     Function()? onSuccess,

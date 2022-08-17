@@ -35,14 +35,6 @@ class HomeService with ReactiveServiceMixin {
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
-  bool get hasSliders => _sliders != null && _sliders!.isNotEmpty;
-
-  bool get hasMainCats => _mainCats != null && _mainCats!.isNotEmpty;
-
-  bool get hasRandomRess => _randomRess != null && _randomRess!.isNotEmpty;
-
-  bool get hasProms => _proms.isNotEmpty;
-
   // ------- SELECTECTED MAIN CAT RESTAURANTS --------//
   List<Restaurant>? _selectedMainCatRestaurants = [];
   List<Restaurant>? get selectedMainCatRestaurants =>
@@ -93,7 +85,7 @@ class HomeService with ReactiveServiceMixin {
       },
     );
     log.v(
-        '_fetchedRandomRess!.length: ${_fetchedRandomRess.length}, _pagNext:$_pagNext');
+        '_fetchedRandomRess.length: ${_fetchedRandomRess.length}, _pagNext:$_pagNext');
 
     if (_pagNext == null) _isPullUpEnabled = false;
 
