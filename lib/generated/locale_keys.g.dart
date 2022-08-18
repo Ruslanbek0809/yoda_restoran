@@ -111,6 +111,7 @@ abstract class  LocaleKeys {
   static const orderCancelSuccess = 'orderCancelSuccess';
   static const wannaRemoveMeal = 'wannaRemoveMeal';
   static const remove = 'remove';
+  static const delete = 'delete';
   static const promocodeRemoveTMT = 'promocodeRemoveTMT';
   static const promocodeRemoveDiscount = 'promocodeRemoveDiscount';
   static const search = 'search';

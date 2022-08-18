@@ -72,7 +72,7 @@ class _OrdersViewState extends State<OrdersView> {
           },
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: AppTheme.WHITE,
+              backgroundColor: kcWhiteColor,
               elevation: 0.5,
               leadingWidth: 35.w,
               leading: Padding(

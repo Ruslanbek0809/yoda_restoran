@@ -147,7 +147,7 @@ class AddressEditViewModel extends BaseViewModel {
       variant: DialogType.removeAddress,
       title: LocaleKeys.wannaDeleteAddress,
       mainButtonTitle: LocaleKeys.no,
-      secondaryButtonTitle: LocaleKeys.remove,
+      secondaryButtonTitle: LocaleKeys.delete,
       showIconInMainButton: false,
       barrierDismissible: true,
       data: AddressDialogData(

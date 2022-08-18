@@ -109,6 +109,7 @@
     "orderCancelSuccess": "Заказ успешно отменен",
     "wannaRemoveMeal": "Хотите убрать?",
     "remove": "Убрать",
+    "delete": "Удалить",
     "promocodeRemoveTMT": "{} TMT будут списаны с вашего заказа.",
     "promocodeRemoveDiscount": "{} % будут списаны с вашего заказа.",
     "search": "Поиск",
