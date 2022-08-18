@@ -39,7 +39,11 @@ class OrderService with ReactiveServiceMixin {
   }
 
   /// ORDER PAG
+  void enablePullUp() => _isPullUpEnabled = true;
+
+  /// ORDER PAG
   Future<void> getPaginatedOrders({int page = 1}) async {
+    log.v('OrderService getPaginatedOrders()');
     List<Order> _fetchedOrders = [];
     String? _pagNext;
     await _userService.getPaginatedOrders(

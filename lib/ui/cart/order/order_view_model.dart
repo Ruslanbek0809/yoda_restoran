@@ -24,7 +24,21 @@ class OrderViewModel extends ReactiveViewModel {
   /// ORDER PAG
   int _page = 1;
   int get page => _page;
+  bool get isPullUpEnabled => _orderService.isPullUpEnabled;
   bool get isFetchingOrders => _orderService.isFetchingOrders;
+
+  //------------------ PAGINATION ---------------------//
+
+  /// ORDER PAG
+  /// ENABLES SmartRefresher's pull up function
+  void enablePullUp() {
+    _page = 1;
+    _orderService.enablePullUp();
+  }
+
+  /// GETS initial orders
+  Future getInitialOrders() async =>
+      await runBusyFuture(_orderService.getPaginatedOrders());
 
   /// ORDER PAG
   /// GETS all orders
@@ -145,9 +159,13 @@ class OrderViewModel extends ReactiveViewModel {
       await runBusyFuture(
         _userService.cancelOrder(
           orderId,
-          () {
+          () async {
             onSuccessForView!();
-            getOrders();
+
+            /// TODO: Optimize order pagination
+            /// REITINITIALIZES ORDERS
+            enablePullUp();
+            await getInitialOrders();
           },
           () => onFailForView!(),
         ),
@@ -179,7 +197,7 @@ class OrderViewModel extends ReactiveViewModel {
       scheme: 'tel',
       path: phoneNumber,
     );
-    await launch(launchUri.toString());
+    await launchUrl(launchUri);
   }
 
   /// SHOWS rate order Dialog
@@ -197,7 +215,12 @@ class OrderViewModel extends ReactiveViewModel {
         selfPickUp: order.selfPickUp.toString(),
       ),
     );
-    if (respData!.data != null && respData.data == true) await getOrders();
+    if (respData!.data != null && respData.data == true) {
+      /// TODO: Optimize order pagination
+      /// REITINITIALIZES ORDERS
+      enablePullUp();
+      await getInitialOrders();
+    }
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//

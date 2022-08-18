@@ -6,20 +6,33 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import '../../shared/shared.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
+  final bool isRefreshIgnored;
+  CustomHeaderWidget({this.isRefreshIgnored = false});
   @override
   Widget build(BuildContext context) {
     return CustomHeader(
       height: 50.h,
       builder: (BuildContext context, RefreshStatus? mode) {
-        if (mode == RefreshStatus.refreshing ||
-            mode == RefreshStatus.canRefresh ||
-            mode == RefreshStatus.completed)
-          return SpinKitChasingDots(
-            size: 27,
-            color: kcPrimaryColor,
-          );
-        else
-          return SizedBox();
+        if (!isRefreshIgnored) {
+          if (mode == RefreshStatus.refreshing ||
+              mode == RefreshStatus.canRefresh ||
+              mode == RefreshStatus.completed)
+            return SpinKitChasingDots(
+              size: 27,
+              color: kcPrimaryColor,
+            );
+          else
+            return SizedBox();
+        } else {
+          if (mode == RefreshStatus.canRefresh ||
+              mode == RefreshStatus.completed)
+            return SpinKitChasingDots(
+              size: 27,
+              color: kcPrimaryColor,
+            );
+          else
+            return SizedBox();
+        }
       },
     );
   }

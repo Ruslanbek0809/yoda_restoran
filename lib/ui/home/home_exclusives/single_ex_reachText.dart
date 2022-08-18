@@ -135,7 +135,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                                       scheme: 'https',
                                       path: url,
                                     );
-                                    await launch(launchUri.toString());
+                                    await launchUrl(launchUri);
                                   },
                                   onImageTap: (src, _, __, ___) {
                                     print(src);

@@ -52,7 +52,7 @@ class HomeViewModel extends ReactiveViewModel {
   bool get fetchingFilter => _homeService.fetchingFilter;
   bool get fetchingFilterError => _homeService.fetchingFilterError;
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   int _page = 1;
   int get page => _page;
   bool get isPullUpEnabled => _homeService.isPullUpEnabled;
@@ -90,7 +90,7 @@ class HomeViewModel extends ReactiveViewModel {
         busyObject: homeExclusivesFuture);
   }
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   /// GETS more home restaurants
   Future<void> getMorePaginatedRestaurants() async {
     _page++;
@@ -100,7 +100,7 @@ class HomeViewModel extends ReactiveViewModel {
 
   //------------------ PAGINATION ---------------------//
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   void enablePullUp() {
     _page = 1;
     _homeService.enablePullUp();

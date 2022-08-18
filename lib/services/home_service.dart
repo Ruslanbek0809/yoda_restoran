@@ -31,7 +31,7 @@ class HomeService with ReactiveServiceMixin {
   List<Exclusive>? _exclusives = [];
   List<Exclusive>? get exclusives => _exclusives;
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
@@ -73,7 +73,7 @@ class HomeService with ReactiveServiceMixin {
   //   return _randomRess;
   // }
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   Future<List<Restaurant>?> getPaginatedRess({int page = 1}) async {
     List<Restaurant> _fetchedRandomRess = [];
     String? _pagNext;
@@ -99,7 +99,8 @@ class HomeService with ReactiveServiceMixin {
     return _randomRess;
   }
 
-  /// TODO: PAG
+  /// HOME RESS PAG
+  /// ENABLES SmartRefresher's pull up function
   void enablePullUp() => _isPullUpEnabled = true;
 
   Future<List<Promoted?>> getProms() async {

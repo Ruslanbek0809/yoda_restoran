@@ -80,7 +80,7 @@ class ApiService {
   //   }
   // }
 
-  /// TODO: PAG
+  /// HOME RESS PAG
   Future<void> getPaginatedRess(
     int page,
     Function(List<Restaurant>?, String?)? onSuccess,

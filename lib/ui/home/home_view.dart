@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-        /// TODO: PAG
+        /// HOME RESS PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
         /// This TRIGGERS fetch action of home data
@@ -154,22 +154,20 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   SmartRefresher(
                     header: CustomHeaderWidget(),
-
-                    /// TODO: PAG
                     footer: CustomFooterWidget(),
                     controller: _refreshController,
 
-                    /// TODO: PAG
+                    /// HOME RESS PAG
                     enablePullUp: model.isPullUpEnabled,
                     onRefresh: () async {
-                      /// TODO: PAG
+                      /// HOME RESS PAG
                       if (model.isPullUpEnabled == false) model.enablePullUp();
 
                       await model.getHomeData();
                       _refreshController.refreshCompleted();
                     },
 
-                    /// TODO: PAG
+                    /// HOME RESS PAG
                     onLoading: () async {
                       await model.getMorePaginatedRestaurants();
                       _refreshController.loadComplete();
