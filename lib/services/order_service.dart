@@ -20,10 +20,12 @@ class OrderService with ReactiveServiceMixin {
 
   Promocode? get promocode => _promocode;
 
-  List<Order>? _orders = [];
-  List<Order>? get orders => _orders;
+  List<Order> _orders = [];
+  List<Order> get orders => _orders;
 
   /// ORDER PAG
+  int _page = 1;
+  int get page => _page;
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
@@ -39,13 +41,47 @@ class OrderService with ReactiveServiceMixin {
   }
 
   /// ORDER PAG
-  void enablePullUp() => _isPullUpEnabled = true;
+  Future<void> getInitialPaginatedOrders() async {
+    log.v('====> START OrderService getInitialPaginatedOrders()');
 
-  /// ORDER PAG
-  Future<void> getPaginatedOrders({int page = 1}) async {
-    log.v('OrderService getPaginatedOrders()');
+    /// INITIALIZE _page with 1 and _isPullUpEnabled
+    _page = 1;
+    _isPullUpEnabled = true;
+
     List<Order> _fetchedOrders = [];
     String? _pagNext;
+
+    /// FETCH PART
+    await _userService.getPaginatedOrders(
+      _page,
+      (pagOrders, pagNext) {
+        if (pagOrders != null && pagOrders.isNotEmpty)
+          _fetchedOrders = pagOrders;
+        if (pagNext != null) _pagNext = pagNext;
+      },
+    );
+
+    /// CHECKS next pagination is NULL or NOT
+    if (_pagNext == null) _isPullUpEnabled = false;
+
+    /// ASSIGNS last _fetchedOrders to _orders
+    _orders = _fetchedOrders;
+
+    log.v(
+        '====> END OrderService getInitialPaginatedOrders() _page: $_page, _orders.length: ${_orders.length}; _isPullUpEnabled:$_isPullUpEnabled');
+  }
+
+  /// ORDER PAG
+  Future<void> getPaginatedOrders() async {
+    log.v('====> START OrderService getPaginatedOrders()');
+
+    /// INCREMENTS _page +1
+    _page = _page + 1;
+
+    List<Order> _fetchedOrders = [];
+    String? _pagNext;
+
+    /// FETCH PART
     await _userService.getPaginatedOrders(
       page,
       (pagOrders, pagNext) {
@@ -55,17 +91,13 @@ class OrderService with ReactiveServiceMixin {
       },
     );
 
-    log.v(
-        '_fetchedOrders.length: ${_fetchedOrders.length}, _pagNext:$_pagNext');
-
+    /// CHECKS next pagination is NULL or NOT
     if (_pagNext == null) _isPullUpEnabled = false;
 
-    if (page == 1)
-      _orders = _fetchedOrders;
-    else
-      _orders = [..._orders!, ..._fetchedOrders];
+    /// ASSIGNS last _fetchedOrders to _orders
+    _orders = [..._orders, ..._fetchedOrders];
 
     log.v(
-        '_orders!.length: ${_orders!.length}; _isPullUpEnabled:$_isPullUpEnabled');
+        '====> END OrderService getPaginatedOrders() _page: $_page, _orders.length: ${_orders.length}; _isPullUpEnabled:$_isPullUpEnabled');
   }
 }

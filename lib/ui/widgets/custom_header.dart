@@ -24,8 +24,9 @@ class CustomHeaderWidget extends StatelessWidget {
           else
             return SizedBox();
         } else {
-          if (mode == RefreshStatus.canRefresh ||
-              mode == RefreshStatus.completed)
+          if (mode == RefreshStatus.canRefresh
+              // || mode == RefreshStatus.completed
+              )
             return SpinKitChasingDots(
               size: 27,
               color: kcPrimaryColor,

@@ -51,9 +51,7 @@ class _OrdersViewState extends State<OrdersView> {
 
           /// NO need to reload when notification status is 4. Else, RELOAD
           if (noti.status != '4') {
-            /// TODO: Optimize order pagination
-            /// REITINITIALIZES ORDERS
-            model.enablePullUp();
+            /// REINITIALIZES ORDERS
             await model.getInitialOrders();
           }
         });
@@ -64,9 +62,7 @@ class _OrdersViewState extends State<OrdersView> {
           model.log
               .v('OrdersView OnMESSAGE_OPENEDAPP with data ${message.data}');
 
-          /// TODO: Optimize order pagination
-          /// REITINITIALIZES ORDERS
-          model.enablePullUp();
+          /// REINITIALIZES ORDERS
           await model.getInitialOrders();
         });
         return WillPopScope(
@@ -104,7 +100,6 @@ class _OrdersViewState extends State<OrdersView> {
               /// ORDER PAG
               enablePullUp: model.isPullUpEnabled,
               onRefresh: () async {
-                model.enablePullUp();
                 await model.getInitialOrders();
                 _refreshController.refreshCompleted();
               },
@@ -116,7 +111,7 @@ class _OrdersViewState extends State<OrdersView> {
               },
               child: model.isBusy && model.page == 1
                   ? LoadingWidget()
-                  : model.orders!.isEmpty
+                  : model.orders.isEmpty
                       ? EmptyWidget(
                           text: LocaleKeys.noOrdersYet,
                           svg: 'assets/empty_orders.svg',
@@ -127,9 +122,9 @@ class _OrdersViewState extends State<OrdersView> {
                             horizontal: 5.w,
                             vertical: 10.h,
                           ),
-                          itemCount: model.orders!.length,
+                          itemCount: model.orders.length,
                           itemBuilder: (context, pos) {
-                            Order order = model.orders![pos];
+                            Order order = model.orders[pos];
                             num? orderPromocodePrice = model.getPromocodePrice(
                                 order); // GETS promocode price for this order
                             num? orderTotalPriceWithPromocode =

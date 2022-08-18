@@ -19,35 +19,20 @@ class OrderViewModel extends ReactiveViewModel {
 
 //------------------------ ORDER PART ----------------------------//
 
-  List<Order>? get orders => _orderService.orders;
+  List<Order> get orders => _orderService.orders;
 
   /// ORDER PAG
-  int _page = 1;
-  int get page => _page;
+  int get page => _orderService.page;
   bool get isPullUpEnabled => _orderService.isPullUpEnabled;
   bool get isFetchingOrders => _orderService.isFetchingOrders;
 
-  //------------------ PAGINATION ---------------------//
-
-  /// ORDER PAG
-  /// ENABLES SmartRefresher's pull up function
-  void enablePullUp() {
-    _page = 1;
-    _orderService.enablePullUp();
-  }
-
   /// GETS initial orders
   Future getInitialOrders() async =>
-      await runBusyFuture(_orderService.getPaginatedOrders());
+      await runBusyFuture(_orderService.getInitialPaginatedOrders());
 
-  /// ORDER PAG
-  /// GETS all orders
-  Future getMorePaginatedOrders() async {
-    _page++;
-    log.v('getMorePaginatedOrders() with _page: $_page');
-    await runBusyFuture(_orderService.getPaginatedOrders(page: _page));
-    log.i('orders length: ${orders!.length} ');
-  }
+  /// GETS more paginated orders
+  Future getMorePaginatedOrders() async =>
+      await runBusyFuture(_orderService.getPaginatedOrders());
 
   /// GETS getPromocodePrice
   num getPromocodePrice(Order order) {
@@ -162,9 +147,7 @@ class OrderViewModel extends ReactiveViewModel {
           () async {
             onSuccessForView!();
 
-            /// TODO: Optimize order pagination
-            /// REITINITIALIZES ORDERS
-            enablePullUp();
+            /// REINITIALIZES ORDERS
             await getInitialOrders();
           },
           () => onFailForView!(),
@@ -216,9 +199,7 @@ class OrderViewModel extends ReactiveViewModel {
       ),
     );
     if (respData!.data != null && respData.data == true) {
-      /// TODO: Optimize order pagination
-      /// REITINITIALIZES ORDERS
-      enablePullUp();
+      /// REINITIALIZES ORDERS
       await getInitialOrders();
     }
   }
