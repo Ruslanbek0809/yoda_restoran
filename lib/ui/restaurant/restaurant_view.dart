@@ -23,9 +23,7 @@ class RestaurantView extends StatelessWidget {
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
-          // height: 0.33.sh,
-          width: 1.sw,
-          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 10.h),
+          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 12.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,114 +58,45 @@ class RestaurantView extends StatelessWidget {
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: restaurant.discount != null &&
-                            restaurant.discount! > 0
-                        //------------------ WORKING HOURS with DISCOUNT ---------------------//
-                        ? Row(
-                            children: [
-                              Container(
-                                transform: Matrix4.translationValues(16.w, 0.0,
-                                    0.0), // Stacks container into another container
-                                padding:
-                                    EdgeInsets.fromLTRB(14.w, 4.h, 24.w, 4.h),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.GREEN_COLOR.withOpacity(0.85),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                        Constants.BORDER_RADIUS_20),
-                                    bottomRight: Radius.circular(
-                                        Constants.BORDER_RADIUS_20),
-                                  ),
-                                ),
-                                child: FittedBox(
-                                  child: Text(
-                                    '-${formatNum(restaurant.discount!)}%',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: kcWhiteColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w,
-                                  vertical: 4.h,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_DARK.withOpacity(0.85),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                        Constants.BORDER_RADIUS_20),
-                                    bottomRight: Radius.circular(
-                                        Constants.BORDER_RADIUS_20),
-                                  ),
-                                ),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        right: 4.w,
-                                        top: 2.h,
-                                      ),
-                                      child: Icon(
-                                        Icons.access_time_rounded,
-                                        color: kcWhiteColor,
-                                        size: 16.sp,
-                                      ),
-                                    ),
-                                    Text(
-                                      restaurant.workingHours!,
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: kcWhiteColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
+                    child:
                         //------------------ WORKING HOURS ---------------------//
-                        : Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10.w,
-                              vertical: 4.h,
+                        Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 4.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
+                          bottomRight:
+                              Radius.circular(Constants.BORDER_RADIUS_20),
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              right: 4.w,
+                              top: 2.h,
                             ),
-                            decoration: BoxDecoration(
-                              color: AppTheme.MAIN_DARK.withOpacity(0.85),
-                              borderRadius: BorderRadius.only(
-                                topLeft:
-                                    Radius.circular(Constants.BORDER_RADIUS_20),
-                                bottomRight:
-                                    Radius.circular(Constants.BORDER_RADIUS_20),
-                              ),
-                            ),
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    right: 4.w,
-                                    top: 2.h,
-                                  ),
-                                  child: Icon(
-                                    Icons.access_time_rounded,
-                                    color: kcWhiteColor,
-                                    size: 16.sp,
-                                  ),
-                                ),
-                                Text(
-                                  restaurant.workingHours!,
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: kcWhiteColor,
-                                  ),
-                                ),
-                              ],
+                            child: Icon(
+                              Icons.access_time_rounded,
+                              color: kcWhiteColor,
+                              size: 16.sp,
                             ),
                           ),
+                          Text(
+                            restaurant.workingHours!,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: kcWhiteColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   //------------------ FAVOURITE ---------------------//
                   Positioned(
@@ -287,7 +216,65 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ],
               ),
-              //------------------ HOURLY DISCOUNT ---------------------//
+
+              //------------------ DISCOUNT ONLY ---------------------//
+              if (restaurant.discount != null && restaurant.discount! > 0)
+                FittedBox(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kcSecondaryLightColor,
+                          borderRadius: AppTheme().radius20,
+                        ),
+                        margin:
+                            EdgeInsets.only(left: 18.w, top: 10.h, bottom: 2.h),
+                        padding: EdgeInsets.only(
+                            top: 6.h, bottom: 6.w, right: 16.w, left: 22.w),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child: Text(
+                                LocaleKeys.discount,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: kcIconColor,
+                                ),
+                              ).tr(),
+                            ),
+                            Text(
+                              '${formatNum(restaurant.discount!)}%',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        top: 5.h,
+                        child: SimpleShadow(
+                          child: SvgPicture.asset(
+                            'assets/discount.svg',
+                            color: kcGreenColor,
+                            width: 34.w,
+                          ),
+                          opacity: 0.1,
+                          color: kcSecondaryDarkColor,
+                          offset: Offset(2, 2),
+                          sigma: 2,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              //------------------ HOURLY DISCOUNT ONLY ---------------------//
               if (restaurant.hourlyDiscount != null &&
                   restaurant.hourlyDiscount! > 0)
                 FittedBox(
@@ -299,9 +286,9 @@ class RestaurantView extends StatelessWidget {
                           borderRadius: AppTheme().radius20,
                         ),
                         margin:
-                            EdgeInsets.only(left: 16.w, top: 8.h, bottom: 2.h),
+                            EdgeInsets.only(left: 16.w, top: 10.h, bottom: 2.h),
                         padding: EdgeInsets.only(
-                            top: 4.h, bottom: 4.w, right: 16.w, left: 22.w),
+                            top: 6.h, bottom: 6.w, right: 16.w, left: 24.w),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.ideographic,
@@ -329,12 +316,12 @@ class RestaurantView extends StatelessWidget {
                       ),
                       Positioned(
                         left: 0,
-                        top: 3.h,
+                        top: 5.h,
                         child: SimpleShadow(
                           child: SvgPicture.asset(
                             'assets/discount.svg',
                             color: kcGreenColor,
-                            width: 32.w,
+                            width: 34.w,
                           ),
                           opacity: 0.1,
                           color: kcSecondaryDarkColor,
@@ -353,3 +340,118 @@ class RestaurantView extends StatelessWidget {
     );
   }
 }
+
+
+                  // //------------------ DELIVERY TIME ---------------------//
+                  // Positioned(
+                  //   bottom: 0,
+                  //   right: 0,
+                  //   child: restaurant.discount != null &&
+                  //           restaurant.discount! > 0
+                  //       //------------------ WORKING HOURS with DISCOUNT ---------------------//
+                  //       ? Row(
+                  //           children: [
+                  //             Container(
+                  //               transform: Matrix4.translationValues(16.w, 0.0,
+                  //                   0.0), // Stacks container into another container
+                  //               padding:
+                  //                   EdgeInsets.fromLTRB(14.w, 4.h, 24.w, 4.h),
+                  //               decoration: BoxDecoration(
+                  //                 color: AppTheme.GREEN_COLOR.withOpacity(0.85),
+                  //                 borderRadius: BorderRadius.only(
+                  //                   topLeft: Radius.circular(
+                  //                       Constants.BORDER_RADIUS_20),
+                  //                   bottomRight: Radius.circular(
+                  //                       Constants.BORDER_RADIUS_20),
+                  //                 ),
+                  //               ),
+                  //               child: FittedBox(
+                  //                 child: Text(
+                  //                   '-${formatNum(restaurant.discount!)}%',
+                  //                   style: TextStyle(
+                  //                     fontSize: 16.sp,
+                  //                     color: kcWhiteColor,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //             Container(
+                  //               padding: EdgeInsets.symmetric(
+                  //                 horizontal: 10.w,
+                  //                 vertical: 4.h,
+                  //               ),
+                  //               decoration: BoxDecoration(
+                  //                 color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                  //                 borderRadius: BorderRadius.only(
+                  //                   topLeft: Radius.circular(
+                  //                       Constants.BORDER_RADIUS_20),
+                  //                   bottomRight: Radius.circular(
+                  //                       Constants.BORDER_RADIUS_20),
+                  //                 ),
+                  //               ),
+                  //               alignment: Alignment.center,
+                  //               child: Row(
+                  //                 children: [
+                  //                   Padding(
+                  //                     padding: EdgeInsets.only(
+                  //                       right: 4.w,
+                  //                       top: 2.h,
+                  //                     ),
+                  //                     child: Icon(
+                  //                       Icons.access_time_rounded,
+                  //                       color: kcWhiteColor,
+                  //                       size: 16.sp,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     restaurant.workingHours!,
+                  //                     style: TextStyle(
+                  //                       fontSize: 16.sp,
+                  //                       color: kcWhiteColor,
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         )
+                  //       //------------------ WORKING HOURS ---------------------//
+                  //       : Container(
+                  //           padding: EdgeInsets.symmetric(
+                  //             horizontal: 10.w,
+                  //             vertical: 4.h,
+                  //           ),
+                  //           decoration: BoxDecoration(
+                  //             color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                  //             borderRadius: BorderRadius.only(
+                  //               topLeft:
+                  //                   Radius.circular(Constants.BORDER_RADIUS_20),
+                  //               bottomRight:
+                  //                   Radius.circular(Constants.BORDER_RADIUS_20),
+                  //             ),
+                  //           ),
+                  //           alignment: Alignment.center,
+                  //           child: Row(
+                  //             children: [
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(
+                  //                   right: 4.w,
+                  //                   top: 2.h,
+                  //                 ),
+                  //                 child: Icon(
+                  //                   Icons.access_time_rounded,
+                  //                   color: kcWhiteColor,
+                  //                   size: 16.sp,
+                  //                 ),
+                  //               ),
+                  //               Text(
+                  //                 restaurant.workingHours!,
+                  //                 style: TextStyle(
+                  //                   fontSize: 16.sp,
+                  //                   color: kcWhiteColor,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  // ),

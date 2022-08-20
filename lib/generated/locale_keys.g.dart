@@ -144,6 +144,7 @@ abstract class  LocaleKeys {
   static const chooseMainCat = 'chooseMainCat';
   static const addAddedSuccessfully = 'addAddedSuccessfully';
   static const km = 'km';
+  static const discount = 'discount';
   static const more = 'more';
   static const doubleBackToCloseApp = 'doubleBackToCloseApp';
   static const toggleDeliveryOnly = 'toggleDeliveryOnly';
