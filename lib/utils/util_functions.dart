@@ -31,6 +31,14 @@ String formatNum(num value) =>
 String formatNumRating(num value) =>
     value.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '');
 
+/// PARSES and FORMATS discountBegin and discountEnd in Hm format only
+extension DateTimeHmFormatter on String {
+  String formateDateTimeHmOnly() {
+    DateTime _tempDate = DateFormat('HH:mm').parse(this);
+    return DateFormat.Hm().format(_tempDate);
+  }
+}
+
 final List<EachIntroWidget> onBoardingList = [
   EachIntroWidget(
     subTitle: 'Söýgüli restoranlaryňyzyň tagamlaryny sargyt ediň',

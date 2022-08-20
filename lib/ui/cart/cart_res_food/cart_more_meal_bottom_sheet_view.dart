@@ -222,7 +222,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 border:
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),

@@ -91,6 +91,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_slidable: ^1.2.0
   awesome_dialog: ^2.2.1
+  simple_shadow: ^0.3.0 # A customizable shadow for any widget
 
   # IMAGE
   cached_network_image: ^3.2.1

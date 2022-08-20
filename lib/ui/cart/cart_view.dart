@@ -204,7 +204,7 @@ class CartView extends StatelessWidget {
                   right: 0,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppTheme.WHITE,
+                      color: kcWhiteColor,
                       border: Border(
                         top: BorderSide(
                           width: 0.5,

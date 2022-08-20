@@ -280,7 +280,7 @@ class PromResView extends StatelessWidget {
                       Icon(
                         Icons.star_rounded,
                         size: 18.w,
-                        color: AppTheme.GREEN_COLOR,
+                        color: kcPrimaryColor,
                       ),
                       Text(
                         '${formatNumRating(restaurant.rating!)} (${restaurant.rated})',

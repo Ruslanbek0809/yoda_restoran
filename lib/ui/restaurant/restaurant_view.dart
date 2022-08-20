@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/app_colors.dart';
@@ -22,7 +23,7 @@ class RestaurantView extends StatelessWidget {
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
-          height: 0.3.sh,
+          // height: 0.33.sh,
           width: 1.sw,
           margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 10.h),
           child: Column(
@@ -271,7 +272,7 @@ class RestaurantView extends StatelessWidget {
                       Icon(
                         Icons.star_rounded,
                         size: 22.w,
-                        color: AppTheme.GREEN_COLOR,
+                        color: kcPrimaryColor,
                       ),
                       SizedBox(width: 3.w),
                       Text(
@@ -286,6 +287,64 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ],
               ),
+              //------------------ HOURLY DISCOUNT ---------------------//
+              if (restaurant.hourlyDiscount != null &&
+                  restaurant.hourlyDiscount! > 0)
+                FittedBox(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kcSecondaryLightColor,
+                          borderRadius: AppTheme().radius20,
+                        ),
+                        margin:
+                            EdgeInsets.only(left: 16.w, top: 8.h, bottom: 2.h),
+                        padding: EdgeInsets.only(
+                            top: 4.h, bottom: 4.w, right: 16.w, left: 22.w),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child: Text(
+                                '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: kcIconColor,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '${formatNum(restaurant.hourlyDiscount!)}%',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        top: 3.h,
+                        child: SimpleShadow(
+                          child: SvgPicture.asset(
+                            'assets/discount.svg',
+                            color: kcGreenColor,
+                            width: 32.w,
+                          ),
+                          opacity: 0.1,
+                          color: kcSecondaryDarkColor,
+                          offset: Offset(2, 2),
+                          sigma: 2,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
             ],
           ),
         );
