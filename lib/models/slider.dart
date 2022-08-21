@@ -10,6 +10,7 @@ class SliderModel {
     this.id,
     this.order,
     this.image,
+    this.imageRu,
     this.option,
     this.restaurant,
     this.url,
@@ -23,6 +24,9 @@ class SliderModel {
 
   @JsonKey(name: 'image')
   final String? image;
+
+  @JsonKey(name: 'image_ru')
+  final String? imageRu;
 
   @JsonKey(name: 'option')
   final String? option;

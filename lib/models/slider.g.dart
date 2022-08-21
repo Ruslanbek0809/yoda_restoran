@@ -10,6 +10,7 @@ SliderModel _$SliderModelFromJson(Map<String, dynamic> json) => SliderModel(
       id: json['id'] as int?,
       order: json['order'] as int?,
       image: json['image'] as String?,
+      imageRu: json['image_ru'] as String?,
       option: json['option'] as String?,
       restaurant: json['restaurant'] == null
           ? null
@@ -22,6 +23,7 @@ Map<String, dynamic> _$SliderModelToJson(SliderModel instance) =>
       'id': instance.id,
       'order': instance.order,
       'image': instance.image,
+      'image_ru': instance.imageRu,
       'option': instance.option,
       'url': instance.url,
       'restaurant': instance.restaurant,
