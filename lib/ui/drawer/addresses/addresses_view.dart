@@ -101,7 +101,6 @@ class AddressesView extends StatelessWidget {
                                 //   ],
                                 // ),
 
-                                // The start action pane is the one at the left or the top side.
                                 endActionPane: ActionPane(
                                   dragDismissible: false,
                                   extentRatio: 0.25,
