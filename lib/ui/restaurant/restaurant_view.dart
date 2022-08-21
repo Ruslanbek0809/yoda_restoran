@@ -18,8 +18,12 @@ class RestaurantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResViewModel>.reactive(
-      // onModelReady: (model) =>
-      //     model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
+      /// INITIALIZES hourly discount variables for further condition
+      onModelReady: (model) =>
+          restaurant.hourlyDiscount != null && restaurant.hourlyDiscount! > 0
+              ? model.initializeHourlyDiscountVars(
+                  restaurant.discountBegin!, restaurant.discountEnd!)
+              : () {},
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
@@ -218,7 +222,8 @@ class RestaurantView extends StatelessWidget {
               ),
 
               //------------------ DISCOUNT ONLY ---------------------//
-              if (restaurant.discount != null && restaurant.discount! > 0)
+              if ((restaurant.discount != null && restaurant.discount! > 0) &&
+                  !model.isHourlyDiscountActive)
                 FittedBox(
                   child: Stack(
                     children: [
@@ -275,8 +280,11 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ),
               //------------------ HOURLY DISCOUNT ONLY ---------------------//
-              if (restaurant.hourlyDiscount != null &&
-                  restaurant.hourlyDiscount! > 0)
+              if (model.isHourlyDiscountActive ||
+                  ((restaurant.discount == null || restaurant.discount! == 0) &&
+                      (restaurant.hourlyDiscount != null &&
+                          restaurant.hourlyDiscount! > 0) &&
+                      !model.isHourlyDiscountActive))
                 FittedBox(
                   child: Stack(
                     children: [
@@ -310,6 +318,106 @@ class RestaurantView extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 color: kcIconColor,
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        top: 5.h,
+                        child: SimpleShadow(
+                          child: SvgPicture.asset(
+                            'assets/discount.svg',
+                            color: kcGreenColor,
+                            width: 34.w,
+                          ),
+                          opacity: 0.1,
+                          color: kcSecondaryDarkColor,
+                          offset: Offset(2, 2),
+                          sigma: 2,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+              //------------------ DISCOUNT and HOURLY DISCOUNT ---------------------//
+              if ((restaurant.discount != null && restaurant.discount! > 0) &&
+                  (restaurant.hourlyDiscount != null &&
+                      restaurant.hourlyDiscount! > 0) &&
+                  !model.isHourlyDiscountActive)
+                FittedBox(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kcSecondaryLightColor,
+                          borderRadius: AppTheme().radius20,
+                        ),
+                        margin:
+                            EdgeInsets.only(left: 18.w, top: 10.h, bottom: 2.h),
+                        padding: EdgeInsets.only(
+                            top: 6.h, bottom: 6.w, right: 16.w, left: 22.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //------------------ DISCOUNT ---------------------//
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.ideographic,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 5.w),
+                                  child: Text(
+                                    LocaleKeys.discount,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: kcIconColor,
+                                    ),
+                                  ).tr(),
+                                ),
+                                Text(
+                                  '${formatNum(restaurant.discount!)}%',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: kcIconColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              '/',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kcIconColor,
+                              ),
+                            ),
+                            //------------------ HOURLY DISCOUNT ---------------------//
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.ideographic,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 5.w),
+                                  child: Text(
+                                    '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: kcIconColor,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '${formatNum(restaurant.hourlyDiscount!)}%',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: kcIconColor,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

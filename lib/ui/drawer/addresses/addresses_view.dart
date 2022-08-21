@@ -93,10 +93,6 @@ class AddressesView extends StatelessWidget {
                                       onPressed: (BuildContext context) async =>
                                           await model.showAddressRemoveDialog(
                                               model, model.addresses![pos]),
-
-                                      // async =>
-                                      //     await model.showAddressRemoveDialog(
-                                      //         model, model.addresses![pos]),
                                       backgroundColor: kcRedColor,
                                       foregroundColor: kcWhiteColor,
                                       icon: Icons.delete_outline_rounded,

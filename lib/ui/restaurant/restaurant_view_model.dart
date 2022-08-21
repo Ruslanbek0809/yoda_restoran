@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/services/services.dart';
@@ -21,13 +22,20 @@ class ResViewModel extends BaseViewModel {
   bool _isFavorited = false;
   bool get isFavorited => _isFavorited;
 
-  /// NAVIGATES to LoginView if not logged in yet
-  // Future<void> navToLoginView() async => await _navService.navigateTo(
-  //       Routes.loginView,
-  //       arguments: LoginViewArguments(
-  //         isCartView: false,
-  //       ), // Workaround. isCartView is used to navigate to new View by condition in OtpVM
-  //     );
+  bool _isHourlyDiscountActive = false;
+  bool get isHourlyDiscountActive => _isHourlyDiscountActive;
+
+  /// INITIALIZES hourly discount variables for further condition
+  void initializeHourlyDiscountVars(String discountBegin, String discountEnd) {
+    DateTime _discountBeginDateTime = DateFormat('HH:mm').parse(discountBegin);
+    DateTime _discountEndDateTime = DateFormat('HH:mm').parse(discountEnd);
+
+    int _currentHour = DateTime.now().hour;
+
+    if (_currentHour >= _discountBeginDateTime.hour &&
+        _currentHour < _discountEndDateTime.hour)
+      _isHourlyDiscountActive = true;
+  }
 
   /// CHECKS and ASSIGNS initial res fav state
   void checkResFav(int resId) =>
