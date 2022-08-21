@@ -103,7 +103,7 @@ class ApiService {
       } else
         response =
             await _apiRoot.dio.get('api/paginatedRestaurants?page=$page');
-      log.v('RESPONSE: api/paginatedRestaurants/ => ${response.data}');
+      // log.v('RESPONSE: api/paginatedRestaurants/ => ${response.data}');
 
       if (response.data['results'] != null) {
         for (final _randomRestaurant in response.data['results'])

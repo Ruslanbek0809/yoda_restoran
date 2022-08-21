@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/shared/shared.dart';
@@ -76,8 +77,32 @@ class AddressesView extends StatelessWidget {
                                 // Specify a key if the Slidable is dismissible.
                                 key: ValueKey(model.addresses![pos].id),
 
+                                // // The start action pane is the one at the left or the top side.
+                                // startActionPane: ActionPane(
+                                //   dragDismissible: false,
+                                //   extentRatio: 0.25,
+                                //   // A motion is a widget used to control how the pane animates.
+                                //   motion: const ScrollMotion(),
+
+                                //   // // A pane can dismiss the Slidable.
+                                //   // dismissible: DismissiblePane(onDismissed: () {}),
+
+                                //   // All actions are defined in the children parameter.
+                                //   children: [
+                                //     // A SlidableAction can have an icon and/or a label.
+                                //     SlidableAction(
+                                //       onPressed: (BuildContext context) async =>
+                                //           await model.showAddressRemoveDialog(
+                                //               model, model.addresses![pos]),
+                                //       backgroundColor: kcRedColor,
+                                //       foregroundColor: kcWhiteColor,
+                                //       icon: Icons.delete_outline_rounded,
+                                //     ),
+                                //   ],
+                                // ),
+
                                 // The start action pane is the one at the left or the top side.
-                                startActionPane: ActionPane(
+                                endActionPane: ActionPane(
                                   dragDismissible: false,
                                   extentRatio: 0.25,
                                   // A motion is a widget used to control how the pane animates.
@@ -88,14 +113,17 @@ class AddressesView extends StatelessWidget {
 
                                   // All actions are defined in the children parameter.
                                   children: [
-                                    // A SlidableAction can have an icon and/or a label.
-                                    SlidableAction(
+                                    // A CustomSlidableAction can have an icon and/or a label.
+                                    CustomSlidableAction(
                                       onPressed: (BuildContext context) async =>
                                           await model.showAddressRemoveDialog(
                                               model, model.addresses![pos]),
                                       backgroundColor: kcRedColor,
-                                      foregroundColor: kcWhiteColor,
-                                      icon: Icons.delete_outline_rounded,
+                                      child: SvgPicture.asset(
+                                        'assets/trash.svg',
+                                        color: kcWhiteColor,
+                                        width: 24.sp,
+                                      ),
                                     ),
                                   ],
                                 ),
