@@ -31,37 +31,6 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
             singleExViewModel: model,
           ),
         ),
-
-        // SliverAppBar(
-        //   expandedHeight: model.isBusy || model.hasError ? 0.05.sh : 0.175.sh,
-        //   pinned: true,
-        //   stretch: true,
-        //   backgroundColor: AppTheme.WHITE,
-        //   leading: BackButtonWidget(),
-        //   flexibleSpace: model.isBusy || model.hasError
-        //       ? SizedBox()
-        //       : FlexibleSpaceBar(
-        //           titlePadding: EdgeInsets.fromLTRB(54.w, 16.h, 16.w,
-        //               12.h), // left padding 54.w moves title a bit to give a size for leading back icon
-        //           title: Text(
-        //             singleEx.name!,
-        //             maxLines: 2,
-        //             overflow: TextOverflow.ellipsis,
-        //             style: kts20DarkText,
-        //           ),
-        //         ),
-        //   //------------------ ACTIONS FAV ---------------------//
-        //   actions: [
-        //     IconButton(
-        //       onPressed: () => Navigator.pop(context),
-        //       icon: Icon(
-        //         Icons.share_rounded,
-        //         size: 24.w,
-        //         color: kcSecondaryDarkColor,
-        //       ),
-        //     )
-        //   ],
-        // ),
         model.isBusy
             ? SliverToBoxAdapter(
                 child: Padding(
@@ -77,15 +46,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                       ),
                     ),
                   )
-                :
-                // SliverList(
-                //     delegate: SliverChildBuilderDelegate((context, index) {
-                //     return Container(
-                //         child: ListTile(
-                //       title: Text("${index}a"),
-                //     ));
-                //   }, childCount: 25)),
-                SliverPadding(
+                : SliverPadding(
                     padding: EdgeInsets.only(
                       top: 0.h,
                       bottom: 0.11.sh, // COMPENSATES SingleExBottomCart
@@ -157,70 +118,6 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                       ),
                     ),
                   ),
-//------------------ MEAL LIST ---------------------//
-        // SliverPadding(
-        //   padding: EdgeInsets.only(
-        //       bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
-        //   sliver: SliverList(
-        //     delegate: SliverChildBuilderDelegate(
-        //       (BuildContext context, int index) {
-        //         final resCategory = model.resCategories![index];
-        //         final resCategoryMeals = resCategory.meals;
-        //         return Column(
-        //           children: [
-        //             Container(
-        //               alignment: Alignment.centerLeft,
-        //               padding: EdgeInsets.only(left: 12.w, top: 5.h),
-        //               child: Text(
-        //                 resCategory.resCategoryModel!.name!,
-        //                 style: TextStyle(
-        //                   fontSize: 16.sp,
-        //                   color: kcSecondFontColor,
-        //                 ),
-        //               ),
-        //             ),
-
-        //             // Container(
-        //             //   alignment: Alignment.centerLeft,
-        //             //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
-        //             //   child: Text(
-        //             //     resCategory.resCategoryModel!.name!,
-        //             //     style: TextStyle(
-        //             //       fontSize: 22.sp,
-        //             //       fontWeight: FontWeight.bold,
-        //             //       color: AppTheme.MAIN_DARK,
-        //             //     ),
-        //             //   ),
-        //             // ),
-        //             GridView.builder(
-        //               shrinkWrap: true,
-        //               physics: NeverScrollableScrollPhysics(),
-        //               padding: EdgeInsets.symmetric(
-        //                 vertical: 12.h,
-        //                 horizontal: 10.w,
-        //               ),
-        //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //                 crossAxisCount: 2,
-        //                 mainAxisSpacing: 10.h, //spaceTopBottom
-        //                 crossAxisSpacing: 6.w, //spaceLeftRight
-        //                 childAspectRatio: itemWidth / itemHeight,
-        //               ),
-        //               itemCount: resCategoryMeals!.length,
-        //               itemBuilder: (context, pos) {
-        //                 return MealView(
-        //                   meal: resCategoryMeals[pos],
-        //                   restaurant:
-        //                       restaurant, // Needed for add meal with conditions only in CART
-        //                 );
-        //               },
-        //             ),
-        //           ],
-        //         );
-        //       },
-        //       childCount: model.resCategories!.length,
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }
