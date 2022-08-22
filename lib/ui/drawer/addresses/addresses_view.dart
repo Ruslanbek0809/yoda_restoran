@@ -68,97 +68,93 @@ class AddressesView extends StatelessWidget {
                         physics: BouncingScrollPhysics(),
                         itemCount: model.addresses!.length,
                         itemBuilder: (context, pos) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(6.r),
-                            child: GestureDetector(
-                              onTap: () => model.navToAddressEditView(
-                                  model.addresses![pos], model),
-                              child: Slidable(
-                                // Specify a key if the Slidable is dismissible.
-                                key: ValueKey(model.addresses![pos].id),
+                          return GestureDetector(
+                            onTap: () => model.navToAddressEditView(
+                                model.addresses![pos], model),
+                            child: Slidable(
+                              // Specify a key if the Slidable is dismissible.
+                              key: ValueKey(model.addresses![pos].id),
 
-                                // // The start action pane is the one at the left or the top side.
-                                // startActionPane: ActionPane(
-                                //   dragDismissible: false,
-                                //   extentRatio: 0.25,
-                                //   // A motion is a widget used to control how the pane animates.
-                                //   motion: const ScrollMotion(),
+                              // // The start action pane is the one at the left or the top side.
+                              // startActionPane: ActionPane(
+                              //   dragDismissible: false,
+                              //   extentRatio: 0.25,
+                              //   // A motion is a widget used to control how the pane animates.
+                              //   motion: const ScrollMotion(),
 
-                                //   // // A pane can dismiss the Slidable.
-                                //   // dismissible: DismissiblePane(onDismissed: () {}),
+                              //   // // A pane can dismiss the Slidable.
+                              //   // dismissible: DismissiblePane(onDismissed: () {}),
 
-                                //   // All actions are defined in the children parameter.
-                                //   children: [
-                                //     // A SlidableAction can have an icon and/or a label.
-                                //     SlidableAction(
-                                //       onPressed: (BuildContext context) async =>
-                                //           await model.showAddressRemoveDialog(
-                                //               model, model.addresses![pos]),
-                                //       backgroundColor: kcRedColor,
-                                //       foregroundColor: kcWhiteColor,
-                                //       icon: Icons.delete_outline_rounded,
-                                //     ),
-                                //   ],
-                                // ),
+                              //   // All actions are defined in the children parameter.
+                              //   children: [
+                              //     // A SlidableAction can have an icon and/or a label.
+                              //     SlidableAction(
+                              //       onPressed: (BuildContext context) async =>
+                              //           await model.showAddressRemoveDialog(
+                              //               model, model.addresses![pos]),
+                              //       backgroundColor: kcRedColor,
+                              //       foregroundColor: kcWhiteColor,
+                              //       icon: Icons.delete_outline_rounded,
+                              //     ),
+                              //   ],
+                              // ),
 
-                                endActionPane: ActionPane(
-                                  dragDismissible: false,
-                                  extentRatio: 0.25,
-                                  // A motion is a widget used to control how the pane animates.
-                                  motion: const ScrollMotion(),
+                              endActionPane: ActionPane(
+                                dragDismissible: false,
+                                extentRatio: 0.25,
+                                // A motion is a widget used to control how the pane animates.
+                                motion: const ScrollMotion(),
 
-                                  // // A pane can dismiss the Slidable.
-                                  // dismissible: DismissiblePane(onDismissed: () {}),
+                                // // A pane can dismiss the Slidable.
+                                // dismissible: DismissiblePane(onDismissed: () {}),
 
-                                  // All actions are defined in the children parameter.
+                                // All actions are defined in the children parameter.
+                                children: [
+                                  // A CustomSlidableAction can have an icon and/or a label.
+                                  CustomSlidableAction(
+                                    onPressed: (BuildContext context) async =>
+                                        await model.showAddressRemoveDialog(
+                                            model, model.addresses![pos]),
+                                    backgroundColor: kcRedColor,
+                                    child: SvgPicture.asset(
+                                      'assets/trash.svg',
+                                      color: kcWhiteColor,
+                                      width: 24.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              // The child of the Slidable is what the user sees when the
+                              // component is not dragged.
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                  6.w,
+                                  pos == 0 ? 10.h : 15.h,
+                                  16.w,
+                                  15.h,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // A CustomSlidableAction can have an icon and/or a label.
-                                    CustomSlidableAction(
-                                      onPressed: (BuildContext context) async =>
-                                          await model.showAddressRemoveDialog(
-                                              model, model.addresses![pos]),
-                                      backgroundColor: kcRedColor,
-                                      child: SvgPicture.asset(
-                                        'assets/trash.svg',
-                                        color: kcWhiteColor,
-                                        width: 24.sp,
+                                    Flexible(
+                                      child: Text(
+                                        model.addresses![pos].street! +
+                                            (model.addresses![pos].house != null
+                                                ? ', ${model.addresses![pos].house}'
+                                                : ''),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: kts18Text,
                                       ),
                                     ),
+                                    SizedBox(width: 5.w),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: kcSecondaryDarkColor,
+                                    ),
                                   ],
-                                ),
-
-                                // The child of the Slidable is what the user sees when the
-                                // component is not dragged.
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                    6.w,
-                                    pos == 0 ? 10.h : 15.h,
-                                    16.w,
-                                    15.h,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          model.addresses![pos].street! +
-                                              (model.addresses![pos].house !=
-                                                      null
-                                                  ? ', ${model.addresses![pos].house}'
-                                                  : ''),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: kts18Text,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.w),
-                                      Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: kcSecondaryDarkColor,
-                                      ),
-                                    ],
-                                  ),
                                 ),
                               ),
                             ),

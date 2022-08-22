@@ -14,7 +14,6 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
 
   @override
   Widget build(BuildContext context, CartViewModel model) {
-    model.log.v('CartMealItem =========');
 
     num? totalMealSum = model.getTotalMealSum(cartMeal); // Gets totalMealSum
     String concatenateVolsCustoms = model
