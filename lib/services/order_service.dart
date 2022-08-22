@@ -1,18 +1,11 @@
-import 'package:stacked/stacked.dart';
-
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
 import 'services.dart';
 
 // 1 For Reactive View
-class OrderService with ReactiveServiceMixin {
+class OrderService {
   final log = getLogger('OrderService');
-
-  OrderService() {
-    // 2
-    listenToReactiveValues([isFetchingOrders]);
-  }
 
   final _userService = locator<UserService>();
 
@@ -28,17 +21,6 @@ class OrderService with ReactiveServiceMixin {
   int get page => _page;
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
-
-  // 3
-  ReactiveValue<bool> _isFetchingOrders =
-      ReactiveValue<bool>(false); // Custom busy for HomeView
-  bool get isFetchingOrders => _isFetchingOrders.value;
-
-  Future<void> getOrdersFromNotifications() async {
-    _isFetchingOrders.value = true;
-    _orders = await _userService.getOrders();
-    _isFetchingOrders.value = false;
-  }
 
   /// ORDER PAG
   Future<void> getInitialPaginatedOrders() async {

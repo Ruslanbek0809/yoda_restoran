@@ -63,13 +63,9 @@ class SingleOrderView extends StatelessWidget {
                 dividerTheme: DividerThemeData(
                     color: Theme.of(context).colorScheme.background),
               ),
-              // DateFormat('dd-MM-yyyy HH:mm').format(deliveryTime!.toLocal())
               child: ClipRRect(
                 borderRadius: AppTheme().radius16,
                 child: ExpansionTile(
-                  // backgroundColor: kcSecondaryLightColor,
-                  // collapsedBackgroundColor:
-                  //     kcSecondaryLightColor,
                   initiallyExpanded: order.status == 2 || order.status == 1,
                   title: SizedBox(),
                   onExpansionChanged: (value) {

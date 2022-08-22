@@ -6,7 +6,7 @@ import 'package:yoda_res/app/app.router.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/services/services.dart';
 
-class OrderViewModel extends ReactiveViewModel {
+class OrderViewModel extends BaseViewModel {
   final log = getLogger('OrderViewModel');
 
   final _navService = locator<NavigationService>();
@@ -19,7 +19,6 @@ class OrderViewModel extends ReactiveViewModel {
   /// ORDER PAG
   int get page => _orderService.page;
   bool get isPullUpEnabled => _orderService.isPullUpEnabled;
-  bool get isFetchingOrders => _orderService.isFetchingOrders;
 
   /// GETS initial orders
   Future getInitialOrders() async =>
@@ -38,7 +37,4 @@ class OrderViewModel extends ReactiveViewModel {
   /// NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
-
-  @override
-  List<ReactiveServiceMixin> get reactiveServices => [_orderService];
 }
