@@ -230,6 +230,21 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
+  //------------------ AWESOME DIALOG NAVIGATION ---------------------//
+
+  Future<void> navToResDetailsViewViaAwesomeDialog(
+          Restaurant restaurant) async =>
+      await _navService.navigateTo(
+        Routes.resDetailsView,
+        arguments: ResDetailsViewArguments(restaurant: restaurant),
+      );
+
+  Future<void> navToSliderWebview(String sliderUrl) async =>
+      await _navService.navigateTo(
+        Routes.sliderWebview,
+        arguments: SliderWebviewArguments(sliderUrl: sliderUrl),
+      );
+
   // TODO: HiveRating
   //------------------ HIVE RATING PART ---------------------//
 

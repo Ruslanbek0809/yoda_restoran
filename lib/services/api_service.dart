@@ -17,7 +17,7 @@ class ApiService {
     List<SliderModel> _sliders = [];
     try {
       Response response = await _apiRoot.dio.get('api/sliders/');
-      log.v('RESPONSE: api/slider/ => ${response.data}');
+      // log.v('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
         response.data.forEach((_slider) {
