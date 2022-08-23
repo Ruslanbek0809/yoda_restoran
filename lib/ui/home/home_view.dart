@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:shake/shake.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
@@ -43,6 +44,13 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
+        ShakeDetector detector = ShakeDetector.autoStart(
+          shakeThresholdGravity: 2,
+          onPhoneShake: () {
+            printLog('onPhoneShake WORKING');
+          },
+        );
+
         /// HOME RESS PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
