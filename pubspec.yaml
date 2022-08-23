@@ -110,6 +110,11 @@ dev_dependencies:
 
 dependency_overrides:
   flutter_svg: ^1.0.0 # To fix dependency issue between flutter_hmtl and flutter_svg
+  # To fix issues related to awesome_dialog package
+  flare_flutter:
+    git:
+      url: https://github.com/tsinis/Flare-Flutter
+      path: flare_flutter/ 
 
 flutter_icons:
   android: true
