@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:awesome_dialog/awesome_dialog.dart' as awesomeDialog;
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +33,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  AwesomeDialog? _awesomeDialog;
+  // AwesomeDialog? _awesomeDialog;
   final _refreshController = RefreshController();
 
   @override
@@ -48,69 +47,68 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-        //------------------ SHAKE SLIDERS DIALOG ---------------------//
-        ShakeDetector.autoStart(
-          shakeThresholdGravity: 1.75,
-          onPhoneShake: () async {
-            printLog('onPhoneShake WORKING');
-            if (model.sliders != null && model.sliders!.isNotEmpty) {
-              /// GENERATES a new Random object
-              final _random = Random();
+        // //------------------ SHAKE SLIDERS DIALOG ---------------------//
+        // ShakeDetector.autoStart(
+        //   shakeThresholdGravity: 1.75,
+        //   onPhoneShake: () async {
+        //     printLog('onPhoneShake WORKING');
+        //     if (model.sliders != null && model.sliders!.isNotEmpty) {
+        //       /// GENERATES a new Random object
+        //       final _random = Random();
 
-              // GENERATES a random index based on the list length
-              // and USE it to RETRIEVE the element
-              final _selectedRandomSlider =
-                  model.sliders![_random.nextInt(model.sliders!.length)];
+        //       // GENERATES a random index based on the list length
+        //       // and USE it to RETRIEVE the element
+        //       final _selectedRandomSlider =
+        //           model.sliders![_random.nextInt(model.sliders!.length)];
 
-              /// DISMISSES previous awesome dialog
-              if (_awesomeDialog != null) {
-                printLog('_awesomeDialog CALLED');
-                _awesomeDialog?.dismiss();
-                _awesomeDialog = null;
-              }
+        //       /// DISMISSES previous awesome dialog
+        //       if (_awesomeDialog != null) {
+        //         printLog('_awesomeDialog CALLED');
+        //         _awesomeDialog?.dismiss();
+        //         _awesomeDialog = null;
+        //       }
 
-              _awesomeDialog = awesomeDialog.AwesomeDialog(
-                context: context,
-                width: 1.sw,
-                showCloseIcon: false,
-                headerAnimationLoop: false,
-                padding: EdgeInsets.zero,
-                // onDissmissCallback: (value) {
-                //   _awesomeDialog?.dismiss();
-                //   printLog('onDissmissCallback value: $value');
-                // },
+        //       _awesomeDialog = awesomeDialog.AwesomeDialog(
+        //         context: context,
+        //         width: 1.sw,
+        //         showCloseIcon: false,
+        //         headerAnimationLoop: false,
+        //         padding: EdgeInsets.zero,
+        //         // onDissmissCallback: (value) {
+        //         //   _awesomeDialog?.dismiss();
+        //         //   printLog('onDissmissCallback value: $value');
+        //         // },
 
-                /// REMOVES top gap in a dialog
-                bodyHeaderDistance: 0,
-                dialogBackgroundColor: Colors.transparent,
-                animType: awesomeDialog.AnimType.SCALE,
-                dialogType: awesomeDialog.DialogType.NO_HEADER,
-                body: FittedBox(
-                  child: GestureDetector(
-                    onTap: () async {
-                      _awesomeDialog?.dismiss();
-                      _awesomeDialog = null;
-                      // Navigator.pop(context);
-                      _selectedRandomSlider.option == 'restoran'
-                          ? await model.navToResDetailsViewViaAwesomeDialog(
-                              _selectedRandomSlider.restaurant!)
-                          : await model
-                              .navToSliderWebview(_selectedRandomSlider.url!);
-                    },
-                    child: YodaImage(
-                      /// CHANGES slider image by localization
-                      image: context.locale == context.supportedLocales[0]
-                          ? _selectedRandomSlider.image!
-                          : _selectedRandomSlider.imageRu!,
-                      phImage: 'assets/ph_slider.png',
-                      borderRadius: 20.0,
-                    ),
-                  ),
-                ),
-              )..show();
-            }
-          },
-        );
+        //         /// REMOVES top gap in a dialog
+        //         bodyHeaderDistance: 0,
+        //         dialogBackgroundColor: Colors.transparent,
+        //         animType: awesomeDialog.AnimType.SCALE,
+        //         dialogType: awesomeDialog.DialogType.NO_HEADER,
+        //         body: FittedBox(
+        //           child: GestureDetector(
+        //             onTap: () async {
+        //               _awesomeDialog?.dismiss();
+        //               _awesomeDialog = null;
+        //               _selectedRandomSlider.option == 'restoran'
+        //                   ? await model.navToResDetailsViewViaAwesomeDialog(
+        //                       _selectedRandomSlider.restaurant!)
+        //                   : await model
+        //                       .navToSliderWebview(_selectedRandomSlider.url!);
+        //             },
+        //             child: YodaImage(
+        //               /// CHANGES slider image by localization
+        //               image: context.locale == context.supportedLocales[0]
+        //                   ? _selectedRandomSlider.image!
+        //                   : _selectedRandomSlider.imageRu!,
+        //               phImage: 'assets/ph_slider.png',
+        //               borderRadius: 20.0,
+        //             ),
+        //           ),
+        //         ),
+        //       )..show();
+        //     }
+        //   },
+        // );
 
         /// HOME RESS PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
@@ -123,13 +121,13 @@ class _HomeViewState extends State<HomeView> {
           var info = await InAppUpdate.checkForUpdate();
 
           // model.log.v('InAppUpdate Info: $info');
-          print('InAppUpdate Info: $info');
+          printLog('InAppUpdate Info: $info');
           // model.log.v(
           //     'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
-          print(
+          printLog(
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
-            print('I AM IN startFlexibleUpdate(): ');
+            printLog('I AM IN startFlexibleUpdate(): ');
             await InAppUpdate.startFlexibleUpdate();
             await InAppUpdate.completeFlexibleUpdate();
           }
