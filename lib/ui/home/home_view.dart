@@ -49,8 +49,8 @@ class _HomeViewState extends State<HomeView> {
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
         //------------------ SHAKE SLIDERS DIALOG ---------------------//
-        ShakeDetector detector = ShakeDetector.autoStart(
-          shakeThresholdGravity: 2,
+        ShakeDetector.autoStart(
+          shakeThresholdGravity: 1.75,
           onPhoneShake: () async {
             printLog('onPhoneShake WORKING');
             if (model.sliders != null && model.sliders!.isNotEmpty) {
@@ -66,6 +66,7 @@ class _HomeViewState extends State<HomeView> {
               if (_awesomeDialog != null) {
                 printLog('_awesomeDialog CALLED');
                 _awesomeDialog?.dismiss();
+                _awesomeDialog = null;
               }
 
               _awesomeDialog = awesomeDialog.AwesomeDialog(
@@ -106,9 +107,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                 ),
-              );
-
-              await _awesomeDialog?.show();
+              )..show();
             }
           },
         );
