@@ -10,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
 import 'package:yoda_res/shared/shared.dart';
+import 'package:yoda_res/ui/cart/order/single_order_view_model.dart';
 import 'package:yoda_res/ui/drawer/addresses/addresses_view_model.dart';
 import 'package:yoda_res/ui/rate_us_dialog_hook.dart';
 import '../app/app.locator.dart';
@@ -67,6 +68,11 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
           notificationModel: sheetRequest.data,
+        ),
+    DialogType.orderDelete: (context, sheetRequest, completer) =>
+        OrderDeleteDialogView(
+          request: sheetRequest,
+          completer: completer,
         ),
   };
 
@@ -526,6 +532,7 @@ class NotificationDialogView extends StatelessWidget {
           );
   }
 }
+
 //------------------ ADDRESS DIALOGS ---------------------//
 
 class RemoveAddressDialogView extends StatelessWidget {
@@ -931,5 +938,77 @@ class RateOrderDialogView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+//------------------ ORDER DELETE DIALOGS ---------------------//
+
+class OrderDeleteDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const OrderDeleteDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
+              ),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
+              ),
+            ],
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+            titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Text(
+              request.title!,
+              textAlign: TextAlign.center,
+            ).tr(),
+            titleTextStyle: ktsDefault18BoldText,
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
+              ),
+              SizedBox(width: 42.w),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
+              ),
+            ],
+          );
   }
 }

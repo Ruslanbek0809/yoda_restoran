@@ -169,7 +169,7 @@ class SingleOrderViewModel extends BaseViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
-    if (respData!.data == true) {
+    if (respData!.data != null && respData.data == true) {
       await runBusyFuture(
         _userService.cancelOrder(
           orderId,
@@ -233,6 +233,41 @@ class SingleOrderViewModel extends BaseViewModel {
       /// TODO: Optimize if possible
       await orderViewModel.getInitialOrders();
     }
+  }
+
+//------------------------ ORDER DELETE DIALOG ----------------------------//
+
+  /// SHOWS ORDER DELETE Dialog
+  Future showOrderDeleteDialog(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
+    log.i('showOrderDeleteDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.orderDelete,
+      title: LocaleKeys.wannaDeleteOrder,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.delete,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+
+    // TODO: FINISH delete part
+    if (respData != null && respData.data == true)
+      await runBusyFuture(
+        _userService.cancelOrder(
+          order.id!,
+          () async {
+            onSuccessForView!();
+
+            /// REINITIALIZES ORDERS
+            /// TODO: Optimize if possible
+            await orderViewModel.getInitialOrders();
+          },
+          () => onFailForView!(),
+        ),
+        busyObject: order.id!,
+      );
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//
