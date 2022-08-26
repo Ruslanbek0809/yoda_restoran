@@ -94,6 +94,8 @@
     "orderReady": "Taýýar",
     "orderTaken": "Alyndy",
     "cancelOrder": "Sargydy ýatyr",
+    "deleteOrder": "Sargydy aýyr",
+    "wannaDeleteOrder": "Siz sargydy aýyrmakçymy?",
     "driver": "Sürüji:",
     "reOrder": "Täzeden sargyt et",
     "rate": "Baha ber",

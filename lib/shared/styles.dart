@@ -18,6 +18,11 @@ TextStyle ktsButton18ContactText = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
+TextStyle kts16DialogText = TextStyle(
+  fontSize: 16.sp,
+  color: kcDialogColor,
+);
+
 // TextStyle ktsTextfieldText = TextStyle(
 //   color: kcFontColor,
 //   fontSize: 18.sp,

@@ -31,7 +31,7 @@ class SingleOrderView extends StatelessWidget {
           key: ValueKey(order.id),
 
           /// ADDS bool condition to model.currentOrderExpansionState
-          enabled: !model.currentOrderExpansionState,
+          enabled: !model.currentOrderExpansionState && order.status == 4,
           endActionPane: ActionPane(
             dragDismissible: false,
             extentRatio: 0.25,
@@ -475,6 +475,45 @@ class SingleOrderView extends StatelessWidget {
                               }
                             },
                           ),
+                        ),
+                      ),
+
+                    //------------------ ORDER DELETE BUTTON ---------------------//
+                    if (order.status == 4)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 6.h, horizontal: 15.w),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/trash.svg',
+                                color: kcDialogColor,
+                                width: 20.sp,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 7.w),
+                                child: Text(
+                                  LocaleKeys.deleteOrder,
+                                  style: kts16DialogText,
+                                ).tr(),
+                              )
+                            ],
+                          ),
+                          onPressed: () async {},
+                          // onPressed: () async =>
+                          //     await model.showAddressRemoveDialog(
+                          //   addressesViewModel,
+                          //   address,
+                          // ),
                         ),
                       ),
                   ],
