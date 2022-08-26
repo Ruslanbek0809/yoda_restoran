@@ -20,13 +20,14 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
       right: 0,
       child: Container(
         decoration: BoxDecoration(
-            color: AppTheme.WHITE,
+            color: kcWhiteColor,
             border: Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
             boxShadow: [AppTheme().bottomCartShadow]),
         padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 25.w),
         child: TextButton(
           style: TextButton.styleFrom(
             backgroundColor: kcPrimaryColor,
+            primary: kcSecondaryLightColor, // ripple effect color
             elevation: 0,
             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius15),
             padding: EdgeInsets.symmetric(vertical: 14.h),

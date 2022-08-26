@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoda_res/shared/app_colors.dart';
 import '../../utils/utils.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
   CustomElevatedButton(
       {required this.height,
       required this.width,
-      this.color = AppTheme.MAIN,
+      this.color = kcPrimaryColor,
       required this.text,
       required this.borderRadius,
       this.isLoading = false,
@@ -37,12 +38,12 @@ class CustomElevatedButton extends StatelessWidget {
       child: isLoading
           ? Padding(
               padding: EdgeInsets.all(5.w),
-              child: CircularProgressIndicator(backgroundColor: AppTheme.WHITE),
+              child: CircularProgressIndicator(backgroundColor: kcWhiteColor),
             )
           : Text(
               text,
               style: TextStyle(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
               ),

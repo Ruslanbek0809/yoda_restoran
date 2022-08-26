@@ -377,7 +377,9 @@ class SingleOrderView extends StatelessWidget {
                               horizontal: 15.w, vertical: 10.h),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              backgroundColor: AppTheme.MAIN_DARK,
+                              backgroundColor: kcSecondaryDarkColor,
+                              primary:
+                                  kcSecondaryLightColor, // ripple effect color
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: AppTheme().radius10),
@@ -485,6 +487,8 @@ class SingleOrderView extends StatelessWidget {
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: Colors.transparent,
+                            primary:
+                                kcSecondaryLightColor, // ripple effect color
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: AppTheme().radius10),

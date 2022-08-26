@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +12,7 @@ class CustomTextButton extends StatelessWidget {
   final Function onPressed;
   CustomTextButton(
       {required this.text,
-      this.color = AppTheme.MAIN,
+      this.color = kcPrimaryColor,
       this.textStyle,
       this.padding,
       this.borderRadius,
@@ -21,6 +22,7 @@ class CustomTextButton extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: color,
+        primary: kcSecondaryLightColor, // ripple effect color
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? AppTheme().radius15),
@@ -34,7 +36,7 @@ class CustomTextButton extends StatelessWidget {
         text,
         style: textStyle ??
             TextStyle(
-              color: AppTheme.WHITE,
+              color: kcWhiteColor,
               fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 
 class CustomTextChildButton extends StatelessWidget {
@@ -9,7 +10,7 @@ class CustomTextChildButton extends StatelessWidget {
   final Function onPressed;
   CustomTextChildButton({
     required this.child,
-    this.color = AppTheme.MAIN,
+    this.color = kcPrimaryColor,
     this.padding,
     this.borderRadius,
     required this.onPressed,
@@ -19,6 +20,7 @@ class CustomTextChildButton extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: color,
+        primary: kcSecondaryLightColor, // ripple effect color
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? AppTheme().radius15,

@@ -60,7 +60,8 @@ class OrderSuccessView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: AppTheme.MAIN_DARK,
+                      backgroundColor: kcSecondaryDarkColor,
+                      primary: kcSecondaryLightColor, // ripple effect color
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: AppTheme().radius10),

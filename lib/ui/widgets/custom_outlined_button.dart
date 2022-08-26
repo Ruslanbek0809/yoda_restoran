@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoda_res/shared/app_colors.dart';
 import '../../utils/utils.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
@@ -21,25 +22,25 @@ class CustomOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        primary: color ?? AppTheme.MAIN,
-        onSurface: color ?? AppTheme.MAIN,
-        shadowColor: color ?? AppTheme.MAIN,
+        primary: color ?? kcPrimaryColor,
+        onSurface: color ?? kcPrimaryColor,
+        shadowColor: color ?? kcPrimaryColor,
         elevation: 0,
         shape: RoundedRectangleBorder(
-            borderRadius: borderRadius as BorderRadiusGeometry? ??
-                AppTheme().radius15),
+            borderRadius:
+                borderRadius as BorderRadiusGeometry? ?? AppTheme().radius15),
         // minimumSize: Size(width!, height!),
       ),
       onPressed: onPressed as void Function()?,
       child: isLoading
           ? Padding(
               padding: const EdgeInsets.all(5.0),
-              child: CircularProgressIndicator(backgroundColor: AppTheme.WHITE),
+              child: CircularProgressIndicator(backgroundColor: kcWhiteColor),
             )
           : Text(
               text!,
               style: TextStyle(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),

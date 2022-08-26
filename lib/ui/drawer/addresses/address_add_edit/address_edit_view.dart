@@ -52,6 +52,13 @@ class AddressEditView extends StatelessWidget {
                 addressesViewModel,
                 address,
               ),
+              // onPressed: () async =>
+              //     SchedulerBinding.instance.addPostFrameCallback(
+              //   (_) async => await model.showAddressRemoveDialog(
+              //     addressesViewModel,
+              //     address,
+              //   ),
+              // ),
               icon: SvgPicture.asset(
                 'assets/trash.svg',
                 color: kcSecondaryDarkColor,
@@ -80,6 +87,7 @@ class AddressEditView extends StatelessWidget {
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: kcPrimaryColor,
+                        primary: kcSecondaryLightColor, // ripple effect color
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: AppTheme().radius10),

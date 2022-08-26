@@ -144,7 +144,8 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(15.w, 10.w, 15.w, 25.w),
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: AppTheme.MAIN,
+                        backgroundColor: kcPrimaryColor,
+                        primary: kcSecondaryLightColor, // ripple effect color
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: AppTheme().radius15),
