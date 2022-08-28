@@ -98,6 +98,7 @@ abstract class  LocaleKeys {
   static const cancelOrder = 'cancelOrder';
   static const deleteOrder = 'deleteOrder';
   static const wannaDeleteOrder = 'wannaDeleteOrder';
+  static const orderDeleteSuccess = 'orderDeleteSuccess';
   static const driver = 'driver';
   static const reOrder = 'reOrder';
   static const rate = 'rate';

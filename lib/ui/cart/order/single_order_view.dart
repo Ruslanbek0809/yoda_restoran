@@ -495,29 +495,49 @@ class SingleOrderView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 vertical: 6.h, horizontal: 15.w),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/trash.svg',
-                                color: kcDialogColor,
-                                width: 20.sp,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 7.w),
-                                child: Text(
-                                  LocaleKeys.deleteOrder,
-                                  style: kts16DialogText,
-                                ).tr(),
-                              )
-                            ],
+                          child: model.busy(order.id) && order.status == 4
+                              ? ButtonLoading(color: kcPrimaryColor)
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/trash.svg',
+                                      color: kcDialogColor,
+                                      width: 20.sp,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 7.w),
+                                      child: Text(
+                                        LocaleKeys.deleteOrder,
+                                        style: kts16DialogText,
+                                      ).tr(),
+                                    )
+                                  ],
+                                ),
+                          onPressed: () async =>
+                              await model.showOrderDeleteDialog(
+                            () async {
+                              showErrorFlashBar(
+                                context: context,
+                                msg: LocaleKeys.orderDeleteSuccess.tr(),
+                                margin: EdgeInsets.only(
+                                  left: 0.1.sw,
+                                  right: 0.1.sw,
+                                  bottom: 0.05.sh,
+                                ),
+                              );
+                            },
+                            () async {
+                              showErrorFlashBar(
+                                context: context,
+                                margin: EdgeInsets.only(
+                                  left: 0.1.sw,
+                                  right: 0.1.sw,
+                                  bottom: 0.05.sh,
+                                ),
+                              );
+                            },
                           ),
-                          onPressed: () async {},
-                          // onPressed: () async =>
-                          //     await model.showAddressRemoveDialog(
-                          //   addressesViewModel,
-                          //   address,
-                          // ),
                         ),
                       ),
                   ],

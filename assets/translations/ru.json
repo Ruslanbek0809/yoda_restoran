@@ -96,6 +96,7 @@
     "cancelOrder": "Отменить заказ",
     "deleteOrder": "Удалить заказ",
     "wannaDeleteOrder": "Вы хотите удалить заказ?",
+    "orderDeleteSuccess": "Заказ успешно удален",
     "driver": "Водитель:",
     "reOrder": "Заказать повторно",
     "rate": "Оценить",

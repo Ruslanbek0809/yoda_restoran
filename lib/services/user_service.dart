@@ -373,7 +373,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } catch (error) {
+    } on DioError catch (error) {
       log.v('ERROR on api/address/$addressId/: $error');
       onFail!();
       rethrow;
@@ -537,6 +537,27 @@ class UserService {
         onFail!();
     } on DioError catch (error) {
       log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteOrder(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    await Future.delayed(Duration(seconds: 5));
+    try {
+      Response response = await _apiRoot.dio.delete('api/orders/$orderId/');
+      log.v('RESPONSE: api/orders/$orderId/ => ${response.statusCode}');
+
+      if (response.data != null && response.statusCode == 204)
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v('ERROR on api/orders/$orderId/: ${error.response}');
       onFail!();
       rethrow;
     }

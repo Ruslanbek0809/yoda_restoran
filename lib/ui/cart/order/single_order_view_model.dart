@@ -251,11 +251,9 @@ class SingleOrderViewModel extends BaseViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
-
-    // TODO: FINISH delete part
     if (respData != null && respData.data == true)
       await runBusyFuture(
-        _userService.cancelOrder(
+        _userService.deleteOrder(
           order.id!,
           () async {
             onSuccessForView!();
