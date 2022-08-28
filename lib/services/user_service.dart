@@ -549,15 +549,16 @@ class UserService {
   ) async {
     await Future.delayed(Duration(seconds: 5));
     try {
-      Response response = await _apiRoot.dio.delete('api/orders/$orderId/');
-      log.v('RESPONSE: api/orders/$orderId/ => ${response.statusCode}');
+      Response response =
+          await _apiRoot.dio.delete('api/paginatedorder/$orderId/');
+      log.v('RESPONSE: api/paginatedorder/$orderId/ => ${response.statusCode}');
 
       if (response.data != null && response.statusCode == 204)
         onSuccess!();
       else
         onFail!();
     } on DioError catch (error) {
-      log.v('ERROR on api/orders/$orderId/: ${error.response}');
+      log.v('ERROR on api/paginatedorder/$orderId/: ${error.response}');
       onFail!();
       rethrow;
     }
