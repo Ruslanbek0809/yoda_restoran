@@ -43,16 +43,43 @@ class SingleOrderView extends StatelessWidget {
 
             // All actions are defined in the children parameter.
             children: [
-              // A CustomSlidableAction can have an icon and/or a label.
-              CustomSlidableAction(
-                onPressed: (BuildContext context) async {},
-                backgroundColor: kcRedColor,
-                child: SvgPicture.asset(
-                  'assets/trash.svg',
-                  color: kcWhiteColor,
-                  width: 24.sp,
+              if (order.status == 4)
+                // A CustomSlidableAction can have an icon and/or a label.
+                CustomSlidableAction(
+                  autoClose: false,
+                  onPressed: (BuildContext context) async =>
+                      await model.showOrderDeleteDialog(
+                    () async {
+                      showErrorFlashBar(
+                        context: context,
+                        msg: LocaleKeys.orderDeleteSuccess.tr(),
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      );
+                    },
+                    () async {
+                      showErrorFlashBar(
+                        context: context,
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      );
+                    },
+                  ),
+                  backgroundColor: kcRedColor,
+                  child: model.busy(order.id) && order.status == 4
+                      ? ButtonLoading(color: kcWhiteColor)
+                      : SvgPicture.asset(
+                          'assets/trash.svg',
+                          color: kcWhiteColor,
+                          width: 24.sp,
+                        ),
                 ),
-              ),
             ],
           ),
           child: Padding(

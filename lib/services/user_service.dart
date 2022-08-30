@@ -547,7 +547,6 @@ class UserService {
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-    await Future.delayed(Duration(seconds: 5));
     try {
       Response response =
           await _apiRoot.dio.delete('api/paginatedorder/$orderId/');
