@@ -77,7 +77,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         ),
                         // --------------- ADDRESS -------------- //
                         Material(
-                          color: AppTheme.WHITE,
+                          color: kcWhiteColor,
                           child: InkWell(
                             onTap: model.isDelivery
                                 ? () async => await showFlexibleBottomSheet(
@@ -113,7 +113,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                             children: [
                                               SvgPicture.asset(
                                                 'assets/house.svg',
-                                                color: AppTheme.MAIN_DARK,
+                                                color: kcSecondaryDarkColor,
                                                 width: 25.w,
                                               ),
                                               SizedBox(width: 15.w),
@@ -174,7 +174,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         ),
                         // --------------- DELIVERY DATE TIME -------------- //
                         Material(
-                          color: AppTheme.WHITE,
+                          color: kcWhiteColor,
                           child: InkWell(
                             onTap: () async {
                               DateTime? _tempDateTime =
@@ -386,24 +386,24 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         ),
                         // --------------- PARMENT TYPE -------------- //
                         Material(
-                          color: AppTheme.WHITE,
+                          color: kcWhiteColor,
                           child: InkWell(
+                            /// CUSTOM BOTTOM SHEET BASED ON CONTENT
                             onTap: () async => await showFlexibleBottomSheet(
-                              minHeight: 0,
+                              isExpand: false,
+                              // minHeight: 0,
                               initHeight: 0.3,
                               maxHeight: 0.3,
                               duration: Duration(milliseconds: 250),
                               context: context,
                               bottomSheetColor: Colors.transparent,
                               builder: (context, scrollController, offset) {
-                                return CustomBarBottomSheet(
-                                  child: CheckoutPaymentTypeBottomSheetView(
-                                    scrollController: scrollController,
-                                    offset: offset,
-                                  ),
+                                return CheckoutPaymentTypeBottomSheetView(
+                                  scrollController: scrollController,
+                                  offset: offset,
                                 );
                               },
-                              anchors: [0, 0.3],
+                              // anchors: [0, 0.3],
                             ),
                             // onTap: model.showCustomPaymentTypeBottomSheet,
                             child: Padding(
@@ -475,11 +475,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 border:
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),
-              padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 15.h + 0.02.sw),
+              padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 22.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
