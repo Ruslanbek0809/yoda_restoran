@@ -12,7 +12,7 @@ import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
-import '../restaurant_info_bottom_sheet.dart';
+import 'restaurant_info_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -374,28 +374,26 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //------------------ RESTAURANT INFO BOTTOM SHEET ---------------------//
                               //------------------ CUSTOM PACKAGE ---------------------//
                               GestureDetector(
+                                /// CUSTOM BOTTOM SHEET BASED ON CONTENT
                                 onTap: () async =>
                                     await showFlexibleBottomSheet(
-                                  minHeight: 0,
-                                  initHeight: 0.45,
+                                  isExpand: false,
+                                  initHeight: 0.975,
                                   maxHeight: 0.975,
                                   duration: Duration(milliseconds: 250),
                                   context: context,
                                   bottomSheetColor: Colors.transparent,
                                   builder: (context, scrollController, offset) {
-                                    return CustomBarBottomSheet(
-                                      child: RestaurantInfoBottomSheet(
-                                        scrollController: scrollController,
-                                        offset: offset,
-                                        restaurant: restaurant,
-                                      ),
+                                    return RestaurantInfoBottomSheet(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                      restaurant: restaurant,
                                     );
                                   },
-                                  anchors: [0, 0.45, 0.975],
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: AppTheme.MAIN_LIGHT,
+                                    color: kcSecondaryLightColor,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -403,7 +401,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   margin: EdgeInsets.only(right: 16.w),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
-                                    color: AppTheme.MAIN_DARK,
+                                    color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),

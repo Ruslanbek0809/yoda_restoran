@@ -3,7 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/shared/shared.dart';
 
 class CustomModalInsideBottomSheet extends StatelessWidget {
-  const CustomModalInsideBottomSheet({Key? key}) : super(key: key);
+  final bool isOuterPaddingExist;
+  final double? leftOuterPadding;
+  final double? rightOuterPadding;
+  const CustomModalInsideBottomSheet({
+    Key? key,
+    this.isOuterPaddingExist = false,
+    this.leftOuterPadding,
+    this.rightOuterPadding,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +21,11 @@ class CustomModalInsideBottomSheet extends StatelessWidget {
       margin: EdgeInsets.only(
         top: 14.h,
         bottom: 12.h,
-        left: 0.5.sw - 24,
-        right: 0.5.sw - 24,
+        left:
+            isOuterPaddingExist ? 0.5.sw - 24 - leftOuterPadding! : 0.5.sw - 24,
+        right: isOuterPaddingExist
+            ? 0.5.sw - 24 - rightOuterPadding!
+            : 0.5.sw - 24,
       ),
       decoration: BoxDecoration(
         color: kcSecondaryLightColor,
