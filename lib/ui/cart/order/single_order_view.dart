@@ -171,11 +171,11 @@ class SingleOrderView extends StatelessWidget {
                               allowHalfRating: false,
                               ignoreGestures: true,
                               glow: false,
-                              unratedColor: AppTheme.MAIN.withOpacity(0.4),
+                              unratedColor: kcPrimaryColor.withOpacity(0.4),
                               itemSize: 14.sp,
                               itemBuilder: (context, _) => Icon(
                                 Icons.star,
-                                color: AppTheme.MAIN,
+                                color: kcPrimaryColor,
                               ),
                               onRatingUpdate: (val) {},
                             )

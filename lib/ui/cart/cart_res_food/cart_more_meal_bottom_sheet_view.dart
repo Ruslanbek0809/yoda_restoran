@@ -166,7 +166,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                     itemCount:
                                         mainCustomizable.customizables!.length,
                                     separatorBuilder: (ctx, pos) => Divider(
-                                      color: AppTheme.DRAWER_DIVIDER,
+                                      color: kcDividerColor,
                                       indent: 0.175.sw,
                                     ),
                                     itemBuilder: (ctx, pos) => CheckboxListTile(
@@ -277,7 +277,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                           flex: 2,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppTheme.WHITE,
+                              color: kcWhiteColor,
                               borderRadius: AppTheme().radius15,
                               border: Border.all(
                                 color: kcDividerSecondaryColor,
@@ -289,7 +289,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Material(
-                                    color: AppTheme.WHITE,
+                                    color: kcWhiteColor,
                                     borderRadius: AppTheme().radius15,
                                     // borderRadius: BorderRadius.only(
                                     //   topLeft: Radius.circular(15.0),
@@ -327,7 +327,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Material(
-                                    color: AppTheme.WHITE,
+                                    color: kcWhiteColor,
                                     borderRadius: AppTheme().radius15,
                                     // borderRadius: BorderRadius.only(
                                     //   topRight: Radius.circular(15.0),

@@ -64,7 +64,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     ],
                   ),
                   Divider(
-                    color: AppTheme.DRAWER_DIVIDER,
+                    color: kcDividerColor,
                     indent: 0.111.sw,
                   ),
                   // --------------- ADDRESS -------------- //
@@ -142,7 +142,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                 children: [
                                   SvgPicture.asset(
                                     'assets/map_pin_bold.svg',
-                                    color: AppTheme.MAIN_DARK,
+                                    color: kcSecondaryDarkColor,
                                     width: 25.w,
                                   ),
                                   SizedBox(width: 15.w),
@@ -156,7 +156,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     ),
                   ),
                   Divider(
-                    color: AppTheme.DRAWER_DIVIDER,
+                    color: kcDividerColor,
                     indent: 0.111.sw,
                   ),
                   // --------------- DELIVERY DATE TIME -------------- //
@@ -281,7 +281,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               children: [
                                 SvgPicture.asset(
                                   'assets/clock.svg',
-                                  color: AppTheme.MAIN_DARK,
+                                  color: kcSecondaryDarkColor,
                                   width: 25.w,
                                 ),
                                 SizedBox(width: 15.w),
@@ -353,7 +353,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     ),
                   ),
                   Divider(
-                    color: AppTheme.DRAWER_DIVIDER,
+                    color: kcDividerColor,
                     indent: 0.111.sw,
                   ),
                   // --------------- PARMENT TYPE -------------- //
@@ -383,7 +383,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               children: [
                                 SvgPicture.asset(
                                   'assets/wallet.svg',
-                                  color: AppTheme.MAIN_DARK,
+                                  color: kcSecondaryDarkColor,
                                   width: 25.w,
                                 ),
                                 SizedBox(width: 15.w),
@@ -418,7 +418,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     ),
                   ),
                   Divider(
-                    color: AppTheme.DRAWER_DIVIDER,
+                    color: kcDividerColor,
                     indent: 0.111.sw,
                   ),
                   SizedBox(height: 10.h),

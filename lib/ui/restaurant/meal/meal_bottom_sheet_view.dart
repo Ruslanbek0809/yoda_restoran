@@ -169,7 +169,7 @@ class MealBottomSheet extends StatelessWidget {
                                     itemCount:
                                         mainCustomizable.customizables!.length,
                                     separatorBuilder: (ctx, pos) => Divider(
-                                      color: AppTheme.DRAWER_DIVIDER,
+                                      color: kcDividerColor,
                                       indent: 0.175.sw,
                                     ),
                                     itemBuilder: (ctx, pos) => CheckboxListTile(
@@ -225,7 +225,7 @@ class MealBottomSheet extends StatelessWidget {
             right: 0,
             child: Container(
               decoration: BoxDecoration(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 border:
                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
               ),
@@ -280,7 +280,7 @@ class MealBottomSheet extends StatelessWidget {
                           flex: 2,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppTheme.WHITE,
+                              color: kcWhiteColor,
                               borderRadius: AppTheme().radius15,
                               border: Border.all(
                                 color: kcDividerSecondaryColor,
@@ -292,7 +292,7 @@ class MealBottomSheet extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Material(
-                                    color: AppTheme.WHITE,
+                                    color: kcWhiteColor,
                                     borderRadius: AppTheme().radius15,
                                     // borderRadius: BorderRadius.only(
                                     //   topLeft: Radius.circular(15.0),
@@ -330,7 +330,7 @@ class MealBottomSheet extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Material(
-                                    color: AppTheme.WHITE,
+                                    color: kcWhiteColor,
                                     borderRadius: AppTheme().radius15,
                                     // borderRadius: BorderRadius.only(
                                     //   topRight: Radius.circular(15.0),

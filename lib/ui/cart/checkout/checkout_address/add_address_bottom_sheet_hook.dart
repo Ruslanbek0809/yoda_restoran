@@ -42,12 +42,10 @@ class AddAddressBottomSheetHook
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             border: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
             ),
             hintText: LocaleKeys.ashgabat.tr(),
             hintStyle: ktsDefault18HelperText,
@@ -63,12 +61,10 @@ class AddAddressBottomSheetHook
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             border: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
             ),
             labelText: LocaleKeys.streetEx.tr(),
             labelStyle: ktsDefault18HelperText,
@@ -87,12 +83,10 @@ class AddAddressBottomSheetHook
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   labelText: LocaleKeys.apartment.tr(),
                   labelStyle: kts14HelperText,
@@ -109,12 +103,10 @@ class AddAddressBottomSheetHook
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   labelText: LocaleKeys.house.tr(),
                   labelStyle: kts14HelperText,
@@ -131,12 +123,10 @@ class AddAddressBottomSheetHook
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
                   ),
                   labelText: LocaleKeys.floor.tr(),
                   labelStyle: kts14HelperText,
@@ -165,11 +155,10 @@ class AddAddressBottomSheetHook
               borderSide: BorderSide.none,
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: AppTheme.DRAWER_DIVIDER, width: 0.5),
+              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
             ),
             filled: true,
-            fillColor: AppTheme.MAIN_LIGHT,
+            fillColor: kcSecondaryLightColor,
           ),
           validator: model.updateNote,
         ),

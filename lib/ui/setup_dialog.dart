@@ -481,7 +481,7 @@ class NotificationDialogView extends StatelessWidget {
                 ),
                 // SvgPicture.asset(
                 //   notificationData.svg,
-                //   color: AppTheme.MAIN,
+                //   color: kcPrimaryColor,
                 //   width: 90.w,
                 //   height: 90.w,
                 // ),
@@ -512,7 +512,7 @@ class NotificationDialogView extends StatelessWidget {
                 ),
                 // SvgPicture.asset(
                 //   notificationData.lottie,
-                //   color: AppTheme.MAIN,
+                //   color: kcPrimaryColor,
                 //   width: 90.w,
                 //   height: 90.w,
                 // ),
@@ -769,9 +769,9 @@ class RateOrderDialogView extends StatelessWidget {
                         itemCount: 5,
                         glow: false,
                         unratedColor: model.ratingError
-                            ? AppTheme.MAIN
+                            ? kcPrimaryColor
                             // ? AppTheme.RED.withOpacity(0.85)
-                            : AppTheme.MAIN.withOpacity(0.4),
+                            : kcPrimaryColor.withOpacity(0.4),
                         itemSize: 50,
                         itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                         itemBuilder: (context, _) => AnimatedCrossFade(
@@ -782,12 +782,12 @@ class RateOrderDialogView extends StatelessWidget {
                             Icons.star,
                             // Icons.star_border,
                             // size: 26,
-                            color: AppTheme.MAIN,
+                            color: kcPrimaryColor,
                           ),
                           duration: const Duration(milliseconds: 200),
                           secondChild: Icon(
                             Icons.star,
-                            color: AppTheme.MAIN,
+                            color: kcPrimaryColor,
                           ),
                         ),
                         onRatingUpdate: model.updateRating,
@@ -875,7 +875,7 @@ class RateOrderDialogView extends StatelessWidget {
                                                             (context, _) =>
                                                                 Icon(
                                                           Icons.star,
-                                                          color: AppTheme.MAIN,
+                                                          color: kcPrimaryColor,
                                                         ),
                                                         onRatingUpdate:
                                                             model.updateRating,
@@ -928,7 +928,7 @@ class RateOrderDialogView extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.clear_rounded,
-                    color: AppTheme.MAIN_DARK,
+                    color: kcSecondaryDarkColor,
                     size: 22.sp,
                   ),
                 ),

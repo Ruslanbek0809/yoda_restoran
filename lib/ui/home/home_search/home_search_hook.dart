@@ -25,10 +25,10 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
       child: TextField(
           style: TextStyle(
             fontSize: 18.sp,
-            color: AppTheme.MAIN_DARK,
+            color: kcSecondaryDarkColor,
           ),
           decoration: InputDecoration(
-            fillColor: AppTheme.WHITE,
+            fillColor: kcWhiteColor,
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
             hintText: LocaleKeys.search.tr(),

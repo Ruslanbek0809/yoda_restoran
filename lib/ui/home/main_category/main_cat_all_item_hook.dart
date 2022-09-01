@@ -8,7 +8,6 @@ import '../../widgets/widgets.dart';
 import '../main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'main_cat_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
@@ -42,7 +41,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(left: 12.w, right: 12.w),
-        color: AppTheme.WHITE,
+        color: kcWhiteColor,
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
@@ -78,7 +77,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                     padding: EdgeInsets.all(6.h),
                     child: Material(
                       shape: CircleBorder(),
-                      color: AppTheme.MAIN_LIGHT,
+                      color: kcSecondaryLightColor,
                       child: Icon(
                         Icons.arrow_forward_rounded,
                         color: kcFontColor,

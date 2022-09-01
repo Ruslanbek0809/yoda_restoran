@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 
 class ColoredTabBar extends Container implements PreferredSizeWidget {
@@ -14,7 +15,7 @@ class ColoredTabBar extends Container implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
-          color: AppTheme.WHITE,
+          color: kcWhiteColor,
           boxShadow: isShrink ? [AppTheme().tabBarShadow] : [],
         ),
         child: Row(children: [

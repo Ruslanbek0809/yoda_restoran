@@ -245,11 +245,11 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Material(
-                                color: AppTheme.WHITE,
+                                color: kcWhiteColor,
                                 borderRadius: AppTheme().radius15,
                                 elevation: 3,
                                 shadowColor:
-                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                    kcSecondaryLightColor.withOpacity(0.3),
                                 child: InkWell(
                                   borderRadius: AppTheme().radius15,
                                   onTap: () async {
@@ -276,11 +276,11 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 style: kts18Text,
                               ),
                               Material(
-                                color: AppTheme.WHITE,
+                                color: kcWhiteColor,
                                 borderRadius: AppTheme().radius15,
                                 elevation: 3,
                                 shadowColor:
-                                    AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                                    kcSecondaryLightColor.withOpacity(0.3),
                                 child: InkWell(
                                   borderRadius: AppTheme().radius15,
                                   onTap: meal.gVolumes!.isNotEmpty ||
@@ -388,7 +388,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             color: Colors.transparent,
                             borderRadius: AppTheme().radius15,
                             elevation: 3,
-                            shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                            shadowColor: kcSecondaryLightColor.withOpacity(0.3),
                             child: InkWell(
                               borderRadius: AppTheme().radius15,
                               onTap: meal.gVolumes!.isNotEmpty ||
@@ -473,7 +473,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               child: Ink(
                                 width: constraints.maxWidth,
                                 decoration: BoxDecoration(
-                                  color: AppTheme.WHITE,
+                                  color: kcWhiteColor,
                                   borderRadius: AppTheme().radius15,
                                 ),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),

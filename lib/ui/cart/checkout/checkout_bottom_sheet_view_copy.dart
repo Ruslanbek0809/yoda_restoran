@@ -72,7 +72,7 @@
 //                           ],
 //                         ),
 //                         Divider(
-//                           color: AppTheme.DRAWER_DIVIDER,
+//                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
 //                         // --------------- ADDRESS -------------- //
@@ -154,7 +154,7 @@
 //                                       children: [
 //                                         SvgPicture.asset(
 //                                           'assets/map_pin_bold.svg',
-//                                           color: AppTheme.MAIN_DARK,
+//                                           color: kcSecondaryDarkColor,
 //                                           width: 25.w,
 //                                         ),
 //                                         SizedBox(width: 15.w),
@@ -168,7 +168,7 @@
 //                           ),
 //                         ),
 //                         Divider(
-//                           color: AppTheme.DRAWER_DIVIDER,
+//                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
 //                         // --------------- DELIVERY DATE TIME -------------- //
@@ -305,7 +305,7 @@
 //                                     children: [
 //                                       SvgPicture.asset(
 //                                         'assets/clock.svg',
-//                                         color: AppTheme.MAIN_DARK,
+//                                         color: kcSecondaryDarkColor,
 //                                         width: 25.w,
 //                                       ),
 //                                       SizedBox(width: 15.w),
@@ -380,7 +380,7 @@
 //                           ),
 //                         ),
 //                         Divider(
-//                           color: AppTheme.DRAWER_DIVIDER,
+//                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
 //                         // --------------- PARMENT TYPE -------------- //
@@ -411,7 +411,7 @@
 //                                     children: [
 //                                       SvgPicture.asset(
 //                                         'assets/wallet.svg',
-//                                         color: AppTheme.MAIN_DARK,
+//                                         color: kcSecondaryDarkColor,
 //                                         width: 25.w,
 //                                       ),
 //                                       SizedBox(width: 15.w),
@@ -448,7 +448,7 @@
 //                           ),
 //                         ),
 //                         Divider(
-//                           color: AppTheme.DRAWER_DIVIDER,
+//                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
 //                         SizedBox(height: 10.h),

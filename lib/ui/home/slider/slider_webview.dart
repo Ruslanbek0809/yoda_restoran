@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:yoda_res/utils/utils.dart';
+import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 
 class SliderWebview extends StatefulWidget {
@@ -45,7 +46,7 @@ class _SliderWebviewState extends State<SliderWebview> {
 
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
-        color: AppTheme.MAIN,
+        color: kcPrimaryColor,
       ),
       onRefresh: () async {
         if (Platform.isAndroid) {
@@ -62,7 +63,7 @@ class _SliderWebviewState extends State<SliderWebview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.WHITE,
+        backgroundColor: kcWhiteColor,
         elevation: 0.5,
         leading: BackButtonWidget(),
       ),
@@ -111,8 +112,8 @@ class _SliderWebviewState extends State<SliderWebview> {
             progress < 1.0
                 ? LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: AppTheme.MAIN.withOpacity(0.3),
-                    color: AppTheme.MAIN,
+                    backgroundColor: kcPrimaryColor.withOpacity(0.3),
+                    color: kcPrimaryColor,
                   )
                 : SizedBox(),
           ],

@@ -20,10 +20,10 @@ class HomeSearchView extends StatelessWidget {
           scopesRoute: true,
           namesRoute: true,
           child: Scaffold(
-            backgroundColor: AppTheme.WHITE,
+            backgroundColor: kcWhiteColor,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              backgroundColor: AppTheme.WHITE,
+              backgroundColor: kcWhiteColor,
               elevation: 0.5,
               titleSpacing: 0,
               leading: IconButton(
@@ -45,7 +45,7 @@ class HomeSearchView extends StatelessWidget {
                           icon: Icon(
                             Icons.search_rounded,
                             size: 22.w,
-                            color: AppTheme.DRAWER_DIVIDER,
+                            color: kcDividerColor,
                           ),
                           onPressed: () {},
                         )
@@ -55,7 +55,7 @@ class HomeSearchView extends StatelessWidget {
                           icon: Icon(
                             Icons.clear_rounded,
                             size: 22.w,
-                            color: AppTheme.DRAWER_DIVIDER,
+                            color: kcDividerColor,
                           ),
                           onPressed: () {
                             FocusScope.of(context)

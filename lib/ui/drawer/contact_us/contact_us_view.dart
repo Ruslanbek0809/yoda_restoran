@@ -19,7 +19,7 @@ class ContactUsView extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: AppTheme.WHITE,
+            backgroundColor: kcWhiteColor,
             elevation: 0,
             leading: IconButton(
               icon: Icon(
@@ -32,7 +32,7 @@ class ContactUsView extends StatelessWidget {
             title: Text(
               LocaleKeys.contact_us,
               style: TextStyle(
-                color: AppTheme.MAIN_DARK,
+                color: kcSecondaryDarkColor,
               ),
             ).tr(),
             centerTitle: true,

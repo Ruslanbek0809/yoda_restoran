@@ -26,7 +26,7 @@ class RateUsDialogHook extends HookViewModelWidget<RateUsDialogViewModel> {
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: AppTheme.MAIN_LIGHT,
+        fillColor: kcSecondaryLightColor,
         hintText: LocaleKeys.ratingComment.tr(),
         hintStyle: kts16HelperText,
       ),

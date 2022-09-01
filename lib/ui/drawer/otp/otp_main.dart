@@ -73,7 +73,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                 appContext: context,
                 controller: otpController,
                 pastedTextStyle: TextStyle(
-                  color: AppTheme.MAIN,
+                  color: kcPrimaryColor,
                   fontWeight: FontWeight.bold,
                 ),
                 length: 6,

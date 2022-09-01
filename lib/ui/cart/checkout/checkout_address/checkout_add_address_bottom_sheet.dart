@@ -59,7 +59,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(Constants.BORDER_RADIUS_20),
                             ),
-                            color: AppTheme.WHITE,
+                            color: kcWhiteColor,
                           ),
                           padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
                           child: Form(
@@ -78,7 +78,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                     right: 0,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppTheme.WHITE,
+                        color: kcWhiteColor,
                         // border: Border.all(
                         //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
                       ),

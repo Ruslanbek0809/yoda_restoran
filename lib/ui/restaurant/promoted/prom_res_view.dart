@@ -76,7 +76,7 @@ class PromResView extends StatelessWidget {
                         vertical: 4.h,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.MAIN_DARK.withOpacity(0.9),
+                        color: kcSecondaryDarkColor.withOpacity(0.9),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
                           bottomRight:
@@ -116,7 +116,7 @@ class PromResView extends StatelessWidget {
                       width: 0.09.sw,
                       height: 0.09.sw,
                       decoration: BoxDecoration(
-                        color: AppTheme.WHITE.withOpacity(0.8),
+                        color: kcWhiteColor.withOpacity(0.8),
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
@@ -128,7 +128,7 @@ class PromResView extends StatelessWidget {
                               : Icons.favorite_border,
                           color: model.isFavorited
                               ? AppTheme.RED
-                              : AppTheme.MAIN_DARK,
+                              : kcSecondaryDarkColor,
                           size: 20.w,
                         ),
                       ),
@@ -145,7 +145,7 @@ class PromResView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppTheme.MAIN_DARK,
+                    color: kcSecondaryDarkColor,
                   ),
                 ),
               ),
@@ -218,7 +218,7 @@ class PromResView extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 12.sp,
-                          color: AppTheme.MAIN_DARK,
+                          color: kcSecondaryDarkColor,
                         ),
                       ),
                     ],
@@ -269,7 +269,7 @@ class PromResView extends StatelessWidget {
 //                                   vertical: 4.h,
 //                                 ),
 //                                 decoration: BoxDecoration(
-//                                   color: AppTheme.MAIN_DARK.withOpacity(0.85),
+//                                   color: kcSecondaryDarkColor.withOpacity(0.85),
 //                                   borderRadius: BorderRadius.only(
 //                                     topLeft: Radius.circular(
 //                                         Constants.BORDER_RADIUS_20),

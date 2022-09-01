@@ -35,7 +35,7 @@ class CartView extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: AppTheme.WHITE,
+              backgroundColor: kcWhiteColor,
               elevation: 0.5,
               leadingWidth: 35.w,
               leading: Padding(
@@ -87,7 +87,7 @@ class CartView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 5.h),
                           child: Divider(
                             thickness: 1,
-                            color: AppTheme.DRAWER_DIVIDER.withOpacity(0.5),
+                            color: kcDividerColor.withOpacity(0.5),
                           ),
                         );
                       },
@@ -101,7 +101,7 @@ class CartView extends StatelessWidget {
                     //         onTap: () => Navigator.pop(context),
                     //         child: SvgPicture.asset(
                     //           'assets/forkKnife.svg',
-                    //           color: AppTheme.MAIN_DARK,
+                    //           color: kcSecondaryDarkColor,
                     //           width: 25.w,
                     //         ),
                     //       ),
@@ -115,7 +115,7 @@ class CartView extends StatelessWidget {
                     //       ),
                     //       Spacer(),
                     //       CupertinoSwitch(
-                    //         activeColor: AppTheme.MAIN,
+                    //         activeColor: kcPrimaryColor,
                     //         trackColor: AppTheme.TOGGLE_COLOR,
                     //         value: _switchValue,
                     //         onChanged: (value) {
@@ -209,7 +209,7 @@ class CartView extends StatelessWidget {
                       border: Border(
                         top: BorderSide(
                           width: 0.5,
-                          color: AppTheme.MAIN_DARK.withOpacity(0.25),
+                          color: kcSecondaryDarkColor.withOpacity(0.25),
                         ),
                       ),
                       // border: Border.all(

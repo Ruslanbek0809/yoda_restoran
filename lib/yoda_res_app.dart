@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/shared/shared.dart';
 import 'app/app.router.dart';
 import 'ui/widgets/widgets.dart';
 import 'utils/utils.dart';
@@ -30,18 +31,18 @@ class YodaResApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         theme: ThemeData(
           brightness: Brightness.light,
-          primaryColor: AppTheme.MAIN,
-          scaffoldBackgroundColor: AppTheme.WHITE,
-          splashColor: AppTheme.MAIN_LIGHT,
+          primaryColor: kcPrimaryColor,
+          scaffoldBackgroundColor: kcWhiteColor,
+          splashColor: kcSecondaryLightColor,
           fontFamily: 'Segoe',
           appBarTheme: AppBarTheme(elevation: 0),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
-          primaryColor: AppTheme.MAIN,
-          scaffoldBackgroundColor: AppTheme.WHITE,
-          splashColor: AppTheme.MAIN_LIGHT,
+          primaryColor: kcPrimaryColor,
+          scaffoldBackgroundColor: kcWhiteColor,
+          splashColor: kcSecondaryLightColor,
           fontFamily: 'Segoe',
           appBarTheme: AppBarTheme(elevation: 0),
           visualDensity: VisualDensity.adaptivePlatformDensity,

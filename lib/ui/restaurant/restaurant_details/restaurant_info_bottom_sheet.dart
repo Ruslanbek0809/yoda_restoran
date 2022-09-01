@@ -93,7 +93,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 7.h),
             child: Divider(
               thickness: 0.5,
-              color: AppTheme.DRAWER_DIVIDER,
+              color: kcDividerColor,
             ),
           ),
           // --------------- WORKING HOURS -------------- //
@@ -127,7 +127,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 7.h),
               child: Divider(
                 thickness: 0.5,
-                color: AppTheme.DRAWER_DIVIDER,
+                color: kcDividerColor,
               ),
             ),
           if (restaurant.paymentTypes != null)
@@ -160,7 +160,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 10.h),
             child: Divider(
               thickness: 0.5,
-              color: AppTheme.DRAWER_DIVIDER,
+              color: kcDividerColor,
             ),
           ),
           Padding(

@@ -72,7 +72,7 @@
 //                       padding: EdgeInsets.only(top: 10.h),
 //                       child: SvgPicture.asset(
 //                         'assets/rate_yoda_res.svg',
-//                         color: AppTheme.MAIN,
+//                         color: kcPrimaryColor,
 //                         width: 0.35.sw,
 //                       ),
 //                     ),
@@ -83,7 +83,7 @@
 //                         'Soltan Restoran',
 //                         style: TextStyle(
 //                           fontSize: 30.sp,
-//                           color: AppTheme.MAIN_DARK,
+//                           color: kcSecondaryDarkColor,
 //                           fontWeight: FontWeight.bold,
 //                         ),
 //                       ),
@@ -149,7 +149,7 @@
 //                             borderSide: BorderSide.none,
 //                           ),
 //                           filled: true,
-//                           fillColor: AppTheme.MAIN_LIGHT,
+//                           fillColor: kcPrimaryColor_LIGHT,
 //                           hintText: 'Teswir',
 //                           hintStyle: TextStyle(
 //                             fontSize: 16.sp,
@@ -188,7 +188,7 @@
 //                               children: [
 //                                 SvgPicture.asset(
 //                                   'assets/success_rate_star.svg',
-//                                   color: AppTheme.MAIN,
+//                                   color: kcPrimaryColor,
 //                                   width: 120.w,
 //                                   height: 120.w,
 //                                 ),
@@ -197,7 +197,7 @@
 //                                   'Soltan Restoran',
 //                                   textAlign: TextAlign.center,
 //                                   style: TextStyle(
-//                                     color: AppTheme.MAIN,
+//                                     color: kcPrimaryColor,
 //                                     fontSize: 22.sp,
 //                                     fontWeight: FontWeight.normal,
 //                                   ),

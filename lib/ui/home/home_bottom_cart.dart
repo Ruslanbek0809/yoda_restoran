@@ -68,14 +68,14 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
             height: 0.24.sw,
             width: 1.sw,
             decoration: BoxDecoration(
-              color: AppTheme.WHITE,
+              color: kcWhiteColor,
               boxShadow: [AppTheme().bottomCartShadow],
             ),
             child: Container(
               margin: EdgeInsets.fromLTRB(10.w, 8.h, 10.w, 15.h + 0.02.sw),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: AppTheme.MAIN,
+                color: kcPrimaryColor,
                 borderRadius: AppTheme().radius10,
               ),
               alignment: Alignment.center,

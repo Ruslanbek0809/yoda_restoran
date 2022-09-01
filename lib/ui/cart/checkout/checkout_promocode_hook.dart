@@ -25,7 +25,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
           children: [
             SvgPicture.asset(
               'assets/percent.svg',
-              color: AppTheme.MAIN_DARK,
+              color: kcSecondaryDarkColor,
               width: 25.w,
             ),
             Expanded(
@@ -63,7 +63,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                               model.promocode!.quantity != -1
                           ? SvgPicture.asset(
                               'assets/check_outlined_circle.svg',
-                              color: AppTheme.MAIN,
+                              color: kcPrimaryColor,
                               width: 16.w,
                             )
                           : _promocodeController.text.length > 2 &&
@@ -71,7 +71,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                                   model.promocode!.quantity == -1
                               ? SvgPicture.asset(
                                   'assets/warning_circle.svg',
-                                  color: AppTheme.MAIN,
+                                  color: kcPrimaryColor,
                                   width: 25.w,
                                 )
                               : SizedBox(),

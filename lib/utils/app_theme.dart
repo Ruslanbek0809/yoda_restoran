@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../shared/shared.dart';
+
 class AppTheme {
   /// Colors
   static const Color MAIN = Color(0xFFFF891D);
@@ -75,32 +77,32 @@ class AppTheme {
       );
 
   BoxShadow get searchShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.125),
+        color: kcSecondaryDarkColor.withOpacity(0.125),
         blurRadius: 4.0,
         offset: const Offset(1.1, 1.1),
       );
 
   BoxShadow get toggleShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.075),
+        color: kcSecondaryDarkColor.withOpacity(0.075),
         blurRadius: 2.0,
         offset: const Offset(1, 1),
       );
 
   BoxShadow get bottomCartShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.2),
+        color: kcSecondaryDarkColor.withOpacity(0.2),
         blurRadius: 4.0,
         offset: const Offset(0.0, 1.1),
       );
 
   BoxShadow get tabBarShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.045),
+        color: kcSecondaryDarkColor.withOpacity(0.045),
         blurRadius: 20,
         spreadRadius: 5,
         offset: const Offset(0, 20),
       );
 
   BoxShadow get resBottomShadow => BoxShadow(
-        color: AppTheme.MAIN_DARK.withOpacity(0.2),
+        color: kcSecondaryDarkColor.withOpacity(0.2),
         blurRadius: 2.0,
         offset: const Offset(0.0, 1.1),
       );

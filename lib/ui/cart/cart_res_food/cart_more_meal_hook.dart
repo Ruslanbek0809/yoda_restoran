@@ -251,10 +251,11 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Material(
-                              color: AppTheme.WHITE,
+                              color: kcWhiteColor,
                               borderRadius: AppTheme().radius15,
                               elevation: 3,
-                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                              shadowColor:
+                                  kcSecondaryLightColor.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().radius15,
                                 onTap: () async {
@@ -280,10 +281,11 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                               style: kts16Text,
                             ),
                             Material(
-                              color: AppTheme.WHITE,
+                              color: kcWhiteColor,
                               borderRadius: AppTheme().radius15,
                               elevation: 3,
-                              shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                              shadowColor:
+                                  kcSecondaryLightColor.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().radius15,
                                 onTap: meal.gVolumes!.isNotEmpty ||
@@ -385,7 +387,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           color: Colors.transparent,
                           borderRadius: AppTheme().radius15,
                           elevation: 3,
-                          shadowColor: AppTheme.MAIN_LIGHT.withOpacity(0.3),
+                          shadowColor: kcSecondaryLightColor.withOpacity(0.3),
                           child: InkWell(
                             borderRadius: AppTheme().radius15,
                             onTap: meal.gVolumes!.isNotEmpty ||
@@ -463,7 +465,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                             child: Ink(
                               width: constraints.maxWidth,
                               decoration: BoxDecoration(
-                                color: AppTheme.WHITE,
+                                color: kcWhiteColor,
                                 borderRadius: AppTheme().radius15,
                               ),
                               padding: EdgeInsets.symmetric(vertical: 8.h),

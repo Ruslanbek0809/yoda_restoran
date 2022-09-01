@@ -64,7 +64,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           expandedHeight: 0.55.sh,
           pinned: true,
           stretch: true,
-          backgroundColor: AppTheme.WHITE,
+          backgroundColor: kcWhiteColor,
           centerTitle: true,
           title: AnimatedSwitcher(
             duration: Duration(milliseconds: 300),
@@ -92,7 +92,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: kcWhiteColor,
-                // color: model.isShrink ? Colors.transparent : AppTheme.WHITE,
+                // color: model.isShrink ? Colors.transparent : kcWhiteColor,
                 // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
               ),
               child: Material(
@@ -214,7 +214,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppTheme.WHITE,
+                      color: kcWhiteColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
@@ -250,7 +250,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //------------------ RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
+                                  color: kcSecondaryLightColor,
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -265,7 +265,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   children: [
                                     SvgPicture.asset(
                                       'assets/star.svg',
-                                      color: AppTheme.MAIN_DARK,
+                                      color: kcSecondaryDarkColor,
                                       width: 20.w,
                                     ),
                                     SizedBox(width: 5.w),
@@ -282,7 +282,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //------------------ WORK TIME ---------------------//
                               // Container(
                               //   decoration: BoxDecoration(
-                              //     color: AppTheme.MAIN_LIGHT,
+                              //     color: kcPrimaryColor_LIGHT,
                               //     borderRadius: AppTheme().radius20,
                               //   ),
                               //   padding: EdgeInsets.symmetric(
@@ -293,7 +293,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //     children: [
                               //       SvgPicture.asset(
                               //         'assets/clock.svg',
-                              //         color: AppTheme.MAIN_DARK,
+                              //         color: kcSecondaryDarkColor,
                               //         width: 20.w,
                               //       ),
                               //       SizedBox(width: 5.w),
@@ -311,7 +311,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //------------------ LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
+                                  color: kcSecondaryLightColor,
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -414,7 +414,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             horizontal: 16.w,
                           ),
                           child: Divider(
-                            color: AppTheme.MAIN_LIGHT,
+                            color: kcSecondaryLightColor,
                             thickness: 1.w,
                           ),
                         ),
@@ -451,9 +451,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             color: model.activeTab ==
                                     model.resCategories!.indexOf(resCategory)
                                 ? model.isTabPressed
-                                    ? AppTheme.MAIN_LIGHT
-                                    : AppTheme.WHITE
-                                : AppTheme.WHITE,
+                                    ? kcSecondaryLightColor
+                                    : kcWhiteColor
+                                : kcWhiteColor,
                           ),
                           margin: EdgeInsets.symmetric(
                             vertical: 2.h,
@@ -510,7 +510,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
-                          color: AppTheme.MAIN_DARK,
+                          color: kcSecondaryDarkColor,
                         ),
                       ),
                     ),
@@ -523,7 +523,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     //     style: TextStyle(
                     //       fontSize: 22.sp,
                     //       fontWeight: FontWeight.bold,
-                    //       color: AppTheme.MAIN_DARK,
+                    //       color: kcSecondaryDarkColor,
                     //     ),
                     //   ),
                     // ),

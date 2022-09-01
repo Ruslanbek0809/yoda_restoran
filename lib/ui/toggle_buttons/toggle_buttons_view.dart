@@ -54,7 +54,7 @@ class ToggleButtonView extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppTheme.MAIN_LIGHT,
+                    color: kcSecondaryLightColor,
                     borderRadius: AppTheme().radius15,
                   ),
                   height: 44.h,
@@ -68,7 +68,7 @@ class ToggleButtonView extends StatelessWidget {
                         child: Container(
                           width: constraints.maxWidth / 2.2,
                           decoration: BoxDecoration(
-                            color: AppTheme.WHITE,
+                            color: kcWhiteColor,
                             borderRadius: AppTheme().radius15,
                             boxShadow: [AppTheme().toggleShadow],
                           ),

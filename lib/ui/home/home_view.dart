@@ -373,7 +373,7 @@ class _HomeViewState extends State<HomeView> {
                                             style: TextStyle(
                                               fontSize: 24.sp,
                                               fontWeight: FontWeight.bold,
-                                              color: AppTheme.MAIN_DARK,
+                                              color: kcSecondaryDarkColor,
                                             ),
                                           ),
                                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import '../../../shared/shared.dart';
 import 'res_bottom_cart/res_bottom_cart_total_view.dart';
 import 'res_details_view_model.dart';
 import '../../../utils/utils.dart';
@@ -67,12 +68,12 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
             height: 0.24.sw,
             width: 1.sw,
             decoration: BoxDecoration(
-              color: AppTheme.WHITE,
+              color: kcWhiteColor,
               // boxShadow: [AppTheme().resBottomShadow],
               border: Border(
                 top: BorderSide(
                   width: 0.5,
-                  color: AppTheme.MAIN_DARK.withOpacity(0.25),
+                  color: kcSecondaryDarkColor.withOpacity(0.25),
                 ),
               ),
             ),
@@ -80,7 +81,7 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
               margin: EdgeInsets.fromLTRB(10.w, 8.h, 10.w, 15.h + 0.02.sw),
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: AppTheme.MAIN,
+                color: kcPrimaryColor,
                 borderRadius: AppTheme().radius10,
               ),
               alignment: Alignment.center,

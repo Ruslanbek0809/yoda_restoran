@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../shared/shared.dart';
 import '../../shared/styles.dart';
-import '../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class OtpTimerWidget extends StatelessWidget {
@@ -33,7 +33,7 @@ class OtpTimerWidget extends StatelessWidget {
           children: <Widget>[
             Icon(
               Icons.access_time_rounded,
-              color: AppTheme.MAIN,
+              color: kcPrimaryColor,
             ),
             SizedBox(width: 5.w),
             Text(

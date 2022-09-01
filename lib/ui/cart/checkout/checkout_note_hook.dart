@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
-import '../../../shared/styles.dart';
+import '../../../shared/shared.dart';
 import 'checkout_view_model.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,7 +40,7 @@ class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
                 borderSide: BorderSide.none,
               ),
               filled: true,
-              fillColor: AppTheme.MAIN_LIGHT,
+              fillColor: kcSecondaryLightColor,
             ),
             onChanged: model.updateCheckoutNote,
             onSaved: model.updateCheckoutNote,

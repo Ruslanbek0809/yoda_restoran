@@ -44,7 +44,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(left: 4.w),
-        color: AppTheme.WHITE,
+        color: kcWhiteColor,
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
@@ -71,7 +71,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                   borderRadius: AppTheme().radius12,
                   color: model.isMainCatSelected(mainCategory.id)
                       ? AppTheme.GREEN_COLOR
-                      : AppTheme.WHITE,
+                      : kcWhiteColor,
                 ),
                 child: FittedBox(
                   child: Text(
@@ -80,7 +80,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: model.isMainCatSelected(mainCategory.id)
-                          ? AppTheme.WHITE
+                          ? kcWhiteColor
                           : kcFontColor,
                     ),
                   ),

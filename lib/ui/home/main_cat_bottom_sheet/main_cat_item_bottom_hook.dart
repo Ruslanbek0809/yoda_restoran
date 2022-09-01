@@ -78,7 +78,7 @@ class MainCategoryItemBottomHook
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: model.isTempMainCatSelected(mainCategory!.id)
-                        ? AppTheme.WHITE
+                        ? kcWhiteColor
                         : kcFontColor,
                   ),
                 ),

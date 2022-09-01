@@ -70,7 +70,7 @@ class RestaurantView extends StatelessWidget {
                         vertical: 4.h,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                        color: kcSecondaryDarkColor.withOpacity(0.85),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(Constants.BORDER_RADIUS_20),
                           bottomRight:
@@ -110,7 +110,7 @@ class RestaurantView extends StatelessWidget {
                       width: 0.11.sw,
                       height: 0.11.sw,
                       decoration: BoxDecoration(
-                        color: AppTheme.WHITE.withOpacity(0.8),
+                        color: kcWhiteColor.withOpacity(0.8),
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
@@ -122,7 +122,7 @@ class RestaurantView extends StatelessWidget {
                               : Icons.favorite_border,
                           color: model.isFavorited
                               ? AppTheme.RED
-                              : AppTheme.MAIN_DARK,
+                              : kcSecondaryDarkColor,
                           size: 25.w,
                         ),
                       ),
@@ -139,7 +139,7 @@ class RestaurantView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppTheme.MAIN_DARK,
+                    color: kcSecondaryDarkColor,
                   ),
                 ),
               ),
@@ -489,7 +489,7 @@ class RestaurantView extends StatelessWidget {
                   //                 vertical: 4.h,
                   //               ),
                   //               decoration: BoxDecoration(
-                  //                 color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                  //                 color: kcSecondaryDarkColor.withOpacity(0.85),
                   //                 borderRadius: BorderRadius.only(
                   //                   topLeft: Radius.circular(
                   //                       Constants.BORDER_RADIUS_20),
@@ -530,7 +530,7 @@ class RestaurantView extends StatelessWidget {
                   //             vertical: 4.h,
                   //           ),
                   //           decoration: BoxDecoration(
-                  //             color: AppTheme.MAIN_DARK.withOpacity(0.85),
+                  //             color: kcSecondaryDarkColor.withOpacity(0.85),
                   //             borderRadius: BorderRadius.only(
                   //               topLeft:
                   //                   Radius.circular(Constants.BORDER_RADIUS_20),

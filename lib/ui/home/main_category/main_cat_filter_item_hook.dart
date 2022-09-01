@@ -43,7 +43,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
       ),
       child: Container(
         margin: EdgeInsets.only(left: 12.w, right: 2.w),
-        color: AppTheme.WHITE,
+        color: kcWhiteColor,
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
@@ -81,7 +81,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
                       shape: RoundedRectangleBorder(
                         borderRadius: AppTheme().radius16,
                       ),
-                      color: AppTheme.MAIN_LIGHT,
+                      color: kcSecondaryLightColor,
                       child: Padding(
                         padding: EdgeInsets.all(14.w),
                         child: SvgPicture.asset(

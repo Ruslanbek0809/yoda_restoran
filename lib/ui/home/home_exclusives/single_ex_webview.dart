@@ -53,7 +53,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
 
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
-        color: AppTheme.MAIN,
+        color: kcPrimaryColor,
       ),
       onRefresh: () async {
         if (Platform.isAndroid) {
@@ -70,7 +70,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.WHITE,
+        backgroundColor: kcWhiteColor,
         elevation: 0.5,
         leading: BackButtonWidget(),
         //------------------ ACTIONS FAV ---------------------//
@@ -131,8 +131,8 @@ class _SingleExWebviewState extends State<SingleExWebview> {
             progress < 1.0
                 ? LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: AppTheme.MAIN.withOpacity(0.3),
-                    color: AppTheme.MAIN,
+                    backgroundColor: kcPrimaryColor.withOpacity(0.3),
+                    color: kcPrimaryColor,
                   )
                 : SizedBox(),
           ],
@@ -179,7 +179,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
 
 //     PullToRefreshController pullToRefreshController = PullToRefreshController(
 //       options: PullToRefreshOptions(
-//         color: AppTheme.MAIN,
+//         color: kcPrimaryColor,
 //       ),
 //       onRefresh: () async {
 //         if (Platform.isAndroid) {
@@ -231,8 +231,8 @@ class _SingleExWebviewState extends State<SingleExWebview> {
 //             model.progress < 1.0
 //                 ? LinearProgressIndicator(
 //                     value: model.progress,
-//                     backgroundColor: AppTheme.MAIN.withOpacity(0.3),
-//                     color: AppTheme.MAIN,
+//                     backgroundColor: kcPrimaryColor.withOpacity(0.3),
+//                     color: kcPrimaryColor,
 //                   )
 //                 : SizedBox(),
 //           ],

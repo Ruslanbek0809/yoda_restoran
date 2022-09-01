@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 
 class CustomIconButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppTheme.WHITE,
+      color: kcWhiteColor,
       shape: CircleBorder(),
       elevation: 5,
       child: InkWell(

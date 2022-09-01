@@ -45,7 +45,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.WHITE,
+        color: kcWhiteColor,
         borderRadius: AppTheme().radius10,
       ),
       padding: EdgeInsets.only(top: 5.h, left: 22.w, right: 22.w),

@@ -66,7 +66,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Material(
-                      color: AppTheme.MAIN_LIGHT,
+                      color: kcSecondaryLightColor,
                       borderRadius: AppTheme().radius15,
                       elevation: 0,
                       child: InkWell(
@@ -94,7 +94,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                       ),
                     ),
                     Material(
-                      color: AppTheme.MAIN_LIGHT,
+                      color: kcSecondaryLightColor,
                       borderRadius: AppTheme().radius15,
                       elevation: 0,
                       child: InkWell(

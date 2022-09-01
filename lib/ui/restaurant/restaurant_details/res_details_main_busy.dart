@@ -30,7 +30,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
           pinned: true,
           stretch: true,
           floating: false,
-          backgroundColor: AppTheme.WHITE,
+          backgroundColor: kcWhiteColor,
           centerTitle: true,
           title: SizedBox(),
           leading: AnimatedSwitcher(
@@ -41,10 +41,10 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               margin: EdgeInsets.only(left: 10.w, top: 5.w),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
               ),
               child: Material(
-                color: AppTheme.WHITE,
+                color: kcWhiteColor,
                 shape: CircleBorder(),
                 elevation: 0,
                 child: InkWell(
@@ -66,7 +66,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppTheme.WHITE,
+                  color: kcWhiteColor,
                   // boxShadow: _isShrink
                   //     ? []
                   //     : [AppTheme().buttonShadow],
@@ -74,7 +74,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                 child: Material(
                   shape: CircleBorder(),
                   elevation: 0,
-                  color: AppTheme.WHITE,
+                  color: kcWhiteColor,
                   child: InkWell(
                     customBorder: CircleBorder(),
                     onTap: () {},
@@ -97,13 +97,13 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppTheme.WHITE,
+                  color: kcWhiteColor,
                   // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                 ),
                 child: Material(
                   shape: CircleBorder(),
                   elevation: 0,
-                  color: AppTheme.WHITE,
+                  color: kcWhiteColor,
                   child: InkWell(
                     customBorder: CircleBorder(),
                     onTap: () {},
@@ -140,7 +140,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppTheme.WHITE,
+                      color: kcWhiteColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
@@ -176,7 +176,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               //------------------ RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
+                                  color: kcSecondaryLightColor,
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -191,7 +191,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   children: [
                                     SvgPicture.asset(
                                       'assets/star.svg',
-                                      color: AppTheme.MAIN_DARK,
+                                      color: kcSecondaryDarkColor,
                                       width: 20.w,
                                     ),
                                     SizedBox(width: 5.w),
@@ -208,7 +208,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               //------------------ WORK TIME ---------------------//
                               // Container(
                               //   decoration: BoxDecoration(
-                              //     color: AppTheme.MAIN_LIGHT,
+                              //     color: kcPrimaryColor_LIGHT,
                               //     borderRadius: AppTheme().radius20,
                               //   ),
                               //   padding: EdgeInsets.symmetric(
@@ -219,7 +219,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               //     children: [
                               //       SvgPicture.asset(
                               //         'assets/clock.svg',
-                              //         color: AppTheme.MAIN_DARK,
+                              //         color: kcSecondaryDarkColor,
                               //         width: 20.w,
                               //       ),
                               //       SizedBox(width: 5.w),
@@ -238,7 +238,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               //------------------ LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
-                                  color: AppTheme.MAIN_LIGHT,
+                                  color: kcSecondaryLightColor,
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -303,7 +303,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                 onTap: () {},
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: AppTheme.MAIN_LIGHT,
+                                    color: kcSecondaryLightColor,
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -311,7 +311,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   margin: EdgeInsets.only(right: 16.w),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
-                                    color: AppTheme.MAIN_DARK,
+                                    color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),
@@ -324,7 +324,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                             horizontal: 16.w,
                           ),
                           child: Divider(
-                            color: AppTheme.MAIN_LIGHT,
+                            color: kcSecondaryLightColor,
                             thickness: 1.w,
                           ),
                         ),
