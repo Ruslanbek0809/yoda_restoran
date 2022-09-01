@@ -83,7 +83,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: AppTheme.FONT_COLOR,
+                    color: kcFontColor,
                   ),
                 ),
               ),
@@ -117,7 +117,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                 ': ${restaurant.workingHours}',
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: AppTheme.FONT_COLOR,
+                  color: kcFontColor,
                 ),
               ),
             ],
@@ -151,7 +151,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   paymentTypesText,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: AppTheme.FONT_COLOR,
+                    color: kcFontColor,
                   ),
                 ),
               ],

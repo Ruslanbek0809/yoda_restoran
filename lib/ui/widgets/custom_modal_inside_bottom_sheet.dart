@@ -19,7 +19,7 @@ class CustomModalInsideBottomSheet extends StatelessWidget {
       height: 4.h,
       alignment: Alignment.center,
       margin: EdgeInsets.only(
-        top: 14.h,
+        top: 12.h,
         bottom: 12.h,
         left:
             isOuterPaddingExist ? 0.5.sw - 24 - leftOuterPadding! : 0.5.sw - 24,

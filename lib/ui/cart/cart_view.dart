@@ -42,7 +42,7 @@ class CartView extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_rounded,
-                    color: AppTheme.FONT_COLOR,
+                    color: kcFontColor,
                     size: 25.w,
                   ),
                   onPressed: model.navBack,
@@ -109,7 +109,7 @@ class CartView extends StatelessWidget {
                     //         'Esbaplar',
                     //         style: TextStyle(
                     //           fontSize: 18.sp,
-                    //           color: AppTheme.FONT_COLOR,
+                    //           color: kcFontColor,
                     //         ),
                     //       ),
                     //       Spacer(),
@@ -301,11 +301,8 @@ class CartView extends StatelessWidget {
                                     },
                                     anchors: [0, 0.8],
                                   );
-                                  // await showCustomCheckoutBottomSheet();
                                 } else
                                   model.navToLoginView();
-
-                                // await model.onCartCheckoutButtonPressed();
                               }
                             },
                           ),

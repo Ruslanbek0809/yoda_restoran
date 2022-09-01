@@ -69,7 +69,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                           LocaleKeys.deliveryPriceWillAddByOperator,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: AppTheme.FONT_COLOR,
+                            color: kcFontColor,
                           ),
                         ).tr(),
                       ),
@@ -93,7 +93,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                           maxLines: 2,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: AppTheme.FONT_COLOR,
+                            color: kcFontColor,
                           ),
                         ),
                       ),

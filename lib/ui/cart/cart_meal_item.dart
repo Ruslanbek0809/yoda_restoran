@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../models/hive_models/hive_models.dart';
-import '../../shared/styles.dart';
+import '../../shared/shared.dart';
 import 'cart_view_model.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
@@ -14,7 +14,6 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
 
   @override
   Widget build(BuildContext context, CartViewModel model) {
-
     num? totalMealSum = model.getTotalMealSum(cartMeal); // Gets totalMealSum
     String concatenateVolsCustoms = model
         .getConcatenateVolsCustoms(cartMeal); // Gets concatenatedVolsCustoms
@@ -82,7 +81,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                           child: Icon(
                             Icons.remove_rounded,
                             size: 25.w,
-                            color: AppTheme.FONT_COLOR,
+                            color: kcFontColor,
                           ),
                         ),
                       ),
@@ -107,7 +106,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                           child: Icon(
                             Icons.add_rounded,
                             size: 25.w,
-                            color: AppTheme.FONT_COLOR,
+                            color: kcFontColor,
                           ),
                         ),
                       ),

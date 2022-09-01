@@ -94,7 +94,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   borderWidth: 0.0,
                   errorBorderColor: AppTheme.RED,
                 ),
-                cursorColor: AppTheme.FONT_COLOR,
+                cursorColor: kcFontColor,
                 animationDuration: Duration(milliseconds: 300),
                 enableActiveFill: true,
                 errorAnimationController: errorController,

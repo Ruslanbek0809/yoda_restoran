@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,8 @@ import 'package:yoda_res/ui/widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import 'checkout_add_address_bottom_sheet2.dart';
 
 class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
@@ -28,17 +31,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
         ),
-        child:
-            // model.isBusy
-            //     ? ListView(
-            //         controller: scrollController,
-            //         shrinkWrap: true,
-            //         children: [
-            //           LoadingWidget(width: 0.1.sw),
-            //         ],
-            //       )
-            //     :
-            ListView(
+        child: ListView(
           controller: scrollController,
           shrinkWrap: true,
           children: [
@@ -51,6 +44,20 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
               child: Material(
                 color: kcWhiteColor,
                 child: InkWell(
+                  // /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                  // onTap: () async => await showFlexibleBottomSheet(
+                  //   isExpand: false,
+                  //   initHeight: 0.95,
+                  //   maxHeight: 0.95,
+                  //   duration: Duration(milliseconds: 250),
+                  //   context: context,
+                  //   bottomSheetColor: Colors.transparent,
+                  //   builder: (context, scrollController, offset) =>
+                  //       CheckoutAddAddressBottomSheet2View(
+                  //     scrollController: scrollController,
+                  //     offset: offset,
+                  //   ),
+                  // ),
                   onTap: model.showCustomAddAddressBottomSheet,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),

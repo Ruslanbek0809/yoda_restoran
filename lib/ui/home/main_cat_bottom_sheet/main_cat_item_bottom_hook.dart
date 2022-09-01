@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:yoda_res/ui/home/main_cat_bottom_sheet/main_cat_bottom_view_model.dart';
 import '../../../models/models.dart';
+import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,7 +79,7 @@ class MainCategoryItemBottomHook
                     fontSize: 14.sp,
                     color: model.isTempMainCatSelected(mainCategory!.id)
                         ? AppTheme.WHITE
-                        : AppTheme.FONT_COLOR,
+                        : kcFontColor,
                   ),
                 ),
               ),

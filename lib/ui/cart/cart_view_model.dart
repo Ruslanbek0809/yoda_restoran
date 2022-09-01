@@ -199,17 +199,6 @@ class CartViewModel extends ReactiveViewModel {
   //   }
   // }
 
-  /// CALLS CheckoutBottomSheetView
-  // Future showCustomCheckoutBottomSheet() async {
-  //   log.i('showCustomCheckoutBottomSheet()');
-  //   await _bottomSheetService.showCustomSheet(
-  //     variant: BottomSheetType.checkout,
-  //     enableDrag: true,
-  //     barrierDismissible: true,
-  //     isScrollControlled: true,
-  //   );
-  // }
-
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 

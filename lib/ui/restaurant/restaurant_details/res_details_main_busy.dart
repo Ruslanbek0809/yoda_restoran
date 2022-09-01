@@ -199,7 +199,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                       formatNumRating(restaurant.rating!),
                                       style: TextStyle(
                                         fontSize: 15.sp,
-                                        color: AppTheme.FONT_COLOR,
+                                        color: kcFontColor,
                                       ),
                                     ),
                                   ],
@@ -227,7 +227,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               //         restaurant.workingHours!,
                               //         style: TextStyle(
                               //           fontSize: 16.sp,
-                              //           color: AppTheme.FONT_COLOR,
+                              //           color: kcFontColor,
                               //         ),
                               //       ),
                               //     ],
@@ -266,7 +266,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ),
                                               Text(
@@ -274,7 +274,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ).tr(),
                                               Text(
@@ -282,7 +282,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ),
                                             ],
@@ -292,7 +292,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
-                                              color: AppTheme.FONT_COLOR,
+                                              color: kcFontColor,
                                             ),
                                           ),
                                   ],

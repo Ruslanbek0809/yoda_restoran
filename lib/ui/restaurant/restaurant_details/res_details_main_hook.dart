@@ -76,7 +76,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       overflow: TextOverflow.fade,
                       style: TextStyle(
                         fontSize: 20.sp,
-                        color: AppTheme.FONT_COLOR,
+                        color: kcFontColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -273,7 +273,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                       formatNumRating(restaurant.rating!),
                                       style: TextStyle(
                                         fontSize: 15.sp,
-                                        color: AppTheme.FONT_COLOR,
+                                        color: kcFontColor,
                                       ),
                                     ),
                                   ],
@@ -301,7 +301,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //         restaurant.workingHours!,
                               //         style: TextStyle(
                               //           fontSize: 16.sp,
-                              //           color: AppTheme.FONT_COLOR,
+                              //           color: kcFontColor,
                               //         ),
                               //       ),
                               //     ],
@@ -339,7 +339,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ),
                                               Text(
@@ -347,7 +347,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ).tr(),
                                               Text(
@@ -355,7 +355,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ),
                                             ],
@@ -365,7 +365,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
-                                              color: AppTheme.FONT_COLOR,
+                                              color: kcFontColor,
                                             ),
                                           ),
                                   ],

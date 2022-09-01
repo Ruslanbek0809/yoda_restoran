@@ -95,7 +95,7 @@
 //                         'Sargyt edeniňiz üçin sag boluň!',
 //                         style: TextStyle(
 //                           fontSize: 20.sp,
-//                           color: AppTheme.FONT_COLOR,
+//                           color: kcFontColor,
 //                           fontWeight: FontWeight.w500,
 //                         ),
 //                       ),
@@ -107,7 +107,7 @@
 //                         'Işimiziň hilini ýokarlandyrmak üçin tagamlarymyza we hyzmatymyza berjek bahaňyz biziň üçin wajyp.',
 //                         style: TextStyle(
 //                           fontSize: 16.sp,
-//                           color: AppTheme.FONT_COLOR,
+//                           color: kcFontColor,
 //                         ),
 //                         textAlign: TextAlign.center,
 //                       ),

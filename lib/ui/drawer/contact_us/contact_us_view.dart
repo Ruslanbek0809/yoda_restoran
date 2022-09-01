@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
-
 import 'contact_us_hook.dart';
 import 'contact_us_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +24,7 @@ class ContactUsView extends StatelessWidget {
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_rounded,
-                color: AppTheme.FONT_COLOR,
+                color: kcFontColor,
                 size: 25.w,
               ),
               onPressed: model.navToHomeByRemovingAll,

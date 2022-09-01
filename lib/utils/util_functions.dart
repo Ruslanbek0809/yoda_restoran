@@ -258,7 +258,7 @@ Future<dynamic> showAlertDialog({
         title: Text(
           title,
           style: TextStyle(
-            color: AppTheme.FONT_COLOR,
+            color: kcFontColor,
             fontSize: 16.sp,
           ),
         ),
@@ -267,7 +267,7 @@ Future<dynamic> showAlertDialog({
             text: defaultActionText,
             color: Colors.transparent,
             textStyle: TextStyle(
-              color: AppTheme.FONT_COLOR,
+              color: kcFontColor,
               fontSize: 17.sp,
               fontWeight: FontWeight.bold,
             ),
@@ -277,7 +277,7 @@ Future<dynamic> showAlertDialog({
             text: cancelActionText,
             color: Colors.transparent,
             textStyle: TextStyle(
-              color: AppTheme.FONT_COLOR,
+              color: kcFontColor,
               fontSize: 17.sp,
             ),
             onPressed: () => Navigator.of(context).pop(false),
@@ -295,7 +295,7 @@ Future<dynamic> showAlertDialog({
         CupertinoDialogAction(
           child: Text(defaultActionText),
           textStyle: TextStyle(
-            color: AppTheme.FONT_COLOR,
+            color: kcFontColor,
             fontSize: 17.sp,
             fontWeight: FontWeight.bold,
           ),
@@ -304,7 +304,7 @@ Future<dynamic> showAlertDialog({
         CupertinoDialogAction(
           child: Text(cancelActionText),
           textStyle: TextStyle(
-            color: AppTheme.FONT_COLOR,
+            color: kcFontColor,
             fontSize: 17.sp,
           ),
           onPressed: () => Navigator.of(context).pop(false),

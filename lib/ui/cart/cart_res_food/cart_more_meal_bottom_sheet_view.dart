@@ -312,7 +312,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                           size: 23.w,
                                           color: model.quantityDraft == 1
                                               ? kcHelperColor
-                                              : AppTheme.FONT_COLOR,
+                                              : kcFontColor,
                                         ),
                                       ),
                                     ),
@@ -347,7 +347,7 @@ class CartMoreMealBottomSheet extends StatelessWidget {
                                         child: Icon(
                                           Icons.add_rounded,
                                           size: 23.w,
-                                          color: AppTheme.FONT_COLOR,
+                                          color: kcFontColor,
                                         ),
                                       ),
                                     ),

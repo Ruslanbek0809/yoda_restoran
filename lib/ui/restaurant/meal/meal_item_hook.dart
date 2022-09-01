@@ -265,7 +265,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     child: Icon(
                                       Icons.remove_rounded,
                                       size: 22.w,
-                                      color: AppTheme.FONT_COLOR,
+                                      color: kcFontColor,
                                     ),
                                   ),
                                 ),
@@ -377,7 +377,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     child: Icon(
                                       Icons.add_rounded,
                                       size: 22.w,
-                                      color: AppTheme.FONT_COLOR,
+                                      color: kcFontColor,
                                     ),
                                   ),
                                 ),

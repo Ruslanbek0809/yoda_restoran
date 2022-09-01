@@ -35,7 +35,7 @@ class HomeSearch extends ViewModelWidget<HomeViewModel> {
               Icon(
                 CupertinoIcons.search,
                 size: 22.w,
-                color: AppTheme.FONT_COLOR,
+                color: kcFontColor,
               ),
             ],
           ),

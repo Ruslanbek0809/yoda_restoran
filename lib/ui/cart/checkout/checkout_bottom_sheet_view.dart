@@ -145,7 +145,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                   Icons
                                                       .arrow_forward_ios_rounded,
                                                   size: 20,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                         ),
                                       ],
@@ -371,7 +371,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                     child: Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       size: 20,
-                                      color: AppTheme.FONT_COLOR,
+                                      color: kcFontColor,
                                     ),
                                   ),
                                 ],
@@ -439,7 +439,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                     child: Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       size: 20,
-                                      color: AppTheme.FONT_COLOR,
+                                      color: kcFontColor,
                                     ),
                                   ),
                                 ],

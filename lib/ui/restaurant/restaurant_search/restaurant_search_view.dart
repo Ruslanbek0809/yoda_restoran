@@ -38,7 +38,7 @@ class RestaurantSearchView extends StatelessWidget {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
-                  color: AppTheme.FONT_COLOR,
+                  color: kcFontColor,
                   size: 20.w,
                 ),
                 onPressed: model.navBack,

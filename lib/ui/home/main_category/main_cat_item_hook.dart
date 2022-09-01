@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import '../../../shared/shared.dart';
 import 'main_cat_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../models/models.dart';
@@ -80,7 +81,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                       fontSize: 14.sp,
                       color: model.isMainCatSelected(mainCategory.id)
                           ? AppTheme.WHITE
-                          : AppTheme.FONT_COLOR,
+                          : kcFontColor,
                     ),
                   ),
                 ),

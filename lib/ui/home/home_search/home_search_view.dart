@@ -29,7 +29,7 @@ class HomeSearchView extends StatelessWidget {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
-                  color: AppTheme.FONT_COLOR,
+                  color: kcFontColor,
                   size: 20.w,
                 ),
                 onPressed: model.navBack,
@@ -205,7 +205,7 @@ class HomeSearchView extends StatelessWidget {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 18.sp,
-                                                  color: AppTheme.FONT_COLOR,
+                                                  color: kcFontColor,
                                                 ),
                                               ),
                                             ),

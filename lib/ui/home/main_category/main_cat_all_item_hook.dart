@@ -81,7 +81,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
                       color: AppTheme.MAIN_LIGHT,
                       child: Icon(
                         Icons.arrow_forward_rounded,
-                        color: AppTheme.FONT_COLOR,
+                        color: kcFontColor,
                       ),
                     ),
                   ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/models/models.dart';
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
-
 import 'toggle_buttons_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -84,7 +84,7 @@ class ToggleButtonView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 17.sp,
                               color: model.isDelivery
-                                  ? AppTheme.FONT_COLOR
+                                  ? kcFontColor
                                   : AppTheme.FONT_GREY_COLOR,
                             ),
                           ).tr(),
@@ -101,7 +101,7 @@ class ToggleButtonView extends StatelessWidget {
                               fontSize: 17.sp,
                               color: model.isDelivery
                                   ? AppTheme.FONT_GREY_COLOR
-                                  : AppTheme.FONT_COLOR,
+                                  : kcFontColor,
                             ),
                           ).tr(),
                         ),

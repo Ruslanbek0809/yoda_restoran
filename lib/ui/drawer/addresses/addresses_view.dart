@@ -33,7 +33,7 @@ class AddressesView extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_back_rounded,
-                  color: AppTheme.FONT_COLOR,
+                  color: kcFontColor,
                   size: 25.w,
                 ),
                 onPressed: model.navToHomeByRemovingAll,

@@ -270,7 +270,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                   child: Icon(
                                     Icons.remove_rounded,
                                     size: 18.w,
-                                    color: AppTheme.FONT_COLOR,
+                                    color: kcFontColor,
                                   ),
                                 ),
                               ),
@@ -374,7 +374,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                   child: Icon(
                                     Icons.add_rounded,
                                     size: 18.w,
-                                    color: AppTheme.FONT_COLOR,
+                                    color: kcFontColor,
                                   ),
                                 ),
                               ),
