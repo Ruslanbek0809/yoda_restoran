@@ -15,6 +15,7 @@ import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'checkout/checkout_bottom_sheet_view_copy.dart';
 import 'checkout/checkout_bottom_sheet_view.dart';
 
 class CartView extends StatelessWidget {
@@ -283,23 +284,23 @@ class CartView extends StatelessWidget {
                                     'PASSED TIME nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
 
                                 if (model.hasLoggedInUser) {
+                                  /// CUSTOM BOTTOM SHEET BASED ON CONTENT
                                   await showFlexibleBottomSheet(
-                                    minHeight: 0,
-                                    initHeight: 0.8,
-                                    maxHeight: 0.8,
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
                                     duration: Duration(milliseconds: 250),
                                     context: context,
                                     bottomSheetColor: Colors.transparent,
                                     builder:
                                         (context, scrollController, offset) {
-                                      return CustomBarBottomSheet(
+                                      return CustomModalBottomSheet(
                                         child: CheckoutBottomSheetView(
                                           scrollController: scrollController,
                                           offset: offset,
                                         ),
                                       );
                                     },
-                                    anchors: [0, 0.8],
                                   );
                                 } else
                                   model.navToLoginView();
