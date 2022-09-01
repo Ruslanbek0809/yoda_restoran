@@ -37,7 +37,7 @@ class CheckoutViewModel extends ReactiveViewModel {
   String? deliveryDateFormatted = '';
 
   /// ASSIGNS default value for dateTime
-  void getOnModelReady() {
+  Future<void> getOnModelReady() async {
     // deliveryDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
@@ -46,6 +46,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     if (!cartRes!.resPaymentTypes!.contains(selectedPaymentType))
       _checkoutService
           .saveSelectedPaymentType(_hiveDbService.cartRes!.resPaymentTypes![0]);
+    await getAddresses();
   }
 
   /// UPDATES deliveryDateTime
@@ -65,6 +66,24 @@ class CheckoutViewModel extends ReactiveViewModel {
     deliveryDateTime = newDeliveryDateTime;
     deliveryDateFormatted = DateFormat('HH:mm').format(deliveryDateTime!);
     notifyListeners();
+  }
+
+//------------------------ CHECKOUT ADDRESSES ----------------------------//
+
+  List<Address>? get addresses => _checkoutService.addresses;
+
+  /// GETS addresses for CheckoutSelectAddressBottomSheetView. It is not fetched inside CheckoutSelectAddressBottomSheetView because of custom content based bottom sheet
+  Future<void> getAddresses() async {
+    log.i('getAddresses()');
+
+    try {
+      await runBusyFuture(
+        _checkoutService.getAddresses(),
+        busyObject: 'selectAddresses',
+      );
+    } catch (err) {
+      throw err;
+    }
   }
 
   /// SEARCHES and GETS promocode if FOUND

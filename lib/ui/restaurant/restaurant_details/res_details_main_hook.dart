@@ -378,8 +378,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 onTap: () async =>
                                     await showFlexibleBottomSheet(
                                   isExpand: false,
-                                  initHeight: 0.975,
-                                  maxHeight: 0.975,
+                                  initHeight: 0.95,
+                                  maxHeight: 0.95,
                                   duration: Duration(milliseconds: 250),
                                   context: context,
                                   bottomSheetColor: Colors.transparent,

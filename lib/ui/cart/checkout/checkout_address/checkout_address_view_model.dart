@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.locator.dart';
 import 'package:yoda_res/app/app.logger.dart';
 import 'package:yoda_res/generated/locale_keys.g.dart';
@@ -23,16 +23,16 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
       ? _tempSelectedAddress!
       : _checkoutService.selectedAddress!;
 
-  // /// SEARCHES and GETS promocode if found
-  Future<void> getAddresses() async {
-    log.i('getAddresses()');
+  // /// GETS addresses for CheckoutSelectAddressBottomSheetView
+  // Future<void> getAddresses() async {
+  //   log.i('getAddresses()');
 
-    try {
-      await runBusyFuture(_checkoutService.getAddresses());
-    } catch (err) {
-      throw err;
-    }
-  }
+  //   try {
+  //     await runBusyFuture(_checkoutService.getAddresses());
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
   /// Temporarily SETS _tempSelectedAddress
   void updateTempSelectedAddress(Address selectedAddress) {

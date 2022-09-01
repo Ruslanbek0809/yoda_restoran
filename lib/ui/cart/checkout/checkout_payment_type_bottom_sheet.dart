@@ -5,7 +5,6 @@ import 'package:yoda_res/generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import 'checkout_view_model.dart';
-import '../../widgets/custom_text_child_button.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -37,58 +36,56 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
             CustomModalInsideBottomSheet(),
 // --------------- PAYMENT TYPES -------------- //
             if (paymentTypes.isNotEmpty)
-              Padding(
-                padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: model.cartRes!.resPaymentTypes!.length,
-                  itemBuilder: (context, pos) {
-                    var paymentType = model.cartRes!.resPaymentTypes![pos];
-                    return Material(
-                      color: kcWhiteColor,
-                      child: InkWell(
-                        onTap: () =>
-                            model.updateTempSelectedPaymentType(paymentType),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 6.h),
-                          child: Row(
-                            children: [
-                              AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
-                                child: model.tempSelectedPaymentType!.id ==
-                                        paymentType.id
-                                    ? SvgPicture.asset(
-                                        'assets/checkCircle.svg',
-                                        color: kcGreenColor,
-                                        width: 25.w,
-                                      )
-                                    : SvgPicture.asset(
-                                        'assets/checkCircle.svg',
-                                        color: kcWhiteColor,
-                                        width: 25.w,
-                                      ),
-                              ),
-                              SizedBox(width: 10.w),
-                              Text(
-                                context.locale == context.supportedLocales[0]
-                                    ? paymentType.nameTk!
-                                    : paymentType.nameRu!,
-                                style: kts18Text,
-                              ),
-                            ],
-                          ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                itemCount: model.cartRes!.resPaymentTypes!.length,
+                itemBuilder: (context, pos) {
+                  var paymentType = model.cartRes!.resPaymentTypes![pos];
+                  return Material(
+                    color: kcWhiteColor,
+                    child: InkWell(
+                      onTap: () =>
+                          model.updateTempSelectedPaymentType(paymentType),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 6.h),
+                        child: Row(
+                          children: [
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              child: model.tempSelectedPaymentType!.id ==
+                                      paymentType.id
+                                  ? SvgPicture.asset(
+                                      'assets/checkCircle.svg',
+                                      color: kcGreenColor,
+                                      width: 25.w,
+                                    )
+                                  : SvgPicture.asset(
+                                      'assets/checkCircle.svg',
+                                      color: kcWhiteColor,
+                                      width: 25.w,
+                                    ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Text(
+                              context.locale == context.supportedLocales[0]
+                                  ? paymentType.nameTk!
+                                  : paymentType.nameRu!,
+                              style: kts18Text,
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      color: kcDividerColor,
-                      indent: 35.w,
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: kcDividerColor,
+                    indent: 35.w,
+                  );
+                },
               ),
             //--------------- PAYMENT BUTTON -------------- //
             Container(

@@ -49,7 +49,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.vertical(
                           top: Radius.circular(Constants.BORDER_RADIUS_20)),
-                      color: AppTheme.WHITE,
+                      color: kcWhiteColor,
                     ),
                     padding: EdgeInsets.fromLTRB(20.w, 22.h, 0.0, 20.h),
                     child: Column(
@@ -59,7 +59,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           children: [
                             SvgPicture.asset(
                               'assets/phone.svg',
-                              color: AppTheme.MAIN_DARK,
+                              color: kcSecondaryDarkColor,
                               width: 25.w,
                             ),
                             SizedBox(width: 15.w),
@@ -79,27 +79,23 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         Material(
                           color: kcWhiteColor,
                           child: InkWell(
-                            onTap: model.isDelivery
+                            /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                            onTap: model.isDelivery &&
+                                    !model.busy('selectAddresses')
                                 ? () async => await showFlexibleBottomSheet(
-                                      minHeight: 0,
-                                      initHeight: 0.31,
-                                      maxHeight: 0.975,
+                                      isExpand: false,
+                                      initHeight: 0.95,
+                                      maxHeight: 0.95,
                                       duration: Duration(milliseconds: 250),
                                       context: context,
                                       bottomSheetColor: Colors.transparent,
-                                      builder:
-                                          (context, scrollController, offset) {
-                                        return CustomBarBottomSheet(
-                                          child:
-                                              CheckoutSelectAddressBottomSheetView(
-                                            scrollController: scrollController,
-                                            offset: offset,
-                                          ),
-                                        );
-                                      },
-                                      anchors: [0, 0.31, 0.975],
+                                      builder: (context, scrollController,
+                                              offset) =>
+                                          CheckoutSelectAddressBottomSheetView(
+                                        scrollController: scrollController,
+                                        offset: offset,
+                                      ),
                                     )
-                                // model.showCustomSelectAddressBottomSheet
                                 : null,
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -143,11 +139,14 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(right: 20.w),
-                                          child: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            size: 20,
-                                            color: AppTheme.FONT_COLOR,
-                                          ),
+                                          child: model.busy('selectAddresses')
+                                              ? LoadingWidget(width: 20)
+                                              : Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  size: 20,
+                                                  color: AppTheme.FONT_COLOR,
+                                                ),
                                         ),
                                       ],
                                     )
@@ -391,21 +390,17 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             /// CUSTOM BOTTOM SHEET BASED ON CONTENT
                             onTap: () async => await showFlexibleBottomSheet(
                               isExpand: false,
-                              // minHeight: 0,
-                              initHeight: 0.3,
-                              maxHeight: 0.3,
+                              initHeight: 0.5,
+                              maxHeight: 0.5,
                               duration: Duration(milliseconds: 250),
                               context: context,
                               bottomSheetColor: Colors.transparent,
-                              builder: (context, scrollController, offset) {
-                                return CheckoutPaymentTypeBottomSheetView(
-                                  scrollController: scrollController,
-                                  offset: offset,
-                                );
-                              },
-                              // anchors: [0, 0.3],
+                              builder: (context, scrollController, offset) =>
+                                  CheckoutPaymentTypeBottomSheetView(
+                                scrollController: scrollController,
+                                offset: offset,
+                              ),
                             ),
-                            // onTap: model.showCustomPaymentTypeBottomSheet,
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Row(
