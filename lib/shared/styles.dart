@@ -35,7 +35,7 @@ TextStyle kts16DialogText = TextStyle(
 
 TextStyle kts10IconText = TextStyle(
   fontSize: 10.sp,
-  fontWeight: FontWeight.normal,
+  fontWeight: FontWeight.w600,
   color: kcIconColor,
 );
 

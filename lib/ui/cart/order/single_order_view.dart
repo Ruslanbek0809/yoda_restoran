@@ -122,7 +122,8 @@ class SingleOrderView extends StatelessWidget {
                         Row(
                           children: [
                             SvgPicture.asset(
-                              'assets/clock_light.svg',
+                              'assets/clock.svg',
+                              color: kcContactColor,
                               width: 18.w,
                             ),
                             SizedBox(width: 5.w),
@@ -205,13 +206,26 @@ class SingleOrderView extends StatelessWidget {
                   children: <Widget>[
                     //------------------ INNER PART ---------------------//
                     //------------------ ORDER TIMELINE ---------------------//
-                    SizedBox(
-                      height: 75.h,
-                      child: OrderTimeline(
-                        order: order,
-                        singleOrderViewModel: model,
+                    if (order.status! > 1)
+                      Container(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(bottom: 12.h, top: 10.h),
                       ),
-                    ),
+                    if (order.status! > 1)
+                      SizedBox(
+                        height: 40.h,
+                        child: OrderTimeline(
+                          order: order,
+                          singleOrderViewModel: model,
+                        ),
+                      ),
+                    if (order.status! > 1)
+                      Container(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(top: 14.h),
+                      ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
@@ -597,14 +611,14 @@ class OrderTimeline extends StatelessWidget {
     return Timeline.tileBuilder(
       theme: TimelineThemeData(
         direction: Axis.horizontal,
-        nodePosition: 0.65, // MOVES indicatorBuilder
+        nodePosition: 1, // MOVES indicatorBuilder
         connectorTheme: ConnectorThemeData(
           thickness: 3.0,
-          color: kcSecondaryLightColor,
+          color: kcOrderTimelineColor,
         ),
         indicatorTheme: IndicatorThemeData(size: 15.0),
       ),
-      padding: EdgeInsets.only(top: 10.h),
+      // padding: EdgeInsets.only(top: 10.h),
       builder: TimelineTileBuilder.connected(
         itemExtentBuilder: (_, __) =>
             1.sw / singleOrderViewModel.orderTimelines.length,
@@ -613,7 +627,7 @@ class OrderTimeline extends StatelessWidget {
           if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
             return SolidLineConnector(color: kcSecondaryDarkColor);
           else
-            return SolidLineConnector(color: kcSecondaryLightColor);
+            return SolidLineConnector(color: kcOrderTimelineColor);
         },
         indicatorBuilder: (_, index) {
           if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
@@ -627,39 +641,34 @@ class OrderTimeline extends StatelessWidget {
             );
           else
             return DotIndicator(
-              color: kcSecondaryLightColor,
+              color: kcOrderTimelineColor,
               child: SizedBox(),
             );
         },
 
         /// TOP content of indicator
         oppositeContentsBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                height: 0.25,
-                color: kcDividerColor,
-                margin: EdgeInsets.only(bottom: 6.h),
-              ),
-              Text(
-                singleOrderViewModel.orderTimelines[index].name,
-                style: kts10IconText,
-              ),
-              Text(
-                DateFormat('HH:mm').format(
-                    singleOrderViewModel.orderTimelines[index].orderStatusAt),
-                style: kts10IconText,
-              )
-            ],
-          );
+          if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
+            return Column(
+              children: [
+                Text(
+                  singleOrderViewModel.orderTimelines[index].name,
+                  style: kts10IconText,
+                ),
+                Text(
+                  DateFormat('HH:mm').format(
+                      singleOrderViewModel.orderTimelines[index].orderStatusAt),
+                  style: kts10IconText,
+                )
+              ],
+            );
+          else
+            SizedBox();
+          return SizedBox();
         },
 
         /// BOTTOM content of indicator
-        contentsBuilder: (_, __) => Container(
-          height: 0.25,
-          color: kcDividerColor,
-          margin: EdgeInsets.only(top: 12.h),
-        ),
+        contentsBuilder: (_, __) => SizedBox(),
       ),
     );
   }
