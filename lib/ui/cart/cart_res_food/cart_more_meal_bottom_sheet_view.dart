@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meal_view_model.dart';
+import '../../../generated/locale_keys.g.dart';
+import 'cart_more_meal_view_model.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';

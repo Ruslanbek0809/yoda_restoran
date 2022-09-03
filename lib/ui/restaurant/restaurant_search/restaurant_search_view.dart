@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/restaurant/meal/meal_view.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../../models/models.dart';
+import '../../../shared/shared.dart';
+import '../meal/meal_view.dart';
+import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'res_search_hook.dart';
 import 'restaurant_search_view_model.dart';

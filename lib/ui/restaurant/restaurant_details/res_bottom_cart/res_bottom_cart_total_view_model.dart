@@ -1,8 +1,8 @@
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/services/services.dart';
+import '../../../../app/app.locator.dart';
+import '../../../../app/app.logger.dart';
+import '../../../../models/hive_models/hive_models.dart';
+import '../../../../services/services.dart';
 
 /// This VM just to update quantity in realtime
 class ResBottomCartTotalViewModel extends ReactiveViewModel {

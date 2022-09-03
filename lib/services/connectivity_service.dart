@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../app/app.logger.dart';
+import '../utils/utils.dart';
 
 class ConnectivityService {
   final log = getLogger('ConnectivityService');

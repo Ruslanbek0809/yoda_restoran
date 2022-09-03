@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'exclusive_single.g.dart';
 
 @JsonSerializable(includeIfNull: true)

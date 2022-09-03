@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/restaurant.dart';
-import 'package:yoda_res/shared/shared.dart';
+import '../../../models/restaurant.dart';
+import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'home_search_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home_search_hook.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomeSearchView extends StatelessWidget {

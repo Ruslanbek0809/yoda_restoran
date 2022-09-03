@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import 'checkout_view_model.dart';
 import '../../../utils/utils.dart';

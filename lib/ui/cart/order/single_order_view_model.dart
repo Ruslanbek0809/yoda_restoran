@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../app/app.locator.dart';
+import '../../../app/app.logger.dart';
+import '../../../app/app.router.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../models/models.dart';
+import '../../../services/services.dart';
+import '../../../utils/utils.dart';
 
 import 'order_view_model.dart';
 

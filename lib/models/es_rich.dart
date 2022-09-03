@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yoda_res/models/models.dart';
+import 'models.dart';
 part 'es_rich.g.dart';
 
 @JsonSerializable(includeIfNull: true)

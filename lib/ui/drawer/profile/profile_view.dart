@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/app_colors.dart';
-import 'package:yoda_res/shared/styles.dart';
-import 'package:yoda_res/ui/drawer/profile/profile_hook.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../shared/app_colors.dart';
+import '../../../shared/styles.dart';
+import 'profile_hook.dart';
+import '../../../utils/utils.dart';
 import '../drawer_view.dart';
 import 'profile_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

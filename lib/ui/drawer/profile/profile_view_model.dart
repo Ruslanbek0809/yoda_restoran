@@ -1,13 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../app/app.locator.dart';
+import '../../../app/app.logger.dart';
+import '../../../app/app.router.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../models/hive_models/hive_models.dart';
+import '../../../services/services.dart';
+import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ProfileViewModel extends BaseViewModel {

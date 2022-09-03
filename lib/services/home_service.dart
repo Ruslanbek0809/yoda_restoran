@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/services/services.dart';
+import 'services.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';

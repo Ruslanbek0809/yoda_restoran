@@ -3,12 +3,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/app/app.locator.dart';
-import 'package:yoda_res/app/app.logger.dart';
-import 'package:yoda_res/app/app.router.dart';
-import 'package:yoda_res/services/services.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../app/app.locator.dart';
+import '../../app/app.logger.dart';
+import '../../app/app.router.dart';
+import '../../services/services.dart';
+import '../widgets/widgets.dart';
+import '../../utils/utils.dart';
 
 class DrawerViewModel extends BaseViewModel {
   final log = getLogger('DrawerViewModel');

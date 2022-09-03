@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'models.dart';
+
 part 'main_volume.g.dart';
 
 @JsonSerializable()

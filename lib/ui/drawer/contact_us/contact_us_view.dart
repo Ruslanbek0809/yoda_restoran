@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'contact_us_hook.dart';

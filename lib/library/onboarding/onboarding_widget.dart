@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/shared/app_colors.dart';
+import '../../shared/app_colors.dart';
 import 'circle_progress_bar.dart';
 import 'each_intro_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

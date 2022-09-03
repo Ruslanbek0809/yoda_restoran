@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 

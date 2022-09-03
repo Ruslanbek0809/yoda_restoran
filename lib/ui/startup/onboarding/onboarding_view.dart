@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/library/onboarding/onboarding.dart';
+import '../../../library/onboarding/onboarding.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 
 import 'onboarding_view_model.dart';
 

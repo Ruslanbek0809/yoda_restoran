@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:yoda_res/models/models.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../models/models.dart';
+import '../../../shared/shared.dart';
+import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

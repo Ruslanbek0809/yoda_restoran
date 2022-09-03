@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';

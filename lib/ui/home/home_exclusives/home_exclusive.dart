@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/home_view_model.dart';
+import '../home_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

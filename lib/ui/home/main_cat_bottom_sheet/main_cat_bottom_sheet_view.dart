@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/shared.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../shared/shared.dart';
 import '../../../models/models.dart';
 import '../../../utils/utils.dart';
 import 'main_cat_bottom_sort.dart';

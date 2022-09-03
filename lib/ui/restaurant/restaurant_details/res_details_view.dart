@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 import '../../../models/models.dart';
 import 'res_details_bottom_cart.dart';
 import 'res_details_main_hook.dart';

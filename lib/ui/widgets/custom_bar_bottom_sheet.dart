@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yoda_res/shared/shared.dart';
+import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 
 class CustomBarBottomSheet extends StatelessWidget {

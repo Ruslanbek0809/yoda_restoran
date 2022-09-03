@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../shared/shared.dart';
+import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 
 import 'addresses_view_model.dart';

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:yoda_res/models/hive_models/hive_models.dart';
-import 'package:yoda_res/services/services.dart';
+import '../models/hive_models/hive_models.dart';
+import 'services.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';

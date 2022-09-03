@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 import 'hive_models.dart';
 
 part 'hive_meal.g.dart';

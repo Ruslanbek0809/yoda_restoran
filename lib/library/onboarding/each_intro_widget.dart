@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../shared/shared.dart';
+import '../../ui/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EachIntroWidget extends StatelessWidget {

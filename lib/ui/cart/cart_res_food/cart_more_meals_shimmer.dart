@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../../shared/shared.dart';
+import '../../widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../utils/utils.dart';
 
 class CartMoreMealsShimmerWidget extends StatelessWidget {
   const CartMoreMealsShimmerWidget({

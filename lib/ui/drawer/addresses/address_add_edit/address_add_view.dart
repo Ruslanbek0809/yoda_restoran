@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/widgets/widgets.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../../../../shared/shared.dart';
+import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
 import 'address_add_hook.dart';
 import 'address_add_view_model.dart';

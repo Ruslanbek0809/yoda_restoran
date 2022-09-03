@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/home_exclusives/single_ex_bottom_cart.dart';
-import 'package:yoda_res/ui/home/home_exclusives/single_ex_webview.dart';
+import 'single_ex_bottom_cart.dart';
+import 'single_ex_webview.dart';
 import '../../../models/models.dart';
 import 'single_ex_view_model.dart';
 import 'single_ex_reachText.dart';

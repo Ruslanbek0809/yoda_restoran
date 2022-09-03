@@ -1,4 +1,4 @@
-import 'package:yoda_res/ui/cart/cart_res_food/cart_more_meal_view_model.dart';
+import '../ui/cart/cart_res_food/cart_more_meal_view_model.dart';
 import 'models.dart';
 
 class CartMoreMealBottomSheetData {

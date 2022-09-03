@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
+import '../../generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
 import '../../shared/styles.dart';
 import 'package:easy_localization/easy_localization.dart';

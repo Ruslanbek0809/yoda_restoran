@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/home/main_cat_bottom_sheet/main_cat_bottom_view_model.dart';
+import 'main_cat_bottom_view_model.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';

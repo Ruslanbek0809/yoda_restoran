@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/models/models.dart';
+import '../../generated/locale_keys.g.dart';
+import '../../models/models.dart';
 import '../../shared/shared.dart';
 import 'cart_view_model.dart';
 import '../toggle_buttons/toggle_buttons_view.dart';

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/startup/startup_viewmodel.dart';
+import 'startup_viewmodel.dart';
 
 class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
   final Widget child;

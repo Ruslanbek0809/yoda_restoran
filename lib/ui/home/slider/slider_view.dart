@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/shared/app_colors.dart';
+import '../../../shared/app_colors.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
 import 'slider_view_model.dart';

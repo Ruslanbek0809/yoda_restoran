@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:yoda_res/shared/shared.dart';
+import '../../shared/shared.dart';
 
 class EmptyWidget extends StatelessWidget {
   final String? text;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoda_res/shared/app_colors.dart';
+import '../../shared/app_colors.dart';
 import '../../utils/utils.dart';
 
 class CustomIconTextButton extends StatelessWidget {

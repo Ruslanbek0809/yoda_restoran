@@ -1,9 +1,11 @@
 import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'app/app.locator.dart';
 import 'models/hive_models/hive_models.dart';
 import 'ui/setup_bottom_sheet.dart';

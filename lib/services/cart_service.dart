@@ -1,4 +1,4 @@
-import 'package:yoda_res/models/hive_models/hive_models.dart';
+import '../models/hive_models/hive_models.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';

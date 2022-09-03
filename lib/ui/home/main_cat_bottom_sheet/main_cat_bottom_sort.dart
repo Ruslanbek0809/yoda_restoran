@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
-import 'package:yoda_res/shared/app_colors.dart';
-import 'package:yoda_res/shared/styles.dart';
-import 'package:yoda_res/ui/home/main_cat_bottom_sheet/main_cat_bottom_view_model.dart';
-import 'package:yoda_res/ui/widgets/button_loading.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../shared/app_colors.dart';
+import '../../../shared/styles.dart';
+import 'main_cat_bottom_view_model.dart';
+import '../../widgets/button_loading.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
