@@ -8,7 +8,6 @@ import '../../../models/models.dart';
 import 'single_order_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../shared/shared.dart';
-import '../../../utils/utils.dart';
 import 'order_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 

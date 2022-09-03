@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:timelines/timelines.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
@@ -17,9 +18,11 @@ import 'single_order_view_model.dart';
 class SingleOrderView extends StatelessWidget {
   final Order order;
   final OrderViewModel orderViewModel;
-  const SingleOrderView(
-      {Key? key, required this.order, required this.orderViewModel})
-      : super(key: key);
+  const SingleOrderView({
+    Key? key,
+    required this.order,
+    required this.orderViewModel,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleOrderViewModel>.reactive(
@@ -201,6 +204,14 @@ class SingleOrderView extends StatelessWidget {
                   expandedCrossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     //------------------ INNER PART ---------------------//
+                    //------------------ ORDER TIMELINE ---------------------//
+                    SizedBox(
+                      height: 75.h,
+                      child: OrderTimeline(
+                        order: order,
+                        singleOrderViewModel: model,
+                      ),
+                    ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
@@ -449,11 +460,6 @@ class SingleOrderView extends StatelessWidget {
                                             ).tr(),
                                         ],
                                       )
-                                    // : order.status == 4
-                                    //     ? Text(
-                                    //         LocaleKeys.reOrder,
-                                    //         style: ktsButton18Text,
-                                    //       ).tr()
                                     : model.busy(order.id) && order.status == 1
                                         ? ButtonLoading()
                                         : Text(
@@ -574,6 +580,87 @@ class SingleOrderView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class OrderTimeline extends StatelessWidget {
+  final Order order;
+  final SingleOrderViewModel singleOrderViewModel;
+  const OrderTimeline({
+    Key? key,
+    required this.order,
+    required this.singleOrderViewModel,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Timeline.tileBuilder(
+      theme: TimelineThemeData(
+        direction: Axis.horizontal,
+        nodePosition: 0.65, // MOVES indicatorBuilder
+        connectorTheme: ConnectorThemeData(
+          thickness: 3.0,
+          color: kcSecondaryLightColor,
+        ),
+        indicatorTheme: IndicatorThemeData(size: 15.0),
+      ),
+      padding: EdgeInsets.only(top: 10.h),
+      builder: TimelineTileBuilder.connected(
+        itemExtentBuilder: (_, __) =>
+            1.sw / singleOrderViewModel.orderTimelines.length,
+        itemCount: singleOrderViewModel.orderTimelines.length,
+        connectorBuilder: (_, index, __) {
+          if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
+            return SolidLineConnector(color: kcSecondaryDarkColor);
+          else
+            return SolidLineConnector(color: kcSecondaryLightColor);
+        },
+        indicatorBuilder: (_, index) {
+          if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
+            return DotIndicator(
+              color: kcSecondaryDarkColor,
+              child: Icon(
+                Icons.check,
+                color: kcWhiteColor,
+                size: 10.0,
+              ),
+            );
+          else
+            return DotIndicator(
+              color: kcSecondaryLightColor,
+              child: SizedBox(),
+            );
+        },
+
+        /// TOP content of indicator
+        oppositeContentsBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                height: 0.25,
+                color: kcDividerColor,
+                margin: EdgeInsets.only(bottom: 6.h),
+              ),
+              Text(
+                singleOrderViewModel.orderTimelines[index].name,
+                style: kts10IconText,
+              ),
+              Text(
+                DateFormat('HH:mm').format(
+                    singleOrderViewModel.orderTimelines[index].orderStatusAt),
+                style: kts10IconText,
+              )
+            ],
+          );
+        },
+
+        /// BOTTOM content of indicator
+        contentsBuilder: (_, __) => Container(
+          height: 0.25,
+          color: kcDividerColor,
+          margin: EdgeInsets.only(top: 12.h),
+        ),
+      ),
     );
   }
 }

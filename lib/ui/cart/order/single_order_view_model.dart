@@ -28,6 +28,14 @@ class SingleOrderViewModel extends BaseViewModel {
   String _orderStatusText = '';
   String get orderStatusText => _orderStatusText;
 
+  List<OrderTimeline> _orderTimelines = [
+    OrderTimeline(1, 'Default', DateTime.now()),
+    OrderTimeline(2, 'Default', DateTime.now()),
+    OrderTimeline(3, 'Default', DateTime.now()),
+    OrderTimeline(4, 'Default', DateTime.now()),
+  ];
+  List<OrderTimeline> get orderTimelines => _orderTimelines;
+
   /// Function that FIRES first in SingleOrderViewModel
   void initSingleOrder() {
     /// INITIALIZES _orderStatusText
@@ -55,6 +63,35 @@ class SingleOrderViewModel extends BaseViewModel {
     /// ASSIGNS initial value to _currentOrderExpansionState
     _currentOrderExpansionState =
         order.status == 2 || order.status == 1 ? true : false;
+
+    /// CREATES and INITIALIZES orderStatuses for this order
+    for (int i = 0; i < _orderTimelines.length; i++) {
+      /// INITIALIZES _orderStatusText
+      switch (_orderTimelines[i].id) {
+        case 1:
+          _orderTimelines[i].name = LocaleKeys.orderWaiting.tr();
+          _orderTimelines[i].orderStatusAt = order.createdAt!;
+          break;
+        case 2:
+          _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
+          _orderTimelines[i].orderStatusAt = order.kitchenAt!;
+          break;
+        case 3:
+          _orderTimelines[i].name = order.selfPickUp!
+              ? LocaleKeys.orderReady.tr()
+              : LocaleKeys.orderSent.tr();
+          _orderTimelines[i].orderStatusAt = order.driverAt!;
+          break;
+        case 4:
+          _orderTimelines[i].name = order.selfPickUp!
+              ? LocaleKeys.orderTaken.tr()
+              : LocaleKeys.orderDelivered.tr();
+          _orderTimelines[i].orderStatusAt = order.deliveredAt!;
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   /// ASSIGNS new value to _currentOrderExpansionState

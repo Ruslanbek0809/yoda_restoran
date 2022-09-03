@@ -14,6 +14,9 @@ class Order {
     this.dostawkaPrice,
     this.deliveryTime,
     this.createdAt,
+    this.kitchenAt,
+    this.driverAt,
+    this.deliveredAt,
     this.status,
     this.restaurant,
     this.promocode,
@@ -45,6 +48,15 @@ class Order {
 
   @JsonKey(name: 'createdAt')
   final DateTime? createdAt;
+
+  @JsonKey(name: 'kitchenAt')
+  final DateTime? kitchenAt;
+
+  @JsonKey(name: 'driverAt')
+  final DateTime? driverAt;
+
+  @JsonKey(name: 'deliveredAt')
+  final DateTime? deliveredAt;
 
   @JsonKey(name: 'status')
   final int? status;

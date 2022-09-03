@@ -1,5 +1,6 @@
-class OrderStatus {
+class OrderTimeline {
   final int id;
-  final String name;
-  OrderStatus(this.id, this.name);
+  String name;
+  DateTime orderStatusAt;
+  OrderTimeline(this.id, this.name, this.orderStatusAt);
 }
