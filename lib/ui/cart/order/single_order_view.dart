@@ -145,11 +145,11 @@ class SingleOrderView extends StatelessWidget {
                                   ),
 
                             /// if order.rating NOT null, SHOW orderStatusText here
-                            if (order.rating != null)
-                              Text(
-                                ' - ${model.orderStatusText}',
-                                style: kts14HelperText,
-                              ),
+                            // if (order.rating != null)
+                            Text(
+                              ' #${order.orderNumber!.substring(order.orderNumber!.length - 4)}',
+                              style: kts14HelperText,
+                            ),
                           ],
                         ),
                       ],
@@ -220,12 +220,12 @@ class SingleOrderView extends StatelessWidget {
                           singleOrderViewModel: model,
                         ),
                       ),
-                    if (order.status! > 1)
-                      Container(
-                        height: 0.25,
-                        color: kcDividerColor,
-                        margin: EdgeInsets.only(top: 14.h),
-                      ),
+                    // if (order.status! > 1)
+                    Container(
+                      height: 0.25,
+                      color: kcDividerColor,
+                      margin: EdgeInsets.only(top: 14.h),
+                    ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
@@ -272,7 +272,7 @@ class SingleOrderView extends StatelessWidget {
                             order.selfPickUp!
                                 ? Text(
                                     '0 TMT',
-                                    style: kts16Text,
+                                    style: ktsDefault16BoldText,
                                   )
                                 : order.status == 1
                                     ? Text(
@@ -284,7 +284,7 @@ class SingleOrderView extends StatelessWidget {
                                         ? SizedBox()
                                         : Text(
                                             '${formatNum(order.dostawkaPrice!)} TMT',
-                                            style: kts16Text,
+                                            style: ktsDefault16BoldText,
                                           ),
                           ],
                         ),
