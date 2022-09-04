@@ -29,7 +29,6 @@ class SingleOrderViewModel extends BaseViewModel {
   String get orderStatusText => _orderStatusText;
 
   List<OrderTimeline> _orderTimelines = [
-    OrderTimeline(1, 'Default', DateTime.now()),
     OrderTimeline(2, 'Default', DateTime.now()),
     OrderTimeline(3, 'Default', DateTime.now()),
     OrderTimeline(4, 'Default', DateTime.now()),
@@ -68,10 +67,6 @@ class SingleOrderViewModel extends BaseViewModel {
     for (int i = 0; i < _orderTimelines.length; i++) {
       /// INITIALIZES _orderStatusText
       switch (_orderTimelines[i].id) {
-        case 1:
-          _orderTimelines[i].name = LocaleKeys.orderWaiting.tr();
-          _orderTimelines[i].orderStatusAt = order.createdAt!;
-          break;
         case 2:
           _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
           _orderTimelines[i].orderStatusAt = order.kitchenAt!;
