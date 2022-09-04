@@ -178,7 +178,7 @@ class SingleOrderView extends StatelessWidget {
                               unratedColor: kcPrimaryColor.withOpacity(0.4),
                               itemSize: 14.sp,
                               itemBuilder: (context, _) => Icon(
-                                Icons.star,
+                                Icons.star_rounded,
                                 color: kcPrimaryColor,
                               ),
                               onRatingUpdate: (val) {},
@@ -210,7 +210,11 @@ class SingleOrderView extends StatelessWidget {
                       Container(
                         height: 0.25,
                         color: kcDividerColor,
-                        margin: EdgeInsets.only(bottom: 12.h, top: 10.h),
+                        margin: EdgeInsets.only(
+                          bottom: 12.h,
+                          top: 10.h,
+                          left: 15.w,
+                        ),
                       ),
                     if (order.status! > 1)
                       SizedBox(
@@ -224,7 +228,10 @@ class SingleOrderView extends StatelessWidget {
                     Container(
                       height: 0.25,
                       color: kcDividerColor,
-                      margin: EdgeInsets.only(top: 14.h),
+                      margin: EdgeInsets.only(
+                        top: 14.h,
+                        left: 15.w,
+                      ),
                     ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
@@ -379,37 +386,47 @@ class SingleOrderView extends StatelessWidget {
                     if (order.rating != null &&
                         order.rating!.feedback!.isNotEmpty)
                       Container(
-                        width: 1.sw,
-                        margin: EdgeInsets.symmetric(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(
+                          top: 8.h,
+                          bottom: 8.h,
+                          left: 15.w,
+                        ),
+                      ),
+                    if (order.rating != null &&
+                        order.rating!.feedback!.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 15.w,
                           vertical: 5.h,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 7.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: AppTheme().radius10,
-                          color: kcSecondaryLightColor,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              LocaleKeys.ratingYourFeedback,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: kcErrorEmptyColor,
-                                fontWeight: FontWeight.w600,
+                            RatingBar.builder(
+                              initialRating: order.rating!.value!,
+                              direction: Axis.horizontal,
+                              itemCount: 5,
+                              allowHalfRating: false,
+                              ignoreGestures: true,
+                              glow: false,
+                              unratedColor:
+                                  kcSecondaryDarkColor.withOpacity(0.4),
+                              itemSize: 14.sp,
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star_rounded,
+                                color: kcSecondaryDarkColor,
                               ),
-                            ).tr(),
-                            SizedBox(height: 5.h),
+                              onRatingUpdate: (val) {},
+                            ),
+                            SizedBox(height: 4.h),
                             Text(
                               order.rating!.feedback!,
                               maxLines: null,
                               style: TextStyle(
                                 fontSize: 14.sp,
-                                color: kcErrorEmptyColor,
+                                color: kcIconColor,
                               ),
                             ),
                           ],
