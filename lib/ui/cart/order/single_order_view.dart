@@ -328,59 +328,82 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    SizedBox(height: 15.h),
+                    //------------------ USER DETAILS (PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
+                    if (order.paymentType != null)
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              LocaleKeys.paymentType,
+                              style: kts16Text,
+                            ).tr(),
+                            Text(
+                              context.locale == context.supportedLocales[0]
+                                  ? order.paymentType!.nameTk!
+                                  : order.paymentType!.nameRu!,
+                              style: ktsDefault16BoldText,
+                            ),
+                          ],
+                        ),
+                      ),
                     //------------------ ORDER MEAL LIST ---------------------//
-                    Column(
-                      children: order.orderItems!.map((_orderItem) {
-                        String? _orderItemConcatenatedText =
-                            model.getConcatenateVolsCustoms(_orderItem);
+                    Padding(
+                      padding: EdgeInsets.only(top: 15.h),
+                      child: Column(
+                        children: order.orderItems!.map((_orderItem) {
+                          String? _orderItemConcatenatedText =
+                              model.getConcatenateVolsCustoms(_orderItem);
 
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            left: 16.w,
-                            bottom: 5.h,
-                            right: 15.w,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      _orderItem.mealJson!.name!,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              left: 16.w,
+                              bottom: 5.h,
+                              right: 15.w,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        _orderItem.mealJson!.name!,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: kts16Text,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
                                       style: kts16Text,
                                     ),
-                                  ),
-                                  Text(
-                                    '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
-                                    style: kts16Text,
-                                  ),
-                                ],
-                              ),
-                              //------------------ OrderItem concatenated text ---------------------//
-                              if (_orderItem.volumePrices!.isNotEmpty ||
-                                  _orderItem.costumizedMeals!.isNotEmpty)
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 10.w,
-                                    bottom: 0.h,
-                                    top: 2.h,
-                                  ),
-                                  child: Text(
-                                    _orderItemConcatenatedText!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: kts14HelperText,
-                                  ),
+                                  ],
                                 ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                                //------------------ OrderItem concatenated text ---------------------//
+                                if (_orderItem.volumePrices!.isNotEmpty ||
+                                    _orderItem.costumizedMeals!.isNotEmpty)
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 10.w,
+                                      bottom: 0.h,
+                                      top: 2.h,
+                                    ),
+                                    child: Text(
+                                      _orderItemConcatenatedText!,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: kts14HelperText,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                     //------------------ ORDER RATING BUTTON/FEEDBACK ---------------------//
                     if (order.rating != null &&

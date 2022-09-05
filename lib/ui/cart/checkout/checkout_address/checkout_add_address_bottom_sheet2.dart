@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import 'add_address_bottom_sheet_hook.dart';

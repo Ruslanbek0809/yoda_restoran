@@ -77,7 +77,7 @@ class AddAddressBottomSheetHook
           children: [
             Flexible(
               child: TextFormField(
-                controller: _houseController,
+                controller: _apartmentController,
                 style: kts18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
@@ -97,7 +97,7 @@ class AddAddressBottomSheetHook
             SizedBox(width: 10.w),
             Flexible(
               child: TextFormField(
-                controller: _apartmentController,
+                controller: _houseController,
                 style: kts18Text,
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,

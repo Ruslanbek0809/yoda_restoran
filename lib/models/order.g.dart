@@ -44,6 +44,13 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       rating: json['rating'] == null
           ? null
           : RatingModel.fromJson(json['rating'] as Map<String, dynamic>),
+      notes: json['notes'] as String?,
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
+      paymentType: json['paymentType'] == null
+          ? null
+          : PaymentType.fromJson(json['paymentType'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
@@ -64,4 +71,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'driver': instance.driver,
       'orderItems': instance.orderItems,
       'rating': instance.rating,
+      'notes': instance.notes,
+      'address': instance.address,
+      'paymentType': instance.paymentType,
     };

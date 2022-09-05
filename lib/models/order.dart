@@ -23,6 +23,9 @@ class Order {
     this.driver,
     this.orderItems,
     this.rating,
+    this.notes,
+    this.address,
+    this.paymentType,
   });
 
   @JsonKey(name: 'id')
@@ -75,6 +78,15 @@ class Order {
 
   @JsonKey(name: 'rating')
   final RatingModel? rating;
+
+  @JsonKey(name: 'notes')
+  final String? notes;
+
+  @JsonKey(name: 'address')
+  final Address? address;
+
+  @JsonKey(name: 'paymentType')
+  final PaymentType? paymentType;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 
