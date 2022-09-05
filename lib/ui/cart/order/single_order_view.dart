@@ -349,6 +349,69 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
+                    if (order.address != null)
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/house_outlined.svg',
+                              color: kcErrorEmptyColor,
+                              // width: 22.w,
+                            ),
+                            SizedBox(width: 7.w),
+                            Text(
+                              order.address!.street!,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: kts16Text,
+                            ),
+                            if (order.address?.apartment != null)
+                              Text(
+                                LocaleKeys.apartment,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ).tr(),
+                            if (order.address?.apartment != null)
+                              Text(
+                                ' ${order.address?.apartment},',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ),
+                            if (order.address?.house != null)
+                              Text(
+                                LocaleKeys.house,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ).tr(),
+                            if (order.address?.house != null)
+                              Text(
+                                ' ${order.address?.house},',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ),
+                            if (order.address?.floor != null)
+                              Text(
+                                LocaleKeys.floor,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ).tr(),
+                            if (order.address?.floor != null)
+                              Text(
+                                ' ${order.address?.floor}',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts16Text,
+                              ),
+                          ],
+                        ),
+                      ),
                     //------------------ ORDER MEAL LIST ---------------------//
                     Padding(
                       padding: EdgeInsets.only(top: 15.h),
