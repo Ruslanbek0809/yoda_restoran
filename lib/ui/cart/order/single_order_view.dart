@@ -412,6 +412,26 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
+
+                    if (order.notes != null)
+                      Padding(
+                        padding:
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/chat_circle_outlined.svg',
+                              color: kcErrorEmptyColor,
+                              // width: 22.w,
+                            ),
+                            SizedBox(width: 7.w),
+                            Text(
+                              order.notes!,
+                              style: kts16Text,
+                            ),
+                          ],
+                        ),
+                      ),
                     //------------------ ORDER MEAL LIST ---------------------//
                     Padding(
                       padding: EdgeInsets.only(top: 15.h),
