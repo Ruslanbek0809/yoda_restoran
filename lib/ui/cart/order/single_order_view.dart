@@ -328,11 +328,20 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
+                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    Container(
+                      height: 0.25,
+                      color: kcDividerColor,
+                      margin: EdgeInsets.only(
+                        top: 12.h,
+                        left: 15.w,
+                      ),
+                    ),
                     //------------------ USER DETAILS (PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
                     if (order.paymentType != null)
                       Padding(
                         padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -352,7 +361,7 @@ class SingleOrderView extends StatelessWidget {
                     if (order.address != null)
                       Padding(
                         padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
                         child: Row(
                           children: [
                             SvgPicture.asset(
@@ -361,80 +370,103 @@ class SingleOrderView extends StatelessWidget {
                               // width: 22.w,
                             ),
                             SizedBox(width: 7.w),
-                            Text(
-                              order.address!.street!,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: kts16Text,
+                            Flexible(
+                              child: Text(
+                                order.address!.street!,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: kts14IconText,
+                              ),
                             ),
                             if (order.address?.apartment != null)
-                              Text(
-                                LocaleKeys.apartment,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
-                              ).tr(),
+                              Flexible(
+                                child: Text(
+                                  LocaleKeys.apartment,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ).tr(),
+                              ),
                             if (order.address?.apartment != null)
-                              Text(
-                                ' ${order.address?.apartment},',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
+                              Flexible(
+                                child: Text(
+                                  ' ${order.address?.apartment},',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ),
                               ),
                             if (order.address?.house != null)
-                              Text(
-                                LocaleKeys.house,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
-                              ).tr(),
+                              Flexible(
+                                child: Text(
+                                  LocaleKeys.house,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ).tr(),
+                              ),
                             if (order.address?.house != null)
-                              Text(
-                                ' ${order.address?.house},',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
+                              Flexible(
+                                child: Text(
+                                  ' ${order.address?.house},',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ),
                               ),
                             if (order.address?.floor != null)
-                              Text(
-                                LocaleKeys.floor,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
-                              ).tr(),
+                              Flexible(
+                                child: Text(
+                                  LocaleKeys.floor,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ).tr(),
+                              ),
                             if (order.address?.floor != null)
-                              Text(
-                                ' ${order.address?.floor}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts16Text,
+                              Flexible(
+                                child: Text(
+                                  ' ${order.address?.floor}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: kts14IconText,
+                                ),
                               ),
                           ],
                         ),
                       ),
-
                     if (order.notes != null)
                       Padding(
                         padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
                         child: Row(
                           children: [
                             SvgPicture.asset(
                               'assets/chat_circle_outlined.svg',
                               color: kcErrorEmptyColor,
-                              // width: 22.w,
                             ),
                             SizedBox(width: 7.w),
-                            Text(
-                              order.notes!,
-                              style: kts16Text,
+                            Flexible(
+                              child: Text(
+                                order.notes!,
+                                style: kts14IconText,
+                              ),
                             ),
                           ],
                         ),
                       ),
+                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    Container(
+                      height: 0.25,
+                      color: kcDividerColor,
+                      margin: EdgeInsets.only(
+                        top: 12.h,
+                        left: 15.w,
+                      ),
+                    ),
                     //------------------ ORDER MEAL LIST ---------------------//
                     Padding(
-                      padding: EdgeInsets.only(top: 15.h),
+                      padding: EdgeInsets.only(top: 12.h),
                       child: Column(
                         children: order.orderItems!.map((_orderItem) {
                           String? _orderItemConcatenatedText =
@@ -471,11 +503,7 @@ class SingleOrderView extends StatelessWidget {
                                 if (_orderItem.volumePrices!.isNotEmpty ||
                                     _orderItem.costumizedMeals!.isNotEmpty)
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                      left: 10.w,
-                                      bottom: 0.h,
-                                      top: 2.h,
-                                    ),
+                                    padding: EdgeInsets.only(top: 2.h),
                                     child: Text(
                                       _orderItemConcatenatedText!,
                                       overflow: TextOverflow.ellipsis,
