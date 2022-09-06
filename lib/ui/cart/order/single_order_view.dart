@@ -463,57 +463,70 @@ class SingleOrderView extends StatelessWidget {
                         left: 15.w,
                       ),
                     ),
-                    //------------------ ORDER MEAL LIST ---------------------//
-                    Padding(
-                      padding: EdgeInsets.only(top: 12.h),
-                      child: Column(
-                        children: order.orderItems!.map((_orderItem) {
-                          String? _orderItemConcatenatedText =
-                              model.getConcatenateVolsCustoms(_orderItem);
 
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              left: 16.w,
-                              bottom: 5.h,
-                              right: 15.w,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        _orderItem.mealJson!.name!,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: kts16Text,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
+                    //------------------ ORDERS TOTAL PRICE ---------------------//
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 10.h,
+                        bottom: 4.h,
+                        right: 15.w,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '${formatNum(order.totPrice!)} TMT',
+                          style: ktsDefault18SemiBoldText,
+                        ),
+                      ),
+                    ),
+                    //------------------ ORDER MEAL LIST ---------------------//
+                    Column(
+                      children: order.orderItems!.map((_orderItem) {
+                        String? _orderItemConcatenatedText =
+                            model.getConcatenateVolsCustoms(_orderItem);
+
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            left: 15.w,
+                            bottom: 5.h,
+                            right: 15.w,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _orderItem.mealJson!.name!,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                       style: kts16Text,
                                     ),
-                                  ],
-                                ),
-                                //------------------ OrderItem concatenated text ---------------------//
-                                if (_orderItem.volumePrices!.isNotEmpty ||
-                                    _orderItem.costumizedMeals!.isNotEmpty)
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 2.h),
-                                    child: Text(
-                                      _orderItemConcatenatedText!,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: kts14HelperText,
-                                    ),
                                   ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                                  Text(
+                                    '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
+                                    style: kts16Text,
+                                  ),
+                                ],
+                              ),
+                              //------------------ OrderItem concatenated text ---------------------//
+                              if (_orderItem.volumePrices!.isNotEmpty ||
+                                  _orderItem.costumizedMeals!.isNotEmpty)
+                                Padding(
+                                  padding: EdgeInsets.only(top: 2.h),
+                                  child: Text(
+                                    _orderItemConcatenatedText!,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: kts14HelperText,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
                     ),
                     //------------------ ORDER RATING BUTTON/FEEDBACK ---------------------//
                     if (order.rating != null &&
@@ -522,7 +535,7 @@ class SingleOrderView extends StatelessWidget {
                         height: 0.25,
                         color: kcDividerColor,
                         margin: EdgeInsets.only(
-                          top: 8.h,
+                          top: 10.h,
                           bottom: 8.h,
                           left: 15.w,
                         ),
