@@ -50,24 +50,27 @@ class MealBottomSheetView extends StatelessWidget {
                 width: 1.sw,
               ),
             ),
-            //----------- DESCRIPTION --------------//
+            //----------- MEAL INFO --------------//
             Container(
               color: kcSecondaryLightColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15.w, 10.h, 10.w, 15.h),
-                    child: Text(
-                      meal.description!,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: kcBottomDescColor,
+                  //----------- DESCRIPTION --------------//
+                  if (meal.description!.isNotEmpty)
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(15.w, 10.h, 10.w, 15.h),
+                      child: Text(
+                        meal.description!,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: kcBottomDescColor,
+                        ),
                       ),
                     ),
-                  ),
                   //----------- MAIN VOLUME LIST --------------//
-                  if (meal.gVolumes!.isNotEmpty) Divider(color: kcDividerColor),
+                  if (meal.gVolumes!.isNotEmpty && meal.description!.isNotEmpty)
+                    Divider(color: kcDividerColor),
                   if (meal.gVolumes!.isNotEmpty)
                     ...meal.gVolumes!
                         .mapIndexed<Widget>(
