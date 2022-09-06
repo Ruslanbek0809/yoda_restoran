@@ -300,17 +300,19 @@ class SingleOrderView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             15.w,
-                            order.selfPickUp! ? 15.h : 17.h,
+                            order.selfPickUp! ? 14.h : 16.h,
                             15.w,
-                            order.selfPickUp! ? 0.h : 2.h),
+                            order.selfPickUp! ? 2.h : 4.h),
                         child: Row(
+                          textBaseline: TextBaseline.ideographic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
                                 SvgPicture.asset(
                                   'assets/percent.svg',
-                                  color: kcSecondaryDarkColor,
+                                  color: kcGreenColor,
                                   width: 22.w,
                                 ),
                                 SizedBox(width: 7.w),
@@ -321,8 +323,8 @@ class SingleOrderView extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              '${formatNum(order.totPrice!)} TMT -${formatNum(model.getPromocodePrice())} TMT',
-                              style: kts16Text,
+                              '-${formatNum(model.getPromocodePrice())} TMT',
+                              style: ktsDefault16BoldText,
                             ),
                           ],
                         ),
@@ -434,7 +436,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    if (order.notes != null)
+                    if (order.notes != null && order.notes!.isNotEmpty)
                       Padding(
                         padding:
                             EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
@@ -790,6 +792,7 @@ class OrderTimeline extends StatelessWidget {
       ),
       // padding: EdgeInsets.only(top: 10.h),
       builder: TimelineTileBuilder.connected(
+        connectionDirection: ConnectionDirection.before,
         itemExtentBuilder: (_, __) =>
             1.sw / singleOrderViewModel.orderTimelines.length,
         itemCount: singleOrderViewModel.orderTimelines.length,

@@ -69,19 +69,22 @@ class SingleOrderViewModel extends BaseViewModel {
       switch (_orderTimelines[i].id) {
         case 2:
           _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
-          _orderTimelines[i].orderStatusAt = order.kitchenAt!;
+          if (order.kitchenAt != null)
+            _orderTimelines[i].orderStatusAt = order.kitchenAt!;
           break;
         case 3:
           _orderTimelines[i].name = order.selfPickUp!
               ? LocaleKeys.orderReady.tr()
               : LocaleKeys.orderSent.tr();
-          _orderTimelines[i].orderStatusAt = order.driverAt!;
+          if (order.driverAt != null)
+            _orderTimelines[i].orderStatusAt = order.driverAt!;
           break;
         case 4:
           _orderTimelines[i].name = order.selfPickUp!
               ? LocaleKeys.orderTaken.tr()
               : LocaleKeys.orderDelivered.tr();
-          _orderTimelines[i].orderStatusAt = order.deliveredAt!;
+          if (order.deliveredAt != null)
+            _orderTimelines[i].orderStatusAt = order.deliveredAt!;
           break;
         default:
           break;
