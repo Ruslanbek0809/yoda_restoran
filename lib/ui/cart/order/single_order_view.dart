@@ -224,7 +224,6 @@ class SingleOrderView extends StatelessWidget {
                           singleOrderViewModel: model,
                         ),
                       ),
-                    // if (order.status! > 1)
                     Container(
                       height: 0.25,
                       color: kcDividerColor,
@@ -680,61 +679,68 @@ class SingleOrderView extends StatelessWidget {
 
                     //------------------ ORDER DELETE BUTTON ---------------------//
                     if (order.status == 4)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            primary:
-                                kcSecondaryLightColor, // ripple effect color
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: AppTheme().radius10),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 6.h, horizontal: 15.w),
-                          ),
-                          child: model.busy(order.id) && order.status == 4
-                              ? ButtonLoading(color: kcPrimaryColor)
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/trash.svg',
-                                      color: kcDialogColor,
-                                      width: 20.sp,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 15.w),
+                          child: SizedBox(
+                            width: 0.35.sw,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: kcOrderDeleteButtonBackColor,
+                                primary:
+                                    kcSecondaryLightColor, // ripple effect color
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: AppTheme().radius10),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 6.h, horizontal: 15.w),
+                              ),
+                              child: model.busy(order.id) && order.status == 4
+                                  ? ButtonLoading(color: kcPrimaryColor)
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/trash.svg',
+                                          color: kcDialogColor,
+                                          width: 16.sp,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 5.w),
+                                          child: Text(
+                                            LocaleKeys.deleteOrder,
+                                            style: kts12DialogText,
+                                          ).tr(),
+                                        )
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 7.w),
-                                      child: Text(
-                                        LocaleKeys.deleteOrder,
-                                        style: kts16DialogText,
-                                      ).tr(),
-                                    )
-                                  ],
-                                ),
-                          onPressed: () async =>
-                              await model.showOrderDeleteDialog(
-                            () async {
-                              showErrorFlashBar(
-                                context: context,
-                                msg: LocaleKeys.orderDeleteSuccess.tr(),
-                                margin: EdgeInsets.only(
-                                  left: 0.1.sw,
-                                  right: 0.1.sw,
-                                  bottom: 0.05.sh,
-                                ),
-                              );
-                            },
-                            () async {
-                              showErrorFlashBar(
-                                context: context,
-                                margin: EdgeInsets.only(
-                                  left: 0.1.sw,
-                                  right: 0.1.sw,
-                                  bottom: 0.05.sh,
-                                ),
-                              );
-                            },
+                              onPressed: () async =>
+                                  await model.showOrderDeleteDialog(
+                                () async {
+                                  showErrorFlashBar(
+                                    context: context,
+                                    msg: LocaleKeys.orderDeleteSuccess.tr(),
+                                    margin: EdgeInsets.only(
+                                      left: 0.1.sw,
+                                      right: 0.1.sw,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                                () async {
+                                  showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 0.1.sw,
+                                      right: 0.1.sw,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       ),

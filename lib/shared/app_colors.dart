@@ -17,5 +17,6 @@ const Color kcActiveDotColor = Color(0xFFBBBBBB);
 const Color kcRedColor = Color(0xFFE64F3A);
 const Color kcContactColor = Color(0xFF999999);
 const Color kcOrderTimelineColor = Color(0xFFEEEEEE);
+const Color kcOrderDeleteButtonBackColor = Color(0xFFFAFAFA);
 const Color kcErrorEmptyColor = Color(0xFF666666);
 const Color kcIconColor = Color(0xFF333333);
