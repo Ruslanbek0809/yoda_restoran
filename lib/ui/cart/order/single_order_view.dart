@@ -329,15 +329,16 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ SINGLE ORDER DIVIDER ---------------------//
-                    Container(
-                      height: 0.25,
-                      color: kcDividerColor,
-                      margin: EdgeInsets.only(
-                        top: 12.h,
-                        left: 15.w,
+                    //------------------ PROMOCODE SINGLE ORDER DIVIDER ---------------------//
+                    if (order.promocode != null)
+                      Container(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(
+                          top: 12.h,
+                          left: 15.w,
+                        ),
                       ),
-                    ),
                     //------------------ USER DETAILS (PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
                     if (order.paymentType != null)
                       Padding(
@@ -618,20 +619,15 @@ class SingleOrderView extends StatelessWidget {
                                       ).tr()
                                     ],
                                   )
-                                : order.status == 3
+                                : order.status == 3 && !order.selfPickUp!
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          !order.selfPickUp!
-                                              ? Text(
-                                                  LocaleKeys.driver,
-                                                  style: ktsButton18Text,
-                                                ).tr()
-                                              : Text(
-                                                  LocaleKeys.selfPickUp,
-                                                  style: ktsButton18Text,
-                                                ).tr(),
+                                          Text(
+                                            LocaleKeys.driver,
+                                            style: ktsButton18Text,
+                                          ).tr(),
                                           if (!order.selfPickUp!)
                                             Text(
                                               ' ${order.driver!.mobile}',
@@ -680,6 +676,8 @@ class SingleOrderView extends StatelessWidget {
                                   if (!order.selfPickUp!)
                                     await model.makePhoneCallToDriver(
                                         order.driver!.mobile!);
+                                  else
+                                    await model.showCancelAcceptedOrderDialog();
                                   break;
                                 case 4:
                                   await model.showRateOrderDialog(order);
