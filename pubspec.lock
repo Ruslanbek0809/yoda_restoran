@@ -42,7 +42,7 @@ packages:
       name: awesome_dialog
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1"
+    version: "3.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -463,15 +463,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  flare_flutter:
-    dependency: "direct overridden"
-    description:
-      path: flare_flutter
-      ref: HEAD
-      resolved-ref: e90219f457602c61afee0b5f6cec2d66bd395e01
-      url: "https://github.com/tsinis/Flare-Flutter"
-    source: git
-    version: "3.0.2"
   flash:
     dependency: "direct main"
     description:
@@ -1094,6 +1085,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  rive:
+    dependency: transitive
+    description:
+      name: rive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.1"
   rxdart:
     dependency: transitive
     description:
@@ -1248,13 +1246,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  simple_animations:
-    dependency: transitive
-    description:
-      name: simple_animations
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.2.0"
   simple_shadow:
     dependency: "direct main"
     description:
