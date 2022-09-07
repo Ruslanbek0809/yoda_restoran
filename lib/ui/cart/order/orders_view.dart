@@ -47,11 +47,7 @@ class _OrdersViewState extends State<OrdersView> {
           model.log.v(
               'notificationData JSON title: ${noti.title}, status: ${noti.status}');
 
-          /// NO need to reload when notification status is 4. Else, RELOAD
-          if (noti.status != '4') {
-            /// REINITIALIZES ORDERS
-            await model.getInitialOrders();
-          }
+          await model.getInitialOrders();
         });
 
         /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
