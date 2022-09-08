@@ -231,7 +231,7 @@ class SingleOrderView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              LocaleKeys.phone,
+                              LocaleKeys.orderPhone,
                               style: kts16Text,
                             ).tr(),
                             Text(

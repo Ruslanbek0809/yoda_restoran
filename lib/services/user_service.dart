@@ -502,7 +502,7 @@ class UserService {
     try {
       Response response =
           await _apiRoot.dio.get('api/paginatedorder?page=$page');
-      log.v('RESPONSE: api/paginatedorder/ => ${response.data}');
+      // log.v('RESPONSE: api/paginatedorder/ => ${response.data}');
 
       if (response.data['results'] != null) {
         for (final _paginatedOrder in response.data['results'])
