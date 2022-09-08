@@ -118,15 +118,9 @@ class SingleOrderView extends StatelessWidget {
                           style: ktsDefault18SemiBoldText,
                         ),
                         SizedBox(height: 3.h),
-                        //------------------ DATE and STATUS ---------------------//
+                        //------------------ ORDER CREATED AT DATE and ORDER STATUS ---------------------//
                         Row(
                           children: [
-                            SvgPicture.asset(
-                              'assets/clock.svg',
-                              color: kcContactColor,
-                              width: 18.w,
-                            ),
-                            SizedBox(width: 5.w),
                             order.deliveryTime == null
                                 ? order.status == 4
                                     ? Text(
@@ -143,9 +137,6 @@ class SingleOrderView extends StatelessWidget {
                                         .format(order.deliveryTime!.toLocal()),
                                     style: kts14Text,
                                   ),
-
-                            /// if order.rating NOT null, SHOW orderStatusText here
-                            // if (order.rating != null)
                             Text(
                               ' #${order.orderNumber!.substring(order.orderNumber!.length - 4)}',
                               style: kts14HelperText,
@@ -224,14 +215,15 @@ class SingleOrderView extends StatelessWidget {
                           singleOrderViewModel: model,
                         ),
                       ),
-                    Container(
-                      height: 0.25,
-                      color: kcDividerColor,
-                      margin: EdgeInsets.only(
-                        top: 14.h,
-                        left: 15.w,
+                    if (order.status! > 1)
+                      Container(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(
+                          top: 14.h,
+                          left: 15.w,
+                        ),
                       ),
-                    ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
@@ -350,6 +342,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
                     //------------------ USER DETAILS (PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
+
                     if (order.paymentType != null)
                       Padding(
                         padding:
