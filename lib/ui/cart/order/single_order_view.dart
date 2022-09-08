@@ -240,28 +240,38 @@ class SingleOrderView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              LocaleKeys.driver,
+                              LocaleKeys.phone,
                               style: kts16Text,
                             ).tr(),
-                            order.selfPickUp!
-                                ? Text(
-                                    '-',
-                                    style: kts16Text,
-                                  )
-                                : order.status == 1
-                                    ? Text(
-                                        LocaleKeys.notAssignedYet,
-                                        style: kts16Text,
-                                        overflow: TextOverflow.visible,
-                                      ).tr()
-                                    : order.driver == null ||
-                                            (order.driver!.mobile == null ||
-                                                order.driver!.mobile!.isEmpty)
-                                        ? SizedBox()
-                                        : Text(
-                                            order.driver!.mobile!,
-                                            style: kts16Text,
-                                          ),
+                            Text(
+                              order.restaurant!.phoneNumber != null
+                                  ? order.restaurant!.phoneNumber.toString()
+                                  : '',
+                              style: kts16Text,
+                            ),
+                            // Text(
+                            //   LocaleKeys.driver,
+                            //   style: kts16Text,
+                            // ).tr(),
+                            // order.selfPickUp!
+                            //     ? Text(
+                            //         '-',
+                            //         style: kts16Text,
+                            //       )
+                            //     : order.status == 1
+                            //         ? Text(
+                            //             LocaleKeys.notAssignedYet,
+                            //             style: kts16Text,
+                            //             overflow: TextOverflow.visible,
+                            //           ).tr()
+                            //         : order.driver == null ||
+                            //                 (order.driver!.mobile == null ||
+                            //                     order.driver!.mobile!.isEmpty)
+                            //             ? SizedBox()
+                            //             : Text(
+                            //                 order.driver!.mobile!,
+                            //                 style: kts16Text,
+                            //               ),
                           ],
                         ),
                       ),
