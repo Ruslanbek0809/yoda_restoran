@@ -619,20 +619,32 @@ class SingleOrderView extends StatelessWidget {
                                       ).tr()
                                     ],
                                   )
-                                : order.status == 3 && !order.selfPickUp!
+                                : order.status == 3
+                                    //  && !order.selfPickUp!
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            LocaleKeys.driver,
+                                            LocaleKeys.phone,
                                             style: ktsButton18Text,
                                           ).tr(),
-                                          if (!order.selfPickUp!)
-                                            Text(
-                                              ' ${order.driver!.mobile}',
-                                              style: ktsButton18Text,
-                                            ).tr(),
+                                          Text(
+                                            order.restaurant!.phoneNumber !=
+                                                    null
+                                                ? ' ${order.restaurant!.phoneNumber}'
+                                                : '',
+                                            style: ktsButton18Text,
+                                          ).tr(),
+                                          // Text(
+                                          //   LocaleKeys.driver,
+                                          //   style: ktsButton18Text,
+                                          // ).tr(),
+                                          // if (!order.selfPickUp!)
+                                          //   Text(
+                                          //     ' ${order.driver!.mobile}',
+                                          //     style: ktsButton18Text,
+                                          //   ).tr(),
                                         ],
                                       )
                                     : model.busy(order.id) && order.status == 1
@@ -673,11 +685,14 @@ class SingleOrderView extends StatelessWidget {
                                   await model.showCancelAcceptedOrderDialog();
                                   break;
                                 case 3:
-                                  if (!order.selfPickUp!)
+                                  if (order.restaurant?.phoneNumber != null)
                                     await model.makePhoneCallToDriver(
-                                        order.driver!.mobile!);
-                                  else
-                                    await model.showCancelAcceptedOrderDialog();
+                                        order.restaurant!.phoneNumber!);
+                                  // if (!order.selfPickUp!)
+                                  //   await model.makePhoneCallToDriver(
+                                  //       order.driver!.mobile!);
+                                  // else
+                                  //   await model.showCancelAcceptedOrderDialog();
                                   break;
                                 case 4:
                                   await model.showRateOrderDialog(order);
