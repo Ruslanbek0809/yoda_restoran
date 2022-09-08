@@ -215,19 +215,18 @@ class SingleOrderView extends StatelessWidget {
                           singleOrderViewModel: model,
                         ),
                       ),
-                    if (order.status! > 1)
-                      Container(
-                        height: 0.25,
-                        color: kcDividerColor,
-                        margin: EdgeInsets.only(
-                          top: 14.h,
-                          left: 15.w,
-                        ),
+                    Container(
+                      height: 0.25,
+                      color: kcDividerColor,
+                      margin: EdgeInsets.only(
+                        top: 14.h,
+                        left: 15.w,
                       ),
+                    ),
                     //------------------ DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
-                        padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 5.h),
+                        padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 6.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -331,8 +330,8 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ PROMOCODE SINGLE ORDER DIVIDER ---------------------//
-                    if (order.promocode != null)
+                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    if (!order.selfPickUp! || order.promocode != null)
                       Container(
                         height: 0.25,
                         color: kcDividerColor,
@@ -341,8 +340,41 @@ class SingleOrderView extends StatelessWidget {
                           left: 15.w,
                         ),
                       ),
-                    //------------------ USER DETAILS (PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
-
+                    //------------------ USER DETAILS (DELIVERY DATETIME, PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
+                    Padding(
+                      padding:
+                          EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          !order.selfPickUp!
+                              ? Text(
+                                  LocaleKeys.deliveryTime,
+                                  style: kts16Text,
+                                ).tr()
+                              : Text(
+                                  LocaleKeys.preparationOrderTime,
+                                  style: kts16Text,
+                                ).tr(),
+                          order.deliveryTime == null
+                              ? order.status == 4
+                                  ? Text(
+                                      DateFormat('HH:mm, dd.MM.yyyy')
+                                          .format(order.createdAt!.toLocal()),
+                                      style: ktsDefault16BoldText,
+                                    )
+                                  : Text(
+                                      LocaleKeys.now,
+                                      style: ktsDefault16BoldText,
+                                    ).tr()
+                              : Text(
+                                  DateFormat('HH:mm, dd.MM.yyyy')
+                                      .format(order.deliveryTime!.toLocal()),
+                                  style: ktsDefault16BoldText,
+                                ),
+                        ],
+                      ),
+                    ),
                     if (order.paymentType != null)
                       Padding(
                         padding:
@@ -372,7 +404,6 @@ class SingleOrderView extends StatelessWidget {
                             SvgPicture.asset(
                               'assets/house_outlined.svg',
                               color: kcErrorEmptyColor,
-                              // width: 22.w,
                             ),
                             SizedBox(width: 7.w),
                             Flexible(

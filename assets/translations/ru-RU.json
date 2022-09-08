@@ -50,6 +50,7 @@
     "no": "Отмена",
     "deliveryTime": "Время доставки: ",
     "preparationTime": "Приготовить к: ",
+    "preparationOrderTime": "Приготовить: ",
     "now": "Сейчас",
     "today": "Сегодня",
     "tomorrow": "Завтра",
