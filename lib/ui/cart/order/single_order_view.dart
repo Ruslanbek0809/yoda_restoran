@@ -296,6 +296,16 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
+                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    if (!order.selfPickUp!)
+                      Container(
+                        height: 0.25,
+                        color: kcDividerColor,
+                        margin: EdgeInsets.only(
+                          top: 14.h,
+                          left: 15.w,
+                        ),
+                      ),
                     //------------------ PROMOCODE PART ---------------------//
                     if (order.promocode != null)
                       Padding(
@@ -395,7 +405,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    if (order.address != null)
+                    if (order.address != null && order.address!.isNotEmpty)
                       Padding(
                         padding:
                             EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
@@ -408,66 +418,74 @@ class SingleOrderView extends StatelessWidget {
                             SizedBox(width: 7.w),
                             Flexible(
                               child: Text(
-                                order.address!.street!,
+                                order.address!,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: kts14IconText,
                               ),
                             ),
-                            if (order.address?.apartment != null)
-                              Flexible(
-                                child: Text(
-                                  LocaleKeys.apartment,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ).tr(),
-                              ),
-                            if (order.address?.apartment != null)
-                              Flexible(
-                                child: Text(
-                                  ' ${order.address?.apartment},',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ),
-                              ),
-                            if (order.address?.house != null)
-                              Flexible(
-                                child: Text(
-                                  LocaleKeys.house,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ).tr(),
-                              ),
-                            if (order.address?.house != null)
-                              Flexible(
-                                child: Text(
-                                  ' ${order.address?.house},',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ),
-                              ),
-                            if (order.address?.floor != null)
-                              Flexible(
-                                child: Text(
-                                  LocaleKeys.floor,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ).tr(),
-                              ),
-                            if (order.address?.floor != null)
-                              Flexible(
-                                child: Text(
-                                  ' ${order.address?.floor}',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: kts14IconText,
-                                ),
-                              ),
+                            // Flexible(
+                            //   child: Text(
+                            //     order.address!.street!,
+                            //     maxLines: 2,
+                            //     overflow: TextOverflow.ellipsis,
+                            //     style: kts14IconText,
+                            //   ),
+                            // ),
+                            // if (order.address?.apartment != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       LocaleKeys.apartment,
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ).tr(),
+                            //   ),
+                            // if (order.address?.apartment != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       ' ${order.address?.apartment},',
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ),
+                            //   ),
+                            // if (order.address?.house != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       LocaleKeys.house,
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ).tr(),
+                            //   ),
+                            // if (order.address?.house != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       ' ${order.address?.house},',
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ),
+                            //   ),
+                            // if (order.address?.floor != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       LocaleKeys.floor,
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ).tr(),
+                            //   ),
+                            // if (order.address?.floor != null)
+                            //   Flexible(
+                            //     child: Text(
+                            //       ' ${order.address?.floor}',
+                            //       maxLines: 2,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       style: kts14IconText,
+                            //     ),
+                            //   ),
                           ],
                         ),
                       ),
@@ -655,32 +673,12 @@ class SingleOrderView extends StatelessWidget {
                                   )
                                 : order.status == 3
                                     //  && !order.selfPickUp!
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            LocaleKeys.phone,
-                                            style: ktsButton18Text,
-                                          ).tr(),
-                                          Text(
-                                            order.restaurant!.phoneNumber !=
-                                                    null
-                                                ? ' ${order.restaurant!.phoneNumber}'
-                                                : '',
-                                            style: ktsButton18Text,
-                                          ).tr(),
-                                          // Text(
-                                          //   LocaleKeys.driver,
-                                          //   style: ktsButton18Text,
-                                          // ).tr(),
-                                          // if (!order.selfPickUp!)
-                                          //   Text(
-                                          //     ' ${order.driver!.mobile}',
-                                          //     style: ktsButton18Text,
-                                          //   ).tr(),
-                                        ],
-                                      )
+                                    ? Text(
+                                        order.restaurant!.phoneNumber != null
+                                            ? ' ${order.restaurant!.phoneNumber}'
+                                            : '',
+                                        style: ktsButton18Text,
+                                      ).tr()
                                     : model.busy(order.id) && order.status == 1
                                         ? ButtonLoading()
                                         : Text(

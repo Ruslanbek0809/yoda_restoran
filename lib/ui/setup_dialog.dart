@@ -10,7 +10,6 @@ import 'package:stacked_services/stacked_services.dart';
 import '../generated/locale_keys.g.dart';
 import '../models/models.dart';
 import '../shared/shared.dart';
-import 'cart/order/single_order_view_model.dart';
 import 'drawer/addresses/addresses_view_model.dart';
 import 'rate_us_dialog_hook.dart';
 import '../app/app.locator.dart';

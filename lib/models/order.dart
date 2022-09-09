@@ -83,7 +83,7 @@ class Order {
   final String? notes;
 
   @JsonKey(name: 'address')
-  final Address? address;
+  final String? address;
 
   @JsonKey(name: 'paymentType')
   final PaymentType? paymentType;
