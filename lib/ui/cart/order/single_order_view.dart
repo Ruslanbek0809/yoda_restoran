@@ -297,7 +297,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
                     //------------------ SINGLE ORDER DIVIDER ---------------------//
-                    if (!order.selfPickUp!)
+                    if (order.promocode != null)
                       Container(
                         height: 0.25,
                         color: kcDividerColor,
@@ -424,68 +424,6 @@ class SingleOrderView extends StatelessWidget {
                                 style: kts14IconText,
                               ),
                             ),
-                            // Flexible(
-                            //   child: Text(
-                            //     order.address!.street!,
-                            //     maxLines: 2,
-                            //     overflow: TextOverflow.ellipsis,
-                            //     style: kts14IconText,
-                            //   ),
-                            // ),
-                            // if (order.address?.apartment != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       LocaleKeys.apartment,
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ).tr(),
-                            //   ),
-                            // if (order.address?.apartment != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       ' ${order.address?.apartment},',
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ),
-                            //   ),
-                            // if (order.address?.house != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       LocaleKeys.house,
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ).tr(),
-                            //   ),
-                            // if (order.address?.house != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       ' ${order.address?.house},',
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ),
-                            //   ),
-                            // if (order.address?.floor != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       LocaleKeys.floor,
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ).tr(),
-                            //   ),
-                            // if (order.address?.floor != null)
-                            //   Flexible(
-                            //     child: Text(
-                            //       ' ${order.address?.floor}',
-                            //       maxLines: 2,
-                            //       overflow: TextOverflow.ellipsis,
-                            //       style: kts14IconText,
-                            //     ),
-                            //   ),
                           ],
                         ),
                       ),
