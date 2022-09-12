@@ -139,27 +139,6 @@ class MealViewModel extends ReactiveViewModel {
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
 
-  /// CALLS MealBottomSheet
-  // Future showCustomMealBottomSheet(
-  //     Meal meal, Restaurant restaurant, MealViewModel mealViewModel) async {
-  //   log.i('');
-  //   await _bottomSheetService.showCustomSheet(
-  //     variant: BottomSheetType.meal,
-  //     enableDrag: true,
-  //     barrierDismissible: true,
-  //     isScrollControlled: true,
-  //     data: MealBottomSheetData(
-  //       meal: meal,
-  //       restaurant: restaurant,
-  //       mealViewModel: mealViewModel,
-  //     ),
-  //   );
-
-  //   /// These below 2 lines are implemented for rare issue cases: when user dismisses mealBottomSheet without action it preserves meal's quantity. It solves this issue.
-  //   quantityDraft = 1;
-  //   quantityDraftTempNoAttribute = 0;
-  // }
-
   int quantityDraft = 1;
   int quantityDraftTempNoAttribute =
       0; // Here quantityDraftTempNoAttribute is used in a meal with NO attributes
