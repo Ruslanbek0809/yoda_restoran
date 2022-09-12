@@ -6,7 +6,6 @@ import '../../../app/app.router.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../cart_view_model.dart';
-// import 'package:yoda_res/utils/utils.dart';
 
 class CartMoreMealViewModel extends ReactiveViewModel {
   final log = getLogger('CartMoreMealViewModel');
@@ -15,7 +14,6 @@ class CartMoreMealViewModel extends ReactiveViewModel {
   CartMoreMealViewModel({this.mealId, required this.cartViewModel});
 
   final _bottomCartService = locator<BottomCartService>();
-  // final _bottomSheetService = locator<BottomSheetService>();
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
 
@@ -25,27 +23,6 @@ class CartMoreMealViewModel extends ReactiveViewModel {
   int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
 
 //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
-
-  // /// CALLS MealBottomSheet
-  // Future showCustomMealBottomSheet(Meal meal, Restaurant restaurant,
-  //     CartMoreMealViewModel cartMoreMealViewModel) async {
-  //   log.i('');
-  //   await _bottomSheetService.showCustomSheet(
-  //     variant: BottomSheetType.cartMoreMeal,
-  //     enableDrag: true,
-  //     barrierDismissible: true,
-  //     isScrollControlled: true,
-  //     data: CartMoreMealBottomSheetData(
-  //       meal: meal,
-  //       restaurant: restaurant,
-  //       cartMoreMealViewModel: cartMoreMealViewModel,
-  //     ),
-  //   );
-
-  //   /// These below 2 lines are implemented for rare issue cases: when user dismisses mealBottomSheet without action it preserves meal's quantity. It solves this issue.
-  //   quantityDraft = 1;
-  //   quantityDraftTempNoAttribute = 0;
-  // }
 
   int quantityDraft = 1;
   int quantityDraftTempNoAttribute =
@@ -143,13 +120,6 @@ class CartMoreMealViewModel extends ReactiveViewModel {
     log.i('subtractQuantityDraft() quantityDraft: $quantityDraft');
     notifyListeners();
   }
-
-  // /// CHECKS wether this vol in _selectedVols or NOT
-  // Volume? isVolSelected(Volume? vol) => _selectedVols!.firstWhere(
-  //       (_vol) => _vol.id == vol!.id,
-  //       orElse: () =>
-  //           Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
-  //     );
 
   /// CHECKS wether this cus in _selectedCustoms or NOT
   bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);

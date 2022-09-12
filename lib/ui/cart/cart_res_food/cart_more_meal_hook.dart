@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,7 +8,6 @@ import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'cart_more_meal_bottom_sheet.dart';
 import 'cart_more_meal_bottom_sheet_view.dart';
 import 'cart_more_meal_view_model.dart';
 
@@ -80,54 +78,6 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
               );
             },
           );
-
-          // //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
-          // //------------------ CUSTOM PACKAGE ---------------------//
-          // await showFlexibleBottomSheet(
-          //   minHeight: 0,
-          //   initHeight: (meal.gVolumes!.isEmpty &&
-          //               meal.gCustomizables!.isEmpty) &&
-          //           meal.description!.isEmpty
-          //       ? Platform.isIOS
-          //           ? 0.635
-          //           : 0.63
-          //       : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isNotEmpty
-          //           ? Platform.isIOS
-          //               ? 0.74
-          //               : 0.75
-          //           : 0.975,
-          //   maxHeight:
-          //       (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isEmpty
-          //           ? Platform.isIOS
-          //               ? 0.635
-          //               : 0.63
-          //           : 0.975,
-          //   duration: Duration(milliseconds: 250),
-          //   context: context,
-          //   bottomSheetColor: Colors.transparent,
-          //   builder: (context, scrollController, offset) {
-          //     return CustomBarBottomSheet(
-          //       isMealBottomSheet: true,
-          //       child: CartMoreMealBottomSheet(
-          //         scrollController: scrollController,
-          //         offset: offset,
-          //         meal: meal,
-          //         restaurant: restaurant,
-          //         cartMoreMealViewModel: model,
-          //       ),
-          //     );
-          //   },
-          //   anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //           meal.description!.isEmpty
-          //       ? [0, Platform.isIOS ? 0.635 : 0.63]
-          //       : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isNotEmpty
-          //           ? [0, Platform.isIOS ? 0.74 : 0.75, 0.975]
-          //           : [0, 0.975],
-          // );
-          // await model.showCustomMealBottomSheet(meal, restaurant, model);
         },
         child: Container(
           width: itemWidth,
@@ -341,75 +291,6 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                             );
                                           },
                                         );
-
-                                        // //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
-                                        // //------------------ CUSTOM PACKAGE ---------------------//
-                                        // await showFlexibleBottomSheet(
-                                        //   minHeight: 0,
-                                        //   initHeight: (meal.gVolumes!.isEmpty &&
-                                        //               meal.gCustomizables!
-                                        //                   .isEmpty) &&
-                                        //           meal.description!.isEmpty
-                                        //       ? Platform.isIOS
-                                        //           ? 0.635
-                                        //           : 0.63
-                                        //       : (meal.gVolumes!.isEmpty &&
-                                        //                   meal.gCustomizables!
-                                        //                       .isEmpty) &&
-                                        //               meal.description!
-                                        //                   .isNotEmpty
-                                        //           ? Platform.isIOS
-                                        //               ? 0.74
-                                        //               : 0.75
-                                        //           : 0.975,
-                                        //   maxHeight: (meal.gVolumes!.isEmpty &&
-                                        //               meal.gCustomizables!
-                                        //                   .isEmpty) &&
-                                        //           meal.description!.isEmpty
-                                        //       ? Platform.isIOS
-                                        //           ? 0.635
-                                        //           : 0.63
-                                        //       : 0.975,
-                                        //   duration: Duration(milliseconds: 250),
-                                        //   context: context,
-                                        //   bottomSheetColor: Colors.transparent,
-                                        //   builder: (context, scrollController,
-                                        //       offset) {
-                                        //     return CustomBarBottomSheet(
-                                        //       isMealBottomSheet: true,
-                                        //       child: CartMoreMealBottomSheet(
-                                        //         scrollController:
-                                        //             scrollController,
-                                        //         offset: offset,
-                                        //         meal: meal,
-                                        //         restaurant: restaurant,
-                                        //         cartMoreMealViewModel: model,
-                                        //       ),
-                                        //     );
-                                        //   },
-                                        //   anchors: (meal.gVolumes!.isEmpty &&
-                                        //               meal.gCustomizables!
-                                        //                   .isEmpty) &&
-                                        //           meal.description!.isEmpty
-                                        //       ? [
-                                        //           0,
-                                        //           Platform.isIOS ? 0.635 : 0.63
-                                        //         ]
-                                        //       : (meal.gVolumes!.isEmpty &&
-                                        //                   meal.gCustomizables!
-                                        //                       .isEmpty) &&
-                                        //               meal.description!
-                                        //                   .isNotEmpty
-                                        //           ? [
-                                        //               0,
-                                        //               Platform.isIOS
-                                        //                   ? 0.74
-                                        //                   : 0.75,
-                                        //               0.975
-                                        //             ]
-                                        //           : [0, 0.975],
-                                        // );
-                                        // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                       }
                                     : () async {
                                         await model
@@ -447,38 +328,17 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                     //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
                                     //------------------ CUSTOM PACKAGE ---------------------//
                                     await showFlexibleBottomSheet(
-                                      minHeight: 0,
-                                      initHeight: (meal.gVolumes!.isEmpty &&
-                                                  meal.gCustomizables!
-                                                      .isEmpty) &&
-                                              meal.description!.isEmpty
-                                          ? Platform.isIOS
-                                              ? 0.635
-                                              : 0.63
-                                          : (meal.gVolumes!.isEmpty &&
-                                                      meal.gCustomizables!
-                                                          .isEmpty) &&
-                                                  meal.description!.isNotEmpty
-                                              ? Platform.isIOS
-                                                  ? 0.74
-                                                  : 0.75
-                                              : 0.975,
-                                      maxHeight: (meal.gVolumes!.isEmpty &&
-                                                  meal.gCustomizables!
-                                                      .isEmpty) &&
-                                              meal.description!.isEmpty
-                                          ? Platform.isIOS
-                                              ? 0.635
-                                              : 0.63
-                                          : 0.975,
+                                      isExpand: false,
+                                      // minHeight: 0,
+                                      initHeight: 0.95,
+                                      maxHeight: 0.95,
                                       context: context,
                                       bottomSheetColor: Colors.transparent,
                                       duration: Duration(milliseconds: 250),
                                       builder:
                                           (context, scrollController, offset) {
-                                        return CustomBarBottomSheet(
-                                          isMealBottomSheet: true,
-                                          child: CartMoreMealBottomSheet(
+                                        return CustomModalBottomSheet(
+                                          child: CartMoreMealBottomSheetView(
                                             scrollController: scrollController,
                                             offset: offset,
                                             meal: meal,
@@ -487,23 +347,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                           ),
                                         );
                                       },
-                                      anchors: (meal.gVolumes!.isEmpty &&
-                                                  meal.gCustomizables!
-                                                      .isEmpty) &&
-                                              meal.description!.isEmpty
-                                          ? [0, Platform.isIOS ? 0.635 : 0.63]
-                                          : (meal.gVolumes!.isEmpty &&
-                                                      meal.gCustomizables!
-                                                          .isEmpty) &&
-                                                  meal.description!.isNotEmpty
-                                              ? [
-                                                  0,
-                                                  Platform.isIOS ? 0.74 : 0.75,
-                                                  0.975
-                                                ]
-                                              : [0, 0.975],
                                     );
-                                    // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                   }
                                 : () async {
                                     await model
