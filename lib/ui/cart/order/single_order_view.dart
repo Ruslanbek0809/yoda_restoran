@@ -367,13 +367,7 @@ class SingleOrderView extends StatelessWidget {
                                   style: kts16Text,
                                 ).tr(),
                           order.deliveryTime == null
-                              ? order.status == 4
-                                  ? Text(
-                                      DateFormat('HH:mm, dd.MM.yyyy')
-                                          .format(order.createdAt!.toLocal()),
-                                      style: ktsDefault16BoldText,
-                                    )
-                                  : Text(
+                              ? Text(
                                       LocaleKeys.now,
                                       style: ktsDefault16BoldText,
                                     ).tr()
