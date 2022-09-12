@@ -72,51 +72,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
               );
             },
           );
-          // await showFlexibleBottomSheet(
-          //   minHeight: 0,
-          //   initHeight: (meal.gVolumes!.isEmpty &&
-          //               meal.gCustomizables!.isEmpty) &&
-          //           meal.description!.isEmpty
-          //       ? Platform.isIOS
-          //           ? 0.635
-          //           : 0.63
-          //       : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isNotEmpty
-          //           ? Platform.isIOS
-          //               ? 0.74
-          //               : 0.75
-          //           : 0.975,
-          //   maxHeight:
-          //       (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isEmpty
-          //           ? Platform.isIOS
-          //               ? 0.635
-          //               : 0.63
-          //           : 0.975,
-          //   duration: Duration(milliseconds: 250),
-          //   context: context,
-          //   bottomSheetColor: Colors.transparent,
-          //   builder: (context, scrollController, offset) {
-          //     return CustomBarBottomSheet(
-          //       isMealBottomSheet: true,
-          //       child: MealBottomSheet(
-          //         scrollController: scrollController,
-          //         offset: offset,
-          //         meal: meal,
-          //         restaurant: restaurant,
-          //         mealViewModel: model,
-          //       ),
-          //     );
-          //   },
-          //   anchors: (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //           meal.description!.isEmpty
-          //       ? [0, Platform.isIOS ? 0.635 : 0.63]
-          //       : (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) &&
-          //               meal.description!.isNotEmpty
-          //           ? [0, Platform.isIOS ? 0.74 : 0.75, 0.975]
-          //           : [0, 0.975],
-          // );
-          // await model.showCustomMealBottomSheet(meal, restaurant, model);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -290,7 +245,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 ),
                               ),
                               Text(
-                                // model.quantity.toString(),
                                 model.mealQuantity.toString(),
                                 style: kts18Text,
                               ),
@@ -333,78 +287,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                               );
                                             },
                                           );
-                                          // await showFlexibleBottomSheet(
-                                          //   minHeight: 0,
-                                          //   initHeight: (meal.gVolumes!
-                                          //                   .isEmpty &&
-                                          //               meal.gCustomizables!
-                                          //                   .isEmpty) &&
-                                          //           meal.description!.isEmpty
-                                          //       ? Platform.isIOS
-                                          //           ? 0.635
-                                          //           : 0.63
-                                          //       : (meal.gVolumes!.isEmpty &&
-                                          //                   meal.gCustomizables!
-                                          //                       .isEmpty) &&
-                                          //               meal.description!
-                                          //                   .isNotEmpty
-                                          //           ? Platform.isIOS
-                                          //               ? 0.74
-                                          //               : 0.75
-                                          //           : 0.975,
-                                          //   maxHeight: (meal.gVolumes!
-                                          //                   .isEmpty &&
-                                          //               meal.gCustomizables!
-                                          //                   .isEmpty) &&
-                                          //           meal.description!.isEmpty
-                                          //       ? Platform.isIOS
-                                          //           ? 0.635
-                                          //           : 0.63
-                                          //       : 0.975,
-                                          //   duration:
-                                          //       Duration(milliseconds: 250),
-                                          //   context: context,
-                                          //   bottomSheetColor:
-                                          //       Colors.transparent,
-                                          //   builder: (context, scrollController,
-                                          //       offset) {
-                                          //     return CustomBarBottomSheet(
-                                          //       isMealBottomSheet: true,
-                                          //       child: MealBottomSheet(
-                                          //         scrollController:
-                                          //             scrollController,
-                                          //         offset: offset,
-                                          //         meal: meal,
-                                          //         restaurant: restaurant,
-                                          //         mealViewModel: model,
-                                          //       ),
-                                          //     );
-                                          //   },
-                                          //   anchors: (meal.gVolumes!.isEmpty &&
-                                          //               meal.gCustomizables!
-                                          //                   .isEmpty) &&
-                                          //           meal.description!.isEmpty
-                                          //       ? [
-                                          //           0,
-                                          //           Platform.isIOS
-                                          //               ? 0.635
-                                          //               : 0.63
-                                          //         ]
-                                          //       : (meal.gVolumes!.isEmpty &&
-                                          //                   meal.gCustomizables!
-                                          //                       .isEmpty) &&
-                                          //               meal.description!
-                                          //                   .isNotEmpty
-                                          //           ? [
-                                          //               0,
-                                          //               Platform.isIOS
-                                          //                   ? 0.74
-                                          //                   : 0.75,
-                                          //               0.975
-                                          //             ]
-                                          //           : [0, 0.975],
-                                          // );
-                                          // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                         }
                                       : () async {
                                           await model
@@ -463,67 +345,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           );
                                         },
                                       );
-                                      // await showFlexibleBottomSheet(
-                                      //   minHeight: 0,
-                                      //   initHeight: (meal.gVolumes!.isEmpty &&
-                                      //               meal.gCustomizables!
-                                      //                   .isEmpty) &&
-                                      //           meal.description!.isEmpty
-                                      //       ? Platform.isIOS
-                                      //           ? 0.635
-                                      //           : 0.63
-                                      //       : (meal.gVolumes!.isEmpty &&
-                                      //                   meal.gCustomizables!
-                                      //                       .isEmpty) &&
-                                      //               meal.description!.isNotEmpty
-                                      //           ? Platform.isIOS
-                                      //               ? 0.74
-                                      //               : 0.75
-                                      //           : 0.975,
-                                      //   maxHeight: (meal.gVolumes!.isEmpty &&
-                                      //               meal.gCustomizables!
-                                      //                   .isEmpty) &&
-                                      //           meal.description!.isEmpty
-                                      //       ? Platform.isIOS
-                                      //           ? 0.635
-                                      //           : 0.63
-                                      //       : 0.975,
-                                      //   duration: Duration(milliseconds: 250),
-                                      //   context: context,
-                                      //   bottomSheetColor: Colors.transparent,
-                                      //   builder: (context, scrollController,
-                                      //       offset) {
-                                      //     return CustomBarBottomSheet(
-                                      //       isMealBottomSheet: true,
-                                      //       child: MealBottomSheet(
-                                      //         scrollController:
-                                      //             scrollController,
-                                      //         offset: offset,
-                                      //         meal: meal,
-                                      //         restaurant: restaurant,
-                                      //         mealViewModel: model,
-                                      //       ),
-                                      //     );
-                                      //   },
-                                      //   anchors: (meal.gVolumes!.isEmpty &&
-                                      //               meal.gCustomizables!
-                                      //                   .isEmpty) &&
-                                      //           meal.description!.isEmpty
-                                      //       ? [0, Platform.isIOS ? 0.635 : 0.63]
-                                      //       : (meal.gVolumes!.isEmpty &&
-                                      //                   meal.gCustomizables!
-                                      //                       .isEmpty) &&
-                                      //               meal.description!.isNotEmpty
-                                      //           ? [
-                                      //               0,
-                                      //               Platform.isIOS
-                                      //                   ? 0.74
-                                      //                   : 0.75,
-                                      //               0.975
-                                      //             ]
-                                      //           : [0, 0.975],
-                                      // );
-                                      // await model.showCustomMealBottomSheet(meal, restaurant, model);
                                     }
                                   : () async {
                                       await model
