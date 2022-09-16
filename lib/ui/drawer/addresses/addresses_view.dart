@@ -5,8 +5,6 @@ import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
-import '../../../utils/utils.dart';
-
 import 'addresses_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';

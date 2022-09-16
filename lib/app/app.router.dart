@@ -16,6 +16,7 @@ import '../ui/cart/order/orders_view.dart';
 import '../ui/drawer/about_us/about_us_view.dart';
 import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
+import '../ui/drawer/credit_cards/credit_cards.dart';
 import '../ui/drawer/login/login_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
@@ -94,6 +95,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.singleExView, page: SingleExView),
     RouteDef(Routes.sliderWebview, page: SliderWebview),
+    RouteDef(Routes.addressesView, page: CreditCardsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -251,6 +253,12 @@ class StackedRouter extends RouterBase {
           sliderUrl: args.sliderUrl,
           key: args.key,
         ),
+        settings: data,
+      );
+    },
+    CreditCardsView: (data) {
+      return CustomMaterialPageRoute(
+        builder: (context) => const CreditCardsView(),
         settings: data,
       );
     },
