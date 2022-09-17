@@ -33,6 +33,7 @@ abstract class  LocaleKeys {
   static const profile = 'profile';
   static const orders = 'orders';
   static const addresses = 'addresses';
+  static const my_credit_cards = 'my_credit_cards';
   static const about_us = 'about_us';
   static const contact_us = 'contact_us';
   static const lang_en = 'lang_en';

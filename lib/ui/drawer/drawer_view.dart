@@ -46,6 +46,20 @@ class DrawerView extends StatelessWidget {
           onTap = () async => model.navToAddressesView();
           break;
         }
+      case LocaleKeys.my_credit_cards:
+        {
+          title = LocaleKeys.my_credit_cards;
+          svgName = 'assets/credit_card.svg';
+          onTap = () async => model.navToMyCreditCardsView();
+          break;
+        }
+      case LocaleKeys.addresses:
+        {
+          title = LocaleKeys.addresses;
+          svgName = 'assets/map_pin.svg';
+          onTap = () async => model.navToAddressesView();
+          break;
+        }
       case LocaleKeys.about_us:
         {
           title = LocaleKeys.about_us;

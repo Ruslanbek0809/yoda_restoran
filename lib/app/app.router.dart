@@ -16,7 +16,7 @@ import '../ui/cart/order/orders_view.dart';
 import '../ui/drawer/about_us/about_us_view.dart';
 import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
-import '../ui/drawer/credit_cards/credit_cards.dart';
+import '../ui/drawer/credit_cards/my_credit_cards.dart';
 import '../ui/drawer/login/login_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
@@ -49,6 +49,7 @@ class Routes {
   static const String onBoardingView = '/on-boarding-view';
   static const String singleExView = '/single-ex-view';
   static const String sliderWebview = '/slider-webview';
+  static const String myCreditCardsView = '/my-credit-cards-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -69,6 +70,7 @@ class Routes {
     onBoardingView,
     singleExView,
     sliderWebview,
+    myCreditCardsView,
   };
 }
 
@@ -95,7 +97,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.singleExView, page: SingleExView),
     RouteDef(Routes.sliderWebview, page: SliderWebview),
-    RouteDef(Routes.addressesView, page: CreditCardsView),
+    RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -256,9 +258,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    CreditCardsView: (data) {
+    MyCreditCardsView: (data) {
       return CustomMaterialPageRoute(
-        builder: (context) => const CreditCardsView(),
+        builder: (context) => const MyCreditCardsView(),
         settings: data,
       );
     },

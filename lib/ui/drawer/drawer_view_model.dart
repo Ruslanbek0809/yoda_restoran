@@ -42,6 +42,9 @@ class DrawerViewModel extends BaseViewModel {
   Future<void> navToAddressesView() async =>
       await _navService.navigateTo(Routes.addressesView);
 
+  Future<void> navToMyCreditCardsView() async =>
+      await _navService.navigateTo(Routes.myCreditCardsView);
+
   Future<void> navToAboutUsView() async =>
       await _navService.navigateTo(Routes.aboutUsView);
 
