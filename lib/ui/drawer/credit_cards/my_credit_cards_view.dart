@@ -17,7 +17,7 @@ class MyCreditCardsView extends StatelessWidget {
     return ViewModelBuilder<CreditCardsViewModel>.reactive(
       builder: (context, model, child) => WillPopScope(
         onWillPop: () async {
-          // model.navToHomeByRemovingAll(); // Workaround
+          model.navToHomeByRemovingAll(); // Workaround
           return false;
         },
         child: Scaffold(
@@ -39,7 +39,7 @@ class MyCreditCardsView extends StatelessWidget {
               ),
               centerTitle: true,
               title: Text(
-                LocaleKeys.addresses,
+                LocaleKeys.my_credit_cards,
                 style: kts22DarkText,
               ).tr(),
               actions: [
@@ -54,7 +54,10 @@ class MyCreditCardsView extends StatelessWidget {
                 ),
               ],
             ),
-            body: SizedBox()
+            body: EmptyWidget(
+              text: LocaleKeys.noCreditCardsYet,
+              svg: 'assets/credit_card_empty.svg',
+            )
             // model.isBusy
             //     ? LoadingWidget()
             //     : model.addresses!.isEmpty

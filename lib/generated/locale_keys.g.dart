@@ -87,6 +87,7 @@ abstract class  LocaleKeys {
   static const nothingFound = 'nothingFound';
   static const noOrdersYet = 'noOrdersYet';
   static const noAddressesYet = 'noAddressesYet';
+  static const noCreditCardsYet = 'noCreditCardsYet';
   static const select = 'select';
   static const myOrders = 'myOrders';
   static const yourOrderWasPassedToRes = 'yourOrderWasPassedToRes';

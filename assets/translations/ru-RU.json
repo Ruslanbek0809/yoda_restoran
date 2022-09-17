@@ -85,6 +85,7 @@
     "nothingFound": "Ничего не найдено",
     "noOrdersYet": "У вас еще не было заказов",
     "noAddressesYet": "Вы еще не добавили адрес",
+    "noCreditCardsYet": "У вас не привязана банковская карта",
     "select": "Готово",
     "myOrders": "Заказы",
     "yourOrderWasPassedToRes": "Ваш заказ передан в ресторан.",
