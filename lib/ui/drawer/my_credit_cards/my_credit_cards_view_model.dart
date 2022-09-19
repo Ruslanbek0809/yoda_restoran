@@ -30,7 +30,8 @@ class CreditCardsViewModel extends FutureViewModel {
   /// NAVIGATES to MyCreditCardAddView
   Future<void> navToMyCreditCardAddView() async {
     dynamic _navResult;
-    _navResult = await _navService.navigateTo(Routes.addressAddView) ?? false;
+    _navResult =
+        await _navService.navigateTo(Routes.myCreditCardAddView) ?? false;
     if (_navResult) await initialise(); // Workaround
   }
 

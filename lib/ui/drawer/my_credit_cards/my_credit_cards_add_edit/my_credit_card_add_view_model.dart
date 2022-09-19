@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
 import '../../../../app/app.locator.dart';
@@ -15,8 +16,32 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   String? _city = LocaleKeys.ashgabat.tr();
   String? get city => _city;
 
-  String? _street;
-  String? get street => _street;
+  String _street = '';
+  String get street => _street;
+
+  String _cardNumber = '';
+  String get cardNumber => _cardNumber;
+
+  String _expiryDate = '';
+  String get expiryDate => _expiryDate;
+
+  String _cardHolderName = '';
+  String get cardHolderName => _cardHolderName;
+
+  String _cvvCode = '';
+  String get cvvCode => _cvvCode;
+
+  bool _isCvvFocused = false;
+  bool get isCvvFocused => _isCvvFocused;
+
+  bool _useGlassMorphism = false;
+  bool get useGlassMorphism => _useGlassMorphism;
+
+  bool _useBackgroundImage = false;
+  bool get useBackgroundImage => _useBackgroundImage;
+
+  OutlineInputBorder? _border;
+  OutlineInputBorder? get border => _border;
 
   /// UPDATES _city
   String? updateCity(String? value) {

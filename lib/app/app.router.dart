@@ -51,6 +51,7 @@ class Routes {
   static const String singleExView = '/single-ex-view';
   static const String sliderWebview = '/slider-webview';
   static const String myCreditCardsView = '/my-credit-cards-view';
+  static const String myCreditCardAddView = '/my-credit-card-add-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -72,6 +73,7 @@ class Routes {
     singleExView,
     sliderWebview,
     myCreditCardsView,
+    myCreditCardAddView,
   };
 }
 
@@ -99,6 +101,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.singleExView, page: SingleExView),
     RouteDef(Routes.sliderWebview, page: SliderWebview),
     RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
+    RouteDef(Routes.addressAddView, page: AddressAddView),
+    RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
