@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
 import '../../../../app/app.locator.dart';
@@ -85,6 +86,25 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   //     throw err;
   //   }
   // }
+
+  void onGlassmorphismChange(bool value) {
+    _useGlassMorphism = value;
+    notifyListeners();
+  }
+
+  void onBackgroundChange(bool value) {
+    _useBackgroundImage = value;
+    notifyListeners();
+  }
+
+  void onCreditCardModelChange(CreditCardModel? creditCardModel) {
+    _cardNumber = creditCardModel!.cardNumber;
+    _expiryDate = creditCardModel.expiryDate;
+    _cardHolderName = creditCardModel.cardHolderName;
+    _cvvCode = creditCardModel.cvvCode;
+    _isCvvFocused = creditCardModel.isCvvFocused;
+    notifyListeners();
+  }
 
 //------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
