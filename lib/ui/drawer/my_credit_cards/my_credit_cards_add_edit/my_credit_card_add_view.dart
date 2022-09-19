@@ -34,7 +34,7 @@ class MyCreditCardAddView extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          title: Text(LocaleKeys.address, style: kts22DarkText).tr(),
+          title: Text(LocaleKeys.bank_card, style: kts22DarkText).tr(),
         ),
         body: Column(
           children: [
