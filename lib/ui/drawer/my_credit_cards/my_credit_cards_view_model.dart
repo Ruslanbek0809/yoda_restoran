@@ -27,6 +27,13 @@ class CreditCardsViewModel extends FutureViewModel {
 
 //------------------------ NAVIGATIONS ----------------------------//
 
+  /// NAVIGATES to MyCreditCardAddView
+  Future<void> navToMyCreditCardAddView() async {
+    dynamic _navResult;
+    _navResult = await _navService.navigateTo(Routes.addressAddView) ?? false;
+    if (_navResult) await initialise(); // Workaround
+  }
+
   /// NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);

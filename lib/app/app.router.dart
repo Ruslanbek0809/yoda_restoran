@@ -16,8 +16,9 @@ import '../ui/cart/order/orders_view.dart';
 import '../ui/drawer/about_us/about_us_view.dart';
 import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
-import '../ui/drawer/credit_cards/my_credit_cards.dart';
 import '../ui/drawer/login/login_view.dart';
+import '../ui/drawer/my_credit_cards/my_credit_cards.dart';
+import '../ui/drawer/my_credit_cards/my_credit_cards_add_edit/my_credit_card_add_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
@@ -264,6 +265,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    MyCreditCardAddView: (data) {
+      var args = data.getArgs<MyCreditCardAddViewArguments>(
+        orElse: () => MyCreditCardAddViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MyCreditCardAddView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -347,4 +357,10 @@ class SliderWebviewArguments {
   final String sliderUrl;
   final Key? key;
   SliderWebviewArguments({required this.sliderUrl, this.key});
+}
+
+/// MyCreditCardAddView arguments holder class
+class MyCreditCardAddViewArguments {
+  final Key? key;
+  MyCreditCardAddViewArguments({this.key});
 }
