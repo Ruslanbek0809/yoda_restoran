@@ -229,8 +229,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                         title: Center(
                                           child: Text(
                                             LocaleKeys.close,
-                                            style:
-                                                TextStyle(color: AppTheme.RED),
+                                            style: TextStyle(color: kcRedColor),
                                           ).tr(),
                                         ),
                                         onTap: () => model.navBack(),

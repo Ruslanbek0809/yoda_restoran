@@ -92,7 +92,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   selectedColor: kcFillBorderColor,
                   activeColor: kcFillBorderColor,
                   borderWidth: 0.0,
-                  errorBorderColor: AppTheme.RED,
+                  errorBorderColor: kcRedColor,
                 ),
                 cursorColor: kcFontColor,
                 animationDuration: Duration(milliseconds: 300),

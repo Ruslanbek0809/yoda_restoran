@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import '../shared/shared.dart';
 
 class AppTheme {
-  static const Color GREEN_COLOR = Color(0xFF76C03F);
-  static const Color RED = Color(0xFFE64F3A);
-  static const Color BLACK = Color(0xFF000000);
-  static const Color WHITE = Color(0xFFFFFFFF);
-
   /// Vertical & Horizontal Spaces
   static const double _VerticalSpaceExtraSmall = 4.0;
   static const double _VerticalSpaceSmall = 8.0;

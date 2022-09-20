@@ -96,14 +96,14 @@ class LoginView extends StatelessWidget with $LoginView {
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.RED,
+                          color: kcRedColor,
                           width: 0.3,
                         ),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.RED,
+                          color: kcRedColor,
                           width: 0.3,
                         ),
                       ),

@@ -108,7 +108,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 3.h),
                           decoration: BoxDecoration(
-                            color: AppTheme.GREEN_COLOR,
+                            color: kcGreenColor,
                             borderRadius: BorderRadius.only(
                               topLeft:
                                   Radius.circular(Constants.BORDER_RADIUS_20),
