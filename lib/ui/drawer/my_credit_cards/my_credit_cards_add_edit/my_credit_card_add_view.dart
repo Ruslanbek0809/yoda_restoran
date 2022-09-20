@@ -38,6 +38,7 @@ class MyCreditCardAddView extends StatelessWidget {
         ),
         body: Column(
           children: [
+            //------------------ CREDIT CARD UI ---------------------//
             CreditCardWidget(
               glassmorphismConfig:
                   model.useGlassMorphism ? Glassmorphism.defaultConfig() : null,
@@ -45,7 +46,7 @@ class MyCreditCardAddView extends StatelessWidget {
               expiryDate: model.expiryDate,
               cardHolderName: model.cardHolderName,
               cvvCode: model.cvvCode,
-              bankName: 'Axis Bank',
+              bankName: 'Rysgal Bank',
               showBackView: model.isCvvFocused,
               obscureCardNumber: true,
               obscureCardCvv: true,
@@ -66,6 +67,7 @@ class MyCreditCardAddView extends StatelessWidget {
                 ),
               ],
             ),
+            //------------------ CREDIT CARD FORM ---------------------//
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -159,80 +161,40 @@ class MyCreditCardAddView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Glassmorphism',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Switch(
-                          value: model.useGlassMorphism,
-                          inactiveTrackColor: Colors.grey,
-                          activeColor: Colors.white,
-                          activeTrackColor: Colors.green,
-                          onChanged: model.onGlassmorphismChange,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Card Image',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Switch(
-                          value: model.useBackgroundImage,
-                          inactiveTrackColor: Colors.grey,
-                          activeColor: Colors.white,
-                          activeTrackColor: Colors.green,
-                          onChanged: model.onBackgroundChange,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        primary: const Color(0xff1b447b),
-                        onPrimary: const Color(0xff1b447b),
-                        onSurface: const Color(0xff1b447b),
-                        shadowColor: const Color(0xff1b447b),
-                      ),
-                      child: Container(
-                        margin: const EdgeInsets.all(12),
-                        child: const Text(
-                          'Validate',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'halter',
-                            fontSize: 14,
-                            package: 'flutter_credit_card',
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (creditCardFormKey.currentState!.validate()) {
-                          print('valid!');
-                        } else {
-                          print('invalid!');
-                        }
-                      },
-                    ),
                   ],
                 ),
               ),
+            ),
+            //------------------ VALIDATE BUTTON ---------------------//
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                primary: const Color(0xff1b447b),
+                onPrimary: const Color(0xff1b447b),
+                onSurface: const Color(0xff1b447b),
+                shadowColor: const Color(0xff1b447b),
+              ),
+              child: Container(
+                margin: const EdgeInsets.all(12),
+                child: const Text(
+                  'Validate',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'halter',
+                    fontSize: 14,
+                    package: 'flutter_credit_card',
+                  ),
+                ),
+              ),
+              onPressed: () {
+                if (creditCardFormKey.currentState!.validate()) {
+                  print('valid!');
+                } else {
+                  print('invalid!');
+                }
+              },
             ),
           ],
         ),
