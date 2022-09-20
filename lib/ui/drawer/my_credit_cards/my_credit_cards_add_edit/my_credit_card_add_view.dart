@@ -48,6 +48,7 @@ class MyCreditCardAddView extends StatelessWidget {
               cvvCode: model.cvvCode,
               bankName: 'Rysgal Bank',
               showBackView: model.isCvvFocused,
+              labelCardHolder: LocaleKeys.card_holder.tr(),
               obscureCardNumber: true,
               obscureCardCvv: true,
               isHolderNameVisible: true,
@@ -68,102 +69,91 @@ class MyCreditCardAddView extends StatelessWidget {
               ],
             ),
             //------------------ CREDIT CARD FORM ---------------------//
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    CreditCardForm(
-                      formKey: creditCardFormKey,
-                      obscureCvv: true,
-                      obscureNumber: true,
-                      cardNumber: model.cardNumber,
-                      cvvCode: model.cvvCode,
-                      isHolderNameVisible: true,
-                      isCardNumberVisible: true,
-                      isExpiryDateVisible: true,
-                      cardHolderName: model.cardHolderName,
-                      expiryDate: model.expiryDate,
-                      themeColor: Colors.blue,
-                      textColor: Colors.white,
-                      cardNumberDecoration: InputDecoration(
-                        labelText: 'Number',
-                        hintText: 'XXXX XXXX XXXX XXXX',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
-                      expiryDateDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        labelText: 'Expired Date',
-                        hintText: 'XX/XX',
-                      ),
-                      cvvCodeDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        labelText: 'CVV',
-                        hintText: 'XXX',
-                      ),
-                      cardHolderDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.white),
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.withOpacity(0.7),
-                            width: 2.0,
-                          ),
-                        ),
-                        labelText: 'Card Holder',
-                      ),
-                      onCreditCardModelChange: model.onCreditCardModelChange,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+            CreditCardForm(
+              formKey: creditCardFormKey,
+              obscureCvv: true,
+              obscureNumber: true,
+              cardNumber: model.cardNumber,
+              cvvCode: model.cvvCode,
+              isHolderNameVisible: true,
+              isCardNumberVisible: true,
+              isExpiryDateVisible: true,
+              cardHolderName: model.cardHolderName,
+              expiryDate: model.expiryDate,
+              themeColor: Colors.blue,
+              textColor: Colors.white,
+              cardNumberDecoration: InputDecoration(
+                labelText: LocaleKeys.card_number.tr(),
+                hintText: 'XXXX XXXX XXXX XXXX',
+                // hintStyle: const TextStyle(color: Colors.white),
+                // labelStyle: const TextStyle(color: Colors.white),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
                 ),
               ),
+              expiryDateDecoration: InputDecoration(
+                // hintStyle: const TextStyle(color: Colors.white),
+                // labelStyle: const TextStyle(color: Colors.white),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                labelText: LocaleKeys.card_date_deadline.tr(),
+                hintText: 'XX/XX',
+              ),
+              cvvCodeDecoration: InputDecoration(
+                // hintStyle: const TextStyle(color: Colors.white),
+                // labelStyle: const TextStyle(color: Colors.white),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                labelText: 'CVV',
+                hintText: 'XXX',
+              ),
+              cardHolderDecoration: InputDecoration(
+                // hintStyle: const TextStyle(color: Colors.white),
+                // labelStyle: const TextStyle(color: Colors.white),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.withOpacity(0.7),
+                    width: 2.0,
+                  ),
+                ),
+                labelText: LocaleKeys.card_holder.tr(),
+              ),
+              onCreditCardModelChange: model.onCreditCardModelChange,
             ),
             //------------------ VALIDATE BUTTON ---------------------//
             ElevatedButton(

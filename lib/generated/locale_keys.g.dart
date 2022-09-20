@@ -82,6 +82,9 @@ abstract class  LocaleKeys {
   static const apartment = 'apartment';
   static const floor = 'floor';
   static const bank_card = 'bank_card';
+  static const card_holder = 'card_holder';
+  static const card_number = 'card_number';
+  static const card_date_deadline = 'card_date_deadline';
   static const add_card = 'add_card';
   static const reload = 'reload';
   static const errorOccured = 'errorOccured';
