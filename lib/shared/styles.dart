@@ -23,16 +23,6 @@ TextStyle kts16DialogText = TextStyle(
   color: kcDialogColor,
 );
 
-// TextStyle ktsTextfieldText = TextStyle(
-//   color: kcFontColor,
-//   fontSize: 18.sp,
-// );
-
-// TextStyle ktsLabelText = TextStyle(
-//   color: kcHelperColor,
-//   fontSize: 16.sp,
-// );
-
 TextStyle kts10IconText = TextStyle(
   fontSize: 10.sp,
   fontWeight: FontWeight.w600,

@@ -149,6 +149,7 @@ class DrawerView extends StatelessWidget {
                           color: Theme.of(context).colorScheme.background),
                     ),
                     child: CustomExpansionTile(
+                      // backgroundColor: DrawerThemeData().backgroundColor,
                       key: expansionTile,
                       initiallyExpanded: false,
                       onExpansionChanged: (value) {

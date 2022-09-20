@@ -66,6 +66,14 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
+/// BANKS list
+final List<String> banksList = [
+  "Rysgal Bank",
+  "Senagat Bank",
+  "Türkmenistanyň Döwlet Daşary Ykdysady Iş Banky",
+  "Halkbank we beýleki banklar ",
+];
+
 List<FilterSort> mainCatSortList = [
   FilterSort(1, LocaleKeys.defaultt),
   FilterSort(2, LocaleKeys.byName),

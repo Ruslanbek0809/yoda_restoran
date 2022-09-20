@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
@@ -33,8 +31,7 @@ class MyCreditCardsView extends StatelessWidget {
                     color: kcFontColor,
                     size: 25.w,
                   ),
-                  onPressed: () {},
-                  // onPressed: model.navToHomeByRemovingAll,
+                  onPressed: model.navToHomeByRemovingAll,
                 ),
               ),
               centerTitle: true,
