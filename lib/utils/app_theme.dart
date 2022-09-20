@@ -107,6 +107,15 @@ class AppTheme {
         offset: const Offset(0.0, 1.1),
       );
 
+  /// OutlineInputBorder
+  OutlineInputBorder get cardOutlineInputBorder => OutlineInputBorder(
+        borderRadius: radius10,
+        borderSide: BorderSide(
+          color: kcDividerColor,
+          width: 1,
+        ),
+      );
+
   /// Radiuses
   BorderRadius get radius20 => BorderRadius.circular(20.0);
   BorderRadius get radius15 => BorderRadius.circular(15.0);

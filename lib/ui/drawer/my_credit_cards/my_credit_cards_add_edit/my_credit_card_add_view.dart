@@ -4,6 +4,8 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
+import '../../../../utils/utils.dart';
+import '../../../widgets/widgets.dart';
 import 'my_credit_card_add_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -36,153 +38,129 @@ class MyCreditCardAddView extends StatelessWidget {
           centerTitle: true,
           title: Text(LocaleKeys.bank_card, style: kts22DarkText).tr(),
         ),
-        body: Column(
-          children: [
-            //------------------ CREDIT CARD UI ---------------------//
-            CreditCardWidget(
-              cardNumber: model.cardNumber,
-              expiryDate: model.expiryDate,
-              cardHolderName: model.cardHolderName,
-              cvvCode: model.cvvCode,
-              bankName: 'Rysgal Bank',
-              showBackView: model.isCvvFocused,
-              labelCardHolder: LocaleKeys.card_holder.tr(),
-              obscureCardNumber: true,
-              obscureCardCvv: true,
-              isHolderNameVisible: true,
-              cardBgColor: kcPrimaryColor,
-              isSwipeGestureEnabled: true,
-              onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-              // customCardTypeIcons: <CustomCardTypeIcon>[
-              //   CustomCardTypeIcon(
-              //     cardType: CardType.mastercard,
-              //     cardImage: Image.asset(
-              //       'assets/mastercard.png',
-              //       height: 48,
-              //       width: 48,
-              //     ),
-              //   ),
-              // ],
-            ),
-            //------------------ CREDIT CARD FORM ---------------------//
-            CreditCardForm(
-              formKey: creditCardFormKey,
-              obscureCvv: true,
-              obscureNumber: true,
-              cardNumber: model.cardNumber,
-              cvvCode: model.cvvCode,
-              isHolderNameVisible: true,
-              isCardNumberVisible: true,
-              isExpiryDateVisible: true,
-              cardHolderName: model.cardHolderName,
-              expiryDate: model.expiryDate,
-              themeColor: Colors.blue,
-              textColor: Colors.white,
-              cardNumberDecoration: InputDecoration(
-                labelText: LocaleKeys.card_number.tr(),
-                hintText: 'XXXX XXXX XXXX XXXX',
-                // hintStyle: const TextStyle(color: Colors.white),
-                // labelStyle: const TextStyle(color: Colors.white),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              //------------------ CREDIT CARD UI ---------------------//
+              CreditCardWidget(
+                cardNumber: model.cardNumber,
+                expiryDate: model.expiryDate,
+                cardHolderName: model.cardHolderName,
+                cvvCode: model.cvvCode,
+                bankName: 'Rysgal Bank',
+                showBackView: model.isCvvFocused,
+                labelCardHolder: LocaleKeys.card_holder.tr(),
+                // textStyle: const TextStyle(
+                //   color: Colors.white,
+                //   // fontFamily: 'halter',
+                //   fontSize: 16,
+                //   package: 'flutter_credit_card',
+                // ),
+                obscureCardNumber: true,
+                obscureCardCvv: true,
+                isHolderNameVisible: true,
+                cardBgColor: kcPrimaryColor,
+                isSwipeGestureEnabled: true,
+                onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
+                // customCardTypeIcons: <CustomCardTypeIcon>[
+                //   CustomCardTypeIcon(
+                //     cardType: CardType.mastercard,
+                //     cardImage: Image.asset(
+                //       'assets/mastercard.png',
+                //       height: 48,
+                //       width: 48,
+                //     ),
+                //   ),
+                // ],
+              ),
+              //------------------ CREDIT CARD FORM ---------------------//
+              CreditCardForm(
+                formKey: creditCardFormKey,
+                obscureCvv: true,
+                obscureNumber: true,
+                cardNumber: model.cardNumber,
+                cvvCode: model.cvvCode,
+                isHolderNameVisible: true,
+                isCardNumberVisible: true,
+                isExpiryDateVisible: true,
+                cardHolderName: model.cardHolderName,
+                expiryDate: model.expiryDate,
+                themeColor: kcPrimaryColor,
+                cardNumberDecoration: InputDecoration(
+                  labelText: LocaleKeys.card_number.tr(),
+                  hintText: 'XXXX XXXX XXXX XXXX',
+                  hintStyle: ktsDefault18HelperText,
+                  labelStyle: ktsDefault18HelperText,
+                  focusedBorder: AppTheme().cardOutlineInputBorder,
+                  enabledBorder: AppTheme().cardOutlineInputBorder,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
+                expiryDateDecoration: InputDecoration(
+                  hintStyle: ktsDefault18HelperText,
+                  labelStyle: ktsDefault18HelperText,
+                  focusedBorder: AppTheme().cardOutlineInputBorder,
+                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  labelText: LocaleKeys.card_date_deadline.tr(),
+                  hintText: 'XX/XX',
+                ),
+                cvvCodeDecoration: InputDecoration(
+                  hintStyle: ktsDefault18HelperText,
+                  labelStyle: ktsDefault18HelperText,
+                  focusedBorder: AppTheme().cardOutlineInputBorder,
+                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  labelText: 'CVV',
+                  hintText: 'XXX',
+                ),
+                cardHolderDecoration: InputDecoration(
+                  hintStyle: ktsDefault18HelperText,
+                  labelStyle: ktsDefault18HelperText,
+                  focusedBorder: AppTheme().cardOutlineInputBorder,
+                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  labelText: LocaleKeys.card_holder.tr(),
+                ),
+                onCreditCardModelChange: model.onCreditCardModelChange,
+              ),
+              //------------------ CARD ADD BUTTON ---------------------//
+              Container(
+                color: kcWhiteColor,
+                padding: EdgeInsets.fromLTRB(16.w, 75.h, 16.w, 50.h),
+                child: SizedBox(
+                  width: 1.sw,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: kcPrimaryColor,
+                      primary: kcSecondaryLightColor, // ripple effect color
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: AppTheme().radius10),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                    ),
+                    child: model.isBusy
+                        ? ButtonLoading()
+                        : Text(
+                            LocaleKeys.add_card,
+                            style: ktsButton18Text,
+                          ).tr(),
+                    onPressed: () async {
+                      if (creditCardFormKey.currentState!.validate()) {
+                        print('valid!');
+                      } else {
+                        print('invalid!');
+                      }
+                      // FocusScope.of(context)
+                      //     .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                      // if (!_addEditAddressformKey.currentState!.validate())
+                      //   return;
+                      // _addEditAddressformKey.currentState!.save();
+                      // await model.onAddAddressPressed(
+                      //   () => model.navBack(),
+                      //   () => model.navBack(),
+                      // );
+                    },
                   ),
                 ),
               ),
-              expiryDateDecoration: InputDecoration(
-                // hintStyle: const TextStyle(color: Colors.white),
-                // labelStyle: const TextStyle(color: Colors.white),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                labelText: LocaleKeys.card_date_deadline.tr(),
-                hintText: 'XX/XX',
-              ),
-              cvvCodeDecoration: InputDecoration(
-                // hintStyle: const TextStyle(color: Colors.white),
-                // labelStyle: const TextStyle(color: Colors.white),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                labelText: 'CVV',
-                hintText: 'XXX',
-              ),
-              cardHolderDecoration: InputDecoration(
-                // hintStyle: const TextStyle(color: Colors.white),
-                // labelStyle: const TextStyle(color: Colors.white),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.7),
-                    width: 2.0,
-                  ),
-                ),
-                labelText: LocaleKeys.card_holder.tr(),
-              ),
-              onCreditCardModelChange: model.onCreditCardModelChange,
-            ),
-            //------------------ VALIDATE BUTTON ---------------------//
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                primary: const Color(0xff1b447b),
-                onPrimary: const Color(0xff1b447b),
-                onSurface: const Color(0xff1b447b),
-                shadowColor: const Color(0xff1b447b),
-              ),
-              child: Container(
-                margin: const EdgeInsets.all(12),
-                child: const Text(
-                  LocaleKeys.add_card,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'halter',
-                    fontSize: 14,
-                    package: 'flutter_credit_card',
-                  ),
-                ).tr(),
-              ),
-              onPressed: () {
-                if (creditCardFormKey.currentState!.validate()) {
-                  print('valid!');
-                } else {
-                  print('invalid!');
-                }
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => MyCreditCardAddViewModel(),
