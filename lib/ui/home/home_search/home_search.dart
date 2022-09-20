@@ -29,7 +29,7 @@ class HomeSearch extends ViewModelWidget<HomeViewModel> {
                 LocaleKeys.search,
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: kcSecondFontColor,
+                  color: kcSecondaryFontColor,
                 ),
               ).tr(),
               Icon(

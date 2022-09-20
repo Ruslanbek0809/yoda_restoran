@@ -82,7 +82,7 @@ class DrawerView extends StatelessWidget {
         ListTile(
           leading: SvgPicture.asset(
             svgName,
-            color: AppTheme.DRAWER_ICON,
+            color: kcHelperColor,
             width: 33.w,
           ),
           title: Text(
@@ -156,7 +156,7 @@ class DrawerView extends StatelessWidget {
                       },
                       leading: SvgPicture.asset(
                         'assets/globe.svg',
-                        color: AppTheme.DRAWER_ICON,
+                        color: kcHelperColor,
                         width: 33.w,
                       ),
                       title: Text(
@@ -253,7 +253,7 @@ class DrawerView extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/chat_circle.svg',
-                            color: AppTheme.DRAWER_ICON,
+                            color: kcHelperColor,
                             width: 50.w,
                           ),
                           SizedBox(width: 10.w),

@@ -332,7 +332,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                         ToggleButtonView(restaurant: restaurant),
                         //------------------ MAIN DIVIDER ---------------------//
                         Container(
-                          color: AppTheme.MAIN_DIVIDER_COLOR,
+                          color: kcMainDividerColor,
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           margin: EdgeInsets.only(top: 15.h),
                         ),

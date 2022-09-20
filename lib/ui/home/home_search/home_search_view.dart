@@ -232,8 +232,7 @@ class HomeSearchView extends StatelessWidget {
                                             EdgeInsets.symmetric(vertical: 5.h),
                                         child: Divider(
                                           thickness: 0.5,
-                                          color: AppTheme
-                                              .DRAWER_SECOND_DIVIDER_COLOR,
+                                          color: kcDividerSecondaryColor,
                                         ),
                                       );
                                     },

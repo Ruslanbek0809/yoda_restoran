@@ -85,7 +85,7 @@ class ToggleButtonView extends StatelessWidget {
                               fontSize: 17.sp,
                               color: model.isDelivery
                                   ? kcFontColor
-                                  : AppTheme.FONT_GREY_COLOR,
+                                  : kcSecondaryFontColor,
                             ),
                           ).tr(),
                         ),
@@ -100,7 +100,7 @@ class ToggleButtonView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 17.sp,
                               color: model.isDelivery
-                                  ? AppTheme.FONT_GREY_COLOR
+                                  ? kcSecondaryFontColor
                                   : kcFontColor,
                             ),
                           ).tr(),

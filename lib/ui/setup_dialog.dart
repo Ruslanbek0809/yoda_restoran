@@ -866,9 +866,10 @@ class RateOrderDialogView extends StatelessWidget {
                                                         allowHalfRating: false,
                                                         ignoreGestures: true,
                                                         glow: false,
-                                                        unratedColor: AppTheme
-                                                            .MAIN
-                                                            .withOpacity(0.4),
+                                                        unratedColor:
+                                                            kcPrimaryColor
+                                                                .withOpacity(
+                                                                    0.4),
                                                         itemSize: 45,
                                                         itemBuilder:
                                                             (context, _) =>
