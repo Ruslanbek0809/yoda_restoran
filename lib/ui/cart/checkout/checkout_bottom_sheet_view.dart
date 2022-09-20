@@ -436,7 +436,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                 border: Border(
                   top: BorderSide(
                     width: 0.1,
-                    color: AppTheme.BUTTON_BORDER_COLOR,
+                    color: kcButtonBorderColor,
                   ),
                 ),
               ),

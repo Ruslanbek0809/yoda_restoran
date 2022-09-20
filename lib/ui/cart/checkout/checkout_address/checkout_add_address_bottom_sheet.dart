@@ -78,9 +78,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                     right: 0,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: kcWhiteColor,
-                        // border: Border.all(
-                        //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                        color: kcWhiteColor
                       ),
                       padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                       child: CustomTextChildButton(

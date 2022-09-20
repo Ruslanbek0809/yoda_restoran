@@ -21,7 +21,7 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
       child: Container(
         decoration: BoxDecoration(
             color: kcWhiteColor,
-            border: Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+            border: Border.all(color: kcButtonBorderColor, width: 0.1),
             boxShadow: [AppTheme().bottomCartShadow]),
         padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 25.w),
         child: TextButton(

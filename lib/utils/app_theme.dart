@@ -3,14 +3,6 @@ import 'package:flutter/material.dart';
 import '../shared/shared.dart';
 
 class AppTheme {
-  static const Color CONTACT_COLOR = Color(0xFF999999);
-  static const Color FILL_COLOR = Color(0xFFF8F8F8);
-  static const Color FILL_BORDER_COLOR = Color(0xFFBBBBBB);
-  static const Color FILL_BORDER_SECOND_COLOR = Color(0xFFF1F0ED);
-  static const Color TEXTFIELD_HINT_COLOR = Color(0xFF2C0909);
-  static const Color BUTTON_BORDER_COLOR = Color(0xFF888888);
-  static const Color TOGGLE_COLOR = Color(0xFFDDDDDB);
-  static const Color DIALOG_TITLE_COLOR = Color(0xFF666666);
   static const Color GREEN_COLOR = Color(0xFF76C03F);
   static const Color RED = Color(0xFFE64F3A);
   static const Color BLACK = Color(0xFF000000);

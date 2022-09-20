@@ -70,26 +70,26 @@ class LoginView extends StatelessWidget with $LoginView {
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: Text('+993', style: kts18Text),
                       ),
-                      fillColor: AppTheme.FILL_COLOR,
+                      fillColor: kcFillColor,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),

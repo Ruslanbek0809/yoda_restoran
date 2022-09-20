@@ -166,8 +166,6 @@ class DrawerView extends StatelessWidget {
                         // context.locale.toString(),
                         style: kts16DarkSemiBoldText,
                       ).tr(),
-                      // iconColor: AppTheme.CONTACT_COLOR,
-                      // expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         CustomTextChildButton(
                           padding: EdgeInsets.only(

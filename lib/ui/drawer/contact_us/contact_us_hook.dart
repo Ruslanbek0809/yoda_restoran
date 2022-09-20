@@ -196,7 +196,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               Text(
                 LocaleKeys.our_phone,
                 style: TextStyle(
-                  color: AppTheme.CONTACT_COLOR,
+                  color: kcContactColor,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -205,20 +205,12 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               Text(
                 LocaleKeys.our_address,
                 style: TextStyle(
-                  color: AppTheme.CONTACT_COLOR,
+                  color: kcContactColor,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ).tr(),
               SizedBox(height: 2.h),
-              // Text(
-              //   'Instagram: @yoda.restoran',
-              //   style: TextStyle(
-              //     color: AppTheme.CONTACT_COLOR,
-              //     fontSize: 16.sp,
-              //     fontWeight: FontWeight.w600,
-              //   ),
-              // ).tr(),
             ],
           ),
         ),
