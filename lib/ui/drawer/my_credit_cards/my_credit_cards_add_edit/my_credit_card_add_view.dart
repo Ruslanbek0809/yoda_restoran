@@ -40,8 +40,6 @@ class MyCreditCardAddView extends StatelessWidget {
           children: [
             //------------------ CREDIT CARD UI ---------------------//
             CreditCardWidget(
-              glassmorphismConfig:
-                  model.useGlassMorphism ? Glassmorphism.defaultConfig() : null,
               cardNumber: model.cardNumber,
               expiryDate: model.expiryDate,
               cardHolderName: model.cardHolderName,
@@ -53,20 +51,18 @@ class MyCreditCardAddView extends StatelessWidget {
               obscureCardCvv: true,
               isHolderNameVisible: true,
               cardBgColor: kcPrimaryColor,
-              backgroundImage:
-                  model.useBackgroundImage ? 'assets/card_bg.png' : null,
               isSwipeGestureEnabled: true,
               onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-              customCardTypeIcons: <CustomCardTypeIcon>[
-                CustomCardTypeIcon(
-                  cardType: CardType.mastercard,
-                  cardImage: Image.asset(
-                    'assets/mastercard.png',
-                    height: 48,
-                    width: 48,
-                  ),
-                ),
-              ],
+              // customCardTypeIcons: <CustomCardTypeIcon>[
+              //   CustomCardTypeIcon(
+              //     cardType: CardType.mastercard,
+              //     cardImage: Image.asset(
+              //       'assets/mastercard.png',
+              //       height: 48,
+              //       width: 48,
+              //     ),
+              //   ),
+              // ],
             ),
             //------------------ CREDIT CARD FORM ---------------------//
             CreditCardForm(
@@ -169,14 +165,14 @@ class MyCreditCardAddView extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(12),
                 child: const Text(
-                  'Validate',
+                  LocaleKeys.add_card,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'halter',
                     fontSize: 14,
                     package: 'flutter_credit_card',
                   ),
-                ),
+                ).tr(),
               ),
               onPressed: () {
                 if (creditCardFormKey.currentState!.validate()) {

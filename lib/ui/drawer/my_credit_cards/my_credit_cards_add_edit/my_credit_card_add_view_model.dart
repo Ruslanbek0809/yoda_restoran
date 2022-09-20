@@ -35,12 +35,6 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   bool _isCvvFocused = false;
   bool get isCvvFocused => _isCvvFocused;
 
-  bool _useGlassMorphism = false;
-  bool get useGlassMorphism => _useGlassMorphism;
-
-  bool _useBackgroundImage = false;
-  bool get useBackgroundImage => _useBackgroundImage;
-
   OutlineInputBorder? _border;
   OutlineInputBorder? get border => _border;
 
@@ -86,16 +80,6 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   //     throw err;
   //   }
   // }
-
-  void onGlassmorphismChange(bool value) {
-    _useGlassMorphism = value;
-    notifyListeners();
-  }
-
-  void onBackgroundChange(bool value) {
-    _useBackgroundImage = value;
-    notifyListeners();
-  }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     _cardNumber = creditCardModel!.cardNumber;
