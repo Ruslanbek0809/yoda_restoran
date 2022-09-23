@@ -114,13 +114,11 @@ class MyCreditCardAddView extends StatelessWidget {
                     toggleable: true,
                   );
                 },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    indent: 0.175.sw,
-                    thickness: 0.5,
-                    color: kcDividerSecondaryColor,
-                  );
-                },
+                separatorBuilder: (context, index) => Divider(
+                  indent: 0.175.sw,
+                  thickness: 0.5,
+                  color: kcDividerSecondaryColor,
+                ),
               ),
               //------------------ CARD ADD BUTTON ---------------------//
               Container(

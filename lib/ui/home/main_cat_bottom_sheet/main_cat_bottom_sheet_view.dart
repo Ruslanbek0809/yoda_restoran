@@ -99,29 +99,6 @@ class MainCatBottomSheetView extends StatelessWidget {
                       onChanged: (value) =>
                           model.updateIsOpenByRestaurants(value!),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       LocaleKeys
-                    //           .byOpenRestaurants, // Changes name of first element if location is enabled
-                    //       style: TextStyle(
-                    //         color: kcFontColor,
-                    //         fontSize: 16.sp,
-                    //       ),
-                    //     ).tr(),
-                    //     Transform.scale(
-                    //       scale: 1.25,
-                    //       child: Checkbox(
-                    //         checkColor: kcWhiteColor,
-                    //         value: model.isByOpenRestaurantsChecked,
-                    //         onChanged: (value) =>
-                    //             model.updateIsOpenByRestaurants(value!),
-                    //         activeColor: kcGreenColor,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                   //--------------- MAIN CATEGORY SORT MANUAL -------------- //
 
@@ -146,6 +123,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                         ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(bottom: 0.125.sh),
                           itemCount: mainCatSortList.length,
                           itemBuilder: (context, pos) {
                             return RadioListTile<FilterSort>(
@@ -165,131 +143,15 @@ class MainCatBottomSheetView extends StatelessWidget {
                               toggleable: true,
                             );
                           },
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                              color: kcDividerColor,
-                              indent: 10.w,
-                              endIndent: 15.w,
-                            );
-                          },
+                          separatorBuilder: (context, index) => Divider(
+                            color: kcDividerColor,
+                            indent: 10.w,
+                            endIndent: 15.w,
+                          ),
                         ),
-                        // Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: mainCatSortList
-                        //       .map<Widget>(
-                        //         (FilterSort categoryFilter) => Column(
-                        //           crossAxisAlignment: CrossAxisAlignment.start,
-                        //           children: [
-                        //             RadioListTile<FilterSort>(
-                        //               value: categoryFilter,
-                        //               groupValue: model.selectedSort,
-                        //               onChanged: model.updateSelectedSort,
-                        //               title: Text(
-                        //                 mainCatSortList.indexOf(
-                        //                                 categoryFilter) ==
-                        //                             0 &&
-                        //                         model.locationPosition != null
-                        //                     ? LocaleKeys.sortByGeolocation
-                        //                     : categoryFilter
-                        //                         .name, // Changes name of first element if location is enabled
-                        //                 style: TextStyle(
-                        //                   color: kcFontColor,
-                        //                   fontSize: 16.sp,
-                        //                 ),
-                        //               ).tr(),
-                        //               activeColor: kcGreenColor,
-                        //               controlAffinity:
-                        //                   ListTileControlAffinity.trailing,
-                        //               toggleable: true,
-                        //             ),
-                        //             if (mainCatSortList
-                        //                     .indexOf(categoryFilter) !=
-                        //                 mainCatSortList.length - 1)
-                        //               Divider(
-                        //                 color: kcDividerColor,
-                        //                 indent: 10.w,
-                        //                 endIndent: 15.w,
-                        //               )
-                        //           ],
-                        //         ),
-                        //       )
-                        //       .toList(),
-                        // ),
-                        SizedBox(height: 0.125.sh)
                       ],
                     ),
                   ),
-                  // //--------------- MAIN CATEGORY SORT MANUAL -------------- //
-                  // Container(
-                  //   padding:
-                  //       EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.h),
-                  //   decoration: BoxDecoration(
-                  //     color: kcWhiteColor,
-                  //     borderRadius: AppTheme().radius20,
-                  //   ),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Padding(
-                  //         padding: EdgeInsets.only(bottom: 10.h),
-                  //         child: Text(
-                  //           LocaleKeys.showOrder,
-                  //           style: ktsDefault24DarkText,
-                  //         ).tr(),
-                  //       ),
-                  //       Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: mainCatSortList
-                  //             .map<Widget>(
-                  //               (FilterSort categoryFilter) => Column(
-                  //                 crossAxisAlignment: CrossAxisAlignment.start,
-                  //                 children: [
-                  //                   Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Text(
-                  //                         mainCatSortList.indexOf(
-                  //                                         categoryFilter) ==
-                  //                                     0 &&
-                  //                                 model.locationPosition != null
-                  //                             ? LocaleKeys.sortByGeolocation
-                  //                             : categoryFilter
-                  //                                 .name, // Changes name of first element if location is enabled
-                  //                         style: TextStyle(
-                  //                           color: kcFontColor,
-                  //                           fontSize: 16.sp,
-                  //                         ),
-                  //                       ).tr(),
-                  //                       Transform.scale(
-                  //                         scale: 1.5,
-                  //                         child: Radio<FilterSort>(
-                  //                           value: categoryFilter,
-                  //                           groupValue: model.selectedSort,
-                  //                           onChanged: model.updateSelectedSort,
-                  //                           activeColor: kcGreenColor,
-                  //                           toggleable: true,
-                  //                         ),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                   if (mainCatSortList
-                  //                           .indexOf(categoryFilter) !=
-                  //                       mainCatSortList.length - 1)
-                  //                     Divider(
-                  //                       color: kcDividerColor,
-                  //                       indent: 2.w,
-                  //                       endIndent: 13.w,
-                  //                     )
-                  //                 ],
-                  //               ),
-                  //             )
-                  //             .toList(),
-                  //       ),
-                  //       SizedBox(height: 0.125.sh)
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),
