@@ -36,43 +36,11 @@ class MyCreditCardAddView extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          title: Text(LocaleKeys.bank_card, style: kts22DarkText).tr(),
+          title: Text(LocaleKeys.card_info, style: kts22DarkText).tr(),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // //------------------ CREDIT CARD UI ---------------------//
-              // CreditCardWidget(
-              //   cardNumber: model.cardNumber,
-              //   expiryDate: model.expiryDate,
-              //   cardHolderName: model.cardHolderName,
-              //   cvvCode: model.cvvCode,
-              //   bankName: 'Rysgal Bank',
-              //   showBackView: model.isCvvFocused,
-              //   labelCardHolder: LocaleKeys.card_holder.tr(),
-              //   // textStyle: const TextStyle(
-              //   //   color: Colors.white,
-              //   //   // fontFamily: 'halter',
-              //   //   fontSize: 16,
-              //   //   package: 'flutter_credit_card',
-              //   // ),
-              //   obscureCardNumber: true,
-              //   obscureCardCvv: true,
-              //   isHolderNameVisible: true,
-              //   cardBgColor: kcPrimaryColor,
-              //   isSwipeGestureEnabled: true,
-              //   onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-              //   // customCardTypeIcons: <CustomCardTypeIcon>[
-              //   //   CustomCardTypeIcon(
-              //   //     cardType: CardType.mastercard,
-              //   //     cardImage: Image.asset(
-              //   //       'assets/mastercard.png',
-              //   //       height: 48,
-              //   //       width: 48,
-              //   //     ),
-              //   //   ),
-              //   // ],
-              // ),
               //------------------ CREDIT CARD FORM ---------------------//
               CreditCardForm(
                 formKey: creditCardFormKey,
