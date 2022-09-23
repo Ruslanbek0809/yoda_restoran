@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'models.dart';
+
 part 'create_order.g.dart';
 
 @JsonSerializable(explicitToJson: true)

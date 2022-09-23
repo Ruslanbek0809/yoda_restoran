@@ -14,8 +14,6 @@ import 'cart_meal_item.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'checkout/checkout_bottom_sheet_view_copy.dart';
 import 'checkout/checkout_bottom_sheet_view.dart';
 
 class CartView extends StatelessWidget {

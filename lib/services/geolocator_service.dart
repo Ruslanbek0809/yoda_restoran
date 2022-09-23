@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+
 import '../app/app.logger.dart';
 
 class GeolocatorService {

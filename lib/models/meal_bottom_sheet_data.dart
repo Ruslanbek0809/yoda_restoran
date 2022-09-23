@@ -1,5 +1,5 @@
-import 'models.dart';
 import '../ui/restaurant/meal/meal_view_model.dart';
+import 'models.dart';
 
 class MealBottomSheetData {
   MealBottomSheetData({

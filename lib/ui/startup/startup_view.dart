@@ -1,15 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+
 import '../../generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/utils.dart';
 import 'startup_animated_text_hook.dart';
 import 'startup_viewmodel.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class StartUpView extends StatelessWidget {
   StartUpView({Key? key}) : super(key: key);

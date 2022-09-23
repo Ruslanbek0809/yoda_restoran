@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/hive_models/hive_models.dart';
 import '../models/models.dart';
-import 'services.dart';
 import '../utils/utils.dart';
+import 'services.dart';
 
 class UserService {
   final log = getLogger('UserService');

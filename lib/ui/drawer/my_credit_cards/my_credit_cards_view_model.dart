@@ -5,7 +5,6 @@ import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
-
 import '../../../generated/locale_keys.g.dart';
 import '../../../utils/utils.dart';
 
