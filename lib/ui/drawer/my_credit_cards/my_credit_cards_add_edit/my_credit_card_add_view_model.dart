@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:yoda_res/utils/utils.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.logger.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../models/models.dart';
 import '../../../../services/services.dart';
 
 class MyCreditCardAddViewModel extends BaseViewModel {
@@ -35,58 +37,24 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   bool _isCvvFocused = false;
   bool get isCvvFocused => _isCvvFocused;
 
-  OutlineInputBorder? _border;
-  OutlineInputBorder? get border => _border;
+  BankCard? _selectedBankCard = bankList[0];
+  BankCard? get selectedBankCard => _selectedBankCard;
 
-  /// UPDATES _city
-  String? updateCity(String? value) {
-    log.v('updateCity value: $value');
-    if (value!.isEmpty) return LocaleKeys.enterCity.tr();
-
-    _city = value;
-    notifyListeners();
-    return null;
-  }
-
-  /// UPDATES _street
-  String? updateStreet(String? value) {
-    log.v('updateStreet value: $value');
-    // if (value == null || value.isEmpty) return null;
-    if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
-
-    _street = value;
-    notifyListeners();
-    return null;
-  }
-
-  // /// ADDS new address
-  // Future<void> onAddAddressPressed(
-  //   Function()? onSuccess,
-  //   Function()? onFail,
-  // ) async {
-  //   log.v('onAddAddressPressed()');
-  //   try {
-  //     await runBusyFuture(_userService.addAddress(
-  //       city,
-  //       street,
-  //       house,
-  //       apartment,
-  //       floor,
-  //       note,
-  //       () => onSuccess!(),
-  //       () => onFail!(),
-  //     ));
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
-
+  /// SAVES credit card info
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
     _cardHolderName = creditCardModel.cardHolderName;
     _cvvCode = creditCardModel.cvvCode;
     _isCvvFocused = creditCardModel.isCvvFocused;
+    notifyListeners();
+  }
+
+  /// UPDATES _selectedBankCard
+  void updateSelectedBankCard(BankCard? newSelectedBankCard) {
+    log.i('updateSelectedBankCard(): ${newSelectedBankCard!.bankName}');
+
+    _selectedBankCard = newSelectedBankCard;
     notifyListeners();
   }
 

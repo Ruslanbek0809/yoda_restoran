@@ -71,22 +71,18 @@ final List<BankCard> bankList = [
   BankCard(
     bankId: 1,
     bankName: LocaleKeys.halk_bank,
-    bankLogo: 'assets/bank/halk.png',
   ),
   BankCard(
     bankId: 2,
     bankName: LocaleKeys.rysgal_bank,
-    bankLogo: 'assets/bank/rysgal.png',
   ),
   BankCard(
     bankId: 3,
     bankName: LocaleKeys.senagat_bank,
-    bankLogo: 'assets/bank/senagat.png',
   ),
   BankCard(
     bankId: 4,
     bankName: LocaleKeys.another_bank,
-    bankLogo: 'assets/bank/halk.png',
   ),
 ];
 

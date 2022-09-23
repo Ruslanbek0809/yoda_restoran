@@ -3,6 +3,7 @@ import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
@@ -91,6 +92,35 @@ class MyCreditCardAddView extends StatelessWidget {
                   labelText: LocaleKeys.card_holder.tr(),
                 ),
                 onCreditCardModelChange: model.onCreditCardModelChange,
+              ),
+              //------------------ BANK CARD LIST ---------------------//
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(top: 20.h),
+                itemCount: bankList.length,
+                itemBuilder: (context, pos) {
+                  return RadioListTile<BankCard>(
+                    value: bankList[pos],
+                    groupValue: model.selectedBankCard,
+                    onChanged: model.updateSelectedBankCard,
+                    title: Text(
+                      bankList[pos]
+                          .bankName, // Changes name of first element if location is enabled
+                      style: kts16Text,
+                    ).tr(),
+                    activeColor: kcGreenColor,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    toggleable: true,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    indent: 0.175.sw,
+                    thickness: 0.5,
+                    color: kcDividerSecondaryColor,
+                  );
+                },
               ),
               //------------------ CARD ADD BUTTON ---------------------//
               Container(

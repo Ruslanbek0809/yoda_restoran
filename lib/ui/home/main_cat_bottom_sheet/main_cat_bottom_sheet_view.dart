@@ -131,7 +131,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                       color: kcWhiteColor,
                       borderRadius: AppTheme().radius20,
                     ),
-                    child: Column(  
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
