@@ -70,22 +70,22 @@ final List<String> drawerLoggedInList = [
 final List<BankCard> bankList = [
   BankCard(
     bankId: 1,
-    bankName: 'halk_bank',
+    bankName: LocaleKeys.halk_bank,
     bankLogo: 'assets/bank/halk.png',
   ),
   BankCard(
     bankId: 2,
-    bankName: 'rysgal_bank',
+    bankName: LocaleKeys.rysgal_bank,
     bankLogo: 'assets/bank/rysgal.png',
   ),
   BankCard(
     bankId: 3,
-    bankName: 'senagat_bank',
+    bankName: LocaleKeys.senagat_bank,
     bankLogo: 'assets/bank/senagat.png',
   ),
   BankCard(
     bankId: 4,
-    bankName: 'other_bank',
+    bankName: LocaleKeys.another_bank,
     bankLogo: 'assets/bank/halk.png',
   ),
 ];
