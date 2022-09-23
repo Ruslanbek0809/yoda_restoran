@@ -48,12 +48,15 @@ class YodaResApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         builder: (context, child) {
-          return ScrollConfiguration(
-            behavior: MyBehavior(), // To remove the glow effect entirely
-            child: MediaQuery(
-              //Setting font does not change with system font size
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: child!,
+          /// A widget that unfocus everything when tapped.
+          return UnfocusWidget(
+            child: ScrollConfiguration(
+              behavior: MyBehavior(), // To remove the glow effect entirely
+              child: MediaQuery(
+                //Setting font does not change with system font size
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: child!,
+              ),
             ),
           );
         },
