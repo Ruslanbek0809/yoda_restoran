@@ -124,6 +124,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                     // ),
                   ),
                   //--------------- MAIN CATEGORY SORT MANUAL -------------- //
+
                   Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
@@ -142,48 +143,78 @@ class MainCatBottomSheetView extends StatelessWidget {
                             style: ktsDefault24DarkText,
                           ).tr(),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: mainCatSortList
-                              .map<Widget>(
-                                (FilterSort categoryFilter) => Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    RadioListTile<FilterSort>(
-                                      value: categoryFilter,
-                                      groupValue: model.selectedSort,
-                                      onChanged: model.updateSelectedSort,
-                                      title: Text(
-                                        mainCatSortList.indexOf(
-                                                        categoryFilter) ==
-                                                    0 &&
-                                                model.locationPosition != null
-                                            ? LocaleKeys.sortByGeolocation
-                                            : categoryFilter
-                                                .name, // Changes name of first element if location is enabled
-                                        style: TextStyle(
-                                          color: kcFontColor,
-                                          fontSize: 16.sp,
-                                        ),
-                                      ).tr(),
-                                      activeColor: kcGreenColor,
-                                      controlAffinity:
-                                          ListTileControlAffinity.trailing,
-                                      toggleable: true,
-                                    ),
-                                    if (mainCatSortList
-                                            .indexOf(categoryFilter) !=
-                                        mainCatSortList.length - 1)
-                                      Divider(
-                                        color: kcDividerColor,
-                                        indent: 10.w,
-                                        endIndent: 15.w,
-                                      )
-                                  ],
-                                ),
-                              )
-                              .toList(),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: mainCatSortList.length,
+                          itemBuilder: (context, pos) {
+                            return RadioListTile<FilterSort>(
+                              value: mainCatSortList[pos],
+                              groupValue: model.selectedSort,
+                              onChanged: model.updateSelectedSort,
+                              title: Text(
+                                mainCatSortList.indexOf(mainCatSortList[pos]) ==
+                                            0 &&
+                                        model.locationPosition != null
+                                    ? LocaleKeys.sortByGeolocation
+                                    : mainCatSortList[pos].name,
+                                style: kts16Text,
+                              ).tr(),
+                              activeColor: kcGreenColor,
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              toggleable: true,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              color: kcDividerColor,
+                              indent: 10.w,
+                              endIndent: 15.w,
+                            );
+                          },
                         ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: mainCatSortList
+                        //       .map<Widget>(
+                        //         (FilterSort categoryFilter) => Column(
+                        //           crossAxisAlignment: CrossAxisAlignment.start,
+                        //           children: [
+                        //             RadioListTile<FilterSort>(
+                        //               value: categoryFilter,
+                        //               groupValue: model.selectedSort,
+                        //               onChanged: model.updateSelectedSort,
+                        //               title: Text(
+                        //                 mainCatSortList.indexOf(
+                        //                                 categoryFilter) ==
+                        //                             0 &&
+                        //                         model.locationPosition != null
+                        //                     ? LocaleKeys.sortByGeolocation
+                        //                     : categoryFilter
+                        //                         .name, // Changes name of first element if location is enabled
+                        //                 style: TextStyle(
+                        //                   color: kcFontColor,
+                        //                   fontSize: 16.sp,
+                        //                 ),
+                        //               ).tr(),
+                        //               activeColor: kcGreenColor,
+                        //               controlAffinity:
+                        //                   ListTileControlAffinity.trailing,
+                        //               toggleable: true,
+                        //             ),
+                        //             if (mainCatSortList
+                        //                     .indexOf(categoryFilter) !=
+                        //                 mainCatSortList.length - 1)
+                        //               Divider(
+                        //                 color: kcDividerColor,
+                        //                 indent: 10.w,
+                        //                 endIndent: 15.w,
+                        //               )
+                        //           ],
+                        //         ),
+                        //       )
+                        //       .toList(),
+                        // ),
                         SizedBox(height: 0.125.sh)
                       ],
                     ),
