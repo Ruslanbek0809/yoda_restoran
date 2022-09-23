@@ -91,6 +91,14 @@ class AppTheme {
         ),
       );
 
+  /// UnderlineInputBorder
+  UnderlineInputBorder get cardUnderlineInputBorder => UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: kcDividerColor,
+          width: 0.5,
+        ),
+      );
+
   /// Radiuses
   BorderRadius get radius20 => BorderRadius.circular(20.0);
   BorderRadius get radius15 => BorderRadius.circular(15.0);

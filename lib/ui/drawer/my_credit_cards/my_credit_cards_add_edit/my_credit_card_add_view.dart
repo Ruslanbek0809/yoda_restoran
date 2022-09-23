@@ -41,38 +41,38 @@ class MyCreditCardAddView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              //------------------ CREDIT CARD UI ---------------------//
-              CreditCardWidget(
-                cardNumber: model.cardNumber,
-                expiryDate: model.expiryDate,
-                cardHolderName: model.cardHolderName,
-                cvvCode: model.cvvCode,
-                bankName: 'Rysgal Bank',
-                showBackView: model.isCvvFocused,
-                labelCardHolder: LocaleKeys.card_holder.tr(),
-                // textStyle: const TextStyle(
-                //   color: Colors.white,
-                //   // fontFamily: 'halter',
-                //   fontSize: 16,
-                //   package: 'flutter_credit_card',
-                // ),
-                obscureCardNumber: true,
-                obscureCardCvv: true,
-                isHolderNameVisible: true,
-                cardBgColor: kcPrimaryColor,
-                isSwipeGestureEnabled: true,
-                onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-                // customCardTypeIcons: <CustomCardTypeIcon>[
-                //   CustomCardTypeIcon(
-                //     cardType: CardType.mastercard,
-                //     cardImage: Image.asset(
-                //       'assets/mastercard.png',
-                //       height: 48,
-                //       width: 48,
-                //     ),
-                //   ),
-                // ],
-              ),
+              // //------------------ CREDIT CARD UI ---------------------//
+              // CreditCardWidget(
+              //   cardNumber: model.cardNumber,
+              //   expiryDate: model.expiryDate,
+              //   cardHolderName: model.cardHolderName,
+              //   cvvCode: model.cvvCode,
+              //   bankName: 'Rysgal Bank',
+              //   showBackView: model.isCvvFocused,
+              //   labelCardHolder: LocaleKeys.card_holder.tr(),
+              //   // textStyle: const TextStyle(
+              //   //   color: Colors.white,
+              //   //   // fontFamily: 'halter',
+              //   //   fontSize: 16,
+              //   //   package: 'flutter_credit_card',
+              //   // ),
+              //   obscureCardNumber: true,
+              //   obscureCardCvv: true,
+              //   isHolderNameVisible: true,
+              //   cardBgColor: kcPrimaryColor,
+              //   isSwipeGestureEnabled: true,
+              //   onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
+              //   // customCardTypeIcons: <CustomCardTypeIcon>[
+              //   //   CustomCardTypeIcon(
+              //   //     cardType: CardType.mastercard,
+              //   //     cardImage: Image.asset(
+              //   //       'assets/mastercard.png',
+              //   //       height: 48,
+              //   //       width: 48,
+              //   //     ),
+              //   //   ),
+              //   // ],
+              // ),
               //------------------ CREDIT CARD FORM ---------------------//
               CreditCardForm(
                 formKey: creditCardFormKey,
@@ -91,30 +91,32 @@ class MyCreditCardAddView extends StatelessWidget {
                   hintText: 'XXXX XXXX XXXX XXXX',
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
-                  focusedBorder: AppTheme().cardOutlineInputBorder,
-                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  focusedBorder: AppTheme().cardUnderlineInputBorder,
+                  enabledBorder: AppTheme().cardUnderlineInputBorder,
                 ),
                 expiryDateDecoration: InputDecoration(
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
-                  focusedBorder: AppTheme().cardOutlineInputBorder,
-                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  focusedBorder: AppTheme().cardUnderlineInputBorder,
+                  enabledBorder: AppTheme().cardUnderlineInputBorder,
                   labelText: LocaleKeys.card_date_deadline.tr(),
                   hintText: 'XX/XX',
                 ),
                 cvvCodeDecoration: InputDecoration(
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
-                  focusedBorder: AppTheme().cardOutlineInputBorder,
-                  enabledBorder: AppTheme().cardOutlineInputBorder,
-                  labelText: 'CVV',
-                  hintText: 'XXX',
+                  focusedBorder: AppTheme().cardUnderlineInputBorder,
+                  enabledBorder: AppTheme().cardUnderlineInputBorder,
+                  labelText: '',
+                  hintText: '',
+                  // labelText: 'CVC',
+                  // hintText: 'XXX',
                 ),
                 cardHolderDecoration: InputDecoration(
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
-                  focusedBorder: AppTheme().cardOutlineInputBorder,
-                  enabledBorder: AppTheme().cardOutlineInputBorder,
+                  focusedBorder: AppTheme().cardUnderlineInputBorder,
+                  enabledBorder: AppTheme().cardUnderlineInputBorder,
                   labelText: LocaleKeys.card_holder.tr(),
                 ),
                 onCreditCardModelChange: model.onCreditCardModelChange,
