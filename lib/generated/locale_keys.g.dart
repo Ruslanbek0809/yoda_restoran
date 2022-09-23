@@ -81,10 +81,10 @@ abstract class  LocaleKeys {
   static const apartment = 'apartment';
   static const floor = 'floor';
   static const my_credit_cards = 'my_credit_cards';
-  static const halk_bank = 'halk_bank';
   static const rysgal_bank = 'rysgal_bank';
   static const senagat_bank = 'senagat_bank';
-  static const another_bank = 'another_bank';
+  static const dyi_bank = 'dyi_bank';
+  static const halk_bank_and_others = 'halk_bank_and_others';
   static const card_info = 'card_info';
   static const card_holder = 'card_holder';
   static const card_number = 'card_number';
