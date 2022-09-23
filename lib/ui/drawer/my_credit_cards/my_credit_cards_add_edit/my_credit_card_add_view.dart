@@ -107,10 +107,8 @@ class MyCreditCardAddView extends StatelessWidget {
                   labelStyle: kts16HelperText,
                   focusedBorder: AppTheme().cardUnderlineInputBorder,
                   enabledBorder: AppTheme().cardUnderlineInputBorder,
-                  labelText: '',
-                  hintText: '',
-                  // labelText: 'CVC',
-                  // hintText: 'XXX',
+                  labelText: 'CVC',
+                  hintText: 'XXX',
                 ),
                 cardHolderDecoration: InputDecoration(
                   hintStyle: kts16HelperText,

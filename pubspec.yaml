@@ -134,7 +134,6 @@ flutter:
   assets:
     - assets/
     - assets/fonts/
-    - assets/bank/
     - assets/translations/
     
   fonts:
