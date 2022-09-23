@@ -66,12 +66,28 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
-/// BANKS list
-final List<String> banksList = [
-  "Rysgal Bank",
-  "Senagat Bank",
-  "Türkmenistanyň Döwlet Daşary Ykdysady Iş Banky",
-  "Halkbank we beýleki banklar ",
+/// BANK list
+final List<BankCard> bankList = [
+  BankCard(
+    bankId: 1,
+    bankName: 'halk_bank',
+    bankLogo: 'assets/bank/halk.png',
+  ),
+  BankCard(
+    bankId: 2,
+    bankName: 'rysgal_bank',
+    bankLogo: 'assets/bank/rysgal.png',
+  ),
+  BankCard(
+    bankId: 3,
+    bankName: 'senagat_bank',
+    bankLogo: 'assets/bank/senagat.png',
+  ),
+  BankCard(
+    bankId: 4,
+    bankName: 'other_bank',
+    bankLogo: 'assets/bank/halk.png',
+  ),
 ];
 
 List<FilterSort> mainCatSortList = [
