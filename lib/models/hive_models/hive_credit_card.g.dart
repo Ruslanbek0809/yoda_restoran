@@ -17,9 +17,9 @@ class HiveCreditCardAdapter extends TypeAdapter<HiveCreditCard> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveCreditCard(
-      cardNumber: fields[0] as String?,
-      expiryDate: fields[1] as String?,
-      cardHolderName: fields[2] as String?,
+      cardNumber: fields[0] as String,
+      expiryDate: fields[1] as String,
+      cardHolderName: fields[2] as String,
     );
   }
 

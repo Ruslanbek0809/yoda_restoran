@@ -26,6 +26,7 @@ void main() async {
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
   Hive.registerAdapter<HiveRating>(HiveRatingAdapter()); // TODO: HiveRating
+  Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();

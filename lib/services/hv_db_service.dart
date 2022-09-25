@@ -49,7 +49,7 @@ class HiveDbService with ReactiveServiceMixin {
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
     await Hive.openBox<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
-    await Hive.openBox<HiveRating>(Constants.creditCardsBox);
+    await Hive.openBox<HiveCreditCard>(Constants.creditCardsBox);
 
     log.v('====== HiveDbService ENDED opening boxes ======');
   }
