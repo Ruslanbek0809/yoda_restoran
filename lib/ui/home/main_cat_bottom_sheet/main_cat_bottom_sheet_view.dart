@@ -31,121 +31,130 @@ class MainCatBottomSheetView extends StatelessWidget {
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
         ),
-        child: ListView(
-          controller: scrollController,
-          shrinkWrap: true,
+        child: Stack(
           children: [
-            // --------------- MAIN CATEGORIES -------------- //
-            Container(
-              decoration: BoxDecoration(
-                color: kcWhiteColor,
-                borderRadius: AppTheme().radius20,
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    LocaleKeys.kitchen,
-                    style: ktsDefault24DarkText,
-                  ).tr(),
-                  GridView.builder(
-                    padding: EdgeInsets.only(top: 10.h),
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 0.h, //spaceTopBottom
-                      crossAxisSpacing: 5.w, //spaceLeftRight
-                      childAspectRatio: 0.75,
-                    ),
-                    itemCount: model.mainCats!.length,
-                    itemBuilder: (context, pos) {
-                      return MainCategoryItemBottomHook(
-                        mainCategory: model.mainCats![pos],
-                      );
-                    },
+            ListView(
+              controller: scrollController,
+              shrinkWrap: true,
+              children: [
+                // --------------- MAIN CATEGORIES -------------- //
+                Container(
+                  decoration: BoxDecoration(
+                    color: kcWhiteColor,
+                    borderRadius: AppTheme().radius20,
                   ),
-                ],
-              ),
-            ),
-            //--------------- MAIN CATEGORY OPEN RESTAURANTS MANUAL -------------- //
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10.h),
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                color: kcWhiteColor,
-                borderRadius: AppTheme().radius20,
-              ),
-              child: CheckboxListTile(
-                title: Text(
-                  LocaleKeys
-                      .byOpenRestaurants, // Changes name of first element if location is enabled
-                  style: TextStyle(
-                    color: kcFontColor,
-                    fontSize: 16.sp,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        LocaleKeys.kitchen,
+                        style: ktsDefault24DarkText,
+                      ).tr(),
+                      GridView.builder(
+                        padding: EdgeInsets.only(top: 10.h),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          mainAxisSpacing: 0.h, //spaceTopBottom
+                          crossAxisSpacing: 5.w, //spaceLeftRight
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: model.mainCats!.length,
+                        itemBuilder: (context, pos) {
+                          return MainCategoryItemBottomHook(
+                            mainCategory: model.mainCats![pos],
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ).tr(),
-                value: model.isByOpenRestaurantsChecked,
-                controlAffinity: ListTileControlAffinity.trailing,
-                checkColor: kcWhiteColor,
-                activeColor: kcGreenColor,
-                onChanged: (value) => model.updateIsOpenByRestaurants(value!),
-              ),
-            ),
-
-            //--------------- MAIN CATEGORY SORT MANUAL -------------- //
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                color: kcWhiteColor,
-                borderRadius: AppTheme().radius20,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.only(left: 10.w, right: 10.w, bottom: 4.h),
-                    child: Text(
-                      LocaleKeys.showOrder,
-                      style: ktsDefault24DarkText,
+                ),
+                //--------------- MAIN CATEGORY OPEN RESTAURANTS MANUAL -------------- //
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    color: kcWhiteColor,
+                    borderRadius: AppTheme().radius20,
+                  ),
+                  child: CheckboxListTile(
+                    title: Text(
+                      LocaleKeys
+                          .byOpenRestaurants, // Changes name of first element if location is enabled
+                      style: TextStyle(
+                        color: kcFontColor,
+                        fontSize: 16.sp,
+                      ),
                     ).tr(),
+                    value: model.isByOpenRestaurantsChecked,
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    checkColor: kcWhiteColor,
+                    activeColor: kcGreenColor,
+                    onChanged: (value) =>
+                        model.updateIsOpenByRestaurants(value!),
                   ),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.only(bottom: 0.125.sh),
-                    itemCount: mainCatSortList.length,
-                    itemBuilder: (context, pos) {
-                      return RadioListTile<FilterSort>(
-                        value: mainCatSortList[pos],
-                        groupValue: model.selectedSort,
-                        onChanged: model.updateSelectedSort,
-                        title: Text(
-                          mainCatSortList.indexOf(mainCatSortList[pos]) == 0 &&
-                                  model.locationPosition != null
-                              ? LocaleKeys.sortByGeolocation
-                              : mainCatSortList[pos].name,
-                          style: kts16Text,
+                ),
+
+                //--------------- MAIN CATEGORY SORT MANUAL -------------- //
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    color: kcWhiteColor,
+                    borderRadius: AppTheme().radius20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 10.w, right: 10.w, bottom: 4.h),
+                        child: Text(
+                          LocaleKeys.showOrder,
+                          style: ktsDefault24DarkText,
                         ).tr(),
-                        activeColor: kcGreenColor,
-                        controlAffinity: ListTileControlAffinity.trailing,
-                        toggleable: true,
-                      );
-                    },
-                    separatorBuilder: (context, index) => Divider(
-                      color: kcDividerColor,
-                      indent: 10.w,
-                      endIndent: 15.w,
-                    ),
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.only(bottom: 0.125.sh),
+                        itemCount: mainCatSortList.length,
+                        itemBuilder: (context, pos) {
+                          return RadioListTile<FilterSort>(
+                            value: mainCatSortList[pos],
+                            groupValue: model.selectedSort,
+                            onChanged: model.updateSelectedSort,
+                            title: Text(
+                              mainCatSortList.indexOf(mainCatSortList[pos]) ==
+                                          0 &&
+                                      model.locationPosition != null
+                                  ? LocaleKeys.sortByGeolocation
+                                  : mainCatSortList[pos].name,
+                              style: kts16Text,
+                            ).tr(),
+                            activeColor: kcGreenColor,
+                            controlAffinity: ListTileControlAffinity.trailing,
+                            toggleable: true,
+                          );
+                        },
+                        separatorBuilder: (context, index) => Divider(
+                          color: kcDividerColor,
+                          indent: 10.w,
+                          endIndent: 15.w,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
 
-            // //--------------- SORT SELECTIONS -------------- //
-            // MainCatSortBottom(),
+            //--------------- SORT SELECTIONS -------------- //
+            MainCatSortBottom(),
           ],
         ),
       ),
