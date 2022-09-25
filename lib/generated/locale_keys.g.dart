@@ -88,7 +88,6 @@ abstract class  LocaleKeys {
   static const card_info = 'card_info';
   static const card_holder = 'card_holder';
   static const enter_card_holder = 'enter_card_holder';
-  static const enter_full_card_holder = 'enter_full_card_holder';
   static const card_number = 'card_number';
   static const enter_card_number = 'enter_card_number';
   static const enter_full_card_number = 'enter_full_card_number';
