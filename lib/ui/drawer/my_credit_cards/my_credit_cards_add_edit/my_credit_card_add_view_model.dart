@@ -7,11 +7,13 @@ import '../../../../app/app.locator.dart';
 import '../../../../app/app.logger.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../models/models.dart';
+import '../../../../services/services.dart';
 
 class MyCreditCardAddViewModel extends BaseViewModel {
   final log = getLogger('MyCreditCardAddViewModel');
 
   final _navService = locator<NavigationService>();
+  final _hiveDbService = locator<HiveDbService>();
 
   String _cardNumber = '';
   String get cardNumber => _cardNumber;
@@ -71,13 +73,18 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// SAVES credit card info
-  void onCreditCardModelChange(CreditCardModel? creditCardModel) {
+  /// SAVES credit card info to HIVE
+  Future<void> onCreditCardModelChange(CreditCardModel? creditCardModel) async {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
     _cardHolderName = creditCardModel.cardHolderName;
-    _cvvCode = creditCardModel.cvvCode;
-    _isCvvFocused = creditCardModel.isCvvFocused;
+    await _hiveDbService.addCreditCard(
+      CreditCard(
+        cardNumber: _cardNumber,
+        expiryDate: _expiryDate,
+        cardHolderName: _cardHolderName,
+      ),
+    );
     notifyListeners();
   }
 

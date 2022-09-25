@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -46,7 +45,7 @@ class MyCreditCardAddView extends StatelessWidget {
               CreditCardForm(
                 formKey: creditCardFormKey,
                 obscureCvv: true,
-                obscureNumber: true,
+                obscureNumber: false,
                 cardNumber: model.cardNumber,
                 cvvCode: model.cvvCode,
                 isHolderNameVisible: true,

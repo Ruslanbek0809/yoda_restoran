@@ -457,4 +457,33 @@ class HiveDbService with ReactiveServiceMixin {
     log.v(
         'AFTER delete action for _hiveRatings.value.length: ${_hiveRatings.value.length}');
   }
+
+//---------------------------------------//
+//------------------ CREDIT CARD ---------------------//
+//---------------------------------------//
+
+  /// ADDS a creadit card
+  Future<void> addCreditCard(CreditCard creditCard) async {
+    log.v('creditCard: $creditCard');
+
+    try {
+      final HiveMeal _cartMeal = HiveMeal(
+        id: meal.id,
+        image: meal.image,
+        imageCard: meal.imageCard,
+        name: meal.name,
+        price: meal.price,
+        discount: meal.discount!.toInt(),
+        discountedPrice: meal.discountedPrice,
+        quantity: quantity,
+        customs: [],
+        volumes: [],
+      );
+      await cartMealsBox.add(_cartMeal);
+      _cartMeals.value.add(_cartMeal);
+      log.v('_cartMeals.value length: ${_cartMeals.value.length}');
+    } catch (e) {
+      log.v('Couldn\'t ADD a meal to CART: $e');
+    }
+  }
 }
