@@ -29,11 +29,23 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
+  /// UPDATES _cardNumber
+  String? updateCardNumberValidator(String? value) {
+    log.v('updateCardNumberValidator value: $value, ${value!.length}');
+
+    if (value.isEmpty || value.length < 19) return 'updateCardNumberValidator';
+    // LocaleKeys.enterStreet.tr();
+
+    _expiryDate = value;
+    notifyListeners();
+    return null;
+  }
+
   /// UPDATES _expiryDate
   String? updateExpiryDateValidator(String? value) {
     log.v('updateExpiryDateValidator value: $value');
 
-    if (value!.isEmpty || value.length < 5) return 'updateCardHolder';
+    if (value!.isEmpty || value.length < 5) return 'updateExpiryDateValidator';
     // LocaleKeys.enterStreet.tr();
 
     _expiryDate = value;
@@ -48,7 +60,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   }
 
   /// UPDATES _cardHolderName
-  String? updateCardHolder(String? value) {
+  String? updateCardHolderValidator(String? value) {
     log.v('updateCardHolder value: $value');
     if (value!.isEmpty) return 'updateCardHolder';
     // LocaleKeys.enterStreet.tr();
