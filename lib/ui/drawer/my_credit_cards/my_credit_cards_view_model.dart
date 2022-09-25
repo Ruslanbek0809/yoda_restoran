@@ -21,11 +21,13 @@ class CreditCardsViewModel extends ReactiveViewModel {
 //------------------------ NAVIGATIONS ----------------------------//
 
   /// NAVIGATES to MyCreditCardAddView
-  Future<void> navToMyCreditCardAddView() async {
+  Future<void> navToMyCreditCardAddView({
+    required Function() onNewCreditCardAdded,
+  }) async {
     dynamic _navResult;
     _navResult =
         await _navService.navigateTo(Routes.myCreditCardAddView) ?? false;
-    // if (_navResult) await initialise(); // Workaround
+    if (_navResult) await onNewCreditCardAdded(); // Workaround
   }
 
   /// NAVIGATES to Home by removing all previous routes

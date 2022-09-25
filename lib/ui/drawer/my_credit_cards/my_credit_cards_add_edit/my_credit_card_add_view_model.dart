@@ -73,11 +73,16 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// SAVES credit card info to HIVE
+  /// SAVES credit card info on change
   Future<void> onCreditCardModelChange(CreditCardModel? creditCardModel) async {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
     _cardHolderName = creditCardModel.cardHolderName;
+    notifyListeners();
+  }
+
+  /// SAVES and CREATED credit card info to HIVE
+  Future<void> onCreditCardSave() async {
     await _hiveDbService.addCreditCard(
       CreditCard(
         cardNumber: _cardNumber,
@@ -85,6 +90,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
         cardHolderName: _cardHolderName,
       ),
     );
+    navBack();
     notifyListeners();
   }
 

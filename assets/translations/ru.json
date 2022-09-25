@@ -93,6 +93,7 @@
     "enter_card_date_deadline": "Введите срок действия карты",
     "enter_full_card_date_deadline": "Введите полный срок действия карты",
     "add_card": "Добавьте карту",
+    "credit_card_added": "Ваша карта добавлена",
     "smthWentWrong": "Что-то пошло не так... :(",
     "reload": "Обновить",
     "errorOccured": "Ошибка подключения",

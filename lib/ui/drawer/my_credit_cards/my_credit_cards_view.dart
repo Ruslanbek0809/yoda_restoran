@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../generated/locale_keys.g.dart';
@@ -9,7 +11,9 @@ import '../../widgets/widgets.dart';
 import 'my_credit_cards_view_model.dart';
 
 class MyCreditCardsView extends StatelessWidget {
-  const MyCreditCardsView({Key? key}) : super(key: key);
+  MyCreditCardsView({Key? key}) : super(key: key);
+
+  FlashController? _previousController;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,10 @@ class MyCreditCardsView extends StatelessWidget {
                   color: kcSecondaryDarkColor,
                   size: 25.w,
                 ),
-                onPressed: model.navToMyCreditCardAddView,
+                onPressed: () => model.navToMyCreditCardAddView(
+                  onNewCreditCardAdded: () =>
+                      showNewCreditCardAddedFlashBar(context),
+                ),
               ),
             ],
           ),
@@ -101,5 +108,46 @@ class MyCreditCardsView extends StatelessWidget {
       ),
       viewModelBuilder: () => CreditCardsViewModel(),
     );
+  }
+
+  Future<void> showNewCreditCardAddedFlashBar(BuildContext context) async {
+    if (_previousController?.isDisposed == false)
+      await _previousController?.dismiss();
+
+    _previousController = FlashController<dynamic>(
+      context,
+      builder: (context, controller) {
+        return Flash(
+          controller: controller,
+          margin: EdgeInsets.only(
+            left: 16.w,
+            right: 16.w,
+            bottom: 0.05.sh,
+          ),
+          backgroundColor: kcSecondaryDarkColor,
+          borderRadius: kbr15,
+          boxShadows: kElevationToShadow[0],
+          position: FlashPosition.bottom,
+          barrierDismissible: true,
+          behavior: FlashBehavior.floating,
+          child: FlashBar(
+            icon: Padding(
+              padding: EdgeInsets.only(left: 24.w, right: 12.w),
+              child: SvgPicture.asset(
+                'assets/warning.svg',
+                width: 20.w,
+                height: 20.h,
+              ),
+            ),
+            content: Text(
+              LocaleKeys.credit_card_added,
+              style: kts16ButtonText,
+            ).tr(),
+          ),
+        );
+      },
+      duration: const Duration(seconds: 2),
+    );
+    await _previousController?.show();
   }
 }

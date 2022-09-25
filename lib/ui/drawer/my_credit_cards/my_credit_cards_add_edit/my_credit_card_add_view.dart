@@ -147,6 +147,7 @@ class MyCreditCardAddView extends StatelessWidget {
                     onPressed: () async {
                       if (creditCardFormKey.currentState!.validate()) {
                         print('valid!');
+                        await model.onCreditCardSave();
                       } else {
                         print('invalid!');
                       }

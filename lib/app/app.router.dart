@@ -265,7 +265,7 @@ class StackedRouter extends RouterBase {
     },
     MyCreditCardsView: (data) {
       return CustomMaterialPageRoute(
-        builder: (context) => const MyCreditCardsView(),
+        builder: (context) => MyCreditCardsView(),
         settings: data,
       );
     },
