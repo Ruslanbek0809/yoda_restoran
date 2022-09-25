@@ -87,8 +87,14 @@ abstract class  LocaleKeys {
   static const halk_bank_and_others = 'halk_bank_and_others';
   static const card_info = 'card_info';
   static const card_holder = 'card_holder';
+  static const enter_card_holder = 'enter_card_holder';
+  static const enter_full_card_holder = 'enter_full_card_holder';
   static const card_number = 'card_number';
+  static const enter_card_number = 'enter_card_number';
+  static const enter_full_card_number = 'enter_full_card_number';
   static const card_date_deadline = 'card_date_deadline';
+  static const enter_card_date_deadline = 'enter_card_date_deadline';
+  static const enter_full_card_date_deadline = 'enter_full_card_date_deadline';
   static const add_card = 'add_card';
   static const reload = 'reload';
   static const errorOccured = 'errorOccured';
