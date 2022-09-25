@@ -30,8 +30,19 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   BankCard? get selectedBankCard => _selectedBankCard;
 
   /// CVC validator (EMPTY validator)
-  String? updateValidator(String? value) {
-    log.v('updateValidator value: $value');
+  String? updateCvvValidator(String? value) {
+    log.v('updateCvvValidator value: $value');
+    return null;
+  }
+
+  /// UPDATES _cardHolderName
+  String? updateCardHolder(String? value) {
+    log.v('updateCardHolder value: $value');
+    if (value!.isEmpty) return 'updateCardHolder';
+    // LocaleKeys.enterStreet.tr();
+
+    _cardHolderName = value;
+    notifyListeners();
     return null;
   }
 

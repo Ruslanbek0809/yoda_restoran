@@ -84,7 +84,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                 ),
-                cvvValidator: model.updateValidator,
+                cvvValidator: model.updateCvvValidator,
                 cardHolderDecoration: InputDecoration(
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
@@ -92,6 +92,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   enabledBorder: AppTheme().cardUnderlineInputBorder,
                   labelText: LocaleKeys.card_holder.tr(),
                 ),
+                cardHolderValidator: model.updateCardHolder,
                 onCreditCardModelChange: model.onCreditCardModelChange,
               ),
               //------------------ BANK CARD LIST ---------------------//
