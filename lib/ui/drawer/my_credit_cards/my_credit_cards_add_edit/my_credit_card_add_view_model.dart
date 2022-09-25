@@ -29,6 +29,18 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
+  /// UPDATES _expiryDate
+  String? updateExpiryDateValidator(String? value) {
+    log.v('updateExpiryDateValidator value: $value');
+
+    if (value!.isEmpty || value.length < 5) return 'updateCardHolder';
+    // LocaleKeys.enterStreet.tr();
+
+    _expiryDate = value;
+    notifyListeners();
+    return null;
+  }
+
   /// CVC validator (EMPTY validator)
   String? updateCvvValidator(String? value) {
     log.v('updateCvvValidator value: $value');

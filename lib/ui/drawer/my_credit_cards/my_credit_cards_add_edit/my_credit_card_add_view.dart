@@ -71,6 +71,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   labelText: LocaleKeys.card_date_deadline.tr(),
                   hintText: 'XX/XX',
                 ),
+                expiryDateValidator: model.updateExpiryDateValidator,
                 cvvCodeDecoration: InputDecoration(
                   labelText: '',
                   hintText: '',
