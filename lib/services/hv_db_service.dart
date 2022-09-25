@@ -13,7 +13,7 @@ class HiveDbService with ReactiveServiceMixin {
 
   HiveDbService() {
     // 3
-    listenToReactiveValues([_cartMeals, _hiveRatings]);
+    listenToReactiveValues([_cartMeals, _hiveRatings, _hiveCreditCards]);
   }
 
   final _bottomCartService = locator<BottomCartService>();
@@ -22,6 +22,7 @@ class HiveDbService with ReactiveServiceMixin {
   static late Box<HiveMeal>
       cartMealsBox; // Also we don't need other 2 meal and res related boxes here
   static late Box<HiveRating> hiveRatingBox; // TODO: HiveRating
+  static late Box<HiveCreditCard> hiveCreditCardsBox;
 
   HiveRestaurant? cartRes;
 
@@ -34,6 +35,10 @@ class HiveDbService with ReactiveServiceMixin {
       ReactiveValue<List<HiveRating>>([]);
   List<HiveRating> get hiveRatings => _hiveRatings.value;
 
+  /// HIVE CREDIT CARDS
+  final _hiveCreditCards = ReactiveValue<List<HiveCreditCard>>([]);
+  List<HiveCreditCard> get hiveCreditCards => _hiveCreditCards.value;
+
   /// INITIALIZE in StartUpViewModel
   Future initHiveBoxes() async {
     log.v('====== HiveDbService STARTED opening boxes ======');
@@ -44,6 +49,7 @@ class HiveDbService with ReactiveServiceMixin {
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
     await Hive.openBox<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
+    await Hive.openBox<HiveRating>(Constants.creditCardsBox);
 
     log.v('====== HiveDbService ENDED opening boxes ======');
   }
@@ -74,6 +80,14 @@ class HiveDbService with ReactiveServiceMixin {
     _hiveRatings.value = hiveRatingBox.values.toList();
 
     log.v('_hiveRatings.value length: ${_hiveRatings.value.length}');
+  }
+
+  /// GETS hive credit cards from hiveCreditCardsBox
+  void getHiveCreditCards() {
+    hiveCreditCardsBox = Hive.box<HiveCreditCard>(Constants.creditCardsBox);
+    _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
+
+    log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
   }
 
 //---------------------------------------//
@@ -467,17 +481,10 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('creditCard: $creditCard');
 
     try {
-      final HiveMeal _cartMeal = HiveMeal(
-        id: meal.id,
-        image: meal.image,
-        imageCard: meal.imageCard,
-        name: meal.name,
-        price: meal.price,
-        discount: meal.discount!.toInt(),
-        discountedPrice: meal.discountedPrice,
-        quantity: quantity,
-        customs: [],
-        volumes: [],
+      final HiveCreditCard _cartMeal = HiveCreditCard(
+        cardNumber: creditCard.cardNumber,
+        expiryDate: creditCard.expiryDate,
+        cardHolderName: creditCard.cardHolderName,
       );
       await cartMealsBox.add(_cartMeal);
       _cartMeals.value.add(_cartMeal);
