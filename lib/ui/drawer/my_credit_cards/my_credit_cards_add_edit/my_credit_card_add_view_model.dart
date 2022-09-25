@@ -29,6 +29,12 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
+  /// CVC validator (EMPTY validator)
+  String? updateValidator(String? value) {
+    log.v('updateValidator value: $value');
+    return null;
+  }
+
   /// SAVES credit card info
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     _cardNumber = creditCardModel!.cardNumber;

@@ -84,6 +84,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                 ),
+                cvvValidator: model.updateValidator,
                 cardHolderDecoration: InputDecoration(
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
