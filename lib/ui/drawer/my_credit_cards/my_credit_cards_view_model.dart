@@ -3,20 +3,56 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../models/hive_models/hive_models.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
+import '../../../utils/utils.dart';
 
 class CreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('CreditCardsViewModel');
 
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _dialogService = locator<DialogService>();
 
   List<Address>? _addresses = [];
   List<Address>? get addresses => _addresses;
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
+
+//------------------------ CREDIT CARD DELETE DIALOG ----------------------------//
+
+  /// SHOWS CREDIT CARD DELETE Dialog
+  Future showCreditCardDeleteDialog(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
+    log.i('showCreditCardDeleteDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.creditCardDelete,
+      title: LocaleKeys.wannaDeleteCreditCard,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.delete,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+    if (respData != null && respData.data == true)
+      await runBusyFuture(
+        _userService.deleteOrder(
+          order.id!,
+          () async {
+            onSuccessForView!();
+
+            /// REINITIALIZES ORDERS
+            /// TODO: Optimize if possible
+            await orderViewModel.getInitialOrders();
+          },
+          () => onFailForView!(),
+        ),
+        busyObject: order.id!,
+      );
+  }
 
 //------------------------ NAVIGATIONS ----------------------------//
 

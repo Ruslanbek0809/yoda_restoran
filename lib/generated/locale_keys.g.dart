@@ -96,6 +96,7 @@ abstract class  LocaleKeys {
   static const enter_full_card_date_deadline = 'enter_full_card_date_deadline';
   static const add_card = 'add_card';
   static const credit_card_added = 'credit_card_added';
+  static const wannaDeleteCreditCard = 'wannaDeleteCreditCard';
   static const reload = 'reload';
   static const errorOccured = 'errorOccured';
   static const smthWentWrong = 'smthWentWrong';

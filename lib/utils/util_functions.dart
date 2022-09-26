@@ -129,6 +129,7 @@ enum DialogType {
   removeAddress,
   rateOrder,
   orderDelete,
+  creditCardDelete,
 }
 
 /// Enum for snackbar types

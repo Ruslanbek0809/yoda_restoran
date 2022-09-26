@@ -148,18 +148,8 @@ class MyCreditCardAddView extends StatelessWidget {
                       if (creditCardFormKey.currentState!.validate()) {
                         print('valid!');
                         await model.onCreditCardSave();
-                      } else {
+                      } else
                         print('invalid!');
-                      }
-                      // FocusScope.of(context)
-                      //     .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                      // if (!_addEditAddressformKey.currentState!.validate())
-                      //   return;
-                      // _addEditAddressformKey.currentState!.save();
-                      // await model.onAddAddressPressed(
-                      //   () => model.navBack(),
-                      //   () => model.navBack(),
-                      // );
                     },
                   ),
                 ),
