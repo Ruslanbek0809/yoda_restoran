@@ -172,6 +172,12 @@ TextStyle ktsDefault18HelperText = TextStyle(
   color: kcHelperColor,
 );
 
+TextStyle kts24CreditCardNumberText = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.w600,
+  color: kcCreditCardNumberColor,
+);
+
 TextStyle kts20Text = TextStyle(
   fontSize: 20.sp,
   color: kcFontColor,

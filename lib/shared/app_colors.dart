@@ -27,3 +27,4 @@ const Color kcOrderDeleteButtonBackColor = Color(0xFFFAFAFA);
 const Color kcErrorEmptyColor = Color(0xFF666666);
 const Color kcIconColor = Color(0xFF333333);
 const Color kcCreditCardDeleteIconColor = Color(0xFF666666);
+const Color kcCreditCardNumberColor = Color(0xFFD9D9D9);

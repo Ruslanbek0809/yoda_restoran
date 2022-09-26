@@ -74,34 +74,56 @@ class MyCreditCardsView extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // --------------- CREDIT CARD -------------- //
+                          // --------------- CREDIT CARD INFO -------------- //
                           Flexible(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // --------------- CREDIT CARD NAME  -------------- //
                                 Text(
                                   _creditCard.cardHolderName,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: ktsDefault16BoldText,
                                 ),
+                                // --------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
                                 Padding(
-                                  padding: EdgeInsets.only(top: 6.h),
+                                  padding: EdgeInsets.only(top: 0.h),
                                   child: Row(
+                                    textBaseline: TextBaseline.ideographic,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
                                     children: [
                                       Flexible(
-                                        child: Text(
-                                          _creditCard.cardNumber,
-                                          // _creditCard.cardNumber.replaceRange(0,
-                                          //     _creditCard.cardNumber.length - 4, '*'),
-                                          style: kts16Text,
+                                        child: Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: _creditCard.cardNumber
+                                                    .replaceRange(
+                                                        0,
+                                                        _creditCard
+                                                            .cardNumber.length,
+                                                        '•••• •••• •••• '),
+                                                style:
+                                                    kts24CreditCardNumberText,
+                                              ),
+                                              TextSpan(
+                                                text: _creditCard.cardNumber
+                                                    .substring(_creditCard
+                                                            .cardNumber.length -
+                                                        4),
+                                                style: kts18Text,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(left: 4.w),
+                                        padding: EdgeInsets.only(left: 16.w),
                                         child: Text(
                                           _creditCard.expiryDate,
-                                          style: kts16Text,
+                                          style: kts18Text,
                                         ),
                                       ),
                                     ],
