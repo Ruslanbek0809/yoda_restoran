@@ -452,8 +452,8 @@ class HiveDbService with ReactiveServiceMixin {
 //---------------------------------------//
 
   // TODO: HiveRating
-  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
-  Future<void> removeHiveRatingFromHiveRatings(int? orderId) async {
+  /// DELETES a hive rating
+  Future<void> deleteHiveRatingFromHiveRatings(int? orderId) async {
     log.v('orderId: $orderId');
 
     /// CHECHKS whether order with this id exists in hiveRatingBox
@@ -494,5 +494,20 @@ class HiveDbService with ReactiveServiceMixin {
     } catch (e) {
       log.v('Couldn\'t ADD a credict card to hiveCreditCardsBox: $e');
     }
+  }
+
+  /// DELETES a hive rating from _hiveCreditCards
+  Future<void> deleteHiveCreditCard(HiveCreditCard hiveCreditCard) async {
+    log.v('hiveCreditCard: $hiveCreditCard');
+
+    int pos = _hiveCreditCards.value.indexOf(hiveCreditCard);
+
+    log.v(
+        'DELETING hiveCreditCard when _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
+    hiveCreditCardsBox.deleteAt(pos);
+    _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
+
+    log.v(
+        'AFTER delete action for _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
   }
 }

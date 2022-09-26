@@ -68,7 +68,7 @@ class RateUsDialogViewModel extends BaseViewModel {
   /// TODO: HiveRating
   /// CLEARS hiveRating with this orderId if it EXISTS in hiveRatings
   Future<void> removeHiveRatingFromHiveRatings(int? orderId) async =>
-      await _hiveDbService.removeHiveRatingFromHiveRatings(orderId);
+      await _hiveDbService.deleteHiveRatingFromHiveRatings(orderId);
 
   /// SENDS user rating
   Future<void> onRatingSendPressed(
