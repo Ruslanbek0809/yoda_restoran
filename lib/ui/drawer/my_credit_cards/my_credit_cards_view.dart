@@ -103,9 +103,8 @@ class MyCreditCardsView extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(left: 4.w),
                             child: IconButton(
-                              onPressed: () async {},
-                              // onPressed: () async =>
-                              //     await model.showClearCartDialog(model),
+                              onPressed: () async => await model
+                                  .showCreditCardDeleteDialog(_creditCard),
                               icon: SvgPicture.asset(
                                 'assets/trash.svg',
                                 color: kcCreditCardDeleteIconColor,

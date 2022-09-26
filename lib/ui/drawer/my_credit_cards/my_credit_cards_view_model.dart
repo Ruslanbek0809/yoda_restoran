@@ -24,10 +24,7 @@ class CreditCardsViewModel extends ReactiveViewModel {
 //------------------------ CREDIT CARD DELETE DIALOG ----------------------------//
 
   /// SHOWS CREDIT CARD DELETE Dialog
-  Future showCreditCardDeleteDialog(
-    Function()? onSuccessForView,
-    Function()? onFailForView,
-  ) async {
+  Future showCreditCardDeleteDialog(HiveCreditCard hiveCreditCard) async {
     log.i('showCreditCardDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.creditCardDelete,
@@ -38,20 +35,7 @@ class CreditCardsViewModel extends ReactiveViewModel {
       barrierDismissible: true,
     );
     if (respData != null && respData.data == true)
-      await runBusyFuture(
-        _userService.deleteOrder(
-          order.id!,
-          () async {
-            onSuccessForView!();
-
-            /// REINITIALIZES ORDERS
-            /// TODO: Optimize if possible
-            await orderViewModel.getInitialOrders();
-          },
-          () => onFailForView!(),
-        ),
-        busyObject: order.id!,
-      );
+      await _hiveDbService.deleteHiveCreditCard(hiveCreditCard);
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
