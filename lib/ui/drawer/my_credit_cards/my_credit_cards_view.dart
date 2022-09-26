@@ -65,23 +65,19 @@ class MyCreditCardsView extends StatelessWidget {
                 )
               // --------------- HIVE CREDIT CARDS -------------- //
               : ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   physics: BouncingScrollPhysics(),
                   itemCount: model.hiveCreditCards.length,
                   itemBuilder: (context, pos) {
                     final _creditCard = model.hiveCreditCards[pos];
                     return Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        6.w,
-                        pos == 0 ? 10.h : 15.h,
-                        16.w,
-                        15.h,
-                      ),
+                      padding: EdgeInsets.fromLTRB(24.w, 12.h, 0.0, 12.h),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          // --------------- CREDIT CARD -------------- //
                           Flexible(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   _creditCard.cardHolderName,
@@ -89,19 +85,34 @@ class MyCreditCardsView extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   style: ktsDefault16BoldText,
                                 ),
-                                // Text(
-                                //   _creditCard.cardNumber.replaceRange(1,
-                                //       _creditCard.cardNumber.length - 4, '*'),
-                                //   maxLines: 1,
-                                //   overflow: TextOverflow.ellipsis,
-                                //   style: kts16HelperText,
-                                // ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 6.h),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          _creditCard.cardNumber,
+                                          // _creditCard.cardNumber.replaceRange(0,
+                                          //     _creditCard.cardNumber.length - 4, '*'),
+                                          style: kts16Text,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 4.w),
+                                        child: Text(
+                                          _creditCard.expiryDate,
+                                          style: kts16Text,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           // --------------- CREDIT CARD DELETE -------------- //
                           Padding(
-                            padding: EdgeInsets.only(left: 4.w),
+                            padding: EdgeInsets.only(left: 4.w, right: 8.w),
                             child: IconButton(
                               onPressed: () async => await model
                                   .showCreditCardDeleteDialog(_creditCard),
@@ -118,7 +129,7 @@ class MyCreditCardsView extends StatelessWidget {
                   },
                   separatorBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 6.w),
+                      margin: EdgeInsets.only(left: 24.w),
                       color: kcDividerColor,
                       height: 0.5.h,
                     );
