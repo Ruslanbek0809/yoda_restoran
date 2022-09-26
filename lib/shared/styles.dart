@@ -96,7 +96,6 @@ TextStyle kts16PrimaryBoldText = TextStyle(
 
 TextStyle kts16Text = TextStyle(
   fontSize: 16.sp,
-  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 

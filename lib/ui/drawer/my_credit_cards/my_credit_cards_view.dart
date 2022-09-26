@@ -63,36 +63,57 @@ class MyCreditCardsView extends StatelessWidget {
                   text: LocaleKeys.noCreditCardsYet,
                   svg: 'assets/credit_card_empty.svg',
                 )
+              // --------------- HIVE CREDIT CARDS -------------- //
               : ListView.separated(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   physics: BouncingScrollPhysics(),
                   itemCount: model.hiveCreditCards.length,
                   itemBuilder: (context, pos) {
                     final _creditCard = model.hiveCreditCards[pos];
-                    return GestureDetector(
-                      onTap: () {},
-                      // onTap: () => model.navToAddressEditView(
-                      //     model.addresses![pos], model),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          6.w,
-                          pos == 0 ? 10.h : 15.h,
-                          16.w,
-                          15.h,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                _creditCard.cardHolderName,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts18Text,
+                    return Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        6.w,
+                        pos == 0 ? 10.h : 15.h,
+                        16.w,
+                        15.h,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Text(
+                                  _creditCard.cardHolderName,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: ktsDefault16BoldText,
+                                ),
+                                // Text(
+                                //   _creditCard.cardNumber.replaceRange(1,
+                                //       _creditCard.cardNumber.length - 4, '*'),
+                                //   maxLines: 1,
+                                //   overflow: TextOverflow.ellipsis,
+                                //   style: kts16HelperText,
+                                // ),
+                              ],
+                            ),
+                          ),
+                          // --------------- CREDIT CARD DELETE -------------- //
+                          Padding(
+                            padding: EdgeInsets.only(left: 4.w),
+                            child: IconButton(
+                              onPressed: () async {},
+                              // onPressed: () async =>
+                              //     await model.showClearCartDialog(model),
+                              icon: SvgPicture.asset(
+                                'assets/trash.svg',
+                                color: kcCreditCardDeleteIconColor,
+                                width: 24.w,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     );
                   },
