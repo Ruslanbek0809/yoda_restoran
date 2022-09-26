@@ -477,18 +477,20 @@ class HiveDbService with ReactiveServiceMixin {
 //---------------------------------------//
 
   /// ADDS a creadit card
-  Future<void> addCreditCard(CreditCard creditCard) async {
+  Future<void> addCreditCard(CreditCard creditCard, BankCard bankCard) async {
     log.v('creditCard.cardNumber: ${creditCard.cardNumber}');
     log.v('creditCard.expiryDate: ${creditCard.expiryDate}');
     log.v('creditCard.cardHolderName: ${creditCard.cardHolderName}');
 
     try {
-      final HiveCreditCard _cartMeal = HiveCreditCard(
+      final HiveCreditCard _creditCard = HiveCreditCard(
         cardNumber: creditCard.cardNumber,
         expiryDate: creditCard.expiryDate,
         cardHolderName: creditCard.cardHolderName,
+        bankId: bankCard.bankId,
+        bankName: bankCard.bankName,
       );
-      await hiveCreditCardsBox.add(_cartMeal);
+      await hiveCreditCardsBox.add(_creditCard);
       _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
       log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
     } catch (e) {

@@ -89,6 +89,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
         expiryDate: _expiryDate,
         cardHolderName: _cardHolderName,
       ),
+      _selectedBankCard!,
     );
     navBack();
     notifyListeners();

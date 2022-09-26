@@ -7,6 +7,8 @@ class HiveCreditCard {
     required this.cardNumber,
     required this.expiryDate,
     required this.cardHolderName,
+    required this.bankId,
+    required this.bankName,
   });
 
   @HiveField(0)
@@ -17,4 +19,10 @@ class HiveCreditCard {
 
   @HiveField(2)
   final String cardHolderName;
+
+  @HiveField(3)
+  final int bankId;
+
+  @HiveField(4)
+  final String bankName;
 }

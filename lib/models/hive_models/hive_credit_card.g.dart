@@ -20,19 +20,25 @@ class HiveCreditCardAdapter extends TypeAdapter<HiveCreditCard> {
       cardNumber: fields[0] as String,
       expiryDate: fields[1] as String,
       cardHolderName: fields[2] as String,
+      bankId: fields[3] as int,
+      bankName: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveCreditCard obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.cardNumber)
       ..writeByte(1)
       ..write(obj.expiryDate)
       ..writeByte(2)
-      ..write(obj.cardHolderName);
+      ..write(obj.cardHolderName)
+      ..writeByte(3)
+      ..write(obj.bankId)
+      ..writeByte(4)
+      ..write(obj.bankName);
   }
 
   @override
