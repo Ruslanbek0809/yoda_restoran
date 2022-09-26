@@ -28,7 +28,7 @@ class CreditCardsViewModel extends ReactiveViewModel {
     log.i('showCreditCardDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.creditCardDelete,
-      title: LocaleKeys.wannaDeleteCreditCard,
+      title: LocaleKeys.wanna_delete_credit_card,
       mainButtonTitle: LocaleKeys.no,
       secondaryButtonTitle: LocaleKeys.delete,
       showIconInMainButton: false,

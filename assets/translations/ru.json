@@ -94,7 +94,7 @@
     "enter_full_card_date_deadline": "Введите полный срок действия карты",
     "add_card": "Добавьте карту",
     "credit_card_added": "Ваша карта добавлена",
-    "wannaDeleteCreditCard": "Вы действительно хотите удалить эту карту?",
+    "wanna_delete_credit_card": "Вы действительно хотите удалить эту карту?",
     "smthWentWrong": "Что-то пошло не так... :(",
     "reload": "Обновить",
     "errorOccured": "Ошибка подключения",
