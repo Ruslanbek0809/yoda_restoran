@@ -565,8 +565,8 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ ORDER BUTTON ---------------------//
 
+                    //------------------ ORDER BUTTON ---------------------//
                     if (order.status != 4 ||
                         (order.status == 4 && order.rating == null))
                       SizedBox(height: 5.h),
@@ -668,6 +668,104 @@ class SingleOrderView extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                    //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
+                    SizedBox(
+                      width: 1.sw,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 10.h),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: kcSecondaryDarkColor,
+                            primary:
+                                kcSecondaryLightColor, // ripple effect color
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(vertical: 11.h),
+                          ),
+                          child: order.status == 4
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      size: 26.0,
+                                      color: kcWhiteColor,
+                                    ),
+                                    SizedBox(width: 5.w),
+                                    Text(
+                                      LocaleKeys.rateOrder,
+                                      style: ktsButton18Text,
+                                    ).tr()
+                                  ],
+                                )
+                              : order.status == 3
+                                  //  && !order.selfPickUp!
+                                  ? Text(
+                                      order.restaurant!.phoneNumber != null
+                                          ? ' ${order.restaurant!.phoneNumber}'
+                                          : '',
+                                      style: ktsButton18Text,
+                                    ).tr()
+                                  : model.busy(order.id) && order.status == 1
+                                      ? ButtonLoading()
+                                      : Text(
+                                          LocaleKeys.cancelOrder,
+                                          style: ktsButton18Text,
+                                        ).tr(),
+                          onPressed: () async {
+                            switch (order.status) {
+                              case 1:
+                                await model.showCancelWaitingOrderDialog(
+                                  order.id!,
+                                  () async {
+                                    showErrorFlashBar(
+                                      context: context,
+                                      msg: LocaleKeys.orderCancelSuccess.tr(),
+                                      margin: EdgeInsets.only(
+                                        left: 0.1.sw,
+                                        right: 0.1.sw,
+                                        bottom: 0.05.sh,
+                                      ),
+                                    );
+                                  },
+                                  () async {
+                                    showErrorFlashBar(
+                                      context: context,
+                                      margin: EdgeInsets.only(
+                                        left: 0.1.sw,
+                                        right: 0.1.sw,
+                                        bottom: 0.05.sh,
+                                      ),
+                                    );
+                                  },
+                                );
+                                break;
+                              case 2:
+                                await model.showCancelAcceptedOrderDialog();
+                                break;
+                              case 3:
+                                if (order.restaurant?.phoneNumber != null)
+                                  await model.makePhoneCallToDriver(
+                                      order.restaurant!.phoneNumber!);
+                                // if (!order.selfPickUp!)
+                                //   await model.makePhoneCallToDriver(
+                                //       order.driver!.mobile!);
+                                // else
+                                //   await model.showCancelAcceptedOrderDialog();
+                                break;
+                              case 4:
+                                await model.showRateOrderDialog(order);
+                                break;
+                              default:
+                                break;
+                            }
+                          },
+                        ),
+                      ),
+                    ),
 
                     //------------------ ORDER DELETE BUTTON ---------------------//
                     if (order.status == 4)
