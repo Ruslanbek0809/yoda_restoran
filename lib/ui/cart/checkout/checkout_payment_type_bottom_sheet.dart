@@ -36,14 +36,17 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 // --------------- PAYMENT TYPES -------------- //
-            if (paymentTypes.isNotEmpty)
+            if (model.cartRes!.resPaymentTypes != null &&
+                model.cartRes!.resPaymentTypes!.isNotEmpty)
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
                 itemCount: model.cartRes!.resPaymentTypes!.length,
                 itemBuilder: (context, pos) {
                   var paymentType = model.cartRes!.resPaymentTypes![pos];
+                  model.log.v(
+                      'paymentType.id: ${paymentType.id}, paymentType.nameTk: ${paymentType.nameTk}');
                   return Material(
                     color: kcWhiteColor,
                     child: InkWell(

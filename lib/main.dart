@@ -43,5 +43,5 @@ void main() async {
       fallbackLocale: const Locale('en', 'US'),
       child: YodaResApp(),
     ),
-  );
+  );  
 }
