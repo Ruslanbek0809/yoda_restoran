@@ -573,11 +573,13 @@ class SingleOrderView extends StatelessWidget {
                                         size: 26.0,
                                         color: kcWhiteColor,
                                       ),
-                                      SizedBox(width: 5.w),
-                                      Text(
-                                        LocaleKeys.rateOrder,
-                                        style: ktsButton18Text,
-                                      ).tr()
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 5.w),
+                                        child: Text(
+                                          LocaleKeys.rateOrder,
+                                          style: ktsButton18Text,
+                                        ).tr(),
+                                      )
                                     ],
                                   )
                                 : order.status == 3
@@ -636,57 +638,6 @@ class SingleOrderView extends StatelessWidget {
                                   break;
                                 case 4:
                                   await model.showRateOrderDialog(order);
-                                  break;
-                                default:
-                                  break;
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-
-                    //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
-                    if (order.status == 1 || order.status == 2)
-                      SizedBox(height: 5.h),
-                    if (order.status == 1 || order.status == 2)
-                      SizedBox(
-                        width: 1.sw,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 10.h),
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: order.status == 1
-                                  ? kcSecondaryLightColor
-                                  : kcOnlinePaymentColor,
-                              primary: order.status == 1
-                                  ? kcSecondaryLightColor
-                                  : kcOnlinePaymentColor, // ripple effect color
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: AppTheme().radius10),
-                              padding: EdgeInsets.symmetric(vertical: 11.h),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.star_border_rounded,
-                                  size: 26.0,
-                                  color: kcWhiteColor,
-                                ),
-                                SizedBox(width: 5.w),
-                                Text(
-                                  LocaleKeys.rateOrder,
-                                  style: ktsButton18Text,
-                                ).tr()
-                              ],
-                            ),
-                            onPressed: () async {
-                              switch (order.status) {
-                                case 1:
-                                  break;
-                                case 2:
                                   break;
                                 default:
                                   break;
@@ -760,6 +711,60 @@ class SingleOrderView extends StatelessWidget {
                                 },
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+
+                    //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
+                    if (order.status == 1 || order.status == 2)
+                      SizedBox(
+                        width: 1.sw,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: order.status == 1
+                                  ? kcSecondaryLightColor
+                                  : kcOnlinePaymentColor,
+                              primary: order.status == 1
+                                  ? kcSecondaryLightColor
+                                  : kcOnlinePaymentColor, // ripple effect color
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: AppTheme().radius10),
+                              padding: EdgeInsets.symmetric(vertical: 11.h),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/credit_card.svg',
+                                  color: order.status == 1
+                                      ? kcContactColor
+                                      : kcWhiteColor,
+                                  width: 28.w,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10.w),
+                                  child: Text(
+                                    LocaleKeys.online_paymentType,
+                                    style: order.status == 1
+                                        ? ktsButton18ContactText
+                                        : ktsButton18Text,
+                                  ).tr(),
+                                )
+                              ],
+                            ),
+                            onPressed: () async {
+                              switch (order.status) {
+                                case 1:
+                                  break;
+                                case 2:
+                                  break;
+                                default:
+                                  break;
+                              }
+                            },
                           ),
                         ),
                       ),
