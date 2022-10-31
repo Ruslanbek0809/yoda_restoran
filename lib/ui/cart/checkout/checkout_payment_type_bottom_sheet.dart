@@ -54,32 +54,90 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                           model.updateTempSelectedPaymentType(paymentType),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 6.h),
-                        child: Row(
-                          children: [
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: model.tempSelectedPaymentType!.id ==
-                                      paymentType.id
-                                  ? SvgPicture.asset(
-                                      'assets/checkCircle.svg',
-                                      color: kcGreenColor,
-                                      width: 25.w,  
-                                    )
-                                  : SvgPicture.asset(
-                                      'assets/checkCircle.svg',
-                                      color: kcWhiteColor,
-                                      width: 25.w,
-                                    ),
-                            ),
-                            SizedBox(width: 10.w),
-                            Text(
-                              context.locale == context.supportedLocales[0]
-                                  ? paymentType.nameTk!
-                                  : paymentType.nameRu!,
-                              style: kts18Text,
-                            ),
-                          ],
-                        ),
+                        child:
+
+                            /// If it is ONLINE payment type
+                            paymentType.id == 4
+                                ? Row(
+                                    children: [
+                                      AnimatedSwitcher(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        child:
+                                            model.tempSelectedPaymentType!.id ==
+                                                    paymentType.id
+                                                ? SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: kcGreenColor,
+                                                    width: 25.w,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: kcWhiteColor,
+                                                    width: 25.w,
+                                                  ),
+                                      ),
+                                      SizedBox(width: 10.w),
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              context.locale ==
+                                                      context
+                                                          .supportedLocales[0]
+                                                  ? paymentType.nameTk!
+                                                  : paymentType.nameRu!,
+                                              style: kts18Text,
+                                            ),
+
+                                            /// ONLINE payment info
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 2.h),
+                                              child: Text(
+                                                LocaleKeys
+                                                    .online_paymentType_info,
+                                                style: kts12DialogText,
+                                              ).tr(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+
+                                /// If it is NOT ONLINE payment type
+                                : Row(
+                                    children: [
+                                      AnimatedSwitcher(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        child:
+                                            model.tempSelectedPaymentType!.id ==
+                                                    paymentType.id
+                                                ? SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: kcGreenColor,
+                                                    width: 25.w,
+                                                  )
+                                                : SvgPicture.asset(
+                                                    'assets/checkCircle.svg',
+                                                    color: kcWhiteColor,
+                                                    width: 25.w,
+                                                  ),
+                                      ),
+                                      SizedBox(width: 10.w),
+                                      Text(
+                                        context.locale ==
+                                                context.supportedLocales[0]
+                                            ? paymentType.nameTk!
+                                            : paymentType.nameRu!,
+                                        style: kts18Text,
+                                      ),
+                                    ],
+                                  ),
                       ),
                     ),
                   );
