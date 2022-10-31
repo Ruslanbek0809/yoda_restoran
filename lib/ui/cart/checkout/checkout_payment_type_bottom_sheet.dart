@@ -63,7 +63,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                   ? SvgPicture.asset(
                                       'assets/checkCircle.svg',
                                       color: kcGreenColor,
-                                      width: 25.w,
+                                      width: 25.w,  
                                     )
                                   : SvgPicture.asset(
                                       'assets/checkCircle.svg',

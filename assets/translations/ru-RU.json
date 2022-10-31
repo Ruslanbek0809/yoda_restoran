@@ -57,6 +57,7 @@
     "tomorrow": "Завтра",
     "requiredWorkingHoursForRes": "Время приема заказов ресторана {}",
     "paymentType": "Способ оплаты: ",
+    "online_paymentType_info": "Sargydyňyz restoran tarapyndan kabul edilenden soň töleg edip bilersiňiz",
     "cash": "Наличными",
     "terminal": "Терминал",
     "promocode": "Промокод",
