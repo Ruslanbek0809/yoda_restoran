@@ -768,6 +768,18 @@ class SingleOrderView extends StatelessWidget {
                           ),
                         ),
                       ),
+
+//------------------ ONLINE PAYMENT INFO ---------------------//
+                    if (order.status == 1 || order.status == 2)
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(24.w, 0.h, 15.w, 10.h),
+                        child: Text(
+                          order.status == 1
+                              ? LocaleKeys.online_paymentType_info
+                              : LocaleKeys.can_online_pay,
+                          style: kts12DialogText,
+                        ).tr(),
+                      ),
                   ],
                 ),
               ),
