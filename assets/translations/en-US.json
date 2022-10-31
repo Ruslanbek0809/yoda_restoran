@@ -60,6 +60,7 @@
     "online_paymentType_info": "Sargydyňyz restoran tarapyndan kabul edilenden soň töleg edip bilersiňiz",
     "online_paymentType": "Online töleg",
     "can_online_pay": "Töleg edip bilersiňiz",
+    "online_not_paid": "Töleg edilmedi",
     "online_paid": "Töleg edildi",
     "cash": "Nagt",
     "terminal": "Terminal",

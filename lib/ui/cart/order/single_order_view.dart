@@ -356,26 +356,74 @@ class SingleOrderView extends StatelessWidget {
                         ],
                       ),
                     ),
+                    //------------------ ORDER PAYMENT TYPE ---------------------//
                     if (order.paymentType != null)
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              LocaleKeys.paymentType,
-                              style: kts16Text,
-                            ).tr(),
-                            Text(
-                              context.locale == context.supportedLocales[0]
-                                  ? order.paymentType!.nameTk!
-                                  : order.paymentType!.nameRu!,
-                              style: ktsDefault16BoldText,
+                      //------------------ ORDER ONLINE PAYMENT TYPE ---------------------//
+                      order.paymentType!.id == 4
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                  left: 15.w, right: 15.w, top: 12.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        LocaleKeys.paymentType,
+                                        style: kts16Text,
+                                      ).tr(),
+                                      Text(
+                                        context.locale ==
+                                                context.supportedLocales[0]
+                                            ? order.paymentType!.nameTk!
+                                            : order.paymentType!.nameRu!,
+                                        style: ktsDefault16BoldText,
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 7.w,
+                                      vertical: 1.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: AppTheme().radius5,
+                                      color: kcSecondaryLightColor,
+                                    ),
+                                    child: Text(
+                                      LocaleKeys.online_not_paid,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: kcFontColor,
+                                      ),
+                                    ).tr(),
+                                  )
+                                ],
+                              ),
+                            )
+                          //------------------ ORDER OTHER PAYMENT TYPES ---------------------//
+                          : Padding(
+                              padding: EdgeInsets.only(
+                                  left: 15.w, right: 15.w, top: 12.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    LocaleKeys.paymentType,
+                                    style: kts16Text,
+                                  ).tr(),
+                                  Text(
+                                    context.locale ==
+                                            context.supportedLocales[0]
+                                        ? order.paymentType!.nameTk!
+                                        : order.paymentType!.nameRu!,
+                                    style: ktsDefault16BoldText,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
                     if (order.address != null && order.address!.isNotEmpty)
                       Padding(
                         padding:
