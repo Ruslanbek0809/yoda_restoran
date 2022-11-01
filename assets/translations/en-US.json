@@ -62,6 +62,8 @@
     "can_online_pay": "Töleg edip bilersiňiz",
     "online_not_paid": "Töleg edilmedi",
     "online_paid": "Töleg edildi",
+    "selectCreditCard": "Karty saýla",
+    "addNewCreditCard": "Täze kart goş",
     "cash": "Nagt",
     "terminal": "Terminal",
     "promocode": "Promokod",

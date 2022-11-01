@@ -14,8 +14,6 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   final _checkoutService = locator<CheckoutService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
-//------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
-
   List<Address>? get addresses => _checkoutService.addresses;
 
   Address? _tempSelectedAddress;

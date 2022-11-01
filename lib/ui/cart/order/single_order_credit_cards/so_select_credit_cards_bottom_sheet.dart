@@ -69,7 +69,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                         ),
                         SizedBox(width: 10.w),
                         Text(
-                          LocaleKeys.addNewAddress,
+                          LocaleKeys.addNewCreditCard,
                           style: kts18Text,
                         ).tr(),
                       ],
@@ -92,8 +92,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   return Material(
                     color: kcWhiteColor,
                     child: InkWell(
-                      onTap: () {},
-                      // onTap: () => model.updateTempSelectedAddress(_address),
+                      onTap: () =>
+                          model.updateTempSelectedHiveCreditCard(_creditCard),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Row(
@@ -210,7 +210,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                 ),
                 child: Text(
-                  LocaleKeys.selectAddress,
+                  LocaleKeys.selectCreditCard,
                   style: TextStyle(
                     color: kcWhiteColor,
                     fontSize: 18.sp,

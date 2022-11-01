@@ -14,7 +14,14 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   HiveCreditCard? _tempSelectedHiveCreditCard;
   HiveCreditCard? get tempSelectedHiveCreditCard => _tempSelectedHiveCreditCard;
 
-//------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
+  /// Temporarily SETS _tempSelectedHiveCreditCard
+  void updateTempSelectedHiveCreditCard(HiveCreditCard selectedHiveCreditCard) {
+    log.v(
+        'updateTempSelectedHiveCreditCard selectedHiveCreditCard: ${selectedHiveCreditCard.bankId}');
+
+    _tempSelectedHiveCreditCard = selectedHiveCreditCard;
+    notifyListeners();
+  }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];

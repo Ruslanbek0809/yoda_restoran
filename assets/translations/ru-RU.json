@@ -62,6 +62,8 @@
     "can_online_pay": "Вы можете произвести оплату",
     "online_not_paid": "Оплата не произведена",
     "online_paid": "Оплата произведена",
+    "selectCreditCard": "Выбрать карту",
+    "addNewCreditCard": "Добавить новую карту",
     "cash": "Наличными",
     "terminal": "Терминал",
     "promocode": "Промокод",

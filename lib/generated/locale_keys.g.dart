@@ -64,6 +64,8 @@ abstract class  LocaleKeys {
   static const can_online_pay = 'can_online_pay';
   static const online_not_paid = 'online_not_paid';
   static const online_paid = 'online_paid';
+  static const selectCreditCard = 'selectCreditCard';
+  static const addNewCreditCard = 'addNewCreditCard';
   static const cash = 'cash';
   static const terminal = 'terminal';
   static const promocode = 'promocode';
