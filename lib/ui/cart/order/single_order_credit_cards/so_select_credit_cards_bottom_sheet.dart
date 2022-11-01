@@ -102,8 +102,10 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                             // --------------- SELECTED HIVE CREDIT CARD -------------- //
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
-                              child: model.tempSelectedHiveCreditCard!.bankId ==
-                                      _creditCard.bankId
+                              child: model.tempSelectedHiveCreditCard != null &&
+                                      model.tempSelectedHiveCreditCard!
+                                              .bankId ==
+                                          _creditCard.bankId
                                   ? SvgPicture.asset(
                                       'assets/checkCircle.svg',
                                       color: kcGreenColor,
@@ -186,7 +188,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   return Divider(color: kcDividerColor);
                 },
               ),
-            //--------------- ADDRESS CHOOSE BUTTON -------------- //
+            //--------------- CREDIT CARD CHOOSE BUTTON -------------- //
             Container(
               decoration: BoxDecoration(
                 color: kcWhiteColor,
@@ -200,7 +202,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 22.h),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: kcPrimaryColor,
+                  backgroundColor: kcOnlinePaymentColor,
                   primary: kcSecondaryLightColor, // ripple effect color
                   elevation: 0,
                   shape:

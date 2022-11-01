@@ -860,6 +860,20 @@ class SingleOrderView extends StatelessWidget {
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:
+                                  await showFlexibleBottomSheet(
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
+                                    duration: Duration(milliseconds: 250),
+                                    context: context,
+                                    bottomSheetColor: Colors.transparent,
+                                    builder:
+                                        (context, scrollController, offset) =>
+                                            SOSelectCreditCardsBottomSheetView(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                    ),
+                                  );
                                   break;
                                 case 2:
                                   await showFlexibleBottomSheet(
