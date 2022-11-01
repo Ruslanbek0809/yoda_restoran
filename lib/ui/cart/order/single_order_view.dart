@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'order_view_model.dart';
+import 'single_order_credit_cards/so_select_credit_cards_bottom_sheet.dart';
 import 'single_order_view_model.dart';
 
 class SingleOrderView extends StatelessWidget {
@@ -860,6 +862,20 @@ class SingleOrderView extends StatelessWidget {
                                 case 1:
                                   break;
                                 case 2:
+                                  await showFlexibleBottomSheet(
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
+                                    duration: Duration(milliseconds: 250),
+                                    context: context,
+                                    bottomSheetColor: Colors.transparent,
+                                    builder:
+                                        (context, scrollController, offset) =>
+                                            SOSelectCreditCardsBottomSheetView(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                    ),
+                                  );
                                   break;
                                 default:
                                   break;

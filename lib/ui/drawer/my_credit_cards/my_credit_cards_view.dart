@@ -10,9 +10,14 @@ import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import 'my_credit_cards_view_model.dart';
 
-class MyCreditCardsView extends StatelessWidget {
+class MyCreditCardsView extends StatefulWidget {
   MyCreditCardsView({Key? key}) : super(key: key);
 
+  @override
+  State<MyCreditCardsView> createState() => _MyCreditCardsViewState();
+}
+
+class _MyCreditCardsViewState extends State<MyCreditCardsView> {
   FlashController? _previousController;
 
   @override

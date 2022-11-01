@@ -3,16 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
-import 'checkout_address_view_model.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
+import 'so_credit_cards_view_model.dart';
+
+class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
-  const CheckoutSelectAddressBottomSheetView({
+  const SOSelectCreditCardsBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
@@ -20,7 +21,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
+    return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
