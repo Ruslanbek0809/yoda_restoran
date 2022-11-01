@@ -56,7 +56,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //     offset: offset,
                   //   ),
                   // ),
-                  onTap: model.showCustomAddAddressBottomSheet,
+                  onTap: () {},
+                  // onTap: model.showCustomAddAddressBottomSheet,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: Row(
@@ -77,50 +78,102 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 ),
               ),
             ),
-            if (model.addresses!.isNotEmpty) Divider(color: kcDividerColor),
-            // --------------- ADDRESSES -------------- //
-            if (model.addresses!.isNotEmpty)
+            if (model.hiveCreditCards.isNotEmpty)
+              Divider(color: kcDividerColor),
+            // --------------- HIVE CREDIT CARDS -------------- //
+            if (model.hiveCreditCards.isNotEmpty)
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                itemCount: model.addresses!.length,
+                itemCount: model.hiveCreditCards.length,
                 itemBuilder: (context, pos) {
-                  var _address = model.addresses![pos];
+                  final _creditCard = model.hiveCreditCards[pos];
                   return Material(
                     color: kcWhiteColor,
                     child: InkWell(
-                      onTap: () => model.updateTempSelectedAddress(_address),
+                      onTap: () {},
+                      // onTap: () => model.updateTempSelectedAddress(_address),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            // --------------- SELECTED HIVE CREDIT CARD -------------- //
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
-                              child:
-                                  model.tempSelectedAddress!.id == _address.id
-                                      ? SvgPicture.asset(
-                                          'assets/checkCircle.svg',
-                                          color: kcGreenColor,
-                                          width: 25.w,
-                                        )
-                                      : SvgPicture.asset(
-                                          'assets/checkCircle.svg',
-                                          color: kcActiveDotColor,
-                                          width: 25.w,
-                                        ),
+                              child: model.tempSelectedHiveCreditCard!.bankId ==
+                                      _creditCard.bankId
+                                  ? SvgPicture.asset(
+                                      'assets/checkCircle.svg',
+                                      color: kcGreenColor,
+                                      width: 25.w,
+                                    )
+                                  : SvgPicture.asset(
+                                      'assets/checkCircle.svg',
+                                      color: kcActiveDotColor,
+                                      width: 25.w,
+                                    ),
                             ),
                             SizedBox(width: 10.w),
+
+                            // --------------- CREDIT CARD INFO -------------- //
                             Flexible(
-                              child: Text(
-                                _address.street! +
-                                    (_address.house != null
-                                        ? ', ${_address.house}'
-                                        : ''),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: kts18Text,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // --------------- CREDIT CARD NAME  -------------- //
+                                  Text(
+                                    _creditCard.cardHolderName,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: ktsDefault16BoldText,
+                                  ),
+                                  // --------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 0.h),
+                                    child: Row(
+                                      textBaseline: TextBaseline.ideographic,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.baseline,
+                                      children: [
+                                        Flexible(
+                                          child: Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: _creditCard.cardNumber
+                                                      .replaceRange(
+                                                          0,
+                                                          _creditCard.cardNumber
+                                                              .length,
+                                                          '•••• •••• •••• '),
+                                                  style:
+                                                      kts24CreditCardNumberText,
+                                                ),
+                                                TextSpan(
+                                                  text: _creditCard.cardNumber
+                                                      .substring(_creditCard
+                                                              .cardNumber
+                                                              .length -
+                                                          4),
+                                                  style: kts18Text,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 16.w),
+                                          child: Text(
+                                            _creditCard.expiryDate,
+                                            style: kts18Text,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -163,7 +216,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   ),
                 ).tr(),
                 onPressed: () {
-                  model.saveSelectedAddress();
+                  // model.saveSelectedAddress();
                   Navigator.pop(context);
                   // completer(SheetResponse());
                 },
@@ -172,7 +225,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
           ],
         ),
       ),
-      viewModelBuilder: () => CheckoutAddressViewModel(),
+      viewModelBuilder: () => SOCreditCardsViewModel(),
     );
   }
 }

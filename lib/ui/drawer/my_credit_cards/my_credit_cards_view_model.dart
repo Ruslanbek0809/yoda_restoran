@@ -5,7 +5,6 @@ import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/hive_models/hive_models.dart';
-import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
@@ -15,9 +14,6 @@ class CreditCardsViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
   final _dialogService = locator<DialogService>();
-
-  List<Address>? _addresses = [];
-  List<Address>? get addresses => _addresses;
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
