@@ -360,48 +360,100 @@ class SingleOrderView extends StatelessWidget {
                     if (order.paymentType != null)
                       //------------------ ORDER ONLINE PAYMENT TYPE ---------------------//
                       order.paymentType!.id == 4
-                          ? Padding(
-                              padding: EdgeInsets.only(
-                                  left: 15.w, right: 15.w, top: 12.h),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
+                          ?
+                          //------------------ ORDER ONLINE If PAID ---------------------//
+                          order.paid!
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 15.w, right: 15.w, top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         LocaleKeys.paymentType,
                                         style: kts16Text,
                                       ).tr(),
-                                      Text(
-                                        context.locale ==
-                                                context.supportedLocales[0]
-                                            ? order.paymentType!.nameTk!
-                                            : order.paymentType!.nameRu!,
-                                        style: ktsDefault16BoldText,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 3.w),
+                                                child: Text(
+                                                  context.locale ==
+                                                          context.supportedLocales[
+                                                              0]
+                                                      ? order
+                                                          .paymentType!.nameTk!
+                                                      : order
+                                                          .paymentType!.nameRu!,
+                                                  style:
+                                                      kts16OnlinePaymentBoldText,
+                                                ),
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/check_outlined_circle.svg',
+                                                color: kcOnlinePaymentColor,
+                                                width: 22.sp,
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            LocaleKeys.online_paid,
+                                            style: kts10DialogText,
+                                          ).tr(),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 7.w,
-                                      vertical: 1.h,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: AppTheme().radius5,
-                                      color: kcSecondaryLightColor,
-                                    ),
-                                    child: Text(
-                                      LocaleKeys.online_not_paid,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: kcFontColor,
+                                )
+                              //------------------ ORDER ONLINE If NOT PAID ---------------------//
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 15.w, right: 15.w, top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            LocaleKeys.paymentType,
+                                            style: kts16Text,
+                                          ).tr(),
+                                          Text(
+                                            context.locale ==
+                                                    context.supportedLocales[0]
+                                                ? order.paymentType!.nameTk!
+                                                : order.paymentType!.nameRu!,
+                                            style: ktsDefault16BoldText,
+                                          ),
+                                        ],
                                       ),
-                                    ).tr(),
-                                  )
-                                ],
-                              ),
-                            )
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 7.w,
+                                          vertical: 1.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius5,
+                                          color: kcSecondaryLightColor,
+                                        ),
+                                        child: Text(
+                                          LocaleKeys.online_not_paid,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: kcFontColor,
+                                          ),
+                                        ).tr(),
+                                      )
+                                    ],
+                                  ),
+                                )
                           //------------------ ORDER OTHER PAYMENT TYPES ---------------------//
                           : Padding(
                               padding: EdgeInsets.only(

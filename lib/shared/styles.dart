@@ -29,6 +29,11 @@ TextStyle kts10IconText = TextStyle(
   color: kcIconColor,
 );
 
+TextStyle kts10DialogText = TextStyle(
+  fontSize: 10.sp,
+  color: kcDialogColor,
+);
+
 TextStyle kts12DialogText = TextStyle(
   fontSize: 12.sp,
   color: kcDialogColor,
@@ -124,6 +129,12 @@ TextStyle kts16DarkSemiBoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
+);
+
+TextStyle kts16OnlinePaymentBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcOnlinePaymentColor,
 );
 
 TextStyle kts18Text = TextStyle(
