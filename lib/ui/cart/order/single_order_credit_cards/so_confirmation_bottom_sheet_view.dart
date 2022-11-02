@@ -37,6 +37,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
           controller: scrollController,
           shrinkWrap: true,
           children: [
+            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            CustomModalInsideBottomSheet(),
+
             Padding(
               padding: EdgeInsets.fromLTRB(20.w, 22.h, 0.0, 20.h),
               child: Column(
