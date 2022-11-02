@@ -372,47 +372,102 @@ class SingleOrderView extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        LocaleKeys.paymentType,
-                                        style: kts16Text,
-                                      ).tr(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 3.w),
-                                                child: Text(
-                                                  context.locale ==
-                                                          context.supportedLocales[
-                                                              0]
-                                                      ? order
-                                                          .paymentType!.nameTk!
-                                                      : order
-                                                          .paymentType!.nameRu!,
-                                                  style:
-                                                      kts16OnlinePaymentBoldText,
-                                                ),
-                                              ),
-                                              SvgPicture.asset(
-                                                'assets/check_outlined_circle.svg',
-                                                color: kcOnlinePaymentColor,
-                                                width: 22.sp,
-                                              ),
-                                            ],
-                                          ),
                                           Text(
-                                            LocaleKeys.online_paid,
-                                            style: kts10DialogText,
+                                            LocaleKeys.paymentType,
+                                            style: kts16Text,
                                           ).tr(),
+                                          Text(
+                                            context.locale ==
+                                                    context.supportedLocales[0]
+                                                ? order.paymentType!.nameTk!
+                                                : order.paymentType!.nameRu!,
+                                            style: ktsDefault16BoldText,
+                                          ),
                                         ],
                                       ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 7.w,
+                                          vertical: 1.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius5,
+                                          color: kcOnlinePaymentColor,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 2.w),
+                                              child: Text(
+                                                LocaleKeys.online_paid,
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  color: kcWhiteColor,
+                                                ),
+                                              ).tr(),
+                                            ),
+                                            SvgPicture.asset(
+                                              'assets/check_outlined_circle.svg',
+                                              color: kcWhiteColor,
+                                              width: 16.sp,
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
+                              // Padding(
+                              //     padding: EdgeInsets.only(
+                              //         left: 15.w, right: 15.w, top: 12.h),
+                              //     child: Row(
+                              //       mainAxisAlignment:
+                              //           MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         Text(
+                              //           LocaleKeys.paymentType,
+                              //           style: kts16Text,
+                              //         ).tr(),
+                              //         Column(
+                              //           crossAxisAlignment:
+                              //               CrossAxisAlignment.end,
+                              //           children: [
+                              //             Row(
+                              //               children: [
+                              //                 Padding(
+                              //                   padding:
+                              //                       EdgeInsets.only(right: 3.w),
+                              //                   child: Text(
+                              //                     context.locale ==
+                              //                             context.supportedLocales[
+                              //                                 0]
+                              //                         ? order
+                              //                             .paymentType!.nameTk!
+                              //                         : order
+                              //                             .paymentType!.nameRu!,
+                              //                     style:
+                              //                         kts16OnlinePaymentBoldText,
+                              //                   ),
+                              //                 ),
+                              //                 SvgPicture.asset(
+                              //                   'assets/check_outlined_circle.svg',
+                              //                   color: kcOnlinePaymentColor,
+                              //                   width: 22.sp,
+                              //                 ),
+                              //               ],
+                              //             ),
+                              //             Text(
+                              //               LocaleKeys.online_paid,
+                              //               style: kts10DialogText,
+                              //             ).tr(),
+                              //           ],
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   )
                               //------------------ ORDER ONLINE If NOT PAID ---------------------//
                               : Padding(
                                   padding: EdgeInsets.only(
