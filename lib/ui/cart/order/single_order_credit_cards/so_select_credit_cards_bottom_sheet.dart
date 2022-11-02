@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +8,7 @@ import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-
+import 'so_confirmation_bottom_sheet_view.dart';
 import 'so_credit_cards_view_model.dart';
 
 class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
@@ -56,8 +57,19 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //     offset: offset,
                   //   ),
                   // ),
-                  onTap: () {},
-                  // onTap: model.showCustomAddAddressBottomSheet,
+                  onTap: () async => await showFlexibleBottomSheet(
+                    isExpand: false,
+                    initHeight: 0.95,
+                    maxHeight: 0.95,
+                    duration: Duration(milliseconds: 250),
+                    context: context,
+                    bottomSheetColor: Colors.transparent,
+                    builder: (context, scrollController, offset) =>
+                        SOConfirmationBottomSheetView(
+                      scrollController: scrollController,
+                      offset: offset,
+                    ),
+                  ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: Row(
@@ -217,11 +229,19 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ).tr(),
-                onPressed: () {
-                  // model.saveSelectedAddress();
-                  Navigator.pop(context);
-                  // completer(SheetResponse());
-                },
+                onPressed: () async => await showFlexibleBottomSheet(
+                  isExpand: false,
+                  initHeight: 0.95,
+                  maxHeight: 0.95,
+                  duration: Duration(milliseconds: 250),
+                  context: context,
+                  bottomSheetColor: Colors.transparent,
+                  builder: (context, scrollController, offset) =>
+                      SOConfirmationBottomSheetView(
+                    scrollController: scrollController,
+                    offset: offset,
+                  ),
+                ),
               ),
             )
           ],
