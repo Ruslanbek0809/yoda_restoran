@@ -62,7 +62,7 @@ class CartMoreMealsShimmerWidget extends StatelessWidget {
                                   height: itemWidth,
                                   width: itemWidth,
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.4),
+                                    color: kcWhiteColor.withOpacity(0.4),
                                     borderRadius: AppTheme().radius20,
                                   ),
                                 ),

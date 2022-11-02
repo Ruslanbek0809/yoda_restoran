@@ -38,10 +38,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
           shrinkWrap: true,
           children: [
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
-            CustomModalInsideBottomSheet(),
+            CustomModalInsideBottomSheet(isBottomZero: true),
 
             Padding(
-              padding: EdgeInsets.fromLTRB(20.w, 22.h, 0.0, 20.h),
+              padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
               child: Column(
                 children: [
                   //------------------ CREDIT CARD FORM ---------------------//
@@ -81,9 +81,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       // labelText: 'CVC',
                       // hintText: 'XXX',
                       hintStyle:
-                          TextStyle(fontSize: 16.sp, color: Colors.white),
+                          TextStyle(fontSize: 16.sp, color: kcWhiteColor),
                       labelStyle:
-                          TextStyle(fontSize: 16.sp, color: Colors.white),
+                          TextStyle(fontSize: 16.sp, color: kcWhiteColor),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
