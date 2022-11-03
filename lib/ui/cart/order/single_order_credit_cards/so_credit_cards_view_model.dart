@@ -59,11 +59,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   String _cardHolderName = '';
   String get cardHolderName => _cardHolderName;
 
-  String _cvvCode = '';
-  String get cvvCode => _cvvCode;
-
-  bool _isCvvFocused = false;
-  bool get isCvvFocused => _isCvvFocused;
+  String _cvcCode = '';
+  String get cvcCode => _cvcCode;
 
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
@@ -93,8 +90,14 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }
 
   /// CVC validator (EMPTY validator)
-  String? updateCvvValidator(String? value) {
-    log.v('updateCvvValidator value: $value');
+  String? updateCVCValidator(String? value) {
+    log.v('updateCVCValidator value: $value');
+
+    if (value!.isEmpty) return LocaleKeys.enter_cvc_kod.tr();
+    if (value.length < 3) return LocaleKeys.enter_full_cvc_kod.tr();
+
+    _cvcCode = value;
+    notifyListeners();
     return null;
   }
 

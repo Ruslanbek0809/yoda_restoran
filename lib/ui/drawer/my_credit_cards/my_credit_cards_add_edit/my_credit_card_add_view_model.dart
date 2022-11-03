@@ -27,9 +27,6 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   String _cvvCode = '';
   String get cvvCode => _cvvCode;
 
-  bool _isCvvFocused = false;
-  bool get isCvvFocused => _isCvvFocused;
-
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 

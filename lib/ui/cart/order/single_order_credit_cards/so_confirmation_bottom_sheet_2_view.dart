@@ -131,7 +131,7 @@
 //                 ],
 //               ),
 //             ),
-//             //--------------- CHECKOUT BUTTON -------------- //
+              //--------------- CREDIT CARD CONFIRM BUTTON -------------- //
 //             Container(
 //               decoration: BoxDecoration(
 //                 color: kcWhiteColor,
@@ -144,11 +144,12 @@
 //               ),
 //               padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 22.h),
 //               child: CustomTextChildButton(
+//                 color: kcOnlinePaymentColor,
 //                 padding: EdgeInsets.symmetric(vertical: 14.h),
 //                 child: model.isBusy
 //                     ? ButtonLoading()
 //                     : Text(
-//                         LocaleKeys.orderNow,
+//                         LocaleKeys.confirm,
 //                         style: ktsButton18Text,
 //                       ).tr(),
 //                 onPressed: model.isBusy ? () {} : () async {},

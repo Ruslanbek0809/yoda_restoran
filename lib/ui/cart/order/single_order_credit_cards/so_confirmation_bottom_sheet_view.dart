@@ -26,7 +26,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.8,
+          initialChildSize: 0.825,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -65,7 +65,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 obscureCvv: true,
                                 obscureNumber: false,
                                 cardNumber: model.cardNumber,
-                                cvvCode: model.cvvCode,
+                                cvvCode: model.cvcCode,
                                 isHolderNameVisible: true,
                                 isCardNumberVisible: true,
                                 isExpiryDateVisible: true,
@@ -97,21 +97,17 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 expiryDateValidator:
                                     model.updateExpiryDateValidator,
                                 cvvCodeDecoration: InputDecoration(
-                                  labelText: '',
-                                  hintText: '',
-                                  // labelText: 'CVC',
+                                  hintStyle: kts16HelperText,
+                                  labelStyle: kts16HelperText,
+                                  labelText: LocaleKeys.cvc_kod.tr(),
                                   // hintText: 'XXX',
-                                  hintStyle: TextStyle(
-                                      fontSize: 16.sp, color: kcWhiteColor),
-                                  labelStyle: TextStyle(
-                                      fontSize: 16.sp, color: kcWhiteColor),
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   errorBorder: InputBorder.none,
                                   disabledBorder: InputBorder.none,
                                 ),
-                                cvvValidator: model.updateCvvValidator,
+                                cvvValidator: model.updateCVCValidator,
                                 cardHolderDecoration: InputDecoration(
                                   hintStyle: kts16HelperText,
                                   labelStyle: kts16HelperText,
@@ -161,15 +157,24 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //--------------- ADD ADDRESS BUTTON -------------- //
+                  //--------------- CREDIT CARD CONFIRM BUTTON -------------- //
                   Positioned(
                     bottom: 0,
                     left: 0,
                     right: 0,
                     child: Container(
-                      decoration: BoxDecoration(color: kcWhiteColor),
+                      decoration: BoxDecoration(
+                        color: kcWhiteColor,
+                        border: Border(
+                          top: BorderSide(
+                            width: 0.1,
+                            color: kcButtonBorderColor,
+                          ),
+                        ),
+                      ),
                       padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                       child: CustomTextChildButton(
+                        color: kcOnlinePaymentColor,
                         borderRadius: AppTheme().radius15,
                         padding: EdgeInsets.symmetric(vertical: 14.h),
                         child: AnimatedSwitcher(
@@ -179,7 +184,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                               //     ? ButtonLoading()
                               //     :
                               Text(
-                            LocaleKeys.addNewAddressButton,
+                            LocaleKeys.confirm,
                             style: ktsButton18Text,
                           ).tr(),
                         ),

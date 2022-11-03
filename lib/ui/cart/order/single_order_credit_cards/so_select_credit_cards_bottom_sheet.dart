@@ -35,7 +35,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 
-            // --------------- ADD NEW ADDRESS -------------- //
+            // --------------- CREDIT CARD CONFIRMATION -------------- //
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Material(
