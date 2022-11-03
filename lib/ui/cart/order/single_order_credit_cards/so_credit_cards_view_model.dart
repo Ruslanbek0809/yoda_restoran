@@ -30,12 +30,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ CREDIT CARD CONFIRMATION ----------------------------//
+//------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
 
-//------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
-
-  /// CALLS AddAddressBottomSheet
-  Future<void> showCustomAddAddressBottomSheet() async {
+  /// CALLS CreditCardsConfirmationBottomSheet
+  Future<void> showCustomCreditCardsConfirmationBottomSheet() async {
     log.i('');
     // SheetResponse<bool>? _navResult;
     // _navResult =

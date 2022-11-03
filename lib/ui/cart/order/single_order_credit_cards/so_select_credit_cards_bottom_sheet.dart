@@ -54,7 +54,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //     offset: offset,
                   //   ),
                   // ),
-                  onTap: () {},
+                  onTap: model.showCustomCreditCardsConfirmationBottomSheet,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: Row(
