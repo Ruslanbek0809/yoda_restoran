@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
@@ -45,14 +45,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // --------------- BOTTOM SHEET DRAGGER -------------- //
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: SvgPicture.asset(
-                            'assets/bottom_sheet_dragger.svg',
-                            color: kcSecondaryLightColor,
-                          ),
-                        ),
+                        // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                        CustomModalInsideBottomSheet(isBottomZero: true),
+
+                        //------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.vertical(
@@ -60,73 +56,106 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             ),
                             color: kcWhiteColor,
                           ),
-                          padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
-                          child: //------------------ CREDIT CARD FORM ---------------------//
+                          padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
+                          child: Column(
+                            children: [
+                              //------------------ CREDIT CARD FORM ---------------------//
                               CreditCardForm(
-                            formKey: creditCardFormKey,
-                            obscureCvv: true,
-                            obscureNumber: false,
-                            cardNumber: model.cardNumber,
-                            cvvCode: model.cvvCode,
-                            isHolderNameVisible: true,
-                            isCardNumberVisible: true,
-                            isExpiryDateVisible: true,
-                            cardHolderName: model.cardHolderName,
-                            expiryDate: model.expiryDate,
-                            themeColor: kcPrimaryColor,
-                            cardNumberDecoration: InputDecoration(
-                              labelText: LocaleKeys.card_number.tr(),
-                              hintText: 'XXXX XXXX XXXX XXXX',
-                              hintStyle: kts16HelperText,
-                              labelStyle: kts16HelperText,
-                              focusedBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                              enabledBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                            ),
-                            cardNumberValidator:
-                                model.updateCardNumberValidator,
-                            expiryDateDecoration: InputDecoration(
-                              hintStyle: kts16HelperText,
-                              labelStyle: kts16HelperText,
-                              focusedBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                              enabledBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                              labelText: LocaleKeys.card_date_deadline.tr(),
-                              hintText: 'XX/XX',
-                            ),
-                            expiryDateValidator:
-                                model.updateExpiryDateValidator,
-                            cvvCodeDecoration: InputDecoration(
-                              labelText: '',
-                              hintText: '',
-                              // labelText: 'CVC',
-                              // hintText: 'XXX',
-                              hintStyle: TextStyle(
-                                  fontSize: 16.sp, color: kcWhiteColor),
-                              labelStyle: TextStyle(
-                                  fontSize: 16.sp, color: kcWhiteColor),
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                            ),
-                            cvvValidator: model.updateCvvValidator,
-                            cardHolderDecoration: InputDecoration(
-                              hintStyle: kts16HelperText,
-                              labelStyle: kts16HelperText,
-                              focusedBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                              enabledBorder:
-                                  AppTheme().cardUnderlineInputBorder,
-                              labelText: LocaleKeys.card_holder.tr(),
-                            ),
-                            cardHolderValidator:
-                                model.updateCardHolderValidator,
-                            onCreditCardModelChange:
-                                model.onCreditCardModelChange,
+                                formKey: creditCardFormKey,
+                                obscureCvv: true,
+                                obscureNumber: false,
+                                cardNumber: model.cardNumber,
+                                cvvCode: model.cvvCode,
+                                isHolderNameVisible: true,
+                                isCardNumberVisible: true,
+                                isExpiryDateVisible: true,
+                                cardHolderName: model.cardHolderName,
+                                expiryDate: model.expiryDate,
+                                themeColor: kcPrimaryColor,
+                                cardNumberDecoration: InputDecoration(
+                                  labelText: LocaleKeys.card_number.tr(),
+                                  hintText: 'XXXX XXXX XXXX XXXX',
+                                  hintStyle: kts16HelperText,
+                                  labelStyle: kts16HelperText,
+                                  focusedBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  enabledBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                ),
+                                cardNumberValidator:
+                                    model.updateCardNumberValidator,
+                                expiryDateDecoration: InputDecoration(
+                                  hintStyle: kts16HelperText,
+                                  labelStyle: kts16HelperText,
+                                  focusedBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  enabledBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  labelText: LocaleKeys.card_date_deadline.tr(),
+                                  hintText: 'XX/XX',
+                                ),
+                                expiryDateValidator:
+                                    model.updateExpiryDateValidator,
+                                cvvCodeDecoration: InputDecoration(
+                                  labelText: '',
+                                  hintText: '',
+                                  // labelText: 'CVC',
+                                  // hintText: 'XXX',
+                                  hintStyle: TextStyle(
+                                      fontSize: 16.sp, color: kcWhiteColor),
+                                  labelStyle: TextStyle(
+                                      fontSize: 16.sp, color: kcWhiteColor),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                ),
+                                cvvValidator: model.updateCvvValidator,
+                                cardHolderDecoration: InputDecoration(
+                                  hintStyle: kts16HelperText,
+                                  labelStyle: kts16HelperText,
+                                  focusedBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  enabledBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  labelText: LocaleKeys.card_holder.tr(),
+                                ),
+                                cardHolderValidator:
+                                    model.updateCardHolderValidator,
+                                onCreditCardModelChange:
+                                    model.onCreditCardModelChange,
+                              ),
+
+                              //------------------ BANK CARD LIST ---------------------//
+                              ListView.separated(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.only(top: 20.h),
+                                itemCount: bankList.length,
+                                itemBuilder: (context, pos) {
+                                  return RadioListTile<BankCard>(
+                                    value: bankList[pos],
+                                    groupValue: model.selectedBankCard,
+                                    onChanged: model.updateSelectedBankCard,
+                                    title: Text(
+                                      bankList[pos]
+                                          .bankName, // Changes name of first element if location is enabled
+                                      style: kts16Text,
+                                    ).tr(),
+                                    activeColor: kcGreenColor,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    toggleable: true,
+                                  );
+                                },
+                                separatorBuilder: (context, index) => Divider(
+                                  indent: 0.175.sw,
+                                  thickness: 0.5,
+                                  color: kcDividerSecondaryColor,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
