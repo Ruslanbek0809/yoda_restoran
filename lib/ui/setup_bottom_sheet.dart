@@ -17,6 +17,7 @@ void setupBottomSheet() {
         (context, sheetRequest, completer) => SOConfirmationBottomSheetView(
               request: sheetRequest,
               completer: completer,
+              soCreditCardsConfirmationBottomSheetData: sheetRequest.data,
             ),
   };
 

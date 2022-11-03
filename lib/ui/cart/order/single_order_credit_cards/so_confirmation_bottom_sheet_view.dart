@@ -14,10 +14,13 @@ import 'so_credit_cards_view_model.dart';
 class SOConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
+  final SOCreditCardsConfirmationBottomSheetData
+      soCreditCardsConfirmationBottomSheetData;
   SOConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
+    required this.soCreditCardsConfirmationBottomSheetData,
   }) : super(key: key);
 
   final GlobalKey<FormState> creditCardFormKey = GlobalKey<FormState>();
@@ -122,14 +125,16 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 onCreditCardModelChange:
                                     model.onCreditCardModelChange,
                               ),
-
-                              Padding(
-                                padding: EdgeInsets.only(left: 16.w, top: 4.h),
-                                child: Text(
-                                  '* CVC kod ýatda saklanmaýar',
-                                  style: kts12ContactText,
-                                ).tr(),
-                              ),
+                              if (soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 16.w, top: 4.h),
+                                  child: Text(
+                                    '* CVC kod ýatda saklanmaýar',
+                                    style: kts12ContactText,
+                                  ).tr(),
+                                ),
                               //------------------ BANK CARD LIST ---------------------//
                               ListView.separated(
                                 shrinkWrap: true,
