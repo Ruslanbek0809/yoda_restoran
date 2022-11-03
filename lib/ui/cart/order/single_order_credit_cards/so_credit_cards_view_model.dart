@@ -33,7 +33,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 //------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
 
   /// CALLS CreditCardsConfirmationBottomSheet
-  Future<void> showCustomCreditCardsConfirmationBottomSheet() async {
+  Future<void> showCustomCreditCardsConfirmationBottomSheet(
+      {bool? isNewCreditCard = true, HiveCreditCard? hiveCreditCard}) async {
     log.i('');
     // SheetResponse<bool>? _navResult;
     // _navResult =
@@ -42,6 +43,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
+      data: SOCreditCardsConfirmationBottomSheetData(
+        isNewCreditCard: isNewCreditCard,
+        hiveCreditCard: hiveCreditCard,
+      ),
     );
 
     // if (_navResult != null && _navResult.data == true) {

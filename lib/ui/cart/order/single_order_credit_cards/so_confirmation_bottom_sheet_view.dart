@@ -26,7 +26,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.83,
+          initialChildSize: 0.835,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
