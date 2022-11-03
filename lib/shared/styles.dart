@@ -55,6 +55,11 @@ TextStyle kts12PromocodeText = TextStyle(
   color: kcPromocodeColor,
 );
 
+TextStyle kts12ContactText = TextStyle(
+  fontSize: 12.sp,
+  color: kcContactColor,
+);
+
 TextStyle kts14Text = TextStyle(
   fontSize: 14.sp,
   fontWeight: FontWeight.normal,

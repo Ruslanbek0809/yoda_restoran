@@ -64,12 +64,12 @@ class MyCreditCardAddView extends StatelessWidget {
                 ),
                 cardNumberValidator: model.updateCardNumberValidator,
                 expiryDateDecoration: InputDecoration(
+                  labelText: LocaleKeys.card_date_deadline.tr(),
+                  hintText: 'XX/XX',
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
                   focusedBorder: AppTheme().cardUnderlineInputBorder,
                   enabledBorder: AppTheme().cardUnderlineInputBorder,
-                  labelText: LocaleKeys.card_date_deadline.tr(),
-                  hintText: 'XX/XX',
                 ),
                 expiryDateValidator: model.updateExpiryDateValidator,
                 cvvCodeDecoration: InputDecoration(
@@ -87,11 +87,11 @@ class MyCreditCardAddView extends StatelessWidget {
                 ),
                 cvvValidator: model.updateCvvValidator,
                 cardHolderDecoration: InputDecoration(
+                  labelText: LocaleKeys.card_holder.tr(),
                   hintStyle: kts16HelperText,
                   labelStyle: kts16HelperText,
                   focusedBorder: AppTheme().cardUnderlineInputBorder,
                   enabledBorder: AppTheme().cardUnderlineInputBorder,
-                  labelText: LocaleKeys.card_holder.tr(),
                 ),
                 cardHolderValidator: model.updateCardHolderValidator,
                 onCreditCardModelChange: model.onCreditCardModelChange,

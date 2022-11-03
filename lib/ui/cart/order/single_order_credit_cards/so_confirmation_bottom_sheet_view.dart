@@ -26,7 +26,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.825,
+          initialChildSize: 0.83,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -58,6 +58,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           ),
                           padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               //------------------ CREDIT CARD FORM ---------------------//
                               CreditCardForm(
@@ -85,27 +86,26 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 cardNumberValidator:
                                     model.updateCardNumberValidator,
                                 expiryDateDecoration: InputDecoration(
+                                  labelText: LocaleKeys.card_date_deadline.tr(),
+                                  hintText: 'XX/XX',
                                   hintStyle: kts16HelperText,
                                   labelStyle: kts16HelperText,
                                   focusedBorder:
                                       AppTheme().cardUnderlineInputBorder,
                                   enabledBorder:
                                       AppTheme().cardUnderlineInputBorder,
-                                  labelText: LocaleKeys.card_date_deadline.tr(),
-                                  hintText: 'XX/XX',
                                 ),
                                 expiryDateValidator:
                                     model.updateExpiryDateValidator,
                                 cvvCodeDecoration: InputDecoration(
+                                  labelText: LocaleKeys.cvc_kod.tr(),
+                                  hintText: 'XXX',
                                   hintStyle: kts16HelperText,
                                   labelStyle: kts16HelperText,
-                                  labelText: LocaleKeys.cvc_kod.tr(),
-                                  // hintText: 'XXX',
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
+                                  focusedBorder:
+                                      AppTheme().cardUnderlineInputBorder,
+                                  enabledBorder:
+                                      AppTheme().cardUnderlineInputBorder,
                                 ),
                                 cvvValidator: model.updateCVCValidator,
                                 cardHolderDecoration: InputDecoration(
@@ -123,6 +123,13 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     model.onCreditCardModelChange,
                               ),
 
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.w, top: 4.h),
+                                child: Text(
+                                  '* CVC kod ýatda saklanmaýar',
+                                  style: kts12ContactText,
+                                ).tr(),
+                              ),
                               //------------------ BANK CARD LIST ---------------------//
                               ListView.separated(
                                 shrinkWrap: true,
@@ -191,29 +198,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         onPressed: () async {
                           FocusScope.of(context)
                               .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                          // if (!_addressformKey.currentState!.validate()) return;
-                          // _addressformKey.currentState!.save();
-                          // await model.onAddAddressPressed(() async {
-                          //   await completer(SheetResponse(data: true));
-                          //   await showErrorFlashBar(
-                          //     context: context,
-                          //     msg: LocaleKeys.addAddedSuccessfully,
-                          //     margin: EdgeInsets.only(
-                          //       left: 16.w,
-                          //       right: 16.w,
-                          //       bottom: 0.05.sh,
-                          //     ),
-                          //   );
-                          // }, () async {
-                          //   await showErrorFlashBar(
-                          //     context: context,
-                          //     margin: EdgeInsets.only(
-                          //       left: 16.w,
-                          //       right: 16.w,
-                          //       bottom: 0.05.sh,
-                          //     ),
-                          //   );
-                          // });
                         },
                       ),
                     ),
