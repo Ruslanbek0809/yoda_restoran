@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.logger.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -13,6 +14,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
 
   final _hiveDbService = locator<HiveDbService>();
+  final _bottomSheetService = locator<BottomSheetService>();
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
@@ -29,6 +31,26 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }
 
 //------------------------ CREDIT CARD CONFIRMATION ----------------------------//
+
+//------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
+
+  /// CALLS AddAddressBottomSheet
+  Future<void> showCustomAddAddressBottomSheet() async {
+    log.i('');
+    // SheetResponse<bool>? _navResult;
+    // _navResult =
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.creditCardConfirmation,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
+
+    // if (_navResult != null && _navResult.data == true) {
+    //   log.i('_navResult: $_navResult');
+    //   await runBusyFuture(_checkoutService.getAddresses());
+    // }
+  }
 
   String _cardNumber = '';
   String get cardNumber => _cardNumber;

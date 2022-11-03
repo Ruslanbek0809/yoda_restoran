@@ -12,6 +12,11 @@ void setupBottomSheet() {
           request: sheetRequest,
           completer: completer,
         ),
+    BottomSheetType.creditCardConfirmation: (context, sheetRequest, completer) =>
+        CheckoutAddAddressBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
+        ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);

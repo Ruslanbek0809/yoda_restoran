@@ -111,6 +111,7 @@ enum BottomSheetType {
   paymentType,
   selectAddress,
   addAddress,
+  creditCardConfirmation,
 }
 
 /// Enum for dialog types
