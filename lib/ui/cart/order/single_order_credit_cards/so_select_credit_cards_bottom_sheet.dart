@@ -227,7 +227,23 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 //     offset: offset,
                 //   ),
                 // ),
-                onPressed: () {},
+                onPressed: () async {
+                  if (model.tempSelectedHiveCreditCard == null)
+                    await showErrorFlashBar(
+                      context: context,
+                      msg: LocaleKeys.selectCreditCard,
+                      margin: EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        bottom: 0.13.sh,
+                      ),
+                    );
+                  else
+                    await model.showCustomCreditCardsConfirmationBottomSheet(
+                      isNewCreditCard: false,
+                      hiveCreditCard: model.tempSelectedHiveCreditCard,
+                    );
+                },
               ),
             )
           ],
