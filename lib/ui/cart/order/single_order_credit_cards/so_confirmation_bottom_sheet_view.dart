@@ -144,28 +144,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),
-                              //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
-                              if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 20.h),
-                                  child: Text(
-                                    LocaleKeys.bank,
-                                    style: kts14ContactText,
-                                  ).tr(),
-                                ),
-                              if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 2.h),
-                                  child: Text(
-                                    soCreditCardsConfirmationBottomSheetData
-                                        .hiveCreditCard!.bankName,
-                                    style: kts18Text,
-                                  ).tr(),
-                                ),
                               //------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard!)
@@ -205,6 +183,27 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     color: kcDividerSecondaryColor,
                                   ),
                                 ),
+                              //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                              if (!soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 16.w, top: 20.h),
+                                  child: Text(
+                                    LocaleKeys.bank,
+                                    style: kts14ContactText,
+                                  ).tr(),
+                                ),
+                              if (!soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 16.w, top: 2.h),
+                                  child: Text(
+                                    model.selectedBankCard!.bankName,
+                                    style: kts18Text,
+                                  ).tr(),
+                                ),
                             ],
                           ),
                         ),
@@ -233,14 +232,12 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 14.h),
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
-                          child:
-                              // model.isLoading
-                              //     ? ButtonLoading()
-                              //     :
-                              Text(
-                            LocaleKeys.confirm,
-                            style: ktsButton18Text,
-                          ).tr(),
+                          child: model.isLoading
+                              ? ButtonLoading()
+                              : Text(
+                                  LocaleKeys.confirm,
+                                  style: ktsButton18Text,
+                                ).tr(),
                         ),
                         onPressed: () async {
                           FocusScope.of(context)
@@ -250,6 +247,27 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             return;
                           creditCardFormKey.currentState!.save();
                           model.log.v('creditCardFormKey SUCCESS');
+                          // await model.onAddAddressPressed(() async {
+                          //   await completer(SheetResponse(data: true));
+                          //   await showErrorFlashBar(
+                          //     context: context,
+                          //     msg: LocaleKeys.addAddedSuccessfully,
+                          //     margin: EdgeInsets.only(
+                          //       left: 16.w,
+                          //       right: 16.w,
+                          //       bottom: 0.05.sh,
+                          //     ),
+                          //   );
+                          // }, () async {
+                          //   await showErrorFlashBar(
+                          //     context: context,
+                          //     margin: EdgeInsets.only(
+                          //       left: 16.w,
+                          //       right: 16.w,
+                          //       bottom: 0.05.sh,
+                          //     ),
+                          //   );
+                          // });
                         },
                       ),
                     ),

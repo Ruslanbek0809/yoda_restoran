@@ -15,6 +15,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _userService = locator<UserService>();
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
@@ -57,6 +58,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     // }
   }
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   String _cardNumber = '';
   String get cardNumber => _cardNumber;
 
@@ -79,6 +83,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _cardNumber = hiveCreditCard.cardNumber;
     _expiryDate = hiveCreditCard.expiryDate;
     _cardHolderName = hiveCreditCard.cardHolderName;
+    _selectedBankCard = BankCard(
+      bankId: hiveCreditCard.bankId,
+      bankName: hiveCreditCard.bankName,
+    );
     notifyListeners();
   }
 
@@ -142,6 +150,48 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
     _selectedBankCard = newSelectedBankCard;
     notifyListeners();
+  }
+
+  /// POST after CONFIRM button is pressed
+  Future<void> onConfirmButtonPressed(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
+    log.v('onConfirmButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+
+        // _userService.addAddress(
+        //   city,
+        //   street,
+        //   house,
+        //   apartment,
+        //   floor,
+        //   note,
+        //   () => onSuccess!(),
+        //   () => onFail!(),
+        // );
+        //   _checkoutService.addAddress(
+        //   _city,
+        //   _street,
+        //   _house,
+        //   _apartment,
+        //   _floor,
+        //   _note,
+        //   () {
+        //     _isLoading = false;
+        //     onSuccessForView!();
+        //   },
+        //   () {
+        //     _isLoading = false;
+        //     notifyListeners();
+        //     onFailForView!();
+        //   },
+        // )
+        );
   }
 
   @override
