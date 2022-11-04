@@ -131,7 +131,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 4.h),
                                   child: Text(
-                                    '* CVC kod ýatda saklanmaýar',
+                                    LocaleKeys.confirm,
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),

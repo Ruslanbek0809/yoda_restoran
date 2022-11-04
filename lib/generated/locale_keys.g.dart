@@ -107,6 +107,7 @@ abstract class  LocaleKeys {
   static const cvc_kod = 'cvc_kod';
   static const enter_cvc_kod = 'enter_cvc_kod';
   static const enter_full_cvc_kod = 'enter_full_cvc_kod';
+  static const cvc_kod_not_saved = 'cvc_kod_not_saved';
   static const add_card = 'add_card';
   static const credit_card_added = 'credit_card_added';
   static const wanna_delete_credit_card = 'wanna_delete_credit_card';
