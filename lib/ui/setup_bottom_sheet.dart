@@ -3,6 +3,7 @@ import '../app/app.locator.dart';
 import '../utils/utils.dart';
 import 'cart/checkout/checkout_address/checkout_add_address_bottom_sheet.dart';
 import 'cart/order/single_order_credit_cards/so_confirmation_bottom_sheet_view.dart';
+import 'cart/order/single_order_credit_cards/so_send_code_confirmation_bottom_sheet_view.dart';
 
 void setupBottomSheet() {
   final _bottomSheetService = locator<BottomSheetService>();
@@ -19,6 +20,11 @@ void setupBottomSheet() {
               completer: completer,
               soCreditCardsConfirmationBottomSheetData: sheetRequest.data,
             ),
+    BottomSheetType.sendCodeConfirmation: (context, sheetRequest, completer) =>
+        SOSendCodeConfirmationBottomSheetView(
+          request: sheetRequest,
+          completer: completer,
+        ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
@@ -19,8 +17,6 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
     required this.request,
     required this.completer,
   }) : super(key: key);
-
-  final GlobalKey<FormState> creditCardFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,68 +57,6 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //------------------ CREDIT CARD FORM ---------------------//
-                              CreditCardForm(
-                                formKey: creditCardFormKey,
-                                obscureCvv: true,
-                                obscureNumber: false,
-                                cardNumber: model.cardNumber,
-                                cvvCode: model.cvcCode,
-                                isHolderNameVisible: true,
-                                isCardNumberVisible: true,
-                                isExpiryDateVisible: true,
-                                cardHolderName: model.cardHolderName,
-                                expiryDate: model.expiryDate,
-                                themeColor: kcPrimaryColor,
-                                cardNumberDecoration: InputDecoration(
-                                  labelText: LocaleKeys.card_number.tr(),
-                                  hintText: 'XXXX XXXX XXXX XXXX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                cardNumberValidator:
-                                    model.updateCardNumberValidator,
-                                expiryDateDecoration: InputDecoration(
-                                  labelText: LocaleKeys.card_date_deadline.tr(),
-                                  hintText: 'XX/XX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                expiryDateValidator:
-                                    model.updateExpiryDateValidator,
-                                cvvCodeDecoration: InputDecoration(
-                                  labelText: LocaleKeys.cvc_kod.tr(),
-                                  hintText: 'XXX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                cvvValidator: model.updateCVCValidator,
-                                cardHolderDecoration: InputDecoration(
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  labelText: LocaleKeys.card_holder.tr(),
-                                ),
-                                cardHolderValidator:
-                                    model.updateCardHolderValidator,
-                                onCreditCardModelChange:
-                                    model.onCreditCardModelChange,
-                              ),
                               //------------------ CVC CODE INFO ---------------------//
                               Padding(
                                 padding: EdgeInsets.only(left: 16.w, top: 4.h),
@@ -131,63 +65,13 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                   style: kts12ContactText,
                                 ).tr(),
                               ),
-                              //------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
-                              Padding(
-                                padding: EdgeInsets.only(top: 20.h),
-                                child: Divider(
-                                  indent: 0.175.sw,
-                                  thickness: 0.5,
-                                  color: kcDividerSecondaryColor,
-                                ),
-                              ),
-                              ListView.separated(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: bankList.length,
-                                itemBuilder: (context, pos) {
-                                  return RadioListTile<BankCard>(
-                                    value: bankList[pos],
-                                    groupValue: model.selectedBankCard,
-                                    onChanged: model.updateSelectedBankCard,
-                                    title: Text(
-                                      bankList[pos]
-                                          .bankName, // Changes name of first element if location is enabled
-                                      style: kts16Text,
-                                    ).tr(),
-                                    activeColor: kcGreenColor,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    toggleable: true,
-                                  );
-                                },
-                                separatorBuilder: (context, index) => Divider(
-                                  indent: 0.175.sw,
-                                  thickness: 0.5,
-                                  color: kcDividerSecondaryColor,
-                                ),
-                              ),
-                              //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
-                              Padding(
-                                padding: EdgeInsets.only(left: 16.w, top: 20.h),
-                                child: Text(
-                                  LocaleKeys.bank,
-                                  style: kts14ContactText,
-                                ).tr(),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 16.w, top: 2.h),
-                                child: Text(
-                                  model.selectedBankCard!.bankName,
-                                  style: kts18Text,
-                                ).tr(),
-                              ),
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  //--------------- CREDIT CARD CONFIRM BUTTON -------------- //
+                  //--------------- SEND CODE CONFIRM BUTTON -------------- //
                   Positioned(
                     bottom: 0,
                     left: 0,
@@ -220,31 +104,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           FocusScope.of(context)
                               .unfocus(); // UNFOCUSES all textfield b4 data fetch
 
-                          if (!creditCardFormKey.currentState!.validate())
-                            return;
-                          creditCardFormKey.currentState!.save();
-                          model.log.v('creditCardFormKey SUCCESS');
-                          // await model.onAddAddressPressed(() async {
-                          //   await completer(SheetResponse(data: true));
-                          //   await showErrorFlashBar(
-                          //     context: context,
-                          //     msg: LocaleKeys.addAddedSuccessfully,
-                          //     margin: EdgeInsets.only(
-                          //       left: 16.w,
-                          //       right: 16.w,
-                          //       bottom: 0.05.sh,
-                          //     ),
-                          //   );
-                          // }, () async {
-                          //   await showErrorFlashBar(
-                          //     context: context,
-                          //     margin: EdgeInsets.only(
-                          //       left: 16.w,
-                          //       right: 16.w,
-                          //       bottom: 0.05.sh,
-                          //     ),
-                          //   );
-                          // });
+                          // if (!creditCardFormKey.currentState!.validate())
+                          //   return;
+                          // creditCardFormKey.currentState!.save();
+                          // model.log.v('creditCardFormKey SUCCESS');
                         },
                       ),
                     ),
