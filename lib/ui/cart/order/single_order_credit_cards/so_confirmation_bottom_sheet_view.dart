@@ -29,7 +29,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.835,
+          initialChildSize: 0.875,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -125,44 +125,56 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 onCreditCardModelChange:
                                     model.onCreditCardModelChange,
                               ),
+                              //------------------ CVC CODE INFO ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard!)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 4.h),
                                   child: Text(
-                                    LocaleKeys.confirm,
+                                    LocaleKeys.cvc_kod_not_saved,
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),
                               //------------------ BANK CARD LIST ---------------------//
-                              ListView.separated(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.only(top: 20.h),
-                                itemCount: bankList.length,
-                                itemBuilder: (context, pos) {
-                                  return RadioListTile<BankCard>(
-                                    value: bankList[pos],
-                                    groupValue: model.selectedBankCard,
-                                    onChanged: model.updateSelectedBankCard,
-                                    title: Text(
-                                      bankList[pos]
-                                          .bankName, // Changes name of first element if location is enabled
-                                      style: kts16Text,
-                                    ).tr(),
-                                    activeColor: kcGreenColor,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    toggleable: true,
-                                  );
-                                },
-                                separatorBuilder: (context, index) => Divider(
-                                  indent: 0.175.sw,
-                                  thickness: 0.5,
-                                  color: kcDividerSecondaryColor,
+                              if (soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20.h),
+                                  child: Divider(
+                                    indent: 0.175.sw,
+                                    thickness: 0.5,
+                                    color: kcDividerSecondaryColor,
+                                  ),
                                 ),
-                              ),
+                              if (soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: bankList.length,
+                                  itemBuilder: (context, pos) {
+                                    return RadioListTile<BankCard>(
+                                      value: bankList[pos],
+                                      groupValue: model.selectedBankCard,
+                                      onChanged: model.updateSelectedBankCard,
+                                      title: Text(
+                                        bankList[pos]
+                                            .bankName, // Changes name of first element if location is enabled
+                                        style: kts16Text,
+                                      ).tr(),
+                                      activeColor: kcGreenColor,
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      toggleable: true,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) => Divider(
+                                    indent: 0.175.sw,
+                                    thickness: 0.5,
+                                    color: kcDividerSecondaryColor,
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -203,6 +215,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         onPressed: () async {
                           FocusScope.of(context)
                               .unfocus(); // UNFOCUSES all textfield b4 data fetch
+
+                          if (!creditCardFormKey.currentState!.validate())
+                            return;
+                          creditCardFormKey.currentState!.save();
+                          model.log.v('creditCardFormKey SUCCESS');
                         },
                       ),
                     ),
