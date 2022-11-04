@@ -91,6 +91,7 @@ abstract class  LocaleKeys {
   static const apartment = 'apartment';
   static const floor = 'floor';
   static const my_credit_cards = 'my_credit_cards';
+  static const bank = 'bank';
   static const rysgal_bank = 'rysgal_bank';
   static const senagat_bank = 'senagat_bank';
   static const dyi_bank = 'dyi_bank';

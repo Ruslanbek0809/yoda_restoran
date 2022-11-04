@@ -29,7 +29,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.875,
+          initialChildSize:
+              soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
+                  ? 0.875
+                  : 0.61,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -136,7 +139,29 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),
-                              //------------------ BANK CARD LIST ---------------------//
+                              //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                              if (!soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 16.w, top: 20.h),
+                                  child: Text(
+                                    LocaleKeys.bank,
+                                    style: kts14ContactText,
+                                  ).tr(),
+                                ),
+                              if (!soCreditCardsConfirmationBottomSheetData
+                                  .isNewCreditCard!)
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 16.w, top: 2.h),
+                                  child: Text(
+                                    soCreditCardsConfirmationBottomSheetData
+                                        .hiveCreditCard!.bankName,
+                                    style: kts18Text,
+                                  ).tr(),
+                                ),
+                              //------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard!)
                                 Padding(

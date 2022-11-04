@@ -82,6 +82,11 @@ TextStyle kts14IconText = TextStyle(
   color: kcIconColor,
 );
 
+TextStyle kts14ContactText = TextStyle(
+  fontSize: 14.sp,
+  color: kcContactColor,
+);
+
 TextStyle ktsDefault14DialogText = TextStyle(
   fontSize: 14.sp,
   color: kcDialogColor,
