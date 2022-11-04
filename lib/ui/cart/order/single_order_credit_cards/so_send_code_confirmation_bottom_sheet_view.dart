@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
@@ -11,18 +10,14 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
-import 'so_send_code_confirmation_bottom_sheet_view.dart';
 
-class SOConfirmationBottomSheetView extends StatelessWidget {
+class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
-  final SOCreditCardsConfirmationBottomSheetData
-      soCreditCardsConfirmationBottomSheetData;
-  SOConfirmationBottomSheetView({
+  SOSendCodeConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
-    required this.soCreditCardsConfirmationBottomSheetData,
   }) : super(key: key);
 
   final GlobalKey<FormState> creditCardFormKey = GlobalKey<FormState>();
@@ -31,16 +26,8 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       viewModelBuilder: () => SOCreditCardsViewModel(),
-      onModelReady: (model) =>
-          !soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
-              ? model.assignHiveCreditCardToTemp(
-                  soCreditCardsConfirmationBottomSheetData.hiveCreditCard!)
-              : null,
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize:
-              soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
-                  ? 0.875
-                  : 0.61,
+          initialChildSize: 0.5,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -137,76 +124,63 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     model.onCreditCardModelChange,
                               ),
                               //------------------ CVC CODE INFO ---------------------//
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 4.h),
-                                  child: Text(
-                                    LocaleKeys.cvc_kod_not_saved,
-                                    style: kts12ContactText,
-                                  ).tr(),
-                                ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.w, top: 4.h),
+                                child: Text(
+                                  LocaleKeys.cvc_kod_not_saved,
+                                  style: kts12ContactText,
+                                ).tr(),
+                              ),
                               //------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20.h),
-                                  child: Divider(
-                                    indent: 0.175.sw,
-                                    thickness: 0.5,
-                                    color: kcDividerSecondaryColor,
-                                  ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 20.h),
+                                child: Divider(
+                                  indent: 0.175.sw,
+                                  thickness: 0.5,
+                                  color: kcDividerSecondaryColor,
                                 ),
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: bankList.length,
-                                  itemBuilder: (context, pos) {
-                                    return RadioListTile<BankCard>(
-                                      value: bankList[pos],
-                                      groupValue: model.selectedBankCard,
-                                      onChanged: model.updateSelectedBankCard,
-                                      title: Text(
-                                        bankList[pos]
-                                            .bankName, // Changes name of first element if location is enabled
-                                        style: kts16Text,
-                                      ).tr(),
-                                      activeColor: kcGreenColor,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      toggleable: true,
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) => Divider(
-                                    indent: 0.175.sw,
-                                    thickness: 0.5,
-                                    color: kcDividerSecondaryColor,
-                                  ),
+                              ),
+                              ListView.separated(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: bankList.length,
+                                itemBuilder: (context, pos) {
+                                  return RadioListTile<BankCard>(
+                                    value: bankList[pos],
+                                    groupValue: model.selectedBankCard,
+                                    onChanged: model.updateSelectedBankCard,
+                                    title: Text(
+                                      bankList[pos]
+                                          .bankName, // Changes name of first element if location is enabled
+                                      style: kts16Text,
+                                    ).tr(),
+                                    activeColor: kcGreenColor,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    toggleable: true,
+                                  );
+                                },
+                                separatorBuilder: (context, index) => Divider(
+                                  indent: 0.175.sw,
+                                  thickness: 0.5,
+                                  color: kcDividerSecondaryColor,
                                 ),
+                              ),
                               //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
-                              if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 20.h),
-                                  child: Text(
-                                    LocaleKeys.bank,
-                                    style: kts14ContactText,
-                                  ).tr(),
-                                ),
-                              if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 2.h),
-                                  child: Text(
-                                    model.selectedBankCard!.bankName,
-                                    style: kts18Text,
-                                  ).tr(),
-                                ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.w, top: 20.h),
+                                child: Text(
+                                  LocaleKeys.bank,
+                                  style: kts14ContactText,
+                                ).tr(),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.w, top: 2.h),
+                                child: Text(
+                                  model.selectedBankCard!.bankName,
+                                  style: kts18Text,
+                                ).tr(),
+                              ),
                             ],
                           ),
                         ),
@@ -250,9 +224,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             return;
                           creditCardFormKey.currentState!.save();
                           model.log.v('creditCardFormKey SUCCESS');
-
-                          await model
-                              .showCustomSendCodeConfirmationBottomSheet();
                           // await model.onAddAddressPressed(() async {
                           //   await completer(SheetResponse(data: true));
                           //   await showErrorFlashBar(

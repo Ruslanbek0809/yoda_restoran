@@ -185,6 +185,22 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
+//------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
+
+  /// CALLS SendCodeConfirmationBottomSheet
+  Future<void> showCustomSendCodeConfirmationBottomSheet({
+    bool? isNewCreditCard = true,
+    Order? order,
+  }) async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.sendCodeConfirmation,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+    );
+  }
+
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
 }
