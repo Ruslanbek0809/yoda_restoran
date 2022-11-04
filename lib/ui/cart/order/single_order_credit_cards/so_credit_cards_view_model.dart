@@ -12,8 +12,6 @@ import '../../../../utils/utils.dart';
 
 class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
-  final Order order;
-  SOCreditCardsViewModel(this.order);
 
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
@@ -38,7 +36,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   /// CALLS CreditCardsConfirmationBottomSheet
   Future<void> showCustomCreditCardsConfirmationBottomSheet({
     bool? isNewCreditCard = true,
-    HiveCreditCard? hiveCreditCard,
+    Order? order,
   }) async {
     log.i('');
     // SheetResponse<bool>? _navResult;
@@ -50,7 +48,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       isScrollControlled: true,
       data: SOCreditCardsConfirmationBottomSheetData(
         isNewCreditCard: isNewCreditCard,
-        hiveCreditCard: hiveCreditCard,
+        hiveCreditCard: _tempSelectedHiveCreditCard,
+        order: order,
       ),
     );
 
@@ -156,6 +155,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
   /// POST after CONFIRM button is pressed
   Future<void> onConfirmButtonPressed(
+    Order order,
     Function()? onSuccessForView,
     Function()? onFailForView,
   ) async {

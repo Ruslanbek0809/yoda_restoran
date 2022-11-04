@@ -24,7 +24,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(order),
+      viewModelBuilder: () => SOCreditCardsViewModel(),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
@@ -58,7 +58,10 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //     offset: offset,
                   //   ),
                   // ),
-                  onTap: model.showCustomCreditCardsConfirmationBottomSheet,
+                  /// ASSIGNS only order model if it is new Credit Card
+                  onTap: () async =>
+                      await model.showCustomCreditCardsConfirmationBottomSheet(
+                          order: order),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: Row(
@@ -245,7 +248,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   else
                     await model.showCustomCreditCardsConfirmationBottomSheet(
                       isNewCreditCard: false,
-                      hiveCreditCard: model.tempSelectedHiveCreditCard,
+                      order: order,
                     );
                 },
               ),

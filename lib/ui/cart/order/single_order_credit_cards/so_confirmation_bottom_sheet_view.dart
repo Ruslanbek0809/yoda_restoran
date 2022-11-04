@@ -28,6 +28,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
+      viewModelBuilder: () => SOCreditCardsViewModel(),
       onModelReady: (model) =>
           !soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
               ? model.assignHiveCreditCardToTemp(
@@ -276,7 +277,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
               ),
             );
           }),
-      viewModelBuilder: () => SOCreditCardsViewModel(),
     );
   }
 }
