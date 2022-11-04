@@ -72,6 +72,16 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
+  /// ASSIGNS INITIAL list for selectedVolumes and selectedMultiCustomizables
+  void assignHiveCreditCardToTemp(HiveCreditCard hiveCreditCard) {
+    log.i('assignHiveCreditCardToTemp()');
+
+    _cardNumber = hiveCreditCard.cardNumber;
+    _expiryDate = hiveCreditCard.expiryDate;
+    _cardHolderName = hiveCreditCard.cardHolderName;
+    notifyListeners();
+  }
+
   /// UPDATES _cardNumber
   String? updateCardNumberValidator(String? value) {
     log.v('updateCardNumberValidator value: $value, ${value!.length}');

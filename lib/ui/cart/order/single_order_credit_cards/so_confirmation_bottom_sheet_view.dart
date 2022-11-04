@@ -28,6 +28,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
+      onModelReady: (model) =>
+          !soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
+              ? model.assignHiveCreditCardToTemp(
+                  soCreditCardsConfirmationBottomSheetData.hiveCreditCard!)
+              : null,
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize:
               soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
