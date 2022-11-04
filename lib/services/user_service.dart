@@ -566,7 +566,7 @@ class UserService {
 
   /// POST ONLINE PAYMENT
   Future<void> postOnlinePayment(
-    Order? order,
+    Order order,
     String cardNumber,
     String expiryDate,
     String cardHolderName,
@@ -582,12 +582,31 @@ class UserService {
     // if (apartment != null) _queryParams['apartment'] = apartment;
     // if (floor != null) _queryParams['floor'] = floor;
     // if (note != null) _queryParams['currency'] = note;
+    _queryParams['userName'] = 'userName';
+    _queryParams['password'] = 'password';
+    _queryParams['orderNumber'] = order.orderNumber;
+
+    /// AMOUNT part START
+    num _totalOrderSum = order.totPrice!;
+    if (order.promocode != null) {
+      if (order.promocode!.promoType == 1)
+        _totalOrderSum -= order.promocode!.discount!;
+      else
+        _totalOrderSum = order.totPrice! -
+            (order.totPrice! / 100) * order.promocode!.discount!;
+    }
+    if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
+    _queryParams['amount'] = _totalOrderSum;
+
+    /// AMOUNT part END
+
     _queryParams['currency'] = 934;
     _queryParams['language'] = 'ru';
     _queryParams['pageView'] = 'DESKTOP';
+    _queryParams['clientId'] = _currentUser!.id;
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData addressFormData = FormData.fromMap(_queryParams);
+    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
 
     try {
       //----------- DIO PART START -------------//
@@ -604,9 +623,9 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        data: addressFormData,
+        data: onlinePaymentFormData,
       );
-      log.v('RESPONSE: api/address/ => ${response.data}');
+      log.v('RESPONSE: postOnlinePayment => ${response.data}');
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
@@ -614,7 +633,7 @@ class UserService {
       else
         onFail();
     } on DioError catch (error) {
-      log.v('ERROR on api/address/ ${error.response}');
+      log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();
       rethrow;
     }
