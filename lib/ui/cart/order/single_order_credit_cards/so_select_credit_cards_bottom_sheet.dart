@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../models/models.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
@@ -12,15 +13,18 @@ import 'so_credit_cards_view_model.dart';
 class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
+  final Order order;
   const SOSelectCreditCardsBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
+    required this.order,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
+      viewModelBuilder: () => SOCreditCardsViewModel(order),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
@@ -249,7 +253,6 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
           ],
         ),
       ),
-      viewModelBuilder: () => SOCreditCardsViewModel(),
     );
   }
 }

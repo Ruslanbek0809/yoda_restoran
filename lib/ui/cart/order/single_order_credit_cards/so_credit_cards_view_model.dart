@@ -12,6 +12,8 @@ import '../../../../utils/utils.dart';
 
 class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
+  final Order order;
+  SOCreditCardsViewModel(this.order);
 
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
@@ -164,6 +166,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
     await runBusyFuture(
       _userService.postOnlinePayment(
+        order,
         _cardNumber,
         _expiryDate,
         _cardHolderName,

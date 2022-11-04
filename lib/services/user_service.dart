@@ -566,13 +566,14 @@ class UserService {
 
   /// POST ONLINE PAYMENT
   Future<void> postOnlinePayment(
-    String? cardNumber,
-    String? expiryDate,
-    String? cardHolderName,
-    String? cvcCode,
+    Order order,
+    String cardNumber,
+    String expiryDate,
+    String cardHolderName,
+    String cvcCode,
     BankCard? selectedBankCard,
-    Function()? onSuccess,
-    Function()? onFail,
+    Function() onSuccess,
+    Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     // _queryParams['city'] = city;
@@ -580,35 +581,41 @@ class UserService {
     // if (house != null) _queryParams['house'] = house;
     // if (apartment != null) _queryParams['apartment'] = apartment;
     // if (floor != null) _queryParams['floor'] = floor;
-    // if (note != null) _queryParams['notes'] = note;
+    // if (note != null) _queryParams['currency'] = note;
+    _queryParams['currency'] = 934;
+    _queryParams['language'] = 'ru';
+    _queryParams['pageView'] = 'DESKTOP';
 
     log.v('_queryParams at the END: $_queryParams');
     final FormData addressFormData = FormData.fromMap(_queryParams);
 
     try {
+      //----------- DIO PART START -------------//
       Dio dio = Dio();
       Map<String, dynamic> _headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       };
 
-      dio.options.baseUrl =
-          _savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
+      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
       dio.options.headers = _headers;
-      Response response = await _apiRoot.dio.post(
-        'api/address/',
+
+      //----------- DIO PART END -------------//
+
+      Response response = await dio.post(
+        '',
         data: addressFormData,
       );
       log.v('RESPONSE: api/address/ => ${response.data}');
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
-        onSuccess!();
+        onSuccess();
       else
-        onFail!();
+        onFail();
     } on DioError catch (error) {
       log.v('ERROR on api/address/ ${error.response}');
-      onFail!();
+      onFail();
       rethrow;
     }
   }
