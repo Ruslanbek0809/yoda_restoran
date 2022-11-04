@@ -163,35 +163,23 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
 
     await runBusyFuture(
-
-        // _userService.addAddress(
-        //   city,
-        //   street,
-        //   house,
-        //   apartment,
-        //   floor,
-        //   note,
-        //   () => onSuccess!(),
-        //   () => onFail!(),
-        // );
-        //   _checkoutService.addAddress(
-        //   _city,
-        //   _street,
-        //   _house,
-        //   _apartment,
-        //   _floor,
-        //   _note,
-        //   () {
-        //     _isLoading = false;
-        //     onSuccessForView!();
-        //   },
-        //   () {
-        //     _isLoading = false;
-        //     notifyListeners();
-        //     onFailForView!();
-        //   },
-        // )
-        );
+      _userService.postOnlinePayment(
+        _cardNumber,
+        _expiryDate,
+        _cardHolderName,
+        _cvcCode,
+        _selectedBankCard,
+        () {
+          _isLoading = false;
+          onSuccessForView!();
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
   }
 
   @override

@@ -566,27 +566,35 @@ class UserService {
 
   /// POST ONLINE PAYMENT
   Future<void> postOnlinePayment(
-    String? city,
-    String? street,
-    int? house,
-    int? apartment,
-    int? floor,
-    String? note,
+    String? cardNumber,
+    String? expiryDate,
+    String? cardHolderName,
+    String? cvcCode,
+    BankCard? selectedBankCard,
     Function()? onSuccess,
     Function()? onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
-    _queryParams['city'] = city;
-    _queryParams['street'] = street;
-    if (house != null) _queryParams['house'] = house;
-    if (apartment != null) _queryParams['apartment'] = apartment;
-    if (floor != null) _queryParams['floor'] = floor;
-    if (note != null) _queryParams['notes'] = note;
+    // _queryParams['city'] = city;
+    // _queryParams['street'] = street;
+    // if (house != null) _queryParams['house'] = house;
+    // if (apartment != null) _queryParams['apartment'] = apartment;
+    // if (floor != null) _queryParams['floor'] = floor;
+    // if (note != null) _queryParams['notes'] = note;
 
     log.v('_queryParams at the END: $_queryParams');
     final FormData addressFormData = FormData.fromMap(_queryParams);
 
     try {
+      Dio dio = Dio();
+      Map<String, dynamic> _headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      };
+
+      dio.options.baseUrl =
+          _savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
+      dio.options.headers = _headers;
       Response response = await _apiRoot.dio.post(
         'api/address/',
         data: addressFormData,
