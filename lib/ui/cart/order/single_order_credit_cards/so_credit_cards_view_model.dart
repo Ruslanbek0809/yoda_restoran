@@ -204,6 +204,18 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   String _sendCode = '';
   String get sendCode => _sendCode;
 
+  /// SEND CODE validator (EMPTY validator)
+  String? updateSendCodeValidator(String? value) {
+    log.v('updateSendCodeValidator value: $value');
+
+    if (value!.isEmpty) return LocaleKeys.enter_cvc_kod.tr();
+    if (value.length < 3) return LocaleKeys.enter_full_cvc_kod.tr();
+
+    _sendCode = value;
+    notifyListeners();
+    return null;
+  }
+
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
 }

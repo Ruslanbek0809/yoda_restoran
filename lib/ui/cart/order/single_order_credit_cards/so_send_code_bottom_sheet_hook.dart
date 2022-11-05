@@ -19,24 +19,13 @@ class SOSendCodeBottomSheetHook
   @override
   Widget buildViewModelWidget(
       BuildContext context, SOCreditCardsViewModel model) {
-    final _cityController =
-        useTextEditingController(text: LocaleKeys.ashgabat.tr());
-    final _streetController = useTextEditingController();
-    final _apartmentController = useTextEditingController();
-    final _houseController = useTextEditingController();
-    final _floorController = useTextEditingController();
-    final _notesController = useTextEditingController();
+    final _sendCodeController = useTextEditingController();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // --------------- CITY -------------- //
-        Padding(
-          padding: EdgeInsets.only(left: 5.w),
-          child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
-        ),
         TextFormField(
-          controller: _cityController,
+          controller: _sendCodeController,
           style: kts18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
@@ -50,117 +39,7 @@ class SOSendCodeBottomSheetHook
             hintText: LocaleKeys.ashgabat.tr(),
             hintStyle: ktsDefault18HelperText,
           ),
-          validator: model.updateCity,
-        ),
-        // --------------- STREET -------------- //
-        SizedBox(height: 15.h),
-        TextFormField(
-          controller: _streetController,
-          style: kts18Text,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            labelText: LocaleKeys.streetEx.tr(),
-            labelStyle: ktsDefault18HelperText,
-          ),
-          validator: model.updateStreet,
-        ),
-        SizedBox(height: 15.h),
-        // --------------- APARTMENT/HOUSE/FLOOR -------------- //
-        Row(
-          children: [
-            Flexible(
-              child: TextFormField(
-                controller: _apartmentController,
-                style: kts18Text,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  labelText: LocaleKeys.apartment.tr(),
-                  labelStyle: kts14HelperText,
-                ),
-                validator: model.updateHouse,
-              ),
-            ),
-            SizedBox(width: 10.w),
-            Flexible(
-              child: TextFormField(
-                controller: _houseController,
-                style: kts18Text,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  labelText: LocaleKeys.house.tr(),
-                  labelStyle: kts14HelperText,
-                ),
-                validator: model.updateApartment,
-              ),
-            ),
-            SizedBox(width: 10.w),
-            Flexible(
-              child: TextFormField(
-                controller: _floorController,
-                style: kts18Text,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-                  ),
-                  labelText: LocaleKeys.floor.tr(),
-                  labelStyle: kts14HelperText,
-                ),
-                validator: model.updateFloor,
-              ),
-            ),
-            Flexible(child: SizedBox())
-          ],
-        ),
-        // --------------- NOTE -------------- //
-        Padding(
-          padding: EdgeInsets.only(left: 5.w, top: 15.h),
-          child: Text(LocaleKeys.note, style: kts14HelperText).tr(),
-        ),
-        SizedBox(height: 5.h),
-        TextFormField(
-          controller: _notesController,
-          maxLines: 5,
-          style: kts18Text,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: AppTheme().radius10,
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            filled: true,
-            fillColor: kcSecondaryLightColor,
-          ),
-          validator: model.updateNote,
+          validator: model.updateSendCodeValidator,
         ),
       ],
     );
