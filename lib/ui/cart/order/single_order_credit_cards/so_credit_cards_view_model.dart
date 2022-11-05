@@ -104,10 +104,14 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _cardNumber = value;
 
     /// CHECKS for _isConfirmAvailable
-    if (_cardNumber.isNotEmpty &&
-        _expiryDate.isNotEmpty &&
+    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
+        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
         _cardHolderName.isNotEmpty &&
-        _cvcCode.isNotEmpty) _isConfirmAvailable = true;
+        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
+      _isConfirmAvailable = true;
+    else
+      _isConfirmAvailable = true;
+
     notifyListeners();
     return null;
   }
@@ -120,6 +124,15 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.length < 5) return LocaleKeys.enter_full_card_date_deadline.tr();
 
     _expiryDate = value;
+
+    /// CHECKS for _isConfirmAvailable
+    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
+        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
+        _cardHolderName.isNotEmpty &&
+        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
+      _isConfirmAvailable = true;
+    else
+      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
@@ -132,6 +145,15 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.length < 3) return LocaleKeys.enter_full_cvc_kod.tr();
 
     _cvcCode = value;
+
+    /// CHECKS for _isConfirmAvailable
+    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
+        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
+        _cardHolderName.isNotEmpty &&
+        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
+      _isConfirmAvailable = true;
+    else
+      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
@@ -142,6 +164,15 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value!.isEmpty) return LocaleKeys.enter_card_holder.tr();
 
     _cardHolderName = value;
+
+    /// CHECKS for _isConfirmAvailable
+    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
+        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
+        _cardHolderName.isNotEmpty &&
+        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
+      _isConfirmAvailable = true;
+    else
+      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
