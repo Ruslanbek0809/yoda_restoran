@@ -155,11 +155,11 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }
 
   /// POST after CONFIRM button is pressed
-  Future<void> onConfirmButtonPressed(
-    Order order,
+  Future<void> onConfirmButtonPressed({
+    Order? order,
     Function()? onSuccessForView,
     Function()? onFailForView,
-  ) async {
+  }) async {
     log.v('onConfirmButtonPressed()');
 
     _isLoading = true;
@@ -167,7 +167,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
     await runBusyFuture(
       _userService.postOnlinePayment(
-        order,
+        order!,
         _cardNumber,
         _expiryDate,
         _cardHolderName,
