@@ -76,7 +76,7 @@ class SliderView extends StatelessWidget {
               count: sliders.length,
               activeIndex: model.activeIndex,
               effect: ScrollingDotsEffect(
-                activeDotColor: kcActiveDotColor,
+                activeDotColor: kcFillBorderColor,
                 dotColor: kcDividerSecondaryColor,
                 maxVisibleDots: 5,
                 radius: 6.h,

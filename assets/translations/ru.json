@@ -66,6 +66,7 @@
     "online_payment_success": "Оплата прошла успешно",
     "online_payment_fail": "Оплата не прошла",
     "online_payment_fail_info": "Убедитесь, что информация о карте верна или на счету достаточно средств, и повторите попытку",
+    "online_payment_send_code_info": "Введите код подтверждения отправленный на номер:",
     "selectCreditCard": "Выбрать карту",
     "addNewCreditCard": "Добавить новую карту",
     "cash": "Наличными",

@@ -66,6 +66,7 @@
     "online_payment_success": "Töleg üstünlikli geçirildi",
     "online_payment_fail": "Töleg geçmedi",
     "online_payment_fail_info": "Kartyň maglumatlarynyň dogrudygyny ýa-da hasapdaky serişdeleriň ýeterlikdigini anyklap, täzeden synanşyň",
+    "online_payment_send_code_info": "telefon belgiňize ugradylan gizlin kody giriziň",
     "selectCreditCard": "Karty saýla",
     "addNewCreditCard": "Täze kart goş",
     "cash": "Nagt",

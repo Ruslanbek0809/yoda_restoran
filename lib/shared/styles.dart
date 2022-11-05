@@ -153,7 +153,7 @@ TextStyle kts18Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle kts18SemiBoldText = TextStyle(
+TextStyle kts18BoldText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,

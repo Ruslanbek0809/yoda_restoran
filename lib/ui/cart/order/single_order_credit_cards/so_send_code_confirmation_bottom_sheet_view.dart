@@ -46,16 +46,37 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
-                        CustomModalInsideBottomSheet(isBottomZero: true),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 16.h),
+                          child: CustomModalInsideBottomSheet(),
+                        ),
 
-                        //       //------------------ CVC CODE INFO ---------------------//
-                        //       Padding(
-                        //         padding: EdgeInsets.only(left: 16.w, top: 4.h),
-                        //         child: Text(
-                        //           LocaleKeys.cvc_kod_not_saved,
-                        //           style: kts12ContactText,
-                        //         ).tr(),
-                        //       ),
+                        //------------------ SEND CODE INFO ---------------------//
+                        context.locale == context.supportedLocales[0]
+                            ? Column(
+                                children: [
+                                  Text(
+                                    '+993 65 ****23',
+                                    style: kts18BoldText,
+                                  ),
+                                  Text(
+                                    LocaleKeys.online_payment_send_code_info,
+                                    style: kts18Text,
+                                  ).tr(),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Text(
+                                    LocaleKeys.online_payment_send_code_info,
+                                    style: kts12ContactText,
+                                  ).tr(),
+                                  Text(
+                                    '+993 65 ****23',
+                                    style: kts18BoldText,
+                                  ),
+                                ],
+                              ),
                         // --------------- SEND CODE TEXTFIELD -------------- //
                         Container(
                           decoration: BoxDecoration(
@@ -63,7 +84,8 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               top: Radius.circular(Constants.BORDER_RADIUS_20),
                             ),
                             color: kcWhiteColor,
-                          ),  
+                          ),
+                          margin: EdgeInsets.only(top: 8.h),
                           padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
                           child: Form(
                             key: _sendCodeformKey,

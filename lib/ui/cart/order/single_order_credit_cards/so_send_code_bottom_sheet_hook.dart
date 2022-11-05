@@ -32,7 +32,7 @@ class SOSendCodeBottomSheetHook
               borderRadius: kbr10,
               borderSide: BorderSide(
                 color: kcFillBorderColor,
-                width: 1,
+                width: 0.5,
               ),
             ),
             hintText: LocaleKeys.code.tr(),
