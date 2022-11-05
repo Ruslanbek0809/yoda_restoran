@@ -8,6 +8,7 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
+import 'so_send_code_bottom_sheet_hook.dart';
 
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -17,6 +18,8 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
     required this.request,
     required this.completer,
   }) : super(key: key);
+
+  final GlobalKey<FormState> _sendCodeformKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                         // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                         CustomModalInsideBottomSheet(isBottomZero: true),
 
-                        //------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                        // --------------- SEND CODE TEXTFIELD -------------- //
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.vertical(
@@ -53,21 +56,36 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                             ),
                             color: kcWhiteColor,
                           ),
-                          padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //------------------ CVC CODE INFO ---------------------//
-                              Padding(
-                                padding: EdgeInsets.only(left: 16.w, top: 4.h),
-                                child: Text(
-                                  LocaleKeys.cvc_kod_not_saved,
-                                  style: kts12ContactText,
-                                ).tr(),
-                              ),
-                            ],
+                          padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
+                          child: Form(
+                            key: _sendCodeformKey,
+                            autovalidateMode: AutovalidateMode.disabled,
+                            child: SOSendCodeBottomSheetHook(),
                           ),
                         ),
+                        // //------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.vertical(
+                        //       top: Radius.circular(Constants.BORDER_RADIUS_20),
+                        //     ),
+                        //     color: kcWhiteColor,
+                        //   ),
+                        //   padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       //------------------ CVC CODE INFO ---------------------//
+                        //       Padding(
+                        //         padding: EdgeInsets.only(left: 16.w, top: 4.h),
+                        //         child: Text(
+                        //           LocaleKeys.cvc_kod_not_saved,
+                        //           style: kts12ContactText,
+                        //         ).tr(),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

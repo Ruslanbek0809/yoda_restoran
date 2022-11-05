@@ -201,6 +201,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
+  String _sendCode = '';
+  String get sendCode => _sendCode;
+
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
 }
