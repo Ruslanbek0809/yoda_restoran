@@ -600,9 +600,9 @@ class UserService {
 
     /// AMOUNT part END
 
+    _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['currency'] = 934;
     _queryParams['language'] = 'ru';
-    _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['pageView'] = 'DESKTOP';
     _queryParams['clientId'] = _currentUser!.id;
 

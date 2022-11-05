@@ -256,15 +256,15 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 soCreditCardsConfirmationBottomSheetData.order!,
                             onSuccessForView: () async {
                               await completer(SheetResponse(data: true));
-                              await showErrorFlashBar(
-                                context: context,
-                                msg: LocaleKeys.addAddedSuccessfully,
-                                margin: EdgeInsets.only(
-                                  left: 16.w,
-                                  right: 16.w,
-                                  bottom: 0.05.sh,
-                                ),
-                              );
+                              // await showErrorFlashBar(
+                              //   context: context,
+                              //   msg: LocaleKeys.addAddedSuccessfully,
+                              //   margin: EdgeInsets.only(
+                              //     left: 16.w,
+                              //     right: 16.w,
+                              //     bottom: 0.05.sh,
+                              //   ),
+                              // );
                             },
                             onFailForView: () async {
                               await showErrorFlashBar(
