@@ -4,6 +4,7 @@
     "continuee": "Продолжить",
     "you_will_receive_sms": "Вы получите код аутентификации по SMS",
     "title_confirm": "Подтвердите",
+    "code": "Код",
     "enter_otp_code": "Введите полученный код аутентификации",
     "enter_otp_code_error": "Введите код",
     "confirm": "Подтвердить",

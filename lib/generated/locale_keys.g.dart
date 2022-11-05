@@ -6,6 +6,7 @@ abstract class  LocaleKeys {
   static const continuee = 'continuee';
   static const you_will_receive_sms = 'you_will_receive_sms';
   static const title_confirm = 'title_confirm';
+  static const code = 'code';
   static const enter_otp_code = 'enter_otp_code';
   static const enter_otp_code_error = 'enter_otp_code_error';
   static const confirm = 'confirm';

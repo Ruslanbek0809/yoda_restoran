@@ -117,7 +117,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                                     )
                                   : SvgPicture.asset(
                                       'assets/checkCircle.svg',
-                                      color: kcActiveDotColor,
+                                      color: kcFillBorderColor,
                                       width: 25.w,
                                     ),
                             ),

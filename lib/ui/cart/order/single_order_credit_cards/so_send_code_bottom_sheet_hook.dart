@@ -28,15 +28,26 @@ class SOSendCodeBottomSheetHook
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+            border: OutlineInputBorder(
+              borderRadius: kbr10,
+              borderSide: BorderSide(
+                color: kcFillBorderColor,
+                width: 1,
+              ),
             ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            hintText: LocaleKeys.ashgabat.tr(),
+            hintText: LocaleKeys.code.tr(),
             hintStyle: ktsDefault18HelperText,
           ),
+          // InputDecoration(
+          //       border: UnderlineInputBorder(
+          //         borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+          //       ),
+          //       focusedBorder: UnderlineInputBorder(
+          //         borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+          //       ),
+          //       hintText: LocaleKeys.code.tr(),
+          //       hintStyle: ktsDefault18HelperText,
+          //     ),
           validator: model.updateSendCodeValidator,
         ),
       ],

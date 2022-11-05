@@ -22,7 +22,6 @@ const Color kcBlackColor = Color(0xFF000000);
 const Color kcWhiteColor = Color(0xFFFFFFFF);
 const Color kcBottomDescColor = Color(0xFF787773);
 const Color kcPromocodeColor = Color(0xFF747474);
-const Color kcActiveDotColor = Color(0xFFBBBBBB);
 const Color kcOrderTimelineColor = Color(0xFFEEEEEE);
 const Color kcOrderDeleteButtonBackColor = Color(0xFFFAFAFA);
 const Color kcErrorEmptyColor = Color(0xFF666666);
