@@ -48,6 +48,14 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                         // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                         CustomModalInsideBottomSheet(isBottomZero: true),
 
+                        //       //------------------ CVC CODE INFO ---------------------//
+                        //       Padding(
+                        //         padding: EdgeInsets.only(left: 16.w, top: 4.h),
+                        //         child: Text(
+                        //           LocaleKeys.cvc_kod_not_saved,
+                        //           style: kts12ContactText,
+                        //         ).tr(),
+                        //       ),
                         // --------------- SEND CODE TEXTFIELD -------------- //
                         Container(
                           decoration: BoxDecoration(
@@ -63,29 +71,6 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                             child: SOSendCodeBottomSheetHook(),
                           ),
                         ),
-                        // //------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.vertical(
-                        //       top: Radius.circular(Constants.BORDER_RADIUS_20),
-                        //     ),
-                        //     color: kcWhiteColor,
-                        //   ),
-                        //   padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       //------------------ CVC CODE INFO ---------------------//
-                        //       Padding(
-                        //         padding: EdgeInsets.only(left: 16.w, top: 4.h),
-                        //         child: Text(
-                        //           LocaleKeys.cvc_kod_not_saved,
-                        //           style: kts12ContactText,
-                        //         ).tr(),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
