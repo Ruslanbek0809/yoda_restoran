@@ -77,9 +77,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
-  bool _isConfirmAvailable = false;
-  bool get isConfirmAvailable => _isConfirmAvailable;
-
   /// ASSIGNS INITIAL list for selectedVolumes and selectedMultiCustomizables
   void assignHiveCreditCardToTemp(HiveCreditCard hiveCreditCard) {
     log.i('assignHiveCreditCardToTemp()');
@@ -102,16 +99,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.length < 19) return LocaleKeys.enter_full_card_number.tr();
 
     _cardNumber = value;
-
-    /// CHECKS for _isConfirmAvailable
-    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
-        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
-        _cardHolderName.isNotEmpty &&
-        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
-      _isConfirmAvailable = true;
-    else
-      _isConfirmAvailable = true;
-
     notifyListeners();
     return null;
   }
@@ -124,15 +111,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.length < 5) return LocaleKeys.enter_full_card_date_deadline.tr();
 
     _expiryDate = value;
-
-    /// CHECKS for _isConfirmAvailable
-    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
-        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
-        _cardHolderName.isNotEmpty &&
-        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
-      _isConfirmAvailable = true;
-    else
-      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
@@ -145,15 +123,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.length < 3) return LocaleKeys.enter_full_cvc_kod.tr();
 
     _cvcCode = value;
-
-    /// CHECKS for _isConfirmAvailable
-    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
-        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
-        _cardHolderName.isNotEmpty &&
-        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
-      _isConfirmAvailable = true;
-    else
-      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
@@ -164,15 +133,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value!.isEmpty) return LocaleKeys.enter_card_holder.tr();
 
     _cardHolderName = value;
-
-    /// CHECKS for _isConfirmAvailable
-    if ((_cardNumber.isNotEmpty && _cardNumber.length >= 19) &&
-        (_expiryDate.isNotEmpty && _expiryDate.length >= 5) &&
-        _cardHolderName.isNotEmpty &&
-        (_cvcCode.isNotEmpty && _cvcCode.length >= 3))
-      _isConfirmAvailable = true;
-    else
-      _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }
@@ -182,6 +142,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
     _cardHolderName = creditCardModel.cardHolderName;
+
     notifyListeners();
   }
 
