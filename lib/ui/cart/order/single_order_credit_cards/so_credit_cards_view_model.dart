@@ -77,6 +77,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
+  bool _isConfirmAvailable = false;
+  bool get isConfirmAvailable => _isConfirmAvailable;
+
   /// ASSIGNS INITIAL list for selectedVolumes and selectedMultiCustomizables
   void assignHiveCreditCardToTemp(HiveCreditCard hiveCreditCard) {
     log.i('assignHiveCreditCardToTemp()');
@@ -98,7 +101,13 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     if (value.isEmpty) return LocaleKeys.enter_card_number.tr();
     if (value.length < 19) return LocaleKeys.enter_full_card_number.tr();
 
-    _expiryDate = value;
+    _cardNumber = value;
+
+    /// CHECKS for _isConfirmAvailable
+    if (_cardNumber.isNotEmpty &&
+        _expiryDate.isNotEmpty &&
+        _cardHolderName.isNotEmpty &&
+        _cvcCode.isNotEmpty) _isConfirmAvailable = true;
     notifyListeners();
     return null;
   }

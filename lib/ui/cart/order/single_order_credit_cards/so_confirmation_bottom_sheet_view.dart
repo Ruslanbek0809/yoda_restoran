@@ -11,7 +11,6 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
-import 'so_send_code_confirmation_bottom_sheet_view.dart';
 
 class SOConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;

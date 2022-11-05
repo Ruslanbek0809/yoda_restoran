@@ -37,7 +37,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     if (value.isEmpty) return LocaleKeys.enter_card_number.tr();
     if (value.length < 19) return LocaleKeys.enter_full_card_number.tr();
 
-    _expiryDate = value;
+    _cardNumber = value;
     notifyListeners();
     return null;
   }

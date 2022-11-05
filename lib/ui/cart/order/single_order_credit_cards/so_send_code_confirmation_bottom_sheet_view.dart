@@ -63,7 +63,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               top: Radius.circular(Constants.BORDER_RADIUS_20),
                             ),
                             color: kcWhiteColor,
-                          ),
+                          ),  
                           padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 10.h),
                           child: Form(
                             key: _sendCodeformKey,
