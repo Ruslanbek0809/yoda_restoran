@@ -26,7 +26,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       viewModelBuilder: () => SOCreditCardsViewModel(),
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.5,
+          initialChildSize: 0.45,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -46,36 +46,45 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: CustomModalInsideBottomSheet(),
-                        ),
+                        CustomModalInsideBottomSheet(),
 
                         //------------------ SEND CODE INFO ---------------------//
                         context.locale == context.supportedLocales[0]
-                            ? Column(
-                                children: [
-                                  Text(
-                                    '+993 65 ****23',
-                                    style: kts18BoldText,
-                                  ),
-                                  Text(
-                                    LocaleKeys.online_payment_send_code_info,
-                                    style: kts18Text,
-                                  ).tr(),
-                                ],
+                            ? Padding(
+                                padding: EdgeInsets.only(
+                                    top: 12.h, left: 22.w, right: 22.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '+993 65 ****23',
+                                      style: kts18BoldText,
+                                    ),
+                                    Text(
+                                      LocaleKeys.online_payment_send_code_info,
+                                      style: kts16Text,
+                                      textAlign: TextAlign.center,
+                                    ).tr(),
+                                  ],
+                                ),
                               )
-                            : Column(
-                                children: [
-                                  Text(
-                                    LocaleKeys.online_payment_send_code_info,
-                                    style: kts12ContactText,
-                                  ).tr(),
-                                  Text(
-                                    '+993 65 ****23',
-                                    style: kts18BoldText,
-                                  ),
-                                ],
+                            : Padding(
+                                padding: EdgeInsets.only(
+                                    top: 12.h, left: 22.w, right: 22.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.online_payment_send_code_info,
+                                      style: kts16Text,
+                                      textAlign: TextAlign.center,
+                                    ).tr(),
+                                    Text(
+                                      '+993 65 ****23',
+                                      style: kts18BoldText,
+                                    ),
+                                  ],
+                                ),
                               ),
                         // --------------- SEND CODE TEXTFIELD -------------- //
                         Container(

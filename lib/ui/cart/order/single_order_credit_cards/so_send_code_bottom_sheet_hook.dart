@@ -35,19 +35,10 @@ class SOSendCodeBottomSheetHook
                 width: 0.5,
               ),
             ),
+            
             hintText: LocaleKeys.code.tr(),
             hintStyle: ktsDefault18HelperText,
           ),
-          // InputDecoration(
-          //       border: UnderlineInputBorder(
-          //         borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-          //       ),
-          //       focusedBorder: UnderlineInputBorder(
-          //         borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-          //       ),
-          //       hintText: LocaleKeys.code.tr(),
-          //       hintStyle: ktsDefault18HelperText,
-          //     ),
           validator: model.updateSendCodeValidator,
         ),
       ],
