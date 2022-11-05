@@ -582,8 +582,8 @@ class UserService {
     // if (apartment != null) _queryParams['apartment'] = apartment;
     // if (floor != null) _queryParams['floor'] = floor;
     // if (note != null) _queryParams['currency'] = note;
-    _queryParams['userName'] = 'userName';
-    _queryParams['password'] = 'password';
+    _queryParams['userName'] = 'Ver43k764ghwS2H';
+    _queryParams['password'] = '101211004240';
     _queryParams['orderNumber'] = order.orderNumber;
 
     /// AMOUNT part START
@@ -602,6 +602,7 @@ class UserService {
 
     _queryParams['currency'] = 934;
     _queryParams['language'] = 'ru';
+    _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['pageView'] = 'DESKTOP';
     _queryParams['clientId'] = _currentUser!.id;
 
