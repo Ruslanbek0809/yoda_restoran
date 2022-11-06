@@ -24,6 +24,7 @@ class SOSendCodeBottomSheetHook
       children: [
         TextFormField(
           controller: _sendCodeController,
+          textAlign: TextAlign.center,
           style: kts18Text,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
@@ -35,7 +36,6 @@ class SOSendCodeBottomSheetHook
                 width: 0.5,
               ),
             ),
-            
             hintText: LocaleKeys.code.tr(),
             hintStyle: ktsDefault18HelperText,
           ),

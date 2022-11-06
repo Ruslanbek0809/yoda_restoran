@@ -249,34 +249,34 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           creditCardFormKey.currentState!.save();
                           model.log.v('creditCardFormKey SUCCESS');
 
-                          // await model
-                          //     .showCustomSendCodeConfirmationBottomSheet();
-                          await model.onConfirmButtonPressed(
-                            order:
-                                soCreditCardsConfirmationBottomSheetData.order!,
-                            onSuccessForView: () async {
-                              await completer(SheetResponse(data: true));
-                              // await showErrorFlashBar(
-                              //   context: context,
-                              //   msg: LocaleKeys.addAddedSuccessfully,
-                              //   margin: EdgeInsets.only(
-                              //     left: 16.w,
-                              //     right: 16.w,
-                              //     bottom: 0.05.sh,
-                              //   ),
-                              // );
-                            },
-                            onFailForView: () async {
-                              await showErrorFlashBar(
-                                context: context,
-                                margin: EdgeInsets.only(
-                                  left: 16.w,
-                                  right: 16.w,
-                                  bottom: 0.05.sh,
-                                ),
-                              );
-                            },
-                          );
+                          await model
+                              .showCustomSendCodeConfirmationBottomSheet();
+                          // await model.onConfirmButtonPressed(
+                          //   order:
+                          //       soCreditCardsConfirmationBottomSheetData.order!,
+                          //   onSuccessForView: () async {
+                          //     await completer(SheetResponse(data: true));
+                          //     // await showErrorFlashBar(
+                          //     //   context: context,
+                          //     //   msg: LocaleKeys.addAddedSuccessfully,
+                          //     //   margin: EdgeInsets.only(
+                          //     //     left: 16.w,
+                          //     //     right: 16.w,
+                          //     //     bottom: 0.05.sh,
+                          //     //   ),
+                          //     // );
+                          //   },
+                          //   onFailForView: () async {
+                          //     await showErrorFlashBar(
+                          //       context: context,
+                          //       margin: EdgeInsets.only(
+                          //         left: 16.w,
+                          //         right: 16.w,
+                          //         bottom: 0.05.sh,
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                         },
                       ),
                     ),
