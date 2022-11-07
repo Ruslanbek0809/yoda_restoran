@@ -157,7 +157,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   /// POST after CONFIRM button is pressed
   Future<void> onConfirmButtonPressed({
     Order? order,
-    Function()? onSuccessForView,
+    Function(PaymentRegister)? onSuccessForView,
     Function()? onFailForView,
   }) async {
     log.v('onConfirmButtonPressed()');
@@ -173,9 +173,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         _cardHolderName,
         _cvcCode,
         _selectedBankCard,
-        () {
+        (PaymentRegister paymentRegister) {
           _isLoading = false;
-          onSuccessForView!();
+          onSuccessForView!(paymentRegister);
         },
         () {
           _isLoading = false;

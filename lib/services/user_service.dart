@@ -570,7 +570,7 @@ class UserService {
     String cardHolderName,
     String cvcCode,
     BankCard? selectedBankCard,
-    Function() onSuccess,
+    Function(PaymentRegister) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
@@ -655,7 +655,7 @@ class UserService {
         _paymentRegister = PaymentRegister.fromJson(response.data);
 
       if (_paymentRegister != null && _paymentRegister.errorCode == '0')
-        onSuccess();
+        onSuccess(_paymentRegister);
       else
         onFail();
     } on DioError catch (error) {

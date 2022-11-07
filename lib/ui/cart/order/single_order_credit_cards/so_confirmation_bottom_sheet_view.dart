@@ -256,7 +256,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           await model.onConfirmButtonPressed(
                             order:
                                 soCreditCardsConfirmationBottomSheetData.order!,
-                            onSuccessForView: () async {
+                            onSuccessForView: (paymentRegister) async {
                               await showFlexibleBottomSheet(
                                 isExpand: false,
                                 initHeight: 0.95,
@@ -268,6 +268,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     SOPaymentBottomSheetView(
                                   scrollController: scrollController,
                                   offset: offset,
+                                  paymentRegister: paymentRegister,
                                 ),
                               );
                               // await completer(SheetResponse(data: true));
