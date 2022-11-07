@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/hive_models/hive_models.dart';
@@ -648,21 +646,15 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        // '?userName=Ver43k764ghwS2H&password=101211004240&orderNumber=${order.orderNumber}&amount=$_totalOrderSum&returnUrl=https://mpi.gov.tm/payment/finish.html&currency=934&language=ru&pageView=DESKTOP&clientId=${_currentUser!.id}',
-        // queryParameters: _queryParams,
         data: onlinePaymentFormData,
       );
       log.v('RESPONSE: postOnlinePayment => ${response.data}');
 
-      if (response.data != null) {
-        response.data.forEach((_user) {
-          _user['addresses'].forEach((_address) {
-            _addresses.add(Address.fromJson(_address));
-          });
-        });
-      }
-      if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201))
+      PaymentRegister? _paymentRegister;
+      if (response.data != null)
+        _paymentRegister = PaymentRegister.fromJson(response.data);
+
+      if (_paymentRegister != null && _paymentRegister.errorCode == '0')
         onSuccess();
       else
         onFail();
