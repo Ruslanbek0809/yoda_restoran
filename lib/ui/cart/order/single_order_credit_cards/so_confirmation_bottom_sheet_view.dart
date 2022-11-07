@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:stacked/stacked.dart';
@@ -255,6 +256,20 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             order:
                                 soCreditCardsConfirmationBottomSheetData.order!,
                             onSuccessForView: () async {
+                              await showFlexibleBottomSheet(
+                                isExpand: false,
+                                initHeight: 0.95,
+                                maxHeight: 0.95,
+                                duration: Duration(milliseconds: 250),
+                                context: context,
+                                bottomSheetColor: Colors.transparent,
+                                builder: (context, scrollController, offset) =>
+                                    SOSelectCreditCardsBottomSheetView(
+                                  scrollController: scrollController,
+                                  offset: offset,
+                                  order: order,
+                                ),
+                              );
                               // await completer(SheetResponse(data: true));
                               // await showErrorFlashBar(
                               //   context: context,
