@@ -6,6 +6,7 @@ part 'payment_register.g.dart';
 class PaymentRegister {
   PaymentRegister({
     this.errorCode,
+    this.errorMessage,
     this.orderId,
     this.formUrl,
   });
@@ -18,6 +19,9 @@ class PaymentRegister {
 
   @JsonKey(name: 'formUrl')
   final String? formUrl;
+
+  @JsonKey(name: 'errorMessage')
+  final String? errorMessage;
 
   factory PaymentRegister.fromJson(Map<String, dynamic> json) =>
       _$PaymentRegisterFromJson(json);

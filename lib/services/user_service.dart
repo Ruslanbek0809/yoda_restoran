@@ -650,14 +650,23 @@ class UserService {
       );
       log.v('RESPONSE: postOnlinePayment => ${response.data}');
 
-      PaymentRegister? _paymentRegister;
-      if (response.data != null)
-        _paymentRegister = PaymentRegister.fromJson(response.data);
+      // if (response.data != null)
+      log.v('RESPONSE: postOnlinePayment => ${response.data['errorCode']}');
 
-      if (_paymentRegister != null && _paymentRegister.errorCode == '0')
-        onSuccess(_paymentRegister);
-      else
-        onFail();
+      PaymentRegister? _paymentRegister;
+      // if (response.data != null) {
+      _paymentRegister = PaymentRegister.fromJson(response.data);
+      log.v(
+          'RESPONSE: _paymentRegister NOT NULL => ${_paymentRegister.errorCode == '0'}');
+      // }
+
+      // if (_paymentRegister != null)
+      //   log.v(
+      //       'RESPONSE: _paymentRegister => ${_paymentRegister.errorCode ?? 400}');
+      // if (_paymentRegister != null && _paymentRegister.errorCode == '0')
+      //   onSuccess(_paymentRegister);
+
+      onFail();
     } on DioError catch (error) {
       log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();
