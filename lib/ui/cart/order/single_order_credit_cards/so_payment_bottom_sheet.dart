@@ -96,8 +96,8 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
                 children: [
                   InAppWebView(
                     key: webViewKey,
-                    initialUrlRequest: URLRequest(
-                        url: Uri.parse(widget.paymentRegister.formUrl!)),
+                    // initialUrlRequest: URLRequest(
+                    //     url: Uri.parse(widget.paymentRegister.formUrl!)),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {
