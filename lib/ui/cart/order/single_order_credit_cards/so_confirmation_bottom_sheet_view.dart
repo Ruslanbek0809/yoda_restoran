@@ -255,7 +255,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             order:
                                 soCreditCardsConfirmationBottomSheetData.order!,
                             onSuccessForView: () async {
-                              await completer(SheetResponse(data: true));
+                              // await completer(SheetResponse(data: true));
                               // await showErrorFlashBar(
                               //   context: context,
                               //   msg: LocaleKeys.addAddedSuccessfully,

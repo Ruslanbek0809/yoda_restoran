@@ -582,8 +582,8 @@ class UserService {
     // if (apartment != null) _queryParams['apartment'] = apartment;
     // if (floor != null) _queryParams['floor'] = floor;
     // if (note != null) _queryParams['currency'] = note;
-    _queryParams['userName'] = 'Ver43k764ghwS2H';
-    _queryParams['password'] = '101211004240';
+    _queryParams['userName'] = '101211004240';
+    _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['orderNumber'] = order.orderNumber;
 
     /// AMOUNT part START
@@ -596,7 +596,8 @@ class UserService {
             (order.totPrice! / 100) * order.promocode!.discount!;
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
-    _queryParams['amount'] = _totalOrderSum;
+    _queryParams['amount'] = 123;
+    // _queryParams['amount'] = _totalOrderSum;
 
     /// AMOUNT part END
 
@@ -612,20 +613,17 @@ class UserService {
     try {
       //----------- DIO PART START -------------//
       Dio dio = Dio();
-      // Map<String, dynamic> _headers = {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      // };
 
+      //----------- DIO BASE URL -------------//
       dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
-      // dio.options.headers = _headers;
 
+      //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
             log.v(
-                'REQUEST[${options.method}] => PATH: ${options.baseUrl}?${options.queryParameters} OR ${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
