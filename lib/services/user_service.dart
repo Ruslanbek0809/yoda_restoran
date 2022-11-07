@@ -654,6 +654,13 @@ class UserService {
       );
       log.v('RESPONSE: postOnlinePayment => ${response.data}');
 
+      if (response.data != null) {
+        response.data.forEach((_user) {
+          _user['addresses'].forEach((_address) {
+            _addresses.add(Address.fromJson(_address));
+          });
+        });
+      }
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
         onSuccess();
