@@ -11,6 +11,7 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
+import 'so_payment_bottom_sheet.dart';
 
 class SOConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
@@ -264,10 +265,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 context: context,
                                 bottomSheetColor: Colors.transparent,
                                 builder: (context, scrollController, offset) =>
-                                    SOSelectCreditCardsBottomSheetView(
+                                    SOPaymentBottomSheetView(
                                   scrollController: scrollController,
                                   offset: offset,
-                                  order: order,
                                 ),
                               );
                               // await completer(SheetResponse(data: true));
