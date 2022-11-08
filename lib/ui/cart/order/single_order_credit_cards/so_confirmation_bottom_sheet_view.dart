@@ -251,14 +251,8 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           creditCardFormKey.currentState!.save();
                           model.log.v('creditCardFormKey SUCCESS');
 
-                          // await model
-                          //     .showCustomSendCodeConfirmationBottomSheet();
-                          await model.onConfirmButtonPressed(
-                            order:
-                                soCreditCardsConfirmationBottomSheetData.order!,
-                            onSuccessForView: (paymentRegister) async {
                               await showFlexibleBottomSheet(
-                                isExpand: false,
+                                // isExpand: false,
                                 initHeight: 0.95,
                                 maxHeight: 0.95,
                                 duration: Duration(milliseconds: 250),
@@ -268,31 +262,51 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     SOPaymentBottomSheetView(
                                   scrollController: scrollController,
                                   offset: offset,
-                                  paymentRegister: paymentRegister,
+                                  // paymentRegister: paymentRegister,
                                 ),
                               );
-                              // await completer(SheetResponse(data: true));
-                              // await showErrorFlashBar(
-                              //   context: context,
-                              //   msg: LocaleKeys.addAddedSuccessfully,
-                              //   margin: EdgeInsets.only(
-                              //     left: 16.w,
-                              //     right: 16.w,
-                              //     bottom: 0.05.sh,
-                              //   ),
-                              // );
-                            },
-                            onFailForView: () async {
-                              await showErrorFlashBar(
-                                context: context,
-                                margin: EdgeInsets.only(
-                                  left: 16.w,
-                                  right: 16.w,
-                                  bottom: 0.05.sh,
-                                ),
-                              );
-                            },
-                          );
+                          // await model
+                          //     .showCustomSendCodeConfirmationBottomSheet();
+                          // await model.onConfirmButtonPressed(
+                          //   order:
+                          //       soCreditCardsConfirmationBottomSheetData.order!,
+                          //   onSuccessForView: (paymentRegister) async {
+                          //     await showFlexibleBottomSheet(
+                          //       isExpand: false,
+                          //       initHeight: 0.95,
+                          //       maxHeight: 0.95,
+                          //       duration: Duration(milliseconds: 250),
+                          //       context: context,
+                          //       bottomSheetColor: Colors.transparent,
+                          //       builder: (context, scrollController, offset) =>
+                          //           SOPaymentBottomSheetView(
+                          //         scrollController: scrollController,
+                          //         offset: offset,
+                          //         paymentRegister: paymentRegister,
+                          //       ),
+                          //     );
+                          //     // await completer(SheetResponse(data: true));
+                          //     // await showErrorFlashBar(
+                          //     //   context: context,
+                          //     //   msg: LocaleKeys.addAddedSuccessfully,
+                          //     //   margin: EdgeInsets.only(
+                          //     //     left: 16.w,
+                          //     //     right: 16.w,
+                          //     //     bottom: 0.05.sh,
+                          //     //   ),
+                          //     // );
+                          //   },
+                          //   onFailForView: () async {
+                          //     await showErrorFlashBar(
+                          //       context: context,
+                          //       margin: EdgeInsets.only(
+                          //         left: 16.w,
+                          //         right: 16.w,
+                          //         bottom: 0.05.sh,
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                         },
                       ),
                     ),

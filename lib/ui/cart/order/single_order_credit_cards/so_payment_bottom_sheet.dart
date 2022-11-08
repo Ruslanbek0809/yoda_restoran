@@ -13,12 +13,12 @@ import 'so_credit_cards_view_model.dart';
 class SOPaymentBottomSheetView extends StatefulWidget {
   final ScrollController scrollController;
   final double offset;
-  final PaymentRegister paymentRegister;
+  // final PaymentRegister paymentRegister;
   const SOPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
-    required this.paymentRegister,
+    // required this.paymentRegister,
   }) : super(key: key);
 
   @override
@@ -46,7 +46,8 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
 
   late PullToRefreshController pullToRefreshController;
 
-  String url = "";
+  String url =
+      "https://mpi.gov.tm/payment/merchants/online/payment_ru.html?mdOrder=c0f2f5e7-35ad-4f61-9fc7-59d880ef93f0";
 
   double progress = 0;
 
@@ -82,66 +83,73 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
             top: Radius.circular(Constants.BORDER_RADIUS_20),
           ),
         ),
-        child: ListView(
-          controller: widget.scrollController,
-          shrinkWrap: true,
+        child: Column(
+          // controller: widget.scrollController,
+          // shrinkWrap: true,
           children: [
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 
             // --------------- CREDIT CARD CONFIRMATION -------------- //
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Stack(
-                children: [
-                  InAppWebView(
-                    key: webViewKey,
-                    // initialUrlRequest: URLRequest(
-                    //     url: Uri.parse(widget.paymentRegister.formUrl!)),
-                    initialOptions: options,
-                    pullToRefreshController: pullToRefreshController,
-                    onWebViewCreated: (controller) {
-                      webViewController = controller;
-                    },
-                    onLoadStart: (controller, url) {
-                      setState(() {
-                        this.url = url.toString();
-                        urlController.text = this.url;
-                      });
-                    },
-                    androidOnPermissionRequest:
-                        (controller, origin, resources) async {
-                      return PermissionRequestResponse(
-                          resources: resources,
-                          action: PermissionRequestResponseAction.GRANT);
-                    },
-                    onProgressChanged: (controller, progress) {
-                      if (progress == 100) {
-                        pullToRefreshController.endRefreshing();
-                      }
-                      setState(() {
-                        this.progress = progress / 100;
-                        urlController.text = this.url;
-                      });
-                    },
-                    onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                      setState(() {
-                        this.url = url.toString();
-                        urlController.text = this.url;
-                      });
-                    },
-                    onConsoleMessage: (controller, consoleMessage) {
-                      print(consoleMessage);
-                    },
-                  ),
-                  progress < 1.0
-                      ? LinearProgressIndicator(
-                          value: progress,
-                          backgroundColor: kcPrimaryColor.withOpacity(0.3),
-                          color: kcPrimaryColor,
-                        )
-                      : SizedBox(),
-                ],
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Stack(
+                  children: [
+                    InAppWebView(
+                      key: webViewKey,
+                      initialUrlRequest: URLRequest(
+                        url: Uri.parse(
+                            "https://mpi.gov.tm/payment/merchants/online/payment_ru.html?mdOrder=c0f2f5e7-35ad-4f61-9fc7-59d880ef93f0"
+                            // widget.paymentRegister.formUrl!
+                            ),
+                      ),
+                      initialOptions: options,
+                      pullToRefreshController: pullToRefreshController,
+                      onWebViewCreated: (controller) {
+                        webViewController = controller;
+                      },
+                      onLoadStart: (controller, url) {
+                        setState(() {
+                          this.url = url.toString();
+                          urlController.text = this.url;
+                        });
+                      },
+                      androidOnPermissionRequest:
+                          (controller, origin, resources) async {
+                        return PermissionRequestResponse(
+                            resources: resources,
+                            action: PermissionRequestResponseAction.GRANT);
+                      },
+                      onProgressChanged: (controller, progress) {
+                        if (progress == 100) {
+                          pullToRefreshController.endRefreshing();
+                        }
+                        setState(() {
+                          this.progress = progress / 100;
+                          urlController.text = this.url;
+                        });
+                      },
+                      onUpdateVisitedHistory:
+                          (controller, url, androidIsReload) {
+                        setState(() {
+                          this.url = url.toString();
+                          urlController.text = this.url;
+                        });
+                      },
+                      onConsoleMessage: (controller, consoleMessage) {
+                        print(consoleMessage);
+                      },
+                    ),
+                    progress < 1.0
+                        ? LinearProgressIndicator(
+                            value: progress,
+                            backgroundColor: kcPrimaryColor.withOpacity(0.3),
+                            color: kcPrimaryColor,
+                          )
+                        : SizedBox(),
+                  ],
+                ),
               ),
             ),
 
