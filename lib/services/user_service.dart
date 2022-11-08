@@ -646,33 +646,27 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        // queryParameters: _queryParams,
         data: onlinePaymentFormData,
       );
-      if (response.data != null)
-        // log.v(
-        //     'RESPONSE: postOnlinePayment => ${response.data["errorMessage"]}');
-        log.v('RESPONSE: postOnlinePayment => ${response.data}');
-      final _decodedResponse = jsonDecode(response.data);
-      log.v('RESPONSE: _decodedResponse => ${_decodedResponse.toString()}');
-      log.v(
-          'RESPONSE: _decodedResponse errorCode => ${_decodedResponse["errorCode"]}');
-
-      PaymentRegister? _paymentRegister;
       if (response.data != null) {
+        log.v('RESPONSE: postOnlinePayment => ${response.data}');
+
+        /// PARSES the string and returns the resulting Json object
+        final _decodedResponse = jsonDecode(response.data);
+
+        /// CONVERTS JSON into DART MODEL
+        PaymentRegister? _paymentRegister;
         _paymentRegister = PaymentRegister.fromJson(_decodedResponse);
-        log.v('RESPONSE: _paymentRegister NOT NULL => $_paymentRegister');
+
         log.v(
             'RESPONSE: _paymentRegister NOT NULL => ${_paymentRegister.errorCode == '0'}');
+        if (_paymentRegister.errorCode == '0')
+          onSuccess(_paymentRegister);
+        else
+          onFail();
       }
 
-      if (_paymentRegister != null)
-        log.v(
-            'RESPONSE: _paymentRegister => ${_paymentRegister.errorCode ?? 400}');
-      // if (_paymentRegister != null && _paymentRegister.errorCode == '0')
-      //   onSuccess(_paymentRegister);
-
-      // onFail();
+      onFail();
     } on DioError catch (error) {
       log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();
