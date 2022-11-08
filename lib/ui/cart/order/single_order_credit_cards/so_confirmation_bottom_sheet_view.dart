@@ -258,7 +258,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 soCreditCardsConfirmationBottomSheetData.order!,
                             onSuccessForView: (paymentRegister) async {
                               await showFlexibleBottomSheet(
-                                // isExpand: false,
                                 initHeight: 0.95,
                                 maxHeight: 0.95,
                                 duration: Duration(milliseconds: 250),
