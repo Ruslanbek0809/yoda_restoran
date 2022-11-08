@@ -96,8 +96,10 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   void updateSelectedBankCard(BankCard? newSelectedBankCard) {
     log.i('updateSelectedBankCard(): ${newSelectedBankCard!.bankName}');
 
-    _selectedBankCard = newSelectedBankCard;
-    notifyListeners();
+    if (_selectedBankCard!.bankId != newSelectedBankCard.bankId) {
+      _selectedBankCard = newSelectedBankCard;
+      notifyListeners();
+    }
   }
 
 //------------------------ NAVIGATION ----------------------------//

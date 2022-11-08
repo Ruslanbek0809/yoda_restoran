@@ -69,6 +69,10 @@ final List<String> drawerLoggedInList = [
 /// BANK list
 final List<BankCard> bankList = [
   BankCard(
+    bankId: 1,
+    bankName: LocaleKeys.halk_bank_and_others,
+  ),
+  BankCard(
     bankId: 2,
     bankName: LocaleKeys.rysgal_bank,
   ),
@@ -79,10 +83,6 @@ final List<BankCard> bankList = [
   BankCard(
     bankId: 4,
     bankName: LocaleKeys.dyi_bank,
-  ),
-  BankCard(
-    bankId: 1,
-    bankName: LocaleKeys.halk_bank_and_others,
   ),
 ];
 

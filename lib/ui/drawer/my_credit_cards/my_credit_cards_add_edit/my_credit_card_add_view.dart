@@ -106,11 +106,16 @@ class MyCreditCardAddView extends StatelessWidget {
                   return RadioListTile<BankCard>(
                     value: bankList[pos],
                     groupValue: model.selectedBankCard,
-                    onChanged: model.updateSelectedBankCard,
+                    onChanged: bankList[pos].bankId == 1
+                        ? model.updateSelectedBankCard
+                        : (value) {},
                     title: Text(
                       bankList[pos]
                           .bankName, // Changes name of first element if location is enabled
-                      style: kts16Text,
+                      style:
+                          model.selectedBankCard!.bankId == bankList[pos].bankId
+                              ? kts16Text
+                              : kts16ContactText,
                     ).tr(),
                     activeColor: kcGreenColor,
                     controlAffinity: ListTileControlAffinity.leading,
