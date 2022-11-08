@@ -40,6 +40,7 @@ abstract class  LocaleKeys {
   static const orders = 'orders';
   static const addresses = 'addresses';
   static const about_us = 'about_us';
+  static const about_us_terms_of_use = 'about_us_terms_of_use';
   static const contact_us = 'contact_us';
   static const lang_en = 'lang_en';
   static const lang_ru = 'lang_ru';

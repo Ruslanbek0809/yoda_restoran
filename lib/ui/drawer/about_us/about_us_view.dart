@@ -42,44 +42,61 @@ class AboutUsView extends StatelessWidget {
             ).tr(),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 25.h),
+            padding: EdgeInsets.symmetric(vertical: 25.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  LocaleKeys.aboutUsHello,
-                  style: kts18Text,
-                ).tr(),
                 Padding(
-                  padding: EdgeInsets.only(top: 15.h),
+                  padding: EdgeInsets.only(left: 24.w),
+                  child: Text(
+                    LocaleKeys.aboutUsHello,
+                    style: kts18Text,
+                  ).tr(),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 15.h),
                   child: Text(
                     LocaleKeys.aboutUsContent,
                     style: kts18Text,
                   ).tr(),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 15.h),
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 15.h),
                   child: Text(
                     LocaleKeys.aboutUsBonApetite,
                     style: kts18Text,
                   ).tr(),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 24.h),
+                  padding: EdgeInsets.only(left: 24.w, top: 24.h),
                   child: Divider(color: kcDividerColor),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.h),
+                  padding: EdgeInsets.only(
+                    left: 24.w,
+                    top: 10.h,
+                    bottom: 10.h,
+                    right: 16.w,
+                  ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '+99364 687171',
+                        LocaleKeys.about_us_terms_of_use,
                         style: kts16IconBoldText,
+                      ).tr(),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 20.sp,
+                        color: kcIconColor,
                       ),
                     ],
                   ),
                 ),
-                Divider(color: kcDividerColor),
+                Padding(
+                  padding: EdgeInsets.only(left: 24.w),
+                  child: Divider(color: kcDividerColor),
+                ),
               ],
             ),
           ),
