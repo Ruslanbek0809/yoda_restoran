@@ -646,21 +646,21 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        queryParameters: _queryParams,
-        // data: onlinePaymentFormData,
+        // queryParameters: _queryParams,
+        data: onlinePaymentFormData,
       );
-      if (response.data != null) {
+      if (response.data != null)
         // log.v(
         //     'RESPONSE: postOnlinePayment => ${response.data["errorMessage"]}');
         log.v('RESPONSE: postOnlinePayment => ${response.data}');
-      }
-
-      // // if (response.data != null)
-      // log.v('RESPONSE: postOnlinePayment => ${response.data['errorCode']}');
+      final _decodedResponse = jsonDecode(response.data);
+      log.v('RESPONSE: _decodedResponse => ${_decodedResponse.toString()}');
+      log.v(
+          'RESPONSE: _decodedResponse errorCode => ${_decodedResponse["errorCode"]}');
 
       PaymentRegister? _paymentRegister;
       if (response.data != null) {
-        _paymentRegister = PaymentRegister.fromJson(response.data);
+        _paymentRegister = PaymentRegister.fromJson(_decodedResponse);
         log.v('RESPONSE: _paymentRegister NOT NULL => $_paymentRegister');
         log.v(
             'RESPONSE: _paymentRegister NOT NULL => ${_paymentRegister.errorCode == '0'}');
