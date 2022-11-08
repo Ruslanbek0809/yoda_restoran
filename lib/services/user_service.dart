@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../app/app.locator.dart';
@@ -582,7 +583,8 @@ class UserService {
     // if (note != null) _queryParams['currency'] = note;
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['orderNumber'] = order.orderNumber;
+    _queryParams['orderNumber'] = 'Ver43k764ghwS2HH';
+    // _queryParams['orderNumber'] = order.orderNumber;
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -658,15 +660,30 @@ class UserService {
         PaymentRegister? _paymentRegister;
         _paymentRegister = PaymentRegister.fromJson(_decodedResponse);
 
-        log.v(
-            'RESPONSE: _paymentRegister NOT NULL => ${_paymentRegister.errorCode == '0'}');
+        if (_paymentRegister.orderId != null)
+          log.v(
+              'RESPONSE: _paymentRegister.orderId NOT NULL => ${_paymentRegister.orderId}');
+
+        if (_paymentRegister.formUrl != null)
+          log.v(
+              'RESPONSE: _paymentRegister.formUrl NOT NULL => ${_paymentRegister.formUrl}');
+
+        if (_paymentRegister.errorCode != null)
+          log.v(
+              'RESPONSE: _paymentRegister.errorCode  NOT NULL SUCCESS => ${_paymentRegister.errorCode == '0'}');
+
+        if (_paymentRegister.errorMessage != null)
+          log.v(
+              'RESPONSE: _paymentRegister.errorMessage NOT NULL => ${_paymentRegister.errorMessage}');
+
+        /// if SUCCESS
         if (_paymentRegister.errorCode == '0')
           onSuccess(_paymentRegister);
+
+        /// if FAIL
         else
           onFail();
       }
-
-      onFail();
     } on DioError catch (error) {
       log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();

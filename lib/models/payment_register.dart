@@ -7,8 +7,8 @@ class PaymentRegister {
   PaymentRegister({
     this.errorCode,
     this.errorMessage,
-    // this.orderId,
-    // this.formUrl,
+    this.orderId,
+    this.formUrl,
   });
 
   @JsonKey(name: 'errorCode')
@@ -17,11 +17,11 @@ class PaymentRegister {
   @JsonKey(name: 'errorMessage')
   final String? errorMessage;
 
-  // @JsonKey(name: 'orderId')
-  // final String? orderId;
+  @JsonKey(name: 'orderId')
+  final String? orderId;
 
-  // @JsonKey(name: 'formUrl')
-  // final String? formUrl;
+  @JsonKey(name: 'formUrl')
+  final String? formUrl;
 
   factory PaymentRegister.fromJson(Map<String, dynamic> json) =>
       _$PaymentRegisterFromJson(json);
