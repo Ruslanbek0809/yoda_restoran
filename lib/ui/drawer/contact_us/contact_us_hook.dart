@@ -194,21 +194,51 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
               ),
               SizedBox(height: 0.35.sw),
               Text(
-                LocaleKeys.our_phone,
-                style: TextStyle(
-                  color: kcContactColor,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                LocaleKeys.our_phone_title,
+                style: kts16DialogBoldText,
               ).tr(),
-              SizedBox(height: 2.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_client_title,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_client,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_cooperation_title,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_cooperation,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                LocaleKeys.our_address_title,
+                style: kts16DialogBoldText,
+              ).tr(),
               Text(
                 LocaleKeys.our_address,
-                style: TextStyle(
-                  color: kcContactColor,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: kts16DialogText,
               ).tr(),
               SizedBox(height: 2.h),
             ],
