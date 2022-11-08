@@ -150,6 +150,12 @@ TextStyle kts16ContactBlueBoldText = TextStyle(
   color: kcBlueColor,
 );
 
+TextStyle kts16IconBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcIconColor,
+);
+
 TextStyle kts18Text = TextStyle(
   fontSize: 18.sp,
   color: kcFontColor,

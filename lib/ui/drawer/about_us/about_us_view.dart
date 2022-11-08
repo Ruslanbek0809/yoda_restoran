@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
-import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -65,25 +64,22 @@ class AboutUsView extends StatelessWidget {
                     style: kts18Text,
                   ).tr(),
                 ),
-                Spacer(),
-                Divider(color: kcDividerColor),
                 Padding(
-                  padding: EdgeInsets.only(top: 7.h, bottom: 20.h),
+                  padding: EdgeInsets.only(top: 24.h),
+                  child: Divider(color: kcDividerColor),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Row(
                     children: [
-                      SvgPicture.asset(
-                        'assets/phone.svg',
-                        color: kcContactColor,
-                        width: 25.w,
-                      ),
-                      SizedBox(width: 5.w),
                       Text(
                         '+99364 687171',
-                        style: kts16ContactText,
+                        style: kts16IconBoldText,
                       ),
                     ],
                   ),
                 ),
+                Divider(color: kcDividerColor),
               ],
             ),
           ),
