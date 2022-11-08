@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -206,10 +207,23 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       style: kts16DialogText,
                     ).tr(),
                   ),
-                  Text(
-                    LocaleKeys.our_phone_for_client,
-                    style: kts16ContactBlueBoldText,
-                  ).tr(),
+                  GestureDetector(
+                    onTap: () async {
+                      // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+                      // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+                      // such as spaces in the input, which would cause `launch` to fail on some
+                      // platforms.
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: LocaleKeys.our_phone_for_client.tr(),
+                      );
+                      await launchUrl(launchUri);
+                    },
+                    child: Text(
+                      LocaleKeys.our_phone_for_client,
+                      style: kts16ContactBlueBoldText,
+                    ).tr(),
+                  ),
                 ],
               ),
               Row(
@@ -221,10 +235,23 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       style: kts16DialogText,
                     ).tr(),
                   ),
-                  Text(
-                    LocaleKeys.our_phone_for_cooperation,
-                    style: kts16ContactBlueBoldText,
-                  ).tr(),
+                  GestureDetector(
+                    onTap: () async {
+                      // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+                      // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+                      // such as spaces in the input, which would cause `launch` to fail on some
+                      // platforms.
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: LocaleKeys.our_phone_for_cooperation.tr(),
+                      );
+                      await launchUrl(launchUri);
+                    },
+                    child: Text(
+                      LocaleKeys.our_phone_for_cooperation,
+                      style: kts16ContactBlueBoldText,
+                    ).tr(),
+                  ),
                 ],
               ),
               SizedBox(height: 24.h),
