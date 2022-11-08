@@ -28,7 +28,12 @@ abstract class  LocaleKeys {
   static const text = 'text';
   static const enter_text = 'enter_text';
   static const send = 'send';
-  static const our_phone = 'our_phone';
+  static const our_phone_title = 'our_phone_title';
+  static const our_phone_for_client_title = 'our_phone_for_client_title';
+  static const our_phone_for_client = 'our_phone_for_client';
+  static const our_phone_for_cooperation_title = 'our_phone_for_cooperation_title';
+  static const our_phone_for_cooperation = 'our_phone_for_cooperation';
+  static const our_address_title = 'our_address_title';
   static const our_address = 'our_address';
   static const register = 'register';
   static const profile = 'profile';
