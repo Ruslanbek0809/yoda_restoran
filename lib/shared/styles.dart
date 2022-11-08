@@ -141,7 +141,7 @@ TextStyle kts16DarkText = TextStyle(
   color: kcSecondaryDarkColor,
 );
 
-TextStyle kts16DarkSemiBoldText = TextStyle(
+TextStyle kts16DarkBoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
@@ -176,18 +176,6 @@ TextStyle kts18NotificationText = TextStyle(
   color: kcGreenColor,
 );
 
-TextStyle ktsDefault18SemiBoldText = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
-  color: kcFontColor,
-);
-
-TextStyle ktsDefault18BoldText = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
-  color: kcFontColor,
-);
-
 TextStyle kts18DarkText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
@@ -210,7 +198,7 @@ TextStyle kts20Text = TextStyle(
   color: kcFontColor,
 );
 
-TextStyle ktsDefault20BoldText = TextStyle(
+TextStyle kts20BoldText = TextStyle(
   fontSize: 20.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,

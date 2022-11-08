@@ -117,7 +117,7 @@ class SingleOrderView extends StatelessWidget {
                         Text(
                           order.restaurant!.name!,
                           overflow: TextOverflow.ellipsis,
-                          style: ktsDefault18SemiBoldText,
+                          style: kts18BoldText,
                         ),
                         SizedBox(height: 3.h),
                         //------------------ ORDER CREATED AT DATE and ORDER STATUS ---------------------//
@@ -155,7 +155,7 @@ class SingleOrderView extends StatelessWidget {
                     children: [
                       Text(
                         '${order.promocode != null ? formatNum(model.getTotalOrderSumWithPromocode()) : formatNum(order.dostawkaPrice != null ? (order.totPrice! + order.dostawkaPrice!) : order.totPrice!)} TMT',
-                        style: ktsDefault18SemiBoldText,
+                        style: kts18BoldText,
                       ),
                       SizedBox(height: 2.h),
 
@@ -528,7 +528,7 @@ class SingleOrderView extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Text(
                           '${formatNum(order.totPrice!)} TMT',
-                          style: ktsDefault18SemiBoldText,
+                          style: kts18BoldText,
                         ),
                       ),
                     ),

@@ -87,7 +87,7 @@ class DrawerView extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: kts16DarkSemiBoldText,
+            style: kts16DarkBoldText,
           ).tr(),
           onTap: onTap,
         ),
@@ -163,7 +163,7 @@ class DrawerView extends StatelessWidget {
                         ? LocaleKeys.lang_en
                         : LocaleKeys.lang_ru,
                     // context.locale.toString(),
-                    style: kts16DarkSemiBoldText,
+                    style: kts16DarkBoldText,
                   ).tr(),
                   children: <Widget>[
                     CustomTextChildButton(

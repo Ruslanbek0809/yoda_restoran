@@ -96,7 +96,7 @@ class MealDialogView extends StatelessWidget {
     return ViewModelBuilder<MealViewModel>.reactive(
       builder: (context, model, child) => (Platform.isIOS)
           ? CupertinoAlertDialog(
-              title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+              title: Text(request.title!, style: kts18BoldText).tr(),
               content: Text(
                 request.description!,
                 style: ktsDefault14DialogText,
@@ -105,7 +105,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
-                    style: ktsDefault18SemiBoldText,
+                    style: kts18BoldText,
                   ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
@@ -135,7 +135,7 @@ class MealDialogView extends StatelessWidget {
                 request.title!,
                 textAlign: TextAlign.center,
               ).tr(),
-              titleTextStyle: ktsDefault18BoldText,
+              titleTextStyle: kts18BoldText,
               content: Text(
                 request.description!,
                 textAlign: TextAlign.center,
@@ -145,7 +145,7 @@ class MealDialogView extends StatelessWidget {
                 CustomTextChildButton(
                   child: Text(
                     request.secondaryButtonTitle!,
-                    style: ktsDefault18SemiBoldText,
+                    style: kts18BoldText,
                   ).tr(),
                   color: Colors.transparent,
                   onPressed: () async {
@@ -193,7 +193,7 @@ class ClearCartDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+                title: Text(request.title!, style: kts18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -228,7 +228,7 @@ class ClearCartDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault18BoldText,
+                titleTextStyle: kts18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -278,7 +278,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+                title: Text(request.title!, style: kts18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -316,7 +316,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
                   request.title!,
                   textAlign: TextAlign.center,
                 ).tr(),
-                titleTextStyle: ktsDefault18BoldText,
+                titleTextStyle: kts18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -365,7 +365,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
-            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            title: Text(request.title!, style: kts18BoldText).tr(),
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -379,7 +379,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
               CustomTextChildButton(
                 child: Text(
                   request.mainButtonTitle!,
-                  style: ktsDefault18SemiBoldText,
+                  style: kts18BoldText,
                 ).tr(),
                 color: Colors.transparent,
                 onPressed: () async =>
@@ -396,7 +396,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
               request.title!,
               textAlign: TextAlign.center,
             ).tr(),
-            titleTextStyle: ktsDefault18BoldText,
+            titleTextStyle: kts18BoldText,
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -411,7 +411,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
               CustomTextChildButton(
                 child: Text(
                   request.mainButtonTitle!,
-                  style: ktsDefault18SemiBoldText,
+                  style: kts18BoldText,
                 ).tr(),
                 color: Colors.transparent,
                 onPressed: () async =>
@@ -437,7 +437,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
-            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            title: Text(request.title!, style: kts18BoldText).tr(),
             content: Text(content, style: kts18Text).tr(),
           )
         : AlertDialog(
@@ -449,7 +449,7 @@ class CancelAcceptedOrderDialogView extends StatelessWidget {
               request.title!,
               textAlign: TextAlign.center,
             ).tr(),
-            titleTextStyle: ktsDefault18BoldText,
+            titleTextStyle: kts18BoldText,
             content: Text(
               content,
               textAlign: TextAlign.center,
@@ -558,7 +558,7 @@ class RemoveAddressDialogView extends StatelessWidget {
       builder: (context, model, child) {
         return (Platform.isIOS)
             ? CupertinoAlertDialog(
-                title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+                title: Text(request.title!, style: kts18BoldText).tr(),
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -628,7 +628,7 @@ class RemoveAddressDialogView extends StatelessWidget {
                       ),
                   ],
                 ),
-                titleTextStyle: ktsDefault18BoldText,
+                titleTextStyle: kts18BoldText,
                 actions: <Widget>[
                   CustomTextChildButton(
                     child: Text(
@@ -961,7 +961,7 @@ class OrderDeleteDialogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
-            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            title: Text(request.title!, style: kts18BoldText).tr(),
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -992,7 +992,7 @@ class OrderDeleteDialogView extends StatelessWidget {
               request.title!,
               textAlign: TextAlign.center,
             ).tr(),
-            titleTextStyle: ktsDefault18BoldText,
+            titleTextStyle: kts18BoldText,
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -1032,7 +1032,7 @@ class CreditCardDeleteDialogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
-            title: Text(request.title!, style: ktsDefault18BoldText).tr(),
+            title: Text(request.title!, style: kts18BoldText).tr(),
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -1063,7 +1063,7 @@ class CreditCardDeleteDialogView extends StatelessWidget {
               request.title!,
               textAlign: TextAlign.center,
             ).tr(),
-            titleTextStyle: ktsDefault18BoldText,
+            titleTextStyle: kts18BoldText,
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(

@@ -279,7 +279,7 @@ class MealBottomSheetView extends StatelessWidget {
                                   padding: EdgeInsets.only(left: 5.w),
                                   child: Text(
                                     '${formatNum(model.totalSumDraft)} TMT',
-                                    style: kts16DarkSemiBoldText,
+                                    style: kts16DarkBoldText,
                                   ),
                                 ),
                               ],
@@ -482,7 +482,7 @@ class MealBottomSheetView extends StatelessWidget {
                                   padding: EdgeInsets.only(left: 5.w),
                                   child: Text(
                                     '${formatNum(model.totalSumDraft)} TMT',
-                                    style: kts16DarkSemiBoldText,
+                                    style: kts16DarkBoldText,
                                   ),
                                 ),
                               ],

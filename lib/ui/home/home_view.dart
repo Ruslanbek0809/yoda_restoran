@@ -1,12 +1,9 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:awesome_dialog/awesome_dialog.dart' as awesomeDialog;
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:shake/shake.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../generated/locale_keys.g.dart';
@@ -500,8 +497,7 @@ class _HomeViewState extends State<HomeView> {
                                                           .foundRestaurants,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      style:
-                                                          ktsDefault18BoldText,
+                                                      style: kts18BoldText,
                                                     ).tr(args: [
                                                       model
                                                           .selectedMainCatRestaurants

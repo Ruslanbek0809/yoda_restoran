@@ -41,7 +41,7 @@ class OrderSuccessView extends StatelessWidget {
                 child: Text(
                   LocaleKeys.yourOrderWasPassedToRes,
                   textAlign: TextAlign.center,
-                  style: ktsDefault20BoldText,
+                  style: kts20BoldText,
                 ).tr(),
               ),
               // SizedBox(height: 10.h),

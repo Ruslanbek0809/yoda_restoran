@@ -59,7 +59,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         model.currentUser!.mobile != null
                             ? model.currentUser!.mobile!
                             : '+993 65555555',
-                        style: ktsDefault18BoldText,
+                        style: kts18BoldText,
                       ),
                     ],
                   ),
@@ -186,7 +186,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               ? LocaleType.tk
                               : LocaleType.ru,
                           theme: DatePickerTheme(
-                            doneStyle: ktsDefault20BoldText,
+                            doneStyle: kts20BoldText,
                             backgroundColor: kcWhiteColor,
                           ),
                         );
