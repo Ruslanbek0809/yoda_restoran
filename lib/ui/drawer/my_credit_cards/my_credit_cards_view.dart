@@ -89,7 +89,7 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
                                   _creditCard.cardHolderName,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: ktsDefault16BoldText,
+                                  style: kts16BoldText,
                                 ),
                                 // --------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
                                 Padding(

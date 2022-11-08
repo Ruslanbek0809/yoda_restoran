@@ -119,10 +119,16 @@ TextStyle kts16PrimaryLightText = TextStyle(
   color: kcPrimaryColor,
 );
 
-TextStyle ktsDefault16BoldText = TextStyle(
+TextStyle kts16BoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
+);
+
+TextStyle kts16WhiteBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcWhiteColor,
 );
 
 TextStyle kts16HelperText = TextStyle(

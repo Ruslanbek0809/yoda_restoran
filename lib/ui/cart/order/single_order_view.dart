@@ -258,7 +258,7 @@ class SingleOrderView extends StatelessWidget {
                             order.selfPickUp!
                                 ? Text(
                                     '0 TMT',
-                                    style: ktsDefault16BoldText,
+                                    style: kts16BoldText,
                                   )
                                 : order.status == 1
                                     ? Text(
@@ -270,7 +270,7 @@ class SingleOrderView extends StatelessWidget {
                                         ? SizedBox()
                                         : Text(
                                             '${formatNum(order.dostawkaPrice!)} TMT',
-                                            style: ktsDefault16BoldText,
+                                            style: kts16BoldText,
                                           ),
                           ],
                         ),
@@ -314,7 +314,7 @@ class SingleOrderView extends StatelessWidget {
                             ),
                             Text(
                               '-${formatNum(model.getPromocodePrice())} TMT',
-                              style: ktsDefault16BoldText,
+                              style: kts16BoldText,
                             ),
                           ],
                         ),
@@ -348,12 +348,12 @@ class SingleOrderView extends StatelessWidget {
                           order.deliveryTime == null
                               ? Text(
                                   LocaleKeys.now,
-                                  style: ktsDefault16BoldText,
+                                  style: kts16BoldText,
                                 ).tr()
                               : Text(
                                   DateFormat('HH:mm, dd.MM.yyyy')
                                       .format(order.deliveryTime!.toLocal()),
-                                  style: ktsDefault16BoldText,
+                                  style: kts16BoldText,
                                 ),
                         ],
                       ),
@@ -372,25 +372,14 @@ class SingleOrderView extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            LocaleKeys.paymentType,
-                                            style: kts16Text,
-                                          ).tr(),
-                                          Text(
-                                            context.locale ==
-                                                    context.supportedLocales[0]
-                                                ? order.paymentType!.nameTk!
-                                                : order.paymentType!.nameRu!,
-                                            style: ktsDefault16BoldText,
-                                          ),
-                                        ],
-                                      ),
+                                      Text(
+                                        LocaleKeys.paymentType,
+                                        style: kts16Text,
+                                      ).tr(),
                                       Container(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w,
-                                          vertical: 1.h,
+                                          horizontal: 8.w,
+                                          vertical: 2.h,
                                         ),
                                         decoration: BoxDecoration(
                                           borderRadius: AppTheme().radius5,
@@ -400,19 +389,21 @@ class SingleOrderView extends StatelessWidget {
                                           children: [
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(right: 2.w),
+                                                  EdgeInsets.only(right: 4.w),
                                               child: Text(
-                                                LocaleKeys.online_paid,
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  color: kcWhiteColor,
-                                                ),
-                                              ).tr(),
+                                                context.locale ==
+                                                        context
+                                                            .supportedLocales[0]
+                                                    ? order.paymentType!.nameTk!
+                                                    : order
+                                                        .paymentType!.nameRu!,
+                                                style: kts16WhiteBoldText,
+                                              ),
                                             ),
                                             SvgPicture.asset(
                                               'assets/check_outlined_circle.svg',
                                               color: kcWhiteColor,
-                                              width: 16.sp,
+                                              width: 20.sp,
                                             ),
                                           ],
                                         ),
@@ -420,54 +411,6 @@ class SingleOrderView extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              // Padding(
-                              //     padding: EdgeInsets.only(
-                              //         left: 15.w, right: 15.w, top: 12.h),
-                              //     child: Row(
-                              //       mainAxisAlignment:
-                              //           MainAxisAlignment.spaceBetween,
-                              //       children: [
-                              //         Text(
-                              //           LocaleKeys.paymentType,
-                              //           style: kts16Text,
-                              //         ).tr(),
-                              //         Column(
-                              //           crossAxisAlignment:
-                              //               CrossAxisAlignment.end,
-                              //           children: [
-                              //             Row(
-                              //               children: [
-                              //                 Padding(
-                              //                   padding:
-                              //                       EdgeInsets.only(right: 3.w),
-                              //                   child: Text(
-                              //                     context.locale ==
-                              //                             context.supportedLocales[
-                              //                                 0]
-                              //                         ? order
-                              //                             .paymentType!.nameTk!
-                              //                         : order
-                              //                             .paymentType!.nameRu!,
-                              //                     style:
-                              //                         kts16OnlinePaymentBoldText,
-                              //                   ),
-                              //                 ),
-                              //                 SvgPicture.asset(
-                              //                   'assets/check_outlined_circle.svg',
-                              //                   color: kcOnlinePaymentColor,
-                              //                   width: 22.sp,
-                              //                 ),
-                              //               ],
-                              //             ),
-                              //             Text(
-                              //               LocaleKeys.online_paid,
-                              //               style: kts10DialogText,
-                              //             ).tr(),
-                              //           ],
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   )
                               //------------------ ORDER ONLINE If NOT PAID ---------------------//
                               : Padding(
                                   padding: EdgeInsets.only(
@@ -494,7 +437,7 @@ class SingleOrderView extends StatelessWidget {
                                                   context.supportedLocales[0]
                                               ? order.paymentType!.nameTk!
                                               : order.paymentType!.nameRu!,
-                                          style: ktsDefault16BoldText,
+                                          style: kts16BoldText,
                                         ),
                                       )
                                     ],
@@ -517,7 +460,7 @@ class SingleOrderView extends StatelessWidget {
                                             context.supportedLocales[0]
                                         ? order.paymentType!.nameTk!
                                         : order.paymentType!.nameRu!,
-                                    style: ktsDefault16BoldText,
+                                    style: kts16BoldText,
                                   ),
                                 ],
                               ),
