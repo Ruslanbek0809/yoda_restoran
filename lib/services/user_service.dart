@@ -575,16 +575,9 @@ class UserService {
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
-    // _queryParams['city'] = city;
-    // _queryParams['street'] = street;
-    // if (house != null) _queryParams['house'] = house;
-    // if (apartment != null) _queryParams['apartment'] = apartment;
-    // if (floor != null) _queryParams['floor'] = floor;
-    // if (note != null) _queryParams['currency'] = note;
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['orderNumber'] = 'Ver43k764ghwS2HH';
-    // _queryParams['orderNumber'] = order.orderNumber;
+    _queryParams['orderNumber'] = order.orderNumber;
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -597,7 +590,7 @@ class UserService {
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
     _queryParams['amount'] = 123;
-    // _queryParams['amount'] = _totalOrderSum;
+    _queryParams['amount'] = int.parse('${_totalOrderSum}00');
 
     /// AMOUNT part END
 

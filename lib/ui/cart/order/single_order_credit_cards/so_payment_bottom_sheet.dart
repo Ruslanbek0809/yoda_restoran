@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import '../../../../models/models.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
@@ -11,12 +12,12 @@ import 'so_credit_cards_view_model.dart';
 class SOPaymentBottomSheetView extends StatefulWidget {
   final ScrollController scrollController;
   final double offset;
-  // final PaymentRegister paymentRegister;
+  final PaymentRegister paymentRegister;
   const SOPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
-    // required this.paymentRegister,
+    required this.paymentRegister,
   }) : super(key: key);
 
   @override
@@ -81,8 +82,6 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
           ),
         ),
         child: Column(
-          // controller: widget.scrollController,
-          // shrinkWrap: true,
           children: [
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
@@ -97,10 +96,7 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
                       key: webViewKey,
                       // initialData: InAppWebViewInitialData(),
                       initialUrlRequest: URLRequest(
-                        url: Uri.parse(
-                            "https://mpi.gov.tm/payment/merchants/online/payment_ru.html?mdOrder=b4390c72-997b-402e-a7ea-d6a5382b39fe"
-                            // widget.paymentRegister.formUrl!
-                            ),
+                        url: Uri.parse(widget.paymentRegister.formUrl!),
                       ),
                       initialOptions: options,
                       pullToRefreshController: pullToRefreshController,
