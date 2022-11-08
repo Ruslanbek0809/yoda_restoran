@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import '../../../../models/models.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
@@ -46,8 +44,7 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
 
   late PullToRefreshController pullToRefreshController;
 
-  String url =
-      "https://mpi.gov.tm/payment/merchants/online/payment_ru.html?mdOrder=c0f2f5e7-35ad-4f61-9fc7-59d880ef93f0";
+  String url = "";
 
   double progress = 0;
 
@@ -98,6 +95,7 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
                   children: [
                     InAppWebView(
                       key: webViewKey,
+                      // initialData: InAppWebViewInitialData(),
                       initialUrlRequest: URLRequest(
                         url: Uri.parse(
                             "https://mpi.gov.tm/payment/merchants/online/payment_ru.html?mdOrder=c0f2f5e7-35ad-4f61-9fc7-59d880ef93f0"
