@@ -192,7 +192,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                   },
                 ),
               ),
-              SizedBox(height: 0.35.sw),
+              SizedBox(height: 0.33.sw),
               Text(
                 LocaleKeys.our_phone_title,
                 style: kts16DialogBoldText,
@@ -206,12 +206,10 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       style: kts16DialogText,
                     ).tr(),
                   ),
-                  Expanded(
-                    child: Text(
-                      LocaleKeys.our_phone_for_client,
-                      style: kts16DialogText,
-                    ).tr(),
-                  ),
+                  Text(
+                    LocaleKeys.our_phone_for_client,
+                    style: kts16ContactBlueBoldText,
+                  ).tr(),
                 ],
               ),
               Row(
@@ -223,15 +221,13 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       style: kts16DialogText,
                     ).tr(),
                   ),
-                  Expanded(
-                    child: Text(
-                      LocaleKeys.our_phone_for_cooperation,
-                      style: kts16DialogText,
-                    ).tr(),
-                  ),
+                  Text(
+                    LocaleKeys.our_phone_for_cooperation,
+                    style: kts16ContactBlueBoldText,
+                  ).tr(),
                 ],
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 24.h),
               Text(
                 LocaleKeys.our_address_title,
                 style: kts16DialogBoldText,

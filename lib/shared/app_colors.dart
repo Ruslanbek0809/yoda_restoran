@@ -17,6 +17,7 @@ const Color kcButtonBorderColor = Color(0xFF888888);
 const Color kcDialogColor = Color(0xFF666666);
 const Color kcRedColor = Color(0xFFE64F3A);
 const Color kcGreenColor = Color(0xFF76C03F);
+const Color kcBlueColor = Color(0xFF0496FC);
 const Color kcOnlinePaymentColor = Color(0xFF8552A8);
 const Color kcBlackColor = Color(0xFF000000);
 const Color kcWhiteColor = Color(0xFFFFFFFF);

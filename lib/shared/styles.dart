@@ -144,6 +144,12 @@ TextStyle kts16DialogBoldText = TextStyle(
   color: kcDialogColor,
 );
 
+TextStyle kts16ContactBlueBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcBlueColor,
+);
+
 TextStyle kts18Text = TextStyle(
   fontSize: 18.sp,
   color: kcFontColor,
