@@ -578,6 +578,7 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['orderNumber'] = order.orderNumber;
+    // _queryParams['orderNumber'] = 'Ver43k764ghwS2HJKLMNOL';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -589,8 +590,9 @@ class UserService {
             (order.totPrice! / 100) * order.promocode!.discount!;
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
-    _queryParams['amount'] = 123;
-    _queryParams['amount'] = int.parse('${_totalOrderSum}00');
+
+    _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
+    _queryParams['amount'] = _totalOrderSum.toInt();
 
     /// AMOUNT part END
 

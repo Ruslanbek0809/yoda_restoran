@@ -132,7 +132,7 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
                         });
                       },
                       onConsoleMessage: (controller, consoleMessage) {
-                        print(consoleMessage);
+                        model.log.v(consoleMessage);
                       },
                     ),
                     progress < 1.0
