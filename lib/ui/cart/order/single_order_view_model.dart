@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -333,6 +336,20 @@ class SingleOrderViewModel extends BaseViewModel {
     );
   }
 
+  /// Function onConsoleMessage
+  void onConsoleMessage(
+      InAppWebViewController controller, ConsoleMessage consoleMessage) async {
+    log.v('onConsoleMessage => $consoleMessage');
+
+    final _isErrorTextExists = consoleMessage.message.contains('ErrorCode');
+    final _isErrorCodeExists = consoleMessage.message.contains('5');
+    log.v(
+        'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
+
+    /// PARSES the string and returns the resulting Json object
+    // final _decodedResponse = jsonDecode(consoleMessage.message);
+    // log.v('onConsoleMessage _decodedResponse => $_decodedResponse');
+  }
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes

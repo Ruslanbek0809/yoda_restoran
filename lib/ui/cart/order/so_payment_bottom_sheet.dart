@@ -131,9 +131,7 @@ class _SingleOrderPaymentBottomSheetViewState
                           urlController.text = this.url;
                         });
                       },
-                      onConsoleMessage: (controller, consoleMessage) {
-                        model.log.v('onConsoleMessage: $consoleMessage');
-                      },
+                      onConsoleMessage: model.onConsoleMessage,
                     ),
                     progress < 1.0
                         ? LinearProgressIndicator(
