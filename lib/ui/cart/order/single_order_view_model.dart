@@ -351,11 +351,23 @@ class SingleOrderViewModel extends BaseViewModel {
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
   }
 
-  /// SHOWS on Dialog
+  /// SHOWS ONLINE PAYMENT FAIL Dialog
   Future showOnlinePaymentFailDialog() async {
     log.i('showOnlinePaymentFailDialog()');
     await _dialogService.showCustomDialog(
-      variant: DialogType.cancelAcceptedOrder,
+      variant: DialogType.onlinePaymentFail,
+      title: LocaleKeys.orderIsPreparing,
+      data: LocaleKeys.toCancelOrderCallRes,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+  }
+
+  /// SHOWS ONLINE PAYMENT SUCCESS Dialog
+  Future showOnlinePaymentSuccessDialog() async {
+    log.i('showOnlinePaymentSuccessDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.onlinePaymentSuccess,
       title: LocaleKeys.orderIsPreparing,
       data: LocaleKeys.toCancelOrderCallRes,
       showIconInMainButton: false,

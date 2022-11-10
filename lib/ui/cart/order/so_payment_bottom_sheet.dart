@@ -138,7 +138,7 @@ class _SingleOrderPaymentBottomSheetViewState
                           consoleMessage: consoleMessage,
                           onSuccessForView: () {},
                           onFailForView: () async =>
-                              await model.showCancelAcceptedOrderDialog(),
+                              await model.showOnlinePaymentFailDialog(),
                         );
                       },
                     ),

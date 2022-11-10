@@ -495,12 +495,6 @@ class NotificationDialogView extends StatelessWidget {
                   height: 85.h,
                   width: 85.w,
                 ),
-                // SvgPicture.asset(
-                //   notificationData.svg,
-                //   color: kcPrimaryColor,
-                //   width: 90.w,
-                //   height: 90.w,
-                // ),
                 SizedBox(height: 15.h),
                 Text(
                   notificationData.restaurant,
@@ -526,12 +520,6 @@ class NotificationDialogView extends StatelessWidget {
                   notificationData.lottie,
                   height: 0.2.sh,
                 ),
-                // SvgPicture.asset(
-                //   notificationData.lottie,
-                //   color: kcPrimaryColor,
-                //   width: 90.w,
-                //   height: 90.w,
-                // ),
                 SizedBox(height: 15.h),
                 Text(
                   notificationData.restaurant,
@@ -1118,7 +1106,18 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
-            title: Text(request.title!, style: kts18BoldText).tr(),
+            title: Column(
+              children: [
+                SvgPicture.asset(
+                  'check_online_success.svg',
+                  color: kcPrimaryColor,
+                ),
+                Text(
+                  request.title!,
+                  style: kts18BoldText,
+                ).tr(),
+              ],
+            ),
             content: Text(content, style: kts18Text).tr(),
           )
         : AlertDialog(
@@ -1126,10 +1125,74 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
             titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
             contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
             actionsAlignment: MainAxisAlignment.center,
-            title: Text(
-              request.title!,
+            title: Column(
+              children: [
+                SvgPicture.asset(
+                  'check_online_success.svg',
+                  color: kcPrimaryColor,
+                ),
+                Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ).tr(),
+              ],
+            ),
+            titleTextStyle: kts18BoldText,
+            content: Text(
+              content,
               textAlign: TextAlign.center,
             ).tr(),
+            contentTextStyle: kts18Text,
+          );
+  }
+}
+
+class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  final String content;
+  const ShowOnlinePaymentSuccessDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+    required this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Column(
+              children: [
+                SvgPicture.asset(
+                  'check_online_success.svg',
+                  color: kcPrimaryColor,
+                ),
+                Text(
+                  request.title!,
+                  style: kts18BoldText,
+                ).tr(),
+              ],
+            ),
+            content: Text(content, style: kts18Text).tr(),
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
+            contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Column(
+              children: [
+                SvgPicture.asset(
+                  'check_online_success.svg',
+                  color: kcPrimaryColor,
+                ),
+                Text(
+                  request.title!,
+                  textAlign: TextAlign.center,
+                ).tr(),
+              ],
+            ),
             titleTextStyle: kts18BoldText,
             content: Text(
               content,
