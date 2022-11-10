@@ -14,6 +14,7 @@ import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'order_view_model.dart';
 import 'single_order_view_model.dart';
+import 'so_payment_bottom_sheet.dart';
 
 class SingleOrderView extends StatelessWidget {
   final Order order;
@@ -824,8 +825,9 @@ class SingleOrderView extends StatelessWidget {
                                   borderRadius: AppTheme().radius10),
                               padding: EdgeInsets.symmetric(vertical: 11.h),
                             ),
-                            child: order.status != 1 && model.isLoading
-                                ? ButtonLoading()
+                            child: order.status == 1 && model.isLoading
+                                // order.status != 1 && model.isLoading
+                                ? ButtonLoading(fontSize: 28.sp)
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -850,50 +852,48 @@ class SingleOrderView extends StatelessWidget {
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:
+                                  await model.onConfirmButtonPressed(
+                                    order: order,
+                                    onSuccessForView: (paymentRegister) async {
+                                      await showFlexibleBottomSheet(
+                                        initHeight: 0.95,
+                                        maxHeight: 0.95,  
+                                        duration: Duration(milliseconds: 250),
+                                        context: context,
+                                        bottomSheetColor: Colors.transparent,
+                                        builder: (context, scrollController,
+                                                offset) =>
+                                            SingleOrderPaymentBottomSheetView(
+                                          scrollController: scrollController,
+                                          offset: offset,
+                                          paymentRegister: paymentRegister,
+                                        ),
+                                      );
+                                      // await completer(SheetResponse(data: true));
+                                      // await showErrorFlashBar(
+                                      //   context: context,
+                                      //   msg: LocaleKeys.addAddedSuccessfully,
+                                      //   margin: EdgeInsets.only(
+                                      //     left: 16.w,
+                                      //     right: 16.w,
+                                      //     bottom: 0.05.sh,
+                                      //   ),
+                                      // );
+                                    },
+                                    onFailForView: () async {
+                                      await showErrorFlashBar(
+                                        context: context,
+                                        margin: EdgeInsets.only(
+                                          left: 16.w,
+                                          right: 16.w,
+                                          bottom: 0.05.sh,
+                                        ),
+                                      );
+                                    },
+                                  );
 
                                   // // await model
                                   // //     .showCustomSendCodeConfirmationBottomSheet();
-                                  // await model.onConfirmButtonPressed(
-                                  //   order:
-                                  //       soCreditCardsConfirmationBottomSheetData
-                                  //           .order!,
-                                  //   onSuccessForView: (paymentRegister) async {
-                                  //     await showFlexibleBottomSheet(
-                                  //       initHeight: 0.95,
-                                  //       maxHeight: 0.95,
-                                  //       duration: Duration(milliseconds: 250),
-                                  //       context: context,
-                                  //       bottomSheetColor: Colors.transparent,
-                                  //       builder: (context, scrollController,
-                                  //               offset) =>
-                                  //           SOPaymentBottomSheetView(
-                                  //         scrollController: scrollController,
-                                  //         offset: offset,
-                                  //         paymentRegister: paymentRegister,
-                                  //       ),
-                                  //     );
-                                  //     // await completer(SheetResponse(data: true));
-                                  //     // await showErrorFlashBar(
-                                  //     //   context: context,
-                                  //     //   msg: LocaleKeys.addAddedSuccessfully,
-                                  //     //   margin: EdgeInsets.only(
-                                  //     //     left: 16.w,
-                                  //     //     right: 16.w,
-                                  //     //     bottom: 0.05.sh,
-                                  //     //   ),
-                                  //     // );
-                                  //   },
-                                  //   onFailForView: () async {
-                                  //     await showErrorFlashBar(
-                                  //       context: context,
-                                  //       margin: EdgeInsets.only(
-                                  //         left: 16.w,
-                                  //         right: 16.w,
-                                  //         bottom: 0.05.sh,
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
                                   // await showFlexibleBottomSheet(
                                   //   isExpand: false,
                                   //   initHeight: 0.95,

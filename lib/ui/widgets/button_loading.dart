@@ -5,11 +5,12 @@ import '../../shared/shared.dart';
 
 class ButtonLoading extends StatelessWidget {
   final Color color;
-  ButtonLoading({this.color = kcWhiteColor});
+  final double fontSize;
+  ButtonLoading({this.color = kcWhiteColor, this.fontSize = 26});
   @override
   Widget build(BuildContext context) {
     return SpinKitChasingDots(
-      size: 26,
+      size: fontSize,
       color: color,
     );
   }

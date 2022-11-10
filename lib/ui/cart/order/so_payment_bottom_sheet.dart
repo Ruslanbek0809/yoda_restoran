@@ -95,7 +95,6 @@ class _SingleOrderPaymentBottomSheetViewState
                   children: [
                     InAppWebView(
                       key: webViewKey,
-                      // initialData: InAppWebViewInitialData(),
                       initialUrlRequest: URLRequest(
                         url: Uri.parse(widget.paymentRegister.formUrl!),
                       ),
@@ -133,7 +132,7 @@ class _SingleOrderPaymentBottomSheetViewState
                         });
                       },
                       onConsoleMessage: (controller, consoleMessage) {
-                        model.log.v(consoleMessage);
+                        model.log.v('onConsoleMessage: $consoleMessage');
                       },
                     ),
                     progress < 1.0

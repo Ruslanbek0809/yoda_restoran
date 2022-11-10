@@ -573,7 +573,7 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['orderNumber'] = order.orderNumber;
-    // _queryParams['orderNumber'] = 'Ver43k764ghwS2HJKLMNOL';
+    _queryParams['orderNumber'] = 'Ver43k764ghwS2F';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -676,6 +676,8 @@ class UserService {
           onFail();
       }
     } on DioError catch (error) {
+      // log.v(
+      //     'onConsoleMessage: {message: ipayResp={"ErrorCode":"5","ErrorMessage":"Доступ запрещён"}, messageLevel: 1}');
       log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();
       rethrow;
