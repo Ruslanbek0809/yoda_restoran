@@ -22,7 +22,7 @@ TextStyle kts12DialogText = TextStyle(
   color: kcDialogColor,
 );
 
-TextStyle ktsDefault12Text = TextStyle(
+TextStyle kts12Text = TextStyle(
   fontSize: 12.sp,
   color: kcFontColor,
 );

@@ -356,8 +356,8 @@ class SingleOrderViewModel extends BaseViewModel {
     log.i('showOnlinePaymentFailDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.onlinePaymentFail,
-      title: LocaleKeys.orderIsPreparing,
-      data: LocaleKeys.toCancelOrderCallRes,
+      title: LocaleKeys.online_payment_fail,
+      data: LocaleKeys.online_payment_fail_info,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
@@ -368,8 +368,8 @@ class SingleOrderViewModel extends BaseViewModel {
     log.i('showOnlinePaymentSuccessDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.onlinePaymentSuccess,
-      title: LocaleKeys.orderIsPreparing,
-      data: LocaleKeys.toCancelOrderCallRes,
+      title: LocaleKeys.online_payment_success,
+      data: '',
       showIconInMainButton: false,
       barrierDismissible: true,
     );

@@ -140,7 +140,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                     meal.name ?? '-',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: ktsDefault12Text,
+                    style: kts12Text,
                   ),
                 ),
                 //------------------ MEAL PRICE ---------------------//

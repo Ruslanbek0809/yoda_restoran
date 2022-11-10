@@ -1109,16 +1109,20 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'check_online_success.svg',
+                  'assets/checkCircle.svg',
+                  width: 32.sp,
                   color: kcPrimaryColor,
                 ),
-                Text(
-                  request.title!,
-                  style: kts18BoldText,
-                ).tr(),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Text(
+                    request.title!,
+                    style: kts18BoldText,
+                  ).tr(),
+                ),
               ],
             ),
-            content: Text(content, style: kts18Text).tr(),
+            content: Text(content, style: kts12Text).tr(),
           )
         : AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
@@ -1128,13 +1132,17 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'check_online_success.svg',
+                  'assets/checkCircle.svg',
                   color: kcPrimaryColor,
+                  width: 32.sp,
                 ),
-                Text(
-                  request.title!,
-                  textAlign: TextAlign.center,
-                ).tr(),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Text(
+                    request.title!,
+                    textAlign: TextAlign.center,
+                  ).tr(),
+                ),
               ],
             ),
             titleTextStyle: kts18BoldText,
@@ -1142,7 +1150,7 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
               content,
               textAlign: TextAlign.center,
             ).tr(),
-            contentTextStyle: kts18Text,
+            contentTextStyle: kts12Text,
           );
   }
 }
@@ -1174,7 +1182,11 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
                 ).tr(),
               ],
             ),
-            content: Text(content, style: kts18Text).tr(),
+            content: SizedBox(),
+            // Text(
+            //   content,
+            //   textAlign: TextAlign.center,
+            // ).tr(),
           )
         : AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
@@ -1186,6 +1198,7 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
                 SvgPicture.asset(
                   'check_online_success.svg',
                   color: kcPrimaryColor,
+                  width: 24.sp,
                 ),
                 Text(
                   request.title!,
@@ -1194,10 +1207,11 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
               ],
             ),
             titleTextStyle: kts18BoldText,
-            content: Text(
-              content,
-              textAlign: TextAlign.center,
-            ).tr(),
+            content: SizedBox(),
+            // Text(
+            //   content,
+            //   textAlign: TextAlign.center,
+            // ).tr(),
             contentTextStyle: kts18Text,
           );
   }
