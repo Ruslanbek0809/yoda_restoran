@@ -350,7 +350,8 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text(LocaleKeys.save, style: ktsButton18Text).tr(),
+                        : Text(LocaleKeys.save, style: ktsButtonWhite18Text)
+                            .tr(),
                   ),
                   color: kcSecondaryDarkColor,
                   padding: EdgeInsets.symmetric(vertical: 14.h),

@@ -130,7 +130,8 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text(LocaleKeys.confirm, style: ktsButton18Text).tr(),
+                        : Text(LocaleKeys.confirm, style: ktsButtonWhite18Text)
+                            .tr(),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   borderRadius: kbr10,

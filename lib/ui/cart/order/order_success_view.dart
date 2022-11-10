@@ -69,7 +69,7 @@ class OrderSuccessView extends StatelessWidget {
                     ),
                     child: Text(
                       LocaleKeys.homeScreen,
-                      style: ktsButton18Text,
+                      style: ktsButtonWhite18Text,
                     ).tr(),
                     onPressed: model.navToHomeByRemovingAll,
                   ),

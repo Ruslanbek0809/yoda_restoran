@@ -189,7 +189,7 @@ TextStyle ktsDefault18HelperText = TextStyle(
   color: kcHelperColor,
 );
 
-TextStyle ktsButton18Text = TextStyle(
+TextStyle ktsButtonWhite18Text = TextStyle(
   color: kcWhiteColor,
   fontSize: 18.sp,
 );

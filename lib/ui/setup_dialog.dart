@@ -820,7 +820,7 @@ class RateOrderDialogView extends StatelessWidget {
                                     LocaleKeys.ratingSend,
                                     style: model.rating == 0
                                         ? ktsButton18ContactText
-                                        : ktsButton18Text,
+                                        : ktsButtonWhite18Text,
                                   ).tr(),
                           ),
                           onPressed: model.rating == 0

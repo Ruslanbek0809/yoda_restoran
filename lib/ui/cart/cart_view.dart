@@ -196,7 +196,7 @@ class CartView extends StatelessWidget {
                               // model.hasLoggedInUser
                               //     ? LocaleKeys.continuee
                               //     : LocaleKeys.register,
-                              style: ktsButton18Text,
+                              style: ktsButtonWhite18Text,
                             ).tr(),
                             onPressed: () async {
                               /// Below res workingHours are splitted

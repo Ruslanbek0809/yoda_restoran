@@ -371,7 +371,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                           ? LocaleKeys.Add
                                           : LocaleKeys.choose,
                                       style: model.isAllVolSelected
-                                          ? ktsButton18Text
+                                          ? ktsButtonWhite18Text
                                           : ktsButton18ContactText,
                                     ).tr(),
                                     color: model.isAllVolSelected
@@ -574,7 +574,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                           ? LocaleKeys.Add
                                           : LocaleKeys.choose,
                                       style: model.isAllVolSelected
-                                          ? ktsButton18Text
+                                          ? ktsButtonWhite18Text
                                           : ktsButton18ContactText,
                                     ).tr(),
                                     color: model.isAllVolSelected

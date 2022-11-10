@@ -96,7 +96,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                               ? ButtonLoading()
                               : Text(
                                   LocaleKeys.addNewAddressButton,
-                                  style: ktsButton18Text,
+                                  style: ktsButtonWhite18Text,
                                 ).tr(),
                         ),
                         onPressed: () async {

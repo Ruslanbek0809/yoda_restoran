@@ -592,6 +592,7 @@ class UserService {
     /// AMOUNT part END
 
     _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
+    _queryParams['description'] = 'Yoda Restoran: ${order.restaurant!.name}';
     _queryParams['currency'] = 934;
     _queryParams['language'] = 'ru';
     _queryParams['pageView'] = 'DESKTOP';

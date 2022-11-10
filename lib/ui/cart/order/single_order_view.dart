@@ -667,7 +667,7 @@ class SingleOrderView extends StatelessWidget {
                                         padding: EdgeInsets.only(left: 5.w),
                                         child: Text(
                                           LocaleKeys.rateOrder,
-                                          style: ktsButton18Text,
+                                          style: ktsButtonWhite18Text,
                                         ).tr(),
                                       )
                                     ],
@@ -677,13 +677,13 @@ class SingleOrderView extends StatelessWidget {
                                         order.restaurant!.phoneNumber != null
                                             ? ' ${order.restaurant!.phoneNumber}'
                                             : '',
-                                        style: ktsButton18Text,
+                                        style: ktsButtonWhite18Text,
                                       ).tr()
                                     : model.busy(order.id) && order.status == 1
                                         ? ButtonLoading()
                                         : Text(
                                             LocaleKeys.cancelOrder,
-                                            style: ktsButton18Text,
+                                            style: ktsButtonWhite18Text,
                                           ).tr(),
                             onPressed: () async {
                               switch (order.status) {
@@ -824,27 +824,29 @@ class SingleOrderView extends StatelessWidget {
                                   borderRadius: AppTheme().radius10),
                               padding: EdgeInsets.symmetric(vertical: 11.h),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/credit_card.svg',
-                                  color: order.status == 1
-                                      ? kcContactColor
-                                      : kcWhiteColor,
-                                  width: 28.w,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.w),
-                                  child: Text(
-                                    LocaleKeys.online_paymentType,
-                                    style: order.status == 1
-                                        ? ktsButton18ContactText
-                                        : ktsButton18Text,
-                                  ).tr(),
-                                )
-                              ],
-                            ),
+                            child: order.status != 1 && model.isLoading
+                                ? ButtonLoading()
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/credit_card.svg',
+                                        color: order.status == 1
+                                            ? kcContactColor
+                                            : kcWhiteColor,
+                                        width: 28.w,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10.w),
+                                        child: Text(
+                                          LocaleKeys.online_paymentType,
+                                          style: order.status == 1
+                                              ? ktsButton18ContactText
+                                              : ktsButtonWhite18Text,
+                                        ).tr(),
+                                      )
+                                    ],
+                                  ),
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:

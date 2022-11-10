@@ -154,7 +154,8 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       duration: const Duration(milliseconds: 300),
                       child: model.isBusy
                           ? ButtonLoading()
-                          : Text(LocaleKeys.send, style: ktsButton18Text).tr()),
+                          : Text(LocaleKeys.send, style: ktsButtonWhite18Text)
+                              .tr()),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10.0),

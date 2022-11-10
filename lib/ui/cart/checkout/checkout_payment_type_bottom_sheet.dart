@@ -164,7 +164,8 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
               child: CustomTextChildButton(
                 borderRadius: AppTheme().radius15,
                 padding: EdgeInsets.symmetric(vertical: 14.h),
-                child: Text(LocaleKeys.select, style: ktsButton18Text).tr(),
+                child:
+                    Text(LocaleKeys.select, style: ktsButtonWhite18Text).tr(),
                 onPressed: () {
                   model.savePaymentType();
                   Navigator.pop(context);

@@ -90,7 +90,7 @@ class AddressEditView extends StatelessWidget {
                           ? ButtonLoading()
                           : Text(
                               LocaleKeys.save,
-                              style: ktsButton18Text,
+                              style: ktsButtonWhite18Text,
                             ).tr(),
                       onPressed: () async {
                         FocusScope.of(context)

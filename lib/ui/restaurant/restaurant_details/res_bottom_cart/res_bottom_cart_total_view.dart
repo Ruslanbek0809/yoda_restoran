@@ -18,10 +18,10 @@ class ResBottomCartTotalView extends StatelessWidget {
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(LocaleKeys.order, style: ktsButton18Text).tr(),
+                Text(LocaleKeys.order, style: ktsButtonWhite18Text).tr(),
                 Text(
                   '${formatNum(model.getTotalCartSum)} TMT',
-                  style: ktsButton18Text,
+                  style: ktsButtonWhite18Text,
                 ),
               ],
             ),

@@ -478,7 +478,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           ? ButtonLoading()
                           : Text(
                               LocaleKeys.orderNow,
-                              style: ktsButton18Text,
+                              style: ktsButtonWhite18Text,
                             ).tr(),
                       // onPressed: model.navToOrdersByRemovingAll,
                       onPressed: model.isBusy

@@ -125,7 +125,8 @@ class LoginView extends StatelessWidget with $LoginView {
                         duration: const Duration(milliseconds: 300),
                         child: model.isBusy
                             ? ButtonLoading()
-                            : Text(LocaleKeys.continuee, style: ktsButton18Text)
+                            : Text(LocaleKeys.continuee,
+                                    style: ktsButtonWhite18Text)
                                 .tr(),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),

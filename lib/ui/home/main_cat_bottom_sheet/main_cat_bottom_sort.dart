@@ -37,7 +37,7 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
               ? ButtonLoading()
               : Text(
                   LocaleKeys.confirmSortButton,
-                  style: ktsButton18Text,
+                  style: ktsButtonWhite18Text,
                 ).tr(),
           onPressed: () async {
             /// If model.selectedSort IS NOT DEFAULT

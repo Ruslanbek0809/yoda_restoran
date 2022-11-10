@@ -147,7 +147,7 @@ class MyCreditCardAddView extends StatelessWidget {
                         ? ButtonLoading()
                         : Text(
                             LocaleKeys.add_card,
-                            style: ktsButton18Text,
+                            style: ktsButtonWhite18Text,
                           ).tr(),
                     onPressed: () async {
                       if (creditCardFormKey.currentState!.validate()) {
