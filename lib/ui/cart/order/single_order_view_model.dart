@@ -303,6 +303,41 @@ class SingleOrderViewModel extends BaseViewModel {
       );
   }
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  /// POST after CONFIRM button is pressed
+  Future<void> onConfirmButtonPressed({
+    Order? order,
+    Function(PaymentRegister)? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onConfirmButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.postOnlinePayment(
+        order!,
+        _cardNumber,
+        _expiryDate,
+        _cardHolderName,
+        _cvcCode,
+        _selectedBankCard,
+        (PaymentRegister paymentRegister) {
+          _isLoading = false;
+          onSuccessForView!(paymentRegister);
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
