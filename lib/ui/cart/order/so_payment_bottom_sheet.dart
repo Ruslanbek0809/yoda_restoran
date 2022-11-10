@@ -136,7 +136,8 @@ class _SingleOrderPaymentBottomSheetViewState
                         model.onConsoleMessage(
                           controller: controller,
                           consoleMessage: consoleMessage,
-                          onSuccessForView: () {},
+                          onSuccessForView: () async =>
+                              await model.showOnlinePaymentSuccessDialog(),
                           onFailForView: () async =>
                               await model.showOnlinePaymentFailDialog(),
                         );

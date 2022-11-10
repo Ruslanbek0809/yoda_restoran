@@ -349,6 +349,8 @@ class SingleOrderViewModel extends BaseViewModel {
     final _isErrorCodeExists = consoleMessage.message.contains('5');
     log.v(
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
+
+    if (_isErrorTextExists && _isErrorCodeExists) onFailForView!();
   }
 
   /// SHOWS ONLINE PAYMENT FAIL Dialog
