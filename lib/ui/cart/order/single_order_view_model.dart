@@ -337,19 +337,32 @@ class SingleOrderViewModel extends BaseViewModel {
   }
 
   /// Function onConsoleMessage
-  void onConsoleMessage(
-      InAppWebViewController controller, ConsoleMessage consoleMessage) async {
+  void onConsoleMessage({
+    InAppWebViewController? controller,
+    ConsoleMessage? consoleMessage,
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
     log.v('onConsoleMessage => $consoleMessage');
 
-    final _isErrorTextExists = consoleMessage.message.contains('ErrorCode');
+    final _isErrorTextExists = consoleMessage!.message.contains('ErrorCode');
     final _isErrorCodeExists = consoleMessage.message.contains('5');
     log.v(
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
-
-    /// PARSES the string and returns the resulting Json object
-    // final _decodedResponse = jsonDecode(consoleMessage.message);
-    // log.v('onConsoleMessage _decodedResponse => $_decodedResponse');
   }
+
+  /// SHOWS on Dialog
+  Future showOnlinePaymentFailDialog() async {
+    log.i('showOnlinePaymentFailDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.cancelAcceptedOrder,
+      title: LocaleKeys.orderIsPreparing,
+      data: LocaleKeys.toCancelOrderCallRes,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+  }
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
