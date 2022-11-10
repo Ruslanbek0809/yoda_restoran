@@ -320,11 +320,6 @@ class SingleOrderViewModel extends BaseViewModel {
     await runBusyFuture(
       _userService.postOnlinePayment(
         order!,
-        _cardNumber,
-        _expiryDate,
-        _cardHolderName,
-        _cvcCode,
-        _selectedBankCard,
         (PaymentRegister paymentRegister) {
           _isLoading = false;
           onSuccessForView!(paymentRegister);
