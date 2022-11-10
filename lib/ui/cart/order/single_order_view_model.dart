@@ -14,9 +14,9 @@ import 'order_view_model.dart';
 
 class SingleOrderViewModel extends BaseViewModel {
   final log = getLogger('SingleOrderViewModel');
-  final Order order;
-  final OrderViewModel orderViewModel;
-  SingleOrderViewModel(this.order, this.orderViewModel);
+  final Order? order;
+  final OrderViewModel? orderViewModel;
+  SingleOrderViewModel({this.order, this.orderViewModel});
 
   final _navService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
@@ -38,7 +38,7 @@ class SingleOrderViewModel extends BaseViewModel {
   /// Function that FIRES first in SingleOrderViewModel
   void initSingleOrder() {
     /// INITIALIZES _orderStatusText
-    switch (order.status) {
+    switch (order!.status) {
       case 1:
         _orderStatusText = LocaleKeys.orderWaiting.tr();
         break;
@@ -46,12 +46,12 @@ class SingleOrderViewModel extends BaseViewModel {
         _orderStatusText = LocaleKeys.orderAccepted.tr();
         break;
       case 3:
-        _orderStatusText = order.selfPickUp!
+        _orderStatusText = order!.selfPickUp!
             ? LocaleKeys.orderReady.tr()
             : LocaleKeys.orderSent.tr();
         break;
       case 4:
-        _orderStatusText = order.selfPickUp!
+        _orderStatusText = order!.selfPickUp!
             ? LocaleKeys.orderTaken.tr()
             : LocaleKeys.orderDelivered.tr();
         break;
@@ -61,7 +61,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
     /// ASSIGNS initial value to _currentOrderExpansionState
     _currentOrderExpansionState =
-        order.status == 2 || order.status == 1 ? true : false;
+        order!.status == 2 || order!.status == 1 ? true : false;
 
     /// CREATES and INITIALIZES orderStatuses for this order
     for (int i = 0; i < _orderTimelines.length; i++) {
@@ -69,22 +69,22 @@ class SingleOrderViewModel extends BaseViewModel {
       switch (_orderTimelines[i].id) {
         case 2:
           _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
-          if (order.kitchenAt != null)
-            _orderTimelines[i].orderStatusAt = order.kitchenAt!;
+          if (order!.kitchenAt != null)
+            _orderTimelines[i].orderStatusAt = order!.kitchenAt!;
           break;
         case 3:
-          _orderTimelines[i].name = order.selfPickUp!
+          _orderTimelines[i].name = order!.selfPickUp!
               ? LocaleKeys.orderReady.tr()
               : LocaleKeys.orderSent.tr();
-          if (order.driverAt != null)
-            _orderTimelines[i].orderStatusAt = order.driverAt!;
+          if (order!.driverAt != null)
+            _orderTimelines[i].orderStatusAt = order!.driverAt!;
           break;
         case 4:
-          _orderTimelines[i].name = order.selfPickUp!
+          _orderTimelines[i].name = order!.selfPickUp!
               ? LocaleKeys.orderTaken.tr()
               : LocaleKeys.orderDelivered.tr();
-          if (order.deliveredAt != null)
-            _orderTimelines[i].orderStatusAt = order.deliveredAt!;
+          if (order!.deliveredAt != null)
+            _orderTimelines[i].orderStatusAt = order!.deliveredAt!;
           break;
         default:
           break;
@@ -102,27 +102,27 @@ class SingleOrderViewModel extends BaseViewModel {
   num getPromocodePrice() {
     num totalPromocodePrice = 0;
 
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        totalPromocodePrice = order.promocode!.discount!;
+    if (order!.promocode != null) {
+      if (order!.promocode!.promoType == 1)
+        totalPromocodePrice = order!.promocode!.discount!;
       else
         totalPromocodePrice =
-            (order.totPrice! / 100) * order.promocode!.discount!;
+            (order!.totPrice! / 100) * order!.promocode!.discount!;
     }
     return totalPromocodePrice;
   }
 
   /// GETS getTotalOrderSum with promocode
   num getTotalOrderSumWithPromocode() {
-    num totalOrderSum = order.totPrice!;
+    num totalOrderSum = order!.totPrice!;
 
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        totalOrderSum -= order.promocode!.discount!;
+    if (order!.promocode != null) {
+      if (order!.promocode!.promoType == 1)
+        totalOrderSum -= order!.promocode!.discount!;
       else
-        totalOrderSum = order.totPrice! - getPromocodePrice();
+        totalOrderSum = order!.totPrice! - getPromocodePrice();
     }
-    if (order.dostawkaPrice != null) totalOrderSum += order.dostawkaPrice!;
+    if (order!.dostawkaPrice != null) totalOrderSum += order!.dostawkaPrice!;
     return totalOrderSum;
   }
 
@@ -213,7 +213,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
             /// REINITIALIZES ORDERS
             /// TODO: Optimize if possible
-            await orderViewModel.getInitialOrders();
+            await orderViewModel!.getInitialOrders();
           },
           () => onFailForView!(),
         ),
@@ -266,7 +266,7 @@ class SingleOrderViewModel extends BaseViewModel {
     if (respData!.data != null && respData.data == true) {
       /// REINITIALIZES ORDERS
       /// TODO: Optimize if possible
-      await orderViewModel.getInitialOrders();
+      await orderViewModel!.getInitialOrders();
     }
   }
 
@@ -289,17 +289,17 @@ class SingleOrderViewModel extends BaseViewModel {
     if (respData != null && respData.data == true)
       await runBusyFuture(
         _userService.deleteOrder(
-          order.id!,
+          order!.id!,
           () async {
             onSuccessForView!();
 
             /// REINITIALIZES ORDERS
             /// TODO: Optimize if possible
-            await orderViewModel.getInitialOrders();
+            await orderViewModel!.getInitialOrders();
           },
           () => onFailForView!(),
         ),
-        busyObject: order.id!,
+        busyObject: order!.id!,
       );
   }
 

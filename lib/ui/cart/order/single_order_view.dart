@@ -12,9 +12,7 @@ import '../../widgets/widgets.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'order_view_model.dart';
-import 'single_order_credit_cards/so_select_credit_cards_bottom_sheet.dart';
 import 'single_order_view_model.dart';
 
 class SingleOrderView extends StatelessWidget {
@@ -29,7 +27,10 @@ class SingleOrderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleOrderViewModel>.reactive(
       onModelReady: (model) => model.initSingleOrder(),
-      viewModelBuilder: () => SingleOrderViewModel(order, orderViewModel),
+      viewModelBuilder: () => SingleOrderViewModel(
+        order: order,
+        orderViewModel: orderViewModel,
+      ),
       builder: (context, model, child) {
         return Slidable(
           // Specify a key if the Slidable is dismissible.
@@ -891,21 +892,21 @@ class SingleOrderView extends StatelessWidget {
                                   //     );
                                   //   },
                                   // );
-                                  await showFlexibleBottomSheet(
-                                    isExpand: false,
-                                    initHeight: 0.95,
-                                    maxHeight: 0.95,
-                                    duration: Duration(milliseconds: 250),
-                                    context: context,
-                                    bottomSheetColor: Colors.transparent,
-                                    builder:
-                                        (context, scrollController, offset) =>
-                                            SOSelectCreditCardsBottomSheetView(
-                                      scrollController: scrollController,
-                                      offset: offset,
-                                      order: order,
-                                    ),
-                                  );
+                                  // await showFlexibleBottomSheet(
+                                  //   isExpand: false,
+                                  //   initHeight: 0.95,
+                                  //   maxHeight: 0.95,
+                                  //   duration: Duration(milliseconds: 250),
+                                  //   context: context,
+                                  //   bottomSheetColor: Colors.transparent,
+                                  //   builder:
+                                  //       (context, scrollController, offset) =>
+                                  //           SOSelectCreditCardsBottomSheetView(
+                                  //     scrollController: scrollController,
+                                  //     offset: offset,
+                                  //     order: order,
+                                  //   ),
+                                  // );
                                   break;
                                 case 2:
                                   break;

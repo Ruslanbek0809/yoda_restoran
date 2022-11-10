@@ -4,16 +4,16 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../models/models.dart';
-import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
-import 'so_credit_cards_view_model.dart';
+import '../../widgets/widgets.dart';
+import 'single_order_view_model.dart';
 
-class SOPaymentBottomSheetView extends StatefulWidget {
+class SingleOrderPaymentBottomSheetView extends StatefulWidget {
   final ScrollController scrollController;
   final double offset;
   final PaymentRegister paymentRegister;
-  const SOPaymentBottomSheetView({
+  const SingleOrderPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
@@ -21,11 +21,12 @@ class SOPaymentBottomSheetView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SOPaymentBottomSheetView> createState() =>
-      _SOPaymentBottomSheetViewState();
+  State<SingleOrderPaymentBottomSheetView> createState() =>
+      _SingleOrderPaymentBottomSheetViewState();
 }
 
-class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
+class _SingleOrderPaymentBottomSheetViewState
+    extends State<SingleOrderPaymentBottomSheetView> {
   final GlobalKey webViewKey = GlobalKey();
 
   InAppWebViewController? webViewController;
@@ -72,8 +73,8 @@ class _SOPaymentBottomSheetViewState extends State<SOPaymentBottomSheetView> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(),
+    return ViewModelBuilder<SingleOrderViewModel>.reactive(
+      viewModelBuilder: () => SingleOrderViewModel(),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
