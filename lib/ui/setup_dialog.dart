@@ -1110,8 +1110,6 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   'assets/online_payment_fail.svg',
-                  // width: 32.sp,
-                  // color: kcPrimaryColor,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.h),
@@ -1133,8 +1131,6 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   'assets/online_payment_fail.svg',
-                  // color: kcPrimaryColor,
-                  // width: 32.sp,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.h),
@@ -1174,7 +1170,6 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   'assets/online_payment_success.svg',
-                  // color: kcPrimaryColor,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 12.h),
@@ -1186,10 +1181,6 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
               ],
             ),
             content: SizedBox(),
-            // Text(
-            //   content,
-            //   textAlign: TextAlign.center,
-            // ).tr(),
           )
         : AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
@@ -1200,8 +1191,6 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   'assets/online_payment_success.svg',
-                  // color: kcPrimaryColor,
-                  // width: 24.sp,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 12.h),
@@ -1214,10 +1203,6 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
             ),
             titleTextStyle: kts18BoldText,
             content: SizedBox(),
-            // Text(
-            //   content,
-            //   textAlign: TextAlign.center,
-            // ).tr(),
             contentTextStyle: kts18Text,
           );
   }
