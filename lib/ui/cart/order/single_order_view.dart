@@ -852,6 +852,7 @@ class SingleOrderView extends StatelessWidget {
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:
+                                  await model.showOnlinePaymentSuccessDialog();
                                   await model.showOnlinePaymentFailDialog();
                                   // await model.onConfirmButtonPressed(
                                   //   order: order,

@@ -1109,9 +1109,9 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'assets/checkCircle.svg',
-                  width: 32.sp,
-                  color: kcPrimaryColor,
+                  'assets/online_payment_fail.svg',
+                  // width: 32.sp,
+                  // color: kcPrimaryColor,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.h),
@@ -1132,9 +1132,9 @@ class ShowOnlinePaymentFailDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'assets/checkCircle.svg',
-                  color: kcPrimaryColor,
-                  width: 32.sp,
+                  'assets/online_payment_fail.svg',
+                  // color: kcPrimaryColor,
+                  // width: 32.sp,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.h),
@@ -1173,13 +1173,16 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'check_online_success.svg',
-                  color: kcPrimaryColor,
+                  'assets/online_payment_success.svg',
+                  // color: kcPrimaryColor,
                 ),
-                Text(
-                  request.title!,
-                  style: kts18BoldText,
-                ).tr(),
+                Padding(
+                  padding: EdgeInsets.only(top: 12.h),
+                  child: Text(
+                    request.title!,
+                    style: kts18BoldText,
+                  ).tr(),
+                ),
               ],
             ),
             content: SizedBox(),
@@ -1196,14 +1199,17 @@ class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
             title: Column(
               children: [
                 SvgPicture.asset(
-                  'check_online_success.svg',
-                  color: kcPrimaryColor,
-                  width: 24.sp,
+                  'assets/online_payment_success.svg',
+                  // color: kcPrimaryColor,
+                  // width: 24.sp,
                 ),
-                Text(
-                  request.title!,
-                  textAlign: TextAlign.center,
-                ).tr(),
+                Padding(
+                  padding: EdgeInsets.only(top: 12.h),
+                  child: Text(
+                    request.title!,
+                    textAlign: TextAlign.center,
+                  ).tr(),
+                ),
               ],
             ),
             titleTextStyle: kts18BoldText,
