@@ -342,7 +342,7 @@ class SingleOrderViewModel extends BaseViewModel {
     Function(PaymentRegister)? onSuccessForView,
     Function()? onFailForView,
   }) async {
-    log.v('onConfirmButtonPressed()');
+    log.v('checkOnlinePaymentOrderState()');
 
     _isLoading = true;
     notifyListeners();
