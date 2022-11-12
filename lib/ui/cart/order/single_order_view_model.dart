@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:stacked/stacked.dart';
@@ -356,8 +354,12 @@ class SingleOrderViewModel extends BaseViewModel {
       /// CHECKS ONLINE PAYMENT ORDER STATUS
       await _userService.checkOnlinePaymentOrderStatus(
         paymentRegister!,
-        () {
+        () async {
           onSuccessForView!();
+
+          /// REINITIALIZES ORDERS
+          /// TODO: Optimize if possible
+          await orderViewModel!.getInitialOrders();
         },
         () {
           onFailForView!();

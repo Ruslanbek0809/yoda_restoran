@@ -10,16 +10,16 @@ OrderPaymentCheckStatus _$OrderPaymentCheckStatusFromJson(
         Map<String, dynamic> json) =>
     OrderPaymentCheckStatus(
       orderStatus: json['OrderStatus'] as int?,
-      errorCode: json['errorCode'] as String?,
-      errorMessage: json['errorMessage'] as String?,
-      orderNumber: json['OrderNumber'] as int?,
+      errorCode: json['ErrorCode'] as String?,
+      errorMessage: json['ErrorMessage'] as String?,
+      orderNumber: json['OrderNumber'] as String?,
     );
 
 Map<String, dynamic> _$OrderPaymentCheckStatusToJson(
         OrderPaymentCheckStatus instance) =>
     <String, dynamic>{
       'OrderStatus': instance.orderStatus,
-      'errorCode': instance.errorCode,
-      'errorMessage': instance.errorMessage,
+      'ErrorCode': instance.errorCode,
+      'ErrorMessage': instance.errorMessage,
       'OrderNumber': instance.orderNumber,
     };

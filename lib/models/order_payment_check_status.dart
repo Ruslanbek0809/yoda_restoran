@@ -14,14 +14,14 @@ class OrderPaymentCheckStatus {
   @JsonKey(name: 'OrderStatus')
   final int? orderStatus;
 
-  @JsonKey(name: 'errorCode')
+  @JsonKey(name: 'ErrorCode')
   final String? errorCode;
 
-  @JsonKey(name: 'errorMessage')
+  @JsonKey(name: 'ErrorMessage')
   final String? errorMessage;
 
   @JsonKey(name: 'OrderNumber')
-  final int? orderNumber;
+  final String? orderNumber;
 
   factory OrderPaymentCheckStatus.fromJson(Map<String, dynamic> json) =>
       _$OrderPaymentCheckStatusFromJson(json);
