@@ -325,33 +325,7 @@ class SingleOrderViewModel extends BaseViewModel {
         order!,
         (PaymentRegister paymentRegister) {
           _isLoading = false;
-          onSuccessForView!(paymentRegister);
-        },
-        () {
-          _isLoading = false;
           notifyListeners();
-          onFailForView!();
-        },
-      ),
-    );
-  }
-
-  /// CHECKS ONLINE PAYMENT ORDER STATE
-  Future<void> checkOnlinePaymentOrderState({
-    PaymentRegister? paymentRegister,
-    Function(PaymentRegister)? onSuccessForView,
-    Function()? onFailForView,
-  }) async {
-    log.v('checkOnlinePaymentOrderState()');
-
-    _isLoading = true;
-    notifyListeners();
-
-    await runBusyFuture(
-      _userService.checkOnlinePaymentOrderState(
-        paymentRegister!,
-        (PaymentRegister paymentRegister) {
-          _isLoading = false;
           onSuccessForView!(paymentRegister);
         },
         () {
@@ -379,19 +353,14 @@ class SingleOrderViewModel extends BaseViewModel {
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
 
     if (_isErrorTextExists && _isErrorCodeExists) {
-      // onFailForView!();
-      // checkOnlinePaymentOrderState(paymentRegister: paymentRegister);
-
-      await _userService.checkOnlinePaymentOrderState(
+      /// CHECKS ONLINE PAYMENT ORDER STATUS
+      await _userService.checkOnlinePaymentOrderStatus(
         paymentRegister!,
-        (PaymentRegister paymentRegister) {
-          // _isLoading = false;
-          // onSuccessForView!(paymentRegister);
+        () {
+          onSuccessForView!();
         },
         () {
-          // _isLoading = false;
-          // notifyListeners();
-          // onFailForView!();
+          onFailForView!();
         },
       );
     }

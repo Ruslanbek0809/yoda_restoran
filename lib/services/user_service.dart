@@ -592,6 +592,7 @@ class UserService {
     /// AMOUNT part END
 
     _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
+    _queryParams['failUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['description'] = 'Yoda Restoran: ${order.restaurant!.name}';
     _queryParams['currency'] = 934;
     _queryParams['language'] = 'ru';
@@ -676,24 +677,21 @@ class UserService {
           onFail();
       }
     } on DioError catch (error) {
-      // log.v(
-      //     'onConsoleMessage: {message: ipayResp={"ErrorCode":"5","ErrorMessage":"Доступ запрещён"}, messageLevel: 1}');
       log.v('ERROR on postOnlinePayment => ${error.response}');
       onFail();
       rethrow;
     }
   }
 
-  /// CHECKS ONLINE PAYMENT ORDER STATE
-  Future<void> checkOnlinePaymentOrderState(
+  /// CHECKS ONLINE PAYMENT ORDER STATUS
+  Future<void> checkOnlinePaymentOrderStatus(
     PaymentRegister paymentRegister,
-    Function(PaymentRegister) onSuccess,
+    Function() onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    // _queryParams['orderId'] = 'Ver43Test4';
     _queryParams['orderId'] = paymentRegister.orderId;
     _queryParams['language'] = 'ru';
 
@@ -741,7 +739,7 @@ class UserService {
         data: onlinePaymentFormData,
       );
       if (response.data != null) {
-        log.v('RESPONSE: postOnlinePayment => ${response.data}');
+        log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
 
         /// PARSES the string and returns the resulting Json object
         final _decodedResponse = jsonDecode(response.data);
@@ -775,9 +773,7 @@ class UserService {
         //   onFail();
       }
     } on DioError catch (error) {
-      // log.v(
-      //     'onConsoleMessage: {message: ipayResp={"ErrorCode":"5","ErrorMessage":"Доступ запрещён"}, messageLevel: 1}');
-      log.v('ERROR on postOnlinePayment => ${error.response}');
+      log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
       onFail();
       rethrow;
     }
