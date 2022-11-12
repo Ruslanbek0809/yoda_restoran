@@ -89,75 +89,79 @@ class _SingleOrderPaymentBottomSheetViewState
 
             // --------------- CREDIT CARD CONFIRMATION -------------- //
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Stack(
-                  children: [
-                    InAppWebView(
-                      key: webViewKey,
-                      initialUrlRequest: URLRequest(
-                        url: Uri.parse(widget.paymentRegister.formUrl!),
+              child: !model.isPaymentLoading
+                  ? LoadingWidget()
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Stack(
+                        children: [
+                          InAppWebView(
+                            key: webViewKey,
+                            initialUrlRequest: URLRequest(
+                              url: Uri.parse(widget.paymentRegister.formUrl!),
+                            ),
+                            initialOptions: options,
+                            pullToRefreshController: pullToRefreshController,
+                            onWebViewCreated: (controller) {
+                              webViewController = controller;
+                            },
+                            onLoadStart: (controller, url) {
+                              setState(() {
+                                this.url = url.toString();
+                                urlController.text = this.url;
+                              });
+                            },
+                            androidOnPermissionRequest:
+                                (controller, origin, resources) async {
+                              return PermissionRequestResponse(
+                                  resources: resources,
+                                  action:
+                                      PermissionRequestResponseAction.GRANT);
+                            },
+                            onProgressChanged: (controller, progress) {
+                              if (progress == 100) {
+                                pullToRefreshController.endRefreshing();
+                              }
+                              setState(() {
+                                this.progress = progress / 100;
+                                urlController.text = this.url;
+                              });
+                            },
+                            onUpdateVisitedHistory:
+                                (controller, url, androidIsReload) {
+                              setState(() {
+                                this.url = url.toString();
+                                urlController.text = this.url;
+                              });
+                            },
+                            onConsoleMessage: (controller, consoleMessage) {
+                              /// Function onConsoleMessage
+                              model.onConsoleMessage(
+                                paymentRegister: widget.paymentRegister,
+                                controller: controller,
+                                consoleMessage: consoleMessage,
+                                onSuccessForView: () async {
+                                  Navigator.pop(context);
+                                  await model.showOnlinePaymentSuccessDialog();
+                                },
+                                onFailForView: () async {
+                                  Navigator.pop(context);
+                                  await model.showOnlinePaymentFailDialog();
+                                },
+                              );
+                            },
+                          ),
+                          progress < 1.0
+                              ? LinearProgressIndicator(
+                                  value: progress,
+                                  backgroundColor:
+                                      kcPrimaryColor.withOpacity(0.3),
+                                  color: kcPrimaryColor,
+                                )
+                              : SizedBox(),
+                        ],
                       ),
-                      initialOptions: options,
-                      pullToRefreshController: pullToRefreshController,
-                      onWebViewCreated: (controller) {
-                        webViewController = controller;
-                      },
-                      onLoadStart: (controller, url) {
-                        setState(() {
-                          this.url = url.toString();
-                          urlController.text = this.url;
-                        });
-                      },
-                      androidOnPermissionRequest:
-                          (controller, origin, resources) async {
-                        return PermissionRequestResponse(
-                            resources: resources,
-                            action: PermissionRequestResponseAction.GRANT);
-                      },
-                      onProgressChanged: (controller, progress) {
-                        if (progress == 100) {
-                          pullToRefreshController.endRefreshing();
-                        }
-                        setState(() {
-                          this.progress = progress / 100;
-                          urlController.text = this.url;
-                        });
-                      },
-                      onUpdateVisitedHistory:
-                          (controller, url, androidIsReload) {
-                        setState(() {
-                          this.url = url.toString();
-                          urlController.text = this.url;
-                        });
-                      },
-                      onConsoleMessage: (controller, consoleMessage) {
-                        /// Function onConsoleMessage
-                        model.onConsoleMessage(
-                          paymentRegister: widget.paymentRegister,  
-                          controller: controller,
-                          consoleMessage: consoleMessage,
-                          onSuccessForView: () async {
-                            Navigator.pop(context);
-                            await model.showOnlinePaymentSuccessDialog();
-                          },
-                          onFailForView: () async {
-                            Navigator.pop(context);
-                            await model.showOnlinePaymentFailDialog();
-                          },
-                        );
-                      },
                     ),
-                    progress < 1.0
-                        ? LinearProgressIndicator(
-                            value: progress,
-                            backgroundColor: kcPrimaryColor.withOpacity(0.3),
-                            color: kcPrimaryColor,
-                          )
-                        : SizedBox(),
-                  ],
-                ),
-              ),
             ),
           ],
         ),

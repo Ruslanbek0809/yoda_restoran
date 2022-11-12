@@ -335,6 +335,9 @@ class SingleOrderViewModel extends BaseViewModel {
     );
   }
 
+  bool _isPaymentLoading = false;
+  bool get isPaymentLoading => _isPaymentLoading;
+
   /// Function onConsoleMessage
   Future<void> onConsoleMessage({
     OrderPaymentRegister? paymentRegister,
