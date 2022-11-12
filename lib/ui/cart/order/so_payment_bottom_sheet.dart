@@ -134,12 +134,15 @@ class _SingleOrderPaymentBottomSheetViewState
                       onConsoleMessage: (controller, consoleMessage) {
                         /// Function onConsoleMessage
                         model.onConsoleMessage(
+                          paymentRegister: widget.paymentRegister,
                           controller: controller,
                           consoleMessage: consoleMessage,
-                          onSuccessForView: () async =>
-                              await model.showOnlinePaymentSuccessDialog(),
-                          onFailForView: () async =>
-                              await model.showOnlinePaymentFailDialog(),
+                          onSuccessForView: () async {},
+                          onFailForView: () async {},
+                          // onSuccessForView: () async =>
+                          //     await model.showOnlinePaymentSuccessDialog(),
+                          // onFailForView: () async =>
+                          //     await model.showOnlinePaymentFailDialog(),
                         );
                       },
                     ),

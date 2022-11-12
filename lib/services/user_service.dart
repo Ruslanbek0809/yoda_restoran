@@ -573,7 +573,7 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     // _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test6';
+    _queryParams['orderNumber'] = 'Ver43Test7';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -693,8 +693,8 @@ class UserService {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['orderId'] = 'Ver43Test6';
-    // _queryParams['orderId'] = paymentRegister.orderId;
+    // _queryParams['orderId'] = 'Ver43Test4';
+    _queryParams['orderId'] = paymentRegister.orderId;
     _queryParams['language'] = 'ru';
 
     log.v('_queryParams at the END: $_queryParams');

@@ -364,7 +364,8 @@ class SingleOrderViewModel extends BaseViewModel {
   }
 
   /// Function onConsoleMessage
-  void onConsoleMessage({
+  Future<void> onConsoleMessage({
+    PaymentRegister? paymentRegister,
     InAppWebViewController? controller,
     ConsoleMessage? consoleMessage,
     Function()? onSuccessForView,
@@ -377,7 +378,23 @@ class SingleOrderViewModel extends BaseViewModel {
     log.v(
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
 
-    if (_isErrorTextExists && _isErrorCodeExists) onFailForView!();
+    if (_isErrorTextExists && _isErrorCodeExists) {
+      // onFailForView!();
+      // checkOnlinePaymentOrderState(paymentRegister: paymentRegister);
+
+      await _userService.checkOnlinePaymentOrderState(
+        paymentRegister!,
+        (PaymentRegister paymentRegister) {
+          // _isLoading = false;
+          // onSuccessForView!(paymentRegister);
+        },
+        () {
+          // _isLoading = false;
+          // notifyListeners();
+          // onFailForView!();
+        },
+      );
+    }
   }
 
   /// SHOWS ONLINE PAYMENT FAIL Dialog
