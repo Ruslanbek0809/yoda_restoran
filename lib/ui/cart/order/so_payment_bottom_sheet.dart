@@ -94,43 +94,43 @@ class _SingleOrderPaymentBottomSheetViewState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 0.1.sh),
+                  // SizedBox(height: 0.1.sh),
                   SvgPicture.asset(
                     'assets/title_yoda_restoran_start.svg',
                     width: 0.6.sw,
                   ),
                   SizedBox(height: 0.1.sh),
                   SvgPicture.asset(
-                    'assets/online_payment_success.svg',
+                    'assets/online_payment_fail.svg',
                     width: 100.sp,
                   ),
                   SizedBox(height: 0.1.sh),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Text(
-                      LocaleKeys.online_payment_success,
+                      LocaleKeys.online_payment_fail,
                       textAlign: TextAlign.center,
                       style: kts20BoldText,
                     ).tr(),
                   ),
-                  // SizedBox(height: 10.h),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  //   child: Text(
-                  //     LocaleKeys.toConfirmOrderWairForCallFromRes,
-                  //     textAlign: TextAlign.center,
-                  //     style: kts16HelperText,
-                  //   ).tr(),
-                  // ),
-                  // SizedBox(height: 60.h),
-                  // TextButton(
-                  //   child: Text(
-                  //     LocaleKeys.orders,
-                  //     style: kts18Text,
-                  //   ).tr(),
-                  //   onPressed: model.navToOrdersByRemovingAll,
-                  // ),
-                  SizedBox(height: 0.2.sh),
+                  SizedBox(height: 10.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      LocaleKeys.online_payment_fail_info,
+                      textAlign: TextAlign.center,
+                      style: kts14SecondaryDarkText,
+                    ).tr(),
+                  ),
+                  SizedBox(height: 0.075.sh),
+                  TextButton(
+                    child: Text(
+                      LocaleKeys.cash_payment,
+                      style: kts18Text,
+                    ).tr(),
+                    onPressed: model.navToOrdersByRemovingAll,
+                  ),
+                  SizedBox(height: 10.h),
                   SizedBox(
                     width: 1.sw,
                     child: Padding(
@@ -156,6 +156,72 @@ class _SingleOrderPaymentBottomSheetViewState
                 ],
               ),
             ),
+            // Expanded(
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       SizedBox(height: 0.1.sh),
+            //       SvgPicture.asset(
+            //         'assets/title_yoda_restoran_start.svg',
+            //         width: 0.6.sw,
+            //       ),
+            //       SizedBox(height: 0.1.sh),
+            //       SvgPicture.asset(
+            //         'assets/online_payment_success.svg',
+            //         width: 100.sp,
+            //       ),
+            //       SizedBox(height: 0.1.sh),
+            //       Padding(
+            //         padding: EdgeInsets.symmetric(horizontal: 16.w),
+            //         child: Text(
+            //           LocaleKeys.online_payment_success,
+            //           textAlign: TextAlign.center,
+            //           style: kts20BoldText,
+            //         ).tr(),
+            //       ),
+            //       // SizedBox(height: 10.h),
+            //       // Padding(
+            //       //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+            //       //   child: Text(
+            //       //     LocaleKeys.toConfirmOrderWairForCallFromRes,
+            //       //     textAlign: TextAlign.center,
+            //       //     style: kts16HelperText,
+            //       //   ).tr(),
+            //       // ),
+            //       // SizedBox(height: 60.h),
+            //       // TextButton(
+            //       //   child: Text(
+            //       //     LocaleKeys.orders,
+            //       //     style: kts18Text,
+            //       //   ).tr(),
+            //       //   onPressed: model.navToOrdersByRemovingAll,
+            //       // ),
+            //       SizedBox(height: 0.2.sh),
+            //       SizedBox(
+            //         width: 1.sw,
+            //         child: Padding(
+            //           padding: EdgeInsets.symmetric(horizontal: 30.w),
+            //           child: TextButton(
+            //             style: TextButton.styleFrom(
+            //               backgroundColor: kcSecondaryDarkColor,
+            //               primary: kcSecondaryLightColor, // ripple effect color
+            //               elevation: 0,
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: AppTheme().radius10),
+            //               padding: EdgeInsets.symmetric(vertical: 14.h),
+            //             ),
+            //             child: Text(
+            //               LocaleKeys.orders,
+            //               style: ktsButtonWhite18Text,
+            //             ).tr(),
+            //             onPressed: model.navToHomeByRemovingAll,
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(height: 50.h),
+            //     ],
+            //   ),
+            // ),
             // // --------------- CREDIT CARD CONFIRMATION -------------- //
             // Expanded(
             //   child: !model.isPaymentLoading

@@ -73,6 +73,11 @@ TextStyle ktsDefault14DialogText = TextStyle(
   color: kcDialogColor,
 );
 
+TextStyle kts14SecondaryDarkText = TextStyle(
+  fontSize: 14.sp,
+  color: kcSecondaryDarkColor,
+);
+
 TextStyle kts16ContactText = TextStyle(
   fontSize: 16.sp,
   color: kcContactColor,
