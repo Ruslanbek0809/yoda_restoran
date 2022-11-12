@@ -75,6 +75,8 @@ abstract class  LocaleKeys {
   static const online_payment_success = 'online_payment_success';
   static const online_payment_fail = 'online_payment_fail';
   static const online_payment_fail_info = 'online_payment_fail_info';
+  static const cash_payment = 'cash_payment';
+  static const online_payment_fail_retry = 'online_payment_fail_retry';
   static const online_payment_send_code_info = 'online_payment_send_code_info';
   static const selectCreditCard = 'selectCreditCard';
   static const addNewCreditCard = 'addNewCreditCard';
