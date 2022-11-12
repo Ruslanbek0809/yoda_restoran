@@ -92,6 +92,17 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                               style: kts18Text,
                                             ),
 
+                                            /// ONLINE payment bank info
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 2.h),
+                                              child: Text(
+                                                LocaleKeys
+                                                    .online_paymentType_bank_info,
+                                                style: kts12DialogText,
+                                              ).tr(),
+                                            ),
+
                                             /// ONLINE payment info
                                             Padding(
                                               padding:

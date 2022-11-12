@@ -64,6 +64,7 @@
     "tomorrow": "Ertir",
     "requiredWorkingHoursForRes": "Restoran sargytlary {} aralygynda kabul edýär.",
     "paymentType": "Töleg görnüşi: ",
+    "online_paymentType_bank_info": "“Halkbank” onlaýn töleg ulgamyna girýän banklaryň kartlary kabul edilýär",
     "online_paymentType_info": "Sargydyňyz restoran tarapyndan kabul edilenden soň töleg edip bilersiňiz",
     "online_paymentType": "Online töleg",
     "can_online_pay": "Töleg edip bilersiňiz",

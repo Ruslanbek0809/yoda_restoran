@@ -66,6 +66,7 @@ abstract class  LocaleKeys {
   static const tomorrow = 'tomorrow';
   static const requiredWorkingHoursForRes = 'requiredWorkingHoursForRes';
   static const paymentType = 'paymentType';
+  static const online_paymentType_bank_info = 'online_paymentType_bank_info';
   static const online_paymentType_info = 'online_paymentType_info';
   static const online_paymentType = 'online_paymentType';
   static const can_online_pay = 'can_online_pay';

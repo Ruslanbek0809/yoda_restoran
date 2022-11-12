@@ -134,7 +134,7 @@ class _SingleOrderPaymentBottomSheetViewState
                       onConsoleMessage: (controller, consoleMessage) {
                         /// Function onConsoleMessage
                         model.onConsoleMessage(
-                          paymentRegister: widget.paymentRegister,
+                          paymentRegister: widget.paymentRegister,  
                           controller: controller,
                           consoleMessage: consoleMessage,
                           onSuccessForView: () async {
