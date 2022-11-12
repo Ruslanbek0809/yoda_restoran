@@ -12,11 +12,13 @@ class SingleOrderPaymentBottomSheetView extends StatefulWidget {
   final ScrollController scrollController;
   final double offset;
   final OrderPaymentRegister paymentRegister;
+  final Order order;
   const SingleOrderPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
     required this.paymentRegister,
+    required this.order,
   }) : super(key: key);
 
   @override

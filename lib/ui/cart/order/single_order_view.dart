@@ -866,6 +866,7 @@ class SingleOrderView extends StatelessWidget {
                                             SingleOrderPaymentBottomSheetView(
                                           scrollController: scrollController,
                                           offset: offset,
+                                          order: order,
                                           paymentRegister: paymentRegister,
                                         ),
                                       );

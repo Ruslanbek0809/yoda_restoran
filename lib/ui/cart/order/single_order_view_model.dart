@@ -338,8 +338,16 @@ class SingleOrderViewModel extends BaseViewModel {
   bool _isPaymentLoading = false;
   bool get isPaymentLoading => _isPaymentLoading;
 
+  bool _isPaymentPanelsFinished = false;
+  bool get isPaymentPanelsFinished => _isPaymentPanelsFinished;
+
+  /// Enum for order payment status
+  OrderPaymentStatus _isPaymentSuccess = OrderPaymentStatus.idle;
+  OrderPaymentStatus get isPaymentSuccess => _isPaymentSuccess;
+
   /// Function onConsoleMessage
   Future<void> onConsoleMessage({
+    Order? order,
     OrderPaymentRegister? paymentRegister,
     InAppWebViewController? controller,
     ConsoleMessage? consoleMessage,
@@ -354,17 +362,45 @@ class SingleOrderViewModel extends BaseViewModel {
         'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
 
     if (_isErrorTextExists && _isErrorCodeExists) {
+      _isPaymentLoading = true;
+
+      /// STARTS _isPaymentLoading part in bottom sheet
+      _isPaymentPanelsFinished = true;
+      notifyListeners();
+
       /// CHECKS ONLINE PAYMENT ORDER STATUS
       await _userService.checkOnlinePaymentOrderStatus(
         paymentRegister!,
         () async {
-          onSuccessForView!();
+          // onSuccessForView!();
+
+          _isPaymentLoading = false;
+
+          _isPaymentSuccess = OrderPaymentStatus.success;
+          notifyListeners();
+
+          /// PATCHS ORDER PAID VAR
+          await runBusyFuture(
+            _userService.patchOrderToPaid(
+              order!.id!,
+              () {
+                // onSuccessForView();
+              },
+              () {
+                onFailForView!();
+              },
+            ),
+          );
 
           /// REINITIALIZES ORDERS
           /// TODO: Optimize if possible
           await orderViewModel!.getInitialOrders();
         },
         () {
+          _isPaymentLoading = false;
+
+          _isPaymentSuccess = OrderPaymentStatus.fail;
+          notifyListeners();
           onFailForView!();
         },
       );
