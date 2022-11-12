@@ -686,38 +686,16 @@ class UserService {
 
   /// CHECKS ONLINE PAYMENT ORDER STATE
   Future<void> checkOnlinePaymentOrderState(
-    Order order,
+    PaymentRegister paymentRegister,
     Function(PaymentRegister) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    // _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test6';
-
-    /// AMOUNT part START
-    num _totalOrderSum = order.totPrice!;
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        _totalOrderSum -= order.promocode!.discount!;
-      else
-        _totalOrderSum = order.totPrice! -
-            (order.totPrice! / 100) * order.promocode!.discount!;
-    }
-    if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
-
-    _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
-    _queryParams['amount'] = _totalOrderSum.toInt();
-
-    /// AMOUNT part END
-
-    _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
-    _queryParams['description'] = 'Yoda Restoran: ${order.restaurant!.name}';
-    _queryParams['currency'] = 934;
+    _queryParams['orderId'] = 'Ver43Test6';
+    // _queryParams['orderId'] = paymentRegister.orderId;
     _queryParams['language'] = 'ru';
-    _queryParams['pageView'] = 'DESKTOP';
-    _queryParams['clientId'] = _currentUser!.id;
 
     log.v('_queryParams at the END: $_queryParams');
     final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
@@ -727,7 +705,7 @@ class UserService {
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
+      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
@@ -788,13 +766,13 @@ class UserService {
           log.v(
               'RESPONSE: _paymentRegister.errorMessage NOT NULL => ${_paymentRegister.errorMessage}');
 
-        /// if SUCCESS
-        if (_paymentRegister.errorCode == '0')
-          onSuccess(_paymentRegister);
+        // /// if SUCCESS
+        // if (_paymentRegister.errorCode == '0')
+        //   onSuccess(_paymentRegister);
 
-        /// if FAIL
-        else
-          onFail();
+        // /// if FAIL
+        // else
+        //   onFail();
       }
     } on DioError catch (error) {
       // log.v(

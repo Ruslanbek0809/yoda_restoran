@@ -336,6 +336,33 @@ class SingleOrderViewModel extends BaseViewModel {
     );
   }
 
+  /// CHECKS ONLINE PAYMENT ORDER STATE
+  Future<void> checkOnlinePaymentOrderState({
+    PaymentRegister? paymentRegister,
+    Function(PaymentRegister)? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onConfirmButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.checkOnlinePaymentOrderState(
+        paymentRegister!,
+        (PaymentRegister paymentRegister) {
+          _isLoading = false;
+          onSuccessForView!(paymentRegister);
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
   /// Function onConsoleMessage
   void onConsoleMessage({
     InAppWebViewController? controller,
