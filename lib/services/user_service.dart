@@ -566,7 +566,7 @@ class UserService {
   /// POST ONLINE PAYMENT WITHOUT PAYMENT PANEL
   Future<void> postOnlinePayment(
     Order order,
-    Function(PaymentRegister) onSuccess,
+    Function(OrderPaymentRegister) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
@@ -649,8 +649,8 @@ class UserService {
         final _decodedResponse = jsonDecode(response.data);
 
         /// CONVERTS JSON into DART MODEL
-        PaymentRegister? _paymentRegister;
-        _paymentRegister = PaymentRegister.fromJson(_decodedResponse);
+        OrderPaymentRegister? _paymentRegister;
+        _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
 
         if (_paymentRegister.orderId != null)
           log.v(
@@ -685,7 +685,7 @@ class UserService {
 
   /// CHECKS ONLINE PAYMENT ORDER STATUS
   Future<void> checkOnlinePaymentOrderStatus(
-    PaymentRegister paymentRegister,
+    OrderPaymentRegister paymentRegister,
     Function() onSuccess,
     Function() onFail,
   ) async {
@@ -696,7 +696,8 @@ class UserService {
     _queryParams['language'] = 'ru';
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    final FormData onlinePaymentOrderStatusFormData =
+        FormData.fromMap(_queryParams);
 
     try {
       //----------- DIO PART START -------------//
@@ -736,7 +737,7 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        data: onlinePaymentFormData,
+        data: onlinePaymentOrderStatusFormData,
       );
       if (response.data != null) {
         log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
@@ -745,8 +746,8 @@ class UserService {
         final _decodedResponse = jsonDecode(response.data);
 
         /// CONVERTS JSON into DART MODEL
-        PaymentRegister? _paymentRegister;
-        _paymentRegister = PaymentRegister.fromJson(_decodedResponse);
+        OrderPaymentRegister? _paymentRegister;
+        _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
 
         if (_paymentRegister.orderId != null)
           log.v(

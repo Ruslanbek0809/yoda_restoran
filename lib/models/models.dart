@@ -36,4 +36,4 @@ export 'address_dialog_data.dart';
 export 'rating_model.dart';
 export 'bank_card.dart';
 export 'credit_card.dart';
-export 'payment_register.dart';
+export 'order_payment_register.dart';

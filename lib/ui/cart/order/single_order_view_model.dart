@@ -312,7 +312,7 @@ class SingleOrderViewModel extends BaseViewModel {
   /// POST after CONFIRM button is pressed
   Future<void> onConfirmButtonPressed({
     Order? order,
-    Function(PaymentRegister)? onSuccessForView,
+    Function(OrderPaymentRegister)? onSuccessForView,
     Function()? onFailForView,
   }) async {
     log.v('onConfirmButtonPressed()');
@@ -323,7 +323,7 @@ class SingleOrderViewModel extends BaseViewModel {
     await runBusyFuture(
       _userService.postOnlinePayment(
         order!,
-        (PaymentRegister paymentRegister) {
+        (OrderPaymentRegister paymentRegister) {
           _isLoading = false;
           notifyListeners();
           onSuccessForView!(paymentRegister);
@@ -339,7 +339,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
   /// Function onConsoleMessage
   Future<void> onConsoleMessage({
-    PaymentRegister? paymentRegister,
+    OrderPaymentRegister? paymentRegister,
     InAppWebViewController? controller,
     ConsoleMessage? consoleMessage,
     Function()? onSuccessForView,

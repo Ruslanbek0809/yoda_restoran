@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'payment_register.g.dart';
+part 'order_payment_register.g.dart';
 
 @JsonSerializable()
-class PaymentRegister {
-  PaymentRegister({
+class OrderPaymentRegister {
+  OrderPaymentRegister({
     this.errorCode,
     this.errorMessage,
     this.orderId,
@@ -23,8 +23,8 @@ class PaymentRegister {
   @JsonKey(name: 'formUrl')
   final String? formUrl;
 
-  factory PaymentRegister.fromJson(Map<String, dynamic> json) =>
-      _$PaymentRegisterFromJson(json);
+  factory OrderPaymentRegister.fromJson(Map<String, dynamic> json) =>
+      _$OrderPaymentRegisterFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PaymentRegisterToJson(this);
+  Map<String, dynamic> toJson() => _$OrderPaymentRegisterToJson(this);
 }

@@ -12,7 +12,7 @@ import 'single_order_view_model.dart';
 class SingleOrderPaymentBottomSheetView extends StatefulWidget {
   final ScrollController scrollController;
   final double offset;
-  final PaymentRegister paymentRegister;
+  final OrderPaymentRegister paymentRegister;
   const SingleOrderPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
