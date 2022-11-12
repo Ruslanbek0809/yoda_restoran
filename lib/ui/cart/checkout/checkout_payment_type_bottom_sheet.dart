@@ -169,7 +169,6 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                 onPressed: () {
                   model.savePaymentType();
                   Navigator.pop(context);
-                  // completer(SheetResponse());
                 },
               ),
             )

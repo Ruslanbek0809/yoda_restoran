@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../app/app.locator.dart';
@@ -746,32 +745,18 @@ class UserService {
         final _decodedResponse = jsonDecode(response.data);
 
         /// CONVERTS JSON into DART MODEL
-        OrderPaymentRegister? _paymentRegister;
-        _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
+        OrderPaymentCheckStatus? _orderPaymentCheckStatus;
+        _orderPaymentCheckStatus =
+            OrderPaymentCheckStatus.fromJson(_decodedResponse);
 
-        if (_paymentRegister.orderId != null)
-          log.v(
-              'RESPONSE: _paymentRegister.orderId NOT NULL => ${_paymentRegister.orderId}');
+        /// if SUCCESS
+        if (_orderPaymentCheckStatus.errorCode == '0' &&
+            _orderPaymentCheckStatus.orderStatus == 2)
+          onSuccess();
 
-        if (_paymentRegister.formUrl != null)
-          log.v(
-              'RESPONSE: _paymentRegister.formUrl NOT NULL => ${_paymentRegister.formUrl}');
-
-        if (_paymentRegister.errorCode != null)
-          log.v(
-              'RESPONSE: _paymentRegister.errorCode  NOT NULL SUCCESS => ${_paymentRegister.errorCode == '0'}');
-
-        if (_paymentRegister.errorMessage != null)
-          log.v(
-              'RESPONSE: _paymentRegister.errorMessage NOT NULL => ${_paymentRegister.errorMessage}');
-
-        // /// if SUCCESS
-        // if (_paymentRegister.errorCode == '0')
-        //   onSuccess(_paymentRegister);
-
-        // /// if FAIL
-        // else
-        //   onFail();
+        /// if FAIL
+        else
+          onFail();
       }
     } on DioError catch (error) {
       log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');

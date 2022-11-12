@@ -137,12 +137,14 @@ class _SingleOrderPaymentBottomSheetViewState
                           paymentRegister: widget.paymentRegister,
                           controller: controller,
                           consoleMessage: consoleMessage,
-                          onSuccessForView: () async {},
-                          onFailForView: () async {},
-                          // onSuccessForView: () async =>
-                          //     await model.showOnlinePaymentSuccessDialog(),
-                          // onFailForView: () async =>
-                          //     await model.showOnlinePaymentFailDialog(),
+                          onSuccessForView: () async {
+                            Navigator.pop(context);
+                            await model.showOnlinePaymentSuccessDialog();
+                          },
+                          onFailForView: () async {
+                            Navigator.pop(context);
+                            await model.showOnlinePaymentFailDialog();
+                          },
                         );
                       },
                     ),
@@ -157,53 +159,6 @@ class _SingleOrderPaymentBottomSheetViewState
                 ),
               ),
             ),
-
-            // //--------------- CREDIT CARD CHOOSE BUTTON -------------- //
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: kcWhiteColor,
-            //     border: Border(
-            //       top: BorderSide(
-            //         width: 0.1,
-            //         color: kcButtonBorderColor,
-            //       ),
-            //     ),
-            //   ),
-            //   padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 22.h),
-            //   child: TextButton(
-            //     style: TextButton.styleFrom(
-            //       backgroundColor: kcOnlinePaymentColor,
-            //       primary: kcSecondaryLightColor, // ripple effect color
-            //       elevation: 0,
-            //       shape:
-            //           RoundedRectangleBorder(borderRadius: AppTheme().radius15),
-            //       padding: EdgeInsets.symmetric(vertical: 14.h),
-            //     ),
-            //     child: Text(
-            //       LocaleKeys.selectCreditCard,
-            //       style: TextStyle(
-            //         color: kcWhiteColor,
-            //         fontSize: 18.sp,
-            //         fontWeight: FontWeight.w400,
-            //       ),
-            //     ).tr(),
-            //     // onPressed: () async => await showFlexibleBottomSheet(
-            //     //   isExpand: false,
-            //     //   initHeight: 0.95,
-            //     //   maxHeight: 0.95,
-            //     //   duration: Duration(milliseconds: 250),
-            //     //   context: context,
-            //     //   bottomSheetColor: Colors.transparent,
-            //     //   builder: (context, scrollController, offset) =>
-            //     //       SOConfirmationBottomSheetView(
-            //     //     scrollController: scrollController,
-            //     //     offset: offset,
-            //     //   ),
-            //     // ),
-            //     onPressed: () async {
-            //     },
-            //   ),
-            // )
           ],
         ),
       ),

@@ -881,35 +881,6 @@ class SingleOrderView extends StatelessWidget {
                                       );
                                     },
                                   );
-                                  // await model.onConfirmButtonPressed(
-                                  //   order: order,
-                                  //   onSuccessForView: (paymentRegister) async {
-                                  //     await showFlexibleBottomSheet(
-                                  //       initHeight: 0.95,
-                                  //       maxHeight: 0.95,
-                                  //       duration: Duration(milliseconds: 250),
-                                  //       context: context,
-                                  //       bottomSheetColor: Colors.transparent,
-                                  //       builder: (context, scrollController,
-                                  //               offset) =>
-                                  //           SingleOrderPaymentBottomSheetView(
-                                  //         scrollController: scrollController,
-                                  //         offset: offset,
-                                  //         paymentRegister: paymentRegister,
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  //   onFailForView: () async {
-                                  //     await showErrorFlashBar(
-                                  //       context: context,
-                                  //       margin: EdgeInsets.only(
-                                  //         left: 16.w,
-                                  //         right: 16.w,
-                                  //         bottom: 0.05.sh,
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
 
                                   // // await model
                                   // //     .showCustomSendCodeConfirmationBottomSheet();
