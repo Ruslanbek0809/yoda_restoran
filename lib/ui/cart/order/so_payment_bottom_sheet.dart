@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../widgets/widgets.dart';
 import 'single_order_view_model.dart';
 
@@ -86,83 +89,149 @@ class _SingleOrderPaymentBottomSheetViewState
           children: [
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
-
-            // --------------- CREDIT CARD CONFIRMATION -------------- //
+            // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
             Expanded(
-              child: !model.isPaymentLoading
-                  ? LoadingWidget()
-                  : Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Stack(
-                        children: [
-                          InAppWebView(
-                            key: webViewKey,
-                            initialUrlRequest: URLRequest(
-                              url: Uri.parse(widget.paymentRegister.formUrl!),
-                            ),
-                            initialOptions: options,
-                            pullToRefreshController: pullToRefreshController,
-                            onWebViewCreated: (controller) {
-                              webViewController = controller;
-                            },
-                            onLoadStart: (controller, url) {
-                              setState(() {
-                                this.url = url.toString();
-                                urlController.text = this.url;
-                              });
-                            },
-                            androidOnPermissionRequest:
-                                (controller, origin, resources) async {
-                              return PermissionRequestResponse(
-                                  resources: resources,
-                                  action:
-                                      PermissionRequestResponseAction.GRANT);
-                            },
-                            onProgressChanged: (controller, progress) {
-                              if (progress == 100) {
-                                pullToRefreshController.endRefreshing();
-                              }
-                              setState(() {
-                                this.progress = progress / 100;
-                                urlController.text = this.url;
-                              });
-                            },
-                            onUpdateVisitedHistory:
-                                (controller, url, androidIsReload) {
-                              setState(() {
-                                this.url = url.toString();
-                                urlController.text = this.url;
-                              });
-                            },
-                            onConsoleMessage: (controller, consoleMessage) {
-                              /// Function onConsoleMessage
-                              model.onConsoleMessage(
-                                paymentRegister: widget.paymentRegister,
-                                controller: controller,
-                                consoleMessage: consoleMessage,
-                                onSuccessForView: () async {
-                                  Navigator.pop(context);
-                                  await model.showOnlinePaymentSuccessDialog();
-                                },
-                                onFailForView: () async {
-                                  Navigator.pop(context);
-                                  await model.showOnlinePaymentFailDialog();
-                                },
-                              );
-                            },
-                          ),
-                          progress < 1.0
-                              ? LinearProgressIndicator(
-                                  value: progress,
-                                  backgroundColor:
-                                      kcPrimaryColor.withOpacity(0.3),
-                                  color: kcPrimaryColor,
-                                )
-                              : SizedBox(),
-                        ],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 0.1.sh),
+                  SvgPicture.asset(
+                    'assets/title_yoda_restoran_start.svg',
+                    width: 0.6.sw,
+                  ),
+                  SizedBox(height: 0.1.sh),
+                  SvgPicture.asset(
+                    'assets/online_payment_success.svg',
+                    width: 100.sp,
+                  ),
+                  SizedBox(height: 0.1.sh),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      LocaleKeys.online_payment_success,
+                      textAlign: TextAlign.center,
+                      style: kts20BoldText,
+                    ).tr(),
+                  ),
+                  // SizedBox(height: 10.h),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  //   child: Text(
+                  //     LocaleKeys.toConfirmOrderWairForCallFromRes,
+                  //     textAlign: TextAlign.center,
+                  //     style: kts16HelperText,
+                  //   ).tr(),
+                  // ),
+                  // SizedBox(height: 60.h),
+                  // TextButton(
+                  //   child: Text(
+                  //     LocaleKeys.orders,
+                  //     style: kts18Text,
+                  //   ).tr(),
+                  //   onPressed: model.navToOrdersByRemovingAll,
+                  // ),
+                  SizedBox(height: 0.2.sh),
+                  SizedBox(
+                    width: 1.sw,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: kcSecondaryDarkColor,
+                          primary: kcSecondaryLightColor, // ripple effect color
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: AppTheme().radius10),
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                        ),
+                        child: Text(
+                          LocaleKeys.orders,
+                          style: ktsButtonWhite18Text,
+                        ).tr(),
+                        onPressed: model.navToHomeByRemovingAll,
                       ),
                     ),
+                  ),
+                  SizedBox(height: 50.h),
+                ],
+              ),
             ),
+            // // --------------- CREDIT CARD CONFIRMATION -------------- //
+            // Expanded(
+            //   child: !model.isPaymentLoading
+            //       ? LoadingWidget()
+            //       : Padding(
+            //           padding: EdgeInsets.symmetric(horizontal: 16.w),
+            //           child: Stack(
+            //             children: [
+            //               InAppWebView(
+            //                 key: webViewKey,
+            //                 initialUrlRequest: URLRequest(
+            //                   url: Uri.parse(widget.paymentRegister.formUrl!),
+            //                 ),
+            //                 initialOptions: options,
+            //                 pullToRefreshController: pullToRefreshController,
+            //                 onWebViewCreated: (controller) {
+            //                   webViewController = controller;
+            //                 },
+            //                 onLoadStart: (controller, url) {
+            //                   setState(() {
+            //                     this.url = url.toString();
+            //                     urlController.text = this.url;
+            //                   });
+            //                 },
+            //                 androidOnPermissionRequest:
+            //                     (controller, origin, resources) async {
+            //                   return PermissionRequestResponse(
+            //                       resources: resources,
+            //                       action:
+            //                           PermissionRequestResponseAction.GRANT);
+            //                 },
+            //                 onProgressChanged: (controller, progress) {
+            //                   if (progress == 100) {
+            //                     pullToRefreshController.endRefreshing();
+            //                   }
+            //                   setState(() {
+            //                     this.progress = progress / 100;
+            //                     urlController.text = this.url;
+            //                   });
+            //                 },
+            //                 onUpdateVisitedHistory:
+            //                     (controller, url, androidIsReload) {
+            //                   setState(() {
+            //                     this.url = url.toString();
+            //                     urlController.text = this.url;
+            //                   });
+            //                 },
+            //                 onConsoleMessage: (controller, consoleMessage) {
+            //                   /// Function onConsoleMessage
+            //                   model.onConsoleMessage(
+            //                     paymentRegister: widget.paymentRegister,
+            //                     controller: controller,
+            //                     consoleMessage: consoleMessage,
+            //                     onSuccessForView: () async {
+            //                       Navigator.pop(context);
+            //                       await model.showOnlinePaymentSuccessDialog();
+            //                     },
+            //                     onFailForView: () async {
+            //                       Navigator.pop(context);
+            //                       await model.showOnlinePaymentFailDialog();
+            //                     },
+            //                   );
+            //                 },
+            //               ),
+            //               progress < 1.0
+            //                   ? LinearProgressIndicator(
+            //                       value: progress,
+            //                       backgroundColor:
+            //                           kcPrimaryColor.withOpacity(0.3),
+            //                       color: kcPrimaryColor,
+            //                     )
+            //                   : SizedBox(),
+            //             ],
+            //           ),
+            //         ),
+            // ),
           ],
         ),
       ),
