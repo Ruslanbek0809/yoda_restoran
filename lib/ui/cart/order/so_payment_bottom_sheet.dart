@@ -90,113 +90,49 @@ class _SingleOrderPaymentBottomSheetViewState
             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
             // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // SizedBox(height: 0.1.sh),
-                  SvgPicture.asset(
-                    'assets/title_yoda_restoran_start.svg',
-                    width: 0.6.sw,
-                  ),
-                  SizedBox(height: 0.1.sh),
-                  SvgPicture.asset(
-                    'assets/online_payment_fail.svg',
-                    width: 100.sp,
-                  ),
-                  SizedBox(height: 0.1.sh),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Text(
-                      LocaleKeys.online_payment_fail,
-                      textAlign: TextAlign.center,
-                      style: kts20BoldText,
-                    ).tr(),
-                  ),
-                  SizedBox(height: 10.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Text(
-                      LocaleKeys.online_payment_fail_info,
-                      textAlign: TextAlign.center,
-                      style: kts14SecondaryDarkText,
-                    ).tr(),
-                  ),
-                  SizedBox(height: 0.075.sh),
-                  TextButton(
-                    child: Text(
-                      LocaleKeys.cash_payment,
-                      style: kts18Text,
-                    ).tr(),
-                    onPressed: model.navToOrdersByRemovingAll,
-                  ),
-                  SizedBox(height: 10.h),
-                  SizedBox(
-                    width: 1.sw,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: kcSecondaryDarkColor,
-                          primary: kcSecondaryLightColor, // ripple effect color
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: AppTheme().radius10),
-                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                        ),
-                        child: Text(
-                          LocaleKeys.orders,
-                          style: ktsButtonWhite18Text,
-                        ).tr(),
-                        onPressed: model.navToHomeByRemovingAll,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 50.h),
-                ],
-              ),
-            ),
             // Expanded(
             //   child: Column(
             //     mainAxisAlignment: MainAxisAlignment.center,
             //     children: [
-            //       SizedBox(height: 0.1.sh),
-            //       SvgPicture.asset(
-            //         'assets/title_yoda_restoran_start.svg',
-            //         width: 0.6.sw,
+            //       Padding(
+            //         padding: EdgeInsets.only(top: 0.1.sh),
+            //         child: SvgPicture.asset(
+            //           'assets/title_yoda_restoran_start.svg',
+            //           width: 0.6.sw,
+            //         ),
             //       ),
-            //       SizedBox(height: 0.1.sh),
+            //       Spacer(),
             //       SvgPicture.asset(
-            //         'assets/online_payment_success.svg',
+            //         'assets/online_payment_fail.svg',
             //         width: 100.sp,
             //       ),
             //       SizedBox(height: 0.1.sh),
             //       Padding(
             //         padding: EdgeInsets.symmetric(horizontal: 16.w),
             //         child: Text(
-            //           LocaleKeys.online_payment_success,
+            //           LocaleKeys.online_payment_fail,
             //           textAlign: TextAlign.center,
             //           style: kts20BoldText,
             //         ).tr(),
             //       ),
-            //       // SizedBox(height: 10.h),
-            //       // Padding(
-            //       //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-            //       //   child: Text(
-            //       //     LocaleKeys.toConfirmOrderWairForCallFromRes,
-            //       //     textAlign: TextAlign.center,
-            //       //     style: kts16HelperText,
-            //       //   ).tr(),
-            //       // ),
-            //       // SizedBox(height: 60.h),
-            //       // TextButton(
-            //       //   child: Text(
-            //       //     LocaleKeys.orders,
-            //       //     style: kts18Text,
-            //       //   ).tr(),
-            //       //   onPressed: model.navToOrdersByRemovingAll,
-            //       // ),
-            //       SizedBox(height: 0.2.sh),
+            //       SizedBox(height: 10.h),
+            //       Padding(
+            //         padding: EdgeInsets.symmetric(horizontal: 16.w),
+            //         child: Text(
+            //           LocaleKeys.online_payment_fail_info,
+            //           textAlign: TextAlign.center,
+            //           style: kts14SecondaryDarkText,
+            //         ).tr(),
+            //       ),
+            //       Spacer(),
+            //       TextButton(
+            //         child: Text(
+            //           LocaleKeys.cash_payment,
+            //           style: kts18Text,
+            //         ).tr(),
+            //         onPressed: model.navToOrdersByRemovingAll,
+            //       ),
+            //       SizedBox(height: 10.h),
             //       SizedBox(
             //         width: 1.sw,
             //         child: Padding(
@@ -218,10 +154,61 @@ class _SingleOrderPaymentBottomSheetViewState
             //           ),
             //         ),
             //       ),
-            //       SizedBox(height: 50.h),
+            //       SizedBox(height: 0.1.sh),
             //     ],
             //   ),
             // ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 0.1.sh),
+                    child: SvgPicture.asset(
+                      'assets/title_yoda_restoran_start.svg',
+                      width: 0.6.sw,
+                    ),
+                  ),
+                  Spacer(),
+                  SvgPicture.asset(
+                    'assets/online_payment_success.svg',
+                    width: 100.sp,
+                  ),
+                  SizedBox(height: 0.1.sh),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      LocaleKeys.online_payment_success,
+                      textAlign: TextAlign.center,
+                      style: kts20BoldText,
+                    ).tr(),
+                  ),
+                  Spacer(),
+                  SizedBox(
+                    width: 1.sw,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: kcSecondaryDarkColor,
+                          primary: kcSecondaryLightColor, // ripple effect color
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: AppTheme().radius10),
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                        ),
+                        child: Text(
+                          LocaleKeys.orders,
+                          style: ktsButtonWhite18Text,
+                        ).tr(),
+                        onPressed: model.navToHomeByRemovingAll,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 0.1.sh),
+                ],
+              ),
+            ),
             // // --------------- CREDIT CARD CONFIRMATION -------------- //
             // Expanded(
             //   child: !model.isPaymentLoading
