@@ -765,6 +765,32 @@ class UserService {
     }
   }
 
+  Future<void> patchOrderToPaid(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'paid': true}),
+      );
+      log.v(
+          'RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v(
+          'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
+
   // /// POST ONLINE PAYMENT WITH PAYMENT PANEL
   // Future<void> postOnlinePayment(
   //   Order order,
