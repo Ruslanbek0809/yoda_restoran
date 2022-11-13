@@ -369,40 +369,40 @@ class SingleOrderViewModel extends BaseViewModel {
       notifyListeners();
 
       /// CHECKS ONLINE PAYMENT ORDER STATUS
-      await _userService.checkOnlinePaymentOrderStatus(
-        paymentRegister!,
-        () async {
-          // onSuccessForView!();
+      await runBusyFuture(
+        _userService.checkOnlinePaymentOrderStatus(
+          paymentRegister!,
+          () async {
+            // onSuccessForView!();
 
-          _isPaymentLoading = false;
+            _isPaymentLoading = false;
 
-          _isPaymentSuccess = OrderPaymentStatus.success;
-          notifyListeners();
+            _isPaymentSuccess = OrderPaymentStatus.success;
+            notifyListeners();
 
-          /// PATCHS ORDER PAID VAR
-          await runBusyFuture(
-            _userService.patchOrderToPaid(
+            /// PATCHS ORDER PAID VAR
+            await _userService.patchOrderToPaid(
               order!.id!,
-              () {
+              () async {
+                /// REINITIALIZES ORDERS
+                /// TODO: Optimize if possible
+                await orderViewModel!.getInitialOrders();
+
                 // onSuccessForView();
               },
               () {
-                onFailForView!();
+                // onFailForView!();
               },
-            ),
-          );
+            );
+          },
+          () {
+            _isPaymentLoading = false;
 
-          /// REINITIALIZES ORDERS
-          /// TODO: Optimize if possible
-          await orderViewModel!.getInitialOrders();
-        },
-        () {
-          _isPaymentLoading = false;
-
-          _isPaymentSuccess = OrderPaymentStatus.fail;
-          notifyListeners();
-          onFailForView!();
-        },
+            _isPaymentSuccess = OrderPaymentStatus.fail;
+            notifyListeners();
+            // onFailForView!();
+          },
+        ),
       );
     }
   }

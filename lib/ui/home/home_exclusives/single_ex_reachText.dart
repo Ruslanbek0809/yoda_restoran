@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:stacked/stacked.dart';
@@ -7,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../shared/shared.dart';
 import '../../restaurant/restaurant_view.dart';
 import '../../widgets/widgets.dart';
-import '../../../utils/utils.dart';
 import '../../../models/models.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'single_ex_view_model.dart';

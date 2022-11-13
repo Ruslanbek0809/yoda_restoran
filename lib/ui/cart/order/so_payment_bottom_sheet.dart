@@ -143,6 +143,7 @@ class _SingleOrderPaymentBottomSheetViewState
                         onConsoleMessage: (controller, consoleMessage) {
                           /// Function onConsoleMessage
                           model.onConsoleMessage(
+                            order: widget.order,
                             paymentRegister: widget.paymentRegister,
                             controller: controller,
                             consoleMessage: consoleMessage,
