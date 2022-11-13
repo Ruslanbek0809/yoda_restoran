@@ -268,7 +268,11 @@ class _SingleOrderPaymentBottomSheetViewState
                         LocaleKeys.cash_payment,
                         style: kts18Text,
                       ).tr(),
-                      onPressed: model.navToOrdersByRemovingAll,
+                      onPressed: () async {
+                        if (widget.order.restaurant?.phoneNumber != null)
+                          await model.makePhoneCallToDriver(
+                              widget.order.restaurant!.phoneNumber!);
+                      },
                     ),
                     SizedBox(height: 10.h),
                     SizedBox(
@@ -286,7 +290,7 @@ class _SingleOrderPaymentBottomSheetViewState
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
                           child: Text(
-                            LocaleKeys.orders,
+                            LocaleKeys.online_payment_fail_retry,
                             style: ktsButtonWhite18Text,
                           ).tr(),
                           onPressed: () => Navigator.pop(context),

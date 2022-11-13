@@ -807,7 +807,8 @@ class SingleOrderView extends StatelessWidget {
                       ),
 
                     //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
-                    if (order.status == 1 || order.status == 2)
+                    if ((!order.paid! && order.status == 1) ||
+                        (!order.paid! && order.status == 2))
                       SizedBox(
                         width: 1.sw,
                         child: Padding(
@@ -825,8 +826,7 @@ class SingleOrderView extends StatelessWidget {
                                   borderRadius: AppTheme().radius10),
                               padding: EdgeInsets.symmetric(vertical: 11.h),
                             ),
-                            child: order.status == 1 && model.isLoading
-                                // order.status != 1 && model.isLoading
+                            child: order.status == 2 && model.isLoading
                                 ? ButtonLoading(fontSize: 28.sp)
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
