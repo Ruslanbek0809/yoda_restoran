@@ -217,7 +217,7 @@ class _SingleOrderPaymentBottomSheetViewState
                             LocaleKeys.orders,
                             style: ktsButtonWhite18Text,
                           ).tr(),
-                          onPressed: model.navToHomeByRemovingAll,
+                          onPressed: () => Navigator.pop(context),
                         ),
                       ),
                     ),
@@ -227,7 +227,7 @@ class _SingleOrderPaymentBottomSheetViewState
               ),
             // --------------- ONLINE PAYMENT FAIL -------------- //
             if (model.isPaymentPanelsFinished &&
-                model.isPaymentSuccess == OrderPaymentStatus.success)
+                model.isPaymentSuccess == OrderPaymentStatus.fail)
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -289,7 +289,7 @@ class _SingleOrderPaymentBottomSheetViewState
                             LocaleKeys.orders,
                             style: ktsButtonWhite18Text,
                           ).tr(),
-                          onPressed: model.navToHomeByRemovingAll,
+                          onPressed: () => Navigator.pop(context),
                         ),
                       ),
                     ),
