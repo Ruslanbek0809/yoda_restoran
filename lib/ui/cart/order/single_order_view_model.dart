@@ -432,13 +432,7 @@ class SingleOrderViewModel extends BaseViewModel {
       barrierDismissible: true,
     );
   }
-
-  /// RETRIES payment register formUrl
-  void retryPaymentRegisterFormUrl() {
-    _isPaymentPanelsFinished = false;
-    notifyListeners();
-  }
-
+  
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes
