@@ -368,6 +368,8 @@ class SingleOrderViewModel extends BaseViewModel {
       _isPaymentPanelsFinished = true;
       notifyListeners();
 
+      await Future.delayed(Duration(seconds: 1));
+
       /// CHECKS ONLINE PAYMENT ORDER STATUS
       await runBusyFuture(
         _userService.checkOnlinePaymentOrderStatus(
@@ -429,6 +431,12 @@ class SingleOrderViewModel extends BaseViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
+  }
+
+  /// RETRIES payment register formUrl
+  void retryPaymentRegisterFormUrl() {
+    _isPaymentPanelsFinished = false;
+    notifyListeners();
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//
