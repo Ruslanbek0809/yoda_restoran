@@ -721,11 +721,6 @@ class SingleOrderView extends StatelessWidget {
                                   if (order.restaurant?.phoneNumber != null)
                                     await model.makePhoneCallToDriver(
                                         order.restaurant!.phoneNumber!);
-                                  // if (!order.selfPickUp!)
-                                  //   await model.makePhoneCallToDriver(
-                                  //       order.driver!.mobile!);
-                                  // else
-                                  //   await model.showCancelAcceptedOrderDialog();
                                   break;
                                 case 4:
                                   await model.showRateOrderDialog(order);
@@ -852,6 +847,8 @@ class SingleOrderView extends StatelessWidget {
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:
+                                  break;
+                                case 2:
                                   await model.onConfirmButtonPressed(
                                     onSuccessForView: (paymentRegister) async {
                                       await showFlexibleBottomSheet(
@@ -900,8 +897,6 @@ class SingleOrderView extends StatelessWidget {
                                   //     order: order,
                                   //   ),
                                   // );
-                                  break;
-                                case 2:
                                   break;
                                 default:
                                   break;

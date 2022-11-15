@@ -62,7 +62,7 @@ final List<String> drawerLoggedInList = [
   "profile",
   "orders",
   "addresses",
-  "my_credit_cards",
+  // "my_credit_cards",
   "about_us"
 ];
 
