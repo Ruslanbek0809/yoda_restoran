@@ -147,14 +147,6 @@ class _SingleOrderPaymentBottomSheetViewState
                             paymentRegister: widget.paymentRegister,
                             controller: controller,
                             consoleMessage: consoleMessage,
-                            onSuccessForView: () async {
-                              Navigator.pop(context);
-                              await model.showOnlinePaymentSuccessDialog();
-                            },
-                            onFailForView: () async {
-                              Navigator.pop(context);
-                              await model.showOnlinePaymentFailDialog();
-                            },
                           );
                         },
                       ),
@@ -268,7 +260,7 @@ class _SingleOrderPaymentBottomSheetViewState
                         LocaleKeys.cash_payment,
                         style: kts18Text,
                       ).tr(),
-                      onPressed: () async {
+                      onPressed: () async { 
                         if (widget.order.restaurant?.phoneNumber != null)
                           await model.makePhoneCallToDriver(
                               widget.order.restaurant!.phoneNumber!);

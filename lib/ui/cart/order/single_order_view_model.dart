@@ -351,8 +351,6 @@ class SingleOrderViewModel extends BaseViewModel {
     OrderPaymentRegister? paymentRegister,
     InAppWebViewController? controller,
     ConsoleMessage? consoleMessage,
-    Function()? onSuccessForView,
-    Function()? onFailForView,
   }) async {
     log.v('onConsoleMessage => $consoleMessage');
 
@@ -389,12 +387,8 @@ class SingleOrderViewModel extends BaseViewModel {
                 /// REINITIALIZES ORDERS
                 /// TODO: Optimize if possible
                 await orderViewModel!.getInitialOrders();
-
-                // onSuccessForView();
               },
-              () {
-                // onFailForView!();
-              },
+              () {},
             );
           },
           () {
@@ -402,7 +396,6 @@ class SingleOrderViewModel extends BaseViewModel {
 
             _isPaymentSuccess = OrderPaymentStatus.fail;
             notifyListeners();
-            // onFailForView!();
           },
         ),
       );
@@ -432,7 +425,7 @@ class SingleOrderViewModel extends BaseViewModel {
       barrierDismissible: true,
     );
   }
-  
+
 //------------------------ ORDER SUCCESS PART ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes

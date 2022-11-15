@@ -78,18 +78,18 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
         ),
-    DialogType.onlinePaymentFail: (context, sheetRequest, completer) =>
-        ShowOnlinePaymentFailDialogView(
-          request: sheetRequest,
-          completer: completer,
-          content: sheetRequest.data,
-        ),
-    DialogType.onlinePaymentSuccess: (context, sheetRequest, completer) =>
-        ShowOnlinePaymentSuccessDialogView(
-          request: sheetRequest,
-          completer: completer,
-          content: sheetRequest.data,
-        ),
+    // DialogType.onlinePaymentFail: (context, sheetRequest, completer) =>
+    //     ShowOnlinePaymentFailDialogView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //       content: sheetRequest.data,
+    //     ),
+    // DialogType.onlinePaymentSuccess: (context, sheetRequest, completer) =>
+    //     ShowOnlinePaymentSuccessDialogView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //       content: sheetRequest.data,
+    //     ),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
@@ -1089,121 +1089,121 @@ class CreditCardDeleteDialogView extends StatelessWidget {
   }
 }
 
-//------------------ SHOW ONLINE PAYMENT DIALOGS ---------------------//
+// //------------------ SHOW ONLINE PAYMENT DIALOGS ---------------------//
 
-class ShowOnlinePaymentFailDialogView extends StatelessWidget {
-  final DialogRequest request;
-  final Function(DialogResponse) completer;
-  final String content;
-  const ShowOnlinePaymentFailDialogView({
-    Key? key,
-    required this.request,
-    required this.completer,
-    required this.content,
-  });
+// class ShowOnlinePaymentFailDialogView extends StatelessWidget {
+//   final DialogRequest request;
+//   final Function(DialogResponse) completer;
+//   final String content;
+//   const ShowOnlinePaymentFailDialogView({
+//     Key? key,
+//     required this.request,
+//     required this.completer,
+//     required this.content,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return (Platform.isIOS)
-        ? CupertinoAlertDialog(
-            title: Column(
-              children: [
-                SvgPicture.asset(
-                  'assets/online_payment_fail.svg',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Text(
-                    request.title!,
-                    style: kts18BoldText,
-                  ).tr(),
-                ),
-              ],
-            ),
-            content: Text(content, style: kts12Text).tr(),
-          )
-        : AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-            contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-            actionsAlignment: MainAxisAlignment.center,
-            title: Column(
-              children: [
-                SvgPicture.asset(
-                  'assets/online_payment_fail.svg',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Text(
-                    request.title!,
-                    textAlign: TextAlign.center,
-                  ).tr(),
-                ),
-              ],
-            ),
-            titleTextStyle: kts18BoldText,
-            content: Text(
-              content,
-              textAlign: TextAlign.center,
-            ).tr(),
-            contentTextStyle: kts12Text,
-          );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return (Platform.isIOS)
+//         ? CupertinoAlertDialog(
+//             title: Column(
+//               children: [
+//                 SvgPicture.asset(
+//                   'assets/online_payment_fail.svg',
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.only(top: 8.h),
+//                   child: Text(
+//                     request.title!,
+//                     style: kts18BoldText,
+//                   ).tr(),
+//                 ),
+//               ],
+//             ),
+//             content: Text(content, style: kts12Text).tr(),
+//           )
+//         : AlertDialog(
+//             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+//             titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
+//             contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+//             actionsAlignment: MainAxisAlignment.center,
+//             title: Column(
+//               children: [
+//                 SvgPicture.asset(
+//                   'assets/online_payment_fail.svg',
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.only(top: 8.h),
+//                   child: Text(
+//                     request.title!,
+//                     textAlign: TextAlign.center,
+//                   ).tr(),
+//                 ),
+//               ],
+//             ),
+//             titleTextStyle: kts18BoldText,
+//             content: Text(
+//               content,
+//               textAlign: TextAlign.center,
+//             ).tr(),
+//             contentTextStyle: kts12Text,
+//           );
+//   }
+// }
 
-class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
-  final DialogRequest request;
-  final Function(DialogResponse) completer;
-  final String content;
-  const ShowOnlinePaymentSuccessDialogView({
-    Key? key,
-    required this.request,
-    required this.completer,
-    required this.content,
-  });
+// class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
+//   final DialogRequest request;
+//   final Function(DialogResponse) completer;
+//   final String content;
+//   const ShowOnlinePaymentSuccessDialogView({
+//     Key? key,
+//     required this.request,
+//     required this.completer,
+//     required this.content,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return (Platform.isIOS)
-        ? CupertinoAlertDialog(
-            title: Column(
-              children: [
-                SvgPicture.asset(
-                  'assets/online_payment_success.svg',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 12.h),
-                  child: Text(
-                    request.title!,
-                    style: kts18BoldText,
-                  ).tr(),
-                ),
-              ],
-            ),
-            content: SizedBox(),
-          )
-        : AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-            contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-            actionsAlignment: MainAxisAlignment.center,
-            title: Column(
-              children: [
-                SvgPicture.asset(
-                  'assets/online_payment_success.svg',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 12.h),
-                  child: Text(
-                    request.title!,
-                    textAlign: TextAlign.center,
-                  ).tr(),
-                ),
-              ],
-            ),
-            titleTextStyle: kts18BoldText,
-            content: SizedBox(),
-            contentTextStyle: kts18Text,
-          );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return (Platform.isIOS)
+//         ? CupertinoAlertDialog(
+//             title: Column(
+//               children: [
+//                 SvgPicture.asset(
+//                   'assets/online_payment_success.svg',
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.only(top: 12.h),
+//                   child: Text(
+//                     request.title!,
+//                     style: kts18BoldText,
+//                   ).tr(),
+//                 ),
+//               ],
+//             ),
+//             content: SizedBox(),
+//           )
+//         : AlertDialog(
+//             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+//             titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
+//             contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+//             actionsAlignment: MainAxisAlignment.center,
+//             title: Column(
+//               children: [
+//                 SvgPicture.asset(
+//                   'assets/online_payment_success.svg',
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.only(top: 12.h),
+//                   child: Text(
+//                     request.title!,
+//                     textAlign: TextAlign.center,
+//                   ).tr(),
+//                 ),
+//               ],
+//             ),
+//             titleTextStyle: kts18BoldText,
+//             content: SizedBox(),
+//             contentTextStyle: kts18Text,
+//           );
+//   }
+// }
