@@ -261,14 +261,32 @@ class _SingleOrderPaymentBottomSheetViewState
                     ),
                     Spacer(),
                     TextButton(
-                      child: Text(
-                        LocaleKeys.cash_payment,
-                        style: kts18Text,
-                      ).tr(),
+                      child: model.isChangeToCashLoading
+                          ? ButtonLoading(color: kcPrimaryColor)
+                          : Text(
+                              LocaleKeys.cash_payment,
+                              style: kts18Text,
+                            ).tr(),
                       onPressed: () async {
-                        if (widget.order.restaurant?.phoneNumber != null)
-                          await model.makePhoneCallToDriver(
-                              widget.order.restaurant!.phoneNumber!);
+                        await model.onChangeToCashButtonPressed(
+                          onSuccessForView: () async {
+                            await snackBar(
+                                LocaleKeys
+                                    .payment_type_changed_from_online_to_cash
+                                    .tr(),
+                                context);
+                          },
+                          onFailForView: () async {
+                            await showErrorFlashBar(
+                              context: context,
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
                     SizedBox(height: 10.h),

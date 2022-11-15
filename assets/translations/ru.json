@@ -76,6 +76,7 @@
     "cash_payment": "Оплата наличными",
     "online_payment_fail_retry": "Повторить заново",
     "online_payment_send_code_info": "Введите код подтверждения отправленный на номер:",
+    "payment_type_changed_from_online_to_cash": "Способ оплаты изменен с онлайн на наличный",
     "selectCreditCard": "Выбрать карту",
     "addNewCreditCard": "Добавить новую карту",
     "cash": "Наличными",
