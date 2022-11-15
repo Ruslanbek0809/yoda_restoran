@@ -347,7 +347,6 @@ class SingleOrderViewModel extends BaseViewModel {
 
   /// Function onConsoleMessage
   Future<void> onConsoleMessage({
-    Order? order,
     OrderPaymentRegister? paymentRegister,
     InAppWebViewController? controller,
     ConsoleMessage? consoleMessage,
@@ -373,8 +372,7 @@ class SingleOrderViewModel extends BaseViewModel {
         _userService.checkOnlinePaymentOrderStatus(
           paymentRegister!,
           () async {
-            // onSuccessForView!();
-
+            
             _isPaymentLoading = false;
 
             _isPaymentSuccess = OrderPaymentStatus.success;

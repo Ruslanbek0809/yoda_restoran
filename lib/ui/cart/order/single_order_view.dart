@@ -866,8 +866,9 @@ class SingleOrderView extends StatelessWidget {
                                             SingleOrderPaymentBottomSheetView(
                                           scrollController: scrollController,
                                           offset: offset,
-                                          order: order,
                                           paymentRegister: paymentRegister,
+                                          order: order,
+                                          orderViewModel: orderViewModel,
                                         ),
                                       );
                                     },
@@ -912,7 +913,8 @@ class SingleOrderView extends StatelessWidget {
                       ),
 
 //------------------ ONLINE PAYMENT INFO ---------------------//
-                    if (order.status == 1 || order.status == 2)
+                    if ((!order.paid! && order.status == 1) ||
+                        (!order.paid! && order.status == 2))
                       Padding(
                         padding: EdgeInsets.fromLTRB(24.w, 0.h, 15.w, 10.h),
                         child: Text(

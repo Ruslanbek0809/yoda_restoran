@@ -10,6 +10,7 @@ import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../widgets/widgets.dart';
+import 'order_view_model.dart';
 import 'single_order_view_model.dart';
 
 class SingleOrderPaymentBottomSheetView extends StatefulWidget {
@@ -17,12 +18,14 @@ class SingleOrderPaymentBottomSheetView extends StatefulWidget {
   final double offset;
   final OrderPaymentRegister paymentRegister;
   final Order order;
+  final OrderViewModel orderViewModel;
   const SingleOrderPaymentBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
     required this.paymentRegister,
     required this.order,
+    required this.orderViewModel,
   }) : super(key: key);
 
   @override
@@ -79,7 +82,10 @@ class _SingleOrderPaymentBottomSheetViewState
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleOrderViewModel>.reactive(
-      viewModelBuilder: () => SingleOrderViewModel(),
+      viewModelBuilder: () => SingleOrderViewModel(
+        order: widget.order,
+        orderViewModel: widget.orderViewModel,
+      ),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
@@ -143,7 +149,6 @@ class _SingleOrderPaymentBottomSheetViewState
                         onConsoleMessage: (controller, consoleMessage) {
                           /// Function onConsoleMessage
                           model.onConsoleMessage(
-                            order: widget.order,
                             paymentRegister: widget.paymentRegister,
                             controller: controller,
                             consoleMessage: consoleMessage,
@@ -260,7 +265,7 @@ class _SingleOrderPaymentBottomSheetViewState
                         LocaleKeys.cash_payment,
                         style: kts18Text,
                       ).tr(),
-                      onPressed: () async { 
+                      onPressed: () async {
                         if (widget.order.restaurant?.phoneNumber != null)
                           await model.makePhoneCallToDriver(
                               widget.order.restaurant!.phoneNumber!);
