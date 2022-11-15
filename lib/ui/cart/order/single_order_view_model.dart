@@ -309,7 +309,6 @@ class SingleOrderViewModel extends BaseViewModel {
 
   /// POST after CONFIRM button is pressed
   Future<void> onConfirmButtonPressed({
-    Order? order,
     Function(OrderPaymentRegister)? onSuccessForView,
     Function()? onFailForView,
   }) async {
@@ -372,7 +371,6 @@ class SingleOrderViewModel extends BaseViewModel {
         _userService.checkOnlinePaymentOrderStatus(
           paymentRegister!,
           () async {
-            
             _isPaymentLoading = false;
 
             _isPaymentSuccess = OrderPaymentStatus.success;
@@ -421,6 +419,36 @@ class SingleOrderViewModel extends BaseViewModel {
       data: '',
       showIconInMainButton: false,
       barrierDismissible: true,
+    );
+  }
+
+  bool _isChangeToCashLoading = false;
+  bool get isChangeToCashLoading => _isChangeToCashLoading;
+
+  /// POST after CONFIRM button is pressed
+  Future<void> onChangeToCashButtonPressed({
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onChangeToCashButtonPressed()');
+
+    _isChangeToCashLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.patchOrderOnlineToCash(
+        order!.id!,
+        () {
+          _isChangeToCashLoading = false;
+          notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isChangeToCashLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
     );
   }
 

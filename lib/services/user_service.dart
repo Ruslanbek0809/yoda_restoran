@@ -572,7 +572,7 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     // _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test19';
+    _queryParams['orderNumber'] = 'Ver43Test21';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -786,6 +786,32 @@ class UserService {
     } on DioError catch (error) {
       log.v(
           'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
+
+  Future<void> patchOrderOnlineToCash(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'paymentType': 1}),
+      );
+      log.v(
+          'RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v(
+          'ERROR patchOrderOnlineToCash => api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
       rethrow;
     }
