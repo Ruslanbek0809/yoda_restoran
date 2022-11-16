@@ -320,6 +320,7 @@ class SingleOrderViewModel extends BaseViewModel {
     await runBusyFuture(
       _userService.postOnlinePayment(
         order!,
+        false,
         (OrderPaymentRegister paymentRegister) {
           _isLoading = false;
           notifyListeners();
@@ -362,6 +363,9 @@ class SingleOrderViewModel extends BaseViewModel {
 
       /// STARTS _isPaymentLoading part in bottom sheet
       _isPaymentPanelsFinished = true;
+
+      /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+      _isOnlinePaymentRetrySuccess = false;
       notifyListeners();
 
       await Future.delayed(Duration(milliseconds: 500));
@@ -389,7 +393,6 @@ class SingleOrderViewModel extends BaseViewModel {
           },
           () {
             _isPaymentLoading = false;
-
             _isPaymentSuccess = OrderPaymentStatus.fail;
             notifyListeners();
           },
@@ -456,30 +459,45 @@ class SingleOrderViewModel extends BaseViewModel {
     );
   }
 
+  OrderPaymentRegister? _retryOnlinePaymentRegister;
+  OrderPaymentRegister? get retryOnlinePaymentRegister =>
+      _retryOnlinePaymentRegister;
+
   bool _isOnlinePaymentRetrySuccess = false;
   bool get isOnlinePaymentRetrySuccess => _isOnlinePaymentRetrySuccess;
+
+  int _onlineRetryCounter = 0;
+  int get onlineRetryCounter => _onlineRetryCounter;
 
   bool _isOnlinePaymentRetryLoading = false;
   bool get isOnlinePaymentRetryLoading => _isOnlinePaymentRetryLoading;
 
   /// POST after ONLINE PAYMENT RETRY button is pressed
   Future<void> onOnlinePaymentRetryButtonPressed({
-    Function(OrderPaymentRegister)? onSuccessForView,
+    Function()? onSuccessForView,
     Function()? onFailForView,
   }) async {
     log.v('onOnlinePaymentRetryButtonPressed()');
 
+    /// STARTS new _onlineRetryCounter for this specific order
+    _onlineRetryCounter = _onlineRetryCounter + 1;
     _isOnlinePaymentRetryLoading = true;
     notifyListeners();
 
     await runBusyFuture(
       _userService.postOnlinePayment(
         order!,
+        true,
         (OrderPaymentRegister paymentRegister) {
           _isOnlinePaymentRetryLoading = false;
+
+          /// STARTS _isPaymentLoading part in bottom sheet
+          _isPaymentPanelsFinished = false;
+
           _isOnlinePaymentRetrySuccess = true;
+          _retryOnlinePaymentRegister = paymentRegister;
           notifyListeners();
-          onSuccessForView!(paymentRegister);
+          onSuccessForView!();
         },
         () {
           _isOnlinePaymentRetryLoading = false;

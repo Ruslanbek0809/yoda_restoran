@@ -111,7 +111,10 @@ class _SingleOrderPaymentBottomSheetViewState
                       InAppWebView(
                         key: webViewKey,
                         initialUrlRequest: URLRequest(
-                          url: Uri.parse(widget.paymentRegister.formUrl!),
+                          /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
+                          url: Uri.parse(model.isOnlinePaymentRetrySuccess
+                              ? model.retryOnlinePaymentRegister!.formUrl!
+                              : widget.paymentRegister.formUrl!),
                         ),
                         initialOptions: options,
                         pullToRefreshController: pullToRefreshController,
@@ -311,7 +314,7 @@ class _SingleOrderPaymentBottomSheetViewState
                           ).tr(),
                           onPressed: () async {
                             await model.onOnlinePaymentRetryButtonPressed(
-                              onSuccessForView: (paymentRegister) async {},
+                              onSuccessForView: () async {},
                               onFailForView: () async {
                                 await showErrorFlashBar(
                                   context: context,
