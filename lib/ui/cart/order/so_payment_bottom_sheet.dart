@@ -270,6 +270,7 @@ class _SingleOrderPaymentBottomSheetViewState
                       onPressed: () async {
                         await model.onChangeToCashButtonPressed(
                           onSuccessForView: () async {
+                            Navigator.pop(context);
                             await snackBar(
                                 LocaleKeys
                                     .payment_type_changed_from_online_to_cash
