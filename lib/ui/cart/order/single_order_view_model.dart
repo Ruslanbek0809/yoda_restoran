@@ -364,7 +364,7 @@ class SingleOrderViewModel extends BaseViewModel {
       _isPaymentPanelsFinished = true;
       notifyListeners();
 
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 500));
 
       /// CHECKS ONLINE PAYMENT ORDER STATUS
       await runBusyFuture(
@@ -449,6 +449,40 @@ class SingleOrderViewModel extends BaseViewModel {
         },
         () {
           _isChangeToCashLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
+  bool _isOnlinePaymentRetrySuccess = false;
+  bool get isOnlinePaymentRetrySuccess => _isOnlinePaymentRetrySuccess;
+
+  bool _isOnlinePaymentRetryLoading = false;
+  bool get isOnlinePaymentRetryLoading => _isOnlinePaymentRetryLoading;
+
+  /// POST after ONLINE PAYMENT RETRY button is pressed
+  Future<void> onOnlinePaymentRetryButtonPressed({
+    Function(OrderPaymentRegister)? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onOnlinePaymentRetryButtonPressed()');
+
+    _isOnlinePaymentRetryLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.postOnlinePayment(
+        order!,
+        (OrderPaymentRegister paymentRegister) {
+          _isOnlinePaymentRetryLoading = false;
+          _isOnlinePaymentRetrySuccess = true;
+          notifyListeners();
+          onSuccessForView!(paymentRegister);
+        },
+        () {
+          _isOnlinePaymentRetryLoading = false;
           notifyListeners();
           onFailForView!();
         },

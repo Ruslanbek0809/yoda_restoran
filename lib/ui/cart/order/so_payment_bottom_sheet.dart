@@ -306,10 +306,24 @@ class _SingleOrderPaymentBottomSheetViewState
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
                           child: Text(
-                            LocaleKeys.orders,
+                            LocaleKeys.online_payment_fail_retry,
                             style: ktsButtonWhite18Text,
                           ).tr(),
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () async {
+                            await model.onOnlinePaymentRetryButtonPressed(
+                              onSuccessForView: (paymentRegister) async {},
+                              onFailForView: () async {
+                                await showErrorFlashBar(
+                                  context: context,
+                                  margin: EdgeInsets.only(
+                                    left: 16.w,
+                                    right: 16.w,
+                                    bottom: 0.05.sh,
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                     ),
