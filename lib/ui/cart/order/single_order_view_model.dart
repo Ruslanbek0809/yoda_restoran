@@ -321,6 +321,7 @@ class SingleOrderViewModel extends BaseViewModel {
       _userService.postOnlinePayment(
         order!,
         false,
+        0,
         (OrderPaymentRegister paymentRegister) {
           _isLoading = false;
           notifyListeners();
@@ -360,6 +361,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
     if (_isErrorTextExists && _isErrorCodeExists) {
       _isPaymentLoading = true;
+      _isPaymentSuccess = OrderPaymentStatus.idle;
 
       /// STARTS _isPaymentLoading part in bottom sheet
       _isPaymentPanelsFinished = true;
@@ -488,6 +490,7 @@ class SingleOrderViewModel extends BaseViewModel {
       _userService.postOnlinePayment(
         order!,
         true,
+        _onlineRetryCounter,
         (OrderPaymentRegister paymentRegister) {
           _isOnlinePaymentRetryLoading = false;
 

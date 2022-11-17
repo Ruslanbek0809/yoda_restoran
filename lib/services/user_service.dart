@@ -566,14 +566,17 @@ class UserService {
   Future<void> postOnlinePayment(
     Order order,
     bool isRetryOnlinePayment,
+    int onlineRetryCounter,
     Function(OrderPaymentRegister) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    if(isRetryOnlinePayment)
-    _queryParams['orderNumber'] = order.orderNumber;
+    if (isRetryOnlinePayment)
+      _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
+    else
+      _queryParams['orderNumber'] = order.orderNumber;
     // _queryParams['orderNumber'] = 'Ver43Test24-1';
 
     /// AMOUNT part START

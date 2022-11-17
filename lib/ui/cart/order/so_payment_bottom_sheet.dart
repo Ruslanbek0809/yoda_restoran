@@ -308,10 +308,12 @@ class _SingleOrderPaymentBottomSheetViewState
                                 borderRadius: AppTheme().radius10),
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
-                          child: Text(
-                            LocaleKeys.online_payment_fail_retry,
-                            style: ktsButtonWhite18Text,
-                          ).tr(),
+                          child: model.isOnlinePaymentRetryLoading
+                              ? ButtonLoading()
+                              : Text(
+                                  LocaleKeys.online_payment_fail_retry,
+                                  style: ktsButtonWhite18Text,
+                                ).tr(),
                           onPressed: () async {
                             await model.onOnlinePaymentRetryButtonPressed(
                               onSuccessForView: () async {},
