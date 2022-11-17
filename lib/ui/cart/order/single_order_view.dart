@@ -802,8 +802,10 @@ class SingleOrderView extends StatelessWidget {
                       ),
 
                     //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
-                    if ((!order.paid! && order.status == 1) ||
-                        (!order.paid! && order.status == 2))
+                    if ((order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 1)) ||
+                        (order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 2)))
                       SizedBox(
                         width: 1.sw,
                         child: Padding(
@@ -907,8 +909,10 @@ class SingleOrderView extends StatelessWidget {
                       ),
 
 //------------------ ONLINE PAYMENT INFO ---------------------//
-                    if ((!order.paid! && order.status == 1) ||
-                        (!order.paid! && order.status == 2))
+                    if ((order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 1)) ||
+                        (order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 2)))
                       Padding(
                         padding: EdgeInsets.fromLTRB(24.w, 0.h, 15.w, 10.h),
                         child: Text(

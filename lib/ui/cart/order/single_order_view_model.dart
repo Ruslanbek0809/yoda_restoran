@@ -447,14 +447,14 @@ class SingleOrderViewModel extends BaseViewModel {
     await runBusyFuture(
       _userService.patchOrderOnlineToCash(
         order!.id!,
+        
         () async {
-          _isChangeToCashLoading = false;
-          notifyListeners();
-          onSuccessForView!();
-
           /// REINITIALIZES ORDERS
           /// TODO: Optimize if possible
           await orderViewModel!.getInitialOrders();
+          _isChangeToCashLoading = false;
+          notifyListeners();
+          onSuccessForView!();
         },
         () {
           _isChangeToCashLoading = false;

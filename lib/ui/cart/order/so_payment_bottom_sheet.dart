@@ -273,12 +273,24 @@ class _SingleOrderPaymentBottomSheetViewState
                       onPressed: () async {
                         await model.onChangeToCashButtonPressed(
                           onSuccessForView: () async {
+                            await showErrorFlashBar(
+                              msg: LocaleKeys
+                                  .payment_type_changed_from_online_to_cash
+                                  .tr(),
+                              context: context,
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
                             Navigator.pop(context);
-                            await snackBar(
-                                LocaleKeys
-                                    .payment_type_changed_from_online_to_cash
-                                    .tr(),
-                                context);
+                            // await Future.delayed(Duration(milliseconds: 300));
+                            // await snackBar(
+                            //     LocaleKeys
+                            //         .payment_type_changed_from_online_to_cash
+                            //         .tr(),
+                            //     context);
                           },
                           onFailForView: () async {
                             await showErrorFlashBar(
