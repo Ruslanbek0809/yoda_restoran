@@ -365,9 +365,6 @@ class SingleOrderViewModel extends BaseViewModel {
 
       /// STARTS _isPaymentLoading part in bottom sheet
       _isPaymentPanelsFinished = true;
-
-      /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
-      _isOnlinePaymentRetrySuccess = false;
       notifyListeners();
 
       await Future.delayed(Duration(milliseconds: 500));
@@ -375,11 +372,16 @@ class SingleOrderViewModel extends BaseViewModel {
       /// CHECKS ONLINE PAYMENT ORDER STATUS
       await runBusyFuture(
         _userService.checkOnlinePaymentOrderStatus(
-          paymentRegister!,
+          _isOnlinePaymentRetrySuccess
+              ? _retryOnlinePaymentRegister!
+              : paymentRegister!,
           () async {
             _isPaymentLoading = false;
 
             _isPaymentSuccess = OrderPaymentStatus.success;
+
+            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+            _isOnlinePaymentRetrySuccess = false;
             notifyListeners();
 
             /// PATCHS ORDER PAID VAR
@@ -396,6 +398,9 @@ class SingleOrderViewModel extends BaseViewModel {
           () {
             _isPaymentLoading = false;
             _isPaymentSuccess = OrderPaymentStatus.fail;
+
+            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+            _isOnlinePaymentRetrySuccess = false;
             notifyListeners();
           },
         ),
