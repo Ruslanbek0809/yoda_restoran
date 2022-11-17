@@ -377,7 +377,6 @@ class SingleOrderViewModel extends BaseViewModel {
               : paymentRegister!,
           () async {
             _isPaymentLoading = false;
-
             _isPaymentSuccess = OrderPaymentStatus.success;
 
             /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister

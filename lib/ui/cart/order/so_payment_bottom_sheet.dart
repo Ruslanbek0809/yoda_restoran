@@ -300,7 +300,7 @@ class _SingleOrderPaymentBottomSheetViewState
                         padding: EdgeInsets.symmetric(horizontal: 30.w),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: kcSecondaryDarkColor,
+                            backgroundColor: kcOnlinePaymentColor,
                             primary:
                                 kcSecondaryLightColor, // ripple effect color
                             elevation: 0,
@@ -310,10 +310,22 @@ class _SingleOrderPaymentBottomSheetViewState
                           ),
                           child: model.isOnlinePaymentRetryLoading
                               ? ButtonLoading()
-                              : Text(
-                                  LocaleKeys.online_payment_fail_retry,
-                                  style: ktsButtonWhite18Text,
-                                ).tr(),
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/arrow_clockwise.svg',
+                                      color: kcWhiteColor,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 8.w),
+                                      child: Text(
+                                        LocaleKeys.online_payment_fail_retry,
+                                        style: ktsButtonWhite18Text,
+                                      ).tr(),
+                                    ),
+                                  ],
+                                ),
                           onPressed: () async {
                             await model.onOnlinePaymentRetryButtonPressed(
                               onSuccessForView: () async {},
