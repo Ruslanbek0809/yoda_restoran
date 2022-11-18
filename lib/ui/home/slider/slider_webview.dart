@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import '../../../utils/utils.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 
@@ -19,17 +17,11 @@ class _SliderWebviewState extends State<SliderWebview> {
 
   InAppWebViewController? webViewController;
 
-  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-    crossPlatform: InAppWebViewOptions(
-      useShouldOverrideUrlLoading: true,
-      mediaPlaybackRequiresUserGesture: false,
-    ),
-    android: AndroidInAppWebViewOptions(
-      useHybridComposition: true,
-    ),
-    ios: IOSInAppWebViewOptions(
-      allowsInlineMediaPlayback: true,
-    ),
+  InAppWebViewSettings options = InAppWebViewSettings(
+    useShouldOverrideUrlLoading: true,
+    mediaPlaybackRequiresUserGesture: false,
+    useHybridComposition: true,
+    allowsInlineMediaPlayback: true,
   );
 
   late PullToRefreshController pullToRefreshController;
@@ -45,9 +37,7 @@ class _SliderWebviewState extends State<SliderWebview> {
     super.initState();
 
     pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: kcPrimaryColor,
-      ),
+      settings: PullToRefreshSettings(color: kcPrimaryColor),
       onRefresh: () async {
         if (Platform.isAndroid) {
           webViewController?.reload();
@@ -72,8 +62,11 @@ class _SliderWebviewState extends State<SliderWebview> {
           children: [
             InAppWebView(
               key: webViewKey,
-              initialUrlRequest: URLRequest(url: Uri.parse(widget.sliderUrl)),
-              initialOptions: options,
+              initialUrlRequest: URLRequest(
+                /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
+                url: WebUri(widget.sliderUrl),
+              ),
+              initialSettings: options,
               pullToRefreshController: pullToRefreshController,
               onWebViewCreated: (controller) {
                 webViewController = controller;
@@ -84,11 +77,10 @@ class _SliderWebviewState extends State<SliderWebview> {
                   urlController.text = this.url;
                 });
               },
-              androidOnPermissionRequest:
-                  (controller, origin, resources) async {
-                return PermissionRequestResponse(
-                    resources: resources,
-                    action: PermissionRequestResponseAction.GRANT);
+              onPermissionRequest: (controller, resources) async {
+                return PermissionResponse(
+                    resources: resources.resources,
+                    action: PermissionResponseAction.GRANT);
               },
               onProgressChanged: (controller, progress) {
                 if (progress == 100) {
