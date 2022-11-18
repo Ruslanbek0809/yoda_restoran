@@ -39,17 +39,11 @@ class _SingleOrderPaymentBottomSheetViewState
 
   InAppWebViewController? webViewController;
 
-  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-    crossPlatform: InAppWebViewOptions(
-      useShouldOverrideUrlLoading: true,
-      mediaPlaybackRequiresUserGesture: false,
-    ),
-    android: AndroidInAppWebViewOptions(
-      useHybridComposition: true,
-    ),
-    ios: IOSInAppWebViewOptions(
-      allowsInlineMediaPlayback: true,
-    ),
+  InAppWebViewSettings options = InAppWebViewSettings(
+    useShouldOverrideUrlLoading: true,
+    mediaPlaybackRequiresUserGesture: false,
+    useHybridComposition: true,
+    allowsInlineMediaPlayback: true,
   );
 
   late PullToRefreshController pullToRefreshController;
@@ -65,9 +59,7 @@ class _SingleOrderPaymentBottomSheetViewState
     super.initState();
 
     pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: kcPrimaryColor,
-      ),
+      settings: PullToRefreshSettings(color: kcPrimaryColor),
       onRefresh: () async {
         if (Platform.isAndroid) {
           webViewController?.reload();
@@ -112,11 +104,11 @@ class _SingleOrderPaymentBottomSheetViewState
                         key: webViewKey,
                         initialUrlRequest: URLRequest(
                           /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
-                          url: Uri.parse(model.isOnlinePaymentRetrySuccess
+                          url: WebUri(model.isOnlinePaymentRetrySuccess
                               ? model.retryOnlinePaymentRegister!.formUrl!
                               : widget.paymentRegister.formUrl!),
                         ),
-                        initialOptions: options,
+                        initialSettings: options,
                         pullToRefreshController: pullToRefreshController,
                         onWebViewCreated: (controller) {
                           webViewController = controller;
@@ -127,11 +119,10 @@ class _SingleOrderPaymentBottomSheetViewState
                             urlController.text = this.url;
                           });
                         },
-                        androidOnPermissionRequest:
-                            (controller, origin, resources) async {
-                          return PermissionRequestResponse(
-                              resources: resources,
-                              action: PermissionRequestResponseAction.GRANT);
+                        onPermissionRequest: (controller, resources) async {
+                          return PermissionResponse(
+                              resources: resources.resources,
+                              action: PermissionResponseAction.GRANT);
                         },
                         onProgressChanged: (controller, progress) {
                           if (progress == 100) {
@@ -277,7 +268,7 @@ class _SingleOrderPaymentBottomSheetViewState
                               msg: LocaleKeys
                                   .payment_type_changed_from_online_to_cash
                                   .tr(),
-                              context: context, 
+                              context: context,
                               margin: EdgeInsets.only(
                                 left: 16.w,
                                 right: 16.w,
