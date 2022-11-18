@@ -112,6 +112,7 @@ dev_dependencies:
 
 dependency_overrides:
   flutter_svg: ^1.0.0 # To fix dependency issue between flutter_hmtl and flutter_svg
+  flash: ^2.0.3+3
 
 flutter_icons:
   android: true
