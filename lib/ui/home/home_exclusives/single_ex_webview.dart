@@ -1,10 +1,12 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'single_ex_view_model.dart';
 
 class SingleExWebview extends StatefulWidget {
@@ -23,11 +25,17 @@ class _SingleExWebviewState extends State<SingleExWebview> {
 
   InAppWebViewController? webViewController;
 
-  InAppWebViewSettings options = InAppWebViewSettings(
-    useShouldOverrideUrlLoading: true,
-    mediaPlaybackRequiresUserGesture: false,
-    useHybridComposition: true,
-    allowsInlineMediaPlayback: true,
+  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+    crossPlatform: InAppWebViewOptions(
+      useShouldOverrideUrlLoading: true,
+      mediaPlaybackRequiresUserGesture: false,
+    ),
+    android: AndroidInAppWebViewOptions(
+      useHybridComposition: true,
+    ),
+    ios: IOSInAppWebViewOptions(
+      allowsInlineMediaPlayback: true,
+    ),
   );
 
   late PullToRefreshController pullToRefreshController;
@@ -43,7 +51,9 @@ class _SingleExWebviewState extends State<SingleExWebview> {
     super.initState();
 
     pullToRefreshController = PullToRefreshController(
-      settings: PullToRefreshSettings(color: kcPrimaryColor),
+      options: PullToRefreshOptions(
+        color: kcPrimaryColor,
+      ),
       onRefresh: () async {
         if (Platform.isAndroid) {
           webViewController?.reload();
@@ -79,11 +89,9 @@ class _SingleExWebviewState extends State<SingleExWebview> {
           children: [
             InAppWebView(
               key: webViewKey,
-              initialUrlRequest: URLRequest(
-                /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
-                url: WebUri(widget.singleEx.url!),
-              ),
-              initialSettings: options,
+              initialUrlRequest:
+                  URLRequest(url: Uri.parse(widget.singleEx.url!)),
+              initialOptions: options,
               pullToRefreshController: pullToRefreshController,
               onWebViewCreated: (controller) {
                 webViewController = controller;
@@ -94,10 +102,11 @@ class _SingleExWebviewState extends State<SingleExWebview> {
                   urlController.text = this.url;
                 });
               },
-              onPermissionRequest: (controller, resources) async {
-                return PermissionResponse(
-                    resources: resources.resources,
-                    action: PermissionResponseAction.GRANT);
+              androidOnPermissionRequest:
+                  (controller, origin, resources) async {
+                return PermissionRequestResponse(
+                    resources: resources,
+                    action: PermissionRequestResponseAction.GRANT);
               },
               onProgressChanged: (controller, progress) {
                 if (progress == 100) {
