@@ -26,6 +26,7 @@ void main() async {
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
   Hive.registerAdapter<HiveRating>(HiveRatingAdapter()); // TODO: HiveRating
+  Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();
@@ -42,5 +43,5 @@ void main() async {
       fallbackLocale: const Locale('en', 'US'),
       child: YodaResApp(),
     ),
-  );
+  );  
 }

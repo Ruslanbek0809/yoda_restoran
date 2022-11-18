@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +8,6 @@ import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'checkout_add_address_bottom_sheet2.dart';
 
 class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
@@ -109,7 +106,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                                         )
                                       : SvgPicture.asset(
                                           'assets/checkCircle.svg',
-                                          color: kcActiveDotColor,
+                                          color: kcFillBorderColor,
                                           width: 25.w,
                                         ),
                             ),
@@ -142,7 +139,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                 border: Border(
                   top: BorderSide(
                     width: 0.1,
-                    color: AppTheme.BUTTON_BORDER_COLOR,
+                    color: kcButtonBorderColor,
                   ),
                 ),
               ),

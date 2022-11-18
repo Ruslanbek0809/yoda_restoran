@@ -240,7 +240,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                         border: Border(
                           top: BorderSide(
                             width: 0.1,
-                            color: AppTheme.BUTTON_BORDER_COLOR,
+                            color: kcButtonBorderColor,
                           ),
                         ),
                       ),
@@ -279,7 +279,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                   padding: EdgeInsets.only(left: 5.w),
                                   child: Text(
                                     '${formatNum(model.totalSumDraft)} TMT',
-                                    style: kts16DarkSemiBoldText,
+                                    style: kts16DarkBoldText,
                                   ),
                                 ),
                               ],
@@ -371,7 +371,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                           ? LocaleKeys.Add
                                           : LocaleKeys.choose,
                                       style: model.isAllVolSelected
-                                          ? ktsButton18Text
+                                          ? ktsButtonWhite18Text
                                           : ktsButton18ContactText,
                                     ).tr(),
                                     color: model.isAllVolSelected
@@ -443,7 +443,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                         border: Border(
                           top: BorderSide(
                             width: 0.1,
-                            color: AppTheme.BUTTON_BORDER_COLOR,
+                            color: kcButtonBorderColor,
                           ),
                         ),
                       ),
@@ -482,7 +482,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                   padding: EdgeInsets.only(left: 5.w),
                                   child: Text(
                                     '${formatNum(model.totalSumDraft)} TMT',
-                                    style: kts16DarkSemiBoldText,
+                                    style: kts16DarkBoldText,
                                   ),
                                 ),
                               ],
@@ -574,7 +574,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                           ? LocaleKeys.Add
                                           : LocaleKeys.choose,
                                       style: model.isAllVolSelected
-                                          ? ktsButton18Text
+                                          ? ktsButtonWhite18Text
                                           : ktsButton18ContactText,
                                     ).tr(),
                                     color: model.isAllVolSelected

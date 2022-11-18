@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/app_colors.dart';
 import '../../../shared/styles.dart';
-import 'main_cat_bottom_view_model.dart';
-import '../../widgets/button_loading.dart';
 import '../../../utils/utils.dart';
-import 'package:easy_localization/easy_localization.dart';
+import '../../widgets/button_loading.dart';
+import 'main_cat_bottom_view_model.dart';
 
 class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
   const MainCatSortBottom({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
       child: Container(
         decoration: BoxDecoration(
             color: kcWhiteColor,
-            border: Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+            border: Border.all(color: kcButtonBorderColor, width: 0.1),
             boxShadow: [AppTheme().bottomCartShadow]),
         padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 25.w),
         child: TextButton(
@@ -36,7 +37,7 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
               ? ButtonLoading()
               : Text(
                   LocaleKeys.confirmSortButton,
-                  style: ktsButton18Text,
+                  style: ktsButtonWhite18Text,
                 ).tr(),
           onPressed: () async {
             /// If model.selectedSort IS NOT DEFAULT

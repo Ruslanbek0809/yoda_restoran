@@ -1,0 +1,368 @@
+import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stacked/stacked.dart';
+import '../../../../models/models.dart';
+import '../../../../shared/shared.dart';
+import '../../../../utils/utils.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../widgets/widgets.dart';
+import 'order_view_model.dart';
+import 'single_order_view_model.dart';
+
+class SingleOrderPaymentBottomSheetView extends StatefulWidget {
+  final ScrollController scrollController;
+  final double offset;
+  final OrderPaymentRegister paymentRegister;
+  final Order order;
+  final OrderViewModel orderViewModel;
+  const SingleOrderPaymentBottomSheetView({
+    Key? key,
+    required this.scrollController,
+    required this.offset,
+    required this.paymentRegister,
+    required this.order,
+    required this.orderViewModel,
+  }) : super(key: key);
+
+  @override
+  State<SingleOrderPaymentBottomSheetView> createState() =>
+      _SingleOrderPaymentBottomSheetViewState();
+}
+
+class _SingleOrderPaymentBottomSheetViewState
+    extends State<SingleOrderPaymentBottomSheetView> {
+  final GlobalKey webViewKey = GlobalKey();
+
+  InAppWebViewController? webViewController;
+
+  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+    crossPlatform: InAppWebViewOptions(
+      useShouldOverrideUrlLoading: true,
+      mediaPlaybackRequiresUserGesture: false,
+    ),
+    android: AndroidInAppWebViewOptions(
+      useHybridComposition: true,
+    ),
+    ios: IOSInAppWebViewOptions(
+      allowsInlineMediaPlayback: true,
+    ),
+  );
+
+  late PullToRefreshController pullToRefreshController;
+
+  String url = "";
+
+  double progress = 0;
+
+  final urlController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    pullToRefreshController = PullToRefreshController(
+      options: PullToRefreshOptions(
+        color: kcPrimaryColor,
+      ),
+      onRefresh: () async {
+        if (Platform.isAndroid) {
+          webViewController?.reload();
+        } else if (Platform.isIOS) {
+          webViewController?.loadUrl(
+              urlRequest: URLRequest(url: await webViewController?.getUrl()));
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewModelBuilder<SingleOrderViewModel>.reactive(
+      viewModelBuilder: () => SingleOrderViewModel(
+        order: widget.order,
+        orderViewModel: widget.orderViewModel,
+      ),
+      builder: (context, model, child) => Container(
+        decoration: BoxDecoration(
+          color: kcWhiteColor,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(Constants.BORDER_RADIUS_20),
+          ),
+        ),
+        child: Column(
+          children: [
+            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            CustomModalInsideBottomSheet(),
+
+            // --------------- IF PANEL FINISHED AND PAYMENT LOADING -------------- //
+            if (model.isPaymentPanelsFinished && model.isPaymentLoading)
+              Expanded(child: LoadingWidget()),
+            // --------------- CREDIT CARD CONFIRMATION -------------- //
+            if (!model.isPaymentPanelsFinished)
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Stack(
+                    children: [
+                      InAppWebView(
+                        key: webViewKey,
+                        initialUrlRequest: URLRequest(
+                          /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
+                          url: Uri.parse(model.isOnlinePaymentRetrySuccess
+                              ? model.retryOnlinePaymentRegister!.formUrl!
+                              : widget.paymentRegister.formUrl!),
+                        ),
+                        initialOptions: options,
+                        pullToRefreshController: pullToRefreshController,
+                        onWebViewCreated: (controller) {
+                          webViewController = controller;
+                        },
+                        onLoadStart: (controller, url) {
+                          setState(() {
+                            this.url = url.toString();
+                            urlController.text = this.url;
+                          });
+                        },
+                        androidOnPermissionRequest:
+                            (controller, origin, resources) async {
+                          return PermissionRequestResponse(
+                              resources: resources,
+                              action: PermissionRequestResponseAction.GRANT);
+                        },
+                        onProgressChanged: (controller, progress) {
+                          if (progress == 100) {
+                            pullToRefreshController.endRefreshing();
+                          }
+                          setState(() {
+                            this.progress = progress / 100;
+                            urlController.text = this.url;
+                          });
+                        },
+                        onUpdateVisitedHistory:
+                            (controller, url, androidIsReload) {
+                          setState(() {
+                            this.url = url.toString();
+                            urlController.text = this.url;
+                          });
+                        },
+                        onConsoleMessage: (controller, consoleMessage) {
+                          /// Function onConsoleMessage
+                          model.onConsoleMessage(
+                            paymentRegister: widget.paymentRegister,
+                            controller: controller,
+                            consoleMessage: consoleMessage,
+                          );
+                        },
+                      ),
+                      progress < 1.0
+                          ? LinearProgressIndicator(
+                              value: progress,
+                              backgroundColor: kcPrimaryColor.withOpacity(0.3),
+                              color: kcPrimaryColor,
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+              ),
+            // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
+            // --------------- ONLINE PAYMENT SUCCESS -------------- //
+            if (model.isPaymentPanelsFinished &&
+                model.isPaymentSuccess == OrderPaymentStatus.success)
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.1.sh),
+                      child: SvgPicture.asset(
+                        'assets/title_yoda_restoran_start.svg',
+                        width: 0.6.sw,
+                      ),
+                    ),
+                    Spacer(),
+                    SvgPicture.asset(
+                      'assets/online_payment_success.svg',
+                      width: 100.sp,
+                    ),
+                    SizedBox(height: 0.1.sh),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        LocaleKeys.online_payment_success,
+                        textAlign: TextAlign.center,
+                        style: kts20BoldText,
+                      ).tr(),
+                    ),
+                    Spacer(),
+                    SizedBox(
+                      width: 1.sw,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: kcSecondaryDarkColor,
+                            primary:
+                                kcSecondaryLightColor, // ripple effect color
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
+                          ),
+                          child: Text(
+                            LocaleKeys.orders,
+                            style: ktsButtonWhite18Text,
+                          ).tr(),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 0.1.sh),
+                  ],
+                ),
+              ),
+            // --------------- ONLINE PAYMENT FAIL -------------- //
+            if (model.isPaymentPanelsFinished &&
+                model.isPaymentSuccess == OrderPaymentStatus.fail)
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.1.sh),
+                      child: SvgPicture.asset(
+                        'assets/title_yoda_restoran_start.svg',
+                        width: 0.6.sw,
+                      ),
+                    ),
+                    Spacer(),
+                    SvgPicture.asset(
+                      'assets/online_payment_fail.svg',
+                      width: 100.sp,
+                    ),
+                    SizedBox(height: 0.1.sh),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        LocaleKeys.online_payment_fail,
+                        textAlign: TextAlign.center,
+                        style: kts20BoldText,
+                      ).tr(),
+                    ),
+                    SizedBox(height: 10.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        LocaleKeys.online_payment_fail_info,
+                        textAlign: TextAlign.center,
+                        style: kts14SecondaryDarkText,
+                      ).tr(),
+                    ),
+                    Spacer(),
+                    TextButton(
+                      child: model.isChangeToCashLoading
+                          ? ButtonLoading(color: kcPrimaryColor)
+                          : Text(
+                              LocaleKeys.cash_payment,
+                              style: kts18Text,
+                            ).tr(),
+                      onPressed: () async {
+                        await model.onChangeToCashButtonPressed(
+                          onSuccessForView: () async {
+                            await showErrorFlashBar(
+                              msg: LocaleKeys
+                                  .payment_type_changed_from_online_to_cash
+                                  .tr(),
+                              context: context, 
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
+                            Navigator.pop(context);
+                            // await Future.delayed(Duration(milliseconds: 300));
+                            // await snackBar(
+                            //     LocaleKeys
+                            //         .payment_type_changed_from_online_to_cash
+                            //         .tr(),
+                            //     context);
+                          },
+                          onFailForView: () async {
+                            await showErrorFlashBar(
+                              context: context,
+                              margin: EdgeInsets.only(
+                                left: 16.w,
+                                right: 16.w,
+                                bottom: 0.05.sh,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(height: 10.h),
+                    SizedBox(
+                      width: 1.sw,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: kcOnlinePaymentColor,
+                            primary:
+                                kcSecondaryLightColor, // ripple effect color
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
+                          ),
+                          child: model.isOnlinePaymentRetryLoading
+                              ? ButtonLoading()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/arrow_clockwise.svg',
+                                      color: kcWhiteColor,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 8.w),
+                                      child: Text(
+                                        LocaleKeys.online_payment_fail_retry,
+                                        style: ktsButtonWhite18Text,
+                                      ).tr(),
+                                    ),
+                                  ],
+                                ),
+                          onPressed: () async {
+                            await model.onOnlinePaymentRetryButtonPressed(
+                              onSuccessForView: () async {},
+                              onFailForView: () async {
+                                await showErrorFlashBar(
+                                  context: context,
+                                  margin: EdgeInsets.only(
+                                    left: 16.w,
+                                    right: 16.w,
+                                    bottom: 0.05.sh,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 0.1.sh),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

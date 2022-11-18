@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +12,9 @@ import '../../widgets/widgets.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'order_view_model.dart';
 import 'single_order_view_model.dart';
+import 'so_payment_bottom_sheet.dart';
 
 class SingleOrderView extends StatelessWidget {
   final Order order;
@@ -27,7 +28,10 @@ class SingleOrderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleOrderViewModel>.reactive(
       onModelReady: (model) => model.initSingleOrder(),
-      viewModelBuilder: () => SingleOrderViewModel(order, orderViewModel),
+      viewModelBuilder: () => SingleOrderViewModel(
+        order: order,
+        orderViewModel: orderViewModel,
+      ),
       builder: (context, model, child) {
         return Slidable(
           // Specify a key if the Slidable is dismissible.
@@ -115,7 +119,7 @@ class SingleOrderView extends StatelessWidget {
                         Text(
                           order.restaurant!.name!,
                           overflow: TextOverflow.ellipsis,
-                          style: ktsDefault18SemiBoldText,
+                          style: kts18BoldText,
                         ),
                         SizedBox(height: 3.h),
                         //------------------ ORDER CREATED AT DATE and ORDER STATUS ---------------------//
@@ -153,7 +157,7 @@ class SingleOrderView extends StatelessWidget {
                     children: [
                       Text(
                         '${order.promocode != null ? formatNum(model.getTotalOrderSumWithPromocode()) : formatNum(order.dostawkaPrice != null ? (order.totPrice! + order.dostawkaPrice!) : order.totPrice!)} TMT',
-                        style: ktsDefault18SemiBoldText,
+                        style: kts18BoldText,
                       ),
                       SizedBox(height: 2.h),
 
@@ -240,29 +244,6 @@ class SingleOrderView extends StatelessWidget {
                                   : '',
                               style: kts16Text,
                             ),
-                            // Text(
-                            //   LocaleKeys.driver,
-                            //   style: kts16Text,
-                            // ).tr(),
-                            // order.selfPickUp!
-                            //     ? Text(
-                            //         '-',
-                            //         style: kts16Text,
-                            //       )
-                            //     : order.status == 1
-                            //         ? Text(
-                            //             LocaleKeys.notAssignedYet,
-                            //             style: kts16Text,
-                            //             overflow: TextOverflow.visible,
-                            //           ).tr()
-                            //         : order.driver == null ||
-                            //                 (order.driver!.mobile == null ||
-                            //                     order.driver!.mobile!.isEmpty)
-                            //             ? SizedBox()
-                            //             : Text(
-                            //                 order.driver!.mobile!,
-                            //                 style: kts16Text,
-                            //               ),
                           ],
                         ),
                       ),
@@ -279,7 +260,7 @@ class SingleOrderView extends StatelessWidget {
                             order.selfPickUp!
                                 ? Text(
                                     '0 TMT',
-                                    style: ktsDefault16BoldText,
+                                    style: kts16BoldText,
                                   )
                                 : order.status == 1
                                     ? Text(
@@ -291,7 +272,7 @@ class SingleOrderView extends StatelessWidget {
                                         ? SizedBox()
                                         : Text(
                                             '${formatNum(order.dostawkaPrice!)} TMT',
-                                            style: ktsDefault16BoldText,
+                                            style: kts16BoldText,
                                           ),
                           ],
                         ),
@@ -335,7 +316,7 @@ class SingleOrderView extends StatelessWidget {
                             ),
                             Text(
                               '-${formatNum(model.getPromocodePrice())} TMT',
-                              style: ktsDefault16BoldText,
+                              style: kts16BoldText,
                             ),
                           ],
                         ),
@@ -369,36 +350,123 @@ class SingleOrderView extends StatelessWidget {
                           order.deliveryTime == null
                               ? Text(
                                   LocaleKeys.now,
-                                  style: ktsDefault16BoldText,
+                                  style: kts16BoldText,
                                 ).tr()
                               : Text(
                                   DateFormat('HH:mm, dd.MM.yyyy')
                                       .format(order.deliveryTime!.toLocal()),
-                                  style: ktsDefault16BoldText,
+                                  style: kts16BoldText,
                                 ),
                         ],
                       ),
                     ),
+                    //------------------ ORDER PAYMENT TYPE ---------------------//
                     if (order.paymentType != null)
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              LocaleKeys.paymentType,
-                              style: kts16Text,
-                            ).tr(),
-                            Text(
-                              context.locale == context.supportedLocales[0]
-                                  ? order.paymentType!.nameTk!
-                                  : order.paymentType!.nameRu!,
-                              style: ktsDefault16BoldText,
+                      //------------------ ORDER ONLINE PAYMENT TYPE ---------------------//
+                      order.paymentType!.id == 4
+                          ?
+                          //------------------ ORDER ONLINE If PAID ---------------------//
+                          order.paid!
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 15.w, right: 15.w, top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        LocaleKeys.paymentType,
+                                        style: kts16Text,
+                                      ).tr(),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w,
+                                          vertical: 2.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius5,
+                                          color: kcOnlinePaymentColor,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 4.w),
+                                              child: Text(
+                                                context.locale ==
+                                                        context
+                                                            .supportedLocales[0]
+                                                    ? order.paymentType!.nameTk!
+                                                    : order
+                                                        .paymentType!.nameRu!,
+                                                style: kts16WhiteBoldText,
+                                              ),
+                                            ),
+                                            SvgPicture.asset(
+                                              'assets/check_outlined_circle.svg',
+                                              color: kcWhiteColor,
+                                              width: 20.sp,
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              //------------------ ORDER ONLINE If NOT PAID ---------------------//
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 15.w, right: 15.w, top: 12.h),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        LocaleKeys.paymentType,
+                                        style: kts16Text,
+                                      ).tr(),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w,
+                                          vertical: 2.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: AppTheme().radius5,
+                                          color: kcSecondaryLightColor,
+                                        ),
+                                        child: Text(
+                                          context.locale ==
+                                                  context.supportedLocales[0]
+                                              ? order.paymentType!.nameTk!
+                                              : order.paymentType!.nameRu!,
+                                          style: kts16BoldText,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                          //------------------ ORDER OTHER PAYMENT TYPES ---------------------//
+                          : Padding(
+                              padding: EdgeInsets.only(
+                                  left: 15.w, right: 15.w, top: 12.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    LocaleKeys.paymentType,
+                                    style: kts16Text,
+                                  ).tr(),
+                                  Text(
+                                    context.locale ==
+                                            context.supportedLocales[0]
+                                        ? order.paymentType!.nameTk!
+                                        : order.paymentType!.nameRu!,
+                                    style: kts16BoldText,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
                     if (order.address != null && order.address!.isNotEmpty)
                       Padding(
                         padding:
@@ -462,7 +530,7 @@ class SingleOrderView extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Text(
                           '${formatNum(order.totPrice!)} TMT',
-                          style: ktsDefault18SemiBoldText,
+                          style: kts18BoldText,
                         ),
                       ),
                     ),
@@ -565,8 +633,8 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ ORDER BUTTON ---------------------//
 
+                    //------------------ ORDER BUTTON ---------------------//
                     if (order.status != 4 ||
                         (order.status == 4 && order.rating == null))
                       SizedBox(height: 5.h),
@@ -596,26 +664,27 @@ class SingleOrderView extends StatelessWidget {
                                         size: 26.0,
                                         color: kcWhiteColor,
                                       ),
-                                      SizedBox(width: 5.w),
-                                      Text(
-                                        LocaleKeys.rateOrder,
-                                        style: ktsButton18Text,
-                                      ).tr()
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 5.w),
+                                        child: Text(
+                                          LocaleKeys.rateOrder,
+                                          style: ktsButtonWhite18Text,
+                                        ).tr(),
+                                      )
                                     ],
                                   )
                                 : order.status == 3
-                                    //  && !order.selfPickUp!
                                     ? Text(
                                         order.restaurant!.phoneNumber != null
                                             ? ' ${order.restaurant!.phoneNumber}'
                                             : '',
-                                        style: ktsButton18Text,
+                                        style: ktsButtonWhite18Text,
                                       ).tr()
                                     : model.busy(order.id) && order.status == 1
                                         ? ButtonLoading()
                                         : Text(
                                             LocaleKeys.cancelOrder,
-                                            style: ktsButton18Text,
+                                            style: ktsButtonWhite18Text,
                                           ).tr(),
                             onPressed: () async {
                               switch (order.status) {
@@ -652,11 +721,6 @@ class SingleOrderView extends StatelessWidget {
                                   if (order.restaurant?.phoneNumber != null)
                                     await model.makePhoneCallToDriver(
                                         order.restaurant!.phoneNumber!);
-                                  // if (!order.selfPickUp!)
-                                  //   await model.makePhoneCallToDriver(
-                                  //       order.driver!.mobile!);
-                                  // else
-                                  //   await model.showCancelAcceptedOrderDialog();
                                   break;
                                 case 4:
                                   await model.showRateOrderDialog(order);
@@ -735,6 +799,128 @@ class SingleOrderView extends StatelessWidget {
                             ),
                           ),
                         ),
+                      ),
+
+                    //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
+                    if ((order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 1)) ||
+                        (order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 2)))
+                      SizedBox(
+                        width: 1.sw,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: order.status == 1
+                                  ? kcSecondaryLightColor
+                                  : kcOnlinePaymentColor,
+                              primary: order.status == 1
+                                  ? kcSecondaryLightColor
+                                  : kcOnlinePaymentColor, // ripple effect color
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: AppTheme().radius10),
+                              padding: EdgeInsets.symmetric(vertical: 11.h),
+                            ),
+                            child: order.status == 2 && model.isLoading
+                                ? ButtonLoading(fontSize: 28.sp)
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/credit_card.svg',
+                                        color: order.status == 1
+                                            ? kcContactColor
+                                            : kcWhiteColor,
+                                        width: 28.w,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10.w),
+                                        child: Text(
+                                          LocaleKeys.online_paymentType,
+                                          style: order.status == 1
+                                              ? ktsButton18ContactText
+                                              : ktsButtonWhite18Text,
+                                        ).tr(),
+                                      )
+                                    ],
+                                  ),
+                            onPressed: () async {
+                              switch (order.status) {
+                                case 1:
+                                  break;
+                                case 2:
+                                  await model.onConfirmButtonPressed(
+                                    onSuccessForView: (paymentRegister) async {
+                                      await showFlexibleBottomSheet(
+                                        initHeight: 0.95,
+                                        maxHeight: 0.95,
+                                        duration: Duration(milliseconds: 250),
+                                        context: context,
+                                        bottomSheetColor: Colors.transparent,
+                                        builder: (context, scrollController,
+                                                offset) =>
+                                            SingleOrderPaymentBottomSheetView(
+                                          scrollController: scrollController,
+                                          offset: offset,
+                                          paymentRegister: paymentRegister,
+                                          order: order,
+                                          orderViewModel: orderViewModel,
+                                        ),
+                                      );
+                                    },
+                                    onFailForView: () async {
+                                      await showErrorFlashBar(
+                                        context: context,
+                                        margin: EdgeInsets.only(
+                                          left: 16.w,
+                                          right: 16.w,
+                                          bottom: 0.05.sh,
+                                        ),
+                                      );
+                                    },
+                                  );
+
+                                  // // await model
+                                  // //     .showCustomSendCodeConfirmationBottomSheet();
+                                  // await showFlexibleBottomSheet(
+                                  //   isExpand: false,
+                                  //   initHeight: 0.95,
+                                  //   maxHeight: 0.95,
+                                  //   duration: Duration(milliseconds: 250),
+                                  //   context: context,
+                                  //   bottomSheetColor: Colors.transparent,
+                                  //   builder:
+                                  //       (context, scrollController, offset) =>
+                                  //           SOSelectCreditCardsBottomSheetView(
+                                  //     scrollController: scrollController,
+                                  //     offset: offset,
+                                  //     order: order,
+                                  //   ),
+                                  // );
+                                  break;
+                                default:
+                                  break;
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+
+//------------------ ONLINE PAYMENT INFO ---------------------//
+                    if ((order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 1)) ||
+                        (order.paymentType!.id == 4 &&
+                            (!order.paid! && order.status == 2)))
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(24.w, 0.h, 15.w, 10.h),
+                        child: Text(
+                          order.status == 1
+                              ? LocaleKeys.online_paymentType_info
+                              : LocaleKeys.can_online_pay,
+                          style: kts12DialogText,
+                        ).tr(),
                       ),
                   ],
                 ),

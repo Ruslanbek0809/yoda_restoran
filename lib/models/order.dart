@@ -26,6 +26,7 @@ class Order {
     this.notes,
     this.address,
     this.paymentType,
+    this.paid,
   });
 
   @JsonKey(name: 'id')
@@ -87,6 +88,9 @@ class Order {
 
   @JsonKey(name: 'paymentType')
   final PaymentType? paymentType;
+
+  @JsonKey(name: 'paid')
+  final bool? paid;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 

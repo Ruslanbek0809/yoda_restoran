@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoda_res/utils/utils.dart';
 
+import '../shared/shared.dart';
 import 'src/date_model.dart';
 import 'src/datetime_picker_theme.dart';
 import 'src/i18n_model.dart';
@@ -485,12 +486,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
               child: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 size: 45,
-                color: AppTheme.DIALOG_TITLE_COLOR,
-              ), // Change Text Widget to Icon Widget
-              // Text(
-              //   '$cancel',
-              //   style: theme.cancelStyle,
-              // ),
+                color: kcDialogColor,
+              ),
               onPressed: () {
                 Navigator.pop(context);
                 if (widget.route.onCancel != null) {

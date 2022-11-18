@@ -53,7 +53,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   child: Icon(
                     Icons.arrow_back_rounded,
                     size: 27.w,
-                    color: AppTheme.BLACK,
+                    color: kcBlackColor,
                   ),
                 ),
               ),
@@ -83,7 +83,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                       child: Icon(
                         Icons.favorite_outline_outlined,
                         size: 27.w,
-                        color: AppTheme.BLACK,
+                        color: kcBlackColor,
                       ),
                     ),
                   ),
@@ -112,7 +112,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                       child: Icon(
                         Icons.search_rounded,
                         size: 27.w,
-                        color: AppTheme.BLACK,
+                        color: kcBlackColor,
                       ),
                     ),
                   ),
@@ -332,7 +332,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                         ToggleButtonView(restaurant: restaurant),
                         //------------------ MAIN DIVIDER ---------------------//
                         Container(
-                          color: AppTheme.MAIN_DIVIDER_COLOR,
+                          color: kcMainDividerColor,
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           margin: EdgeInsets.only(top: 15.h),
                         ),

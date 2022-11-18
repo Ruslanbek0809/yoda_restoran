@@ -12,6 +12,17 @@ void setupBottomSheet() {
           request: sheetRequest,
           completer: completer,
         ),
+    // BottomSheetType.creditCardConfirmation:
+    //     (context, sheetRequest, completer) => SOConfirmationBottomSheetView(
+    //           request: sheetRequest,
+    //           completer: completer,
+    //           soCreditCardsConfirmationBottomSheetData: sheetRequest.data,
+    //         ),
+    // BottomSheetType.sendCodeConfirmation: (context, sheetRequest, completer) =>
+    //     SOSendCodeConfirmationBottomSheetView(
+    //       request: sheetRequest,
+    //       completer: completer,
+    //     ),
   };
 
   _bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);

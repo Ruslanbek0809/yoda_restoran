@@ -41,7 +41,7 @@ class OrderSuccessView extends StatelessWidget {
                 child: Text(
                   LocaleKeys.yourOrderWasPassedToRes,
                   textAlign: TextAlign.center,
-                  style: ktsDefault20BoldText,
+                  style: kts20BoldText,
                 ).tr(),
               ),
               // SizedBox(height: 10.h),
@@ -69,7 +69,7 @@ class OrderSuccessView extends StatelessWidget {
                     ),
                     child: Text(
                       LocaleKeys.homeScreen,
-                      style: ktsButton18Text,
+                      style: ktsButtonWhite18Text,
                     ).tr(),
                     onPressed: model.navToHomeByRemovingAll,
                   ),

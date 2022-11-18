@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../shared/shared.dart';
 import '../../utils/app_theme.dart';
 
 class StaggerAnimationButtonWidget extends StatelessWidget {
@@ -57,14 +58,14 @@ class StaggerAnimationButtonWidget extends StatelessWidget {
             ? Text(
                 titleButton!,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: kcWhiteColor,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold),
               )
             : const CircularProgressIndicator(
                 value: null,
                 strokeWidth: 1.0,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: AlwaysStoppedAnimation<Color>(kcWhiteColor),
               ),
       ),
     );

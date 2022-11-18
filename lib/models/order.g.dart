@@ -49,6 +49,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       paymentType: json['paymentType'] == null
           ? null
           : PaymentType.fromJson(json['paymentType'] as Map<String, dynamic>),
+      paid: json['paid'] as bool?,
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
@@ -72,4 +73,5 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'notes': instance.notes,
       'address': instance.address,
       'paymentType': instance.paymentType,
+      'paid': instance.paid,
     };

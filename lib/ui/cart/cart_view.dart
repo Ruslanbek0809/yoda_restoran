@@ -14,8 +14,6 @@ import 'cart_meal_item.dart';
 import 'cart_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'checkout/checkout_bottom_sheet_view_copy.dart';
 import 'checkout/checkout_bottom_sheet_view.dart';
 
 class CartView extends StatelessWidget {
@@ -92,41 +90,6 @@ class CartView extends StatelessWidget {
                         );
                       },
                     ),
-                    //------------------ ACCESSORIES ---------------------//
-                    // Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    //   child: Row(
-                    //     children: [
-                    //       GestureDetector(
-                    //         onTap: () => Navigator.pop(context),
-                    //         child: SvgPicture.asset(
-                    //           'assets/forkKnife.svg',
-                    //           color: kcSecondaryDarkColor,
-                    //           width: 25.w,
-                    //         ),
-                    //       ),
-                    //       SizedBox(width: 15.w),
-                    //       Text(
-                    //         'Esbaplar',
-                    //         style: TextStyle(
-                    //           fontSize: 18.sp,
-                    //           color: kcFontColor,
-                    //         ),
-                    //       ),
-                    //       Spacer(),
-                    //       CupertinoSwitch(
-                    //         activeColor: kcPrimaryColor,
-                    //         trackColor: AppTheme.TOGGLE_COLOR,
-                    //         value: _switchValue,
-                    //         onChanged: (value) {
-                    //           setState(() {
-                    //             _switchValue = value;
-                    //           });
-                    //         },
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     //------------------ CART MEAL WIDGET TITLE ---------------------//
                     if (!model.hasError)
                       Padding(
@@ -212,11 +175,6 @@ class CartView extends StatelessWidget {
                           color: kcSecondaryDarkColor.withOpacity(0.25),
                         ),
                       ),
-                      // border: Border.all(
-                      //   color: AppTheme.BUTTON_BORDER_COLOR,
-                      //   width: 0.1,
-                      // ),
-                      // boxShadow: [AppTheme().bottomCartShadow],
                     ),
                     padding:
                         EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 15.h + 0.02.sw),
@@ -238,7 +196,7 @@ class CartView extends StatelessWidget {
                               // model.hasLoggedInUser
                               //     ? LocaleKeys.continuee
                               //     : LocaleKeys.register,
-                              style: ktsButton18Text,
+                              style: ktsButtonWhite18Text,
                             ).tr(),
                             onPressed: () async {
                               /// Below res workingHours are splitted

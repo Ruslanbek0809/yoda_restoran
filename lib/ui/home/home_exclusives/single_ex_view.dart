@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'single_ex_bottom_cart.dart';
-import 'single_ex_webview.dart';
+
 import '../../../models/models.dart';
-import 'single_ex_view_model.dart';
+import 'single_ex_bottom_cart.dart';
 import 'single_ex_reachText.dart';
+import 'single_ex_view_model.dart';
+import 'single_ex_webview.dart';
 
 class SingleExView extends StatelessWidget {
   final ExclusiveSingle singleEx;

@@ -17,6 +17,7 @@ class Constants {
   static const cartMealsBox = 'cartMealsBox';
   static const volCartBox = 'volCartBox';
   static const hiveRatingBox = 'hiveRatingBox';
+  static const creditCardsBox = 'creditCardsBox';
 
   /// SharedPreferences
   static const accessToken = 'accessToken';

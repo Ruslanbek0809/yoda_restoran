@@ -49,22 +49,22 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
             await _tweenController.forward();
             //------------------ MAIN CAT BOTTOM SHEET ---------------------//
             //------------------ CUSTOM PACKAGE ---------------------//
+            /// CUSTOM BOTTOM SHEET BASED ON CONTENT
             await showFlexibleBottomSheet(
-              minHeight: 0,
-              initHeight: 0.975,
-              maxHeight: 0.975,
+              isExpand: false,
+              initHeight: 0.95,
+              maxHeight: 0.95,
               context: context,
               duration: Duration(milliseconds: 250),
               bottomSheetColor: Colors.transparent,
               builder: (context, scrollController, offset) {
-                return CustomBarBottomSheet(
+                return CustomModalBottomSheet(
                   child: MainCatBottomSheetView(
                     scrollController: scrollController,
                     offset: offset,
                   ),
                 );
               },
-              anchors: [0, 0.975],
             );
           },
           child: Column(

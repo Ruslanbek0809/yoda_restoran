@@ -108,7 +108,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 3.h),
                           decoration: BoxDecoration(
-                            color: AppTheme.GREEN_COLOR,
+                            color: kcGreenColor,
                             borderRadius: BorderRadius.only(
                               topLeft:
                                   Radius.circular(Constants.BORDER_RADIUS_20),
@@ -137,10 +137,10 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                     right: 2.w,
                   ),
                   child: Text(
-                    meal.name!,
+                    meal.name ?? '-',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: ktsDefault12Text,
+                    style: kts12Text,
                   ),
                 ),
                 //------------------ MEAL PRICE ---------------------//

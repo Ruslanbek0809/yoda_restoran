@@ -229,8 +229,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                         title: Center(
                                           child: Text(
                                             LocaleKeys.close,
-                                            style:
-                                                TextStyle(color: AppTheme.RED),
+                                            style: TextStyle(color: kcRedColor),
                                           ).tr(),
                                         ),
                                         onTap: () => model.navBack(),
@@ -351,7 +350,8 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     duration: const Duration(milliseconds: 300),
                     child: model.isBusy
                         ? ButtonLoading()
-                        : Text(LocaleKeys.save, style: ktsButton18Text).tr(),
+                        : Text(LocaleKeys.save, style: ktsButtonWhite18Text)
+                            .tr(),
                   ),
                   color: kcSecondaryDarkColor,
                   padding: EdgeInsets.symmetric(vertical: 14.h),

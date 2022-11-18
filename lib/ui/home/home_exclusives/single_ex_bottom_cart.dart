@@ -81,10 +81,10 @@ class SingleExBottomCart extends HookViewModelWidget<SingleExViewModel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(model.cartRes!.name!, style: ktsButton18Text),
+                  Text(model.cartRes!.name!, style: ktsButtonWhite18Text),
                   Text(
                     '${formatNum(model.getTotalCartSum)} TMT',
-                    style: ktsButton18Text,
+                    style: ktsButtonWhite18Text,
                   ),
                 ],
               ),

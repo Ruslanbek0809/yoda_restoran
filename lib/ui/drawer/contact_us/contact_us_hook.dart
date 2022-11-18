@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -153,7 +154,8 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                       duration: const Duration(milliseconds: 300),
                       child: model.isBusy
                           ? ButtonLoading()
-                          : Text(LocaleKeys.send, style: ktsButton18Text).tr()),
+                          : Text(LocaleKeys.send, style: ktsButtonWhite18Text)
+                              .tr()),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10.0),
@@ -192,33 +194,77 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                   },
                 ),
               ),
-              SizedBox(height: 0.35.sw),
+              SizedBox(height: 0.33.sw),
               Text(
-                LocaleKeys.our_phone,
-                style: TextStyle(
-                  color: AppTheme.CONTACT_COLOR,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                LocaleKeys.our_phone_title,
+                style: kts16DialogBoldText,
               ).tr(),
-              SizedBox(height: 2.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_client_title,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+                      // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+                      // such as spaces in the input, which would cause `launch` to fail on some
+                      // platforms.
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: LocaleKeys.our_phone_for_client.tr(),
+                      );
+                      await launchUrl(launchUri);
+                    },
+                    child: Text(
+                      LocaleKeys.our_phone_for_client,
+                      style: kts16ContactBlueBoldText,
+                    ).tr(),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.our_phone_for_cooperation_title,
+                      style: kts16DialogText,
+                    ).tr(),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+                      // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+                      // such as spaces in the input, which would cause `launch` to fail on some
+                      // platforms.
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: LocaleKeys.our_phone_for_cooperation.tr(),
+                      );
+                      await launchUrl(launchUri);
+                    },
+                    child: Text(
+                      LocaleKeys.our_phone_for_cooperation,
+                      style: kts16ContactBlueBoldText,
+                    ).tr(),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24.h),
+              Text(
+                LocaleKeys.our_address_title,
+                style: kts16DialogBoldText,
+              ).tr(),
               Text(
                 LocaleKeys.our_address,
-                style: TextStyle(
-                  color: AppTheme.CONTACT_COLOR,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: kts16DialogText,
               ).tr(),
               SizedBox(height: 2.h),
-              // Text(
-              //   'Instagram: @yoda.restoran',
-              //   style: TextStyle(
-              //     color: AppTheme.CONTACT_COLOR,
-              //     fontSize: 16.sp,
-              //     fontWeight: FontWeight.w600,
-              //   ),
-              // ).tr(),
             ],
           ),
         ),

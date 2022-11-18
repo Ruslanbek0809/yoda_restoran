@@ -70,40 +70,40 @@ class LoginView extends StatelessWidget with $LoginView {
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: Text('+993', style: kts18Text),
                       ),
-                      fillColor: AppTheme.FILL_COLOR,
+                      fillColor: kcFillColor,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.FILL_BORDER_COLOR,
+                          color: kcFillBorderColor,
                           width: 0.3,
                         ),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.RED,
+                          color: kcRedColor,
                           width: 0.3,
                         ),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: AppTheme().radius10,
                         borderSide: BorderSide(
-                          color: AppTheme.RED,
+                          color: kcRedColor,
                           width: 0.3,
                         ),
                       ),
@@ -125,7 +125,8 @@ class LoginView extends StatelessWidget with $LoginView {
                         duration: const Duration(milliseconds: 300),
                         child: model.isBusy
                             ? ButtonLoading()
-                            : Text(LocaleKeys.continuee, style: ktsButton18Text)
+                            : Text(LocaleKeys.continuee,
+                                    style: ktsButtonWhite18Text)
                                 .tr(),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 14.h),

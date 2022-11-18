@@ -79,8 +79,12 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: kcWhiteColor,
-                        // border: Border.all(
-                        //     color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+                        border: Border(
+                          top: BorderSide(
+                            width: 0.1,
+                            color: kcButtonBorderColor,
+                          ),
+                        ),
                       ),
                       padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 25.h),
                       child: CustomTextChildButton(
@@ -92,7 +96,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                               ? ButtonLoading()
                               : Text(
                                   LocaleKeys.addNewAddressButton,
-                                  style: ktsButton18Text,
+                                  style: ktsButtonWhite18Text,
                                 ).tr(),
                         ),
                         onPressed: () async {

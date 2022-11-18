@@ -14,25 +14,12 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   final _checkoutService = locator<CheckoutService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
-//------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
-
   List<Address>? get addresses => _checkoutService.addresses;
 
   Address? _tempSelectedAddress;
   Address? get tempSelectedAddress => _tempSelectedAddress != null
       ? _tempSelectedAddress!
       : _checkoutService.selectedAddress!;
-
-  // /// GETS addresses for CheckoutSelectAddressBottomSheetView
-  // Future<void> getAddresses() async {
-  //   log.i('getAddresses()');
-
-  //   try {
-  //     await runBusyFuture(_checkoutService.getAddresses());
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
 
   /// Temporarily SETS _tempSelectedAddress
   void updateTempSelectedAddress(Address selectedAddress) {
@@ -51,9 +38,6 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     _checkoutService.saveSelectedAddress(_tempSelectedAddress!);
     notifyListeners();
   }
-
-  // @override
-  // Future futureToRun() => _checkoutService.getAddresses();
 
 //------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
 

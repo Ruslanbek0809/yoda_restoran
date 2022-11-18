@@ -59,7 +59,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         model.currentUser!.mobile != null
                             ? model.currentUser!.mobile!
                             : '+993 65555555',
-                        style: ktsDefault18BoldText,
+                        style: kts18BoldText,
                       ),
                     ],
                   ),
@@ -186,7 +186,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                               ? LocaleType.tk
                               : LocaleType.ru,
                           theme: DatePickerTheme(
-                            doneStyle: ktsDefault20BoldText,
+                            doneStyle: kts20BoldText,
                             backgroundColor: kcWhiteColor,
                           ),
                         );
@@ -290,11 +290,11 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                     model.isDelivery
                                         ? Text(
                                             LocaleKeys.deliveryTime,
-                                            style: ktsDefault16BoldText,
+                                            style: kts16BoldText,
                                           ).tr()
                                         : Text(
                                             LocaleKeys.preparationTime,
-                                            style: ktsDefault16BoldText,
+                                            style: kts16BoldText,
                                           ).tr(),
                                     model.deliveryDateTime == null
                                         ? Text(
@@ -391,7 +391,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   children: [
                                     Text(
                                       LocaleKeys.paymentType,
-                                      style: ktsDefault16BoldText,
+                                      style: kts16BoldText,
                                     ).tr(),
                                     Text(
                                       context.locale ==
@@ -436,7 +436,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                 border: Border(
                   top: BorderSide(
                     width: 0.1,
-                    color: AppTheme.BUTTON_BORDER_COLOR,
+                    color: kcButtonBorderColor,
                   ),
                 ),
               ),
@@ -478,7 +478,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           ? ButtonLoading()
                           : Text(
                               LocaleKeys.orderNow,
-                              style: ktsButton18Text,
+                              style: ktsButtonWhite18Text,
                             ).tr(),
                       // onPressed: model.navToOrdersByRemovingAll,
                       onPressed: model.isBusy

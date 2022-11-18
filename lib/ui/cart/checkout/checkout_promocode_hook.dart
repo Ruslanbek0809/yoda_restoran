@@ -41,14 +41,14 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: AppTheme().radius15,
                       borderSide: BorderSide(
-                        color: AppTheme.FILL_BORDER_SECOND_COLOR,
+                        color: kcFillSecondaryBorderColor,
                         width: 1,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: AppTheme().radius15,
                       borderSide: BorderSide(
-                        color: AppTheme.FILL_BORDER_SECOND_COLOR,
+                        color: kcFillSecondaryBorderColor,
                         width: 1,
                       ),
                     ),

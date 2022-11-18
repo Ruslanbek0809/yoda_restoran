@@ -70,7 +70,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius12,
                   color: model.isMainCatSelected(mainCategory.id)
-                      ? AppTheme.GREEN_COLOR
+                      ? kcGreenColor
                       : kcWhiteColor,
                 ),
                 child: FittedBox(

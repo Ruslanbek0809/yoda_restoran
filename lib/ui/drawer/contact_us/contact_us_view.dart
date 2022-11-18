@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
-import '../../../utils/utils.dart';
 import 'contact_us_hook.dart';
 import 'contact_us_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,9 +30,7 @@ class ContactUsView extends StatelessWidget {
             ),
             title: Text(
               LocaleKeys.contact_us,
-              style: TextStyle(
-                color: kcSecondaryDarkColor,
-              ),
+              style: kts18DarkText,
             ).tr(),
             centerTitle: true,
           ),

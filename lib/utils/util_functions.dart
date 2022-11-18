@@ -66,15 +66,30 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
+/// BANK list
+final List<BankCard> bankList = [
+  BankCard(
+    bankId: 1,
+    bankName: LocaleKeys.halk_bank_and_others,
+  ),
+  BankCard(
+    bankId: 2,
+    bankName: LocaleKeys.rysgal_bank,
+  ),
+  BankCard(
+    bankId: 3,
+    bankName: LocaleKeys.senagat_bank,
+  ),
+  BankCard(
+    bankId: 4,
+    bankName: LocaleKeys.dyi_bank,
+  ),
+];
+
 List<FilterSort> mainCatSortList = [
   FilterSort(1, LocaleKeys.defaultt),
   FilterSort(2, LocaleKeys.byName),
   FilterSort(3, LocaleKeys.byRatings),
-];
-
-List<PaymentTypee> paymentTypes = [
-  PaymentTypee(1, 'Nagt'),
-  PaymentTypee(2, 'Terminal'),
 ];
 
 /// Enum for FormValidation
@@ -83,8 +98,8 @@ enum FormValidation { phoneInvalid, valid }
 /// Enum for bottomCartController
 enum BottomCartStatus { idle, forward, reverse }
 
-/// Enum for sortAnimationController
-enum MainFilterAnimationStatus { idle, forward, reverse }
+/// Enum for order payment status
+enum OrderPaymentStatus { idle, success, fail }
 
 /// Enum for bottom sheet types
 enum BottomSheetType {
@@ -96,6 +111,8 @@ enum BottomSheetType {
   paymentType,
   selectAddress,
   addAddress,
+  creditCardConfirmation,
+  sendCodeConfirmation,
 }
 
 /// Enum for dialog types
@@ -109,6 +126,9 @@ enum DialogType {
   removeAddress,
   rateOrder,
   orderDelete,
+  creditCardDelete,
+  onlinePaymentFail,
+  onlinePaymentSuccess,
 }
 
 /// Enum for snackbar types
@@ -207,7 +227,7 @@ snackBar(String? message, BuildContext context) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(message!),
-      duration: Duration(seconds: 2),
+      duration: Duration(seconds: 3),
     ),
   );
 }

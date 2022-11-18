@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
-import '../meal/meal_view.dart';
 import '../../widgets/widgets.dart';
-import '../../../utils/utils.dart';
+import '../meal/meal_view.dart';
 import 'res_search_hook.dart';
 import 'restaurant_search_view_model.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RestaurantSearchView extends StatelessWidget {
   final Restaurant restaurant;

@@ -6,37 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // To make it clear which weight we are using, we'll define the weight even for regular
 // fonts
 
-TextStyle ktsButton18Text = TextStyle(
-  color: kcWhiteColor,
-  fontSize: 18.sp,
-  fontWeight: FontWeight.normal,
-);
-
-TextStyle ktsButton18ContactText = TextStyle(
-  color: kcContactColor,
-  fontSize: 18.sp,
-  fontWeight: FontWeight.normal,
-);
-
-TextStyle kts16DialogText = TextStyle(
-  fontSize: 16.sp,
-  color: kcDialogColor,
-);
-
-// TextStyle ktsTextfieldText = TextStyle(
-//   color: kcFontColor,
-//   fontSize: 18.sp,
-// );
-
-// TextStyle ktsLabelText = TextStyle(
-//   color: kcHelperColor,
-//   fontSize: 16.sp,
-// );
-
 TextStyle kts10IconText = TextStyle(
   fontSize: 10.sp,
   fontWeight: FontWeight.w600,
   color: kcIconColor,
+);
+
+TextStyle kts10DialogText = TextStyle(
+  fontSize: 10.sp,
+  color: kcDialogColor,
 );
 
 TextStyle kts12DialogText = TextStyle(
@@ -44,9 +22,8 @@ TextStyle kts12DialogText = TextStyle(
   color: kcDialogColor,
 );
 
-TextStyle ktsDefault12Text = TextStyle(
+TextStyle kts12Text = TextStyle(
   fontSize: 12.sp,
-  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 
@@ -60,9 +37,13 @@ TextStyle kts12PromocodeText = TextStyle(
   color: kcPromocodeColor,
 );
 
+TextStyle kts12ContactText = TextStyle(
+  fontSize: 12.sp,
+  color: kcContactColor,
+);
+
 TextStyle kts14Text = TextStyle(
   fontSize: 14.sp,
-  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 
@@ -82,9 +63,19 @@ TextStyle kts14IconText = TextStyle(
   color: kcIconColor,
 );
 
+TextStyle kts14ContactText = TextStyle(
+  fontSize: 14.sp,
+  color: kcContactColor,
+);
+
 TextStyle ktsDefault14DialogText = TextStyle(
   fontSize: 14.sp,
   color: kcDialogColor,
+);
+
+TextStyle kts14SecondaryDarkText = TextStyle(
+  fontSize: 14.sp,
+  color: kcSecondaryDarkColor,
 );
 
 TextStyle kts16ContactText = TextStyle(
@@ -95,7 +86,6 @@ TextStyle kts16ContactText = TextStyle(
 TextStyle kts16ButtonText = TextStyle(
   color: kcWhiteColor,
   fontSize: 16.sp,
-  fontWeight: FontWeight.normal,
 );
 
 TextStyle kts16PrimaryBoldText = TextStyle(
@@ -106,7 +96,6 @@ TextStyle kts16PrimaryBoldText = TextStyle(
 
 TextStyle kts16Text = TextStyle(
   fontSize: 16.sp,
-  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 
@@ -115,10 +104,16 @@ TextStyle kts16PrimaryLightText = TextStyle(
   color: kcPrimaryColor,
 );
 
-TextStyle ktsDefault16BoldText = TextStyle(
+TextStyle kts16BoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
+);
+
+TextStyle kts16WhiteBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcWhiteColor,
 );
 
 TextStyle kts16HelperText = TextStyle(
@@ -131,19 +126,47 @@ TextStyle kts16DarkText = TextStyle(
   color: kcSecondaryDarkColor,
 );
 
-TextStyle kts16DarkSemiBoldText = TextStyle(
+TextStyle kts16DarkBoldText = TextStyle(
   fontSize: 16.sp,
   fontWeight: FontWeight.w600,
   color: kcSecondaryDarkColor,
 );
 
+TextStyle kts16OnlinePaymentBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcOnlinePaymentColor,
+);
+
+TextStyle kts16DialogText = TextStyle(
+  fontSize: 16.sp,
+  color: kcDialogColor,
+);
+
+TextStyle kts16DialogBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcDialogColor,
+);
+
+TextStyle kts16ContactBlueBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcBlueColor,
+);
+
+TextStyle kts16IconBoldText = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w600,
+  color: kcIconColor,
+);
+
 TextStyle kts18Text = TextStyle(
   fontSize: 18.sp,
-  fontWeight: FontWeight.normal,
   color: kcFontColor,
 );
 
-TextStyle kts18SemiBoldText = TextStyle(
+TextStyle kts18BoldText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
@@ -160,18 +183,6 @@ TextStyle kts18NotificationText = TextStyle(
   color: kcGreenColor,
 );
 
-TextStyle ktsDefault18SemiBoldText = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
-  color: kcFontColor,
-);
-
-TextStyle ktsDefault18BoldText = TextStyle(
-  fontSize: 18.sp,
-  fontWeight: FontWeight.w600,
-  color: kcFontColor,
-);
-
 TextStyle kts18DarkText = TextStyle(
   fontSize: 18.sp,
   fontWeight: FontWeight.w600,
@@ -183,12 +194,28 @@ TextStyle ktsDefault18HelperText = TextStyle(
   color: kcHelperColor,
 );
 
+TextStyle ktsButtonWhite18Text = TextStyle(
+  color: kcWhiteColor,
+  fontSize: 18.sp,
+);
+
+TextStyle ktsButton18ContactText = TextStyle(
+  color: kcContactColor,
+  fontSize: 18.sp,
+);
+
+TextStyle kts24CreditCardNumberText = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeight.w600,
+  color: kcCreditCardNumberColor,
+);
+
 TextStyle kts20Text = TextStyle(
   fontSize: 20.sp,
   color: kcFontColor,
 );
 
-TextStyle ktsDefault20BoldText = TextStyle(
+TextStyle kts20BoldText = TextStyle(
   fontSize: 20.sp,
   fontWeight: FontWeight.w600,
   color: kcFontColor,
@@ -197,7 +224,6 @@ TextStyle ktsDefault20BoldText = TextStyle(
 TextStyle ktsButtonText = TextStyle(
   color: kcWhiteColor,
   fontSize: 20.sp,
-  fontWeight: FontWeight.normal,
 );
 
 TextStyle kts20DarkText = TextStyle(
@@ -226,7 +252,6 @@ TextStyle ktsDefault22BoldText = TextStyle(
 
 TextStyle kts22PrimaryText = TextStyle(
   fontSize: 22.sp,
-  fontWeight: FontWeight.normal,
   color: kcPrimaryColor,
 );
 

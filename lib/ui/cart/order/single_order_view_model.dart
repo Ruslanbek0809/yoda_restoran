@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
@@ -9,14 +11,13 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
-
 import 'order_view_model.dart';
 
 class SingleOrderViewModel extends BaseViewModel {
   final log = getLogger('SingleOrderViewModel');
-  final Order order;
-  final OrderViewModel orderViewModel;
-  SingleOrderViewModel(this.order, this.orderViewModel);
+  final Order? order;
+  final OrderViewModel? orderViewModel;
+  SingleOrderViewModel({this.order, this.orderViewModel});
 
   final _navService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
@@ -38,7 +39,7 @@ class SingleOrderViewModel extends BaseViewModel {
   /// Function that FIRES first in SingleOrderViewModel
   void initSingleOrder() {
     /// INITIALIZES _orderStatusText
-    switch (order.status) {
+    switch (order!.status) {
       case 1:
         _orderStatusText = LocaleKeys.orderWaiting.tr();
         break;
@@ -46,12 +47,12 @@ class SingleOrderViewModel extends BaseViewModel {
         _orderStatusText = LocaleKeys.orderAccepted.tr();
         break;
       case 3:
-        _orderStatusText = order.selfPickUp!
+        _orderStatusText = order!.selfPickUp!
             ? LocaleKeys.orderReady.tr()
             : LocaleKeys.orderSent.tr();
         break;
       case 4:
-        _orderStatusText = order.selfPickUp!
+        _orderStatusText = order!.selfPickUp!
             ? LocaleKeys.orderTaken.tr()
             : LocaleKeys.orderDelivered.tr();
         break;
@@ -61,7 +62,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
     /// ASSIGNS initial value to _currentOrderExpansionState
     _currentOrderExpansionState =
-        order.status == 2 || order.status == 1 ? true : false;
+        order!.status == 2 || order!.status == 1 ? true : false;
 
     /// CREATES and INITIALIZES orderStatuses for this order
     for (int i = 0; i < _orderTimelines.length; i++) {
@@ -69,22 +70,22 @@ class SingleOrderViewModel extends BaseViewModel {
       switch (_orderTimelines[i].id) {
         case 2:
           _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
-          if (order.kitchenAt != null)
-            _orderTimelines[i].orderStatusAt = order.kitchenAt!;
+          if (order!.kitchenAt != null)
+            _orderTimelines[i].orderStatusAt = order!.kitchenAt!;
           break;
         case 3:
-          _orderTimelines[i].name = order.selfPickUp!
+          _orderTimelines[i].name = order!.selfPickUp!
               ? LocaleKeys.orderReady.tr()
               : LocaleKeys.orderSent.tr();
-          if (order.driverAt != null)
-            _orderTimelines[i].orderStatusAt = order.driverAt!;
+          if (order!.driverAt != null)
+            _orderTimelines[i].orderStatusAt = order!.driverAt!;
           break;
         case 4:
-          _orderTimelines[i].name = order.selfPickUp!
+          _orderTimelines[i].name = order!.selfPickUp!
               ? LocaleKeys.orderTaken.tr()
               : LocaleKeys.orderDelivered.tr();
-          if (order.deliveredAt != null)
-            _orderTimelines[i].orderStatusAt = order.deliveredAt!;
+          if (order!.deliveredAt != null)
+            _orderTimelines[i].orderStatusAt = order!.deliveredAt!;
           break;
         default:
           break;
@@ -102,27 +103,27 @@ class SingleOrderViewModel extends BaseViewModel {
   num getPromocodePrice() {
     num totalPromocodePrice = 0;
 
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        totalPromocodePrice = order.promocode!.discount!;
+    if (order!.promocode != null) {
+      if (order!.promocode!.promoType == 1)
+        totalPromocodePrice = order!.promocode!.discount!;
       else
         totalPromocodePrice =
-            (order.totPrice! / 100) * order.promocode!.discount!;
+            (order!.totPrice! / 100) * order!.promocode!.discount!;
     }
     return totalPromocodePrice;
   }
 
   /// GETS getTotalOrderSum with promocode
   num getTotalOrderSumWithPromocode() {
-    num totalOrderSum = order.totPrice!;
+    num totalOrderSum = order!.totPrice!;
 
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        totalOrderSum -= order.promocode!.discount!;
+    if (order!.promocode != null) {
+      if (order!.promocode!.promoType == 1)
+        totalOrderSum -= order!.promocode!.discount!;
       else
-        totalOrderSum = order.totPrice! - getPromocodePrice();
+        totalOrderSum = order!.totPrice! - getPromocodePrice();
     }
-    if (order.dostawkaPrice != null) totalOrderSum += order.dostawkaPrice!;
+    if (order!.dostawkaPrice != null) totalOrderSum += order!.dostawkaPrice!;
     return totalOrderSum;
   }
 
@@ -213,7 +214,7 @@ class SingleOrderViewModel extends BaseViewModel {
 
             /// REINITIALIZES ORDERS
             /// TODO: Optimize if possible
-            await orderViewModel.getInitialOrders();
+            await orderViewModel!.getInitialOrders();
           },
           () => onFailForView!(),
         ),
@@ -266,7 +267,7 @@ class SingleOrderViewModel extends BaseViewModel {
     if (respData!.data != null && respData.data == true) {
       /// REINITIALIZES ORDERS
       /// TODO: Optimize if possible
-      await orderViewModel.getInitialOrders();
+      await orderViewModel!.getInitialOrders();
     }
   }
 
@@ -289,18 +290,229 @@ class SingleOrderViewModel extends BaseViewModel {
     if (respData != null && respData.data == true)
       await runBusyFuture(
         _userService.deleteOrder(
-          order.id!,
+          order!.id!,
           () async {
             onSuccessForView!();
 
             /// REINITIALIZES ORDERS
             /// TODO: Optimize if possible
-            await orderViewModel.getInitialOrders();
+            await orderViewModel!.getInitialOrders();
           },
           () => onFailForView!(),
         ),
-        busyObject: order.id!,
+        busyObject: order!.id!,
       );
+  }
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  /// POST after CONFIRM button is pressed
+  Future<void> onConfirmButtonPressed({
+    Function(OrderPaymentRegister)? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onConfirmButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.postOnlinePayment(
+        order!,
+        false,
+        0,
+        (OrderPaymentRegister paymentRegister) {
+          _isLoading = false;
+          notifyListeners();
+          onSuccessForView!(paymentRegister);
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
+  bool _isPaymentLoading = false;
+  bool get isPaymentLoading => _isPaymentLoading;
+
+  bool _isPaymentPanelsFinished = false;
+  bool get isPaymentPanelsFinished => _isPaymentPanelsFinished;
+
+  /// Enum for order payment status
+  OrderPaymentStatus _isPaymentSuccess = OrderPaymentStatus.idle;
+  OrderPaymentStatus get isPaymentSuccess => _isPaymentSuccess;
+
+  /// Function onConsoleMessage
+  Future<void> onConsoleMessage({
+    OrderPaymentRegister? paymentRegister,
+    InAppWebViewController? controller,
+    ConsoleMessage? consoleMessage,
+  }) async {
+    log.v('onConsoleMessage => $consoleMessage');
+
+    final _isErrorTextExists = consoleMessage!.message.contains('ErrorCode');
+    final _isErrorCodeExists = consoleMessage.message.contains('5');
+    log.v(
+        'onConsoleMessage => _isErrorTextExists: $_isErrorTextExists, _isErrorCodeExists: $_isErrorCodeExists, really ERROR: ${_isErrorTextExists && _isErrorCodeExists}');
+
+    if (_isErrorTextExists && _isErrorCodeExists) {
+      _isPaymentLoading = true;
+      _isPaymentSuccess = OrderPaymentStatus.idle;
+
+      /// STARTS _isPaymentLoading part in bottom sheet
+      _isPaymentPanelsFinished = true;
+      notifyListeners();
+
+      await Future.delayed(Duration(milliseconds: 500));
+
+      /// CHECKS ONLINE PAYMENT ORDER STATUS
+      await runBusyFuture(
+        _userService.checkOnlinePaymentOrderStatus(
+          _isOnlinePaymentRetrySuccess
+              ? _retryOnlinePaymentRegister!
+              : paymentRegister!,
+          () async {
+            _isPaymentLoading = false;
+            _isPaymentSuccess = OrderPaymentStatus.success;
+
+            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+            _isOnlinePaymentRetrySuccess = false;
+            notifyListeners();
+
+            /// PATCHS ORDER PAID VAR
+            await _userService.patchOrderToPaid(
+              order!.id!,
+              () async {
+                /// REINITIALIZES ORDERS
+                /// TODO: Optimize if possible
+                await orderViewModel!.getInitialOrders();
+              },
+              () {},
+            );
+          },
+          () {
+            _isPaymentLoading = false;
+            _isPaymentSuccess = OrderPaymentStatus.fail;
+
+            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+            _isOnlinePaymentRetrySuccess = false;
+            notifyListeners();
+          },
+        ),
+      );
+    }
+  }
+
+  /// SHOWS ONLINE PAYMENT FAIL Dialog
+  Future showOnlinePaymentFailDialog() async {
+    log.i('showOnlinePaymentFailDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.onlinePaymentFail,
+      title: LocaleKeys.online_payment_fail,
+      data: LocaleKeys.online_payment_fail_info,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+  }
+
+  /// SHOWS ONLINE PAYMENT SUCCESS Dialog
+  Future showOnlinePaymentSuccessDialog() async {
+    log.i('showOnlinePaymentSuccessDialog()');
+    await _dialogService.showCustomDialog(
+      variant: DialogType.onlinePaymentSuccess,
+      title: LocaleKeys.online_payment_success,
+      data: '',
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+  }
+
+  bool _isChangeToCashLoading = false;
+  bool get isChangeToCashLoading => _isChangeToCashLoading;
+
+  /// POST after CONFIRM button is pressed
+  Future<void> onChangeToCashButtonPressed({
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onChangeToCashButtonPressed()');
+
+    _isChangeToCashLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.patchOrderOnlineToCash(
+        order!.id!,
+        
+        () async {
+          /// REINITIALIZES ORDERS
+          /// TODO: Optimize if possible
+          await orderViewModel!.getInitialOrders();
+          _isChangeToCashLoading = false;
+          notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isChangeToCashLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
+  OrderPaymentRegister? _retryOnlinePaymentRegister;
+  OrderPaymentRegister? get retryOnlinePaymentRegister =>
+      _retryOnlinePaymentRegister;
+
+  bool _isOnlinePaymentRetrySuccess = false;
+  bool get isOnlinePaymentRetrySuccess => _isOnlinePaymentRetrySuccess;
+
+  int _onlineRetryCounter = 0;
+  int get onlineRetryCounter => _onlineRetryCounter;
+
+  bool _isOnlinePaymentRetryLoading = false;
+  bool get isOnlinePaymentRetryLoading => _isOnlinePaymentRetryLoading;
+
+  /// POST after ONLINE PAYMENT RETRY button is pressed
+  Future<void> onOnlinePaymentRetryButtonPressed({
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onOnlinePaymentRetryButtonPressed()');
+
+    /// STARTS new _onlineRetryCounter for this specific order
+    _onlineRetryCounter = _onlineRetryCounter + 1;
+    _isOnlinePaymentRetryLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.postOnlinePayment(
+        order!,
+        true,
+        _onlineRetryCounter,
+        (OrderPaymentRegister paymentRegister) {
+          _isOnlinePaymentRetryLoading = false;
+
+          /// STARTS _isPaymentLoading part in bottom sheet
+          _isPaymentPanelsFinished = false;
+
+          _isOnlinePaymentRetrySuccess = true;
+          _retryOnlinePaymentRegister = paymentRegister;
+          notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isOnlinePaymentRetryLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//

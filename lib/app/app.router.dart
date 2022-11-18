@@ -16,8 +16,9 @@ import '../ui/cart/order/orders_view.dart';
 import '../ui/drawer/about_us/about_us_view.dart';
 import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
-import '../ui/drawer/credit_cards/my_credit_cards.dart';
 import '../ui/drawer/login/login_view.dart';
+import '../ui/drawer/my_credit_cards/my_credit_cards.dart';
+import '../ui/drawer/my_credit_cards/my_credit_cards_add_edit/my_credit_card_add_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
@@ -50,6 +51,7 @@ class Routes {
   static const String singleExView = '/single-ex-view';
   static const String sliderWebview = '/slider-webview';
   static const String myCreditCardsView = '/my-credit-cards-view';
+  static const String myCreditCardAddView = '/my-credit-card-add-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -71,6 +73,7 @@ class Routes {
     singleExView,
     sliderWebview,
     myCreditCardsView,
+    myCreditCardAddView,
   };
 }
 
@@ -98,6 +101,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.singleExView, page: SingleExView),
     RouteDef(Routes.sliderWebview, page: SliderWebview),
     RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
+    RouteDef(Routes.addressAddView, page: AddressAddView),
+    RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -260,7 +265,16 @@ class StackedRouter extends RouterBase {
     },
     MyCreditCardsView: (data) {
       return CustomMaterialPageRoute(
-        builder: (context) => const MyCreditCardsView(),
+        builder: (context) => MyCreditCardsView(),
+        settings: data,
+      );
+    },
+    MyCreditCardAddView: (data) {
+      var args = data.getArgs<MyCreditCardAddViewArguments>(
+        orElse: () => MyCreditCardAddViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MyCreditCardAddView(key: args.key),
         settings: data,
       );
     },
@@ -347,4 +361,10 @@ class SliderWebviewArguments {
   final String sliderUrl;
   final Key? key;
   SliderWebviewArguments({required this.sliderUrl, this.key});
+}
+
+/// MyCreditCardAddView arguments holder class
+class MyCreditCardAddViewArguments {
+  final Key? key;
+  MyCreditCardAddViewArguments({this.key});
 }

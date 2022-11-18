@@ -68,7 +68,7 @@ class MainCategoryItemBottomHook
               decoration: BoxDecoration(
                 borderRadius: AppTheme().radius15,
                 color: model.isTempMainCatSelected(mainCategory!.id)
-                    ? AppTheme.GREEN_COLOR
+                    ? kcGreenColor
                     : Colors.transparent,
               ),
               child: FittedBox(

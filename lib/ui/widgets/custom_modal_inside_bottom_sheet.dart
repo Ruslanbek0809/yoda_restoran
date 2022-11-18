@@ -6,11 +6,13 @@ class CustomModalInsideBottomSheet extends StatelessWidget {
   final bool isOuterPaddingExist;
   final double? leftOuterPadding;
   final double? rightOuterPadding;
+  final bool isBottomZero;
   const CustomModalInsideBottomSheet({
     Key? key,
     this.isOuterPaddingExist = false,
     this.leftOuterPadding,
     this.rightOuterPadding,
+    this.isBottomZero = false,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class CustomModalInsideBottomSheet extends StatelessWidget {
       alignment: Alignment.center,
       margin: EdgeInsets.only(
         top: 12.h,
-        bottom: 12.h,
+        bottom: isBottomZero ? 0.h : 12.h,
         left:
             isOuterPaddingExist ? 0.5.sw - 24 - leftOuterPadding! : 0.5.sw - 24,
         right: isOuterPaddingExist

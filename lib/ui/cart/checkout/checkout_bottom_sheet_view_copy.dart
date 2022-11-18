@@ -472,7 +472,7 @@
 //               decoration: BoxDecoration(
 //                 color: kcWhiteColor,
 //                 border:
-//                     Border.all(color: AppTheme.BUTTON_BORDER_COLOR, width: 0.1),
+//                     Border.all(color: AppTheme.kcButtonBorderColor, width: 0.1),
 //               ),
 //               padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 22.h),
 //               child: Row(

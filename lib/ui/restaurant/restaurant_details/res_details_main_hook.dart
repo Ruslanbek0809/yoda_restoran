@@ -106,7 +106,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   child: Icon(
                     Icons.arrow_back_rounded,
                     size: 27.w,
-                    color: AppTheme.BLACK,
+                    color: kcBlackColor,
                   ),
                 ),
               ),
@@ -149,8 +149,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                       : Icons.favorite_border,
                                   size: 27.w,
                                   color: model.isFavorited
-                                      ? AppTheme.RED
-                                      : AppTheme.BLACK,
+                                      ? kcRedColor
+                                      : kcBlackColor,
                                 ),
                               ),
                             ),
@@ -169,14 +169,11 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: kcWhiteColor,
-                    // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-                    // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                   ),
                   child: Material(
                     shape: CircleBorder(),
                     elevation: 0,
                     color: kcWhiteColor,
-                    // color: model.isShrink ? Colors.transparent : kcWhiteColor,
                     child: InkWell(
                       customBorder: CircleBorder(),
                       onTap: () => model.navToResSearchView(),
@@ -185,7 +182,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         child: Icon(
                           Icons.search_rounded,
                           size: 27.w,
-                          color: AppTheme.BLACK,
+                          color: kcBlackColor,
                         ),
                       ),
                     ),
@@ -422,7 +419,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                         ToggleButtonView(restaurant: restaurant),
                         //------------------ MAIN DIVIDER ---------------------//
                         Container(
-                          color: AppTheme.MAIN_DIVIDER_COLOR,
+                          color: kcMainDividerColor,
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           margin: EdgeInsets.only(top: 15.h),
                         ),

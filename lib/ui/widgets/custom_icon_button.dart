@@ -26,7 +26,7 @@ class CustomIconButton extends StatelessWidget {
           child: Icon(
             iconData,
             size: 27.w,
-            color: AppTheme.BLACK,
+            color: kcBlackColor,
           ),
         ),
       ),
