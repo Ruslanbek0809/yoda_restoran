@@ -63,7 +63,11 @@ dependencies:
   geolocator: ^8.1.1
   double_back_to_close_app: ^2.1.0
   flutter_html: ^2.2.1
-  flutter_inappwebview: ^5.7.1+1
+
+  # flutter_inappwebview: ^5.7.1+1
+  flutter_inappwebview:
+    git: https://github.com/Ruslanbek0809/flutter_inappwebview.git  # To fix dependency issue
+
   platform: ^3.1.0 # Native settings package
   bottom_sheet: ^3.1.1 # For custom bottom sheet
   share_plus: ^4.0.10

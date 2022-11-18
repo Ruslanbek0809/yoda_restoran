@@ -548,10 +548,19 @@ packages:
   flutter_inappwebview:
     dependency: "direct main"
     description:
-      name: flutter_inappwebview
+      path: "."
+      ref: HEAD
+      resolved-ref: "049f3b4179082fb831d9a8f7a2f67098da1af7de"
+      url: "https://github.com/Ruslanbek0809/flutter_inappwebview.git"
+    source: git
+    version: "6.0.0-beta.14"
+  flutter_inappwebview_internal_annotations:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_internal_annotations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.7.1+1"
+    version: "1.1.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
