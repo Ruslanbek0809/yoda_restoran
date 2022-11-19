@@ -138,20 +138,24 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
                   color: kcSecondaryDarkColor,
                   width: 22.w,
                 ),
-                SizedBox(width: 5.w),
-                Text(
-                  LocaleKeys.paymentType,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: kcFontColor,
-                  ),
-                ).tr(),
-                Text(
-                  paymentTypesText,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: kcFontColor,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Text(
+                    LocaleKeys.paymentType,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: kcFontColor,
+                    ),
+                  ).tr(),
+                ),
+                Flexible(
+                  child: Text(
+                    paymentTypesText,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: kcFontColor,
+                    ),
                   ),
                 ),
               ],

@@ -561,6 +561,7 @@ class UserService {
     //   rethrow;
     // }
 
+    /// CHANGED order from DELETE to PATCH in order to BACKUP online payments in DJANGO admin panel
     try {
       Response response = await _apiRoot.dio.patch(
         'api/order/$orderId/',
