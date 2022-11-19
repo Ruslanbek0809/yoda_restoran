@@ -71,18 +71,25 @@ class HomeSearchView extends StatelessWidget {
                 ? LoadingWidget()
                 : model.searchRestaurants.isEmpty || model.hasError
                     ? Column(
+                        mainAxisAlignment: model.mainCats!.isNotEmpty
+                            ? MainAxisAlignment.spaceBetween
+                            : MainAxisAlignment.center,
                         children: [
                           if (model.mainCats!.isNotEmpty)
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
+                              padding: EdgeInsets.only(
+                                top: 10.h,
+                                left: 16.w,
+                                right: 16.w,
+                              ),
                               child: Wrap(
                                 runSpacing: 8.0,
                                 spacing: 10.0,
                                 children: model.mainCats!.map((_mainCat) {
                                   return Container(
-                                    margin: EdgeInsets.only(top: 3.h),
+                                    margin: EdgeInsets.only(top: 2.h),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 7.w, vertical: 2.h),
+                                        horizontal: 8.w, vertical: 4.h),
                                     decoration: BoxDecoration(
                                       borderRadius: kbr10,
                                       color: kcSecondaryLightColor,
@@ -103,6 +110,9 @@ class HomeSearchView extends StatelessWidget {
                             // text: LocaleKeys.nothingFound,
                             svg: 'assets/empty_search.svg',
                           ),
+
+                          /// To make Empty in center
+                          if (model.mainCats!.isNotEmpty) SizedBox(),
                         ],
                       )
                     : ListView.builder(
