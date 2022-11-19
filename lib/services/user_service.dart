@@ -546,17 +546,35 @@ class UserService {
     Function()? onSuccess,
     Function()? onFail,
   ) async {
-    try {
-      Response response =
-          await _apiRoot.dio.delete('api/paginatedorder/$orderId/');
-      log.v('RESPONSE: api/paginatedorder/$orderId/ => ${response.statusCode}');
+    // try {
+    //   Response response =
+    //       await _apiRoot.dio.delete('api/order/$orderId/');
+    //   log.v('RESPONSE: api/order/$orderId/ => ${response.statusCode}');
 
-      if (response.data != null && response.statusCode == 204)
+    //   if (response.data != null && response.statusCode == 204)
+    //     onSuccess!();
+    //   else
+    //     onFail!();
+    // } on DioError catch (error) {
+    //   log.v('ERROR on api/order/$orderId/: ${error.response}');
+    //   onFail!();
+    //   rethrow;
+    // }
+
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'status': 5}),
+      );
+      log.v('RESPONSE: api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
         onSuccess!();
       else
         onFail!();
     } on DioError catch (error) {
-      log.v('ERROR on api/paginatedorder/$orderId/: ${error.response}');
+      log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
       rethrow;
     }
