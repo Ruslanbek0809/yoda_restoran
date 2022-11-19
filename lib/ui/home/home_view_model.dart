@@ -12,6 +12,7 @@ import '../../utils/utils.dart';
 // A map key of type string
 const String homeSlidersFuture = 'homeSlidersFuture';
 const String homeMainCatsFuture = 'homeMainCatsFuture';
+const String homeSearchMainCatsFuture = 'homeSearchMainCatsFuture';
 const String homeRandomRessFuture = 'homeRandomRessFuture';
 const String homePromsFuture = 'homePromsFuture';
 const String homeExclusivesFuture = 'homeExclusivesFuture';
@@ -33,6 +34,7 @@ class HomeViewModel extends ReactiveViewModel {
 
   List<SliderModel>? get sliders => _homeService.sliders;
   List<MainCategory>? get mainCats => _homeService.mainCats;
+  List<MainCategory>? get searchMainCats => _homeService.searchMainCats;
   List<Restaurant>? get randomRess => _homeService.randomRess;
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
@@ -61,6 +63,7 @@ class HomeViewModel extends ReactiveViewModel {
   bool get busyForKeys =>
       busy(homeSlidersFuture) ||
       busy(homeMainCatsFuture) ||
+      busy(homeSearchMainCatsFuture) ||
       busy(homeRandomRessFuture) ||
       busy(homePromsFuture) ||
       busy(homeExclusivesFuture);
@@ -69,6 +72,7 @@ class HomeViewModel extends ReactiveViewModel {
   bool get hasErrorForKeys =>
       hasErrorForKey(homeSlidersFuture) ||
       hasErrorForKey(homeMainCatsFuture) ||
+      hasErrorForKey(homeSearchMainCatsFuture) ||
       hasErrorForKey(homeRandomRessFuture) ||
       hasErrorForKey(homePromsFuture) ||
       hasErrorForKey(homeExclusivesFuture);
@@ -83,6 +87,8 @@ class HomeViewModel extends ReactiveViewModel {
         busyObject: homeSlidersFuture);
     await runBusyFuture(_homeService.getMainCategs(),
         busyObject: homeMainCatsFuture);
+    await runBusyFuture(_homeService.getSearchMainCategs(),
+        busyObject: homeSearchMainCatsFuture);
     await runBusyFuture(_homeService.getPaginatedRess(),
         busyObject: homeRandomRessFuture);
     await runBusyFuture(_homeService.getProms(), busyObject: homePromsFuture);

@@ -19,7 +19,7 @@ class HomeSearchViewModel extends BaseViewModel {
   TextEditingController? _searchController = TextEditingController(text: '');
   TextEditingController? get searchController => _searchController;
 
-  List<MainCategory>? get mainCats => _homeService.mainCats;
+  List<MainCategory>? get searchMainCats => _homeService.searchMainCats;
 
   List<SearchRestaurant?> _searchRestaurants = [];
   List<SearchRestaurant?> get searchRestaurants => _searchRestaurants;

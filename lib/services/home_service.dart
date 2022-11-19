@@ -22,6 +22,9 @@ class HomeService with ReactiveServiceMixin {
   List<MainCategory>? _mainCats = [];
   List<MainCategory>? get mainCats => _mainCats;
 
+  List<MainCategory>? _searchMainCats = [];
+  List<MainCategory>? get searchMainCats => _searchMainCats;
+
   List<Restaurant>? _randomRess = [];
   List<Restaurant>? get randomRess => _randomRess;
 
@@ -68,10 +71,10 @@ class HomeService with ReactiveServiceMixin {
   }
 
   Future<List<MainCategory>?> getSearchMainCategs() async {
-    _mainCats = await _api.getMainCats();
-    _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
-    log.v(_mainCats!.length);
-    return _mainCats;
+    _searchMainCats = await _api.getSearchMainCats();
+    _searchMainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
+    log.v(_searchMainCats!.length);
+    return _searchMainCats;
   }
 
   // Future<List<Restaurant>?> getRandomRess() async {

@@ -71,11 +71,11 @@ class HomeSearchView extends StatelessWidget {
                 ? LoadingWidget()
                 : model.searchRestaurants.isEmpty || model.hasError
                     ? Column(
-                        mainAxisAlignment: model.mainCats!.isNotEmpty
+                        mainAxisAlignment: model.searchMainCats!.isNotEmpty
                             ? MainAxisAlignment.spaceBetween
                             : MainAxisAlignment.center,
                         children: [
-                          if (model.mainCats!.isNotEmpty)
+                          if (model.searchMainCats!.isNotEmpty)
                             Padding(
                               padding: EdgeInsets.only(
                                 top: 10.h,
@@ -85,10 +85,11 @@ class HomeSearchView extends StatelessWidget {
                               child: Wrap(
                                 runSpacing: 8.0,
                                 spacing: 10.0,
-                                children: model.mainCats!.map((_mainCat) {
+                                children:
+                                    model.searchMainCats!.map((_searchMainCat) {
                                   return InkWell(
-                                    onTap: () =>
-                                        model.startMainSearch(_mainCat.name!),
+                                    onTap: () => model
+                                        .startMainSearch(_searchMainCat.name!),
                                     borderRadius: kbr10,
                                     child: Container(
                                       margin: EdgeInsets.only(top: 2.h),
@@ -100,7 +101,7 @@ class HomeSearchView extends StatelessWidget {
                                       ),
                                       child: FittedBox(
                                         child: Text(
-                                          _mainCat.name!,
+                                          _searchMainCat.name!,
                                           overflow: TextOverflow.ellipsis,
                                           style: kts14Text,
                                         ),
@@ -117,7 +118,7 @@ class HomeSearchView extends StatelessWidget {
                           ),
 
                           /// To make Empty in center
-                          if (model.mainCats!.isNotEmpty) SizedBox(),
+                          if (model.searchMainCats!.isNotEmpty) SizedBox(),
                         ],
                       )
                     : ListView.builder(
