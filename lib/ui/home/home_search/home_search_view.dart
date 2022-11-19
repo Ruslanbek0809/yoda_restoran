@@ -67,14 +67,14 @@ class HomeSearchView extends StatelessWidget {
               ],
             ),
             //------------------ ListView builder ---------------------//
-            body: model.searchRestaurants.isEmpty || model.hasError
-                ? EmptyWidget(
-                    text: '',
-                    // text: LocaleKeys.nothingFound,
-                    svg: 'assets/empty_search.svg',
-                  )
-                : model.isBusy
-                    ? LoadingWidget()
+            body: model.isBusy
+                ? LoadingWidget()
+                : model.searchRestaurants.isEmpty || model.hasError
+                    ? EmptyWidget(
+                        text: '',
+                        // text: LocaleKeys.nothingFound,
+                        svg: 'assets/empty_search.svg',
+                      )
                     : ListView.builder(
                         padding: EdgeInsets.only(top: 10.h),
                         itemCount: model.searchRestaurants.length,
@@ -293,21 +293,6 @@ class HomeSearchView extends StatelessWidget {
                           );
                         },
                       ),
-            // AnimatedSwitcher(
-            //   duration: const Duration(milliseconds: 300),
-            //   reverseDuration: const Duration(milliseconds: 300),
-            //   child: _showProductsResult
-            //       ? SizedBox() // In production change to SearchProductsResultWidget()
-            //       // SearchProductsResultWidget(
-            //       //     searchName: _searchKeyword,
-            //       //   )
-            //       : Align(
-            //           alignment: Alignment.topCenter,
-            //           child:
-            //               SizedBox() // In production change to RecentSearchesWidget()
-            //           // RecentSearchesWidget(onTap: _onSubmitCallBack),
-            //           ),
-            // ),
           ),
         );
       },

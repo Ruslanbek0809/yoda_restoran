@@ -76,14 +76,14 @@ class RestaurantSearchView extends StatelessWidget {
               ],
             ),
             //------------------ ListView builder ---------------------//
-            body: model.searchMealss.isEmpty || model.hasError
-                ? EmptyWidget(
-                    text: '',
-                    // text: LocaleKeys.nothingFound,
-                    svg: 'assets/empty_search.svg',
-                  )
-                : model.isBusy
-                    ? LoadingWidget()
+            body: model.isBusy
+                ? LoadingWidget()
+                : model.searchMealss.isEmpty || model.hasError
+                    ? EmptyWidget(
+                        text: '',
+                        // text: LocaleKeys.nothingFound,
+                        svg: 'assets/empty_search.svg',
+                      )
                     : GridView.builder(
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(
