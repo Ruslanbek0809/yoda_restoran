@@ -67,6 +67,13 @@ class HomeService with ReactiveServiceMixin {
     return _mainCats;
   }
 
+  Future<List<MainCategory>?> getSearchMainCategs() async {
+    _mainCats = await _api.getMainCats();
+    _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
+    log.v(_mainCats!.length);
+    return _mainCats;
+  }
+
   // Future<List<Restaurant>?> getRandomRess() async {
   //   _randomRess = await _api.getRandomRess();
   //   log.v(_randomRess!.length);

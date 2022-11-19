@@ -194,7 +194,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                   },
                 ),
               ),
-              SizedBox(height: 0.33.sw),
+              SizedBox(height: 0.3.sw),
               Text(
                 LocaleKeys.our_phone_title,
                 style: kts16DialogBoldText,
@@ -227,6 +227,7 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                   ),
                 ],
               ),
+              SizedBox(height: 12.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -38,10 +38,30 @@ class ApiService {
       // log.v('RESPONSE: api/maincategories/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_mainCategory) {
+        for (final _mainCategory in response.data) {
           _mainCategories.add(MainCategory.fromJson(_mainCategory));
-        });
+        }
       }
+      return _mainCategories;
+    } catch (error) {
+      log.v('ERROR on api/maincategories/ :$error');
+      rethrow;
+    }
+  }
+
+  Future<List<MainCategory>> getSearchMainCats() async {
+    List<MainCategory> _mainCategories = [];
+    try {
+      Response response = await _apiRoot.dio
+          .get('api/maincategories/', queryParameters: {'search': true});
+      // log.v('RESPONSE: api/maincategories/ => ${response.data}');
+
+      if (response.data != null) {
+        for (final _mainCategory in response.data) {
+          _mainCategories.add(MainCategory.fromJson(_mainCategory));
+        }
+      }
+
       return _mainCategories;
     } catch (error) {
       log.v('ERROR on api/maincategories/ :$error');
