@@ -70,10 +70,40 @@ class HomeSearchView extends StatelessWidget {
             body: model.isBusy
                 ? LoadingWidget()
                 : model.searchRestaurants.isEmpty || model.hasError
-                    ? EmptyWidget(
-                        text: '',
-                        // text: LocaleKeys.nothingFound,
-                        svg: 'assets/empty_search.svg',
+                    ? Column(
+                        children: [
+                          if (model.mainCats!.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: Wrap(
+                                runSpacing: 8.0,
+                                spacing: 10.0,
+                                children: model.mainCats!.map((_mainCat) {
+                                  return Container(
+                                    margin: EdgeInsets.only(top: 3.h),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7.w, vertical: 2.h),
+                                    decoration: BoxDecoration(
+                                      borderRadius: kbr10,
+                                      color: kcSecondaryLightColor,
+                                    ),
+                                    child: FittedBox(
+                                      child: Text(
+                                        _mainCat.name!,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: kts14Text,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          EmptyWidget(
+                            text: '',
+                            // text: LocaleKeys.nothingFound,
+                            svg: 'assets/empty_search.svg',
+                          ),
+                        ],
                       )
                     : ListView.builder(
                         padding: EdgeInsets.only(top: 10.h),

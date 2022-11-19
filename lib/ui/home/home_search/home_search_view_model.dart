@@ -11,9 +11,12 @@ class HomeSearchViewModel extends BaseViewModel {
 
   final _searchService = locator<SearchService>();
   final _navService = locator<NavigationService>();
+  final _homeService = locator<HomeService>();
 
   String? _searchText = '';
   String? get searchText => _searchText;
+
+  List<MainCategory>? get mainCats => _homeService.mainCats;
 
   List<SearchRestaurant?> _searchRestaurants = [];
   List<SearchRestaurant?> get searchRestaurants => _searchRestaurants;
