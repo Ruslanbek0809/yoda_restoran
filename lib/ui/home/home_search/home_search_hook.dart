@@ -13,8 +13,9 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
-    final _searchController = useTextEditingController(text: model.searchText);
-    if (model.searchText!.isEmpty) _searchController.clear();
+    // final _searchController =
+    //     useTextEditingController(text: model.searchController!.text);
+    // if (model.searchController!.text.isEmpty) _searchController.clear();
     return Container(
       decoration: BoxDecoration(
         color: kcWhiteColor,
@@ -34,7 +35,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             hintText: LocaleKeys.search.tr(),
             hintStyle: kts14HelperText,
           ),
-          controller: _searchController,
+          controller: model.searchController,
           autofocus: true,
           onChanged: (value) =>
               _debouncer.run(() => model.startMainSearch(value)),

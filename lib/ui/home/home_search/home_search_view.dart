@@ -38,7 +38,7 @@ class HomeSearchView extends StatelessWidget {
               actions: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: model.searchText!.isEmpty
+                  child: model.searchController!.text.isEmpty
                       ? IconButton(
                           tooltip: 'Search',
                           // tooltip: i18n(currentLang, ki18nSearch),
@@ -86,19 +86,24 @@ class HomeSearchView extends StatelessWidget {
                                 runSpacing: 8.0,
                                 spacing: 10.0,
                                 children: model.mainCats!.map((_mainCat) {
-                                  return Container(
-                                    margin: EdgeInsets.only(top: 2.h),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8.w, vertical: 4.h),
-                                    decoration: BoxDecoration(
-                                      borderRadius: kbr10,
-                                      color: kcSecondaryLightColor,
-                                    ),
-                                    child: FittedBox(
-                                      child: Text(
-                                        _mainCat.name!,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: kts14Text,
+                                  return InkWell(
+                                    onTap: () =>
+                                        model.startMainSearch(_mainCat.name!),
+                                    borderRadius: kbr10,
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 2.h),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w, vertical: 4.h),
+                                      decoration: BoxDecoration(
+                                        borderRadius: kbr10,
+                                        color: kcSecondaryLightColor,
+                                      ),
+                                      child: FittedBox(
+                                        child: Text(
+                                          _mainCat.name!,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: kts14Text,
+                                        ),
                                       ),
                                     ),
                                   );

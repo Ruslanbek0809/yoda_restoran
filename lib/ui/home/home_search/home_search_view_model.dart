@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
@@ -13,8 +14,10 @@ class HomeSearchViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _homeService = locator<HomeService>();
 
-  String? _searchText = '';
-  String? get searchText => _searchText;
+  // String? _searchText = '';
+  // String? get searchText => _searchText;
+  TextEditingController? _searchController = TextEditingController(text: '');
+  TextEditingController? get searchController => _searchController;
 
   List<MainCategory>? get mainCats => _homeService.mainCats;
 
@@ -24,11 +27,11 @@ class HomeSearchViewModel extends BaseViewModel {
   /// STARTS MAIN SEARCH and GETS result
   Future<void> startMainSearch(String? searchText) async {
     log.i('startMainSearch() searchText: $searchText');
-    _searchText = searchText;
+    _searchController!.text = searchText!;
 
-    if (_searchText!.isEmpty) clearSearch();
+    if (_searchController!.text.isEmpty) clearSearch();
 
-    if (searchText!.isEmpty || searchText.length < 3) return;
+    if (searchText.isEmpty || searchText.length < 3) return;
 
     dynamic result =
         await runBusyFuture(_searchService.startMainSearch(searchText));
@@ -43,7 +46,7 @@ class HomeSearchViewModel extends BaseViewModel {
   /// CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
-    _searchText = '';
+    _searchController!.text = '';
     _searchRestaurants = [];
     notifyListeners();
   }
