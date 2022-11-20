@@ -1099,4 +1099,24 @@ class UserService {
       throw DioErrorType.response;
     }
   }
+
+  //------------------ ABOUT US APIS ---------------------//
+
+  Future<List<Address>> getAboutUs() async {
+    List<Address> _addresses = [];
+    try {
+      Response response = await _apiRoot.dio.get('api/additional/');
+      log.v('RESPONSE: api/additional/ => ${response.data}');
+
+      /// Below data structure is like user list in each user and its addresses
+      if (response.data != null) {}
+
+      return _addresses;
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/additional/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
 }
