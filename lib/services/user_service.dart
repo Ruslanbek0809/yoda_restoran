@@ -275,8 +275,6 @@ class UserService {
       return _addresses;
     } on DioError catch (error) {
       log.v(error);
-      // log.v(
-      //     'ERROR on api/user/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }

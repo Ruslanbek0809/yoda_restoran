@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
+import '../../../models/models.dart';
 import '../../../services/services.dart';
 
 class AboutUsViewModel extends FutureViewModel {
@@ -11,14 +12,13 @@ class AboutUsViewModel extends FutureViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
-  // List<Address>? _addresses = [];
-  // List<Address>? get addresses => _addresses;
+  List<AboutUsModel>? _aboutUsList = [];
+  List<AboutUsModel>? get aboutUsList => _aboutUsList;
 
   @override
   Future<void> futureToRun() async {
-    // _addresses =
-    await _userService.getAboutUs();
-    // log.v('_addresses!.length: ${_addresses!.length}');
+    _aboutUsList = await _userService.getAboutUs();
+    log.v('_aboutUsList!.length: ${_aboutUsList!.length}');
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
