@@ -38,3 +38,4 @@ export 'bank_card.dart';
 export 'credit_card.dart';
 export 'order_payment_register.dart';
 export 'order_payment_check_status.dart';
+export 'about_us.dart';

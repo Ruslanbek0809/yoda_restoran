@@ -265,11 +265,11 @@ class UserService {
 
       /// Below data structure is like user list in each user and its addresses
       if (response.data != null) {
-        response.data.forEach((_user) {
-          _user['addresses'].forEach((_address) {
+        for (final _user in response.data) {
+          for (final _address in _user['addresses']) {
             _addresses.add(Address.fromJson(_address));
-          });
-        });
+          }
+        }
       }
 
       return _addresses;
@@ -1102,26 +1102,21 @@ class UserService {
 
   //------------------ ABOUT US APIS ---------------------//
 
-  Future<List<Address>> getAboutUs() async {
-    List<Address> _addresses = [];
+  Future<List<AboutUsModel>> getAboutUs() async {
+    List<AboutUsModel> _aboutUsList = [];
     try {
       Response response = await _apiRoot.dio.get('api/additional/');
       log.v('RESPONSE: api/additional/ => ${response.data}');
 
-      /// Below data structure is like user list in each user and its addresses
       if (response.data != null) {
-        response.data.forEach((_user) {
-          _user['addresses'].forEach((_address) {
-            _addresses.add(Address.fromJson(_address));
-          });
-        });
+        for (final _aboutUs in response.data) {
+          _aboutUsList.add(AboutUsModel.fromJson(_aboutUs));
+        }
       }
-      
-      return _addresses;
+
+      return _aboutUsList;
     } on DioError catch (error) {
       log.v(error);
-      // log.v(
-      //     'ERROR on api/additional/ :${error.response!.statusCode} and ${error.response!.data}');
       rethrow;
     }
   }
