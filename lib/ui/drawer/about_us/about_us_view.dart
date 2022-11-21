@@ -38,7 +38,9 @@ class AboutUsView extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              LocaleKeys.about_us,
+              model.isAboutUsTermSelected
+                  ? LocaleKeys.about_us_terms_of_use
+                  : LocaleKeys.about_us,
               style: kts22DarkText,
             ).tr(),
           ),
@@ -108,7 +110,7 @@ class AboutUsView extends StatelessWidget {
                           child: Divider(color: kcDividerColor),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () => model.updateIsAboutUsTermSelected(),
                           child: Padding(
                             padding: EdgeInsets.only(
                               left: 24.w,
