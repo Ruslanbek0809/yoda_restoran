@@ -20,10 +20,11 @@ class ApiService {
       // log.v('RESPONSE: api/slider/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_slider) {
+        for (final _slider in response.data) {
           _sliders.add(SliderModel.fromJson(_slider));
-        });
+        }
       }
+
       return _sliders;
     } catch (error) {
       log.v('ERROR on api/slider/ :$error');
@@ -156,10 +157,11 @@ class ApiService {
       // log.v('RESPONSE: api/promoted/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_promoted) {
+        for (final _promoted in response.data) {
           _promotedList.add(Promoted.fromJson(_promoted));
-        });
+        }
       }
+
       return _promotedList;
     } on DioError catch (error) {
       log.v('ERROR on api/promoted/ :${error.response}');
@@ -174,9 +176,9 @@ class ApiService {
       // log.v('RESPONSE: api/groupexclusive/ => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_exclusive) {
+        for (final _exclusive in response.data) {
           _exclusives.add(Exclusive.fromJson(_exclusive));
-        });
+        }
       }
       return _exclusives;
     } on DioError catch (error) {
@@ -237,11 +239,12 @@ class ApiService {
         response = await _apiRoot.dio.get('api/restaurants?$_queryPars');
       // log.v('RESPONSE: api/restaurants? => ${response.data}');
 
-      if (response.data != null)
-        response.data.forEach((_promoted) {
-          _selectedMainCatRestaurants.add(Restaurant.fromJson(_promoted));
-        });
-
+      if (response.data != null) {
+        for (final _selectedMainCatRestaurant in response.data) {
+          _selectedMainCatRestaurants
+              .add(Restaurant.fromJson(_selectedMainCatRestaurant));
+        }
+      }
       return _selectedMainCatRestaurants;
     } on DioError catch (error) {
       log.v('ERROR on api/promoted/ :${error.response}');
@@ -277,10 +280,9 @@ class ApiService {
       // log.v('RESPONSE: api/richRes/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
-        response.data.forEach((_resCategory) {
+        for (final _resCategory in response.data) {
           _seRiches.add(EsRich.fromJson(_resCategory));
-        });
-
+        }
         onSuccess!(_seRiches);
       }
     } on DioError catch (error) {
@@ -303,9 +305,9 @@ class ApiService {
       // log.v('RESPONSE: api/categories/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
-        response.data.forEach((_resCategory) {
+        for (final _resCategory in response.data) {
           _resCategories.add(ResCategory.fromJson(_resCategory));
-        });
+        }
 
         onSuccess!(_resCategories);
       } else {
@@ -333,9 +335,9 @@ class ApiService {
       // log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
 
       if (response.data != null) {
-        response.data.forEach((_resCategory) {
+        for (final _resCategory in response.data) {
           _moreMeals.add(Meal.fromJson(_resCategory));
-        });
+        }
       }
 
       return _moreMeals;
@@ -386,9 +388,9 @@ class ApiService {
       // log.v('RESPONSE: api/restaurants/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
-        response.data.forEach((_searchRestaurant) {
+        for (final _searchRestaurant in response.data) {
           _searchRestaurants.add(SearchRestaurant.fromJson(_searchRestaurant));
-        });
+        }
       }
       log.v('RESPONSE: _searchRestaurants => ${_searchRestaurants.length}');
 
@@ -414,9 +416,9 @@ class ApiService {
       // log.v('RESPONSE: api/restaurantMeals/ => ${response.data}');
 
       if (response.data != null && response.statusCode == 200) {
-        response.data.forEach((_searchMeal) {
+        for (final _searchMeal in response.data) {
           _searchMeals.add(Meal.fromJson(_searchMeal));
-        });
+        }
       }
       log.v('RESPONSE: _searchMeals => ${_searchMeals.length}');
 
