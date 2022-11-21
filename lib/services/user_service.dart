@@ -1109,8 +1109,14 @@ class UserService {
       log.v('RESPONSE: api/additional/ => ${response.data}');
 
       /// Below data structure is like user list in each user and its addresses
-      if (response.data != null) {}
-
+      if (response.data != null) {
+        response.data.forEach((_user) {
+          _user['addresses'].forEach((_address) {
+            _addresses.add(Address.fromJson(_address));
+          });
+        });
+      }
+      
       return _addresses;
     } on DioError catch (error) {
       log.v(error);
