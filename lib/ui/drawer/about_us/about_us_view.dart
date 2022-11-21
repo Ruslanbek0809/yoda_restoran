@@ -107,26 +107,29 @@ class AboutUsView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 24.w, top: 24.h),
                           child: Divider(color: kcDividerColor),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 24.w,
-                            top: 10.h,
-                            bottom: 10.h,
-                            right: 16.w,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                LocaleKeys.about_us_terms_of_use,
-                                style: kts16IconBoldText,
-                              ).tr(),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 20.sp,
-                                color: kcIconColor,
-                              ),
-                            ],
+                        InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: 24.w,
+                              top: 10.h,
+                              bottom: 10.h,
+                              right: 16.w,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  LocaleKeys.about_us_terms_of_use,
+                                  style: kts16IconBoldText,
+                                ).tr(),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 20.sp,
+                                  color: kcIconColor,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Padding(

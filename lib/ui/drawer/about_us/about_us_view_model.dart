@@ -15,6 +15,9 @@ class AboutUsViewModel extends FutureViewModel {
   List<AboutUsModel>? _aboutUsList = [];
   List<AboutUsModel>? get aboutUsList => _aboutUsList;
 
+  bool _isAboutUsTermSelected = false;
+  bool get isAboutUsTermSelected => _isAboutUsTermSelected;
+
   @override
   Future<void> futureToRun() async {
     _aboutUsList = await _userService.getAboutUs();
