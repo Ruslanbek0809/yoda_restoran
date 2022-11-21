@@ -46,98 +46,157 @@ class AboutUsView extends StatelessWidget {
           ),
           body: model.isBusy
               ? LoadingWidget()
-              : Padding(
-                  padding: EdgeInsets.symmetric(vertical: 25.h),
-                  child: SingleChildScrollView(
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 25.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Html(
-                          data: model.aboutUsList![0].info,
-                          style: {
-                            "body": Style(
-                                margin: EdgeInsets.zero,
-                                padding: EdgeInsets.zero), // GENERAL BODY
-                            "p": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero), // NORMAL
-                            "pre": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero), // FORMATTED
-                            "h1": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero),
-                            "h2": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero),
-                            "h3": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero),
-                            "h4": Style(
-                                margin:
-                                    EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                                padding: EdgeInsets.zero),
-                          },
-                          onLinkTap: (url, _, __, ___) async {
-                            final Uri launchUri = Uri(
-                              scheme: 'https',
-                              path: url,
-                            );
-                            await launchUrl(launchUri);
-                          },
-                          onImageTap: (src, _, __, ___) {
-                            print(src);
-                          },
-                          onImageError: (exception, stackTrace) {
-                            print(exception);
-                          },
-                          onCssParseError: (css, messages) {
-                            print("css that errored: $css");
-                            print("error messages:");
-                            messages.forEach((element) {
-                              print(element);
-                            });
-                            return null;
-                          },
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 24.w, top: 24.h),
-                          child: Divider(color: kcDividerColor),
-                        ),
-                        InkWell(
-                          onTap: () => model.updateIsAboutUsTermSelected(),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: 24.w,
-                              top: 10.h,
-                              bottom: 10.h,
-                              right: 16.w,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  LocaleKeys.about_us_terms_of_use,
-                                  style: kts16IconBoldText,
-                                ).tr(),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 20.sp,
-                                  color: kcIconColor,
-                                ),
-                              ],
+                        if (!model.isAboutUsTermSelected)
+                          Html(
+                            data: model.aboutUsList![0].info,
+                            style: {
+                              "body": Style(
+                                  margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero), // GENERAL BODY
+                              "p": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero), // NORMAL
+                              "pre": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero), // FORMATTED
+                              "h1": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h2": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h3": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h4": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                            },
+                            onLinkTap: (url, _, __, ___) async {
+                              final Uri launchUri = Uri(
+                                scheme: 'https',
+                                path: url,
+                              );
+                              await launchUrl(launchUri);
+                            },
+                            onImageTap: (src, _, __, ___) {
+                              print(src);
+                            },
+                            onImageError: (exception, stackTrace) {
+                              print(exception);
+                            },
+                            onCssParseError: (css, messages) {
+                              print("css that errored: $css");
+                              print("error messages:");
+                              messages.forEach((element) {
+                                print(element);
+                              });
+                              return null;
+                            },
+                          ),
+                        if (model.isAboutUsTermSelected)
+                          Html(
+                            data: model.aboutUsList![1].info,
+                            style: {
+                              "body": Style(
+                                  margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero), // GENERAL BODY
+                              "p": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero), // NORMAL
+                              "pre": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero), // FORMATTED
+                              "h1": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h2": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h3": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                              "h4": Style(
+                                  margin: EdgeInsets.fromLTRB(
+                                      16.w, 0.h, 16.w, 10.h),
+                                  padding: EdgeInsets.zero),
+                            },
+                            onLinkTap: (url, _, __, ___) async {
+                              final Uri launchUri = Uri(
+                                scheme: 'https',
+                                path: url,
+                              );
+                              await launchUrl(launchUri);
+                            },
+                            onImageTap: (src, _, __, ___) {
+                              print(src);
+                            },
+                            onImageError: (exception, stackTrace) {
+                              print(exception);
+                            },
+                            onCssParseError: (css, messages) {
+                              print("css that errored: $css");
+                              print("error messages:");
+                              messages.forEach((element) {
+                                print(element);
+                              });
+                              return null;
+                            },
+                          ),
+                        if (!model.isAboutUsTermSelected)
+                          Padding(
+                            padding: EdgeInsets.only(left: 24.w, top: 24.h),
+                            child: Divider(color: kcDividerColor),
+                          ),
+                        if (!model.isAboutUsTermSelected)
+                          InkWell(
+                            onTap: () => model.updateIsAboutUsTermSelected(),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: 24.w,
+                                top: 10.h,
+                                bottom: 10.h,
+                                right: 16.w,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    LocaleKeys.about_us_terms_of_use,
+                                    style: kts16IconBoldText,
+                                  ).tr(),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 20.sp,
+                                    color: kcIconColor,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 24.w),
-                          child: Divider(color: kcDividerColor),
-                        ),
+                        if (!model.isAboutUsTermSelected)
+                          Padding(
+                            padding: EdgeInsets.only(left: 24.w),
+                            child: Divider(color: kcDividerColor),
+                          ),
                       ],
                     ),
                   ),
