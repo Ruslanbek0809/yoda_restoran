@@ -21,6 +21,18 @@ class AboutUsViewModel extends FutureViewModel {
     log.v('_aboutUsList!.length: ${_aboutUsList!.length}');
   }
 
+  // /// UPDATES _email
+  // String? updatePhone(String? value) {
+  //   log.v('updatePhone value: $value');
+  //   if (value == null || value.isEmpty || value.length < 11) {
+  //     return LocaleKeys.enter_phone.tr();
+  //   }
+
+  //   _phone = value;
+  //   notifyListeners();
+  //   return null;
+  // }
+
 //------------------------ NAVIGATIONS ----------------------------//
 
   /// NAVIGATES to Home by removing all previous routes

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,28 +49,58 @@ class AboutUsView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 24.w),
-                        child: Text(
-                          LocaleKeys.aboutUsHello,
-                          style: kts18Text,
-                        ).tr(),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 24.w, right: 24.w, top: 15.h),
-                        child: Text(
-                          LocaleKeys.aboutUsContent,
-                          style: kts18Text,
-                        ).tr(),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 24.w, right: 24.w, top: 15.h),
-                        child: Text(
-                          LocaleKeys.aboutUsBonApetite,
-                          style: kts18Text,
-                        ).tr(),
+                      Html(
+                        data: model.aboutUsList![0].info,
+                        style: {
+                          "body": Style(
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.zero), // GENERAL BODY
+                          "p": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero), // NORMAL
+                          "pre": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero), // FORMATTED
+                          "h1": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero),
+                          "h2": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero),
+                          "h3": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero),
+                          "h4": Style(
+                              margin:
+                                  EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
+                              padding: EdgeInsets.zero),
+                        },
+                        onLinkTap: (url, _, __, ___) async {
+                          final Uri launchUri = Uri(
+                            scheme: 'https',
+                            path: url,
+                          );
+                          await launchUrl(launchUri);
+                        },
+                        onImageTap: (src, _, __, ___) {
+                          print(src);
+                        },
+                        onImageError: (exception, stackTrace) {
+                          print(exception);
+                        },
+                        onCssParseError: (css, messages) {
+                          print("css that errored: $css");
+                          print("error messages:");
+                          messages.forEach((element) {
+                            print(element);
+                          });
+                          return null;
+                        },
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 24.w, top: 24.h),
