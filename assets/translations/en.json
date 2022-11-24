@@ -201,7 +201,9 @@
     "ratingYourFeedback": "Siziň teswiriňiz",
     "rateOrder": "Baha ber",
     "wannaLogoutUser": "Siz ulgamdan çykmakçymy?",
+    "userLogoutSuccess": "Siz akkauntdan çykdyňyz",
     "wannaDeleteUser": "Hasabyňyzy aýyrmakçymy?",
+    "userDeleteSuccess": "Siziň akkauntyňyz ulgamdan aýryldy",
     "deleteUserInfo": "Hasabyňyz bilen bagly maglumatlar ulgamdan aýrylar we gaýtaryp getirip bolmaz",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"

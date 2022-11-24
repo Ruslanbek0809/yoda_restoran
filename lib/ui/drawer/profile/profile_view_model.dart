@@ -148,7 +148,7 @@ class ProfileViewModel extends BaseViewModel {
   /// SHOWS USER LOGOUT Dialog
   Future showUserLogoutDialog(
     Function()? onSuccessForView,
-    Function()? onFailForView,
+    // Function()? onFailForView,
   ) async {
     log.i('showUserLogoutDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(

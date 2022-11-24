@@ -50,17 +50,30 @@ class ProfileView extends StatelessWidget {
                       //   ),
                       // );
                     },
-                    () async {
-                      // showErrorFlashBar(
-                      //   context: context,
-                      //   margin: EdgeInsets.only(
-                      //     left: 0.1.sw,
-                      //     right: 0.1.sw,
-                      //     bottom: 0.05.sh,
-                      //   ),
-                      // );
-                    },
                   ),
+                  // onPressed: () async => await model.showUserLogoutDialog(
+                  //   () async {
+                  //     // showErrorFlashBar(
+                  //     //   context: context,
+                  //     //   msg: LocaleKeys.orderDeleteSuccess.tr(),
+                  //     //   margin: EdgeInsets.only(
+                  //     //     left: 0.1.sw,
+                  //     //     right: 0.1.sw,
+                  //     //     bottom: 0.05.sh,
+                  //     //   ),
+                  //     // );
+                  //   },
+                  //   () async {
+                  //     // showErrorFlashBar(
+                  //     //   context: context,
+                  //     //   margin: EdgeInsets.only(
+                  //     //     left: 0.1.sw,
+                  //     //     right: 0.1.sw,
+                  //     //     bottom: 0.05.sh,
+                  //     //   ),
+                  //     // );
+                  //   },
+                  // ),
                   // onPressed: model.logout,
                   child: Text(LocaleKeys.logout, style: kts16Text).tr(),
                 ),

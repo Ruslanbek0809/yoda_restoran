@@ -202,7 +202,9 @@
     "ratingYourFeedback": "Ваш комментарий",
     "rateOrder": "Оцените",
     "wannaLogoutUser": "Выйти из аккаунта?",
+    "userLogoutSuccess": "Вы вышли из аккаунта",
     "wannaDeleteUser": "Удалить аккаунт?",
+    "userDeleteSuccess": "Ваш аккаунт был удален",
     "deleteUserInfo": "Все данные, связанные с аккаунтом, будут удалены и невозможно будет восстановить",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
