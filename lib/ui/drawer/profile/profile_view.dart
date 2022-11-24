@@ -41,9 +41,10 @@ class ProfileView extends StatelessWidget {
                 child: TextButton(
                   onPressed: () async => await model.showUserLogoutDialog(
                     () async {
-                      await showErrorFlashBar(
+                      showErrorFlashBar(
                         context: context,
                         msg: LocaleKeys.userLogoutSuccess.tr(),
+                        duration: Duration(seconds: 3),
                         margin: EdgeInsets.only(
                           left: 0.1.sw,
                           right: 0.1.sw,
@@ -53,29 +54,6 @@ class ProfileView extends StatelessWidget {
                       await model.navToHomeByRemovingAll();
                     },
                   ),
-                  // onPressed: () async => await model.showUserLogoutDialog(
-                  //   () async {
-                  //     // showErrorFlashBar(
-                  //     //   context: context,
-                  //     //   msg: LocaleKeys.orderDeleteSuccess.tr(),
-                  //     //   margin: EdgeInsets.only(
-                  //     //     left: 0.1.sw,
-                  //     //     right: 0.1.sw,
-                  //     //     bottom: 0.05.sh,
-                  //     //   ),
-                  //     // );
-                  //   },
-                  //   () async {
-                  //     // showErrorFlashBar(
-                  //     //   context: context,
-                  //     //   margin: EdgeInsets.only(
-                  //     //     left: 0.1.sw,
-                  //     //     right: 0.1.sw,
-                  //     //     bottom: 0.05.sh,
-                  //     //   ),
-                  //     // );
-                  //   },
-                  // ),
                   // onPressed: model.logout,
                   child: Text(LocaleKeys.logout, style: kts16Text).tr(),
                 ),

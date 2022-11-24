@@ -384,24 +384,27 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                         () async {
                           showErrorFlashBar(
                             context: context,
-                            msg: LocaleKeys.userLogoutSuccess.tr(),
+                            msg: LocaleKeys.deleteUserFlashInfo.tr(),
+                            duration: Duration(seconds: 3),
                             margin: EdgeInsets.only(
                               left: 0.1.sw,
                               right: 0.1.sw,
                               bottom: 0.05.sh,
                             ),
                           );
+                          await model.navToHomeByRemovingAll();
                         },
-                        () async {
-                          showErrorFlashBar(
-                            context: context,
-                            margin: EdgeInsets.only(
-                              left: 0.1.sw,
-                              right: 0.1.sw,
-                              bottom: 0.05.sh,
-                            ),
-                          );
-                        },
+                        // () async {
+                        //   showErrorFlashBar(
+                        //     context: context,
+                        //     margin: EdgeInsets.only(
+                        //       left: 0.1.sw,
+                        //       right: 0.1.sw,
+                        //       bottom: 0.05.sh,
+                        //     ),
+                        //   );
+                        //   await model.navToHomeByRemovingAll();
+                        // },
                       ),
                     ),
                   ),

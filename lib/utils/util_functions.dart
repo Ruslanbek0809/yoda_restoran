@@ -159,11 +159,12 @@ void printLog(dynamic data) {
 Future<void> showErrorFlashBar({
   required BuildContext context,
   String msg = LocaleKeys.errorOccured,
+  Duration duration = const Duration(milliseconds: 2000),
   required EdgeInsets margin,
 }) async {
   await showFlash(
     context: context,
-    duration: Duration(milliseconds: 2000),
+    duration: duration,
     builder: (context, controller) {
       return Flash(
         backgroundColor: kcSecondaryDarkColor,
