@@ -159,21 +159,30 @@ class ProfileViewModel extends BaseViewModel {
       showIconInMainButton: false,
       barrierDismissible: true,
     );
-    // if (respData != null && respData.data == true)
-    //   await runBusyFuture(
-    //     _userService.deleteOrder(
-    //       order!.id!,
-    //       () async {
-    //         onSuccessForView!();
+    if (respData != null && respData.data == true) {
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // await prefs.remove(Constants.accessToken);
+      // final String? _accessToken = prefs.getString(Constants.accessToken);
+      // log.i('ACCESS TOKEN after remove: $_accessToken');
+      // await _userService.logoutUser();
+      // await _hiveDbService.clearCart();
+      await navToHomeByRemovingAll();
+      await onSuccessForView!();
+    }
+    // await runBusyFuture(
+    //   _userService.deleteOrder(
+    //     order!.id!,
+    //     () async {
+    //       onSuccessForView!();
 
-    //         /// REINITIALIZES ORDERS
-    //         /// TODO: Optimize if possible
-    //         await orderViewModel!.getInitialOrders();
-    //       },
-    //       () => onFailForView!(),
-    //     ),
-    //     busyObject: order!.id!,
-    //   );
+    //       /// REINITIALIZES ORDERS
+    //       /// TODO: Optimize if possible
+    //       await orderViewModel!.getInitialOrders();
+    //     },
+    //     () => onFailForView!(),
+    //   ),
+    //   busyObject: order!.id!,
+    // );
   }
 
 //------------------------ NAVIGATIONS ----------------------------//

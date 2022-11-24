@@ -78,6 +78,11 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
         ),
+    DialogType.userLogout: (context, sheetRequest, completer) =>
+        UserLogoutDialogView(
+          request: sheetRequest,
+          completer: completer,
+        ),
     // DialogType.onlinePaymentFail: (context, sheetRequest, completer) =>
     //     ShowOnlinePaymentFailDialogView(
     //       request: sheetRequest,
@@ -1119,7 +1124,7 @@ class UserLogoutDialogView extends StatelessWidget {
               CustomTextChildButton(
                 child: Text(
                   request.mainButtonTitle!,
-                  style: kts18Text,
+                  style: kts18BoldText,
                 ).tr(),
                 color: Colors.transparent,
                 onPressed: () async =>
@@ -1151,7 +1156,7 @@ class UserLogoutDialogView extends StatelessWidget {
               CustomTextChildButton(
                 child: Text(
                   request.mainButtonTitle!,
-                  style: kts18Text,
+                  style: kts18BoldText,
                 ).tr(),
                 color: Colors.transparent,
                 onPressed: () async =>
