@@ -394,17 +394,6 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                           );
                           await model.navToHomeByRemovingAll();
                         },
-                        // () async {
-                        //   showErrorFlashBar(
-                        //     context: context,
-                        //     margin: EdgeInsets.only(
-                        //       left: 0.1.sw,
-                        //       right: 0.1.sw,
-                        //       bottom: 0.05.sh,
-                        //     ),
-                        //   );
-                        //   await model.navToHomeByRemovingAll();
-                        // },
                       ),
                     ),
                   ),

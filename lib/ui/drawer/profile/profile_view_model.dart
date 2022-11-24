@@ -148,7 +148,6 @@ class ProfileViewModel extends BaseViewModel {
   /// SHOWS USER LOGOUT Dialog
   Future showUserLogoutDialog(
     Function()? onSuccessForView,
-    // Function()? onFailForView,
   ) async {
     log.i('showUserLogoutDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
@@ -173,7 +172,6 @@ class ProfileViewModel extends BaseViewModel {
   /// SHOWS USER DELETE Dialog
   Future showUserDeleteDialog(
     Function()? onSuccessForView,
-    // Function()? onFailForView,
   ) async {
     log.i('showUserDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(

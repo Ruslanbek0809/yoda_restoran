@@ -54,7 +54,6 @@ class ProfileView extends StatelessWidget {
                       await model.navToHomeByRemovingAll();
                     },
                   ),
-                  // onPressed: model.logout,
                   child: Text(LocaleKeys.logout, style: kts16Text).tr(),
                 ),
               ),
