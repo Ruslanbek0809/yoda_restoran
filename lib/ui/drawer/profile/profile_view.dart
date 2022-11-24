@@ -41,7 +41,7 @@ class ProfileView extends StatelessWidget {
                 child: TextButton(
                   onPressed: () async => await model.showUserLogoutDialog(
                     () async {
-                      showErrorFlashBar(
+                      await showErrorFlashBar(
                         context: context,
                         msg: LocaleKeys.userLogoutSuccess.tr(),
                         margin: EdgeInsets.only(
@@ -50,6 +50,7 @@ class ProfileView extends StatelessWidget {
                           bottom: 0.05.sh,
                         ),
                       );
+                      await model.navToHomeByRemovingAll();
                     },
                   ),
                   // onPressed: () async => await model.showUserLogoutDialog(

@@ -167,22 +167,8 @@ class ProfileViewModel extends BaseViewModel {
       // await _userService.logoutUser();
       // await _hiveDbService.clearCart();
       onSuccessForView!();
-      await navToHomeByRemovingAll();
+      // await navToHomeByRemovingAll();
     }
-    // await runBusyFuture(
-    //   _userService.deleteOrder(
-    //     order!.id!,
-    //     () async {
-    //       onSuccessForView!();
-
-    //       /// REINITIALIZES ORDERS
-    //       /// TODO: Optimize if possible
-    //       await orderViewModel!.getInitialOrders();
-    //     },
-    //     () => onFailForView!(),
-    //   ),
-    //   busyObject: order!.id!,
-    // );
   }
 
   /// SHOWS USER DELETE Dialog
@@ -193,27 +179,22 @@ class ProfileViewModel extends BaseViewModel {
     log.i('showUserDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.userDelete,
-      title: LocaleKeys.wannaLogoutUser,
+      title: LocaleKeys.wannaDeleteUser,
       mainButtonTitle: LocaleKeys.no,
-      secondaryButtonTitle: LocaleKeys.yes,
+      secondaryButtonTitle: LocaleKeys.remove,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
-    // if (respData != null && respData.data == true)
-    //   await runBusyFuture(
-    //     _userService.deleteOrder(
-    //       order!.id!,
-    //       () async {
-    //         onSuccessForView!();
-
-    //         /// REINITIALIZES ORDERS
-    //         /// TODO: Optimize if possible
-    //         await orderViewModel!.getInitialOrders();
-    //       },
-    //       () => onFailForView!(),
-    //     ),
-    //     busyObject: order!.id!,
-    //   );
+    if (respData != null && respData.data == true) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(Constants.accessToken);
+      final String? _accessToken = prefs.getString(Constants.accessToken);
+      log.i('ACCESS TOKEN after remove: $_accessToken');
+      await _userService.logoutUser();
+      await _hiveDbService.clearCart();
+      onSuccessForView!();
+      await navToHomeByRemovingAll();
+    }
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
