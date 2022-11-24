@@ -179,18 +179,19 @@ class ProfileViewModel extends BaseViewModel {
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
       variant: DialogType.userDelete,
       title: LocaleKeys.wannaDeleteUser,
+      description: LocaleKeys.deleteUserInfo,
       mainButtonTitle: LocaleKeys.no,
       secondaryButtonTitle: LocaleKeys.remove,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
     if (respData != null && respData.data == true) {
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // await prefs.remove(Constants.accessToken);
-      // final String? _accessToken = prefs.getString(Constants.accessToken);
-      // log.i('ACCESS TOKEN after remove: $_accessToken');
-      // await _userService.logoutUser();
-      // await _hiveDbService.clearCart();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(Constants.accessToken);
+      final String? _accessToken = prefs.getString(Constants.accessToken);
+      log.i('ACCESS TOKEN after remove: $_accessToken');
+      await _userService.logoutUser();
+      await _hiveDbService.clearCart();
       onSuccessForView!();
     }
   }

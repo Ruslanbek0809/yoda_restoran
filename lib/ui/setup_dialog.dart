@@ -1186,6 +1186,7 @@ class UserDeleteDialogView extends StatelessWidget {
     return (Platform.isIOS)
         ? CupertinoAlertDialog(
             title: Text(request.title!, style: kts18BoldText).tr(),
+            content: Text(request.description!, style: kts14Text).tr(),
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
@@ -1217,6 +1218,11 @@ class UserDeleteDialogView extends StatelessWidget {
               textAlign: TextAlign.center,
             ).tr(),
             titleTextStyle: kts18BoldText,
+            content: Text(
+              request.description!,
+              textAlign: TextAlign.center,
+            ).tr(),
+            contentTextStyle: kts14Text,
             actions: <Widget>[
               CustomTextChildButton(
                 child: Text(
