@@ -343,12 +343,12 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   validator: model.updatePhone,
                 ),
               ),
-              SizedBox(height: 0.2.sw),
+              SizedBox(height: 0.25.sw),
               //------------------ USER DELETE BUTTON ---------------------//
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 12.w),
+                  padding: EdgeInsets.only(bottom: 14.w),
                   child: SizedBox(
                     width: 0.5.sw,
                     child: TextButton(
@@ -380,7 +380,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                 )
                               ],
                             ),
-                      onPressed: () async => await model.showUserLogoutDialog(
+                      onPressed: () async => await model.showUserDeleteDialog(
                         () async {
                           showErrorFlashBar(
                             context: context,
@@ -392,30 +392,17 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                             ),
                           );
                         },
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                        },
                       ),
-                      // onPressed: () async => await model.showUserLogoutDialog(
-                      //   () async {
-                      //     // showErrorFlashBar(
-                      //     //   context: context,
-                      //     //   msg: LocaleKeys.orderDeleteSuccess.tr(),
-                      //     //   margin: EdgeInsets.only(
-                      //     //     left: 0.1.sw,
-                      //     //     right: 0.1.sw,
-                      //     //     bottom: 0.05.sh,
-                      //     //   ),
-                      //     // );
-                      //   },
-                      //   () async {
-                      //     // showErrorFlashBar(
-                      //     //   context: context,
-                      //     //   margin: EdgeInsets.only(
-                      //     //     left: 0.1.sw,
-                      //     //     right: 0.1.sw,
-                      //     //     bottom: 0.05.sh,
-                      //     //   ),
-                      //     // );
-                      //   },
-                      // ),
                     ),
                   ),
                 ),
