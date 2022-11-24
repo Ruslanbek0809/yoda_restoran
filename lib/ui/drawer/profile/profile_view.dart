@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/app_colors.dart';
 import '../../../shared/styles.dart';
+import '../../../utils/utils.dart';
 import 'profile_hook.dart';
 import '../drawer_view.dart';
 import 'profile_view_model.dart';
@@ -40,15 +41,15 @@ class ProfileView extends StatelessWidget {
                 child: TextButton(
                   onPressed: () async => await model.showUserLogoutDialog(
                     () async {
-                      // showErrorFlashBar(
-                      //   context: context,
-                      //   msg: LocaleKeys.orderDeleteSuccess.tr(),
-                      //   margin: EdgeInsets.only(
-                      //     left: 0.1.sw,
-                      //     right: 0.1.sw,
-                      //     bottom: 0.05.sh,
-                      //   ),
-                      // );
+                      showErrorFlashBar(
+                        context: context,
+                        msg: LocaleKeys.userLogoutSuccess.tr(),
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
+                      );
                     },
                   ),
                   // onPressed: () async => await model.showUserLogoutDialog(

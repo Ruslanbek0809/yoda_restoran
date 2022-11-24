@@ -166,8 +166,8 @@ class ProfileViewModel extends BaseViewModel {
       // log.i('ACCESS TOKEN after remove: $_accessToken');
       // await _userService.logoutUser();
       // await _hiveDbService.clearCart();
+      onSuccessForView!();
       await navToHomeByRemovingAll();
-      await onSuccessForView!();
     }
     // await runBusyFuture(
     //   _userService.deleteOrder(
