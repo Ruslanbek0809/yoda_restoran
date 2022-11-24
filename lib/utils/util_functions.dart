@@ -129,6 +129,8 @@ enum DialogType {
   creditCardDelete,
   onlinePaymentFail,
   onlinePaymentSuccess,
+  userLogout,
+  userDelete,
 }
 
 /// Enum for snackbar types

@@ -4,7 +4,6 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../shared/app_colors.dart';
 import '../../../shared/styles.dart';
 import 'profile_hook.dart';
-import '../../../utils/utils.dart';
 import '../drawer_view.dart';
 import 'profile_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

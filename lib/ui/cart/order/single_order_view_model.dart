@@ -447,7 +447,6 @@ class SingleOrderViewModel extends BaseViewModel {
     await runBusyFuture(
       _userService.patchOrderOnlineToCash(
         order!.id!,
-        
         () async {
           /// REINITIALIZES ORDERS
           /// TODO: Optimize if possible

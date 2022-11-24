@@ -16,6 +16,7 @@ class ProfileViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
+  final _dialogService = locator<DialogService>();
 
   HiveUser? get currentUser => _userService.currentUser;
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
@@ -140,6 +141,39 @@ class ProfileViewModel extends BaseViewModel {
     } catch (err) {
       throw err;
     }
+  }
+
+//------------------------ USER LOGOUT/DELETE DIALOG ----------------------------//
+
+  /// SHOWS USER LOGOUT Dialog
+  Future showUserLogoutDialog(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
+    log.i('showUserLogoutDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.userLogout,
+      title: LocaleKeys.wannaDeleteOrder,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.delete,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+    if (respData != null && respData.data == true)
+      await runBusyFuture(
+        _userService.deleteOrder(
+          order!.id!,
+          () async {
+            onSuccessForView!();
+
+            /// REINITIALIZES ORDERS
+            /// TODO: Optimize if possible
+            await orderViewModel!.getInitialOrders();
+          },
+          () => onFailForView!(),
+        ),
+        busyObject: order!.id!,
+      );
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
