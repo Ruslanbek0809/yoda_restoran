@@ -83,6 +83,11 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
         ),
+    DialogType.userDelete: (context, sheetRequest, completer) =>
+        UserDeleteDialogView(
+          request: sheetRequest,
+          completer: completer,
+        ),
     // DialogType.onlinePaymentFail: (context, sheetRequest, completer) =>
     //     ShowOnlinePaymentFailDialogView(
     //       request: sheetRequest,
@@ -1101,6 +1106,76 @@ class UserLogoutDialogView extends StatelessWidget {
   final DialogRequest request;
   final Function(DialogResponse) completer;
   const UserLogoutDialogView({
+    Key? key,
+    required this.request,
+    required this.completer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return (Platform.isIOS)
+        ? CupertinoAlertDialog(
+            title: Text(request.title!, style: kts18BoldText).tr(),
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
+              ),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: kts18BoldText,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
+              ),
+            ],
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
+            titlePadding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+            actionsAlignment: MainAxisAlignment.center,
+            title: Text(
+              request.title!,
+              textAlign: TextAlign.center,
+            ).tr(),
+            titleTextStyle: kts18BoldText,
+            actions: <Widget>[
+              CustomTextChildButton(
+                child: Text(
+                  request.secondaryButtonTitle!,
+                  style: kts18Text,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: true)),
+              ),
+              SizedBox(width: 42.w),
+              CustomTextChildButton(
+                child: Text(
+                  request.mainButtonTitle!,
+                  style: kts18BoldText,
+                ).tr(),
+                color: Colors.transparent,
+                onPressed: () async =>
+                    await completer(DialogResponse(data: false)),
+              ),
+            ],
+          );
+  }
+}
+
+class UserDeleteDialogView extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const UserDeleteDialogView({
     Key? key,
     required this.request,
     required this.completer,

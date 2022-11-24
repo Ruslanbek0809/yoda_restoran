@@ -185,6 +185,37 @@ class ProfileViewModel extends BaseViewModel {
     // );
   }
 
+  /// SHOWS USER DELETE Dialog
+  Future showUserDeleteDialog(
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  ) async {
+    log.i('showUserDeleteDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.userLogout,
+      title: LocaleKeys.wannaLogoutUser,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.yes,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+    if (respData != null && respData.data == true)
+      await runBusyFuture(
+        _userService.deleteOrder(
+          order!.id!,
+          () async {
+            onSuccessForView!();
+
+            /// REINITIALIZES ORDERS
+            /// TODO: Optimize if possible
+            await orderViewModel!.getInitialOrders();
+          },
+          () => onFailForView!(),
+        ),
+        busyObject: order!.id!,
+      );
+  }
+
 //------------------------ NAVIGATIONS ----------------------------//
 
   void navBack() => _navService.back();
