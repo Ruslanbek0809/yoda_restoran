@@ -201,6 +201,9 @@
     "ratingConfirmation": "Pikiriňizi paýlaşanyňyz üçin sag boluň!",
     "ratingYourFeedback": "Siziň teswiriňiz",
     "rateOrder": "Baha ber",
+    "wannaLogoutUser": "Siz ulgamdan çykmakçymy?",
+    "wannaDeleteUser": "Hasabyňyzy aýyrmakçymy?",
+    "deleteUserInfo": "Hasabyňyz bilen bagly maglumatlar ulgamdan aýrylar we gaýtaryp getirip bolmaz",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }
