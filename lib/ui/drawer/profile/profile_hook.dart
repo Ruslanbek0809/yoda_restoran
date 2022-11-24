@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
@@ -343,6 +344,82 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 ),
               ),
               SizedBox(height: 0.2.sw),
+              //------------------ USER DELETE BUTTON ---------------------//
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 12.w),
+                  child: SizedBox(
+                    width: 0.5.sw,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kcOrderDeleteButtonBackColor,
+                        primary: kcSecondaryLightColor, // ripple effect color
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: AppTheme().radius10),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 14.w),
+                      ),
+                      child: model.isBusy
+                          ? ButtonLoading(color: kcPrimaryColor)
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/trash.svg',
+                                  color: kcDialogColor,
+                                  width: 16.sp,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5.w),
+                                  child: Text(
+                                    LocaleKeys.deleteOrder,
+                                    style: kts14DialogText,
+                                  ).tr(),
+                                )
+                              ],
+                            ),
+                      onPressed: () async => await model.showUserLogoutDialog(
+                        () async {
+                          showErrorFlashBar(
+                            context: context,
+                            msg: LocaleKeys.userLogoutSuccess.tr(),
+                            margin: EdgeInsets.only(
+                              left: 0.1.sw,
+                              right: 0.1.sw,
+                              bottom: 0.05.sh,
+                            ),
+                          );
+                        },
+                      ),
+                      // onPressed: () async => await model.showUserLogoutDialog(
+                      //   () async {
+                      //     // showErrorFlashBar(
+                      //     //   context: context,
+                      //     //   msg: LocaleKeys.orderDeleteSuccess.tr(),
+                      //     //   margin: EdgeInsets.only(
+                      //     //     left: 0.1.sw,
+                      //     //     right: 0.1.sw,
+                      //     //     bottom: 0.05.sh,
+                      //     //   ),
+                      //     // );
+                      //   },
+                      //   () async {
+                      //     // showErrorFlashBar(
+                      //     //   context: context,
+                      //     //   margin: EdgeInsets.only(
+                      //     //     left: 0.1.sw,
+                      //     //     right: 0.1.sw,
+                      //     //     bottom: 0.05.sh,
+                      //     //   ),
+                      //     // );
+                      //   },
+                      // ),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 width: 1.sw,
                 child: CustomTextChildButton(

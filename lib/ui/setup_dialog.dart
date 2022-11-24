@@ -121,7 +121,7 @@ class MealDialogView extends StatelessWidget {
               title: Text(request.title!, style: kts18BoldText).tr(),
               content: Text(
                 request.description!,
-                style: ktsDefault14DialogText,
+                style: kts14DialogText,
               ).tr(),
               actions: <Widget>[
                 CustomTextChildButton(
@@ -161,7 +161,7 @@ class MealDialogView extends StatelessWidget {
               content: Text(
                 request.description!,
                 textAlign: TextAlign.center,
-                style: ktsDefault14DialogText,
+                style: kts14DialogText,
               ).tr(),
               actions: <Widget>[
                 CustomTextChildButton(

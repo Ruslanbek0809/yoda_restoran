@@ -68,7 +68,7 @@ TextStyle kts14ContactText = TextStyle(
   color: kcContactColor,
 );
 
-TextStyle ktsDefault14DialogText = TextStyle(
+TextStyle kts14DialogText = TextStyle(
   fontSize: 14.sp,
   color: kcDialogColor,
 );

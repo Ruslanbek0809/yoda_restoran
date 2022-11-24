@@ -192,28 +192,28 @@ class ProfileViewModel extends BaseViewModel {
   ) async {
     log.i('showUserDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
-      variant: DialogType.userLogout,
+      variant: DialogType.userDelete,
       title: LocaleKeys.wannaLogoutUser,
       mainButtonTitle: LocaleKeys.no,
       secondaryButtonTitle: LocaleKeys.yes,
       showIconInMainButton: false,
       barrierDismissible: true,
     );
-    if (respData != null && respData.data == true)
-      await runBusyFuture(
-        _userService.deleteOrder(
-          order!.id!,
-          () async {
-            onSuccessForView!();
+    // if (respData != null && respData.data == true)
+    //   await runBusyFuture(
+    //     _userService.deleteOrder(
+    //       order!.id!,
+    //       () async {
+    //         onSuccessForView!();
 
-            /// REINITIALIZES ORDERS
-            /// TODO: Optimize if possible
-            await orderViewModel!.getInitialOrders();
-          },
-          () => onFailForView!(),
-        ),
-        busyObject: order!.id!,
-      );
+    //         /// REINITIALIZES ORDERS
+    //         /// TODO: Optimize if possible
+    //         await orderViewModel!.getInitialOrders();
+    //       },
+    //       () => onFailForView!(),
+    //     ),
+    //     busyObject: order!.id!,
+    //   );
   }
 
 //------------------------ NAVIGATIONS ----------------------------//
