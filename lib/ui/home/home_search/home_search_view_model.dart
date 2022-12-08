@@ -25,14 +25,11 @@ class HomeSearchViewModel extends BaseViewModel {
   List<SearchRestaurant?> get searchRestaurants => _searchRestaurants;
 
   /// STARTS MAIN SEARCH and GETS result
-  Future<void> startMainSearch(String? searchText) async {
+  Future<void> startMainSearch(String searchText) async {
     log.i('startMainSearch() searchText: $searchText');
-    _searchText = searchText!;
-    // _searchController!.text = searchText!;
-    // notifyListeners();
+    _searchText = searchText;
 
-    // if (_searchController!.text.isEmpty) clearSearch();
-
+    if (searchText.isEmpty) clearSearch();
     if (searchText.isEmpty || searchText.length < 3) return;
 
     dynamic result =

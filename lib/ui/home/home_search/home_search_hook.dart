@@ -17,11 +17,6 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
     model.log.v('buildViewModelWidget CALLED');
     final _searchController = useTextEditingController(text: model.searchText);
-
-    // final update = useValueListenable(_searchController);
-    // useEffect(() {
-    //   _searchController = update;
-    // }, [update]);
     if (model.searchText!.isEmpty) _searchController.clear();
 
     return Semantics(
@@ -65,9 +60,8 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                   hintStyle: kts14HelperText,
                 ),
                 autofocus: true,
-                onChanged: (value) => _debouncer.run(() {
-                      model.startMainSearch(value);
-                    }),
+                onChanged: (value) =>
+                    _debouncer.run(() => model.startMainSearch(value)),
                 onSubmitted: (value) =>
                     _debouncer.run(() => model.startMainSearch(value))),
           ),
@@ -135,7 +129,8 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       offset: _searchMainCat.name!.length,
                                     ),
                                   );
-                                  model.startMainSearch(_searchMainCat.name!);
+                                  model.startMainSearch(
+                                      _searchMainCat.name ?? '');
                                 },
                                 borderRadius: kbr10,
                                 child: Container(
