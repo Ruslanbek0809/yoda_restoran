@@ -52,6 +52,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             margin: EdgeInsets.symmetric(vertical: 5.h),
             child: TextField(
+                controller: _searchController,
                 style: TextStyle(
                   fontSize: 18.sp,
                   color: kcSecondaryDarkColor,
@@ -63,7 +64,6 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                   hintText: LocaleKeys.search.tr(),
                   hintStyle: kts14HelperText,
                 ),
-                controller: _searchController,
                 autofocus: true,
                 onChanged: (value) => _debouncer.run(() {
                       model.startMainSearch(value);
@@ -125,8 +125,18 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                             children:
                                 model.searchMainCats!.map((_searchMainCat) {
                               return InkWell(
-                                onTap: () =>
-                                    model.startMainSearch(_searchMainCat.name!),
+                                onTap: () {
+                                  //* UPDATES current _searchController.text
+                                  //* FIX link: https://stackoverflow.com/questions/51127241/how-do-you-change-the-value-inside-of-a-textfield-flutter
+                                  _searchController.value =
+                                      _searchController.value.copyWith(
+                                    text: _searchMainCat.name!,
+                                    selection: TextSelection.collapsed(
+                                      offset: _searchMainCat.name!.length,
+                                    ),
+                                  );
+                                  model.startMainSearch(_searchMainCat.name!);
+                                },
                                 borderRadius: kbr10,
                                 child: Container(
                                   margin: EdgeInsets.only(top: 2.h),
