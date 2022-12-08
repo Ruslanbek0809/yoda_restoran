@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
@@ -12,9 +13,15 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
-    // final _searchController =
-    //     useTextEditingController(text: model.searchController!.text);
-    // if (model.searchController!.text.isEmpty) _searchController.clear();
+    model.log.v('buildViewModelWidget CALLED');
+    final _searchController = useTextEditingController(text: model.searchText);
+
+    // final update = useValueListenable(_searchController);
+    // useEffect(() {
+    //   _searchController = update;
+    // }, [update]);
+    if (model.searchText!.isEmpty) _searchController.clear();
+
     return Container(
       decoration: BoxDecoration(
         color: kcWhiteColor,
@@ -34,10 +41,11 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             hintText: LocaleKeys.search.tr(),
             hintStyle: kts14HelperText,
           ),
-          controller: model.searchController,
+          controller: _searchController,
           autofocus: true,
-          onChanged: (value) =>
-              _debouncer.run(() => model.startMainSearch(value)),
+          onChanged: (value) => _debouncer.run(() {
+                model.startMainSearch(value);
+              }),
           onSubmitted: (value) =>
               _debouncer.run(() => model.startMainSearch(value))),
     );

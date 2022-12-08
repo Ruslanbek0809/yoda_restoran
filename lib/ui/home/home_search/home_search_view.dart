@@ -38,7 +38,8 @@ class HomeSearchView extends StatelessWidget {
               actions: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: model.searchController!.text.isEmpty
+                  child: model.searchText!.isEmpty
+                      // model.searchController!.text.isEmpty
                       ? IconButton(
                           tooltip: 'Search',
                           // tooltip: i18n(currentLang, ki18nSearch),

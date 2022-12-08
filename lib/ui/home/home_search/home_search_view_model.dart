@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
@@ -14,10 +13,11 @@ class HomeSearchViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _homeService = locator<HomeService>();
 
-  // String? _searchText = '';
-  // String? get searchText => _searchText;
-  TextEditingController? _searchController = TextEditingController(text: '');
-  TextEditingController? get searchController => _searchController;
+  String? _searchText = '';
+  String? get searchText => _searchText;
+
+  // TextEditingController? _searchController = TextEditingController(text: '');
+  // TextEditingController? get searchController => _searchController;
 
   List<MainCategory>? get searchMainCats => _homeService.searchMainCats;
 
@@ -27,9 +27,11 @@ class HomeSearchViewModel extends BaseViewModel {
   /// STARTS MAIN SEARCH and GETS result
   Future<void> startMainSearch(String? searchText) async {
     log.i('startMainSearch() searchText: $searchText');
-    _searchController!.text = searchText!;
+    _searchText = searchText!;
+    // _searchController!.text = searchText!;
+    // notifyListeners();
 
-    if (_searchController!.text.isEmpty) clearSearch();
+    // if (_searchController!.text.isEmpty) clearSearch();
 
     if (searchText.isEmpty || searchText.length < 3) return;
 
@@ -46,7 +48,8 @@ class HomeSearchViewModel extends BaseViewModel {
   /// CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
-    _searchController!.text = '';
+    _searchText = '';
+    // _searchController!.text = '';
     _searchRestaurants = [];
     notifyListeners();
   }
