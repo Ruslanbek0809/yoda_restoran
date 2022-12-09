@@ -22,7 +22,8 @@ abstract class  LocaleKeys {
   static const gender = 'gender';
   static const email = 'email';
   static const phone = 'phone';
-  static const operator = 'operator';
+  static const orderOperator = 'orderOperator';
+  static const orderOperatorButton = 'orderOperatorButton';
   static const save = 'save';
   static const your_name = 'your_name';
   static const text = 'text';

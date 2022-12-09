@@ -235,7 +235,7 @@ class SingleOrderView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              LocaleKeys.operator,
+                              LocaleKeys.orderOperator,
                               style: kts16Text,
                             ).tr(),
                             Text(
@@ -673,13 +673,24 @@ class SingleOrderView extends StatelessWidget {
                                       )
                                     ],
                                   )
-                                : order.status == 3
-                                    ? Text(
-                                        order.restaurant!.phoneNumber != null
-                                            ? ' ${order.restaurant!.phoneNumber}'
-                                            : '',
-                                        style: ktsButtonWhite18Text,
-                                      ).tr()
+                                : order.status == 2 || order.status == 3
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/phone.svg',
+                                            color: kcWhiteColor,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 5.w),
+                                            child: Text(
+                                              LocaleKeys.orderOperatorButton,
+                                              style: ktsButtonWhite18Text,
+                                            ).tr(),
+                                          )
+                                        ],
+                                      )
                                     : model.busy(order.id) && order.status == 1
                                         ? ButtonLoading()
                                         : Text(
@@ -715,7 +726,10 @@ class SingleOrderView extends StatelessWidget {
                                   );
                                   break;
                                 case 2:
-                                  await model.showCancelAcceptedOrderDialog();
+                                  // await model.showCancelAcceptedOrderDialog();
+                                  if (order.restaurant?.phoneNumber != null)
+                                    await model.makePhoneCallToDriver(
+                                        order.restaurant!.phoneNumber!);
                                   break;
                                 case 3:
                                   if (order.restaurant?.phoneNumber != null)
