@@ -27,7 +27,7 @@ class SingleExView extends StatelessWidget {
                     ),
               //------------------ BOTTOM CART ---------------------//
               if (!model.hasError &&
-                  model.cartRes!.id != -1 &&
+                  (model.cartRes != null && model.cartRes!.id != -1) &&
                   singleEx.option == 'reachText')
                 SingleExBottomCart(),
             ],
