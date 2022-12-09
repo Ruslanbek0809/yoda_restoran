@@ -44,12 +44,6 @@ void setupDialog() {
           request: sheetRequest,
           completer: completer,
         ),
-    DialogType.cancelAcceptedOrder: (context, sheetRequest, completer) =>
-        CancelAcceptedOrderDialogView(
-          request: sheetRequest,
-          completer: completer,
-          content: sheetRequest.data,
-        ),
     DialogType.notification: (context, sheetRequest, completer) =>
         NotificationDialogView(
           request: sheetRequest,
@@ -440,43 +434,6 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
                     await completer(DialogResponse(data: false)),
               ),
             ],
-          );
-  }
-}
-
-class CancelAcceptedOrderDialogView extends StatelessWidget {
-  final DialogRequest request;
-  final Function(DialogResponse) completer;
-  final String content;
-  const CancelAcceptedOrderDialogView({
-    Key? key,
-    required this.request,
-    required this.completer,
-    required this.content,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return (Platform.isIOS)
-        ? CupertinoAlertDialog(
-            title: Text(request.title!, style: kts18BoldText).tr(),
-            content: Text(content, style: kts18Text).tr(),
-          )
-        : AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-            titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-            contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-            actionsAlignment: MainAxisAlignment.center,
-            title: Text(
-              request.title!,
-              textAlign: TextAlign.center,
-            ).tr(),
-            titleTextStyle: kts18BoldText,
-            content: Text(
-              content,
-              textAlign: TextAlign.center,
-            ).tr(),
-            contentTextStyle: kts18Text,
           );
   }
 }

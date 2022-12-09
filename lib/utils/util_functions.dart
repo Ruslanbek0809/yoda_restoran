@@ -121,7 +121,6 @@ enum DialogType {
   clearCart,
   removeCartMeal,
   cancelWaitingOrder,
-  cancelAcceptedOrder,
   notification,
   removeAddress,
   rateOrder,

@@ -223,18 +223,6 @@ class SingleOrderViewModel extends BaseViewModel {
     }
   }
 
-  /// SHOWS cancel accepted order Dialog
-  Future showCancelAcceptedOrderDialog() async {
-    log.i('showCancelAcceptedOrderDialog()');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.cancelAcceptedOrder,
-      title: LocaleKeys.orderIsPreparing,
-      data: LocaleKeys.toCancelOrderCallRes,
-      showIconInMainButton: false,
-      barrierDismissible: true,
-    );
-  }
-
   /// MAKES a call to driver
   Future<void> makePhoneCallToDriver(String phoneNumber) async {
     // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
