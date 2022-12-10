@@ -204,6 +204,7 @@ abstract class  LocaleKeys {
   static const ratingConfirmation = 'ratingConfirmation';
   static const ratingYourFeedback = 'ratingYourFeedback';
   static const rateOrder = 'rateOrder';
+  static const userDelete = 'userDelete';
   static const wannaLogoutUser = 'wannaLogoutUser';
   static const userLogoutSuccess = 'userLogoutSuccess';
   static const wannaDeleteUser = 'wannaDeleteUser';

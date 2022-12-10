@@ -374,7 +374,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 5.w),
                                   child: Text(
-                                    LocaleKeys.deleteOrder,
+                                    LocaleKeys.userDelete,
                                     style: kts14DialogText,
                                   ).tr(),
                                 )
