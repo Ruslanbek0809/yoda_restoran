@@ -71,7 +71,7 @@ dependencies:
       ref: v5.7.1+1
 
   platform: ^3.1.0 # Native settings package
-  bottom_sheet: ^3.1.1 # For custom bottom sheet
+  bottom_sheet: ^3.1.2 # For custom bottom sheet
   share_plus: ^4.0.10
   shake: ^2.1.0 # A flutter package to detect phone shakes
 
@@ -82,12 +82,11 @@ dependencies:
   # UI
   keyboard_actions: ^3.3.1+1
   flutter_screenutil: ^5.5.3+2
-  carousel_slider: ^4.0.0
+  carousel_slider: ^4.2.0
   flutter_svg: ^1.0.0
   mask_text_input_formatter: ^2.0.0
   pin_code_fields: ^7.3.0
   flutter_datetime_picker: ^1.5.1
-  extended_nested_scroll_view: ^4.0.0
   flutter_rating_bar: ^4.0.0
   lottie: ^1.2.1
   # pull_to_refresh: ^2.0.0

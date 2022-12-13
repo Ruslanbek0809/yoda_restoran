@@ -70,7 +70,7 @@ packages:
       name: bottom_sheet
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   build:
     dependency: transitive
     description:
@@ -154,7 +154,7 @@ packages:
       name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.1"
+    version: "4.2.0"
   characters:
     dependency: transitive
     description:
@@ -386,13 +386,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2"
-  extended_nested_scroll_view:
-    dependency: "direct main"
-    description:
-      name: extended_nested_scroll_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
   fake_async:
     dependency: transitive
     description:
