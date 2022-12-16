@@ -313,6 +313,7 @@ class SingleOrderViewModel extends BaseViewModel {
         (OrderPaymentRegister paymentRegister) {
           _isLoading = false;
           notifyListeners();
+          // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
           onSuccessForView!(paymentRegister);
         },
         () {

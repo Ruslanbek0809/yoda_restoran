@@ -595,7 +595,7 @@ class UserService {
       _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     else
       _queryParams['orderNumber'] = order.orderNumber;
-    // _queryParams['orderNumber'] = 'Ver43Test24-1';
+    // _queryParams['orderNumber'] = 'Ver43Test25';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -630,7 +630,7 @@ class UserService {
 
       //----------- DIO BASE URL -------------//
       dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
-      dio.options.contentType= Headers.formUrlEncodedContentType; //* New Code
+      // dio.options.contentType = Headers.formUrlEncodedContentType; //* New Code
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
@@ -645,7 +645,7 @@ class UserService {
             // If you want to reject the request with a error message,f
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
-          onResponse: (response, handler) { 
+          onResponse: (response, handler) {
             // Do something with response data
             return handler.next(response); // continue
             // If you want to reject the request with a error message,
