@@ -71,21 +71,21 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
           .handleBFDynamicLinks(); // INITIALIZATION of FB Dynamic Link
     });
 
-    /// DEPRECATED after 2.3.0+35
+    /// DEPRECATED after app version 2.3.0+35
     // /// GETS user's location
     // await _geolocatorService.getUserLocation();
 
     await _apiRootService.initDio();
     await _hiveDbService.initHiveBoxes();
-    _hiveDbService.getCartMeals(); // GETS all CART meals insiede cartMealBox
-    _hiveDbService.getCartRes(); // GETS CART restaurant inside cartResBox
-    _hiveDbService.getHiveRatings(); // TODO: HiveRating
-    // _hiveDbService.getHiveCreditCards(); // GETS all hive credit cards
+    _hiveDbService.getCartMeals(); //* GETS all CART meals insiede cartMealBox
+    _hiveDbService.getCartRes(); //* GETS CART restaurant inside cartResBox
+    _hiveDbService.getHiveRatings(); //* GETS hive ratings
+    _hiveDbService.getHiveCreditCards(); //* GETS all hive credit cards
 
-    /// USE _userService.getInitialUser OR _userService.initUser
+    //* USE _userService.getInitialUser OR _userService.initUser
     await _userService.initUser();
 
-    /// CHECKS whether onBoarding was SEEN or NOT
+    //* CHECKS whether onBoarding was SEEN or NOT
     var prefs = await SharedPreferences.getInstance();
     var _isOnBoardingSeen = prefs.getBool(Constants.isOnBoardingSeen) ?? false;
     log.v('==== IS ONBOARDING SEEN: $_isOnBoardingSeen ====');

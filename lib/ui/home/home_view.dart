@@ -133,8 +133,7 @@ class _HomeViewState extends State<HomeView> {
         /// HANDLES clicked terminated dynamic link
         await model.handleClickedDynamicLink();
 
-        // TODO: HiveRating
-        /// HANDLES hiveRatings
+        //* HANDLES hiveRatings
         if (model.hiveRating != null) await model.checkAndShowFirstHiveRating();
       }),
       builder: (context, model, child) {

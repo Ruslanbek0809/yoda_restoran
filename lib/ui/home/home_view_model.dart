@@ -250,8 +250,7 @@ class HomeViewModel extends ReactiveViewModel {
         Routes.sliderWebview,
         arguments: SliderWebviewArguments(sliderUrl: sliderUrl),
       );
-
-  // TODO: HiveRating
+      
   //------------------ HIVE RATING PART ---------------------//
 
   /// GETS very first hiveRating

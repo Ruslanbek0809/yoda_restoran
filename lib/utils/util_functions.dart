@@ -62,7 +62,7 @@ final List<String> drawerLoggedInList = [
   "profile",
   "orders",
   "addresses",
-  // "my_credit_cards",
+  "my_credit_cards",
   "about_us"
 ];
 
@@ -373,8 +373,7 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
   }
   print('Handling a background message ${message.messageId}');
 
-  // TODO: HiveRating
-  //------------------ HIVE RATING PART ---------------------//
+  //* ------------------ HIVE RATING PART ---------------------//
 
   /// HIVE DIR
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();

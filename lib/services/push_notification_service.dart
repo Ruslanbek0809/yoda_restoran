@@ -98,7 +98,6 @@ class PushNotificationService {
             );
           break;
         case '4':
-          // TODO: HiveRating
           log.v('INSIDE STATUS 4');
           await _dialogService.showCustomDialog(
             variant: DialogType.rateOrder,

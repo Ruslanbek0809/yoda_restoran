@@ -796,7 +796,6 @@ class RateOrderDialogView extends StatelessWidget {
                                   ? () {}
                                   : () async => await model.onRatingSendPressed(
                                         () async {
-                                          /// TODO: HiveRating
                                           await model
                                               .removeHiveRatingFromHiveRatings(
                                                   int.parse(
