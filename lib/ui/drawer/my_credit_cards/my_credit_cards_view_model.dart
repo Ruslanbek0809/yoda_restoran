@@ -9,46 +9,46 @@ import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
 class CreditCardsViewModel extends ReactiveViewModel {
-//   final log = getLogger('CreditCardsViewModel');
+  final log = getLogger('CreditCardsViewModel');
 
-//   final _navService = locator<NavigationService>();
+  final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
-//   final _dialogService = locator<DialogService>();
+  final _dialogService = locator<DialogService>();
 
-//   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
+  List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
-// //------------------------ CREDIT CARD DELETE DIALOG ----------------------------//
+//------------------------ CREDIT CARD DELETE DIALOG ----------------------------//
 
-//   /// SHOWS CREDIT CARD DELETE Dialog
-//   Future showCreditCardDeleteDialog(HiveCreditCard hiveCreditCard) async {
-//     log.i('showCreditCardDeleteDialog()');
-//     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
-//       variant: DialogType.creditCardDelete,
-//       title: LocaleKeys.wanna_delete_credit_card,
-//       mainButtonTitle: LocaleKeys.no,
-//       secondaryButtonTitle: LocaleKeys.delete,
-//       showIconInMainButton: false,
-//       barrierDismissible: true,
-//     );
-//     if (respData != null && respData.data == true)
-//       await _hiveDbService.deleteHiveCreditCard(hiveCreditCard);
-//   }
+  /// SHOWS CREDIT CARD DELETE Dialog
+  Future showCreditCardDeleteDialog(HiveCreditCard hiveCreditCard) async {
+    log.i('showCreditCardDeleteDialog()');
+    DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
+      variant: DialogType.creditCardDelete,
+      title: LocaleKeys.wanna_delete_credit_card,
+      mainButtonTitle: LocaleKeys.no,
+      secondaryButtonTitle: LocaleKeys.delete,
+      showIconInMainButton: false,
+      barrierDismissible: true,
+    );
+    if (respData != null && respData.data == true)
+      await _hiveDbService.deleteHiveCreditCard(hiveCreditCard);
+  }
 
-// //------------------------ NAVIGATIONS ----------------------------//
+//------------------------ NAVIGATIONS ----------------------------//
 
-//   /// NAVIGATES to MyCreditCardAddView
-//   Future<void> navToMyCreditCardAddView({
-//     required Function() onNewCreditCardAdded,
-//   }) async {
-//     dynamic _navResult;
-//     _navResult =
-//         await _navService.navigateTo(Routes.myCreditCardAddView) ?? false;
-//     if (_navResult) await onNewCreditCardAdded(); // Workaround
-//   }
+  /// NAVIGATES to MyCreditCardAddView
+  Future<void> navToMyCreditCardAddView({
+    required Function() onNewCreditCardAdded,
+  }) async {
+    dynamic _navResult;
+    _navResult =
+        await _navService.navigateTo(Routes.myCreditCardAddView) ?? false;
+    if (_navResult) await onNewCreditCardAdded(); // Workaround
+  }
 
-//   /// NAVIGATES to Home by removing all previous routes
-//   Future<void> navToHomeByRemovingAll() async =>
-//       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
+  /// NAVIGATES to Home by removing all previous routes
+  Future<void> navToHomeByRemovingAll() async =>
+      await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
