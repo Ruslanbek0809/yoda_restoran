@@ -306,7 +306,7 @@ class SingleOrderViewModel extends BaseViewModel {
     notifyListeners();
 
     await runBusyFuture(
-      _userService.postOnlinePayment(
+      _userService.postRegisterOnlinePayment(
         order!,
         false,
         0,
@@ -479,7 +479,7 @@ class SingleOrderViewModel extends BaseViewModel {
     notifyListeners();
 
     await runBusyFuture(
-      _userService.postOnlinePayment(
+      _userService.postRegisterOnlinePayment(
         order!,
         true,
         _onlineRetryCounter,
