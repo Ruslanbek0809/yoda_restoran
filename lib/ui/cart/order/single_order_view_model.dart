@@ -8,12 +8,14 @@ import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
 import '../../../generated/locale_keys.g.dart';
+import '../../../models/hive_models/hive_models.dart';
 import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 import 'order_view_model.dart';
 
-class SingleOrderViewModel extends BaseViewModel {
+//* NEW CODE
+class SingleOrderViewModel extends ReactiveViewModel {
   final log = getLogger('SingleOrderViewModel');
   final Order? order;
   final OrderViewModel? orderViewModel;
@@ -22,6 +24,12 @@ class SingleOrderViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
+
+  //* NEW CODE
+  final _hiveDbService = locator<HiveDbService>();
+
+  //* NEW CODE
+  List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
   bool _currentOrderExpansionState = false;
   bool get currentOrderExpansionState => _currentOrderExpansionState;
@@ -310,11 +318,29 @@ class SingleOrderViewModel extends BaseViewModel {
         order!,
         false,
         0,
-        (OrderPaymentRegister paymentRegister) {
-          _isLoading = false;
-          notifyListeners();
-          log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
-          // onSuccessForView!(paymentRegister);
+        (OrderPaymentRegister paymentRegister) async {
+          //* NEW CODE COMMENT
+          // _isLoading = false;
+          // notifyListeners();
+          // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
+          // // onSuccessForView!(paymentRegister);
+
+          //* NEW CODE
+          await _userService.postPayOnlinePayment(
+            hiveCreditCards[0],
+            paymentRegister,
+            false,
+            0,
+            () async {
+              _isLoading = false;
+              notifyListeners();
+            },
+            () {
+              _isLoading = false;
+              notifyListeners();
+              onFailForView!();
+            },
+          );
         },
         () {
           _isLoading = false;
@@ -483,7 +509,7 @@ class SingleOrderViewModel extends BaseViewModel {
         order!,
         true,
         _onlineRetryCounter,
-        (OrderPaymentRegister paymentRegister) {
+        (OrderPaymentRegister paymentRegister) async {
           _isOnlinePaymentRetryLoading = false;
 
           /// STARTS _isPaymentLoading part in bottom sheet
@@ -512,4 +538,8 @@ class SingleOrderViewModel extends BaseViewModel {
   /// NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
+
+  //* NEW CODE
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
 }

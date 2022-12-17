@@ -599,7 +599,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test28';
+    _queryParams['orderNumber'] = 'Ver43Test38';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -712,26 +712,22 @@ class UserService {
   //* POST PAY ONLINE PAYMENT WITHOUT PAYMENT PANEL
   Future<void> postPayOnlinePayment(
     HiveCreditCard hiveCreditCard,
-    Order order,
+    OrderPaymentRegister paymentRegister,
     bool isRetryOnlinePayment,
     int onlineRetryCounter,
-    Function(OrderPaymentRegister) onSuccess,
+    Function() onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    // if (isRetryOnlinePayment)
-    //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
-    // else
-    //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['MDORDER'] = 'Ver43Test28';
+    _queryParams['MDORDER'] = paymentRegister.orderId;
 
-    _queryParams['\$PAN'] = hiveCreditCard.cardNumber;
-    _queryParams['\$CVC'] = '620';
-    // _queryParams['\$CVC'] = hiveCreditCard.;
-    _queryParams['YYYY'] = '2042';
-    _queryParams['MM'] = '7';
+    _queryParams['\$PAN'] =
+        int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
+    _queryParams['\$CVC'] = 620;
+    _queryParams['YYYY'] = 2042;
+    _queryParams['MM'] = 07;
     _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
     _queryParams['language'] = 'ru';
 
@@ -744,7 +740,7 @@ class UserService {
 
       //----------- DIO BASE URL -------------//
       dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/paymentorder.do';
-      dio.options.contentType = Headers.formUrlEncodedContentType;
+      // dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
