@@ -7,16 +7,13 @@ import '../models/models.dart';
 import 'services.dart';
 import '../utils/utils.dart';
 
-// 1 For Reactive Views
+//* 1 For Reactive Views
 class HiveDbService with ReactiveServiceMixin {
   final log = getLogger('HiveDbService');
 
   HiveDbService() {
-    // 3
-    listenToReactiveValues([
-      _cartMeals, _hiveRatings,
-      // _hiveCreditCards
-    ]);
+    //* 3
+    listenToReactiveValues([_cartMeals, _hiveRatings, _hiveCreditCards]);
   }
 
   final _bottomCartService = locator<BottomCartService>();
@@ -24,25 +21,24 @@ class HiveDbService with ReactiveServiceMixin {
   static late Box<HiveRestaurant> cartResBox;
   static late Box<HiveMeal>
       cartMealsBox; // Also we don't need other 2 meal and res related boxes here
-  static late Box<HiveRating> hiveRatingBox; // TODO: HiveRating
-  // static late Box<HiveCreditCard> hiveCreditCardsBox;
+  static late Box<HiveRating> hiveRatingBox;
+  static late Box<HiveCreditCard> hiveCreditCardsBox;
 
   HiveRestaurant? cartRes;
 
-  // 2
+  //* 2
   ReactiveValue<List<HiveMeal>> _cartMeals = ReactiveValue<List<HiveMeal>>([]);
   List<HiveMeal> get cartMeals => _cartMeals.value;
 
-  // TODO: HiveRating
   ReactiveValue<List<HiveRating>> _hiveRatings =
       ReactiveValue<List<HiveRating>>([]);
   List<HiveRating> get hiveRatings => _hiveRatings.value;
 
-  /// HIVE CREDIT CARDS
+  //* HIVE CREDIT CARDS
   final _hiveCreditCards = ReactiveValue<List<HiveCreditCard>>([]);
   List<HiveCreditCard> get hiveCreditCards => _hiveCreditCards.value;
 
-  /// INITIALIZE in StartUpViewModel
+  //* INITIALIZE in StartUpViewModel
   Future initHiveBoxes() async {
     log.v('====== HiveDbService STARTED opening boxes ======');
 
@@ -51,13 +47,13 @@ class HiveDbService with ReactiveServiceMixin {
     await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
     await Hive.openBox<HiveVolCus>(Constants.volCartBox);
-    await Hive.openBox<HiveRating>(Constants.hiveRatingBox); // TODO: HiveRating
+    await Hive.openBox<HiveRating>(Constants.hiveRatingBox);
     await Hive.openBox<HiveCreditCard>(Constants.creditCardsBox);
 
     log.v('====== HiveDbService ENDED opening boxes ======');
   }
 
-  /// GETS CART restaurant from cartResBox
+  //* GETS CART restaurant from cartResBox
   void getCartRes() {
     cartResBox = Hive.box<HiveRestaurant>(Constants.cartResBox);
 
@@ -66,7 +62,7 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('cartRes ${cartRes!.id}');
   }
 
-  /// GETS all CART meals from cartMealsBox
+  //* GETS all CART meals from cartMealsBox
   void getCartMeals() {
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     _cartMeals.value = cartMealsBox.values.toList();
@@ -76,8 +72,7 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('_cartMeals.value length: ${_cartMeals.value.length}');
   }
 
-  /// TODO: HiveRating
-  /// GETS all hive ratings from hiveRatingBox
+  //* GETS all hive ratings from hiveRatingBox
   void getHiveRatings() {
     hiveRatingBox = Hive.box<HiveRating>(Constants.hiveRatingBox);
     _hiveRatings.value = hiveRatingBox.values.toList();
@@ -85,13 +80,13 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('_hiveRatings.value length: ${_hiveRatings.value.length}');
   }
 
-  // /// GETS hive credit cards from hiveCreditCardsBox
-  // void getHiveCreditCards() {
-  //   hiveCreditCardsBox = Hive.box<HiveCreditCard>(Constants.creditCardsBox);
-  //   _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
+  //* GETS hive credit cards from hiveCreditCardsBox
+  void getHiveCreditCards() {
+    hiveCreditCardsBox = Hive.box<HiveCreditCard>(Constants.creditCardsBox);
+    _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
 
-  //   log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
-  // }
+    log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
+  }
 
 //---------------------------------------//
 //------------------ RESTAURANT PART ---------------------//
@@ -450,12 +445,11 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//---------------------------------------//
-//----------------------- HIVE RATING --------------------------//
-//---------------------------------------//
+//* ---------------------------------------//
+//* ----------------------- HIVE RATING --------------------------//
+//* ---------------------------------------//
 
-  // TODO: HiveRating
-  /// DELETES a hive rating
+  //* DELETES a hive rating
   Future<void> deleteHiveRatingFromHiveRatings(int? orderId) async {
     log.v('orderId: $orderId');
 
@@ -475,44 +469,44 @@ class HiveDbService with ReactiveServiceMixin {
         'AFTER delete action for _hiveRatings.value.length: ${_hiveRatings.value.length}');
   }
 
-//---------------------------------------//
-//------------------ CREDIT CARD ---------------------//
-//---------------------------------------//
+//* ---------------------------------------//
+//* ------------------ CREDIT CARD ---------------------//
+//* ---------------------------------------//
 
-  // /// ADDS a creadit card
-  // Future<void> addCreditCard(CreditCard creditCard, BankCard bankCard) async {
-  //   log.v('creditCard.cardNumber: ${creditCard.cardNumber}');
-  //   log.v('creditCard.expiryDate: ${creditCard.expiryDate}');
-  //   log.v('creditCard.cardHolderName: ${creditCard.cardHolderName}');
+  //* ADDS a creadit card
+  Future<void> addCreditCard(CreditCard creditCard, BankCard bankCard) async {
+    log.v('creditCard.cardNumber: ${creditCard.cardNumber}');
+    log.v('creditCard.expiryDate: ${creditCard.expiryDate}');
+    log.v('creditCard.cardHolderName: ${creditCard.cardHolderName}');
 
-  //   try {
-  //     final HiveCreditCard _creditCard = HiveCreditCard(
-  //       cardNumber: creditCard.cardNumber,
-  //       expiryDate: creditCard.expiryDate,
-  //       cardHolderName: creditCard.cardHolderName,
-  //       bankId: bankCard.bankId,
-  //       bankName: bankCard.bankName,
-  //     );
-  //     await hiveCreditCardsBox.add(_creditCard);
-  //     _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
-  //     log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
-  //   } catch (e) {
-  //     log.v('Couldn\'t ADD a credict card to hiveCreditCardsBox: $e');
-  //   }
-  // }
+    try {
+      final HiveCreditCard _creditCard = HiveCreditCard(
+        cardNumber: creditCard.cardNumber,
+        expiryDate: creditCard.expiryDate,
+        cardHolderName: creditCard.cardHolderName,
+        bankId: bankCard.bankId,
+        bankName: bankCard.bankName,
+      );
+      await hiveCreditCardsBox.add(_creditCard);
+      _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
+      log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
+    } catch (e) {
+      log.v('Couldn\'t ADD a credict card to hiveCreditCardsBox: $e');
+    }
+  }
 
-  // /// DELETES a hive rating from _hiveCreditCards
-  // Future<void> deleteHiveCreditCard(HiveCreditCard hiveCreditCard) async {
-  //   log.v('hiveCreditCard: $hiveCreditCard');
+  //* DELETES a hive rating from _hiveCreditCards
+  Future<void> deleteHiveCreditCard(HiveCreditCard hiveCreditCard) async {
+    log.v('hiveCreditCard: $hiveCreditCard');
 
-  //   int pos = _hiveCreditCards.value.indexOf(hiveCreditCard);
+    int pos = _hiveCreditCards.value.indexOf(hiveCreditCard);
 
-  //   log.v(
-  //       'DELETING hiveCreditCard when _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
-  //   hiveCreditCardsBox.deleteAt(pos);
-  //   _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
+    log.v(
+        'DELETING hiveCreditCard when _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
+    hiveCreditCardsBox.deleteAt(pos);
+    _hiveCreditCards.value = hiveCreditCardsBox.values.toList();
 
-  //   log.v(
-  //       'AFTER delete action for _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
-  // }
+    log.v(
+        'AFTER delete action for _hiveCreditCards.value.length: ${_hiveCreditCards.value.length}');
+  }
 }

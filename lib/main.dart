@@ -25,7 +25,7 @@ void main() async {
   Hive.registerAdapter<HiveResPaymentType>(HiveResPaymentTypeAdapter());
   Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
-  Hive.registerAdapter<HiveRating>(HiveRatingAdapter()); // TODO: HiveRating
+  Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
   Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
   setupLocator();
   setupBottomSheet();
@@ -33,8 +33,7 @@ void main() async {
   setupSnackbar();
 
   // When the app is completely closed (not in the background) and opened directly from the push notification
-  FirebaseMessaging.onBackgroundMessage(
-      fbBackgroundHandler); // TODO: HiveRating and FB Background
+  FirebaseMessaging.onBackgroundMessage(fbBackgroundHandler); //* FB Background
 
   runApp(
     EasyLocalization(
@@ -43,5 +42,5 @@ void main() async {
       fallbackLocale: const Locale('en', 'US'),
       child: YodaResApp(),
     ),
-  );  
+  );
 }
