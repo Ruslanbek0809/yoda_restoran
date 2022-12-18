@@ -599,7 +599,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test38';
+    _queryParams['orderNumber'] = 'Ver43Test39';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -739,8 +739,8 @@ class UserService {
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/paymentorder.do';
-      // dio.options.contentType = Headers.formUrlEncodedContentType;
+      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/processform.do';
+      dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
