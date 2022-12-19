@@ -314,6 +314,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     notifyListeners();
 
     await runBusyFuture(
+      //* NEW CODE  STEP 1
       _userService.postRegisterOnlinePayment(
         order!,
         false,
@@ -325,18 +326,30 @@ class SingleOrderViewModel extends ReactiveViewModel {
           // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
           // // onSuccessForView!(paymentRegister);
 
-          //* NEW CODE
+          //* NEW CODE  STEP 2
           await _userService.postProcessOnlinePayment(
             hiveCreditCards[0],
             paymentRegister,
             (OrderPaymentAcsUrl paymentAcsUrl) async {
-              //* NEW CODE
+              //* NEW CODE STEP 3
               await _userService.postAcsUrl(
                 paymentRegister,
                 paymentAcsUrl,
                 () async {
-                  _isLoading = false;
-                  notifyListeners();
+                  //* NEW CODE STEP 4
+                  await _userService.postFinish3ds(
+                    paymentRegister,
+                    paymentAcsUrl,
+                    () async {
+                      _isLoading = false;
+                      notifyListeners();
+                    },
+                    () {
+                      _isLoading = false;
+                      notifyListeners();
+                      onFailForView!();
+                    },
+                  );
                 },
                 () {
                   _isLoading = false;

@@ -599,7 +599,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test50';
+    _queryParams['orderNumber'] = 'Ver43Test55';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -843,6 +843,11 @@ class UserService {
         log.v(
             'RESPONSE: postAcsUrl => response.statusCode: ${response.statusCode}');
 
+        /// PARSES the string and returns the resulting Json object
+        final _decodedResponse = jsonDecode(response.data);
+        log.v(
+            'RESPONSE: postAcsUrl _decodedResponse => ${_decodedResponse.toString()}');
+
         //* if SUCCESS
         if (response.data != null &&
             (response.statusCode == 200 || response.statusCode == 201))
@@ -861,10 +866,13 @@ class UserService {
   //* POST finish3ds STEP 4
   Future<void> postFinish3ds(
     OrderPaymentRegister paymentRegister,
+    OrderPaymentAcsUrl paymentAcsUrl,
     Function() onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
+    _queryParams['MD'] = paymentRegister.orderId;
+    _queryParams['PaRes'] = paymentAcsUrl.paReq;
     _queryParams['authForm'] = 'authForm';
     _queryParams['request_id'] = paymentRegister.orderId;
     _queryParams['sendPasswordButton'] = 'Send password';
@@ -878,7 +886,7 @@ class UserService {
 
       //----------- DIO BASE URL -------------//
       dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
-      dio.options.contentType = Headers.formUrlEncodedContentType;
+      // dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
@@ -886,7 +894,8 @@ class UserService {
           onRequest: (options, handler) {
             // Do something before request is sent
             log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}&authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=${paymentAcsUrl.paReq}');
+            // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
             //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
@@ -911,7 +920,8 @@ class UserService {
       //----------- DIO PART END -------------//
 
       Response response = await dio.post(
-        '&authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
+        '?MD=${paymentRegister.orderId}&PaRes=${paymentAcsUrl.paReq}',
+        // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
         // queryParameters: _queryParams,
         // data: onlinePaymentFormData,
       );
@@ -920,13 +930,13 @@ class UserService {
         log.v(
             'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
 
-        //* if SUCCESS
-        if (response.data != null &&
-            (response.statusCode == 200 || response.statusCode == 201))
-          onSuccess();
-        //* if FAIL
-        else
-          onFail();
+        // //* if SUCCESS
+        // if (response.data != null &&
+        //     (response.statusCode == 200 || response.statusCode == 201))
+        //   onSuccess();
+        // //* if FAIL
+        // else
+        //   onFail();
       }
     } on DioError catch (error) {
       log.v('ERROR on postFinish3ds => ${error.response}');
