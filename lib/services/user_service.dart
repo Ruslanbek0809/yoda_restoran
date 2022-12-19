@@ -599,7 +599,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test43';
+    _queryParams['orderNumber'] = 'Ver43Test48';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -608,7 +608,6 @@ class UserService {
         _totalOrderSum -= order.promocode!.discount!;
       else
         _totalOrderSum = order.totPrice! -
-        
             (order.totPrice! / 100) * order.promocode!.discount!;
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
@@ -797,7 +796,7 @@ class UserService {
     _queryParams['TermUrl'] = paymentAcsUrl.termUrl;
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
 
     try {
       //----------- DIO PART START -------------//
@@ -813,7 +812,8 @@ class UserService {
           onRequest: (options, handler) {
             // Do something before request is sent
             log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
+            //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
@@ -837,8 +837,9 @@ class UserService {
       //----------- DIO PART END -------------//
 
       Response response = await dio.post(
-        '',
-        data: onlinePaymentFormData,
+        '&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}',
+        // queryParameters: _queryParams,
+        // data: onlinePaymentFormData,
       );
       if (response.data != null) {
         log.v('RESPONSE: postAcsUrl => ${response.data}');
