@@ -599,7 +599,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test39';
+    _queryParams['orderNumber'] = 'Ver43Test43';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -608,6 +608,7 @@ class UserService {
         _totalOrderSum -= order.promocode!.discount!;
       else
         _totalOrderSum = order.totPrice! -
+        
             (order.totPrice! / 100) * order.promocode!.discount!;
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
@@ -693,12 +694,10 @@ class UserService {
     }
   }
 
-  //* POST PAY ONLINE PAYMENT WITHOUT PAYMENT PANEL STEP 2
-  Future<void> postPayOnlinePayment(
+  //* POST PROCESS ONLINE PAYMENT WITHOUT PAYMENT PANEL STEP 2
+  Future<void> postProcessOnlinePayment(
     HiveCreditCard hiveCreditCard,
     OrderPaymentRegister paymentRegister,
-    bool isRetryOnlinePayment,
-    int onlineRetryCounter,
     Function(OrderPaymentAcsUrl) onSuccess,
     Function() onFail,
   ) async {
@@ -716,7 +715,8 @@ class UserService {
     _queryParams['language'] = 'ru';
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    final FormData onlinePaymentProcessFormData =
+        FormData.fromMap(_queryParams);
 
     try {
       //----------- DIO PART START -------------//
@@ -757,10 +757,10 @@ class UserService {
 
       Response response = await dio.post(
         '',
-        data: onlinePaymentFormData,
+        data: onlinePaymentProcessFormData,
       );
       if (response.data != null) {
-        log.v('RESPONSE: postPayOnlinePayment => ${response.data}');
+        log.v('RESPONSE: postProcessOnlinePayment => ${response.data}');
 
         /// PARSES the string and returns the resulting Json object
         final _decodedResponse = jsonDecode(response.data);
@@ -778,33 +778,23 @@ class UserService {
           onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on postPayOnlinePayment => ${error.response}');
+      log.v('ERROR on postProcessOnlinePayment => ${error.response}');
       onFail();
       rethrow;
     }
   }
 
   //* POST acsUrl STEP 3
-  Future<void> postacsUrl(
-    HiveCreditCard hiveCreditCard,
+  Future<void> postAcsUrl(
     OrderPaymentRegister paymentRegister,
-    bool isRetryOnlinePayment,
-    int onlineRetryCounter,
+    OrderPaymentAcsUrl paymentAcsUrl,
     Function() onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
-    _queryParams['userName'] = '101211004240';
-    _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['MDORDER'] = paymentRegister.orderId;
-
-    _queryParams['\$PAN'] =
-        int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
-    _queryParams['\$CVC'] = 620;
-    _queryParams['YYYY'] = 2042;
-    _queryParams['MM'] = 07;
-    _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
-    _queryParams['language'] = 'ru';
+    _queryParams['MD'] = paymentRegister.orderId;
+    _queryParams['PaReq'] = paymentAcsUrl.paReq;
+    _queryParams['TermUrl'] = paymentAcsUrl.termUrl;
 
     log.v('_queryParams at the END: $_queryParams');
     final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
@@ -814,7 +804,7 @@ class UserService {
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/processform.do';
+      dio.options.baseUrl = paymentAcsUrl.acsUrl!;
       dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
@@ -851,7 +841,7 @@ class UserService {
         data: onlinePaymentFormData,
       );
       if (response.data != null) {
-        log.v('RESPONSE: postOnlinePayment => ${response.data}');
+        log.v('RESPONSE: postAcsUrl => ${response.data}');
 
         // /// PARSES the string and returns the resulting Json object
         // final _decodedResponse = jsonDecode(response.data);
@@ -885,7 +875,7 @@ class UserService {
         //   onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on postOnlinePayment => ${error.response}');
+      log.v('ERROR on postAcsUrl => ${error.response}');
       onFail();
       rethrow;
     }

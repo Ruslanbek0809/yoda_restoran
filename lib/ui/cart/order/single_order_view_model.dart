@@ -326,14 +326,24 @@ class SingleOrderViewModel extends ReactiveViewModel {
           // // onSuccessForView!(paymentRegister);
 
           //* NEW CODE
-          await _userService.postPayOnlinePayment(
+          await _userService.postProcessOnlinePayment(
             hiveCreditCards[0],
             paymentRegister,
-            false,
-            0,
             (OrderPaymentAcsUrl paymentAcsUrl) async {
-              _isLoading = false;
-              notifyListeners();
+              //* NEW CODE
+              await _userService.postAcsUrl(
+                paymentRegister,
+                paymentAcsUrl,
+                () async {
+                  _isLoading = false;
+                  notifyListeners();
+                },
+                () {
+                  _isLoading = false;
+                  notifyListeners();
+                  onFailForView!();
+                },
+              );
             },
             () {
               _isLoading = false;
