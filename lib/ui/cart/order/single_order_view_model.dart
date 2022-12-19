@@ -331,7 +331,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
             paymentRegister,
             false,
             0,
-            () async {
+            (OrderPaymentAcsUrl paymentAcsUrl) async {
               _isLoading = false;
               notifyListeners();
             },
