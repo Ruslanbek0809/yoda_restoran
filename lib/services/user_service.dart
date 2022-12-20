@@ -9,6 +9,7 @@ import '../models/hive_models/hive_models.dart';
 import '../models/models.dart';
 import '../utils/utils.dart';
 import 'services.dart';
+import 'package:html/parser.dart';
 
 class UserService {
   final log = getLogger('UserService');
@@ -847,6 +848,12 @@ class UserService {
         final _decodedResponse = jsonDecode(response.data);
         log.v(
             'RESPONSE: postAcsUrl _decodedResponse => ${_decodedResponse.toString()}');
+        var document = parse(_decodedResponse);
+        var inputElement = document.querySelector('[name="PaRes"]')!.text;
+        final String parsedString = document.documentElement!.text;
+        log.v('RESPONSE: document => $inputElement');
+        log.v('RESPONSE: postAcsUrl inputElement => $inputElement');
+        log.v('RESPONSE: postAcsUrl parsedString => $parsedString');
 
         //* if SUCCESS
         if (response.data != null &&

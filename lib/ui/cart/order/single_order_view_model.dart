@@ -336,20 +336,22 @@ class SingleOrderViewModel extends ReactiveViewModel {
                 paymentRegister,
                 paymentAcsUrl,
                 () async {
-                  //* NEW CODE STEP 4
-                  await _userService.postFinish3ds(
-                    paymentRegister,
-                    paymentAcsUrl,
-                    () async {
                       _isLoading = false;
                       notifyListeners();
-                    },
-                    () {
-                      _isLoading = false;
-                      notifyListeners();
-                      onFailForView!();
-                    },
-                  );
+                  // //* NEW CODE STEP 4
+                  // await _userService.postFinish3ds(
+                  //   paymentRegister,
+                  //   paymentAcsUrl,
+                  //   () async {
+                  //     _isLoading = false;
+                  //     notifyListeners();
+                  //   },
+                  //   () {
+                  //     _isLoading = false;
+                  //     notifyListeners();
+                  //     onFailForView!();
+                  //   },
+                  // );
                 },
                 () {
                   _isLoading = false;

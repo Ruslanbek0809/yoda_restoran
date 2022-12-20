@@ -865,6 +865,7 @@ class SingleOrderView extends StatelessWidget {
                                 case 1:
                                   break;
                                 case 2:
+                                
                                   await model.onConfirmButtonPressed(
                                     onSuccessForView: (paymentRegister) async {
                                       await showFlexibleBottomSheet(
