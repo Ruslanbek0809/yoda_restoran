@@ -600,7 +600,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test57';
+    _queryParams['orderNumber'] = 'Ver43Test60';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -868,12 +868,13 @@ class UserService {
   Future<void> postFinish3ds(
     OrderPaymentRegister paymentRegister,
     OrderPaymentAcsUrl paymentAcsUrl,
+    String paResValue,
     Function() onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['MD'] = paymentRegister.orderId;
-    _queryParams['PaRes'] = paymentAcsUrl.paReq;
+    _queryParams['PaRes'] = paResValue;
     _queryParams['authForm'] = 'authForm';
     _queryParams['request_id'] = paymentRegister.orderId;
     _queryParams['sendPasswordButton'] = 'Send password';
@@ -886,7 +887,9 @@ class UserService {
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+      dio.options.baseUrl = paymentAcsUrl.termUrl ??
+          'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+      // dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
       // dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
@@ -894,8 +897,8 @@ class UserService {
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
-            log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=${paymentAcsUrl.paReq}');
+            log.i(
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=$paResValue');
             // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
             //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
@@ -921,9 +924,10 @@ class UserService {
       //----------- DIO PART END -------------//
 
       Response response = await dio.post(
-        '?MD=${paymentRegister.orderId}&PaRes=${paymentAcsUrl.paReq}',
+        '',
+        // '?MD=${paymentRegister.orderId}&PaRes=$paResValue',
         // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
-        // queryParameters: _queryParams,
+        queryParameters: _queryParams,
         // data: onlinePaymentFormData,
       );
       if (response.data != null) {

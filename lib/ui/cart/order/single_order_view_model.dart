@@ -342,6 +342,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
                   await _userService.postFinish3ds(
                     paymentRegister,
                     paymentAcsUrl,
+                    paResValue,
                     () async {
                       _isLoading = false;
                       notifyListeners();
