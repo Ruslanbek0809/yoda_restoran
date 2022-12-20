@@ -600,7 +600,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test55';
+    _queryParams['orderNumber'] = 'Ver43Test57';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -641,7 +641,7 @@ class UserService {
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
-            log.v(
+            log.i(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
@@ -731,7 +731,7 @@ class UserService {
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
-            log.v(
+            log.i(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
@@ -788,7 +788,7 @@ class UserService {
   Future<void> postAcsUrl(
     OrderPaymentRegister paymentRegister,
     OrderPaymentAcsUrl paymentAcsUrl,
-    Function() onSuccess,
+    Function(String paResValue) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
@@ -811,7 +811,7 @@ class UserService {
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
-            log.v(
+            log.i(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl}&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
             //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
@@ -844,21 +844,15 @@ class UserService {
         log.v(
             'RESPONSE: postAcsUrl => response.statusCode: ${response.statusCode}');
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
-        log.v(
-            'RESPONSE: postAcsUrl _decodedResponse => ${_decodedResponse.toString()}');
-        var document = parse(_decodedResponse);
-        var inputElement = document.querySelector('[name="PaRes"]')!.text;
-        final String parsedString = document.documentElement!.text;
-        log.v('RESPONSE: document => $inputElement');
-        log.v('RESPONSE: postAcsUrl inputElement => $inputElement');
-        log.v('RESPONSE: postAcsUrl parsedString => $parsedString');
+        var document = parse(response.data);
+        //* GETS value of DOCUMENT => BODY => FORM (firstChild) => 2nd INPUT (nodes[1]) => value of 'PaRes' (attributes['value'])
+        String paResValue =
+            document.body!.firstChild!.nodes[1].attributes['value'] ?? '';
 
         //* if SUCCESS
         if (response.data != null &&
             (response.statusCode == 200 || response.statusCode == 201))
-          onSuccess();
+          onSuccess(paResValue);
         //* if FAIL
         else
           onFail();

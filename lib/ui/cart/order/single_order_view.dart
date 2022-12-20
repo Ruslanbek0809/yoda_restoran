@@ -15,6 +15,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'order_view_model.dart';
 import 'single_order_view_model.dart';
 import 'so_payment_bottom_sheet.dart';
+import 'package:html/parser.dart';
 
 class SingleOrderView extends StatelessWidget {
   final Order order;
@@ -865,7 +866,7 @@ class SingleOrderView extends StatelessWidget {
                                 case 1:
                                   break;
                                 case 2:
-                                
+
                                   await model.onConfirmButtonPressed(
                                     onSuccessForView: (paymentRegister) async {
                                       await showFlexibleBottomSheet(
