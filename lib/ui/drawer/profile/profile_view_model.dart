@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
+
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
@@ -8,7 +10,6 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../models/hive_models/hive_models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final log = getLogger('ProfileViewModel');

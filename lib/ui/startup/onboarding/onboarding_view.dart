@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../library/onboarding/onboarding.dart';
 import 'package:stacked/stacked.dart';
-import '../../../utils/utils.dart';
 
+import '../../../library/onboarding/onboarding.dart';
+import '../../../utils/utils.dart';
 import 'onboarding_view_model.dart';
 
 class OnBoardingView extends StatelessWidget {

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'shared/shared.dart';
+
 import 'app/app.router.dart';
+import 'shared/shared.dart';
 import 'ui/widgets/widgets.dart';
 import 'utils/utils.dart';
 

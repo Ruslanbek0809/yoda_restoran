@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import '../../shared/shared.dart';
 
 // Migrate DiagnosticableMixin to Diagnosticable until

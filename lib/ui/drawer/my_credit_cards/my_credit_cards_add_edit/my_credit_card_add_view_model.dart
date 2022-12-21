@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/utils/utils.dart';
+import '../../../../utils/utils.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.logger.dart';
 import '../../../../generated/locale_keys.g.dart';

@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'models.dart';
+
 part 'es_rich.g.dart';
 
 @JsonSerializable(includeIfNull: true)

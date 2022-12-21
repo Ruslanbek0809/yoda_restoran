@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'exclusive_single.dart';
 import 'models.dart';
 

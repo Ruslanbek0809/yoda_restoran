@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'about_us.g.dart';
 
 @JsonSerializable()

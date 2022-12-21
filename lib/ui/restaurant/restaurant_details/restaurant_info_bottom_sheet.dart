@@ -1,12 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../../../shared/shared.dart';
-import '../../../models/models.dart';
-import '../../../utils/utils.dart';
-import 'package:easy_localization/easy_localization.dart';
 
+import '../../../generated/locale_keys.g.dart';
+import '../../../models/models.dart';
+import '../../../shared/shared.dart';
+import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
 class RestaurantInfoBottomSheet extends StatelessWidget {

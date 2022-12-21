@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
+
 import '../app/app.locator.dart';
+import '../app/app.logger.dart';
 import '../generated/locale_keys.g.dart';
 import '../models/models.dart';
-import '../app/app.logger.dart';
 import '../utils/utils.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class PushNotificationService {
   final log = getLogger('PushNotificationService');

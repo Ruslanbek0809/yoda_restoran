@@ -205,9 +205,9 @@ class _SingleOrderPaymentBottomSheetViewState
                         padding: EdgeInsets.symmetric(horizontal: 30.w),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: kcSecondaryDarkColor,
-                            primary:
-                                kcSecondaryLightColor, // ripple effect color
+                            foregroundColor: kcSecondaryLightColor,
+                            backgroundColor:
+                                kcSecondaryDarkColor, // ripple effect color
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: AppTheme().radius10),
@@ -312,9 +312,9 @@ class _SingleOrderPaymentBottomSheetViewState
                         padding: EdgeInsets.symmetric(horizontal: 30.w),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: kcOnlinePaymentColor,
-                            primary:
-                                kcSecondaryLightColor, // ripple effect color
+                            foregroundColor: kcSecondaryLightColor,
+                            backgroundColor:
+                                kcOnlinePaymentColor, // ripple effect color
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: AppTheme().radius10),

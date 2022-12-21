@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+
 import 'main_cat_all_item_hook.dart';
 import 'main_cat_filter_item_hook.dart';
 import 'main_cat_item_hook.dart';
 import 'main_cat_view_model.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainCatView extends StatelessWidget {
   @override
