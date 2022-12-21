@@ -15,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'order_view_model.dart';
 import 'single_order_view_model.dart';
 import 'so_payment_bottom_sheet.dart';
-import 'package:html/parser.dart';
 
 class SingleOrderView extends StatelessWidget {
   final Order order;
@@ -648,9 +647,9 @@ class SingleOrderView extends StatelessWidget {
                               horizontal: 15.w, vertical: 10.h),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              backgroundColor: kcSecondaryDarkColor,
-                              primary:
-                                  kcSecondaryLightColor, // ripple effect color
+                              foregroundColor: kcSecondaryLightColor,
+                              backgroundColor:
+                                  kcSecondaryDarkColor, // ripple effect color
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: AppTheme().radius10),
@@ -758,9 +757,9 @@ class SingleOrderView extends StatelessWidget {
                             width: 0.35.sw,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                backgroundColor: kcOrderDeleteButtonBackColor,
-                                primary:
-                                    kcSecondaryLightColor, // ripple effect color
+                                foregroundColor: kcSecondaryLightColor,
+                                backgroundColor:
+                                    kcOrderDeleteButtonBackColor, // ripple effect color
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: AppTheme().radius10),
@@ -827,10 +826,10 @@ class SingleOrderView extends StatelessWidget {
                           padding: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              backgroundColor: order.status == 1
+                              foregroundColor: order.status == 1
                                   ? kcSecondaryLightColor
                                   : kcOnlinePaymentColor,
-                              primary: order.status == 1
+                              backgroundColor: order.status == 1
                                   ? kcSecondaryLightColor
                                   : kcOnlinePaymentColor, // ripple effect color
                               elevation: 0,
@@ -866,7 +865,6 @@ class SingleOrderView extends StatelessWidget {
                                 case 1:
                                   break;
                                 case 2:
-
                                   await model.onConfirmButtonPressed(
                                     onSuccessForView: (paymentRegister) async {
                                       await showFlexibleBottomSheet(

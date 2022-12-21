@@ -4,7 +4,7 @@ import '../app/app.logger.dart';
 import '../utils/utils.dart';
 
 /// ApiRootService is used to initializeDio in both ApiService and UserApiService
-class ApiRootService {
+class   ApiRootService {
   final log = getLogger('ApiRootService');
 
   Dio dio = Dio();

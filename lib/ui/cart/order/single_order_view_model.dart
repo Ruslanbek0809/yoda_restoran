@@ -314,59 +314,16 @@ class SingleOrderViewModel extends ReactiveViewModel {
     notifyListeners();
 
     await runBusyFuture(
-      //* NEW CODE  STEP 1
-      _userService.postRegisterOnlinePayment(
+      //* NEW CODE for online payment fetch from backend
+      _userService.postOnlinePayment(
         order!,
         false,
         0,
         (OrderPaymentRegister paymentRegister) async {
-          //* NEW CODE COMMENT
-          // _isLoading = false;
-          // notifyListeners();
-          // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
-          // // onSuccessForView!(paymentRegister);
-
-          //* NEW CODE  STEP 2
-          await _userService.postProcessOnlinePayment(
-            hiveCreditCards[0],
-            paymentRegister,
-            (OrderPaymentAcsUrl paymentAcsUrl) async {
-              //* NEW CODE STEP 3
-              await _userService.postAcsUrl(
-                paymentRegister,
-                paymentAcsUrl,
-                (String paResValue) async {
-                  // _isLoading = false;
-                  // notifyListeners();
-                  //* NEW CODE STEP 4
-                  await _userService.postFinish3ds(
-                    paymentRegister,
-                    paymentAcsUrl,
-                    paResValue,
-                    () async {
-                      _isLoading = false;
-                      notifyListeners();
-                    },
-                    () {
-                      _isLoading = false;
-                      notifyListeners();
-                      onFailForView!();
-                    },
-                  );
-                },
-                () {
-                  _isLoading = false;
-                  notifyListeners();
-                  onFailForView!();
-                },
-              );
-            },
-            () {
-              _isLoading = false;
-              notifyListeners();
-              onFailForView!();
-            },
-          );
+          _isLoading = false;
+          notifyListeners();
+          log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
+          // onSuccessForView!(paymentRegister);
         },
         () {
           _isLoading = false;
@@ -374,6 +331,67 @@ class SingleOrderViewModel extends ReactiveViewModel {
           onFailForView!();
         },
       ),
+
+      // //* NEW CODE  STEP 1
+      // _userService.postRegisterOnlinePayment(
+      //   order!,
+      //   false,
+      //   0,
+      //   (OrderPaymentRegister paymentRegister) async {
+      //     //* NEW CODE COMMENT
+      //     // _isLoading = false;
+      //     // notifyListeners();
+      //     // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
+      //     // // onSuccessForView!(paymentRegister);
+
+      //     //* NEW CODE  STEP 2
+      //     await _userService.postProcessOnlinePayment(
+      //       hiveCreditCards[0],
+      //       paymentRegister,
+      //       (OrderPaymentAcsUrl paymentAcsUrl) async {
+      //         //* NEW CODE STEP 3
+      //         await _userService.postAcsUrl(
+      //           paymentRegister,
+      //           paymentAcsUrl,
+      //           (String paResValue) async {
+      //             // _isLoading = false;
+      //             // notifyListeners();
+      //             //* NEW CODE STEP 4
+      //             await _userService.postFinish3ds(
+      //               paymentRegister,
+      //               paymentAcsUrl,
+      //               paResValue,
+      //               () async {
+      //                 _isLoading = false;
+      //                 notifyListeners();
+      //               },
+      //               () {
+      //                 _isLoading = false;
+      //                 notifyListeners();
+      //                 onFailForView!();
+      //               },
+      //             );
+      //           },
+      //           () {
+      //             _isLoading = false;
+      //             notifyListeners();
+      //             onFailForView!();
+      //           },
+      //         );
+      //       },
+      //       () {
+      //         _isLoading = false;
+      //         notifyListeners();
+      //         onFailForView!();
+      //       },
+      //     );
+      //   },
+      //   () {
+      //     _isLoading = false;
+      //     notifyListeners();
+      //     onFailForView!();
+      //   },
+      // ),
     );
   }
 
