@@ -585,8 +585,8 @@ class UserService {
 
   //* ------------------ ONLINE PAYMENT Start ---------------------//
 
-  //* POST ONLINE PAYMENT from backend
-  Future<void> postOnlinePayment(
+  //* CREATES BANK ORDER from backend
+  Future<void> createBankOrder(
     Order order,
     bool isRetryOnlinePayment,
     int onlineRetryCounter,
@@ -600,9 +600,9 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test60';
+    _queryParams['orderNumber'] = 'Ver43Test75';
 
-    /// AMOUNT part START
+    //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
     if (order.promocode != null) {
       if (order.promocode!.promoType == 1)
@@ -616,7 +616,7 @@ class UserService {
     _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
     _queryParams['amount'] = _totalOrderSum.toInt();
 
-    /// AMOUNT part END
+    //* AMOUNT part END
 
     _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['failUrl'] = 'https://mpi.gov.tm/payment/finish.html';
@@ -627,14 +627,14 @@ class UserService {
     _queryParams['clientId'] = _currentUser!.id;
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
 
     try {
-      //----------- DIO PART START -------------//
+      //*----------- DIO PART START -------------//
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
+      dio.options.baseUrl = 'http://yodarestoran.com/api/createBankOrder/';
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
@@ -663,13 +663,20 @@ class UserService {
           },
         ),
       );
-      //----------- DIO PART END -------------//
+      //*----------- DIO PART END -------------//
 
+      // Response response = await _apiRoot.dio.patch(
+      //   'api/createBankOrder/',
+      //   queryParameters: _queryParams,
+      // );
       Response response = await dio.post(
         '',
-        data: onlinePaymentFormData,
+        queryParameters: _queryParams,
+        // data: onlinePaymentFormData,
       );
       if (response.data != null) {
+        log.v(
+            'RESPONSE: postOnlinePayment => response.statusCode: ${response.statusCode}');
         log.v('RESPONSE: postOnlinePayment => ${response.data}');
 
         /// PARSES the string and returns the resulting Json object
@@ -779,7 +786,9 @@ class UserService {
         data: onlinePaymentFormData,
       );
       if (response.data != null) {
-        log.v('RESPONSE: postOnlinePayment => ${response.data}');
+        log.v('RESPONSE: postRegisterOnlinePayment => ${response.data}');
+        log.v(
+            'RESPONSE: postRegisterOnlinePayment => response.statusCode: ${response.statusCode}');
 
         /// PARSES the string and returns the resulting Json object
         final _decodedResponse = jsonDecode(response.data);
@@ -797,7 +806,7 @@ class UserService {
           onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on postOnlinePayment => ${error.response}');
+      log.v('ERROR on postRegisterOnlinePayment => ${error.response}');
       onFail();
       rethrow;
     }
@@ -870,6 +879,8 @@ class UserService {
       );
       if (response.data != null) {
         log.v('RESPONSE: postProcessOnlinePayment => ${response.data}');
+        log.v(
+            'RESPONSE: postProcessOnlinePayment => response.statusCode: ${response.statusCode}');
 
         /// PARSES the string and returns the resulting Json object
         final _decodedResponse = jsonDecode(response.data);

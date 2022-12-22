@@ -315,14 +315,13 @@ class SingleOrderViewModel extends ReactiveViewModel {
 
     await runBusyFuture(
       //* NEW CODE for online payment fetch from backend
-      _userService.postOnlinePayment(
+      _userService.createBankOrder(
         order!,
         false,
         0,
         (OrderPaymentRegister paymentRegister) async {
           _isLoading = false;
           notifyListeners();
-          log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
           // onSuccessForView!(paymentRegister);
         },
         () {
