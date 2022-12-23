@@ -316,6 +316,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     await runBusyFuture(
       //* NEW CODE for online payment fetch from backend
       _userService.createBankOrder(
+        hiveCreditCards[0],
         order!,
         false,
         0,

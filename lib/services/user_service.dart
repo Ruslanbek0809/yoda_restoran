@@ -587,6 +587,7 @@ class UserService {
 
   //* CREATES BANK ORDER from backend
   Future<void> createBankOrder(
+    HiveCreditCard hiveCreditCard,
     Order order,
     bool isRetryOnlinePayment,
     int onlineRetryCounter,
@@ -600,7 +601,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test75';
+    _queryParams['orderNumber'] = 'Ver43Test90';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -626,15 +627,23 @@ class UserService {
     _queryParams['pageView'] = 'DESKTOP';
     _queryParams['clientId'] = _currentUser!.id;
 
+    //* User card Info
+    _queryParams['\$PAN'] =
+        int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
+    _queryParams['\$CVC'] = 620;
+    _queryParams['YYYY'] = 2042;
+    _queryParams['MM'] = 07;
+    _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
+
     log.v('_queryParams at the END: $_queryParams');
-    // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    final FormData createBankOrderFormData = FormData.fromMap(_queryParams);
 
     try {
       //*----------- DIO PART START -------------//
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'http://yodarestoran.com/api/createBankOrder/';
+      dio.options.baseUrl = 'http://yodarestoran.com:8000/api/createBankOrder/';
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
@@ -668,34 +677,35 @@ class UserService {
       // Response response = await _apiRoot.dio.patch(
       //   'api/createBankOrder/',
       //   queryParameters: _queryParams,
+      //   // data: createBankOrderFormData,
       // );
       Response response = await dio.post(
         '',
         queryParameters: _queryParams,
-        // data: onlinePaymentFormData,
+        // data: createBankOrderFormData,
       );
       if (response.data != null) {
         log.v(
-            'RESPONSE: postOnlinePayment => response.statusCode: ${response.statusCode}');
-        log.v('RESPONSE: postOnlinePayment => ${response.data}');
+            'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
+        log.v('RESPONSE: createBankOrder => ${response.data}');
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+        // /// PARSES the string and returns the resulting Json object
+        // final _decodedResponse = jsonDecode(response.data);
 
-        /// CONVERTS JSON into DART MODEL
-        OrderPaymentRegister? _paymentRegister;
-        _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
+        // /// CONVERTS JSON into DART MODEL
+        // OrderPaymentRegister? _paymentRegister;
+        // _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
 
-        /// if SUCCESS
-        if (_paymentRegister.errorCode == '0')
-          onSuccess(_paymentRegister);
+        // /// if SUCCESS
+        // if (_paymentRegister.errorCode == '0')
+        //   onSuccess(_paymentRegister);
 
-        /// if FAIL
-        else
-          onFail();
+        // /// if FAIL
+        // else
+        //   onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on postOnlinePayment => ${error.response}');
+      log.v('ERROR on createBankOrder => ${error.response}');
       onFail();
       rethrow;
     }
@@ -716,7 +726,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test60';
+    _queryParams['orderNumber'] = 'Ver43Test81';
 
     /// AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -912,18 +922,21 @@ class UserService {
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
+    _queryParams['network'] = 'ALTYN_ASYR';
     _queryParams['MD'] = paymentRegister.orderId;
     _queryParams['PaReq'] = paymentAcsUrl.paReq;
     _queryParams['TermUrl'] = paymentAcsUrl.termUrl;
 
     log.v('_queryParams at the END: $_queryParams');
+    final FormData acsUrlFormData = FormData.fromMap(_queryParams);
 
     try {
-      //----------- DIO PART START -------------//
+      //*----------- DIO PART START -------------//
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = paymentAcsUrl.acsUrl!;
+      dio.options.baseUrl = 'https://acs.gov.tm/acs/pareq';
+      // dio.options.baseUrl = paymentAcsUrl.acsUrl!;
       dio.options.contentType = Headers.formUrlEncodedContentType;
 
       //----------- DIO INTERCEPTORS -------------//
@@ -932,8 +945,9 @@ class UserService {
           onRequest: (options, handler) {
             // Do something before request is sent
             log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
-            //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+            // &MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
+
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
@@ -954,10 +968,13 @@ class UserService {
           },
         ),
       );
-      //----------- DIO PART END -------------//
+      //*----------- DIO PART END -------------//
 
       Response response = await dio.post(
-        '&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}',
+        '',
+        // '&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}',
+        // data: acsUrlFormData,
+        queryParameters: _queryParams,
       );
       if (response.data != null) {
         log.v('RESPONSE: postAcsUrl => ${response.data}');
