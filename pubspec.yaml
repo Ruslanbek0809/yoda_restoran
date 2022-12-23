@@ -73,7 +73,7 @@ dependencies:
   platform: ^3.1.0 # Native settings package
   bottom_sheet: ^3.1.1 # For custom bottom sheet
   share_plus: ^4.0.10
-  shake: ^2.1.0 # A flutter package to detect phone shakes
+  # shake: ^2.1.0 # A flutter package to detect phone shakes
 
   # NETWORK
   dio: ^4.0.4
@@ -97,7 +97,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_slidable: ^1.2.0
   simple_shadow: ^0.3.0 # A customizable shadow for any widget
-  awesome_dialog: ^3.0.0
+  # awesome_dialog: ^3.0.0
   timelines: ^0.1.0 # order status flow
   flutter_credit_card: ^3.0.4
 

@@ -21,8 +21,11 @@ import 'home_search/home_search.dart';
 import 'home_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'slider/slider_view.dart';
+
+// import 'dart:math';
+// import 'package:shake/shake.dart';
+// import 'package:awesome_dialog/awesome_dialog.dart' as awesomeDialog;
 
 class HomeView extends StatefulWidget {
   @override
@@ -30,7 +33,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  // AwesomeDialog? _awesomeDialog;
+  // awesomeDialog.AwesomeDialog? _awesomeDialog;
   final _refreshController = RefreshController();
 
   @override
@@ -44,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-        // //------------------ SHAKE SLIDERS DIALOG ---------------------//
+        //* //------------------ SHAKE SLIDERS DIALOG ---------------------//
         // ShakeDetector.autoStart(
         //   shakeThresholdGravity: 1.75,
         //   onPhoneShake: () async {
