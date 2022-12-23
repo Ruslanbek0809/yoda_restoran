@@ -601,7 +601,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test90';
+    _queryParams['orderNumber'] = 'Ver43Test98';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -636,53 +636,11 @@ class UserService {
     _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
 
     log.v('_queryParams at the END: $_queryParams');
-    final FormData createBankOrderFormData = FormData.fromMap(_queryParams);
 
     try {
-      //*----------- DIO PART START -------------//
-      Dio dio = Dio();
-
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'http://yodarestoran.com:8000/api/createBankOrder/';
-
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //*----------- DIO PART END -------------//
-
-      // Response response = await _apiRoot.dio.patch(
-      //   'api/createBankOrder/',
-      //   queryParameters: _queryParams,
-      //   // data: createBankOrderFormData,
-      // );
-      Response response = await dio.post(
-        '',
+      Response response = await _apiRoot.dio.post(
+        'api/createBankOrder/',
         queryParameters: _queryParams,
-        // data: createBankOrderFormData,
       );
       if (response.data != null) {
         log.v(
