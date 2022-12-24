@@ -669,516 +669,599 @@ class UserService {
     }
   }
 
-  //* POST REGISTER ONLINE PAYMENT STEP 1
-  Future<void> postRegisterOnlinePayment(
-    Order order,
-    bool isRetryOnlinePayment,
-    int onlineRetryCounter,
-    Function(OrderPaymentRegister) onSuccess,
-    Function() onFail,
-  ) async {
-    Map<String, dynamic> _queryParams = {};
-    _queryParams['userName'] = '101211004240';
-    _queryParams['password'] = 'Ver43k764ghwS2H';
-    // if (isRetryOnlinePayment)
-    //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
-    // else
-    //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test81';
+  // //* CHECKS ONLINE PAYMENT ORDER STATUS
+  // Future<void> checkOnlinePaymentOrderStatus(
+  //   OrderPaymentRegister paymentRegister,
+  //   Function() onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['userName'] = '101211004240';
+  //   _queryParams['password'] = 'Ver43k764ghwS2H';
+  //   _queryParams['orderId'] = paymentRegister.orderId;
+  //   _queryParams['language'] = 'ru';
 
-    /// AMOUNT part START
-    num _totalOrderSum = order.totPrice!;
-    if (order.promocode != null) {
-      if (order.promocode!.promoType == 1)
-        _totalOrderSum -= order.promocode!.discount!;
-      else
-        _totalOrderSum = order.totPrice! -
-            (order.totPrice! / 100) * order.promocode!.discount!;
-    }
-    if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   final FormData onlinePaymentOrderStatusFormData =
+  //       FormData.fromMap(_queryParams);
 
-    _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
-    _queryParams['amount'] = _totalOrderSum.toInt();
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-    /// AMOUNT part END
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
 
-    _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
-    _queryParams['failUrl'] = 'https://mpi.gov.tm/payment/finish.html';
-    _queryParams['description'] = 'Yoda Restoran: ${order.restaurant!.name}';
-    _queryParams['currency'] = 934;
-    _queryParams['language'] = 'ru';
-    _queryParams['pageView'] = 'DESKTOP';
-    _queryParams['clientId'] = _currentUser!.id;
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.v(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
 
-    log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+  //     Response response = await dio.post(
+  //       '',
+  //       data: onlinePaymentOrderStatusFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
 
-    try {
-      //----------- DIO PART START -------------//
-      Dio dio = Dio();
+  //       /// PARSES the string and returns the resulting Json object
+  //       final _decodedResponse = jsonDecode(response.data);
 
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
+  //       /// CONVERTS JSON into DART MODEL
+  //       OrderPaymentCheckStatus? _orderPaymentCheckStatus;
+  //       _orderPaymentCheckStatus =
+  //           OrderPaymentCheckStatus.fromJson(_decodedResponse);
 
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //----------- DIO PART END -------------//
+  //       /// if SUCCESS
+  //       if (_orderPaymentCheckStatus.errorCode == '0' &&
+  //           _orderPaymentCheckStatus.orderStatus == 2)
+  //         onSuccess();
 
-      Response response = await dio.post(
-        '',
-        data: onlinePaymentFormData,
-      );
-      if (response.data != null) {
-        log.v('RESPONSE: postRegisterOnlinePayment => ${response.data}');
-        log.v(
-            'RESPONSE: postRegisterOnlinePayment => response.statusCode: ${response.statusCode}');
+  //       /// if FAIL
+  //       else
+  //         onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+  // //* POST REGISTER ONLINE PAYMENT STEP 1
+  // Future<void> postRegisterOnlinePayment(
+  //   Order order,
+  //   bool isRetryOnlinePayment,
+  //   int onlineRetryCounter,
+  //   Function(OrderPaymentRegister) onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['userName'] = '101211004240';
+  //   _queryParams['password'] = 'Ver43k764ghwS2H';
+  //   // if (isRetryOnlinePayment)
+  //   //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
+  //   // else
+  //   //   _queryParams['orderNumber'] = order.orderNumber;
+  //   _queryParams['orderNumber'] = 'Ver43Test81';
 
-        /// CONVERTS JSON into DART MODEL
-        OrderPaymentRegister? _paymentRegister;
-        _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
+  //   /// AMOUNT part START
+  //   num _totalOrderSum = order.totPrice!;
+  //   if (order.promocode != null) {
+  //     if (order.promocode!.promoType == 1)
+  //       _totalOrderSum -= order.promocode!.discount!;
+  //     else
+  //       _totalOrderSum = order.totPrice! -
+  //           (order.totPrice! / 100) * order.promocode!.discount!;
+  //   }
+  //   if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
 
-        /// if SUCCESS
-        if (_paymentRegister.errorCode == '0')
-          onSuccess(_paymentRegister);
+  //   _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
+  //   _queryParams['amount'] = _totalOrderSum.toInt();
 
-        /// if FAIL
-        else
-          onFail();
-      }
-    } on DioError catch (error) {
-      log.v('ERROR on postRegisterOnlinePayment => ${error.response}');
-      onFail();
-      rethrow;
-    }
-  }
+  //   /// AMOUNT part END
 
-  //* POST PROCESS ONLINE PAYMENT WITHOUT PAYMENT PANEL STEP 2
-  Future<void> postProcessOnlinePayment(
-    HiveCreditCard hiveCreditCard,
-    OrderPaymentRegister paymentRegister,
-    Function(OrderPaymentAcsUrl) onSuccess,
-    Function() onFail,
-  ) async {
-    Map<String, dynamic> _queryParams = {};
-    _queryParams['userName'] = '101211004240';
-    _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['MDORDER'] = paymentRegister.orderId;
+  //   _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
+  //   _queryParams['failUrl'] = 'https://mpi.gov.tm/payment/finish.html';
+  //   _queryParams['description'] = 'Yoda Restoran: ${order.restaurant!.name}';
+  //   _queryParams['currency'] = 934;
+  //   _queryParams['language'] = 'ru';
+  //   _queryParams['pageView'] = 'DESKTOP';
+  //   _queryParams['clientId'] = _currentUser!.id;
 
-    _queryParams['\$PAN'] =
-        int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
-    _queryParams['\$CVC'] = 620;
-    _queryParams['YYYY'] = 2042;
-    _queryParams['MM'] = 07;
-    _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
-    _queryParams['language'] = 'ru';
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
 
-    log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentProcessFormData =
-        FormData.fromMap(_queryParams);
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-    try {
-      //----------- DIO PART START -------------//
-      Dio dio = Dio();
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/register.do';
 
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/processform.do';
-      dio.options.contentType = Headers.formUrlEncodedContentType;
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.i(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
 
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //----------- DIO PART END -------------//
+  //     Response response = await dio.post(
+  //       '',
+  //       data: onlinePaymentFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: postRegisterOnlinePayment => ${response.data}');
+  //       log.v(
+  //           'RESPONSE: postRegisterOnlinePayment => response.statusCode: ${response.statusCode}');
 
-      Response response = await dio.post(
-        '',
-        data: onlinePaymentProcessFormData,
-      );
-      if (response.data != null) {
-        log.v('RESPONSE: postProcessOnlinePayment => ${response.data}');
-        log.v(
-            'RESPONSE: postProcessOnlinePayment => response.statusCode: ${response.statusCode}');
+  //       /// PARSES the string and returns the resulting Json object
+  //       final _decodedResponse = jsonDecode(response.data);
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+  //       /// CONVERTS JSON into DART MODEL
+  //       OrderPaymentRegister? _paymentRegister;
+  //       _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
 
-        /// CONVERTS JSON into DART MODEL
-        OrderPaymentAcsUrl? _paymentAcsUrl;
-        _paymentAcsUrl = OrderPaymentAcsUrl.fromJson(_decodedResponse);
+  //       /// if SUCCESS
+  //       if (_paymentRegister.errorCode == '0')
+  //         onSuccess(_paymentRegister);
 
-        /// if SUCCESS
-        if (_paymentAcsUrl.errorCode == 0)
-          onSuccess(_paymentAcsUrl);
+  //       /// if FAIL
+  //       else
+  //         onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on postRegisterOnlinePayment => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
 
-        /// if FAIL
-        else
-          onFail();
-      }
-    } on DioError catch (error) {
-      log.v('ERROR on postProcessOnlinePayment => ${error.response}');
-      onFail();
-      rethrow;
-    }
-  }
+  // //* POST PROCESS ONLINE PAYMENT WITHOUT PAYMENT PANEL STEP 2
+  // Future<void> postProcessOnlinePayment(
+  //   HiveCreditCard hiveCreditCard,
+  //   OrderPaymentRegister paymentRegister,
+  //   Function(OrderPaymentAcsUrl) onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['userName'] = '101211004240';
+  //   _queryParams['password'] = 'Ver43k764ghwS2H';
+  //   _queryParams['MDORDER'] = paymentRegister.orderId;
 
-  //* POST acsUrl STEP 3
-  Future<void> postAcsUrl(
-    OrderPaymentRegister paymentRegister,
-    OrderPaymentAcsUrl paymentAcsUrl,
-    Function(String paResValue) onSuccess,
-    Function() onFail,
-  ) async {
-    Map<String, dynamic> _queryParams = {};
-    _queryParams['network'] = 'ALTYN_ASYR';
-    _queryParams['MD'] = paymentRegister.orderId;
-    _queryParams['PaReq'] = paymentAcsUrl.paReq;
-    _queryParams['TermUrl'] = paymentAcsUrl.termUrl;
+  //   _queryParams['\$PAN'] =
+  //       int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
+  //   _queryParams['\$CVC'] = 620;
+  //   _queryParams['YYYY'] = 2042;
+  //   _queryParams['MM'] = 07;
+  //   _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
+  //   _queryParams['language'] = 'ru';
 
-    log.v('_queryParams at the END: $_queryParams');
-    final FormData acsUrlFormData = FormData.fromMap(_queryParams);
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   final FormData onlinePaymentProcessFormData =
+  //       FormData.fromMap(_queryParams);
 
-    try {
-      //*----------- DIO PART START -------------//
-      Dio dio = Dio();
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://acs.gov.tm/acs/pareq';
-      // dio.options.baseUrl = paymentAcsUrl.acsUrl!;
-      dio.options.contentType = Headers.formUrlEncodedContentType;
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/processform.do';
+  //     dio.options.contentType = Headers.formUrlEncodedContentType;
 
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            // &MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.i(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
 
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //*----------- DIO PART END -------------//
+  //     Response response = await dio.post(
+  //       '',
+  //       data: onlinePaymentProcessFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: postProcessOnlinePayment => ${response.data}');
+  //       log.v(
+  //           'RESPONSE: postProcessOnlinePayment => response.statusCode: ${response.statusCode}');
 
-      Response response = await dio.post(
-        '',
-        // '&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}',
-        // data: acsUrlFormData,
-        queryParameters: _queryParams,
-      );
-      if (response.data != null) {
-        log.v('RESPONSE: postAcsUrl => ${response.data}');
-        log.v(
-            'RESPONSE: postAcsUrl => response.statusCode: ${response.statusCode}');
+  //       /// PARSES the string and returns the resulting Json object
+  //       final _decodedResponse = jsonDecode(response.data);
 
-        var document = parse(response.data);
-        //* GETS value of DOCUMENT => BODY => FORM (firstChild) => 2nd INPUT (nodes[1]) => value of 'PaRes' (attributes['value'])
-        String paResValue =
-            document.body!.firstChild!.nodes[1].attributes['value'] ?? '';
+  //       /// CONVERTS JSON into DART MODEL
+  //       OrderPaymentAcsUrl? _paymentAcsUrl;
+  //       _paymentAcsUrl = OrderPaymentAcsUrl.fromJson(_decodedResponse);
 
-        //* if SUCCESS
-        if (response.data != null &&
-            (response.statusCode == 200 || response.statusCode == 201))
-          onSuccess(paResValue);
-        //* if FAIL
-        else
-          onFail();
-      }
-    } on DioError catch (error) {
-      log.v('ERROR on postAcsUrl => ${error.response}');
-      onFail();
-      rethrow;
-    }
-  }
+  //       /// if SUCCESS
+  //       if (_paymentAcsUrl.errorCode == 0)
+  //         onSuccess(_paymentAcsUrl);
 
-  //* POST finish3ds STEP 4
-  Future<void> postFinish3ds(
-    OrderPaymentRegister paymentRegister,
-    OrderPaymentAcsUrl paymentAcsUrl,
-    String paResValue,
-    Function() onSuccess,
-    Function() onFail,
-  ) async {
-    Map<String, dynamic> _queryParams = {};
-    _queryParams['MD'] = paymentRegister.orderId;
-    _queryParams['PaRes'] = paResValue;
-    _queryParams['authForm'] = 'authForm';
-    _queryParams['request_id'] = paymentRegister.orderId;
-    _queryParams['sendPasswordButton'] = 'Send password';
+  //       /// if FAIL
+  //       else
+  //         onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on postProcessOnlinePayment => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
 
-    log.v('_queryParams at the END: $_queryParams');
-    // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+  // //* POST acsUrl STEP 3
+  // Future<void> postAcsUrl(
+  //   OrderPaymentRegister paymentRegister,
+  //   OrderPaymentAcsUrl paymentAcsUrl,
+  //   Function(String paResValue) onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['network'] = 'ALTYN_ASYR';
+  //   _queryParams['MD'] = paymentRegister.orderId;
+  //   _queryParams['PaReq'] = paymentAcsUrl.paReq;
+  //   _queryParams['TermUrl'] = paymentAcsUrl.termUrl;
 
-    try {
-      //----------- DIO PART START -------------//
-      Dio dio = Dio();
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   final FormData acsUrlFormData = FormData.fromMap(_queryParams);
 
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = paymentAcsUrl.termUrl ??
-          'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
-      // dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
-      // dio.options.contentType = Headers.formUrlEncodedContentType;
+  //   try {
+  //     //*----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=$paResValue');
-            // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
-            //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //----------- DIO PART END -------------//
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = 'https://acs.gov.tm/acs/pareq';
+  //     // dio.options.baseUrl = paymentAcsUrl.acsUrl!;
+  //     dio.options.contentType = Headers.formUrlEncodedContentType;
 
-      Response response = await dio.post(
-        '',
-        // '?MD=${paymentRegister.orderId}&PaRes=$paResValue',
-        // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
-        queryParameters: _queryParams,
-        // data: onlinePaymentFormData,
-      );
-      if (response.data != null) {
-        log.v('RESPONSE: postFinish3ds => ${response.data}');
-        log.v(
-            'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.i(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl}QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           // &MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}');
 
-        // //* if SUCCESS
-        // if (response.data != null &&
-        //     (response.statusCode == 200 || response.statusCode == 201))
-        //   onSuccess();
-        // //* if FAIL
-        // else
-        //   onFail();
-      }
-    } on DioError catch (error) {
-      log.v('ERROR on postFinish3ds => ${error.response}');
-      onFail();
-      rethrow;
-    }
-  }
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //*----------- DIO PART END -------------//
 
-  //* CHECKS ONLINE PAYMENT ORDER STATUS
-  Future<void> checkOnlinePaymentOrderStatus(
-    OrderPaymentRegister paymentRegister,
-    Function() onSuccess,
-    Function() onFail,
-  ) async {
-    Map<String, dynamic> _queryParams = {};
-    _queryParams['userName'] = '101211004240';
-    _queryParams['password'] = 'Ver43k764ghwS2H';
-    _queryParams['orderId'] = paymentRegister.orderId;
-    _queryParams['language'] = 'ru';
+  //     Response response = await dio.post(
+  //       '',
+  //       // '&MD=${paymentRegister.orderId}&PaReq=${paymentAcsUrl.paReq}&TermUrl=${paymentAcsUrl.termUrl}',
+  //       // data: acsUrlFormData,
+  //       queryParameters: _queryParams,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: postAcsUrl => ${response.data}');
+  //       log.v(
+  //           'RESPONSE: postAcsUrl => response.statusCode: ${response.statusCode}');
 
-    log.v('_queryParams at the END: $_queryParams');
-    final FormData onlinePaymentOrderStatusFormData =
-        FormData.fromMap(_queryParams);
+  //       var document = parse(response.data);
+  //       //* GETS value of DOCUMENT => BODY => FORM (firstChild) => 2nd INPUT (nodes[1]) => value of 'PaRes' (attributes['value'])
+  //       String paResValue =
+  //           document.body!.firstChild!.nodes[1].attributes['value'] ?? '';
 
-    try {
-      //----------- DIO PART START -------------//
-      Dio dio = Dio();
+  //       //* if SUCCESS
+  //       if (response.data != null &&
+  //           (response.statusCode == 200 || response.statusCode == 201))
+  //         onSuccess(paResValue);
+  //       //* if FAIL
+  //       else
+  //         onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on postAcsUrl => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
 
-      //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
+  // //* POST finish3ds STEP 4
+  // Future<void> postFinish3ds(
+  //   OrderPaymentRegister paymentRegister,
+  //   OrderPaymentAcsUrl paymentAcsUrl,
+  //   String paResValue,
+  //   Function() onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['MD'] = paymentRegister.orderId;
+  //   _queryParams['PaRes'] = paResValue;
+  //   _queryParams['authForm'] = 'authForm';
+  //   _queryParams['request_id'] = paymentRegister.orderId;
+  //   _queryParams['sendPasswordButton'] = 'Send password';
 
-      //----------- DIO INTERCEPTORS -------------//
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            // Do something before request is sent
-            log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-            // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
-            // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
-          },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
-            // If you want to resolve the request with some custom data，
-            // you can resolve a `Response` object eg: `handler.resolve(response)`.
-          },
-        ),
-      );
-      //----------- DIO PART END -------------//
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
 
-      Response response = await dio.post(
-        '',
-        data: onlinePaymentOrderStatusFormData,
-      );
-      if (response.data != null) {
-        log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = paymentAcsUrl.termUrl ??
+  //         'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+  //     // dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+  //     // dio.options.contentType = Headers.formUrlEncodedContentType;
 
-        /// CONVERTS JSON into DART MODEL
-        OrderPaymentCheckStatus? _orderPaymentCheckStatus;
-        _orderPaymentCheckStatus =
-            OrderPaymentCheckStatus.fromJson(_decodedResponse);
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.i(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=$paResValue');
+  //           // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
+  //           //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
 
-        /// if SUCCESS
-        if (_orderPaymentCheckStatus.errorCode == '0' &&
-            _orderPaymentCheckStatus.orderStatus == 2)
-          onSuccess();
+  //     Response response = await dio.post(
+  //       '',
+  //       // '?MD=${paymentRegister.orderId}&PaRes=$paResValue',
+  //       // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
+  //       queryParameters: _queryParams,
+  //       // data: onlinePaymentFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: postFinish3ds => ${response.data}');
+  //       log.v(
+  //           'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
 
-        /// if FAIL
-        else
-          onFail();
-      }
-    } on DioError catch (error) {
-      log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
-      onFail();
-      rethrow;
-    }
-  }
+  //       // //* if SUCCESS
+  //       // if (response.data != null &&
+  //       //     (response.statusCode == 200 || response.statusCode == 201))
+  //       //   onSuccess();
+  //       // //* if FAIL
+  //       // else
+  //       //   onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on postFinish3ds => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
 
-  Future<void> patchOrderToPaid(
-    int orderId,
-    Function()? onSuccess,
-    Function()? onFail,
-  ) async {
-    try {
-      Response response = await _apiRoot.dio.patch(
-        'api/order/$orderId/',
-        data: FormData.fromMap({'paid': true}),
-      );
-      log.v(
-          'RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
+  // //* CHECKS ONLINE PAYMENT ORDER STATUS
+  // Future<void> checkOnlinePaymentOrderStatus(
+  //   OrderPaymentRegister paymentRegister,
+  //   Function() onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['userName'] = '101211004240';
+  //   _queryParams['password'] = 'Ver43k764ghwS2H';
+  //   _queryParams['orderId'] = paymentRegister.orderId;
+  //   _queryParams['language'] = 'ru';
 
-      if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201))
-        onSuccess!();
-      else
-        onFail!();
-    } on DioError catch (error) {
-      log.v(
-          'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
-      onFail!();
-      rethrow;
-    }
-  }
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   final FormData onlinePaymentOrderStatusFormData =
+  //       FormData.fromMap(_queryParams);
 
-  Future<void> patchOrderOnlineToCash(
-    int orderId,
-    Function()? onSuccess,
-    Function()? onFail,
-  ) async {
-    try {
-      Response response = await _apiRoot.dio.patch(
-        'api/order/$orderId/',
-        data: FormData.fromMap({'paymentType': 3}),
-      );
-      log.v(
-          'RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
 
-      if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201))
-        onSuccess!();
-      else
-        onFail!();
-    } on DioError catch (error) {
-      log.v(
-          'ERROR patchOrderOnlineToCash => api/order/$orderId/ with RESPONSE: ${error.response}');
-      onFail!();
-      rethrow;
-    }
-  }
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
+
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.v(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
+
+  //     Response response = await dio.post(
+  //       '',
+  //       data: onlinePaymentOrderStatusFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
+
+  //       /// PARSES the string and returns the resulting Json object
+  //       final _decodedResponse = jsonDecode(response.data);
+
+  //       /// CONVERTS JSON into DART MODEL
+  //       OrderPaymentCheckStatus? _orderPaymentCheckStatus;
+  //       _orderPaymentCheckStatus =
+  //           OrderPaymentCheckStatus.fromJson(_decodedResponse);
+
+  //       /// if SUCCESS
+  //       if (_orderPaymentCheckStatus.errorCode == '0' &&
+  //           _orderPaymentCheckStatus.orderStatus == 2)
+  //         onSuccess();
+
+  //       /// if FAIL
+  //       else
+  //         onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
+
+  // Future<void> patchOrderToPaid(
+  //   int orderId,
+  //   Function()? onSuccess,
+  //   Function()? onFail,
+  // ) async {
+  //   try {
+  //     Response response = await _apiRoot.dio.patch(
+  //       'api/order/$orderId/',
+  //       data: FormData.fromMap({'paid': true}),
+  //     );
+  //     log.v(
+  //         'RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
+
+  //     if (response.data != null &&
+  //         (response.statusCode == 200 || response.statusCode == 201))
+  //       onSuccess!();
+  //     else
+  //       onFail!();
+  //   } on DioError catch (error) {
+  //     log.v(
+  //         'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
+  //     onFail!();
+  //     rethrow;
+  //   }
+  // }
+
+  // Future<void> patchOrderOnlineToCash(
+  //   int orderId,
+  //   Function()? onSuccess,
+  //   Function()? onFail,
+  // ) async {
+  //   try {
+  //     Response response = await _apiRoot.dio.patch(
+  //       'api/order/$orderId/',
+  //       data: FormData.fromMap({'paymentType': 3}),
+  //     );
+  //     log.v(
+  //         'RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
+
+  //     if (response.data != null &&
+  //         (response.statusCode == 200 || response.statusCode == 201))
+  //       onSuccess!();
+  //     else
+  //       onFail!();
+  //   } on DioError catch (error) {
+  //     log.v(
+  //         'ERROR patchOrderOnlineToCash => api/order/$orderId/ with RESPONSE: ${error.response}');
+  //     onFail!();
+  //     rethrow;
+  //   }
+  // }
 
   //* ------------------ ONLINE PAYMENT End ---------------------//
 

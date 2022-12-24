@@ -428,41 +428,42 @@ class SingleOrderViewModel extends ReactiveViewModel {
 
       await Future.delayed(Duration(milliseconds: 500));
 
-      /// CHECKS ONLINE PAYMENT ORDER STATUS
-      await runBusyFuture(
-        _userService.checkOnlinePaymentOrderStatus(
-          _isOnlinePaymentRetrySuccess
-              ? _retryOnlinePaymentRegister!
-              : paymentRegister!,
-          () async {
-            _isPaymentLoading = false;
-            _isPaymentSuccess = OrderPaymentStatus.success;
+      ///* COMMENTED
+      // /// CHECKS ONLINE PAYMENT ORDER STATUS
+      // await runBusyFuture(
+      //   _userService.checkOnlinePaymentOrderStatus(
+      //     _isOnlinePaymentRetrySuccess
+      //         ? _retryOnlinePaymentRegister!
+      //         : paymentRegister!,
+      //     () async {
+      //       _isPaymentLoading = false;
+      //       _isPaymentSuccess = OrderPaymentStatus.success;
 
-            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
-            _isOnlinePaymentRetrySuccess = false;
-            notifyListeners();
+      //       /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+      //       _isOnlinePaymentRetrySuccess = false;
+      //       notifyListeners();
 
-            /// PATCHS ORDER PAID VAR
-            await _userService.patchOrderToPaid(
-              order!.id!,
-              () async {
-                /// REINITIALIZES ORDERS
-                /// TODO: Optimize if possible
-                await orderViewModel!.getInitialOrders();
-              },
-              () {},
-            );
-          },
-          () {
-            _isPaymentLoading = false;
-            _isPaymentSuccess = OrderPaymentStatus.fail;
+      //       /// PATCHS ORDER PAID VAR
+      //       await _userService.patchOrderToPaid(
+      //         order!.id!,
+      //         () async {
+      //           /// REINITIALIZES ORDERS
+      //           /// TODO: Optimize if possible
+      //           await orderViewModel!.getInitialOrders();
+      //         },
+      //         () {},
+      //       );
+      //     },
+      //     () {
+      //       _isPaymentLoading = false;
+      //       _isPaymentSuccess = OrderPaymentStatus.fail;
 
-            /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
-            _isOnlinePaymentRetrySuccess = false;
-            notifyListeners();
-          },
-        ),
-      );
+      //       /// Below _isOnlinePaymentRetrySuccess is used for retryOnlinePaymentRegister
+      //       _isOnlinePaymentRetrySuccess = false;
+      //       notifyListeners();
+      //     },
+      //   ),
+      // );
     }
   }
 
@@ -503,24 +504,25 @@ class SingleOrderViewModel extends ReactiveViewModel {
     _isChangeToCashLoading = true;
     notifyListeners();
 
-    await runBusyFuture(
-      _userService.patchOrderOnlineToCash(
-        order!.id!,
-        () async {
-          /// REINITIALIZES ORDERS
-          /// TODO: Optimize if possible
-          await orderViewModel!.getInitialOrders();
-          _isChangeToCashLoading = false;
-          notifyListeners();
-          onSuccessForView!();
-        },
-        () {
-          _isChangeToCashLoading = false;
-          notifyListeners();
-          onFailForView!();
-        },
-      ),
-    );
+    ///* COMMENTED
+    // await runBusyFuture(
+    //   _userService.patchOrderOnlineToCash(
+    //     order!.id!,
+    //     () async {
+    //       /// REINITIALIZES ORDERS
+    //       /// TODO: Optimize if possible
+    //       await orderViewModel!.getInitialOrders();
+    //       _isChangeToCashLoading = false;
+    //       notifyListeners();
+    //       onSuccessForView!();
+    //     },
+    //     () {
+    //       _isChangeToCashLoading = false;
+    //       notifyListeners();
+    //       onFailForView!();
+    //     },
+    //   ),
+    // );
   }
 
   OrderPaymentRegister? _retryOnlinePaymentRegister;
@@ -548,29 +550,30 @@ class SingleOrderViewModel extends ReactiveViewModel {
     _isOnlinePaymentRetryLoading = true;
     notifyListeners();
 
-    await runBusyFuture(
-      _userService.postRegisterOnlinePayment(
-        order!,
-        true,
-        _onlineRetryCounter,
-        (OrderPaymentRegister paymentRegister) async {
-          _isOnlinePaymentRetryLoading = false;
+    ///* COMMENTED
+    // await runBusyFuture(
+    //   _userService.postRegisterOnlinePayment(
+    //     order!,
+    //     true,
+    //     _onlineRetryCounter,
+    //     (OrderPaymentRegister paymentRegister) async {
+    //       _isOnlinePaymentRetryLoading = false;
 
-          /// STARTS _isPaymentLoading part in bottom sheet
-          _isPaymentPanelsFinished = false;
+    //       /// STARTS _isPaymentLoading part in bottom sheet
+    //       _isPaymentPanelsFinished = false;
 
-          _isOnlinePaymentRetrySuccess = true;
-          _retryOnlinePaymentRegister = paymentRegister;
-          notifyListeners();
-          onSuccessForView!();
-        },
-        () {
-          _isOnlinePaymentRetryLoading = false;
-          notifyListeners();
-          onFailForView!();
-        },
-      ),
-    );
+    //       _isOnlinePaymentRetrySuccess = true;
+    //       _retryOnlinePaymentRegister = paymentRegister;
+    //       notifyListeners();
+    //       onSuccessForView!();
+    //     },
+    //     () {
+    //       _isOnlinePaymentRetryLoading = false;
+    //       notifyListeners();
+    //       onFailForView!();
+    //     },
+    //   ),
+    // );
   }
 
 //------------------------ ORDER SUCCESS PART ----------------------------//
