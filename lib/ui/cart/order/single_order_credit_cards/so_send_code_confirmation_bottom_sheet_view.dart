@@ -131,7 +131,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               ? ButtonLoading()
                               : Text(
                                   LocaleKeys.confirm,
-                                  style: ktsButton18Text,
+                                  style: ktsButton18ContactText,
                                 ).tr(),
                         ),
                         onPressed: () async {

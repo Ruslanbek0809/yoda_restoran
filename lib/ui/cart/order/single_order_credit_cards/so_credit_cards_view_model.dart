@@ -154,37 +154,69 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// POST after CONFIRM button is pressed
-  Future<void> onConfirmButtonPressed({
+  //* POST after CONFIRM button is pressed
+  Future<void> onOtpVerifyButtonPressed({
     Order? order,
-    Function(PaymentRegister)? onSuccessForView,
+    Function()? onSuccessForView,
     Function()? onFailForView,
   }) async {
-    log.v('onConfirmButtonPressed()');
+    log.v('onOtpVerifyButtonPressed()');
 
     _isLoading = true;
     notifyListeners();
 
-    await runBusyFuture(
-      _userService.postOnlinePayment(
-        order!,
-        _cardNumber,
-        _expiryDate,
-        _cardHolderName,
-        _cvcCode,
-        _selectedBankCard,
-        (PaymentRegister paymentRegister) {
-          _isLoading = false;
-          onSuccessForView!(paymentRegister);
-        },
-        () {
-          _isLoading = false;
-          notifyListeners();
-          onFailForView!();
-        },
-      ),
-    );
+    // await runBusyFuture(
+    //   _userService.postOnlinePayment(
+    //     order!,
+    //     _cardNumber,
+    //     _expiryDate,
+    //     _cardHolderName,
+    //     _cvcCode,
+    //     _selectedBankCard,
+    //     ( paymentRegister) {
+    //       _isLoading = false;
+    //       onSuccessForView!(paymentRegister);
+    //     },
+    //     () {
+    //       _isLoading = false;
+    //       notifyListeners();
+    //       onFailForView!();
+    //     },
+    //   ),
+    // );
   }
+
+  // /// POST after CONFIRM button is pressed
+  // Future<void> onConfirmButtonPressed({
+  //   Order? order,
+  //   Function(PaymentRegister)? onSuccessForView,
+  //   Function()? onFailForView,
+  // }) async {
+  //   log.v('onConfirmButtonPressed()');
+
+  //   _isLoading = true;
+  //   notifyListeners();
+
+  //   await runBusyFuture(
+  //     _userService.postOnlinePayment(
+  //       order!,
+  //       _cardNumber,
+  //       _expiryDate,
+  //       _cardHolderName,
+  //       _cvcCode,
+  //       _selectedBankCard,
+  //       (PaymentRegister paymentRegister) {
+  //         _isLoading = false;
+  //         onSuccessForView!(paymentRegister);
+  //       },
+  //       () {
+  //         _isLoading = false;
+  //         notifyListeners();
+  //         onFailForView!();
+  //       },
+  //     ),
+  //   );
+  // }
 
 //------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
 

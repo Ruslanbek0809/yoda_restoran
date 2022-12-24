@@ -669,6 +669,56 @@ class UserService {
     }
   }
 
+  //* VERIFIES OTP ORDER PAYMENT
+  Future<void> verifyOtpOrderPayment(
+    String requestId,
+    int smsCode,
+    bool isRetryOnlinePayment,
+    int onlineRetryCounter,
+    Function() onSuccess,
+    Function() onFail,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+
+    _queryParams['authForm'] = 'authForm';
+    _queryParams['request_id'] = requestId;
+    _queryParams['pwdInputVisible'] = smsCode;
+    _queryParams['submitPasswordButton'] = 'Submit';
+
+    log.v('_queryParams at the END: $_queryParams');
+
+    try {
+      Response response = await _apiRoot.dio.post(
+        'api/createBankOrder/',
+        queryParameters: _queryParams,
+      );
+      if (response.data != null) {
+        log.v(
+            'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
+        log.v('RESPONSE: createBankOrder => ${response.data}');
+
+        // /// PARSES the string and returns the resulting Json object
+        // final _decodedResponse = jsonDecode(response.data);
+
+        // /// CONVERTS JSON into DART MODEL
+        // OrderPaymentRegister? _paymentRegister;
+        // _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
+
+        // /// if SUCCESS
+        // if (_paymentRegister.errorCode == '0')
+        //   onSuccess(_paymentRegister);
+
+        // /// if FAIL
+        // else
+        //   onFail();
+      }
+    } on DioError catch (error) {
+      log.v('ERROR on createBankOrder => ${error.response}');
+      onFail();
+      rethrow;
+    }
+  }
+
   // //* CHECKS ONLINE PAYMENT ORDER STATUS
   // Future<void> checkOnlinePaymentOrderStatus(
   //   OrderPaymentRegister paymentRegister,

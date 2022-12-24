@@ -867,22 +867,38 @@ class SingleOrderView extends StatelessWidget {
                                 case 2:
                                   await model.onConfirmButtonPressed(
                                     onSuccessForView: (paymentRegister) async {
-                                      await showFlexibleBottomSheet(
-                                        initHeight: 0.95,
-                                        maxHeight: 0.95,
-                                        duration: Duration(milliseconds: 250),
-                                        context: context,
-                                        bottomSheetColor: Colors.transparent,
-                                        builder: (context, scrollController,
-                                                offset) =>
-                                            SingleOrderPaymentBottomSheetView(
-                                          scrollController: scrollController,
-                                          offset: offset,
-                                          paymentRegister: paymentRegister,
-                                          order: order,
-                                          orderViewModel: orderViewModel,
-                                        ),
-                                      );
+                                      // await showFlexibleBottomSheet(
+                                      //   initHeight: 0.95,
+                                      //   maxHeight: 0.95,
+                                      //   duration: Duration(milliseconds: 250),
+                                      //   context: context,
+                                      //   bottomSheetColor: Colors.transparent,
+                                      //   builder: (context, scrollController,
+                                      //           offset) =>
+                                      //       SingleOrderPaymentBottomSheetView(
+                                      //     scrollController: scrollController,
+                                      //     offset: offset,
+                                      //     paymentRegister: paymentRegister,
+                                      //     order: order,
+                                      //     orderViewModel: orderViewModel,
+                                      //   ),
+                                      // );
+
+                                      // await showFlexibleBottomSheet(
+                                      //   isExpand: false,
+                                      //   initHeight: 0.95,
+                                      //   maxHeight: 0.95,
+                                      //   duration: Duration(milliseconds: 250),
+                                      //   context: context,
+                                      //   bottomSheetColor: Colors.transparent,
+                                      //   builder: (context, scrollController,
+                                      //           offset) =>
+                                      //       SOSendCodeConfirmationBottomSheetView(
+                                      //     scrollController: scrollController,
+                                      //     offset: offset,
+                                      //     order: order,
+                                      //   ),
+                                      // );
                                     },
                                     onFailForView: () async {
                                       await showErrorFlashBar(
