@@ -40,3 +40,4 @@ export 'order_payment_register.dart';
 export 'order_payment_check_status.dart';
 export 'about_us.dart';
 export 'order_payment_acs_url.dart';
+export 'order_payment_create_bank_order.dart';

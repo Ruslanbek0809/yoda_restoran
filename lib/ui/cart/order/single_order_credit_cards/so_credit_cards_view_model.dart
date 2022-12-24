@@ -154,38 +154,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  //* POST after CONFIRM button is pressed
-  Future<void> onOtpVerifyButtonPressed({
-    Order? order,
-    Function()? onSuccessForView,
-    Function()? onFailForView,
-  }) async {
-    log.v('onOtpVerifyButtonPressed()');
-
-    _isLoading = true;
-    notifyListeners();
-
-    // await runBusyFuture(
-    //   _userService.postOnlinePayment(
-    //     order!,
-    //     _cardNumber,
-    //     _expiryDate,
-    //     _cardHolderName,
-    //     _cvcCode,
-    //     _selectedBankCard,
-    //     ( paymentRegister) {
-    //       _isLoading = false;
-    //       onSuccessForView!(paymentRegister);
-    //     },
-    //     () {
-    //       _isLoading = false;
-    //       notifyListeners();
-    //       onFailForView!();
-    //     },
-    //   ),
-    // );
-  }
-
   // /// POST after CONFIRM button is pressed
   // Future<void> onConfirmButtonPressed({
   //   Order? order,
@@ -247,6 +215,35 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _sendCode = value;
     notifyListeners();
     return null;
+  }
+
+  //* POST after CONFIRM button is pressed
+  Future<void> onOtpVerifyButtonPressed({
+    required String requestId,
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onOtpVerifyButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      _userService.verifyOtpOrderPayment(
+        requestId,
+        int.parse(_sendCode),
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
   }
 
   @override

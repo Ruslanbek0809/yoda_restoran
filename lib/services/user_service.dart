@@ -591,7 +591,7 @@ class UserService {
     Order order,
     bool isRetryOnlinePayment,
     int onlineRetryCounter,
-    Function(OrderPaymentRegister) onSuccess,
+    Function(OrderPaymentCreateBankOrder) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
@@ -601,7 +601,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver43Test98';
+    _queryParams['orderNumber'] = 'Ver44Test1';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -642,26 +642,25 @@ class UserService {
         'api/createBankOrder/',
         queryParameters: _queryParams,
       );
-      if (response.data != null) {
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
         log.v(
             'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
         log.v('RESPONSE: createBankOrder => ${response.data}');
 
-        // /// PARSES the string and returns the resulting Json object
-        // final _decodedResponse = jsonDecode(response.data);
+        /// PARSES the string and returns the resulting Json object
+        final _decodedResponse = jsonDecode(response.data);
 
-        // /// CONVERTS JSON into DART MODEL
-        // OrderPaymentRegister? _paymentRegister;
-        // _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
+        /// CONVERTS JSON into DART MODEL
+        OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
+        _paymentCreateBankOrder =
+            OrderPaymentCreateBankOrder.fromJson(_decodedResponse);
 
-        // /// if SUCCESS
-        // if (_paymentRegister.errorCode == '0')
-        //   onSuccess(_paymentRegister);
+        onSuccess(_paymentCreateBankOrder);
+      } else
 
-        // /// if FAIL
-        // else
-        //   onFail();
-      }
+        /// if FAIL
+        onFail();
     } on DioError catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');
       onFail();
@@ -673,8 +672,6 @@ class UserService {
   Future<void> verifyOtpOrderPayment(
     String requestId,
     int smsCode,
-    bool isRetryOnlinePayment,
-    int onlineRetryCounter,
     Function() onSuccess,
     Function() onFail,
   ) async {

@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:timelines/timelines.dart';
+import 'package:yoda_res/ui/cart/order/single_order_credit_cards/so_send_code_confirmation_bottom_sheet_view.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
@@ -866,7 +867,8 @@ class SingleOrderView extends StatelessWidget {
                                   break;
                                 case 2:
                                   await model.onConfirmButtonPressed(
-                                    onSuccessForView: (paymentRegister) async {
+                                    onSuccessForView:
+                                        (paymentCreateBankOrder) async {
                                       // await showFlexibleBottomSheet(
                                       //   initHeight: 0.95,
                                       //   maxHeight: 0.95,
@@ -884,21 +886,9 @@ class SingleOrderView extends StatelessWidget {
                                       //   ),
                                       // );
 
-                                      // await showFlexibleBottomSheet(
-                                      //   isExpand: false,
-                                      //   initHeight: 0.95,
-                                      //   maxHeight: 0.95,
-                                      //   duration: Duration(milliseconds: 250),
-                                      //   context: context,
-                                      //   bottomSheetColor: Colors.transparent,
-                                      //   builder: (context, scrollController,
-                                      //           offset) =>
-                                      //       SOSendCodeConfirmationBottomSheetView(
-                                      //     scrollController: scrollController,
-                                      //     offset: offset,
-                                      //     order: order,
-                                      //   ),
-                                      // );
+                                      await model
+                                          .showCustomSendCodeConfirmationBottomSheet(
+                                              paymentCreateBankOrder);
                                     },
                                     onFailForView: () async {
                                       await showErrorFlashBar(

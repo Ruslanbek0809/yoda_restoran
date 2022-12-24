@@ -24,6 +24,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
+  final _bottomSheetService = locator<BottomSheetService>();
 
   //* NEW CODE
   final _hiveDbService = locator<HiveDbService>();
@@ -303,9 +304,23 @@ class SingleOrderViewModel extends ReactiveViewModel {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  /// CALLS SOSendCodeConfirmationBottomSheetView
+  Future<void> showCustomSendCodeConfirmationBottomSheet(
+    OrderPaymentCreateBankOrder paymentCreateBankOrder,
+  ) async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.sendCodeConfirmation,
+      enableDrag: true,
+      barrierDismissible: true,
+      isScrollControlled: true,
+      data: paymentCreateBankOrder,
+    );
+  }
+
   /// POST after CONFIRM button is pressed
   Future<void> onConfirmButtonPressed({
-    Function(OrderPaymentRegister)? onSuccessForView,
+    Function(OrderPaymentCreateBankOrder)? onSuccessForView,
     Function()? onFailForView,
   }) async {
     log.v('onConfirmButtonPressed()');
@@ -320,10 +335,10 @@ class SingleOrderViewModel extends ReactiveViewModel {
         order!,
         false,
         0,
-        (OrderPaymentRegister paymentRegister) async {
+        (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
           _isLoading = false;
           notifyListeners();
-          // onSuccessForView!(paymentRegister);
+          onSuccessForView!(paymentCreateBankOrder);
         },
         () {
           _isLoading = false;

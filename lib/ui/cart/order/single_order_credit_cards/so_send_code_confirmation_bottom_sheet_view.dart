@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../utils/utils.dart';
@@ -13,10 +14,12 @@ import 'so_send_code_bottom_sheet_hook.dart';
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
+  final OrderPaymentRegister paymentCreateBankOrder;
   SOSendCodeConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
+    required this.paymentCreateBankOrder,
   }) : super(key: key);
 
   final GlobalKey<FormState> _sendCodeformKey = GlobalKey<FormState>();
