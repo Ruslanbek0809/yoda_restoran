@@ -14,7 +14,7 @@ import 'so_send_code_bottom_sheet_hook.dart';
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
-  final OrderPaymentRegister paymentCreateBankOrder;
+  final OrderPaymentCreateBankOrder paymentCreateBankOrder;
   SOSendCodeConfirmationBottomSheetView({
     Key? key,
     required this.request,
@@ -141,10 +141,26 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           FocusScope.of(context)
                               .unfocus(); // UNFOCUSES all textfield b4 data fetch
 
-                          // if (!creditCardFormKey.currentState!.validate())
-                          //   return;
-                          // creditCardFormKey.currentState!.save();
-                          // model.log.v('creditCardFormKey SUCCESS');
+                          if (!_sendCodeformKey.currentState!.validate())
+                            return;
+                          _sendCodeformKey.currentState!.save();
+                          model.log.v('_sendCodeformKey SUCCESS');
+                          await model.onOtpVerifyButtonPressed(
+                            requestId: paymentCreateBankOrder.requestId ?? '',
+                            onSuccessForView: () async {
+                              
+                            },
+                            onFailForView: () async {
+                              await showErrorFlashBar(
+                                context: context,
+                                margin: EdgeInsets.only(
+                                  left: 16.w,
+                                  right: 16.w,
+                                  bottom: 0.05.sh,
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
                     ),

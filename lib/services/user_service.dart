@@ -601,7 +601,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test1';
+    _queryParams['orderNumber'] = 'Ver44Test8';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -648,13 +648,14 @@ class UserService {
             'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
         log.v('RESPONSE: createBankOrder => ${response.data}');
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+        // /// PARSES the string and returns the resulting Json object
+        // final _decodedResponse = jsonDecode(response.data);
+        // log.v('RESPONSE: _decodedResponse => $_decodedResponse');
 
         /// CONVERTS JSON into DART MODEL
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
         _paymentCreateBankOrder =
-            OrderPaymentCreateBankOrder.fromJson(_decodedResponse);
+            OrderPaymentCreateBankOrder.fromJson(response.data);
 
         onSuccess(_paymentCreateBankOrder);
       } else
@@ -683,34 +684,65 @@ class UserService {
     _queryParams['submitPasswordButton'] = 'Submit';
 
     log.v('_queryParams at the END: $_queryParams');
+    // final FormData verifyOtpOrderPaymentFormData =
+    //     FormData.fromMap(_queryParams);
 
     try {
-      Response response = await _apiRoot.dio.post(
-        'api/createBankOrder/',
+      //----------- DIO PART START -------------//
+      Dio dio = Dio();
+
+      //----------- DIO BASE URL -------------//
+      dio.options.baseUrl =
+          'https://acs.gov.tm/acs/pages/enrollment/authentication.jsf';
+      dio.options.contentType = Headers.formUrlEncodedContentType;
+
+      //----------- DIO INTERCEPTORS -------------//
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            // Do something before request is sent
+            log.v(
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+            return handler.next(options); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+            // If you want to reject the request with a error message,f
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onResponse: (response, handler) {
+            // Do something with response data
+            return handler.next(response); // continue
+            // If you want to reject the request with a error message,
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onError: (DioError e, handler) {
+            // Do something with response error
+            return handler.next(e); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+          },
+        ),
+      );
+      //----------- DIO PART END -------------//
+      Response response = await dio.post(
+        '',
         queryParameters: _queryParams,
       );
-      if (response.data != null) {
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
         log.v(
-            'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
-        log.v('RESPONSE: createBankOrder => ${response.data}');
+            'RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
+        log.v('RESPONSE: verifyOtpOrderPayment => ${response.data}');
+        onSuccess();
+      } else
 
-        // /// PARSES the string and returns the resulting Json object
-        // final _decodedResponse = jsonDecode(response.data);
-
-        // /// CONVERTS JSON into DART MODEL
-        // OrderPaymentRegister? _paymentRegister;
-        // _paymentRegister = OrderPaymentRegister.fromJson(_decodedResponse);
-
-        // /// if SUCCESS
-        // if (_paymentRegister.errorCode == '0')
-        //   onSuccess(_paymentRegister);
-
-        // /// if FAIL
-        // else
-        //   onFail();
-      }
+        /// if FAIL
+        onFail();
     } on DioError catch (error) {
-      log.v('ERROR on createBankOrder => ${error.response}');
+      log.v(
+          'ERROR: verifyOtpOrderPayment => response.statusCode: ${error.response!.statusCode}');
+      log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
       onFail();
       rethrow;
     }
