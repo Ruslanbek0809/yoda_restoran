@@ -6,7 +6,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:timelines/timelines.dart';
-import 'package:yoda_res/ui/cart/order/single_order_credit_cards/so_send_code_confirmation_bottom_sheet_view.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../widgets/widgets.dart';
@@ -14,8 +13,8 @@ import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'order_view_model.dart';
+import 'single_order_credit_cards/so_select_credit_cards_bottom_sheet.dart';
 import 'single_order_view_model.dart';
-import 'so_payment_bottom_sheet.dart';
 
 class SingleOrderView extends StatelessWidget {
   final Order order;
@@ -866,59 +865,57 @@ class SingleOrderView extends StatelessWidget {
                                 case 1:
                                   break;
                                 case 2:
-                                  await model.onConfirmButtonPressed(
-                                    onSuccessForView:
-                                        (paymentCreateBankOrder) async {
-                                      // await showFlexibleBottomSheet(
-                                      //   initHeight: 0.95,
-                                      //   maxHeight: 0.95,
-                                      //   duration: Duration(milliseconds: 250),
-                                      //   context: context,
-                                      //   bottomSheetColor: Colors.transparent,
-                                      //   builder: (context, scrollController,
-                                      //           offset) =>
-                                      //       SingleOrderPaymentBottomSheetView(
-                                      //     scrollController: scrollController,
-                                      //     offset: offset,
-                                      //     paymentRegister: paymentRegister,
-                                      //     order: order,
-                                      //     orderViewModel: orderViewModel,
-                                      //   ),
-                                      // );
+                                  // await model.onConfirmButtonPressed(
+                                  //   onSuccessForView:
+                                  //       (paymentCreateBankOrder) async {
+                                  //     // await showFlexibleBottomSheet(
+                                  //     //   initHeight: 0.95,
+                                  //     //   maxHeight: 0.95,
+                                  //     //   duration: Duration(milliseconds: 250),
+                                  //     //   context: context,
+                                  //     //   bottomSheetColor: Colors.transparent,
+                                  //     //   builder: (context, scrollController,
+                                  //     //           offset) =>
+                                  //     //       SingleOrderPaymentBottomSheetView(
+                                  //     //     scrollCftroller: scrollController,
+                                  //     //     offset: offset,
+                                  //     //     paymentRegister: paymentRegister,
+                                  //     //     order: order,
+                                  //     //     orderViewModel: orderViewModel,
+                                  //     //   ),
+                                  //     // );
 
-                                      await model
-                                          .showCustomSendCodeConfirmationBottomSheet(
-                                              paymentCreateBankOrder);
-                                    },
-                                    onFailForView: () async {
-                                      await showErrorFlashBar(
-                                        context: context,
-                                        margin: EdgeInsets.only(
-                                          left: 16.w,
-                                          right: 16.w,
-                                          bottom: 0.05.sh,
-                                        ),
-                                      );
-                                    },
-                                  );
-
-                                  // // await model
-                                  // //     .showCustomSendCodeConfirmationBottomSheet();
-                                  // await showFlexibleBottomSheet(
-                                  //   isExpand: false,
-                                  //   initHeight: 0.95,
-                                  //   maxHeight: 0.95,
-                                  //   duration: Duration(milliseconds: 250),
-                                  //   context: context,
-                                  //   bottomSheetColor: Colors.transparent,
-                                  //   builder:
-                                  //       (context, scrollController, offset) =>
-                                  //           SOSelectCreditCardsBottomSheetView(
-                                  //     scrollController: scrollController,
-                                  //     offset: offset,
-                                  //     order: order,
-                                  //   ),
+                                  //     await model
+                                  //         .showCustomSendCodeConfirmationBottomSheet(
+                                  //             paymentCreateBankOrder);
+                                  //   },
+                                  //   onFailForView: () async {
+                                  //     await showErrorFlashBar(
+                                  //       context: context,
+                                  //       margin: EdgeInsets.only(
+                                  //         left: 16.w,
+                                  //         right: 16.w,
+                                  //         bottom: 0.05.sh,
+                                  //       ),
+                                  //     );
+                                  //   },
                                   // );
+
+                                  await showFlexibleBottomSheet(
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
+                                    duration: Duration(milliseconds: 250),
+                                    context: context,
+                                    bottomSheetColor: Colors.transparent,
+                                    builder:
+                                        (context, scrollController, offset) =>
+                                            SOSelectCreditCardsBottomSheetView(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                      order: order,
+                                    ),
+                                  );
                                   break;
                                 default:
                                   break;

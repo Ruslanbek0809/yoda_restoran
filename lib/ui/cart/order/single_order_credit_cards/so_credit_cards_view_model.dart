@@ -13,9 +13,9 @@ import '../../../../utils/utils.dart';
 class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
 
+  final _userService = locator<UserService>();
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
-  final _userService = locator<UserService>();
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
