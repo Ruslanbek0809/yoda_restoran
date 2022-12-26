@@ -31,8 +31,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//!------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
-
   //* CALLS CreditCardsConfirmationBottomSheet
   Future<void> showCustomCreditCardsConfirmationBottomSheet({
     bool isNewCreditCard = true,
@@ -58,6 +56,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     //   await runBusyFuture(_checkoutService.getAddresses());
     // }
   }
+
+//!------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
 
   String _cardNumber = '';
   String get cardNumber => _cardNumber;
@@ -172,6 +172,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
   //* POST Online Payment Order button is pressed
   Future<void> onOnlinePaymentOrderButtonPressed({
+    required HiveCreditCard selectedHiveCreditCard,
     required Order order,
     Function(OrderPaymentCreateBankOrder)? onSuccessForView,
     Function()? onFailForView,
@@ -184,7 +185,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     await runBusyFuture(
       //* NEW CODE for online payment fetch from backend
       _userService.createBankOrder(
-        hiveCreditCards[0],
+        selectedHiveCreditCard,
+        _cvcCode,
         order,
         false,
         0,
@@ -263,8 +265,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
-//!------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
-
   //* CALLS SOSendCodeConfirmationBottomSheetView
   Future<void> showCustomSendCodeConfirmationBottomSheet(
     OrderPaymentCreateBankOrder paymentCreateBankOrder,
@@ -278,6 +278,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       data: paymentCreateBankOrder,
     );
   }
+
+//!------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
 
   String _sendCode = '';
   String get sendCode => _sendCode;

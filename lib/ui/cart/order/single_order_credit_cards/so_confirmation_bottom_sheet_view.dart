@@ -57,10 +57,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        //*--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                        //!--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                         CustomModalInsideBottomSheet(isBottomZero: true),
 
-                        //*------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                        //!------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.vertical(
@@ -72,7 +72,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //*------------------ CREDIT CARD FORM ---------------------//
+                              //!------------------ CREDIT CARD FORM ---------------------//
                               CreditCardForm(
                                 formKey: creditCardFormKey,
                                 obscureCvv: true,
@@ -134,7 +134,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 onCreditCardModelChange:
                                     model.onCreditCardModelChange,
                               ),
-                              //*------------------ CVC CODE INFO ---------------------//
+                              //!------------------ CVC CODE INFO ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard)
                                 Padding(
@@ -145,7 +145,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),
-                              //*------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
+                              //!------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard)
                                 Padding(
@@ -166,11 +166,16 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     return RadioListTile<BankCard>(
                                       value: bankList[pos],
                                       groupValue: model.selectedBankCard,
-                                      onChanged: model.updateSelectedBankCard,
+                                      onChanged: bankList[pos].bankId == 1
+                                          ? model.updateSelectedBankCard
+                                          : (value) {},
                                       title: Text(
                                         bankList[pos]
-                                            .bankName, // Changes name of first element if location is enabled
-                                        style: kts16Text,
+                                            .bankName, //* Changes name of first element if location is enabled
+                                        style: model.selectedBankCard!.bankId ==
+                                                bankList[pos].bankId
+                                            ? kts16Text
+                                            : kts16ContactText,
                                       ).tr(),
                                       activeColor: kcGreenColor,
                                       controlAffinity:
@@ -184,7 +189,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     color: kcDividerSecondaryColor,
                                   ),
                                 ),
-                              //*------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                              //!------------------ HIVE CREDIT CARD BANK INFO ---------------------//
                               if (!soCreditCardsConfirmationBottomSheetData
                                   .isNewCreditCard)
                                 Padding(
@@ -211,7 +216,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //*--------------- CREDIT CARD CONFIRM BUTTON -------------- //
+                  //! --------------- CREDIT CARD CONFIRM BUTTON -------------- //
                   Positioned(
                     bottom: 0,
                     left: 0,
@@ -248,6 +253,12 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             print('creditCardFormKey SUCCESS');
                             await model.onCreditCardSave();
                             await model.onOnlinePaymentOrderButtonPressed(
+                              selectedHiveCreditCard:
+                                  soCreditCardsConfirmationBottomSheetData
+                                          .isNewCreditCard
+                                      ? model.hiveCreditCards.last
+                                      : soCreditCardsConfirmationBottomSheetData
+                                          .hiveCreditCard!,
                               order: soCreditCardsConfirmationBottomSheetData
                                   .order,
                               onSuccessForView: (paymentCreateBankOrder) async {
@@ -284,48 +295,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                             );
                           } else
                             print('creditCardFormKey FAILED');
-
-                          // // await model
-                          // //     .showCustomSendCodeConfirmationBottomSheet();
-                          // await model.onConfirmButtonPressed(
-                          //   order:
-                          //       soCreditCardsConfirmationBottomSheetData.order!,
-                          //   onSuccessForView: (paymentRegister) async {
-                          //     await showFlexibleBottomSheet(
-                          //       initHeight: 0.95,
-                          //       maxHeight: 0.95,
-                          //       duration: Duration(milliseconds: 250),
-                          //       context: context,
-                          //       bottomSheetColor: Colors.transparent,
-                          //       builder: (context, scrollController, offset) =>
-                          //           SOPaymentBottomSheetView(
-                          //         scrollController: scrollController,
-                          //         offset: offset,
-                          //         paymentRegister: paymentRegister,
-                          //       ),
-                          //     );
-                          //     // await completer(SheetResponse(data: true));
-                          //     // await showErrorFlashBar(
-                          //     //   context: context,
-                          //     //   msg: LocaleKeys.addAddedSuccessfully,
-                          //     //   margin: EdgeInsets.only(
-                          //     //     left: 16.w,
-                          //     //     right: 16.w,
-                          //     //     bottom: 0.05.sh,
-                          //     //   ),
-                          //     // );
-                          //   },
-                          //   onFailForView: () async {
-                          //     await showErrorFlashBar(
-                          //       context: context,
-                          //       margin: EdgeInsets.only(
-                          //         left: 16.w,
-                          //         right: 16.w,
-                          //         bottom: 0.05.sh,
-                          //       ),
-                          //     );
-                          //   },
-                          // );
                         },
                       ),
                     ),

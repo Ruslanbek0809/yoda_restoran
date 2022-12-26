@@ -111,7 +111,7 @@ class MyCreditCardAddView extends StatelessWidget {
                         : (value) {},
                     title: Text(
                       bankList[pos]
-                          .bankName, // Changes name of first element if location is enabled
+                          .bankName, //* Changes name of first element if location is enabled
                       style:
                           model.selectedBankCard!.bankId == bankList[pos].bankId
                               ? kts16Text
