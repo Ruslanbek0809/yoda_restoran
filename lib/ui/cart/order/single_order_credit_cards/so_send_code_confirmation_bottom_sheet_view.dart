@@ -134,7 +134,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               ? ButtonLoading()
                               : Text(
                                   LocaleKeys.confirm,
-                                  style: ktsButton18ContactText,
+                                  style: ktsButtonWhite18Text,
                                 ).tr(),
                         ),
                         onPressed: () async {
@@ -147,9 +147,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           model.log.v('_sendCodeformKey SUCCESS');
                           await model.onOtpVerifyButtonPressed(
                             requestId: paymentCreateBankOrder.requestId ?? '',
-                            onSuccessForView: () async {
-                              
-                            },
+                            onSuccessForView: () async {},
                             onFailForView: () async {
                               await showErrorFlashBar(
                                 context: context,

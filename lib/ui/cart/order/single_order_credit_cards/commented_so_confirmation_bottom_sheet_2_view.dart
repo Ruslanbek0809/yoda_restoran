@@ -50,7 +50,7 @@
 //                     obscureCvv: true,
 //                     obscureNumber: false,
 //                     cardNumber: model.cardNumber,
-//                     cvvCode: model.cvvCode,
+//                     cvvCode: model.cvcCode,
 //                     isHolderNameVisible: true,
 //                     isCardNumberVisible: true,
 //                     isExpiryDateVisible: true,
@@ -90,7 +90,7 @@
 //                       errorBorder: InputBorder.none,
 //                       disabledBorder: InputBorder.none,
 //                     ),
-//                     cvvValidator: model.updateCvvValidator,
+//                     cvvValidator: model.updateCVCValidator,
 //                     cardHolderDecoration: InputDecoration(
 //                       hintStyle: kts16HelperText,
 //                       labelStyle: kts16HelperText,
@@ -131,7 +131,7 @@
 //                 ],
 //               ),
 //             ),
-              //--------------- CREDIT CARD CONFIRM BUTTON -------------- //
+//             //*  --------------- CREDIT CARD CONFIRM BUTTON -------------- //
 //             Container(
 //               decoration: BoxDecoration(
 //                 color: kcWhiteColor,
@@ -150,7 +150,7 @@
 //                     ? ButtonLoading()
 //                     : Text(
 //                         LocaleKeys.confirm,
-//                         style: ktsButton18Text,
+//                         style: ktsButtonWhite18Text,
 //                       ).tr(),
 //                 onPressed: model.isBusy ? () {} : () async {},
 //               ),

@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +10,7 @@ import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
+
 class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
@@ -44,6 +46,11 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
               child: Material(
                 color: kcWhiteColor,
                 child: InkWell(
+                  /// ASSIGNS only order model if it is new Credit Card
+                  onTap: () async =>
+                      await model.showCustomCreditCardsConfirmationBottomSheet(
+                          order: order),
+                  //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
                   //   initHeight: 0.95,
@@ -52,15 +59,11 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //   context: context,
                   //   bottomSheetColor: Colors.transparent,
                   //   builder: (context, scrollController, offset) =>
-                  //       SOConfirmationBottomSheetView(
+                  //       SOConfirmationBottomSheet2View(
                   //     scrollController: scrollController,
                   //     offset: offset,
                   //   ),
                   // ),
-                  /// ASSIGNS only order model if it is new Credit Card
-                  onTap: () async =>
-                      await model.showCustomCreditCardsConfirmationBottomSheet(
-                          order: order),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
                     child: Row(
