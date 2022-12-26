@@ -1480,21 +1480,21 @@ class UserService {
     }
   }
 
-  //* ------------------ ABOUT US APIS ---------------------//
+  //* ------------------ ADDITIONALS APIS ---------------------//
 
-  Future<List<AboutUsModel>> getAboutUs() async {
-    List<AboutUsModel> _aboutUsList = [];
+  Future<List<AdditionalModel>> getAdditionals() async {
+    List<AdditionalModel> _additionals = [];
     try {
       Response response = await _apiRoot.dio.get('api/additional/');
       log.v('RESPONSE: api/additional/ => ${response.data}');
 
-      if (response.data != null) {
-        for (final _aboutUs in response.data) {
-          _aboutUsList.add(AboutUsModel.fromJson(_aboutUs));
+      if (response.data != null && response.statusCode == 200) {
+        for (final _additional in response.data) {
+          _additionals.add(AdditionalModel.fromJson(_additional));
         }
       }
 
-      return _aboutUsList;
+      return _additionals;
     } on DioError catch (error) {
       log.v(error);
       rethrow;

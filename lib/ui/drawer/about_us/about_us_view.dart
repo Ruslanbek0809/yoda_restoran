@@ -52,9 +52,9 @@ class AboutUsView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (!model.isAboutUsTermSelected)
+                        if (model.isAboutUsTermSelected)
                           Html(
-                            data: model.aboutUsList![0].info,
+                            data: model.additionals![0].info,
                             style: {
                               "body": Style(
                                   margin: EdgeInsets.zero,
@@ -106,9 +106,9 @@ class AboutUsView extends StatelessWidget {
                               return null;
                             },
                           ),
-                        if (model.isAboutUsTermSelected)
+                        if (!model.isAboutUsTermSelected)
                           Html(
-                            data: model.aboutUsList![1].info,
+                            data: model.additionals![1].info,
                             style: {
                               "body": Style(
                                   margin: EdgeInsets.zero,

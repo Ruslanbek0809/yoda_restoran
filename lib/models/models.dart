@@ -38,6 +38,6 @@ export 'bank_card.dart';
 export 'credit_card.dart';
 export 'order_payment_register.dart';
 export 'order_payment_check_status.dart';
-export 'about_us.dart';
+export 'additional.dart';
 export 'order_payment_acs_url.dart';
 export 'order_payment_create_bank_order.dart';

@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'about_us.g.dart';
+part 'additional.g.dart';
 
 @JsonSerializable()
-class AboutUsModel {
-  AboutUsModel({
+class AdditionalModel {
+  AdditionalModel({
     this.id,
     this.name,
     this.info,
@@ -23,8 +23,8 @@ class AboutUsModel {
   @JsonKey(name: 'info_ru')
   final String? infoRu;
 
-  factory AboutUsModel.fromJson(Map<String, dynamic> json) =>
-      _$AboutUsModelFromJson(json);
+  factory AdditionalModel.fromJson(Map<String, dynamic> json) =>
+      _$AdditionalModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AboutUsModelToJson(this);
+  Map<String, dynamic> toJson() => _$AdditionalModelToJson(this);
 }

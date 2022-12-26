@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'about_us.dart';
+part of 'additional.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AboutUsModel _$AboutUsModelFromJson(Map<String, dynamic> json) => AboutUsModel(
+AdditionalModel _$AdditionalModelFromJson(Map<String, dynamic> json) =>
+    AdditionalModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
       info: json['info'] as String?,
@@ -14,7 +15,7 @@ AboutUsModel _$AboutUsModelFromJson(Map<String, dynamic> json) => AboutUsModel(
       infoRu: json['info_ru'] as String?,
     );
 
-Map<String, dynamic> _$AboutUsModelToJson(AboutUsModel instance) =>
+Map<String, dynamic> _$AdditionalModelToJson(AdditionalModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
