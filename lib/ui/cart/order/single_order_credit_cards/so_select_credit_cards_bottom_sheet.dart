@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,10 +45,11 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
               child: Material(
                 color: kcWhiteColor,
                 child: InkWell(
-                  /// ASSIGNS only order model if it is new Credit Card
+                  //* ASSIGNS only order model if it is new Credit Card
                   onTap: () async =>
                       await model.showCustomCreditCardsConfirmationBottomSheet(
-                          order: order),
+                    order: order,
+                  ),
                   //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
@@ -208,8 +208,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 22.h),
               child: TextButton(
                 style: TextButton.styleFrom(
+                  foregroundColor: kcSecondaryLightColor,
                   backgroundColor: kcOnlinePaymentColor,
-                  primary: kcSecondaryLightColor, // ripple effect color
                   elevation: 0,
                   shape:
                       RoundedRectangleBorder(borderRadius: AppTheme().radius15),
@@ -223,7 +223,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ).tr(),
-                // onPressed: () async => await showFlexibleBottomSheet(
+                //* COMMENTED
+                // onTap: () async => await showFlexibleBottomSheet(
                 //   isExpand: false,
                 //   initHeight: 0.95,
                 //   maxHeight: 0.95,
@@ -231,7 +232,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 //   context: context,
                 //   bottomSheetColor: Colors.transparent,
                 //   builder: (context, scrollController, offset) =>
-                //       SOConfirmationBottomSheetView(
+                //       SOConfirmationBottomSheet2View(
                 //     scrollController: scrollController,
                 //     offset: offset,
                 //   ),

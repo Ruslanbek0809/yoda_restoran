@@ -136,8 +136,8 @@ class MyCreditCardAddView extends StatelessWidget {
                   width: 1.sw,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: kcPrimaryColor,
-                      primary: kcSecondaryLightColor, // ripple effect color
+                      foregroundColor: kcSecondaryLightColor,
+                      backgroundColor: kcPrimaryColor, // ripple effect color
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: AppTheme().radius10),
@@ -150,11 +150,14 @@ class MyCreditCardAddView extends StatelessWidget {
                             style: ktsButtonWhite18Text,
                           ).tr(),
                     onPressed: () async {
+                      FocusScope.of(context)
+                          .unfocus(); // UNFOCUSES all textfield b4 data fetch
+
                       if (creditCardFormKey.currentState!.validate()) {
-                        print('valid!');
+                        print('creditCardFormKey SUCCESS');
                         await model.onCreditCardSave();
                       } else
-                        print('invalid!');
+                        print('creditCardFormKey FAILED');
                     },
                   ),
                 ),

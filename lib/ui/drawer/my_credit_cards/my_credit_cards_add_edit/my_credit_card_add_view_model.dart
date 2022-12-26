@@ -30,7 +30,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
-  /// UPDATES _cardNumber
+  //* UPDATES _cardNumber
   String? updateCardNumberValidator(String? value) {
     log.v('updateCardNumberValidator value: $value, ${value!.length}');
 
@@ -42,7 +42,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _expiryDate
+  //* UPDATES _expiryDate
   String? updateExpiryDateValidator(String? value) {
     log.v('updateExpiryDateValidator value: $value');
 
@@ -54,13 +54,13 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// CVC validator (EMPTY validator)
+  //* CVC validator (EMPTY validator)
   String? updateCvvValidator(String? value) {
     log.v('updateCvvValidator value: $value');
     return null;
   }
 
-  /// UPDATES _cardHolderName
+  //* UPDATES _cardHolderName
   String? updateCardHolderValidator(String? value) {
     log.v('updateCardHolder value: $value');
     if (value!.isEmpty) return LocaleKeys.enter_card_holder.tr();
@@ -70,7 +70,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// SAVES credit card info on change
+  //* SAVES credit card info on change
   Future<void> onCreditCardModelChange(CreditCardModel? creditCardModel) async {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
@@ -78,7 +78,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// SAVES and CREATED credit card info to HIVE
+  //* SAVES and CREATED credit card info to HIVE
   Future<void> onCreditCardSave() async {
     await _hiveDbService.addCreditCard(
       CreditCard(
@@ -92,7 +92,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// UPDATES _selectedBankCard
+  //* UPDATES _selectedBankCard
   void updateSelectedBankCard(BankCard? newSelectedBankCard) {
     log.i('updateSelectedBankCard(): ${newSelectedBankCard!.bankName}');
 

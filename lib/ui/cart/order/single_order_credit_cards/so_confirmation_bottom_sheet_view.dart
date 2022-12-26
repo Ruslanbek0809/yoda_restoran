@@ -244,10 +244,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           FocusScope.of(context)
                               .unfocus(); // UNFOCUSES all textfield b4 data fetch
 
-                          if (!creditCardFormKey.currentState!.validate())
-                            return;
-                          creditCardFormKey.currentState!.save();
-                          model.log.v('creditCardFormKey SUCCESS');
+                          if (creditCardFormKey.currentState!.validate()) {
+                            print('creditCardFormKey SUCCESS');
+                            await model.onCreditCardSave();
+                          } else
+                            print('creditCardFormKey FAILED');
 
                           // // await model
                           // //     .showCustomSendCodeConfirmationBottomSheet();

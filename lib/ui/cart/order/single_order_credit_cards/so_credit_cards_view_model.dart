@@ -77,7 +77,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   BankCard? _selectedBankCard = bankList[0];
   BankCard? get selectedBankCard => _selectedBankCard;
 
-  /// ASSIGNS INITIAL list for selectedVolumes and selectedMultiCustomizables
+  //* ASSIGNS INITIAL list for selectedVolumes and selectedMultiCustomizables
   void assignHiveCreditCardToTemp(HiveCreditCard hiveCreditCard) {
     log.i('assignHiveCreditCardToTemp()');
 
@@ -91,7 +91,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES _cardNumber
+  //* UPDATES _cardNumber
   String? updateCardNumberValidator(String? value) {
     log.v('updateCardNumberValidator value: $value, ${value!.length}');
 
@@ -103,7 +103,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _expiryDate
+  //* UPDATES _expiryDate
   String? updateExpiryDateValidator(String? value) {
     log.v('updateExpiryDateValidator value: $value');
 
@@ -115,7 +115,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// CVC validator (EMPTY validator)
+  //* CVC validator (EMPTY validator)
   String? updateCVCValidator(String? value) {
     log.v('updateCVCValidator value: $value');
 
@@ -127,7 +127,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _cardHolderName
+  //* UPDATES _cardHolderName
   String? updateCardHolderValidator(String? value) {
     log.v('updateCardHolder value: $value');
     if (value!.isEmpty) return LocaleKeys.enter_card_holder.tr();
@@ -137,7 +137,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// SAVES credit card info on change
+  //* SAVES credit card info on change
   Future<void> onCreditCardModelChange(CreditCardModel? creditCardModel) async {
     _cardNumber = creditCardModel!.cardNumber;
     _expiryDate = creditCardModel.expiryDate;
@@ -146,11 +146,27 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES _selectedBankCard
+  //* SAVES and CREATED credit card info to HIVE
+  Future<void> onCreditCardSave() async {
+    await _hiveDbService.addCreditCard(
+      CreditCard(
+        cardNumber: _cardNumber,
+        expiryDate: _expiryDate,
+        cardHolderName: _cardHolderName,
+      ),
+      _selectedBankCard!,
+    );
+    notifyListeners();
+  }
+
+  //* UPDATES _selectedBankCard
   void updateSelectedBankCard(BankCard? newSelectedBankCard) {
     log.i('updateSelectedBankCard(): ${newSelectedBankCard!.bankName}');
 
-    _selectedBankCard = newSelectedBankCard;
+    if (_selectedBankCard!.bankId != newSelectedBankCard.bankId) {
+      _selectedBankCard = newSelectedBankCard;
+      notifyListeners();
+    }
     notifyListeners();
   }
 
