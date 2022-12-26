@@ -24,7 +24,6 @@ class SingleOrderViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
-  final _bottomSheetService = locator<BottomSheetService>();
 
   //* NEW CODE
   final _hiveDbService = locator<HiveDbService>();
@@ -268,9 +267,9 @@ class SingleOrderViewModel extends ReactiveViewModel {
     }
   }
 
-//------------------------ ORDER DELETE DIALOG ----------------------------//
+//!------------------------ ORDER DELETE DIALOG ----------------------------//
 
-  /// SHOWS ORDER DELETE Dialog
+  //* SHOWS ORDER DELETE Dialog
   Future showOrderDeleteDialog(
     Function()? onSuccessForView,
     Function()? onFailForView,
@@ -292,7 +291,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
             onSuccessForView!();
 
             /// REINITIALIZES ORDERS
-            /// TODO: Optimize if possible
+            // TODO: Optimize if possible
             await orderViewModel!.getInitialOrders();
           },
           () => onFailForView!(),
@@ -304,111 +303,97 @@ class SingleOrderViewModel extends ReactiveViewModel {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  /// CALLS SOSendCodeConfirmationBottomSheetView
-  Future<void> showCustomSendCodeConfirmationBottomSheet(
-    OrderPaymentCreateBankOrder paymentCreateBankOrder,
-  ) async {
-    log.i('');
-    await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.sendCodeConfirmation,
-      enableDrag: true,
-      barrierDismissible: true,
-      isScrollControlled: true,
-      data: paymentCreateBankOrder,
-    );
-  }
+  // //* POST after CONFIRM button is pressed
+  // Future<void> onConfirmButtonPressed({
+  //   Function(OrderPaymentCreateBankOrder)? onSuccessForView,
+  //   Function()? onFailForView,
+  // }) async {
+  //   log.v('onConfirmButtonPressed()');
 
-  /// POST after CONFIRM button is pressed
-  Future<void> onConfirmButtonPressed({
-    Function(OrderPaymentCreateBankOrder)? onSuccessForView,
-    Function()? onFailForView,
-  }) async {
-    log.v('onConfirmButtonPressed()');
+  //   _isLoading = true;
+  //   notifyListeners();
 
-    _isLoading = true;
-    notifyListeners();
+  //   await runBusyFuture(
+  //     //* NEW CODE for online payment fetch from backend
+  //     _userService.createBankOrder(
+  //       hiveCreditCards[0],
+  //       order!,
+  //       false,
+  //       0,
+  //       (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
+  //         _isLoading = false;
+  //         notifyListeners();
+  //         onSuccessForView!(paymentCreateBankOrder);
+  //       },
+  //       () {
+  //         _isLoading = false;
+  //         notifyListeners();
+  //         onFailForView!();
+  //       },
+  //     ),
 
-    await runBusyFuture(
-      //* NEW CODE for online payment fetch from backend
-      _userService.createBankOrder(
-        hiveCreditCards[0],
-        order!,
-        false,
-        0,
-        (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
-          _isLoading = false;
-          notifyListeners();
-          onSuccessForView!(paymentCreateBankOrder);
-        },
-        () {
-          _isLoading = false;
-          notifyListeners();
-          onFailForView!();
-        },
-      ),
+  //     // //* NEW CODE  STEP 1
+  //     // _userService.postRegisterOnlinePayment(
+  //     //   order!,
+  //     //   false,
+  //     //   0,
+  //     //   (OrderPaymentRegister paymentRegister) async {
+  //     //     //* NEW CODE COMMENT
+  //     //     // _isLoading = false;
+  //     //     // notifyListeners();
+  //     //     // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
+  //     //     // // onSuccessForView!(paymentRegister);
 
-      // //* NEW CODE  STEP 1
-      // _userService.postRegisterOnlinePayment(
-      //   order!,
-      //   false,
-      //   0,
-      //   (OrderPaymentRegister paymentRegister) async {
-      //     //* NEW CODE COMMENT
-      //     // _isLoading = false;
-      //     // notifyListeners();
-      //     // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
-      //     // // onSuccessForView!(paymentRegister);
-
-      //     //* NEW CODE  STEP 2
-      //     await _userService.postProcessOnlinePayment(
-      //       hiveCreditCards[0],
-      //       paymentRegister,
-      //       (OrderPaymentAcsUrl paymentAcsUrl) async {
-      //         //* NEW CODE STEP 3
-      //         await _userService.postAcsUrl(
-      //           paymentRegister,
-      //           paymentAcsUrl,
-      //           (String paResValue) async {
-      //             // _isLoading = false;
-      //             // notifyListeners();
-      //             //* NEW CODE STEP 4
-      //             await _userService.postFinish3ds(
-      //               paymentRegister,
-      //               paymentAcsUrl,
-      //               paResValue,
-      //               () async {
-      //                 _isLoading = false;
-      //                 notifyListeners();
-      //               },
-      //               () {
-      //                 _isLoading = false;
-      //                 notifyListeners();
-      //                 onFailForView!();
-      //               },
-      //             );
-      //           },
-      //           () {
-      //             _isLoading = false;
-      //             notifyListeners();
-      //             onFailForView!();
-      //           },
-      //         );
-      //       },
-      //       () {
-      //         _isLoading = false;
-      //         notifyListeners();
-      //         onFailForView!();
-      //       },
-      //     );
-      //   },
-      //   () {
-      //     _isLoading = false;
-      //     notifyListeners();
-      //     onFailForView!();
-      //   },
-      // ),
-    );
-  }
+  //     //     //* NEW CODE  STEP 2
+  //     //     await _userService.postProcessOnlinePayment(
+  //     //       hiveCreditCards[0],
+  //     //       paymentRegister,
+  //     //       (OrderPaymentAcsUrl paymentAcsUrl) async {
+  //     //         //* NEW CODE STEP 3
+  //     //         await _userService.postAcsUrl(
+  //     //           paymentRegister,
+  //     //           paymentAcsUrl,
+  //     //           (String paResValue) async {
+  //     //             // _isLoading = false;
+  //     //             // notifyListeners();
+  //     //             //* NEW CODE STEP 4
+  //     //             await _userService.postFinish3ds(
+  //     //               paymentRegister,
+  //     //               paymentAcsUrl,
+  //     //               paResValue,
+  //     //               () async {
+  //     //                 _isLoading = false;
+  //     //                 notifyListeners();
+  //     //               },
+  //     //               () {
+  //     //                 _isLoading = false;
+  //     //                 notifyListeners();
+  //     //                 onFailForView!();
+  //     //               },
+  //     //             );
+  //     //           },
+  //     //           () {
+  //     //             _isLoading = false;
+  //     //             notifyListeners();
+  //     //             onFailForView!();
+  //     //           },
+  //     //         );
+  //     //       },
+  //     //       () {
+  //     //         _isLoading = false;
+  //     //         notifyListeners();
+  //     //         onFailForView!();
+  //     //       },
+  //     //     );
+  //     //   },
+  //     //   () {
+  //     //     _isLoading = false;
+  //     //     notifyListeners();
+  //     //     onFailForView!();
+  //     //   },
+  //     // ),
+  //   );
+  // }
 
   bool _isPaymentLoading = false;
   bool get isPaymentLoading => _isPaymentLoading;

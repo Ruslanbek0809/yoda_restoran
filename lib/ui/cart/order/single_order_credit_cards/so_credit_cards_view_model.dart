@@ -31,12 +31,12 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
+//!------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
 
-  /// CALLS CreditCardsConfirmationBottomSheet
+  //* CALLS CreditCardsConfirmationBottomSheet
   Future<void> showCustomCreditCardsConfirmationBottomSheet({
-    bool? isNewCreditCard = true,
-    Order? order,
+    bool isNewCreditCard = true,
+    required Order order,
   }) async {
     log.i('');
     // SheetResponse<bool>? _navResult;
@@ -58,9 +58,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     //   await runBusyFuture(_checkoutService.getAddresses());
     // }
   }
-
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
 
   String _cardNumber = '';
   String get cardNumber => _cardNumber;
@@ -170,51 +167,115 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  // /// POST after CONFIRM button is pressed
-  // Future<void> onConfirmButtonPressed({
-  //   Order? order,
-  //   Function(PaymentRegister)? onSuccessForView,
-  //   Function()? onFailForView,
-  // }) async {
-  //   log.v('onConfirmButtonPressed()');
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
-  //   _isLoading = true;
-  //   notifyListeners();
-
-  //   await runBusyFuture(
-  //     _userService.postOnlinePayment(
-  //       order!,
-  //       _cardNumber,
-  //       _expiryDate,
-  //       _cardHolderName,
-  //       _cvcCode,
-  //       _selectedBankCard,
-  //       (PaymentRegister paymentRegister) {
-  //         _isLoading = false;
-  //         onSuccessForView!(paymentRegister);
-  //       },
-  //       () {
-  //         _isLoading = false;
-  //         notifyListeners();
-  //         onFailForView!();
-  //       },
-  //     ),
-  //   );
-  // }
-
-//------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
-
-  /// CALLS SendCodeConfirmationBottomSheet
-  Future<void> showCustomSendCodeConfirmationBottomSheet({
-    bool? isNewCreditCard = true,
-    Order? order,
+  //* POST Online Payment Order button is pressed
+  Future<void> onOnlinePaymentOrderButtonPressed({
+    required Order order,
+    Function(OrderPaymentCreateBankOrder)? onSuccessForView,
+    Function()? onFailForView,
   }) async {
+    log.v('onOnlinePaymentOrderButtonPressed()');
+
+    _isLoading = true;
+    notifyListeners();
+
+    await runBusyFuture(
+      //* NEW CODE for online payment fetch from backend
+      _userService.createBankOrder(
+        hiveCreditCards[0],
+        order,
+        false,
+        0,
+        (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
+          _isLoading = false;
+          notifyListeners();
+          onSuccessForView!(paymentCreateBankOrder);
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+
+      // //* NEW CODE  STEP 1
+      // _userService.postRegisterOnlinePayment(
+      //   order!,
+      //   false,
+      //   0,
+      //   (OrderPaymentRegister paymentRegister) async {
+      //     //* NEW CODE COMMENT
+      //     // _isLoading = false;
+      //     // notifyListeners();
+      //     // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
+      //     // // onSuccessForView!(paymentRegister);
+
+      //     //* NEW CODE  STEP 2
+      //     await _userService.postProcessOnlinePayment(
+      //       hiveCreditCards[0],
+      //       paymentRegister,
+      //       (OrderPaymentAcsUrl paymentAcsUrl) async {
+      //         //* NEW CODE STEP 3
+      //         await _userService.postAcsUrl(
+      //           paymentRegister,
+      //           paymentAcsUrl,
+      //           (String paResValue) async {
+      //             // _isLoading = false;
+      //             // notifyListeners();
+      //             //* NEW CODE STEP 4
+      //             await _userService.postFinish3ds(
+      //               paymentRegister,
+      //               paymentAcsUrl,
+      //               paResValue,
+      //               () async {
+      //                 _isLoading = false;
+      //                 notifyListeners();
+      //               },
+      //               () {
+      //                 _isLoading = false;
+      //                 notifyListeners();
+      //                 onFailForView!();
+      //               },
+      //             );
+      //           },
+      //           () {
+      //             _isLoading = false;
+      //             notifyListeners();
+      //             onFailForView!();
+      //           },
+      //         );
+      //       },
+      //       () {
+      //         _isLoading = false;
+      //         notifyListeners();
+      //         onFailForView!();
+      //       },
+      //     );
+      //   },
+      //   () {
+      //     _isLoading = false;
+      //     notifyListeners();
+      //     onFailForView!();
+      //   },
+      // ),
+    );
+  }
+
+//!------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
+
+  //* CALLS SOSendCodeConfirmationBottomSheetView
+  Future<void> showCustomSendCodeConfirmationBottomSheet(
+    OrderPaymentCreateBankOrder paymentCreateBankOrder,
+  ) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.sendCodeConfirmation,
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
+      data: paymentCreateBankOrder,
     );
   }
 

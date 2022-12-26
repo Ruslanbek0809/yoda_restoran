@@ -30,13 +30,13 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
       viewModelBuilder: () => SOCreditCardsViewModel(),
       onModelReady: (model) =>
-          !soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
+          !soCreditCardsConfirmationBottomSheetData.isNewCreditCard
               ? model.assignHiveCreditCardToTemp(
                   soCreditCardsConfirmationBottomSheetData.hiveCreditCard!)
               : null,
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize:
-              soCreditCardsConfirmationBottomSheetData.isNewCreditCard!
+              soCreditCardsConfirmationBottomSheetData.isNewCreditCard
                   ? 0.875
                   : 0.61,
           maxChildSize: 0.95,
@@ -57,10 +57,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                        //*--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                         CustomModalInsideBottomSheet(isBottomZero: true),
 
-                        //------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                        //*------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.vertical(
@@ -72,7 +72,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //------------------ CREDIT CARD FORM ---------------------//
+                              //*------------------ CREDIT CARD FORM ---------------------//
                               CreditCardForm(
                                 formKey: creditCardFormKey,
                                 obscureCvv: true,
@@ -134,9 +134,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                 onCreditCardModelChange:
                                     model.onCreditCardModelChange,
                               ),
-                              //------------------ CVC CODE INFO ---------------------//
+                              //*------------------ CVC CODE INFO ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
+                                  .isNewCreditCard)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 4.h),
@@ -145,9 +145,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts12ContactText,
                                   ).tr(),
                                 ),
-                              //------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
+                              //*------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
                               if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
+                                  .isNewCreditCard)
                                 Padding(
                                   padding: EdgeInsets.only(top: 20.h),
                                   child: Divider(
@@ -157,7 +157,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   ),
                                 ),
                               if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
+                                  .isNewCreditCard)
                                 ListView.separated(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -184,9 +184,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     color: kcDividerSecondaryColor,
                                   ),
                                 ),
-                              //------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                              //*------------------ HIVE CREDIT CARD BANK INFO ---------------------//
                               if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
+                                  .isNewCreditCard)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 20.h),
@@ -196,7 +196,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   ).tr(),
                                 ),
                               if (!soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard!)
+                                  .isNewCreditCard)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 2.h),
@@ -211,7 +211,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //--------------- CREDIT CARD CONFIRM BUTTON -------------- //
+                  //*--------------- CREDIT CARD CONFIRM BUTTON -------------- //
                   Positioned(
                     bottom: 0,
                     left: 0,
@@ -242,11 +242,46 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         ),
                         onPressed: () async {
                           FocusScope.of(context)
-                              .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                              .unfocus(); //* UNFOCUSES all textfield b4 data fetch
 
                           if (creditCardFormKey.currentState!.validate()) {
                             print('creditCardFormKey SUCCESS');
                             await model.onCreditCardSave();
+                            await model.onOnlinePaymentOrderButtonPressed(
+                              order: soCreditCardsConfirmationBottomSheetData
+                                  .order,
+                              onSuccessForView: (paymentCreateBankOrder) async {
+                                await model
+                                    .showCustomSendCodeConfirmationBottomSheet(
+                                        paymentCreateBankOrder);
+                                // await showFlexibleBottomSheet(
+                                //   initHeight: 0.95,
+                                //   maxHeight: 0.95,
+                                //   duration: Duration(milliseconds: 250),
+                                //   context: context,
+                                //   bottomSheetColor: Colors.transparent,
+                                //   builder: (context, scrollController,
+                                //           offset) =>
+                                //       SingleOrderPaymentBottomSheetView(
+                                //     scrollCftroller: scrollController,
+                                //     offset: offset,
+                                //     paymentRegister: paymentRegister,
+                                //     order: order,
+                                //     orderViewModel: orderViewModel,
+                                //   ),
+                                // );
+                              },
+                              onFailForView: () async {
+                                await showErrorFlashBar(
+                                  context: context,
+                                  margin: EdgeInsets.only(
+                                    left: 16.w,
+                                    right: 16.w,
+                                    bottom: 0.05.sh,
+                                  ),
+                                );
+                              },
+                            );
                           } else
                             print('creditCardFormKey FAILED');
 

@@ -3,11 +3,11 @@ import 'models.dart';
 
 class SOCreditCardsConfirmationBottomSheetData {
   SOCreditCardsConfirmationBottomSheetData({
-    this.isNewCreditCard,
+    required this.isNewCreditCard,
     this.hiveCreditCard,
-    this.order,
+    required this.order,
   });
-  final bool? isNewCreditCard;
+  final bool isNewCreditCard;
   final HiveCreditCard? hiveCreditCard;
-  final Order? order;
+  final Order order;
 }
