@@ -602,7 +602,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test10';
+    _queryParams['orderNumber'] = 'Ver44Test17';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -824,6 +824,58 @@ class UserService {
     } on DioError catch (error) {
       log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
       onFail();
+      rethrow;
+    }
+  }
+
+  Future<void> patchOrderToPaid(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'paid': true}),
+      );
+      log.v(
+          'RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v(
+          'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
+      rethrow;
+    }
+  }
+
+  Future<void> patchOrderOnlineToCash(
+    int orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  ) async {
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/order/$orderId/',
+        data: FormData.fromMap({'paymentType': 3}),
+      );
+      log.v(
+          'RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201))
+        onSuccess!();
+      else
+        onFail!();
+    } on DioError catch (error) {
+      log.v(
+          'ERROR patchOrderOnlineToCash => api/order/$orderId/ with RESPONSE: ${error.response}');
+      onFail!();
       rethrow;
     }
   }

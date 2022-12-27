@@ -146,6 +146,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
   //* SAVES and CREATED credit card info to HIVE
   Future<void> onCreditCardSave() async {
+    log.v('onCreditCardSave()');
     await _hiveDbService.addCreditCard(
       CreditCard(
         cardNumber: _cardNumber,
@@ -340,10 +341,21 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     await runBusyFuture(
       _userService.checkOnlinePaymentOrderStatus(
         orderId,
-        () {
-          _isLoading = false;
-          notifyListeners();
-          onSuccessForView!();
+        () async {
+          // //* PATCHS ORDER PAID VAR
+          // await _userService.patchOrderToPaid(
+          //   order!.id!,
+          //   () async {
+          //     _isLoading = false;
+          //     notifyListeners();
+          //     onSuccessForView!();
+
+          //     /// REINITIALIZES ORDERS
+          //     /// TODO: Optimize if possible
+          //     await orderViewModel!.getInitialOrders();
+          //   },
+          //   () {},
+          // );
         },
         () {
           _isLoading = false;
@@ -354,8 +366,45 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
+//!------------------------ PAYMENT SUCCESS/FAIL BOTTOM SHEET ----------------------------//
+
+  bool _isChangeOnlineToCashLoading = false;
+  bool get isChangeOnlineToCashLoading => _isChangeOnlineToCashLoading;
+
+  ///* CHANGES ONLINE to CASH button is PRESSED
+  Future<void> onChangeOnlineToCashButtonPressed({
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('onChangeOnlineToCashButtonPressed()');
+
+    _isChangeOnlineToCashLoading = true;
+    notifyListeners();
+
+    ///* COMMENTED
+    // await runBusyFuture(
+    //   _userService.patchOrderOnlineToCash(
+    //     order!.id!,
+    //     () async {
+    //       /// REINITIALIZES ORDERS
+    //       /// TODO: Optimize if possible
+    //       await orderViewModel!.getInitialOrders();
+    //       _isChangeToCashLoading = false;
+    //       notifyListeners();
+    //       onSuccessForView!();
+    //     },
+    //     () {
+    //       _isChangeToCashLoading = false;
+    //       notifyListeners();
+    //       onFailForView!();
+    //     },
+    //   ),
+    // );
+  }
+
 //------------------------ NAVIGATION ----------------------------//
-  void navBack() => _navService.back(result: true);
+  void navBack() => _navService.back();
+  // void navBack() => _navService.back(result: true);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];

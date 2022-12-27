@@ -255,7 +255,9 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
 
                           if (creditCardFormKey.currentState!.validate()) {
                             print('creditCardFormKey SUCCESS');
-                            await model.onCreditCardSave();
+                            if (soCreditCardsConfirmationBottomSheetData
+                                .isNewCreditCard)
+                              await model.onCreditCardSave();
                             await model.onOnlinePaymentOrderButtonPressed(
                               selectedHiveCreditCard:
                                   soCreditCardsConfirmationBottomSheetData

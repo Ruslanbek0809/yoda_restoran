@@ -135,14 +135,14 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                     ),
                     Spacer(),
                     TextButton(
-                      child: model.isChangeToCashLoading
+                      child: model.isChangeOnlineToCashLoading
                           ? ButtonLoading(color: kcPrimaryColor)
                           : Text(
                               LocaleKeys.cash_payment,
                               style: kts18Text,
                             ).tr(),
                       onPressed: () async {
-                        await model.onChangeToCashButtonPressed(
+                        await model.onChangeOnlineToCashButtonPressed(
                           onSuccessForView: () async {
                             await showErrorFlashBar(
                               msg: LocaleKeys
@@ -155,7 +155,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                                 bottom: 0.05.sh,
                               ),
                             );
-                            Navigator.pop(context);
+                            model.navBack();
                           },
                           onFailForView: () async {
                             await showErrorFlashBar(
@@ -169,41 +169,6 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                           },
                         );
                       },
-                    ),
-                    SizedBox(height: 10.h),
-                    SizedBox(
-                      width: 1.sw,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.w),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: kcSecondaryLightColor,
-                            backgroundColor:
-                                kcOnlinePaymentColor, // ripple effect color
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: AppTheme().radius10),
-                            padding: EdgeInsets.symmetric(vertical: 14.h),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/arrow_clockwise.svg',
-                                color: kcWhiteColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: Text(
-                                  LocaleKeys.online_payment_fail_retry,
-                                  style: ktsButtonWhite18Text,
-                                ).tr(),
-                              ),
-                            ],
-                          ),
-                          onPressed: () async {},
-                        ),
-                      ),
                     ),
                     SizedBox(height: 0.1.sh),
                   ],
