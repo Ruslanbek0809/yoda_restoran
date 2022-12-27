@@ -312,6 +312,34 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         requestId,
         int.parse(_sendCode),
         () {
+          // _isLoading = false;
+          // notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
+  }
+
+  //* CHECKS ONLINE PAYMENT ORDER STATUS after VERIFICATION
+  Future<void> checkOnlinePaymentOrderStatus({
+    required String orderId,
+    Function()? onSuccessForView,
+    Function()? onFailForView,
+  }) async {
+    log.v('checkOnlinePaymentOrderStatus()');
+
+    // _isLoading = true;
+    // notifyListeners();
+
+    await runBusyFuture(
+      _userService.checkOnlinePaymentOrderStatus(
+        orderId,
+        () {
           _isLoading = false;
           notifyListeners();
           onSuccessForView!();

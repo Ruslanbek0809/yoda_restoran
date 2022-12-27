@@ -651,10 +651,6 @@ class UserService {
             'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
         log.v('RESPONSE: createBankOrder => ${response.data}');
 
-        // /// PARSES the string and returns the resulting Json object
-        // final _decodedResponse = jsonDecode(response.data);
-        // log.v('RESPONSE: _decodedResponse => $_decodedResponse');
-
         /// CONVERTS JSON into DART MODEL
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
         _paymentCreateBankOrder =
@@ -687,8 +683,6 @@ class UserService {
     _queryParams['submitPasswordButton'] = 'Submit';
 
     log.v('_queryParams at the END: $_queryParams');
-    // final FormData verifyOtpOrderPaymentFormData =
-    //     FormData.fromMap(_queryParams);
 
     try {
       //----------- DIO PART START -------------//
@@ -751,88 +745,88 @@ class UserService {
     }
   }
 
-  // //* CHECKS ONLINE PAYMENT ORDER STATUS
-  // Future<void> checkOnlinePaymentOrderStatus(
-  //   OrderPaymentRegister paymentRegister,
-  //   Function() onSuccess,
-  //   Function() onFail,
-  // ) async {
-  //   Map<String, dynamic> _queryParams = {};
-  //   _queryParams['userName'] = '101211004240';
-  //   _queryParams['password'] = 'Ver43k764ghwS2H';
-  //   _queryParams['orderId'] = paymentRegister.orderId;
-  //   _queryParams['language'] = 'ru';
+  //* CHECKS ONLINE PAYMENT ORDER STATUS
+  Future<void> checkOnlinePaymentOrderStatus(
+    String orderId,
+    Function() onSuccess,
+    Function() onFail,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['userName'] = '101211004240';
+    _queryParams['password'] = 'Ver43k764ghwS2H';
+    _queryParams['orderId'] = orderId;
+    _queryParams['language'] = 'ru';
 
-  //   log.v('_queryParams at the END: $_queryParams');
-  //   final FormData onlinePaymentOrderStatusFormData =
-  //       FormData.fromMap(_queryParams);
+    log.v('_queryParams at the END: $_queryParams');
+    final FormData onlinePaymentOrderStatusFormData =
+        FormData.fromMap(_queryParams);
 
-  //   try {
-  //     //----------- DIO PART START -------------//
-  //     Dio dio = Dio();
+    try {
+      //----------- DIO PART START -------------//
+      Dio dio = Dio();
 
-  //     //----------- DIO BASE URL -------------//
-  //     dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
+      //----------- DIO BASE URL -------------//
+      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
 
-  //     //----------- DIO INTERCEPTORS -------------//
-  //     dio.interceptors.add(
-  //       InterceptorsWrapper(
-  //         onRequest: (options, handler) {
-  //           // Do something before request is sent
-  //           log.v(
-  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-  //           return handler.next(options); //continue
-  //           // If you want to resolve the request with some custom data，
-  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
-  //           // If you want to reject the request with a error message,f
-  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
-  //         },
-  //         onResponse: (response, handler) {
-  //           // Do something with response data
-  //           return handler.next(response); // continue
-  //           // If you want to reject the request with a error message,
-  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
-  //         },
-  //         onError: (DioError e, handler) {
-  //           // Do something with response error
-  //           return handler.next(e); //continue
-  //           // If you want to resolve the request with some custom data，
-  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
-  //         },
-  //       ),
-  //     );
-  //     //----------- DIO PART END -------------//
+      //----------- DIO INTERCEPTORS -------------//
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            // Do something before request is sent
+            log.v(
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+            return handler.next(options); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+            // If you want to reject the request with a error message,f
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onResponse: (response, handler) {
+            // Do something with response data
+            return handler.next(response); // continue
+            // If you want to reject the request with a error message,
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onError: (DioError e, handler) {
+            // Do something with response error
+            return handler.next(e); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+          },
+        ),
+      );
+      //----------- DIO PART END -------------//
 
-  //     Response response = await dio.post(
-  //       '',
-  //       data: onlinePaymentOrderStatusFormData,
-  //     );
-  //     if (response.data != null) {
-  //       log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
+      Response response = await dio.post(
+        '',
+        data: onlinePaymentOrderStatusFormData,
+      );
+      if (response.data != null) {
+        log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
 
-  //       /// PARSES the string and returns the resulting Json object
-  //       final _decodedResponse = jsonDecode(response.data);
+        /// PARSES the string and returns the resulting Json object
+        final _decodedResponse = jsonDecode(response.data);
 
-  //       /// CONVERTS JSON into DART MODEL
-  //       OrderPaymentCheckStatus? _orderPaymentCheckStatus;
-  //       _orderPaymentCheckStatus =
-  //           OrderPaymentCheckStatus.fromJson(_decodedResponse);
+        /// CONVERTS JSON into DART MODEL
+        OrderPaymentCheckStatus? _orderPaymentCheckStatus;
+        _orderPaymentCheckStatus =
+            OrderPaymentCheckStatus.fromJson(_decodedResponse);
 
-  //       /// if SUCCESS
-  //       if (_orderPaymentCheckStatus.errorCode == '0' &&
-  //           _orderPaymentCheckStatus.orderStatus == 2)
-  //         onSuccess();
+        /// if SUCCESS
+        if (_orderPaymentCheckStatus.errorCode == '0' &&
+            _orderPaymentCheckStatus.orderStatus == 2)
+          onSuccess();
 
-  //       /// if FAIL
-  //       else
-  //         onFail();
-  //     }
-  //   } on DioError catch (error) {
-  //     log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
-  //     onFail();
-  //     rethrow;
-  //   }
-  // }
+        /// if FAIL
+        else
+          onFail();
+      }
+    } on DioError catch (error) {
+      log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
+      onFail();
+      rethrow;
+    }
+  }
 
   // //* POST REGISTER ONLINE PAYMENT STEP 1
   // Future<void> postRegisterOnlinePayment(

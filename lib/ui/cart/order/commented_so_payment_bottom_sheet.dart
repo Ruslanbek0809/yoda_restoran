@@ -1,24 +1,25 @@
+// import 'dart:io';
 // import 'package:easy_localization/easy_localization.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:stacked/stacked.dart';
-// import '../../../../generated/locale_keys.g.dart';
 // import '../../../../models/models.dart';
 // import '../../../../shared/shared.dart';
 // import '../../../../utils/utils.dart';
-// import '../../../widgets/widgets.dart';
-// import '../order_view_model.dart';
-// import 'so_credit_cards_view_model.dart';
+// import '../../../generated/locale_keys.g.dart';
+// import '../../widgets/widgets.dart';
+// import 'order_view_model.dart';
+// import 'single_order_view_model.dart';
 
-// class SingleOrderPaymentBottomSheetView extends StatelessWidget {
+// class SingleOrderPaymentBottomSheetView extends StatefulWidget {
 //   final ScrollController scrollController;
 //   final double offset;
 //   final OrderPaymentRegister paymentRegister;
 //   final Order order;
 //   final OrderViewModel orderViewModel;
-//   SingleOrderPaymentBottomSheetView({
+//   const SingleOrderPaymentBottomSheetView({
 //     Key? key,
 //     required this.scrollController,
 //     required this.offset,
@@ -28,9 +29,63 @@
 //   }) : super(key: key);
 
 //   @override
+//   State<SingleOrderPaymentBottomSheetView> createState() =>
+//       _SingleOrderPaymentBottomSheetViewState();
+// }
+
+// class _SingleOrderPaymentBottomSheetViewState
+//     extends State<SingleOrderPaymentBottomSheetView> {
+//   final GlobalKey webViewKey = GlobalKey();
+
+//   InAppWebViewController? webViewController;
+
+//   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+//     crossPlatform: InAppWebViewOptions(
+//       useShouldOverrideUrlLoading: true,
+//       mediaPlaybackRequiresUserGesture: false,
+//     ),
+//     android: AndroidInAppWebViewOptions(
+//       useHybridComposition: true,
+//     ),
+//     ios: IOSInAppWebViewOptions(
+//       allowsInlineMediaPlayback: true,
+//     ),
+//   );
+
+//   late PullToRefreshController pullToRefreshController;
+
+//   String url = "";
+
+//   double progress = 0;
+
+//   final urlController = TextEditingController();
+
+//   @override
+//   void initState() {
+//     super.initState();
+
+//     pullToRefreshController = PullToRefreshController(
+//       options: PullToRefreshOptions(
+//         color: kcPrimaryColor,
+//       ),
+//       onRefresh: () async {
+//         if (Platform.isAndroid) {
+//           webViewController?.reload();
+//         } else if (Platform.isIOS) {
+//           webViewController?.loadUrl(
+//               urlRequest: URLRequest(url: await webViewController?.getUrl()));
+//         }
+//       },
+//     );
+//   }
+
+//   @override
 //   Widget build(BuildContext context) {
-//     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-//       viewModelBuilder: () => SOCreditCardsViewModel(),
+//     return ViewModelBuilder<SingleOrderViewModel>.reactive(
+//       viewModelBuilder: () => SingleOrderViewModel(
+//         order: widget.order,
+//         orderViewModel: widget.orderViewModel,
+//       ),
 //       builder: (context, model, child) => Container(
 //         decoration: BoxDecoration(
 //           color: kcWhiteColor,
@@ -43,6 +98,77 @@
 //             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
 //             CustomModalInsideBottomSheet(),
 
+//             // --------------- IF PANEL FINISHED AND PAYMENT LOADING -------------- //
+//             if (model.isPaymentPanelsFinished && model.isPaymentLoading)
+//               Expanded(child: LoadingWidget()),
+//             // --------------- CREDIT CARD CONFIRMATION -------------- //
+//             if (!model.isPaymentPanelsFinished)
+//               Expanded(
+//                 child: Padding(
+//                   padding: EdgeInsets.symmetric(horizontal: 16.w),
+//                   child: Stack(
+//                     children: [
+//                       InAppWebView(
+//                         key: webViewKey,
+//                         initialUrlRequest: URLRequest(
+//                           /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
+//                           url: Uri.parse(model.isOnlinePaymentRetrySuccess
+//                               ? model.retryOnlinePaymentRegister!.formUrl!
+//                               : widget.paymentRegister.formUrl!),
+//                         ),
+//                         initialOptions: options,
+//                         pullToRefreshController: pullToRefreshController,
+//                         onWebViewCreated: (controller) {
+//                           webViewController = controller;
+//                         },
+//                         onLoadStart: (controller, url) {
+//                           setState(() {
+//                             this.url = url.toString();
+//                             urlController.text = this.url;
+//                           });
+//                         },
+//                         androidOnPermissionRequest:
+//                             (controller, origin, resources) async {
+//                           return PermissionRequestResponse(
+//                               resources: resources,
+//                               action: PermissionRequestResponseAction.GRANT);
+//                         },
+//                         onProgressChanged: (controller, progress) {
+//                           if (progress == 100) {
+//                             pullToRefreshController.endRefreshing();
+//                           }
+//                           setState(() {
+//                             this.progress = progress / 100;
+//                             urlController.text = this.url;
+//                           });
+//                         },
+//                         onUpdateVisitedHistory:
+//                             (controller, url, androidIsReload) {
+//                           setState(() {
+//                             this.url = url.toString();
+//                             urlController.text = this.url;
+//                           });
+//                         },
+//                         onConsoleMessage: (controller, consoleMessage) {
+//                           /// Function onConsoleMessage
+//                           model.onConsoleMessage(
+//                             paymentRegister: widget.paymentRegister,
+//                             controller: controller,
+//                             consoleMessage: consoleMessage,
+//                           );
+//                         },
+//                       ),
+//                       progress < 1.0
+//                           ? LinearProgressIndicator(
+//                               value: progress,
+//                               backgroundColor: kcPrimaryColor.withOpacity(0.3),
+//                               color: kcPrimaryColor,
+//                             )
+//                           : SizedBox(),
+//                     ],
+//                   ),
+//                 ),
+//               ),
 //             // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
 //             // --------------- ONLINE PAYMENT SUCCESS -------------- //
 //             if (model.isPaymentPanelsFinished &&
@@ -159,6 +285,12 @@
 //                               ),
 //                             );
 //                             Navigator.pop(context);
+//                             // await Future.delayed(Duration(milliseconds: 300));
+//                             // await snackBar(
+//                             //     LocaleKeys
+//                             //         .payment_type_changed_from_online_to_cash
+//                             //         .tr(),
+//                             //     context);
 //                           },
 //                           onFailForView: () async {
 //                             await showErrorFlashBar(

@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,6 +10,7 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
+import 'so_payment_bottom_sheet.dart';
 import 'so_send_code_bottom_sheet_hook.dart';
 
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
@@ -147,7 +149,39 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           model.log.v('_sendCodeformKey SUCCESS');
                           await model.onOtpVerifyButtonPressed(
                             requestId: paymentCreateBankOrder.requestId ?? '',
-                            onSuccessForView: () async {},
+                            onSuccessForView: () async {
+                              await model.checkOnlinePaymentOrderStatus(
+                                orderId: paymentCreateBankOrder.orderId ?? '',
+                                onSuccessForView: () async {
+                                  // await showFlexibleBottomSheet(
+                                  //   initHeight: 0.95,
+                                  //   maxHeight: 0.95,
+                                  //   duration: Duration(milliseconds: 250),
+                                  //   context: context,
+                                  //   bottomSheetColor: Colors.transparent,
+                                  //   builder:
+                                  //       (context, scrollController, offset) =>
+                                  //           SingleOrderPaymentBottomSheetView(
+                                  //     scrollController: scrollController,
+                                  //     offset: offset,
+                                  //     paymentRegister: paymentRegister,
+                                  //     order: order,
+                                  //     orderViewModel: orderViewModel,
+                                  //   ),
+                                  // );
+                                },
+                                onFailForView: () async {
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                             onFailForView: () async {
                               await showErrorFlashBar(
                                 context: context,
