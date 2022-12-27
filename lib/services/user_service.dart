@@ -602,7 +602,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test17';
+    _queryParams['orderNumber'] = 'Ver44Test18';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;

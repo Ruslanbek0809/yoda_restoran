@@ -9,15 +9,12 @@ import '../../../../models/hive_models/hive_models.dart';
 import '../../../../models/models.dart';
 import '../../../../services/services.dart';
 import '../../../../utils/utils.dart';
-import '../order_view_model.dart';
 
 class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
-  final Order order;
-  final OrderViewModel orderViewModel;
+  final SOBottomSheetData soBottomSheetData;
   SOCreditCardsViewModel({
-    required this.order,
-    required this.orderViewModel,
+    required this.soBottomSheetData,
   });
 
   final _userService = locator<UserService>();
@@ -42,8 +39,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   //* CALLS CreditCardsConfirmationBottomSheet
   Future<void> showCustomCreditCardsConfirmationBottomSheet({
     bool isNewCreditCard = true,
-    required SOCreditCardsViewModel soCreditCardsViewModel,
-    // required Order order,
   }) async {
     log.i('');
     // SheetResponse<bool>? _navResult;
@@ -53,11 +48,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
-      data: SOCreditCardsConfirmationBottomSheetData(
+      data: SOConfirmationBottomSheetData(
         isNewCreditCard: isNewCreditCard,
         hiveCreditCard: _tempSelectedHiveCreditCard,
-        // order: order,
-        soCreditCardsViewModel: soCreditCardsViewModel,
+        soBottomSheetData: soBottomSheetData,
       ),
     );
 
@@ -184,7 +178,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   //* POST Online Payment Order button is pressed
   Future<void> onOnlinePaymentOrderButtonPressed({
     required HiveCreditCard selectedHiveCreditCard,
-    // required Order order,
     Function(OrderPaymentCreateBankOrder)? onSuccessForView,
     Function()? onFailForView,
   }) async {
@@ -198,7 +191,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       _userService.createBankOrder(
         selectedHiveCreditCard,
         _cvcCode,
-        order,
+        soBottomSheetData.order,
         false,
         0,
         (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
@@ -218,7 +211,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   //* CALLS SOSendCodeConfirmationBottomSheetView
   Future<void> showCustomSendCodeConfirmationBottomSheet(
     OrderPaymentCreateBankOrder paymentCreateBankOrder,
-    SOCreditCardsViewModel soCreditCardsViewModel,
   ) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
@@ -226,9 +218,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
-      data: SOConfirmationBottomSheetData(
+      data: SOSendCodeConfirmationBottomSheetData(
         paymentCreateBankOrder: paymentCreateBankOrder,
-        soCreditCardsViewModel: soCreditCardsViewModel,
+        soBottomSheetData: soBottomSheetData,
       ),
       // data: paymentCreateBankOrder,
     );

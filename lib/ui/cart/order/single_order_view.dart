@@ -913,8 +913,10 @@ class SingleOrderView extends StatelessWidget {
                                             SOSelectCreditCardsBottomSheetView(
                                       scrollController: scrollController,
                                       offset: offset,
-                                      order: order,
-                                      orderViewModel: orderViewModel,
+                                      soBottomSheetData: SOBottomSheetData(
+                                        order: order,
+                                        orderViewModel: orderViewModel,
+                                      ),
                                     ),
                                   );
                                   break;

@@ -8,29 +8,24 @@ import '../../../widgets/widgets.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../order_view_model.dart';
 import 'so_credit_cards_view_model.dart';
 
 class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
-  final Order order;
-  final OrderViewModel orderViewModel;
+  final SOBottomSheetData soBottomSheetData;
   const SOSelectCreditCardsBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
-    required this.order,
-    required this.orderViewModel,
+    required this.soBottomSheetData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(
-        order: order,
-        orderViewModel: orderViewModel,
-      ),
+      viewModelBuilder: () =>
+          SOCreditCardsViewModel(soBottomSheetData: soBottomSheetData),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,
@@ -54,9 +49,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   //* ASSIGNS only order model if it is new Credit Card
                   onTap: () async =>
                       await model.showCustomCreditCardsConfirmationBottomSheet(
-                    // order: order,
-                    soCreditCardsViewModel: model,
-                  ),
+                          // order: order,
+                          ),
                   //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
@@ -260,7 +254,6 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                     await model.showCustomCreditCardsConfirmationBottomSheet(
                       isNewCreditCard: false,
                       // order: order,
-                      soCreditCardsViewModel: model,
                     );
                   }
                 },

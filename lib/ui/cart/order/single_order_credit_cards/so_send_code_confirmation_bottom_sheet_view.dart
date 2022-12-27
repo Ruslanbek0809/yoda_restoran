@@ -16,12 +16,13 @@ import 'so_send_code_bottom_sheet_hook.dart';
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
-  final SOConfirmationBottomSheetData soConfirmationBottomSheetData;
+  final SOSendCodeConfirmationBottomSheetData
+      soSendCodeConfirmationBottomSheetData;
   SOSendCodeConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
-    required this.soConfirmationBottomSheetData,
+    required this.soSendCodeConfirmationBottomSheetData,
   }) : super(key: key);
 
   final GlobalKey<FormState> _sendCodeformKey = GlobalKey<FormState>();
@@ -29,8 +30,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () =>
-          soConfirmationBottomSheetData.soCreditCardsViewModel,
+      viewModelBuilder: () => SOCreditCardsViewModel(
+        soBottomSheetData:
+            soSendCodeConfirmationBottomSheetData.soBottomSheetData,
+      ),
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize: 0.45,
           maxChildSize: 0.95,
@@ -149,12 +152,12 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           _sendCodeformKey.currentState!.save();
                           model.log.v('_sendCodeformKey SUCCESS');
                           await model.onOtpVerifyButtonPressed(
-                            requestId: soConfirmationBottomSheetData
+                            requestId: soSendCodeConfirmationBottomSheetData
                                     .paymentCreateBankOrder.requestId ??
                                 '',
                             onSuccessForView: () async {
                               await model.checkOnlinePaymentOrderStatus(
-                                orderId: soConfirmationBottomSheetData
+                                orderId: soSendCodeConfirmationBottomSheetData
                                         .paymentCreateBankOrder.orderId ??
                                     '',
                                 onSuccessForView: () async {
@@ -171,11 +174,9 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                       scrollController: scrollController,
                                       offset: offset,
                                       isPaymentSuccess: true,
-                                      soCreditCardsViewModel:
-                                          soConfirmationBottomSheetData
-                                              .soCreditCardsViewModel,
-                                      // order: order,
-                                      // orderViewModel: orderViewModel,
+                                      soBottomSheetData:
+                                          soSendCodeConfirmationBottomSheetData
+                                              .soBottomSheetData,
                                     ),
                                   );
                                 },

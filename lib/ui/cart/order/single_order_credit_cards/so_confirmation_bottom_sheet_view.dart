@@ -14,13 +14,12 @@ import 'so_credit_cards_view_model.dart';
 class SOConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
-  final SOCreditCardsConfirmationBottomSheetData
-      soCreditCardsConfirmationBottomSheetData;
+  final SOConfirmationBottomSheetData soConfirmationBottomSheetData;
   SOConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
-    required this.soCreditCardsConfirmationBottomSheetData,
+    required this.soConfirmationBottomSheetData,
   }) : super(key: key);
 
   final GlobalKey<FormState> creditCardFormKey = GlobalKey<FormState>();
@@ -28,18 +27,16 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () =>
-          soCreditCardsConfirmationBottomSheetData.soCreditCardsViewModel,
-      onModelReady: (model) =>
-          !soCreditCardsConfirmationBottomSheetData.isNewCreditCard
-              ? model.assignHiveCreditCardToTemp(
-                  soCreditCardsConfirmationBottomSheetData.hiveCreditCard!)
-              : null,
+      viewModelBuilder: () => SOCreditCardsViewModel(
+        soBottomSheetData: soConfirmationBottomSheetData.soBottomSheetData,
+      ),
+      onModelReady: (model) => !soConfirmationBottomSheetData.isNewCreditCard
+          ? model.assignHiveCreditCardToTemp(
+              soConfirmationBottomSheetData.hiveCreditCard!)
+          : null,
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize:
-              soCreditCardsConfirmationBottomSheetData.isNewCreditCard
-                  ? 0.875
-                  : 0.61,
+              soConfirmationBottomSheetData.isNewCreditCard ? 0.875 : 0.61,
           maxChildSize: 0.95,
           expand: false,
           builder: (context, scrollController) {
@@ -77,11 +74,10 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                               CreditCardForm(
                                 formKey: creditCardFormKey,
                                 obscureCvv: true,
-                                obscureNumber:
-                                    soCreditCardsConfirmationBottomSheetData
-                                            .isNewCreditCard
-                                        ? false
-                                        : true,
+                                obscureNumber: soConfirmationBottomSheetData
+                                        .isNewCreditCard
+                                    ? false
+                                    : true,
                                 cardNumber: model.cardNumber,
                                 cvvCode: model.cvcCode,
                                 isHolderNameVisible: true,
@@ -140,8 +136,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     model.onCreditCardModelChange,
                               ),
                               //!------------------ CVC CODE INFO ---------------------//
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard)
+                              if (soConfirmationBottomSheetData.isNewCreditCard)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 16.w, top: 4.h),
@@ -151,8 +146,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   ).tr(),
                                 ),
                               //!------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard)
+                              if (soConfirmationBottomSheetData.isNewCreditCard)
                                 Padding(
                                   padding: EdgeInsets.only(top: 20.h),
                                   child: Divider(
@@ -161,8 +155,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     color: kcDividerSecondaryColor,
                                   ),
                                 ),
-                              if (soCreditCardsConfirmationBottomSheetData
-                                  .isNewCreditCard)
+                              if (soConfirmationBottomSheetData.isNewCreditCard)
                                 ListView.separated(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -195,7 +188,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   ),
                                 ),
                               //!------------------ HIVE CREDIT CARD BANK INFO ---------------------//
-                              if (!soCreditCardsConfirmationBottomSheetData
+                              if (!soConfirmationBottomSheetData
                                   .isNewCreditCard)
                                 Padding(
                                   padding:
@@ -205,7 +198,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts14ContactText,
                                   ).tr(),
                                 ),
-                              if (!soCreditCardsConfirmationBottomSheetData
+                              if (!soConfirmationBottomSheetData
                                   .isNewCreditCard)
                                 Padding(
                                   padding:
@@ -256,23 +249,19 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
 
                           if (creditCardFormKey.currentState!.validate()) {
                             print('creditCardFormKey SUCCESS');
-                            if (soCreditCardsConfirmationBottomSheetData
-                                .isNewCreditCard)
+                            if (soConfirmationBottomSheetData.isNewCreditCard)
                               await model.onCreditCardSave();
                             await model.onOnlinePaymentOrderButtonPressed(
                               selectedHiveCreditCard:
-                                  soCreditCardsConfirmationBottomSheetData
-                                          .isNewCreditCard
+                                  soConfirmationBottomSheetData.isNewCreditCard
                                       ? model.hiveCreditCards.last
-                                      : soCreditCardsConfirmationBottomSheetData
+                                      : soConfirmationBottomSheetData
                                           .hiveCreditCard!,
                               onSuccessForView: (paymentCreateBankOrder) async {
                                 model.navBack();
                                 await model
                                     .showCustomSendCodeConfirmationBottomSheet(
                                   paymentCreateBankOrder,
-                                  soCreditCardsConfirmationBottomSheetData
-                                      .soCreditCardsViewModel,
                                 );
                                 // await showFlexibleBottomSheet(
                                 //   initHeight: 0.95,

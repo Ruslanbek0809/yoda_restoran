@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/models.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
@@ -13,23 +14,20 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
   final bool isPaymentSuccess;
-  final SOCreditCardsViewModel soCreditCardsViewModel;
-  // final Order order;
-  // final OrderViewModel orderViewModel;
+  final SOBottomSheetData soBottomSheetData;
   SingleOrderPaymentSuccessFailBottomSheetView({
     Key? key,
     required this.scrollController,
     required this.offset,
     required this.isPaymentSuccess,
-    required this.soCreditCardsViewModel,
-    // required this.order,
-    // required this.orderViewModel,
+    required this.soBottomSheetData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => soCreditCardsViewModel,
+      viewModelBuilder: () =>
+          SOCreditCardsViewModel(soBottomSheetData: soBottomSheetData),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,

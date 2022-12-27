@@ -24,7 +24,7 @@ void setupBottomSheet() {
         SOSendCodeConfirmationBottomSheetView(
           request: sheetRequest,
           completer: completer,
-          paymentCreateBankOrder: sheetRequest.data,
+          soConfirmationBottomSheetData: sheetRequest.data,
         ),
   };
 
