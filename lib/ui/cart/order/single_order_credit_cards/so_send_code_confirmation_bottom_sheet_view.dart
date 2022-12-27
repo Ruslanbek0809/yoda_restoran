@@ -16,12 +16,12 @@ import 'so_send_code_bottom_sheet_hook.dart';
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse<bool>) completer;
-  final OrderPaymentCreateBankOrder paymentCreateBankOrder;
+  final SOConfirmationBottomSheetData soConfirmationBottomSheetData;
   SOSendCodeConfirmationBottomSheetView({
     Key? key,
     required this.request,
     required this.completer,
-    required this.paymentCreateBankOrder,
+    required this.soConfirmationBottomSheetData,
   }) : super(key: key);
 
   final GlobalKey<FormState> _sendCodeformKey = GlobalKey<FormState>();
@@ -29,7 +29,8 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(),
+      viewModelBuilder: () =>
+          soConfirmationBottomSheetData.soCreditCardsViewModel,
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize: 0.45,
           maxChildSize: 0.95,
@@ -148,10 +149,14 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           _sendCodeformKey.currentState!.save();
                           model.log.v('_sendCodeformKey SUCCESS');
                           await model.onOtpVerifyButtonPressed(
-                            requestId: paymentCreateBankOrder.requestId ?? '',
+                            requestId: soConfirmationBottomSheetData
+                                    .paymentCreateBankOrder.requestId ??
+                                '',
                             onSuccessForView: () async {
                               await model.checkOnlinePaymentOrderStatus(
-                                orderId: paymentCreateBankOrder.orderId ?? '',
+                                orderId: soConfirmationBottomSheetData
+                                        .paymentCreateBankOrder.orderId ??
+                                    '',
                                 onSuccessForView: () async {
                                   model.navBack();
                                   await showFlexibleBottomSheet(
@@ -166,6 +171,9 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                       scrollController: scrollController,
                                       offset: offset,
                                       isPaymentSuccess: true,
+                                      soCreditCardsViewModel:
+                                          soConfirmationBottomSheetData
+                                              .soCreditCardsViewModel,
                                       // order: order,
                                       // orderViewModel: orderViewModel,
                                     ),

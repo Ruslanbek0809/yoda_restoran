@@ -9,9 +9,16 @@ import '../../../../models/hive_models/hive_models.dart';
 import '../../../../models/models.dart';
 import '../../../../services/services.dart';
 import '../../../../utils/utils.dart';
+import '../order_view_model.dart';
 
 class SOCreditCardsViewModel extends ReactiveViewModel {
   final log = getLogger('SOCreditCardsViewModel');
+  final Order order;
+  final OrderViewModel orderViewModel;
+  SOCreditCardsViewModel({
+    required this.order,
+    required this.orderViewModel,
+  });
 
   final _userService = locator<UserService>();
   final _hiveDbService = locator<HiveDbService>();
@@ -35,7 +42,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   //* CALLS CreditCardsConfirmationBottomSheet
   Future<void> showCustomCreditCardsConfirmationBottomSheet({
     bool isNewCreditCard = true,
-    required Order order,
+    required SOCreditCardsViewModel soCreditCardsViewModel,
+    // required Order order,
   }) async {
     log.i('');
     // SheetResponse<bool>? _navResult;
@@ -48,7 +56,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       data: SOCreditCardsConfirmationBottomSheetData(
         isNewCreditCard: isNewCreditCard,
         hiveCreditCard: _tempSelectedHiveCreditCard,
-        order: order,
+        // order: order,
+        soCreditCardsViewModel: soCreditCardsViewModel,
       ),
     );
 
@@ -175,7 +184,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   //* POST Online Payment Order button is pressed
   Future<void> onOnlinePaymentOrderButtonPressed({
     required HiveCreditCard selectedHiveCreditCard,
-    required Order order,
+    // required Order order,
     Function(OrderPaymentCreateBankOrder)? onSuccessForView,
     Function()? onFailForView,
   }) async {
@@ -203,73 +212,13 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
           onFailForView!();
         },
       ),
-
-      // //* NEW CODE  STEP 1
-      // _userService.postRegisterOnlinePayment(
-      //   order!,
-      //   false,
-      //   0,
-      //   (OrderPaymentRegister paymentRegister) async {
-      //     //* NEW CODE COMMENT
-      //     // _isLoading = false;
-      //     // notifyListeners();
-      //     // log.v('paymentRegister.formUrl: ${paymentRegister.formUrl}');
-      //     // // onSuccessForView!(paymentRegister);
-
-      //     //* NEW CODE  STEP 2
-      //     await _userService.postProcessOnlinePayment(
-      //       hiveCreditCards[0],
-      //       paymentRegister,
-      //       (OrderPaymentAcsUrl paymentAcsUrl) async {
-      //         //* NEW CODE STEP 3
-      //         await _userService.postAcsUrl(
-      //           paymentRegister,
-      //           paymentAcsUrl,
-      //           (String paResValue) async {
-      //             // _isLoading = false;
-      //             // notifyListeners();
-      //             //* NEW CODE STEP 4
-      //             await _userService.postFinish3ds(
-      //               paymentRegister,
-      //               paymentAcsUrl,
-      //               paResValue,
-      //               () async {
-      //                 _isLoading = false;
-      //                 notifyListeners();
-      //               },
-      //               () {
-      //                 _isLoading = false;
-      //                 notifyListeners();
-      //                 onFailForView!();
-      //               },
-      //             );
-      //           },
-      //           () {
-      //             _isLoading = false;
-      //             notifyListeners();
-      //             onFailForView!();
-      //           },
-      //         );
-      //       },
-      //       () {
-      //         _isLoading = false;
-      //         notifyListeners();
-      //         onFailForView!();
-      //       },
-      //     );
-      //   },
-      //   () {
-      //     _isLoading = false;
-      //     notifyListeners();
-      //     onFailForView!();
-      //   },
-      // ),
     );
   }
 
   //* CALLS SOSendCodeConfirmationBottomSheetView
   Future<void> showCustomSendCodeConfirmationBottomSheet(
     OrderPaymentCreateBankOrder paymentCreateBankOrder,
+    SOCreditCardsViewModel soCreditCardsViewModel,
   ) async {
     log.i('');
     await _bottomSheetService.showCustomSheet(
@@ -277,7 +226,11 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       enableDrag: true,
       barrierDismissible: true,
       isScrollControlled: true,
-      data: paymentCreateBankOrder,
+      data: SOConfirmationBottomSheetData(
+        paymentCreateBankOrder: paymentCreateBankOrder,
+        soCreditCardsViewModel: soCreditCardsViewModel,
+      ),
+      // data: paymentCreateBankOrder,
     );
   }
 

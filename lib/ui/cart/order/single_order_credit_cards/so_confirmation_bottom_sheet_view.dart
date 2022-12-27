@@ -28,7 +28,8 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(),
+      viewModelBuilder: () =>
+          soCreditCardsConfirmationBottomSheetData.soCreditCardsViewModel,
       onModelReady: (model) =>
           !soCreditCardsConfirmationBottomSheetData.isNewCreditCard
               ? model.assignHiveCreditCardToTemp(
@@ -265,13 +266,14 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                       ? model.hiveCreditCards.last
                                       : soCreditCardsConfirmationBottomSheetData
                                           .hiveCreditCard!,
-                              order: soCreditCardsConfirmationBottomSheetData
-                                  .order,
                               onSuccessForView: (paymentCreateBankOrder) async {
                                 model.navBack();
                                 await model
                                     .showCustomSendCodeConfirmationBottomSheet(
-                                        paymentCreateBankOrder);
+                                  paymentCreateBankOrder,
+                                  soCreditCardsConfirmationBottomSheetData
+                                      .soCreditCardsViewModel,
+                                );
                                 // await showFlexibleBottomSheet(
                                 //   initHeight: 0.95,
                                 //   maxHeight: 0.95,

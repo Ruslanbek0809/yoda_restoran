@@ -4,17 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../models/models.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
-import '../order_view_model.dart';
 import 'so_credit_cards_view_model.dart';
 
 class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
   final bool isPaymentSuccess;
+  final SOCreditCardsViewModel soCreditCardsViewModel;
   // final Order order;
   // final OrderViewModel orderViewModel;
   SingleOrderPaymentSuccessFailBottomSheetView({
@@ -22,6 +21,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
     required this.scrollController,
     required this.offset,
     required this.isPaymentSuccess,
+    required this.soCreditCardsViewModel,
     // required this.order,
     // required this.orderViewModel,
   }) : super(key: key);
@@ -29,7 +29,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      viewModelBuilder: () => SOCreditCardsViewModel(),
+      viewModelBuilder: () => soCreditCardsViewModel,
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(
           color: kcWhiteColor,

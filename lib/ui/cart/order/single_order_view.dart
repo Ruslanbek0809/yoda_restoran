@@ -914,6 +914,7 @@ class SingleOrderView extends StatelessWidget {
                                       scrollController: scrollController,
                                       offset: offset,
                                       order: order,
+                                      orderViewModel: orderViewModel,
                                     ),
                                   );
                                   break;
