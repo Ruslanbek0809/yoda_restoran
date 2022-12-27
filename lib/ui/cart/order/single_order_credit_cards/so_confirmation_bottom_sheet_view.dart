@@ -76,7 +76,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                               CreditCardForm(
                                 formKey: creditCardFormKey,
                                 obscureCvv: true,
-                                obscureNumber: soCreditCardsConfirmationBottomSheetData.isNewCreditCard ? false : true,
+                                obscureNumber:
+                                    soCreditCardsConfirmationBottomSheetData
+                                            .isNewCreditCard
+                                        ? false
+                                        : true,
                                 cardNumber: model.cardNumber,
                                 cvvCode: model.cvcCode,
                                 isHolderNameVisible: true,
@@ -262,6 +266,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                               order: soCreditCardsConfirmationBottomSheetData
                                   .order,
                               onSuccessForView: (paymentCreateBankOrder) async {
+                                model.navBack();
                                 await model
                                     .showCustomSendCodeConfirmationBottomSheet(
                                         paymentCreateBankOrder);

@@ -16,6 +16,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   final _userService = locator<UserService>();
   final _hiveDbService = locator<HiveDbService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _navService = locator<NavigationService>();
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
@@ -352,6 +353,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       ),
     );
   }
+
+//------------------------ NAVIGATION ----------------------------//
+  void navBack() => _navService.back(result: true);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];

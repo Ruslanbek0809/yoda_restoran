@@ -248,11 +248,13 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                         bottom: 0.13.sh,
                       ),
                     );
-                  else
+                  else {
+                    model.navBack();
                     await model.showCustomCreditCardsConfirmationBottomSheet(
                       isNewCreditCard: false,
                       order: order,
                     );
+                  }
                 },
               ),
             )
