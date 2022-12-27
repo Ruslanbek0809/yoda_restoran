@@ -602,7 +602,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test9';
+    _queryParams['orderNumber'] = 'Ver44Test10';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -631,9 +631,11 @@ class UserService {
     //* User card Info
     _queryParams['\$PAN'] =
         int.parse(hiveCreditCard.cardNumber.replaceAll(' ', ''));
-    _queryParams['\$CVC'] = 620;
-    _queryParams['YYYY'] = 2042;
-    _queryParams['MM'] = 07;
+    _queryParams['\$CVC'] = int.parse(cvcCode);
+
+    var splittedExpiryDate = hiveCreditCard.expiryDate.split('/');
+    _queryParams['YYYY'] = int.parse('20${splittedExpiryDate[1]}');
+    _queryParams['MM'] = int.parse(splittedExpiryDate[0]);
     _queryParams['TEXT'] = hiveCreditCard.cardHolderName;
 
     log.v('_queryParams at the END: $_queryParams');

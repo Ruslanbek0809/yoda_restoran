@@ -76,7 +76,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                               CreditCardForm(
                                 formKey: creditCardFormKey,
                                 obscureCvv: true,
-                                obscureNumber: false,
+                                obscureNumber: soCreditCardsConfirmationBottomSheetData.isNewCreditCard ? false : true,
                                 cardNumber: model.cardNumber,
                                 cvvCode: model.cvcCode,
                                 isHolderNameVisible: true,
