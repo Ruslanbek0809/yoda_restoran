@@ -268,7 +268,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             () async {
               // _isLoading = false;
               // notifyListeners();
-          onSuccessForView!();
+              onSuccessForView!();
             },
             () {
               _isLoading = false;
@@ -286,7 +286,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
-  //* CHECKS ONLINE PAYMENT ORDER STATUS after VERIFICATION
+  ///* CHECKS ONLINE PAYMENT ORDER STATUS after VERIFICATION
   Future<void> checkOnlinePaymentOrderStatus({
     required String orderId,
     Function()? onSuccessForView,
@@ -298,7 +298,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     // notifyListeners();
 
     await runBusyFuture(
-      _userService.checkOnlinePaymentOrderStatus(
+      _userService.checkOnlinePaymentOrderStatusExtended(
         orderId,
         () async {
           // //* PATCHS ORDER PAID VAR

@@ -47,10 +47,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 color: kcWhiteColor,
                 child: InkWell(
                   //* ASSIGNS only order model if it is new Credit Card
-                  onTap: () async =>
-                      await model.showCustomCreditCardsConfirmationBottomSheet(
-                          // order: order,
-                          ),
+                  onTap: () async => await model
+                      .showCustomCreditCardsConfirmationBottomSheet(),
                   //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
@@ -253,7 +251,6 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                     model.navBack();
                     await model.showCustomCreditCardsConfirmationBottomSheet(
                       isNewCreditCard: false,
-                      // order: order,
                     );
                   }
                 },

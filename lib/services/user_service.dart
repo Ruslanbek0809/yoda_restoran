@@ -586,7 +586,7 @@ class UserService {
 
   //* ------------------ ONLINE PAYMENT Start ---------------------//
 
-  //* CREATES BANK ORDER from backend
+  //* CREATES BANK ORDER from backend STEP 1
   Future<void> createBankOrder(
     HiveCreditCard hiveCreditCard,
     String cvcCode,
@@ -603,9 +603,10 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test62';
+    _queryParams['orderNumber'] = 'Ver44Test63';
 
-    //* AMOUNT part START
+    //* ======= AMOUNT part START ======= //
+
     num _totalOrderSum = order.totPrice!;
     if (order.promocode != null) {
       if (order.promocode!.promoType == 1)
@@ -616,11 +617,10 @@ class UserService {
     }
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
 
-    _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
-    _queryParams['amount'] = 1;
-    // _queryParams['amount'] = _totalOrderSum.toInt();
+    _totalOrderSum *= 100; //* CONVERTS real value to make it acceptable by bank
+    _queryParams['amount'] = _totalOrderSum.toInt();
 
-    //* AMOUNT part END
+    //* ======= AMOUNT part END ======= //
 
     _queryParams['returnUrl'] = 'https://mpi.gov.tm/payment/finish.html';
     _queryParams['failUrl'] = 'https://mpi.gov.tm/payment/finish.html';
@@ -650,8 +650,8 @@ class UserService {
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201)) {
         log.v(
-            'RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
-        log.v('RESPONSE: createBankOrder => ${response.data}');
+            'SUCCESS RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
+        log.v('SUCCESS RESPONSE: createBankOrder => ${response.data}');
 
         /// CONVERTS JSON into DART MODEL
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
@@ -670,7 +670,7 @@ class UserService {
     }
   }
 
-  //* VERIFIES OTP ORDER PAYMENT
+  //* VERIFIES OTP ORDER PAYMENT STEP 2
   Future<void> verifyOtpOrderPayment(
     String requestId,
     int smsCode,
@@ -701,7 +701,7 @@ class UserService {
           onRequest: (options, handler) {
             // Do something before request is sent
             log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
@@ -730,13 +730,13 @@ class UserService {
 
       if (response.data != null && response.statusCode == 200) {
         // log.v(
-        //     'RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
-        // log.v('RESPONSE: verifyOtpOrderPayment => ${response.data}');
+        //     'SUCCESS RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
+        // log.v('SUCCESS RESPONSE: verifyOtpOrderPayment => ${response.data}');
 
         //! Step 1. Parses the HTML string into a Document object
         Document document = parse(response.data);
         log.v(
-            'RESPONSE: verifyOtpOrderPayment HTML BODY INNER ELEMENT => ${document.body!.innerHtml}');
+            'SUCCESS RESPONSE: verifyOtpOrderPayment HTML BODY INNER ELEMENT => ${document.body!.innerHtml}');
 
         //! Step 2. EXECUTES query on the input element with the name "PaRes". If it is FOUND, it EXECUTES next query. If it is NOT FOUND, it throws StateError
         try {
@@ -830,15 +830,13 @@ class UserService {
         //! if FAIL
         onFail();
     } on DioError catch (error) {
-      log.v(
-          'ERROR: verifyOtpOrderPayment => response.statusCode: ${error.response!.statusCode}');
       log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
       onFail();
       rethrow;
     }
   }
 
-  ///* POST finish3ds STEP 4
+  ///* POST finish3ds  STEP 3
   Future<void> postFinish3ds(
     String orderId,
     String paResValue,
@@ -846,29 +844,26 @@ class UserService {
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
-    // _queryParams['userName'] = '101211004240';
-    // _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['MD'] = orderId;
     _queryParams['PaRes'] = paResValue;
 
     log.v('_queryParams at the END: $_queryParams');
-    // final FormData postFinish3dsFormData = FormData.fromMap(_queryParams);
 
     try {
-      //----------- DIO PART START -------------//
+      //* ----------- DIO PART START -------------//
       Dio dio = Dio();
 
-      //----------- DIO BASE URL -------------//
+      //* ----------- DIO BASE URL -------------//
       dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
       dio.options.contentType = Headers.formUrlEncodedContentType;
 
-      //----------- DIO INTERCEPTORS -------------//
+      //* ----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
             // Do something before request is sent
             log.i(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
@@ -889,38 +884,43 @@ class UserService {
           },
         ),
       );
-      //----------- DIO PART END -------------//
+      //* ----------- DIO PART END -------------//
 
       Response response = await dio.post(
         '',
         queryParameters: _queryParams,
-        // data: postFinish3dsFormData,
       );
-      onSuccess();
-      if (response.data != null) {
-        log.v('RESPONSE: postFinish3ds => ${response.data}');
-        log.v(
-            'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
 
-        // //* if SUCCESS
-        if (response.data != null &&
-            (response.statusCode == 200 ||
-                response.statusCode == 201 ||
-                response.statusCode == 302)) onSuccess();
-        // //* if FAIL
-        // else
-        //   onFail();
+      log.v('SUCCESS RESPONSE: postFinish3ds => ${response.data}');
+      log.v(
+          'SUCCESS RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 ||
+              response.statusCode == 201 ||
+              response.statusCode == 302)) {
+        //* SUCCESS
+        onSuccess();
+      } else {
+        //* if FAIL
+        onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on postFinish3ds => ${error.response}');
-      onSuccess();
-      // onFail();
+      if (error.response!.statusCode == 200 ||
+          error.response!.statusCode == 201 ||
+          error.response!.statusCode == 302) {
+        //* SUCCESS
+        onSuccess();
+      } else {
+        log.v('ERROR on postFinish3ds => ${error.response}');
+        onFail();
+      }
       rethrow;
     }
   }
 
-  ///* CHECKS ONLINE PAYMENT ORDER STATUS
-  Future<void> checkOnlinePaymentOrderStatus(
+  ///* CHECKS ONLINE PAYMENT ORDER STATUS EXTENDED STEP 4
+  Future<void> checkOnlinePaymentOrderStatusExtended(
     String orderId,
     Function() onSuccess,
     Function() onFail,
@@ -929,8 +929,6 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['orderId'] = orderId;
-    // _queryParams['orderNumber'] = orderId;
-    // _queryParams['orderNumber'] = 'Ver44Test21';
     _queryParams['language'] = 'ru';
 
     log.v('_queryParams at the END: $_queryParams');
@@ -951,7 +949,7 @@ class UserService {
           onRequest: (options, handler) {
             // Do something before request is sent
             log.v(
-                'REQUEST[${options.method}] => BASE URL:${options.baseUrl} QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
@@ -978,28 +976,31 @@ class UserService {
         '',
         data: onlinePaymentOrderStatusFormData,
       );
-      if (response.data != null) {
-        log.v('RESPONSE: checkOnlinePaymentOrderStatus => ${response.data}');
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        log.v(
+            'SUCCESS RESPONSE: checkOnlinePaymentOrderStatusExtended => ${response.data}');
 
-        /// PARSES the string and returns the resulting Json object
-        final _decodedResponse = jsonDecode(response.data);
+        // /// PARSES the string and returns the resulting Json object
+        // final _decodedResponse = jsonDecode(response.data);
 
-        /// CONVERTS JSON into DART MODEL
-        OrderPaymentCheckStatus? _orderPaymentCheckStatus;
-        _orderPaymentCheckStatus =
-            OrderPaymentCheckStatus.fromJson(_decodedResponse);
+        // /// CONVERTS JSON into DART MODEL
+        // OrderPaymentCheckStatus? _orderPaymentCheckStatus;
+        // _orderPaymentCheckStatus =
+        //     OrderPaymentCheckStatus.fromJson(_decodedResponse);
 
-        /// if SUCCESS
-        if (_orderPaymentCheckStatus.errorCode == '0' &&
-            _orderPaymentCheckStatus.orderStatus == 2)
-          onSuccess();
+        // /// if SUCCESS
+        // if (_orderPaymentCheckStatus.errorCode == '0' &&
+        //     _orderPaymentCheckStatus.orderStatus == 2)
+        //   onSuccess();
 
-        /// if FAIL
-        else
-          onFail();
+        // /// if FAIL
+        // else
+        //   onFail();
       }
     } on DioError catch (error) {
-      log.v('ERROR on checkOnlinePaymentOrderStatus => ${error.response}');
+      log.v(
+          'ERROR on checkOnlinePaymentOrderStatusExtended => ${error.response}');
       onFail();
       rethrow;
     }
@@ -1016,7 +1017,7 @@ class UserService {
         data: FormData.fromMap({'paid': true}),
       );
       log.v(
-          'RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
+          'SUCCESS RESPONSE patchOrderToPaid => api/order/$orderId/ => ${response.data}');
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
@@ -1042,7 +1043,7 @@ class UserService {
         data: FormData.fromMap({'paymentType': 3}),
       );
       log.v(
-          'RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
+          'SUCCESS RESPONSE patchOrderOnlineToCash => api/order/$orderId/ => ${response.data}');
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201))
