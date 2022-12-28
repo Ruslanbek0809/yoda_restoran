@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test58';
+    _queryParams['orderNumber'] = 'Ver44Test62';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -674,7 +674,7 @@ class UserService {
   Future<void> verifyOtpOrderPayment(
     String requestId,
     int smsCode,
-    Function() onSuccess,
+    Function(String) onSuccess,
     Function() onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
@@ -745,7 +745,8 @@ class UserService {
               document.querySelectorAll('input[name="PaRes"]');
 
           //* Gets the value of the input element.
-          final paresElementValue = paresElements.first.attributes['value'];
+          final paresElementValue =
+              paresElements.first.attributes['value'] ?? '';
           //* Prints the value.
           print('PaRes\'s value paresElementValue: $paresElementValue');
 
@@ -782,7 +783,7 @@ class UserService {
             } else {
               //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
               //! SUCCESS
-              onSuccess();
+              onSuccess(paresElementValue);
             }
           } on StateError catch (e) {
             //* The input element was not found.
@@ -790,7 +791,7 @@ class UserService {
 
             //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
             //! SUCCESS
-            onSuccess();
+            onSuccess(paresElementValue);
           }
 
           //! Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
@@ -837,91 +838,86 @@ class UserService {
     }
   }
 
-  // ///* POST finish3ds STEP 4
-  // Future<void> postFinish3ds(
-  //   OrderPaymentRegister paymentRegister,
-  //   OrderPaymentAcsUrl paymentAcsUrl,
-  //   String paResValue,
-  //   Function() onSuccess,
-  //   Function() onFail,
-  // ) async {
-  //   Map<String, dynamic> _queryParams = {};
-  //   _queryParams['MD'] = paymentRegister.orderId;
-  //   _queryParams['PaRes'] = paResValue;
-  //   _queryParams['authForm'] = 'authForm';
-  //   _queryParams['request_id'] = paymentRegister.orderId;
-  //   _queryParams['sendPasswordButton'] = 'Send password';
+  ///* POST finish3ds STEP 4
+  Future<void> postFinish3ds(
+    String orderId,
+    String paResValue,
+    Function() onSuccess,
+    Function() onFail,
+  ) async {
+    Map<String, dynamic> _queryParams = {};
+    // _queryParams['userName'] = '101211004240';
+    // _queryParams['password'] = 'Ver43k764ghwS2H';
+    _queryParams['MD'] = orderId;
+    _queryParams['PaRes'] = paResValue;
 
-  //   log.v('_queryParams at the END: $_queryParams');
-  //   // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+    log.v('_queryParams at the END: $_queryParams');
+    // final FormData postFinish3dsFormData = FormData.fromMap(_queryParams);
 
-  //   try {
-  //     //----------- DIO PART START -------------//
-  //     Dio dio = Dio();
+    try {
+      //----------- DIO PART START -------------//
+      Dio dio = Dio();
 
-  //     //----------- DIO BASE URL -------------//
-  //     dio.options.baseUrl = paymentAcsUrl.termUrl ??
-  //         'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
-  //     // dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
-  //     // dio.options.contentType = Headers.formUrlEncodedContentType;
+      //----------- DIO BASE URL -------------//
+      dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+      dio.options.contentType = Headers.formUrlEncodedContentType;
 
-  //     //----------- DIO INTERCEPTORS -------------//
-  //     dio.interceptors.add(
-  //       InterceptorsWrapper(
-  //         onRequest: (options, handler) {
-  //           // Do something before request is sent
-  //           log.i(
-  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=$paResValue');
-  //           // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
-  //           //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
-  //           return handler.next(options); //continue
-  //           // If you want to resolve the request with some custom data，
-  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
-  //           // If you want to reject the request with a error message,f
-  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
-  //         },
-  //         onResponse: (response, handler) {
-  //           // Do something with response data
-  //           return handler.next(response); // continue
-  //           // If you want to reject the request with a error message,
-  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
-  //         },
-  //         onError: (DioError e, handler) {
-  //           // Do something with response error
-  //           return handler.next(e); //continue
-  //           // If you want to resolve the request with some custom data，
-  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
-  //         },
-  //       ),
-  //     );
-  //     //----------- DIO PART END -------------//
+      //----------- DIO INTERCEPTORS -------------//
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            // Do something before request is sent
+            log.i(
+                'REQUEST[${options.method}] => BASE URL:${options.baseUrl}QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+            return handler.next(options); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+            // If you want to reject the request with a error message,f
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onResponse: (response, handler) {
+            // Do something with response data
+            return handler.next(response); // continue
+            // If you want to reject the request with a error message,
+            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+          },
+          onError: (DioError e, handler) {
+            // Do something with response error
+            return handler.next(e); //continue
+            // If you want to resolve the request with some custom data，
+            // you can resolve a `Response` object eg: `handler.resolve(response)`.
+          },
+        ),
+      );
+      //----------- DIO PART END -------------//
 
-  //     Response response = await dio.post(
-  //       '',
-  //       // '?MD=${paymentRegister.orderId}&PaRes=$paResValue',
-  //       // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
-  //       queryParameters: _queryParams,
-  //       // data: onlinePaymentFormData,
-  //     );
-  //     if (response.data != null) {
-  //       log.v('RESPONSE: postFinish3ds => ${response.data}');
-  //       log.v(
-  //           'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
+      Response response = await dio.post(
+        '',
+        queryParameters: _queryParams,
+        // data: postFinish3dsFormData,
+      );
+      onSuccess();
+      if (response.data != null) {
+        log.v('RESPONSE: postFinish3ds => ${response.data}');
+        log.v(
+            'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
 
-  //       // //* if SUCCESS
-  //       // if (response.data != null &&
-  //       //     (response.statusCode == 200 || response.statusCode == 201))
-  //       //   onSuccess();
-  //       // //* if FAIL
-  //       // else
-  //       //   onFail();
-  //     }
-  //   } on DioError catch (error) {
-  //     log.v('ERROR on postFinish3ds => ${error.response}');
-  //     onFail();
-  //     rethrow;
-  //   }
-  // }
+        // //* if SUCCESS
+        if (response.data != null &&
+            (response.statusCode == 200 ||
+                response.statusCode == 201 ||
+                response.statusCode == 302)) onSuccess();
+        // //* if FAIL
+        // else
+        //   onFail();
+      }
+    } on DioError catch (error) {
+      log.v('ERROR on postFinish3ds => ${error.response}');
+      onSuccess();
+      // onFail();
+      rethrow;
+    }
+  }
 
   ///* CHECKS ONLINE PAYMENT ORDER STATUS
   Future<void> checkOnlinePaymentOrderStatus(

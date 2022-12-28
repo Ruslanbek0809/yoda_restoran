@@ -175,45 +175,45 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           _sendCodeformKey.currentState!.save();
                           model.log.v('_sendCodeformKey SUCCESS');
                           await model.onOtpVerifyButtonPressed(
-                            requestId: soSendCodeConfirmationBottomSheetData
-                                    .paymentCreateBankOrder.requestId ??
-                                '',
+                            paymentCreateBankOrder:
+                                soSendCodeConfirmationBottomSheetData
+                                    .paymentCreateBankOrder,
                             onSuccessForView: () async {
-                              // await model.checkOnlinePaymentOrderStatus(
-                              //   orderId: soSendCodeConfirmationBottomSheetData
-                              //           .paymentCreateBankOrder.orderId ??
-                              //       '',
-                              //   onSuccessForView: () async {
-                              //     model.navBack();
-                              //     await showFlexibleBottomSheet(
-                              //       initHeight: 0.95,
-                              //       maxHeight: 0.95,
-                              //       duration: Duration(milliseconds: 250),
-                              //       context: context,
-                              //       bottomSheetColor: Colors.transparent,
-                              //       builder: (context, scrollController,
-                              //               offset) =>
-                              //           SingleOrderPaymentSuccessFailBottomSheetView(
-                              //         scrollController: scrollController,
-                              //         offset: offset,
-                              //         isPaymentSuccess: true,
-                              //         soBottomSheetData:
-                              //             soSendCodeConfirmationBottomSheetData
-                              //                 .soBottomSheetData,
-                              //       ),
-                              //     );
-                              //   },
-                              //   onFailForView: () async {
-                              //     await showErrorFlashBar(
-                              //       context: context,
-                              //       margin: EdgeInsets.only(
-                              //         left: 16.w,
-                              //         right: 16.w,
-                              //         bottom: 0.05.sh,
-                              //       ),
-                              //     );
-                              //   },
-                              // );
+                              await model.checkOnlinePaymentOrderStatus(
+                                orderId: soSendCodeConfirmationBottomSheetData
+                                        .paymentCreateBankOrder.orderId ??
+                                    '',
+                                onSuccessForView: () async {
+                                  // model.navBack();
+                                  // await showFlexibleBottomSheet(
+                                  //   initHeight: 0.95,
+                                  //   maxHeight: 0.95,
+                                  //   duration: Duration(milliseconds: 250),
+                                  //   context: context,
+                                  //   bottomSheetColor: Colors.transparent,
+                                  //   builder: (context, scrollController,
+                                  //           offset) =>
+                                  //       SingleOrderPaymentSuccessFailBottomSheetView(
+                                  //     scrollController: scrollController,
+                                  //     offset: offset,
+                                  //     isPaymentSuccess: true,
+                                  //     soBottomSheetData:
+                                  //         soSendCodeConfirmationBottomSheetData
+                                  //             .soBottomSheetData,
+                                  //   ),
+                                  // );
+                                },
+                                onFailForView: () async {
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             onFailForView: () async {
                               await showErrorFlashBar(

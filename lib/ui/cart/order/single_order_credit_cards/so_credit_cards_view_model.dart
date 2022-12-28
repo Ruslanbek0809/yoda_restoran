@@ -245,7 +245,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
   //* POST after CONFIRM button is pressed
   Future<void> onOtpVerifyButtonPressed({
-    required String requestId,
+    required OrderPaymentCreateBankOrder paymentCreateBankOrder,
     Function()? onSuccessForView,
     Function()? onFailForView,
   }) async {
@@ -256,12 +256,26 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
     await runBusyFuture(
       _userService.verifyOtpOrderPayment(
-        requestId,
+        paymentCreateBankOrder.requestId ?? '',
         int.parse(_sendCode),
-        () {
-          _isLoading = false;
-          notifyListeners();
+        (String paResValue) async {
+          // _isLoading = false;
+          // notifyListeners();
+
+          await _userService.postFinish3ds(
+            paymentCreateBankOrder.orderId ?? '',
+            paResValue,
+            () async {
+              // _isLoading = false;
+              // notifyListeners();
           onSuccessForView!();
+            },
+            () {
+              _isLoading = false;
+              notifyListeners();
+              onFailForView!();
+            },
+          );
         },
         () {
           _isLoading = false;
