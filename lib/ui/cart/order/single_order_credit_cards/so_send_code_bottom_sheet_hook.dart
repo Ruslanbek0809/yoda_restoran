@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sms_autofill/sms_autofill.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
@@ -24,11 +25,16 @@ class SOSendCodeBottomSheetHook
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          scrollPadding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom - 40.h),
           controller: _sendCodeController,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(5),
+          ],
           textAlign: TextAlign.center,
           style: kts18Text,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.done,
           // onCodeChanged: model.updateSendCodeValidator,
           // onCodeSubmitted: model.updateSendCodeValidator,
           // codeLength: 5,

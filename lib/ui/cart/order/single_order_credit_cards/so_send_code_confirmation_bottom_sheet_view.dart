@@ -11,7 +11,6 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
-import 'so_payment_success_fail_bottom_sheet.dart';
 import 'so_send_code_bottom_sheet_hook.dart';
 
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
@@ -180,41 +179,41 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                     .paymentCreateBankOrder.requestId ??
                                 '',
                             onSuccessForView: () async {
-                              await model.checkOnlinePaymentOrderStatus(
-                                orderId: soSendCodeConfirmationBottomSheetData
-                                        .paymentCreateBankOrder.orderId ??
-                                    '',
-                                onSuccessForView: () async {
-                                  model.navBack();
-                                  await showFlexibleBottomSheet(
-                                    initHeight: 0.95,
-                                    maxHeight: 0.95,
-                                    duration: Duration(milliseconds: 250),
-                                    context: context,
-                                    bottomSheetColor: Colors.transparent,
-                                    builder: (context, scrollController,
-                                            offset) =>
-                                        SingleOrderPaymentSuccessFailBottomSheetView(
-                                      scrollController: scrollController,
-                                      offset: offset,
-                                      isPaymentSuccess: true,
-                                      soBottomSheetData:
-                                          soSendCodeConfirmationBottomSheetData
-                                              .soBottomSheetData,
-                                    ),
-                                  );
-                                },
-                                onFailForView: () async {
-                                  await showErrorFlashBar(
-                                    context: context,
-                                    margin: EdgeInsets.only(
-                                      left: 16.w,
-                                      right: 16.w,
-                                      bottom: 0.05.sh,
-                                    ),
-                                  );
-                                },
-                              );
+                              // await model.checkOnlinePaymentOrderStatus(
+                              //   orderId: soSendCodeConfirmationBottomSheetData
+                              //           .paymentCreateBankOrder.orderId ??
+                              //       '',
+                              //   onSuccessForView: () async {
+                              //     model.navBack();
+                              //     await showFlexibleBottomSheet(
+                              //       initHeight: 0.95,
+                              //       maxHeight: 0.95,
+                              //       duration: Duration(milliseconds: 250),
+                              //       context: context,
+                              //       bottomSheetColor: Colors.transparent,
+                              //       builder: (context, scrollController,
+                              //               offset) =>
+                              //           SingleOrderPaymentSuccessFailBottomSheetView(
+                              //         scrollController: scrollController,
+                              //         offset: offset,
+                              //         isPaymentSuccess: true,
+                              //         soBottomSheetData:
+                              //             soSendCodeConfirmationBottomSheetData
+                              //                 .soBottomSheetData,
+                              //       ),
+                              //     );
+                              //   },
+                              //   onFailForView: () async {
+                              //     await showErrorFlashBar(
+                              //       context: context,
+                              //       margin: EdgeInsets.only(
+                              //         left: 16.w,
+                              //         right: 16.w,
+                              //         bottom: 0.05.sh,
+                              //       ),
+                              //     );
+                              //   },
+                              // );
                             },
                             onFailForView: () async {
                               await showErrorFlashBar(

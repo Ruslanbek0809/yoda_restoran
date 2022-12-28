@@ -259,8 +259,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         requestId,
         int.parse(_sendCode),
         () {
-          // _isLoading = false;
-          // notifyListeners();
+          _isLoading = false;
+          notifyListeners();
           onSuccessForView!();
         },
         () {
