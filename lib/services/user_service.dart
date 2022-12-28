@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test41';
+    _queryParams['orderNumber'] = 'Ver44Test50';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -728,58 +728,105 @@ class UserService {
         queryParameters: _queryParams,
       );
 
-      if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201)) {
+      if (response.data != null && response.statusCode == 200) {
         // log.v(
         //     'RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
         // log.v('RESPONSE: verifyOtpOrderPayment => ${response.data}');
 
-        // var document = parse(response.data);
-        //* GETS value of DOCUMENT => BODY => FORM (firstChild) => 2nd INPUT (nodes[1]) => value of 'PaRes' (attributes['value'])
-        // String paResValue =
-        //     document.body!.firstChild!.nodes[1].attributes['value'] ?? '';
-
-        // Parse the HTML string into a Document object
+        //! Step 1. Parses the HTML string into a Document object
         Document document = parse(response.data);
         log.v(
             'RESPONSE: verifyOtpOrderPayment HTML BODY INNER ELEMENT => ${document.body!.innerHtml}');
 
-        // Find the element with the "errorMessage" class
-        var errorMessageElement =
-            document.getElementsByClassName('errorMessage').first;
+        //! Step 2. EXECUTES query on the input element with the name "PaRes". If it is FOUND, it EXECUTES next query. If it is NOT FOUND, it throws StateError
+        try {
+          //* Finds the input element with the name "PaRes".
+          final paresElements =
+              document.querySelectorAll('input[name="PaRes"]');
 
-        // Get the text content of the element
-        String errorMessage = errorMessageElement.text;
+          //* Gets the value of the input element.
+          final paresElementValue = paresElements.first.attributes['value'];
+          //* Prints the value.
+          print('PaRes\'s value paresElementValue: $paresElementValue');
 
-        // Print the error message
-        print(
-            'errorMessage: $errorMessage'); // Output: "Wrong password typed attempt 1 of 3"
+          //! Step 3. If "PaRes" element FOUND, it EXECUTES next query on "operationCancelledMessage" element. If it is FOUND, it gives FAIL. If it is NOT FOUND, it gives SUCCESS.
+          try {
+            // //* PRINTS operationCancelledMessage method 1
+            //   //* Find the element with the "operationCancelledMessage" class
+            //   var operationCancelledMessageElement1 = document
+            //       .getElementsByClassName('operationCancelledMessage')
+            //       .first;
+            //   //* Get the text content of the element
+            //   String operationCancelledMessage1 =
+            //       operationCancelledMessageElement1.text;
+            // //* Print the error message
+            // print(
+            //     'operationCancelledMessage1: $operationCancelledMessage1'); // Output: "Operation cancelled"
 
-        // Find the element with the "errorMessage" class
-        var operationCancelledMessageElement =
-            document.querySelector('.operationCancelledMessage');
+            //* PRINTS operationCancelledMessage method 2
+            //* Find the element with the "operationCancelledMessage" class
+            var operationCancelledMessageElement2 =
+                document.querySelector('.operationCancelledMessage');
 
-        // Get the text content of the element
-        String operationCancelledMessage =
-            operationCancelledMessageElement?.text ?? 'it is null';
+            //! Step 3.1. If "operationCancelledMessage" element is FOUND, then it is 100% FAIL
+            if (operationCancelledMessageElement2 != null) {
+              //* Get the text content of the element
+              String operationCancelledMessage2 =
+                  operationCancelledMessageElement2.text;
+              //* Print the error message
+              print(
+                  'operationCancelledMessage2: $operationCancelledMessage2'); // Output: "Operation cancelled"
 
-        // Print the error message
-        print(
-            'operationCancelledMessage: $operationCancelledMessage'); // Output: "Operation cancelled"
+              //! if FAIL
+              onFail();
+            } else {
+              //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
+              //! SUCCESS
+              onSuccess();
+            }
+          } on StateError catch (e) {
+            //* The input element was not found.
+            print('operationCancelledMessage element not found: $e');
 
-        // Find the element with the "errorMessage" class
-        var errorMessageElement1 = document.querySelector('.errorMessage');
+            //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
+            //! SUCCESS
+            onSuccess();
+          }
 
-        // Get the text content of the element
-        String errorMessage1 = errorMessageElement1?.text ?? 'it is null';
+          //! Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
+        } on StateError catch (e) {
+          //* The input element was not found.
+          print('PaRes element not found: $e');
 
-        // Print the error message
-        print('errorMessage1: $errorMessage1'); // Output: "Operation cancelled"
+          // //* PRINTS errorMessage method 1
+          // //* Finds the element with the "errorMessage" class
+          // var errorMessageElement1 =
+          //     document.getElementsByClassName('errorMessage').first;
+          // //* Gets the text content of the element
+          // String errorMessage1 = errorMessageElement1.text;
+          // //* Prints the error message
+          // print(
+          //     'errorMessage1: $errorMessage1'); //* Output: "Wrong password typed attempt 1 of 3"
 
-        onSuccess();
+          //* PRINTS errorMessage method 2
+          //* Find the element with the "errorMessage" class
+          var errorMessageElement2 = document.querySelector('.errorMessage');
+
+          //! Step 4.1. If "errorMessage" element is FOUND, then it is FAIL
+          if (errorMessageElement2 != null) {
+            //* Gets the text content of the element
+            String errorMessage2 = errorMessageElement2.text;
+            //* Prints the error message
+            print(
+                'errorMessage2: $errorMessage2'); //* Output: "Operation cancelled"
+
+            //! if FAIL
+            onFail();
+          }
+        }
       } else
 
-        /// if FAIL
+        //! if FAIL
         onFail();
     } on DioError catch (error) {
       log.v(

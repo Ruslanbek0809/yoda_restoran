@@ -1,5 +1,6 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -30,6 +31,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
+      // onModelReady: (model) async => await SmsAutoFill().listenForCode,
       viewModelBuilder: () => SOCreditCardsViewModel(
         soBottomSheetData:
             soSendCodeConfirmationBottomSheetData.soBottomSheetData,
@@ -109,6 +111,28 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                             key: _sendCodeformKey,
                             autovalidateMode: AutovalidateMode.disabled,
                             child: SOSendCodeBottomSheetHook(),
+                            //     TextFieldPinAutoFill(
+                            //   // controller: _sendCodeController,
+                            //   // textAlign: TextAlign.center,
+                            //   style: kts18Text,
+                            //   // keyboardType: TextInputType.text,
+                            //   // textInputAction: TextInputAction.next,
+                            //   onCodeChanged: model.updateSendCodeValidator,
+                            //   onCodeSubmitted: model.updateSendCodeValidator,
+                            //   codeLength: 5,
+                            //   decoration: InputDecoration(
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: kbr10,
+                            //       borderSide: BorderSide(
+                            //         color: kcFillBorderColor,
+                            //         width: 0.5,
+                            //       ),
+                            //     ),
+                            //     hintText: LocaleKeys.code.tr(),
+                            //     hintStyle: ktsDefault18HelperText,
+                            //   ),
+                            //   // validator: model.updateSendCodeValidator,
+                            // ),
                           ),
                         ),
                       ],
