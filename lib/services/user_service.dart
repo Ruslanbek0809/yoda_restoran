@@ -9,7 +9,8 @@ import '../models/hive_models/hive_models.dart';
 import '../models/models.dart';
 import '../utils/utils.dart';
 import 'services.dart';
-import 'package:html/parser.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html/dom.dart' show Document;
 
 class UserService {
   final log = getLogger('UserService');
@@ -602,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test18';
+    _queryParams['orderNumber'] = 'Ver44Test41';
 
     //* AMOUNT part START
     num _totalOrderSum = order.totPrice!;
@@ -616,7 +617,8 @@ class UserService {
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
 
     _totalOrderSum *= 100; // CONVERTS real value to make it acceptable by bank
-    _queryParams['amount'] = _totalOrderSum.toInt();
+    _queryParams['amount'] = 1;
+    // _queryParams['amount'] = _totalOrderSum.toInt();
 
     //* AMOUNT part END
 
@@ -728,9 +730,52 @@ class UserService {
 
       if (response.data != null &&
           (response.statusCode == 200 || response.statusCode == 201)) {
+        // log.v(
+        //     'RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
+        // log.v('RESPONSE: verifyOtpOrderPayment => ${response.data}');
+
+        // var document = parse(response.data);
+        //* GETS value of DOCUMENT => BODY => FORM (firstChild) => 2nd INPUT (nodes[1]) => value of 'PaRes' (attributes['value'])
+        // String paResValue =
+        //     document.body!.firstChild!.nodes[1].attributes['value'] ?? '';
+
+        // Parse the HTML string into a Document object
+        Document document = parse(response.data);
         log.v(
-            'RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
-        log.v('RESPONSE: verifyOtpOrderPayment => ${response.data}');
+            'RESPONSE: verifyOtpOrderPayment HTML BODY INNER ELEMENT => ${document.body!.innerHtml}');
+
+        // Find the element with the "errorMessage" class
+        var errorMessageElement =
+            document.getElementsByClassName('errorMessage').first;
+
+        // Get the text content of the element
+        String errorMessage = errorMessageElement.text;
+
+        // Print the error message
+        print(
+            'errorMessage: $errorMessage'); // Output: "Wrong password typed attempt 1 of 3"
+
+        // Find the element with the "errorMessage" class
+        var operationCancelledMessageElement =
+            document.querySelector('.operationCancelledMessage');
+
+        // Get the text content of the element
+        String operationCancelledMessage =
+            operationCancelledMessageElement?.text ?? 'it is null';
+
+        // Print the error message
+        print(
+            'operationCancelledMessage: $operationCancelledMessage'); // Output: "Operation cancelled"
+
+        // Find the element with the "errorMessage" class
+        var errorMessageElement1 = document.querySelector('.errorMessage');
+
+        // Get the text content of the element
+        String errorMessage1 = errorMessageElement1?.text ?? 'it is null';
+
+        // Print the error message
+        print('errorMessage1: $errorMessage1'); // Output: "Operation cancelled"
+
         onSuccess();
       } else
 
@@ -745,7 +790,93 @@ class UserService {
     }
   }
 
-  //* CHECKS ONLINE PAYMENT ORDER STATUS
+  // ///* POST finish3ds STEP 4
+  // Future<void> postFinish3ds(
+  //   OrderPaymentRegister paymentRegister,
+  //   OrderPaymentAcsUrl paymentAcsUrl,
+  //   String paResValue,
+  //   Function() onSuccess,
+  //   Function() onFail,
+  // ) async {
+  //   Map<String, dynamic> _queryParams = {};
+  //   _queryParams['MD'] = paymentRegister.orderId;
+  //   _queryParams['PaRes'] = paResValue;
+  //   _queryParams['authForm'] = 'authForm';
+  //   _queryParams['request_id'] = paymentRegister.orderId;
+  //   _queryParams['sendPasswordButton'] = 'Send password';
+
+  //   log.v('_queryParams at the END: $_queryParams');
+  //   // final FormData onlinePaymentFormData = FormData.fromMap(_queryParams);
+
+  //   try {
+  //     //----------- DIO PART START -------------//
+  //     Dio dio = Dio();
+
+  //     //----------- DIO BASE URL -------------//
+  //     dio.options.baseUrl = paymentAcsUrl.termUrl ??
+  //         'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+  //     // dio.options.baseUrl = 'https://mpi.gov.tm:443/payment/rest/finish3ds.do';
+  //     // dio.options.contentType = Headers.formUrlEncodedContentType;
+
+  //     //----------- DIO INTERCEPTORS -------------//
+  //     dio.interceptors.add(
+  //       InterceptorsWrapper(
+  //         onRequest: (options, handler) {
+  //           // Do something before request is sent
+  //           log.i(
+  //               'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?MD=${paymentRegister.orderId}&PaRes=$paResValue');
+  //           // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password');
+  //           //  QUERY PARAMS:${options.queryParameters} OR FORM DATA:${options.data}');
+  //           return handler.next(options); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //           // If you want to reject the request with a error message,f
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onResponse: (response, handler) {
+  //           // Do something with response data
+  //           return handler.next(response); // continue
+  //           // If you want to reject the request with a error message,
+  //           // you can reject a `DioError` object eg: `handler.reject(dioError)`
+  //         },
+  //         onError: (DioError e, handler) {
+  //           // Do something with response error
+  //           return handler.next(e); //continue
+  //           // If you want to resolve the request with some custom data，
+  //           // you can resolve a `Response` object eg: `handler.resolve(response)`.
+  //         },
+  //       ),
+  //     );
+  //     //----------- DIO PART END -------------//
+
+  //     Response response = await dio.post(
+  //       '',
+  //       // '?MD=${paymentRegister.orderId}&PaRes=$paResValue',
+  //       // &authForm=authForm&request_id=${paymentRegister.orderId}&sendPasswordButton=Send password',
+  //       queryParameters: _queryParams,
+  //       // data: onlinePaymentFormData,
+  //     );
+  //     if (response.data != null) {
+  //       log.v('RESPONSE: postFinish3ds => ${response.data}');
+  //       log.v(
+  //           'RESPONSE: postFinish3ds => response.statusCode: ${response.statusCode}');
+
+  //       // //* if SUCCESS
+  //       // if (response.data != null &&
+  //       //     (response.statusCode == 200 || response.statusCode == 201))
+  //       //   onSuccess();
+  //       // //* if FAIL
+  //       // else
+  //       //   onFail();
+  //     }
+  //   } on DioError catch (error) {
+  //     log.v('ERROR on postFinish3ds => ${error.response}');
+  //     onFail();
+  //     rethrow;
+  //   }
+  // }
+
+  ///* CHECKS ONLINE PAYMENT ORDER STATUS
   Future<void> checkOnlinePaymentOrderStatus(
     String orderId,
     Function() onSuccess,
@@ -755,6 +886,8 @@ class UserService {
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
     _queryParams['orderId'] = orderId;
+    // _queryParams['orderNumber'] = orderId;
+    // _queryParams['orderNumber'] = 'Ver44Test21';
     _queryParams['language'] = 'ru';
 
     log.v('_queryParams at the END: $_queryParams');
@@ -766,7 +899,8 @@ class UserService {
       Dio dio = Dio();
 
       //----------- DIO BASE URL -------------//
-      dio.options.baseUrl = 'https://mpi.gov.tm/payment/rest/getOrderStatus.do';
+      dio.options.baseUrl =
+          'https://mpi.gov.tm/payment/rest/getOrderStatusExtended.do';
 
       //----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(

@@ -18,13 +18,13 @@ void setupBottomSheet() {
         (context, sheetRequest, completer) => SOConfirmationBottomSheetView(
               request: sheetRequest,
               completer: completer,
-              soCreditCardsConfirmationBottomSheetData: sheetRequest.data,
+              soConfirmationBottomSheetData: sheetRequest.data,
             ),
     BottomSheetType.sendCodeConfirmation: (context, sheetRequest, completer) =>
         SOSendCodeConfirmationBottomSheetView(
           request: sheetRequest,
           completer: completer,
-          soConfirmationBottomSheetData: sheetRequest.data,
+          soSendCodeConfirmationBottomSheetData: sheetRequest.data,
         ),
   };
 
