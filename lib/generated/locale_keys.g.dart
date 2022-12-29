@@ -211,6 +211,7 @@ abstract class  LocaleKeys {
   static const userDeleteSuccess = 'userDeleteSuccess';
   static const deleteUserInfo = 'deleteUserInfo';
   static const deleteUserFlashInfo = 'deleteUserFlashInfo';
+  static const sendCodeErrorAttempt = 'sendCodeErrorAttempt';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
 

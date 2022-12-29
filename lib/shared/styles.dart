@@ -161,6 +161,11 @@ TextStyle kts16IconBoldText = TextStyle(
   color: kcIconColor,
 );
 
+TextStyle kts16ErrorText = TextStyle(
+  fontSize: 16.sp,
+  color: kcRedColor,
+);
+
 TextStyle kts18Text = TextStyle(
   fontSize: 18.sp,
   color: kcFontColor,

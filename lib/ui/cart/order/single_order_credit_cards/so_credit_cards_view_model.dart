@@ -228,6 +228,11 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
 
 //!------------------------ SEND CODE CONFIRMATION BOTTOM SHEET ----------------------------//
 
+  bool _isSendCodeError = false;
+  bool get isSendCodeError => _isSendCodeError;
+  int _sendCodeErrorAttemptCount = 0;
+  int get sendCodeErrorAttemptCount => _sendCodeErrorAttemptCount;
+
   String _sendCode = '';
   String get sendCode => _sendCode;
 
@@ -252,6 +257,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     log.v('onOtpVerifyButtonPressed()');
 
     _isLoading = true;
+    _isSendCodeError = false;
+    _sendCodeErrorAttemptCount = 0;
     notifyListeners();
 
     await runBusyFuture(
@@ -261,7 +268,17 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         (String paResValue) async {
           // _isLoading = false;
           // notifyListeners();
-
+          await runBusyFuture(
+            _userService.checkOnlinePaymentOrderStatusExtended(
+              paymentCreateBankOrder.orderId ?? '',
+              () async {},
+              () {
+                _isLoading = false;
+                notifyListeners();
+                onFailForView!();
+              },
+            ),
+          );
           await _userService.postFinish3ds(
             paymentCreateBankOrder.orderId ?? '',
             paResValue,
@@ -277,8 +294,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             },
           );
         },
-        () {
+        (int attemptCountInt) {
           _isLoading = false;
+          _isSendCodeError = true;
+          _sendCodeErrorAttemptCount = attemptCountInt;
           notifyListeners();
           onFailForView!();
         },

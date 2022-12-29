@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test63';
+    _queryParams['orderNumber'] = 'Ver44Test67';
 
     //* ======= AMOUNT part START ======= //
 
@@ -675,7 +675,7 @@ class UserService {
     String requestId,
     int smsCode,
     Function(String) onSuccess,
-    Function() onFail,
+    Function(int) onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
 
@@ -779,7 +779,7 @@ class UserService {
                   'operationCancelledMessage2: $operationCancelledMessage2'); // Output: "Operation cancelled"
 
               //! if FAIL
-              onFail();
+              onFail(-1);
             } else {
               //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
               //! SUCCESS
@@ -819,19 +819,32 @@ class UserService {
             String errorMessage2 = errorMessageElement2.text;
             //* Prints the error message
             print(
-                'errorMessage2: $errorMessage2'); //* Output: "Operation cancelled"
+                'errorMessage2: $errorMessage2'); //* Output: "Wrong password typed attempt 1 of 3"
+
+            String? attemptCountString = errorMessage2[29]; // c will be 'e'
+            print(
+                'attemptCountString: $attemptCountString and its runType: ${attemptCountString.runtimeType}'); //* Output: attemptCount
+
+            int attemptCountInt = 0;
+            try {
+              attemptCountInt = int.parse(attemptCountString);
+            } catch (e) {
+              print('FormatException: Invalid number');
+            }
+            print(
+                'attemptCountInt: $attemptCountInt and its runType: ${attemptCountInt.runtimeType}'); //* Output: attemptCount
 
             //! if FAIL
-            onFail();
+            onFail(attemptCountInt);
           }
         }
       } else
 
         //! if FAIL
-        onFail();
+        onFail(0);
     } on DioError catch (error) {
       log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
-      onFail();
+      onFail(0);
       rethrow;
     }
   }
