@@ -238,33 +238,21 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           duration: const Duration(milliseconds: 300),
                           child: model.isLoading
                               ? ButtonLoading()
-                              :
-                              // Row(
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceBetween,
-                              //     children: [
-                              //       Flexible(
-                              //         child: Text(
-                              //           model.addresses![pos].street! +
-                              //               (model.addresses![pos].house != null
-                              //                   ? ', ${model.addresses![pos].house}'
-                              //                   : ''),
-                              //           maxLines: 1,
-                              //           overflow: TextOverflow.ellipsis,
-                              //           style: kts18Text,
-                              //         ),
-                              //       ),
-                              //       SizedBox(width: 5.w),
-                              //       Icon(
-                              //         Icons.arrow_forward_ios_rounded,
-                              //         color: kcSecondaryDarkColor,
-                              //       ),
-                              //     ],
-                              //   ),
-                              Text(
-                                  LocaleKeys.confirm,
-                                  style: ktsButtonWhite18Text,
-                                ).tr(),
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      LocaleKeys.continuee,
+                                      style: ktsButtonWhite18Text,
+                                    ).tr(),
+                                    SizedBox(width: 7.w),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 20.sp,
+                                      color: kcWhiteColor,
+                                    ),
+                                  ],
+                                ),
                         ),
                         onPressed: () async {
                           FocusScope.of(context)

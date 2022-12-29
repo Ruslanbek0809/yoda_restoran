@@ -296,8 +296,12 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         },
         (int attemptCountInt) {
           _isLoading = false;
-          _isSendCodeError = true;
-          _sendCodeErrorAttemptCount = attemptCountInt;
+
+          if (attemptCountInt != 0 && attemptCountInt != -1) {
+            _isSendCodeError = true;
+            _sendCodeErrorAttemptCount = attemptCountInt;
+          }
+
           notifyListeners();
           onFailForView!();
         },

@@ -136,7 +136,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                       ),
                       if (model.isSendCodeError)
                         Padding(
-                          padding: EdgeInsets.only(left: 16.w, top: 20.h),
+                          padding: EdgeInsets.only(left: 16.w, top: 5.h),
                           child: Text(
                             LocaleKeys.sendCodeErrorAttempt,
                             style: kts16ErrorText,

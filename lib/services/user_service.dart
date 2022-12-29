@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test67';
+    _queryParams['orderNumber'] = 'Ver44Test73';
 
     //* ======= AMOUNT part START ======= //
 
@@ -817,22 +817,22 @@ class UserService {
           if (errorMessageElement2 != null) {
             //* Gets the text content of the element
             String errorMessage2 = errorMessageElement2.text;
-            //* Prints the error message
-            print(
-                'errorMessage2: $errorMessage2'); //* Output: "Wrong password typed attempt 1 of 3"
-
-            String? attemptCountString = errorMessage2[29]; // c will be 'e'
-            print(
-                'attemptCountString: $attemptCountString and its runType: ${attemptCountString.runtimeType}'); //* Output: attemptCount
+            errorMessage2 = errorMessage2.replaceAll(' ', '');
+            // //* Prints the error message
+            // print(
+            //     'errorMessage2: $errorMessage2'); //* Output: "Wrong password typed attempt 1 of 3"
+            // print(
+            //     'errorMessage2 length: ${errorMessage2.length}'); //* Output: "Wrong password typed attempt 1 of 3"
+            String? attemptCountString = errorMessage2[26];
+            // print(
+            //     'attemptCountString: $attemptCountString and its runType: ${attemptCountString.runtimeType}'); //* Output: attemptCount
 
             int attemptCountInt = 0;
             try {
               attemptCountInt = int.parse(attemptCountString);
             } catch (e) {
-              print('FormatException: Invalid number');
+              // print('FormatException: Invalid number');
             }
-            print(
-                'attemptCountInt: $attemptCountInt and its runType: ${attemptCountInt.runtimeType}'); //* Output: attemptCount
 
             //! if FAIL
             onFail(attemptCountInt);
