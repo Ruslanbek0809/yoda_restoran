@@ -27,7 +27,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   HiveCreditCard? _tempSelectedHiveCreditCard;
   HiveCreditCard? get tempSelectedHiveCreditCard => _tempSelectedHiveCreditCard;
 
-  /// Temporarily SETS _tempSelectedHiveCreditCard
+  //* SETS _tempSelectedHiveCreditCard
   void updateTempSelectedHiveCreditCard(HiveCreditCard selectedHiveCreditCard) {
     log.v(
         'updateTempSelectedHiveCreditCard selectedHiveCreditCard: ${selectedHiveCreditCard.bankId}');
@@ -147,9 +147,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  //* SAVES and CREATED credit card info to HIVE
-  Future<void> onCreditCardSave() async {
-    log.v('onCreditCardSave()');
+  //* SAVES and CREATES a new credit card info to HIVE
+  Future<void> saveCreditCardToHive() async {
+    log.v('saveCreditCardToHive()');
     await _hiveDbService.addCreditCard(
       CreditCard(
         cardNumber: _cardNumber,
@@ -354,8 +354,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   Future<void> getInitialOrdersWhenOnlinePaymentIsSuccess() async {
     log.v('getInitialOrdersWhenOnlinePaymentIsSuccess()');
 
-    /// REINITIALIZES ORDERS
-    /// TODO: Optimize if possible
+    //* REINITIALIZES ORDERS
+    // TODO: Optimize if possible
     await soBottomSheetData.orderViewModel.getInitialOrders();
   }
 
@@ -372,25 +372,24 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _isChangeOnlineToCashLoading = true;
     notifyListeners();
 
-    ///* COMMENTED
-    // await runBusyFuture(
-    //   _userService.patchOrderOnlineToCash(
-    //     order!.id!,
-    //     () async {
-    //       /// REINITIALIZES ORDERS
-    //       /// TODO: Optimize if possible
-    //       await orderViewModel!.getInitialOrders();
-    //       _isChangeToCashLoading = false;
-    //       notifyListeners();
-    //       onSuccessForView!();
-    //     },
-    //     () {
-    //       _isChangeToCashLoading = false;
-    //       notifyListeners();
-    //       onFailForView!();
-    //     },
-    //   ),
-    // );
+    await runBusyFuture(
+      _userService.patchOrderOnlineToCash(
+        soBottomSheetData.order.id!,
+        () async {
+          //* REINITIALIZES ORDERS
+          // TODO: Optimize if possible
+          await soBottomSheetData.orderViewModel.getInitialOrders();
+          _isChangeOnlineToCashLoading = false;
+          notifyListeners();
+          onSuccessForView!();
+        },
+        () {
+          _isChangeOnlineToCashLoading = false;
+          notifyListeners();
+          onFailForView!();
+        },
+      ),
+    );
   }
 
 //------------------------ NAVIGATION ----------------------------//

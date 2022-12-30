@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test77';
+    _queryParams['orderNumber'] = 'Ver44Test82';
 
     //* ======= AMOUNT part START ======= //
 
@@ -618,7 +618,8 @@ class UserService {
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
 
     _totalOrderSum *= 100; //* CONVERTS real value to make it acceptable by bank
-    _queryParams['amount'] = _totalOrderSum.toInt();
+    _queryParams['amount'] = 10000;
+    // _queryParams['amount'] = _totalOrderSum.toInt();
 
     //* ======= AMOUNT part END ======= //
 
@@ -653,15 +654,16 @@ class UserService {
             'SUCCESS RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
         log.v('SUCCESS RESPONSE: createBankOrder => ${response.data}');
 
-        /// CONVERTS JSON into DART MODEL
+        //* CONVERTS JSON into DART MODEL
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
         _paymentCreateBankOrder =
             OrderPaymentCreateBankOrder.fromJson(response.data);
 
+        //! if SUCCESS
         onSuccess(_paymentCreateBankOrder);
       } else
 
-        /// if FAIL
+        //! if FAIL
         onFail();
     } on DioError catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');

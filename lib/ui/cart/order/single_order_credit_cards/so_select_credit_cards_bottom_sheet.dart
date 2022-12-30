@@ -108,9 +108,9 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: model.tempSelectedHiveCreditCard != null &&
-                                      model.tempSelectedHiveCreditCard!
-                                              .bankId ==
-                                          _creditCard.bankId
+                                      model.hiveCreditCards.indexOf(model
+                                              .tempSelectedHiveCreditCard!) ==
+                                          pos
                                   ? SvgPicture.asset(
                                       'assets/checkCircle.svg',
                                       color: kcGreenColor,

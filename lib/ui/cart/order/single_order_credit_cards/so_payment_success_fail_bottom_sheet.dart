@@ -42,11 +42,11 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            //! --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 
-            // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
-            // --------------- ONLINE PAYMENT SUCCESS -------------- //
+            //! --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
+            //! --------------- ONLINE PAYMENT SUCCESS -------------- //
             if (isPaymentSuccess == true)
               Expanded(
                 child: Column(
@@ -100,7 +100,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                   ],
                 ),
               ),
-            // --------------- ONLINE PAYMENT FAIL -------------- //
+            //! --------------- ONLINE PAYMENT FAIL -------------- //
             if (isPaymentSuccess == false)
               Expanded(
                 child: Column(

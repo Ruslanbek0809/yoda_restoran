@@ -260,8 +260,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
 
                           if (creditCardFormKey.currentState!.validate()) {
                             print('creditCardFormKey SUCCESS');
-                            if (soConfirmationBottomSheetData.isNewCreditCard)
-                              await model.onCreditCardSave();
+
                             await model.onOnlinePaymentOrderButtonPressed(
                               selectedHiveCreditCard:
                                   soConfirmationBottomSheetData.isNewCreditCard
@@ -269,6 +268,12 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                       : soConfirmationBottomSheetData
                                           .hiveCreditCard!,
                               onSuccessForView: (paymentCreateBankOrder) async {
+
+                                //* If new credit Card is created, run onCreditSave
+                                if (soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  await model.saveCreditCardToHive();
+                                  
                                 model.navBack();
                                 await model
                                     .showCustomSendCodeConfirmationBottomSheet(
