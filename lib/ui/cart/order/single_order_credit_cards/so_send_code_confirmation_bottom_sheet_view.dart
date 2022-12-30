@@ -215,18 +215,31 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                 );
                               },
                               onFailForView: () async {
-                                await showErrorFlashBar(
+                                //! If NO MONEY /INVALID CVC /OTHER ERROR in SEND CODE BOTTOM SHEET
+                                model.navBack();
+                                await showFlexibleBottomSheet(
+                                  initHeight: 0.95,
+                                  maxHeight: 0.95,
+                                  duration: Duration(milliseconds: 250),
                                   context: context,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.05.sh,
+                                  bottomSheetColor: Colors.transparent,
+                                  builder: (context, scrollController,
+                                          offset) =>
+                                      SingleOrderPaymentSuccessFailBottomSheetView(
+                                    scrollController: scrollController,
+                                    offset: offset,
+                                    isPaymentSuccess: false,
+                                    errorText: '',
+                                    soBottomSheetData:
+                                        soSendCodeConfirmationBottomSheetData
+                                            .soBottomSheetData,
                                   ),
                                 );
                               },
                             );
                           },
                           onFailForView: () async {
+                            //! If OPERATION CANCELED after 3 WRONG SEND CODE ATTEMPTS
                             if (model.sendCodeErrorAttemptCount == -1) {
                               model.navBack();
                               await showFlexibleBottomSheet(

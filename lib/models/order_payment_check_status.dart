@@ -5,23 +5,31 @@ part 'order_payment_check_status.g.dart';
 @JsonSerializable()
 class OrderPaymentCheckStatus {
   OrderPaymentCheckStatus({
-    this.orderStatus,
     this.errorCode,
     this.errorMessage,
     this.orderNumber,
+    this.orderStatus,
+    this.actionCode,
+    this.actionCodeDescription,
   });
 
-  @JsonKey(name: 'OrderStatus')
-  final int? orderStatus;
-
-  @JsonKey(name: 'ErrorCode')
+  @JsonKey(name: 'errorCode')
   final String? errorCode;
 
-  @JsonKey(name: 'ErrorMessage')
+  @JsonKey(name: 'errorMessage')
   final String? errorMessage;
 
   @JsonKey(name: 'OrderNumber')
   final String? orderNumber;
+
+  @JsonKey(name: 'orderStatus')
+  final int? orderStatus;
+
+  @JsonKey(name: 'actionCode')
+  final int? actionCode;
+
+  @JsonKey(name: 'actionCodeDescription')
+  final String? actionCodeDescription;
 
   factory OrderPaymentCheckStatus.fromJson(Map<String, dynamic> json) =>
       _$OrderPaymentCheckStatusFromJson(json);

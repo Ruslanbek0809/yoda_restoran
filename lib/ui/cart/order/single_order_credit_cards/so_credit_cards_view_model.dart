@@ -265,35 +265,16 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
       _userService.verifyOtpOrderPayment(
         paymentCreateBankOrder.requestId ?? '',
         int.parse(_sendCode),
-        (String paResValue) async {
-          // _isLoading = false;
-          // notifyListeners();
-          await runBusyFuture(
-            _userService.checkOnlinePaymentOrderStatusExtended(
-              paymentCreateBankOrder.orderId ?? '',
-              () async {},
-              () {
-                _isLoading = false;
-                notifyListeners();
-                onFailForView!();
-              },
-            ),
-          );
-          await _userService.postFinish3ds(
-            paymentCreateBankOrder.orderId ?? '',
-            paResValue,
-            () async {
-              // _isLoading = false;
-              // notifyListeners();
-              onSuccessForView!();
-            },
-            () {
-              _isLoading = false;
-              notifyListeners();
-              onFailForView!();
-            },
-          );
-        },
+        (String paResValue) async => await _userService.postFinish3ds(
+          paymentCreateBankOrder.orderId ?? '',
+          paResValue,
+          () => onSuccessForView!(),
+          () {
+            _isLoading = false;
+            notifyListeners();
+            onFailForView!();
+          },
+        ),
         (int attemptCountInt) {
           _isLoading = false;
 
@@ -317,28 +298,28 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }) async {
     log.v('checkOnlinePaymentOrderStatus()');
 
-    // _isLoading = true;
-    // notifyListeners();
-
     await runBusyFuture(
       _userService.checkOnlinePaymentOrderStatusExtended(
         orderId,
-        () async {
-          // //* PATCHS ORDER PAID VAR
-          // await _userService.patchOrderToPaid(
-          //   order!.id!,
-          //   () async {
-          //     _isLoading = false;
-          //     notifyListeners();
-          //     onSuccessForView!();
+        () async =>
+            //! PATCHS ORDER PAID VAR TO PAID after SUCCESS
+            await _userService.patchOrderToPaid(
+          soBottomSheetData.order.id!,
+          () async {
+            _isLoading = false;
+            notifyListeners();
+            onSuccessForView!();
 
-          //     /// REINITIALIZES ORDERS
-          //     /// TODO: Optimize if possible
-          //     await orderViewModel!.getInitialOrders();
-          //   },
-          //   () {},
-          // );
-        },
+            //* REINITIALIZES ORDERS
+            /// TODO: Optimize if possible
+            await soBottomSheetData.orderViewModel.getInitialOrders();
+          },
+          () {
+            _isLoading = false;
+            notifyListeners();
+            onFailForView!();
+          },
+        ),
         () {
           _isLoading = false;
           notifyListeners();
@@ -349,15 +330,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }
 
 //!------------------------ PAYMENT SUCCESS/FAIL BOTTOM SHEET ----------------------------//
-
-  ///* GETS initial orders in Orders View
-  Future<void> getInitialOrdersWhenOnlinePaymentIsSuccess() async {
-    log.v('getInitialOrdersWhenOnlinePaymentIsSuccess()');
-
-    //* REINITIALIZES ORDERS
-    // TODO: Optimize if possible
-    await soBottomSheetData.orderViewModel.getInitialOrders();
-  }
 
   bool _isChangeOnlineToCashLoading = false;
   bool get isChangeOnlineToCashLoading => _isChangeOnlineToCashLoading;

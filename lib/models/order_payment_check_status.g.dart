@@ -9,17 +9,21 @@ part of 'order_payment_check_status.dart';
 OrderPaymentCheckStatus _$OrderPaymentCheckStatusFromJson(
         Map<String, dynamic> json) =>
     OrderPaymentCheckStatus(
-      orderStatus: json['OrderStatus'] as int?,
-      errorCode: json['ErrorCode'] as String?,
-      errorMessage: json['ErrorMessage'] as String?,
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
       orderNumber: json['OrderNumber'] as String?,
+      orderStatus: json['orderStatus'] as int?,
+      actionCode: json['actionCode'] as int?,
+      actionCodeDescription: json['actionCodeDescription'] as String?,
     );
 
 Map<String, dynamic> _$OrderPaymentCheckStatusToJson(
         OrderPaymentCheckStatus instance) =>
     <String, dynamic>{
-      'OrderStatus': instance.orderStatus,
-      'ErrorCode': instance.errorCode,
-      'ErrorMessage': instance.errorMessage,
+      'errorCode': instance.errorCode,
+      'errorMessage': instance.errorMessage,
       'OrderNumber': instance.orderNumber,
+      'orderStatus': instance.orderStatus,
+      'actionCode': instance.actionCode,
+      'actionCodeDescription': instance.actionCodeDescription,
     };

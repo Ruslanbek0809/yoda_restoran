@@ -28,9 +28,6 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      onModelReady: (model) async => isPaymentSuccess
-          ? await model.getInitialOrdersWhenOnlinePaymentIsSuccess()
-          : {},
       viewModelBuilder: () =>
           SOCreditCardsViewModel(soBottomSheetData: soBottomSheetData),
       builder: (context, model, child) => Container(
@@ -131,7 +128,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
-                        !isPaymentSuccess
+                        !isPaymentSuccess && errorText.isNotEmpty
                             ? errorText
                             : LocaleKeys.online_payment_fail_info,
                         textAlign: TextAlign.center,
