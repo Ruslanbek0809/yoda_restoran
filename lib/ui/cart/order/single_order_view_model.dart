@@ -470,30 +470,6 @@ class SingleOrderViewModel extends ReactiveViewModel {
     }
   }
 
-  /// SHOWS ONLINE PAYMENT FAIL Dialog
-  Future showOnlinePaymentFailDialog() async {
-    log.i('showOnlinePaymentFailDialog()');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.onlinePaymentFail,
-      title: LocaleKeys.online_payment_fail,
-      data: LocaleKeys.online_payment_fail_info,
-      showIconInMainButton: false,
-      barrierDismissible: true,
-    );
-  }
-
-  /// SHOWS ONLINE PAYMENT SUCCESS Dialog
-  Future showOnlinePaymentSuccessDialog() async {
-    log.i('showOnlinePaymentSuccessDialog()');
-    await _dialogService.showCustomDialog(
-      variant: DialogType.onlinePaymentSuccess,
-      title: LocaleKeys.online_payment_success,
-      data: '',
-      showIconInMainButton: false,
-      barrierDismissible: true,
-    );
-  }
-
   bool _isChangeToCashLoading = false;
   bool get isChangeToCashLoading => _isChangeToCashLoading;
 

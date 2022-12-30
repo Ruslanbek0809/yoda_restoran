@@ -126,8 +126,6 @@ enum DialogType {
   rateOrder,
   orderDelete,
   creditCardDelete,
-  onlinePaymentFail,
-  onlinePaymentSuccess,
   userLogout,
   userDelete,
 }

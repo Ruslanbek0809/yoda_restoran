@@ -297,10 +297,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         (int attemptCountInt) {
           _isLoading = false;
 
-          if (attemptCountInt != 0 && attemptCountInt != -1) {
+          if (attemptCountInt != 0 && attemptCountInt != -1)
             _isSendCodeError = true;
-            _sendCodeErrorAttemptCount = attemptCountInt;
-          }
+
+          _sendCodeErrorAttemptCount = attemptCountInt;
 
           notifyListeners();
           onFailForView!();
@@ -349,6 +349,15 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   }
 
 //!------------------------ PAYMENT SUCCESS/FAIL BOTTOM SHEET ----------------------------//
+
+  ///* GETS initial orders in Orders View
+  Future<void> getInitialOrdersWhenOnlinePaymentIsSuccess() async {
+    log.v('getInitialOrdersWhenOnlinePaymentIsSuccess()');
+
+    /// REINITIALIZES ORDERS
+    /// TODO: Optimize if possible
+    await soBottomSheetData.orderViewModel.getInitialOrders();
+  }
 
   bool _isChangeOnlineToCashLoading = false;
   bool get isChangeOnlineToCashLoading => _isChangeOnlineToCashLoading;

@@ -11,6 +11,7 @@ import '../../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'so_credit_cards_view_model.dart';
+import 'so_payment_success_fail_bottom_sheet.dart';
 import 'so_send_code_bottom_sheet_hook.dart';
 
 class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
@@ -66,10 +67,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '+993 65 ****23',
-                                    style: kts18BoldText,
-                                  ),
+                                  // Text(
+                                  //   '+993 65 ****23',
+                                  //   style: kts18BoldText,
+                                  // ),
                                   Text(
                                     LocaleKeys.online_payment_send_code_info,
                                     style: kts16Text,
@@ -89,10 +90,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts16Text,
                                     textAlign: TextAlign.center,
                                   ).tr(),
-                                  Text(
-                                    '+993 65 ****23',
-                                    style: kts18BoldText,
-                                  ),
+                                  // Text(
+                                  //   '+993 65 ****23',
+                                  //   style: kts18BoldText,
+                                  // ),
                                 ],
                               ),
                             ),
@@ -193,24 +194,25 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                       .paymentCreateBankOrder.orderId ??
                                   '',
                               onSuccessForView: () async {
-                                // model.navBack();
-                                // await showFlexibleBottomSheet(
-                                //   initHeight: 0.95,
-                                //   maxHeight: 0.95,
-                                //   duration: Duration(milliseconds: 250),
-                                //   context: context,
-                                //   bottomSheetColor: Colors.transparent,
-                                //   builder: (context, scrollController,
-                                //           offset) =>
-                                //       SingleOrderPaymentSuccessFailBottomSheetView(
-                                //     scrollController: scrollController,
-                                //     offset: offset,
-                                //     isPaymentSuccess: true,
-                                //     soBottomSheetData:
-                                //         soSendCodeConfirmationBottomSheetData
-                                //             .soBottomSheetData,
-                                //   ),
-                                // );
+                                model.navBack();
+                                await showFlexibleBottomSheet(
+                                  initHeight: 0.95,
+                                  maxHeight: 0.95,
+                                  duration: Duration(milliseconds: 250),
+                                  context: context,
+                                  bottomSheetColor: Colors.transparent,
+                                  builder: (context, scrollController,
+                                          offset) =>
+                                      SingleOrderPaymentSuccessFailBottomSheetView(
+                                    scrollController: scrollController,
+                                    offset: offset,
+                                    isPaymentSuccess: true,
+                                    errorText: '',
+                                    soBottomSheetData:
+                                        soSendCodeConfirmationBottomSheetData
+                                            .soBottomSheetData,
+                                  ),
+                                );
                               },
                               onFailForView: () async {
                                 await showErrorFlashBar(
@@ -225,14 +227,36 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                             );
                           },
                           onFailForView: () async {
-                            await showErrorFlashBar(
-                              context: context,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
-                              ),
-                            );
+                            if (model.sendCodeErrorAttemptCount == -1) {
+                              model.navBack();
+                              await showFlexibleBottomSheet(
+                                initHeight: 0.95,
+                                maxHeight: 0.95,
+                                duration: Duration(milliseconds: 250),
+                                context: context,
+                                bottomSheetColor: Colors.transparent,
+                                builder: (context, scrollController, offset) =>
+                                    SingleOrderPaymentSuccessFailBottomSheetView(
+                                  scrollController: scrollController,
+                                  offset: offset,
+                                  isPaymentSuccess: false,
+                                  errorText: LocaleKeys
+                                      .online_payment_operation_cancelled,
+                                  soBottomSheetData:
+                                      soSendCodeConfirmationBottomSheetData
+                                          .soBottomSheetData,
+                                ),
+                              );
+                            } else if (model.sendCodeErrorAttemptCount == 0) {
+                              await showErrorFlashBar(
+                                context: context,
+                                margin: EdgeInsets.only(
+                                  left: 16.w,
+                                  right: 16.w,
+                                  bottom: 0.05.sh,
+                                ),
+                              );
+                            }
                           },
                         );
                       },
