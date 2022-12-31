@@ -603,7 +603,7 @@ class UserService {
     //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     // else
     //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test91';
+    _queryParams['orderNumber'] = 'Ver44Test93';
 
     //* ======= AMOUNT part START ======= //
 
@@ -618,7 +618,6 @@ class UserService {
     if (order.dostawkaPrice != null) _totalOrderSum += order.dostawkaPrice!;
 
     _totalOrderSum *= 100; //* CONVERTS real value to make it acceptable by bank
-    // _queryParams['amount'] = 10000;
     _queryParams['amount'] = _totalOrderSum.toInt();
 
     //* ======= AMOUNT part END ======= //

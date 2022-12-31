@@ -837,70 +837,32 @@ class SingleOrderView extends StatelessWidget {
                                   borderRadius: AppTheme().radius10),
                               padding: EdgeInsets.symmetric(vertical: 11.h),
                             ),
-                            child: order.status == 2 && model.isLoading
-                                ? ButtonLoading(fontSize: 28.sp)
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/credit_card.svg',
-                                        color: order.status == 1
-                                            ? kcContactColor
-                                            : kcWhiteColor,
-                                        width: 28.w,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 10.w),
-                                        child: Text(
-                                          LocaleKeys.online_paymentType,
-                                          style: order.status == 1
-                                              ? ktsButton18ContactText
-                                              : ktsButtonWhite18Text,
-                                        ).tr(),
-                                      )
-                                    ],
-                                  ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/credit_card.svg',
+                                  color: order.status == 1
+                                      ? kcContactColor
+                                      : kcWhiteColor,
+                                  width: 28.w,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10.w),
+                                  child: Text(
+                                    LocaleKeys.online_paymentType,
+                                    style: order.status == 1
+                                        ? ktsButton18ContactText
+                                        : ktsButtonWhite18Text,
+                                  ).tr(),
+                                )
+                              ],
+                            ),
                             onPressed: () async {
                               switch (order.status) {
                                 case 1:
                                   break;
                                 case 2:
-                                  // await model.onConfirmButtonPressed(
-                                  //   onSuccessForView:
-                                  //       (paymentCreateBankOrder) async {
-                                  //     // await showFlexibleBottomSheet(
-                                  //     //   initHeight: 0.95,
-                                  //     //   maxHeight: 0.95,
-                                  //     //   duration: Duration(milliseconds: 250),
-                                  //     //   context: context,
-                                  //     //   bottomSheetColor: Colors.transparent,
-                                  //     //   builder: (context, scrollController,
-                                  //     //           offset) =>
-                                  //     //       SingleOrderPaymentBottomSheetView(
-                                  //     //     scrollCftroller: scrollController,
-                                  //     //     offset: offset,
-                                  //     //     paymentRegister: paymentRegister,
-                                  //     //     order: order,
-                                  //     //     orderViewModel: orderViewModel,
-                                  //     //   ),
-                                  //     // );
-
-                                  //     await model
-                                  //         .showCustomSendCodeConfirmationBottomSheet(
-                                  //             paymentCreateBankOrder);
-                                  //   },
-                                  //   onFailForView: () async {
-                                  //     await showErrorFlashBar(
-                                  //       context: context,
-                                  //       margin: EdgeInsets.only(
-                                  //         left: 16.w,
-                                  //         right: 16.w,
-                                  //         bottom: 0.05.sh,
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
-
                                   await showFlexibleBottomSheet(
                                     isExpand: false,
                                     initHeight: 0.95,

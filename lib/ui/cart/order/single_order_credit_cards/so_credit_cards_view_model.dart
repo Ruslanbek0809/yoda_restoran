@@ -175,6 +175,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  int _onlineRetryCounter = 0;
+  int get onlineRetryCounter => _onlineRetryCounter;
+
   //* POST Online Payment Order button is pressed
   Future<void> onOnlinePaymentOrderButtonPressed({
     required HiveCreditCard selectedHiveCreditCard,
