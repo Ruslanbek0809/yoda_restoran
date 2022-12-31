@@ -7,6 +7,8 @@ class OrderPaymentCreateBankOrder {
   OrderPaymentCreateBankOrder({
     this.orderId,
     this.requestId,
+    this.errorCode,
+    this.errorMessage,
   });
 
   @JsonKey(name: 'order_id')
@@ -14,6 +16,12 @@ class OrderPaymentCreateBankOrder {
 
   @JsonKey(name: 'request_id')
   final String? requestId;
+
+  @JsonKey(name: 'errorCode')
+  final String? errorCode;
+
+  @JsonKey(name: 'errorMessage')
+  final String? errorMessage;
 
   factory OrderPaymentCreateBankOrder.fromJson(Map<String, dynamic> json) =>
       _$OrderPaymentCreateBankOrderFromJson(json);

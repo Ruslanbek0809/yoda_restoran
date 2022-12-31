@@ -175,8 +175,11 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  //* For REORDER feature
+  CreateBankOrderEnum _createBankOrderEnum = CreateBankOrderEnum.idle;
+
+  //* For REORDER feature
   int _onlineRetryCounter = 0;
-  int get onlineRetryCounter => _onlineRetryCounter;
 
   //* POST Online Payment Order button is pressed
   Future<void> onOnlinePaymentOrderButtonPressed({
@@ -189,26 +192,33 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     _isLoading = true;
     notifyListeners();
 
-    await runBusyFuture(
-      //* NEW CODE for online payment fetch from backend
-      _userService.createBankOrder(
-        selectedHiveCreditCard,
-        _cvcCode,
-        soBottomSheetData.order,
-        false,
-        0,
-        (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
-          _isLoading = false;
-          notifyListeners();
-          onSuccessForView!(paymentCreateBankOrder);
-        },
-        () {
-          _isLoading = false;
-          notifyListeners();
-          onFailForView!();
-        },
-      ),
-    );
+    //* LOOPS if errorCode is '1' specifically (Meaning already existing order)
+    do {
+      await runBusyFuture(
+        //* NEW CODE for online payment fetch from backend
+        _userService.createBankOrder(
+          selectedHiveCreditCard,
+          _cvcCode,
+          soBottomSheetData.order,
+          _createBankOrderEnum,
+          _onlineRetryCounter,
+          (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
+            _isLoading = false;
+            notifyListeners();
+            onSuccessForView!(paymentCreateBankOrder);
+          },
+          (CreateBankOrderEnum newCreateBankOrderEnum) {
+            _createBankOrderEnum = newCreateBankOrderEnum;
+            if (newCreateBankOrderEnum == CreateBankOrderEnum.fail) {
+              _isLoading = false;
+              notifyListeners();
+              onFailForView!();
+            } else if (newCreateBankOrderEnum ==
+                CreateBankOrderEnum.reorderFail) _onlineRetryCounter++;
+          },
+        ),
+      );
+    } while (_createBankOrderEnum == CreateBankOrderEnum.reorderFail);
   }
 
   //* CALLS SOSendCodeConfirmationBottomSheetView

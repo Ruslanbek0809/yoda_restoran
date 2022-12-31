@@ -11,7 +11,7 @@ OrderPaymentCheckStatus _$OrderPaymentCheckStatusFromJson(
     OrderPaymentCheckStatus(
       errorCode: json['errorCode'] as String?,
       errorMessage: json['errorMessage'] as String?,
-      orderNumber: json['OrderNumber'] as String?,
+      orderNumber: json['orderNumber'] as String?,
       orderStatus: json['orderStatus'] as int?,
       actionCode: json['actionCode'] as int?,
       actionCodeDescription: json['actionCodeDescription'] as String?,
@@ -22,7 +22,7 @@ Map<String, dynamic> _$OrderPaymentCheckStatusToJson(
     <String, dynamic>{
       'errorCode': instance.errorCode,
       'errorMessage': instance.errorMessage,
-      'OrderNumber': instance.orderNumber,
+      'orderNumber': instance.orderNumber,
       'orderStatus': instance.orderStatus,
       'actionCode': instance.actionCode,
       'actionCodeDescription': instance.actionCodeDescription,

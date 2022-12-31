@@ -19,7 +19,7 @@ class OrderPaymentCheckStatus {
   @JsonKey(name: 'errorMessage')
   final String? errorMessage;
 
-  @JsonKey(name: 'OrderNumber')
+  @JsonKey(name: 'orderNumber')
   final String? orderNumber;
 
   @JsonKey(name: 'orderStatus')

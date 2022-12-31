@@ -261,52 +261,54 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           if (creditCardFormKey.currentState!.validate()) {
                             print('creditCardFormKey SUCCESS');
 
-                            await model.onOnlinePaymentOrderButtonPressed(
-                              selectedHiveCreditCard:
-                                  soConfirmationBottomSheetData.isNewCreditCard
-                                      ? model.hiveCreditCards.last
-                                      : soConfirmationBottomSheetData
-                                          .hiveCreditCard!,
-                              onSuccessForView: (paymentCreateBankOrder) async {
+                            if (!model.isLoading)
+                              await model.onOnlinePaymentOrderButtonPressed(
+                                selectedHiveCreditCard:
+                                    soConfirmationBottomSheetData
+                                            .isNewCreditCard
+                                        ? model.hiveCreditCards.last
+                                        : soConfirmationBottomSheetData
+                                            .hiveCreditCard!,
+                                onSuccessForView:
+                                    (paymentCreateBankOrder) async {
+                                  //* If new credit Card is created, run onCreditSave
+                                  if (soConfirmationBottomSheetData
+                                      .isNewCreditCard)
+                                    await model.saveCreditCardToHive();
 
-                                //* If new credit Card is created, run onCreditSave
-                                if (soConfirmationBottomSheetData
-                                    .isNewCreditCard)
-                                  await model.saveCreditCardToHive();
-                                  
-                                model.navBack();
-                                await model
-                                    .showCustomSendCodeConfirmationBottomSheet(
-                                  paymentCreateBankOrder,
-                                );
-                                // await showFlexibleBottomSheet(
-                                //   initHeight: 0.95,
-                                //   maxHeight: 0.95,
-                                //   duration: Duration(milliseconds: 250),
-                                //   context: context,
-                                //   bottomSheetColor: Colors.transparent,
-                                //   builder: (context, scrollController,
-                                //           offset) =>
-                                //       SingleOrderPaymentBottomSheetView(
-                                //     scrollCftroller: scrollController,
-                                //     offset: offset,
-                                //     paymentRegister: paymentRegister,
-                                //     order: order,
-                                //     orderViewModel: orderViewModel,
-                                //   ),
-                                // );
-                              },
-                              onFailForView: () async {
-                                await showErrorFlashBar(
-                                  context: context,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.05.sh,
-                                  ),
-                                );
-                              },
-                            );
+                                  model.navBack();
+                                  await model
+                                      .showCustomSendCodeConfirmationBottomSheet(
+                                    paymentCreateBankOrder,
+                                  );
+                                  // await showFlexibleBottomSheet(
+                                  //   initHeight: 0.95,
+                                  //   maxHeight: 0.95,
+                                  //   duration: Duration(milliseconds: 250),
+                                  //   context: context,
+                                  //   bottomSheetColor: Colors.transparent,
+                                  //   builder: (context, scrollController,
+                                  //           offset) =>
+                                  //       SingleOrderPaymentBottomSheetView(
+                                  //     scrollCftroller: scrollController,
+                                  //     offset: offset,
+                                  //     paymentRegister: paymentRegister,
+                                  //     order: order,
+                                  //     orderViewModel: orderViewModel,
+                                  //   ),
+                                  // );
+                                },
+                                onFailForView: () async {
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                              );
                           } else
                             print('creditCardFormKey FAILED');
                         },

@@ -591,19 +591,19 @@ class UserService {
     HiveCreditCard hiveCreditCard,
     String cvcCode,
     Order order,
-    bool isRetryOnlinePayment,
+    CreateBankOrderEnum createBankOrderEnum,
     int onlineRetryCounter,
     Function(OrderPaymentCreateBankOrder) onSuccess,
-    Function() onFail,
+    Function(CreateBankOrderEnum) onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
-    // if (isRetryOnlinePayment)
-    //   _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
-    // else
-    //   _queryParams['orderNumber'] = order.orderNumber;
-    _queryParams['orderNumber'] = 'Ver44Test93';
+    if (createBankOrderEnum == CreateBankOrderEnum.reorderFail)
+      _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
+    else
+      _queryParams['orderNumber'] = order.orderNumber;
+    // _queryParams['orderNumber'] = 'Ver44Test93';
 
     //* ======= AMOUNT part START ======= //
 
@@ -657,15 +657,21 @@ class UserService {
         _paymentCreateBankOrder =
             OrderPaymentCreateBankOrder.fromJson(response.data);
 
+        if (_paymentCreateBankOrder.errorCode == '1' &&
+            _paymentCreateBankOrder.errorMessage ==
+                'Заказ с таким номером уже обработан')
+          //! if FAIL
+          onFail(CreateBankOrderEnum.reorderFail);
+
         //! if SUCCESS
         onSuccess(_paymentCreateBankOrder);
       } else
 
         //! if FAIL
-        onFail();
+        onFail(CreateBankOrderEnum.fail);
     } on DioError catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');
-      onFail();
+      onFail(CreateBankOrderEnum.fail);
       rethrow;
     }
   }
