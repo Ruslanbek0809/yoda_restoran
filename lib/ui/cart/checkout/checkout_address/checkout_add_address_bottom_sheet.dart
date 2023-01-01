@@ -99,33 +99,36 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                                   style: ktsButtonWhite18Text,
                                 ).tr(),
                         ),
-                        onPressed: () async {
-                          FocusScope.of(context)
-                              .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                          if (!_addressformKey.currentState!.validate()) return;
-                          _addressformKey.currentState!.save();
-                          await model.onAddAddressPressed(() async {
-                            await completer(SheetResponse(data: true));
-                            await showErrorFlashBar(
-                              context: context,
-                              msg: LocaleKeys.addAddedSuccessfully,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
-                              ),
-                            );
-                          }, () async {
-                            await showErrorFlashBar(
-                              context: context,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
-                              ),
-                            );
-                          });
-                        },
+                        onPressed: !model.isLoading
+                            ? () async {
+                                FocusScope.of(context)
+                                    .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                                if (!_addressformKey.currentState!.validate())
+                                  return;
+                                _addressformKey.currentState!.save();
+                                await model.onAddAddressPressed(() async {
+                                  await completer(SheetResponse(data: true));
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    msg: LocaleKeys.addAddedSuccessfully,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                }, () async {
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                });
+                              }
+                            : () {},
                       ),
                     ),
                   )

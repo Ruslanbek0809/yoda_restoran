@@ -177,105 +177,110 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                 style: ktsButtonWhite18Text,
                               ).tr(),
                       ),
-                      onPressed: () async {
-                        FocusScope.of(context)
-                            .unfocus(); // UNFOCUSES all textfield b4 data fetch
+                      onPressed: !model.isLoading
+                          ? () async {
+                              FocusScope.of(context)
+                                  .unfocus(); // UNFOCUSES all textfield b4 data fetch
 
-                        if (!_sendCodeformKey.currentState!.validate()) return;
-                        _sendCodeformKey.currentState!.save();
-                        model.log.v('_sendCodeformKey SUCCESS');
+                              if (!_sendCodeformKey.currentState!.validate())
+                                return;
+                              _sendCodeformKey.currentState!.save();
+                              model.log.v('_sendCodeformKey SUCCESS');
 
-                        if (!model.isLoading)
-                          await model.onOtpVerifyButtonPressed(
-                            paymentCreateBankOrder:
-                                soSendCodeConfirmationBottomSheetData
-                                    .paymentCreateBankOrder,
-                            onSuccessForView: () async {
-                              await model.checkOnlinePaymentOrderStatus(
-                                orderId: soSendCodeConfirmationBottomSheetData
-                                        .paymentCreateBankOrder.orderId ??
-                                    '',
+                              await model.onOtpVerifyButtonPressed(
+                                paymentCreateBankOrder:
+                                    soSendCodeConfirmationBottomSheetData
+                                        .paymentCreateBankOrder,
                                 onSuccessForView: () async {
-                                  model.navBack();
-                                  await showFlexibleBottomSheet(
-                                    initHeight: 0.95,
-                                    maxHeight: 0.95,
-                                    duration: Duration(milliseconds: 250),
-                                    context: context,
-                                    bottomSheetColor: Colors.transparent,
-                                    builder: (context, scrollController,
-                                            offset) =>
-                                        SingleOrderPaymentSuccessFailBottomSheetView(
-                                      scrollController: scrollController,
-                                      offset: offset,
-                                      isPaymentSuccess: true,
-                                      errorText: '',
-                                      soBottomSheetData:
-                                          soSendCodeConfirmationBottomSheetData
-                                              .soBottomSheetData,
-                                    ),
+                                  await model.checkOnlinePaymentOrderStatus(
+                                    orderId:
+                                        soSendCodeConfirmationBottomSheetData
+                                                .paymentCreateBankOrder
+                                                .orderId ??
+                                            '',
+                                    onSuccessForView: () async {
+                                      model.navBack();
+                                      await showFlexibleBottomSheet(
+                                        initHeight: 0.95,
+                                        maxHeight: 0.95,
+                                        duration: Duration(milliseconds: 250),
+                                        context: context,
+                                        bottomSheetColor: Colors.transparent,
+                                        builder: (context, scrollController,
+                                                offset) =>
+                                            SingleOrderPaymentSuccessFailBottomSheetView(
+                                          scrollController: scrollController,
+                                          offset: offset,
+                                          isPaymentSuccess: true,
+                                          errorText: '',
+                                          soBottomSheetData:
+                                              soSendCodeConfirmationBottomSheetData
+                                                  .soBottomSheetData,
+                                        ),
+                                      );
+                                    },
+                                    onFailForView: () async {
+                                      //! If NO MONEY /INVALID CVC /OTHER ERROR in SEND CODE BOTTOM SHEET
+                                      model.navBack();
+                                      await showFlexibleBottomSheet(
+                                        initHeight: 0.95,
+                                        maxHeight: 0.95,
+                                        duration: Duration(milliseconds: 250),
+                                        context: context,
+                                        bottomSheetColor: Colors.transparent,
+                                        builder: (context, scrollController,
+                                                offset) =>
+                                            SingleOrderPaymentSuccessFailBottomSheetView(
+                                          scrollController: scrollController,
+                                          offset: offset,
+                                          isPaymentSuccess: false,
+                                          errorText: '',
+                                          soBottomSheetData:
+                                              soSendCodeConfirmationBottomSheetData
+                                                  .soBottomSheetData,
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                                 onFailForView: () async {
-                                  //! If NO MONEY /INVALID CVC /OTHER ERROR in SEND CODE BOTTOM SHEET
-                                  model.navBack();
-                                  await showFlexibleBottomSheet(
-                                    initHeight: 0.95,
-                                    maxHeight: 0.95,
-                                    duration: Duration(milliseconds: 250),
-                                    context: context,
-                                    bottomSheetColor: Colors.transparent,
-                                    builder: (context, scrollController,
-                                            offset) =>
-                                        SingleOrderPaymentSuccessFailBottomSheetView(
-                                      scrollController: scrollController,
-                                      offset: offset,
-                                      isPaymentSuccess: false,
-                                      errorText: '',
-                                      soBottomSheetData:
-                                          soSendCodeConfirmationBottomSheetData
-                                              .soBottomSheetData,
-                                    ),
-                                  );
+                                  //! If OPERATION CANCELED after 3 WRONG SEND CODE ATTEMPTS
+                                  if (model.sendCodeErrorAttemptCount == -1) {
+                                    model.navBack();
+                                    await showFlexibleBottomSheet(
+                                      initHeight: 0.95,
+                                      maxHeight: 0.95,
+                                      duration: Duration(milliseconds: 250),
+                                      context: context,
+                                      bottomSheetColor: Colors.transparent,
+                                      builder: (context, scrollController,
+                                              offset) =>
+                                          SingleOrderPaymentSuccessFailBottomSheetView(
+                                        scrollController: scrollController,
+                                        offset: offset,
+                                        isPaymentSuccess: false,
+                                        errorText: LocaleKeys
+                                            .online_payment_operation_cancelled,
+                                        soBottomSheetData:
+                                            soSendCodeConfirmationBottomSheetData
+                                                .soBottomSheetData,
+                                      ),
+                                    );
+                                  } else if (model.sendCodeErrorAttemptCount ==
+                                      0) {
+                                    await showErrorFlashBar(
+                                      context: context,
+                                      margin: EdgeInsets.only(
+                                        left: 16.w,
+                                        right: 16.w,
+                                        bottom: 0.05.sh,
+                                      ),
+                                    );
+                                  }
                                 },
                               );
-                            },
-                            onFailForView: () async {
-                              //! If OPERATION CANCELED after 3 WRONG SEND CODE ATTEMPTS
-                              if (model.sendCodeErrorAttemptCount == -1) {
-                                model.navBack();
-                                await showFlexibleBottomSheet(
-                                  initHeight: 0.95,
-                                  maxHeight: 0.95,
-                                  duration: Duration(milliseconds: 250),
-                                  context: context,
-                                  bottomSheetColor: Colors.transparent,
-                                  builder: (context, scrollController,
-                                          offset) =>
-                                      SingleOrderPaymentSuccessFailBottomSheetView(
-                                    scrollController: scrollController,
-                                    offset: offset,
-                                    isPaymentSuccess: false,
-                                    errorText: LocaleKeys
-                                        .online_payment_operation_cancelled,
-                                    soBottomSheetData:
-                                        soSendCodeConfirmationBottomSheetData
-                                            .soBottomSheetData,
-                                  ),
-                                );
-                              } else if (model.sendCodeErrorAttemptCount == 0) {
-                                await showErrorFlashBar(
-                                  context: context,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.05.sh,
-                                  ),
-                                );
-                              }
-                            },
-                          );
-                      },
+                            }
+                          : () {},
                     ),
                   ),
                 )
