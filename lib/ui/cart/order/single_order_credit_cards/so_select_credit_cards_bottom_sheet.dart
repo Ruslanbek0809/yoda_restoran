@@ -97,8 +97,10 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   return Material(
                     color: kcWhiteColor,
                     child: InkWell(
-                      onTap: () =>
-                          model.updateTempSelectedHiveCreditCard(_creditCard),
+                      onTap: () => model.updateTempSelectedHiveCreditCard(
+                        _creditCard,
+                        pos,
+                      ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Row(

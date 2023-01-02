@@ -28,9 +28,9 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   HiveCreditCard? get tempSelectedHiveCreditCard => _tempSelectedHiveCreditCard;
 
   //* SETS _tempSelectedHiveCreditCard
-  void updateTempSelectedHiveCreditCard(HiveCreditCard selectedHiveCreditCard) {
-    log.v(
-        'updateTempSelectedHiveCreditCard selectedHiveCreditCard: ${selectedHiveCreditCard.bankId}');
+  void updateTempSelectedHiveCreditCard(
+      HiveCreditCard selectedHiveCreditCard, int pos) {
+    log.v('updateTempSelectedHiveCreditCard selectedHiveCreditCard pos: $pos');
 
     _tempSelectedHiveCreditCard = selectedHiveCreditCard;
     notifyListeners();
@@ -195,7 +195,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     //* LOOPS if errorCode is '1' specifically (Meaning already existing order)
     do {
       await runBusyFuture(
-        //* NEW CODE for online payment fetch from backend
         _userService.createBankOrder(
           selectedHiveCreditCard,
           _cvcCode,
@@ -203,18 +202,21 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
           _createBankOrderEnum,
           _onlineRetryCounter,
           (OrderPaymentCreateBankOrder paymentCreateBankOrder) async {
+            _createBankOrderEnum = CreateBankOrderEnum.success;
             _isLoading = false;
             notifyListeners();
             onSuccessForView!(paymentCreateBankOrder);
           },
           (CreateBankOrderEnum newCreateBankOrderEnum) {
             _createBankOrderEnum = newCreateBankOrderEnum;
-            if (newCreateBankOrderEnum == CreateBankOrderEnum.fail) {
+            log.v('newCreateBankOrderEnum: $newCreateBankOrderEnum');
+
+            if (_createBankOrderEnum == CreateBankOrderEnum.fail) {
               _isLoading = false;
               notifyListeners();
               onFailForView!();
-            } else if (newCreateBankOrderEnum ==
-                CreateBankOrderEnum.reorderFail) _onlineRetryCounter++;
+            } else if (_createBankOrderEnum == CreateBankOrderEnum.reorderFail)
+              _onlineRetryCounter++;
           },
         ),
       );

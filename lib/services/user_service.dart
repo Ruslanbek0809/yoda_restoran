@@ -596,6 +596,9 @@ class UserService {
     Function(OrderPaymentCreateBankOrder) onSuccess,
     Function(CreateBankOrderEnum) onFail,
   ) async {
+    log.v(
+        'createBankOrder() createBankOrderEnum: $createBankOrderEnum, onlineRetryCounter: $onlineRetryCounter');
+
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
     _queryParams['password'] = 'Ver43k764ghwS2H';
@@ -648,20 +651,12 @@ class UserService {
         queryParameters: _queryParams,
       );
       if (response.data != null && response.statusCode == 200) {
-        log.v(
-            'SUCCESS RESPONSE: createBankOrder => response.statusCode: ${response.statusCode}');
         log.v('SUCCESS RESPONSE: createBankOrder => ${response.data}');
 
         //* CONVERTS JSON into DART MODEL
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
         _paymentCreateBankOrder =
             OrderPaymentCreateBankOrder.fromJson(response.data);
-
-        if (_paymentCreateBankOrder.errorCode == '1' &&
-            _paymentCreateBankOrder.errorMessage ==
-                'Заказ с таким номером уже обработан')
-          //! if FAIL
-          onFail(CreateBankOrderEnum.reorderFail);
 
         //! if SUCCESS
         onSuccess(_paymentCreateBankOrder);
@@ -671,7 +666,28 @@ class UserService {
         onFail(CreateBankOrderEnum.fail);
     } on DioError catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');
-      onFail(CreateBankOrderEnum.fail);
+      log.v('ERROR on createBankOrder error.response?.data ?? '
+          ' => ${error.response?.data ?? ''}');
+
+      var errorData = error.response?.data;
+      if (errorData != null) {
+        log.v('ERROR on errorData => $errorData');
+        //* CONVERTS JSON into DART MODEL
+        OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
+        _paymentCreateBankOrder =
+            OrderPaymentCreateBankOrder.fromJson(errorData);
+
+        if (_paymentCreateBankOrder.errorCode == '1' &&
+            _paymentCreateBankOrder.errorMessage ==
+                'Заказ с таким номером уже обработан')
+          //! if FAIL
+          onFail(CreateBankOrderEnum.reorderFail);
+        else
+          //! if FAIL
+          onFail(CreateBankOrderEnum.fail);
+      } else
+        //! if FAIL
+        onFail(CreateBankOrderEnum.fail);
       rethrow;
     }
   }
