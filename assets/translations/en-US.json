@@ -76,7 +76,11 @@
     "online_payment_fail_info": "Näsazlyk ýüze çykdy. Hasapdaky serişdeleriň ýeterlikdigini anyklap, ýa başga kart ulanyp, täzeden synanşyň",
     "cash_payment": "Nagt töleg",
     "online_payment_fail_retry": "Täzeden synanyş",
-    "online_payment_send_code_info": "telefon belgiňize ugradylan gizlin kody giriziň",
+    "online_payment_send_code_info": "Telefon belgiňize gelen gizlin kody giriziň:",
+    "sendCodeErrorAttempt": "Kod nädogry girizildi: {}/3",
+    "online_payment_operation_cancelled": "Amal ýatyryldy",
+    "online_payment_no_enough_money": "Serişde ýeterlik däl",
+    "online_payment_wrong_card_info": "Amal ýatyryldy. Kart maglumatlaryny barlaň!",
     "payment_type_changed_from_online_to_cash": "Töleg görnüşi üýtgedildi",
     "selectCreditCard": "Karty saýla",
     "addNewCreditCard": "Täze kart goş",
@@ -209,8 +213,6 @@
     "userDeleteSuccess": "Siziň akkauntyňyz ulgamdan aýryldy",
     "deleteUserInfo": "Hasabyňyz bilen bagly maglumatlar ulgamdan aýrylar we gaýtaryp getirip bolmaz",
     "deleteUserFlashInfo": "Siziň akkauntyňyz 48 sagadyň dowamynda ulgamdan aýrylar",
-    "sendCodeErrorAttempt": "Kod nädogry girizildi: {}/3",
-    "online_payment_operation_cancelled": "Amal ýatyryldy",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

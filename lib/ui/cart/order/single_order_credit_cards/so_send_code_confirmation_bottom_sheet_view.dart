@@ -234,7 +234,15 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                           scrollController: scrollController,
                                           offset: offset,
                                           isPaymentSuccess: false,
-                                          errorText: '',
+                                          errorText: model.smsErrorEnum ==
+                                                  SmsErrorEnum.cvcFail
+                                              ? LocaleKeys
+                                                  .online_payment_wrong_card_info
+                                              : model.smsErrorEnum ==
+                                                      SmsErrorEnum.notEnoughFail
+                                                  ? LocaleKeys
+                                                      .online_payment_no_enough_money
+                                                  : '',
                                           soBottomSheetData:
                                               soSendCodeConfirmationBottomSheetData
                                                   .soBottomSheetData,

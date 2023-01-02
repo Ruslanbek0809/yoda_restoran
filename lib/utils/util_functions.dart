@@ -101,6 +101,9 @@ enum BottomCartStatus { idle, forward, reverse }
 /// Enum for create bank order service
 enum CreateBankOrderEnum { idle, fail, reorderFail, success }
 
+/// Enum for sms error
+enum SmsErrorEnum { idle, fail, cvcFail, notEnoughFail }
+
 /// Enum for bottom sheet types
 enum BottomSheetType {
   mainCategory,

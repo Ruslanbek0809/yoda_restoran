@@ -76,7 +76,11 @@
     "online_payment_fail_info": "Произошла ошибка. Проверьте баланс счета или используйте другую карту и повторите заново",
     "cash_payment": "Оплата наличными",
     "online_payment_fail_retry": "Повторить заново",
-    "online_payment_send_code_info": "Введите код подтверждения отправленный на номер:",
+    "online_payment_send_code_info": "Введите полученный код подтверждения:",
+    "sendCodeErrorAttempt": "Код введен неверно: {}/3",
+    "online_payment_operation_cancelled": "Операция отменена",
+    "online_payment_no_enough_money": "Недостаточно средств",
+    "online_payment_wrong_card_info": "Отказ сети. Проверьте данные карты!",
     "payment_type_changed_from_online_to_cash": "Способ оплаты изменен",
     "selectCreditCard": "Выбрать карту",
     "addNewCreditCard": "Добавить новую карту",
@@ -209,8 +213,6 @@
     "userDeleteSuccess": "Ваш аккаунт был удален",
     "deleteUserInfo": "Все данные, связанные с аккаунтом, будут удалены и невозможно будет восстановить",
     "deleteUserFlashInfo": "Ваш аккаунт был удален в течении 48 часов",
-    "sendCodeErrorAttempt": "Код введен неверно: {}/3",
-    "online_payment_operation_cancelled": "Операция отменена",
     "msg": "Привет! {} добро пожаловать {} мир! ",
     "msg_named": "{} написан на языке {lang}"
 }

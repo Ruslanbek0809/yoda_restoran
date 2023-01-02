@@ -606,7 +606,6 @@ class UserService {
       _queryParams['orderNumber'] = '${order.orderNumber}-$onlineRetryCounter';
     else
       _queryParams['orderNumber'] = order.orderNumber;
-    // _queryParams['orderNumber'] = 'Ver44Test93';
 
     //* ======= AMOUNT part START ======= //
 
@@ -959,7 +958,7 @@ class UserService {
   Future<void> checkOnlinePaymentOrderStatusExtended(
     String orderId,
     Function() onSuccess,
-    Function() onFail,
+    Function(SmsErrorEnum) onFail,
   ) async {
     Map<String, dynamic> _queryParams = {};
     _queryParams['userName'] = '101211004240';
@@ -972,14 +971,14 @@ class UserService {
         FormData.fromMap(_queryParams);
 
     try {
-      //----------- DIO PART START -------------//
+      //*----------- DIO PART START -------------//
       Dio dio = Dio();
 
-      //----------- DIO BASE URL -------------//
+      //*----------- DIO BASE URL -------------//
       dio.options.baseUrl =
           'https://mpi.gov.tm/payment/rest/getOrderStatusExtended.do';
 
-      //----------- DIO INTERCEPTORS -------------//
+      //*----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -1029,14 +1028,24 @@ class UserService {
             _orderPaymentCheckStatus.actionCode == 0)
           onSuccess();
 
+        //! if CVC FAIL after SUCCESS
+        else if (_orderPaymentCheckStatus.orderStatus == 6 &&
+            _orderPaymentCheckStatus.actionCode == 5)
+          onFail(SmsErrorEnum.cvcFail);
+
+        //! if NOT ENOUGH MONEY FAIL after SUCCESS
+        else if (_orderPaymentCheckStatus.orderStatus == 6 &&
+            _orderPaymentCheckStatus.actionCode == 116)
+          onFail(SmsErrorEnum.notEnoughFail);
+
         //! if FAIL
         else
-          onFail();
+          onFail(SmsErrorEnum.fail);
       }
     } on DioError catch (error) {
       log.v(
           'ERROR on checkOnlinePaymentOrderStatusExtended => ${error.response}');
-      onFail();
+      onFail(SmsErrorEnum.fail);
       rethrow;
     }
   }

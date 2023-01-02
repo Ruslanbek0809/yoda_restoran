@@ -305,6 +305,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
+  //* For sms error types
+  SmsErrorEnum _smsErrorEnum = SmsErrorEnum.idle;
+  SmsErrorEnum get smsErrorEnum => _smsErrorEnum;
+
   ///* CHECKS ONLINE PAYMENT ORDER STATUS after VERIFICATION
   Future<void> checkOnlinePaymentOrderStatus({
     required String orderId,
@@ -326,7 +330,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             onSuccessForView!();
 
             //* REINITIALIZES ORDERS
-            /// TODO: Optimize if possible
+            // TODO: Optimize if possible
             await soBottomSheetData.orderViewModel.getInitialOrders();
           },
           () {
@@ -335,7 +339,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             onFailForView!();
           },
         ),
-        () {
+        (SmsErrorEnum smsErrorEnum) {
+          _smsErrorEnum = smsErrorEnum;
           _isLoading = false;
           notifyListeners();
           onFailForView!();
