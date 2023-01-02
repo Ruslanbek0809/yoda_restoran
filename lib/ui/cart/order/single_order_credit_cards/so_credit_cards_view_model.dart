@@ -185,7 +185,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   Future<void> onOnlinePaymentOrderButtonPressed({
     required HiveCreditCard selectedHiveCreditCard,
     Function(OrderPaymentCreateBankOrder)? onSuccessForView,
-    Function()? onFailForView,
+    Function(CreateBankOrderEnum)? onFailForView,
   }) async {
     log.v('onOnlinePaymentOrderButtonPressed()');
 
@@ -211,10 +211,10 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             _createBankOrderEnum = newCreateBankOrderEnum;
             log.v('newCreateBankOrderEnum: $newCreateBankOrderEnum');
 
-            if (_createBankOrderEnum == CreateBankOrderEnum.fail) {
+            if (_createBankOrderEnum == CreateBankOrderEnum.fail || _createBankOrderEnum == CreateBankOrderEnum.wrongCardInfoFail) {
               _isLoading = false;
               notifyListeners();
-              onFailForView!();
+              onFailForView!(_createBankOrderEnum);
             } else if (_createBankOrderEnum == CreateBankOrderEnum.reorderFail)
               _onlineRetryCounter++;
           },

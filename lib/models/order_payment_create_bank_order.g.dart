@@ -11,7 +11,7 @@ OrderPaymentCreateBankOrder _$OrderPaymentCreateBankOrderFromJson(
     OrderPaymentCreateBankOrder(
       orderId: json['order_id'] as String?,
       requestId: json['request_id'] as String?,
-      errorCode: json['errorCode'] as String?,
+      errorCode: json['errorCode'] as dynamic,
       errorMessage: json['errorMessage'] as String?,
     );
 

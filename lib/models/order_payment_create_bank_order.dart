@@ -18,7 +18,7 @@ class OrderPaymentCreateBankOrder {
   final String? requestId;
 
   @JsonKey(name: 'errorCode')
-  final String? errorCode;
+  final dynamic errorCode;
 
   @JsonKey(name: 'errorMessage')
   final String? errorMessage;

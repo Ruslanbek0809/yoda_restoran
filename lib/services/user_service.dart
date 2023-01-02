@@ -675,14 +675,21 @@ class UserService {
         OrderPaymentCreateBankOrder? _paymentCreateBankOrder;
         _paymentCreateBankOrder =
             OrderPaymentCreateBankOrder.fromJson(errorData);
+        log.v(
+            'ERROR on errorData _paymentCreateBankOrder => ${_paymentCreateBankOrder.toString()}');
 
         if (_paymentCreateBankOrder.errorCode == '1' &&
             _paymentCreateBankOrder.errorMessage ==
-                'Заказ с таким номером уже обработан')
-          //! if FAIL
+                'Заказ с таким номером уже обработан') {
+          //! if reorderFail FAIL
           onFail(CreateBankOrderEnum.reorderFail);
+        } else if (_paymentCreateBankOrder.errorCode == 1 &&
+            _paymentCreateBankOrder.errorMessage ==
+                'Неизвестная платёжная система<br>')
+          //! if wrongCardInfoFail FAIL
+          onFail(CreateBankOrderEnum.wrongCardInfoFail);
         else
-          //! if FAIL
+          //! if other FAIL
           onFail(CreateBankOrderEnum.fail);
       } else
         //! if FAIL

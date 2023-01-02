@@ -99,7 +99,7 @@ enum FormValidation { phoneInvalid, valid }
 enum BottomCartStatus { idle, forward, reverse }
 
 /// Enum for create bank order service
-enum CreateBankOrderEnum { idle, fail, reorderFail, success }
+enum CreateBankOrderEnum { idle, fail, reorderFail, wrongCardInfoFail, success }
 
 /// Enum for sms error
 enum SmsErrorEnum { idle, fail, cvcFail, notEnoughFail }

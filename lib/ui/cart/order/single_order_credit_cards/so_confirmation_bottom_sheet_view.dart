@@ -263,6 +263,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                     .validate()) {
                                   print('creditCardFormKey SUCCESS');
 
+                                  //* If new credit Card is created, run onCreditSave
+                                  if (soConfirmationBottomSheetData
+                                      .isNewCreditCard)
+                                    await model.saveCreditCardToHive();
+
                                   await model.onOnlinePaymentOrderButtonPressed(
                                     selectedHiveCreditCard:
                                         soConfirmationBottomSheetData
@@ -272,11 +277,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                                 .hiveCreditCard!,
                                     onSuccessForView:
                                         (paymentCreateBankOrder) async {
-                                      //* If new credit Card is created, run onCreditSave
-                                      if (soConfirmationBottomSheetData
-                                          .isNewCreditCard)
-                                        await model.saveCreditCardToHive();
-
                                       model.navBack();
                                       await model
                                           .showCustomSendCodeConfirmationBottomSheet(
@@ -299,15 +299,28 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                       //   ),
                                       // );
                                     },
-                                    onFailForView: () async {
-                                      await showErrorFlashBar(
-                                        context: context,
-                                        margin: EdgeInsets.only(
-                                          left: 16.w,
-                                          right: 16.w,
-                                          bottom: 0.05.sh,
-                                        ),
-                                      );
+                                    onFailForView: (createBankOrderEnum) async {
+                                      if (createBankOrderEnum ==
+                                          CreateBankOrderEnum.wrongCardInfoFail)
+                                        await showErrorFlashBar(
+                                          context: context,
+                                          msg: LocaleKeys
+                                              .online_payment_wrong_card_info,
+                                          margin: EdgeInsets.only(
+                                            left: 16.w,
+                                            right: 16.w,
+                                            bottom: 0.05.sh,
+                                          ),
+                                        );
+                                      else
+                                        await showErrorFlashBar(
+                                          context: context,
+                                          margin: EdgeInsets.only(
+                                            left: 16.w,
+                                            right: 16.w,
+                                            bottom: 0.05.sh,
+                                          ),
+                                        );
                                     },
                                   );
                                 } else
