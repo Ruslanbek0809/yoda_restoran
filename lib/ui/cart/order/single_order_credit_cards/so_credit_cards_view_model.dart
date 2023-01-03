@@ -237,7 +237,6 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
         paymentCreateBankOrder: paymentCreateBankOrder,
         soBottomSheetData: soBottomSheetData,
       ),
-      // data: paymentCreateBankOrder,
     );
   }
 

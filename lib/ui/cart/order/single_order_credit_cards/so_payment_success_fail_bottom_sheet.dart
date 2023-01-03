@@ -143,34 +143,71 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                               LocaleKeys.cash_payment,
                               style: kts18Text,
                             ).tr(),
-                      onPressed: () async {
-                        await model.onChangeOnlineToCashButtonPressed(
-                          onSuccessForView: () async {
-                            await showErrorFlashBar(
-                              msg: LocaleKeys
-                                  .payment_type_changed_from_online_to_cash
-                                  .tr(),
-                              context: context,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
+                      onPressed: !model.isChangeOnlineToCashLoading
+                          ? () async {
+                              await model.onChangeOnlineToCashButtonPressed(
+                                onSuccessForView: () async {
+                                  await showErrorFlashBar(
+                                    msg: LocaleKeys
+                                        .payment_type_changed_from_online_to_cash
+                                        .tr(),
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                  model.navBack();
+                                },
+                                onFailForView: () async {
+                                  await showErrorFlashBar(
+                                    context: context,
+                                    margin: EdgeInsets.only(
+                                      left: 16.w,
+                                      right: 16.w,
+                                      bottom: 0.05.sh,
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+                          : () {},
+                    ),
+                    SizedBox(height: 10.h),
+                    SizedBox(
+                      width: 1.sw,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: kcSecondaryLightColor,
+                            backgroundColor:
+                                kcOnlinePaymentColor, // ripple effect color
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: AppTheme().radius10),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/arrow_clockwise.svg',
+                                color: kcWhiteColor,
                               ),
-                            );
-                            model.navBack();
-                          },
-                          onFailForView: () async {
-                            await showErrorFlashBar(
-                              context: context,
-                              margin: EdgeInsets.only(
-                                left: 16.w,
-                                right: 16.w,
-                                bottom: 0.05.sh,
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  LocaleKeys.online_payment_fail_retry,
+                                  style: ktsButtonWhite18Text,
+                                ).tr(),
                               ),
-                            );
-                          },
-                        );
-                      },
+                            ],
+                          ),
+                          onPressed: () => model.navBack(),
+                        ),
+                      ),
                     ),
                     SizedBox(height: 0.1.sh),
                   ],
