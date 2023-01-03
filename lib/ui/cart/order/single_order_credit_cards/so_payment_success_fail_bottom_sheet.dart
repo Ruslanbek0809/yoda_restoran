@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 import 'so_credit_cards_view_model.dart';
+import 'so_select_credit_cards_bottom_sheet.dart';
 
 class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
   final ScrollController scrollController;
@@ -205,7 +207,27 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          onPressed: () => model.navBack(),
+                          onPressed: () async {
+                            model.navBack();
+                            await showFlexibleBottomSheet(
+                              isExpand: false,
+                              initHeight: 0.95,
+                              maxHeight: 0.95,
+                              duration: Duration(milliseconds: 250),
+                              context: context,
+                              bottomSheetColor: Colors.transparent,
+                              builder: (context, scrollController, offset) =>
+                                  SOSelectCreditCardsBottomSheetView(
+                                scrollController: scrollController,
+                                offset: offset,
+                                soBottomSheetData: SOBottomSheetData(
+                                  order: model.soBottomSheetData.order,
+                                  orderViewModel:
+                                      model.soBottomSheetData.orderViewModel,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

@@ -7,6 +7,7 @@ class OrderPaymentCreateBankOrder {
   OrderPaymentCreateBankOrder({
     this.orderId,
     this.requestId,
+    this.phone,
     this.errorCode,
     this.errorMessage,
   });
@@ -16,6 +17,9 @@ class OrderPaymentCreateBankOrder {
 
   @JsonKey(name: 'request_id')
   final String? requestId;
+
+  @JsonKey(name: 'phone')
+  final String? phone;
 
   @JsonKey(name: 'errorCode')
   final dynamic errorCode;

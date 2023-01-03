@@ -11,6 +11,7 @@ OrderPaymentCreateBankOrder _$OrderPaymentCreateBankOrderFromJson(
     OrderPaymentCreateBankOrder(
       orderId: json['order_id'] as String?,
       requestId: json['request_id'] as String?,
+      phone: json['phone'] as String?,
       errorCode: json['errorCode'] as dynamic,
       errorMessage: json['errorMessage'] as String?,
     );
@@ -20,6 +21,7 @@ Map<String, dynamic> _$OrderPaymentCreateBankOrderToJson(
     <String, dynamic>{
       'order_id': instance.orderId,
       'request_id': instance.requestId,
+      'phone': instance.phone,
       'errorCode': instance.errorCode,
       'errorMessage': instance.errorMessage,
     };

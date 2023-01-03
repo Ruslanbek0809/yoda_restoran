@@ -35,9 +35,6 @@ class SOSendCodeBottomSheetHook
           style: kts18Text,
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.done,
-          // onCodeChanged: model.updateSendCodeValidator,
-          // onCodeSubmitted: model.updateSendCodeValidator,
-          // codeLength: 5,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: kbr10,

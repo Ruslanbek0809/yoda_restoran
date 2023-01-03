@@ -1,6 +1,5 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -31,7 +30,6 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-      // onModelReady: (model) async => await SmsAutoFill().listenForCode,
       viewModelBuilder: () => SOCreditCardsViewModel(
         soBottomSheetData:
             soSendCodeConfirmationBottomSheetData.soBottomSheetData,
@@ -56,10 +54,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                      //* --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                       CustomModalInsideBottomSheet(),
 
-                      //------------------ SEND CODE INFO ---------------------//
+                      //* ------------------ SEND CODE INFO ---------------------//
                       context.locale == context.supportedLocales[0]
                           ? Padding(
                               padding: EdgeInsets.only(
@@ -67,10 +65,12 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  // Text(
-                                  //   '+993 65 ****23',
-                                  //   style: kts18BoldText,
-                                  // ),
+                                  Text(
+                                    soSendCodeConfirmationBottomSheetData
+                                            .paymentCreateBankOrder.phone ??
+                                        '',
+                                    style: kts18BoldText,
+                                  ),
                                   Text(
                                     LocaleKeys.online_payment_send_code_info,
                                     style: kts16Text,
@@ -90,14 +90,16 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                     style: kts16Text,
                                     textAlign: TextAlign.center,
                                   ).tr(),
-                                  // Text(
-                                  //   '+993 65 ****23',
-                                  //   style: kts18BoldText,
-                                  // ),
+                                  Text(
+                                    soSendCodeConfirmationBottomSheetData
+                                            .paymentCreateBankOrder.phone ??
+                                        '',
+                                    style: kts18BoldText,
+                                  ),
                                 ],
                               ),
                             ),
-                      // --------------- SEND CODE TEXTFIELD -------------- //
+                      //* --------------- SEND CODE TEXTFIELD -------------- //
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.vertical(
@@ -111,28 +113,6 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           key: _sendCodeformKey,
                           autovalidateMode: AutovalidateMode.disabled,
                           child: SOSendCodeBottomSheetHook(),
-                          //     TextFieldPinAutoFill(
-                          //   // controller: _sendCodeController,
-                          //   // textAlign: TextAlign.center,
-                          //   style: kts18Text,
-                          //   // keyboardType: TextInputType.text,
-                          //   // textInputAction: TextInputAction.next,
-                          //   onCodeChanged: model.updateSendCodeValidator,
-                          //   onCodeSubmitted: model.updateSendCodeValidator,
-                          //   codeLength: 5,
-                          //   decoration: InputDecoration(
-                          //     border: OutlineInputBorder(
-                          //       borderRadius: kbr10,
-                          //       borderSide: BorderSide(
-                          //         color: kcFillBorderColor,
-                          //         width: 0.5,
-                          //       ),
-                          //     ),
-                          //     hintText: LocaleKeys.code.tr(),
-                          //     hintStyle: ktsDefault18HelperText,
-                          //   ),
-                          //   // validator: model.updateSendCodeValidator,
-                          // ),
                         ),
                       ),
                       if (model.isSendCodeError)
@@ -148,7 +128,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                     ],
                   ),
                 ),
-                //--------------- SEND CODE CONFIRM BUTTON -------------- //
+                //* --------------- SEND CODE CONFIRM BUTTON -------------- //
                 Positioned(
                   bottom: 0,
                   left: 0,
