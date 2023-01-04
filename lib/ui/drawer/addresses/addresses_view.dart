@@ -92,7 +92,7 @@ class AddressesView extends StatelessWidget {
                               //           await model.showAddressRemoveDialog(
                               //               model, model.addresses![pos]),
                               //       backgroundColor: kcRedColor,
-                              //       foregroundColor: kcWhiteColor,
+                              //       primary: kcWhiteColor,
                               //       icon: Icons.delete_outline_rounded,
                               //     ),
                               //   ],

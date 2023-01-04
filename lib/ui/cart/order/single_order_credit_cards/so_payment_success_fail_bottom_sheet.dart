@@ -79,7 +79,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 30.w),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            foregroundColor: kcSecondaryLightColor,
+                            primary: kcSecondaryLightColor,
                             backgroundColor:
                                 kcSecondaryDarkColor, // ripple effect color
                             elevation: 0,
@@ -183,7 +183,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 30.w),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            foregroundColor: kcSecondaryLightColor,
+                            primary: kcSecondaryLightColor,
                             backgroundColor:
                                 kcOnlinePaymentColor, // ripple effect color
                             elevation: 0,
