@@ -48,8 +48,8 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 child: InkWell(
                   //* ASSIGNS only order model if it is new Credit Card
                   onTap: () async {
-                    await model.showCustomCreditCardsConfirmationBottomSheet();
                     model.navBack();
+                    await model.showCustomCreditCardsConfirmationBottomSheet();
                   },
                   //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
