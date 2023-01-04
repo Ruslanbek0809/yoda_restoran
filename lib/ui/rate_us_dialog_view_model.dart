@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
 import '../app/app.locator.dart';
