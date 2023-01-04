@@ -35,7 +35,7 @@ class HomeService with ReactiveServiceMixin {
   List<Exclusive>? _exclusives = [];
   List<Exclusive>? get exclusives => _exclusives;
 
-  /// HOME RESS PAG
+  //*HOME RESS PAG
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
@@ -84,7 +84,7 @@ class HomeService with ReactiveServiceMixin {
   //   return _randomRess;
   // }
 
-  /// HOME RESS PAG
+  //*HOME RESS PAG
   Future<List<Restaurant>?> getPaginatedRess({int page = 1}) async {
     List<Restaurant> _fetchedRandomRess = [];
     String? _pagNext;
@@ -110,8 +110,8 @@ class HomeService with ReactiveServiceMixin {
     return _randomRess;
   }
 
-  /// HOME RESS PAG
-  /// ENABLES SmartRefresher's pull up function
+  //*HOME RESS PAG
+  //*ENABLES SmartRefresher's pull up function
   void enablePullUp() => _isPullUpEnabled = true;
 
   Future<List<Promoted?>> getProms() async {
@@ -141,7 +141,7 @@ class HomeService with ReactiveServiceMixin {
       openRestaurants,
     );
 
-    /// This line "result.runtimeType != DioError" is Workaround
+    //*This line "result.runtimeType != DioError" is Workaround
     if (result.runtimeType != DioError) {
       _selectedMainCatRestaurants = result;
       _fetchingFilter.value = false;
@@ -162,7 +162,7 @@ class HomeService with ReactiveServiceMixin {
         '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
   }
 
-  /// Workaround to disable custom select error
+  //*Workaround to disable custom select error
   void disableSelectError() {
     log.i('');
 

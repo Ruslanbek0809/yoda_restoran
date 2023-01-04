@@ -56,7 +56,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 6.h),
                         child:
 
-                            /// If it is ONLINE payment type
+                            //*If it is ONLINE payment type
                             paymentType.id == 4
                                 ? Row(
                                     children: [
@@ -92,7 +92,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                               style: kts18Text,
                                             ),
 
-                                            /// ONLINE payment bank info
+                                            //*ONLINE payment bank info
                                             Padding(
                                               padding:
                                                   EdgeInsets.only(top: 2.h),
@@ -103,7 +103,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                               ).tr(),
                                             ),
 
-                                            /// ONLINE payment info
+                                            //*ONLINE payment info
                                             Padding(
                                               padding:
                                                   EdgeInsets.only(top: 2.h),
@@ -119,7 +119,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                     ],
                                   )
 
-                                /// If it is NOT ONLINE payment type
+                                //*If it is NOT ONLINE payment type
                                 : Row(
                                     children: [
                                       AnimatedSwitcher(
@@ -160,7 +160,7 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                   );
                 },
               ),
-            //--------------- PAYMENT BUTTON -------------- //
+            //*-------------- PAYMENT BUTTON -------------- //
             Container(
               decoration: BoxDecoration(
                 color: kcWhiteColor,

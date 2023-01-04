@@ -38,7 +38,7 @@ class PromResView extends StatelessWidget {
             children: [
               Stack(
                 children: [
-//------------------ IMAGE with ripple effect ---------------------//
+//*----------------- IMAGE with ripple effect ---------------------//
                   Stack(
                     children: [
                       GestureDetector(
@@ -64,12 +64,12 @@ class PromResView extends StatelessWidget {
                       // ),
                     ],
                   ),
-                  //------------------ DELIVERY TIME ---------------------//
+                  //*----------------- DELIVERY TIME ---------------------//
                   Positioned(
                     bottom: 0,
                     right: 0,
                     child:
-                        //------------------ WORKING HOURS ---------------------//
+                        //*----------------- WORKING HOURS ---------------------//
                         Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 10.w,
@@ -108,7 +108,7 @@ class PromResView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //------------------ FAVOURITE ---------------------//
+                  //*----------------- FAVOURITE ---------------------//
                   Positioned(
                     top: 8.w,
                     right: 8.w,
@@ -136,7 +136,7 @@ class PromResView extends StatelessWidget {
                   ),
                 ],
               ),
-              //------------------ NAME ---------------------//
+              //*----------------- NAME ---------------------//
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
@@ -149,7 +149,7 @@ class PromResView extends StatelessWidget {
                   ),
                 ),
               ),
-              //------------------ LOCATION and RATE ---------------------//
+              //*----------------- LOCATION and RATE ---------------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

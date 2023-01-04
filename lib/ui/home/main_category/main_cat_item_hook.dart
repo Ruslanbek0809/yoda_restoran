@@ -22,7 +22,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
       duration: const Duration(milliseconds: 100),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once

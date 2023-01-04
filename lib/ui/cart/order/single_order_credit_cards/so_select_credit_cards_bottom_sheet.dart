@@ -195,7 +195,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                   return Divider(color: kcDividerColor);
                 },
               ),
-            //--------------- CREDIT CARD CHOOSE BUTTON -------------- //
+            //*-------------- CREDIT CARD CHOOSE BUTTON -------------- //
             Container(
               decoration: BoxDecoration(
                 color: kcWhiteColor,

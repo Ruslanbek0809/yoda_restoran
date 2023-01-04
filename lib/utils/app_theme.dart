@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../shared/shared.dart';
 
 class AppTheme {
-  /// Vertical & Horizontal Spaces
+  //*Vertical & Horizontal Spaces
   static const double _VerticalSpaceExtraSmall = 4.0;
   static const double _VerticalSpaceSmall = 8.0;
   static const double _VerticalSpaceMedium = 16.0;
@@ -82,7 +82,7 @@ class AppTheme {
         offset: const Offset(0.0, 1.1),
       );
 
-  /// OutlineInputBorder
+  //*OutlineInputBorder
   OutlineInputBorder get cardOutlineInputBorder => OutlineInputBorder(
         borderRadius: radius10,
         borderSide: BorderSide(
@@ -91,7 +91,7 @@ class AppTheme {
         ),
       );
 
-  /// UnderlineInputBorder
+  //*UnderlineInputBorder
   UnderlineInputBorder get cardUnderlineInputBorder => UnderlineInputBorder(
         borderSide: BorderSide(
           color: kcDividerColor,
@@ -99,7 +99,7 @@ class AppTheme {
         ),
       );
 
-  /// Radiuses
+  //*Radiuses
   BorderRadius get radius20 => BorderRadius.circular(20.0);
   BorderRadius get radius15 => BorderRadius.circular(15.0);
   BorderRadius get radius16 => BorderRadius.circular(16.0);

@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
 
-/// ApiRootService is used to initializeDio in both ApiService and UserApiService
-class   ApiRootService {
+//*ApiRootService is used to initializeDio in both ApiService and UserApiService
+class ApiRootService {
   final log = getLogger('ApiRootService');
 
   Dio dio = Dio();
@@ -16,7 +16,7 @@ class   ApiRootService {
       'Content-Type': 'application/json',
     };
 
-    /// Reason for usage of SharedPreferences is that ERROR is occuring in _userService.currentUser.accessToken (Stacked itself error related to services)
+    //*Reason for usage of SharedPreferences is that ERROR is occuring in _userService.currentUser.accessToken (Stacked itself error related to services)
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? accessToken = prefs.getString(Constants.accessToken);
     log.v('ApiRootService ACCESS TOKEN: $accessToken');

@@ -71,7 +71,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   Material(
                     color: kcWhiteColor,
                     child: InkWell(
-                      /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                      //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                       onTap: model.isDelivery && !model.busy('selectAddresses')
                           ? () async => await showFlexibleBottomSheet(
                                 isExpand: false,
@@ -196,9 +196,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                         model.log.v('_tempDateTime: $_tempDateTime');
                         model.log.v('model.now: ${model.now}');
 
-                        /// If _tempDateTime is SELECTED go inside this condition
+                        //*If _tempDateTime is SELECTED go inside this condition
                         if (_tempDateTime != null) {
-                          /// Below we have condition whether selected _tempDateTime inside workingHours
+                          //*Below we have condition whether selected _tempDateTime inside workingHours
                           var resWorkingHoursSplitted =
                               model.cartRes!.workingHours!.split('-');
                           var resStartWorkingHoursSplitted =
@@ -217,7 +217,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           model.log.v(
                               '_tempDateTime and model.deliveryDateTime: $_tempDateTime and ${model.deliveryDateTime}');
 
-                          /// =========== CHECKS HOURS PART =========== ///
+                          //*=========== CHECKS HOURS PART =========== ///
                           if (_tempDateTime.hour < startHour ||
                               _tempDateTime.hour > endHour) {
                             model.log.v(
@@ -236,7 +236,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             );
                           }
 
-                          /// ========== CHECKS MINUTES PART =========== ///
+                          //*========== CHECKS MINUTES PART =========== ///
                           else {
                             model.log.v(
                                 'PASSED HOUR Inconvenience _tempDateTime.hour:${_tempDateTime.hour}, startHour:$startHour, endHour:$endHour');
@@ -360,7 +360,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                   Material(
                     color: kcWhiteColor,
                     child: InkWell(
-                      /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                      //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                       onTap: () async => await showFlexibleBottomSheet(
                         isExpand: false,
                         initHeight: 0.5,
@@ -422,14 +422,14 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     indent: 0.111.sw,
                   ),
                   SizedBox(height: 10.h),
-                  //------------------ PROMOCODE ---------------------//
+                  //*----------------- PROMOCODE ---------------------//
                   CheckoutPromocodeHook(),
                   // --------------- NOTE -------------- //
                   CheckoutNoteHook(),
                 ],
               ),
             ),
-            //--------------- CHECKOUT BUTTON -------------- //
+            //*-------------- CHECKOUT BUTTON -------------- //
             Container(
               decoration: BoxDecoration(
                 color: kcWhiteColor,

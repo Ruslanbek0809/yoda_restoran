@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// A widget that unfocus everything when tapped.
-/// This implements the "Unfocus when tapping in empty space" behavior for the
-/// entire application.
+//*A widget that unfocus everything when tapped.
+//*This implements the "Unfocus when tapping in empty space" behavior for the
+//*entire application.
 ///
 class UnfocusWidget extends StatelessWidget {
   const UnfocusWidget({

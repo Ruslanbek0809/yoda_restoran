@@ -125,7 +125,7 @@ class DrawerView extends StatelessWidget {
                 endIndent: 0.1.sw,
                 color: kcDividerColor,
               ),
-              //------------------ MENU LIST ---------------------//
+              //*----------------- MENU LIST ---------------------//
               ...List.generate(
                 model.hasLoggedInUser
                     ? drawerLoggedInList.length
@@ -139,7 +139,7 @@ class DrawerView extends StatelessWidget {
                   );
                 },
               ),
-              //------------------ LANGUAGE ---------------------//
+              //*----------------- LANGUAGE ---------------------//
               Theme(
                 data: Theme.of(context).copyWith(
                   dividerColor: Colors.transparent,
@@ -231,7 +231,7 @@ class DrawerView extends StatelessWidget {
                   ],
                 ),
               ),
-              //------------------ CONTACT US ---------------------//
+              //*----------------- CONTACT US ---------------------//
               Padding(
                 padding: EdgeInsets.only(
                     top: 0.1.sh, left: 20.w, bottom: 0.175.sw - 10.h),

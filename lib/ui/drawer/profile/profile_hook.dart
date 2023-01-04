@@ -344,7 +344,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 ),
               ),
               SizedBox(height: 0.25.sw),
-              //------------------ USER DELETE BUTTON ---------------------//
+              //*----------------- USER DELETE BUTTON ---------------------//
               Align(
                 alignment: Alignment.center,
                 child: Padding(

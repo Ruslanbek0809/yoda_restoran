@@ -14,7 +14,7 @@ class LoginViewModel extends FormViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
-  /// SAVES login data by posting data to login API (onFailForView() is used to show FlashBar ONLY)
+  //*SAVES login data by posting data to login API (onFailForView() is used to show FlashBar ONLY)
   Future saveLoginData({Function()? onFailForView}) async {
     await runBusyFuture(
       _userService.loginUser(
@@ -37,8 +37,8 @@ class LoginViewModel extends FormViewModel {
   @override
   void setFormStatus() {}
 
-  // /// Checks if the result has an error. If it doesn't we navigate to the success view
-  // /// else we show the friendly validation message.
+  // //*Checks if the result has an error. If it doesn't we navigate to the success view
+  // //*else we show the friendly validation message.
   // Future<void> _handleResponse(Response result) async {
   //   log.v('');
 

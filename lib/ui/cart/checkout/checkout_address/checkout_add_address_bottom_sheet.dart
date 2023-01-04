@@ -71,7 +71,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //--------------- ADD ADDRESS BUTTON -------------- //
+                  //*-------------- ADD ADDRESS BUTTON -------------- //
                   Positioned(
                     bottom: 0,
                     left: 0,

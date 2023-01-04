@@ -12,7 +12,7 @@ import 'utils/utils.dart';
 class YodaResApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /// Orientation: PORTRAIT Only
+    //*Orientation: PORTRAIT Only
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -49,7 +49,7 @@ class YodaResApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         builder: (context, child) {
-          /// A widget that unfocus everything when tapped.
+          //*A widget that unfocus everything when tapped.
           return UnfocusWidget(
             child: ScrollConfiguration(
               behavior: MyBehavior(), // To remove the glow effect entirely

@@ -20,7 +20,7 @@ import 'dart:async';
 
 import 'package:path_provider/path_provider.dart' as pathProvider;
 
-/// Method to round trailing zero based on its type.
+//*Method to round trailing zero based on its type.
 
 // toStringAsFixed guarantees the specified number of fractional
 // digits, so the regular expression is simpler than it would need to
@@ -31,7 +31,7 @@ String formatNum(num value) =>
 String formatNumRating(num value) =>
     value.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '');
 
-/// PARSES and FORMATS discountBegin and discountEnd in Hm format only
+//*PARSES and FORMATS discountBegin and discountEnd in Hm format only
 extension DateTimeHmFormatter on String {
   String formateDateTimeHmOnly() {
     DateTime _tempDate = DateFormat('HH:mm').parse(this);
@@ -66,7 +66,7 @@ final List<String> drawerLoggedInList = [
   "about_us"
 ];
 
-/// BANK list
+//*BANK list
 final List<BankCard> bankList = [
   BankCard(
     bankId: 1,
@@ -92,19 +92,19 @@ List<FilterSort> mainCatSortList = [
   FilterSort(3, LocaleKeys.byRatings),
 ];
 
-/// Enum for FormValidation
+//*Enum for FormValidation
 enum FormValidation { phoneInvalid, valid }
 
-/// Enum for bottomCartController
+//*Enum for bottomCartController
 enum BottomCartStatus { idle, forward, reverse }
 
-/// Enum for create bank order service
+//*Enum for create bank order service
 enum CreateBankOrderEnum { idle, fail, reorderFail, wrongCardInfoFail, success }
 
-/// Enum for sms error
+//*Enum for sms error
 enum SmsErrorEnum { idle, fail, cvcFail, notEnoughFail }
 
-/// Enum for bottom sheet types
+//*Enum for bottom sheet types
 enum BottomSheetType {
   mainCategory,
   restaurantInfo,
@@ -118,7 +118,7 @@ enum BottomSheetType {
   sendCodeConfirmation,
 }
 
-/// Enum for dialog types
+//*Enum for dialog types
 enum DialogType {
   mealCartClear,
   clearCart,
@@ -133,19 +133,19 @@ enum DialogType {
   userDelete,
 }
 
-/// Enum for snackbar types
+//*Enum for snackbar types
 enum SnackBarType {
   restaurantDetailsError,
 }
 
-/// Enum for connectivity
+//*Enum for connectivity
 enum ConnectivityStatus { Idle, WiFi, Cellular, Offline }
 
-/// Platform Types
+//*Platform Types
 final bool isIos = Platform.isIOS;
 final bool isAndroid = Platform.isAndroid;
 
-/// Logging
+//*Logging
 const kLOG_TAG = '[Belent Online]';
 const kLOG_ENABLE = true;
 void printLog(dynamic data) {
@@ -235,14 +235,14 @@ snackBar(String? message, BuildContext context) {
   );
 }
 
-/// Device Type
+//*Device Type
 String getDeviceType() {
   final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   printLog('getDeviceType(): ${data.size.shortestSide}');
   return data.size.shortestSide < 600 ? Constants.PHONE : Constants.TABLET;
 }
 
-/// Hex Color
+//*Hex Color
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 
@@ -338,7 +338,7 @@ Future<dynamic> showAlertDialog({
   );
 }
 
-/// DEBOUNCE for search
+//*DEBOUNCE for search
 
 class Debouncer {
   final int milliseconds;
@@ -356,7 +356,7 @@ class Debouncer {
   }
 }
 
-//------------------ FB BACKGROUND ---------------------//
+//*----------------- FB BACKGROUND ---------------------//
 
 Future<void> fbBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -376,16 +376,16 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
 
   //* ------------------ HIVE RATING PART ---------------------//
 
-  /// HIVE DIR
+  //*HIVE DIR
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
 
-  /// CHECKS whether it this adapter with this type registered or NOT
+  //*CHECKS whether it this adapter with this type registered or NOT
   if (!Hive.isAdapterRegistered(5))
     // HIVE registerAdapter
     Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
 
-  /// CHECKS whether hive box with this name is already OPEN or NOT
+  //*CHECKS whether hive box with this name is already OPEN or NOT
   if (!Hive.isBoxOpen(Constants.hiveRatingBox))
     // HIVE openBox
     await Hive.openBox<HiveRating>(Constants.hiveRatingBox);
@@ -401,20 +401,20 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
         Hive.box<HiveRating>(Constants.hiveRatingBox);
     List<HiveRating> _hiveRatingList = _hiveRatingBox.values.toList();
 
-    /// CHECHKS whether order with this id exists in hiveRatingBox
+    //*CHECHKS whether order with this id exists in hiveRatingBox
     int _indexHiveRatingNotification = _hiveRatingList
         .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);
 
     print(
         'METHOD: addRatingNotification() EXIST INDEX _indexHiveRatingOrder: $_indexHiveRatingNotification');
 
-    /// IF this order EXISTS
+    //*IF this order EXISTS
     if (_indexHiveRatingNotification != -1) {
       await _hiveRatingBox.deleteAt(_indexHiveRatingNotification);
       _hiveRatingList.removeAt(_indexHiveRatingNotification);
     }
 
-    /// ADDS this order to hiveRatingBox
+    //*ADDS this order to hiveRatingBox
     final HiveRating _hiveRatingNotification = HiveRating(
       id: noti.id,
       option: noti.option,
@@ -425,7 +425,7 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
     );
     await _hiveRatingBox.add(_hiveRatingNotification);
 
-    // /// TO CHECK WHETHER IT WORKS
+    // //*TO CHECK WHETHER IT WORKS
     // _hiveRatingList = _hiveRatingBox.values.toList();
     // _indexHiveRatingNotification = _hiveRatingList
     //     .indexWhere((_hiveRatingOrder) => _hiveRatingOrder.id == noti.id);

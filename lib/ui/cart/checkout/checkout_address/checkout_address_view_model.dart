@@ -21,7 +21,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
       ? _tempSelectedAddress!
       : _checkoutService.selectedAddress!;
 
-  /// Temporarily SETS _tempSelectedAddress
+  //*Temporarily SETS _tempSelectedAddress
   void updateTempSelectedAddress(Address selectedAddress) {
     log.v(
         'updateTempSelectedAddress selectedAddress: ${selectedAddress.street}');
@@ -30,7 +30,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// SAVES selectedAddress ( uses _checkoutService reactivity)
+  //*SAVES selectedAddress ( uses _checkoutService reactivity)
   void saveSelectedAddress() {
     log.v(
         'saveSelectedAddress() _tempSelectedAddress: ${_tempSelectedAddress!.street}');
@@ -39,9 +39,9 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ ADD ADDRESS BOTTOM SHEET ----------------------------//
+//*----------------------- ADD ADDRESS BOTTOM SHEET ----------------------------//
 
-  /// CALLS AddAddressBottomSheet
+  //*CALLS AddAddressBottomSheet
   Future<void> showCustomAddAddressBottomSheet() async {
     log.i('');
     SheetResponse<bool>? _navResult;
@@ -79,7 +79,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   String? _note;
   String? get note => _note;
 
-  /// UPDATES _city
+  //*UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
     if (value!.isEmpty) return LocaleKeys.enterCity.tr();
@@ -89,7 +89,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
     if (value!.isEmpty) {
@@ -102,7 +102,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _house
+  //*UPDATES _house
   String? updateHouse(String? value) {
     log.v('updateHouse value: $value');
     if (value == null || value.isEmpty) return null;
@@ -113,7 +113,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _apartment
+  //*UPDATES _apartment
   String? updateApartment(String? value) {
     log.v('updateApartment value: $value');
     if (value == null || value.isEmpty) return null;
@@ -124,7 +124,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _floor
+  //*UPDATES _floor
   String? updateFloor(String? value) {
     log.v('updateFloor value: $value');
     if (value == null || value.isEmpty) return null;
@@ -135,7 +135,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateNote(String? value) {
     log.v('updateNote value: $value');
     if (value == null || value.isEmpty) return null;
@@ -146,7 +146,7 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// ADDS new address
+  //*ADDS new address
   Future<void> onAddAddressPressed(
     Function()? onSuccessForView,
     Function()? onFailForView,

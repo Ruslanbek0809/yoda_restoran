@@ -12,17 +12,17 @@ class DynamicLinkService {
 
   FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
-  /// HANDLES Foreground/Background dynamic link
+  //*HANDLES Foreground/Background dynamic link
   Future handleBFDynamicLinks() async {
     // log.v('====== DynamicLinkService handleBFDynamicLinks() STARTED ======');
 
-    // /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
+    // //*#1 GETS the initial dynamic link if the app is opened with a dynamic link
     // final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
 
-    // /// HANDLES clicked dynamic link
+    // //*HANDLES clicked dynamic link
     // if (data != null) _handleDeepLink(data);
 
-    /// #2 GETS dynamic link in Background / Foreground State
+    //*#2 GETS dynamic link in Background / Foreground State
     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLinkData) {
       // log.v('====== DynamicLinkService Background / Foreground State ======');
       // 3a. handle link that has been retrieved
@@ -32,14 +32,14 @@ class DynamicLinkService {
     });
   }
 
-  /// HANDLES clicked terminated dynamic link
+  //*HANDLES clicked terminated dynamic link
   Future handleClickedDynamicLinks() async {
     // log.v('====== DynamicLinkService handleClickDynamicLinks() STARTED ======');
 
-    /// #1 GETS the initial dynamic link if the app is opened with a dynamic link
+    //*#1 GETS the initial dynamic link if the app is opened with a dynamic link
     final PendingDynamicLinkData? data = await dynamicLinks.getInitialLink();
 
-    /// HANDLES clicked dynamic link
+    //*HANDLES clicked dynamic link
     if (data != null) _handleDeepLink(data);
   }
 
@@ -64,7 +64,7 @@ class DynamicLinkService {
         var singleExUrl = deepLink.queryParameters['url'];
 
         if (singleExId != null) {
-          //------------------ NAVIGATION to SingleExclusive ---------------------//
+          //*------------------ NAVIGATION to SingleExclusive ---------------------//
           _navService.navigateTo(
             Routes.singleExView,
             arguments: SingleExViewArguments(
@@ -86,7 +86,7 @@ class DynamicLinkService {
     bool shortLink,
     ExclusiveSingle singleEx,
   ) async {
-    /// CREATES parameters with all details
+    //*CREATES parameters with all details
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       // The Dynamic Link URI domain. You can view created URIs on your Firebase console
       uriPrefix: 'https://yodarestoran.page.link/',

@@ -21,7 +21,7 @@ class PushNotificationService {
   Future initialise() async {
     log.v('====== PushNotificationService STARTED Fcm Token ======');
 
-    /// This function is used to authorize permissions. On Anroid not needed. Here I use it to see authorizationStatus
+    //*This function is used to authorize permissions. On Anroid not needed. Here I use it to see authorizationStatus
     NotificationSettings settings = await _fcm.requestPermission(
       alert: true,
       announcement: false,
@@ -33,16 +33,16 @@ class PushNotificationService {
     );
     log.v('FCM permission: ${settings.authorizationStatus}');
 
-    /// Here we get fcmToken and store it in _fcmToken
+    //*Here we get fcmToken and store it in _fcmToken
     _fcmToken = await _fcm.getToken();
     log.v('FCM Token: $_fcmToken');
 
-    /// Here we subcscribe to topic so that we send specific message to specific devices
+    //*Here we subcscribe to topic so that we send specific message to specific devices
     _fcm.subscribeToTopic(Constants.topicAllDevices);
     _fcm.subscribeToTopic(Constants.topicAndroidDevices);
     _fcm.subscribeToTopic(Constants.topicIosDevices);
 
-    /// When the app is open and it receives a push notification
+    //*When the app is open and it receives a push notification
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       log.v('Got a message whilst in the foreground onMessage!');
       log.v('Message data: ${message.data}');
@@ -111,7 +111,7 @@ class PushNotificationService {
       }
     });
 
-    /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
+    //*When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       log.v('Got a message whilst in the foreground onMessageOpenedApp!');
       log.v('Message data: ${message.data}');
@@ -127,7 +127,7 @@ class PushNotificationService {
       log.v(
           'notificationData JSON title: ${noti.title}, status: ${noti.status}');
 
-      /// NO need to reload when notification status is 4. Else, RELOAD
+      //*NO need to reload when notification status is 4. Else, RELOAD
       if (noti.status == '4') {
         log.v('INSIDE STATUS 4');
         await _dialogService.showCustomDialog(

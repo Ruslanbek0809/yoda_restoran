@@ -33,7 +33,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
       duration: const Duration(milliseconds: 100),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once
@@ -56,8 +56,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
       child: GestureDetector(
         onTap: () async {
           await _tweenController.forward();
-          //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
-          //------------------ CUSTOM PACKAGE ---------------------//
+          //*----------------- CART MORE MEAL BOTTOM SHEET ---------------------//
+          //*----------------- CUSTOM PACKAGE ---------------------//
           await showFlexibleBottomSheet(
             isExpand: false,
             // minHeight: 0,
@@ -143,7 +143,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                     style: kts12Text,
                   ),
                 ),
-                //------------------ MEAL PRICE ---------------------//
+                //*----------------- MEAL PRICE ---------------------//
                 model.mealQuantity > 0
                     ? Padding(
                         padding: EdgeInsets.only(
@@ -216,7 +216,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                 ),
                               )
                             : SizedBox(),
-                Spacer(), //------------------ BUTTONS ---------------------//
+                Spacer(), //*----------------- BUTTONS ---------------------//
                 AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   child: model.mealQuantity > 0
@@ -266,8 +266,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                     ? () async {
                                         await _tweenController.forward();
 
-                                        //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
-                                        //------------------ CUSTOM PACKAGE ---------------------//
+                                        //*----------------- CART MORE MEAL BOTTOM SHEET ---------------------//
+                                        //*----------------- CUSTOM PACKAGE ---------------------//
                                         await showFlexibleBottomSheet(
                                           isExpand: false,
                                           // minHeight: 0,
@@ -325,8 +325,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                 ? () async {
                                     await _tweenController.forward();
 
-                                    //------------------ CART MORE MEAL BOTTOM SHEET ---------------------//
-                                    //------------------ CUSTOM PACKAGE ---------------------//
+                                    //*----------------- CART MORE MEAL BOTTOM SHEET ---------------------//
+                                    //*----------------- CUSTOM PACKAGE ---------------------//
                                     await showFlexibleBottomSheet(
                                       isExpand: false,
                                       // minHeight: 0,

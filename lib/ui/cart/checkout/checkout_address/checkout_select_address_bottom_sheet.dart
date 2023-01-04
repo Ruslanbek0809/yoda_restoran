@@ -41,7 +41,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
               child: Material(
                 color: kcWhiteColor,
                 child: InkWell(
-                  // /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                  // //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
                   //   initHeight: 0.95,
@@ -132,7 +132,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                   return Divider(color: kcDividerColor);
                 },
               ),
-            //--------------- ADDRESS CHOOSE BUTTON -------------- //
+            //*-------------- ADDRESS CHOOSE BUTTON -------------- //
             Container(
               decoration: BoxDecoration(
                 color: kcWhiteColor,

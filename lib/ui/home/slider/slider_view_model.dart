@@ -23,7 +23,7 @@ class SliderViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  //------------------ NAVIGATION ---------------------//
+  //*----------------- NAVIGATION ---------------------//
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
         Routes.resDetailsView,

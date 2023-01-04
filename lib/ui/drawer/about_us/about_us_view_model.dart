@@ -24,15 +24,15 @@ class AboutUsViewModel extends FutureViewModel {
     log.v('_additionals!.length: ${_additionals!.length}');
   }
 
-  /// UPDATES _isAboutUsTermSelected
+  //*UPDATES _isAboutUsTermSelected
   void updateIsAboutUsTermSelected() {
     _isAboutUsTermSelected = !_isAboutUsTermSelected;
     notifyListeners();
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }

@@ -22,7 +22,7 @@ class ContactUsViewModel extends BaseViewModel {
   String? _info;
   String? get info => _info;
 
-  /// UPDATES _name
+  //*UPDATES _name
   String? updateName(String? value) {
     log.v('updateName value: $value');
     if (value!.isEmpty) {
@@ -34,7 +34,7 @@ class ContactUsViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _email
+  //*UPDATES _email
   String? updatePhone(String? value) {
     log.v('updatePhone value: $value');
     if (value == null || value.isEmpty || value.length < 11) {
@@ -46,7 +46,7 @@ class ContactUsViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _info
+  //*UPDATES _info
   String? updateInfo(String? value) {
     log.v('updateInfo value: $value');
     if (value!.isEmpty) {
@@ -78,11 +78,11 @@ class ContactUsViewModel extends BaseViewModel {
     ));
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
   void navBack() => _navService.back();
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }

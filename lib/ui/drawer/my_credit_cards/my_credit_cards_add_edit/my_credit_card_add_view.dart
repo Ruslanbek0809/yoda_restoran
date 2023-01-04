@@ -41,7 +41,7 @@ class MyCreditCardAddView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              //------------------ CREDIT CARD FORM ---------------------//
+              //*----------------- CREDIT CARD FORM ---------------------//
               CreditCardForm(
                 formKey: creditCardFormKey,
                 obscureCvv: true,
@@ -96,7 +96,7 @@ class MyCreditCardAddView extends StatelessWidget {
                 cardHolderValidator: model.updateCardHolderValidator,
                 onCreditCardModelChange: model.onCreditCardModelChange,
               ),
-              //------------------ BANK CARD LIST ---------------------//
+              //*----------------- BANK CARD LIST ---------------------//
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -128,7 +128,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   color: kcDividerSecondaryColor,
                 ),
               ),
-              //------------------ CARD ADD BUTTON ---------------------//
+              //*----------------- CARD ADD BUTTON ---------------------//
               Container(
                 color: kcWhiteColor,
                 padding: EdgeInsets.fromLTRB(16.w, 75.h, 16.w, 50.h),

@@ -44,7 +44,7 @@
 //               padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
 //               child: Column(
 //                 children: [
-//                   //------------------ CREDIT CARD FORM ---------------------//
+//                   //*----------------- CREDIT CARD FORM ---------------------//
 //                   CreditCardForm(
 //                     formKey: creditCardFormKey,
 //                     obscureCvv: true,
@@ -101,7 +101,7 @@
 //                     cardHolderValidator: model.updateCardHolderValidator,
 //                     onCreditCardModelChange: model.onCreditCardModelChange,
 //                   ),
-//                   //------------------ BANK CARD LIST ---------------------//
+//                   //*----------------- BANK CARD LIST ---------------------//
 //                   ListView.separated(
 //                     shrinkWrap: true,
 //                     physics: NeverScrollableScrollPhysics(),

@@ -22,7 +22,7 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
       duration: const Duration(milliseconds: 75),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once
@@ -45,8 +45,8 @@ class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
-            //------------------ MAIN CAT BOTTOM SHEET ---------------------//
-            //------------------ CUSTOM PACKAGE ---------------------//
+            //*----------------- MAIN CAT BOTTOM SHEET ---------------------//
+            //*----------------- CUSTOM PACKAGE ---------------------//
             await showFlexibleBottomSheet(
               isExpand: false,
               initHeight: 0.95,

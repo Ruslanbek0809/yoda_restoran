@@ -11,7 +11,7 @@ class ApiService {
   final _apiRoot = locator<ApiRootService>();
   final _geolocatorService = locator<GeolocatorService>();
 
-  //------------------ HOME APIS ---------------------//
+  //!------------------ HOME APIS ---------------------//
 
   Future<List<SliderModel>> getSliders() async {
     List<SliderModel> _sliders = [];
@@ -76,7 +76,7 @@ class ApiService {
   //   try {
   //     Response response;
   //     if (_geolocatorService.locationPosition != null) {
-  /// DEPRECATED after 2.3.0+35
+  //*DEPRECATED after 2.3.0+35
   //       await _geolocatorService.getUserCurrentLocationOnly();
   //       response = await _apiRoot.dio.get(
   //         'api/restaurants/',
@@ -101,7 +101,7 @@ class ApiService {
   //   }
   // }
 
-  /// HOME RESS PAG
+  //* HOME RESS PAG
   Future<void> getPaginatedRess(
     int page,
     Function(List<Restaurant>?, String?)? onSuccess,
@@ -111,7 +111,7 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        /// DEPRECATED after 2.3.0+35
+        //*DEPRECATED after 2.3.0+35
         // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/paginatedRestaurants/',
@@ -143,7 +143,7 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        /// DEPRECATED after 2.3.0+35
+        //*DEPRECATED after 2.3.0+35
         // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/promoted/',
@@ -198,7 +198,7 @@ class ApiService {
 
     String _queryPars = '';
 
-    /// IF selectedMainCats IS NOT EMPTY
+    //*IF selectedMainCats IS NOT EMPTY
     if (selectedMainCats.isNotEmpty) {
       _queryPars = 'mainCat=${selectedMainCats[0]}';
       for (int i = 1; i < selectedMainCats.length; i++)
@@ -208,7 +208,7 @@ class ApiService {
       if (rating) _queryPars += '&rating=True'; // Workaround
       if (openRestaurants) _queryPars += '&open=True'; // Workaround
 
-      /// Favourite add part
+      //*Favourite add part
       if (selectedMainCats.contains(14))
         _queryPars += '&favourite=True'; // Workaround
     } else {
@@ -226,7 +226,7 @@ class ApiService {
       Response response;
 
       if (_geolocatorService.locationPosition != null) {
-        /// DEPRECATED after 2.3.0+35
+        //*DEPRECATED after 2.3.0+35
         // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/restaurants?$_queryPars',
@@ -252,7 +252,7 @@ class ApiService {
     }
   }
 
-  //------------------ SINGLE EXCLUSIVE APIS ---------------------//
+  //!------------------ SINGLE EXCLUSIVE APIS ---------------------//
 
   Future<void> getSingleExRiches({
     required int singleExId,
@@ -263,7 +263,7 @@ class ApiService {
     try {
       Response response;
       if (_geolocatorService.locationPosition != null) {
-        /// DEPRECATED after 2.3.0+35
+        //*DEPRECATED after 2.3.0+35
         // await _geolocatorService.getUserCurrentLocationOnly();
         response = await _apiRoot.dio.get(
           'api/richRes/',
@@ -291,7 +291,7 @@ class ApiService {
     }
   }
 
-  //------------------ RESTAURANT APIS ---------------------//
+  //!------------------ RESTAURANT APIS ---------------------//
 
   Future<void> getResCatsWithMeals({
     required int restaurantId,
@@ -320,7 +320,7 @@ class ApiService {
     }
   }
 
-  //------------------ CART APIS ---------------------//
+  //!------------------ CART APIS ---------------------//
 
   Future<List<Meal>> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
     List<Meal> _moreMeals = [];
@@ -349,7 +349,7 @@ class ApiService {
     }
   }
 
-  //------------------ CHECKOUT APIS ---------------------//
+  //!------------------ CHECKOUT APIS ---------------------//
 
   Future<Promocode?> searchPromocode(
       String searchText, int resId, int getTotalCartSum) async {
@@ -378,7 +378,7 @@ class ApiService {
     }
   }
 
-  //------------------ SEARCH APIS ---------------------//
+  //!------------------ SEARCH APIS ---------------------//
 
   Future<List<SearchRestaurant?>> startMainSearch(String searchText) async {
     List<SearchRestaurant?> _searchRestaurants = [];
@@ -403,7 +403,7 @@ class ApiService {
     }
   }
 
-  //------------------ SEARCH APIS ---------------------//
+  //!------------------ SEARCH APIS ---------------------//
 
   Future<List<Meal?>> searchMeals(String searchText, int resId) async {
     List<Meal?> _searchMeals = [];

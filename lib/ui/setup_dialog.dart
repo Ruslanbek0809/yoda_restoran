@@ -99,7 +99,7 @@ void setupDialog() {
   dialogService.registerCustomDialogBuilders(builders);
 }
 
-//------------------ MEAL and RESTAURANT DIALOGS ---------------------//
+//!------------------ MEAL and RESTAURANT DIALOGS ---------------------//
 
 class MealDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -188,7 +188,7 @@ class MealDialogView extends StatelessWidget {
   }
 }
 
-//------------------ CART DIALOGS ---------------------//
+//!------------------ CART DIALOGS ---------------------//
 
 class ClearCartDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -366,7 +366,7 @@ class RemoveCartMealDialogView extends StatelessWidget {
   }
 }
 
-//------------------ ORDER DIALOGS ---------------------//
+//!------------------ ORDER DIALOGS ---------------------//
 
 class CancelWaitingOrderDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -438,7 +438,7 @@ class CancelWaitingOrderDialogView extends StatelessWidget {
   }
 }
 
-//------------------ NOTIFICATION DIALOGS ---------------------//
+//!------------------ NOTIFICATION DIALOGS ---------------------//
 
 class NotificationDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -504,7 +504,7 @@ class NotificationDialogView extends StatelessWidget {
   }
 }
 
-//------------------ ADDRESS DIALOGS ---------------------//
+//!------------------ ADDRESS DIALOGS ---------------------//
 
 class RemoveAddressDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -679,7 +679,7 @@ class RateOrderDialogView extends StatelessWidget {
         builder: (context, model, child) => SingleChildScrollView(
           padding: EdgeInsets.only(
 
-              /// To resize screen when OnKeyboard opened
+              //* To resize screen when OnKeyboard opened
               bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Stack(
             children: [
@@ -729,7 +729,7 @@ class RateOrderDialogView extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ).tr(),
                     ),
-                    // --------------- RATING -------------- //
+                    //* --------------- RATING -------------- //
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: RatingBar.builder(
@@ -764,12 +764,12 @@ class RateOrderDialogView extends StatelessWidget {
                         onRatingUpdate: model.updateRating,
                       ),
                     ),
-                    // --------------- NOTES HOOK -------------- //
+                    //* --------------- NOTES HOOK -------------- //
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 15.h),
                       child: RateUsDialogHook(),
                     ),
-                    //--------------- SEND Button -------------- //
+                    //* --------------- SEND Button -------------- //
                     Padding(
                       padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
                       child: SizedBox(
@@ -801,7 +801,7 @@ class RateOrderDialogView extends StatelessWidget {
                                                   int.parse(
                                                       notificationModel.id!));
 
-                                          /// TO initialise getOrders() API
+                                          //* TO initialise getOrders() API
                                           await completer(
                                               DialogResponse(data: true));
                                           await showDialog(
@@ -912,7 +912,7 @@ class RateOrderDialogView extends StatelessWidget {
   }
 }
 
-//------------------ ORDER DELETE DIALOGS ---------------------//
+//! ------------------ ORDER DELETE DIALOGS ---------------------//
 
 class OrderDeleteDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -984,7 +984,7 @@ class OrderDeleteDialogView extends StatelessWidget {
   }
 }
 
-//------------------ CREDIT CARD DELETE DIALOGS ---------------------//
+//! ------------------ CREDIT CARD DELETE DIALOGS ---------------------//
 
 class CreditCardDeleteDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -1056,7 +1056,7 @@ class CreditCardDeleteDialogView extends StatelessWidget {
   }
 }
 
-//------------------ USER LOGOUT/DELETE DIALOGS ---------------------//
+//! ------------------ USER LOGOUT/DELETE DIALOGS ---------------------//
 
 class UserLogoutDialogView extends StatelessWidget {
   final DialogRequest request;
@@ -1203,122 +1203,3 @@ class UserDeleteDialogView extends StatelessWidget {
           );
   }
 }
-
-// //------------------ SHOW ONLINE PAYMENT DIALOGS ---------------------//
-
-// class ShowOnlinePaymentFailDialogView extends StatelessWidget {
-//   final DialogRequest request;
-//   final Function(DialogResponse) completer;
-//   final String content;
-//   const ShowOnlinePaymentFailDialogView({
-//     Key? key,
-//     required this.request,
-//     required this.completer,
-//     required this.content,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return (Platform.isIOS)
-//         ? CupertinoAlertDialog(
-//             title: Column(
-//               children: [
-//                 SvgPicture.asset(
-//                   'assets/online_payment_fail.svg',
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(top: 8.h),
-//                   child: Text(
-//                     request.title!,
-//                     style: kts18BoldText,
-//                   ).tr(),
-//                 ),
-//               ],
-//             ),
-//             content: Text(content, style: kts12Text).tr(),
-//           )
-//         : AlertDialog(
-//             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-//             titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-//             contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-//             actionsAlignment: MainAxisAlignment.center,
-//             title: Column(
-//               children: [
-//                 SvgPicture.asset(
-//                   'assets/online_payment_fail.svg',
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(top: 8.h),
-//                   child: Text(
-//                     request.title!,
-//                     textAlign: TextAlign.center,
-//                   ).tr(),
-//                 ),
-//               ],
-//             ),
-//             titleTextStyle: kts18BoldText,
-//             content: Text(
-//               content,
-//               textAlign: TextAlign.center,
-//             ).tr(),
-//             contentTextStyle: kts12Text,
-//           );
-//   }
-// }
-
-// class ShowOnlinePaymentSuccessDialogView extends StatelessWidget {
-//   final DialogRequest request;
-//   final Function(DialogResponse) completer;
-//   final String content;
-//   const ShowOnlinePaymentSuccessDialogView({
-//     Key? key,
-//     required this.request,
-//     required this.completer,
-//     required this.content,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return (Platform.isIOS)
-//         ? CupertinoAlertDialog(
-//             title: Column(
-//               children: [
-//                 SvgPicture.asset(
-//                   'assets/online_payment_success.svg',
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(top: 12.h),
-//                   child: Text(
-//                     request.title!,
-//                     style: kts18BoldText,
-//                   ).tr(),
-//                 ),
-//               ],
-//             ),
-//             content: SizedBox(),
-//           )
-//         : AlertDialog(
-//             shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
-//             titlePadding: EdgeInsets.fromLTRB(20.w, 24.h, 24.w, 0.h),
-//             contentPadding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
-//             actionsAlignment: MainAxisAlignment.center,
-//             title: Column(
-//               children: [
-//                 SvgPicture.asset(
-//                   'assets/online_payment_success.svg',
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(top: 12.h),
-//                   child: Text(
-//                     request.title!,
-//                     textAlign: TextAlign.center,
-//                   ).tr(),
-//                 ),
-//               ],
-//             ),
-//             titleTextStyle: kts18BoldText,
-//             content: SizedBox(),
-//             contentTextStyle: kts18Text,
-//           );
-//   }
-// }

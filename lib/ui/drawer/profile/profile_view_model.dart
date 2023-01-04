@@ -37,7 +37,7 @@ class ProfileViewModel extends BaseViewModel {
   String? _phone;
   String? get phone => _phone;
 
-  /// LOGOUTS a user from app
+  //*LOGOUTS a user from app
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(Constants.accessToken);
@@ -48,7 +48,7 @@ class ProfileViewModel extends BaseViewModel {
     await navToHomeByRemovingAll();
   }
 
-  /// ASSIGNS currentUser value
+  //*ASSIGNS currentUser value
   void assignCurrentUserValues() {
     log.v('assignCurrentUserValues()');
 
@@ -63,7 +63,7 @@ class ProfileViewModel extends BaseViewModel {
     _phone = currentUser!.mobile;
   }
 
-  /// UPDATES _name
+  //*UPDATES _name
   String? updateName(String? value) {
     log.v('updateName value: $value');
     // if (value!.isEmpty) {
@@ -75,7 +75,7 @@ class ProfileViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _birthDate
+  //*UPDATES _birthDate
   String? updateBirthDate(DateTime? value) {
     log.v('updateBirthDate value: $value');
     // if (value!.isEmpty) {
@@ -87,7 +87,7 @@ class ProfileViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _gender
+  //*UPDATES _gender
   String? updateGender(String? value) {
     log.v('updateGender value: $value');
     // if (value!.isEmpty) {
@@ -99,7 +99,7 @@ class ProfileViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _email
+  //*UPDATES _email
   String? updateEmail(String? value) {
     log.v('updateEmail value: $value');
     // if (value!.isEmpty) {
@@ -111,7 +111,7 @@ class ProfileViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _email
+  //*UPDATES _email
   String? updatePhone(String? value) {
     log.v('updatePhone value: $value');
     if (value == null || value.isEmpty || value.length < 11) {
@@ -123,7 +123,7 @@ class ProfileViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES user info
+  //*UPDATES user info
   Future<void> onUpdateUserPressed({
     Function()? onFailForView,
     Function()? onSuccessForView,
@@ -144,9 +144,9 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
-//------------------------ USER LOGOUT/DELETE DIALOG ----------------------------//
+//*----------------------- USER LOGOUT/DELETE DIALOG ----------------------------//
 
-  /// SHOWS USER LOGOUT Dialog
+  //*SHOWS USER LOGOUT Dialog
   Future showUserLogoutDialog(
     Function()? onSuccessForView,
   ) async {
@@ -170,7 +170,7 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
-  /// SHOWS USER DELETE Dialog
+  //*SHOWS USER DELETE Dialog
   Future showUserDeleteDialog(
     Function()? onSuccessForView,
   ) async {
@@ -195,11 +195,11 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
   void navBack() => _navService.back();
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 }

@@ -6,7 +6,6 @@ import '../../models/models.dart';
 import '../../shared/shared.dart';
 import 'cart_view_model.dart';
 import '../toggle_buttons/toggle_buttons_view.dart';
-import '../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,7 +18,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-//------------------ DELIVERY TOGGLE TITLE ---------------------//
+//*------------------ DELIVERY TOGGLE TITLE ---------------------//
         Padding(
           padding:
               EdgeInsets.only(top: 20.h, bottom: 10.w, left: 16.w, right: 16.w),
@@ -28,7 +27,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
             style: ktsDefault24DarkText,
           ).tr(),
         ),
-//------------------ DELIVERY TOGGLE ---------------------//
+//*------------------ DELIVERY TOGGLE ---------------------//
         ToggleButtonView(
           restaurant: Restaurant(
             id: model.cartRes!.id,
@@ -48,7 +47,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
             delivery: model.cartRes!.delivery,
           ),
         ),
-//------------------ DELIVERY TYPE TEXT based on condition ---------------------//
+//*------------------ DELIVERY TYPE TEXT based on condition ---------------------//
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.w),
           child: AnimatedSwitcher(

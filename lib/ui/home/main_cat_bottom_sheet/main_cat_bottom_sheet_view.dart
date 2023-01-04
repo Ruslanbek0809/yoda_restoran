@@ -72,7 +72,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                     ],
                   ),
                 ),
-                //--------------- MAIN CATEGORY OPEN RESTAURANTS MANUAL -------------- //
+                //*-------------- MAIN CATEGORY OPEN RESTAURANTS MANUAL -------------- //
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10.h),
                   padding:
@@ -99,7 +99,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                   ),
                 ),
 
-                //--------------- MAIN CATEGORY SORT MANUAL -------------- //
+                //*-------------- MAIN CATEGORY SORT MANUAL -------------- //
                 Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 6.w, vertical: 14.h),
@@ -153,7 +153,7 @@ class MainCatBottomSheetView extends StatelessWidget {
               ],
             ),
 
-            //--------------- SORT SELECTIONS -------------- //
+            //*-------------- SORT SELECTIONS -------------- //
             MainCatSortBottom(),
           ],
         ),

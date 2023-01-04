@@ -4,7 +4,7 @@ import 'meal_item_hook.dart';
 import 'meal_view_model.dart';
 import 'package:stacked/stacked.dart';
 
-/// The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
+//*The reason to use this StatelessWidget instead of directly using FoodWidget structure is to create FoodViewModel first using ViewModelBuilder
 class MealView extends StatelessWidget {
   final Meal meal;
   final Restaurant

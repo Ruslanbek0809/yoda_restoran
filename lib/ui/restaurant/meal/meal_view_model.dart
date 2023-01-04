@@ -8,7 +8,7 @@ import '../../../models/models.dart';
 import '../../../services/services.dart';
 import '../../../utils/utils.dart';
 
-/// ReactiveViewModel is used to "react"
+//*ReactiveViewModel is used to "react"
 class MealViewModel extends ReactiveViewModel {
   final log = getLogger('MealViewModel');
   final int? mealId;
@@ -19,13 +19,13 @@ class MealViewModel extends ReactiveViewModel {
   final _navService = locator<NavigationService>();
   final _hiveDbService = locator<HiveDbService>();
 
-  //----------- HIVE DB PART ------------//
+  //*---------- HIVE DB PART ------------//
 
-  /// This mealQuantity is used in UI part instead of quantity var so that UI to be updated without any Workarounds
+  //*This mealQuantity is used in UI part instead of quantity var so that UI to be updated without any Workarounds
   int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
 
-  /// ADDS or UPDATES a restaurant in CART with condition
-  /// ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
+  //*ADDS or UPDATES a restaurant in CART with condition
+  //*ADDS a meal to CART and UPDATES _quantity and _isButtonToggled
   Future<void> addMealToCart(
     Meal? meal,
     Restaurant? restaurant,
@@ -47,7 +47,7 @@ class MealViewModel extends ReactiveViewModel {
         _hiveDbService.cartRes!.id != -1) {
       await showClearOrNavigateCartDialog(); // CALLS MealDialogView
 
-      /// If user CLEARS cart then START below functions
+      //*If user CLEARS cart then START below functions
       if (_hiveDbService.cartMeals.isEmpty) {
         _bottomCartService
             .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
@@ -58,7 +58,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES a meal in CART. Also UPDATES _quantity and _isButtonToggled
+  //*UPDATES a meal in CART. Also UPDATES _quantity and _isButtonToggled
   Future<void> updateMealInCart({int? mealId, int? mealQuantity}) async {
     log.i('updateMealInCart() mealId: $mealId, mealQuantity: $mealQuantity');
 
@@ -67,20 +67,20 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  //*SUBTRACTS quantity of a meal or REMOVES a meal from CART
   Future<void> subtractOrRemoveMealInCart(int? mealId) async {
     log.i('subtractOrRemoveMealInCart() mealId: $mealId');
 
     await _hiveDbService.subtractOrRemoveMealInCart(mealId);
 
-    /// UPDATES ResBottomCart's quantity
+    //*UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
     notifyListeners();
   }
 
-//------------------------ MEAL CART DIALOG PART ----------------------------//
+//*----------------------- MEAL CART DIALOG PART ----------------------------//
 
-  /// SHOWS Clear or Navigate Cart Dialog
+  //*SHOWS Clear or Navigate Cart Dialog
   Future showClearOrNavigateCartDialog() async {
     log.i('');
     await _dialogService.showCustomDialog(
@@ -94,7 +94,7 @@ class MealViewModel extends ReactiveViewModel {
     );
   }
 
-  /// CLEAR CART
+  //*CLEAR CART
   Future<void> clearCart() async {
     log.i('clearCart()');
 
@@ -102,7 +102,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ MEAL BOTTOM SHEET PART ----------------------------//
+//*----------------------- MEAL BOTTOM SHEET PART ----------------------------//
 
   int quantityDraft = 1;
   int quantityDraftTempNoAttribute =
@@ -118,7 +118,7 @@ class MealViewModel extends ReactiveViewModel {
   List<Customizable> _selectedCustoms = [];
   List<Customizable> get selectedCustoms => _selectedCustoms;
 
-  /// CREATES INITIAL list for selectedVolumes and selectedMultiCustomizables
+  //*CREATES INITIAL list for selectedVolumes and selectedMultiCustomizables
   void setOnModelReadyVolsCustoms(Meal meal) {
     log.i('setOnModelReadyVolsCustoms()');
 
@@ -129,7 +129,7 @@ class MealViewModel extends ReactiveViewModel {
       (_) => Volume(id: -1, groupId: -1, price: -1, volumeName: 'Default'),
     );
 
-    /// ASSINGS initial value to totalSumDraft and quantityDraft
+    //*ASSINGS initial value to totalSumDraft and quantityDraft
     if (meal.gVolumes!.isEmpty && meal.gCustomizables!.isEmpty) {
       if (mealQuantity != 0) {
         quantityDraft = mealQuantity;
@@ -148,15 +148,15 @@ class MealViewModel extends ReactiveViewModel {
           : meal.price!;
     }
 
-    /// ASSINGS initial value to _isAllVolSelected based on
+    //*ASSINGS initial value to _isAllVolSelected based on
     if (meal.gVolumes!.isEmpty) _isAllVolSelected = true;
   }
 
-  /// ADDS to quantityInDraft
+  //*ADDS to quantityInDraft
   void addQuantityDraft(Meal meal) {
     quantityDraft += 1;
 
-    /// ADDS a meal from totalDraftSum
+    //*ADDS a meal from totalDraftSum
     totalSumDraft += meal.discount != null && meal.discount! > 0
         ? meal.discountedPrice!
         : meal.price!;
@@ -176,12 +176,12 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// SUBTRACTS quantityInDraft
+  //*SUBTRACTS quantityInDraft
   void subtractQuantityDraft(Meal meal) {
     if (quantityDraft <= 1) return;
     quantityDraft -= 1;
 
-    /// SUBTRACTS a meal from totalDraftSum
+    //*SUBTRACTS a meal from totalDraftSum
     totalSumDraft -= meal.discount != null && meal.discount! > 0
         ? meal.discountedPrice!
         : meal.price!;
@@ -201,28 +201,28 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// CHECKS wether this cus in _selectedCustoms or NOT
+  //*CHECKS wether this cus in _selectedCustoms or NOT
   bool isCustomSelected(Customizable? cus) => _selectedCustoms.contains(cus);
 
-  /// UPDATES _selectedVolumes's mainVolumePos value to volume
+  //*UPDATES _selectedVolumes's mainVolumePos value to volume
   void updateSelectedVols(Meal meal, int mainVolPos, Volume? volume) {
     if (_selectedVols[mainVolPos].id != -1)
 
-      /// Step 1. SUBTRACTS selected vol's price from totalDraftSum
+      //*Step 1. SUBTRACTS selected vol's price from totalDraftSum
       totalSumDraft -= meal.discount != null || meal.discount! > 0
           ? (_selectedVols[mainVolPos].price! / 100) * (100 - meal.discount!)
           : _selectedVols[mainVolPos].price! *
               quantityDraft; // If already selected vol from group then remove it first
 
-    /// Step 2. ASSIGNS selected volume to _selectedVols[mainVolPos]
+    //*Step 2. ASSIGNS selected volume to _selectedVols[mainVolPos]
     _selectedVols[mainVolPos] = volume!;
 
-    /// Step 3. ADDS selected vol's price to totalDraftSum
+    //*Step 3. ADDS selected vol's price to totalDraftSum
     totalSumDraft += meal.discount! > 0
         ? (_selectedVols[mainVolPos].price! / 100) * (100 - meal.discount!)
         : _selectedVols[mainVolPos].price! * quantityDraft;
 
-    /// Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
+    //*Lines of codes below CHECKS whether all vols selected or NOT to change button conditions
     var _volWithMinus = _selectedVols.firstWhere(
       (vol) => vol.id == -1,
       orElse: () => Volume(id: -2),
@@ -232,19 +232,19 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
+  //*ADDS or REMOVES selected customizable in _selectedCustomizables![mainVolumePos]
   void updateSelectedCustoms(Meal meal, Customizable? selectedCus) {
     if (_selectedCustoms.contains(selectedCus)) {
       _selectedCustoms.remove(selectedCus);
 
-      /// SUBTRACTS selectedCus's price from totalDraftSum
+      //*SUBTRACTS selectedCus's price from totalDraftSum
       totalSumDraft -= meal.discount != null || meal.discount! > 0
           ? (selectedCus!.price! / 100) * (100 - meal.discount!)
           : selectedCus!.price! * quantityDraft;
     } else {
       _selectedCustoms.add(selectedCus!);
 
-      /// ADDS selectedCus's price to totalDraftSum
+      //*ADDS selectedCus's price to totalDraftSum
       totalSumDraft += meal.discount != null || meal.discount! > 0
           ? (selectedCus.price! / 100) * (100 - meal.discount!)
           : selectedCus.price! * quantityDraft;
@@ -252,8 +252,8 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// ADDS or UPDATES a restaurant in CART
-  /// ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
+  //*ADDS or UPDATES a restaurant in CART
+  //*ADDS a meal to CART from BOTTOM SHEET and UPDATES _quantity and _isButtonToggled
   Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, Restaurant? restaurant) async {
     log.i(
@@ -285,7 +285,7 @@ class MealViewModel extends ReactiveViewModel {
         _hiveDbService.cartRes!.id != -1) {
       await showClearOrNavigateCartDialog(); // CALLS MealDialogView
 
-      /// If user CLEARS cart then START below functions
+      //*If user CLEARS cart then START below functions
       if (_hiveDbService.cartMeals.isEmpty) {
         _bottomCartService
             .showBottomCart(); // SHOWS BottomCart. If already active, nothing happens
@@ -299,7 +299,7 @@ class MealViewModel extends ReactiveViewModel {
       }
     }
 
-    /// UPDATES ResBottomCart's quantity
+    //*UPDATES ResBottomCart's quantity
     _bottomCartService.updateResBottomCartQuantity();
 
     quantityDraft = 1;
@@ -312,7 +312,7 @@ class MealViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
   Future navToCartView() async => await _navService
       .navigateTo(Routes.cartView); // TODO: Change page transition here

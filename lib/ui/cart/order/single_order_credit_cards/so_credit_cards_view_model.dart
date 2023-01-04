@@ -211,7 +211,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
             _createBankOrderEnum = newCreateBankOrderEnum;
             log.v('newCreateBankOrderEnum: $newCreateBankOrderEnum');
 
-            if (_createBankOrderEnum == CreateBankOrderEnum.fail || _createBankOrderEnum == CreateBankOrderEnum.wrongCardInfoFail) {
+            if (_createBankOrderEnum == CreateBankOrderEnum.fail ||
+                _createBankOrderEnum == CreateBankOrderEnum.wrongCardInfoFail) {
               _isLoading = false;
               notifyListeners();
               onFailForView!(_createBankOrderEnum);
@@ -250,7 +251,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   String _sendCode = '';
   String get sendCode => _sendCode;
 
-  /// SEND CODE validator (EMPTY validator)
+  //*SEND CODE validator (EMPTY validator)
   String? updateSendCodeValidator(String? value) {
     log.v('updateSendCodeValidator value: $value');
 
@@ -383,9 +384,8 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//* ------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back();
-  // void navBack() => _navService.back(result: true);
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];

@@ -4,9 +4,9 @@ import 'hive_models.dart';
 
 part 'hive_meal.g.dart';
 
-/// Removed description, approved, available, restaurantId, categoryId, data_begin, data_end, value, sizeId, SizeModel
-/// Needed gVolumes, gCustomizes
-/// Added quantity
+//*Removed description, approved, available, restaurantId, categoryId, data_begin, data_end, value, sizeId, SizeModel
+//*Needed gVolumes, gCustomizes
+//*Added quantity
 @HiveType(typeId: 0)
 class HiveMeal {
   HiveMeal({

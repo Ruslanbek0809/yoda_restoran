@@ -48,7 +48,7 @@ class SingleExViewModel extends FutureViewModel {
     await Share.share(singleExDynamicLink);
   }
 
-  //------------------ SINGLE EX WEBVIEW ---------------------//
+  //*----------------- SINGLE EX WEBVIEW ---------------------//
 
   String _url = '';
   String get url => _url;
@@ -66,13 +66,13 @@ class SingleExViewModel extends FutureViewModel {
     // notifyListeners();
   }
 
-  //------------------ BOTTOM CART ---------------------//
+  //*----------------- BOTTOM CART ---------------------//
 
   BottomCartStatus get bottomCartStatus => _bottomCartService
       .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
-  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  //*GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
   num get getTotalCartSum {
     num totalCartSum = 0;
 
@@ -97,7 +97,7 @@ class SingleExViewModel extends FutureViewModel {
     return totalCartSum;
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
   void navToResDetailsView() async => await _navService.navigateTo(
         Routes.resDetailsView,

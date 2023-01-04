@@ -13,12 +13,12 @@ class GeolocatorService {
   LocationPermission get locationPermission => _locationPermission;
   Position? get locationPosition => _locationPosition;
 
-  /// Determine the current position of the device.
+  //*Determine the current position of the device.
   ///
-  /// When the location services are not enabled or permissions
-  /// are denied the `Future` will return an error.
+  //*When the location services are not enabled or permissions
+  //*are denied the `Future` will return an error.
 
-  /// GETS user's location
+  //*GETS user's location
   Future<void> getUserLocation() async {
     // Test if location services are enabled.
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -68,8 +68,8 @@ class GeolocatorService {
     }
   }
 
-  /// DEPRECATED after 2.3.0+35
-  /// GETS user's current location before FETCH
+  //*DEPRECATED after 2.3.0+35
+  //*GETS user's current location before FETCH
   // Future<void> getUserCurrentLocationOnly() async {
   //   // When we reach here, permissions are granted and we can
   //   // continue accessing the position of the device.

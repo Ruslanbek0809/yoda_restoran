@@ -53,7 +53,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
 
     await flashController?.dismiss(); // DISMISSES no internet flashbar
 
-    /// So this below condition is to change lang of API initialization to ru lang when app is opened for the first time. Drawback of easy_localization. Workaround
+    //*So this below condition is to change lang of API initialization to ru lang when app is opened for the first time. Drawback of easy_localization. Workaround
     if (initLocale.toString() == 'ru_RU') {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final _savedLocale = prefs.getString(Constants.savedLocale) ??
@@ -63,7 +63,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
         await prefs.setString(Constants.savedLocale, initLocale.toString());
     }
 
-    /// FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
+    //*FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
     await Firebase.initializeApp().then((value) async {
       await _pushNotificationService
           .initialise(); // INITIALIZATION of FB Push notification
@@ -71,8 +71,8 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
           .handleBFDynamicLinks(); // INITIALIZATION of FB Dynamic Link
     });
 
-    /// DEPRECATED after app version 2.3.0+35
-    // /// GETS user's location
+    //*DEPRECATED after app version 2.3.0+35
+    // //*GETS user's location
     // await _geolocatorService.getUserLocation();
 
     await _apiRootService.initDio();
@@ -106,7 +106,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
           : await _navService.replaceWith(Routes.onBoardingView);
     }
 
-    // /// USER part. GETS initial user with condition and behaves with that in mind
+    // //*USER part. GETS initial user with condition and behaves with that in mind
     // await _userService.getInitialUser(
     //   onSuccess: () async {
     //     log.v('==== SUCCESS User ====');

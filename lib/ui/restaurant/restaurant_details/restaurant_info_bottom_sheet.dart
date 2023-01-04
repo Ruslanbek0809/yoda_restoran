@@ -22,7 +22,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Below part COMBINES all paymentTypes' name and displays it
+    //*Below part COMBINES all paymentTypes' name and displays it
     String paymentTypesText = '';
     if (restaurant.paymentTypes != null) {
       if (context.locale == context.supportedLocales[0])

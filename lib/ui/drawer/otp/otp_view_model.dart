@@ -26,14 +26,14 @@ class OtpViewModel extends FormViewModel {
   String? _currentOtp = '';
   String? get currentOtp => _currentOtp;
 
-  /// UPDATES resend button
+  //*UPDATES resend button
   Future<void> updateResendButton({Function()? onFailForView}) async {
     _hideResendButton = !_hideResendButton;
     log.i('_hideResendButton: $_hideResendButton, phone: $phone');
     notifyListeners();
   }
 
-  /// RESENDS otp code using phone number from previous LoginView
+  //*RESENDS otp code using phone number from previous LoginView
   Future<void> updateResendButtonWithCode({Function()? onFailForView}) async {
     _hideResendButton = !_hideResendButton;
     log.i('_hideResendButton: $_hideResendButton, phone: $phone');
@@ -46,14 +46,14 @@ class OtpViewModel extends FormViewModel {
     );
   }
 
-  /// SAVES otp data by posting otpCode to verify API
+  //*SAVES otp data by posting otpCode to verify API
   Future saveOtpData({Function()? onFailForView}) async {
     await runBusyFuture(
       _userService.verifyUser(
         onSuccess: () async {
           log.i('onSuccess verifyUser: $_hideResendButton, phone: $phone');
           _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
-          /// Navigate to successful route
+          //*Navigate to successful route
           isCartView
               ? _navService.popRepeated(2)
               : _navService.pushNamedAndRemoveUntil(Routes.homeView);
@@ -70,8 +70,8 @@ class OtpViewModel extends FormViewModel {
   @override
   void setFormStatus() {}
 
-  // /// Checks if the result has an error. If it doesn't we navigate to the success view
-  // /// else we show the friendly validation message.
+  // //*Checks if the result has an error. If it doesn't we navigate to the success view
+  // //*else we show the friendly validation message.
   // Future<void> _handleResponse(Response result) async {
   //   log.v('');
 

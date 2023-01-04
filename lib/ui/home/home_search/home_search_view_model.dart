@@ -24,7 +24,7 @@ class HomeSearchViewModel extends BaseViewModel {
   List<SearchRestaurant?> _searchRestaurants = [];
   List<SearchRestaurant?> get searchRestaurants => _searchRestaurants;
 
-  /// STARTS MAIN SEARCH and GETS result
+  //*STARTS MAIN SEARCH and GETS result
   Future<void> startMainSearch(String searchText) async {
     log.i('startMainSearch() searchText: $searchText');
     _searchText = searchText;
@@ -42,7 +42,7 @@ class HomeSearchViewModel extends BaseViewModel {
     }
   }
 
-  /// CLEARS Search
+  //*CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
     _searchText = '';
@@ -51,7 +51,7 @@ class HomeSearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back();
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(

@@ -47,7 +47,7 @@ class RateUsDialogViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // /// UPDATES _note
+  // //*UPDATES _note
   // String? updateNote(String? value) {
   //   log.v('updateNote value: $value');
   //   if (value == null || value.isEmpty) return null;
@@ -89,14 +89,14 @@ class RateUsDialogViewModel extends BaseViewModel {
     }
   }
 
-  /// DISMISSES Dialog after assigned time duratin
+  //*DISMISSES Dialog after assigned time duratin
   void dismissDialogs() =>
       _timer = Timer(Duration(seconds: 2), () => _navService.back());
 
-  /// CANCELS timer if user taps outside of this dialog
+  //*CANCELS timer if user taps outside of this dialog
   void cancelTimer() => _timer.cancel();
 
-//------------------------ NAVIGATION ----------------------------//
+//*------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
   void navBackWithFalse() => _navService.back(result: false);

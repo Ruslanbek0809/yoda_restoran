@@ -29,20 +29,20 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   List<int> _tempSelectedMainCats = [];
   List<int> get tempSelectedMainCats => _tempSelectedMainCats;
 
-  /// ASSIGNS _tempSelectedMainCats (Used in onModelReady)
+  //*ASSIGNS _tempSelectedMainCats (Used in onModelReady)
   void assignTempCats() {
     _tempSelectedMainCats = [...selectedMainCats];
-    // _tempSelectedMainCats = selectedMainCats; /// DON'T ASSIGN reactive value directly. Which makes temp value reactive as well.
+    // _tempSelectedMainCats = selectedMainCats; //*DON'T ASSIGN reactive value directly. Which makes temp value reactive as well.
 
     log.i(
         'assignTempList() _tempSelectedMainCats length: ${_tempSelectedMainCats.length}');
   }
 
-  /// CHECKS whether this mainCat selected or NOT
+  //*CHECKS whether this mainCat selected or NOT
   bool isTempMainCatSelected(int? mainCatId) =>
       _tempSelectedMainCats.contains(mainCatId);
 
-  /// ADDS or REMOVES mainCatId to/from _tempSelectedMainCats Ids
+  //*ADDS or REMOVES mainCatId to/from _tempSelectedMainCats Ids
   void updateTempSelectedMainCats(int? mainCatId) async {
     if (_tempSelectedMainCats.contains(mainCatId))
       _tempSelectedMainCats.remove(mainCatId);
@@ -54,7 +54,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES _isByOpenRestaurantsChecked
+  //*UPDATES _isByOpenRestaurantsChecked
   void updateIsOpenByRestaurants(bool newValue) {
     log.i('updateIsOpenByRestaurants(): $isByOpenRestaurantsChecked');
 
@@ -63,7 +63,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// UPDATES _selectedSort
+  //*UPDATES _selectedSort
   void updateSelectedSort(FilterSort? newSelectedSort) {
     log.i('updateSelectedSort(): ${selectedSort!.name}');
 
@@ -72,7 +72,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
+  //*ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
   Future<void> fireFilterAPI() async {
     log.i('fireFilterAPI()');
 
@@ -95,11 +95,11 @@ class MainCatBottomViewModel extends ReactiveViewModel {
     _mainCatService.assignTempSelectedMainCats(
         _tempSelectedMainCats); // ASSINGS all _tempSelectedMainCats to  _selectedMainCats (CALLED from _mainCatService)
 
-    /// CHECKS whether isFilterApplied var SET to TRUE before or NOT
+    //*CHECKS whether isFilterApplied var SET to TRUE before or NOT
     if (!isFilterApplied) _mainCatService.filterApplied();
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back();
 
   @override

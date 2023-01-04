@@ -72,7 +72,7 @@ class _SingleExWebviewState extends State<SingleExWebview> {
         backgroundColor: kcWhiteColor,
         elevation: 0.5,
         leading: BackButtonWidget(),
-        //------------------ ACTIONS FAV ---------------------//
+        //*----------------- ACTIONS FAV ---------------------//
         actions: [
           IconButton(
             onPressed: widget.singleExViewModel.createDynamicLink,

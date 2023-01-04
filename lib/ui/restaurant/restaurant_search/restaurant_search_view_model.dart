@@ -24,7 +24,7 @@ class RestaurantSearchViewModel extends BaseViewModel {
   List<Meal?> _searchMealss = [];
   List<Meal?> get searchMealss => _searchMealss;
 
-  /// SEARCHES for meals and GETS result
+  //*SEARCHES for meals and GETS result
   Future<void> searchMeals(String? searchText) async {
     log.i('searchMeals() searchText: $searchText');
     _searchText = searchText;
@@ -43,7 +43,7 @@ class RestaurantSearchViewModel extends BaseViewModel {
     }
   }
 
-  /// CLEARS Search
+  //*CLEARS Search
   void clearSearch() {
     log.i('clearSearch()');
     _searchText = '';
@@ -51,7 +51,7 @@ class RestaurantSearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(

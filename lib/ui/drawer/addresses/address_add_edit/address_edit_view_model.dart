@@ -39,7 +39,7 @@ class AddressEditViewModel extends BaseViewModel {
   String? _note;
   String? get note => _note;
 
-  /// SETS initial address values for edit
+  //*SETS initial address values for edit
   void setInitialAddress() {
     log.v('setInitialAddress address: $address');
     if (address.city == 'Aşgabat' || address.city == 'Ашхабад')
@@ -53,7 +53,7 @@ class AddressEditViewModel extends BaseViewModel {
     _note = address.notes;
   }
 
-  /// UPDATES _city
+  //*UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
     if (value!.isEmpty) return LocaleKeys.enterCity.tr();
@@ -62,7 +62,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
     if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
@@ -72,7 +72,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _house
+  //*UPDATES _house
   String? updateHouse(String? value) {
     log.v('updateHouse value: $value');
     if (value == null || value.isEmpty) return null;
@@ -82,7 +82,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _apartment
+  //*UPDATES _apartment
   String? updateApartment(String? value) {
     log.v('updateApartment value: $value');
     if (value == null || value.isEmpty) return null;
@@ -92,7 +92,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _floor
+  //*UPDATES _floor
   String? updateFloor(String? value) {
     log.v('updateFloor value: $value');
     if (value == null || value.isEmpty) return null;
@@ -102,7 +102,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateNote(String? value) {
     log.v('updateNote value: $value');
     if (value == null || value.isEmpty) return null;
@@ -112,7 +112,7 @@ class AddressEditViewModel extends BaseViewModel {
     return null;
   }
 
-  /// EDITS selected address
+  //*EDITS selected address
   Future<void> onEditAddressPressed(
     Function()? onSuccess,
     Function()? onFail,
@@ -135,9 +135,9 @@ class AddressEditViewModel extends BaseViewModel {
     }
   }
 
-//------------------------ ADDRESS REMOVE DIALOG ----------------------------//
+//*----------------------- ADDRESS REMOVE DIALOG ----------------------------//
 
-  /// SHOWS ADDRESS REMOVE Dialog
+  //*SHOWS ADDRESS REMOVE Dialog
   Future showAddressRemoveDialog(
     AddressesViewModel addressesViewModel,
     Address address,
@@ -159,7 +159,7 @@ class AddressEditViewModel extends BaseViewModel {
     if (respData != null && respData.data == true) navBack();
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
   void navBackWithFalse() => _navService.back(result: false);

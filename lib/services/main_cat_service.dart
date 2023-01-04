@@ -31,59 +31,59 @@ class MainCatService with ReactiveServiceMixin {
   ReactiveValue<bool> _isFilterApplied = ReactiveValue<bool>(false);
   bool get isFilterApplied => _isFilterApplied.value;
 
-  //------------------ SELECTED MAIN CATS PART ---------------------//
+  //! ------------------ SELECTED MAIN CATS PART ---------------------//
 
-  /// ADDS or REMOVES mainCategory to/from _selectedMainCats
+  //* ADDS or REMOVES mainCategory to/from _selectedMainCats
   void updateSelectedMainCats(int mainCatId) {
     log.v('updateSelectedMainCats');
     if (_selectedMainCats.value.contains(mainCatId)) {
-      /// This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
+      //* This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
       // _selectedMainCats.value.remove(mainCatId);
 
-      /// This Method 2 WORKS to update UI. Stacked reactivity thing
+      //* This Method 2 WORKS to update UI. Stacked reactivity thing
       var _tempSelectedMainCats = _selectedMainCats.value;
       _tempSelectedMainCats.remove(mainCatId);
       _selectedMainCats.value = [];
       _selectedMainCats.value = [..._tempSelectedMainCats];
     } else {
-      /// This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
+      //* This Method 1 DOES NOT WORK to update UI. Stacked reactivity thing
       // _selectedMainCats.value.add(mainCatId);
 
-      /// This Method 2 WORKS to update UI. Stacked reactivity thing
+      //* This Method 2 WORKS to update UI. Stacked reactivity thing
       _selectedMainCats.value = [..._selectedMainCats.value, mainCatId];
     }
   }
 
-  /// CLEARS _selectedMainCats.value (CALLED from _homeService)
+  //* CLEARS _selectedMainCats.value (CALLED from _homeService)
   void clearSelectedMainCats() {
     _selectedMainCats.value.clear();
   }
 
-  /// ASSIGNS tempSelectedMainCats to _selectedMainCats
+  //* ASSIGNS tempSelectedMainCats to _selectedMainCats
   void assignTempSelectedMainCats(List<int>? tempSelectedMainCats) {
     _selectedMainCats.value = tempSelectedMainCats!;
   }
 
-  //------------------ SELECTED SORT PART ---------------------//
+  //! ------------------ SELECTED SORT PART ---------------------//
 
-  /// UPDATES _selectedSort
+  //* UPDATES _selectedSort
   void updateSelectedSort(FilterSort? newSelectedSort) {
     _selectedSort.value = newSelectedSort!;
     log.v('_selectedSort.value.id: ${_selectedSort.value.id}');
   }
 
-  //------------------ BY OPEN RESTAURANTS PART ---------------------//
+  //! ------------------ BY OPEN RESTAURANTS PART ---------------------//
 
-  /// UPDATES _isByOpenRestaurantsChecked
+  //* UPDATES _isByOpenRestaurantsChecked
   void updateIsOpenByRestaurants(bool newValue) {
     _isByOpenRestaurantsChecked.value = newValue;
     log.v(
         '_isByOpenRestaurantsChecked.value: ${_isByOpenRestaurantsChecked.value}');
   }
 
-  //------------------ FILTER PART ---------------------//
+  //! ------------------ FILTER PART ---------------------//
 
-  /// SETS _isFilterApplied to TRUE
+  //* SETS _isFilterApplied to TRUE
   void filterApplied() {
     if (!_isFilterApplied.value) {
       log.v('filterApplied FIRED');
@@ -91,14 +91,11 @@ class MainCatService with ReactiveServiceMixin {
     }
   }
 
-  /// SETS _isFilterApplied to FALSE
+  //* SETS _isFilterApplied to FALSE
   void filterDisabled() {
     if (_isFilterApplied.value) {
       log.v('filterDisabled FIRED');
       _isFilterApplied.value = false;
     }
   }
-
-  // /// SETS _isFilterApplied to FALSE
-  // void filterDisabled() => _isFilterApplied.value = false;
 }

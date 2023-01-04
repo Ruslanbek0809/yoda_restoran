@@ -19,7 +19,7 @@ class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
     Animation<double> _fadeInFadeOut;
     _fadeInFadeOut = Tween<double>(begin: 0.0, end: 1).animate(_animController);
 
-    /// Animation will be PLAYED only for the first time
+    //*Animation will be PLAYED only for the first time
     if (model.startAnimation == true)
       Timer(Duration(milliseconds: delay!), () {
         model.log.v('_animController CALLED');

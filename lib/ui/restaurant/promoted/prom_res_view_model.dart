@@ -18,14 +18,14 @@ class PromResViewModel extends BaseViewModel {
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  /// CHECKS and ASSIGNS initial res fav state
+  //*CHECKS and ASSIGNS initial res fav state
   void checkResFav(int resId) =>
       _isFavorited = _userService.currentUser!.favs.contains(resId);
 
   bool _isFavorited = false;
   bool get isFavorited => _isFavorited;
 
-  /// UPDATES res fav state
+  //*UPDATES res fav state
   Future<void> updateResFav(int resId) async {
     if (hasLoggedInUser) {
       log.v(

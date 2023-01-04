@@ -18,7 +18,7 @@ class RestaurantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResViewModel>.reactive(
-      /// INITIALIZES hourly discount variables for further condition
+      //*INITIALIZES hourly discount variables for further condition
       onModelReady: (model) =>
           restaurant.hourlyDiscount != null && restaurant.hourlyDiscount! > 0
               ? model.initializeHourlyDiscountVars(
@@ -33,7 +33,7 @@ class RestaurantView extends StatelessWidget {
             children: [
               Stack(
                 children: [
-//------------------ IMAGE with ripple effect ---------------------//
+//*----------------- IMAGE with ripple effect ---------------------//
                   GestureDetector(
                     onTap: () => model.navToResDetailsView(restaurant),
                     child: YodaImage(
@@ -45,7 +45,7 @@ class RestaurantView extends StatelessWidget {
                     ),
                   ),
 
-                  /// Used with Stack
+                  //*Used with Stack
                   // Positioned.fill(
                   //   child: Material(
                   //     color: Colors.transparent,
@@ -58,12 +58,12 @@ class RestaurantView extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  //------------------ DELIVERY TIME ---------------------//
+                  //*----------------- DELIVERY TIME ---------------------//
                   Positioned(
                     bottom: 0,
                     right: 0,
                     child:
-                        //------------------ WORKING HOURS ---------------------//
+                        //*----------------- WORKING HOURS ---------------------//
                         Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 10.w,
@@ -102,7 +102,7 @@ class RestaurantView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //------------------ FAVOURITE ---------------------//
+                  //*----------------- FAVOURITE ---------------------//
                   Positioned(
                     top: 10.w,
                     right: 10.w,
@@ -130,7 +130,7 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ],
               ),
-              //------------------ NAME ---------------------//
+              //*----------------- NAME ---------------------//
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
@@ -143,7 +143,7 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ),
               ),
-              //------------------ LOCATION and RATE ---------------------//
+              //*----------------- LOCATION and RATE ---------------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -221,7 +221,7 @@ class RestaurantView extends StatelessWidget {
                 ],
               ),
 
-              //------------------ DISCOUNT ONLY ---------------------//
+              //*----------------- DISCOUNT ONLY ---------------------//
               if ((restaurant.discount != null && restaurant.discount! > 0) &&
                   (restaurant.hourlyDiscount == null ||
                       restaurant.hourlyDiscount! == 0) &&
@@ -281,7 +281,7 @@ class RestaurantView extends StatelessWidget {
                     ],
                   ),
                 ),
-              //------------------ HOURLY DISCOUNT ONLY ---------------------//
+              //*----------------- HOURLY DISCOUNT ONLY ---------------------//
               if (model.isHourlyDiscountActive ||
                   ((restaurant.discount == null || restaurant.discount! == 0) &&
                       (restaurant.hourlyDiscount != null &&
@@ -343,7 +343,7 @@ class RestaurantView extends StatelessWidget {
                   ),
                 ),
 
-              //------------------ DISCOUNT and HOURLY DISCOUNT ---------------------//
+              //*----------------- DISCOUNT and HOURLY DISCOUNT ---------------------//
               if ((restaurant.discount != null && restaurant.discount! > 0) &&
                   (restaurant.hourlyDiscount != null &&
                       restaurant.hourlyDiscount! > 0) &&
@@ -362,7 +362,7 @@ class RestaurantView extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          //------------------ DISCOUNT ---------------------//
+                          //*----------------- DISCOUNT ---------------------//
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.ideographic,
@@ -395,7 +395,7 @@ class RestaurantView extends StatelessWidget {
                               color: kcIconColor,
                             ),
                           ),
-                          //------------------ HOURLY DISCOUNT ---------------------//
+                          //*----------------- HOURLY DISCOUNT ---------------------//
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.ideographic,

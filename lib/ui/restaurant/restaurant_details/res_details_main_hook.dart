@@ -28,23 +28,23 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
 
-    //-------------- TAB CONTROLLER ----------------//
+    //*------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
       initialLength: model.resCategories!.length,
       initialIndex: model.activeTab,
     );
 
-    /// To dispose a listener attached to TabController
+    //*To dispose a listener attached to TabController
     useEffect(() {
       void _tabListener() => model.updateActiveTab(tabController.index);
       tabController.addListener(_tabListener);
       return () => tabController.removeListener(_tabListener);
     }, [tabController]); // tabController, key, is specified
 
-    //-------------- CUSTOM SCROLL CONTROLLER ----------------//
+    //*------------- CUSTOM SCROLL CONTROLLER ----------------//
     final ScrollController customScrollController = useScrollController();
 
-    /// To dispose a listener attached to ScrollController
+    //*To dispose a listener attached to ScrollController
     useEffect(() {
       void _customScrollListener() =>
           model.updateLastScrollStatus(customScrollController.hasClients &&
@@ -59,7 +59,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
       controller: customScrollController,
       physics: ClampingScrollPhysics(),
       slivers: [
-        //------------------ ARROW BACK ---------------------//
+        //*----------------- ARROW BACK ---------------------//
         SliverAppBar(
           expandedHeight: 0.55.sh,
           pinned: true,
@@ -112,7 +112,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               ),
             ),
           ),
-          //------------------ ACTIONS FAV ---------------------//
+          //*----------------- ACTIONS FAV ---------------------//
           actions: [
             AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
@@ -160,7 +160,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     ),
             ),
             SizedBox(width: 10.w),
-//------------------ ACTIONS SEARCH ---------------------//
+//*----------------- ACTIONS SEARCH ---------------------//
             AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
               child: Padding(
@@ -192,10 +192,11 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
             ),
             SizedBox(width: 15.w),
           ],
-          //------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
+          //*----------------- BACKGROUND RESTAURANT IMAGE ---------------------//
           flexibleSpace: FlexibleSpaceBar(
             stretchModes: [StretchMode.zoomBackground],
-            //// NOTE: Container background image used to add custom widget in front of this background image
+
+            ///*NOTE: Container background image used to add custom widget in front of this background image
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -204,7 +205,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   alignment: Alignment.topCenter,
                 ),
               ),
-              //// NOTE: Instead of direct Container Column is used to make child work properly
+
+              ///*NOTE: Instead of direct Container Column is used to make child work properly
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -223,7 +225,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        //------------------ TITLE NAME ---------------------//
+                        //*----------------- TITLE NAME ---------------------//
                         Padding(
                           padding: EdgeInsets.only(
                             bottom: Platform.isIOS ? 12.h : 10.h,
@@ -239,12 +241,12 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             ),
                           ),
                         ),
-                        //------------------ RATE / WORK TIME / INFO---------------------//
+                        //*----------------- RATE / WORK TIME / INFO---------------------//
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              //------------------ RATE ---------------------//
+                              //*----------------- RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
                                   color: kcSecondaryLightColor,
@@ -276,7 +278,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ WORK TIME ---------------------//
+                              //*----------------- WORK TIME ---------------------//
                               // Container(
                               //   decoration: BoxDecoration(
                               //     color: kcPrimaryColor_LIGHT,
@@ -305,7 +307,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                               //   ),
                               // ),
                               // if (model.locationPosition != null)
-                              //------------------ LOCATION ---------------------//
+                              //*----------------- LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
                                   color: kcSecondaryLightColor,
@@ -368,10 +370,10 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ RESTAURANT INFO BOTTOM SHEET ---------------------//
-                              //------------------ CUSTOM PACKAGE ---------------------//
+                              //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
+                              //*----------------- CUSTOM PACKAGE ---------------------//
                               GestureDetector(
-                                /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                                //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                                 onTap: () async =>
                                     await showFlexibleBottomSheet(
                                   isExpand: false,
@@ -415,9 +417,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             thickness: 1.w,
                           ),
                         ),
-//------------------ DELIVERY/SELF-PICKUP ---------------------//
+//*----------------- DELIVERY/SELF-PICKUP ---------------------//
                         ToggleButtonView(restaurant: restaurant),
-                        //------------------ MAIN DIVIDER ---------------------//
+                        //*----------------- MAIN DIVIDER ---------------------//
                         Container(
                           color: kcMainDividerColor,
                           padding: EdgeInsets.symmetric(vertical: 4.h),
@@ -430,7 +432,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               ),
             ),
           ),
-          //------------------ TABBAR ---------------------//
+          //*----------------- TABBAR ---------------------//
           bottom: ColoredTabBar(
             isShrink: model.isShrink ? true : false,
             tabBar: TabBar(
@@ -488,7 +490,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
             ),
           ),
         ),
-//------------------ MEAL LIST ---------------------//
+//*----------------- MEAL LIST ---------------------//
         SliverPadding(
           padding: EdgeInsets.only(
               bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height

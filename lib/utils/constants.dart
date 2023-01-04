@@ -5,7 +5,7 @@ class Constants {
   static const baseUrlRu = 'https://yodarestoran.com/ru/';
   // static const baseUrlPort = 'http://yodarestoran.com:8000/';
 
-  /// Firebase topic name
+  //*Firebase topic name
   static const topicAllDevices = 'yoda_res';
   static const topicAndroidDevices = 'yoda_res_android';
   static const topicIosDevices = 'yoda_res_ios';
@@ -19,20 +19,20 @@ class Constants {
   static const hiveRatingBox = 'hiveRatingBox';
   static const creditCardsBox = 'creditCardsBox';
 
-  /// SharedPreferences
+  //*SharedPreferences
   static const accessToken = 'accessToken';
 
-  /// Saved locale
+  //*Saved locale
   static const savedLocale = 'savedLocale';
 
-  /// Onboarding
+  //*Onboarding
   static const isOnBoardingSeen = 'isOnBoardingSeen';
 
-  /// Device Types
+  //*Device Types
   static const TABLET = "tablet";
   static const PHONE = "phone";
 
-  /// Border Radius Constants
+  //*Border Radius Constants
   static const BORDER_RADIUS_20 = 20.0;
   static const BORDER_RADIUS_10 = 10.0;
   static const BORDER_RADIUS_15 = 15.0;

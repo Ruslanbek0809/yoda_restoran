@@ -102,7 +102,7 @@ class MyCreditCardAddViewModel extends BaseViewModel {
     }
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
   void navBackWithFalse() => _navService.back(result: false);

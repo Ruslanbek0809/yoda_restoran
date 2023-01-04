@@ -19,7 +19,7 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
         Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
             .animate(bottomCartController);
 
-    /// BottomCartController trigger
+    //*BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)
       switch (bottomCartController.status) {
         case AnimationStatus.dismissed:

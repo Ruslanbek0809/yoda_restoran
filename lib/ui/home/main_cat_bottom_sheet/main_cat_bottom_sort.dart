@@ -40,7 +40,7 @@ class MainCatSortBottom extends ViewModelWidget<MainCatBottomViewModel> {
                   style: ktsButtonWhite18Text,
                 ).tr(),
           onPressed: () async {
-            /// If model.selectedSort IS NOT DEFAULT
+            //*If model.selectedSort IS NOT DEFAULT
             if (model.tempSelectedMainCats.isNotEmpty ||
                 model.selectedSort != mainCatSortList[0] ||
                 model.isByOpenRestaurantsChecked) await model.fireFilterAPI();

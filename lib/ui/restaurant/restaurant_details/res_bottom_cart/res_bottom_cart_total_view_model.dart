@@ -4,7 +4,7 @@ import '../../../../app/app.logger.dart';
 import '../../../../models/hive_models/hive_models.dart';
 import '../../../../services/services.dart';
 
-/// This VM just to update quantity in realtime
+//*This VM just to update quantity in realtime
 class ResBottomCartTotalViewModel extends ReactiveViewModel {
   final log = getLogger('ResBottomCartTotalViewModel');
 
@@ -14,7 +14,7 @@ class ResBottomCartTotalViewModel extends ReactiveViewModel {
   List<HiveMeal> get cartMeals => _hiveDbService.cartMeals;
   bool get isUpdateQuantity => _bottomCartService.isUpdateQuantity;
 
-  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  //*GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
   num get getTotalCartSum {
     num totalCartSum = 0;
 

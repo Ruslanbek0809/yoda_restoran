@@ -40,7 +40,7 @@
 //               controller: scrollController,
 //               padding: EdgeInsets.only(
 
-//                   /// To resize screen when OnKeyboard opened
+//                   //*To resize screen when OnKeyboard opened
 //                   bottom: MediaQuery.of(context).viewInsets.bottom),
 //               child: Column(
 //                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +79,7 @@
 //                         Material(
 //                           color: kcWhiteColor,
 //                           child: InkWell(
-//                             /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+//                             //*CUSTOM BOTTOM SHEET BASED ON CONTENT
 //                             onTap: model.isDelivery &&
 //                                     !model.busy('selectAddresses')
 //                                 ? () async => await showFlexibleBottomSheet(
@@ -209,9 +209,9 @@
 //                               model.log.v('_tempDateTime: $_tempDateTime');
 //                               model.log.v('model.now: ${model.now}');
 
-//                               /// If _tempDateTime is SELECTED go inside this condition
+//                               //*If _tempDateTime is SELECTED go inside this condition
 //                               if (_tempDateTime != null) {
-//                                 /// Below we have condition whether selected _tempDateTime inside workingHours
+//                                 //*Below we have condition whether selected _tempDateTime inside workingHours
 //                                 var resWorkingHoursSplitted =
 //                                     model.cartRes!.workingHours!.split('-');
 //                                 var resStartWorkingHoursSplitted =
@@ -230,7 +230,7 @@
 //                                 model.log.v(
 //                                     '_tempDateTime and model.deliveryDateTime: $_tempDateTime and ${model.deliveryDateTime}');
 
-//                                 /// =========== CHECKS HOURS PART =========== ///
+//                                 //*=========== CHECKS HOURS PART =========== ///
 //                                 if (_tempDateTime.hour < startHour ||
 //                                     _tempDateTime.hour > endHour) {
 //                                   model.log.v(
@@ -253,7 +253,7 @@
 //                                   );
 //                                 }
 
-//                                 /// ========== CHECKS MINUTES PART =========== ///
+//                                 //*========== CHECKS MINUTES PART =========== ///
 //                                 else {
 //                                   model.log.v(
 //                                       'PASSED HOUR Inconvenience _tempDateTime.hour:${_tempDateTime.hour}, startHour:$startHour, endHour:$endHour');
@@ -387,7 +387,7 @@
 //                         Material(
 //                           color: kcWhiteColor,
 //                           child: InkWell(
-//                             /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+//                             //*CUSTOM BOTTOM SHEET BASED ON CONTENT
 //                             onTap: () async => await showFlexibleBottomSheet(
 //                               isExpand: false,
 //                               initHeight: 0.5,
@@ -452,7 +452,7 @@
 //                           indent: 0.111.sw,
 //                         ),
 //                         SizedBox(height: 10.h),
-//                         //------------------ PROMOCODE ---------------------//
+//                         //*----------------- PROMOCODE ---------------------//
 //                         CheckoutPromocodeHook(),
 //                         // --------------- NOTE -------------- //
 //                         CheckoutNoteHook(),
@@ -463,7 +463,7 @@
 //               ),
 //             ),
 //           ),
-//           //--------------- CHECKOUT BUTTON -------------- //
+//           //*-------------- CHECKOUT BUTTON -------------- //
 //           Positioned(
 //             bottom: 0,
 //             left: 0,

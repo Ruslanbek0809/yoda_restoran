@@ -88,18 +88,16 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
   }
 
-//---------------------------------------//
-//------------------ RESTAURANT PART ---------------------//
-//---------------------------------------//
+//! ------------------ RESTAURANT PART ---------------------//
 
-  /// UPDATES a restaurant in CART
+  //* UPDATES a restaurant in CART
   Future<void> updateResInCart(Restaurant? restaurant) async {
     log.i('resId: ${restaurant!.id}');
 
     try {
       List<HiveResPaymentType> _hiveResPaymentTypes = [];
 
-      /// Adds all payment types of a restaurant to _hiveResPaymentTypes and ASSIGNS it to hive res
+      //* Adds all payment types of a restaurant to _hiveResPaymentTypes and ASSIGNS it to hive res
       for (PaymentType paymentType in restaurant.paymentTypes!)
         _hiveResPaymentTypes.add(
           HiveResPaymentType(
@@ -141,11 +139,9 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//---------------------------------------//
-//------------------ MEAL PART ---------------------//
-//---------------------------------------//
+//! ------------------ MEAL PART ---------------------//
 
-  /// GETS total quantity of cartMeals for meal with mealId
+  //* GETS total quantity of cartMeals for meal with mealId
   int? getMealQuantity(int? mealId) {
     var _quantity = 0;
     for (var _cartMeal in _cartMeals.value)
@@ -155,7 +151,7 @@ class HiveDbService with ReactiveServiceMixin {
     return _quantity;
   }
 
-  /// ADDS a meal to CART
+  //* ADDS a meal to CART
   Future<void> addMealToCart(Meal? meal, {int? quantity = 1}) async {
     log.v('mealId: ${meal!.id}, quantity: $quantity');
 
@@ -180,11 +176,11 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-  /// UPDATES a meal in CART
+  //* UPDATES a meal in CART
   Future<void> updateMealInCart({int? mealId, int? quantity}) async {
     log.v('mealId: $mealId, quantity: $quantity');
 
-    /// CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
+    //* CHECKS whether meal with this id exists and GETS pos if it exists. If NOT, returns -1
     int pos = _cartMeals.value.indexWhere((_meal) => _meal.id == mealId);
     if (pos == -1) return;
 
@@ -204,16 +200,16 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-  /// SUBTRACTS quantity of a meal or REMOVES a meal from CART
+  //* SUBTRACTS quantity of a meal or REMOVES a meal from CART
   Future<void> subtractOrRemoveMealInCart(int? mealId) async {
     log.v('mealId: $mealId');
 
-    /// GETS lastMeal from these meals
+    //* GETS lastMeal from these meals
     HiveMeal? _lastMeal =
         _cartMeals.value.lastWhere((_meal) => _meal.id == mealId);
     int pos = _cartMeals.value.indexOf(_lastMeal);
 
-    /// UPDATING
+    //* UPDATING
     if (_lastMeal.quantity! > 1) {
       log.v('_lastMeal with ABOVE 1');
 
@@ -225,7 +221,7 @@ class HiveDbService with ReactiveServiceMixin {
       log.v('_lastMeal.quantity AFTER action: ${_lastMeal.quantity}');
     }
 
-    /// REMOVING
+    //* REMOVING
     else {
       log.v(
           '_lastMeal with BELOW 1 with _cartMeals.value.length: ${_cartMeals.value.length}');
@@ -261,11 +257,9 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('cartResId: ${cartRes!.id}');
   }
 
-//---------------------------------------//
-//------------------ MEAL BOTTOM SHEET PART ---------------------//
-//---------------------------------------//
+//! ------------------ MEAL BOTTOM SHEET PART ---------------------//
 
-  /// ADDS a meal to CART from BOTTOM SHEET
+  //* ADDS a meal to CART from BOTTOM SHEET
   Future<void> addUpdateMealInCartFromBottomSheet(
       Meal? meal, List<Volume> selectedVols, List<Customizable> selectedCustoms,
       {int? quantityDraft = 1}) async {
@@ -276,19 +270,19 @@ class HiveDbService with ReactiveServiceMixin {
     List<HiveMeal>? similarMeals = [];
     HiveMeal? similarUpdateMeal;
 
-    /// STEP 1. Filter only to similar meals from cartMeals
+    //* STEP 1. Filter only to similar meals from cartMeals
     for (HiveMeal cartMeal in _cartMeals.value)
       if (meal.id == cartMeal.id) similarMeals.add(cartMeal);
 
-    /// STEP 2. MAKE isNew to TRUE if similarMeals isEmpty
+    //* STEP 2. MAKE isNew to TRUE if similarMeals isEmpty
     if (similarMeals.isEmpty) isNew = true;
 
     log.v(
         'BEFORE SIMILARS selectedVols and selectedCustoms: ${selectedVols.length} and ${selectedCustoms.length}');
 
-    /// STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
+    //* STEP 3. GO THROUGH each similarMeal for vols and customs iteration to decide whether ADD or UPDATE the meal
     for (HiveMeal similarMeal in similarMeals) {
-      /// STEP 3.1. CREATE and DEFINE initial value for condition
+      //* STEP 3.1. CREATE and DEFINE initial value for condition
       bool shouldAdd = false;
 
       List<Volume> _filteredSelectedVols = [];
@@ -299,7 +293,7 @@ class HiveDbService with ReactiveServiceMixin {
       );
       log.v('filteredVols length: ${_filteredSelectedVols.length}');
 
-      /// STEP 3.2. CHECK length. If not same then UPDATE shouldAdd to TRUE
+      //* STEP 3.2. CHECK length. If not same then UPDATE shouldAdd to TRUE
       if (selectedVols.length != similarMeal.volumes!.length ||
           selectedCustoms.length != similarMeal.customs!.length) {
         shouldAdd = true;
@@ -309,7 +303,7 @@ class HiveDbService with ReactiveServiceMixin {
       log.i(
           'shouldAdd AFTER LENGTH Comparison ---------------------------- $shouldAdd');
 
-      /// STEP 3.2. CHECK selectedVols and UPDATE isAdd var by condition ( ID COMPARISON )
+      //* STEP 3.2. CHECK selectedVols and UPDATE isAdd var by condition ( ID COMPARISON )
       for (Volume vol in _filteredSelectedVols) {
         shouldAdd = !similarMeal.volumes!.any((_vol) => _vol.id == vol.id);
         if (shouldAdd) break;
@@ -317,8 +311,8 @@ class HiveDbService with ReactiveServiceMixin {
 
       log.i('shouldAdd AFTER VOLUME ---------------------------- $shouldAdd');
 
-      /// STEP 3.3. CHECK selectedCustoms and UPDATE isUnique var by condition ( ID COMPARISON )
-      /// The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison Workaround
+      //* STEP 3.3. CHECK selectedCustoms and UPDATE isUnique var by condition ( ID COMPARISON )
+      //* The reason commenting contains func is that same data in hive doesn't equal to each other. That's why we shifted to id comparison Workaround
       if (!shouldAdd)
         for (Customizable cus in selectedCustoms) {
           log.v('cus.id in each selectedCustoms: ${cus.id}');
@@ -329,7 +323,7 @@ class HiveDbService with ReactiveServiceMixin {
       log.i(
           'shouldAdd AFTER CUSTOMIZES ---------------------------- $shouldAdd');
 
-      /// STEP 3.4. if shouldAdd FALSE in the end then ASSIGN its value to isNew and UPDATE similarUpdateMeal
+      //* STEP 3.4. if shouldAdd FALSE in the end then ASSIGN its value to isNew and UPDATE similarUpdateMeal
       if (!shouldAdd) {
         isNew = shouldAdd;
         similarUpdateMeal = similarMeal;
@@ -340,14 +334,14 @@ class HiveDbService with ReactiveServiceMixin {
       log.v('INSIDE SIMILARS shouldAdd at the END: $shouldAdd');
     }
 
-    /// STEP 4. ADD or UPDATE a meal in CART
-    /// ADD PART
+    //* STEP 4. ADD or UPDATE a meal in CART
+    //* ADD PART
     if (isNew) {
       log.v('ADDS with isNew: $isNew');
       List<HiveVolCus> _cartMealVolumes = [];
       List<HiveVolCus> _cartMealCustoms = [];
 
-      /// STEP 4.1. ADD all selectedVols to _cartMeal.volumes
+      //* STEP 4.1. ADD all selectedVols to _cartMeal.volumes
       for (Volume vol in selectedVols)
         _cartMealVolumes.add(HiveVolCus(
           id: vol.id,
@@ -358,7 +352,7 @@ class HiveDbService with ReactiveServiceMixin {
                   .price!, // If discount is TRUE, then add vol's discount price
         ));
 
-      /// STEP 4.2. ADD all selectedCustoms to _cartMeal.customs
+      //* STEP 4.2. ADD all selectedCustoms to _cartMeal.customs
       for (Customizable cus in selectedCustoms)
         _cartMealCustoms.add(HiveVolCus(
           id: cus.id,
@@ -393,7 +387,7 @@ class HiveDbService with ReactiveServiceMixin {
       }
     }
 
-    /// UPDATE PART
+    //* UPDATE PART
     else {
       log.v('UPDATES with isNew: $isNew');
       int pos = _cartMeals.value.indexOf(similarUpdateMeal!);
@@ -409,11 +403,9 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//---------------------------------------//
-//----------------------- CART VIEW PART --------------------------//
-//---------------------------------------//
+//! ----------------------- CART VIEW PART --------------------------//
 
-  /// GETS quantity of this hiveMeal from cartMeals
+  //* GETS quantity of this hiveMeal from cartMeals
   int getCartMealQuantity(HiveMeal hiveMeal) {
     int pos = _cartMeals.value.indexOf(hiveMeal);
     if (pos == -1) return 0;
@@ -423,7 +415,7 @@ class HiveDbService with ReactiveServiceMixin {
     return _cartMeals.value[pos].quantity!;
   }
 
-  /// UPDATES cart meal in cartMeals
+  //* UPDATES cart meal in cartMeals
   Future<void> updateCartMealInCart({HiveMeal? hiveMeal, int? quantity}) async {
     log.i('hiveMeal.id: ${hiveMeal!.id}, quantity: $quantity');
 
@@ -445,19 +437,17 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//* ---------------------------------------//
-//* ----------------------- HIVE RATING --------------------------//
-//* ---------------------------------------//
+//! ----------------------- HIVE RATING --------------------------//
 
   //* DELETES a hive rating
   Future<void> deleteHiveRatingFromHiveRatings(int? orderId) async {
     log.v('orderId: $orderId');
 
-    /// CHECHKS whether order with this id exists in hiveRatingBox
+    //* CHECHKS whether order with this id exists in hiveRatingBox
     int _indexHiveRatingNotification = _hiveRatings.value
         .indexWhere((_hiveRating) => _hiveRating.id == orderId.toString());
 
-    /// IF this hiveRating EXISTS
+    //* IF this hiveRating EXISTS
     if (_indexHiveRatingNotification != -1) {
       log.v(
           'BEFORE delete action for _hiveRatings.value.length: ${_hiveRatings.value.length}');

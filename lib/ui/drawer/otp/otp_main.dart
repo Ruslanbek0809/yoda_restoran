@@ -18,7 +18,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
   Widget buildViewModelWidget(BuildContext context, OtpViewModel model) {
     final otpController = useTextEditingController();
 
-    /// Here I used 2nd approach of creating textEditingController without StatefullWidget
+    //*Here I used 2nd approach of creating textEditingController without StatefullWidget
 
     // ignore: close_sinks
     final errorController = useStreamController<
@@ -28,7 +28,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       duration: Duration(seconds: model.durationTime),
     );
 
-    /// To dispose a status listener attached to timeController
+    //*To dispose a status listener attached to timeController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to update isResend
@@ -41,7 +41,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       return () => timeController.removeStatusListener(_listenerStatus);
     }, [timeController]);
 
-    /// Here it starts countdown in reverse if model.hideResendButton is true
+    //*Here it starts countdown in reverse if model.hideResendButton is true
     if (model.hideResendButton)
       timeController.reverse(
           from: timeController.value == 0.0 ? 1.0 : timeController.value);
@@ -50,7 +50,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            //------------------ YodaRes LOGO ---------------------//
+            //*----------------- YodaRes LOGO ---------------------//
             SizedBox(
               height: 1.sh / 2.5,
               child: SvgPicture.asset(
@@ -66,7 +66,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
               style: kts14HelperText,
             ).tr(),
             verticalSpaceMedium,
-            //------------------ PinCodeTextField ---------------------//
+            //*----------------- PinCodeTextField ---------------------//
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
               child: PinCodeTextField(
@@ -122,7 +122,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
               ),
             ),
             verticalSpaceSmall,
-            //------------------ Verify BUTTON ---------------------//
+            //*----------------- Verify BUTTON ---------------------//
             SizedBox(
               width: 0.8.sw,
               child: CustomTextChildButton(
@@ -182,7 +182,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   }),
             ),
             verticalSpaceMedium,
-            //------------------ RESEND BUTTON and TIMER ---------------------//
+            //*----------------- RESEND BUTTON and TIMER ---------------------//
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
               child: model.hideResendButton

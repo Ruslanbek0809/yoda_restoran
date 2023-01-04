@@ -23,7 +23,7 @@ class MainCategoryItemBottomHook
       duration: const Duration(milliseconds: 75),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once

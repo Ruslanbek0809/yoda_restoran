@@ -30,7 +30,7 @@ class AddressAddViewModel extends BaseViewModel {
   String? _note;
   String? get note => _note;
 
-  /// UPDATES _city
+  //*UPDATES _city
   String? updateCity(String? value) {
     log.v('updateCity value: $value');
     if (value!.isEmpty) return LocaleKeys.enterCity.tr();
@@ -40,7 +40,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateStreet(String? value) {
     log.v('updateStreet value: $value');
     if (value!.isEmpty) return LocaleKeys.enterStreet.tr();
@@ -50,7 +50,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _house
+  //*UPDATES _house
   String? updateHouse(String? value) {
     log.v('updateHouse value: $value');
     if (value == null || value.isEmpty) return null;
@@ -60,7 +60,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _apartment
+  //*UPDATES _apartment
   String? updateApartment(String? value) {
     log.v('updateApartment value: $value');
     if (value == null || value.isEmpty) return null;
@@ -70,7 +70,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _floor
+  //*UPDATES _floor
   String? updateFloor(String? value) {
     log.v('updateFloor value: $value');
     if (value == null || value.isEmpty) return null;
@@ -80,7 +80,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateNote(String? value) {
     log.v('updateNote value: $value');
     if (value == null || value.isEmpty) return null;
@@ -90,7 +90,7 @@ class AddressAddViewModel extends BaseViewModel {
     return null;
   }
 
-  /// ADDS new address
+  //*ADDS new address
   Future<void> onAddAddressPressed(
     Function()? onSuccess,
     Function()? onFail,
@@ -112,7 +112,7 @@ class AddressAddViewModel extends BaseViewModel {
     }
   }
 
-//------------------------ NAVIGATION ----------------------------//
+//*----------------------- NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
   void navBackWithFalse() => _navService.back(result: false);

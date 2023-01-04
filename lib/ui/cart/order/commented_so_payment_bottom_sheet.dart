@@ -111,7 +111,7 @@
 //                       InAppWebView(
 //                         key: webViewKey,
 //                         initialUrlRequest: URLRequest(
-//                           /// CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
+//                           //*CHECKS if it is RETRY ONLINE PAYMENT REGISTER MODEL
 //                           url: Uri.parse(model.isOnlinePaymentRetrySuccess
 //                               ? model.retryOnlinePaymentRegister!.formUrl!
 //                               : widget.paymentRegister.formUrl!),
@@ -150,7 +150,7 @@
 //                           });
 //                         },
 //                         onConsoleMessage: (controller, consoleMessage) {
-//                           /// Function onConsoleMessage
+//                           //*Function onConsoleMessage
 //                           model.onConsoleMessage(
 //                             paymentRegister: widget.paymentRegister,
 //                             controller: controller,

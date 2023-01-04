@@ -11,7 +11,7 @@ class OnBoardingViewModel extends BaseViewModel {
 
   final _navService = locator<NavigationService>();
 
-//------------------------ SUCCESS NAV TO HOME ----------------------------//
+//*----------------------- SUCCESS NAV TO HOME ----------------------------//
 
   Future<void> successNavToHome() async {
     var prefs = await SharedPreferences.getInstance();

@@ -4,7 +4,7 @@ import 'models.dart';
 
 part 'search_restaurant.g.dart';
 
-/// TODO: Add payments list here
+//*TODO: Add payments list here
 @JsonSerializable()
 class SearchRestaurant {
   SearchRestaurant({

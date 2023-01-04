@@ -16,11 +16,11 @@ class MainCatViewModel extends ReactiveViewModel {
   List<int> get selectedMainCats => _mainCatService.selectedMainCats;
   bool get isFilterApplied => _mainCatService.isFilterApplied;
 
-  /// CHECKS whether this mainCat selected or NOT
+  //*CHECKS whether this mainCat selected or NOT
   bool isMainCatSelected(int? mainCatId) =>
       selectedMainCats.contains(mainCatId);
 
-  /// ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
+  //*ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
   Future<void> updateSelectedMainCats(int mainCatId) async {
     log.i(
         'updateSelectedMainCats() _selectedMainCats length: ${selectedMainCats.length}');
@@ -40,7 +40,7 @@ class MainCatViewModel extends ReactiveViewModel {
       false,
     ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
 
-    /// If selected cat is not FETCHED bc of ERROR, then remove last added mainCat from the existing list
+    //*If selected cat is not FETCHED bc of ERROR, then remove last added mainCat from the existing list
     if (!isSelectedFetched)
       _mainCatService.updateSelectedMainCats(
           mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
@@ -49,16 +49,16 @@ class MainCatViewModel extends ReactiveViewModel {
 
     log.i('selectedMainCats length: ${selectedMainCats.length}');
 
-    /// If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
+    //*If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
     if (isFilterApplied && selectedMainCats.isEmpty)
       _mainCatService.filterDisabled();
 
     log.i('LAST selectedMainCats length: ${selectedMainCats.length}');
   }
 
-  //------------------------ MEAL BOTTOM SHEET PART ----------------------------//
+  //*----------------------- MEAL BOTTOM SHEET PART ----------------------------//
 
-  // /// CALLS MainCategoryBottomSheetView
+  // //*CALLS MainCategoryBottomSheetView
   // Future showCustomBottomSheet() async {
   //   log.i('');
   //   await _bottomSheetService.showCustomSheet(

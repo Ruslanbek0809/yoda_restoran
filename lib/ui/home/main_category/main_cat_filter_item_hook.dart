@@ -24,7 +24,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
       duration: const Duration(milliseconds: 75),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once
@@ -47,9 +47,9 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
         child: GestureDetector(
           onTap: () async {
             await _tweenController.forward();
-            //------------------ MAIN CAT BOTTOM SHEET ---------------------//
-            //------------------ CUSTOM PACKAGE ---------------------//
-            /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+            //*----------------- MAIN CAT BOTTOM SHEET ---------------------//
+            //*----------------- CUSTOM PACKAGE ---------------------//
+            //*CUSTOM BOTTOM SHEET BASED ON CONTENT
             await showFlexibleBottomSheet(
               isExpand: false,
               initHeight: 0.95,

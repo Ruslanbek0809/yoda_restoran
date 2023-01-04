@@ -25,7 +25,7 @@ class AddressesViewModel extends FutureViewModel {
     log.v('_addresses!.length: ${_addresses!.length}');
   }
 
-  /// DELETES selected address
+  //*DELETES selected address
   Future<void> onDeleteAddressPressed(
     Address address,
     Function()? onSuccess,
@@ -42,9 +42,9 @@ class AddressesViewModel extends FutureViewModel {
     );
   }
 
-//------------------------ ADDRESS REMOVE DIALOG ----------------------------//
+//*----------------------- ADDRESS REMOVE DIALOG ----------------------------//
 
-  /// SHOWS ADDRESS REMOVE Dialog
+  //*SHOWS ADDRESS REMOVE Dialog
   Future showAddressRemoveDialog(
     AddressesViewModel addressesViewModel,
     Address address,
@@ -68,9 +68,9 @@ class AddressesViewModel extends FutureViewModel {
     }
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 

@@ -54,19 +54,19 @@ class DrawerViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// SETS LOCALE of an app's baseUrl
+  //*SETS LOCALE of an app's baseUrl
   Future<void> setLocale(String locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(Constants.savedLocale, locale);
   }
 
-  /// REINITIALIZES app api url
+  //*REINITIALIZES app api url
   Future<void> reinitializeDio() async =>
       await _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 

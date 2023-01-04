@@ -47,13 +47,13 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-        //* //------------------ SHAKE SLIDERS DIALOG ---------------------//
+        //* //*----------------- SHAKE SLIDERS DIALOG ---------------------//
         // ShakeDetector.autoStart(
         //   shakeThresholdGravity: 1.75,
         //   onPhoneShake: () async {
         //     printLog('onPhoneShake WORKING');
         //     if (model.sliders != null && model.sliders!.isNotEmpty) {
-        //       /// GENERATES a new Random object
+        //       //*GENERATES a new Random object
         //       final _random = Random();
 
         //       // GENERATES a random index based on the list length
@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
         //       final _selectedRandomSlider =
         //           model.sliders![_random.nextInt(model.sliders!.length)];
 
-        //       /// DISMISSES previous awesome dialog
+        //       //*DISMISSES previous awesome dialog
         //       if (_awesomeDialog != null) {
         //         printLog('_awesomeDialog CALLED');
         //         _awesomeDialog?.dismiss();
@@ -79,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
         //         //   printLog('onDissmissCallback value: $value');
         //         // },
 
-        //         /// REMOVES top gap in a dialog
+        //         //*REMOVES top gap in a dialog
         //         bodyHeaderDistance: 0,
         //         dialogBackgroundColor: Colors.transparent,
         //         animType: awesomeDialog.AnimType.SCALE,
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
         //                       .navToSliderWebview(_selectedRandomSlider.url!);
         //             },
         //             child: YodaImage(
-        //               /// CHANGES slider image by localization
+        //               //*CHANGES slider image by localization
         //               image: context.locale == context.supportedLocales[0]
         //                   ? _selectedRandomSlider.image!
         //                   : _selectedRandomSlider.imageRu!,
@@ -110,13 +110,13 @@ class _HomeViewState extends State<HomeView> {
         //   },
         // );
 
-        /// HOME RESS PAG
+        //*HOME RESS PAG
         if (model.isPullUpEnabled == false) model.enablePullUp();
 
-        /// This TRIGGERS fetch action of home data
+        //*This TRIGGERS fetch action of home data
         await _refreshController.requestRefresh();
 
-        /// InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
+        //*InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
         if (Platform.isAndroid) {
           var info = await InAppUpdate.checkForUpdate();
 
@@ -133,7 +133,7 @@ class _HomeViewState extends State<HomeView> {
           }
         }
 
-        /// HANDLES clicked terminated dynamic link
+        //*HANDLES clicked terminated dynamic link
         await model.handleClickedDynamicLink();
 
         //* HANDLES hiveRatings
@@ -165,7 +165,7 @@ class _HomeViewState extends State<HomeView> {
             );
           });
 
-        //------------------ SELECTED CATS LOADING VIEW ---------------------//
+        //*----------------- SELECTED CATS LOADING VIEW ---------------------//
         Widget body = model.fetchingFilter
             ? CustomScrollView(
                 slivers: [
@@ -184,7 +184,7 @@ class _HomeViewState extends State<HomeView> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                //------------------ MENU ---------------------//
+                                //*----------------- MENU ---------------------//
                                 IconButton(
                                   icon: Icon(
                                     Icons.menu_rounded,
@@ -193,7 +193,7 @@ class _HomeViewState extends State<HomeView> {
                                   onPressed: model.homeMenuPressed,
                                   tooltip: 'Drawer',
                                 ),
-                                //------------------ SEARCH ---------------------//
+                                //*----------------- SEARCH ---------------------//
                                 HomeSearch(),
                               ],
                             ),
@@ -215,7 +215,7 @@ class _HomeViewState extends State<HomeView> {
                 ],
               )
             :
-            //------------------ HOME MAIN VIEW ---------------------//
+            //*----------------- HOME MAIN VIEW ---------------------//
             Stack(
                 children: [
                   SmartRefresher(
@@ -223,22 +223,22 @@ class _HomeViewState extends State<HomeView> {
                     footer: CustomFooterWidget(),
                     controller: _refreshController,
 
-                    /// HOME RESS PAG
+                    //*HOME RESS PAG
                     enablePullUp: model.isPullUpEnabled,
                     onRefresh: () async {
-                      /// HOME RESS PAG
+                      //*HOME RESS PAG
                       if (model.isPullUpEnabled == false) model.enablePullUp();
 
                       await model.getHomeData();
                       _refreshController.refreshCompleted();
                     },
 
-                    /// HOME RESS PAG
+                    //*HOME RESS PAG
                     onLoading: () async {
                       await model.getMorePaginatedRestaurants();
                       _refreshController.loadComplete();
                     },
-                    //------------------ HOME ERROR VIEW ---------------------//
+                    //*----------------- HOME ERROR VIEW ---------------------//
                     child: model.hasErrorForKeys
                         ? CustomScrollView(
                             slivers: [
@@ -260,7 +260,7 @@ class _HomeViewState extends State<HomeView> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
-                                            //------------------ MENU ---------------------//
+                                            //*----------------- MENU ---------------------//
                                             IconButton(
                                               icon: Icon(
                                                 Icons.menu_rounded,
@@ -269,7 +269,7 @@ class _HomeViewState extends State<HomeView> {
                                               onPressed: model.homeMenuPressed,
                                               tooltip: 'Drawer',
                                             ),
-                                            //------------------ SEARCH ---------------------//
+                                            //*----------------- SEARCH ---------------------//
                                             HomeSearch(),
                                           ],
                                         ),
@@ -291,14 +291,14 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             ],
                           )
-                        //------------------ HOME SUCCESS VIEW ---------------------//
-                        //------------------ DEFAULT HOME VIEW ---------------------//
+                        //*----------------- HOME SUCCESS VIEW ---------------------//
+                        //*----------------- DEFAULT HOME VIEW ---------------------//
                         : CustomScrollView(
                             slivers: [
                               SliverAppBar(
                                 expandedHeight:
 
-                                    /// If MAIN CAT FILTER is APPLIED
+                                    //*If MAIN CAT FILTER is APPLIED
                                     !model.isFilterApplied
                                         ? 0.075.sh + 0.6.sw
                                         : 0.1.sh,
@@ -318,7 +318,7 @@ class _HomeViewState extends State<HomeView> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
-                                            //------------------ MENU ---------------------//
+                                            //*----------------- MENU ---------------------//
                                             IconButton(
                                               icon: Icon(
                                                 Icons.menu_rounded,
@@ -327,13 +327,13 @@ class _HomeViewState extends State<HomeView> {
                                               onPressed: model.homeMenuPressed,
                                               tooltip: 'Drawer',
                                             ),
-                                            //------------------ SEARCH ---------------------//
+                                            //*----------------- SEARCH ---------------------//
                                             HomeSearch(),
                                           ],
                                         ),
                                       ),
-                                      //------------------ SLIDERS ---------------------//
-                                      /// If MAIN CAT FILTER is APPLIED
+                                      //*----------------- SLIDERS ---------------------//
+                                      //*If MAIN CAT FILTER is APPLIED
                                       if (!model.isFilterApplied)
                                         SliderView(
                                             sliders: model.sliders ?? []),
@@ -341,18 +341,18 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 ),
                               ),
-                              //------------------ HOME CATEGORIES ---------------------//
+                              //*----------------- HOME CATEGORIES ---------------------//
                               SliverPersistentHeader(
                                 pinned: false,
                                 floating: false,
                                 delegate: ContestTabHeader(
-                                  /// If MAIN CAT FILTER is APPLIED
+                                  //*If MAIN CAT FILTER is APPLIED
                                   size: !model.isFilterApplied ? 92.h : 95.h,
                                   child: MainCatView(),
                                 ),
                               ),
-                              //------------------ EXCLUSIVES ---------------------//
-                              /// If MAIN CAT FILTER is APPLIED
+                              //*----------------- EXCLUSIVES ---------------------//
+                              //*If MAIN CAT FILTER is APPLIED
                               if (!model.isFilterApplied &&
                                   model.exclusives!.isNotEmpty)
                                 SliverPersistentHeader(
@@ -384,9 +384,9 @@ class _HomeViewState extends State<HomeView> {
                                     ),
                                   ),
                                 ),
-                              //------------------ BODY: RESTAURANTS ---------------------//
-                              //------------------ DEFAULT BODY VIEW ---------------------//
-                              /// If MAIN CAT FILTER is APPLIED
+                              //*----------------- BODY: RESTAURANTS ---------------------//
+                              //*----------------- DEFAULT BODY VIEW ---------------------//
+                              //*If MAIN CAT FILTER is APPLIED
                               !model.isFilterApplied
                                   ? SliverPadding(
                                       padding: EdgeInsets.only(
@@ -400,7 +400,7 @@ class _HomeViewState extends State<HomeView> {
                                             final _homeRes =
                                                 model.homeRess![pos];
 
-                                            // /// ----------- RESTAURANT with PROMOTED INCLUDED in every manual position --------------//
+                                            // //*----------- RESTAURANT with PROMOTED INCLUDED in every manual position --------------//
                                             return _homeRes.prom != null
                                                 ? Column(
                                                     mainAxisSize:
@@ -409,7 +409,7 @@ class _HomeViewState extends State<HomeView> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      //------------------ RESTAURANT with PROMOTED ---------------------//
+                                                      //*----------------- RESTAURANT with PROMOTED ---------------------//
                                                       RestaurantView(
                                                         restaurant:
                                                             _homeRes.restaurant,
@@ -432,7 +432,7 @@ class _HomeViewState extends State<HomeView> {
                                                         ),
                                                       ),
 
-                                                      /// List of restaurants of pos'th PROMOTED
+                                                      //*List of restaurants of pos'th PROMOTED
                                                       SingleChildScrollView(
                                                         physics:
                                                             BouncingScrollPhysics(),
@@ -458,7 +458,7 @@ class _HomeViewState extends State<HomeView> {
                                                       ),
                                                     ],
                                                   )
-                                                //------------------ RESTAURANT without Promoted ---------------------//
+                                                //*----------------- RESTAURANT without Promoted ---------------------//
                                                 : RestaurantView(
                                                     restaurant:
                                                         _homeRes.restaurant,
@@ -470,7 +470,7 @@ class _HomeViewState extends State<HomeView> {
                                       ),
                                     )
 
-                                  //------------------ SELECTED CATS BODY VIEW ---------------------//
+                                  //*----------------- SELECTED CATS BODY VIEW ---------------------//
                                   : SliverList(
                                       delegate: SliverChildListDelegate(
                                         [
@@ -484,7 +484,7 @@ class _HomeViewState extends State<HomeView> {
                                                   thickness: 1,
                                                 ),
                                               ),
-                                              //------------------ FOUND TITLE and CLEAR part ---------------------//
+                                              //*----------------- FOUND TITLE and CLEAR part ---------------------//
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w,
@@ -530,7 +530,7 @@ class _HomeViewState extends State<HomeView> {
                                                   ],
                                                 ),
                                               ),
-                                              //------------------ SELECTED MAIN CATS RESULT LIST ---------------------//
+                                              //*----------------- SELECTED MAIN CATS RESULT LIST ---------------------//
                                               ListView.builder(
                                                 shrinkWrap: true,
                                                 physics:
@@ -562,7 +562,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                   ),
 
-                  //------------------ BOTTOM CART ---------------------//
+                  //*----------------- BOTTOM CART ---------------------//
                   if (!model.hasErrorForKeys && model.cartRes!.id != -1)
                     HomeBottomCart()
                 ],
@@ -576,7 +576,7 @@ class _HomeViewState extends State<HomeView> {
               statusBarBrightness: Brightness.light // For iOS: (dark icons)
               ),
           child: Scaffold(
-            /// Resize according to Onscreen keyboard
+            //*Resize according to Onscreen keyboard
             resizeToAvoidBottomInset: true,
             key: model.homeScaffoldKey,
             drawer: DrawerView(),

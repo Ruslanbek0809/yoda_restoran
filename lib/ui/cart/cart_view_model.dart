@@ -30,13 +30,13 @@ class CartViewModel extends ReactiveViewModel {
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  /// FETCHS more meals and GETS all carts
+  //* FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
     await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals));
     log.i('moreMeals length: ${moreMeals!.length} ');
   }
 
-  /// CLEARS CART
+  //* CLEARS CART
   Future<void> clearCart() async {
     log.i('clearCart()');
 
@@ -45,13 +45,13 @@ class CartViewModel extends ReactiveViewModel {
     await _navService.pushNamedAndRemoveUntil(Routes.homeView);
   }
 
-  /// UPDATES UI from CartMoreMealVM
+  //* UPDATES UI from CartMoreMealVM
   void updateUIfromCartMoreMealVM() {
     log.i('updateUIfromCartMoreMealVM()');
     notifyListeners();
   }
 
-  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  //* GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
   num get getTotalCartSum {
     num totalCartSum = 0;
 
@@ -76,9 +76,9 @@ class CartViewModel extends ReactiveViewModel {
     return totalCartSum;
   }
 
-//------------------------ Clear CART DIALOG PART ----------------------------//
+//*------------------------ Clear CART DIALOG PART ----------------------------//
 
-  /// SHOWS Clear CART Dialog
+  //* SHOWS Clear CART Dialog
   Future showClearCartDialog(CartViewModel cartViewModel) async {
     log.i('showClearCartDialog()');
     await _dialogService.showCustomDialog(
@@ -92,9 +92,9 @@ class CartViewModel extends ReactiveViewModel {
     );
   }
 
-//------------------------ CART MEAL REMOVE DIALOG ----------------------------//
+//*------------------------ CART MEAL REMOVE DIALOG ----------------------------//
 
-  /// SHOWS CART MEAL REMOVE Dialog
+  //* SHOWS CART MEAL REMOVE Dialog
   Future showRemoveCartMealDialog(
       CartViewModel cartViewModel, HiveMeal cartMeal) async {
     log.i('showRemoveCartMealDialog()');
@@ -112,9 +112,9 @@ class CartViewModel extends ReactiveViewModel {
     );
   }
 
-//------------------------ CART MEAL ----------------------------//
+//*------------------------ CART MEAL ----------------------------//
 
-  /// GETS total meal draft sum
+  //* GETS total meal draft sum
   num getTotalMealSum(HiveMeal cartMeal) {
     num totalMealSum = 0;
     totalMealSum += cartMeal.discount != null || cartMeal.discount! > 0
@@ -132,7 +132,7 @@ class CartViewModel extends ReactiveViewModel {
     return totalMealSum;
   }
 
-  /// CONCATENATES all cartMeal vols and customs into one string
+  //* CONCATENATES all cartMeal vols and customs into one string
   String getConcatenateVolsCustoms(HiveMeal cartMeal) {
     StringBuffer concatenatedString = StringBuffer();
 
@@ -167,7 +167,7 @@ class CartViewModel extends ReactiveViewModel {
     return concatenatedString.toString();
   }
 
-  /// UPDATES cartMeal. If cartMeals is empty then navBack bc CartView is empty
+  //* UPDATES cartMeal. If cartMeals is empty then navBack bc CartView is empty
   Future<void> updateCartMealInCart(
       HiveMeal cartMeal, int? mealQuantity) async {
     log.i(
@@ -182,9 +182,9 @@ class CartViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
+//*------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
 
-  /// CALLS navs based on user's login state.
+  //* CALLS navs based on user's login state.
   // Future<void> onCartCheckoutButtonPressed() async {
   //   if (hasLoggedInUser) {
   //     log.v(
@@ -199,10 +199,10 @@ class CartViewModel extends ReactiveViewModel {
   //   }
   // }
 
-//------------------------ NAVIGATION ----------------------------//
+//*------------------------ NAVIGATION ----------------------------//
   void navBack() => _navService.back(result: true);
 
-  /// NAVIGATES to LoginView
+  //* NAVIGATES to LoginView
   Future<void> navToLoginView() async {
     log.v('USER NOTTTTT FOUND');
     await _navService.navigateTo(

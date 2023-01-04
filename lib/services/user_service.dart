@@ -38,16 +38,16 @@ class UserService {
   //     Response response = await _apiRoot.dio.get('api/user/');
   //     log.v('RESPONSE: api/user/ => ${response.data}');
   //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       /// Step 1. GETS and CONVERTS user json data to dart userModel
+  //       //* Step 1. GETS and CONVERTS user json data to dart userModel
   //       User? userModel;
   //       for (final _userJson in response.data)
   //         userModel = User.fromJson(_userJson);
 
-  //       /// Step 2. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
+  //       //* Step 2. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
   //       userBox = Hive.box<HiveUser>(Constants.userBox);
 
-  //       /// Step 3. SAVES userModel to Hive userBox.
-  //       /// NOTE: Don't rewrite accessToken here.
+  //       //* Step 3. SAVES userModel to Hive userBox.
+  //       //* NOTE: Don't rewrite accessToken here.
   //       await userBox.put(
   //         Constants.userBox,
   //         HiveUser(
@@ -62,7 +62,7 @@ class UserService {
   //         ),
   //       );
 
-  //       /// Step 4. GETS hiveUser from Hive userBox
+  //       //* Step 4. GETS hiveUser from Hive userBox
   //       _currentUser = userBox.get(Constants.userBox);
 
   //       log.v(
@@ -77,31 +77,31 @@ class UserService {
   //   }
   // }
 
-  // /// INITIALIZE in StartUpViewModel
+  // //* INITIALIZE in StartUpViewModel
   // Future clearUser() async {
   //   log.v('====== UserService STARTED opening boxes ======');
 
-  //   /// Step 1. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
+  //   //* Step 1. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
   //   userBox = Hive.box<HiveUser>(Constants.userBox);
 
-  //   /// Step 2. CLEARS user data from hiveBox
+  //   //* Step 2. CLEARS user data from hiveBox
   //   await userBox.clear();
 
-  //   /// Step 3.GETS user data from hiveBox for loggedIn variables
+  //   //* Step 3.GETS user data from hiveBox for loggedIn variables
   //   _currentUser = userBox.get(Constants.userBox);
 
   //   log.v(
   //       '====== UserService ENDED opening boxes ====== _currentUser: $_currentUser and his/her phone: ${_currentUser?.mobile}');
   // }
 
-  /// INITIALIZE in StartUpViewModel
+  //* INITIALIZE in StartUpViewModel
   Future initUser() async {
     log.v('====== UserService STARTED initUser() ======');
 
-    /// Step 1. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
+    //* Step 1. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
     userBox = Hive.box<HiveUser>(Constants.userBox);
 
-    /// Step 2. GETS hiveUser from Hive userBox
+    //* Step 2. GETS hiveUser from Hive userBox
     _currentUser = userBox.get(Constants.userBox);
 
     log.v(
@@ -154,10 +154,10 @@ class UserService {
       );
       log.v('RESPONSE: auth/verify/ => ${response.data}');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        /// Step 1. GETS and CONVERTS user json data to dart userModel
+        //* Step 1. GETS and CONVERTS user json data to dart userModel
         final User userModel = User.fromJson(response.data['user']);
 
-        /// Step 2. SAVES userModel to Hive userBox
+        //* Step 2. SAVES userModel to Hive userBox
         await userBox.put(
           Constants.userBox,
           HiveUser(
@@ -172,14 +172,14 @@ class UserService {
           ),
         );
 
-        /// Step 3. SETS accessToken to Constants.accessToken var
+        //* Step 3. SETS accessToken to Constants.accessToken var
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString(
             Constants.accessToken, response.data['access'] as String);
         final String? _accessToken = prefs.getString(Constants.accessToken);
         log.i('ACCESS TOKEN after setString: $_accessToken');
 
-        /// Step 4. GETS hiveUser from Hive userBox
+        //* Step 4. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
 
         onSuccess!();
@@ -221,10 +221,10 @@ class UserService {
           'RESPONSE: api/user/${_currentUser!.id}/ => ${response.data} and ${response.statusCode}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        /// Step 1. GETS and CONVERTS user json data to dart userModel
+        //* Step 1. GETS and CONVERTS user json data to dart userModel
         final User? userModel = User.fromJson(response.data);
 
-        /// Step 2. UPDATES userModel to Hive userBox
+        //* Step 2. UPDATES userModel to Hive userBox
         await userBox.put(
           Constants.userBox,
           HiveUser(
@@ -239,7 +239,7 @@ class UserService {
           ),
         );
 
-        /// Step 3. GETS hiveUser from Hive userBox
+        //* Step 3. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
         onSuccess!();
       } else
@@ -257,7 +257,7 @@ class UserService {
     log.i('logoutUser() _currentUser: $_currentUser');
   }
 
-  //------------------ ADDRESS APIS ---------------------//
+  //! ------------------ ADDRESS APIS ---------------------//
 
   Future<List<Address>> getAddresses() async {
     List<Address> _addresses = [];
@@ -265,7 +265,7 @@ class UserService {
       Response response = await _apiRoot.dio.get('api/user/');
       log.v('RESPONSE: api/user/ => ${response.data}');
 
-      /// Below data structure is like user list in each user and its addresses
+      //* Below data structure is like user list in each user and its addresses
       if (response.data != null) {
         for (final _user in response.data) {
           for (final _address in _user['addresses']) {
@@ -379,7 +379,7 @@ class UserService {
     }
   }
 
-  //------------------ CREATE ORDER API ---------------------//
+  //! ------------------ CREATE ORDER API ---------------------//
 
   Future<void> createOrder(
     Address? selectedAddress,
@@ -395,7 +395,7 @@ class UserService {
   ) async {
     List<CreateOrderItem>? orderItemList = [];
 
-    /// Step 1. For each cartMeal in cartMeals, creating and assigning to orderItemList
+    //* Step 1. For each cartMeal in cartMeals, creating and assigning to orderItemList
     cartMeals.forEach((_cartMeal) {
       num totalCartMealSum = 0;
 
@@ -410,7 +410,7 @@ class UserService {
         totalCartMealSum += cus.price!;
       });
 
-      /// VOLUME DISSECTING into List<int> part
+      //* VOLUME DISSECTING into List<int> part
       List<int> volList = [];
       List<int> cusList = [];
 
@@ -430,7 +430,7 @@ class UserService {
       ));
     });
 
-    /// Step 2. Here we CREATE new order based on above params and conditions
+    //* Step 2. Here we CREATE new order based on above params and conditions
     CreateOrder createOrder = CreateOrder(
       restaurant: cartRes!.id,
       address: isDelivery ? selectedAddress!.id : null,
@@ -493,7 +493,7 @@ class UserService {
     }
   }
 
-  /// ORDER PAG
+  //* ORDER PAG
   Future<void> getPaginatedOrders(
     int page,
     Function(List<Order>?, String?)? onSuccess,
@@ -562,7 +562,7 @@ class UserService {
     //   rethrow;
     // }
 
-    /// CHANGED order from DELETE to PATCH in order to BACKUP online payments in DJANGO admin panel
+    //* CHANGED order from DELETE to PATCH in order to BACKUP online payments in DJANGO admin panel
     try {
       Response response = await _apiRoot.dio.patch(
         'api/order/$orderId/',
@@ -715,15 +715,15 @@ class UserService {
     log.v('_queryParams at the END: $_queryParams');
 
     try {
-      //----------- DIO PART START -------------//
+      //*----------- DIO PART START -------------//
       Dio dio = Dio();
 
-      //----------- DIO BASE URL -------------//
+      //*----------- DIO BASE URL -------------//
       dio.options.baseUrl =
           'https://acs.gov.tm/acs/pages/enrollment/authentication.jsf';
       dio.options.contentType = Headers.formUrlEncodedContentType;
 
-      //----------- DIO INTERCEPTORS -------------//
+      //*----------- DIO INTERCEPTORS -------------//
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -750,7 +750,7 @@ class UserService {
           },
         ),
       );
-      //----------- DIO PART END -------------//
+      //*----------- DIO PART END -------------//
       Response response = await dio.post(
         '',
         queryParameters: _queryParams,
@@ -877,7 +877,7 @@ class UserService {
     }
   }
 
-  ///* POST finish3ds  STEP 3
+  //** POST finish3ds  STEP 3
   Future<void> postFinish3ds(
     String orderId,
     String paResValue,
@@ -961,7 +961,7 @@ class UserService {
     }
   }
 
-  ///* CHECKS ONLINE PAYMENT ORDER STATUS EXTENDED STEP 4
+  //** CHECKS ONLINE PAYMENT ORDER STATUS EXTENDED STEP 4
   Future<void> checkOnlinePaymentOrderStatusExtended(
     String orderId,
     Function() onSuccess,
@@ -1012,7 +1012,7 @@ class UserService {
           },
         ),
       );
-      //----------- DIO PART END -------------//
+      //*----------- DIO PART END -------------//
 
       Response response = await dio.post(
         '',
@@ -1142,14 +1142,14 @@ class UserService {
         log.v(
             'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs}');
 
-        /// If success then updates local _currentUser's favs
-        /// Step 2. UPDATES userModel to Hive userBox
+        //* If success then updates local _currentUser's favs
+        //* Step 2. UPDATES userModel to Hive userBox
         await userBox.put(
           Constants.userBox,
           _currentUser!,
         );
 
-        /// Step 3. GETS hiveUser from Hive userBox
+        //* Step 3. GETS hiveUser from Hive userBox
         _currentUser = userBox.get(Constants.userBox);
       } else {
         if (isTempFavourited)

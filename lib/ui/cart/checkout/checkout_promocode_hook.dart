@@ -58,7 +58,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 12.w),
 
-                      /// If promocode is NOT NULL and promocode's quantity is NOT equal to -1 which means ERROR then proceed SUCCESS
+                      //*If promocode is NOT NULL and promocode's quantity is NOT equal to -1 which means ERROR then proceed SUCCESS
                       child: _promocodeController.text.length > 2 &&
                               model.promocode != null &&
                               model.promocode!.quantity != -1
@@ -89,7 +89,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
             ),
           ],
         ),
-        //------------------ PROMOCODE RESULT TEXT ---------------------//
+        //*----------------- PROMOCODE RESULT TEXT ---------------------//
         model.busy(_promocodeController.text)
             ? Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),

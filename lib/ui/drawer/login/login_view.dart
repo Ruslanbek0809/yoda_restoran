@@ -40,7 +40,7 @@ class LoginView extends StatelessWidget with $LoginView {
             key: formKey,
             child: Column(
               children: <Widget>[
-                //------------------ YodaRes LOGO ---------------------//
+                //*----------------- YodaRes LOGO ---------------------//
                 SizedBox(
                   height: 1.sh / 2.5,
                   child: SvgPicture.asset(
@@ -53,7 +53,7 @@ class LoginView extends StatelessWidget with $LoginView {
                 verticalSpaceMedium,
                 Text(LocaleKeys.enter_phone, style: kts14HelperText).tr(),
                 verticalSpaceMedium,
-                //------------------ PHONE TEXTFIELD ---------------------//
+                //*----------------- PHONE TEXTFIELD ---------------------//
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.1.sw),
                   child: TextFormField(
@@ -117,7 +117,7 @@ class LoginView extends StatelessWidget with $LoginView {
                   ),
                 ),
                 verticalSpaceMedium,
-                //------------------ Login BUTTON ---------------------//
+                //*----------------- Login BUTTON ---------------------//
                 SizedBox(
                   width: 0.8.sw,
                   child: CustomTextChildButton(

@@ -18,9 +18,9 @@ class MainCatView extends StatelessWidget {
           padding: EdgeInsets.only(top: 8.h),
           child: Row(
             children: [
-              //------------------ FILTER MAIN CAT (NOTE: Manually added) ---------------------//
+              //*----------------- FILTER MAIN CAT (NOTE: Manually added) ---------------------//
               if (model.mainCats!.isNotEmpty) MainCatFilterItemHook(),
-              //------------------ Fetched MAIN CATS ---------------------//
+              //*----------------- Fetched MAIN CATS ---------------------//
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: model.mainCats!
@@ -31,7 +31,7 @@ class MainCatView extends StatelessWidget {
                     )
                     .toList(), // mainCategories!.take(10) is used to take only 6 from the list
               ),
-              //------------------ ALL MAIN CAT (NOTE: Manually added) ---------------------//
+              //*----------------- ALL MAIN CAT (NOTE: Manually added) ---------------------//
               if (model.mainCats!.isNotEmpty) MainCatAllItemHook(),
             ],
           ),

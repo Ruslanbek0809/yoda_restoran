@@ -12,29 +12,29 @@ class OrderViewModel extends BaseViewModel {
   final _navService = locator<NavigationService>();
   final _orderService = locator<OrderService>();
 
-//------------------------ ORDER PART ----------------------------//
+//*----------------------- ORDER PART ----------------------------//
 
   List<Order> get orders => _orderService.orders;
 
-  /// ORDER PAG
+  //*ORDER PAG
   int get page => _orderService.page;
   bool get isPullUpEnabled => _orderService.isPullUpEnabled;
 
-  /// GETS initial orders
+  //*GETS initial orders
   Future getInitialOrders() async =>
       await runBusyFuture(_orderService.getInitialPaginatedOrders());
 
-  /// GETS more paginated orders
+  //*GETS more paginated orders
   Future getMorePaginatedOrders() async =>
       await runBusyFuture(_orderService.getPaginatedOrders());
 
-//------------------------ ORDER SUCCESS PART ----------------------------//
+//*----------------------- ORDER SUCCESS PART ----------------------------//
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
-  /// NAVIGATES to Orders by removing all previous routes
+  //*NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 }

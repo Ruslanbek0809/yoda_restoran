@@ -54,14 +54,14 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                     ),
                   ],
                 ),
-                //------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//
+                //*------------------ ALL VOLS AND CUSTOMS CONCATENATED ---------------------//
                 Text(
                   concatenateVolsCustoms,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: kts14HelperText,
                 ),
-                //------------------ BUTTONS ---------------------//
+                //*------------------ BUTTONS ---------------------//
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

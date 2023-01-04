@@ -21,7 +21,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Here it is reactive instead of nonReactive is just bc delete cartMeal when its quantity is 0
+    //* Here it is reactive instead of nonReactive is just bc delete cartMeal when its quantity is 0
     return ViewModelBuilder<CartViewModel>.reactive(
       onModelReady: (model) => model.getMoreMeals(),
       builder: (context, model, child) {
@@ -70,7 +70,7 @@ class CartView extends StatelessWidget {
                   // Also horizontal: 15.w padding is used for each inner widgets bc of horizontal CartFoodWidget list scroll
                   physics: BouncingScrollPhysics(),
                   children: <Widget>[
-                    //------------------ CARTWIDGET ---------------------//
+                    //*------------------ CARTWIDGET ---------------------//
                     ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -90,7 +90,7 @@ class CartView extends StatelessWidget {
                         );
                       },
                     ),
-                    //------------------ CART MEAL WIDGET TITLE ---------------------//
+                    //*------------------ CART MEAL WIDGET TITLE ---------------------//
                     if (!model.hasError)
                       Padding(
                         padding: EdgeInsets.only(
@@ -100,7 +100,7 @@ class CartView extends StatelessWidget {
                           style: ktsDefault24DarkText,
                         ).tr(),
                       ),
-                    //------------------ CART MORE MEAL LIST ---------------------//
+                    //*------------------ CART MORE MEAL LIST ---------------------//
                     if (!model.hasError)
                       AnimatedSwitcher(
                         duration: Duration(milliseconds: 300),
@@ -154,14 +154,14 @@ class CartView extends StatelessWidget {
                                 ),
                               ),
                       ),
-                    //------------------ TOGGLE BUTTON ---------------------//
+                    //*------------------ TOGGLE BUTTON ---------------------//
                     CartToggleButton(),
                     SizedBox(
                         height: 0.13
                             .sh), // COMPENSATES height of Checkout Button Widget is taking
                   ],
                 ),
-                //------------------ BOTTOM CART WIDGET ---------------------//
+                //*------------------ BOTTOM CART WIDGET ---------------------//
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -199,7 +199,7 @@ class CartView extends StatelessWidget {
                               style: ktsButtonWhite18Text,
                             ).tr(),
                             onPressed: () async {
-                              /// Below res workingHours are splitted
+                              //* Below res workingHours are splitted
                               var resWorkingHoursSplitted =
                                   model.cartRes!.workingHours!.split('-');
                               var resStartWorkingHoursSplitted =
@@ -242,7 +242,7 @@ class CartView extends StatelessWidget {
                                     'PASSED TIME nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
 
                                 if (model.hasLoggedInUser) {
-                                  /// CUSTOM BOTTOM SHEET BASED ON CONTENT
+                                  //* CUSTOM BOTTOM SHEET BASED ON CONTENT
                                   await showFlexibleBottomSheet(
                                     isExpand: false,
                                     initHeight: 0.95,

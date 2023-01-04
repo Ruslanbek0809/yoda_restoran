@@ -4,7 +4,7 @@
 // import '../../app/app.locator.dart';
 // import '../../app/app.logger.dart';
 
-// /// If this is commented below are LoginVM and OtpVM implementation with this
+// //*If this is commented below are LoginVM and OtpVM implementation with this
 // abstract class LoginOtpViewModel extends FormViewModel {
 //   final log = getLogger('LoginOtpViewModel');
 
@@ -31,8 +31,8 @@
 //     }
 //   }
 
-//   // /// Checks if the result has an error. If it doesn't we navigate to the success view
-//   // /// else we show the friendly validation message.
+//   // //*Checks if the result has an error. If it doesn't we navigate to the success view
+//   // //*else we show the friendly validation message.
 //   // Future<void> _handleResponse(Response result) async {
 //   //   log.v('');
 

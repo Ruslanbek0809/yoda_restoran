@@ -38,11 +38,11 @@ class CheckoutService with ReactiveServiceMixin {
   List<Address>? _addresses = [];
   List<Address>? get addresses => _addresses;
 
-  /// SAVES paymentType
+  //*SAVES paymentType
   void saveSelectedPaymentType(HiveResPaymentType selectedPaymentType) =>
       _selectedPaymentType.value = selectedPaymentType;
 
-  /// SETS default value to _selectedPaymentType (Used to clear when new cartRes is set)
+  //*SETS default value to _selectedPaymentType (Used to clear when new cartRes is set)
   void setDefaultValueToSelectedPaymentType() =>
       _selectedPaymentType.value = HiveResPaymentType(
         id: -1,
@@ -50,7 +50,7 @@ class CheckoutService with ReactiveServiceMixin {
         nameTk: 'Default',
       );
 
-  /// SEARCHES promocodes and GETS first
+  //*SEARCHES promocodes and GETS first
   Future<Promocode?> searchPromocode(
       String searchText, int getTotalCartSum) async {
     log.v(
@@ -61,17 +61,17 @@ class CheckoutService with ReactiveServiceMixin {
     return _promocode;
   }
 
-  /// GETS all addresses
+  //*GETS all addresses
   Future<void> getAddresses() async {
     _addresses = await _userService.getAddresses();
     log.v('_addresses!.length: ${_addresses!.length}');
   }
 
-  /// SAVES selectedAddress
+  //*SAVES selectedAddress
   void saveSelectedAddress(Address selectedAddress) =>
       _selectedAddress.value = selectedAddress;
 
-  /// ADDS new address
+  //*ADDS new address
   Future<void> addAddress(
     String? city,
     String? street,
@@ -94,7 +94,7 @@ class CheckoutService with ReactiveServiceMixin {
     );
   }
 
-  /// CREATES ORDER
+  //*CREATES ORDER
   Future<void> createOrder(
     Address? selectedAddress,
     DateTime? deliveryDateTime,

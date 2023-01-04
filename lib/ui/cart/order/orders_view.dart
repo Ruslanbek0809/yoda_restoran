@@ -30,7 +30,7 @@ class _OrdersViewState extends State<OrdersView> {
     return ViewModelBuilder<OrderViewModel>.reactive(
       onModelReady: (model) async => await model.getInitialOrders(),
       builder: (context, model, child) {
-        /// When the app is open and it receives a push notification
+        //*When the app is open and it receives a push notification
         FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
           model.log.v('OrdersView OnMESSAGE with data ${message.data}');
 
@@ -50,13 +50,13 @@ class _OrdersViewState extends State<OrdersView> {
           await model.getInitialOrders();
         });
 
-        /// When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
+        //*When the app is in the background and opened directly from the push notification. and to open a notification message displayed via FCM
         FirebaseMessaging.onMessageOpenedApp
             .listen((RemoteMessage message) async {
           model.log
               .v('OrdersView OnMESSAGE_OPENEDAPP with data ${message.data}');
 
-          /// REINITIALIZES ORDERS
+          //* REINITIALIZES ORDERS
           await model.getInitialOrders();
         });
         return WillPopScope(
@@ -91,14 +91,14 @@ class _OrdersViewState extends State<OrdersView> {
               footer: CustomFooterWidget(),
               controller: _refreshController,
 
-              /// ORDER PAG
+              //*ORDER PAG
               enablePullUp: model.isPullUpEnabled,
               onRefresh: () async {
                 await model.getInitialOrders();
                 _refreshController.refreshCompleted();
               },
 
-              /// ORDER PAG
+              //*ORDER PAG
               onLoading: () async {
                 await model.getMorePaginatedOrders();
                 _refreshController.loadComplete();

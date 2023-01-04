@@ -97,7 +97,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             ),
           ],
         ),
-        //------------------ ListView builder ---------------------//
+        //*----------------- ListView builder ---------------------//
         body: model.isBusy
             ? LoadingWidget()
             : model.searchRestaurants.isEmpty || model.hasError
@@ -159,7 +159,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                         svg: 'assets/empty_search.svg',
                       ),
 
-                      /// To make Empty in center
+                      //*To make Empty in center
                       if (model.searchMainCats!.isNotEmpty) SizedBox(),
                     ],
                   )
@@ -173,7 +173,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //------------------ RESTAURANT PART ---------------------//
+                            //*----------------- RESTAURANT PART ---------------------//
                             GestureDetector(
                               onTap: () => model.navToResDetailsView(Restaurant(
                                 id: _searchRestaurant!.id,
@@ -195,7 +195,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                               )),
                               child: Row(
                                 children: [
-                                  //------------------ IMAGE ---------------------//
+                                  //*----------------- IMAGE ---------------------//
                                   Flexible(
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -209,7 +209,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       ),
                                     ),
                                   ),
-                                  //------------------ NAME and ADDRESS ---------------------//
+                                  //*----------------- NAME and ADDRESS ---------------------//
                                   Expanded(
                                     flex: 3,
                                     child: Column(
@@ -238,7 +238,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                 ],
                               ),
                             ),
-                            //------------------ RESTAURANT MEALS ---------------------//
+                            //*----------------- RESTAURANT MEALS ---------------------//
                             if (_searchRestaurant.meals != null)
                               ListView.separated(
                                 shrinkWrap: true,
@@ -320,7 +320,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                   );
                                 },
                               ),
-                            //------------------ MEAL MORE ---------------------//
+                            //*----------------- MEAL MORE ---------------------//
                             if (_searchRestaurant.meals != null &&
                                 _searchRestaurant.meals!.length > 3)
                               GestureDetector(

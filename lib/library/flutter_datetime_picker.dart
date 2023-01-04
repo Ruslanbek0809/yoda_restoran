@@ -16,7 +16,7 @@ typedef String? StringAtIndexCallBack(int index);
 
 class DatePicker {
   ///
-  /// Display date picker bottom sheet.
+  //*Display date picker bottom sheet.
   ///
   static Future<DateTime?> showDatePicker(
     BuildContext context, {
@@ -52,7 +52,7 @@ class DatePicker {
   }
 
   ///
-  /// Display time picker bottom sheet.
+  //*Display time picker bottom sheet.
   ///
   static Future<DateTime?> showTimePicker(
     BuildContext context, {
@@ -86,7 +86,7 @@ class DatePicker {
   }
 
   ///
-  /// Display time picker bottom sheet with AM/PM.
+  //*Display time picker bottom sheet with AM/PM.
   ///
   static Future<DateTime?> showTime12hPicker(
     BuildContext context, {
@@ -118,7 +118,7 @@ class DatePicker {
   }
 
   ///
-  /// Display date&time picker bottom sheet.
+  //*Display date&time picker bottom sheet.
   ///
   static Future<DateTime?> showDateTimePicker(
     BuildContext context, {
@@ -154,7 +154,7 @@ class DatePicker {
   }
 
   ///
-  /// Display date picker bottom sheet witch custom picker model.
+  //*Display date picker bottom sheet witch custom picker model.
   ///
   static Future<DateTime?> showPicker(
     BuildContext context, {

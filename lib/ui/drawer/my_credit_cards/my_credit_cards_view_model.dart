@@ -18,9 +18,9 @@ class CreditCardsViewModel extends ReactiveViewModel {
 
   List<HiveCreditCard> get hiveCreditCards => _hiveDbService.hiveCreditCards;
 
-//------------------------ CREDIT CARD DELETE DIALOG ----------------------------//
+//*----------------------- CREDIT CARD DELETE DIALOG ----------------------------//
 
-  /// SHOWS CREDIT CARD DELETE Dialog
+  //*SHOWS CREDIT CARD DELETE Dialog
   Future showCreditCardDeleteDialog(HiveCreditCard hiveCreditCard) async {
     log.i('showCreditCardDeleteDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
@@ -35,9 +35,9 @@ class CreditCardsViewModel extends ReactiveViewModel {
       await _hiveDbService.deleteHiveCreditCard(hiveCreditCard);
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
-  /// NAVIGATES to MyCreditCardAddView
+  //*NAVIGATES to MyCreditCardAddView
   Future<void> navToMyCreditCardAddView({
     required Function() onNewCreditCardAdded,
   }) async {
@@ -47,7 +47,7 @@ class CreditCardsViewModel extends ReactiveViewModel {
     if (_navResult) await onNewCreditCardAdded(); // Workaround
   }
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 

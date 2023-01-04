@@ -40,7 +40,7 @@ class ResDetailsViewModel extends FutureViewModel {
   bool get isUpdateQuantity =>
       _bottomCartService.isUpdateQuantity; // custom loading of res bottom cart
 
-  /// _isCustomError and updateCustomError func are used to show error flash bar once. Workaround
+  //*_isCustomError and updateCustomError func are used to show error flash bar once. Workaround
   bool _isCustomError = false;
   bool get isCustomError => _isCustomError;
   List<ResCategory>? _resCategories = [];
@@ -48,13 +48,13 @@ class ResDetailsViewModel extends FutureViewModel {
 
   // List<ResCategory>? get resCategories => _resService.resCategories;
 
-  /// Function to change ACTIVE TAB
+  //*Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
     _activeTab = tabIndex;
     notifyListeners();
   }
 
-  /// Function to change ACTIVE TAB
+  //*Function to change ACTIVE TAB
   void updateLastScrollStatus(bool isReallyShrink) {
     _isShrink = isReallyShrink;
     notifyListeners();
@@ -101,16 +101,16 @@ class ResDetailsViewModel extends FutureViewModel {
     log.i('_resCategories length: ${_resCategories!.length}');
   }
 
-  /// Workaround to show error flash bar once
+  //*Workaround to show error flash bar once
   void updateCustomError() {
     log.i('updateCustomError()');
 
     _isCustomError = false;
   }
 
-//------------------------ RESTAURANT BOTTOM SHEET ----------------------------//
+//*----------------------- RESTAURANT BOTTOM SHEET ----------------------------//
 
-  /// SHOWS RestaurantDetailsInfoBottomSheet
+  //*SHOWS RestaurantDetailsInfoBottomSheet
   // Future showCustomBottomSheet(Restaurant restaurant) async {
   //   log.i('');
   //   await _bottomSheetService.showCustomSheet(
@@ -121,18 +121,18 @@ class ResDetailsViewModel extends FutureViewModel {
   //   );
   // }
 
-//------------------------ FAVOURITE PART ----------------------------//
+//*----------------------- FAVOURITE PART ----------------------------//
 
   bool _isFavorited = false;
   bool get isFavorited => _isFavorited;
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  /// CHECKS and ASSIGNS initial res fav state
+  //*CHECKS and ASSIGNS initial res fav state
   void checkResFav(int resId) =>
       _isFavorited = _userService.currentUser!.favs.contains(resId);
 
-  /// UPDATES res fav state
+  //*UPDATES res fav state
   Future<void> updateResFav(int resId) async {
     if (hasLoggedInUser) {
       log.v(
@@ -160,7 +160,7 @@ class ResDetailsViewModel extends FutureViewModel {
     }
   }
 
-//------------------------ NAVIGATIONS ----------------------------//
+//*----------------------- NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {
     // dynamic _navResult;
@@ -179,7 +179,7 @@ class ResDetailsViewModel extends FutureViewModel {
     // if (_navResult) await initialise(); // Workaround
   }
 
-  /// NAVIGATES to LoginView if not logged in yet
+  //*NAVIGATES to LoginView if not logged in yet
   // Future<void> navToLoginView() async => await _navService.navigateTo(
   //       Routes.loginView,
   //       arguments: LoginViewArguments(

@@ -25,7 +25,7 @@ class ResViewModel extends BaseViewModel {
   bool _isHourlyDiscountActive = false;
   bool get isHourlyDiscountActive => _isHourlyDiscountActive;
 
-  /// INITIALIZES hourly discount variables for further condition
+  //*INITIALIZES hourly discount variables for further condition
   void initializeHourlyDiscountVars(String discountBegin, String discountEnd) {
     DateTime _discountBeginDateTime = DateFormat('HH:mm').parse(discountBegin);
     DateTime _discountEndDateTime = DateFormat('HH:mm').parse(discountEnd);
@@ -37,11 +37,11 @@ class ResViewModel extends BaseViewModel {
       _isHourlyDiscountActive = true;
   }
 
-  /// CHECKS and ASSIGNS initial res fav state
+  //*CHECKS and ASSIGNS initial res fav state
   void checkResFav(int resId) =>
       _isFavorited = _userService.currentUser!.favs.contains(resId);
 
-  /// UPDATES res fav state
+  //*UPDATES res fav state
   Future<void> updateResFav(int resId) async {
     if (hasLoggedInUser) {
       log.v(
@@ -69,7 +69,7 @@ class ResViewModel extends BaseViewModel {
     }
   }
 
-  //------------------ NAVIGATION ---------------------//
+  //*----------------- NAVIGATION ---------------------//
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
         Routes.resDetailsView,

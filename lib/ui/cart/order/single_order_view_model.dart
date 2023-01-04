@@ -47,9 +47,9 @@ class SingleOrderViewModel extends ReactiveViewModel {
   ];
   List<OrderTimeline> get orderTimelines => _orderTimelines;
 
-  /// Function that FIRES first in SingleOrderViewModel
+  //*Function that FIRES first in SingleOrderViewModel
   void initSingleOrder() {
-    /// INITIALIZES _orderStatusText
+    //*INITIALIZES _orderStatusText
     switch (order.status) {
       case 1:
         _orderStatusText = LocaleKeys.orderWaiting.tr();
@@ -71,13 +71,13 @@ class SingleOrderViewModel extends ReactiveViewModel {
         break;
     }
 
-    /// ASSIGNS initial value to _currentOrderExpansionState
+    //*ASSIGNS initial value to _currentOrderExpansionState
     _currentOrderExpansionState =
         order.status == 2 || order.status == 1 ? true : false;
 
-    /// CREATES and INITIALIZES orderStatuses for this order
+    //*CREATES and INITIALIZES orderStatuses for this order
     for (int i = 0; i < _orderTimelines.length; i++) {
-      /// INITIALIZES _orderStatusText
+      //*INITIALIZES _orderStatusText
       switch (_orderTimelines[i].id) {
         case 2:
           _orderTimelines[i].name = LocaleKeys.orderAccepted.tr();
@@ -104,13 +104,13 @@ class SingleOrderViewModel extends ReactiveViewModel {
     }
   }
 
-  /// ASSIGNS new value to _currentOrderExpansionState
+  //*ASSIGNS new value to _currentOrderExpansionState
   void changeCurrentOrderExpansionState(bool value) {
     _currentOrderExpansionState = value;
     notifyListeners();
   }
 
-  /// GETS getPromocodePrice
+  //*GETS getPromocodePrice
   num getPromocodePrice() {
     num totalPromocodePrice = 0;
 
@@ -124,7 +124,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     return totalPromocodePrice;
   }
 
-  /// GETS getTotalOrderSum with promocode
+  //*GETS getTotalOrderSum with promocode
   num getTotalOrderSumWithPromocode() {
     num totalOrderSum = order.totPrice!;
 
@@ -138,14 +138,14 @@ class SingleOrderViewModel extends ReactiveViewModel {
     return totalOrderSum;
   }
 
-  /// CONCATENATES all orderMeals' vols and customs into one string
+  //*CONCATENATES all orderMeals' vols and customs into one string
   String? getConcatenateVolsCustoms(OrderItem _orderItem) {
     StringBuffer concatenatedString = StringBuffer();
 
     List<Volume> _vols = [];
     List<Customizable> _cuss = [];
 
-    /// Step 1. If there is any selected vols, here it FINDS and ADDS found volume with this id from volumes inside gVolumes
+    //*Step 1. If there is any selected vols, here it FINDS and ADDS found volume with this id from volumes inside gVolumes
     if (_orderItem.volumePrices!.isNotEmpty)
       _orderItem.volumePrices!.forEach((vol) {
         _orderItem.mealJson!.gVolumes!.forEach((_mainVolume) {
@@ -157,7 +157,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
         });
       });
 
-    /// Step 2. If there is any selected cuss, here it FINDS and ADDS found customizable with this id from customizables inside gCustomizedMeals
+    //*Step 2. If there is any selected cuss, here it FINDS and ADDS found customizable with this id from customizables inside gCustomizedMeals
     if (_orderItem.costumizedMeals!.isNotEmpty)
       _orderItem.costumizedMeals!.forEach((cus) {
         _orderItem.mealJson!.gCustomizables!.forEach((_mainCus) {
@@ -169,7 +169,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
         });
       });
 
-    /// Step 3. For each found _vols concatenate its name to one text
+    //*Step 3. For each found _vols concatenate its name to one text
     if (_vols.isNotEmpty)
       _vols.forEach((vol) {
         var pos = _vols.indexOf(
@@ -181,7 +181,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
           concatenatedString.write('${vol.volumeName}, ');
       });
 
-    /// Step 3. For each found _cuss concatenate its name to one text
+    //*Step 3. For each found _cuss concatenate its name to one text
     if (_cuss.isNotEmpty)
       _cuss.forEach((cus) {
         var pos = _cuss.indexOf(
@@ -196,12 +196,12 @@ class SingleOrderViewModel extends ReactiveViewModel {
     return concatenatedString.toString();
   }
 
-//------------------------ DIALOGS ----------------------------//
+//*----------------------- DIALOGS ----------------------------//
 
   bool _isCancelingOrder = false;
   bool get isCancelingOrder => _isCancelingOrder;
 
-  /// SHOWS cancel waiting order Dialog
+  //*SHOWS cancel waiting order Dialog
   Future showCancelWaitingOrderDialog(
     int orderId,
     Function()? onSuccessForView,
@@ -223,8 +223,8 @@ class SingleOrderViewModel extends ReactiveViewModel {
           () async {
             onSuccessForView!();
 
-            /// REINITIALIZES ORDERS
-            /// TODO: Optimize if possible
+            //* REINITIALIZES ORDERS
+            // TODO: Optimize if possible
             await orderViewModel.getInitialOrders();
           },
           () => onFailForView!(),
@@ -234,7 +234,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     }
   }
 
-  /// MAKES a call to driver
+  //*MAKES a call to driver
   Future<void> makePhoneCallToDriver(String phoneNumber) async {
     // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
     // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
@@ -248,7 +248,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     await launchUrl(launchUri);
   }
 
-  /// SHOWS rate order Dialog
+  //*SHOWS rate order Dialog
   Future showRateOrderDialog(Order order) async {
     log.i('showRateOrderDialog()');
     DialogResponse<dynamic>? respData = await _dialogService.showCustomDialog(
@@ -264,8 +264,8 @@ class SingleOrderViewModel extends ReactiveViewModel {
       ),
     );
     if (respData!.data != null && respData.data == true) {
-      /// REINITIALIZES ORDERS
-      /// TODO: Optimize if possible
+      //* REINITIALIZES ORDERS
+      // TODO: Optimize if possible
       await orderViewModel.getInitialOrders();
     }
   }
@@ -293,7 +293,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
           () async {
             onSuccessForView!();
 
-            /// REINITIALIZES ORDERS
+            //* REINITIALIZES ORDERS
             // TODO: Optimize if possible
             await orderViewModel.getInitialOrders();
           },
@@ -305,11 +305,11 @@ class SingleOrderViewModel extends ReactiveViewModel {
 
 //!------------------------ ORDER SUCCESS PART ----------------------------//
 
-  /// NAVIGATES to Home by removing all previous routes
+  //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
-  /// NAVIGATES to Orders by removing all previous routes
+  //*NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 

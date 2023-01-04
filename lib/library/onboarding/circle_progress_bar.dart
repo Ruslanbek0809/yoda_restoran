@@ -2,7 +2,7 @@ import 'dart:math' as Math;
 
 import 'package:flutter/widgets.dart';
 
-/// Draws a circular animated progress bar.
+//*Draws a circular animated progress bar.
 class CircleProgressBar extends StatefulWidget {
   final Duration? animationDuration;
   final Color? backgroundColor;

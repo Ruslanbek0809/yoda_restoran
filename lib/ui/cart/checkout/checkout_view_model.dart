@@ -29,27 +29,27 @@ class CheckoutViewModel extends ReactiveViewModel {
   Promocode? _promocode;
   Promocode? get promocode => _promocode;
 
-  /// DateTime vars
+  //*DateTime vars
   final now = DateTime.now();
   DateTime? tomorrow;
   DateTime? maxDateTime;
   DateTime? deliveryDateTime;
   String? deliveryDateFormatted = '';
 
-  /// ASSIGNS default value for dateTime
+  //*ASSIGNS default value for dateTime
   Future<void> getOnModelReady() async {
     // deliveryDateTime = now;
     tomorrow = DateTime(now.year, now.month, now.day + 1);
     maxDateTime = DateTime(now.year, now.month, now.day + 1, 20);
 
-    /// Workaround to give default first hive resPaymentTypes
+    //*Workaround to give default first hive resPaymentTypes
     if (!cartRes!.resPaymentTypes!.contains(selectedPaymentType))
       _checkoutService
           .saveSelectedPaymentType(_hiveDbService.cartRes!.resPaymentTypes![0]);
     await getAddresses();
   }
 
-  /// UPDATES deliveryDateTime
+  //*UPDATES deliveryDateTime
   void updateDateTimeForDelivery(DateTime? newDeliveryDateTime) {
     log.v('updateDateTimeForDelivery()');
     // var resWorkingHoursSplitted = cartRes!.workingHours!.split('-');
@@ -68,11 +68,11 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ CHECKOUT ADDRESSES ----------------------------//
+//*----------------------- CHECKOUT ADDRESSES ----------------------------//
 
   List<Address>? get addresses => _checkoutService.addresses;
 
-  /// GETS addresses for CheckoutSelectAddressBottomSheetView. It is not fetched inside CheckoutSelectAddressBottomSheetView because of custom content based bottom sheet
+  //*GETS addresses for CheckoutSelectAddressBottomSheetView. It is not fetched inside CheckoutSelectAddressBottomSheetView because of custom content based bottom sheet
   Future<void> getAddresses() async {
     log.i('getAddresses()');
 
@@ -86,7 +86,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     }
   }
 
-  /// SEARCHES and GETS promocode if FOUND
+  //*SEARCHES and GETS promocode if FOUND
   Future<void> searchPromocode(String? searchText) async {
     log.i('searchPromocode() searchText: $searchText');
     if (searchText != null && searchText.isEmpty || searchText!.length < 3)
@@ -104,14 +104,14 @@ class CheckoutViewModel extends ReactiveViewModel {
     }
   }
 
-  /// UPDATES _promocode
+  //*UPDATES _promocode
   void resetPromocode() {
     log.v('resetPromocode()');
     _promocode = null;
     notifyListeners();
   }
 
-  /// GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
+  //*GETS total cart meals sum with each price/discountPrice, vols price, customs price, and each cartMeal's quantity
   num get getTotalCartSum {
     num totalCartSum = 0;
 
@@ -136,7 +136,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     return totalCartSum;
   }
 
-  /// GETS getPromocodePrice
+  //*GETS getPromocodePrice
   num get getPromocodePrice {
     num totalPromocodePrice = 0;
 
@@ -149,7 +149,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     return totalPromocodePrice;
   }
 
-  /// GETS getTotalCartSum with promocode
+  //*GETS getTotalCartSum with promocode
   num get getTotalCartSumWithPromocode {
     num totalCartSum = getTotalCartSum;
 
@@ -162,9 +162,9 @@ class CheckoutViewModel extends ReactiveViewModel {
     return totalCartSum;
   }
 
-//------------------------ PAYMENT TYPE BOTTOM SHEET ----------------------------//
+//*----------------------- PAYMENT TYPE BOTTOM SHEET ----------------------------//
 
-  // /// CALLS PaymentTypeBottomSheetView
+  // //*CALLS PaymentTypeBottomSheetView
   // Future<void> showCustomPaymentTypeBottomSheet() async {
   //   log.i('');
   //   await _bottomSheetService.showCustomSheet(
@@ -184,7 +184,7 @@ class CheckoutViewModel extends ReactiveViewModel {
           ? _tempSelectedPaymentType!
           : _checkoutService.selectedPaymentType;
 
-  /// Temporarily SETS paymentType
+  //*Temporarily SETS paymentType
   void updateTempSelectedPaymentType(HiveResPaymentType selectedPaymentType) {
     log.v(
         'updateTempSelectedPaymentType() selectedPaymentType with id: ${selectedPaymentType.id}');
@@ -193,7 +193,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-  /// SAVES paymentType ( uses _checkoutService reactivity)
+  //*SAVES paymentType ( uses _checkoutService reactivity)
   void savePaymentType() {
     log.v(
         'savePaymentType() tempSelectedPaymentType: ${tempSelectedPaymentType!.id}');
@@ -202,9 +202,9 @@ class CheckoutViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
-//------------------------ SELECT ADDRESS BOTTOM SHEET ----------------------------//
+//*----------------------- SELECT ADDRESS BOTTOM SHEET ----------------------------//
 
-  /// CALLS SelectAddressBottomSheet
+  //*CALLS SelectAddressBottomSheet
   // Future<void> showCustomSelectAddressBottomSheet() async {
   //   log.i('');
   //   await _bottomSheetService.showCustomSheet(
@@ -215,12 +215,12 @@ class CheckoutViewModel extends ReactiveViewModel {
   //   );
   // }
 
-//------------------------ CREATE ORDER PART ----------------------------//
+//*----------------------- CREATE ORDER PART ----------------------------//
 
   String? _checkoutNote = '';
   String? get checkoutNote => _checkoutNote;
 
-  /// UPDATES _street
+  //*UPDATES _street
   String? updateCheckoutNote(String? value) {
     log.v('updateCheckoutNote value: $value');
     if (value == null || value.isEmpty) return null;
@@ -230,7 +230,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     return null;
   }
 
-  /// CREATES new order
+  //*CREATES new order
   Future<void> createOrder({Function()? onFailForView}) async {
     log.v('createOrder()');
     await runBusyFuture(_checkoutService.createOrder(
@@ -246,7 +246,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     ));
   }
 
-  /// NAVIGATES to Orders by removing all previous routes
+  //*NAVIGATES to Orders by removing all previous routes
   Future<void> navToOrdersByRemovingAll() async =>
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 

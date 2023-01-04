@@ -24,7 +24,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
     return CustomScrollView(
       physics: const NeverScrollableScrollPhysics(),
       slivers: [
-        //------------------ ARROW BACK ---------------------//
+        //*----------------- ARROW BACK ---------------------//
         SliverAppBar(
           expandedHeight: 0.55.sh,
           pinned: true,
@@ -59,7 +59,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               ),
             ),
           ),
-          //------------------ ACTIONS FAV ---------------------//
+          //*----------------- ACTIONS FAV ---------------------//
           actions: [
             Padding(
               padding: EdgeInsets.only(top: 5.w),
@@ -91,7 +91,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               ),
             ),
             SizedBox(width: 10.w),
-//------------------ ACTIONS SEARCH ---------------------//
+//*----------------- ACTIONS SEARCH ---------------------//
             Padding(
               padding: EdgeInsets.only(top: 5.w),
               child: Container(
@@ -121,10 +121,11 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
             ),
             SizedBox(width: 15.w),
           ],
-          //------------------ BACKGROUND RESTAURANT IMAGE ---------------------//
+          //*----------------- BACKGROUND RESTAURANT IMAGE ---------------------//
           flexibleSpace: FlexibleSpaceBar(
             stretchModes: [StretchMode.zoomBackground],
-            //// NOTE: Container background image used to add custom widget in front of this background image
+
+            ///*NOTE: Container background image used to add custom widget in front of this background image
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -133,7 +134,8 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   alignment: Alignment.topCenter,
                 ),
               ),
-              //// NOTE: Instead of direct Container Column is used to make child work properly
+
+              ///*NOTE: Instead of direct Container Column is used to make child work properly
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -152,7 +154,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        //------------------ TITLE NAME ---------------------//
+                        //*----------------- TITLE NAME ---------------------//
                         Padding(
                           padding: EdgeInsets.only(
                             bottom: Platform.isIOS ? 12.h : 10.h,
@@ -168,12 +170,12 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                             ),
                           ),
                         ),
-                        //------------------ RATE / WORK TIME / INFO---------------------//
+                        //*----------------- RATE / WORK TIME / INFO---------------------//
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              //------------------ RATE ---------------------//
+                              //*----------------- RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
                                   color: kcSecondaryLightColor,
@@ -205,7 +207,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ WORK TIME ---------------------//
+                              //*----------------- WORK TIME ---------------------//
                               // Container(
                               //   decoration: BoxDecoration(
                               //     color: kcPrimaryColor_LIGHT,
@@ -235,7 +237,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               // ),
 
                               // if (model.locationPosition != null)
-                              //------------------ LOCATION ---------------------//
+                              //*----------------- LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
                                   color: kcSecondaryLightColor,
@@ -298,7 +300,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //------------------ INFO ---------------------//
+                              //*----------------- INFO ---------------------//
                               GestureDetector(
                                 onTap: () {},
                                 child: Container(
@@ -328,9 +330,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                             thickness: 1.w,
                           ),
                         ),
-//------------------ DELIVERY/SELF-PICKUP ---------------------//
+//*----------------- DELIVERY/SELF-PICKUP ---------------------//
                         ToggleButtonView(restaurant: restaurant),
-                        //------------------ MAIN DIVIDER ---------------------//
+                        //*----------------- MAIN DIVIDER ---------------------//
                         Container(
                           color: kcMainDividerColor,
                           padding: EdgeInsets.symmetric(vertical: 4.h),
@@ -344,7 +346,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
             ),
           ),
         ),
-//------------------ FOOD LIST with NAME ---------------------//
+//*----------------- FOOD LIST with NAME ---------------------//
         SliverToBoxAdapter(
           child: LoadingWidget(),
         ),

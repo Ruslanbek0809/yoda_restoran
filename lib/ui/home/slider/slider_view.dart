@@ -45,7 +45,7 @@ class SliderView extends StatelessWidget {
                             ? model.navToResDetailsView(slider.restaurant!)
                             : model.navToSliderWebview(slider.url!),
                         child: YodaImage(
-                          /// CHANGES slider image by localization
+                          //*CHANGES slider image by localization
                           image: context.locale == context.supportedLocales[0]
                               ? slider.image!
                               : slider.imageRu!,
@@ -57,7 +57,7 @@ class SliderView extends StatelessWidget {
                       ),
                     ),
 
-                    /// Used with Stack
+                    //*Used with Stack
                     // Positioned.fill(
                     //   child: Material(
                     //     color: Colors.transparent,

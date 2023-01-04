@@ -47,11 +47,11 @@ class ResDetailsView extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-              //------------------ RESTAURANT MAIN PART ---------------------//
+              //*----------------- RESTAURANT MAIN PART ---------------------//
               model.isBusy
                   ? ResDetailsMainBusy(restaurant: restaurant)
                   : ResDetailsMainHook(restaurant: restaurant),
-              //------------------ BOTTOM CART ---------------------//
+              //*----------------- BOTTOM CART ---------------------//
               if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
             ],
           ),

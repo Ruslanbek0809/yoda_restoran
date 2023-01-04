@@ -22,7 +22,7 @@ class StartUpView extends StatelessWidget {
           .addPostFrameCallback((_) => model.runStartupLogic()),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
-        /// CALLED when user has NO Internet Connection
+        //*CALLED when user has NO Internet Connection
         if (model.startAnimation == false &&
             (model.connectivityStatus == ConnectivityStatus.Offline ||
                 model.connectivityStatus == null)) {
@@ -64,7 +64,7 @@ class StartUpView extends StatelessWidget {
           });
         }
 
-        /// CALLED when user has INTERNET CONNECTION
+        //*CALLED when user has INTERNET CONNECTION
         if (model.startAnimation == false &&
             (model.connectivityStatus != ConnectivityStatus.Offline &&
                 model.connectivityStatus != null))
@@ -77,7 +77,7 @@ class StartUpView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //----------- STYLE 1 --------------//
+                    //*---------- STYLE 1 --------------//
                     AnimatedContainer(
                       curve: Curves.fastOutSlowIn,
                       duration: Duration(milliseconds: 2500),
@@ -113,7 +113,7 @@ class StartUpView extends StatelessWidget {
                 ),
             ],
           ),
-          //----------- STYLE 2 --------------//
+          //*---------- STYLE 2 --------------//
           // Stack(
           //   children: [
           //     YodaImage(
@@ -159,7 +159,7 @@ class StartUpView extends StatelessWidget {
           //     ),
           //   ],
           // )
-          //----------- STYLE 3 --------------//
+          //*---------- STYLE 3 --------------//
           // OverflowBox(
           //   maxHeight: MediaQuery.of(context).size.longestSide * 2,
           //   maxWidth: MediaQuery.of(context).size.longestSide * 2,

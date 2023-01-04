@@ -42,7 +42,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                     controller: scrollController,
                     shrinkWrap: true,
                     children: [
-                      //----------- IMAGE --------------//
+                      //*---------- IMAGE --------------//
                       ClipRRect(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(Constants.BORDER_RADIUS_20),
@@ -53,13 +53,13 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                           width: 1.sw,
                         ),
                       ),
-                      //----------- MEAL INFO --------------//
+                      //*---------- MEAL INFO --------------//
                       Container(
                         color: kcSecondaryLightColor,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //----------- DESCRIPTION --------------//
+                            //*---------- DESCRIPTION --------------//
                             if (meal.description!.isNotEmpty)
                               Padding(
                                 padding:
@@ -72,7 +72,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            //----------- MAIN VOLUME LIST --------------//
+                            //*---------- MAIN VOLUME LIST --------------//
                             if (meal.gVolumes!.isNotEmpty &&
                                 meal.description!.isNotEmpty)
                               Divider(color: kcDividerColor),
@@ -94,7 +94,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                             style: kts14HelperText,
                                           ),
                                         ),
-                                        //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                        //*---------- VOLUME LIST for each MAIN VOLUME --------------//
                                         ListView.separated(
                                             shrinkWrap: true,
                                             physics:
@@ -152,7 +152,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                   .toList(),
                             if (meal.gCustomizables!.isNotEmpty)
                               Divider(color: kcDividerColor),
-                            //----------- MAIN CUSTOMIZE LIST --------------//
+                            //*---------- MAIN CUSTOMIZE LIST --------------//
                             if (meal.gCustomizables!.isNotEmpty)
                               ...meal.gCustomizables!
                                   .mapIndexed<Widget>(
@@ -172,7 +172,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                             style: kts14HelperText,
                                           ),
                                         ),
-                                        //----------- VOLUME LIST for each MAIN VOLUME --------------//
+                                        //*---------- VOLUME LIST for each MAIN VOLUME --------------//
                                         ListView.separated(
                                           shrinkWrap: true,
                                           physics:
@@ -221,7 +221,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                                   )
                                   .toList(),
 
-                            /// COMPENSATES meal.gCustomizables! and meal.gVolumes!
+                            //*COMPENSATES meal.gCustomizables! and meal.gVolumes!
                             SizedBox(height: 0.17.sh),
                           ],
                         ),
@@ -233,7 +233,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                     left: 0,
                     right: 0,
                     child:
-                        //----------- BOTTOM CART BUTTON --------------//
+                        //*---------- BOTTOM CART BUTTON --------------//
                         Container(
                       decoration: BoxDecoration(
                         color: kcWhiteColor,
@@ -247,7 +247,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Column(
                         children: [
-                          //----------- MEAL INFO --------------//
+                          //*---------- MEAL INFO --------------//
                           Padding(
                             padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                             child: Row(
@@ -285,7 +285,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          //----------- QUANTITY BUTTONS --------------//
+                          //*---------- QUANTITY BUTTONS --------------//
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: Row(
@@ -410,7 +410,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                   controller: scrollController,
                   shrinkWrap: true,
                   children: [
-                    //----------- IMAGE --------------//
+                    //*---------- IMAGE --------------//
                     ClipRRect(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(Constants.BORDER_RADIUS_20),
@@ -421,7 +421,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                         width: 1.sw,
                       ),
                     ),
-                    //----------- MEAL INFO --------------//
+                    //*---------- MEAL INFO --------------//
                     if (meal.description!.isNotEmpty)
                       Container(
                         color: kcSecondaryLightColor,
@@ -436,7 +436,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                           ),
                         ),
                       ),
-                    //----------- BOTTOM CART BUTTON --------------//
+                    //*---------- BOTTOM CART BUTTON --------------//
                     Container(
                       decoration: BoxDecoration(
                         color: kcWhiteColor,
@@ -450,7 +450,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Column(
                         children: [
-                          //----------- MEAL INFO --------------//
+                          //*---------- MEAL INFO --------------//
                           Padding(
                             padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                             child: Row(
@@ -488,7 +488,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          //----------- QUANTITY BUTTONS --------------//
+                          //*---------- QUANTITY BUTTONS --------------//
                           Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: Row(

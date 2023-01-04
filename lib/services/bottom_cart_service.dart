@@ -20,7 +20,7 @@ class BottomCartService with ReactiveServiceMixin {
   ReactiveValue<bool> _isUpdateQuantity = ReactiveValue<bool>(false);
   bool get isUpdateQuantity => _isUpdateQuantity.value;
 
-  /// HIDES BottomCart
+  //*HIDES BottomCart
   void hideBottomCart() {
     switch (_bottomCartStatus.value) {
       case BottomCartStatus.forward:
@@ -35,7 +35,7 @@ class BottomCartService with ReactiveServiceMixin {
     log.i(_bottomCartStatus.value);
   }
 
-  /// SHOWS BottomCart
+  //*SHOWS BottomCart
   void showBottomCart() {
     switch (_bottomCartStatus.value) {
       case BottomCartStatus.idle:
@@ -53,7 +53,7 @@ class BottomCartService with ReactiveServiceMixin {
     log.i(_bottomCartStatus.value);
   }
 
-  /// UPDATE ResDetailsBottomCart QUANTITY (Workaround)
+  //*UPDATE ResDetailsBottomCart QUANTITY (Workaround)
   Future<void> updateResBottomCartQuantity() async {
     _isUpdateQuantity.value = true;
     await Future.delayed(Duration(seconds: 1));

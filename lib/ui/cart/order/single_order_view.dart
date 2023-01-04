@@ -37,7 +37,7 @@ class SingleOrderView extends StatelessWidget {
           // Specify a key if the Slidable is dismissible.
           key: ValueKey(order.id),
 
-          /// ADDS bool condition to model.currentOrderExpansionState
+          //*ADDS bool condition to model.currentOrderExpansionState
           enabled: !model.currentOrderExpansionState && order.status == 4,
           endActionPane: ActionPane(
             dragDismissible: false,
@@ -108,13 +108,13 @@ class SingleOrderView extends StatelessWidget {
                         'onExpansionChanged() value and _currentOrderExpansionState: $value');
                   },
 
-                  /// had to use SizedBox in leading bc of tileWidth issue
+                  //*had to use SizedBox in leading bc of tileWidth issue
                   leading: SizedBox(
                     width: 0.7.sw,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //------------------ RESTAURANT NAME ---------------------//
+                        //*----------------- RESTAURANT NAME ---------------------//
                         SizedBox(height: 2.h),
                         Text(
                           order.restaurant!.name!,
@@ -122,7 +122,7 @@ class SingleOrderView extends StatelessWidget {
                           style: kts18BoldText,
                         ),
                         SizedBox(height: 3.h),
-                        //------------------ ORDER CREATED AT DATE and ORDER STATUS ---------------------//
+                        //*----------------- ORDER CREATED AT DATE and ORDER STATUS ---------------------//
                         Row(
                           children: [
                             order.deliveryTime == null
@@ -150,7 +150,7 @@ class SingleOrderView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //------------------ ORDER PRICE and STATUS/RATING  ---------------------//
+                  //*----------------- ORDER PRICE and STATUS/RATING  ---------------------//
                   trailing: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -161,7 +161,7 @@ class SingleOrderView extends StatelessWidget {
                       ),
                       SizedBox(height: 2.h),
 
-                      /// if order.rating NOT null
+                      //*if order.rating NOT null
                       order.rating != null
                           ? RatingBar.builder(
                               initialRating: order.rating!.value!,
@@ -199,8 +199,8 @@ class SingleOrderView extends StatelessWidget {
                   ),
                   expandedCrossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    //------------------ INNER PART ---------------------//
-                    //------------------ ORDER TIMELINE ---------------------//
+                    //*----------------- INNER PART ---------------------//
+                    //*----------------- ORDER TIMELINE ---------------------//
                     if (order.status! > 1)
                       Container(
                         height: 0.25,
@@ -227,7 +227,7 @@ class SingleOrderView extends StatelessWidget {
                         left: 15.w,
                       ),
                     ),
-                    //------------------ DRIVER and DELIVERY ---------------------//
+                    //*----------------- DRIVER and DELIVERY ---------------------//
                     if (!order.selfPickUp!)
                       Padding(
                         padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 6.h),
@@ -277,7 +277,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    //*----------------- SINGLE ORDER DIVIDER ---------------------//
                     if (order.promocode != null)
                       Container(
                         height: 0.25,
@@ -287,7 +287,7 @@ class SingleOrderView extends StatelessWidget {
                           left: 15.w,
                         ),
                       ),
-                    //------------------ PROMOCODE PART ---------------------//
+                    //*----------------- PROMOCODE PART ---------------------//
                     if (order.promocode != null)
                       Padding(
                         padding: EdgeInsets.fromLTRB(
@@ -321,7 +321,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    //*----------------- SINGLE ORDER DIVIDER ---------------------//
                     if (!order.selfPickUp! || order.promocode != null)
                       Container(
                         height: 0.25,
@@ -331,7 +331,7 @@ class SingleOrderView extends StatelessWidget {
                           left: 15.w,
                         ),
                       ),
-                    //------------------ USER DETAILS (DELIVERY DATETIME, PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
+                    //*----------------- USER DETAILS (DELIVERY DATETIME, PAYMENT TYPE, ADDRESS, NOTES) ---------------------//
                     Padding(
                       padding:
                           EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
@@ -360,12 +360,12 @@ class SingleOrderView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    //------------------ ORDER PAYMENT TYPE ---------------------//
+                    //*----------------- ORDER PAYMENT TYPE ---------------------//
                     if (order.paymentType != null)
-                      //------------------ ORDER ONLINE PAYMENT TYPE ---------------------//
+                      //*----------------- ORDER ONLINE PAYMENT TYPE ---------------------//
                       order.paymentType!.id == 4
                           ?
-                          //------------------ ORDER ONLINE If PAID ---------------------//
+                          //*----------------- ORDER ONLINE If PAID ---------------------//
                           order.paid!
                               ? Padding(
                                   padding: EdgeInsets.only(
@@ -413,7 +413,7 @@ class SingleOrderView extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              //------------------ ORDER ONLINE If NOT PAID ---------------------//
+                              //*----------------- ORDER ONLINE If NOT PAID ---------------------//
                               : Padding(
                                   padding: EdgeInsets.only(
                                       left: 15.w, right: 15.w, top: 12.h),
@@ -445,7 +445,7 @@ class SingleOrderView extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                          //------------------ ORDER OTHER PAYMENT TYPES ---------------------//
+                          //*----------------- ORDER OTHER PAYMENT TYPES ---------------------//
                           : Padding(
                               padding: EdgeInsets.only(
                                   left: 15.w, right: 15.w, top: 12.h),
@@ -509,7 +509,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    //------------------ SINGLE ORDER DIVIDER ---------------------//
+                    //*----------------- SINGLE ORDER DIVIDER ---------------------//
                     Container(
                       height: 0.25,
                       color: kcDividerColor,
@@ -519,7 +519,7 @@ class SingleOrderView extends StatelessWidget {
                       ),
                     ),
 
-                    //------------------ ORDERS TOTAL PRICE ---------------------//
+                    //*----------------- ORDERS TOTAL PRICE ---------------------//
                     Padding(
                       padding: EdgeInsets.only(
                         top: 10.h,
@@ -534,7 +534,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    //------------------ ORDER MEAL LIST ---------------------//
+                    //*----------------- ORDER MEAL LIST ---------------------//
                     Column(
                       children: order.orderItems!.map((_orderItem) {
                         String? _orderItemConcatenatedText =
@@ -567,7 +567,7 @@ class SingleOrderView extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              //------------------ OrderItem concatenated text ---------------------//
+                              //*----------------- OrderItem concatenated text ---------------------//
                               if (_orderItem.volumePrices!.isNotEmpty ||
                                   _orderItem.costumizedMeals!.isNotEmpty)
                                 Padding(
@@ -583,7 +583,7 @@ class SingleOrderView extends StatelessWidget {
                         );
                       }).toList(),
                     ),
-                    //------------------ ORDER RATING BUTTON/FEEDBACK ---------------------//
+                    //*----------------- ORDER RATING BUTTON/FEEDBACK ---------------------//
                     if (order.rating != null &&
                         order.rating!.feedback!.isNotEmpty)
                       Container(
@@ -634,7 +634,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
 
-                    //------------------ ORDER BUTTON ---------------------//
+                    //*----------------- ORDER BUTTON ---------------------//
                     if (order.status != 4 ||
                         (order.status == 4 && order.rating == null))
                       SizedBox(height: 5.h),
@@ -747,7 +747,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
 
-                    //------------------ ORDER DELETE BUTTON ---------------------//
+                    //*----------------- ORDER DELETE BUTTON ---------------------//
                     if (order.status == 4)
                       Align(
                         alignment: Alignment.centerRight,
@@ -815,7 +815,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
 
-                    //------------------ ONLINE PAYMENT ORDER BUTTON ---------------------//
+                    //*----------------- ONLINE PAYMENT ORDER BUTTON ---------------------//
                     if ((order.paymentType!.id == 4 &&
                             (!order.paid! && order.status == 1)) ||
                         (order.paymentType!.id == 4 &&
@@ -890,7 +890,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
 
-//------------------ ONLINE PAYMENT INFO ---------------------//
+//*----------------- ONLINE PAYMENT INFO ---------------------//
                     if ((order.paymentType!.id == 4 &&
                             (!order.paid! && order.status == 1)) ||
                         (order.paymentType!.id == 4 &&
@@ -964,7 +964,7 @@ class OrderTimeline extends StatelessWidget {
             );
         },
 
-        /// TOP content of indicator
+        //*TOP content of indicator
         oppositeContentsBuilder: (context, index) {
           if (singleOrderViewModel.orderTimelines[index].id <= order.status!)
             return Column(
@@ -987,7 +987,7 @@ class OrderTimeline extends StatelessWidget {
           return SizedBox();
         },
 
-        /// BOTTOM content of indicator
+        //*BOTTOM content of indicator
         contentsBuilder: (_, __) => SizedBox(),
       ),
     );

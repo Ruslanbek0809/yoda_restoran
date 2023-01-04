@@ -26,7 +26,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
       duration: const Duration(milliseconds: 100),
     );
 
-    /// To dispose a status listener attached to _tweenController
+    //*To dispose a status listener attached to _tweenController
     useEffect(() {
       void _listenerStatus(AnimationStatus status) {
         // This listener was used to repeat animation once
@@ -50,8 +50,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         onTap: () async {
           await _tweenController.forward();
 
-          //------------------ MEAL BOTTOM SHEET ---------------------//
-          //------------------ CUSTOM PACKAGE ---------------------//
+          //*----------------- MEAL BOTTOM SHEET ---------------------//
+          //*----------------- CUSTOM PACKAGE ---------------------//
           await showFlexibleBottomSheet(
             isExpand: false,
             // minHeight: 0,
@@ -84,7 +84,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //------------------ IMAGE with DISCOUNT(if needed) ---------------------//
+                  //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
                   Stack(
                     children: [
                       YodaImage(
@@ -136,7 +136,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                       style: kts14Text,
                     ),
                   ),
-                  //------------------ MEAL PRICE ---------------------//
+                  //*----------------- MEAL PRICE ---------------------//
                   model.mealQuantity > 0
                       ? Padding(
                           padding: EdgeInsets.only(
@@ -211,7 +211,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 )
                               : SizedBox(),
                   Spacer(),
-                  //------------------ BUTTONS ---------------------//
+                  //*----------------- BUTTONS ---------------------//
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
                     child: model.mealQuantity > 0
@@ -261,8 +261,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       ? () async {
                                           await _tweenController.forward();
 
-                                          //------------------ MEAL BOTTOM SHEET ---------------------//
-                                          //------------------ CUSTOM PACKAGE ---------------------//
+                                          //*----------------- MEAL BOTTOM SHEET ---------------------//
+                                          //*----------------- CUSTOM PACKAGE ---------------------//
                                           await showFlexibleBottomSheet(
                                             isExpand: false,
                                             // minHeight: 0,
@@ -321,8 +321,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   ? () async {
                                       await _tweenController.forward();
 
-                                      //------------------ MEAL BOTTOM SHEET ---------------------//
-                                      //------------------ CUSTOM PACKAGE ---------------------//
+                                      //*----------------- MEAL BOTTOM SHEET ---------------------//
+                                      //*----------------- CUSTOM PACKAGE ---------------------//
                                       await showFlexibleBottomSheet(
                                         isExpand: false,
                                         // minHeight: 0,

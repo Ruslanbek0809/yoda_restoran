@@ -75,7 +75,7 @@ class RestaurantSearchView extends StatelessWidget {
                 ),
               ],
             ),
-            //------------------ ListView builder ---------------------//
+            //*----------------- ListView builder ---------------------//
             body: model.isBusy
                 ? LoadingWidget()
                 : model.searchMealss.isEmpty || model.hasError
@@ -112,7 +112,7 @@ class RestaurantSearchView extends StatelessWidget {
 }
 
 
-  //           //------------------ FOOD ListView builder ---------------------//
+  //           //*----------------- FOOD ListView builder ---------------------//
   //           body: GridView.builder(
   //             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
   //             shrinkWrap: true,
