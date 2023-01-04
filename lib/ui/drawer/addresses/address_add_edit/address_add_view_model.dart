@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
+
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.logger.dart';
 import '../../../../generated/locale_keys.g.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'home_search_view_model.dart';
+
 import 'home_search_hook.dart';
+import 'home_search_view_model.dart';
 
 class HomeSearchView extends StatelessWidget {
   @override

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+
 import '../../models/hive_models/hive_models.dart';
 import '../../shared/shared.dart';
-import 'cart_view_model.dart';
-import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widgets/widgets.dart';
+import 'cart_view_model.dart';
 
 class CartMealItem extends ViewModelWidget<CartViewModel> {
   final HiveMeal cartMeal;

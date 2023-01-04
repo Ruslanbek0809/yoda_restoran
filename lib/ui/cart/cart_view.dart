@@ -1,19 +1,20 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+
 import '../../generated/locale_keys.g.dart';
 import '../../models/models.dart';
+import '../../shared/shared.dart';
+import '../../utils/utils.dart';
+import '../widgets/widgets.dart';
+import 'cart_meal_item.dart';
 import 'cart_res_food/cart_more_meal_view.dart';
 import 'cart_res_food/cart_more_meals_shimmer.dart';
-import '../../shared/shared.dart';
 import 'cart_toggle_button.dart';
-import '../widgets/widgets.dart';
-import '../../utils/utils.dart';
-import 'cart_meal_item.dart';
 import 'cart_view_model.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'checkout/checkout_bottom_sheet_view.dart';
 
 class CartView extends StatelessWidget {

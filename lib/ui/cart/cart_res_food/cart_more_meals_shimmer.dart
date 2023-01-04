@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-import '../../../shared/shared.dart';
-import '../../widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
+import '../../widgets/widgets.dart';
 
 class CartMoreMealsShimmerWidget extends StatelessWidget {
   const CartMoreMealsShimmerWidget({

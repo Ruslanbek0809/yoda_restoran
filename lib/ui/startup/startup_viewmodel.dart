@@ -6,13 +6,14 @@ import 'package:flash/flash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import '../home/home_view.dart';
-import 'onboarding/onboarding_view.dart';
-import '../../utils/utils.dart';
+
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';
 import '../../services/services.dart';
+import '../../utils/utils.dart';
+import '../home/home_view.dart';
+import 'onboarding/onboarding_view.dart';
 
 class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   final log = getLogger('StartUpViewModel');
