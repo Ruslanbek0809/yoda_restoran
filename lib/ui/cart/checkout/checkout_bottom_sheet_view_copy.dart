@@ -54,7 +54,7 @@
 //                     padding: EdgeInsets.fromLTRB(20.w, 22.h, 0.0, 20.h),
 //                     child: Column(
 //                       children: [
-//                         // --------------- PHONE PART -------------- //
+//                         //*-------------- PHONE PART -------------- //
 //                         Row(
 //                           children: [
 //                             SvgPicture.asset(
@@ -75,7 +75,7 @@
 //                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
-//                         // --------------- ADDRESS -------------- //
+//                         //*-------------- ADDRESS -------------- //
 //                         Material(
 //                           color: kcWhiteColor,
 //                           child: InkWell(
@@ -171,7 +171,7 @@
 //                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
-//                         // --------------- DELIVERY DATE TIME -------------- //
+//                         //*-------------- DELIVERY DATE TIME -------------- //
 //                         Material(
 //                           color: kcWhiteColor,
 //                           child: InkWell(
@@ -383,7 +383,7 @@
 //                           color: kcDividerColor,
 //                           indent: 0.111.sw,
 //                         ),
-//                         // --------------- PARMENT TYPE -------------- //
+//                         //*-------------- PARMENT TYPE -------------- //
 //                         Material(
 //                           color: kcWhiteColor,
 //                           child: InkWell(
@@ -454,7 +454,7 @@
 //                         SizedBox(height: 10.h),
 //                         //*----------------- PROMOCODE ---------------------//
 //                         CheckoutPromocodeHook(),
-//                         // --------------- NOTE -------------- //
+//                         //*-------------- NOTE -------------- //
 //                         CheckoutNoteHook(),
 //                       ],
 //                     ),

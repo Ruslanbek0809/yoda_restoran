@@ -31,7 +31,7 @@ class AddAddressBottomSheetHook
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // --------------- CITY -------------- //
+        //*-------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w),
           child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
@@ -53,7 +53,7 @@ class AddAddressBottomSheetHook
           ),
           validator: model.updateCity,
         ),
-        // --------------- STREET -------------- //
+        //*-------------- STREET -------------- //
         SizedBox(height: 15.h),
         TextFormField(
           controller: _streetController,
@@ -73,7 +73,7 @@ class AddAddressBottomSheetHook
           validator: model.updateStreet,
         ),
         SizedBox(height: 15.h),
-        // --------------- APARTMENT/HOUSE/FLOOR -------------- //
+        //*-------------- APARTMENT/HOUSE/FLOOR -------------- //
         Row(
           children: [
             Flexible(
@@ -138,7 +138,7 @@ class AddAddressBottomSheetHook
             Flexible(child: SizedBox())
           ],
         ),
-        // --------------- NOTE -------------- //
+        //*-------------- NOTE -------------- //
         Padding(
           padding: EdgeInsets.only(left: 5.w, top: 15.h),
           child: Text(LocaleKeys.note, style: kts14HelperText).tr(),

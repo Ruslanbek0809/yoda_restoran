@@ -45,7 +45,7 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // --------------- BOTTOM SHEET DRAGGER -------------- //
+                        //*-------------- BOTTOM SHEET DRAGGER -------------- //
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 8.h),
                           child: SvgPicture.asset(

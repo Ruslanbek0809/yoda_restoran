@@ -49,14 +49,14 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
         controller: scrollController,
         shrinkWrap: true,
         children: [
-          // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+          //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
           CustomModalInsideBottomSheet(
             isOuterPaddingExist: true,
             leftOuterPadding: 16.w,
             rightOuterPadding: 16.w,
           ),
 
-          // --------------- NAME -------------- //
+          //*-------------- NAME -------------- //
           Text(
             restaurant.name!,
             maxLines: 2,
@@ -67,7 +67,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12.h),
-          // --------------- ADDRESS -------------- //
+          //*-------------- ADDRESS -------------- //
           Row(
             children: [
               SvgPicture.asset(
@@ -96,7 +96,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
               color: kcDividerColor,
             ),
           ),
-          // --------------- WORKING HOURS -------------- //
+          //*-------------- WORKING HOURS -------------- //
           Row(
             children: [
               SvgPicture.asset(

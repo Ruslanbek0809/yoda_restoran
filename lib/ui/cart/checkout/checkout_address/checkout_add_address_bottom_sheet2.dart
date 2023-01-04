@@ -34,7 +34,7 @@
 //           controller: scrollController,
 //           shrinkWrap: true,
 //           children: [
-//             // // --------------- BOTTOM SHEET DRAGGER -------------- //
+//             // //*-------------- BOTTOM SHEET DRAGGER -------------- //
 //             // Padding(
 //             //   padding: EdgeInsets.symmetric(vertical: 8.h),
 //             //   child: SvgPicture.asset(
@@ -43,7 +43,7 @@
 //             //     // height: 6.h,
 //             //   ),
 //             // ),
-//             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+//             //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
 //             CustomModalInsideBottomSheet(),
 
 //             Padding(

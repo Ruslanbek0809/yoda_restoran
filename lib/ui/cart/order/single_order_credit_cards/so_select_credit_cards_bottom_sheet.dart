@@ -37,18 +37,20 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
           controller: scrollController,
           shrinkWrap: true,
           children: [
-            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 
-            // --------------- CREDIT CARD CONFIRMATION -------------- //
+            //*-------------- CREDIT CARD CONFIRMATION -------------- //
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Material(
                 color: kcWhiteColor,
                 child: InkWell(
                   //* ASSIGNS only order model if it is new Credit Card
-                  onTap: () async => await model
-                      .showCustomCreditCardsConfirmationBottomSheet(),
+                  onTap: () async {
+                    await model.showCustomCreditCardsConfirmationBottomSheet();
+                    model.navBack();
+                  },
                   //* COMMENTED
                   // onTap: () async => await showFlexibleBottomSheet(
                   //   isExpand: false,
@@ -85,7 +87,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
             ),
             if (model.hiveCreditCards.isNotEmpty)
               Divider(color: kcDividerColor),
-            // --------------- HIVE CREDIT CARDS -------------- //
+            //*-------------- HIVE CREDIT CARDS -------------- //
             if (model.hiveCreditCards.isNotEmpty)
               ListView.separated(
                 shrinkWrap: true,
@@ -106,7 +108,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            // --------------- SELECTED HIVE CREDIT CARD -------------- //
+                            //*-------------- SELECTED HIVE CREDIT CARD -------------- //
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: model.tempSelectedHiveCreditCard != null &&
@@ -126,19 +128,19 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                             ),
                             SizedBox(width: 10.w),
 
-                            // --------------- CREDIT CARD INFO -------------- //
+                            //*-------------- CREDIT CARD INFO -------------- //
                             Flexible(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // --------------- CREDIT CARD NAME  -------------- //
+                                  //*-------------- CREDIT CARD NAME  -------------- //
                                   Text(
                                     _creditCard.cardHolderName,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: kts16BoldText,
                                   ),
-                                  // --------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
+                                  //*-------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
                                   Padding(
                                     padding: EdgeInsets.only(top: 0.h),
                                     child: Row(

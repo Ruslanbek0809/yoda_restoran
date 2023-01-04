@@ -27,7 +27,7 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // --------------- CITY -------------- //
+        //*-------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(top: 10.h),
           child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
@@ -49,7 +49,7 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
           ),
           validator: model.updateCity,
         ),
-        // --------------- STREET -------------- //
+        //*-------------- STREET -------------- //
         Padding(
           padding: EdgeInsets.only(top: 25.h),
           child: Text(LocaleKeys.street, style: kts14HelperText).tr(),
@@ -72,7 +72,7 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
           validator: model.updateStreet,
         ),
         SizedBox(height: 15.h),
-        // --------------- APARTMENT/HOUSE/FLOOR -------------- //
+        //*-------------- APARTMENT/HOUSE/FLOOR -------------- //
         Row(
           children: [
             Flexible(
@@ -137,7 +137,7 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
             Flexible(child: SizedBox())
           ],
         ),
-        // --------------- NOTE -------------- //
+        //*-------------- NOTE -------------- //
         Padding(
           padding: EdgeInsets.only(top: 20.h),
           child: Text(

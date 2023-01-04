@@ -23,7 +23,7 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // --------------- CITY -------------- //
+        //*-------------- CITY -------------- //
         Padding(
           padding: EdgeInsets.only(top: 10.h),
           child: Text(LocaleKeys.city, style: kts14HelperText).tr(),
@@ -45,7 +45,7 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
           ),
           validator: model.updateCity,
         ),
-        // --------------- STREET -------------- //
+        //*-------------- STREET -------------- //
         SizedBox(height: 15.h),
         TextFormField(
           controller: _streetController,
@@ -65,7 +65,7 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
           validator: model.updateStreet,
         ),
         SizedBox(height: 15.h),
-        // --------------- APARTMENT/HOUSE/FLOOR -------------- //
+        //*-------------- APARTMENT/HOUSE/FLOOR -------------- //
         Row(
           children: [
             Flexible(
@@ -130,7 +130,7 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
             Flexible(child: SizedBox())
           ],
         ),
-        // --------------- NOTE -------------- //
+        //*-------------- NOTE -------------- //
         Padding(
           padding: EdgeInsets.only(top: 20.h),
           child: Text(

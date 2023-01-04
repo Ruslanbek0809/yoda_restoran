@@ -19,7 +19,7 @@ class CustomModalBottomSheet extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           child,
-          // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+          //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
           Positioned(
             top: 0.h,
             child: Container(

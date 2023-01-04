@@ -68,7 +68,7 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
                   text: LocaleKeys.noCreditCardsYet,
                   svg: 'assets/credit_card_empty.svg',
                 )
-              // --------------- HIVE CREDIT CARDS -------------- //
+              //*-------------- HIVE CREDIT CARDS -------------- //
               : ListView.separated(
                   physics: BouncingScrollPhysics(),
                   itemCount: model.hiveCreditCards.length,
@@ -79,19 +79,19 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // --------------- CREDIT CARD INFO -------------- //
+                          //*-------------- CREDIT CARD INFO -------------- //
                           Flexible(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // --------------- CREDIT CARD NAME  -------------- //
+                                //*-------------- CREDIT CARD NAME  -------------- //
                                 Text(
                                   _creditCard.cardHolderName,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: kts16BoldText,
                                 ),
-                                // --------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
+                                //*-------------- CREDIT CARD NUMBER and EXPIRY DATE  -------------- //
                                 Padding(
                                   padding: EdgeInsets.only(top: 0.h),
                                   child: Row(
@@ -137,7 +137,7 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
                               ],
                             ),
                           ),
-                          // --------------- CREDIT CARD DELETE -------------- //
+                          //*-------------- CREDIT CARD DELETE -------------- //
                           Padding(
                             padding: EdgeInsets.only(left: 4.w, right: 8.w),
                             child: IconButton(

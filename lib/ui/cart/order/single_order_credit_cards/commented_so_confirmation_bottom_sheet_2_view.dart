@@ -37,7 +37,7 @@
 //           controller: scrollController,
 //           shrinkWrap: true,
 //           children: [
-//             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+//             //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
 //             CustomModalInsideBottomSheet(isBottomZero: true),
 
 //             Padding(

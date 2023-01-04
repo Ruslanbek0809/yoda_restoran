@@ -32,10 +32,10 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
           controller: scrollController,
           shrinkWrap: true,
           children: [
-            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
 
-            // --------------- ADD NEW ADDRESS -------------- //
+            //*-------------- ADD NEW ADDRESS -------------- //
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Material(
@@ -77,7 +77,7 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
               ),
             ),
             if (model.addresses!.isNotEmpty) Divider(color: kcDividerColor),
-            // --------------- ADDRESSES -------------- //
+            //*-------------- ADDRESSES -------------- //
             if (model.addresses!.isNotEmpty)
               ListView.separated(
                 shrinkWrap: true,

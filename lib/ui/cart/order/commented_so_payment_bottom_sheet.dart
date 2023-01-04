@@ -95,13 +95,13 @@
 //         ),
 //         child: Column(
 //           children: [
-//             // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+//             //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
 //             CustomModalInsideBottomSheet(),
 
-//             // --------------- IF PANEL FINISHED AND PAYMENT LOADING -------------- //
+//             //*-------------- IF PANEL FINISHED AND PAYMENT LOADING -------------- //
 //             if (model.isPaymentPanelsFinished && model.isPaymentLoading)
 //               Expanded(child: LoadingWidget()),
-//             // --------------- CREDIT CARD CONFIRMATION -------------- //
+//             //*-------------- CREDIT CARD CONFIRMATION -------------- //
 //             if (!model.isPaymentPanelsFinished)
 //               Expanded(
 //                 child: Padding(
@@ -169,8 +169,8 @@
 //                   ),
 //                 ),
 //               ),
-//             // --------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
-//             // --------------- ONLINE PAYMENT SUCCESS -------------- //
+//             //*-------------- ONLINE PAYMENT SUCCESS/FAIL -------------- //
+//             //*-------------- ONLINE PAYMENT SUCCESS -------------- //
 //             if (model.isPaymentPanelsFinished &&
 //                 model.isPaymentSuccess == OrderPaymentStatus.success)
 //               Expanded(
@@ -225,7 +225,7 @@
 //                   ],
 //                 ),
 //               ),
-//             // --------------- ONLINE PAYMENT FAIL -------------- //
+//             //*-------------- ONLINE PAYMENT FAIL -------------- //
 //             if (model.isPaymentPanelsFinished &&
 //                 model.isPaymentSuccess == OrderPaymentStatus.fail)
 //               Expanded(

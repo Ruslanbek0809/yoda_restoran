@@ -33,9 +33,9 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
           controller: scrollController,
           shrinkWrap: true,
           children: [
-            // --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+            //*-------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
             CustomModalInsideBottomSheet(),
-// --------------- PAYMENT TYPES -------------- //
+//*-------------- PAYMENT TYPES -------------- //
             if (model.cartRes!.resPaymentTypes != null &&
                 model.cartRes!.resPaymentTypes!.isNotEmpty)
               ListView.separated(

@@ -59,7 +59,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(LocaleKeys.profile, style: kts30DarkText).tr(),
-              // --------------- NAME -------------- //
+              //*-------------- NAME -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: TextFormField(
@@ -92,7 +92,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   validator: model.updateName,
                 ),
               ),
-              // --------------- DATE TIME -------------- //
+              //*-------------- DATE TIME -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
@@ -149,7 +149,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   ),
                 ),
               ),
-              // --------------- GENDER -------------- //
+              //*-------------- GENDER -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 8.w),
                 child: Container(
@@ -157,7 +157,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   child: TextFormField(
                     readOnly: true,
                     onTap: () async {
-                      // --------------- GENDER PopUp -------------- //
+                      //*-------------- GENDER PopUp -------------- //
                       if (Platform.isIOS) {
                         await showCupertinoModalPopup(
                           context: context,
@@ -275,7 +275,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   ),
                 ),
               ),
-              // --------------- EMAIL -------------- //
+              //*-------------- EMAIL -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(
@@ -308,7 +308,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   validator: model.updateEmail,
                 ),
               ),
-              // --------------- PHONE -------------- //
+              //*-------------- PHONE -------------- //
               Padding(
                 padding: EdgeInsets.only(top: 8.w),
                 child: TextFormField(

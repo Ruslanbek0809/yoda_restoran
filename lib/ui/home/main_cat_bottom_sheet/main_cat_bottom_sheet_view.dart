@@ -37,7 +37,7 @@ class MainCatBottomSheetView extends StatelessWidget {
               controller: scrollController,
               shrinkWrap: true,
               children: [
-                // --------------- MAIN CATEGORIES -------------- //
+                //*-------------- MAIN CATEGORIES -------------- //
                 Container(
                   decoration: BoxDecoration(
                     color: kcWhiteColor,

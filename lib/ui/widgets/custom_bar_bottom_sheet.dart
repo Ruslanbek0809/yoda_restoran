@@ -20,7 +20,7 @@ class CustomBarBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // --------------- BOTTOM SHEET DRAGGER -------------- //
+          //*-------------- BOTTOM SHEET DRAGGER -------------- //
           Padding(
             padding: EdgeInsets.only(top: 12, bottom: 8),
             child: Container(
@@ -30,7 +30,7 @@ class CustomBarBottomSheet extends StatelessWidget {
                   color: kcWhiteColor, borderRadius: BorderRadius.circular(6)),
             ),
           ),
-          // --------------- BODY Part -------------- //
+          //*-------------- BODY Part -------------- //
           Expanded(
             child: Material(
               color: isMealBottomSheet ? kcSecondaryLightColor : kcWhiteColor,

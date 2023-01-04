@@ -687,7 +687,7 @@ class RateOrderDialogView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                 child: Column(
                   children: [
-                    // --------------- YODA RES Title -------------- //
+                    //*-------------- YODA RES Title -------------- //
                     Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: SvgPicture.asset(
@@ -695,7 +695,7 @@ class RateOrderDialogView extends StatelessWidget {
                         width: 0.35.sw,
                       ),
                     ),
-                    // --------------- RES NAME -------------- //
+                    //*-------------- RES NAME -------------- //
                     Padding(
                       padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
                       child: Text(
@@ -706,7 +706,7 @@ class RateOrderDialogView extends StatelessWidget {
                         // style: kts30DarkBoldText,
                       ),
                     ),
-                    // --------------- TEXT -------------- //
+                    //*-------------- TEXT -------------- //
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Text(
@@ -717,7 +717,7 @@ class RateOrderDialogView extends StatelessWidget {
                         // style: kts20DarkText,
                       ).tr(),
                     ),
-                    // --------------- TEXT -------------- //
+                    //*-------------- TEXT -------------- //
                     Padding(
                       padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                       child: Text(

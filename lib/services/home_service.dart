@@ -39,7 +39,7 @@ class HomeService with ReactiveServiceMixin {
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
-  // ------- SELECTECTED MAIN CAT RESTAURANTS --------//
+  //*------ SELECTECTED MAIN CAT RESTAURANTS --------//
   List<Restaurant>? _selectedMainCatRestaurants = [];
   List<Restaurant>? get selectedMainCatRestaurants =>
       _selectedMainCatRestaurants;
