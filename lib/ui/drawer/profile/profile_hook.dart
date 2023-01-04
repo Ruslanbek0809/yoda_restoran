@@ -354,7 +354,8 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: kcOrderDeleteButtonBackColor,
-                        primary: kcSecondaryLightColor, // ripple effect color
+                        foregroundColor:
+                            kcSecondaryLightColor, // ripple effect color
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: AppTheme().radius10),

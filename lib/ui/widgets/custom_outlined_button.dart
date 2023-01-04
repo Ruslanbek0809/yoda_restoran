@@ -23,8 +23,7 @@ class CustomOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        primary: color ?? kcPrimaryColor,
-        onSurface: color ?? kcPrimaryColor,
+        foregroundColor: color ?? kcPrimaryColor,
         shadowColor: color ?? kcPrimaryColor,
         elevation: 0,
         shape: RoundedRectangleBorder(

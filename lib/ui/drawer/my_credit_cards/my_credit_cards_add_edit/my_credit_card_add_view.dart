@@ -136,7 +136,7 @@ class MyCreditCardAddView extends StatelessWidget {
                   width: 1.sw,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      primary: kcSecondaryLightColor,
+                      foregroundColor: kcSecondaryLightColor,
                       backgroundColor: kcPrimaryColor, // ripple effect color
                       elevation: 0,
                       shape: RoundedRectangleBorder(

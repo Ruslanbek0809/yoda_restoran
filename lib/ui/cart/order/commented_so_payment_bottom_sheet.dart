@@ -205,7 +205,7 @@
 //                         padding: EdgeInsets.symmetric(horizontal: 30.w),
 //                         child: TextButton(
 //                           style: TextButton.styleFrom(
-//                             primary: kcSecondaryLightColor,
+//                             foregroundColor: kcSecondaryLightColor,
 //                             backgroundColor:
 //                                 kcSecondaryDarkColor, // ripple effect color
 //                             elevation: 0,
@@ -312,7 +312,7 @@
 //                         padding: EdgeInsets.symmetric(horizontal: 30.w),
 //                         child: TextButton(
 //                           style: TextButton.styleFrom(
-//                             primary: kcSecondaryLightColor,
+//                             foregroundColor: kcSecondaryLightColor,
 //                             backgroundColor:
 //                                 kcOnlinePaymentColor, // ripple effect color
 //                             elevation: 0,

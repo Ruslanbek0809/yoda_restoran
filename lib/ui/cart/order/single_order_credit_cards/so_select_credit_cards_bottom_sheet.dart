@@ -211,7 +211,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 22.h),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  primary: kcSecondaryLightColor,
+                  foregroundColor: kcSecondaryLightColor,
                   backgroundColor: kcOnlinePaymentColor,
                   elevation: 0,
                   shape:

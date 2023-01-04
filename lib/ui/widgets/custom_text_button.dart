@@ -23,13 +23,12 @@ class CustomTextButton extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: color,
-        primary: kcSecondaryLightColor, // ripple effect color
+        foregroundColor: kcSecondaryLightColor, // ripple effect color
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? AppTheme().radius15),
         padding: padding ?? EdgeInsets.all(0.0),
-        // primary: color,
-        // onSurface: color,
+        // foregroundColor: color,
         // shadowColor: color,
         // minimumSize: Size(width!, height!),
       ),

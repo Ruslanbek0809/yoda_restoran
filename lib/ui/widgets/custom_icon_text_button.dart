@@ -17,7 +17,7 @@ class CustomIconTextButton extends StatelessWidget {
     return TextButton.icon(
       style: TextButton.styleFrom(
         backgroundColor: backgroundColor,
-        primary: kcSecondaryLightColor, // ripple effect color
+        foregroundColor: kcSecondaryLightColor, // ripple effect color
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: AppTheme().radius10),
         padding: EdgeInsets.all(0.0),

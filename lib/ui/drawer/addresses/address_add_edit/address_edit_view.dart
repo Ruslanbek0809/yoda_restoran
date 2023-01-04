@@ -80,7 +80,8 @@ class AddressEditView extends StatelessWidget {
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: kcPrimaryColor,
-                        primary: kcSecondaryLightColor, // ripple effect color
+                        foregroundColor:
+                            kcSecondaryLightColor, // ripple effect color
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: AppTheme().radius10),

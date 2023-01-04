@@ -647,7 +647,7 @@ class SingleOrderView extends StatelessWidget {
                               horizontal: 15.w, vertical: 10.h),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: kcSecondaryLightColor,
+                              foregroundColor: kcSecondaryLightColor,
                               backgroundColor:
                                   kcSecondaryDarkColor, // ripple effect color
                               elevation: 0,
@@ -757,7 +757,7 @@ class SingleOrderView extends StatelessWidget {
                             width: 0.35.sw,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: kcSecondaryLightColor,
+                                foregroundColor: kcSecondaryLightColor,
                                 backgroundColor:
                                     kcOrderDeleteButtonBackColor, // ripple effect color
                                 elevation: 0,
@@ -826,7 +826,7 @@ class SingleOrderView extends StatelessWidget {
                           padding: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: order.status == 1
+                              foregroundColor: order.status == 1
                                   ? kcSecondaryLightColor
                                   : kcOnlinePaymentColor,
                               backgroundColor: order.status == 1

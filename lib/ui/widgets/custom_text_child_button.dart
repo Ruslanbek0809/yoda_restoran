@@ -19,18 +19,16 @@ class CustomTextChildButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        backgroundColor: color,
-        primary: kcSecondaryLightColor, // ripple effect color
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? AppTheme().radius15,
-        ),
-        padding: padding ?? EdgeInsets.all(0.0),
-        // primary: color,
-        // onSurface: color,
-        // shadowColor: color,
-        // minimumSize: Size(width!, height!),
-      ),
+          backgroundColor: color,
+          foregroundColor: kcSecondaryLightColor, // ripple effect color
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: borderRadius ?? AppTheme().radius15,
+          ),
+          padding: padding ?? EdgeInsets.all(0.0)
+          // shadowColor: color,
+          // minimumSize: Size(width!, height!),
+          ),
       child: child,
       onPressed: onPressed as void Function(),
     );
