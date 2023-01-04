@@ -115,8 +115,8 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-# dependency_overrides:
-#   flutter_svg: ^1.0.0 # To fix dependency issue between flutter_hmtl and flutter_svg
+dependency_overrides:
+  flutter_svg: ^1.0.0 # To fix dependency issue between flutter_hmtl and flutter_svg
 
 flutter_icons:
   android: true
