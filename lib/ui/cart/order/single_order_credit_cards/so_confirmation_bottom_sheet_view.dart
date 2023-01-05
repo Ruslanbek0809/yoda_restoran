@@ -181,6 +181,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                   Spacer(),
                   //! --------------- CREDIT CARD CONFIRM BUTTON -------------- //
                   Container(
+                    width: 1.sw,
                     decoration: BoxDecoration(
                       color: kcWhiteColor,
                       border: Border(
