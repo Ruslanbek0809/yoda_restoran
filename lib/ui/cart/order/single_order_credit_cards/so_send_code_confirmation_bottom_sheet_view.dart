@@ -35,7 +35,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
             soSendCodeConfirmationBottomSheetData.soBottomSheetData,
       ),
       builder: (context, model, child) => DraggableScrollableSheet(
-        initialChildSize: 0.45,
+        initialChildSize: 0.5,
         maxChildSize: 0.95,
         expand: false,
         builder: (context, scrollController) {
