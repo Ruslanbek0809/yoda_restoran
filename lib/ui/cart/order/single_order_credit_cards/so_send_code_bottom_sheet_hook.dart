@@ -25,8 +25,6 @@ class SOSendCodeBottomSheetHook
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          // scrollPadding: EdgeInsets.only(
-          //     bottom: MediaQuery.of(context).viewInsets.bottom - 40.h),
           controller: _sendCodeController,
           inputFormatters: [
             LengthLimitingTextInputFormatter(5),
@@ -36,6 +34,13 @@ class SOSendCodeBottomSheetHook
           keyboardType: TextInputType.number,
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderRadius: kbr10,
+              borderSide: BorderSide(
+                color: kcFillBorderColor,
+                width: 1,
+              ),
+            ),
             border: OutlineInputBorder(
               borderRadius: kbr10,
               borderSide: BorderSide(
