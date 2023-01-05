@@ -50,168 +50,180 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     controller: scrollController,
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        //!--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
-                        CustomModalInsideBottomSheet(isBottomZero: true),
+                    // padding: EdgeInsets.only(
+                    //     bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: AnimatedPadding(
+                      padding: MediaQuery.of(context).viewInsets,
+                      duration: const Duration(milliseconds: 100),
+                      curve: Curves.decelerate,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //!--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                          CustomModalInsideBottomSheet(isBottomZero: true),
 
-                        //!------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(Constants.BORDER_RADIUS_20),
-                            ),
-                            color: kcWhiteColor,
-                          ),
-                          padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //!------------------ CREDIT CARD FORM ---------------------//
-                              CreditCardForm(
-                                formKey: creditCardFormKey,
-                                obscureCvv: true,
-                                obscureNumber: soConfirmationBottomSheetData
-                                        .isNewCreditCard
-                                    ? false
-                                    : true,
-                                cardNumber: model.cardNumber,
-                                cvvCode: model.cvcCode,
-                                isHolderNameVisible: true,
-                                isCardNumberVisible: true,
-                                isExpiryDateVisible: true,
-                                cardHolderName: model.cardHolderName,
-                                expiryDate: model.expiryDate,
-                                themeColor: kcPrimaryColor,
-                                cardNumberDecoration: InputDecoration(
-                                  labelText: LocaleKeys.card_number.tr(),
-                                  hintText: 'XXXX XXXX XXXX XXXX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                cardNumberValidator:
-                                    model.updateCardNumberValidator,
-                                expiryDateDecoration: InputDecoration(
-                                  labelText: LocaleKeys.card_date_deadline.tr(),
-                                  hintText: 'XX/XX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                expiryDateValidator:
-                                    model.updateExpiryDateValidator,
-                                cvvCodeDecoration: InputDecoration(
-                                  labelText: LocaleKeys.cvc_kod.tr(),
-                                  hintText: 'XXX',
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                ),
-                                cvvValidator: model.updateCVCValidator,
-                                cardHolderDecoration: InputDecoration(
-                                  hintStyle: kts16HelperText,
-                                  labelStyle: kts16HelperText,
-                                  focusedBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  enabledBorder:
-                                      AppTheme().cardUnderlineInputBorder,
-                                  labelText: LocaleKeys.card_holder.tr(),
-                                ),
-                                cardHolderValidator:
-                                    model.updateCardHolderValidator,
-                                onCreditCardModelChange:
-                                    model.onCreditCardModelChange,
+                          //!------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.vertical(
+                                top:
+                                    Radius.circular(Constants.BORDER_RADIUS_20),
                               ),
-                              //!------------------ CVC CODE INFO ---------------------//
-                              if (soConfirmationBottomSheetData.isNewCreditCard)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 4.h),
-                                  child: Text(
-                                    LocaleKeys.cvc_kod_not_saved,
-                                    style: kts12ContactText,
-                                  ).tr(),
-                                ),
-                              //!------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
-                              if (soConfirmationBottomSheetData.isNewCreditCard)
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20.h),
-                                  child: Divider(
-                                    indent: 0.175.sw,
-                                    thickness: 0.5,
-                                    color: kcDividerSecondaryColor,
+                              color: kcWhiteColor,
+                            ),
+                            padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //!------------------ CREDIT CARD FORM ---------------------//
+                                CreditCardForm(
+                                  formKey: creditCardFormKey,
+                                  obscureCvv: true,
+                                  obscureNumber: soConfirmationBottomSheetData
+                                          .isNewCreditCard
+                                      ? false
+                                      : true,
+                                  cardNumber: model.cardNumber,
+                                  cvvCode: model.cvcCode,
+                                  isHolderNameVisible: true,
+                                  isCardNumberVisible: true,
+                                  isExpiryDateVisible: true,
+                                  cardHolderName: model.cardHolderName,
+                                  expiryDate: model.expiryDate,
+                                  themeColor: kcPrimaryColor,
+                                  cardNumberDecoration: InputDecoration(
+                                    labelText: LocaleKeys.card_number.tr(),
+                                    hintText: 'XXXX XXXX XXXX XXXX',
+                                    hintStyle: kts16HelperText,
+                                    labelStyle: kts16HelperText,
+                                    focusedBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                    enabledBorder:
+                                        AppTheme().cardUnderlineInputBorder,
                                   ),
-                                ),
-                              if (soConfirmationBottomSheetData.isNewCreditCard)
-                                ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: bankList.length,
-                                  itemBuilder: (context, pos) {
-                                    return RadioListTile<BankCard>(
-                                      value: bankList[pos],
-                                      groupValue: model.selectedBankCard,
-                                      onChanged: bankList[pos].bankId == 1
-                                          ? model.updateSelectedBankCard
-                                          : (value) {},
-                                      title: Text(
-                                        bankList[pos]
-                                            .bankName, //* Changes name of first element if location is enabled
-                                        style: model.selectedBankCard!.bankId ==
-                                                bankList[pos].bankId
-                                            ? kts16Text
-                                            : kts16ContactText,
-                                      ).tr(),
-                                      activeColor: kcGreenColor,
-                                      controlAffinity:
-                                          ListTileControlAffinity.leading,
-                                      toggleable: true,
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) => Divider(
-                                    indent: 0.175.sw,
-                                    thickness: 0.5,
-                                    color: kcDividerSecondaryColor,
+                                  cardNumberValidator:
+                                      model.updateCardNumberValidator,
+                                  expiryDateDecoration: InputDecoration(
+                                    labelText:
+                                        LocaleKeys.card_date_deadline.tr(),
+                                    hintText: 'XX/XX',
+                                    hintStyle: kts16HelperText,
+                                    labelStyle: kts16HelperText,
+                                    focusedBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                    enabledBorder:
+                                        AppTheme().cardUnderlineInputBorder,
                                   ),
+                                  expiryDateValidator:
+                                      model.updateExpiryDateValidator,
+                                  cvvCodeDecoration: InputDecoration(
+                                    labelText: LocaleKeys.cvc_kod.tr(),
+                                    hintText: 'XXX',
+                                    hintStyle: kts16HelperText,
+                                    labelStyle: kts16HelperText,
+                                    focusedBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                    enabledBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                  ),
+                                  cvvValidator: model.updateCVCValidator,
+                                  cardHolderDecoration: InputDecoration(
+                                    hintStyle: kts16HelperText,
+                                    labelStyle: kts16HelperText,
+                                    focusedBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                    enabledBorder:
+                                        AppTheme().cardUnderlineInputBorder,
+                                    labelText: LocaleKeys.card_holder.tr(),
+                                  ),
+                                  cardHolderValidator:
+                                      model.updateCardHolderValidator,
+                                  onCreditCardModelChange:
+                                      model.onCreditCardModelChange,
                                 ),
-                              //!------------------ HIVE CREDIT CARD BANK INFO ---------------------//
-                              if (!soConfirmationBottomSheetData
-                                  .isNewCreditCard)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 20.h),
-                                  child: Text(
-                                    LocaleKeys.bank,
-                                    style: kts14ContactText,
-                                  ).tr(),
-                                ),
-                              if (!soConfirmationBottomSheetData
-                                  .isNewCreditCard)
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 16.w, top: 2.h),
-                                  child: Text(
-                                    model.selectedBankCard!.bankName,
-                                    style: kts18Text,
-                                  ).tr(),
-                                ),
-                            ],
+                                //!------------------ CVC CODE INFO ---------------------//
+                                if (soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 16.w, top: 4.h),
+                                    child: Text(
+                                      LocaleKeys.cvc_kod_not_saved,
+                                      style: kts12ContactText,
+                                    ).tr(),
+                                  ),
+                                //!------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
+                                if (soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 20.h),
+                                    child: Divider(
+                                      indent: 0.175.sw,
+                                      thickness: 0.5,
+                                      color: kcDividerSecondaryColor,
+                                    ),
+                                  ),
+                                if (soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: bankList.length,
+                                    itemBuilder: (context, pos) {
+                                      return RadioListTile<BankCard>(
+                                        value: bankList[pos],
+                                        groupValue: model.selectedBankCard,
+                                        onChanged: bankList[pos].bankId == 1
+                                            ? model.updateSelectedBankCard
+                                            : (value) {},
+                                        title: Text(
+                                          bankList[pos]
+                                              .bankName, //* Changes name of first element if location is enabled
+                                          style:
+                                              model.selectedBankCard!.bankId ==
+                                                      bankList[pos].bankId
+                                                  ? kts16Text
+                                                  : kts16ContactText,
+                                        ).tr(),
+                                        activeColor: kcGreenColor,
+                                        controlAffinity:
+                                            ListTileControlAffinity.leading,
+                                        toggleable: true,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        Divider(
+                                      indent: 0.175.sw,
+                                      thickness: 0.5,
+                                      color: kcDividerSecondaryColor,
+                                    ),
+                                  ),
+                                //!------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                                if (!soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 16.w, top: 20.h),
+                                    child: Text(
+                                      LocaleKeys.bank,
+                                      style: kts14ContactText,
+                                    ).tr(),
+                                  ),
+                                if (!soConfirmationBottomSheetData
+                                    .isNewCreditCard)
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 16.w, top: 2.h),
+                                    child: Text(
+                                      model.selectedBankCard!.bankName,
+                                      style: kts18Text,
+                                    ).tr(),
+                                  ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   //! --------------- CREDIT CARD CONFIRM BUTTON -------------- //

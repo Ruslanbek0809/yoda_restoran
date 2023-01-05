@@ -25,8 +25,8 @@ class SOSendCodeBottomSheetHook
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          scrollPadding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom - 40.h),
+          // scrollPadding: EdgeInsets.only(
+          //     bottom: MediaQuery.of(context).viewInsets.bottom - 40.h),
           controller: _sendCodeController,
           inputFormatters: [
             LengthLimitingTextInputFormatter(5),

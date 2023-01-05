@@ -131,7 +131,7 @@ class MyCreditCardAddView extends StatelessWidget {
               //*----------------- CARD ADD BUTTON ---------------------//
               Container(
                 color: kcWhiteColor,
-                padding: EdgeInsets.fromLTRB(16.w, 75.h, 16.w, 50.h),
+                padding: EdgeInsets.fromLTRB(16.w, 32.h, 16.w, 50.h),
                 child: SizedBox(
                   width: 1.sw,
                   child: TextButton(
