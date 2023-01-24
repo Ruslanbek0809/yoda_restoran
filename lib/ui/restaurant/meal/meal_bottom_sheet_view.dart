@@ -35,7 +35,8 @@ class MealBottomSheetView extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(Constants.BORDER_RADIUS_20),
         ),
-        child: meal.gCustomizables!.isNotEmpty || meal.gVolumes!.isNotEmpty
+        child: (meal.gCustomizables ?? []).isNotEmpty ||
+                (meal.gVolumes ?? []).isNotEmpty
             ? Stack(
                 children: [
                   ListView(
@@ -60,12 +61,12 @@ class MealBottomSheetView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //*---------- DESCRIPTION --------------//
-                            if (meal.description!.isNotEmpty)
+                            if ((meal.description ?? '').isNotEmpty)
                               Padding(
                                 padding:
                                     EdgeInsets.fromLTRB(15.w, 10.h, 10.w, 15.h),
                                 child: Text(
-                                  meal.description!,
+                                  meal.description ?? '',
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     color: kcBottomDescColor,
@@ -73,10 +74,10 @@ class MealBottomSheetView extends StatelessWidget {
                                 ),
                               ),
                             //*---------- MAIN VOLUME LIST --------------//
-                            if (meal.gVolumes!.isNotEmpty &&
-                                meal.description!.isNotEmpty)
+                            if ((meal.gVolumes ?? []).isNotEmpty &&
+                                (meal.description ?? '').isNotEmpty)
                               Divider(color: kcDividerColor),
-                            if (meal.gVolumes!.isNotEmpty)
+                            if ((meal.gVolumes ?? []).isNotEmpty)
                               ...meal.gVolumes!
                                   .mapIndexed<Widget>(
                                     (MainVolume mainVolume, mainVolumePos) =>
@@ -150,10 +151,10 @@ class MealBottomSheetView extends StatelessWidget {
                                     ),
                                   )
                                   .toList(),
-                            if (meal.gCustomizables!.isNotEmpty)
+                            if ((meal.gCustomizables ?? []).isNotEmpty)
                               Divider(color: kcDividerColor),
                             //*---------- MAIN CUSTOMIZE LIST --------------//
-                            if (meal.gCustomizables!.isNotEmpty)
+                            if ((meal.gCustomizables ?? []).isNotEmpty)
                               ...meal.gCustomizables!
                                   .mapIndexed<Widget>(
                                     (MainCustomizable mainCustomizable,
@@ -422,7 +423,7 @@ class MealBottomSheetView extends StatelessWidget {
                       ),
                     ),
                     //*---------- MEAL INFO --------------//
-                    if (meal.description!.isNotEmpty)
+                    if ((meal.description ?? '').isNotEmpty)
                       Container(
                         color: kcSecondaryLightColor,
                         child: Padding(
