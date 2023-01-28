@@ -88,7 +88,7 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('_hiveCreditCards.value length: ${_hiveCreditCards.value.length}');
   }
 
-//! ------------------ RESTAURANT PART ---------------------//
+//* ------------------ RESTAURANT PART ---------------------//
 
   //* UPDATES a restaurant in CART
   Future<void> updateResInCart(Restaurant? restaurant) async {
@@ -139,10 +139,10 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//! ------------------ MEAL PART ---------------------//
+//* ------------------ MEAL PART ---------------------//
 
   //* GETS total quantity of cartMeals for meal with mealId
-  int? getMealQuantity(int? mealId) {
+  int getMealQuantity(int? mealId) {
     var _quantity = 0;
     for (var _cartMeal in _cartMeals.value)
       if (_cartMeal.id == mealId) _quantity += _cartMeal.quantity!;
@@ -257,7 +257,7 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('cartResId: ${cartRes!.id}');
   }
 
-//! ------------------ MEAL BOTTOM SHEET PART ---------------------//
+//* ------------------ MEAL BOTTOM SHEET PART ---------------------//
 
   //* ADDS a meal to CART from BOTTOM SHEET
   Future<void> addUpdateMealInCartFromBottomSheet(
@@ -403,7 +403,7 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//! ----------------------- CART VIEW PART --------------------------//
+//* ----------------------- CART VIEW PART --------------------------//
 
   //* GETS quantity of this hiveMeal from cartMeals
   int getCartMealQuantity(HiveMeal hiveMeal) {
@@ -437,7 +437,7 @@ class HiveDbService with ReactiveServiceMixin {
     }
   }
 
-//! ----------------------- HIVE RATING --------------------------//
+//* ----------------------- HIVE RATING --------------------------//
 
   //* DELETES a hive rating
   Future<void> deleteHiveRatingFromHiveRatings(int? orderId) async {

@@ -47,7 +47,7 @@ class RestaurantSearchView extends StatelessWidget {
               actions: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: model.searchText!.isEmpty
+                  child: (model.searchText ?? '').isEmpty
                       ? IconButton(
                           tooltip: 'Search',
                           // tooltip: i18n(currentLang, ki18nSearch),

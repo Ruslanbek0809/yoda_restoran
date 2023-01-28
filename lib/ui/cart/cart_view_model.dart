@@ -24,7 +24,7 @@ class CartViewModel extends ReactiveViewModel {
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
-  List<Meal>? get moreMeals => _cartService.moreMeals;
+  List<Meal> get moreMeals => _cartService.moreMeals;
 
   bool get isDelivery => _toggleButtonService.isDelivery;
 
@@ -33,7 +33,7 @@ class CartViewModel extends ReactiveViewModel {
   //* FETCHS more meals and GETS all carts
   Future getMoreMeals() async {
     await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals));
-    log.i('moreMeals length: ${moreMeals!.length} ');
+    log.i('moreMeals.length: ${moreMeals.length} ');
   }
 
   //* CLEARS CART

@@ -44,8 +44,8 @@ class ResDetailsViewModel extends FutureViewModel {
   //*_isCustomError and updateCustomError func are used to show error flash bar once. Workaround
   bool _isCustomError = false;
   bool get isCustomError => _isCustomError;
-  List<ResCategory>? _resCategories = [];
-  List<ResCategory>? get resCategories => _resCategories;
+  List<ResCategory> _resCategories = [];
+  List<ResCategory> get resCategories => _resCategories;
 
   // List<ResCategory>? get resCategories => _resService.resCategories;
 
@@ -99,7 +99,7 @@ class ResDetailsViewModel extends FutureViewModel {
       },
     );
 
-    log.i('_resCategories length: ${_resCategories!.length}');
+    log.i('_resCategories.length: ${_resCategories.length}');
   }
 
   //*Workaround to show error flash bar once

@@ -257,7 +257,7 @@ class UserService {
     log.i('logoutUser() _currentUser: $_currentUser');
   }
 
-  //! ------------------ ADDRESS APIS ---------------------//
+  //* ------------------ ADDRESS APIS ---------------------//
 
   Future<List<Address>> getAddresses() async {
     List<Address> _addresses = [];
@@ -379,7 +379,7 @@ class UserService {
     }
   }
 
-  //! ------------------ CREATE ORDER API ---------------------//
+  //* ------------------ CREATE ORDER API ---------------------//
 
   Future<void> createOrder(
     Address? selectedAddress,
@@ -657,11 +657,11 @@ class UserService {
         _paymentCreateBankOrder =
             OrderPaymentCreateBankOrder.fromJson(response.data);
 
-        //! if SUCCESS
+        //* if SUCCESS
         onSuccess(_paymentCreateBankOrder);
       } else
 
-        //! if FAIL
+        //* if FAIL
         onFail(CreateBankOrderEnum.fail);
     } on DioError catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');
@@ -681,18 +681,18 @@ class UserService {
         if (_paymentCreateBankOrder.errorCode == '1' &&
             _paymentCreateBankOrder.errorMessage ==
                 'Заказ с таким номером уже обработан') {
-          //! if reorderFail FAIL
+          //* if reorderFail FAIL
           onFail(CreateBankOrderEnum.reorderFail);
         } else if (_paymentCreateBankOrder.errorCode == 1 &&
             _paymentCreateBankOrder.errorMessage ==
                 'Неизвестная платёжная система<br>')
-          //! if wrongCardInfoFail FAIL
+          //* if wrongCardInfoFail FAIL
           onFail(CreateBankOrderEnum.wrongCardInfoFail);
         else
-          //! if other FAIL
+          //* if other FAIL
           onFail(CreateBankOrderEnum.fail);
       } else
-        //! if FAIL
+        //* if FAIL
         onFail(CreateBankOrderEnum.fail);
       rethrow;
     }
@@ -761,12 +761,12 @@ class UserService {
         //     'SUCCESS RESPONSE: verifyOtpOrderPayment => response.statusCode: ${response.statusCode}');
         // log.v('SUCCESS RESPONSE: verifyOtpOrderPayment => ${response.data}');
 
-        //! Step 1. Parses the HTML string into a Document object
+        //* Step 1. Parses the HTML string into a Document object
         Document document = parse(response.data);
         log.v(
             'SUCCESS RESPONSE: verifyOtpOrderPayment HTML BODY INNER ELEMENT => ${document.body!.innerHtml}');
 
-        //! Step 2. EXECUTES query on the input element with the name "PaRes". If it is FOUND, it EXECUTES next query. If it is NOT FOUND, it throws StateError
+        //* Step 2. EXECUTES query on the input element with the name "PaRes". If it is FOUND, it EXECUTES next query. If it is NOT FOUND, it throws StateError
         try {
           //* Finds the input element with the name "PaRes".
           final paresElements =
@@ -778,7 +778,7 @@ class UserService {
           //* Prints the value.
           // print('PaRes\'s value paresElementValue: $paresElementValue');
 
-          //! Step 3. If "PaRes" element FOUND, it EXECUTES next query on "operationCancelledMessage" element. If it is FOUND, it gives FAIL. If it is NOT FOUND, it gives SUCCESS.
+          //* Step 3. If "PaRes" element FOUND, it EXECUTES next query on "operationCancelledMessage" element. If it is FOUND, it gives FAIL. If it is NOT FOUND, it gives SUCCESS.
           try {
             // //* PRINTS operationCancelledMessage method 1
             //   //* Find the element with the "operationCancelledMessage" class
@@ -797,7 +797,7 @@ class UserService {
             var operationCancelledMessageElement2 =
                 document.querySelector('.operationCancelledMessage');
 
-            //! Step 3.1. If "operationCancelledMessage" element is FOUND, then it is 100% FAIL
+            //* Step 3.1. If "operationCancelledMessage" element is FOUND, then it is 100% FAIL
             if (operationCancelledMessageElement2 != null) {
               //* Get the text content of the element
               // String operationCancelledMessage2 =
@@ -806,23 +806,23 @@ class UserService {
               // print(
               //     'operationCancelledMessage2: $operationCancelledMessage2'); // Output: "Operation cancelled"
 
-              //! if FAIL
+              //* if FAIL
               onFail(-1);
             } else {
-              //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
-              //! SUCCESS
+              //* Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
+              //* SUCCESS
               onSuccess(paresElementValue);
             }
           } on StateError catch (e) {
             //* The input element was not found.
             print('operationCancelledMessage element not found: $e');
 
-            //! Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
-            //! SUCCESS
+            //* Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
+            //* SUCCESS
             onSuccess(paresElementValue);
           }
 
-          //! Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
+          //* Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
         } on StateError catch (e) {
           //* The input element was not found.
           print('PaRes element not found: $e');
@@ -841,7 +841,7 @@ class UserService {
           //* Find the element with the "errorMessage" class
           var errorMessageElement2 = document.querySelector('.errorMessage');
 
-          //! Step 4.1. If "errorMessage" element is FOUND, then it is FAIL
+          //* Step 4.1. If "errorMessage" element is FOUND, then it is FAIL
           if (errorMessageElement2 != null) {
             //* Gets the text content of the element
             String errorMessage2 = errorMessageElement2.text;
@@ -862,13 +862,13 @@ class UserService {
               // print('FormatException: Invalid number');
             }
 
-            //! if FAIL
+            //* if FAIL
             onFail(attemptCountInt);
           }
         }
       } else
 
-        //! if FAIL
+        //* if FAIL
         onFail(0);
     } on DioError catch (error) {
       log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
@@ -940,21 +940,21 @@ class UserService {
           (response.statusCode == 200 ||
               response.statusCode == 201 ||
               response.statusCode == 302)) {
-        //! SUCCESS
+        //* SUCCESS
         onSuccess();
       } else {
-        //! FAIL
+        //* FAIL
         onFail();
       }
     } on DioError catch (error) {
-      if (error.response!.statusCode == 200 ||
-          error.response!.statusCode == 201 ||
-          error.response!.statusCode == 302) {
-        //! SUCCESS
+      if (error.response?.statusCode == 200 ||
+          error.response?.statusCode == 201 ||
+          error.response?.statusCode == 302) {
+        //* SUCCESS
         onSuccess();
       } else {
         log.v('ERROR on postFinish3ds => ${error.response}');
-        //! FAIL
+        //* FAIL
         onFail();
       }
       rethrow;
@@ -1030,22 +1030,22 @@ class UserService {
         _orderPaymentCheckStatus =
             OrderPaymentCheckStatus.fromJson(_decodedResponse);
 
-        //! if SUCCESS
+        //* if SUCCESS
         if (_orderPaymentCheckStatus.orderStatus == 2 &&
             _orderPaymentCheckStatus.actionCode == 0)
           onSuccess();
 
-        //! if CVC FAIL after SUCCESS
+        //* if CVC FAIL after SUCCESS
         else if (_orderPaymentCheckStatus.orderStatus == 6 &&
             _orderPaymentCheckStatus.actionCode == 5)
           onFail(SmsErrorEnum.cvcFail);
 
-        //! if NOT ENOUGH MONEY FAIL after SUCCESS
+        //* if NOT ENOUGH MONEY FAIL after SUCCESS
         else if (_orderPaymentCheckStatus.orderStatus == 6 &&
             _orderPaymentCheckStatus.actionCode == 116)
           onFail(SmsErrorEnum.notEnoughFail);
 
-        //! if FAIL
+        //* if FAIL
         else
           onFail(SmsErrorEnum.fail);
       }
@@ -1125,8 +1125,6 @@ class UserService {
 
     log.v(
         'BEFORE fav patch _currentUser?.favs! with result: ${_currentUser?.favs} and ${_formData.fields}');
-    // Map<String, dynamic> _queryParams = {};
-    // if (name != null) _queryParams['first_name'] = name;
     try {
       Response response = await _apiRoot.dio.patch(
         'api/user/${_currentUser!.id}/',

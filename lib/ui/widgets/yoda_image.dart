@@ -11,7 +11,7 @@ class YodaImage extends StatelessWidget {
   final AlignmentGeometry alignment;
 
   const YodaImage({
-    required this.image,
+    this.image = 'assets/ph_product.png',
     this.phImage = 'assets/ph_product.png',
     this.width,
     this.height,

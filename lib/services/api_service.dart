@@ -11,7 +11,7 @@ class ApiService {
   final _apiRoot = locator<ApiRootService>();
   final _geolocatorService = locator<GeolocatorService>();
 
-  //!------------------ HOME APIS ---------------------//
+  //*------------------ HOME APIS ---------------------//
 
   Future<List<SliderModel>> getSliders() async {
     List<SliderModel> _sliders = [];
@@ -252,7 +252,7 @@ class ApiService {
     }
   }
 
-  //!------------------ SINGLE EXCLUSIVE APIS ---------------------//
+  //*------------------ SINGLE EXCLUSIVE APIS ---------------------//
 
   Future<void> getSingleExRiches({
     required int singleExId,
@@ -291,7 +291,7 @@ class ApiService {
     }
   }
 
-  //!------------------ RESTAURANT APIS ---------------------//
+  //* ------------------ RESTAURANT APIS ---------------------//
 
   Future<void> getResCatsWithMeals({
     required int restaurantId,
@@ -320,7 +320,7 @@ class ApiService {
     }
   }
 
-  //!------------------ CART APIS ---------------------//
+  //* ------------------ CART APIS ---------------------//
 
   Future<List<Meal>> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
     List<Meal> _moreMeals = [];
@@ -349,7 +349,7 @@ class ApiService {
     }
   }
 
-  //!------------------ CHECKOUT APIS ---------------------//
+  //* ------------------ CHECKOUT APIS ---------------------//
 
   Future<Promocode?> searchPromocode(
       String searchText, int resId, int getTotalCartSum) async {
@@ -378,7 +378,7 @@ class ApiService {
     }
   }
 
-  //!------------------ SEARCH APIS ---------------------//
+  //* ------------------ SEARCH APIS ---------------------//
 
   Future<List<SearchRestaurant?>> startMainSearch(String searchText) async {
     List<SearchRestaurant?> _searchRestaurants = [];
@@ -403,7 +403,7 @@ class ApiService {
     }
   }
 
-  //!------------------ SEARCH APIS ---------------------//
+  //* ------------------ SEARCH APIS ---------------------//
 
   Future<List<Meal?>> searchMeals(String searchText, int resId) async {
     List<Meal?> _searchMeals = [];

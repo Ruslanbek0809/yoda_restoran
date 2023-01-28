@@ -87,7 +87,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                       SizedBox(width: 5.w),
                       Expanded(
                         child: Text(
-                          model.cartRes!.address!,
+                          model.cartRes?.address ?? '',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(

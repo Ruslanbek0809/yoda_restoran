@@ -30,7 +30,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     //*------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
-      initialLength: model.resCategories!.length,
+      initialLength: model.resCategories.length,
       initialIndex: model.activeTab,
     );
 
@@ -72,7 +72,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 ? Padding(
                     padding: EdgeInsets.only(left: 10.w, top: 5.w),
                     child: Text(
-                      restaurant.name!,
+                      restaurant.name ?? '',
                       overflow: TextOverflow.fade,
                       style: TextStyle(
                         fontSize: 20.sp,
@@ -200,7 +200,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(restaurant.image!),
+                  image: CachedNetworkImageProvider(
+                    restaurant.image ?? 'assets/ph_restaurant.png',
+                  ),
                   fit: BoxFit.contain,
                   alignment: Alignment.topCenter,
                 ),
@@ -233,7 +235,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                             right: 16.w,
                           ),
                           child: Text(
-                            restaurant.name!,
+                            restaurant.name ?? '',
                             style: TextStyle(
                               fontSize: 30.sp,
                               fontWeight: FontWeight.bold,
@@ -269,7 +271,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      formatNumRating(restaurant.rating!),
+                                      formatNumRating(restaurant.rating ?? 5),
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: kcFontColor,
@@ -278,35 +280,6 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //*----------------- WORK TIME ---------------------//
-                              // Container(
-                              //   decoration: BoxDecoration(
-                              //     color: kcPrimaryColor_LIGHT,
-                              //     borderRadius: AppTheme().radius20,
-                              //   ),
-                              //   padding: EdgeInsets.symmetric(
-                              //       horizontal: 10.w, vertical: 7.h),
-                              //   margin: EdgeInsets.symmetric(
-                              //       vertical: 5.h, horizontal: 10.w),
-                              //   child: Row(
-                              //     children: [
-                              //       SvgPicture.asset(
-                              //         'assets/clock.svg',
-                              //         color: kcSecondaryDarkColor,
-                              //         width: 20.w,
-                              //       ),
-                              //       SizedBox(width: 5.w),
-                              //       Text(
-                              //         restaurant.workingHours!,
-                              //         style: TextStyle(
-                              //           fontSize: 16.sp,
-                              //           color: kcFontColor,
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // if (model.locationPosition != null)
                               //*----------------- LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
@@ -360,7 +333,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                             ],
                                           )
                                         : Text(
-                                            restaurant.city!,
+                                            restaurant.city ?? '',
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
@@ -440,7 +413,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               isScrollable: true,
               indicatorColor: Colors.transparent,
               labelPadding: EdgeInsets.all(0.0),
-              tabs: model.resCategories!
+              tabs: model.resCategories
                   .map<Widget>((resCategory) => Tab(
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 500),
@@ -448,7 +421,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           decoration: BoxDecoration(
                             borderRadius: AppTheme().radius15,
                             color: model.activeTab ==
-                                    model.resCategories!.indexOf(resCategory)
+                                    model.resCategories.indexOf(resCategory)
                                 ? model.isTabPressed
                                     ? kcSecondaryLightColor
                                     : kcWhiteColor
@@ -461,7 +434,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           alignment: Alignment.center,
                           child: Text(
-                            resCategory.resCategoryModel!.name!,
+                            resCategory.resCategoryModel?.name ?? '',
                             style: kts14SemiBoldText,
                           ),
                         ),
@@ -469,7 +442,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   .toList(),
               onTap: (index) {
                 model.updateOnTapRipple();
-                double offset = model.resCategories!.getRange(0, index).fold(
+                double offset = model.resCategories.getRange(0, index).fold(
                   0,
                   (prev, resCategory) {
                     int rows = (resCategory.meals!.length / 2).ceil();
@@ -497,7 +470,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final resCategory = model.resCategories![index];
+                final resCategory = model.resCategories[index];
                 final resCategoryMeals = resCategory.meals;
                 return Column(
                   children: [
@@ -505,7 +478,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(left: 12.w, top: 25.h),
                       child: Text(
-                        resCategory.resCategoryModel!.name!,
+                        resCategory.resCategoryModel?.name ?? '',
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
@@ -518,7 +491,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                     //   alignment: Alignment.centerLeft,
                     //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
                     //   child: Text(
-                    //     resCategory.resCategoryModel!.name!,
+                    //     resCategory.resCategoryModel?.name ?? '',
                     //     style: TextStyle(
                     //       fontSize: 22.sp,
                     //       fontWeight: FontWeight.bold,
@@ -551,7 +524,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   ],
                 );
               },
-              childCount: model.resCategories!.length,
+              childCount: model.resCategories.length,
             ),
           ),
         ),

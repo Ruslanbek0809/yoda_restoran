@@ -50,9 +50,9 @@ class PushNotificationService {
       if (message.notification != null) {
         log.v('Message also contained a notification: ${message.notification}');
         log.v(
-            'Message also contained a notification\' title: ${message.notification!.title}');
+            'Message also contained a notification\' title: ${message.notification?.title ?? 'null'}');
         log.v(
-            'Message also contained a notification\' body: ${message.notification!.body}');
+            'Message also contained a notification\' body: ${message.notification?.body ?? 'null'}');
       }
 
       final noti = NotificationModel.fromJson(message.data);
@@ -68,7 +68,7 @@ class PushNotificationService {
             barrierDismissible: true,
             data: NotificationDialogData(
               lottie: 'assets/success_check.json',
-              restaurant: noti.title!,
+              restaurant: noti.title ?? '',
               content: LocaleKeys.yourOrderAccepted.tr(),
             ),
           );
@@ -82,7 +82,7 @@ class PushNotificationService {
               barrierDismissible: true,
               data: NotificationDialogData(
                 lottie: 'assets/pizzabox.json',
-                restaurant: noti.title!,
+                restaurant: noti.title ?? '',
                 content: LocaleKeys.yourOrderReady.tr(),
               ),
             );
@@ -93,7 +93,7 @@ class PushNotificationService {
               barrierDismissible: true,
               data: NotificationDialogData(
                 lottie: 'assets/foodbag.json',
-                restaurant: noti.title!,
+                restaurant: noti.title ?? '',
                 content: LocaleKeys.yourOrderSent.tr(),
               ),
             );
@@ -119,9 +119,9 @@ class PushNotificationService {
       if (message.notification != null) {
         log.v('Message also contained a notification: ${message.notification}');
         log.v(
-            'Message also contained a notification\' title: ${message.notification!.title}');
+            'Message also contained a notification\' title: ${message.notification?.title ?? 'null'}');
         log.v(
-            'Message also contained a notification\' body: ${message.notification!.body}');
+            'Message also contained a notification\' body: ${message.notification?.body ?? 'null'}');
       }
       final noti = NotificationModel.fromJson(message.data);
       log.v(

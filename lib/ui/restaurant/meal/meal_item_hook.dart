@@ -88,7 +88,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                   Stack(
                     children: [
                       YodaImage(
-                        image: meal.imageCard!,
+                        image: meal.imageCard ?? 'assets/ph_product.png',
                         height: constraints.maxWidth,
                         width: constraints.maxWidth,
                         borderRadius: Constants.BORDER_RADIUS_20,
@@ -111,7 +111,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             ),
                             child: FittedBox(
                               child: Text(
-                                '-${formatNum(meal.discount!)}%',
+                                '-${formatNum(meal.discount ?? 0)}%',
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   color: kcWhiteColor,
@@ -130,7 +130,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                       right: 2.w,
                     ),
                     child: Text(
-                      meal.name!,
+                      meal.name ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: kts14Text,
@@ -147,13 +147,13 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             children: [
                               Text(
                                 meal.discount != null || meal.discount! > 0
-                                    ? '${formatNum(meal.discountedPrice!)} TMT'
-                                    : '${formatNum(meal.price!)} TMT',
+                                    ? '${formatNum(meal.discountedPrice ?? 0)} TMT'
+                                    : '${formatNum(meal.price ?? 0)} TMT',
                                 style: kts14HelperText,
                               ),
                               if (meal.value != null)
                                 Text(
-                                  ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                  ' • ${formatNum(meal.value ?? 0)} ${meal.size?.name ?? ''}',
                                   style: kts14HelperText,
                                 ),
                             ],
@@ -169,7 +169,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        '${formatNum(meal.price!)} TMT',
+                                        '${formatNum(meal.price ?? 0)} TMT',
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                           color: kcHelperColor,
@@ -178,7 +178,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                         ),
                                       ),
                                       Text(
-                                        ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                        ' • ${formatNum(meal.value ?? 0)} ${meal.size?.name ?? ''}',
                                         style: kts14HelperText,
                                       ),
                                     ],
@@ -190,7 +190,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     right: 2.w,
                                   ),
                                   child: Text(
-                                    '${formatNum(meal.value!)} ${meal.size!.name}',
+                                    '${formatNum(meal.value ?? 0)} ${meal.size?.name ?? 0}',
                                     style: kts14HelperText,
                                   ),
                                 )
@@ -201,7 +201,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     right: 2.w,
                                   ),
                                   child: Text(
-                                    '${formatNum(meal.price!)} TMT',
+                                    '${formatNum(meal.price ?? 0)} TMT',
                                     style: TextStyle(
                                       fontSize: 14.sp,
                                       color: kcHelperColor,
@@ -256,8 +256,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     kcSecondaryLightColor.withOpacity(0.3),
                                 child: InkWell(
                                   borderRadius: AppTheme().radius15,
-                                  onTap: meal.gVolumes!.isNotEmpty ||
-                                          meal.gCustomizables!.isNotEmpty
+                                  onTap: (meal.gVolumes ?? []).isNotEmpty ||
+                                          (meal.gCustomizables ?? []).isNotEmpty
                                       ? () async {
                                           await _tweenController.forward();
 
@@ -316,8 +316,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                             shadowColor: kcSecondaryLightColor.withOpacity(0.3),
                             child: InkWell(
                               borderRadius: AppTheme().radius15,
-                              onTap: meal.gVolumes!.isNotEmpty ||
-                                      meal.gCustomizables!.isNotEmpty
+                              onTap: (meal.gVolumes ?? []).isNotEmpty ||
+                                      (meal.gCustomizables ?? []).isNotEmpty
                                   ? () async {
                                       await _tweenController.forward();
 
@@ -361,8 +361,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Text(
                                   meal.discount != null && meal.discount! > 0
-                                      ? '${formatNum(meal.discountedPrice!)} TMT'
-                                      : '${formatNum(meal.price!)} TMT',
+                                      ? '${formatNum(meal.discountedPrice ?? 0)} TMT'
+                                      : '${formatNum(meal.price ?? 0)} TMT',
                                   textAlign: TextAlign.center,
                                   style: kts18Text,
                                 ),

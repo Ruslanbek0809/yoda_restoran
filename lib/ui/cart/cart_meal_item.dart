@@ -23,7 +23,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         YodaImage(
-          image: cartMeal.image!,
+          image: cartMeal.image ?? 'assets/ph_product.png',
           height: 0.3.sw,
           width: 0.3.sw,
           borderRadius: Constants.BORDER_RADIUS_10,
@@ -41,7 +41,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
                   children: [
                     Expanded(
                         child: Text(
-                      cartMeal.name!,
+                      cartMeal.name ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: kts16Text,

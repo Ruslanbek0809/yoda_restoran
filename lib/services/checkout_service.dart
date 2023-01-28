@@ -52,7 +52,9 @@ class CheckoutService with ReactiveServiceMixin {
 
   //*SEARCHES promocodes and GETS first
   Future<Promocode?> searchPromocode(
-      String searchText, int getTotalCartSum) async {
+    String searchText,
+    int getTotalCartSum,
+  ) async {
     log.v(
         'searchText: $searchText, resId: ${_hiveDbService.cartRes!.id!}, getTotalCartSum: $getTotalCartSum');
 
@@ -64,7 +66,7 @@ class CheckoutService with ReactiveServiceMixin {
   //*GETS all addresses
   Future<void> getAddresses() async {
     _addresses = await _userService.getAddresses();
-    log.v('_addresses!.length: ${_addresses!.length}');
+    log.v('_addresses.length: ${_addresses?.length}');
   }
 
   //*SAVES selectedAddress

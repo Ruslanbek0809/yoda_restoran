@@ -37,7 +37,7 @@ class RestaurantView extends StatelessWidget {
                   GestureDetector(
                     onTap: () => model.navToResDetailsView(restaurant),
                     child: YodaImage(
-                      image: restaurant.image!,
+                      image: restaurant.image ?? 'assets/ph_restaurant.png',
                       phImage: 'assets/ph_restaurant.png',
                       height: 0.22.sh,
                       width: 1.sw,
@@ -92,7 +92,7 @@ class RestaurantView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            restaurant.workingHours!,
+                            restaurant.workingHours ?? '',
                             style: TextStyle(
                               fontSize: 16.sp,
                               color: kcWhiteColor,
@@ -134,7 +134,7 @@ class RestaurantView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
-                  restaurant.name!,
+                  restaurant.name ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 22.sp,
@@ -191,7 +191,7 @@ class RestaurantView extends StatelessWidget {
                             ),
                             SizedBox(width: 3.w),
                             Text(
-                              restaurant.city!,
+                              restaurant.city ?? '',
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -253,7 +253,7 @@ class RestaurantView extends StatelessWidget {
                               ).tr(),
                             ),
                             Text(
-                              '${formatNum(restaurant.discount!)}%',
+                              '${formatNum(restaurant.discount ?? 0)}%',
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w600,
@@ -314,7 +314,7 @@ class RestaurantView extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${formatNum(restaurant.hourlyDiscount!)}%',
+                              '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w600,
@@ -378,7 +378,7 @@ class RestaurantView extends StatelessWidget {
                                 ).tr(),
                               ),
                               Text(
-                                '${formatNum(restaurant.discount!)}%',
+                                '${formatNum(restaurant.discount ?? 0)}%',
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
@@ -411,7 +411,7 @@ class RestaurantView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '${formatNum(restaurant.hourlyDiscount!)}%',
+                                '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,

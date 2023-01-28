@@ -76,14 +76,15 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                 ),
               ),
             ),
-            if (model.addresses!.isNotEmpty) Divider(color: kcDividerColor),
+            if ((model.addresses ?? []).isNotEmpty)
+              Divider(color: kcDividerColor),
             //*-------------- ADDRESSES -------------- //
-            if (model.addresses!.isNotEmpty)
+            if ((model.addresses ?? []).isNotEmpty)
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 10.h),
-                itemCount: model.addresses!.length,
+                itemCount: model.addresses?.length ?? [].length,
                 itemBuilder: (context, pos) {
                   var _address = model.addresses![pos];
                   return Material(

@@ -47,8 +47,8 @@ class SliderView extends StatelessWidget {
                         child: YodaImage(
                           //*CHANGES slider image by localization
                           image: context.locale == context.supportedLocales[0]
-                              ? slider.image!
-                              : slider.imageRu!,
+                              ? slider.image ?? 'assets/ph_slider.png'
+                              : slider.imageRu ?? 'assets/ph_slider.png',
                           phImage: 'assets/ph_slider.png',
                           width: 1.sw,
                           height: 0.6.sw,

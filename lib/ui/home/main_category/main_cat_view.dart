@@ -19,20 +19,21 @@ class MainCatView extends StatelessWidget {
           child: Row(
             children: [
               //*----------------- FILTER MAIN CAT (NOTE: Manually added) ---------------------//
-              if (model.mainCats!.isNotEmpty) MainCatFilterItemHook(),
+              if ((model.mainCats ?? []).isNotEmpty) MainCatFilterItemHook(),
               //*----------------- Fetched MAIN CATS ---------------------//
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: model.mainCats!
-                    .take(10)
-                    .map(
-                      (mainCategory) =>
-                          MainCatItemHook(mainCategory: mainCategory),
-                    )
-                    .toList(), // mainCategories!.take(10) is used to take only 6 from the list
-              ),
+              if ((model.mainCats ?? []).isNotEmpty)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: model.mainCats!
+                      .take(10)
+                      .map(
+                        (mainCategory) =>
+                            MainCatItemHook(mainCategory: mainCategory),
+                      )
+                      .toList(), // mainCategories!.take(10) is used to take only 6 from the list
+                ),
               //*----------------- ALL MAIN CAT (NOTE: Manually added) ---------------------//
-              if (model.mainCats!.isNotEmpty) MainCatAllItemHook(),
+              if ((model.mainCats ?? []).isNotEmpty) MainCatAllItemHook(),
             ],
           ),
         ),

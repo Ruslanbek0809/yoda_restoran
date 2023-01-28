@@ -12,8 +12,8 @@ class AboutUsViewModel extends FutureViewModel {
   final _userService = locator<UserService>();
   final _navService = locator<NavigationService>();
 
-  List<AdditionalModel>? _additionals = [];
-  List<AdditionalModel>? get additionals => _additionals;
+  List<AdditionalModel> _additionals = [];
+  List<AdditionalModel> get additionals => _additionals;
 
   bool _isAboutUsTermSelected = false;
   bool get isAboutUsTermSelected => _isAboutUsTermSelected;
@@ -21,7 +21,7 @@ class AboutUsViewModel extends FutureViewModel {
   @override
   Future<void> futureToRun() async {
     _additionals = await _userService.getAdditionals();
-    log.v('_additionals!.length: ${_additionals!.length}');
+    log.v('_additionals.length: ${_additionals.length}');
   }
 
   //*UPDATES _isAboutUsTermSelected

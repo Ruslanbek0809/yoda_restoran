@@ -5,10 +5,10 @@ import '../../ui/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EachIntroWidget extends StatelessWidget {
-  final String? imageUrl;
-  final String? subTitle;
+  final String imageUrl;
+  final String subTitle;
 
-  EachIntroWidget({this.imageUrl, this.subTitle});
+  EachIntroWidget({required this.imageUrl, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class EachIntroWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         YodaImage(
-          image: imageUrl!,
+          image: imageUrl,
           fit: BoxFit.fill,
           width: 1.sw,
           height: 1.sh,
@@ -31,7 +31,7 @@ class EachIntroWidget extends StatelessWidget {
           bottom: 0.225.sh,
           width: 1.sw,
           child: Text(
-            subTitle!,
+            subTitle,
             maxLines: 3,
             textAlign: TextAlign.center,
             style: kts22BoldWhiteText,

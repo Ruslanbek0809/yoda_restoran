@@ -95,7 +95,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                 Stack(
                   children: [
                     YodaImage(
-                      image: meal.imageCard!,
+                      image: meal.imageCard ?? 'assets/ph_product.png',
                       height: constraints.maxWidth,
                       width: constraints.maxWidth,
                       borderRadius: Constants.BORDER_RADIUS_20,
@@ -118,7 +118,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           ),
                           child: FittedBox(
                             child: Text(
-                              '-${formatNum(meal.discount!)}%',
+                              '-${formatNum(meal.discount ?? 0)}%',
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: kcWhiteColor,
@@ -154,13 +154,13 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           children: [
                             Text(
                               meal.discount != null || meal.discount! > 0
-                                  ? '${formatNum(meal.discountedPrice!)} TMT'
-                                  : '${formatNum(meal.price!)} TMT',
+                                  ? '${formatNum(meal.discountedPrice ?? 0)} TMT'
+                                  : '${formatNum(meal.price ?? 0)} TMT',
                               style: kts12HelperText,
                             ),
                             if (meal.value != null)
                               Text(
-                                ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                ' • ${formatNum(meal.value ?? 0)} ${meal.size?.name ?? ''}',
                                 style: kts12HelperText,
                               ),
                           ],
@@ -176,7 +176,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      '${formatNum(meal.price!)} TMT',
+                                      '${formatNum(meal.price ?? 0)} TMT',
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         color: kcHelperColor,
@@ -184,7 +184,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                       ),
                                     ),
                                     Text(
-                                      ' • ${formatNum(meal.value!)} ${meal.size!.name}',
+                                      ' • ${formatNum(meal.value ?? 0)} ${meal.size?.name ?? ''}',
                                       style: kts12HelperText,
                                     ),
                                   ],
@@ -196,7 +196,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                   right: 2.w,
                                 ),
                                 child: Text(
-                                  '${formatNum(meal.value!)} ${meal.size!.name}',
+                                  '${formatNum(meal.value ?? 0)} ${meal.size?.name ?? ''}',
                                   style: kts12HelperText,
                                 ),
                               )
@@ -207,7 +207,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                   right: 2.w,
                                 ),
                                 child: Text(
-                                  '${formatNum(meal.price!)} TMT',
+                                  '${formatNum(meal.price ?? 0)} TMT',
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     color: kcHelperColor,
@@ -261,8 +261,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                                   kcSecondaryLightColor.withOpacity(0.3),
                               child: InkWell(
                                 borderRadius: AppTheme().radius15,
-                                onTap: meal.gVolumes!.isNotEmpty ||
-                                        meal.gCustomizables!.isNotEmpty
+                                onTap: (meal.gVolumes ?? []).isNotEmpty ||
+                                        (meal.gCustomizables ?? []).isNotEmpty
                                     ? () async {
                                         await _tweenController.forward();
 
@@ -320,8 +320,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                           shadowColor: kcSecondaryLightColor.withOpacity(0.3),
                           child: InkWell(
                             borderRadius: AppTheme().radius15,
-                            onTap: meal.gVolumes!.isNotEmpty ||
-                                    meal.gCustomizables!.isNotEmpty
+                            onTap: (meal.gVolumes ?? []).isNotEmpty ||
+                                    (meal.gCustomizables ?? []).isNotEmpty
                                 ? () async {
                                     await _tweenController.forward();
 
@@ -364,8 +364,8 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(
                                 meal.discount != null && meal.discount! > 0
-                                    ? '${formatNum(meal.discountedPrice!)} TMT'
-                                    : '${formatNum(meal.price!)} TMT',
+                                    ? '${formatNum(meal.discountedPrice ?? 0)} TMT'
+                                    : '${formatNum(meal.price ?? 0)} TMT',
                                 textAlign: TextAlign.center,
                                 style: kts16Text,
                               ),

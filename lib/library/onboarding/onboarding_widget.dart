@@ -40,21 +40,6 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
             },
             children: widget.introductionList,
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   children: [
-          //     Container(
-          //       alignment: Alignment.topRight,
-          //       child: TextButton(
-          //         onPressed: () => widget.onTapSkipButton(),
-          //         child: Text(
-          //           'Skip',
-          //           style: TextStyle(color: Colors.black, fontSize: 20),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Positioned(
             bottom: 0.075.sh,
             left: 0,

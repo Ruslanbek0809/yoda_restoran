@@ -24,7 +24,7 @@ class EmptyWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
-            text!,
+            text ?? '',
             style: kts18ErrorEmptyText,
             textAlign: TextAlign.center,
           ).tr(),

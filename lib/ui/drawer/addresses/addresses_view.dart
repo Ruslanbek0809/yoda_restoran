@@ -56,7 +56,7 @@ class AddressesView extends StatelessWidget {
           ),
           body: model.isBusy
               ? LoadingWidget()
-              : model.addresses!.isEmpty
+              : model.addresses.isEmpty
                   ? EmptyWidget(
                       text: LocaleKeys.noAddressesYet,
                       svg: 'assets/empty_addresses.svg',
@@ -65,14 +65,14 @@ class AddressesView extends StatelessWidget {
                       padding: EdgeInsets.only(left: 10.w, top: 5.h),
                       child: ListView.separated(
                         physics: BouncingScrollPhysics(),
-                        itemCount: model.addresses!.length,
+                        itemCount: model.addresses.length,
                         itemBuilder: (context, pos) {
                           return GestureDetector(
                             onTap: () => model.navToAddressEditView(
-                                model.addresses![pos], model),
+                                model.addresses[pos], model),
                             child: Slidable(
                               // Specify a key if the Slidable is dismissible.
-                              key: ValueKey(model.addresses![pos].id),
+                              key: ValueKey(model.addresses[pos].id),
 
                               // // The start action pane is the one at the left or the top side.
                               // startActionPane: ActionPane(
@@ -113,7 +113,7 @@ class AddressesView extends StatelessWidget {
                                   CustomSlidableAction(
                                     onPressed: (BuildContext context) async =>
                                         await model.showAddressRemoveDialog(
-                                            model, model.addresses![pos]),
+                                            model, model.addresses[pos]),
                                     backgroundColor: kcRedColor,
                                     child: SvgPicture.asset(
                                       'assets/trash.svg',
@@ -139,9 +139,9 @@ class AddressesView extends StatelessWidget {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        model.addresses![pos].street! +
-                                            (model.addresses![pos].house != null
-                                                ? ', ${model.addresses![pos].house}'
+                                        model.addresses[pos].street! +
+                                            (model.addresses[pos].house != null
+                                                ? ', ${model.addresses[pos].house}'
                                                 : ''),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,

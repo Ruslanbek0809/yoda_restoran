@@ -32,7 +32,7 @@ class MainCatService with ReactiveServiceMixin {
   ReactiveValue<bool> _isFilterApplied = ReactiveValue<bool>(false);
   bool get isFilterApplied => _isFilterApplied.value;
 
-  //! ------------------ SELECTED MAIN CATS PART ---------------------//
+  //* ------------------ SELECTED MAIN CATS PART ---------------------//
 
   //* ADDS or REMOVES mainCategory to/from _selectedMainCats
   void updateSelectedMainCats(int mainCatId) {
@@ -65,7 +65,7 @@ class MainCatService with ReactiveServiceMixin {
     _selectedMainCats.value = tempSelectedMainCats!;
   }
 
-  //! ------------------ SELECTED SORT PART ---------------------//
+  //* ------------------ SELECTED SORT PART ---------------------//
 
   //* UPDATES _selectedSort
   void updateSelectedSort(FilterSort? newSelectedSort) {
@@ -73,7 +73,7 @@ class MainCatService with ReactiveServiceMixin {
     log.v('_selectedSort.value.id: ${_selectedSort.value.id}');
   }
 
-  //! ------------------ BY OPEN RESTAURANTS PART ---------------------//
+  //* ------------------ BY OPEN RESTAURANTS PART ---------------------//
 
   //* UPDATES _isByOpenRestaurantsChecked
   void updateIsOpenByRestaurants(bool newValue) {
@@ -82,7 +82,7 @@ class MainCatService with ReactiveServiceMixin {
         '_isByOpenRestaurantsChecked.value: ${_isByOpenRestaurantsChecked.value}');
   }
 
-  //! ------------------ FILTER PART ---------------------//
+  //* ------------------ FILTER PART ---------------------//
 
   //* SETS _isFilterApplied to TRUE
   void filterApplied() {

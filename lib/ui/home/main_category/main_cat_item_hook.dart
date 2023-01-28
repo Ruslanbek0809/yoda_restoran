@@ -54,7 +54,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               YodaImage(
-                image: mainCategory.image!,
+                image: mainCategory.image ?? 'assets/ph_product.png',
                 width: 60.h,
                 height: 60.h,
                 borderRadius: 10.0,
@@ -75,7 +75,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                 ),
                 child: FittedBox(
                   child: Text(
-                    mainCategory.name!,
+                    mainCategory.name ?? '',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 14.sp,

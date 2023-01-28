@@ -23,8 +23,8 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
           delegate: _TransitionAppBarDelegate(
             title: model.isBusy || model.hasError
                 ? ''
-                : singleEx
-                    .name!, // for test: 'Birini alana 2 nji mugt aksiya edyas gelda'
+                : singleEx.name ??
+                    '', // for test: 'Birini alana 2 nji mugt aksiya edyas gelda'
             extent: model.isBusy || model.hasError ? 66.h : 0.175.sh,
             singleExViewModel: model,
           ),

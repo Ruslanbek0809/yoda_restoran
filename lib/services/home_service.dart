@@ -17,36 +17,35 @@ class HomeService with ReactiveServiceMixin {
 
   final _api = locator<ApiService>();
 
-  List<SliderModel>? _sliders = [];
-  List<SliderModel>? get sliders => _sliders;
+  List<SliderModel> _sliders = [];
+  List<SliderModel> get sliders => _sliders;
 
-  List<MainCategory>? _mainCats = [];
-  List<MainCategory>? get mainCats => _mainCats;
+  List<MainCategory> _mainCats = [];
+  List<MainCategory> get mainCats => _mainCats;
 
-  List<MainCategory>? _searchMainCats = [];
-  List<MainCategory>? get searchMainCats => _searchMainCats;
+  List<MainCategory> _searchMainCats = [];
+  List<MainCategory> get searchMainCats => _searchMainCats;
 
-  List<Restaurant>? _randomRess = [];
-  List<Restaurant>? get randomRess => _randomRess;
+  List<Restaurant> _randomRess = [];
+  List<Restaurant> get randomRess => _randomRess;
 
-  List<Promoted?> _proms = [];
-  List<Promoted?> get proms => _proms;
+  List<Promoted> _proms = [];
+  List<Promoted> get proms => _proms;
 
-  List<Exclusive>? _exclusives = [];
-  List<Exclusive>? get exclusives => _exclusives;
+  List<Exclusive> _exclusives = [];
+  List<Exclusive> get exclusives => _exclusives;
 
   //*HOME RESS PAG
   bool _isPullUpEnabled = true;
   bool get isPullUpEnabled => _isPullUpEnabled;
 
   //*------ SELECTECTED MAIN CAT RESTAURANTS --------//
-  List<Restaurant>? _selectedMainCatRestaurants = [];
-  List<Restaurant>? get selectedMainCatRestaurants =>
+  List<Restaurant> _selectedMainCatRestaurants = [];
+  List<Restaurant> get selectedMainCatRestaurants =>
       _selectedMainCatRestaurants;
 
   bool get hasSelectedMainCatRestaurants =>
-      _selectedMainCatRestaurants != null &&
-      _selectedMainCatRestaurants!.isNotEmpty;
+      _selectedMainCatRestaurants.isNotEmpty;
 
   // 2
   ReactiveValue<bool> _fetchingFilter =
@@ -60,27 +59,27 @@ class HomeService with ReactiveServiceMixin {
 
   Future<List<SliderModel>?> getSliders() async {
     _sliders = await _api.getSliders();
-    log.v(_sliders!.length);
+    log.v('_sliders.length: ${_sliders.length}');
     return _sliders;
   }
 
   Future<List<MainCategory>?> getMainCategs() async {
     _mainCats = await _api.getMainCats();
-    _mainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
-    log.v(_mainCats!.length);
+    _mainCats.sort((prev, next) => prev.order!.compareTo(next.order!));
+    log.v('_mainCats.length: ${_mainCats.length}');
     return _mainCats;
   }
 
   Future<List<MainCategory>?> getSearchMainCategs() async {
     _searchMainCats = await _api.getSearchMainCats();
-    _searchMainCats!.sort((prev, next) => prev.order!.compareTo(next.order!));
-    log.v(_searchMainCats!.length);
+    _searchMainCats.sort((prev, next) => prev.order!.compareTo(next.order!));
+    log.v('_searchMainCats.length: ${_searchMainCats.length}');
     return _searchMainCats;
   }
 
   // Future<List<Restaurant>?> getRandomRess() async {
   //   _randomRess = await _api.getRandomRess();
-  //   log.v(_randomRess!.length);
+  //   log.v('_randomRess.length: ${_randomRess.length}');
   //   return _randomRess;
   // }
 
@@ -103,10 +102,10 @@ class HomeService with ReactiveServiceMixin {
     if (page == 1)
       _randomRess = _fetchedRandomRess;
     else
-      _randomRess = [..._randomRess!, ..._fetchedRandomRess];
+      _randomRess = [..._randomRess, ..._fetchedRandomRess];
 
     log.v(
-        '_randomRess!.length: ${_randomRess!.length}; _isPullUpEnabled:$_isPullUpEnabled');
+        '_randomRess.length: ${_randomRess.length}; _isPullUpEnabled:$_isPullUpEnabled');
     return _randomRess;
   }
 
@@ -122,7 +121,7 @@ class HomeService with ReactiveServiceMixin {
 
   Future<List<Exclusive>?> getExclusives() async {
     _exclusives = await _api.getExclusives();
-    log.v(_exclusives!.length);
+    log.v('_exclusives.length: ${_exclusives.length}');
     return _exclusives;
   }
 
@@ -146,7 +145,7 @@ class HomeService with ReactiveServiceMixin {
       _selectedMainCatRestaurants = result;
       _fetchingFilter.value = false;
       log.v(
-          'result: $result and _selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+          'result: $result and _selectedMainCatRestaurants.length: ${_selectedMainCatRestaurants.length}');
       return true;
     } else {
       _fetchingFilter.value = false;
@@ -157,9 +156,9 @@ class HomeService with ReactiveServiceMixin {
   }
 
   void clearSelectedMainCatRess() {
-    _selectedMainCatRestaurants!.clear();
+    _selectedMainCatRestaurants.clear();
     log.v(
-        '_selectedMainCatRestaurants!.length: ${_selectedMainCatRestaurants!.length}');
+        '_selectedMainCatRestaurants.length: ${_selectedMainCatRestaurants.length}');
   }
 
   //*Workaround to disable custom select error

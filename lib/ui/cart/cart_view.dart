@@ -111,17 +111,16 @@ class CartView extends StatelessWidget {
                                 physics: BouncingScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                  children: model.moreMeals!.map((meal) {
+                                  children: model.moreMeals.map((meal) {
                                     return Padding(
                                       padding: EdgeInsets.only(
-                                          right: model.moreMeals!
-                                                      .indexOf(meal) ==
-                                                  model.moreMeals!.length - 1
-                                              ? 16.w
-                                              : 4.w,
+                                          right:
+                                              model.moreMeals.indexOf(meal) ==
+                                                      model.moreMeals.length - 1
+                                                  ? 16.w
+                                                  : 4.w,
                                           left:
-                                              model.moreMeals!.indexOf(meal) ==
-                                                      0
+                                              model.moreMeals.indexOf(meal) == 0
                                                   ? 16.w
                                                   : 4.w), // For proper padding
                                       child: CartMoreMealView(

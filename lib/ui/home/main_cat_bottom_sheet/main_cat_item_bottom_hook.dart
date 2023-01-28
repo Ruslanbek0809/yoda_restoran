@@ -51,7 +51,7 @@ class MainCategoryItemBottomHook
         child: Column(
           children: [
             YodaImage(
-              image: mainCategory!.image!,
+              image: mainCategory?.image ?? 'assets/ph_product.png',
               width: 70.w,
               height: 70.w,
               borderRadius: 10.0,
@@ -73,7 +73,7 @@ class MainCategoryItemBottomHook
               ),
               child: FittedBox(
                 child: Text(
-                  mainCategory!.name!,
+                  mainCategory?.name ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.sp,

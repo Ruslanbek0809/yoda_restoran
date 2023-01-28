@@ -15,7 +15,7 @@ class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
   Widget buildViewModelWidget(
       BuildContext context, RestaurantSearchViewModel model) {
     final _searchController = useTextEditingController(text: model.searchText);
-    if (model.searchText!.isEmpty) _searchController.clear();
+    if ((model.searchText ?? '').isEmpty) _searchController.clear();
     return Container(
       decoration: BoxDecoration(
         color: kcWhiteColor,

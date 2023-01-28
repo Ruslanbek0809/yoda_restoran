@@ -39,9 +39,9 @@ class _OrdersViewState extends State<OrdersView> {
             model.log.v(
                 'Message also contained a notification: ${message.notification}');
             model.log.v(
-                'Message also contained a notification\' title: ${message.notification!.title}');
+                'Message also contained a notification\' title: ${message.notification?.title ?? ''}');
             model.log.v(
-                'Message also contained a notification\' body: ${message.notification!.body}');
+                'Message also contained a notification\' body: ${message.notification?.body ?? ''}');
           }
 
           final noti = NotificationModel.fromJson(message.data);

@@ -16,13 +16,13 @@ class AddressesViewModel extends FutureViewModel {
   final _userService = locator<UserService>();
   final _dialogService = locator<DialogService>();
 
-  List<Address>? _addresses = [];
-  List<Address>? get addresses => _addresses;
+  List<Address> _addresses = [];
+  List<Address> get addresses => _addresses;
 
   @override
   Future<void> futureToRun() async {
     _addresses = await _userService.getAddresses();
-    log.v('_addresses!.length: ${_addresses!.length}');
+    log.v('_addresses.length: ${_addresses.length}');
   }
 
   //*DELETES selected address

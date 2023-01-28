@@ -20,7 +20,7 @@ class CartMoreMealViewModel extends ReactiveViewModel {
   //*---------- HIVE DB PART ------------//
 
   //*This mealQuantity is used in UI part instead of quantity var so that UI to be updated without any Workarounds
-  int get mealQuantity => _hiveDbService.getMealQuantity(mealId)!;
+  int get mealQuantity => _hiveDbService.getMealQuantity(mealId);
 
 //*----------------------- MEAL BOTTOM SHEET PART ----------------------------//
 

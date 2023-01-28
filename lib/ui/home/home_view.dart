@@ -354,7 +354,7 @@ class _HomeViewState extends State<HomeView> {
                               //*----------------- EXCLUSIVES ---------------------//
                               //*If MAIN CAT FILTER is APPLIED
                               if (!model.isFilterApplied &&
-                                  model.exclusives!.isNotEmpty)
+                                  (model.exclusives ?? []).isNotEmpty)
                                 SliverPersistentHeader(
                                   pinned: false,
                                   floating: false,
@@ -368,7 +368,7 @@ class _HomeViewState extends State<HomeView> {
                                           padding: EdgeInsets.only(
                                               left: 16.w, top: 12.h),
                                           child: Text(
-                                            model.exclusives![0].name!,
+                                            model.exclusives![0].name ?? '',
                                             style: TextStyle(
                                               fontSize: 24.sp,
                                               fontWeight: FontWeight.bold,
@@ -421,7 +421,8 @@ class _HomeViewState extends State<HomeView> {
                                                                 left: 16.w,
                                                                 top: 2.h),
                                                         child: Text(
-                                                          _homeRes.prom!.name!,
+                                                          _homeRes.prom?.name ??
+                                                              '',
                                                           style: TextStyle(
                                                             fontSize: 24.sp,
                                                             fontWeight:

@@ -26,16 +26,16 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
     String paymentTypesText = '';
     if (restaurant.paymentTypes != null) {
       if (context.locale == context.supportedLocales[0])
-        paymentTypesText = restaurant.paymentTypes![0].nameTk!;
+        paymentTypesText = restaurant.paymentTypes?[0].nameTk ?? '';
       else
-        paymentTypesText = restaurant.paymentTypes![0].nameRu!;
+        paymentTypesText = restaurant.paymentTypes?[0].nameRu ?? '';
     }
     if (restaurant.paymentTypes != null)
-      for (int i = 1; i < restaurant.paymentTypes!.length; i++)
+      for (int i = 1; i < (restaurant.paymentTypes ?? []).length; i++)
         if (context.locale == context.supportedLocales[0])
-          paymentTypesText += ', ${restaurant.paymentTypes![i].nameTk!}';
+          paymentTypesText += ', ${restaurant.paymentTypes?[i].nameTk ?? ''}';
         else
-          paymentTypesText += ', ${restaurant.paymentTypes![i].nameRu!}';
+          paymentTypesText += ', ${restaurant.paymentTypes?[i].nameRu ?? ''}';
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -58,7 +58,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
 
           //*-------------- NAME -------------- //
           Text(
-            restaurant.name!,
+            restaurant.name ?? '',
             maxLines: 2,
             style: TextStyle(
               fontSize: 24.sp,
@@ -78,7 +78,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
               SizedBox(width: 5.w),
               Flexible(
                 child: Text(
-                  restaurant.address!,
+                  restaurant.address ?? '',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
@@ -170,7 +170,7 @@ class RestaurantInfoBottomSheet extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: 22.h),
             child: Text(
-              restaurant.description!,
+              restaurant.description ?? '',
               style: kts14Text,
             ),
           ),

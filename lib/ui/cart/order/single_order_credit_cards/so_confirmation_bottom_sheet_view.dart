@@ -50,11 +50,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                 controller: scrollController,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //!--------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
+                  //* --------------- CUSTOM BOTTOM SHEET MODAL WIDGET -------------- //
                   CustomModalInsideBottomSheet(isBottomZero: true),
 
-                  //!------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
-                  //!------------------ CREDIT CARD FORM ---------------------//
+                  //* ------------------ CREDIT CARD FORM and BANK CARD LIST ---------------------//
+                  //* ------------------ CREDIT CARD FORM ---------------------//
                   Padding(
                     padding: EdgeInsets.only(left: 8.w),
                     child: CreditCardForm(
@@ -110,7 +110,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       onCreditCardModelChange: model.onCreditCardModelChange,
                     ),
                   ),
-                  //!------------------ CVC CODE INFO ---------------------//
+                  //* ------------------ CVC CODE INFO ---------------------//
                   if (soConfirmationBottomSheetData.isNewCreditCard)
                     Padding(
                       padding: EdgeInsets.only(left: 24.w, top: 4.h),
@@ -119,7 +119,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         style: kts12ContactText,
                       ).tr(),
                     ),
-                  //!------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
+                  //* ------------------ BANK CARD LIST with NEW CREDIT CARD ---------------------//
                   if (soConfirmationBottomSheetData.isNewCreditCard)
                     Padding(
                       padding: EdgeInsets.only(top: 20.h, left: 8.w),
@@ -161,7 +161,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         color: kcDividerSecondaryColor,
                       ),
                     ),
-                  //!------------------ HIVE CREDIT CARD BANK INFO ---------------------//
+                  //* ------------------ HIVE CREDIT CARD BANK INFO ---------------------//
                   if (!soConfirmationBottomSheetData.isNewCreditCard)
                     Padding(
                       padding: EdgeInsets.only(left: 24.w, top: 20.h),
@@ -179,7 +179,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       ).tr(),
                     ),
                   Spacer(),
-                  //! --------------- CREDIT CARD CONFIRM BUTTON -------------- //
+                  //* --------------- CREDIT CARD CONFIRM BUTTON -------------- //
                   Container(
                     width: 1.sw,
                     decoration: BoxDecoration(
@@ -243,22 +243,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                         .showCustomSendCodeConfirmationBottomSheet(
                                       paymentCreateBankOrder,
                                     );
-                                    // await showFlexibleBottomSheet(
-                                    //   initHeight: 0.95,
-                                    //   maxHeight: 0.95,
-                                    //   duration: Duration(milliseconds: 250),
-                                    //   context: context,
-                                    //   bottomSheetColor: Colors.transparent,
-                                    //   builder: (context, scrollController,
-                                    //           offset) =>
-                                    //       SingleOrderPaymentBottomSheetView(
-                                    //     scrollCftroller: scrollController,
-                                    //     offset: offset,
-                                    //     paymentRegister: paymentRegister,
-                                    //     order: order,
-                                    //     orderViewModel: orderViewModel,
-                                    //   ),
-                                    // );
                                   },
                                   onFailForView: (createBankOrderEnum) async {
                                     if (createBankOrderEnum ==
@@ -290,20 +274,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                           : () {},
                     ),
                   )
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.vertical(
-                  //       top: Radius.circular(Constants.BORDER_RADIUS_20),
-                  //     ),
-                  //     color: kcWhiteColor,
-                  //   ),
-                  //   padding: EdgeInsets.fromLTRB(8.w, 0.h, 0.w, 20.h),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             );

@@ -56,7 +56,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                       ),
                       SizedBox(width: 15.w),
                       Text(
-                        model.currentUser!.mobile != null
+                        model.currentUser?.mobile != null
                             ? model.currentUser!.mobile!
                             : '+993 65555555',
                         style: kts18BoldText,
@@ -115,7 +115,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                                       (model.selectedAddress!
                                                                   .house !=
                                                               null
-                                                          ? ', ${model.selectedAddress!.house}'
+                                                          ? ', ${model.selectedAddress?.house ?? ''}'
                                                           : ''),
                                                   maxLines: 2,
                                                   overflow:
@@ -147,7 +147,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                                   ),
                                   SizedBox(width: 15.w),
                                   Text(
-                                    model.cartRes!.name!,
+                                    model.cartRes?.name ?? '',
                                     style: kts16Text,
                                   ),
                                 ],

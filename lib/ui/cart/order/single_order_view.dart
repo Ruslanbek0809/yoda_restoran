@@ -117,7 +117,7 @@ class SingleOrderView extends StatelessWidget {
                         //*----------------- RESTAURANT NAME ---------------------//
                         SizedBox(height: 2.h),
                         Text(
-                          order.restaurant!.name!,
+                          order.restaurant?.name ?? '',
                           overflow: TextOverflow.ellipsis,
                           style: kts18BoldText,
                         ),
@@ -142,7 +142,7 @@ class SingleOrderView extends StatelessWidget {
                                     style: kts14Text,
                                   ),
                             Text(
-                              ' #${order.orderNumber!.substring(order.orderNumber!.length - 4)}',
+                              ' #${order.orderNumber?.substring(order.orderNumber!.length - 4)}',
                               style: kts14HelperText,
                             ),
                           ],
@@ -239,7 +239,7 @@ class SingleOrderView extends StatelessWidget {
                               style: kts16Text,
                             ).tr(),
                             Text(
-                              order.restaurant!.phoneNumber != null
+                              order.restaurant?.phoneNumber != null
                                   ? order.restaurant!.phoneNumber.toString()
                                   : '',
                               style: kts16Text,
@@ -309,7 +309,7 @@ class SingleOrderView extends StatelessWidget {
                                 ),
                                 SizedBox(width: 7.w),
                                 Text(
-                                  order.promocode!.name!,
+                                  order.promocode?.name ?? '',
                                   style: kts16Text,
                                 ),
                               ],
@@ -396,9 +396,12 @@ class SingleOrderView extends StatelessWidget {
                                                 context.locale ==
                                                         context
                                                             .supportedLocales[0]
-                                                    ? order.paymentType!.nameTk!
-                                                    : order
-                                                        .paymentType!.nameRu!,
+                                                    ? order.paymentType
+                                                            ?.nameTk ??
+                                                        ''
+                                                    : order.paymentType
+                                                            ?.nameRu ??
+                                                        '',
                                                 style: kts16WhiteBoldText,
                                               ),
                                             ),
@@ -437,8 +440,8 @@ class SingleOrderView extends StatelessWidget {
                                         child: Text(
                                           context.locale ==
                                                   context.supportedLocales[0]
-                                              ? order.paymentType!.nameTk!
-                                              : order.paymentType!.nameRu!,
+                                              ? order.paymentType?.nameTk ?? ''
+                                              : order.paymentType?.nameRu ?? '',
                                           style: kts16BoldText,
                                         ),
                                       )
@@ -460,14 +463,15 @@ class SingleOrderView extends StatelessWidget {
                                   Text(
                                     context.locale ==
                                             context.supportedLocales[0]
-                                        ? order.paymentType!.nameTk!
-                                        : order.paymentType!.nameRu!,
+                                        ? order.paymentType?.nameTk ?? ''
+                                        : order.paymentType?.nameRu ?? '',
                                     style: kts16BoldText,
                                   ),
                                 ],
                               ),
                             ),
-                    if (order.address != null && order.address!.isNotEmpty)
+                    if (order.address != null &&
+                        (order.address ?? '').isNotEmpty)
                       Padding(
                         padding:
                             EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
@@ -480,7 +484,7 @@ class SingleOrderView extends StatelessWidget {
                             SizedBox(width: 7.w),
                             Flexible(
                               child: Text(
-                                order.address!,
+                                order.address ?? '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: kts14IconText,
@@ -489,7 +493,7 @@ class SingleOrderView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    if (order.notes != null && order.notes!.isNotEmpty)
+                    if (order.notes != null && (order.notes ?? '').isNotEmpty)
                       Padding(
                         padding:
                             EdgeInsets.only(left: 15.w, right: 15.w, top: 12.h),
@@ -502,7 +506,7 @@ class SingleOrderView extends StatelessWidget {
                             SizedBox(width: 7.w),
                             Flexible(
                               child: Text(
-                                order.notes!,
+                                order.notes ?? '',
                                 style: kts14IconText,
                               ),
                             ),
@@ -529,14 +533,14 @@ class SingleOrderView extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          '${formatNum(order.totPrice!)} TMT',
+                          '${formatNum(order.totPrice ?? 0)} TMT',
                           style: kts18BoldText,
                         ),
                       ),
                     ),
                     //*----------------- ORDER MEAL LIST ---------------------//
                     Column(
-                      children: order.orderItems!.map((_orderItem) {
+                      children: (order.orderItems ?? []).map((_orderItem) {
                         String? _orderItemConcatenatedText =
                             model.getConcatenateVolsCustoms(_orderItem);
 
@@ -555,25 +559,25 @@ class SingleOrderView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      _orderItem.mealJson!.name!,
+                                      _orderItem.mealJson?.name ?? '',
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: kts16Text,
                                     ),
                                   ),
                                   Text(
-                                    '${formatNum(_orderItem.quantity!)} x ${formatNum(_orderItem.price!)} TMT',
+                                    '${formatNum(_orderItem.quantity ?? 0)} x ${formatNum(_orderItem.price ?? 0)} TMT',
                                     style: kts16Text,
                                   ),
                                 ],
                               ),
                               //*----------------- OrderItem concatenated text ---------------------//
-                              if (_orderItem.volumePrices!.isNotEmpty ||
-                                  _orderItem.costumizedMeals!.isNotEmpty)
+                              if ((_orderItem.volumePrices ?? []).isNotEmpty ||
+                                  (_orderItem.costumizedMeals ?? []).isNotEmpty)
                                 Padding(
                                   padding: EdgeInsets.only(top: 2.h),
                                   child: Text(
-                                    _orderItemConcatenatedText!,
+                                    _orderItemConcatenatedText ?? '',
                                     overflow: TextOverflow.ellipsis,
                                     style: kts14HelperText,
                                   ),
@@ -585,7 +589,7 @@ class SingleOrderView extends StatelessWidget {
                     ),
                     //*----------------- ORDER RATING BUTTON/FEEDBACK ---------------------//
                     if (order.rating != null &&
-                        order.rating!.feedback!.isNotEmpty)
+                        (order.rating?.feedback ?? '').isNotEmpty)
                       Container(
                         height: 0.25,
                         color: kcDividerColor,
@@ -596,7 +600,7 @@ class SingleOrderView extends StatelessWidget {
                         ),
                       ),
                     if (order.rating != null &&
-                        order.rating!.feedback!.isNotEmpty)
+                        (order.rating?.feedback ?? '').isNotEmpty)
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 15.w,
@@ -623,7 +627,7 @@ class SingleOrderView extends StatelessWidget {
                             ),
                             SizedBox(height: 4.h),
                             Text(
-                              order.rating!.feedback!,
+                              order.rating?.feedback ?? '',
                               maxLines: null,
                               style: TextStyle(
                                 fontSize: 14.sp,

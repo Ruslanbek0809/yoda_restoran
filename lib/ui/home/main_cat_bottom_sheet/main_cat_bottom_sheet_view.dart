@@ -62,7 +62,7 @@ class MainCatBottomSheetView extends StatelessWidget {
                           crossAxisSpacing: 5.w, //spaceLeftRight
                           childAspectRatio: 0.75,
                         ),
-                        itemCount: model.mainCats!.length,
+                        itemCount: (model.mainCats ?? []).length,
                         itemBuilder: (context, pos) {
                           return MainCategoryItemBottomHook(
                             mainCategory: model.mainCats![pos],

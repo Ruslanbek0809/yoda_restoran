@@ -129,7 +129,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(restaurant.image!),
+                  image: CachedNetworkImageProvider(
+                    restaurant.image ?? 'assets/ph_restaurant.png',
+                  ),
                   fit: BoxFit.contain,
                   alignment: Alignment.topCenter,
                 ),
@@ -162,7 +164,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                             right: 16.w,
                           ),
                           child: Text(
-                            restaurant.name!,
+                            restaurant.name ?? '',
                             style: TextStyle(
                               fontSize: 30.sp,
                               fontWeight: FontWeight.bold,
@@ -198,7 +200,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      formatNumRating(restaurant.rating!),
+                                      formatNumRating(restaurant.rating ?? 5),
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: kcFontColor,
@@ -207,36 +209,6 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //*----------------- WORK TIME ---------------------//
-                              // Container(
-                              //   decoration: BoxDecoration(
-                              //     color: kcPrimaryColor_LIGHT,
-                              //     borderRadius: AppTheme().radius20,
-                              //   ),
-                              //   padding: EdgeInsets.symmetric(
-                              //       horizontal: 10.w, vertical: 7.h),
-                              //   margin: EdgeInsets.symmetric(
-                              //       vertical: 5.h, horizontal: 10.w),
-                              //   child: Row(
-                              //     children: [
-                              //       SvgPicture.asset(
-                              //         'assets/clock.svg',
-                              //         color: kcSecondaryDarkColor,
-                              //         width: 20.w,
-                              //       ),
-                              //       SizedBox(width: 5.w),
-                              //       Text(
-                              //         restaurant.workingHours!,
-                              //         style: TextStyle(
-                              //           fontSize: 16.sp,
-                              //           color: kcFontColor,
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-
-                              // if (model.locationPosition != null)
                               //*----------------- LOCATION ---------------------//
                               Container(
                                 decoration: BoxDecoration(
@@ -290,7 +262,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                             ],
                                           )
                                         : Text(
-                                            restaurant.city!,
+                                            restaurant.city ?? '',
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,

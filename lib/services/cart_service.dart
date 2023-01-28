@@ -15,8 +15,8 @@ class CartService {
 
   Promocode? get promocode => _promocode;
 
-  List<Meal>? _moreMeals = [];
-  List<Meal>? get moreMeals => _moreMeals;
+  List<Meal> _moreMeals = [];
+  List<Meal> get moreMeals => _moreMeals;
 
   //*GETS More meals for this res
   Future<void> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {

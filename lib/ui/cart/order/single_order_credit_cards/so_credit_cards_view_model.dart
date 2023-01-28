@@ -61,7 +61,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     // }
   }
 
-//!------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
+//* ------------------------ CREDIT CARD CONFIRMATION BOTTOM SHEET ----------------------------//
 
   String _cardNumber = '';
   String get cardNumber => _cardNumber;
@@ -349,7 +349,7 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
     );
   }
 
-//!------------------------ PAYMENT SUCCESS/FAIL BOTTOM SHEET ----------------------------//
+//* ------------------------ PAYMENT SUCCESS/FAIL BOTTOM SHEET ----------------------------//
 
   bool _isChangeOnlineToCashLoading = false;
   bool get isChangeOnlineToCashLoading => _isChangeOnlineToCashLoading;

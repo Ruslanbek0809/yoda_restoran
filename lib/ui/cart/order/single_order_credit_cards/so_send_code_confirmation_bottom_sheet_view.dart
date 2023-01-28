@@ -186,7 +186,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                     );
                                   },
                                   onFailForView: () async {
-                                    //! If NO MONEY /INVALID CVC /OTHER ERROR in SEND CODE BOTTOM SHEET
+                                    //* If NO MONEY /INVALID CVC /OTHER ERROR in SEND CODE BOTTOM SHEET
                                     model.navBack();
                                     await showFlexibleBottomSheet(
                                       initHeight: 0.95,
@@ -218,7 +218,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                 );
                               },
                               onFailForView: () async {
-                                //! If OPERATION CANCELED after 3 WRONG SEND CODE ATTEMPTS
+                                //* If OPERATION CANCELED after 3 WRONG SEND CODE ATTEMPTS
                                 if (model.sendCodeErrorAttemptCount == -1) {
                                   model.navBack();
                                   await showFlexibleBottomSheet(

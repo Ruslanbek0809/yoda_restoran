@@ -29,7 +29,6 @@ class CustomOutlinedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius:
                 borderRadius as BorderRadiusGeometry? ?? AppTheme().radius15),
-        // minimumSize: Size(width!, height!),
       ),
       onPressed: onPressed as void Function()?,
       child: isLoading
@@ -38,7 +37,7 @@ class CustomOutlinedButton extends StatelessWidget {
               child: CircularProgressIndicator(backgroundColor: kcWhiteColor),
             )
           : Text(
-              text!,
+              text ?? '',
               style: TextStyle(
                 color: kcWhiteColor,
                 fontSize: 20,

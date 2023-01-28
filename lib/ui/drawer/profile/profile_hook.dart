@@ -24,22 +24,22 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, ProfileViewModel model) {
     model.log.v(
-        'name: ${model.currentUser!.firstName}, mobile: ${model.currentUser!.mobile}, email: ${model.currentUser!.email}, gender: ${model.currentUser!.gender}, birthday: ${model.currentUser!.birthday}');
+        'name: ${model.currentUser?.firstName}, mobile: ${model.currentUser?.mobile}, email: ${model.currentUser?.email}, gender: ${model.currentUser?.gender}, birthday: ${model.currentUser?.birthday}');
 
     final _nameController = useTextEditingController(
-        text: model.currentUser!.firstName != null
-            ? model.currentUser!.firstName
+        text: model.currentUser?.firstName != null
+            ? model.currentUser?.firstName
             : '');
     final _birthdateController = useTextEditingController(
-        text: model.currentUser!.birthday != null
+        text: model.currentUser?.birthday != null
             ? DateFormat('dd-MM-yyyy').format(model.currentUser!.birthday!)
             : '');
     final _genderController =
-        useTextEditingController(text: model.currentUser!.gender ?? '');
+        useTextEditingController(text: model.currentUser?.gender ?? '');
     final _emailController =
-        useTextEditingController(text: model.currentUser!.email ?? '');
+        useTextEditingController(text: model.currentUser?.email ?? '');
     final _phoneController =
-        useTextEditingController(text: model.currentUser!.mobile ?? '');
+        useTextEditingController(text: model.currentUser?.mobile ?? '');
 
     var maskFormatter = MaskTextInputFormatter(
         mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});

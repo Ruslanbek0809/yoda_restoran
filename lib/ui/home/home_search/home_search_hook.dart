@@ -17,7 +17,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
     model.log.v('buildViewModelWidget CALLED');
     final _searchController = useTextEditingController(text: model.searchText);
-    if (model.searchText!.isEmpty) _searchController.clear();
+    if ((model.searchText ?? '').isEmpty) _searchController.clear();
 
     return Semantics(
       explicitChildNodes: true,
@@ -68,7 +68,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
           actions: [
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
-              child: model.searchText!.isEmpty
+              child: (model.searchText ?? '').isEmpty
                   // model.searchController!.text.isEmpty
                   ? IconButton(
                       tooltip: 'Search',
@@ -106,7 +106,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                         ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.center,
                     children: [
-                      if (model.searchMainCats!.isNotEmpty)
+                      if ((model.searchMainCats ?? []).isNotEmpty)
                         Padding(
                           padding: EdgeInsets.only(
                             top: 10.h,
@@ -124,7 +124,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                   //* FIX link: https://stackoverflow.com/questions/51127241/how-do-you-change-the-value-inside-of-a-textfield-flutter
                                   _searchController.value =
                                       _searchController.value.copyWith(
-                                    text: _searchMainCat.name!,
+                                    text: _searchMainCat.name ?? '',
                                     selection: TextSelection.collapsed(
                                       offset: _searchMainCat.name!.length,
                                     ),
@@ -143,7 +143,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                   ),
                                   child: FittedBox(
                                     child: Text(
-                                      _searchMainCat.name!,
+                                      _searchMainCat.name ?? '',
                                       overflow: TextOverflow.ellipsis,
                                       style: kts14Text,
                                     ),
@@ -160,7 +160,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                       ),
 
                       //*To make Empty in center
-                      if (model.searchMainCats!.isNotEmpty) SizedBox(),
+                      if ((model.searchMainCats ?? []).isNotEmpty) SizedBox(),
                     ],
                   )
                 : ListView.builder(
@@ -201,7 +201,9 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 12.w),
                                       child: YodaImage(
-                                        image: _searchRestaurant!.image!,
+                                        image: _searchRestaurant?.image ??
+                                            'assets/ph_restaurant.png',
+                                        phImage: 'assets/ph_restaurant.png',
                                         height: 35.h,
                                         width: 35.h,
                                         borderRadius:
@@ -217,7 +219,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          _searchRestaurant.name!,
+                                          _searchRestaurant?.name ?? '',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 22.sp,
@@ -227,7 +229,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                         ),
                                         SizedBox(height: 3.h),
                                         Text(
-                                          _searchRestaurant.address!,
+                                          _searchRestaurant?.address ?? '',
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: kts14HelperText,
@@ -239,13 +241,13 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                               ),
                             ),
                             //*----------------- RESTAURANT MEALS ---------------------//
-                            if (_searchRestaurant.meals != null)
+                            if (_searchRestaurant?.meals != null)
                               ListView.separated(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.only(
                                     top: 15.h, left: 24.w + 35.h),
-                                itemCount: _searchRestaurant.meals!
+                                itemCount: _searchRestaurant!.meals!
                                     .take(3)
                                     .toList()
                                     .length,
@@ -283,7 +285,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            _meal.name!,
+                                            _meal.name ?? '',
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -321,28 +323,28 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                 },
                               ),
                             //*----------------- MEAL MORE ---------------------//
-                            if (_searchRestaurant.meals != null &&
-                                _searchRestaurant.meals!.length > 3)
+                            if (_searchRestaurant?.meals != null &&
+                                (_searchRestaurant?.meals ?? []).length > 3)
                               GestureDetector(
                                 onTap: () =>
                                     model.navToResDetailsView(Restaurant(
-                                  id: _searchRestaurant.id,
-                                  image: _searchRestaurant.image,
-                                  name: _searchRestaurant.name,
-                                  address: _searchRestaurant.address,
-                                  rated: _searchRestaurant.rated,
-                                  rating: _searchRestaurant.rating,
-                                  workingHours: _searchRestaurant.workingHours,
+                                  id: _searchRestaurant?.id,
+                                  image: _searchRestaurant?.image,
+                                  name: _searchRestaurant?.name,
+                                  address: _searchRestaurant?.address,
+                                  rated: _searchRestaurant?.rated,
+                                  rating: _searchRestaurant?.rating,
+                                  workingHours: _searchRestaurant?.workingHours,
                                   deliveryPrice:
-                                      _searchRestaurant.deliveryPrice,
-                                  description: _searchRestaurant.description,
-                                  phoneNumber: _searchRestaurant.phoneNumber,
-                                  prepareTime: _searchRestaurant.prepareTime,
-                                  city: _searchRestaurant.city,
-                                  distance: _searchRestaurant.distance,
-                                  selfPickUp: _searchRestaurant.selfPickUp,
-                                  delivery: _searchRestaurant.delivery,
-                                  paymentTypes: _searchRestaurant.paymentTypes,
+                                      _searchRestaurant?.deliveryPrice,
+                                  description: _searchRestaurant?.description,
+                                  phoneNumber: _searchRestaurant?.phoneNumber,
+                                  prepareTime: _searchRestaurant?.prepareTime,
+                                  city: _searchRestaurant?.city,
+                                  distance: _searchRestaurant?.distance,
+                                  selfPickUp: _searchRestaurant?.selfPickUp,
+                                  delivery: _searchRestaurant?.delivery,
+                                  paymentTypes: _searchRestaurant?.paymentTypes,
                                 )),
                                 child: Padding(
                                   padding: EdgeInsets.only(
@@ -357,7 +359,9 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                         style: ktsDefault18HelperText,
                                       ).tr(),
                                       Text(
-                                        (_searchRestaurant.meals!.length - 3)
+                                        ((_searchRestaurant?.meals ?? [])
+                                                    .length -
+                                                3)
                                             .toString(),
                                         style: ktsDefault18HelperText,
                                       ),
@@ -374,47 +378,3 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
     );
   }
 }
-
-// class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
-//   final _debouncer = Debouncer(milliseconds: 500);
-
-//   @override
-//   Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
-//     model.log.v('buildViewModelWidget CALLED');
-//     final _searchController = useTextEditingController(text: model.searchText);
-
-//     // final update = useValueListenable(_searchController);
-//     // useEffect(() {
-//     //   _searchController = update;
-//     // }, [update]);
-//     if (model.searchText!.isEmpty) _searchController.clear();
-
-//     return Container(
-//       decoration: BoxDecoration(
-//         color: kcWhiteColor,
-//         borderRadius: BorderRadius.circular(6),
-//       ),
-//       padding: EdgeInsets.symmetric(horizontal: 8.w),
-//       margin: EdgeInsets.symmetric(vertical: 5.h),
-//       child: TextField(
-//           style: TextStyle(
-//             fontSize: 18.sp,
-//             color: kcSecondaryDarkColor,
-//           ),
-//           decoration: InputDecoration(
-//             fillColor: kcWhiteColor,
-//             enabledBorder: InputBorder.none,
-//             border: InputBorder.none,
-//             hintText: LocaleKeys.search.tr(),
-//             hintStyle: kts14HelperText,
-//           ),
-//           controller: _searchController,
-//           autofocus: true,
-//           onChanged: (value) => _debouncer.run(() {
-//                 model.startMainSearch(value);
-//               }),
-//           onSubmitted: (value) =>
-//               _debouncer.run(() => model.startMainSearch(value))),
-//     );
-//   }
-// }

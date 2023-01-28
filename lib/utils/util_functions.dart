@@ -368,9 +368,9 @@ Future<void> fbBackgroundHandler(RemoteMessage message) async {
   if (message.notification != null) {
     print('Message also contained a notification: ${message.notification}');
     print(
-        'Message also contained a notification\' title: ${message.notification!.title}');
+        'Message also contained a notification\' title: ${message.notification?.title ?? ''}');
     print(
-        'Message also contained a notification\' body: ${message.notification!.body}');
+        'Message also contained a notification\' body: ${message.notification?.body ?? ''}');
   }
   print('Handling a background message ${message.messageId}');
 

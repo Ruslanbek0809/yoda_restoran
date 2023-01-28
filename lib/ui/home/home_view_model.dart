@@ -49,7 +49,7 @@ class HomeViewModel extends ReactiveViewModel {
       _mainCatService.isFilterApplied; // NEEDS only for UI cases
 
   List<Restaurant> get selectedMainCatRestaurants => _homeService
-      .selectedMainCatRestaurants!; // FOUND restaurants of selectedMainCats
+      .selectedMainCatRestaurants; // FOUND restaurants of selectedMainCats
 
   bool get fetchingFilter => _homeService.fetchingFilter;
   bool get fetchingFilterError => _homeService.fetchingFilterError;
@@ -120,23 +120,23 @@ class HomeViewModel extends ReactiveViewModel {
     int promPosCount = 0;
 
     //*Looping random restaurants
-    for (final _randomRes in _homeService.randomRess!) {
-      int _randomResPos = _homeService.randomRess!.indexOf(_randomRes);
+    for (final _randomRes in _homeService.randomRess) {
+      int _randomResPos = _homeService.randomRess.indexOf(_randomRes);
 
       //*Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
       if (_homeService.proms.isNotEmpty &&
           _homeService.proms.length > promPosCount) {
         //*Here it CHECKS whether this PROMOTED's position is equa to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
         //*If it positions are EQUAL, then ADDS this PROMOTED to this RESTAURANT
-        if (_homeService.proms[promPosCount]!.position == _randomResPos + 1) {
+        if (_homeService.proms[promPosCount].position == _randomResPos + 1) {
           _homeRess.add(
             HomeResPromo(
               _randomRes,
               Promoted(
-                id: _homeService.proms[promPosCount]!.id,
-                name: _homeService.proms[promPosCount]!.name,
-                order: _homeService.proms[promPosCount]!.order,
-                restaurants: _homeService.proms[promPosCount]!.restaurants,
+                id: _homeService.proms[promPosCount].id,
+                name: _homeService.proms[promPosCount].name,
+                order: _homeService.proms[promPosCount].order,
+                restaurants: _homeService.proms[promPosCount].restaurants,
               ),
             ),
           );

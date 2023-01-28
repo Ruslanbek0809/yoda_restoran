@@ -65,7 +65,7 @@ class MainCatBottomViewModel extends ReactiveViewModel {
 
   //*UPDATES _selectedSort
   void updateSelectedSort(FilterSort? newSelectedSort) {
-    log.i('updateSelectedSort(): ${selectedSort!.name}');
+    log.i('updateSelectedSort(): ${selectedSort?.name ?? ''}');
 
     _mainCatService.updateSelectedSort(
         newSelectedSort); // UPDATES selectedSort (CALLED from _mainCatService)

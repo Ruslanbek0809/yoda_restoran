@@ -124,7 +124,7 @@
     "enter_cvc_kod": "Введите CVC-код карты",
     "enter_full_cvc_kod": "Введите полный CVC-код карты",
     "cvc_kod_not_saved": "* CVC-код не сохраняется",
-    "add_card": "Добавьте карту",
+    "add_card": "Добавить карту",
     "credit_card_added": "Ваша карта добавлена",
     "wanna_delete_credit_card": "Вы действительно хотите удалить эту карту?",
     "smthWentWrong": "Что-то пошло не так... :(",

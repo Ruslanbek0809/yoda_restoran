@@ -87,8 +87,8 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                               context.locale ==
                                                       context
                                                           .supportedLocales[0]
-                                                  ? paymentType.nameTk!
-                                                  : paymentType.nameRu!,
+                                                  ? paymentType.nameTk ?? ''
+                                                  : paymentType.nameRu ?? '',
                                               style: kts18Text,
                                             ),
 
@@ -143,8 +143,8 @@ class CheckoutPaymentTypeBottomSheetView extends StatelessWidget {
                                       Text(
                                         context.locale ==
                                                 context.supportedLocales[0]
-                                            ? paymentType.nameTk!
-                                            : paymentType.nameRu!,
+                                            ? paymentType.nameTk ?? ''
+                                            : paymentType.nameRu ?? '',
                                         style: kts18Text,
                                       ),
                                     ],

@@ -26,8 +26,9 @@ class HomeExclusive extends ViewModelWidget<HomeViewModel> {
               onTap: () => model.navToSingleExView(_singleEx),
               child: YodaImage(
                 image: context.locale == context.supportedLocales[0]
-                    ? _singleEx.image!
-                    : _singleEx.imageRu!,
+                    ? _singleEx.image ?? 'assets/ph_restaurant.png'
+                    : _singleEx.imageRu ?? 'assets/ph_restaurant.png',
+                phImage: 'assets/ph_restaurant.png',
                 fit: BoxFit.cover,
                 width: 100.w,
                 height: 100.w,

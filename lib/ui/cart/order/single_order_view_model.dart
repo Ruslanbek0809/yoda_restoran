@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
 import '../../../app/app.router.dart';
@@ -270,7 +268,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
     }
   }
 
-//!------------------------ ORDER DELETE DIALOG ----------------------------//
+//* ------------------------ ORDER DELETE DIALOG ----------------------------//
 
   //* SHOWS ORDER DELETE Dialog
   Future showOrderDeleteDialog(
@@ -303,7 +301,7 @@ class SingleOrderViewModel extends ReactiveViewModel {
       );
   }
 
-//!------------------------ ORDER SUCCESS PART ----------------------------//
+//* ------------------------ ORDER SUCCESS PART ----------------------------//
 
   //*NAVIGATES to Home by removing all previous routes
   Future<void> navToHomeByRemovingAll() async =>

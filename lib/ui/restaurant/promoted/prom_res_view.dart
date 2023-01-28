@@ -20,8 +20,6 @@ class PromResView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PromResViewModel>.reactive(
-      // onModelReady: (model) =>
-      //     model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
@@ -44,7 +42,8 @@ class PromResView extends StatelessWidget {
                       GestureDetector(
                         onTap: () => model.navToResDetailsView(restaurant),
                         child: YodaImage(
-                          image: restaurant.image!,
+                          image: restaurant.image ?? 'assets/ph_restaurant.png',
+                          phImage: 'assets/ph_restaurant.png',
                           height: 0.18.sh,
                           width: 0.7.sw,
                           borderRadius: Constants.BORDER_RADIUS_20,
@@ -98,7 +97,7 @@ class PromResView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            restaurant.workingHours!,
+                            restaurant.workingHours ?? '',
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: kcWhiteColor,
@@ -140,7 +139,7 @@ class PromResView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
-                  restaurant.name!,
+                  restaurant.name ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 18.sp,
@@ -197,7 +196,7 @@ class PromResView extends StatelessWidget {
                             ),
                             SizedBox(width: 3.w),
                             Text(
-                              restaurant.city!,
+                              restaurant.city ?? '',
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: 12.sp,
@@ -214,7 +213,7 @@ class PromResView extends StatelessWidget {
                         color: kcPrimaryColor,
                       ),
                       Text(
-                        '${formatNumRating(restaurant.rating!)} (${restaurant.rated})',
+                        '${formatNumRating(restaurant.rating ?? 0)} (${restaurant.rated})',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 12.sp,
