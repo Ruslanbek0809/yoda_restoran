@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../models/models.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -58,12 +59,18 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                         width: 0.6.sw,
                       ),
                     ),
-                    Spacer(),
-                    SvgPicture.asset(
-                      'assets/online_payment_success.svg',
-                      width: 100.sp,
+                    // Spacer(),
+
+                    Lottie.asset(
+                      'assets/success_check.json',
+                      height: 0.4.sh,
                     ),
-                    SizedBox(height: 0.1.sh),
+                    // SvgPicture.asset(
+                    //   'assets/online_payment_success.svg',
+                    //   width: 100.sp,
+                    // ),
+                    SizedBox(height: 0.05.sh),
+                    // Spacer(),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
