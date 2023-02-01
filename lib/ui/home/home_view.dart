@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -591,15 +592,45 @@ class _HomeViewState extends State<HomeView> {
           resizeToAvoidBottomInset: true,
           key: model.homeScaffoldKey,
           drawer: DrawerView(),
-          body: Platform.isIOS
-              ? UpgradeAlert(
-                  upgrader: Upgrader(
-                    shouldPopScope: () => true,
-                    messages: context.locale == context.supportedLocales[0]
-                        ? MyTurkmenMessages()
-                        : MyRussianMessages(),
-                  ),
-                  child: DoubleBackToCloseApp(
+          //*Resize according to Onscreen keyboard
+          body: ColorfulSafeArea(
+            color: kcPrimaryColor,
+            // color: Colors.white,
+            left: false,
+            right: false,
+            bottom: false,
+            child: Platform.isIOS
+                ? UpgradeAlert(
+                    upgrader: Upgrader(
+                      shouldPopScope: () => true,
+                      messages: context.locale == context.supportedLocales[0]
+                          ? MyTurkmenMessages()
+                          : MyRussianMessages(),
+                    ),
+                    child: DoubleBackToCloseApp(
+                      snackBar: SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2),
+                        margin: EdgeInsets.only(
+                          left: 16.r,
+                          right: 16.r,
+                          bottom: 0.05.sh,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppTheme().radius10,
+                        ),
+                        content: Text(
+                          LocaleKeys.doubleBackToCloseApp,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                          ),
+                        ).tr(),
+                      ),
+                      child: body,
+                    ),
+                  )
+                : DoubleBackToCloseApp(
                     snackBar: SnackBar(
                       behavior: SnackBarBehavior.floating,
                       duration: Duration(seconds: 2),
@@ -621,29 +652,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     child: body,
                   ),
-                )
-              : DoubleBackToCloseApp(
-                  snackBar: SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    duration: Duration(seconds: 2),
-                    margin: EdgeInsets.only(
-                      left: 16.r,
-                      right: 16.r,
-                      bottom: 0.05.sh,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: AppTheme().radius10,
-                    ),
-                    content: Text(
-                      LocaleKeys.doubleBackToCloseApp,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                      ),
-                    ).tr(),
-                  ),
-                  child: body,
-                ),
+          ),
         );
         // );
       },

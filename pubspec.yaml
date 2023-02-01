@@ -106,6 +106,7 @@ dependencies:
 
   device_preview: ^1.1.0
   responsive_builder: ^0.5.0+1
+  colorful_safe_area: ^0.3.0
 
   # IMAGE
   cached_network_image: ^3.2.1
