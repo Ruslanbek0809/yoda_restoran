@@ -20,8 +20,8 @@ class HomeExclusive extends ViewModelWidget<HomeViewModel> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: exlusiveSingles.mapIndexed((_singleEx, pos) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(pos == 0 ? 16.w : 4.w, 6.h,
-                pos == exlusiveSingles.length - 1 ? 16.w : 4.w, 0.h),
+            padding: EdgeInsets.fromLTRB(pos == 0 ? 16.r : 4.r, 6.r,
+                pos == exlusiveSingles.length - 1 ? 16.r : 4.r, 0.r),
             child: GestureDetector(
               onTap: () => model.navToSingleExView(_singleEx),
               child: YodaImage(
@@ -30,8 +30,8 @@ class HomeExclusive extends ViewModelWidget<HomeViewModel> {
                     : _singleEx.imageRu ?? 'assets/ph_restaurant.png',
                 phImage: 'assets/ph_restaurant.png',
                 fit: BoxFit.cover,
-                width: 100.w,
-                height: 100.w,
+                width: 100.r,
+                height: 100.r,
                 borderRadius: Constants.BORDER_RADIUS_20,
               ),
             ),

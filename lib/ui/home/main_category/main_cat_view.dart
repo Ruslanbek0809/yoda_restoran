@@ -15,7 +15,7 @@ class MainCatView extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: EdgeInsets.only(top: 8.h),
+          padding: EdgeInsets.only(top: 2.r),
           child: Row(
             children: [
               //*----------------- FILTER MAIN CAT (NOTE: Manually added) ---------------------//

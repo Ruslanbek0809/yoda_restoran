@@ -43,7 +43,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
         CurvedAnimation(parent: _tweenController, curve: Curves.bounceInOut),
       ),
       child: Container(
-        margin: EdgeInsets.only(left: 12.w, right: 2.w),
+        margin: EdgeInsets.only(left: 12.r, right: 2.r),
         color: kcWhiteColor,
         child: GestureDetector(
           onTap: () async {
@@ -74,17 +74,17 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
-                  width: 60.h,
-                  height: 60.h,
+                  width: 66.r,
+                  height: 66.r,
                   child: Padding(
-                    padding: EdgeInsets.all(6.h),
+                    padding: EdgeInsets.all(6.r),
                     child: Material(
                       shape: RoundedRectangleBorder(
                         borderRadius: AppTheme().radius16,
                       ),
                       color: kcSecondaryLightColor,
                       child: Padding(
-                        padding: EdgeInsets.all(14.w),
+                        padding: EdgeInsets.all(14.r),
                         child: SvgPicture.asset(
                           'assets/filter.svg',
                           color: kcFontColor,
@@ -95,7 +95,7 @@ class MainCatFilterItemHook extends HookViewModelWidget<MainCatViewModel> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 2.h),
+                padding: EdgeInsets.only(top: 2.r),
                 child: FittedBox(
                   child: Text(
                     LocaleKeys.filter,

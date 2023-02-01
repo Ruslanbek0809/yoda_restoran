@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,14 +13,26 @@ import 'utils/utils.dart';
 class YodaResApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //*Orientation: PORTRAIT Only
+    //* Orientation: PORTRAIT Only
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    //* WORKS in every screen except the screen in which appBar are used (STATUS BAR)
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark,
+      // SystemUiOverlayStyle(
+      //   statusBarColor: kcPrimaryColor,
+      //   statusBarIconBrightness: Brightness.dark,
+      //   systemNavigationBarIconBrightness: Brightness.light,
+      // ),
+    );
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: (context, child) => MaterialApp(
+        // useInheritedMediaQuery: true, //* Config DevicePreview
+        // locale: DevicePreview.locale(context), //* Config DevicePreview
+        // builder: DevicePreview.appBuilder, //* Config DevicePreview
         title: Constants.appName,
         navigatorObservers: [StackedService.routeObserver],
         navigatorKey: StackedService.navigatorKey, // For stacked_services
@@ -27,7 +40,7 @@ class YodaResApp extends StatelessWidget {
             .onGenerateRoute, // Auto generates all routes using stacked package
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: context.locale,
+        locale: context.locale, //* Config DevicePreview
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         theme: ThemeData(
@@ -60,7 +73,7 @@ class YodaResApp extends StatelessWidget {
               ),
             ),
           );
-        },
+        }, //* Config DevicePreview
       ),
     );
   }

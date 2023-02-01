@@ -43,7 +43,7 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.only(left: 4.w),
+        margin: EdgeInsets.only(left: 4.r),
         color: kcWhiteColor,
         child: GestureDetector(
           onTap: () async {
@@ -55,8 +55,8 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
             children: [
               YodaImage(
                 image: mainCategory.image ?? 'assets/ph_product.png',
-                width: 60.h,
-                height: 60.h,
+                width: 66.r,
+                height: 66.r,
                 borderRadius: 10.0,
               ),
               AnimatedContainer(
@@ -64,9 +64,9 @@ class MainCatItemHook extends HookViewModelWidget<MainCatViewModel> {
                 margin: EdgeInsets.only(top: 2.h),
                 padding: EdgeInsets.symmetric(
                     horizontal:
-                        model.isMainCatSelected(mainCategory.id) ? 7.w : 0.0,
+                        model.isMainCatSelected(mainCategory.id) ? 7.r : 0.0,
                     vertical:
-                        model.isMainCatSelected(mainCategory.id) ? 2.h : 0.0),
+                        model.isMainCatSelected(mainCategory.id) ? 2.r : 0.0),
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius12,
                   color: model.isMainCatSelected(mainCategory.id)

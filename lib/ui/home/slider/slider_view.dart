@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stacked/stacked.dart';
 import '../../../shared/app_colors.dart';
@@ -21,7 +22,7 @@ class SliderView extends StatelessWidget {
       builder: (context, model, child) => Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 12.h),
+            padding: EdgeInsets.only(top: 12.r),
             child: CarouselSlider(
               carouselController: model.carouselController,
               options: CarouselOptions(
@@ -39,7 +40,7 @@ class SliderView extends StatelessWidget {
               items: sliders
                   .map(
                     (slider) => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      padding: EdgeInsets.symmetric(horizontal: 4.r),
                       child: GestureDetector(
                         onTap: () async => slider.option == 'restoran'
                             ? model.navToResDetailsView(slider.restaurant!)
@@ -51,7 +52,11 @@ class SliderView extends StatelessWidget {
                               : slider.imageRu ?? 'assets/ph_slider.png',
                           phImage: 'assets/ph_slider.png',
                           width: 1.sw,
-                          height: 0.6.sw,
+                          height: getValueForScreenType<double>(
+                            context: context,
+                            mobile: 0.3.sh,
+                            tablet: 0.375.sh,
+                          ),
                           borderRadius: 20.0,
                         ),
                       ),
@@ -71,7 +76,7 @@ class SliderView extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 7.h),
+            padding: EdgeInsets.only(top: 8.r),
             child: AnimatedSmoothIndicator(
               count: sliders.length,
               activeIndex: model.activeIndex,

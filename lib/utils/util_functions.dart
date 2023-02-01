@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import '../generated/locale_keys.g.dart';
@@ -19,6 +20,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
 
 import 'package:path_provider/path_provider.dart' as pathProvider;
+
+//* WORKS in every screen where appBar are used (STATUS BAR)
+SystemUiOverlayStyle customSystemUiOverlayStyle() => SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    );
 
 //*Method to round trailing zero based on its type.
 

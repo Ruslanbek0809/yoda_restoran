@@ -36,7 +36,7 @@ class CustomOutlinedButton extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: CircularProgressIndicator(backgroundColor: kcWhiteColor),
             )
-          : Text(
+          : Text( 
               text ?? '',
               style: TextStyle(
                 color: kcWhiteColor,

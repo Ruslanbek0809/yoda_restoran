@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../generated/locale_keys.g.dart';
@@ -172,6 +173,7 @@ class _HomeViewState extends State<HomeView> {
                   SliverAppBar(
                     expandedHeight: 0.1.sh,
                     backgroundColor: kcWhiteColor,
+                    systemOverlayStyle: customSystemUiOverlayStyle(),
                     elevation: 0,
                     toolbarHeight: 60.h,
                     automaticallyImplyLeading: false,
@@ -188,7 +190,7 @@ class _HomeViewState extends State<HomeView> {
                                 IconButton(
                                   icon: Icon(
                                     Icons.menu_rounded,
-                                    size: 24.w,
+                                    size: 24.sp,
                                   ),
                                   onPressed: model.homeMenuPressed,
                                   tooltip: 'Drawer',
@@ -245,6 +247,8 @@ class _HomeViewState extends State<HomeView> {
                               SliverAppBar(
                                 expandedHeight: 0.3.sh,
                                 backgroundColor: kcWhiteColor,
+                                systemOverlayStyle:
+                                    customSystemUiOverlayStyle(),
                                 elevation: 0,
                                 toolbarHeight: 60.h,
                                 automaticallyImplyLeading: false,
@@ -253,7 +257,7 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 10.h +
+                                            top: 10.r +
                                                 MediaQuery.of(context)
                                                     .padding
                                                     .top),
@@ -264,7 +268,7 @@ class _HomeViewState extends State<HomeView> {
                                             IconButton(
                                               icon: Icon(
                                                 Icons.menu_rounded,
-                                                size: 24.w,
+                                                size: 24.sp,
                                               ),
                                               onPressed: model.homeMenuPressed,
                                               tooltip: 'Drawer',
@@ -300,18 +304,24 @@ class _HomeViewState extends State<HomeView> {
 
                                     //*If MAIN CAT FILTER is APPLIED
                                     !model.isFilterApplied
-                                        ? 0.075.sh + 0.6.sw
+                                        ? getValueForScreenType<double>(
+                                            context: context,
+                                            mobile: 0.36.sh,
+                                            tablet: 0.45.sh,
+                                          )
                                         : 0.1.sh,
                                 backgroundColor: kcWhiteColor,
+                                systemOverlayStyle:
+                                    customSystemUiOverlayStyle(),
                                 elevation: 0,
-                                toolbarHeight: 60.h,
+                                toolbarHeight: kToolbarHeight,
                                 automaticallyImplyLeading: false,
                                 flexibleSpace: FlexibleSpaceBar(
                                   background: Column(
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            top: 10.h +
+                                            top: 12.r +
                                                 MediaQuery.of(context)
                                                     .padding
                                                     .top),
@@ -322,7 +332,7 @@ class _HomeViewState extends State<HomeView> {
                                             IconButton(
                                               icon: Icon(
                                                 Icons.menu_rounded,
-                                                size: 24.w,
+                                                size: 24.sp,
                                               ),
                                               onPressed: model.homeMenuPressed,
                                               tooltip: 'Drawer',
@@ -336,7 +346,8 @@ class _HomeViewState extends State<HomeView> {
                                       //*If MAIN CAT FILTER is APPLIED
                                       if (!model.isFilterApplied)
                                         SliderView(
-                                            sliders: model.sliders ?? []),
+                                          sliders: model.sliders ?? [],
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -347,7 +358,7 @@ class _HomeViewState extends State<HomeView> {
                                 floating: false,
                                 delegate: ContestTabHeader(
                                   //*If MAIN CAT FILTER is APPLIED
-                                  size: !model.isFilterApplied ? 92.h : 95.h,
+                                  size: !model.isFilterApplied ? 90.r : 94.r,
                                   child: MainCatView(),
                                 ),
                               ),
@@ -359,14 +370,16 @@ class _HomeViewState extends State<HomeView> {
                                   pinned: false,
                                   floating: false,
                                   delegate: ContestTabHeader(
-                                    size: 150.h,
+                                    size: 160.r,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              left: 16.w, top: 12.h),
+                                            left: 16.r,
+                                            top: 14.r,
+                                          ),
                                           child: Text(
                                             model.exclusives![0].name ?? '',
                                             style: TextStyle(
@@ -390,7 +403,7 @@ class _HomeViewState extends State<HomeView> {
                               !model.isFilterApplied
                                   ? SliverPadding(
                                       padding: EdgeInsets.only(
-                                        top: 16.h,
+                                        top: 14.r,
                                         bottom: 0.11
                                             .sh, // COMPENSATES HomeBottomCart
                                       ), // Changes based on exclusive part
@@ -418,8 +431,8 @@ class _HomeViewState extends State<HomeView> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                left: 16.w,
-                                                                top: 2.h),
+                                                                left: 16.r,
+                                                                top: 2.r),
                                                         child: Text(
                                                           _homeRes.prom?.name ??
                                                               '',
@@ -479,17 +492,18 @@ class _HomeViewState extends State<HomeView> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 16.w,
-                                                    vertical: 5.h),
+                                                    horizontal: 16.r,
+                                                    vertical: 6.r),
                                                 child: Divider(
                                                   thickness: 1,
                                                 ),
                                               ),
+
                                               //*----------------- FOUND TITLE and CLEAR part ---------------------//
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 16.w,
-                                                    vertical: 3.h),
+                                                    horizontal: 16.r,
+                                                    vertical: 4.r),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -507,7 +521,7 @@ class _HomeViewState extends State<HomeView> {
                                                           .length
                                                           .toString()
                                                     ]),
-                                                    SizedBox(width: 5.w),
+                                                    SizedBox(width: 5.r),
                                                     CustomTextChildButton(
                                                         child: Text(
                                                           LocaleKeys.clear,
@@ -519,9 +533,9 @@ class _HomeViewState extends State<HomeView> {
                                                             AppTheme().radius20,
                                                         padding: EdgeInsets
                                                             .symmetric(
-                                                                vertical: 6.h,
-                                                                horizontal:
-                                                                    20.w),
+                                                          vertical: 6.r,
+                                                          horizontal: 20.r,
+                                                        ),
                                                         onPressed: () async {
                                                           await model
                                                               .clearSelectedMainCatRess();
@@ -537,7 +551,7 @@ class _HomeViewState extends State<HomeView> {
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 padding:
-                                                    EdgeInsets.only(top: 10.h),
+                                                    EdgeInsets.only(top: 10.r),
                                                 itemCount: model
                                                     .selectedMainCatRestaurants
                                                     .length,
@@ -568,57 +582,30 @@ class _HomeViewState extends State<HomeView> {
                     HomeBottomCart()
                 ],
               );
-        return AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle(
-              // statusBarColor: Colors
-              //     .transparent, // Statusbar transparent
-              statusBarIconBrightness:
-                  Brightness.light, // For Android: (dark icons)
-              statusBarBrightness: Brightness.light // For iOS: (dark icons)
-              ),
-          child: Scaffold(
-            //*Resize according to Onscreen keyboard
-            resizeToAvoidBottomInset: true,
-            key: model.homeScaffoldKey,
-            drawer: DrawerView(),
-            body: Platform.isIOS
-                ? UpgradeAlert(
-                    upgrader: Upgrader(
-                      shouldPopScope: () => true,
-                      messages: context.locale == context.supportedLocales[0]
-                          ? MyTurkmenMessages()
-                          : MyRussianMessages(),
-                    ),
-                    child: DoubleBackToCloseApp(
-                      snackBar: SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        duration: Duration(seconds: 2),
-                        margin: EdgeInsets.only(
-                          left: 16.w,
-                          right: 16.w,
-                          bottom: 0.05.sh,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().radius10,
-                        ),
-                        content: Text(
-                          LocaleKeys.doubleBackToCloseApp,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                          ),
-                        ).tr(),
-                      ),
-                      child: body,
-                    ),
-                  )
-                : DoubleBackToCloseApp(
+        return
+            // AnnotatedRegion<SystemUiOverlayStyle>(
+            //   value: SystemUiOverlayStyle.dark,
+            //   child:
+            Scaffold(
+          //*Resize according to Onscreen keyboard
+          resizeToAvoidBottomInset: true,
+          key: model.homeScaffoldKey,
+          drawer: DrawerView(),
+          body: Platform.isIOS
+              ? UpgradeAlert(
+                  upgrader: Upgrader(
+                    shouldPopScope: () => true,
+                    messages: context.locale == context.supportedLocales[0]
+                        ? MyTurkmenMessages()
+                        : MyRussianMessages(),
+                  ),
+                  child: DoubleBackToCloseApp(
                     snackBar: SnackBar(
                       behavior: SnackBarBehavior.floating,
                       duration: Duration(seconds: 2),
                       margin: EdgeInsets.only(
-                        left: 16.w,
-                        right: 16.w,
+                        left: 16.r,
+                        right: 16.r,
                         bottom: 0.05.sh,
                       ),
                       shape: RoundedRectangleBorder(
@@ -634,7 +621,29 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     child: body,
                   ),
-          ),
+                )
+              : DoubleBackToCloseApp(
+                  snackBar: SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    duration: Duration(seconds: 2),
+                    margin: EdgeInsets.only(
+                      left: 16.r,
+                      right: 16.r,
+                      bottom: 0.05.sh,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: AppTheme().radius10,
+                    ),
+                    content: Text(
+                      LocaleKeys.doubleBackToCloseApp,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                      ),
+                    ).tr(),
+                  ),
+                  child: body,
+                ),
         );
         // );
       },
