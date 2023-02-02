@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -182,8 +181,7 @@ class _HomeViewState extends State<HomeView> {
                       background: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
-                                top: 10.h + MediaQuery.of(context).padding.top),
+                            padding: EdgeInsets.only(top: 10.r),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -257,11 +255,7 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 10.r +
-                                                MediaQuery.of(context)
-                                                    .padding
-                                                    .top),
+                                        padding: EdgeInsets.only(top: 10.r),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -321,11 +315,7 @@ class _HomeViewState extends State<HomeView> {
                                   background: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 12.r +
-                                                MediaQuery.of(context)
-                                                    .padding
-                                                    .top),
+                                        padding: EdgeInsets.only(top: 12.r),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
@@ -588,17 +578,16 @@ class _HomeViewState extends State<HomeView> {
             //   value: SystemUiOverlayStyle.dark,
             //   child:
             Scaffold(
-          //*Resize according to Onscreen keyboard
+          //* Resize according to Onscreen keyboard
           resizeToAvoidBottomInset: true,
           key: model.homeScaffoldKey,
           drawer: DrawerView(),
-          //*Resize according to Onscreen keyboard
+          //* Custom colorful safe area to create IOS like status bar that is compatible with SliverAppBar
           body: ColorfulSafeArea(
-            color: kcPrimaryColor,
-            // color: Colors.white,
             left: false,
             right: false,
             bottom: false,
+            color: kcWhiteColor,
             child: Platform.isIOS
                 ? UpgradeAlert(
                     upgrader: Upgrader(

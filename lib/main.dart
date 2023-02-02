@@ -40,11 +40,11 @@ void main() async {
       path: 'assets/translations',
       supportedLocales: const [Locale('en', 'US'), Locale('ru', 'RU')],
       fallbackLocale: const Locale('en', 'US'),
-      child: 
-      // DevicePreview(
-      //   enabled: !kReleaseMode,
-      //   builder: (context) => 
-        YodaResApp(), //* Config DevicePreview
+      child:
+          // DevicePreview(
+          //   enabled: !kReleaseMode,
+          //   builder: (context) =>
+          YodaResApp(), //* Config DevicePreview
       // ),
     ),
   );

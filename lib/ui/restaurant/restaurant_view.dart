@@ -27,7 +27,7 @@ class RestaurantView extends StatelessWidget {
       builder: (context, model, child) {
         if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
-          margin: EdgeInsets.fromLTRB(16.w, 3.h, 16.w, 12.h),
+          margin: EdgeInsets.fromLTRB(16.r, 4.r, 16.r, 12.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -66,8 +66,8 @@ class RestaurantView extends StatelessWidget {
                         //*----------------- WORKING HOURS ---------------------//
                         Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 4.h,
+                        horizontal: 10.r,
+                        vertical: 4.r,
                       ),
                       decoration: BoxDecoration(
                         color: kcSecondaryDarkColor.withOpacity(0.85),
@@ -82,8 +82,8 @@ class RestaurantView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                              right: 4.w,
-                              top: 2.h,
+                              right: 4.r,
+                              top: 2.r,
                             ),
                             child: Icon(
                               Icons.access_time_rounded,
@@ -104,8 +104,8 @@ class RestaurantView extends StatelessWidget {
                   ),
                   //*----------------- FAVOURITE ---------------------//
                   Positioned(
-                    top: 10.w,
-                    right: 10.w,
+                    top: 10.r,
+                    right: 10.r,
                     child: Container(
                       width: 0.11.sw,
                       height: 0.11.sw,
@@ -123,7 +123,7 @@ class RestaurantView extends StatelessWidget {
                           color: model.isFavorited
                               ? kcRedColor
                               : kcSecondaryDarkColor,
-                          size: 25.w,
+                          size: 24.sp,
                         ),
                       ),
                     ),
@@ -132,7 +132,7 @@ class RestaurantView extends StatelessWidget {
               ),
               //*----------------- NAME ---------------------//
               Padding(
-                padding: EdgeInsets.only(top: 2.h),
+                padding: EdgeInsets.only(top: 2.r),
                 child: Text(
                   restaurant.name ?? '',
                   overflow: TextOverflow.ellipsis,
@@ -153,9 +153,9 @@ class RestaurantView extends StatelessWidget {
                             SvgPicture.asset(
                               'assets/map_pin_bold.svg',
                               color: kcDialogColor,
-                              width: 18.w,
+                              width: 18.r,
                             ),
-                            SizedBox(width: 3.w),
+                            SizedBox(width: 3.r),
                             Text(
                               '${restaurant.city} (${restaurant.distance} ',
                               overflow: TextOverflow.ellipsis,
@@ -187,7 +187,7 @@ class RestaurantView extends StatelessWidget {
                             SvgPicture.asset(
                               'assets/map_pin_bold.svg',
                               color: kcDialogColor,
-                              width: 18.w,
+                              width: 18.sp,
                             ),
                             SizedBox(width: 3.w),
                             Text(
@@ -204,10 +204,10 @@ class RestaurantView extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.star_rounded,
-                        size: 22.w,
+                        size: 22.sp,
                         color: kcPrimaryColor,
                       ),
-                      SizedBox(width: 3.w),
+                      SizedBox(width: 3.r),
                       Text(
                         '${formatNumRating(restaurant.rating!)} (${restaurant.rated})',
                         overflow: TextOverflow.ellipsis,
@@ -235,15 +235,15 @@ class RestaurantView extends StatelessWidget {
                           borderRadius: AppTheme().radius20,
                         ),
                         margin:
-                            EdgeInsets.only(left: 18.w, top: 10.h, bottom: 2.h),
+                            EdgeInsets.only(left: 18.r, top: 10.r, bottom: 2.r),
                         padding: EdgeInsets.only(
-                            top: 6.h, bottom: 6.w, right: 16.w, left: 22.w),
+                            top: 6.r, bottom: 6.r, right: 16.r, left: 22.r),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.ideographic,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(right: 5.w),
+                              padding: EdgeInsets.only(right: 5.r),
                               child: Text(
                                 LocaleKeys.discount,
                                 style: TextStyle(
@@ -270,7 +270,7 @@ class RestaurantView extends StatelessWidget {
                           child: SvgPicture.asset(
                             'assets/discount.svg',
                             color: kcGreenColor,
-                            width: 34.w,
+                            width: 34.sp,
                           ),
                           opacity: 0.1,
                           color: kcSecondaryDarkColor,
@@ -296,15 +296,15 @@ class RestaurantView extends StatelessWidget {
                           borderRadius: AppTheme().radius20,
                         ),
                         margin:
-                            EdgeInsets.only(left: 16.w, top: 10.h, bottom: 2.h),
+                            EdgeInsets.only(left: 16.r, top: 10.r, bottom: 2.r),
                         padding: EdgeInsets.only(
-                            top: 6.h, bottom: 6.w, right: 16.w, left: 24.w),
+                            top: 6.r, bottom: 6.r, right: 16.r, left: 24.r),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.ideographic,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(right: 5.w),
+                              padding: EdgeInsets.only(right: 5.r),
                               child: Text(
                                 '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
                                 style: TextStyle(
@@ -331,7 +331,7 @@ class RestaurantView extends StatelessWidget {
                           child: SvgPicture.asset(
                             'assets/discount.svg',
                             color: kcGreenColor,
-                            width: 34.w,
+                            width: 34.sp,
                           ),
                           opacity: 0.1,
                           color: kcSecondaryDarkColor,
@@ -358,7 +358,7 @@ class RestaurantView extends StatelessWidget {
                       margin:
                           EdgeInsets.only(left: 18.w, top: 10.h, bottom: 2.h),
                       padding: EdgeInsets.only(
-                          top: 6.h, bottom: 6.w, right: 16.w, left: 22.w),
+                          top: 6.r, bottom: 6.r, right: 16.r, left: 22.r),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -368,7 +368,7 @@ class RestaurantView extends StatelessWidget {
                             textBaseline: TextBaseline.ideographic,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(right: 5.w),
+                                padding: EdgeInsets.only(right: 5.r),
                                 child: Text(
                                   LocaleKeys.discount,
                                   style: TextStyle(
@@ -401,7 +401,7 @@ class RestaurantView extends StatelessWidget {
                             textBaseline: TextBaseline.ideographic,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(right: 5.w),
+                                padding: EdgeInsets.only(right: 5.r),
                                 child: Text(
                                   '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
                                   style: TextStyle(
@@ -430,7 +430,7 @@ class RestaurantView extends StatelessWidget {
                         child: SvgPicture.asset(
                           'assets/discount.svg',
                           color: kcGreenColor,
-                          width: 34.w,
+                          width: 34.sp,
                         ),
                         opacity: 0.1,
                         color: kcSecondaryDarkColor,

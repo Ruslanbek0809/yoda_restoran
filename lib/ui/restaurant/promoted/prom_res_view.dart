@@ -26,10 +26,10 @@ class PromResView extends StatelessWidget {
           height: 0.245.sh,
           width: 0.7.sw,
           margin: EdgeInsets.fromLTRB(
-            promRess.indexOf(restaurant) == 0 ? 16.w : 8.w,
-            6.h,
-            promRess.indexOf(restaurant) == promRess.length - 1 ? 16.w : 0.w,
-            24.h,
+            promRess.indexOf(restaurant) == 0 ? 16.r : 8.r,
+            6.r,
+            promRess.indexOf(restaurant) == promRess.length - 1 ? 16.r : 0.r,
+            24.r,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,8 +71,8 @@ class PromResView extends StatelessWidget {
                         //*----------------- WORKING HOURS ---------------------//
                         Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 4.h,
+                        horizontal: 10.r,
+                        vertical: 4.r,
                       ),
                       decoration: BoxDecoration(
                         color: kcSecondaryDarkColor.withOpacity(0.9),
@@ -87,8 +87,8 @@ class PromResView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                              right: 4.w,
-                              top: 2.h,
+                              right: 4.r,
+                              top: 2.r,
                             ),
                             child: Icon(
                               Icons.access_time_rounded,
@@ -109,8 +109,8 @@ class PromResView extends StatelessWidget {
                   ),
                   //*----------------- FAVOURITE ---------------------//
                   Positioned(
-                    top: 8.w,
-                    right: 8.w,
+                    top: 8.r,
+                    right: 8.r,
                     child: Container(
                       width: 0.09.sw,
                       height: 0.09.sw,
@@ -137,7 +137,7 @@ class PromResView extends StatelessWidget {
               ),
               //*----------------- NAME ---------------------//
               Padding(
-                padding: EdgeInsets.only(top: 2.h),
+                padding: EdgeInsets.only(top: 2.r),
                 child: Text(
                   restaurant.name ?? '',
                   overflow: TextOverflow.ellipsis,
@@ -158,9 +158,9 @@ class PromResView extends StatelessWidget {
                             SvgPicture.asset(
                               'assets/map_pin_bold.svg',
                               color: kcDialogColor,
-                              width: 14.w,
+                              width: 14.sp,
                             ),
-                            SizedBox(width: 3.w),
+                            SizedBox(width: 3.r),
                             Text(
                               '${restaurant.city} (${restaurant.distance} ',
                               overflow: TextOverflow.ellipsis,
@@ -192,7 +192,7 @@ class PromResView extends StatelessWidget {
                             SvgPicture.asset(
                               'assets/map_pin_bold.svg',
                               color: kcDialogColor,
-                              width: 14.w,
+                              width: 14.sp,
                             ),
                             SizedBox(width: 3.w),
                             Text(
@@ -209,7 +209,7 @@ class PromResView extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.star_rounded,
-                        size: 18.w,
+                        size: 18.sp,
                         color: kcPrimaryColor,
                       ),
                       Text(

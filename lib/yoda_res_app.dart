@@ -35,9 +35,9 @@ class YodaResApp extends StatelessWidget {
         // builder: DevicePreview.appBuilder, //* Config DevicePreview
         title: Constants.appName,
         navigatorObservers: [StackedService.routeObserver],
-        navigatorKey: StackedService.navigatorKey, // For stacked_services
+        navigatorKey: StackedService.navigatorKey, //* Stacked_services config
         onGenerateRoute: StackedRouter()
-            .onGenerateRoute, // Auto generates all routes using stacked package
+            .onGenerateRoute, //* Auto generates all routes using stacked package
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale, //* Config DevicePreview
@@ -67,7 +67,7 @@ class YodaResApp extends StatelessWidget {
             child: ScrollConfiguration(
               behavior: MyBehavior(), // To remove the glow effect entirely
               child: MediaQuery(
-                //Setting font does not change with system font size
+                //* Setting font does not change with system font size
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: child!,
               ),
