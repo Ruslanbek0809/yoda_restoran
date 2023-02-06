@@ -57,7 +57,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     return CustomScrollView(
       controller: customScrollController,
-      physics: ClampingScrollPhysics(),
+      // physics: ClampingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       slivers: [
         //*----------------- ARROW BACK ---------------------//
         SliverAppBar(
@@ -203,8 +204,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   image: CachedNetworkImageProvider(
                     restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
-                  fit: BoxFit.contain,
-                  alignment: Alignment.topCenter,
+                  fit: BoxFit.cover,
+                  // fit: BoxFit.contain,
+                  // alignment: Alignment.topCenter,
                 ),
               ),
 

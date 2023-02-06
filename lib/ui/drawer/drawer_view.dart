@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import '../../generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
@@ -108,6 +109,13 @@ class DrawerView extends StatelessWidget {
     return ViewModelBuilder<DrawerViewModel>.reactive(
       onModelReady: (model) => model.getAppVersion(),
       builder: (context, model, child) => Drawer(
+        width: getValueForScreenType<bool>(
+          context: context,
+          mobile: false,
+          tablet: true,
+        )
+            ? 0.75.sw
+            : null,
         child: SingleChildScrollView(
           child: Column(
             children: [

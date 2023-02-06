@@ -32,25 +32,15 @@ class ToggleButtonView extends StatelessWidget {
                     model.switchToggleButton();
 
                   if (!restaurant.selfPickUp! && restaurant.delivery!)
-                    await showErrorFlashBar(
+                    await model.showCustomFlashBar(
                       context: context,
                       msg: LocaleKeys.toggleDeliveryOnly,
-                      margin: EdgeInsets.only(
-                        left: 16.w,
-                        right: 16.w,
-                        bottom: 0.12.sh,
-                      ),
                     );
 
                   if (restaurant.selfPickUp! && !restaurant.delivery!)
-                    await showErrorFlashBar(
+                    await model.showCustomFlashBar(
                       context: context,
                       msg: LocaleKeys.toggleSelfPickUpOnly,
-                      margin: EdgeInsets.only(
-                        left: 16.w,
-                        right: 16.w,
-                        bottom: 0.12.sh,
-                      ),
                     );
                 },
                 child: Container(

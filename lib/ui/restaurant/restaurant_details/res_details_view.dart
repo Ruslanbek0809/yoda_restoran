@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import '../../../utils/utils.dart';
 import '../../../models/models.dart';
 import 'res_details_bottom_cart.dart';
 import 'res_details_main_hook.dart';
 import 'res_details_main_busy.dart';
 import 'res_details_view_model.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResDetailsView extends StatelessWidget {
   final Restaurant restaurant;
@@ -22,26 +20,12 @@ class ResDetailsView extends StatelessWidget {
         if (model.isCustomError && restaurant.id == model.cartRes!.id)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateCustomError();
-            await showErrorFlashBar(
-              context: context,
-              margin: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                bottom: 0.12.sh,
-              ),
-            );
+            await model.showCustomFlashBar(context: context);
           });
         else if (model.isCustomError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateCustomError();
-            await showErrorFlashBar(
-              context: context,
-              margin: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                bottom: 0.05.sh,
-              ),
-            );
+            await model.showCustomFlashBar(context: context);
           });
 
         return Scaffold(
