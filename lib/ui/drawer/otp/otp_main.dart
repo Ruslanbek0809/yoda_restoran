@@ -140,14 +140,9 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     if (currentOtp.length != 6) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      showErrorFlashBar(
+                      model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.enter_otp_code_error.tr(),
-                        margin: EdgeInsets.only(
-                          left: 0.1.sw,
-                          right: 0.1.sw,
-                          bottom: 0.05.sh,
-                        ),
                       );
                       return;
                     }
@@ -155,14 +150,9 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     if (currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
-                      showErrorFlashBar(
+                      model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.incorrect_code.tr(),
-                        margin: EdgeInsets.only(
-                          left: 0.1.sw,
-                          right: 0.1.sw,
-                          bottom: 0.05.sh,
-                        ),
                       );
                       return;
                     }
@@ -170,14 +160,8 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     FocusScope.of(context)
                         .unfocus(); // UNFOCUSES all textfield b4 data fetch
                     await model.saveOtpData(
-                      onFailForView: () => showErrorFlashBar(
-                        context: context,
-                        margin: EdgeInsets.only(
-                          left: 0.1.sw,
-                          right: 0.1.sw,
-                          bottom: 0.05.sh,
-                        ),
-                      ),
+                      onFailForView: () =>
+                          model.showCustomFlashBar(context: context),
                     );
                   }),
             ),
@@ -192,14 +176,8 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                   : CustomTextChildButton(
                       onPressed: () async {
                         await model.updateResendButtonWithCode(
-                          onFailForView: () => showErrorFlashBar(
-                            context: context,
-                            margin: EdgeInsets.only(
-                              left: 0.1.sw,
-                              right: 0.1.sw,
-                              bottom: 0.05.sh,
-                            ),
-                          ),
+                          onFailForView: () =>
+                              model.showCustomFlashBar(context: context),
                         );
                       },
                       color: kcWhiteColor,

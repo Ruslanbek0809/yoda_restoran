@@ -486,26 +486,14 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           : () async {
                               if (model.selectedAddress!.id == -1 &&
                                   model.isDelivery)
-                                await showErrorFlashBar(
+                                await model.showCustomFlashBar(
                                   context: context,
                                   msg: LocaleKeys.selectAddressPls,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.13.sh,
-                                  ),
                                 );
                               else
                                 await model.createOrder(
-                                  onFailForView: () async =>
-                                      await showErrorFlashBar(
-                                    context: context,
-                                    margin: EdgeInsets.only(
-                                      left: 16.w,
-                                      right: 16.w,
-                                      bottom: 0.13.sh,
-                                    ),
-                                  ),
+                                  onFailForView: () async => await model
+                                      .showCustomFlashBar(context: context),
                                 );
                             },
                     ),

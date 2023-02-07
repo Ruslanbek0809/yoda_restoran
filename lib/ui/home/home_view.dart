@@ -144,26 +144,15 @@ class _HomeViewState extends State<HomeView> {
         if (model.fetchingFilterError && model.cartRes!.id != -1)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
-            await showErrorFlashBar(
+            await model.showCustomFlashBar(
               context: context,
-              margin: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                bottom: 0.12.sh,
-              ),
+              isCartEmpty: false,
             );
           });
         else if (model.fetchingFilterError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.updateFetchingSelectedError();
-            await showErrorFlashBar(
-              context: context,
-              margin: EdgeInsets.only(
-                left: 16.w,
-                right: 16.w,
-                bottom: 0.05.sh,
-              ),
-            );
+            await model.showCustomFlashBar(context: context);
           });
 
         //*----------------- SELECTED CATS LOADING VIEW ---------------------//

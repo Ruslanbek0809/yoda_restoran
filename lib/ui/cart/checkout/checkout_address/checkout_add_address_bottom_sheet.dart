@@ -93,23 +93,13 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
                               _addressformKey.currentState!.save();
                               await model.onAddAddressPressed(() async {
                                 await completer(SheetResponse(data: true));
-                                await showErrorFlashBar(
+                                await model.showCustomFlashBar(
                                   context: context,
                                   msg: LocaleKeys.addAddedSuccessfully,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.05.sh,
-                                  ),
                                 );
                               }, () async {
-                                await showErrorFlashBar(
+                                await model.showCustomFlashBar(
                                   context: context,
-                                  margin: EdgeInsets.only(
-                                    left: 16.w,
-                                    right: 16.w,
-                                    bottom: 0.05.sh,
-                                  ),
                                 );
                               });
                             }

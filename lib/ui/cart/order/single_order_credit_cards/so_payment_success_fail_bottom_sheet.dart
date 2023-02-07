@@ -156,7 +156,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                           ? () async {
                               await model.onChangeOnlineToCashButtonPressed(
                                 onSuccessForView: () async {
-                                  await showErrorFlashBar(
+                                  await model.showCustomFlashBar(
                                     msg: LocaleKeys
                                         .payment_type_changed_from_online_to_cash
                                         .tr(),
@@ -170,7 +170,7 @@ class SingleOrderPaymentSuccessFailBottomSheetView extends StatelessWidget {
                                   model.navBack();
                                 },
                                 onFailForView: () async {
-                                  await showErrorFlashBar(
+                                  await model.showCustomFlashBar(
                                     context: context,
                                     margin: EdgeInsets.only(
                                       left: 16.w,

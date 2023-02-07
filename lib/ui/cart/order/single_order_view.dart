@@ -57,25 +57,13 @@ class SingleOrderView extends StatelessWidget {
                   onPressed: (BuildContext context) async =>
                       await model.showOrderDeleteDialog(
                     () async {
-                      showErrorFlashBar(
+                      model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.orderDeleteSuccess.tr(),
-                        margin: EdgeInsets.only(
-                          left: 0.1.sw,
-                          right: 0.1.sw,
-                          bottom: 0.05.sh,
-                        ),
                       );
                     },
                     () async {
-                      showErrorFlashBar(
-                        context: context,
-                        margin: EdgeInsets.only(
-                          left: 0.1.sw,
-                          right: 0.1.sw,
-                          bottom: 0.05.sh,
-                        ),
-                      );
+                      model.showCustomFlashBar(context: context);
                     },
                   ),
                   backgroundColor: kcRedColor,
@@ -707,25 +695,14 @@ class SingleOrderView extends StatelessWidget {
                                   await model.showCancelWaitingOrderDialog(
                                     order.id!,
                                     () async {
-                                      showErrorFlashBar(
+                                      model.showCustomFlashBar(
                                         context: context,
                                         msg: LocaleKeys.orderCancelSuccess.tr(),
-                                        margin: EdgeInsets.only(
-                                          left: 0.1.sw,
-                                          right: 0.1.sw,
-                                          bottom: 0.05.sh,
-                                        ),
                                       );
                                     },
                                     () async {
-                                      showErrorFlashBar(
-                                        context: context,
-                                        margin: EdgeInsets.only(
-                                          left: 0.1.sw,
-                                          right: 0.1.sw,
-                                          bottom: 0.05.sh,
-                                        ),
-                                      );
+                                      model.showCustomFlashBar(
+                                          context: context);
                                     },
                                   );
                                   break;
@@ -793,25 +770,13 @@ class SingleOrderView extends StatelessWidget {
                               onPressed: () async =>
                                   await model.showOrderDeleteDialog(
                                 () async {
-                                  showErrorFlashBar(
+                                  model.showCustomFlashBar(
                                     context: context,
                                     msg: LocaleKeys.orderDeleteSuccess.tr(),
-                                    margin: EdgeInsets.only(
-                                      left: 0.1.sw,
-                                      right: 0.1.sw,
-                                      bottom: 0.05.sh,
-                                    ),
                                   );
                                 },
                                 () async {
-                                  showErrorFlashBar(
-                                    context: context,
-                                    margin: EdgeInsets.only(
-                                      left: 0.1.sw,
-                                      right: 0.1.sw,
-                                      bottom: 0.05.sh,
-                                    ),
-                                  );
+                                  model.showCustomFlashBar(context: context);
                                 },
                               ),
                             ),

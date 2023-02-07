@@ -16,8 +16,6 @@ class ToggleButtonViewModel extends ReactiveViewModel {
 
   final _toggleButtonService = locator<ToggleButtonService>();
 
-  FlashController? _flashController;
-
   bool get isDelivery => _toggleButtonService.isDelivery;
 
   //*UPDATES isDelivery to FALSE (USES _toggleButtonService)
@@ -30,6 +28,8 @@ class ToggleButtonViewModel extends ReactiveViewModel {
 
   /// SWITCHES isDelivery (USES _toggleButtonService)
   void switchToggleButton() => _toggleButtonService.switchToggleButton();
+
+  FlashController? _flashController;
 
   /// CREATED custom flash bar instead of one global flash bar because multiple stack flash bar issue
   Future<void> showCustomFlashBar({

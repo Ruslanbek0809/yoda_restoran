@@ -36,7 +36,6 @@ class ResDetailsViewModel extends FutureViewModel {
   int _activeTab = 0;
   bool _isTabPressed = false;
   bool _isShrink = false;
-  FlashController? _flashController;
 
   int get activeTab => _activeTab;
   bool get isTabPressed => _isTabPressed;
@@ -117,48 +116,6 @@ class ResDetailsViewModel extends FutureViewModel {
     _isCustomError = false;
   }
 
-  /// CREATED custom flash bar instead of one global flash bar because multiple stack flash bar issue
-  Future<void> showCustomFlashBar({
-    required BuildContext context,
-    String msg = LocaleKeys.errorOccured,
-    Duration duration = const Duration(seconds: 2),
-  }) async {
-    if (_flashController?.isDisposed == false)
-      await _flashController?.dismiss();
-    _flashController = FlashController<dynamic>(
-      context,
-      duration: duration,
-      builder: (context, controller) {
-        return Flash(
-          controller: controller,
-          barrierDismissible: true,
-          margin: EdgeInsets.only(
-            left: 16.w,
-            right: 16.w,
-            bottom: 0.05.sh,
-          ),
-          position: FlashPosition.bottom,
-          behavior: FlashBehavior.floating,
-          boxShadows: kElevationToShadow[0],
-          borderRadius: AppTheme().radius16,
-          backgroundColor: kcSecondaryDarkColor,
-          child: FlashBar(
-            icon: Padding(
-              padding: EdgeInsets.only(left: 24.w, right: 12.w),
-              child: SvgPicture.asset(
-                'assets/warning.svg',
-                width: 20.w,
-                height: 20.h,
-              ),
-            ),
-            content: Text(msg, style: kts16ButtonText).tr(),
-          ),
-        );
-      },
-    );
-    await _flashController?.show();
-  }
-
 //*----------------------- RESTAURANT BOTTOM SHEET ----------------------------//
 
   //*SHOWS RestaurantDetailsInfoBottomSheet
@@ -211,6 +168,49 @@ class ResDetailsViewModel extends FutureViewModel {
     }
   }
 
+  FlashController? _flashController;
+
+  /// CREATED custom flash bar instead of one global flash bar because multiple stack flash bar issue
+  Future<void> showCustomFlashBar({
+    required BuildContext context,
+    String msg = LocaleKeys.errorOccured,
+    Duration duration = const Duration(seconds: 2),
+  }) async {
+    if (_flashController?.isDisposed == false)
+      await _flashController?.dismiss();
+    _flashController = FlashController<dynamic>(
+      context,
+      duration: duration,
+      builder: (context, controller) {
+        return Flash(
+          controller: controller,
+          barrierDismissible: true,
+          margin: EdgeInsets.only(
+            left: 16.w,
+            right: 16.w,
+            bottom: 0.05.sh,
+          ),
+          position: FlashPosition.bottom,
+          behavior: FlashBehavior.floating,
+          boxShadows: kElevationToShadow[0],
+          borderRadius: AppTheme().radius16,
+          backgroundColor: kcSecondaryDarkColor,
+          child: FlashBar(
+            icon: Padding(
+              padding: EdgeInsets.only(left: 24.w, right: 12.w),
+              child: SvgPicture.asset(
+                'assets/warning.svg',
+                width: 20.w,
+                height: 20.h,
+              ),
+            ),
+            content: Text(msg, style: kts16ButtonText).tr(),
+          ),
+        );
+      },
+    );
+    await _flashController?.show();
+  }
 //*----------------------- NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {

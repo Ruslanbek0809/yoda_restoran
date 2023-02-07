@@ -242,7 +242,7 @@ class SOSelectCreditCardsBottomSheetView extends StatelessWidget {
                 // ),
                 onPressed: () async {
                   if (model.tempSelectedHiveCreditCard == null)
-                    await showErrorFlashBar(
+                    await model.showCustomFlashBar(
                       context: context,
                       msg: LocaleKeys.selectCreditCard,
                       margin: EdgeInsets.only(

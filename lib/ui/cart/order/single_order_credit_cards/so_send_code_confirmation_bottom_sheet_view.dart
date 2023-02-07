@@ -242,7 +242,7 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                                   );
                                 } else if (model.sendCodeErrorAttemptCount ==
                                     0) {
-                                  await showErrorFlashBar(
+                                  await model.showCustomFlashBar(
                                     context: context,
                                     margin: EdgeInsets.only(
                                       left: 16.w,

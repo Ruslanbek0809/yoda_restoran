@@ -247,7 +247,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                   onFailForView: (createBankOrderEnum) async {
                                     if (createBankOrderEnum ==
                                         CreateBankOrderEnum.wrongCardInfoFail)
-                                      await showErrorFlashBar(
+                                      await model.showCustomFlashBar(
                                         context: context,
                                         msg: LocaleKeys
                                             .online_payment_wrong_card_info,
@@ -258,7 +258,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                                         ),
                                       );
                                     else
-                                      await showErrorFlashBar(
+                                      await model.showCustomFlashBar(
                                         context: context,
                                         margin: EdgeInsets.only(
                                           left: 16.w,

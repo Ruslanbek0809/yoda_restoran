@@ -383,15 +383,15 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                             ),
                       onPressed: () async => await model.showUserDeleteDialog(
                         () async {
-                          showErrorFlashBar(
+                          model.showCustomFlashBar(
                             context: context,
                             msg: LocaleKeys.deleteUserFlashInfo.tr(),
-                            duration: Duration(seconds: 3),
                             margin: EdgeInsets.only(
                               left: 0.1.sw,
                               right: 0.1.sw,
                               bottom: 0.05.sh,
                             ),
+                            duration: Duration(seconds: 3),
                           );
                           await model.navToHomeByRemovingAll();
                         },
@@ -419,7 +419,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                     if (!_profileformKey.currentState!.validate()) return;
                     _profileformKey.currentState!.save();
                     await model.onUpdateUserPressed(
-                      onFailForView: () async => await showErrorFlashBar(
+                      onFailForView: () async => await model.showCustomFlashBar(
                         context: context,
                         margin: EdgeInsets.only(
                           left: 16.w,
@@ -427,7 +427,8 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                           bottom: 0.05.sh,
                         ),
                       ),
-                      onSuccessForView: () async => await showErrorFlashBar(
+                      onSuccessForView: () async =>
+                          await model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.profileUpdatedSuccessfully,
                         margin: EdgeInsets.only(

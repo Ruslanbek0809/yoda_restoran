@@ -167,27 +167,17 @@ class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
                     if (!_contactformKey.currentState!.validate()) return;
                     _contactformKey.currentState!.save();
                     await model.onContactPressed(
-                      onFailForView: () async => await showErrorFlashBar(
+                      onFailForView: () async => await model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.msgDidntSent,
-                        margin: EdgeInsets.only(
-                          left: 16.w,
-                          right: 16.w,
-                          bottom: 0.025.sh,
-                        ),
                       ),
                       onSuccessForView: () async {
                         _nameController.clear();
                         _phoneController.clear();
                         _infoController.clear();
-                        await showErrorFlashBar(
+                        await model.showCustomFlashBar(
                           context: context,
                           msg: LocaleKeys.msgSentSuccessfully,
-                          margin: EdgeInsets.only(
-                            left: 16.w,
-                            right: 16.w,
-                            bottom: 0.025.sh,
-                          ),
                         );
                       },
                     );
