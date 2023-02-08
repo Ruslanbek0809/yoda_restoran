@@ -132,6 +132,7 @@ class LoginView extends StatelessWidget with $LoginView {
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr10,
                       onPressed: () async {
+                        FocusScope.of(context).unfocus();
                         if (!formKey.currentState!.validate()) return;
                         formKey.currentState!.save();
 

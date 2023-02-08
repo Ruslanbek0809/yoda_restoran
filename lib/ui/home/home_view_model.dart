@@ -212,6 +212,9 @@ class HomeViewModel extends ReactiveViewModel {
   void navToHomeSearchView() async =>
       await _navService.navigateTo(Routes.homeSearchView);
 
+  void navToRestaurantsView() async =>
+      await _navService.navigateTo(Routes.restaurantsView);
+
   void navToSingleExView(ExclusiveSingle singleEx) async =>
       await _navService.navigateTo(
         Routes.singleExView,

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -319,6 +320,15 @@ class _HomeViewState extends State<HomeView> {
                                             ),
                                             //*----------------- SEARCH ---------------------//
                                             HomeSearch(),
+                                            //*----------------- RESTAURANTS VIEW ---------------------//
+                                            IconButton(
+                                              icon: SvgPicture.asset(
+                                                'assets/restaurants_icon.svg',
+                                              ),
+                                              onPressed:
+                                                  model.navToRestaurantsView,
+                                              tooltip: 'Restaurants',
+                                            ),
                                           ],
                                         ),
                                       ),

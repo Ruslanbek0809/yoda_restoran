@@ -16,7 +16,12 @@ class HomeSearch extends ViewModelWidget<HomeViewModel> {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(
-          right: 10.r,
+          // right: 10.r,
+          right: getValueForScreenType<double>(
+            context: context,
+            mobile: 0.r,
+            tablet: 10.r,
+          ),
           left: getValueForScreenType<double>(
             context: context,
             mobile: 0.r,

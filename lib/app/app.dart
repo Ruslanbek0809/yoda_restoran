@@ -14,6 +14,7 @@ import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_exclusives/single_ex_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/home/restaurants/restaurants_view.dart';
 import '../ui/home/slider/slider_webview.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
@@ -41,6 +42,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: OnBoardingView),
     MaterialRoute(page: SingleExView),
     MaterialRoute(page: SliderWebview),
+    MaterialRoute(page: RestaurantsView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

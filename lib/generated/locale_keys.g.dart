@@ -172,6 +172,7 @@ abstract class  LocaleKeys {
   static const search = 'search';
   static const searchEx = 'searchEx';
   static const searchExMeal = 'searchExMeal';
+  static const restaurants = 'restaurants';
   static const sendCodeIn = 'sendCodeIn';
   static const foundRestaurants = 'foundRestaurants';
   static const clear = 'clear';

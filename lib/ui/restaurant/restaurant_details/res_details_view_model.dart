@@ -83,6 +83,9 @@ class ResDetailsViewModel extends FutureViewModel {
     }
   }
 
+  @override
+  Future<void> futureToRun() async => await getResCatsWithMeals();
+
   // // FETCHS Restaurant categories with their meals
   Future getResCatsWithMeals(
       //   {
@@ -241,9 +244,4 @@ class ResDetailsViewModel extends FutureViewModel {
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
       [_bottomCartService, _hiveDbService];
-
-  @override
-  Future<void> futureToRun() async => await getResCatsWithMeals();
-  // @override
-  // Future<void> futureToRun() async => await Future.delayed(Duration.zero);
 }
