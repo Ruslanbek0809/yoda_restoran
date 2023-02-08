@@ -14,7 +14,7 @@ import '../drawer/drawer_view.dart';
 import '../../shared/shared.dart';
 import 'home_bottom_cart.dart';
 import 'home_exclusives/home_exclusive.dart';
-import 'main_category/main_cat_view.dart';
+import 'main_category/main_cats_view.dart';
 import '../restaurant/promoted/prom_res_view.dart';
 import '../restaurant/restaurant_view.dart';
 import '../widgets/widgets.dart';
@@ -186,6 +186,14 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 //*----------------- SEARCH ---------------------//
                                 HomeSearch(),
+                                //*----------------- RESTAURANTS VIEW ---------------------//
+                                IconButton(
+                                  icon: SvgPicture.asset(
+                                    'assets/restaurants_icon.svg',
+                                  ),
+                                  onPressed: model.navToRestaurantsView,
+                                  tooltip: 'Restaurants',
+                                ),
                               ],
                             ),
                           ),
@@ -260,6 +268,15 @@ class _HomeViewState extends State<HomeView> {
                                             ),
                                             //*----------------- SEARCH ---------------------//
                                             HomeSearch(),
+                                            //*----------------- RESTAURANTS VIEW ---------------------//
+                                            IconButton(
+                                              icon: SvgPicture.asset(
+                                                'assets/restaurants_icon.svg',
+                                              ),
+                                              onPressed:
+                                                  model.navToRestaurantsView,
+                                              tooltip: 'Restaurants',
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -349,7 +366,7 @@ class _HomeViewState extends State<HomeView> {
                                 delegate: ContestTabHeader(
                                   //*If MAIN CAT FILTER is APPLIED
                                   size: !model.isFilterApplied ? 90.r : 94.r,
-                                  child: MainCatView(),
+                                  child: MainCatsView(),
                                 ),
                               ),
                               //*----------------- EXCLUSIVES ---------------------//

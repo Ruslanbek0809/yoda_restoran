@@ -7,7 +7,7 @@ import 'main_cat_filter_item_hook.dart';
 import 'main_cat_item_hook.dart';
 import 'main_cat_view_model.dart';
 
-class MainCatView extends StatelessWidget {
+class MainCatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainCatViewModel>.nonReactive(
