@@ -252,6 +252,54 @@ class ApiService {
     }
   }
 
+  //*------------------ RESTAURANTS APIS ---------------------//
+
+  Future<List<Restaurant>> getAllPaginatedRestaurants() async {
+    log.v(
+        'getAllPaginatedRestaurants() My loc: ${_geolocatorService.locationPosition}');
+    List<Restaurant> _allPaginatedRestaurants = [];
+    try {
+      Response response;
+      if (_geolocatorService.locationPosition != null) {
+        response = await _apiRoot.dio.get(
+          'api/paginatedRestaurants/',
+          queryParameters: {
+            'markerY': _geolocatorService.locationPosition!.longitude,
+            'markerX': _geolocatorService.locationPosition!.latitude,
+            'all': true,
+          },
+        );
+      } else
+        response = await _apiRoot.dio.get(
+          'api/paginatedRestaurants/',
+          queryParameters: {'all': true},
+        );
+      log.v('RESPONSE: api/paginatedRestaurants/ => ${response.data}');
+
+      // if (response.data['results'] != null) {
+      //   for (final _randomRestaurant in response.data['results'])
+      //     _paginatedRestaurants.add(Restaurant.fromJson(_randomRestaurant));
+      // }
+      // onSuccess!(_paginatedRestaurants, response.data['next']);
+
+      // if (response.data != null) {
+      //   for (final _promoted in response.data) {
+      //     _promotedList.add(Promoted.fromJson(_promoted));
+      //   }
+      // }
+
+      if (response.data != null) {
+        for (final _restaurant in response.data) {
+          _allPaginatedRestaurants.add(Restaurant.fromJson(_restaurant));
+        }
+      }
+      return _allPaginatedRestaurants;
+    } on DioError catch (error) {
+      log.v('ERROR on api/paginatedRestaurants/ :$error');
+      rethrow;
+    }
+  }
+
   //*------------------ SINGLE EXCLUSIVE APIS ---------------------//
 
   Future<void> getSingleExRiches({

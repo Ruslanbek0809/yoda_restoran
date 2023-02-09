@@ -27,52 +27,59 @@ class RestaurantsView extends StatelessWidget {
               style: kts22DarkText,
             ).tr(),
           ),
-          body: Column(
-            children: [
-              //*----------------- MAIN CATEGORIES ---------------------//
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.r),
-                child: MainCatsView(),
-              ),
-              //*----------------- RESTAURANTS GRID ---------------------//
-              Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 16.r,
-                    horizontal: 10.r,
-                  ),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 10.r,
-                    crossAxisSpacing: 6.r,
-                    childAspectRatio: 0.8,
-                  ),
-                  itemCount: 10,
-                  itemBuilder: (context, pos) => Column(
-                    children: [
-                      //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
-                      YodaImage(
-                        image: 'assets/mock_restaurant.png',
-                        // image: meal.imageCard ?? 'assets/ph_product.png',
-                      ),
-                      //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.r),
-                        child: Text(
-                          'Overbrinks Oguzkent',
-                          // meal.name ?? '',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: kts14Text,
+          body: model.isBusy
+              ? LoadingWidget()
+              : model.hasError
+                  ? ViewErrorWidget(
+                      modelCallBack: () async => await model.initialise(),
+                    )
+                  : Column(
+                      children: [
+                        //*----------------- MAIN CATEGORIES ---------------------//
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12.r),
+                          child: MainCatsView(),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+                        //*----------------- RESTAURANTS GRID ---------------------//
+                        Expanded(
+                          child: GridView.builder(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 16.r,
+                              horizontal: 10.r,
+                            ),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10.r,
+                              crossAxisSpacing: 6.r,
+                              childAspectRatio: 0.8,
+                            ),
+                            itemCount: 10,
+                            itemBuilder: (context, pos) => Column(
+                              children: [
+                                //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
+                                YodaImage(
+                                  image: 'assets/mock_restaurant.png',
+                                  // image: meal.imageCard ?? 'assets/ph_product.png',
+                                ),
+                                //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
+                                Padding(
+                                  padding: EdgeInsets.only(top: 8.r),
+                                  child: Text(
+                                    'Overbrinks Oguzkent',
+                                    // meal.name ?? '',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                    style: kts14Text,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
         );
       },
     );

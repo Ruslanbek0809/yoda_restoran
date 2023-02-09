@@ -57,24 +57,21 @@ class HomeService with ReactiveServiceMixin {
       ReactiveValue<bool>(false); // Custom busy for HomeView
   bool get fetchingFilterError => _fetchingFilterError.value;
 
-  Future<List<SliderModel>?> getSliders() async {
+  Future<void> getSliders() async {
     _sliders = await _api.getSliders();
     log.v('_sliders.length: ${_sliders.length}');
-    return _sliders;
   }
 
-  Future<List<MainCategory>?> getMainCategs() async {
+  Future<void> getMainCategs() async {
     _mainCats = await _api.getMainCats();
     _mainCats.sort((prev, next) => prev.order!.compareTo(next.order!));
     log.v('_mainCats.length: ${_mainCats.length}');
-    return _mainCats;
   }
 
-  Future<List<MainCategory>?> getSearchMainCategs() async {
+  Future<void> getSearchMainCategs() async {
     _searchMainCats = await _api.getSearchMainCats();
     _searchMainCats.sort((prev, next) => prev.order!.compareTo(next.order!));
     log.v('_searchMainCats.length: ${_searchMainCats.length}');
-    return _searchMainCats;
   }
 
   // Future<List<Restaurant>?> getRandomRess() async {
@@ -84,7 +81,7 @@ class HomeService with ReactiveServiceMixin {
   // }
 
   //*HOME RESS PAG
-  Future<List<Restaurant>?> getPaginatedRess({int page = 1}) async {
+  Future<void> getPaginatedRess({int page = 1}) async {
     List<Restaurant> _fetchedRandomRess = [];
     String? _pagNext;
     await _api.getPaginatedRess(
@@ -106,23 +103,20 @@ class HomeService with ReactiveServiceMixin {
 
     log.v(
         '_randomRess.length: ${_randomRess.length}; _isPullUpEnabled:$_isPullUpEnabled');
-    return _randomRess;
   }
 
   //*HOME RESS PAG
   //*ENABLES SmartRefresher's pull up function
   void enablePullUp() => _isPullUpEnabled = true;
 
-  Future<List<Promoted?>> getProms() async {
+  Future<void> getProms() async {
     _proms = await _api.getProms();
-    log.v(_proms.length);
-    return _proms;
+    log.v('_proms.length: ${_proms.length}');
   }
 
-  Future<List<Exclusive>?> getExclusives() async {
+  Future<void> getExclusives() async {
     _exclusives = await _api.getExclusives();
     log.v('_exclusives.length: ${_exclusives.length}');
-    return _exclusives;
   }
 
   Future<bool> getFilterResult(
@@ -166,5 +160,16 @@ class HomeService with ReactiveServiceMixin {
     log.i('');
 
     _fetchingFilterError.value = false;
+  }
+
+  //*------------------ RESTAURANTS APIS ---------------------//
+
+  List<Restaurant> _allPaginatedRestaurants = [];
+  List<Restaurant> get allPaginatedRestaurants => _allPaginatedRestaurants;
+
+  Future<void> getAllPaginatedRestaurants() async {
+    _allPaginatedRestaurants = await _api.getAllPaginatedRestaurants();
+    log.v(
+        '_allPaginatedRestaurants.length: ${_allPaginatedRestaurants.length}');
   }
 }

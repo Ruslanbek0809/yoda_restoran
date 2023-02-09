@@ -1,11 +1,4 @@
 import 'dart:async';
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flash/flash.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -19,10 +12,13 @@ import '../../../utils/utils.dart';
 class RestauranstViewModel extends FutureViewModel {
   final log = getLogger('RestauranstViewModel');
 
-  final _api = locator<ApiService>();
+  final _homeService = locator<HomeService>();
   final _navService = locator<NavigationService>();
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
+
+  List<Restaurant>? get allPaginatedRestaurants =>
+      _homeService.allPaginatedRestaurants;
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
@@ -32,39 +28,18 @@ class RestauranstViewModel extends FutureViewModel {
   List<ResCategory> _resCategories = [];
   List<ResCategory> get resCategories => _resCategories;
 
-  // @override
-  // Future<void> futureToRun() async => await getResCatsWithMeals();
   @override
-  Future<void> futureToRun() async => await Future.delayed(Duration.zero);
+  Future<void> futureToRun() async => runBusyFuture(
+        _homeService.getAllPaginatedRestaurants(),
+        // busyObject: allPaginatedRestaurantsFuture,
+        throwException: true,
+      );
+  // @override
+  // Future<void> futureToRun() async => await Future.delayed(Duration.zero);
 
-  // // FETCHS Restaurant categories with their meals
-  // Future getResCatsWithMeals(
-  //     //   {
-  //     //   // Function()? onFailForView,
-  //     // }
-  //     ) async {
-  //   log.i('');
-  //   await _api.getResCatsWithMeals(
-  //     restaurantId: restaurant!.id!,
-  //     onSuccess: (result) async {
-  //       _resCategories = result;
-  //     },
-  //     onFail: () {
-  //       _isCustomError = true;
-  //       // _snackBarService.showCustomSnackBar(
-  //       //   variant: SnackBarType.restaurantDetailsError,
-  //       //   message: 'This is a snack bar',
-  //       //   // title: 'The title',
-  //       //   duration: Duration(seconds: 2),
-  //       // );
-  //     },
-  //   );
-
-  //   log.i('_resCategories.length: ${_resCategories.length}');
-  // }
 //*----------------------- NAVIGATIONS ----------------------------//
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [_bottomCartService, _hiveDbService];
+      [_homeService, _bottomCartService, _hiveDbService];
 }
