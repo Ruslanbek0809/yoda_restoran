@@ -142,6 +142,7 @@ class _HomeViewState extends State<HomeView> {
         if (model.hiveRating != null) await model.checkAndShowFirstHiveRating();
       }),
       builder: (context, model, child) {
+        //* SHOWS custom ERROR snackbar when there is FILTER ERROR
         if (model.fetchingFilterError && model.cartRes!.id != -1)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.disableActiveFilterErrorFromView();
@@ -150,6 +151,7 @@ class _HomeViewState extends State<HomeView> {
               isCartEmpty: false,
             );
           });
+        //* SHOWS custom ERROR snackbar when there is FILTER ERROR
         else if (model.fetchingFilterError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.disableActiveFilterErrorFromView();
@@ -370,7 +372,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               //*----------------- EXCLUSIVES ---------------------//
-                              //*If MAIN CAT FILTER is APPLIED
+                              //*----------------- FILTER/MAINCAT is NOT APPLIED ---------------------//
                               if (!model.isFilterApplied &&
                                   (model.exclusives ?? []).isNotEmpty)
                                 SliverPersistentHeader(
@@ -406,7 +408,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               //*----------------- BODY: RESTAURANTS ---------------------//
                               //*----------------- DEFAULT BODY VIEW ---------------------//
-                              //*If MAIN CAT FILTER is APPLIED
+                              //*----------------- FILTER/MAINCAT is NOT APPLIED ---------------------//
                               !model.isFilterApplied
                                   ? SliverPadding(
                                       padding: EdgeInsets.only(
@@ -491,7 +493,7 @@ class _HomeViewState extends State<HomeView> {
                                       ),
                                     )
 
-                                  //*----------------- SELECTED CATS BODY VIEW ---------------------//
+                                  //*----------------- FILTER/MAINCAT is APPLIED ---------------------//
                                   : SliverList(
                                       delegate: SliverChildListDelegate(
                                         [

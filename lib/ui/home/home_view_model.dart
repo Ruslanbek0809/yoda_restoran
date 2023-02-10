@@ -51,16 +51,17 @@ class HomeViewModel extends ReactiveViewModel {
   // FilterSort get selectedSort =>
   //     _mainCatService.selectedSort; // NEEDS only for UI cases
 
-  bool get isFilterApplied => _mainCatService
-      .isFilterApplied; //* DISABLES filter unrelated part in View
-
   //* FILTER-RELATED VARS
-  List<Restaurant> get selectedMainCatRestaurants => _homeService
-      .selectedMainCatRestaurants; //* SHOWS found restaurants of selectedMainCats
   bool get fetchingFilter => _homeService
       .fetchingFilter; //* To show LOADING when FILTER or SINGLE CAT is applied in View
   bool get fetchingFilterError => _homeService
       .fetchingFilterError; //* To show ERROR while fetching selected FILTER or SINGLE CAT in View
+
+  bool get isFilterApplied => _mainCatService
+      .isFilterApplied; //* DISABLES filter unrelated part in View
+
+  List<Restaurant> get selectedMainCatRestaurants => _homeService
+      .selectedMainCatRestaurants; //* SHOWS found restaurants of selectedMainCats
 
   //*HOME RESS PAG
   int _page = 1;
@@ -157,15 +158,18 @@ class HomeViewModel extends ReactiveViewModel {
     return _homeRess;
   }
 
-  //*CLEARS and UPDATES HomeView to its default
+//*----------------------- FILTER ----------------------------//
+
+  //* DISABLES active filter error
+  void disableActiveFilterErrorFromView() =>
+      _homeService.disableActiveFilterError();
+
+  //* CLEARS FILTER/MAINCAT and RESETS HomeView to its default
   Future<void> clearSelectedMainCatRess() async {
     _homeService.clearSelectedMainCatRess();
     _mainCatService.clearSelectedMainCats();
     _mainCatService.filterDisabled();
   }
-
-  void disableActiveFilterErrorFromView() =>
-      _homeService.disableActiveFilterError();
 
   //*----------------- BOTTOM CART ---------------------//
 

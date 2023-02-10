@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
+import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import '../home_bottom_cart.dart';
 import '../main_category/main_cats_view.dart';
@@ -17,6 +18,7 @@ class RestaurantsView extends StatelessWidget {
     return ViewModelBuilder<RestauranstViewModel>.reactive(
       viewModelBuilder: () => RestauranstViewModel(),
       builder: (context, model, child) {
+        //* SHOWS custom ERROR snackbar when there is FILTER ERROR
         if (model.fetchingFilterError && model.cartRes!.id != -1)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.disableActiveFilterErrorFromView();
@@ -25,11 +27,13 @@ class RestaurantsView extends StatelessWidget {
               isCartEmpty: false,
             );
           });
+        //* SHOWS custom ERROR snackbar when there is FILTER ERROR
         else if (model.fetchingFilterError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             model.disableActiveFilterErrorFromView();
             await model.showCustomFlashBar(context: context);
           });
+
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kcWhiteColor,
@@ -49,16 +53,65 @@ class RestaurantsView extends StatelessWidget {
                     )
                   : Stack(
                       children: [
-                        Column(
-                          children: [
-                            //*----------------- MAIN CATEGORIES ---------------------//
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 12.r),
-                              child: MainCatsView(),
-                            ),
-                            //*----------------- RESTAURANTS GRID ---------------------//
-                            Expanded(
-                              child: GridView.builder(
+                        SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              //*----------------- MAIN CATEGORIES ---------------------//
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 12.r),
+                                child: MainCatsView(),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.r, vertical: 6.r),
+                                child: Divider(
+                                  thickness: 1,
+                                ),
+                              ),
+
+                              //*----------------- FILTER/MAINCAT is APPLIED ---------------------//
+                              if (model.isFilterApplied)
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16.r,
+                                    vertical: 4.r,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        LocaleKeys.foundRestaurants,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: kts18BoldText,
+                                      ).tr(args: [
+                                        model.selectedMainCatRestaurants.length
+                                            .toString()
+                                      ]),
+                                      SizedBox(width: 5.r),
+                                      CustomTextChildButton(
+                                          child: Text(
+                                            LocaleKeys.clear,
+                                            style: kts16Text,
+                                          ).tr(),
+                                          color: kcSecondaryLightColor,
+                                          borderRadius: AppTheme().radius20,
+                                          padding: EdgeInsets.symmetric(
+                                            vertical: 6.r,
+                                            horizontal: 20.r,
+                                          ),
+                                          onPressed: () async {
+                                            await model
+                                                .clearSelectedMainCatRess();
+                                            await model.initialise();
+                                          }),
+                                    ],
+                                  ),
+                                ),
+                              //*----------------- RESTAURANTS GRID ---------------------//
+                              GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.symmetric(
                                   vertical: 16.r,
                                   horizontal: 10.r,
@@ -70,7 +123,9 @@ class RestaurantsView extends StatelessWidget {
                                   crossAxisSpacing: 6.r,
                                   childAspectRatio: 0.8,
                                 ),
-                                itemCount: 10,
+                                itemCount: model.isFilterApplied
+                                    ? model.selectedMainCatRestaurants.length
+                                    : model.allPaginatedRestaurants.length,
                                 itemBuilder: (context, pos) => Column(
                                   children: [
                                     //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
@@ -93,12 +148,12 @@ class RestaurantsView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
-                            if (!model.hasError && model.cartRes!.id != -1)
-                              SizedBox(
-                                  height: 0.11
-                                      .sh), //* COMPENSATES HomeBottomCart when cart is NOT EMPTY
-                          ],
+                              if (!model.hasError && model.cartRes!.id != -1)
+                                SizedBox(
+                                    height: 0.11
+                                        .sh), //* COMPENSATES HomeBottomCart when cart is NOT EMPTY
+                            ],
+                          ),
                         ),
 
                         //*----------------- BOTTOM CART (if cart is NOT EMPTY) ---------------------//
