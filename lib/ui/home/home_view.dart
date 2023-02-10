@@ -144,7 +144,7 @@ class _HomeViewState extends State<HomeView> {
       builder: (context, model, child) {
         if (model.fetchingFilterError && model.cartRes!.id != -1)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            model.updateFetchingSelectedError();
+            model.disableActiveFilterErrorFromView();
             await model.showCustomFlashBar(
               context: context,
               isCartEmpty: false,
@@ -152,7 +152,7 @@ class _HomeViewState extends State<HomeView> {
           });
         else if (model.fetchingFilterError)
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            model.updateFetchingSelectedError();
+            model.disableActiveFilterErrorFromView();
             await model.showCustomFlashBar(context: context);
           });
 

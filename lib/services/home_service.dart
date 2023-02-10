@@ -155,8 +155,8 @@ class HomeService with ReactiveServiceMixin {
         '_selectedMainCatRestaurants.length: ${_selectedMainCatRestaurants.length}');
   }
 
-  //*Workaround to disable custom select error
-  void disableSelectError() {
+  //*Workaround to disable active filter select error
+  void disableActiveFilterError() {
     log.i('');
 
     _fetchingFilterError.value = false;

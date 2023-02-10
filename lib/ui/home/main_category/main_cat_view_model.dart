@@ -24,7 +24,7 @@ class MainCatViewModel extends ReactiveViewModel {
   //*ADDS or REMOVES mainCatId to/from _selectedMainCats IDs
   Future<void> updateSelectedMainCats(int mainCatId) async {
     log.i(
-        'updateSelectedMainCats() _selectedMainCats length: ${selectedMainCats.length}');
+        'updateSelectedMainCats() BEFORE _selectedMainCats length: ${selectedMainCats.length}');
 
     _mainCatService.updateSelectedMainCats(
         mainCatId); // UPDATES _selectedMainCats (CALLED from _mainCatService)
@@ -34,12 +34,13 @@ class MainCatViewModel extends ReactiveViewModel {
     await Future.delayed(
         Duration(milliseconds: 300)); // For Yandex like animation
 
+    //* FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
     bool isSelectedFetched = await _homeService.getFilterResult(
       selectedMainCats,
       false,
       false,
       false,
-    ); // FETCHS HOME to SHOW RESULT of selectedMainCats (CALLED from _homeService)
+    );
 
     //*If selected cat is not FETCHED bc of ERROR, then remove last added mainCat from the existing list
     if (!isSelectedFetched)
@@ -48,7 +49,8 @@ class MainCatViewModel extends ReactiveViewModel {
     else
       _mainCatService.filterApplied();
 
-    log.i('selectedMainCats length: ${selectedMainCats.length}');
+    log.i(
+        'updateSelectedMainCats() AFTER selectedMainCats length: ${selectedMainCats.length}');
 
     //*If selectedMainCats list empty and ERROR occurs then DISABLE isFilterApplied
     if (isFilterApplied && selectedMainCats.isEmpty)
@@ -56,18 +58,6 @@ class MainCatViewModel extends ReactiveViewModel {
 
     log.i('LAST selectedMainCats length: ${selectedMainCats.length}');
   }
-
-  //*----------------------- MEAL BOTTOM SHEET PART ----------------------------//
-
-  // //*CALLS MainCategoryBottomSheetView
-  // Future showCustomBottomSheet() async {
-  //   log.i('');
-  //   await _bottomSheetService.showCustomSheet(
-  //     variant: BottomSheetType.mainCategory,
-  //     enableDrag: true,
-  //     isScrollControlled: true,
-  //   );
-  // }
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];

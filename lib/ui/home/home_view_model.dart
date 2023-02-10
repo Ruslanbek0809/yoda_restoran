@@ -51,13 +51,16 @@ class HomeViewModel extends ReactiveViewModel {
   // FilterSort get selectedSort =>
   //     _mainCatService.selectedSort; // NEEDS only for UI cases
 
-  bool get isFilterApplied =>
-      _mainCatService.isFilterApplied; // NEEDS only for UI cases
+  bool get isFilterApplied => _mainCatService
+      .isFilterApplied; //* DISABLES filter unrelated part in View
 
+  //* FILTER-RELATED VARS
   List<Restaurant> get selectedMainCatRestaurants => _homeService
-      .selectedMainCatRestaurants; // FOUND restaurants of selectedMainCats
-  bool get fetchingFilter => _homeService.fetchingFilter;
-  bool get fetchingFilterError => _homeService.fetchingFilterError;
+      .selectedMainCatRestaurants; //* SHOWS found restaurants of selectedMainCats
+  bool get fetchingFilter => _homeService
+      .fetchingFilter; //* To show LOADING when FILTER or SINGLE CAT is applied in View
+  bool get fetchingFilterError => _homeService
+      .fetchingFilterError; //* To show ERROR while fetching selected FILTER or SINGLE CAT in View
 
   //*HOME RESS PAG
   int _page = 1;
@@ -161,7 +164,8 @@ class HomeViewModel extends ReactiveViewModel {
     _mainCatService.filterDisabled();
   }
 
-  void updateFetchingSelectedError() => _homeService.disableSelectError();
+  void disableActiveFilterErrorFromView() =>
+      _homeService.disableActiveFilterError();
 
   //*----------------- BOTTOM CART ---------------------//
 

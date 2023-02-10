@@ -17,25 +17,30 @@ class RestauranstViewModel extends FutureViewModel {
   final _bottomCartService = locator<BottomCartService>();
   final _hiveDbService = locator<HiveDbService>();
 
-  List<Restaurant>? get allPaginatedRestaurants =>
-      _homeService.allPaginatedRestaurants;
+  bool get fetchingFilter => _homeService
+      .fetchingFilter; //* To show LOADING when FILTER or SINGLE CAT is applied in View
+  bool get fetchingFilterError => _homeService
+      .fetchingFilterError; //* To show ERROR while fetching selected FILTER or SINGLE CAT in View
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
-
   BottomCartStatus get bottomCartStatus => _bottomCartService
-      .bottomCartStatus; // Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
+      .bottomCartStatus; //* Here we just receive bottomCartStatus from _bottomCartService for realtime reactivity
 
-  List<ResCategory> _resCategories = [];
-  List<ResCategory> get resCategories => _resCategories;
+//*----------------------- INITIAL ----------------------------//
+
+  List<Restaurant>? get allPaginatedRestaurants =>
+      _homeService.allPaginatedRestaurants;
 
   @override
   Future<void> futureToRun() async => runBusyFuture(
         _homeService.getAllPaginatedRestaurants(),
-        // busyObject: allPaginatedRestaurantsFuture,
         throwException: true,
       );
-  // @override
-  // Future<void> futureToRun() async => await Future.delayed(Duration.zero);
+
+//*----------------------- FILTER ----------------------------//
+
+  void disableActiveFilterErrorFromView() =>
+      _homeService.disableActiveFilterError();
 
 //*----------------------- NAVIGATIONS ----------------------------//
 
