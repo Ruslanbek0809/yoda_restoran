@@ -9,6 +9,7 @@ class Restaurant {
   Restaurant({
     this.id,
     this.image,
+    this.square_image,
     this.name,
     this.address,
     this.rated,
@@ -34,6 +35,9 @@ class Restaurant {
 
   @JsonKey(name: 'image')
   final String? image;
+
+  @JsonKey(name: 'square_image')
+  final String? square_image;
 
   @JsonKey(name: 'name')
   final String? name;

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +7,8 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
-import '../home_bottom_cart.dart';
 import '../main_category/main_cats_view.dart';
+import 'restaurants_bottom_cart.dart';
 import 'restaurants_view_model.dart';
 
 class RestaurantsView extends StatelessWidget {
@@ -121,31 +122,90 @@ class RestaurantsView extends StatelessWidget {
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 10.r,
                                   crossAxisSpacing: 6.r,
-                                  childAspectRatio: 0.8,
+                                  childAspectRatio: 0.775,
                                 ),
                                 itemCount: model.isFilterApplied
                                     ? model.selectedMainCatRestaurants.length
                                     : model.allPaginatedRestaurants.length,
-                                itemBuilder: (context, pos) => Column(
-                                  children: [
-                                    //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
-                                    YodaImage(
-                                      image: 'assets/mock_restaurant.png',
-                                      // image: meal.imageCard ?? 'assets/ph_product.png',
-                                    ),
-                                    //*----------------- IMAGE with DISCOUNT(if needed) ---------------------//
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 8.r),
-                                      child: Text(
-                                        'Overbrinks Oguzkent',
-                                        // meal.name ?? '',
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.center,
-                                        style: kts14Text,
+                                itemBuilder: (context, pos) => GestureDetector(
+                                  onTap: () => model.navToResDetailsView(
+                                    model.isFilterApplied
+                                        ? model.selectedMainCatRestaurants[pos]
+                                        : model.allPaginatedRestaurants[pos],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      //*----------------- CIRCLE AVATAR RESTAURANT IMAGE ---------------------//
+                                      CachedNetworkImage(
+                                        imageUrl: model.isFilterApplied
+                                            ? model
+                                                    .selectedMainCatRestaurants[
+                                                        pos]
+                                                    .square_image ??
+                                                'assets/ph_product.png'
+                                            : model.allPaginatedRestaurants[pos]
+                                                    .square_image ??
+                                                'assets/ph_product.png',
+                                        fit: BoxFit.cover,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                CircleAvatar(
+                                          backgroundColor:
+                                              kcDividerSecondaryColor,
+                                          radius: 51,
+                                          child: CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: imageProvider,
+                                          ),
+                                        ),
+                                        placeholder: (context, url) =>
+                                            CircleAvatar(
+                                          backgroundColor:
+                                              kcDividerSecondaryColor,
+                                          radius: 51,
+                                          child: CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: AssetImage(
+                                              'assets/ph_product.png',
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            CircleAvatar(
+                                          backgroundColor:
+                                              kcDividerSecondaryColor,
+                                          radius: 51,
+                                          child: CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: AssetImage(
+                                              'assets/ph_product.png',
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      //*----------------- RESTAURANT NAME ---------------------//
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 8.r),
+                                        child: Text(
+                                          model.isFilterApplied
+                                              ? model
+                                                      .selectedMainCatRestaurants[
+                                                          pos]
+                                                      .name ??
+                                                  ''
+                                              : model
+                                                      .allPaginatedRestaurants[
+                                                          pos]
+                                                      .name ??
+                                                  '',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: kts14Text,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               if (!model.hasError && model.cartRes!.id != -1)
@@ -158,7 +218,7 @@ class RestaurantsView extends StatelessWidget {
 
                         //*----------------- BOTTOM CART (if cart is NOT EMPTY) ---------------------//
                         if (!model.hasError && model.cartRes!.id != -1)
-                          HomeBottomCart()
+                          RestaurantsBottomCart()
                       ],
                     ),
         );

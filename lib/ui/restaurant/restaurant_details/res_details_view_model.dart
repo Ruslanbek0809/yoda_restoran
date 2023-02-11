@@ -36,10 +36,12 @@ class ResDetailsViewModel extends FutureViewModel {
   int _activeTab = 0;
   bool _isTabPressed = false;
   bool _isShrink = false;
+  bool _isTitleShrink = false;
 
   int get activeTab => _activeTab;
   bool get isTabPressed => _isTabPressed;
   bool get isShrink => _isShrink;
+  bool get isTitleShrink => _isTitleShrink;
 
   HiveRestaurant? get cartRes => _hiveDbService.cartRes;
 
@@ -63,8 +65,9 @@ class ResDetailsViewModel extends FutureViewModel {
   }
 
   //*Function to change ACTIVE TAB
-  void updateLastScrollStatus(bool isReallyShrink) {
+  void updateLastScrollStatus(bool isReallyShrink, bool isTitleShrink) {
     _isShrink = isReallyShrink;
+    _isTitleShrink = isTitleShrink;
     notifyListeners();
   }
 

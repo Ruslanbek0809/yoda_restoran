@@ -10,6 +10,7 @@ class SearchRestaurant {
   SearchRestaurant({
     this.id,
     this.image,
+    this.square_image,
     this.meals,
     this.name,
     this.address,
@@ -32,6 +33,9 @@ class SearchRestaurant {
 
   @JsonKey(name: 'image')
   final String? image;
+
+  @JsonKey(name: 'square_image')
+  final String? square_image;
 
   @JsonKey(name: 'meals')
   final List<Meal>? meals;
