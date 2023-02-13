@@ -152,7 +152,7 @@ class RestaurantsView extends StatelessWidget {
                                                 CircleAvatar(
                                           backgroundColor:
                                               kcDividerSecondaryColor,
-                                          radius: 50.5,
+                                          radius: 51,
                                           child: CircleAvatar(
                                             radius: 50,
                                             backgroundImage: imageProvider,
@@ -162,7 +162,7 @@ class RestaurantsView extends StatelessWidget {
                                             CircleAvatar(
                                           backgroundColor:
                                               kcDividerSecondaryColor,
-                                          radius: 50.5,
+                                          radius: 51,
                                           child: CircleAvatar(
                                             radius: 50,
                                             backgroundImage: AssetImage(
@@ -174,7 +174,7 @@ class RestaurantsView extends StatelessWidget {
                                             CircleAvatar(
                                           backgroundColor:
                                               kcDividerSecondaryColor,
-                                          radius: 50.5,
+                                          radius: 51,
                                           child: CircleAvatar(
                                             radius: 50,
                                             backgroundImage: AssetImage(
