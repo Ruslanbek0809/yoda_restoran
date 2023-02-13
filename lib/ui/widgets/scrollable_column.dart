@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ScrollableColumn extends StatelessWidget {
-  const ScrollableColumn(
-      {Key? key,
-      this.controller,
-      required this.children,
-      this.crossAxisAlignment = CrossAxisAlignment.center,
-      this.textDirection,
-      this.mainAxisAlignment = MainAxisAlignment.start,
-      this.mainAxisSize = MainAxisSize.max,
-      this.verticalDirection = VerticalDirection.down,
-      this.textBaseline})
-      : super(key: key);
+  const ScrollableColumn({
+    Key? key,
+    this.controller,
+    required this.children,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.textDirection,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisSize = MainAxisSize.max,
+    this.verticalDirection = VerticalDirection.down,
+    this.textBaseline,
+  }) : super(key: key);
   final ScrollController? controller;
   final List<Widget> children;
   final CrossAxisAlignment crossAxisAlignment;

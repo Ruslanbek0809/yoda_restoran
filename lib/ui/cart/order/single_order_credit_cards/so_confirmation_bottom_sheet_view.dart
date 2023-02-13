@@ -130,35 +130,42 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                       ),
                     ),
                   if (soConfirmationBottomSheetData.isNewCreditCard)
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                    Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      itemCount: bankList.length,
-                      itemBuilder: (context, pos) {
-                        return RadioListTile<BankCard>(
-                          value: bankList[pos],
-                          groupValue: model.selectedBankCard,
-                          onChanged: bankList[pos].bankId == 1
-                              ? model.updateSelectedBankCard
-                              : (value) {},
-                          title: Text(
-                            bankList[pos]
-                                .bankName, //* Changes name of first element if location is enabled
-                            style: model.selectedBankCard!.bankId ==
-                                    bankList[pos].bankId
-                                ? kts16Text
-                                : kts16ContactText,
-                          ).tr(),
-                          activeColor: kcGreenColor,
-                          controlAffinity: ListTileControlAffinity.leading,
-                          toggleable: true,
-                        );
-                      },
-                      separatorBuilder: (context, index) => Divider(
-                        indent: 0.175.sw,
-                        thickness: 0.5,
-                        color: kcDividerSecondaryColor,
+                      child: Column(
+                        children: bankList
+                            .mapIndexed(
+                              (_singleBank, pos) => Column(
+                                children: [
+                                  RadioListTile<BankCard>(
+                                    value: _singleBank,
+                                    groupValue: model.selectedBankCard,
+                                    onChanged: _singleBank.bankId == 1
+                                        ? model.updateSelectedBankCard
+                                        : (value) {},
+                                    title: Text(
+                                      _singleBank
+                                          .bankName, //* Changes name of first element if location is enabled
+                                      style: model.selectedBankCard!.bankId ==
+                                              _singleBank.bankId
+                                          ? kts16Text
+                                          : kts16ContactText,
+                                    ).tr(),
+                                    activeColor: kcGreenColor,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    toggleable: true,
+                                  ),
+                                  if (pos != bankList.length - 1)
+                                    Divider(
+                                      indent: 0.175.sw,
+                                      thickness: 0.5,
+                                      color: kcDividerSecondaryColor,
+                                    )
+                                ],
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
                   //* ------------------ HIVE CREDIT CARD BANK INFO ---------------------//
