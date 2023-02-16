@@ -13,7 +13,8 @@ import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
-import 'restaurant_info_bottom_sheet.dart';
+import 'res_details_info_bottom_sheet.dart';
+import 'res_details_notification_bell_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -333,7 +334,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   SizedBox(width: 3.w),
                                   // Below condition checks whether res is LOCAL one or NOT
                                   model.locationPosition != null &&
-                                          restaurant.paymentTypes != null
+                                          restaurant.paymentTypes != null &&
+                                          restaurant.notification != null &&
+                                          restaurant.notification!.isEmpty
                                       ? Row(
                                           children: [
                                             Text(
@@ -373,26 +376,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 ],
                               ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: kcSecondaryLightColor,
-                                shape: BoxShape.circle,
-                              ),
-                              padding: EdgeInsets.all(8.r),
-                              margin: EdgeInsets.only(
-                                top: 5.h,
-                                bottom: 5.h,
-                                right: 10.w,
-                              ),
-                              child: Lottie.asset(
-                                'assets/bell2.json',
-                                width: 20.r,
-                                repeat: false,
-                              ),
-                            ),
 
-                            //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
-                            //*----------------- CUSTOM PACKAGE ---------------------//
+                            //*----------------- RESTAURANT DETAILS INFO BOTTOM SHEET ---------------------//
                             GestureDetector(
                               //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                               onTap: () async => await showFlexibleBottomSheet(
@@ -403,7 +388,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 context: context,
                                 bottomSheetColor: Colors.transparent,
                                 builder: (context, scrollController, offset) {
-                                  return RestaurantInfoBottomSheet(
+                                  return ResDetailsInfoBottomSheet(
                                     scrollController: scrollController,
                                     offset: offset,
                                     restaurant: restaurant,
@@ -416,13 +401,53 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   shape: BoxShape.circle,
                                 ),
                                 padding: EdgeInsets.all(4.r),
-                                margin: EdgeInsets.only(right: 16.w),
+                                margin: EdgeInsets.only(right: 10.w),
                                 child: SvgPicture.asset(
                                   'assets/restaurant_info.svg',
                                   color: kcSecondaryDarkColor,
                                 ),
                               ),
                             ),
+
+                            //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
+                            if (restaurant.notification != null &&
+                                restaurant.notification!.isNotEmpty)
+                              GestureDetector(
+                                //*CUSTOM BOTTOM SHEET BASED ON CONTENT
+                                onTap: () async =>
+                                    await showFlexibleBottomSheet(
+                                  isExpand: false,
+                                  initHeight: 0.95,
+                                  maxHeight: 0.95,
+                                  duration: Duration(milliseconds: 250),
+                                  context: context,
+                                  bottomSheetColor: Colors.transparent,
+                                  builder: (context, scrollController, offset) {
+                                    return ResDetailsNotificationBellBottomSheet(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                      restaurant: restaurant,
+                                    );
+                                  },
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: kcSecondaryLightColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  padding: EdgeInsets.all(8.r),
+                                  margin: EdgeInsets.only(
+                                    top: 5.h,
+                                    bottom: 5.h,
+                                    right: 16.w,
+                                  ),
+                                  child: Lottie.asset(
+                                    'assets/bell.json',
+                                    width: 20.r,
+                                    repeat: false,
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),

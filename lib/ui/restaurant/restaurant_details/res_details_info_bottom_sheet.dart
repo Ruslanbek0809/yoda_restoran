@@ -9,11 +9,11 @@ import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
-class RestaurantInfoBottomSheet extends StatelessWidget {
+class ResDetailsInfoBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
   final double offset;
   final Restaurant restaurant;
-  const RestaurantInfoBottomSheet({
+  const ResDetailsInfoBottomSheet({
     Key? key,
     required this.scrollController,
     required this.offset,

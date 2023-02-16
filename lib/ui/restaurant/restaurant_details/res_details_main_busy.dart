@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
@@ -184,7 +185,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 7.h),
+                                  vertical: 8.r,
+                                  horizontal: 10.r,
+                                ),
                                 margin: EdgeInsets.only(
                                   top: 5.h,
                                   bottom: 5.h,
@@ -216,7 +219,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                   borderRadius: AppTheme().radius20,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 7.h),
+                                  vertical: 8.r,
+                                  horizontal: 10.r,
+                                ),
                                 margin: EdgeInsets.only(
                                   top: 5.h,
                                   bottom: 5.h,
@@ -232,7 +237,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     SizedBox(width: 3.w),
                                     // Below condition checks whether res is LOCAL one or NOT
                                     model.locationPosition != null &&
-                                            restaurant.paymentTypes != null
+                                            restaurant.paymentTypes != null &&
+                                            restaurant.notification != null &&
+                                            restaurant.notification!.isEmpty
                                         ? Row(
                                             children: [
                                               Text(
@@ -280,15 +287,38 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     color: kcSecondaryLightColor,
                                     shape: BoxShape.circle,
                                   ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 5.w, vertical: 5.h),
-                                  margin: EdgeInsets.only(right: 16.w),
+                                  padding: EdgeInsets.all(4.r),
+                                  margin: EdgeInsets.only(right: 10.w),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
                                     color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),
+
+                              //*----------------- NOTIFICATION BELL ---------------------//
+                              if (restaurant.notification != null &&
+                                  restaurant.notification!.isNotEmpty)
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: kcSecondaryLightColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.all(8.r),
+                                    margin: EdgeInsets.only(
+                                      top: 5.h,
+                                      bottom: 5.h,
+                                      right: 16.w,
+                                    ),
+                                    child: Lottie.asset(
+                                      'assets/bell.json',
+                                      width: 20.r,
+                                      animate: false,
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                         ),
