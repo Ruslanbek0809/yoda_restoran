@@ -117,6 +117,7 @@ class HiveDbService with ReactiveServiceMixin {
         description: restaurant.description,
         rated: restaurant.rated,
         rating: restaurant.rating,
+        notification: restaurant.notification,
         workingHours: restaurant.workingHours,
         prepareTime: restaurant.prepareTime,
         phoneNumber: restaurant.phoneNumber,

@@ -243,6 +243,7 @@ class HomeViewModel extends ReactiveViewModel {
             address: cartRes!.address,
             phoneNumber: cartRes!.phoneNumber,
             prepareTime: cartRes!.prepareTime,
+            notification: cartRes!.notification,
             workingHours: cartRes!.workingHours,
             city: cartRes!.city,
             distance: cartRes!.distance,

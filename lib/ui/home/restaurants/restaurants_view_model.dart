@@ -70,7 +70,8 @@ class RestauranstViewModel extends FutureViewModel {
     return totalCartSum;
   }
 
-  void navToResDetailsViewFromBottomCart() async => await _navService.navigateTo(
+  void navToResDetailsViewFromBottomCart() async =>
+      await _navService.navigateTo(
         Routes.resDetailsView,
         arguments: ResDetailsViewArguments(
           restaurant: Restaurant(
@@ -84,6 +85,7 @@ class RestauranstViewModel extends FutureViewModel {
             address: cartRes!.address,
             phoneNumber: cartRes!.phoneNumber,
             prepareTime: cartRes!.prepareTime,
+            notification: cartRes!.notification,
             workingHours: cartRes!.workingHours,
             city: cartRes!.city,
             distance: cartRes!.distance,

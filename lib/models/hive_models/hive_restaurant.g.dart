@@ -25,21 +25,22 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       rating: fields[5] as num?,
       deliveryPrice: fields[6] as num?,
       description: fields[7] as String?,
-      workingHours: fields[8] as String?,
-      phoneNumber: fields[9] as String?,
-      prepareTime: fields[10] as String?,
-      city: fields[11] as String?,
-      distance: fields[12] as num?,
-      selfPickUp: fields[13] as bool?,
-      delivery: fields[14] as bool?,
-      resPaymentTypes: (fields[15] as List?)?.cast<HiveResPaymentType>(),
+      notification: fields[8] as String?,
+      workingHours: fields[9] as String?,
+      phoneNumber: fields[10] as String?,
+      prepareTime: fields[11] as String?,
+      city: fields[12] as String?,
+      distance: fields[13] as num?,
+      selfPickUp: fields[14] as bool?,
+      delivery: fields[15] as bool?,
+      resPaymentTypes: (fields[16] as List?)?.cast<HiveResPaymentType>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveRestaurant obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -57,20 +58,22 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       ..writeByte(7)
       ..write(obj.description)
       ..writeByte(8)
-      ..write(obj.workingHours)
+      ..write(obj.notification)
       ..writeByte(9)
-      ..write(obj.phoneNumber)
+      ..write(obj.workingHours)
       ..writeByte(10)
-      ..write(obj.prepareTime)
+      ..write(obj.phoneNumber)
       ..writeByte(11)
-      ..write(obj.city)
+      ..write(obj.prepareTime)
       ..writeByte(12)
-      ..write(obj.distance)
+      ..write(obj.city)
       ..writeByte(13)
-      ..write(obj.selfPickUp)
+      ..write(obj.distance)
       ..writeByte(14)
-      ..write(obj.delivery)
+      ..write(obj.selfPickUp)
       ..writeByte(15)
+      ..write(obj.delivery)
+      ..writeByte(16)
       ..write(obj.resPaymentTypes);
   }
 

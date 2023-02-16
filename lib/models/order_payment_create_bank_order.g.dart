@@ -12,7 +12,7 @@ OrderPaymentCreateBankOrder _$OrderPaymentCreateBankOrderFromJson(
       orderId: json['order_id'] as String?,
       requestId: json['request_id'] as String?,
       phone: json['phone'] as String?,
-      errorCode: json['errorCode'] as dynamic,
+      errorCode: json['errorCode'],
       errorMessage: json['errorMessage'] as String?,
     );
 

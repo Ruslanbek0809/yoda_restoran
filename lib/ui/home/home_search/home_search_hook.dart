@@ -182,6 +182,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                 address: _searchRestaurant.address,
                                 rated: _searchRestaurant.rated,
                                 rating: _searchRestaurant.rating,
+                                notification: _searchRestaurant.notification,
                                 workingHours: _searchRestaurant.workingHours,
                                 deliveryPrice: _searchRestaurant.deliveryPrice,
                                 description: _searchRestaurant.description,
@@ -262,6 +263,8 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       address: _searchRestaurant.address,
                                       rated: _searchRestaurant.rated,
                                       rating: _searchRestaurant.rating,
+                                      notification:
+                                          _searchRestaurant.notification,
                                       workingHours:
                                           _searchRestaurant.workingHours,
                                       deliveryPrice:
@@ -334,6 +337,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                   address: _searchRestaurant?.address,
                                   rated: _searchRestaurant?.rated,
                                   rating: _searchRestaurant?.rating,
+                                  notification: _searchRestaurant?.notification,
                                   workingHours: _searchRestaurant?.workingHours,
                                   deliveryPrice:
                                       _searchRestaurant?.deliveryPrice,

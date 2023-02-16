@@ -140,6 +140,8 @@ class CartView extends StatelessWidget {
                                               model.cartRes!.phoneNumber,
                                           prepareTime:
                                               model.cartRes!.prepareTime,
+                                          notification:
+                                              model.cartRes!.notification,
                                           workingHours:
                                               model.cartRes!.workingHours,
                                           city: model.cartRes!.city,

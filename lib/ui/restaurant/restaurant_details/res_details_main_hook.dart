@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
@@ -280,7 +281,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 borderRadius: AppTheme().radius20,
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 7.h),
+                                vertical: 8.r,
+                                horizontal: 10.r,
+                              ),
                               margin: EdgeInsets.only(
                                 top: 5.h,
                                 bottom: 5.h,
@@ -312,7 +315,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 borderRadius: AppTheme().radius20,
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 7.h),
+                                vertical: 8.r,
+                                horizontal: 10.r,
+                              ),
                               margin: EdgeInsets.only(
                                 top: 5.h,
                                 bottom: 5.h,
@@ -368,6 +373,24 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 ],
                               ),
                             ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: kcSecondaryLightColor,
+                                shape: BoxShape.circle,
+                              ),
+                              padding: EdgeInsets.all(8.r),
+                              margin: EdgeInsets.only(
+                                top: 5.h,
+                                bottom: 5.h,
+                                right: 10.w,
+                              ),
+                              child: Lottie.asset(
+                                'assets/bell2.json',
+                                width: 20.r,
+                                repeat: false,
+                              ),
+                            ),
+
                             //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
                             //*----------------- CUSTOM PACKAGE ---------------------//
                             GestureDetector(
@@ -392,8 +415,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   color: kcSecondaryLightColor,
                                   shape: BoxShape.circle,
                                 ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5.w, vertical: 5.h),
+                                padding: EdgeInsets.all(4.r),
                                 margin: EdgeInsets.only(right: 16.w),
                                 child: SvgPicture.asset(
                                   'assets/restaurant_info.svg',

@@ -15,13 +15,13 @@ mixin $LoginView on StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
   final FocusNode phoneFocusNode = FocusNode();
 
-  //*Registers a listener on every generated controller that calls [model.setData()]
-  //*with the latest textController values
+  /// Registers a listener on every generated controller that calls [model.setData()]
+  /// with the latest textController values
   void listenToFormUpdated(FormViewModel model) {
     phoneController.addListener(() => _updateFormData(model));
   }
 
-  //*Updates the formData on the FormViewModel
+  /// Updates the formData on the FormViewModel
   void _updateFormData(FormViewModel model) => model.setData(
         model.formValueMap
           ..addAll({
@@ -29,7 +29,7 @@ mixin $LoginView on StatelessWidget {
           }),
       );
 
-  //*Calls dispose on all the generated controllers and focus nodes
+  /// Calls dispose on all the generated controllers and focus nodes
   void disposeForm() {
     // The dispose function for a TextEditingController sets all listeners to null
 

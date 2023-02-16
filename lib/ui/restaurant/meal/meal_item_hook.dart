@@ -48,6 +48,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
       ),
       child: GestureDetector(
         onTap: () async {
+          FocusScope.of(context).unfocus();
           await _tweenController.forward();
 
           //*----------------- MEAL BOTTOM SHEET ---------------------//
@@ -259,6 +260,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   onTap: (meal.gVolumes ?? []).isNotEmpty ||
                                           (meal.gCustomizables ?? []).isNotEmpty
                                       ? () async {
+                                          FocusScope.of(context).unfocus();
                                           await _tweenController.forward();
 
                                           //*----------------- MEAL BOTTOM SHEET ---------------------//
@@ -318,7 +320,8 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               borderRadius: AppTheme().radius15,
                               onTap: (meal.gVolumes ?? []).isNotEmpty ||
                                       (meal.gCustomizables ?? []).isNotEmpty
-                                  ? () async {
+                                  ? () async { 
+                                      FocusScope.of(context).unfocus();
                                       await _tweenController.forward();
 
                                       //*----------------- MEAL BOTTOM SHEET ---------------------//

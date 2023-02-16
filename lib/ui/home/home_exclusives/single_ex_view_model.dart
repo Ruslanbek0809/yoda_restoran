@@ -113,6 +113,7 @@ class SingleExViewModel extends FutureViewModel {
             address: cartRes!.address,
             phoneNumber: cartRes!.phoneNumber,
             prepareTime: cartRes!.prepareTime,
+            notification: cartRes!.notification,
             workingHours: cartRes!.workingHours,
             city: cartRes!.city,
             distance: cartRes!.distance,

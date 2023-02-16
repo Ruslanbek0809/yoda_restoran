@@ -20,6 +20,7 @@ class Restaurant {
     this.hourlyDiscount,
     this.discountBegin,
     this.discountEnd,
+    this.notification,
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
@@ -68,6 +69,9 @@ class Restaurant {
 
   @JsonKey(name: 'discountEnd')
   final String? discountEnd;
+
+  @JsonKey(name: 'notification')
+  final String? notification;
 
   @JsonKey(name: 'workingHours')
   final String? workingHours;

@@ -15,6 +15,7 @@ class HiveRestaurant {
     this.rating,
     this.deliveryPrice,
     this.description,
+    this.notification,
     this.workingHours,
     this.phoneNumber,
     this.prepareTime,
@@ -50,26 +51,29 @@ class HiveRestaurant {
   final String? description;
 
   @HiveField(8)
-  final String? workingHours;
+  final String? notification;
 
   @HiveField(9)
-  final String? phoneNumber;
+  final String? workingHours;
 
   @HiveField(10)
-  final String? prepareTime;
+  final String? phoneNumber;
 
   @HiveField(11)
-  final String? city;
+  final String? prepareTime;
 
   @HiveField(12)
-  final num? distance;
+  final String? city;
 
   @HiveField(13)
-  final bool? selfPickUp;
+  final num? distance;
 
   @HiveField(14)
-  final bool? delivery;
+  final bool? selfPickUp;
 
   @HiveField(15)
+  final bool? delivery;
+
+  @HiveField(16)
   final List<HiveResPaymentType>? resPaymentTypes;
 }

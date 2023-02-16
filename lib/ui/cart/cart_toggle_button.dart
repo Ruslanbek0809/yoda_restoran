@@ -40,6 +40,7 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
             address: model.cartRes!.address,
             phoneNumber: model.cartRes!.phoneNumber,
             prepareTime: model.cartRes!.prepareTime,
+            notification: model.cartRes!.notification,
             workingHours: model.cartRes!.workingHours,
             city: model.cartRes!.city,
             distance: model.cartRes!.distance,
