@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:rect_getter/rect_getter.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
@@ -13,1415 +15,207 @@ import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
+import 'fappbar.dart';
 import 'res_details_info_bottom_sheet.dart';
 import 'res_details_notification_bell_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsMainHook extends StatefulWidget {
   final Restaurant restaurant;
-  const ResDetailsMainHook({required this.restaurant, Key? key})
-      : super(key: key, reactive: true);
+  final List<ResCategory> resCategories;
+  ResDetailsMainHook({
+    required this.restaurant,
+    required this.resCategories,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+  State<ResDetailsMainHook> createState() => _ResDetailsMainHookState();
+}
+
+class _ResDetailsMainHookState extends State<ResDetailsMainHook>
+    with SingleTickerProviderStateMixin {
+  bool isCollapsed = false;
+  late AutoScrollController scrollController;
+  late TabController tabController;
+
+  final double expandedHeight = 500.0;
+  final double collapsedHeight = kToolbarHeight;
+
+  final listViewKey = RectGetter.createGlobalKey();
+  Map<int, dynamic> itemKeys = {};
+
+  // prevent animate when press on tab bar
+  bool pauseRectGetterIndex = false;
+
+  @override
+  void initState() {
+    tabController =
+        TabController(length: widget.resCategories.length, vsync: this);
+    scrollController = AutoScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    tabController.dispose();
+    super.dispose();
+  }
+
+  List<int> getVisibleItemsIndex() {
+    Rect? rect = RectGetter.getRectFromKey(listViewKey);
+    List<int> items = [];
+    if (rect == null) return items;
+    itemKeys.forEach((index, key) {
+      Rect? itemRect = RectGetter.getRectFromKey(key);
+      if (itemRect == null) return;
+      if (itemRect.top > rect.bottom) return;
+      if (itemRect.bottom < rect.top) return;
+      items.add(index);
+    });
+    return items;
+  }
+
+  void onCollapsed(bool value) {
+    if (this.isCollapsed == value) return;
+    setState(() => this.isCollapsed = value);
+  }
+
+  bool onScrollNotification(ScrollNotification notification) {
+    if (pauseRectGetterIndex) return true;
+    int lastTabIndex = tabController.length - 1;
+    List<int> visibleItems = getVisibleItemsIndex();
+
+    bool reachLastTabIndex = visibleItems.isNotEmpty &&
+        visibleItems.length <= 2 &&
+        visibleItems.last == lastTabIndex;
+    if (reachLastTabIndex) {
+      tabController.animateTo(lastTabIndex);
+    } else if (visibleItems.isNotEmpty) {
+      int sumIndex = visibleItems.reduce((value, element) => value + element);
+      int middleIndex = sumIndex ~/ visibleItems.length;
+      if (tabController.index != middleIndex)
+        tabController.animateTo(middleIndex);
+    }
+    return false;
+  }
+
+  void animateAndScrollTo(int index) {
+    pauseRectGetterIndex = true;
+    tabController.animateTo(index);
+    scrollController
+        .scrollToIndex(index, preferPosition: AutoScrollPosition.begin)
+        .then((value) => pauseRectGetterIndex = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
-
-    //*------------- TAB CONTROLLER ----------------//
-    final tabController = useTabController(
-      initialLength: model.resCategories.length,
-      initialIndex: model.activeTab,
-    );
-
-    //*To dispose a listener attached to TabController
-    useEffect(() {
-      void _tabListener() => model.updateActiveTab(tabController.index);
-      tabController.addListener(_tabListener);
-      return () => tabController.removeListener(_tabListener);
-    }, [tabController]); // tabController, key, is specified
-
-    //*------------- CUSTOM SCROLL CONTROLLER ----------------//
-    final ScrollController customScrollController = useScrollController();
-
-    //*To dispose a listener attached to ScrollController
-    useEffect(() {
-      void _customScrollListener() => model.updateLastScrollStatus(
-          customScrollController.hasClients &&
-              customScrollController.offset > (0.55.sh - kToolbarHeight - 56.h),
-          customScrollController.hasClients &&
-              customScrollController.offset >
-                  (0.35.sh - kToolbarHeight - 56.h));
-
-      customScrollController.addListener(_customScrollListener);
-      return () => customScrollController.removeListener(_customScrollListener);
-    }, [customScrollController]); // _customScrollController, key, is specified
-
-    return CustomScrollView(
-      controller: customScrollController,
-      // physics: ClampingScrollPhysics(),
-      physics: BouncingScrollPhysics(),
-      slivers: [
-        //*----------------- SLIVER HEADER PART II ---------------------//
-        SliverAppBar(
-          expandedHeight: 0.275.sh,
-          pinned: true,
-          stretch: true,
-          backgroundColor: kcWhiteColor,
-          centerTitle: true,
-          title: AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
-            child: model.isShrink
-                ? Padding(
-                    padding: EdgeInsets.only(left: 10.w, top: 5.w),
-                    child: Text(
-                      restaurant.name ?? '',
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        color: kcFontColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  )
-                : SizedBox(),
-          ),
-          leading: AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
-            child: Container(
-              height: 50.w,
-              width: 50.w,
-              margin: EdgeInsets.only(left: 10.w, top: 5.w),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: kcWhiteColor,
-                // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-                // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
-              ),
-              child: Material(
-                color: kcWhiteColor,
-                // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-                shape: CircleBorder(),
-                elevation: 0,
-                child: InkWell(
-                  customBorder: CircleBorder(),
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back_rounded,
-                    size: 27.w,
-                    color: kcBlackColor,
-                  ),
-                ),
-              ),
+    return RectGetter(
+      key: listViewKey,
+      child: NotificationListener<ScrollNotification>(
+        child: CustomScrollView(
+          controller: scrollController,
+          slivers: [
+            FAppBar(
+              restaurant: widget.restaurant,
+              resCategories: widget.resCategories,
+              context: context,
+              scrollController: scrollController,
+              expandedHeight: expandedHeight,
+              collapsedHeight: collapsedHeight,
+              isCollapsed: isCollapsed,
+              onCollapsed: onCollapsed,
+              tabController: tabController,
+              onTap: (index) => animateAndScrollTo(index),
             ),
-          ),
-          //*----------------- ACTIONS FAV ---------------------//
-          actions: [
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: model.isShrink
-                  ? SizedBox()
-                  : AnimatedSwitcher(
-                      duration: Duration(milliseconds: 300),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 5.w),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: model.isShrink
-                                ? Colors.transparent
-                                : kcWhiteColor,
-                            // boxShadow: _isShrink
-                            //     ? []
-                            //     : [AppTheme().buttonShadow],
-                          ),
-                          child: Material(
-                            shape: CircleBorder(),
-                            elevation: 0,
-                            color: model.isShrink
-                                ? Colors.transparent
-                                : kcWhiteColor,
-                            child: InkWell(
-                              customBorder: CircleBorder(),
-                              onTap: () => model.updateResFav(restaurant.id!),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.w),
-                                child: Icon(
-                                  model.isFavorited
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  size: 27.w,
-                                  color: model.isFavorited
-                                      ? kcRedColor
-                                      : kcBlackColor,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-            ),
-            SizedBox(width: 10.w),
-//*----------------- ACTIONS SEARCH ---------------------//
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: Padding(
-                padding: EdgeInsets.only(top: 5.w),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: kcWhiteColor,
-                  ),
-                  child: Material(
-                    shape: CircleBorder(),
-                    elevation: 0,
-                    color: kcWhiteColor,
-                    child: InkWell(
-                      customBorder: CircleBorder(),
-                      onTap: () => model.navToResSearchView(),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.w),
-                        child: Icon(
-                          Icons.search_rounded,
-                          size: 27.w,
-                          color: kcBlackColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: 15.w),
-          ],
-          //*----------------- BACKGROUND RESTAURANT IMAGE ---------------------//
-          flexibleSpace: FlexibleSpaceBar(
-            stretchModes: [StretchMode.zoomBackground],
+//*----------------- MEAL LIST ---------------------//
+            SliverPadding(
+              padding: EdgeInsets.only(
+                  bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: widget.resCategories.length,
+                  (BuildContext context, int index) {
+                    //! CONFIG scroll
+                    itemKeys[index] = RectGetter.createGlobalKey();
 
-            ///*NOTE: Container background image used to add custom widget in front of this background image
-            background: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    restaurant.image ?? 'assets/ph_restaurant.png',
-                  ),
-                  fit: BoxFit.cover,
-                  // fit: BoxFit.contain,
-                  // alignment: Alignment.topCenter,
-                ),
-              ),
-            ),
-          ),
-        ),
+                    final resCategory = widget.resCategories[index];
+                    final resCategoryMeals = resCategory.meals;
 
-        //*----------------- SLIVER HEADER PART II ---------------------//
-        SliverAppBar(
-          expandedHeight: 0.275.sh,
-          // expandedHeight: 0.55.sh,
-          pinned: false,
-          stretch: true,
-          snap: true,
-          floating: true,
-          backgroundColor: kcGreenColor,
-
-          leading: SizedBox(),
-          title: SizedBox(),
-          // centerTitle: true,
-          flexibleSpace: FlexibleSpaceBar(
-            stretchModes: [StretchMode.fadeTitle],
-            expandedTitleScale: 1.0,
-            centerTitle: true,
-
-            ///*NOTE: Container background image used to add custom widget in front of this background image
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: kcWhiteColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
-                    ),
-                  ),
-                  padding: EdgeInsets.only(
-                      top: Platform.isIOS ? 14.h : 12.h, bottom: 0.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      //*----------------- TITLE NAME ---------------------//
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: Platform.isIOS ? 12.h : 10.h,
-                          left: 16.w,
-                          right: 16.w,
-                        ),
-                        child: Text(
-                          restaurant.name ?? '',
-                          style: TextStyle(
-                            fontSize: 30.sp,
-                            fontWeight: FontWeight.bold,
-                            color: kcSecondaryDarkColor,
-                          ),
-                        ),
-                      ),
-                      //*----------------- RATE / WORK TIME / INFO---------------------//
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
+                    return RectGetter(
+                      key: itemKeys[index],
+                      child: AutoScrollTag(
+                        key: ValueKey(index),
+                        index: index,
+                        controller: scrollController,
+                        child: Column(
                           children: [
-                            //*----------------- RATE ---------------------//
                             Container(
-                              decoration: BoxDecoration(
-                                color: kcSecondaryLightColor,
-                                borderRadius: AppTheme().radius20,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                vertical: 8.r,
-                                horizontal: 10.r,
-                              ),
-                              margin: EdgeInsets.only(
-                                top: 5.h,
-                                bottom: 5.h,
-                                left: 16.w,
-                                right: 10.w,
-                              ),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/star.svg',
-                                    color: kcSecondaryDarkColor,
-                                    width: 20.w,
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  Text(
-                                    formatNumRating(restaurant.rating ?? 5),
-                                    style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: kcFontColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //*----------------- LOCATION ---------------------//
-                            Container(
-                              decoration: BoxDecoration(
-                                color: kcSecondaryLightColor,
-                                borderRadius: AppTheme().radius20,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                vertical: 8.r,
-                                horizontal: 10.r,
-                              ),
-                              margin: EdgeInsets.only(
-                                top: 5.h,
-                                bottom: 5.h,
-                                right: 10.w,
-                              ),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/map_pin_bold.svg',
-                                    color: kcSecondaryDarkColor,
-                                    width: 20.w,
-                                  ),
-                                  SizedBox(width: 3.w),
-                                  // Below condition checks whether res is LOCAL one or NOT
-                                  model.locationPosition != null &&
-                                          restaurant.paymentTypes != null &&
-                                          restaurant.notification != null &&
-                                          restaurant.notification!.isEmpty
-                                      ? Row(
-                                          children: [
-                                            Text(
-                                              '${restaurant.city} (${restaurant.distance} ',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: kcFontColor,
-                                              ),
-                                            ),
-                                            Text(
-                                              LocaleKeys.km,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: kcFontColor,
-                                              ),
-                                            ).tr(),
-                                            Text(
-                                              ')',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 16.sp,
-                                                color: kcFontColor,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Text(
-                                          restaurant.city ?? '',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: kcFontColor,
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ),
-
-                            //*----------------- RESTAURANT DETAILS INFO BOTTOM SHEET ---------------------//
-                            GestureDetector(
-                              //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-                              onTap: () async => await showFlexibleBottomSheet(
-                                isExpand: false,
-                                initHeight: 0.95,
-                                maxHeight: 0.95,
-                                duration: Duration(milliseconds: 250),
-                                context: context,
-                                bottomSheetColor: Colors.transparent,
-                                builder: (context, scrollController, offset) {
-                                  return ResDetailsInfoBottomSheet(
-                                    scrollController: scrollController,
-                                    offset: offset,
-                                    restaurant: restaurant,
-                                  );
-                                },
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: kcSecondaryLightColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                padding: EdgeInsets.all(4.r),
-                                margin: EdgeInsets.only(right: 10.w),
-                                child: SvgPicture.asset(
-                                  'assets/restaurant_info.svg',
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.only(left: 12.w, top: 25.h),
+                              child: Text(
+                                resCategory.resCategoryModel?.name ?? '',
+                                style: TextStyle(
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.bold,
                                   color: kcSecondaryDarkColor,
                                 ),
                               ),
                             ),
 
-                            //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
-                            if (restaurant.notification != null &&
-                                restaurant.notification!.isNotEmpty)
-                              GestureDetector(
-                                //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-                                onTap: () async =>
-                                    await showFlexibleBottomSheet(
-                                  isExpand: false,
-                                  initHeight: 0.95,
-                                  maxHeight: 0.95,
-                                  duration: Duration(milliseconds: 250),
-                                  context: context,
-                                  bottomSheetColor: Colors.transparent,
-                                  builder: (context, scrollController, offset) {
-                                    return ResDetailsNotificationBellBottomSheet(
-                                      scrollController: scrollController,
-                                      offset: offset,
-                                      restaurant: restaurant,
-                                    );
-                                  },
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: kcSecondaryLightColor,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: EdgeInsets.all(8.r),
-                                  margin: EdgeInsets.only(
-                                    top: 5.h,
-                                    bottom: 5.h,
-                                    right: 16.w,
-                                  ),
-                                  child: Lottie.asset(
-                                    'assets/bell.json',
-                                    width: 20.r,
-                                    repeat: false,
-                                  ),
-                                ),
+                            // Container(
+                            //   alignment: Alignment.centerLeft,
+                            //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
+                            //   child: Text(
+                            //     resCategory.resCategoryModel?.name ?? '',
+                            //     style: TextStyle(
+                            //       fontSize: 22.sp,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: kcSecondaryDarkColor,
+                            //     ),
+                            //   ),
+                            // ),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 12.h,
+                                horizontal: 10.w,
                               ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10.h, //spaceTopBottom
+                                crossAxisSpacing: 6.w, //spaceLeftRight
+                                childAspectRatio: itemWidth / itemHeight,
+                              ),
+                              itemCount: resCategoryMeals!.length,
+                              itemBuilder: (context, pos) {
+                                return MealView(
+                                  meal: resCategoryMeals[pos],
+                                  restaurant: widget
+                                      .restaurant, // Needed for add meal with conditions only in CART
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8.h,
-                          horizontal: 16.w,
-                        ),
-                        child: Divider(
-                          color: kcSecondaryLightColor,
-                          thickness: 1.w,
-                        ),
-                      ),
-                      //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-                      ToggleButtonView(restaurant: restaurant),
-                      //*----------------- MAIN DIVIDER ---------------------//
-                      Container(
-                        color: kcMainDividerColor,
-                        padding: EdgeInsets.symmetric(vertical: 4.h),
-                        margin: EdgeInsets.only(top: 15.h),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        //*----------------- SLIVER HEADER CUSTOM TABBAR ---------------------//
-        SliverAppBar(
-          expandedHeight: 0.0025.sh,
-          // expandedHeight: 0.55.sh,
-          pinned: true,
-          // stretch: true,
-          backgroundColor: kcPrimaryColor,
-          leading: SizedBox(),
-          title: SizedBox(),
-          flexibleSpace: SizedBox(),
-          toolbarHeight: 0,
-
-          //*----------------- TABBAR ---------------------//
-          bottom: ColoredTabBar(
-            isShrink: model.isShrink ? true : false,
-            tabBar: TabBar(
-              controller: tabController,
-              isScrollable: true,
-              indicatorColor: Colors.transparent,
-              labelPadding: EdgeInsets.all(0.0),
-              tabs: model.resCategories
-                  .map<Widget>((resCategory) => Tab(
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          decoration: BoxDecoration(
-                            borderRadius: AppTheme().radius15,
-                            color: model.activeTab ==
-                                    model.resCategories.indexOf(resCategory)
-                                ? model.isTabPressed
-                                    ? kcSecondaryLightColor
-                                    : kcWhiteColor
-                                : kcWhiteColor,
-                          ),
-                          margin: EdgeInsets.symmetric(
-                            vertical: 2.h,
-                            horizontal: 5.w,
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 15.w),
-                          alignment: Alignment.center,
-                          child: Text(
-                            resCategory.resCategoryModel?.name ?? '',
-                            style: kts14SemiBoldText,
-                          ),
-                        ),
-                      ))
-                  .toList(),
-              onTap: (index) {
-                model.updateOnTapRipple();
-                double offset = model.resCategories.getRange(0, index).fold(
-                  0,
-                  (prev, resCategory) {
-                    int rows = (resCategory.meals!.length / 2).ceil();
-                    return prev += rows *
-                        (itemHeight +
-                            15.h); // itemHeight + GridView mainAxisSpacing
+                    );
                   },
-                );
-
-                customScrollController.animateTo(
-                  offset + ((index - 1) * 72.h) + 0.55.sh,
-                  // * 88.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate Expanded height
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.linear,
-                );
-                model.updateOnTapRipple();
-              },
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-//         //*----------------- SLIVER HEADER ---------------------//
-//         SliverAppBar(
-//           // expandedHeight: 0.275.sh,
-//           expandedHeight: 0.55.sh,
-//           pinned: true,
-//           stretch: true,
-//           backgroundColor: kcWhiteColor,
-//           centerTitle: true,
-//           title: AnimatedSwitcher(
-//             duration: Duration(milliseconds: 300),
-//             child: model.isShrink
-//                 ? Padding(
-//                     padding: EdgeInsets.only(left: 10.w, top: 5.w),
-//                     child: Text(
-//                       restaurant.name ?? '',
-//                       overflow: TextOverflow.fade,
-//                       style: TextStyle(
-//                         fontSize: 20.sp,
-//                         color: kcFontColor,
-//                         fontWeight: FontWeight.w600,
-//                       ),
-//                     ),
-//                   )
-//                 : SizedBox(),
-//           ),
-//           leading: AnimatedSwitcher(
-//             duration: Duration(milliseconds: 300),
-//             child: Container(
-//               height: 50.w,
-//               width: 50.w,
-//               margin: EdgeInsets.only(left: 10.w, top: 5.w),
-//               decoration: BoxDecoration(
-//                 shape: BoxShape.circle,
-//                 color: kcWhiteColor,
-//                 // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-//                 // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
-//               ),
-//               child: Material(
-//                 color: kcWhiteColor,
-//                 // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-//                 shape: CircleBorder(),
-//                 elevation: 0,
-//                 child: InkWell(
-//                   customBorder: CircleBorder(),
-//                   onTap: () => Navigator.pop(context),
-//                   child: Icon(
-//                     Icons.arrow_back_rounded,
-//                     size: 27.w,
-//                     color: kcBlackColor,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//           //*----------------- ACTIONS FAV ---------------------//
-//           actions: [
-//             AnimatedSwitcher(
-//               duration: Duration(milliseconds: 300),
-//               child: model.isShrink
-//                   ? SizedBox()
-//                   : AnimatedSwitcher(
-//                       duration: Duration(milliseconds: 300),
-//                       child: Padding(
-//                         padding: EdgeInsets.only(top: 5.w),
-//                         child: Container(
-//                           decoration: BoxDecoration(
-//                             shape: BoxShape.circle,
-//                             color: model.isShrink
-//                                 ? Colors.transparent
-//                                 : kcWhiteColor,
-//                             // boxShadow: _isShrink
-//                             //     ? []
-//                             //     : [AppTheme().buttonShadow],
-//                           ),
-//                           child: Material(
-//                             shape: CircleBorder(),
-//                             elevation: 0,
-//                             color: model.isShrink
-//                                 ? Colors.transparent
-//                                 : kcWhiteColor,
-//                             child: InkWell(
-//                               customBorder: CircleBorder(),
-//                               onTap: () => model.updateResFav(restaurant.id!),
-//                               child: Padding(
-//                                 padding: EdgeInsets.all(8.w),
-//                                 child: Icon(
-//                                   model.isFavorited
-//                                       ? Icons.favorite
-//                                       : Icons.favorite_border,
-//                                   size: 27.w,
-//                                   color: model.isFavorited
-//                                       ? kcRedColor
-//                                       : kcBlackColor,
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//             ),
-//             SizedBox(width: 10.w),
-// //*----------------- ACTIONS SEARCH ---------------------//
-//             AnimatedSwitcher(
-//               duration: Duration(milliseconds: 300),
-//               child: Padding(
-//                 padding: EdgeInsets.only(top: 5.w),
-//                 child: Container(
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.circle,
-//                     color: kcWhiteColor,
-//                   ),
-//                   child: Material(
-//                     shape: CircleBorder(),
-//                     elevation: 0,
-//                     color: kcWhiteColor,
-//                     child: InkWell(
-//                       customBorder: CircleBorder(),
-//                       onTap: () => model.navToResSearchView(),
-//                       child: Padding(
-//                         padding: EdgeInsets.all(8.w),
-//                         child: Icon(
-//                           Icons.search_rounded,
-//                           size: 27.w,
-//                           color: kcBlackColor,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             SizedBox(width: 15.w),
-//           ],
-//           //*----------------- BACKGROUND RESTAURANT IMAGE ---------------------//
-//           flexibleSpace: FlexibleSpaceBar(
-//             stretchModes: [StretchMode.zoomBackground],
-
-//             ///*NOTE: Container background image used to add custom widget in front of this background image
-//             background: Container(
-//               decoration: BoxDecoration(
-//                 image: DecorationImage(
-//                   image: CachedNetworkImageProvider(
-//                     restaurant.image ?? 'assets/ph_restaurant.png',
-//                   ),
-//                   fit: BoxFit.cover,
-//                   // fit: BoxFit.contain,
-//                   // alignment: Alignment.topCenter,
-//                 ),
-//               ),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 mainAxisAlignment: MainAxisAlignment.end,
-//                 children: [
-//                   Container(
-//                     decoration: BoxDecoration(
-//                       color: kcWhiteColor,
-//                       borderRadius: BorderRadius.only(
-//                         topLeft: Radius.circular(20.0),
-//                         topRight: Radius.circular(20.0),
-//                       ),
-//                     ),
-//                     padding: EdgeInsets.only(
-//                         top: Platform.isIOS ? 14.h : 12.h, bottom: 50.h),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       mainAxisAlignment: MainAxisAlignment.start,
-//                       children: [
-//                         //*----------------- TITLE NAME ---------------------//
-//                         Padding(
-//                           padding: EdgeInsets.only(
-//                             bottom: Platform.isIOS ? 12.h : 10.h,
-//                             left: 16.w,
-//                             right: 16.w,
-//                           ),
-//                           child: Text(
-//                             restaurant.name ?? '',
-//                             style: TextStyle(
-//                               fontSize: 30.sp,
-//                               fontWeight: FontWeight.bold,
-//                               color: kcSecondaryDarkColor,
-//                             ),
-//                           ),
-//                         ),
-//                         //*----------------- RATE / WORK TIME / INFO---------------------//
-//                         SingleChildScrollView(
-//                           scrollDirection: Axis.horizontal,
-//                           child: Row(
-//                             children: [
-//                               //*----------------- RATE ---------------------//
-//                               Container(
-//                                 decoration: BoxDecoration(
-//                                   color: kcSecondaryLightColor,
-//                                   borderRadius: AppTheme().radius20,
-//                                 ),
-//                                 padding: EdgeInsets.symmetric(
-//                                     horizontal: 10.w, vertical: 7.h),
-//                                 margin: EdgeInsets.only(
-//                                   top: 5.h,
-//                                   bottom: 5.h,
-//                                   left: 16.w,
-//                                   right: 10.w,
-//                                 ),
-//                                 child: Row(
-//                                   children: [
-//                                     SvgPicture.asset(
-//                                       'assets/star.svg',
-//                                       color: kcSecondaryDarkColor,
-//                                       width: 20.w,
-//                                     ),
-//                                     SizedBox(width: 5.w),
-//                                     Text(
-//                                       formatNumRating(restaurant.rating ?? 5),
-//                                       style: TextStyle(
-//                                         fontSize: 15.sp,
-//                                         color: kcFontColor,
-//                                       ),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                               //*----------------- LOCATION ---------------------//
-//                               Container(
-//                                 decoration: BoxDecoration(
-//                                   color: kcSecondaryLightColor,
-//                                   borderRadius: AppTheme().radius20,
-//                                 ),
-//                                 padding: EdgeInsets.symmetric(
-//                                     horizontal: 10.w, vertical: 7.h),
-//                                 margin: EdgeInsets.only(
-//                                   top: 5.h,
-//                                   bottom: 5.h,
-//                                   right: 10.w,
-//                                 ),
-//                                 child: Row(
-//                                   children: [
-//                                     SvgPicture.asset(
-//                                       'assets/map_pin_bold.svg',
-//                                       color: kcSecondaryDarkColor,
-//                                       width: 20.w,
-//                                     ),
-//                                     SizedBox(width: 3.w),
-//                                     // Below condition checks whether res is LOCAL one or NOT
-//                                     model.locationPosition != null &&
-//                                             restaurant.paymentTypes != null
-//                                         ? Row(
-//                                             children: [
-//                                               Text(
-//                                                 '${restaurant.city} (${restaurant.distance} ',
-//                                                 overflow: TextOverflow.ellipsis,
-//                                                 style: TextStyle(
-//                                                   fontSize: 16.sp,
-//                                                   color: kcFontColor,
-//                                                 ),
-//                                               ),
-//                                               Text(
-//                                                 LocaleKeys.km,
-//                                                 overflow: TextOverflow.ellipsis,
-//                                                 style: TextStyle(
-//                                                   fontSize: 16.sp,
-//                                                   color: kcFontColor,
-//                                                 ),
-//                                               ).tr(),
-//                                               Text(
-//                                                 ')',
-//                                                 overflow: TextOverflow.ellipsis,
-//                                                 style: TextStyle(
-//                                                   fontSize: 16.sp,
-//                                                   color: kcFontColor,
-//                                                 ),
-//                                               ),
-//                                             ],
-//                                           )
-//                                         : Text(
-//                                             restaurant.city ?? '',
-//                                             overflow: TextOverflow.ellipsis,
-//                                             style: TextStyle(
-//                                               fontSize: 16.sp,
-//                                               color: kcFontColor,
-//                                             ),
-//                                           ),
-//                                   ],
-//                                 ),
-//                               ),
-//                               //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
-//                               //*----------------- CUSTOM PACKAGE ---------------------//
-//                               GestureDetector(
-//                                 //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-//                                 onTap: () async =>
-//                                     await showFlexibleBottomSheet(
-//                                   isExpand: false,
-//                                   initHeight: 0.95,
-//                                   maxHeight: 0.95,
-//                                   duration: Duration(milliseconds: 250),
-//                                   context: context,
-//                                   bottomSheetColor: Colors.transparent,
-//                                   builder: (context, scrollController, offset) {
-//                                     return RestaurantInfoBottomSheet(
-//                                       scrollController: scrollController,
-//                                       offset: offset,
-//                                       restaurant: restaurant,
-//                                     );
-//                                   },
-//                                 ),
-//                                 child: Container(
-//                                   decoration: BoxDecoration(
-//                                     color: kcSecondaryLightColor,
-//                                     shape: BoxShape.circle,
-//                                   ),
-//                                   padding: EdgeInsets.symmetric(
-//                                       horizontal: 5.w, vertical: 5.h),
-//                                   margin: EdgeInsets.only(right: 16.w),
-//                                   child: SvgPicture.asset(
-//                                     'assets/restaurant_info.svg',
-//                                     color: kcSecondaryDarkColor,
-//                                   ),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: EdgeInsets.symmetric(
-//                             vertical: 8.h,
-//                             horizontal: 16.w,
-//                           ),
-//                           child: Divider(
-//                             color: kcSecondaryLightColor,
-//                             thickness: 1.w,
-//                           ),
-//                         ),
-//                         //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-//                         ToggleButtonView(restaurant: restaurant),
-//                         //*----------------- MAIN DIVIDER ---------------------//
-//                         Container(
-//                           color: kcMainDividerColor,
-//                           padding: EdgeInsets.symmetric(vertical: 4.h),
-//                           margin: EdgeInsets.only(top: 15.h),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             // centerTitle: true,
-//             // expandedTitleScale: 1.5,
-//             // title: AnimatedSwitcher(
-//             //   // opacity: !model.isTitleShrink ? 1.0 : 0.0,
-//             //   // duration: const Duration(milliseconds: 500),
-//             //   duration: Duration(milliseconds: 300),
-//             //   child: model.isTitleShrink
-//             //       ? SizedBox()
-//             //       : Column(
-//             //           crossAxisAlignment: CrossAxisAlignment.start,
-//             //           mainAxisAlignment: MainAxisAlignment.end,
-//             //           children: [
-//             //             Container(
-//             //               decoration: BoxDecoration(
-//             //                 color: kcWhiteColor,
-//             //                 borderRadius: BorderRadius.only(
-//             //                   topLeft: Radius.circular(20.0),
-//             //                   topRight: Radius.circular(20.0),
-//             //                 ),
-//             //               ),
-//             //               padding: EdgeInsets.only(
-//             //                   top: Platform.isIOS ? 14.h : 12.h, bottom: 50.h),
-//             //               child: Column(
-//             //                 crossAxisAlignment: CrossAxisAlignment.start,
-//             //                 mainAxisAlignment: MainAxisAlignment.start,
-//             //                 children: [
-//             //                   //*----------------- TITLE NAME ---------------------//
-//             //                   Padding(
-//             //                     padding: EdgeInsets.only(
-//             //                       bottom: Platform.isIOS ? 12.h : 10.h,
-//             //                       left: 16.w,
-//             //                       right: 16.w,
-//             //                     ),
-//             //                     child: Text(
-//             //                       restaurant.name ?? '',
-//             //                       style: TextStyle(
-//             //                         fontSize: 30.sp,
-//             //                         fontWeight: FontWeight.bold,
-//             //                         color: kcSecondaryDarkColor,
-//             //                       ),
-//             //                     ),
-//             //                   ),
-//             //                   //*----------------- RATE / WORK TIME / INFO---------------------//
-//             //                   SingleChildScrollView(
-//             //                     scrollDirection: Axis.horizontal,
-//             //                     child: Row(
-//             //                       children: [
-//             //                         //*----------------- RATE ---------------------//
-//             //                         Container(
-//             //                           decoration: BoxDecoration(
-//             //                             color: kcSecondaryLightColor,
-//             //                             borderRadius: AppTheme().radius20,
-//             //                           ),
-//             //                           padding: EdgeInsets.symmetric(
-//             //                               horizontal: 10.w, vertical: 7.h),
-//             //                           margin: EdgeInsets.only(
-//             //                             top: 5.h,
-//             //                             bottom: 5.h,
-//             //                             left: 16.w,
-//             //                             right: 10.w,
-//             //                           ),
-//             //                           child: Row(
-//             //                             children: [
-//             //                               SvgPicture.asset(
-//             //                                 'assets/star.svg',
-//             //                                 color: kcSecondaryDarkColor,
-//             //                                 width: 20.w,
-//             //                               ),
-//             //                               SizedBox(width: 5.w),
-//             //                               Text(
-//             //                                 formatNumRating(
-//             //                                     restaurant.rating ?? 5),
-//             //                                 style: TextStyle(
-//             //                                   fontSize: 15.sp,
-//             //                                   color: kcFontColor,
-//             //                                 ),
-//             //                               ),
-//             //                             ],
-//             //                           ),
-//             //                         ),
-//             //                         //*----------------- LOCATION ---------------------//
-//             //                         Container(
-//             //                           decoration: BoxDecoration(
-//             //                             color: kcSecondaryLightColor,
-//             //                             borderRadius: AppTheme().radius20,
-//             //                           ),
-//             //                           padding: EdgeInsets.symmetric(
-//             //                               horizontal: 10.w, vertical: 7.h),
-//             //                           margin: EdgeInsets.only(
-//             //                             top: 5.h,
-//             //                             bottom: 5.h,
-//             //                             right: 10.w,
-//             //                           ),
-//             //                           child: Row(
-//             //                             children: [
-//             //                               SvgPicture.asset(
-//             //                                 'assets/map_pin_bold.svg',
-//             //                                 color: kcSecondaryDarkColor,
-//             //                                 width: 20.w,
-//             //                               ),
-//             //                               SizedBox(width: 3.w),
-//             //                               // Below condition checks whether res is LOCAL one or NOT
-//             //                               model.locationPosition != null &&
-//             //                                       restaurant.paymentTypes !=
-//             //                                           null
-//             //                                   ? Row(
-//             //                                       children: [
-//             //                                         Text(
-//             //                                           '${restaurant.city} (${restaurant.distance} ',
-//             //                                           overflow:
-//             //                                               TextOverflow.ellipsis,
-//             //                                           style: TextStyle(
-//             //                                             fontSize: 16.sp,
-//             //                                             color: kcFontColor,
-//             //                                           ),
-//             //                                         ),
-//             //                                         Text(
-//             //                                           LocaleKeys.km,
-//             //                                           overflow:
-//             //                                               TextOverflow.ellipsis,
-//             //                                           style: TextStyle(
-//             //                                             fontSize: 16.sp,
-//             //                                             color: kcFontColor,
-//             //                                           ),
-//             //                                         ).tr(),
-//             //                                         Text(
-//             //                                           ')',
-//             //                                           overflow:
-//             //                                               TextOverflow.ellipsis,
-//             //                                           style: TextStyle(
-//             //                                             fontSize: 16.sp,
-//             //                                             color: kcFontColor,
-//             //                                           ),
-//             //                                         ),
-//             //                                       ],
-//             //                                     )
-//             //                                   : Text(
-//             //                                       restaurant.city ?? '',
-//             //                                       overflow:
-//             //                                           TextOverflow.ellipsis,
-//             //                                       style: TextStyle(
-//             //                                         fontSize: 16.sp,
-//             //                                         color: kcFontColor,
-//             //                                       ),
-//             //                                     ),
-//             //                             ],
-//             //                           ),
-//             //                         ),
-//             //                         //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
-//             //                         //*----------------- CUSTOM PACKAGE ---------------------//
-//             //                         GestureDetector(
-//             //                           //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-//             //                           onTap: () async =>
-//             //                               await showFlexibleBottomSheet(
-//             //                             isExpand: false,
-//             //                             initHeight: 0.95,
-//             //                             maxHeight: 0.95,
-//             //                             duration: Duration(milliseconds: 250),
-//             //                             context: context,
-//             //                             bottomSheetColor: Colors.transparent,
-//             //                             builder: (context, scrollController,
-//             //                                 offset) {
-//             //                               return RestaurantInfoBottomSheet(
-//             //                                 scrollController: scrollController,
-//             //                                 offset: offset,
-//             //                                 restaurant: restaurant,
-//             //                               );
-//             //                             },
-//             //                           ),
-//             //                           child: Container(
-//             //                             decoration: BoxDecoration(
-//             //                               color: kcSecondaryLightColor,
-//             //                               shape: BoxShape.circle,
-//             //                             ),
-//             //                             padding: EdgeInsets.symmetric(
-//             //                                 horizontal: 5.w, vertical: 5.h),
-//             //                             margin: EdgeInsets.only(right: 16.w),
-//             //                             child: SvgPicture.asset(
-//             //                               'assets/restaurant_info.svg',
-//             //                               color: kcSecondaryDarkColor,
-//             //                             ),
-//             //                           ),
-//             //                         ),
-//             //                       ],
-//             //                     ),
-//             //                   ),
-//             //                   Padding(
-//             //                     padding: EdgeInsets.symmetric(
-//             //                       vertical: 8.h,
-//             //                       horizontal: 16.w,
-//             //                     ),
-//             //                     child: Divider(
-//             //                       color: kcSecondaryLightColor,
-//             //                       thickness: 1.w,
-//             //                     ),
-//             //                   ),
-//             //                   //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-//             //                   ToggleButtonView(restaurant: restaurant),
-//             //                   //*----------------- MAIN DIVIDER ---------------------//
-//             //                   Container(
-//             //                     color: kcMainDividerColor,
-//             //                     padding: EdgeInsets.symmetric(vertical: 4.h),
-//             //                     margin: EdgeInsets.only(top: 15.h),
-//             //                   ),
-//             //                 ],
-//             //               ),
-//             //             ),
-//             //           ],
-//             //         ),
-//             // ),
-//           ),
-//           //*----------------- TABBAR ---------------------//
-//           bottom: ColoredTabBar(
-//             isShrink: model.isShrink ? true : false,
-//             tabBar: TabBar(
-//               controller: tabController,
-//               isScrollable: true,
-//               indicatorColor: Colors.transparent,
-//               labelPadding: EdgeInsets.all(0.0),
-//               tabs: model.resCategories
-//                   .map<Widget>((resCategory) => Tab(
-//                         child: AnimatedContainer(
-//                           duration: Duration(milliseconds: 500),
-//                           curve: Curves.easeInOut,
-//                           decoration: BoxDecoration(
-//                             borderRadius: AppTheme().radius15,
-//                             color: model.activeTab ==
-//                                     model.resCategories.indexOf(resCategory)
-//                                 ? model.isTabPressed
-//                                     ? kcSecondaryLightColor
-//                                     : kcWhiteColor
-//                                 : kcWhiteColor,
-//                           ),
-//                           margin: EdgeInsets.symmetric(
-//                             vertical: 2.h,
-//                             horizontal: 5.w,
-//                           ),
-//                           padding: EdgeInsets.symmetric(horizontal: 15.w),
-//                           alignment: Alignment.center,
-//                           child: Text(
-//                             resCategory.resCategoryModel?.name ?? '',
-//                             style: kts14SemiBoldText,
-//                           ),
-//                         ),
-//                       ))
-//                   .toList(),
-//               onTap: (index) {
-//                 model.updateOnTapRipple();
-//                 double offset = model.resCategories.getRange(0, index).fold(
-//                   0,
-//                   (prev, resCategory) {
-//                     int rows = (resCategory.meals!.length / 2).ceil();
-//                     return prev += rows *
-//                         (itemHeight +
-//                             15.h); // itemHeight + GridView mainAxisSpacing
-//                   },
-//                 );
-
-//                 customScrollController.animateTo(
-//                   offset + ((index - 1) * 72.h) + 0.55.sh,
-//                   // * 88.h FIRST COMPENSATION HERE // + 0.55.sh is to compensate Expanded height
-//                   duration: Duration(milliseconds: 300),
-//                   curve: Curves.linear,
-//                 );
-//                 model.updateOnTapRipple();
-//               },
-//             ),
-//           ),
-//         ),
-//*----------------- MEAL LIST ---------------------//
-        SliverPadding(
-          padding: EdgeInsets.only(
-              bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                final resCategory = model.resCategories[index];
-                final resCategoryMeals = resCategory.meals;
-                return Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 12.w, top: 25.h),
-                      child: Text(
-                        resCategory.resCategoryModel?.name ?? '',
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                          color: kcSecondaryDarkColor,
-                        ),
-                      ),
-                    ),
-
-                    // Container(
-                    //   alignment: Alignment.centerLeft,
-                    //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
-                    //   child: Text(
-                    //     resCategory.resCategoryModel?.name ?? '',
-                    //     style: TextStyle(
-                    //       fontSize: 22.sp,
-                    //       fontWeight: FontWeight.bold,
-                    //       color: kcSecondaryDarkColor,
-                    //     ),
-                    //   ),
-                    // ),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12.h,
-                        horizontal: 10.w,
-                      ),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10.h, //spaceTopBottom
-                        crossAxisSpacing: 6.w, //spaceLeftRight
-                        childAspectRatio: itemWidth / itemHeight,
-                      ),
-                      itemCount: resCategoryMeals!.length,
-                      itemBuilder: (context, pos) {
-                        return MealView(
-                          meal: resCategoryMeals[pos],
-                          restaurant:
-                              restaurant, // Needed for add meal with conditions only in CART
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-              childCount: model.resCategories.length,
-            ),
-          ),
-        ),
-      ],
+        onNotification: onScrollNotification,
+      ),
     );
   }
 }
-// //*NOTE: Instead of direct Container Column is used to make child work properly
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     mainAxisAlignment: MainAxisAlignment.end,
-//                     children: [
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           color: kcWhiteColor,
-//                           borderRadius: BorderRadius.only(
-//                             topLeft: Radius.circular(20.0),
-//                             topRight: Radius.circular(20.0),
-//                           ),
-//                         ),
-//                         padding: EdgeInsets.only(
-//                             top: Platform.isIOS ? 14.h : 12.h, bottom: 50.h),
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           mainAxisAlignment: MainAxisAlignment.start,
-//                           children: [
-//                             //*----------------- TITLE NAME ---------------------//
-//                             Padding(
-//                               padding: EdgeInsets.only(
-//                                 bottom: Platform.isIOS ? 12.h : 10.h,
-//                                 left: 16.w,
-//                                 right: 16.w,
-//                               ),
-//                               child: Text(
-//                                 restaurant.name ?? '',
-//                                 style: TextStyle(
-//                                   fontSize: 30.sp,
-//                                   fontWeight: FontWeight.bold,
-//                                   color: kcSecondaryDarkColor,
-//                                 ),
-//                               ),
-//                             ),
-//                             //*----------------- RATE / WORK TIME / INFO---------------------//
-//                             SingleChildScrollView(
-//                               scrollDirection: Axis.horizontal,
-//                               child: Row(
-//                                 children: [
-//                                   //*----------------- RATE ---------------------//
-//                                   Container(
-//                                     decoration: BoxDecoration(
-//                                       color: kcSecondaryLightColor,
-//                                       borderRadius: AppTheme().radius20,
-//                                     ),
-//                                     padding: EdgeInsets.symmetric(
-//                                         horizontal: 10.w, vertical: 7.h),
-//                                     margin: EdgeInsets.only(
-//                                       top: 5.h,
-//                                       bottom: 5.h,
-//                                       left: 16.w,
-//                                       right: 10.w,
-//                                     ),
-//                                     child: Row(
-//                                       children: [
-//                                         SvgPicture.asset(
-//                                           'assets/star.svg',
-//                                           color: kcSecondaryDarkColor,
-//                                           width: 20.w,
-//                                         ),
-//                                         SizedBox(width: 5.w),
-//                                         Text(
-//                                           formatNumRating(restaurant.rating ?? 5),
-//                                           style: TextStyle(
-//                                             fontSize: 15.sp,
-//                                             color: kcFontColor,
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                   //*----------------- LOCATION ---------------------//
-//                                   Container(
-//                                     decoration: BoxDecoration(
-//                                       color: kcSecondaryLightColor,
-//                                       borderRadius: AppTheme().radius20,
-//                                     ),
-//                                     padding: EdgeInsets.symmetric(
-//                                         horizontal: 10.w, vertical: 7.h),
-//                                     margin: EdgeInsets.only(
-//                                       top: 5.h,
-//                                       bottom: 5.h,
-//                                       right: 10.w,
-//                                     ),
-//                                     child: Row(
-//                                       children: [
-//                                         SvgPicture.asset(
-//                                           'assets/map_pin_bold.svg',
-//                                           color: kcSecondaryDarkColor,
-//                                           width: 20.w,
-//                                         ),
-//                                         SizedBox(width: 3.w),
-//                                         // Below condition checks whether res is LOCAL one or NOT
-//                                         model.locationPosition != null &&
-//                                                 restaurant.paymentTypes != null
-//                                             ? Row(
-//                                                 children: [
-//                                                   Text(
-//                                                     '${restaurant.city} (${restaurant.distance} ',
-//                                                     overflow: TextOverflow.ellipsis,
-//                                                     style: TextStyle(
-//                                                       fontSize: 16.sp,
-//                                                       color: kcFontColor,
-//                                                     ),
-//                                                   ),
-//                                                   Text(
-//                                                     LocaleKeys.km,
-//                                                     overflow: TextOverflow.ellipsis,
-//                                                     style: TextStyle(
-//                                                       fontSize: 16.sp,
-//                                                       color: kcFontColor,
-//                                                     ),
-//                                                   ).tr(),
-//                                                   Text(
-//                                                     ')',
-//                                                     overflow: TextOverflow.ellipsis,
-//                                                     style: TextStyle(
-//                                                       fontSize: 16.sp,
-//                                                       color: kcFontColor,
-//                                                     ),
-//                                                   ),
-//                                                 ],
-//                                               )
-//                                             : Text(
-//                                                 restaurant.city ?? '',
-//                                                 overflow: TextOverflow.ellipsis,
-//                                                 style: TextStyle(
-//                                                   fontSize: 16.sp,
-//                                                   color: kcFontColor,
-//                                                 ),
-//                                               ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                   //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
-//                                   //*----------------- CUSTOM PACKAGE ---------------------//
-//                                   GestureDetector(
-//                                     //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-//                                     onTap: () async =>
-//                                         await showFlexibleBottomSheet(
-//                                       isExpand: false,
-//                                       initHeight: 0.95,
-//                                       maxHeight: 0.95,
-//                                       duration: Duration(milliseconds: 250),
-//                                       context: context,
-//                                       bottomSheetColor: Colors.transparent,
-//                                       builder: (context, scrollController, offset) {
-//                                         return RestaurantInfoBottomSheet(
-//                                           scrollController: scrollController,
-//                                           offset: offset,
-//                                           restaurant: restaurant,
-//                                         );
-//                                       },
-//                                     ),
-//                                     child: Container(
-//                                       decoration: BoxDecoration(
-//                                         color: kcSecondaryLightColor,
-//                                         shape: BoxShape.circle,
-//                                       ),
-//                                       padding: EdgeInsets.symmetric(
-//                                           horizontal: 5.w, vertical: 5.h),
-//                                       margin: EdgeInsets.only(right: 16.w),
-//                                       child: SvgPicture.asset(
-//                                         'assets/restaurant_info.svg',
-//                                         color: kcSecondaryDarkColor,
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                             Padding(
-//                               padding: EdgeInsets.symmetric(
-//                                 vertical: 8.h,
-//                                 horizontal: 16.w,
-//                               ),
-//                               child: Divider(
-//                                 color: kcSecondaryLightColor,
-//                                 thickness: 1.w,
-//                               ),
-//                             ),
-// //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-//                             ToggleButtonView(restaurant: restaurant),
-//                             //*----------------- MAIN DIVIDER ---------------------//
-//                             Container(
-//                               color: kcMainDividerColor,
-//                               padding: EdgeInsets.symmetric(vertical: 4.h),
-//                               margin: EdgeInsets.only(top: 15.h),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),

@@ -29,12 +29,16 @@ class ResDetailsView extends StatelessWidget {
           });
 
         return Scaffold(
+          extendBodyBehindAppBar: true,
           body: Stack(
             children: [
               //*----------------- RESTAURANT MAIN PART ---------------------//
               model.isBusy
                   ? ResDetailsMainBusy(restaurant: restaurant)
-                  : ResDetailsMainHook(restaurant: restaurant),
+                  : ResDetailsMainHook(
+                      restaurant: restaurant,
+                      resCategories: model.resCategories,
+                    ),
               //*----------------- BOTTOM CART ---------------------//
               if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
             ],
