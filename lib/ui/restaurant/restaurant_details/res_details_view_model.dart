@@ -21,7 +21,7 @@ import '../../../utils/utils.dart';
 
 class ResDetailsViewModel extends FutureViewModel {
   final log = getLogger('ResDetailsViewModel');
-  final Restaurant? restaurant;
+  final Restaurant restaurant;
   ResDetailsViewModel(this.restaurant);
 
   final _api = locator<ApiService>();
@@ -56,7 +56,7 @@ class ResDetailsViewModel extends FutureViewModel {
   List<ResCategory> _resCategories = [];
   List<ResCategory> get resCategories => _resCategories;
 
-  // List<ResCategory>? get resCategories => _resService.resCategories;
+//*----------------------- HEADER/ANIMATION/TAB PART ----------------------------//
 
   //*Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
@@ -86,6 +86,32 @@ class ResDetailsViewModel extends FutureViewModel {
     }
   }
 
+  double get expandedHeight => 500.0;
+  double get collapsedHeight => kToolbarHeight;
+
+  //* PREVENTS animate when press on tab bar
+  bool _pauseRectGetterIndex = false;
+  bool get pauseRectGetterIndex => _pauseRectGetterIndex;
+
+  bool _isCollapsed = false;
+  bool get isCollapsed => _isCollapsed;
+
+  //*Function to change isCollapsed var
+  void updatePauseRectGetterIndex(bool value) {
+    if (this._pauseRectGetterIndex == value) return;
+    _pauseRectGetterIndex = value;
+    // notifyListeners();
+  }
+
+  //*Function to change isCollapsed var
+  void updateIsCollapsed(bool value) {
+    if (this._isCollapsed == value) return;
+    _isCollapsed = value;
+    // notifyListeners();
+  }
+
+//*----------------------- MAIN FETCH PART ----------------------------//
+
   @override
   Future<void> futureToRun() async => await getResCatsWithMeals();
 
@@ -97,7 +123,7 @@ class ResDetailsViewModel extends FutureViewModel {
       ) async {
     log.i('');
     await _api.getResCatsWithMeals(
-      restaurantId: restaurant!.id!,
+      restaurantId: restaurant.id!,
       onSuccess: (result) async {
         _resCategories = result;
       },
@@ -231,7 +257,7 @@ class ResDetailsViewModel extends FutureViewModel {
     // dynamic _navResult;
     // _navResult =
     await _navService.navigateTo(Routes.restaurantSearchView,
-        arguments: RestaurantSearchViewArguments(restaurant: restaurant!));
+        arguments: RestaurantSearchViewArguments(restaurant: restaurant));
     // ?? true;
     // if (_navResult) await initialise(); // Workaround
   }

@@ -16,9 +16,7 @@ import 'res_details_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
-  final Restaurant restaurant;
-  const ResDetailsMainBusy({required this.restaurant, Key? key})
-      : super(key: key);
+  const ResDetailsMainBusy({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ResDetailsViewModel model) {
@@ -131,7 +129,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(
-                    restaurant.image ?? 'assets/ph_restaurant.png',
+                    model.restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
                   fit: BoxFit.contain,
                   alignment: Alignment.topCenter,
@@ -165,7 +163,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                             right: 16.w,
                           ),
                           child: Text(
-                            restaurant.name ?? '',
+                            model.restaurant.name ?? '',
                             style: TextStyle(
                               fontSize: 30.sp,
                               fontWeight: FontWeight.bold,
@@ -203,7 +201,8 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      formatNumRating(restaurant.rating ?? 5),
+                                      formatNumRating(
+                                          model.restaurant.rating ?? 5),
                                       style: TextStyle(
                                         fontSize: 15.sp,
                                         color: kcFontColor,
@@ -237,13 +236,16 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     SizedBox(width: 3.w),
                                     // Below condition checks whether res is LOCAL one or NOT
                                     model.locationPosition != null &&
-                                            restaurant.paymentTypes != null &&
-                                            restaurant.notification != null &&
-                                            restaurant.notification!.isEmpty
+                                            model.restaurant.paymentTypes !=
+                                                null &&
+                                            model.restaurant.notification !=
+                                                null &&
+                                            model.restaurant.notification!
+                                                .isEmpty
                                         ? Row(
                                             children: [
                                               Text(
-                                                '${restaurant.city} (${restaurant.distance} ',
+                                                '${model.restaurant.city} (${model.restaurant.distance} ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
@@ -269,7 +271,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                             ],
                                           )
                                         : Text(
-                                            restaurant.city ?? '',
+                                            model.restaurant.city ?? '',
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
@@ -297,8 +299,8 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                               ),
 
                               //*----------------- NOTIFICATION BELL ---------------------//
-                              if (restaurant.notification != null &&
-                                  restaurant.notification!.isNotEmpty)
+                              if (model.restaurant.notification != null &&
+                                  model.restaurant.notification!.isNotEmpty)
                                 GestureDetector(
                                   onTap: () {},
                                   child: Container(
@@ -333,7 +335,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                           ),
                         ),
 //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-                        ToggleButtonView(restaurant: restaurant),
+                        ToggleButtonView(restaurant: model.restaurant),
                         //*----------------- MAIN DIVIDER ---------------------//
                         Container(
                           color: kcMainDividerColor,
