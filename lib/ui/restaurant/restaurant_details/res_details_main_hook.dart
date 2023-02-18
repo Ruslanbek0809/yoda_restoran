@@ -6,7 +6,7 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';
-import 'fappbar.dart';
+import 'res_details_appbar.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,14 +17,15 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
     Key? key,
   }) : super(key: key);
 
-  final listViewKey = RectGetter.createGlobalKey();
-  Map<int, dynamic> itemKeys = {};
+  final resDetailsRectGetterKey = RectGetter.createGlobalKey();
+  Map<int, dynamic> resCategoriesRectGetterKey = {};
 
-  List<int> getVisibleItemsIndex() {
-    Rect? rect = RectGetter.getRectFromKey(listViewKey);
+  //* GETS visible res category and its meals index
+  List<int> getVisibleResCategoryAndItsMealsIndex() {
+    Rect? rect = RectGetter.getRectFromKey(resDetailsRectGetterKey);
     List<int> items = [];
     if (rect == null) return items;
-    itemKeys.forEach((index, key) {
+    resCategoriesRectGetterKey.forEach((index, key) {
       Rect? itemRect = RectGetter.getRectFromKey(key);
       if (itemRect == null) return;
       if (itemRect.top > rect.bottom) return;
@@ -43,6 +44,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
     //*------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(
       initialLength: model.resCategories.length,
+      initialIndex: model.activeTab,
     );
 
     //*------------- CUSTOM SCROLL CONTROLLER ----------------//
@@ -56,21 +58,21 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
     AutoScrollController scrollController = useAutoScrollController()!;
 
     return RectGetter(
-      key: listViewKey,
+      key: resDetailsRectGetterKey,
       child: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {
           if (model.pauseRectGetterIndex) return true;
           int lastTabIndex = tabController.length - 1;
-          List<int> visibleItems = getVisibleItemsIndex();
-          bool reachLastTabIndex = visibleItems.isNotEmpty &&
-              visibleItems.length <= 2 &&
-              visibleItems.last == lastTabIndex;
+          List<int> visibleResCategoryAndItsMealsIndex = getVisibleResCategoryAndItsMealsIndex();
+          bool reachLastTabIndex = visibleResCategoryAndItsMealsIndex.isNotEmpty &&
+              visibleResCategoryAndItsMealsIndex.length <= 2 &&
+              visibleResCategoryAndItsMealsIndex.last == lastTabIndex;
           if (reachLastTabIndex) {
             tabController.animateTo(lastTabIndex);
-          } else if (visibleItems.isNotEmpty) {
+          } else if (visibleResCategoryAndItsMealsIndex.isNotEmpty) {
             int sumIndex =
-                visibleItems.reduce((value, element) => value + element);
-            int middleIndex = sumIndex ~/ visibleItems.length;
+                visibleResCategoryAndItsMealsIndex.reduce((value, element) => value + element);
+            int middleIndex = sumIndex ~/ visibleResCategoryAndItsMealsIndex.length;
             if (tabController.index != middleIndex)
               tabController.animateTo(middleIndex);
           }
@@ -79,17 +81,20 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
         child: CustomScrollView(
           controller: scrollController,
           slivers: [
-            FAppBar(
+//*----------------- SLIVER HEADER ---------------------//
+            ResDetailsAppBar(
+              context: context,
               restaurant: model.restaurant,
               resCategories: model.resCategories,
-              context: context,
               scrollController: scrollController,
               expandedHeight: model.expandedHeight,
               collapsedHeight: model.collapsedHeight,
               isCollapsed: model.isCollapsed,
+              activeTab: model.activeTab,
               onCollapsed: model.updateIsCollapsed,
               tabController: tabController,
               onTap: (index) {
+                model.updateActiveTab(index); //* From OLD
                 model.updatePauseRectGetterIndex(true);
                 tabController.animateTo(index);
                 scrollController
@@ -107,13 +112,14 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   childCount: model.resCategories.length,
                   (BuildContext context, int index) {
                     //! CONFIG scroll
-                    itemKeys[index] = RectGetter.createGlobalKey();
+                    resCategoriesRectGetterKey[index] =
+                        RectGetter.createGlobalKey();
 
                     final resCategory = model.resCategories[index];
                     final resCategoryMeals = resCategory.meals;
 
                     return RectGetter(
-                      key: itemKeys[index],
+                      key: resCategoriesRectGetterKey[index],
                       child: AutoScrollTag(
                         key: ValueKey(index),
                         index: index,

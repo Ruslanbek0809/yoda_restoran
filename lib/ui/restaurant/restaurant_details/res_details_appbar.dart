@@ -1,14 +1,11 @@
 import 'dart:io';
-
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:yoda_res/shared/app_colors.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
@@ -16,11 +13,12 @@ import '../../toggle_buttons/toggle_buttons_view.dart';
 import 'res_details_info_bottom_sheet.dart';
 import 'res_details_notification_bell_bottom_sheet.dart';
 
-class FAppBar extends SliverAppBar {
+class ResDetailsAppBar extends SliverAppBar {
+  final BuildContext context;
   final Restaurant restaurant;
   final List<ResCategory> resCategories;
-  final BuildContext context;
   final bool isCollapsed;
+  final int activeTab;
   final double expandedHeight;
   final double collapsedHeight;
   final AutoScrollController scrollController;
@@ -28,11 +26,12 @@ class FAppBar extends SliverAppBar {
   final void Function(bool isCollapsed) onCollapsed;
   final void Function(int index) onTap;
 
-  FAppBar({
+  ResDetailsAppBar({
+    required this.context,
     required this.restaurant,
     required this.resCategories,
-    required this.context,
     required this.isCollapsed,
+    required this.activeTab,
     required this.expandedHeight,
     required this.collapsedHeight,
     required this.scrollController,
@@ -41,9 +40,11 @@ class FAppBar extends SliverAppBar {
     required this.tabController,
   }) : super(elevation: 4.0, pinned: true, forceElevated: true);
 
+//*----------------- BACKGROUND COLOR OVERRIDE ---------------------//
   @override
   Color? get backgroundColor => kcWhiteColor;
 
+//*----------------- LEADING OVERRIDE ---------------------//
   @override
   Widget? get leading {
     return AnimatedSwitcher(
@@ -77,9 +78,11 @@ class FAppBar extends SliverAppBar {
     );
   }
 
+//*----------------- ACTIONS OVERRIDE ---------------------//
   @override
   List<Widget>? get actions {
     return [
+//*----------------- ACTIONS FAVOURITE ---------------------//
       AnimatedSwitcher(
         duration: Duration(milliseconds: 300),
         child: isCollapsed
@@ -156,6 +159,7 @@ class FAppBar extends SliverAppBar {
     ];
   }
 
+//*----------------- TITLE OVERRIDE ---------------------//
   @override
   Widget? get title {
     return AnimatedOpacity(
@@ -176,6 +180,7 @@ class FAppBar extends SliverAppBar {
     );
   }
 
+//*----------------- FLEXIBLE SPACE OVERRIDE ---------------------//
   @override
   Widget? get flexibleSpace {
     return LayoutBuilder(
@@ -191,9 +196,24 @@ class FAppBar extends SliverAppBar {
         });
 
         return FlexibleSpaceBar(
-          collapseMode: CollapseMode.pin,
+          // collapseMode: CollapseMode.pin,
+          stretchModes: [StretchMode.zoomBackground],
           background: Stack(
             children: [
+              /// BACKGROUND IMAGE
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      restaurant.image ?? 'assets/ph_restaurant.png',
+                    ),
+                    fit: BoxFit.cover,
+                    // fit: BoxFit.contain,
+                    // alignment: Alignment.topCenter,
+                  ),
+                ),
+              ),
+
               /// FRONT CONTENT
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -435,20 +455,6 @@ class FAppBar extends SliverAppBar {
                   ),
                 ],
               ),
-
-              /// BACKGROUND IMAGE
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      restaurant.image ?? 'assets/ph_restaurant.png',
-                    ),
-                    fit: BoxFit.cover,
-                    // fit: BoxFit.contain,
-                    // alignment: Alignment.topCenter,
-                  ),
-                ),
-              ),
             ],
           ),
         );
@@ -456,20 +462,25 @@ class FAppBar extends SliverAppBar {
     );
   }
 
+//*----------------- BOTTOM OVERRIDE ---------------------//
   @override
   PreferredSizeWidget? get bottom {
     return PreferredSize(
       preferredSize: const Size.fromHeight(48),
       child: Container(
-        color: kcWhiteColor,
+        decoration: BoxDecoration(
+          color: kcWhiteColor,
+          boxShadow: isCollapsed ? [AppTheme().tabBarShadow] : [],
+        ),
         child: TabBar(
           isScrollable: true,
           controller: tabController,
-          indicatorPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-          indicatorColor: kcPrimaryColor,
+          indicatorColor: Colors.transparent,
+          // indicatorWeight: 3.0,
+          // indicatorPadding: const EdgeInsets.symmetric(horizontal: 16.0),
           labelColor: kcPrimaryColor,
-          unselectedLabelColor: kcFontColor,
-          indicatorWeight: 3.0,
+          labelPadding: EdgeInsets.all(0.0),
+          // unselectedLabelColor: kcFontColor,
           tabs: resCategories.map((resCategory) {
             return Tab(
               child: AnimatedContainer(
@@ -477,7 +488,9 @@ class FAppBar extends SliverAppBar {
                 curve: Curves.easeInOut,
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
-                  color: kcWhiteColor,
+                  color: activeTab == resCategories.indexOf(resCategory)
+                      ? kcSecondaryLightColor
+                      : kcWhiteColor,
                 ),
                 margin: EdgeInsets.symmetric(
                   vertical: 2.h,

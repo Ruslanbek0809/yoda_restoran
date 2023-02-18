@@ -29,7 +29,7 @@ class ResDetailsView extends StatelessWidget {
           });
 
         return Scaffold(
-          extendBodyBehindAppBar: true,
+          // extendBodyBehindAppBar: true,
           body: Stack(
             children: [
               //*----------------- RESTAURANT MAIN PART ---------------------//

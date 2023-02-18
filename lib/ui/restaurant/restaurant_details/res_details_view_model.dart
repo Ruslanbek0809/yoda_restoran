@@ -61,7 +61,7 @@ class ResDetailsViewModel extends FutureViewModel {
   //*Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
     _activeTab = tabIndex;
-    notifyListeners();
+    // notifyListeners();
   }
 
   //*Function to change ACTIVE TAB
@@ -93,7 +93,7 @@ class ResDetailsViewModel extends FutureViewModel {
   bool _pauseRectGetterIndex = false;
   bool get pauseRectGetterIndex => _pauseRectGetterIndex;
 
-  bool _isCollapsed = false;
+  bool _isCollapsed = true;
   bool get isCollapsed => _isCollapsed;
 
   //*Function to change isCollapsed var
