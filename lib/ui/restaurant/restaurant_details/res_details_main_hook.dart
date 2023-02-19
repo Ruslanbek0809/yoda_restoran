@@ -63,31 +63,37 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
         onNotification: (ScrollNotification notification) {
           if (model.pauseRectGetterIndex) return true;
           int lastTabIndex = tabController.length - 1;
-          List<int> visibleResCategoryAndItsMealsIndex = getVisibleResCategoryAndItsMealsIndex();
-          bool reachLastTabIndex = visibleResCategoryAndItsMealsIndex.isNotEmpty &&
-              visibleResCategoryAndItsMealsIndex.length <= 2 &&
-              visibleResCategoryAndItsMealsIndex.last == lastTabIndex;
+          List<int> visibleResCategoryAndItsMealsIndex =
+              getVisibleResCategoryAndItsMealsIndex();
+          bool reachLastTabIndex =
+              visibleResCategoryAndItsMealsIndex.isNotEmpty &&
+                  visibleResCategoryAndItsMealsIndex.length <= 2 &&
+                  visibleResCategoryAndItsMealsIndex.last == lastTabIndex;
           if (reachLastTabIndex) {
             tabController.animateTo(lastTabIndex);
           } else if (visibleResCategoryAndItsMealsIndex.isNotEmpty) {
-            int sumIndex =
-                visibleResCategoryAndItsMealsIndex.reduce((value, element) => value + element);
-            int middleIndex = sumIndex ~/ visibleResCategoryAndItsMealsIndex.length;
+            int sumIndex = visibleResCategoryAndItsMealsIndex
+                .reduce((value, element) => value + element);
+            int middleIndex =
+                sumIndex ~/ visibleResCategoryAndItsMealsIndex.length;
             if (tabController.index != middleIndex)
               tabController.animateTo(middleIndex);
           }
           return false;
         },
         child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           controller: scrollController,
           slivers: [
 //*----------------- SLIVER HEADER ---------------------//
             ResDetailsAppBar(
               context: context,
+              model: model,
               restaurant: model.restaurant,
               resCategories: model.resCategories,
               scrollController: scrollController,
-              expandedHeight: model.expandedHeight,
+              expandedHeight: 0.55.sh,
+              // expandedHeight: model.expandedHeight,
               collapsedHeight: model.collapsedHeight,
               isCollapsed: model.isCollapsed,
               activeTab: model.activeTab,

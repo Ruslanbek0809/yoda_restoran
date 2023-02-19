@@ -7,7 +7,6 @@ import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
-import '../../../models/models.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/loading_widget.dart';
 import '../../../utils/utils.dart';
@@ -58,37 +57,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               ),
             ),
           ),
-          //*----------------- ACTIONS FAV ---------------------//
           actions: [
-            Padding(
-              padding: EdgeInsets.only(top: 5.w),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: kcWhiteColor,
-                  // boxShadow: _isShrink
-                  //     ? []
-                  //     : [AppTheme().buttonShadow],
-                ),
-                child: Material(
-                  shape: CircleBorder(),
-                  elevation: 0,
-                  color: kcWhiteColor,
-                  child: InkWell(
-                    customBorder: CircleBorder(),
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(8.w),
-                      child: Icon(
-                        Icons.favorite_outline_outlined,
-                        size: 27.w,
-                        color: kcBlackColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
             SizedBox(width: 10.w),
 //*----------------- ACTIONS SEARCH ---------------------//
             Padding(
@@ -97,7 +66,6 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: kcWhiteColor,
-                  // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
                 ),
                 child: Material(
                   shape: CircleBorder(),
@@ -131,8 +99,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   image: CachedNetworkImageProvider(
                     model.restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
-                  fit: BoxFit.contain,
-                  alignment: Alignment.topCenter,
+                  fit: BoxFit.cover,
+                  // fit: BoxFit.contain,
+                  // alignment: Alignment.topCenter,
                 ),
               ),
 
@@ -350,7 +319,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
             ),
           ),
         ),
-//*----------------- FOOD LIST with NAME ---------------------//
+//*----------------- LOADING PART ---------------------//
         SliverToBoxAdapter(
           child: LoadingWidget(),
         ),

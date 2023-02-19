@@ -105,6 +105,7 @@ class ResDetailsViewModel extends FutureViewModel {
 
   //*Function to change isCollapsed var
   void updateIsCollapsed(bool value) {
+    log.i('_isTabPressed: $_isTabPressed');
     if (this._isCollapsed == value) return;
     _isCollapsed = value;
     // notifyListeners();
