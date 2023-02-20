@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rect_getter/rect_getter.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';
 import 'res_details_appbar.dart';
@@ -11,9 +10,7 @@ import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
-  final List<ResCategory> resCategories;
   ResDetailsMainHook({
-    required this.resCategories,
     Key? key,
   }) : super(key: key);
 
@@ -82,14 +79,14 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           return false;
         },
         child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
+          // physics: BouncingScrollPhysics(),
+          physics: AlwaysScrollableScrollPhysics(),
           controller: scrollController,
           slivers: [
 //*----------------- SLIVER HEADER ---------------------//
             ResDetailsAppBar(
               context: context,
               model: model,
-              restaurant: model.restaurant,
               resCategories: model.resCategories,
               scrollController: scrollController,
               expandedHeight: 0.55.sh,
@@ -97,22 +94,26 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               collapsedHeight: model.collapsedHeight,
               isCollapsed: model.isCollapsed,
               activeTab: model.activeTab,
+              isTabPressed: model.isTabPressed,
               onCollapsed: model.updateIsCollapsed,
               tabController: tabController,
               onTap: (index) {
                 model.updateActiveTab(index); //* From OLD
+                model.updateOnTapRipple();
                 model.updatePauseRectGetterIndex(true);
                 tabController.animateTo(index);
                 scrollController
                     .scrollToIndex(index,
                         preferPosition: AutoScrollPosition.begin)
                     .then((value) => model.updatePauseRectGetterIndex(false));
+                model.updateOnTapRipple();
               },
             ),
 //*----------------- MEAL LIST ---------------------//
             SliverPadding(
               padding: EdgeInsets.only(
-                  bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+                bottom: 0.11.sh,
+              ), // COMPENSATES ResDetailsBottomCart height
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: model.resCategories.length,

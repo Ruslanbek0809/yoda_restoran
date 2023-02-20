@@ -99,9 +99,9 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   image: CachedNetworkImageProvider(
                     model.restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
-                  fit: BoxFit.cover,
-                  // fit: BoxFit.contain,
-                  // alignment: Alignment.topCenter,
+                  // fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.topCenter,
                 ),
               ),
 

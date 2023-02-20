@@ -4,6 +4,8 @@ import '../../../models/models.dart';
 import 'res_details_bottom_cart.dart';
 import 'res_details_main_hook.dart';
 import 'res_details_main_busy.dart';
+// import 'res_details_main_hook copy.dart';
+// import 'res_details_main_busy copy.dart';
 import 'res_details_view_model.dart';
 
 class ResDetailsView extends StatelessWidget {
@@ -29,13 +31,11 @@ class ResDetailsView extends StatelessWidget {
           });
 
         return Scaffold(
-          // extendBodyBehindAppBar: true,
           body: Stack(
             children: [
               //*----------------- RESTAURANT MAIN PART ---------------------//
-              model.isBusy
-                  ? ResDetailsMainBusy()
-                  : ResDetailsMainHook(resCategories: model.resCategories),
+              model.isBusy ? ResDetailsMainBusy() : ResDetailsMainHook(),
+              // : ResDetailsMainHook(),
               //*----------------- BOTTOM CART ---------------------//
               if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
             ],

@@ -7,7 +7,6 @@
 // import 'package:stacked/stacked.dart';
 // import '../../../generated/locale_keys.g.dart';
 // import '../../../shared/shared.dart';
-// import '../../../models/models.dart';
 // import '../../toggle_buttons/toggle_buttons_view.dart';
 // import '../../widgets/loading_widget.dart';
 // import '../../../utils/utils.dart';
@@ -350,7 +349,7 @@
 //             ),
 //           ),
 //         ),
-//*----------------- LOADING PART ---------------------//
+// // *----------------- LOADING PART ---------------------//
 //         SliverToBoxAdapter(
 //           child: LoadingWidget(),
 //         ),

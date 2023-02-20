@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,10 +20,10 @@ import 'res_details_view_model.dart';
 class ResDetailsAppBar extends SliverAppBar {
   final BuildContext context;
   final ResDetailsViewModel model;
-  final Restaurant restaurant;
   final List<ResCategory> resCategories;
   final bool isCollapsed;
   final int activeTab;
+  final bool isTabPressed;
   final double expandedHeight;
   final double collapsedHeight;
   final AutoScrollController scrollController;
@@ -33,10 +34,11 @@ class ResDetailsAppBar extends SliverAppBar {
   ResDetailsAppBar({
     required this.context,
     required this.model,
-    required this.restaurant,
+    // required this.restaurant,
     required this.resCategories,
     required this.isCollapsed,
     required this.activeTab,
+    required this.isTabPressed,
     required this.expandedHeight,
     required this.collapsedHeight,
     required this.scrollController,
@@ -65,12 +67,9 @@ class ResDetailsAppBar extends SliverAppBar {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: kcWhiteColor,
-          // color: model.isShrink ? Colors.transparent : kcWhiteColor,
-          // boxShadow: _isShrink ? [] : [AppTheme().buttonShadow],
         ),
         child: Material(
           color: kcWhiteColor,
-          // color: model.isShrink ? Colors.transparent : kcWhiteColor,
           shape: CircleBorder(),
           elevation: 0,
           child: InkWell(
@@ -104,9 +103,6 @@ class ResDetailsAppBar extends SliverAppBar {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: isCollapsed ? Colors.transparent : kcWhiteColor,
-                      // boxShadow: _isShrink
-                      //     ? []
-                      //     : [AppTheme().buttonShadow],
                     ),
                     child: Material(
                       shape: CircleBorder(),
@@ -114,16 +110,16 @@ class ResDetailsAppBar extends SliverAppBar {
                       color: isCollapsed ? Colors.transparent : kcWhiteColor,
                       child: InkWell(
                         customBorder: CircleBorder(),
-                        onTap: () {},
-                        // onTap: () => model.updateResFav(restaurant.id!),
+                        onTap: () => model.updateResFav(model.restaurant.id!),
                         child: Padding(
                           padding: EdgeInsets.all(8.w),
                           child: Icon(
-                            isCollapsed
+                            model.isFavorited
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             size: 27.w,
-                            color: isCollapsed ? kcRedColor : kcBlackColor,
+                            color:
+                                model.isFavorited ? kcRedColor : kcBlackColor,
                           ),
                         ),
                       ),
@@ -149,13 +145,12 @@ class ResDetailsAppBar extends SliverAppBar {
               color: kcWhiteColor,
               child: InkWell(
                 customBorder: CircleBorder(),
-                onTap: () {},
-                // onTap: () => model.navToResSearchView(),
+                onTap: () => model.navToResSearchView(),
                 child: Padding(
                   padding: EdgeInsets.all(8.w),
                   child: Icon(
-                    Icons.search_rounded,
-                    size: 27.w,
+                    CupertinoIcons.search,
+                    size: 27.r,
                     color: kcBlackColor,
                   ),
                 ),
@@ -177,7 +172,7 @@ class ResDetailsAppBar extends SliverAppBar {
       child: Padding(
         padding: EdgeInsets.only(left: 10.w, top: 5.w),
         child: Text(
-          restaurant.name ?? '',
+          model.restaurant.name ?? '',
           overflow: TextOverflow.fade,
           style: TextStyle(
             fontSize: 20.sp,
@@ -210,11 +205,11 @@ class ResDetailsAppBar extends SliverAppBar {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(
-                  restaurant.image ?? 'assets/ph_restaurant.png',
+                  model.restaurant.image ?? 'assets/ph_restaurant.png',
                 ),
-                fit: BoxFit.cover,
-                // fit: BoxFit.contain,
-                // alignment: Alignment.topCenter,
+                // fit: BoxFit.cover,
+                fit: BoxFit.contain,
+                alignment: Alignment.topCenter,
               ),
             ),
             child: Column(
@@ -245,7 +240,7 @@ class ResDetailsAppBar extends SliverAppBar {
                           right: 16.w,
                         ),
                         child: Text(
-                          restaurant.name ?? '',
+                          model.restaurant.name ?? '',
                           style: TextStyle(
                             fontSize: 30.sp,
                             fontWeight: FontWeight.bold,
@@ -283,7 +278,8 @@ class ResDetailsAppBar extends SliverAppBar {
                                   ),
                                   SizedBox(width: 5.w),
                                   Text(
-                                    formatNumRating(restaurant.rating ?? 5),
+                                    formatNumRating(
+                                        model.restaurant.rating ?? 5),
                                     style: TextStyle(
                                       fontSize: 15.sp,
                                       color: kcFontColor,
@@ -317,13 +313,15 @@ class ResDetailsAppBar extends SliverAppBar {
                                   SizedBox(width: 3.w),
                                   // Below condition checks whether res is LOCAL one or NOT
                                   model.locationPosition != null &&
-                                          restaurant.paymentTypes != null &&
-                                          restaurant.notification != null &&
-                                          restaurant.notification!.isEmpty
+                                          model.restaurant.paymentTypes !=
+                                              null &&
+                                          model.restaurant.notification !=
+                                              null &&
+                                          model.restaurant.notification!.isEmpty
                                       ? Row(
                                           children: [
                                             Text(
-                                              '${restaurant.city} (${restaurant.distance} ',
+                                              '${model.restaurant.city} (${model.restaurant.distance} ',
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                 fontSize: 16.sp,
@@ -349,7 +347,7 @@ class ResDetailsAppBar extends SliverAppBar {
                                           ],
                                         )
                                       : Text(
-                                          restaurant.city ?? '',
+                                          model.restaurant.city ?? '',
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 16.sp,
@@ -374,7 +372,7 @@ class ResDetailsAppBar extends SliverAppBar {
                                   return ResDetailsInfoBottomSheet(
                                     scrollController: scrollController,
                                     offset: offset,
-                                    restaurant: restaurant,
+                                    restaurant: model.restaurant,
                                   );
                                 },
                               ),
@@ -393,8 +391,8 @@ class ResDetailsAppBar extends SliverAppBar {
                             ),
 
                             //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
-                            if (restaurant.notification != null &&
-                                restaurant.notification!.isNotEmpty)
+                            if (model.restaurant.notification != null &&
+                                model.restaurant.notification!.isNotEmpty)
                               GestureDetector(
                                 //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                                 onTap: () async =>
@@ -409,7 +407,7 @@ class ResDetailsAppBar extends SliverAppBar {
                                     return ResDetailsNotificationBellBottomSheet(
                                       scrollController: scrollController,
                                       offset: offset,
-                                      restaurant: restaurant,
+                                      restaurant: model.restaurant,
                                     );
                                   },
                                 ),
@@ -445,7 +443,7 @@ class ResDetailsAppBar extends SliverAppBar {
                         ),
                       ),
                       //*----------------- DELIVERY/SELF-PICKUP ---------------------//
-                      ToggleButtonView(restaurant: restaurant),
+                      ToggleButtonView(restaurant: model.restaurant),
                       //*----------------- MAIN DIVIDER ---------------------//
                       Container(
                         color: kcMainDividerColor,
@@ -489,8 +487,10 @@ class ResDetailsAppBar extends SliverAppBar {
                 curve: Curves.easeInOut,
                 decoration: BoxDecoration(
                   borderRadius: AppTheme().radius15,
-                  color: activeTab == resCategories.indexOf(resCategory)
-                      ? kcSecondaryLightColor
+                  color: model.activeTab == resCategories.indexOf(resCategory)
+                      ? model.isTabPressed
+                          ? kcSecondaryLightColor
+                          : kcWhiteColor
                       : kcWhiteColor,
                 ),
                 margin: EdgeInsets.symmetric(
