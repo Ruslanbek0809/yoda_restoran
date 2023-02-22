@@ -62,6 +62,7 @@ dependencies:
   geolocator: ^8.1.1
   double_back_to_close_app: ^2.1.0
   flutter_html: ^2.2.1
+  keframe: ^3.0.0 # Optimization component
 
   # flutter_inappwebview: ^5.7.1+1
   flutter_inappwebview:
