@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
@@ -13,6 +14,7 @@ import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'res_details_info_bottom_sheet.dart';
+import 'res_details_notification_bell_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -62,8 +64,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
     return CustomScrollView(
       controller: customScrollController,
-      // physics: ClampingScrollPhysics(),
-      physics: BouncingScrollPhysics(),
+      physics: ClampingScrollPhysics(),
+      // physics: BouncingScrollPhysics(),
       slivers: [
 //         //*----------------- SLIVER HEADER PART I ---------------------//
 //         SliverAppBar(
@@ -550,7 +552,6 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 //         ),
         //*----------------- SLIVER HEADER ---------------------//
         SliverAppBar(
-          // expandedHeight: 0.275.sh,
           expandedHeight: 0.55.sh,
           pinned: true,
           stretch: true,
@@ -694,9 +695,9 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                   image: CachedNetworkImageProvider(
                     model.restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
-                  fit: BoxFit.cover,
-                  // fit: BoxFit.contain,
-                  // alignment: Alignment.topCenter,
+                  // fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.topCenter,
                 ),
               ),
               child: Column(
@@ -795,11 +796,15 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     // Below condition checks whether res is LOCAL one or NOT
                                     model.locationPosition != null &&
                                             model.restaurant.paymentTypes !=
-                                                null
+                                                null &&
+                                            model.restaurant.notification !=
+                                                null &&
+                                            model.restaurant.notification!
+                                                .isEmpty
                                         ? Row(
                                             children: [
                                               Text(
-                                                '${model.restaurant.city} (${model.restaurant.distance} ',
+                                                '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
@@ -825,7 +830,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                             ],
                                           )
                                         : Text(
-                                            model.restaurant.city ?? '',
+                                            getCustomResCityName(
+                                                model.restaurant.city ?? ''),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
@@ -835,8 +841,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                   ],
                                 ),
                               ),
-                              //*----------------- RESTAURANT INFO BOTTOM SHEET ---------------------//
-                              //*----------------- CUSTOM PACKAGE ---------------------//
+
+                              //*----------------- RESTAURANT DETAILS INFO BOTTOM SHEET ---------------------//
                               GestureDetector(
                                 //*CUSTOM BOTTOM SHEET BASED ON CONTENT
                                 onTap: () async =>
@@ -860,15 +866,55 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     color: kcSecondaryLightColor,
                                     shape: BoxShape.circle,
                                   ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 5.w, vertical: 5.h),
-                                  margin: EdgeInsets.only(right: 16.w),
+                                  padding: EdgeInsets.all(4.r),
+                                  margin: EdgeInsets.only(right: 10.w),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
                                     color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),
+
+                              //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
+                              if (model.restaurant.notification != null &&
+                                  model.restaurant.notification!.isNotEmpty)
+                                GestureDetector(
+                                  //*CUSTOM BOTTOM SHEET BASED ON CONTENT
+                                  onTap: () async =>
+                                      await showFlexibleBottomSheet(
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
+                                    duration: Duration(milliseconds: 250),
+                                    context: context,
+                                    bottomSheetColor: Colors.transparent,
+                                    builder:
+                                        (context, scrollController, offset) {
+                                      return ResDetailsNotificationBellBottomSheet(
+                                        scrollController: scrollController,
+                                        offset: offset,
+                                        restaurant: model.restaurant,
+                                      );
+                                    },
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: kcSecondaryLightColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.all(8.r),
+                                    margin: EdgeInsets.only(
+                                      top: 5.h,
+                                      bottom: 5.h,
+                                      right: 16.w,
+                                    ),
+                                    child: Lottie.asset(
+                                      'assets/bell.json',
+                                      width: 20.r,
+                                      repeat: false,
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                         ),

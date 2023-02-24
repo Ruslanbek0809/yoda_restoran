@@ -47,23 +47,24 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             margin: EdgeInsets.symmetric(vertical: 5.h),
             child: TextField(
-                controller: _searchController,
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  color: kcSecondaryDarkColor,
-                ),
-                decoration: InputDecoration(
-                  fillColor: kcWhiteColor,
-                  enabledBorder: InputBorder.none,
-                  border: InputBorder.none,
-                  hintText: LocaleKeys.search.tr(),
-                  hintStyle: kts14HelperText,
-                ),
-                autofocus: true,
-                onChanged: (value) =>
-                    _debouncer.run(() => model.startMainSearch(value)),
-                onSubmitted: (value) =>
-                    _debouncer.run(() => model.startMainSearch(value))),
+              controller: _searchController,
+              style: TextStyle(
+                fontSize: 18.sp,
+                color: kcSecondaryDarkColor,
+              ),
+              decoration: InputDecoration(
+                fillColor: kcWhiteColor,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none,
+                hintText: LocaleKeys.search.tr(),
+                hintStyle: kts14HelperText,
+              ),
+              autofocus: true,
+              onChanged: (value) =>
+                  _debouncer.run(() => model.startMainSearch(value)),
+              // onSubmitted: (value) =>
+              //     _debouncer.run(() => model.startMainSearch(value)),
+            ),
           ),
           actions: [
             AnimatedSwitcher(
@@ -164,7 +165,7 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                     ],
                   )
                 : ListView.builder(
-                    padding: EdgeInsets.only(top: 10.h),
+                    padding: EdgeInsets.only(top: 10.h, bottom: 16.h),
                     itemCount: model.searchRestaurants.length,
                     itemBuilder: (ctx, pos) {
                       var _searchRestaurant = model.searchRestaurants[pos];

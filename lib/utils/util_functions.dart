@@ -38,6 +38,18 @@ String formatNum(num value) =>
 String formatNumRating(num value) =>
     value.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '');
 
+String getCustomResCityName(String resCityName) {
+  final isCommaFound = resCityName.contains(',');
+  if (isCommaFound) {
+    final cityNameLast = resCityName.split(',').last;
+    if (cityNameLast.isNotEmpty)
+      return cityNameLast.replaceFirst(' ', '');
+    else
+      return resCityName;
+  } else
+    return resCityName;
+}
+
 //*PARSES and FORMATS discountBegin and discountEnd in Hm format only
 extension DateTimeHmFormatter on String {
   String formateDateTimeHmOnly() {

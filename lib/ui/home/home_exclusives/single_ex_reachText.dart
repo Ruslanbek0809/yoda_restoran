@@ -51,6 +51,7 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                     ), // Changes based on exclusive part
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate(
+                        childCount: model.seRiches.length,
                         (BuildContext context, int pos) {
                           final seRich = model.seRiches[pos];
                           return seRich.restaurant != null
@@ -112,7 +113,6 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                                   },
                                 );
                         },
-                        childCount: model.seRiches.length,
                       ),
                     ),
                   ),

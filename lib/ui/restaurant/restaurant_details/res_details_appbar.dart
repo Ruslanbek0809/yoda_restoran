@@ -321,7 +321,7 @@ class ResDetailsAppBar extends SliverAppBar {
                                       ? Row(
                                           children: [
                                             Text(
-                                              '${model.restaurant.city} (${model.restaurant.distance} ',
+                                              '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                 fontSize: 16.sp,
@@ -347,7 +347,8 @@ class ResDetailsAppBar extends SliverAppBar {
                                           ],
                                         )
                                       : Text(
-                                          model.restaurant.city ?? '',
+                                          getCustomResCityName(
+                                              model.restaurant.city ?? ''),
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 16.sp,
@@ -472,7 +473,9 @@ class ResDetailsAppBar extends SliverAppBar {
           boxShadow: !isCollapsed ? [AppTheme().tabBarShadow] : [],
         ),
         child: TabBar(
-          isScrollable: true,
+          isScrollable: resCategories.isNotEmpty && resCategories.length < 4
+              ? false
+              : true,
           controller: tabController,
           indicatorColor: Colors.transparent,
           // indicatorWeight: 3.0,

@@ -82,7 +82,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
         //TODO: DO more optimization using keframe.
         child: CustomScrollView(
           // physics: BouncingScrollPhysics(),
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: ClampingScrollPhysics(),
           controller: scrollController,
           slivers: [
             //*----------------- SLIVER HEADER ---------------------//

@@ -24,22 +24,22 @@ class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
       padding: EdgeInsets.symmetric(horizontal: 8.w),
       margin: EdgeInsets.symmetric(vertical: 5.h),
       child: TextField(
-          style: TextStyle(
-            fontSize: 18.sp,
-            color: kcSecondaryDarkColor,
-          ),
-          decoration: InputDecoration(
-            fillColor: kcWhiteColor,
-            enabledBorder: InputBorder.none,
-            border: InputBorder.none,
-            hintText: LocaleKeys.search.tr(),
-            hintStyle: kts14HelperText,
-          ),
-          controller: _searchController,
-          autofocus: true,
-          onChanged: (value) => _debouncer.run(() => model.searchMeals(value)),
-          onSubmitted: (value) =>
-              _debouncer.run(() => model.searchMeals(value))),
+        style: TextStyle(
+          fontSize: 18.sp,
+          color: kcSecondaryDarkColor,
+        ),
+        decoration: InputDecoration(
+          fillColor: kcWhiteColor,
+          enabledBorder: InputBorder.none,
+          border: InputBorder.none,
+          hintText: LocaleKeys.search.tr(),
+          hintStyle: kts14HelperText,
+        ),
+        controller: _searchController,
+        autofocus: true,
+        onChanged: (value) => _debouncer.run(() => model.searchMeals(value)),
+        // onSubmitted: (value) => _debouncer.run(() => model.searchMeals(value)),
+      ),
     );
   }
 }

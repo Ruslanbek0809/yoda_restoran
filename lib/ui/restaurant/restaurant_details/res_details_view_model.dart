@@ -61,7 +61,7 @@ class ResDetailsViewModel extends FutureViewModel {
   //*Function to change ACTIVE TAB
   void updateActiveTab(int tabIndex) {
     _activeTab = tabIndex;
-    // notifyListeners();
+    notifyListeners();
   }
 
   //*Function to change ACTIVE TAB
@@ -77,12 +77,12 @@ class ResDetailsViewModel extends FutureViewModel {
       Timer(Duration(milliseconds: 1200), () {
         _isTabPressed = false;
         log.i('_isTabPressed: $_isTabPressed');
-        // notifyListeners();
+        notifyListeners();
       });
     } else {
       _isTabPressed = true;
       log.i('_isTabPressed: $_isTabPressed');
-      // notifyListeners();
+      notifyListeners();
     }
   }
 
@@ -181,7 +181,7 @@ class ResDetailsViewModel extends FutureViewModel {
       _isFavorited =
           !_isFavorited; // The reason for fav update before actual patch func is not to keep user from waiting for update patch time
       log.i('_isFavorited: $_isFavorited');
-      // notifyListeners();
+      notifyListeners();
 
       await _userService.patchUserFavs(
         resId,
@@ -189,7 +189,7 @@ class ResDetailsViewModel extends FutureViewModel {
         () {
           log.i('FAIL fav update');
           _isFavorited = !_isFavorited; // Update it back.
-          // notifyListeners();
+          notifyListeners();
         },
       );
     } else {

@@ -131,7 +131,7 @@ class SingleOrderView extends StatelessWidget {
                                   ),
                             Text(
                               ' #${order.orderNumber?.substring(order.orderNumber!.length - 4)}',
-                              style: kts14HelperText,
+                              style: kts14HelperText, 
                             ),
                           ],
                         ),

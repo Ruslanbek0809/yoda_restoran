@@ -214,7 +214,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                         ? Row(
                                             children: [
                                               Text(
-                                                '${model.restaurant.city} (${model.restaurant.distance} ',
+                                                '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 16.sp,
@@ -240,7 +240,8 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                             ],
                                           )
                                         : Text(
-                                            model.restaurant.city ?? '',
+                                            getCustomResCityName(
+                                                model.restaurant.city ?? ''),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 16.sp,
