@@ -145,6 +145,25 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
+                              //*----------------- NOTIFICATION BELL ---------------------//
+                              if (model.restaurant.notification != null &&
+                                  model.restaurant.notification!.isNotEmpty)
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: kcSecondaryLightColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.all(9.r),
+                                    margin: EdgeInsets.only(left: 16.r),
+                                    child: Lottie.asset(
+                                      'assets/bell.json',
+                                      width: 20.r,
+                                      animate: false,
+                                    ),
+                                  ),
+                                ),
                               //*----------------- RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
@@ -158,7 +177,7 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                 margin: EdgeInsets.only(
                                   top: 5.h,
                                   bottom: 5.h,
-                                  left: 16.w,
+                                  left: 10.w,
                                   right: 10.w,
                                 ),
                                 child: Row(
@@ -260,37 +279,13 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.all(4.r),
-                                  margin: EdgeInsets.only(right: 10.w),
+                                  margin: EdgeInsets.only(right: 16.r),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
                                     color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),
-
-                              //*----------------- NOTIFICATION BELL ---------------------//
-                              if (model.restaurant.notification != null &&
-                                  model.restaurant.notification!.isNotEmpty)
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: kcSecondaryLightColor,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.all(8.r),
-                                    margin: EdgeInsets.only(
-                                      top: 5.h,
-                                      bottom: 5.h,
-                                      right: 16.w,
-                                    ),
-                                    child: Lottie.asset(
-                                      'assets/bell.json',
-                                      width: 20.r,
-                                      animate: false,
-                                    ),
-                                  ),
-                                ),
                             ],
                           ),
                         ),

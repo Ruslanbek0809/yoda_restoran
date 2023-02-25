@@ -739,6 +739,42 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
+                              //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
+                              if (model.restaurant.notification != null &&
+                                  model.restaurant.notification!.isNotEmpty)
+                                GestureDetector(
+                                  //*CUSTOM BOTTOM SHEET BASED ON CONTENT
+                                  onTap: () async =>
+                                      await showFlexibleBottomSheet(
+                                    isExpand: false,
+                                    initHeight: 0.95,
+                                    maxHeight: 0.95,
+                                    duration: Duration(milliseconds: 250),
+                                    context: context,
+                                    bottomSheetColor: Colors.transparent,
+                                    builder:
+                                        (context, scrollController, offset) {
+                                      return ResDetailsNotificationBellBottomSheet(
+                                        scrollController: scrollController,
+                                        offset: offset,
+                                        restaurant: model.restaurant,
+                                      );
+                                    },
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: kcSecondaryLightColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: EdgeInsets.all(9.r),
+                                    margin: EdgeInsets.only(left: 16.r),
+                                    child: Lottie.asset(
+                                      'assets/bell.json',
+                                      width: 20.r,
+                                      repeat: false,
+                                    ),
+                                  ),
+                                ),
                               //*----------------- RATE ---------------------//
                               Container(
                                 decoration: BoxDecoration(
@@ -750,8 +786,8 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                 margin: EdgeInsets.only(
                                   top: 5.h,
                                   bottom: 5.h,
-                                  left: 16.w,
-                                  right: 10.w,
+                                  left: 10.r,
+                                  right: 10.r,
                                 ),
                                 child: Row(
                                   children: [
@@ -867,54 +903,13 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                     shape: BoxShape.circle,
                                   ),
                                   padding: EdgeInsets.all(4.r),
-                                  margin: EdgeInsets.only(right: 10.w),
+                                  margin: EdgeInsets.only(right: 16.r),
                                   child: SvgPicture.asset(
                                     'assets/restaurant_info.svg',
                                     color: kcSecondaryDarkColor,
                                   ),
                                 ),
                               ),
-
-                              //*----------------- RESTAURANT DETAILS NOTIFICATION BELL BOTTOM SHEET ---------------------//
-                              if (model.restaurant.notification != null &&
-                                  model.restaurant.notification!.isNotEmpty)
-                                GestureDetector(
-                                  //*CUSTOM BOTTOM SHEET BASED ON CONTENT
-                                  onTap: () async =>
-                                      await showFlexibleBottomSheet(
-                                    isExpand: false,
-                                    initHeight: 0.95,
-                                    maxHeight: 0.95,
-                                    duration: Duration(milliseconds: 250),
-                                    context: context,
-                                    bottomSheetColor: Colors.transparent,
-                                    builder:
-                                        (context, scrollController, offset) {
-                                      return ResDetailsNotificationBellBottomSheet(
-                                        scrollController: scrollController,
-                                        offset: offset,
-                                        restaurant: model.restaurant,
-                                      );
-                                    },
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: kcSecondaryLightColor,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.all(8.r),
-                                    margin: EdgeInsets.only(
-                                      top: 5.h,
-                                      bottom: 5.h,
-                                      right: 16.w,
-                                    ),
-                                    child: Lottie.asset(
-                                      'assets/bell.json',
-                                      width: 20.r,
-                                      repeat: false,
-                                    ),
-                                  ),
-                                ),
                             ],
                           ),
                         ),
