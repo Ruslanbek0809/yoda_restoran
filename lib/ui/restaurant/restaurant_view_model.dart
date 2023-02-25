@@ -41,6 +41,9 @@ class ResViewModel extends BaseViewModel {
   void checkResFav(int resId) =>
       _isFavorited = _userService.currentUser!.favs.contains(resId);
 
+  // //*CHECKS and ASSIGNS res fav if it is in _userService.currentUser!.favs
+  // bool isFavorite(int resId) => _userService.currentUser!.favs.contains(resId);
+
   //*UPDATES res fav state
   Future<void> updateResFav(int resId) async {
     if (hasLoggedInUser) {
