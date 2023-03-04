@@ -19,7 +19,6 @@ import 'package:easy_localization/easy_localization.dart';
   ],
 ) // Needed when generating Formfields
 
-// ignore: must_be_immutable
 class LoginView extends StatelessWidget with $LoginView {
   final bool isCartView;
   LoginView({required this.isCartView, Key? key}) : super(key: key);
