@@ -139,7 +139,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                     String currentOtp = otpController.text;
                     if (currentOtp.length != 6) {
                       errorController.add(ErrorAnimationType
-                          .shake); // Triggering error shake animation
+                          .shake); //* Triggering error shake animation
                       model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.enter_otp_code_error.tr(),
@@ -149,7 +149,7 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
 
                     if (currentOtp != model.successOtp) {
                       errorController.add(ErrorAnimationType
-                          .shake); // Triggering error shake animation
+                          .shake); //* Triggering error shake animation
                       model.showCustomFlashBar(
                         context: context,
                         msg: LocaleKeys.incorrect_code.tr(),

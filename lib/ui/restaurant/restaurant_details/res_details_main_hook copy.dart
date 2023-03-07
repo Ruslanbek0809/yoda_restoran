@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../generated/locale_keys.g.dart';
-import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';

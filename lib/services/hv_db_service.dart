@@ -43,6 +43,8 @@ class HiveDbService with ReactiveServiceMixin {
     log.v('====== HiveDbService STARTED opening boxes ======');
 
     await Hive.openBox<HiveUser>(Constants.userBox);
+    await Hive.openBox<int>(
+        Constants.favoritesBox); //* Without custom hive object
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);

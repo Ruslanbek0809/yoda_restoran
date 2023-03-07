@@ -7,6 +7,7 @@ import '../../shared/app_colors.dart';
 import '../../models/models.dart';
 import '../widgets/widgets.dart';
 import '../../utils/utils.dart';
+import 'restaurant_favorite_button.dart';
 import 'restaurant_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -103,31 +104,32 @@ class RestaurantView extends StatelessWidget {
                     ),
                   ),
                   //*----------------- FAVOURITE ---------------------//
-                  Positioned(
-                    top: 10.r,
-                    right: 10.r,
-                    child: Container(
-                      width: 0.11.sw,
-                      height: 0.11.sw,
-                      decoration: BoxDecoration(
-                        color: kcWhiteColor.withOpacity(0.8),
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () => model.updateResFav(restaurant.id!),
-                        icon: Icon(
-                          model.isFavorited
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: model.isFavorited
-                              ? kcRedColor
-                              : kcSecondaryDarkColor,
-                          size: 24.sp,
-                        ),
-                      ),
-                    ),
-                  ),
+                  RestaurantFavoriteButton(restaurant: restaurant),
+                  // Positioned(
+                  //   top: 10.r,
+                  //   right: 10.r,
+                  //   child: Container(
+                  //     width: 0.11.sw,
+                  //     height: 0.11.sw,
+                  //     decoration: BoxDecoration(
+                  //       color: kcWhiteColor.withOpacity(0.8),
+                  //       shape: BoxShape.circle,
+                  //     ),
+                  //     child: IconButton(
+                  //       padding: EdgeInsets.zero,
+                  //       onPressed: () => model.updateResFav(restaurant.id!),
+                  //       icon: Icon(
+                  //         model.isFavorited
+                  //             ? Icons.favorite
+                  //             : Icons.favorite_border,
+                  //         color: model.isFavorited
+                  //             ? kcRedColor
+                  //             : kcSecondaryDarkColor,
+                  //         size: 24.sp,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               //*----------------- NAME ---------------------//

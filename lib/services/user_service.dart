@@ -19,6 +19,7 @@ class UserService {
   final _pushNotificationService = locator<PushNotificationService>();
 
   static late Box<HiveUser> userBox;
+  static late Box<int> favoritesBox;
 
   String? _otp = '123456';
   String?
@@ -100,6 +101,7 @@ class UserService {
 
     //* Step 1. ASSIGNS opened userBox to userBox for further work in Login/Otp Views
     userBox = Hive.box<HiveUser>(Constants.userBox);
+    favoritesBox = Hive.box<int>(Constants.favoritesBox);
 
     //* Step 2. GETS hiveUser from Hive userBox
     _currentUser = userBox.get(Constants.userBox);
@@ -1111,6 +1113,7 @@ class UserService {
 
   //* ------------------ ONLINE PAYMENT End ---------------------//
 
+  //* ------------------ USER FAVORITES START ---------------------//
   Future<void> patchUserFavs(
     int resId,
     bool isTempFavourited,
@@ -1170,6 +1173,53 @@ class UserService {
       rethrow;
     }
   }
+
+  Future<void> addRestaurantToFav(int resId) async {
+    //* ADDS id of current res to favoritesBox
+    favoritesBox.put(
+      resId, //* Unique hive id for this object
+      resId,
+    );
+
+    log.v(
+        'BEFORE addRestaurantToFav() PATCH favoritesBox.values.toList() with result: ${favoritesBox.values.toList()}');
+
+    final _formData =
+        FormData.fromMap({'favourites': favoritesBox.values.toList()});
+
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/user/${_currentUser!.id}/',
+        data: favoritesBox.values.isNotEmpty
+            ? _formData
+            : <String, dynamic>{'favourites': []},
+      );
+      log.v(
+          'RESPONSE: api/user/${_currentUser!.id}/ with favoritesBox.values.toList(): ${favoritesBox.values.toList()} => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        log.v(
+            'AFTER SUCCESS addRestaurantToFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+      } else {
+        //* If server FAILS, DELETE current res id from favoritesBox
+        await favoritesBox.delete(resId);
+        log.v(
+            'AFTER FAIL addRestaurantToFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+      }
+    } on DioError catch (error) {
+      log.v(
+          'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
+      //* If server FAILS, DELETE current res id from favoritesBox
+      await favoritesBox.delete(resId);
+      log.v(
+          'AFTER FAIL addRestaurantToFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+
+      rethrow;
+    }
+  }
+
+  //* ------------------ USER FAVORITES END ---------------------//
 
   //* ------------------ RATINGS ---------------------//
 
