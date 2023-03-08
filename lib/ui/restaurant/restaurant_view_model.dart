@@ -19,9 +19,6 @@ class ResViewModel extends BaseViewModel {
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  bool _isFavorited = false;
-  bool get isFavorited => _isFavorited;
-
   bool _isHourlyDiscountActive = false;
   bool get isHourlyDiscountActive => _isHourlyDiscountActive;
 
@@ -35,41 +32,6 @@ class ResViewModel extends BaseViewModel {
     if (_currentHour >= _discountBeginDateTime.hour &&
         _currentHour < _discountEndDateTime.hour)
       _isHourlyDiscountActive = true;
-  }
-
-  //*CHECKS and ASSIGNS initial res fav state
-  void checkResFav(int resId) =>
-      _isFavorited = _userService.currentUser!.favs.contains(resId);
-
-  // //*CHECKS and ASSIGNS res fav if it is in _userService.currentUser!.favs
-  // bool isFavorite(int resId) => _userService.currentUser!.favs.contains(resId);
-
-  //*UPDATES res fav state
-  Future<void> updateResFav(int resId) async {
-    if (hasLoggedInUser) {
-      log.v(
-          'updateResFav() USER FOUND with his/her phone and favs: ${_userService.currentUser!.mobile} and ${_userService.currentUser!.favs}');
-      _isFavorited =
-          !_isFavorited; // The reason for fav update before actual patch func is not to keep user from waiting for update patch time
-      log.i('_isFavorited: $_isFavorited');
-      notifyListeners();
-
-      await _userService.patchUserFavs(
-        resId,
-        _isFavorited,
-        () {
-          log.i('FAIL fav update');
-          _isFavorited = !_isFavorited; // Update it back.
-          notifyListeners();
-        },
-      );
-    } else {
-      log.v('updateResFav() USER NOTTTTT FOUND');
-      await _navService.navigateTo(
-        Routes.loginView,
-        arguments: LoginViewArguments(isCartView: false),
-      ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
-    }
   }
 
   //* ADDS id of current res to favoritesBox

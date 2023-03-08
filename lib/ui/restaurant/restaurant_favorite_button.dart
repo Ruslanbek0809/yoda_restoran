@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
-import '../../models/hive_models/hive_models.dart';
 import '../../models/models.dart';
 import '../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +38,7 @@ class RestaurantFavoriteButton extends ViewModelWidget<ResViewModel> {
                     : Icons.favorite_border,
                 color: hiveFavoritesBox.containsKey(restaurant.id!)
                     ? kcRedColor
-                    : kcSecondaryDarkColor, 
+                    : kcSecondaryDarkColor,
                 size: 24.sp,
               ),
             );

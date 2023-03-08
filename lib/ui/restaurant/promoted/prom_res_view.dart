@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../../models/models.dart';
+import 'prom_res_favorite_button.dart';
 import 'prom_res_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
@@ -21,7 +22,6 @@ class PromResView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<PromResViewModel>.reactive(
       builder: (context, model, child) {
-        if (model.hasLoggedInUser) model.checkResFav(restaurant.id!);
         return Container(
           height: 0.245.sh,
           width: 0.7.sw,
@@ -108,31 +108,7 @@ class PromResView extends StatelessWidget {
                     ),
                   ),
                   //*----------------- FAVOURITE ---------------------//
-                  Positioned(
-                    top: 8.r,
-                    right: 8.r,
-                    child: Container(
-                      width: 0.09.sw,
-                      height: 0.09.sw,
-                      decoration: BoxDecoration(
-                        color: kcWhiteColor.withOpacity(0.8),
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () => model.updateResFav(restaurant.id!),
-                        icon: Icon(
-                          model.isFavorited
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: model.isFavorited
-                              ? kcRedColor
-                              : kcSecondaryDarkColor,
-                          size: 20.w,
-                        ),
-                      ),
-                    ),
-                  ),
+                  PromResFavoriteButton(restaurant: restaurant),
                 ],
               ),
               //*----------------- NAME ---------------------//
