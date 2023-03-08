@@ -1176,7 +1176,7 @@ class UserService {
 
   Future<void> addRestaurantToFav(int resId) async {
     //* ADDS id of current res to favoritesBox
-    favoritesBox.put(
+    await favoritesBox.put(
       resId, //* Unique hive id for this object
       resId,
     );
@@ -1214,6 +1214,54 @@ class UserService {
       await favoritesBox.delete(resId);
       log.v(
           'AFTER FAIL addRestaurantToFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+
+      rethrow;
+    }
+  }
+
+  Future<void> removeRestaurantFromFav(int resId) async {
+    //* REMOVES id of current res to favoritesBox
+    await favoritesBox.delete(resId);
+
+    log.v(
+        'BEFORE removeRestaurantFromFav() PATCH favoritesBox.values.toList() with result: ${favoritesBox.values.toList()}');
+
+    final _formData =
+        FormData.fromMap({'favourites': favoritesBox.values.toList()});
+
+    try {
+      Response response = await _apiRoot.dio.patch(
+        'api/user/${_currentUser!.id}/',
+        data: favoritesBox.values.isNotEmpty
+            ? _formData
+            : <String, dynamic>{'favourites': []},
+      );
+      log.v(
+          'RESPONSE: api/user/${_currentUser!.id}/ with favoritesBox.values.toList(): ${favoritesBox.values.toList()} => ${response.data}');
+
+      if (response.data != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        log.v(
+            'AFTER SUCCESS removeRestaurantFromFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+      } else {
+        //* If server FAILS, ADDS previously deleted res to favoritesBox
+        await favoritesBox.put(
+          resId, //* Unique hive id for this object
+          resId,
+        );
+        log.v(
+            'AFTER FAIL removeRestaurantFromFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
+      }
+    } on DioError catch (error) {
+      log.v(
+          'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
+      //* If server FAILS, ADDS previously deleted res to favoritesBox
+      await favoritesBox.put(
+        resId, //* Unique hive id for this object
+        resId,
+      );
+      log.v(
+          'AFTER FAIL removeRestaurantFromFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
 
       rethrow;
     }

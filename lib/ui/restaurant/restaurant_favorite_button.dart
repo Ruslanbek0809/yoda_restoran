@@ -26,32 +26,25 @@ class RestaurantFavoriteButton extends ViewModelWidget<ResViewModel> {
           shape: BoxShape.circle,
         ),
         child: ValueListenableBuilder<Box<int>>(
-            valueListenable: Hive.box<int>(Constants.favoritesBox).listenable(),
-            builder: (context, hiveFavoritesBox, _) {
-              return IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  if (!hiveFavoritesBox.containsKey(restaurant.id!))
-                    model.addRestaurantToFav(restaurant.id!);
-                },
-                // onPressed: () => hiveNotificationsBox.containsKey(notification.id)
-                // ? context
-                //     .read<NotificationWatcherCubit>()
-                //     .removeNotificationAsFavorite(
-                //       notificationId: notification.id!,
-                //     )
-                // : model.addRestaurantToFav(restaurant.id!),
-                icon: Icon(
-                  hiveFavoritesBox.containsKey(restaurant.id!)
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color: hiveFavoritesBox.containsKey(restaurant.id!)
-                      ? kcRedColor
-                      : kcSecondaryDarkColor,
-                  size: 24.sp,
-                ),
-              );
-            }),
+          valueListenable: Hive.box<int>(Constants.favoritesBox).listenable(),
+          builder: (context, hiveFavoritesBox, _) {
+            return IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => hiveFavoritesBox.containsKey(restaurant.id!)
+                  ? model.removeRestaurantFromFav(restaurant.id!)
+                  : model.addRestaurantToFav(restaurant.id!),
+              icon: Icon(
+                hiveFavoritesBox.containsKey(restaurant.id!)
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                color: hiveFavoritesBox.containsKey(restaurant.id!)
+                    ? kcRedColor
+                    : kcSecondaryDarkColor, 
+                size: 24.sp,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

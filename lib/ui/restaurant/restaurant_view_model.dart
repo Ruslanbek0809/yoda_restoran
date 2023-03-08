@@ -87,6 +87,21 @@ class ResViewModel extends BaseViewModel {
     }
   }
 
+  //* REMOVES id of current res from favoritesBox
+  Future<void> removeRestaurantFromFav(int resId) async {
+    if (hasLoggedInUser) {
+      log.v('removeRestaurantFromFav() USER FOUND with resId: $resId');
+
+      await _userService.removeRestaurantFromFav(resId);
+    } else {
+      log.v('removeRestaurantFromFav() USER NOTTTTT FOUND');
+      await _navService.navigateTo(
+        Routes.loginView,
+        arguments: LoginViewArguments(isCartView: false),
+      ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
+    }
+  }
+
   //*----------------- NAVIGATION ---------------------//
 
   void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
