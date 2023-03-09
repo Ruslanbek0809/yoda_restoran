@@ -15,8 +15,6 @@ class ResDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResDetailsViewModel>.reactive(
-      onModelReady: (model) =>
-          model.hasLoggedInUser ? model.checkResFav(restaurant.id!) : () {},
       viewModelBuilder: () => ResDetailsViewModel(restaurant),
       builder: (context, model, child) {
         if (model.isCustomError && restaurant.id == model.cartRes!.id)

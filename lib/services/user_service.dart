@@ -170,7 +170,6 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
-            favs: userModel.favourites ?? [],
           ),
         );
 
@@ -237,7 +236,6 @@ class UserService {
             mobile: userModel.mobile,
             gender: userModel.gender,
             birthday: userModel.birthday,
-            favs: userModel.favourites ?? [],
           ),
         );
 
@@ -1114,65 +1112,6 @@ class UserService {
   //* ------------------ ONLINE PAYMENT End ---------------------//
 
   //* ------------------ USER FAVORITES START ---------------------//
-  Future<void> patchUserFavs(
-    int resId,
-    bool isTempFavourited,
-    Function()? onFail,
-  ) async {
-    if (_currentUser!.favs.contains(resId))
-      _currentUser?.favs.remove(resId);
-    else
-      _currentUser?.favs.add(resId);
-
-    final _formData = FormData.fromMap({'favourites': _currentUser!.favs});
-
-    log.v(
-        'BEFORE fav patch _currentUser?.favs! with result: ${_currentUser?.favs} and ${_formData.fields}');
-    try {
-      Response response = await _apiRoot.dio.patch(
-        'api/user/${_currentUser!.id}/',
-        data: _currentUser!.favs.isNotEmpty
-            ? _formData
-            : <String, dynamic>{'favourites': []},
-      );
-      log.v(
-          'RESPONSE: api/user/${_currentUser!.id}/ with favs: ${_currentUser?.favs ?? []} => ${response.data}');
-
-      if (response.data != null &&
-          (response.statusCode == 200 || response.statusCode == 201)) {
-        log.v(
-            'AFTER SUCCESS fav patch _currentUser?.favs!: ${_currentUser?.favs}');
-
-        //* If success then updates local _currentUser's favs
-        //* Step 2. UPDATES userModel to Hive userBox
-        await userBox.put(
-          Constants.userBox,
-          _currentUser!,
-        );
-
-        //* Step 3. GETS hiveUser from Hive userBox
-        _currentUser = userBox.get(Constants.userBox);
-      } else {
-        if (isTempFavourited)
-          _currentUser?.favs.remove(resId);
-        else
-          _currentUser?.favs.add(resId);
-        log.v(
-            'AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs}');
-        onFail!();
-      }
-    } on DioError catch (error) {
-      log.v(
-          'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
-      if (isTempFavourited)
-        _currentUser?.favs.remove(resId);
-      else
-        _currentUser?.favs.add(resId);
-      log.v('AFTER FAIL fav patch _currentUser?.favs!: ${_currentUser?.favs}');
-      onFail!();
-      rethrow;
-    }
-  }
 
   Future<void> addRestaurantToFav(int resId) async {
     //* ADDS id of current res to favoritesBox

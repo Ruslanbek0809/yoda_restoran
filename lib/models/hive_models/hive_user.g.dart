@@ -24,14 +24,13 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       mobile: fields[4] as String?,
       gender: fields[5] as String?,
       birthday: fields[6] as DateTime?,
-      favs: fields[7] == null ? [] : (fields[7] as List).cast<int>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveUser obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,9 +44,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       ..writeByte(5)
       ..write(obj.gender)
       ..writeByte(6)
-      ..write(obj.birthday)
-      ..writeByte(7)
-      ..write(obj.favs);
+      ..write(obj.birthday);
   }
 
   @override

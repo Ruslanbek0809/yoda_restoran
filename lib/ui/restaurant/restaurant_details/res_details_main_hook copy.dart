@@ -18,6 +18,8 @@ import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'restaurant_favorite_button.dart';
+
 class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
   // final Restaurant restaurant;
   const ResDetailsMainHook(
@@ -608,44 +610,25 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
               duration: Duration(milliseconds: 300),
               child: model.isShrink
                   ? SizedBox()
-                  : AnimatedSwitcher(
-                      duration: Duration(milliseconds: 300),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 5.w),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: model.isShrink
-                                ? Colors.transparent
-                                : kcWhiteColor,
-                            // boxShadow: _isShrink
-                            //     ? []
-                            //     : [AppTheme().buttonShadow],
-                          ),
-                          child: Material(
-                            shape: CircleBorder(),
-                            elevation: 0,
-                            color: model.isShrink
-                                ? Colors.transparent
-                                : kcWhiteColor,
-                            child: InkWell(
-                              customBorder: CircleBorder(),
-                              onTap: () =>
-                                  model.updateResFav(model.restaurant.id!),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.w),
-                                child: Icon(
-                                  model.isFavorited
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  size: 27.w,
-                                  color: model.isFavorited
-                                      ? kcRedColor
-                                      : kcBlackColor,
-                                ),
-                              ),
-                            ),
-                          ),
+                  : Padding(
+                      padding: EdgeInsets.only(top: 5.r),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: model.isShrink
+                              ? Colors.transparent
+                              : kcWhiteColor,
+                          // boxShadow: _isShrink
+                          //     ? []
+                          //     : [AppTheme().buttonShadow],
+                        ),
+                        child: Material(
+                          shape: CircleBorder(),
+                          elevation: 0,
+                          color: model.isShrink
+                              ? Colors.transparent
+                              : kcWhiteColor,
+                          child: ResDetailsFavoriteButton(),
                         ),
                       ),
                     ),

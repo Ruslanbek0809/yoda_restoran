@@ -164,40 +164,35 @@ class ResDetailsViewModel extends FutureViewModel {
 
 //*----------------------- FAVOURITE PART ----------------------------//
 
-  bool _isFavorited = false;
-  bool get isFavorited => _isFavorited;
-
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  //*CHECKS and ASSIGNS initial res fav state
-  void checkResFav(int resId) =>
-      _isFavorited = _userService.currentUser!.favs.contains(resId);
-
-  //*UPDATES res fav state
-  Future<void> updateResFav(int resId) async {
+  //* ADDS id of current res to favoritesBox
+  Future<void> addRestaurantToFav(int resId) async {
     if (hasLoggedInUser) {
-      log.v(
-          'updateResFav() USER FOUND with his/her phone and favs: ${_userService.currentUser!.mobile} and ${_userService.currentUser!.favs}');
-      _isFavorited =
-          !_isFavorited; // The reason for fav update before actual patch func is not to keep user from waiting for update patch time
-      log.i('_isFavorited: $_isFavorited');
-      notifyListeners();
+      log.v('addRestaurantToFav() USER FOUND with resId: $resId');
 
-      await _userService.patchUserFavs(
-        resId,
-        _isFavorited,
-        () {
-          log.i('FAIL fav update');
-          _isFavorited = !_isFavorited; // Update it back.
-          notifyListeners();
-        },
-      );
+      await _userService.addRestaurantToFav(resId);
     } else {
-      log.v('updateResFav() USER NOTTTTT FOUND');
+      log.v('addRestaurantToFav() USER NOTTTTT FOUND');
       await _navService.navigateTo(
         Routes.loginView,
         arguments: LoginViewArguments(isCartView: true),
-      ); // Workaround. isCartView is used to navigate to new View by condition in OtpVM
+      ); //* Workaround. isCartView is used to navigate to new View by condition in OtpVM
+    }
+  }
+
+  //* REMOVES id of current res from favoritesBox
+  Future<void> removeRestaurantFromFav(int resId) async {
+    if (hasLoggedInUser) {
+      log.v('removeRestaurantFromFav() USER FOUND with resId: $resId');
+
+      await _userService.removeRestaurantFromFav(resId);
+    } else {
+      log.v('removeRestaurantFromFav() USER NOTTTTT FOUND');
+      await _navService.navigateTo(
+        Routes.loginView,
+        arguments: LoginViewArguments(isCartView: true),
+      ); //* Workaround. isCartView is used to navigate to new View by condition in OtpVM
     }
   }
 

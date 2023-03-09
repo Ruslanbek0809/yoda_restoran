@@ -71,7 +71,7 @@ class CartView extends StatelessWidget {
                   // Also horizontal: 15.w padding is used for each inner widgets bc of horizontal CartFoodWidget list scroll
                   physics: BouncingScrollPhysics(),
                   children: <Widget>[
-                    //*------------------ CARTWIDGET ---------------------//
+                    //*------------------ CART WIDGET ---------------------//
                     ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

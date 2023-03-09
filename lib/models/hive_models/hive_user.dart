@@ -12,7 +12,6 @@ class HiveUser {
     this.mobile,
     this.gender,
     this.birthday,
-    required this.favs,
   });
 
   @HiveField(0)
@@ -35,7 +34,4 @@ class HiveUser {
 
   @HiveField(6)
   final DateTime? birthday;
-
-  @HiveField(7, defaultValue: [])
-  final List<int> favs;
 }
