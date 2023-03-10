@@ -79,7 +79,7 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     ),
                   ),
                   onChanged: (value) => value.length > 2
-                      ? _debouncer.run(() => model.searchPromocode(value))
+                      ? _debouncer.run(() => model.searchPromocode(value).then((value) => null))
                       : model.resetPromocode(),
                   onSubmitted: (value) => value.length > 2
                       ? _debouncer.run(() => model.searchPromocode(value))

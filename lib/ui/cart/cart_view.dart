@@ -253,14 +253,11 @@ class CartView extends StatelessWidget {
                                     context: context,
                                     bottomSheetColor: Colors.transparent,
                                     builder:
-                                        (context, scrollController, offset) {
-                                      return CustomModalBottomSheet(
-                                        child: CheckoutBottomSheetView(
-                                          scrollController: scrollController,
-                                          offset: offset,
-                                        ),
-                                      );
-                                    },
+                                        (context, scrollController, offset) =>
+                                            CheckoutBottomSheetView(
+                                      scrollController: scrollController,
+                                      offset: offset,
+                                    ),
                                   );
                                 } else
                                   model.navToLoginView();
