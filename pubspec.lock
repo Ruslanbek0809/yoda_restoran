@@ -570,10 +570,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_credit_card
-      sha256: "12cf3b104c6491b2656a4154b5a370ae33a175b0451834f6c26f305c2a6961f8"
+      sha256: "1319687c72d124ce6c902c9e29cbc34f4472fe406a59fa2701d25313e70ba8c7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.6"
   flutter_datetime_picker:
     dependency: "direct main"
     description:

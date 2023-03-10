@@ -98,7 +98,6 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         focusedBorder: AppTheme().cardUnderlineInputBorder,
                         enabledBorder: AppTheme().cardUnderlineInputBorder,
                       ),
-                      cvvValidator: model.updateCVCValidator,
                       cardHolderDecoration: InputDecoration(
                         hintStyle: kts16HelperText,
                         labelStyle: kts16HelperText,
@@ -106,6 +105,7 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
                         enabledBorder: AppTheme().cardUnderlineInputBorder,
                         labelText: LocaleKeys.card_holder.tr(),
                       ),
+                      cvvValidator: model.updateCVCValidator,
                       cardHolderValidator: model.updateCardHolderValidator,
                       onCreditCardModelChange: model.onCreditCardModelChange,
                     ),
