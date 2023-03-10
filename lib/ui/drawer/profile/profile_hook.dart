@@ -405,7 +405,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                 child: CustomTextChildButton(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
-                    child: model.isBusy
+                    child: model.busy('save')
                         ? ButtonLoading()
                         : Text(LocaleKeys.save, style: ktsButtonWhite18Text)
                             .tr(),

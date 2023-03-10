@@ -135,15 +135,18 @@ class ProfileViewModel extends BaseViewModel {
   }) async {
     log.v('onUpdateUserPressed()');
     try {
-      await runBusyFuture(_userService.updateUser(
-        _name,
-        _birthDate,
-        _gender,
-        _email,
-        _phone,
-        () => onSuccessForView!(),
-        () => onFailForView!(),
-      ));
+      await runBusyFuture(
+        _userService.updateUser(
+          _name,
+          _birthDate,
+          _gender,
+          _email,
+          _phone,
+          () => onSuccessForView!(),
+          () => onFailForView!(),
+        ),
+        busyObject: 'save',
+      );
     } catch (err) {
       throw err;
     }
