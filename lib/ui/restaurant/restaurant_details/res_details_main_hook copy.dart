@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../meal/meal_view.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
@@ -16,7 +16,6 @@ import 'res_details_info_bottom_sheet.dart';
 import 'res_details_notification_bell_bottom_sheet.dart';
 import 'res_details_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import 'restaurant_favorite_button.dart';
 
@@ -30,6 +29,10 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+    if (model.restaurant.notification != null &&
+        model.restaurant.notification!.isEmpty) {
+      HapticFeedback.mediumImpact();
+    }
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
@@ -811,51 +814,15 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                                       width: 20.w,
                                     ),
                                     SizedBox(width: 3.w),
-                                    // Below condition checks whether res is LOCAL one or NOT
-                                    model.locationPosition != null &&
-                                            model.restaurant.paymentTypes !=
-                                                null &&
-                                            model.restaurant.notification !=
-                                                null &&
-                                            model.restaurant.notification!
-                                                .isEmpty
-                                        ? Row(
-                                            children: [
-                                              Text(
-                                                '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ),
-                                              Text(
-                                                LocaleKeys.km,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ).tr(),
-                                              Text(
-                                                ')',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : Text(
-                                            getCustomResCityName(
-                                                model.restaurant.city ?? ''),
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 16.sp,
-                                              color: kcFontColor,
-                                            ),
-                                          ),
+                                    Text(
+                                      getCustomResCityName(
+                                          model.restaurant.city ?? ''),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: kcFontColor,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
@@ -318,8 +319,12 @@ class MealBottomSheetView extends StatelessWidget {
                                             elevation: 0,
                                             child: InkWell(
                                               borderRadius: AppTheme().radius15,
-                                              onTap: () => model
-                                                  .subtractQuantityDraft(meal),
+                                              onTap: () async {
+                                                model.subtractQuantityDraft(
+                                                    meal);
+                                                await HapticFeedback
+                                                    .lightImpact();
+                                              },
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 14.h),
@@ -349,8 +354,11 @@ class MealBottomSheetView extends StatelessWidget {
                                             elevation: 0,
                                             child: InkWell(
                                               borderRadius: AppTheme().radius15,
-                                              onTap: () =>
-                                                  model.addQuantityDraft(meal),
+                                              onTap: () async {
+                                                model.addQuantityDraft(meal);
+                                                await HapticFeedback
+                                                    .lightImpact();
+                                              },
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 14.h),
@@ -390,6 +398,7 @@ class MealBottomSheetView extends StatelessWidget {
                                             await model
                                                 .addUpdateMealInCartFromBottomSheet(
                                                     meal, restaurant);
+                                            await HapticFeedback.lightImpact();
                                             Navigator.pop(context);
                                           }
                                         : () {},
@@ -521,8 +530,12 @@ class MealBottomSheetView extends StatelessWidget {
                                             elevation: 0,
                                             child: InkWell(
                                               borderRadius: AppTheme().radius15,
-                                              onTap: () => model
-                                                  .subtractQuantityDraft(meal),
+                                              onTap: () async {
+                                                model.subtractQuantityDraft(
+                                                    meal);
+                                                await HapticFeedback
+                                                    .lightImpact();
+                                              },
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 14.h),
@@ -552,8 +565,11 @@ class MealBottomSheetView extends StatelessWidget {
                                             elevation: 0,
                                             child: InkWell(
                                               borderRadius: AppTheme().radius15,
-                                              onTap: () =>
-                                                  model.addQuantityDraft(meal),
+                                              onTap: () async {
+                                                model.addQuantityDraft(meal);
+                                                await HapticFeedback
+                                                    .lightImpact();
+                                              },
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 14.h),
@@ -593,6 +609,7 @@ class MealBottomSheetView extends StatelessWidget {
                                             await model
                                                 .addUpdateMealInCartFromBottomSheet(
                                                     meal, restaurant);
+                                            await HapticFeedback.lightImpact();
                                             Navigator.pop(context);
                                           }
                                         : () {},

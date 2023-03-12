@@ -311,42 +311,7 @@
 //                                     width: 20.w,
 //                                   ),
 //                                   SizedBox(width: 3.w),
-//                                   // Below condition checks whether res is LOCAL one or NOT
-//                                   model.locationPosition != null &&
-//                                           model.restaurant.paymentTypes !=
-//                                               null &&
-//                                           model.restaurant.notification !=
-//                                               null &&
-//                                           model.restaurant.notification!.isEmpty
-//                                       ? Row(
-//                                           children: [
-//                                             Text(
-//                                               '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
-//                                               overflow: TextOverflow.ellipsis,
-//                                               style: TextStyle(
-//                                                 fontSize: 16.sp,
-//                                                 color: kcFontColor,
-//                                               ),
-//                                             ),
-//                                             Text(
-//                                               LocaleKeys.km,
-//                                               overflow: TextOverflow.ellipsis,
-//                                               style: TextStyle(
-//                                                 fontSize: 16.sp,
-//                                                 color: kcFontColor,
-//                                               ),
-//                                             ).tr(),
-//                                             Text(
-//                                               ')',
-//                                               overflow: TextOverflow.ellipsis,
-//                                               style: TextStyle(
-//                                                 fontSize: 16.sp,
-//                                                 color: kcFontColor,
-//                                               ),
-//                                             ),
-//                                           ],
-//                                         )
-//                                       : Text(
+//                                   Text(
 //                                           getCustomResCityName(
 //                                               model.restaurant.city ?? ''),
 //                                           overflow: TextOverflow.ellipsis,

@@ -53,6 +53,7 @@ class ResDetailsNotificationBellBottomSheet extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: 0.05.sh),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Lottie.asset(
                   'assets/bell.json',

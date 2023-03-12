@@ -1,5 +1,6 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'meal_bottom_sheet_view.dart';
@@ -50,6 +51,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         onTap: () async {
           FocusScope.of(context).unfocus();
           await _tweenController.forward();
+          await HapticFeedback.lightImpact();
 
           //*----------------- MEAL BOTTOM SHEET ---------------------//
           //*----------------- CUSTOM PACKAGE ---------------------//
@@ -231,6 +233,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                     await model
                                         .subtractOrRemoveMealInCart(meal.id);
                                     await _tweenController.forward();
+                                    await HapticFeedback.lightImpact();
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
@@ -262,6 +265,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       ? () async {
                                           FocusScope.of(context).unfocus();
                                           await _tweenController.forward();
+                                          await HapticFeedback.lightImpact();
 
                                           //*----------------- MEAL BOTTOM SHEET ---------------------//
                                           //*----------------- CUSTOM PACKAGE ---------------------//
@@ -295,6 +299,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                               .addUpdateMealInCartFromBottomSheet(
                                                   meal, restaurant);
                                           await _tweenController.forward();
+                                          await HapticFeedback.lightImpact();
                                         },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
@@ -320,9 +325,10 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                               borderRadius: AppTheme().radius15,
                               onTap: (meal.gVolumes ?? []).isNotEmpty ||
                                       (meal.gCustomizables ?? []).isNotEmpty
-                                  ? () async { 
+                                  ? () async {
                                       FocusScope.of(context).unfocus();
                                       await _tweenController.forward();
+                                      await HapticFeedback.lightImpact();
 
                                       //*----------------- MEAL BOTTOM SHEET ---------------------//
                                       //*----------------- CUSTOM PACKAGE ---------------------//

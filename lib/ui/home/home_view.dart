@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -230,8 +231,9 @@ class _HomeViewState extends State<HomeView> {
                       //*HOME RESS PAG
                       if (model.isPullUpEnabled == false) model.enablePullUp();
 
-                      await model.getHomeData();
+                      await model.getHomeData(); 
                       _refreshController.refreshCompleted();
+                      await HapticFeedback.lightImpact();
                     },
 
                     //*HOME RESS PAG

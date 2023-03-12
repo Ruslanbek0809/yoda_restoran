@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
-import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../widgets/loading_widget.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'res_details_view_model.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
   const ResDetailsMainBusy({Key? key}) : super(key: key);
@@ -222,51 +220,15 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                                       width: 20.w,
                                     ),
                                     SizedBox(width: 3.w),
-                                    // Below condition checks whether res is LOCAL one or NOT
-                                    model.locationPosition != null &&
-                                            model.restaurant.paymentTypes !=
-                                                null &&
-                                            model.restaurant.notification !=
-                                                null &&
-                                            model.restaurant.notification!
-                                                .isEmpty
-                                        ? Row(
-                                            children: [
-                                              Text(
-                                                '${getCustomResCityName(model.restaurant.city ?? '')} (${model.restaurant.distance} ',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ),
-                                              Text(
-                                                LocaleKeys.km,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ).tr(),
-                                              Text(
-                                                ')',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  color: kcFontColor,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : Text(
-                                            getCustomResCityName(
-                                                model.restaurant.city ?? ''),
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 16.sp,
-                                              color: kcFontColor,
-                                            ),
-                                          ),
+                                    Text(
+                                      getCustomResCityName(
+                                          model.restaurant.city ?? ''),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: kcFontColor,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
