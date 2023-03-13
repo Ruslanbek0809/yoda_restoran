@@ -51,7 +51,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
         onTap: () async {
           FocusScope.of(context).unfocus();
           await _tweenController.forward();
-          await HapticFeedback.lightImpact();
 
           //*----------------- MEAL BOTTOM SHEET ---------------------//
           //*----------------- CUSTOM PACKAGE ---------------------//
@@ -265,7 +264,6 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                       ? () async {
                                           FocusScope.of(context).unfocus();
                                           await _tweenController.forward();
-                                          await HapticFeedback.lightImpact();
 
                                           //*----------------- MEAL BOTTOM SHEET ---------------------//
                                           //*----------------- CUSTOM PACKAGE ---------------------//
@@ -328,13 +326,11 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                   ? () async {
                                       FocusScope.of(context).unfocus();
                                       await _tweenController.forward();
-                                      await HapticFeedback.lightImpact();
 
                                       //*----------------- MEAL BOTTOM SHEET ---------------------//
                                       //*----------------- CUSTOM PACKAGE ---------------------//
                                       await showFlexibleBottomSheet(
                                         isExpand: false,
-                                        // minHeight: 0,
                                         initHeight: 0.95,
                                         maxHeight: 0.95,
                                         duration: Duration(milliseconds: 250),
@@ -360,6 +356,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
                                           .addUpdateMealInCartFromBottomSheet(
                                               meal, restaurant);
                                       await _tweenController.forward();
+                                      await HapticFeedback.lightImpact();
                                     },
                               child: Ink(
                                 width: constraints.maxWidth,

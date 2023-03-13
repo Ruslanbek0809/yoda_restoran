@@ -228,12 +228,12 @@ class _HomeViewState extends State<HomeView> {
                     //*HOME RESS PAG
                     enablePullUp: model.isPullUpEnabled,
                     onRefresh: () async {
+                      await HapticFeedback.lightImpact();
                       //*HOME RESS PAG
                       if (model.isPullUpEnabled == false) model.enablePullUp();
 
-                      await model.getHomeData(); 
+                      await model.getHomeData();
                       _refreshController.refreshCompleted();
-                      await HapticFeedback.lightImpact();
                     },
 
                     //*HOME RESS PAG

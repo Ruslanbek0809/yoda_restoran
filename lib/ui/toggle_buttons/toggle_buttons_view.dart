@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 
@@ -27,6 +28,7 @@ class ToggleButtonView extends StatelessWidget {
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(
                 onTap: () async {
+                  await HapticFeedback.lightImpact();
                   // If restaurant's both options are TRUE, then it can SWITCH between it
                   if (restaurant.selfPickUp! && restaurant.delivery!)
                     model.switchToggleButton();

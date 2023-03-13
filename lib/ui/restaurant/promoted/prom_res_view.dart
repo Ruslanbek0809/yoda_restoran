@@ -128,59 +128,24 @@ class PromResView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  model.locationPosition != null
-                      ? Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/map_pin_bold.svg',
-                              color: kcDialogColor,
-                              width: 14.sp,
-                            ),
-                            SizedBox(width: 3.r),
-                            Text(
-                              '${restaurant.city} (${restaurant.distance} ',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: kcIconColor,
-                              ),
-                            ),
-                            Text(
-                              LocaleKeys.km,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: kcIconColor,
-                              ),
-                            ).tr(),
-                            Text(
-                              ')',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: kcIconColor,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/map_pin_bold.svg',
-                              color: kcDialogColor,
-                              width: 14.sp,
-                            ),
-                            SizedBox(width: 3.w),
-                            Text(
-                              restaurant.city ?? '',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: kcIconColor,
-                              ),
-                            ),
-                          ],
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/map_pin_bold.svg',
+                        color: kcDialogColor,
+                        width: 14.sp,
+                      ),
+                      SizedBox(width: 3.w),
+                      Text(
+                        restaurant.city ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: kcIconColor,
                         ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: [
                       Icon(

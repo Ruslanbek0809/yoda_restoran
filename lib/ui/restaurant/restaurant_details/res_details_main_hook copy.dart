@@ -29,10 +29,6 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
-    if (model.restaurant.notification != null &&
-        model.restaurant.notification!.isEmpty) {
-      HapticFeedback.mediumImpact();
-    }
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height

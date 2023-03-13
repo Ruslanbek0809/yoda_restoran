@@ -398,7 +398,6 @@ class MealBottomSheetView extends StatelessWidget {
                                             await model
                                                 .addUpdateMealInCartFromBottomSheet(
                                                     meal, restaurant);
-                                            await HapticFeedback.lightImpact();
                                             Navigator.pop(context);
                                           }
                                         : () {},
@@ -609,7 +608,6 @@ class MealBottomSheetView extends StatelessWidget {
                                             await model
                                                 .addUpdateMealInCartFromBottomSheet(
                                                     meal, restaurant);
-                                            await HapticFeedback.lightImpact();
                                             Navigator.pop(context);
                                           }
                                         : () {},

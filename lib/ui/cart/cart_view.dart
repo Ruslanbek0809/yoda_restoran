@@ -11,8 +11,8 @@ import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 import '../widgets/widgets.dart';
 import 'cart_meal_item.dart';
-import 'cart_res_food/cart_more_meal_view.dart';
-import 'cart_res_food/cart_more_meals_shimmer.dart';
+import 'cart_more_meal/cart_more_meal_view.dart';
+import 'cart_more_meal/cart_more_meals_shimmer.dart';
 import 'cart_toggle_button.dart';
 import 'cart_view_model.dart';
 import 'checkout/checkout_bottom_sheet_view.dart';
@@ -103,59 +103,101 @@ class CartView extends StatelessWidget {
                       ),
                     //*------------------ CART MORE MEAL LIST ---------------------//
                     if (!model.hasError)
-                      AnimatedSwitcher(
-                        duration: Duration(milliseconds: 300),
-                        child: model.isBusy
-                            ? CartMoreMealsShimmerWidget()
-                            : SingleChildScrollView(
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: model.moreMeals.map((meal) {
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                          right:
-                                              model.moreMeals.indexOf(meal) ==
-                                                      model.moreMeals.length - 1
-                                                  ? 16.w
-                                                  : 4.w,
-                                          left:
-                                              model.moreMeals.indexOf(meal) == 0
-                                                  ? 16.w
-                                                  : 4.w), // For proper padding
-                                      child: CartMoreMealView(
-                                        meal: meal,
-                                        restaurant: Restaurant(
-                                          id: model.cartRes!.id,
-                                          name: model.cartRes!.name,
-                                          image: model.cartRes!.image,
-                                          rated: model.cartRes!.rated,
-                                          rating: model.cartRes!.rating,
-                                          description:
-                                              model.cartRes!.description,
-                                          deliveryPrice:
-                                              model.cartRes!.deliveryPrice,
-                                          address: model.cartRes!.address,
-                                          phoneNumber:
-                                              model.cartRes!.phoneNumber,
-                                          prepareTime:
-                                              model.cartRes!.prepareTime,
-                                          notification:
-                                              model.cartRes!.notification,
-                                          workingHours:
-                                              model.cartRes!.workingHours,
-                                          city: model.cartRes!.city,
-                                          distance: model.cartRes!.distance,
-                                          selfPickUp: model.cartRes!.selfPickUp,
-                                          delivery: model.cartRes!.delivery,
-                                        ),
-                                        cartViewModel: model,
-                                      ),
-                                    );
-                                  }).toList(),
+                      AnimatedCrossFade(
+                        duration: Duration(milliseconds: 500),
+                        firstChild: CartMoreMealsShimmerWidget(),
+                        secondChild: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: model.moreMeals.map((meal) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                    right: model.moreMeals.indexOf(meal) ==
+                                            model.moreMeals.length - 1
+                                        ? 16.w
+                                        : 4.w,
+                                    left: model.moreMeals.indexOf(meal) == 0
+                                        ? 16.w
+                                        : 4.w), // For proper padding
+                                child: CartMoreMealView(
+                                  meal: meal,
+                                  restaurant: Restaurant(
+                                    id: model.cartRes!.id,
+                                    name: model.cartRes!.name,
+                                    image: model.cartRes!.image,
+                                    rated: model.cartRes!.rated,
+                                    rating: model.cartRes!.rating,
+                                    description: model.cartRes!.description,
+                                    deliveryPrice: model.cartRes!.deliveryPrice,
+                                    address: model.cartRes!.address,
+                                    phoneNumber: model.cartRes!.phoneNumber,
+                                    prepareTime: model.cartRes!.prepareTime,
+                                    notification: model.cartRes!.notification,
+                                    workingHours: model.cartRes!.workingHours,
+                                    city: model.cartRes!.city,
+                                    distance: model.cartRes!.distance,
+                                    selfPickUp: model.cartRes!.selfPickUp,
+                                    delivery: model.cartRes!.delivery,
+                                  ),
+                                  cartViewModel: model,
                                 ),
-                              ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        crossFadeState: model.isBusy
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
                       ),
+                    // AnimatedSwitcher(
+                    //   duration: Duration(milliseconds: 300),
+                    //   child: model.isBusy
+                    //       ? CartMoreMealsShimmerWidget()
+                    //       : SingleChildScrollView(
+                    //           physics: BouncingScrollPhysics(),
+                    //           scrollDirection: Axis.horizontal,
+                    //           child: Row(
+                    //             children: model.moreMeals.map((meal) {
+                    //               return Padding(
+                    //                 padding: EdgeInsets.only(
+                    //                     right: model.moreMeals.indexOf(meal) ==
+                    //                             model.moreMeals.length - 1
+                    //                         ? 16.w
+                    //                         : 4.w,
+                    //                     left: model.moreMeals.indexOf(meal) == 0
+                    //                         ? 16.w
+                    //                         : 4.w), // For proper padding
+                    //                 child: CartMoreMealView(
+                    //                   meal: meal,
+                    //                   restaurant: Restaurant(
+                    //                     id: model.cartRes!.id,
+                    //                     name: model.cartRes!.name,
+                    //                     image: model.cartRes!.image,
+                    //                     rated: model.cartRes!.rated,
+                    //                     rating: model.cartRes!.rating,
+                    //                     description: model.cartRes!.description,
+                    //                     deliveryPrice:
+                    //                         model.cartRes!.deliveryPrice,
+                    //                     address: model.cartRes!.address,
+                    //                     phoneNumber: model.cartRes!.phoneNumber,
+                    //                     prepareTime: model.cartRes!.prepareTime,
+                    //                     notification:
+                    //                         model.cartRes!.notification,
+                    //                     workingHours:
+                    //                         model.cartRes!.workingHours,
+                    //                     city: model.cartRes!.city,
+                    //                     distance: model.cartRes!.distance,
+                    //                     selfPickUp: model.cartRes!.selfPickUp,
+                    //                     delivery: model.cartRes!.delivery,
+                    //                   ),
+                    //                   cartViewModel: model,
+                    //                 ),
+                    //               );
+                    //             }).toList(),
+                    //           ),
+                    //         ),
+                    // ),
                     //*------------------ TOGGLE BUTTON ---------------------//
                     CartToggleButton(),
                     SizedBox(

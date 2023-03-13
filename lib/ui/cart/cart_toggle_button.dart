@@ -56,13 +56,10 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
             child: model.isDelivery
                 ? Row(
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: SvgPicture.asset(
-                          'assets/delivery.svg',
-                          color: Colors.transparent,
-                          width: 10.w,
-                        ),
+                      SvgPicture.asset(
+                        'assets/delivery.svg',
+                        color: Colors.transparent,
+                        width: 10.w,
                       ),
                       Expanded(
                         child: Text(
@@ -77,13 +74,10 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
                   )
                 : Row(
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: SvgPicture.asset(
-                          'assets/map_pin_bold.svg',
-                          color: kcSecondaryDarkColor,
-                          width: 22.w,
-                        ),
+                      SvgPicture.asset(
+                        'assets/map_pin_bold.svg',
+                        color: kcSecondaryDarkColor,
+                        width: 22.w,
                       ),
                       SizedBox(width: 5.w),
                       Expanded(
