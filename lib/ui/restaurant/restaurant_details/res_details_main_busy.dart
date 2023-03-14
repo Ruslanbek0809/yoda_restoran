@@ -2,23 +2,44 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:stacked/stacked.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:yoda_res/ui/widgets/colored_tabbar.dart';
 import '../../../shared/shared.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
-import '../../widgets/loading_widget.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../widgets/widgets.dart';
+import '../meal/meal_item_shimmer_hook.dart';
 import 'res_details_view_model.dart';
 
-class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
-  const ResDetailsMainBusy({Key? key}) : super(key: key);
+class ResDetailsMainBusy extends HookViewModelWidget<ResDetailsViewModel> {
+  const ResDetailsMainBusy({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget build(BuildContext context, ResDetailsViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+    double itemWidth = (1.sw - 12.w - 20.h) / 2;
+    // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
+    double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
+
+    //*------------- TAB CONTROLLER ----------------//
+    final tabController = useTabController(
+      initialLength: 5,
+      initialIndex: model.activeTab,
+    );
+
+    //*To dispose a listener attached to TabController
+    useEffect(() {
+      void _tabListener() => model.updateActiveTab(tabController.index);
+      tabController.addListener(_tabListener);
+      return () => tabController.removeListener(_tabListener);
+    }, [tabController]); // tabController, key, is specified
+
     return CustomScrollView(
-      physics: const NeverScrollableScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
+      // physics: ClampingScrollPhysics(),
       slivers: [
         //*----------------- ARROW BACK ---------------------//
         SliverAppBar(
@@ -97,7 +118,6 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
                   image: CachedNetworkImageProvider(
                     model.restaurant.image ?? 'assets/ph_restaurant.png',
                   ),
-                  // fit: BoxFit.cover,
                   fit: BoxFit.contain,
                   alignment: Alignment.topCenter,
                 ),
@@ -276,10 +296,91 @@ class ResDetailsMainBusy extends ViewModelWidget<ResDetailsViewModel> {
               ),
             ),
           ),
+          // //*----------------- TABBAR ---------------------//
+          // bottom: ColoredTabBar(
+          //   isShrink: model.isShrink ? true : false,
+          //   tabBar: TabBar(
+          //     controller: tabController,
+          //     isScrollable: true,
+          //     indicatorColor: Colors.transparent,
+          //     labelPadding: EdgeInsets.all(0.0),
+          //     tabs: [
+          //       ...List.generate(
+          //         5,
+          //         (pos) => Tab(
+          //           child: AnimatedContainer(
+          //             duration: Duration(milliseconds: 500),
+          //             curve: Curves.easeInOut,
+          //             decoration: BoxDecoration(
+          //               borderRadius: AppTheme().radius15,
+          //               color: kcWhiteColor,
+          //             ),
+          //             margin: EdgeInsets.symmetric(
+          //               vertical: 2.h,
+          //               horizontal: 5.w,
+          //             ),
+          //             padding: EdgeInsets.symmetric(horizontal: 15.w),
+          //             alignment: Alignment.center,
+          //             child: Text(
+          //               model.restaurant.name ?? '',
+          //               style: kts14SemiBoldText,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //     onTap: (index) {},
+          //   ),
+          // ),
         ),
+        // SliverPadding(
+        //   padding: EdgeInsets.only(
+        //       bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+        //   sliver: SliverList(
+        //     delegate: SliverChildBuilderDelegate(
+        //       (BuildContext context, int index) => Column(
+        //         children: [
+        //           Container(
+        //             alignment: Alignment.centerLeft,
+        //             padding: EdgeInsets.only(left: 12.w, top: 25.h),
+        //             child: Text(
+        //               model.restaurant.name ?? '',
+        //               style: TextStyle(
+        //                 fontSize: 24.sp,
+        //                 fontWeight: FontWeight.bold,
+        //                 color: kcSecondaryDarkColor,
+        //               ),
+        //             ),
+        //           ),
+        //           GridView.builder(
+        //             shrinkWrap: true,
+        //             physics: NeverScrollableScrollPhysics(),
+        //             padding: EdgeInsets.symmetric(
+        //               vertical: 12.h,
+        //               horizontal: 10.w,
+        //             ),
+        //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //               crossAxisCount: 2,
+        //               mainAxisSpacing: 10.h, //spaceTopBottom
+        //               crossAxisSpacing: 6.w, //spaceLeftRight
+        //               childAspectRatio: itemWidth / itemHeight,
+        //             ),
+        //             itemCount: 5,
+        //             itemBuilder: (context, pos) => MealItemShimmerHook(),
+        //           ),
+        //         ],
+        //       ),
+        //       childCount: 1,
+        //     ),
+        //   ),
+        // ),
 //*----------------- LOADING PART ---------------------//
-        SliverToBoxAdapter(
-          child: LoadingWidget(),
+        SliverPadding(
+          padding: EdgeInsets.only(
+              bottom: 0.11.sh), //* COMPENSATES ResDetailsBottomCart height
+          sliver: SliverToBoxAdapter(
+            child: LoadingWidget(),
+          ),
         ),
       ],
     );

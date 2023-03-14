@@ -105,6 +105,9 @@ class CartView extends StatelessWidget {
                     if (!model.hasError)
                       AnimatedCrossFade(
                         duration: Duration(milliseconds: 500),
+                        crossFadeState: model.isBusy
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
                         firstChild: CartMoreMealsShimmerWidget(),
                         secondChild: SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
@@ -146,9 +149,6 @@ class CartView extends StatelessWidget {
                             }).toList(),
                           ),
                         ),
-                        crossFadeState: model.isBusy
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
                       ),
                     // AnimatedSwitcher(
                     //   duration: Duration(milliseconds: 300),

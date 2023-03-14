@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
@@ -20,15 +20,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'restaurant_favorite_button.dart';
 
 class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
-  // final Restaurant restaurant;
-  const ResDetailsMainHook(
-      {
-      // required this.restaurant,
-      Key? key})
-      : super(key: key, reactive: true);
+  const ResDetailsMainHook({Key? key}) : super(key: key, reactive: true);
 
   @override
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+    //*------------- ANIMATION CONTROLLER for FADE TRANSITION ----------------//
+    final _animController =
+        useAnimationController(duration: Duration(milliseconds: 200));
+    Animation<double> _fadeInFadeOut;
+    _fadeInFadeOut = Tween<double>(begin: 0.0, end: 1).animate(_animController);
+
+    Timer(Duration(milliseconds: 50), () {
+      model.log.v('_animController CALLED');
+      _animController.forward();
+    });
+
     double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
@@ -605,32 +611,35 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
           ),
           //*----------------- ACTIONS FAV ---------------------//
           actions: [
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: model.isShrink
-                  ? SizedBox()
-                  : Padding(
-                      padding: EdgeInsets.only(top: 5.r),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: model.isShrink
-                              ? Colors.transparent
-                              : kcWhiteColor,
-                          // boxShadow: _isShrink
-                          //     ? []
-                          //     : [AppTheme().buttonShadow],
-                        ),
-                        child: Material(
-                          shape: CircleBorder(),
-                          elevation: 0,
-                          color: model.isShrink
-                              ? Colors.transparent
-                              : kcWhiteColor,
-                          child: ResDetailsFavoriteButton(),
+            FadeTransition(
+              opacity: _fadeInFadeOut,
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                child: model.isShrink
+                    ? SizedBox()
+                    : Padding(
+                        padding: EdgeInsets.only(top: 5.r),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: model.isShrink
+                                ? Colors.transparent
+                                : kcWhiteColor,
+                            // boxShadow: _isShrink
+                            //     ? []
+                            //     : [AppTheme().buttonShadow],
+                          ),
+                          child: Material(
+                            shape: CircleBorder(),
+                            elevation: 0,
+                            color: model.isShrink
+                                ? Colors.transparent
+                                : kcWhiteColor,
+                            child: ResDetailsFavoriteButton(),
+                          ),
                         ),
                       ),
-                    ),
+              ),
             ),
             SizedBox(width: 10.w),
 //*----------------- ACTIONS SEARCH ---------------------//
@@ -1121,9 +1130,12 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           alignment: Alignment.center,
-                          child: Text(
-                            resCategory.resCategoryModel?.name ?? '',
-                            style: kts14SemiBoldText,
+                          child: FadeTransition(
+                            opacity: _fadeInFadeOut,
+                            child: Text(
+                              resCategory.resCategoryModel?.name ?? '',
+                              style: kts14SemiBoldText,
+                            ),
                           ),
                         ),
                       ))
@@ -1154,7 +1166,7 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
 //*----------------- MEAL LIST ---------------------//
         SliverPadding(
           padding: EdgeInsets.only(
-              bottom: 0.11.sh), // COMPENSATES ResDetailsBottomCart height
+              bottom: 0.11.sh), //* COMPENSATES ResDetailsBottomCart height
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -1162,52 +1174,45 @@ class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
                 final resCategoryMeals = resCategory.meals;
                 return Column(
                   children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 12.w, top: 25.h),
-                      child: Text(
-                        resCategory.resCategoryModel?.name ?? '',
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                          color: kcSecondaryDarkColor,
+                    FadeTransition(
+                      opacity: _fadeInFadeOut,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(left: 12.w, top: 25.h),
+                        child: Text(
+                          resCategory.resCategoryModel?.name ?? '',
+                          style: TextStyle(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold,
+                            color: kcSecondaryDarkColor,
+                          ),
                         ),
                       ),
                     ),
-
-                    // Container(
-                    //   alignment: Alignment.centerLeft,
-                    //   padding: EdgeInsets.only(left: 12.w, top: 12.h),
-                    //   child: Text(
-                    //     resCategory.resCategoryModel?.name ?? '',
-                    //     style: TextStyle(
-                    //       fontSize: 22.sp,
-                    //       fontWeight: FontWeight.bold,
-                    //       color: kcSecondaryDarkColor,
-                    //     ),
-                    //   ),
-                    // ),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12.h,
-                        horizontal: 10.w,
+                    FadeTransition(
+                      opacity: _fadeInFadeOut,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12.h,
+                          horizontal: 10.w,
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10.h, //spaceTopBottom
+                          crossAxisSpacing: 6.w, //spaceLeftRight
+                          childAspectRatio: itemWidth / itemHeight,
+                        ),
+                        itemCount: resCategoryMeals!.length,
+                        itemBuilder: (context, pos) {
+                          return MealView(
+                            meal: resCategoryMeals[pos],
+                            restaurant: model
+                                .restaurant, // Needed for add meal with conditions only in CART
+                          );
+                        },
                       ),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10.h, //spaceTopBottom
-                        crossAxisSpacing: 6.w, //spaceLeftRight
-                        childAspectRatio: itemWidth / itemHeight,
-                      ),
-                      itemCount: resCategoryMeals!.length,
-                      itemBuilder: (context, pos) {
-                        return MealView(
-                          meal: resCategoryMeals[pos],
-                          restaurant: model
-                              .restaurant, // Needed for add meal with conditions only in CART
-                        );
-                      },
                     ),
                   ],
                 );
