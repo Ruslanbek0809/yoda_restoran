@@ -13,11 +13,15 @@ class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, HomeViewModel model) {
     final bottomCartController = useAnimationController(
-      duration: const Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 300),
     );
     final bottomCartOffset =
-        Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
-            .animate(bottomCartController);
+        Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: bottomCartController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     //*BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)

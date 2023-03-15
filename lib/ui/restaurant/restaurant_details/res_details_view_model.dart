@@ -239,6 +239,7 @@ class ResDetailsViewModel extends FutureViewModel {
     );
     await _flashController?.show();
   }
+
 //*----------------------- NAVIGATIONS ----------------------------//
 
   Future<void> navToCartView() async {

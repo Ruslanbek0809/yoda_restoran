@@ -30,15 +30,26 @@ class ResDetailsView extends StatelessWidget {
           });
 
         return Scaffold(
-          body: Stack(
-            children: [
+          body:
+              // Stack(
+              //   children: [
               //*----------------- RESTAURANT MAIN PART ---------------------//
               model.isBusy ? ResDetailsMainBusy() : ResDetailsMainHook(),
-              //*----------------- BOTTOM CART ---------------------//
-              if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
-            ],
-          ),
+          // //*----------------- BOTTOM CART ---------------------//
+          // if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
+          //   ],
+          // ),
         );
+        // return Scaffold(
+        //   body: Stack(
+        //     children: [
+        //       //*----------------- RESTAURANT MAIN PART ---------------------//
+        //       model.isBusy ? ResDetailsMainBusy() : ResDetailsMainHook(),
+        //       //*----------------- BOTTOM CART ---------------------//
+        //       if (restaurant.id == model.cartRes!.id) ResDetailsBottomCart(),
+        //     ],
+        //   ),
+        // );
       },
     );
   }

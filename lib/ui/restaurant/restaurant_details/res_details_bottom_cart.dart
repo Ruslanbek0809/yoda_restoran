@@ -13,20 +13,58 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
-    final bottomCartController = useAnimationController(
-      duration: const Duration(milliseconds: 150),
-    );
+    final bottomCartController =
+        useAnimationController(duration: const Duration(milliseconds: 300));
     final bottomCartOffset =
-        Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
-            .animate(bottomCartController);
+        Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: bottomCartController,
+        curve: Curves.easeInOut,
+      ),
+    );
+    // final stableBottomCartOffset =
+    //     Tween<Offset>(begin: Offset.zero, end: Offset(0.0, 1.0)).animate(
+    //   CurvedAnimation(
+    //     parent: bottomCartController,
+    //     curve: Curves.easeInOut,
+    //   ),
+    // );
+    // final bottomCartOffset = Tween<Offset>(
+    //         begin: model.bottomCartStatus == BottomCartStatus.stable
+    //             ? Offset.zero
+    //             : Offset(0.0, 1.0),
+    //         end: model.bottomCartStatus == BottomCartStatus.stable
+    //             ? Offset(0.0, 1.0)
+    //             : Offset.zero)
+    //     .animate(
+    //   CurvedAnimation(
+    //     parent: bottomCartController,
+    //     curve: Curves.easeInOut,
+    //   ),
+    // );
 
-    //*BottomCartController trigger
+    // late Animation<Offset> bottomCartOffset;
+    // if (model.bottomCartStatus == BottomCartStatus.forward)
+    //   bottomCartOffset =
+    //       Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
+    //           .animate(bottomCartController);
+    // else
+    //   bottomCartOffset =
+    //       Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
+    //           .animate(bottomCartController);
+
+    // model.log.i(
+    //     'ResDetailsBottomCart BEFORE model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
+    //* BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)
       switch (bottomCartController.status) {
         case AnimationStatus.dismissed:
           {
             if (model.bottomCartStatus == BottomCartStatus.forward)
+              // {
               bottomCartController.forward();
+            //   model.updateBottomCartToStable();
+            // }
             if (model.bottomCartStatus == BottomCartStatus.reverse)
               bottomCartController.reverse();
           }
@@ -58,6 +96,8 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
         default:
           break;
       }
+    // model.log.i(
+    //     'ResDetailsBottomCart AFTER model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
 
     return Align(
       alignment: Alignment.bottomCenter,

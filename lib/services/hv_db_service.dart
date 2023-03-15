@@ -69,7 +69,7 @@ class HiveDbService with ReactiveServiceMixin {
     cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     _cartMeals.value = cartMealsBox.values.toList();
     if (_cartMeals.value.isNotEmpty)
-      _bottomCartService.showBottomCart(); // SHOWS BottomCart.
+      _bottomCartService.showBottomCart(); //* INITIALIZES BottomCart.
 
     log.v('_cartMeals.value length: ${_cartMeals.value.length}');
   }
