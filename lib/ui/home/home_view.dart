@@ -312,7 +312,8 @@ class _HomeViewState extends State<HomeView> {
                                     !model.isFilterApplied
                                         ? getValueForScreenType<double>(
                                             context: context,
-                                            mobile: 0.36.sh,
+                                            mobile: 0.075.sh + 0.6.sw,
+                                            // mobile: 0.36.sh,
                                             tablet: 0.45.sh,
                                           )
                                         : 0.1.sh,

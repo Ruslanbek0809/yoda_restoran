@@ -375,12 +375,8 @@ class ResDetailsMainBusy extends HookViewModelWidget<ResDetailsViewModel> {
         //   ),
         // ),
 //*----------------- LOADING PART ---------------------//
-        SliverPadding(
-          padding: EdgeInsets.only(
-              bottom: 0.11.sh), //* COMPENSATES ResDetailsBottomCart height
-          sliver: SliverToBoxAdapter(
-            child: LoadingWidget(),
-          ),
+        SliverToBoxAdapter(
+          child: LoadingWidget(),
         ),
       ],
     );
