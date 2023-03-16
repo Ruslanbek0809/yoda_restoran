@@ -43,18 +43,8 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
     //   ),
     // );
 
-    // late Animation<Offset> bottomCartOffset;
-    // if (model.bottomCartStatus == BottomCartStatus.forward)
-    //   bottomCartOffset =
-    //       Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
-    //           .animate(bottomCartController);
-    // else
-    //   bottomCartOffset =
-    //       Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset.zero)
-    //           .animate(bottomCartController);
-
-    // model.log.i(
-    //     'ResDetailsBottomCart BEFORE model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
+    model.log.i(
+        'ResDetailsBottomCart BEFORE model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
     //* BottomCartController trigger
     if (model.bottomCartStatus != BottomCartStatus.idle)
       switch (bottomCartController.status) {
@@ -96,8 +86,8 @@ class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
         default:
           break;
       }
-    // model.log.i(
-    //     'ResDetailsBottomCart AFTER model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
+    model.log.i(
+        'ResDetailsBottomCart AFTER model.bottomCartStatus: ${model.bottomCartStatus} and bottomCartController.status: ${bottomCartController.status}, bottomCartOffset: $bottomCartOffset');
 
     return Align(
       alignment: Alignment.bottomCenter,

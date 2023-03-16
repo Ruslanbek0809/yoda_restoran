@@ -249,6 +249,13 @@ class HomeViewModel extends ReactiveViewModel {
             distance: cartRes!.distance,
             selfPickUp: cartRes!.selfPickUp,
             delivery: cartRes!.delivery,
+            paymentTypes: cartRes!.resPaymentTypes!
+                .map((hiveResPaymentType) => PaymentType(
+                      id: hiveResPaymentType.id,
+                      nameTk: hiveResPaymentType.nameTk,
+                      nameRu: hiveResPaymentType.nameRu,
+                    ))
+                .toList(),
           ),
         ),
       );

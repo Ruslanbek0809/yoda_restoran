@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/models.dart';
-import 'res_details_bottom_cart.dart';
 // import 'res_details_main_hook.dart';
 import 'res_details_main_busy.dart';
 import 'res_details_main_hook copy.dart';
