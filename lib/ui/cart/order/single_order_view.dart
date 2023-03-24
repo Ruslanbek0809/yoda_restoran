@@ -34,7 +34,7 @@ class SingleOrderView extends StatelessWidget {
       ),
       builder: (context, model, child) {
         return Slidable(
-          //* Specify a key if the Slidable is dismissible.
+          // Specify a key if the Slidable is dismissible.
           key: ValueKey(order.id),
 
           //*ADDS bool condition to model.currentOrderExpansionState
@@ -48,10 +48,10 @@ class SingleOrderView extends StatelessWidget {
             // // A pane can dismiss the Slidable.
             // dismissible: DismissiblePane(onDismissed: () {}),
 
-            //* All actions are defined in the children parameter.
+            // All actions are defined in the children parameter.
             children: [
               if (order.status == 4)
-                //* A CustomSlidableAction can have an icon and/or a label.
+                // A CustomSlidableAction can have an icon and/or a label.
                 CustomSlidableAction(
                   autoClose: false,
                   onPressed: (BuildContext context) async =>
