@@ -62,5 +62,9 @@
 		<string>https</string>
 		<string>http</string>
 	</array>
+	<array>
+		<string>sms</string>
+		<string>tel</string>
+	</array>
 </dict>
 </plist>
