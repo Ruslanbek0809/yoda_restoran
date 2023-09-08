@@ -75,10 +75,9 @@
 		<string>https</string>
 		<string>http</string>
 	</array>
-		<key>FirebaseDynamicLinksCustomDomains</key>
-  <array>
-    <string>https://yodarestoran.page.link/</string>
-    <!-- <string>https://yodarestoran.page.link</string> -->
-  </array>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+  	<array>
+    	<string>https://yodarestoran.page.link/</string>
+  	</array>
 </dict>
 </plist>

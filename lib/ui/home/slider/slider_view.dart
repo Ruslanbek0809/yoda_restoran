@@ -40,7 +40,7 @@ class SliderView extends StatelessWidget {
               items: sliders
                   .map(
                     (slider) => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.r),
+                      padding: EdgeInsets.symmetric(horizontal: 4.r), 
                       child: GestureDetector(
                         onTap: () async => slider.option == 'restoran'
                             ? model.navToResDetailsView(slider.restaurant!)
@@ -91,7 +91,7 @@ class SliderView extends StatelessWidget {
                 activeDotScale: 1.2,
               ),
             ),
-          )
+          ),
         ],
       ),
       viewModelBuilder: () => SliderViewModel(),

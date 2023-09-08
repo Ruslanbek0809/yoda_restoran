@@ -131,8 +131,9 @@ class _HomeViewState extends State<HomeView> {
               'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
           if (info.updateAvailability == 2) {
             printLog('I AM IN startFlexibleUpdate(): ');
-            await InAppUpdate.startFlexibleUpdate();
-            await InAppUpdate.completeFlexibleUpdate();
+            await InAppUpdate.startFlexibleUpdate().then((value) async {
+              await InAppUpdate.completeFlexibleUpdate();
+            });
           }
         }
 
@@ -616,6 +617,7 @@ class _HomeViewState extends State<HomeView> {
                       messages: context.locale == context.supportedLocales[0]
                           ? MyTurkmenMessages()
                           : MyRussianMessages(),
+                      dialogStyle: UpgradeDialogStyle.cupertino,
                     ),
                     child: DoubleBackToCloseApp(
                       snackBar: SnackBar(

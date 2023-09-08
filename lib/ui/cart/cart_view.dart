@@ -24,7 +24,7 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     //* Here it is reactive instead of nonReactive is just bc delete cartMeal when its quantity is 0
     return ViewModelBuilder<CartViewModel>.reactive(
-      onModelReady: (model) => model.getMoreMeals(),
+      onModelReady: (model) async => await model.getCartData(),
       builder: (context, model, child) {
         model.log.v('=================== CartView ===================');
         return WillPopScope(
@@ -92,7 +92,8 @@ class CartView extends StatelessWidget {
                       },
                     ),
                     //*------------------ CART MEAL WIDGET TITLE ---------------------//
-                    if (!model.hasError)
+                    if (!model.hasErrorForCartMoreMealsKeys)
+                      // if (!model.hasError)
                       Padding(
                         padding: EdgeInsets.only(
                             top: 20.h, bottom: 10.h, left: 16.w, right: 16.w),
@@ -102,10 +103,12 @@ class CartView extends StatelessWidget {
                         ).tr(),
                       ),
                     //*------------------ CART MORE MEAL LIST ---------------------//
-                    if (!model.hasError)
+                    if (!model.hasErrorForCartMoreMealsKeys)
+                      // if (!model.hasError)
                       AnimatedCrossFade(
                         duration: Duration(milliseconds: 500),
-                        crossFadeState: model.isBusy
+                        crossFadeState: model.busyForCartMoreMealsKey
+                            // crossFadeState: model.isBusy
                             ? CrossFadeState.showFirst
                             : CrossFadeState.showSecond,
                         firstChild: CartMoreMealsShimmerWidget(),

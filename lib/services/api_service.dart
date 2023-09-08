@@ -370,6 +370,33 @@ class ApiService {
 
   //* ------------------ CART APIS ---------------------//
 
+  Future<List<Meal>> getCartMeals(List<HiveMeal> cartMeals) async {
+    List<Meal> _cartMealsUpdated = [];
+
+    String _queryPars = 'id=${cartMeals[0].id}';
+    for (int i = 1; i < cartMeals.length; i++)
+      _queryPars += '&id=${cartMeals[i].id}'; // Workaround
+
+    try {
+      Response response =
+          await _apiRoot.dio.get('api/restaurantMeals/?$_queryPars');
+      // log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
+
+      if (response.data != null) {
+        for (final _resCategory in response.data) {
+          _cartMealsUpdated.add(Meal.fromJson(_resCategory));
+        }
+      }
+
+      return _cartMealsUpdated;
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
+
   Future<List<Meal>> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
     List<Meal> _moreMeals = [];
 

@@ -9,6 +9,10 @@ import '../../models/models.dart';
 import '../../services/services.dart';
 import '../../utils/utils.dart';
 
+//* A map key of type string
+const String cartMealsFuture = 'cartMealsFuture';
+const String cartMoreMealsFuture = 'cartMoreMealsFuture';
+
 class CartViewModel extends ReactiveViewModel {
   final log = getLogger('CartViewModel');
 
@@ -30,11 +34,33 @@ class CartViewModel extends ReactiveViewModel {
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
-  //* FETCHS more meals and GETS all carts
-  Future getMoreMeals() async {
-    await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals));
-    log.i('moreMeals.length: ${moreMeals.length} ');
+  //*Custom boolean busy indicator
+  bool get busyForCartMealsKey => busy(cartMealsFuture);
+
+  //*Custom boolean busy indicator
+  bool get busyForCartMoreMealsKey => busy(cartMoreMealsFuture);
+
+  //*Custom boolean error indicator
+  bool get hasErrorForCartMealsKeys => hasErrorForKey(cartMealsFuture);
+
+  //*Custom boolean error indicator
+  bool get hasErrorForCartMoreMealsKeys => hasErrorForKey(cartMoreMealsFuture);
+
+  //*----------------- CART FETCH ---------------------//
+
+  //*GETS all cart data
+  Future getCartData() async {
+    await runBusyFuture(_cartService.getCartMeals(cartMeals),
+        busyObject: cartMealsFuture);
+    await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals),
+        busyObject: cartMoreMealsFuture);
   }
+
+  // //* FETCHS more meals and GETS all carts
+  // Future getMoreMeals() async {
+  //   await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals));
+  //   log.i('moreMeals.length: ${moreMeals.length} ');
+  // }
 
   //* CLEARS CART
   Future<void> clearCart() async {

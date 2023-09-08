@@ -15,7 +15,7 @@ import '../../services/services.dart';
 import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 
-// A map key of type string
+//* A map key of type string
 const String homeSlidersFuture = 'homeSlidersFuture';
 const String homeMainCatsFuture = 'homeMainCatsFuture';
 const String homeSearchMainCatsFuture = 'homeSearchMainCatsFuture';
