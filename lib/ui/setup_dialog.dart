@@ -698,7 +698,7 @@ class RateOrderDialogView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 25.h, bottom: 10.h),
                       child: AutoSizeText(
-                        notificationModel.title ?? 'Sultan Restoran',
+                        notificationModel.title ?? '',
                         maxLines: 2,
                         minFontSize:
                             22, //* Use double instead of 22.sp to fix stepGranularity issue

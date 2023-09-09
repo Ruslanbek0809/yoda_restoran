@@ -1,5 +1,7 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/drawer/my_credit_cards/my_credit_cards_add_edit/my_credit_card_add_view.dart';
+import 'package:yoda_res/ui/drawer/my_credit_cards/my_credit_cards_view.dart';
 import 'package:yoda_res/ui/home/moments/moment_story_view.dart';
 
 import '../services/services.dart';
@@ -44,6 +46,8 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: SingleExView),
     MaterialRoute(page: SliderWebview),
     MaterialRoute(page: RestaurantsView),
+    MaterialRoute(page: MyCreditCardsView),
+    MaterialRoute(page: MyCreditCardAddView),
     MaterialRoute(page: MomentStoryView),
   ],
   dependencies: [

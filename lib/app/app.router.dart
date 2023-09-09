@@ -8,8 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/ui/home/home_exclusives/single_ex_view.dart';
-import 'package:yoda_res/ui/home/moments/moment_story_view.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -19,12 +18,15 @@ import '../ui/drawer/about_us/about_us_view.dart';
 import '../ui/drawer/addresses/addresses.dart';
 import '../ui/drawer/contact_us/contact_us_view.dart';
 import '../ui/drawer/login/login_view.dart';
-import '../ui/drawer/my_credit_cards/my_credit_cards.dart';
 import '../ui/drawer/my_credit_cards/my_credit_cards_add_edit/my_credit_card_add_view.dart';
+import '../ui/drawer/my_credit_cards/my_credit_cards_view.dart';
 import '../ui/drawer/otp/otp_view.dart';
 import '../ui/drawer/profile/profile_view.dart';
+import '../ui/home/home_exclusives/single_ex_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/home/moments/moment_story_view.dart';
+import '../ui/home/moments/moments_view.dart';
 import '../ui/home/restaurants/restaurants_view.dart';
 import '../ui/home/slider/slider_webview.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
@@ -53,9 +55,9 @@ class Routes {
   static const String onBoardingView = '/on-boarding-view';
   static const String singleExView = '/single-ex-view';
   static const String sliderWebview = '/slider-webview';
+  static const String restaurantsView = '/restaurants-view';
   static const String myCreditCardsView = '/my-credit-cards-view';
   static const String myCreditCardAddView = '/my-credit-card-add-view';
-  static const String restaurantsView = '/restaurants-view';
   static const String momentStoryView = '/moment-story-view';
   static const all = <String>{
     startUpView,
@@ -77,9 +79,9 @@ class Routes {
     onBoardingView,
     singleExView,
     sliderWebview,
+    restaurantsView,
     myCreditCardsView,
     myCreditCardAddView,
-    restaurantsView,
     momentStoryView,
   };
 }
@@ -107,10 +109,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.singleExView, page: SingleExView),
     RouteDef(Routes.sliderWebview, page: SliderWebview),
-    RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
-    RouteDef(Routes.addressAddView, page: AddressAddView),
-    RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
     RouteDef(Routes.restaurantsView, page: RestaurantsView),
+    RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
+    RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
     RouteDef(Routes.momentStoryView, page: MomentStoryView),
   ];
   @override
@@ -272,9 +273,18 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    MyCreditCardsView: (data) {
+    RestaurantsView: (data) {
       return CustomMaterialPageRoute(
-        builder: (context) => MyCreditCardsView(),
+        builder: (context) => const RestaurantsView(),
+        settings: data,
+      );
+    },
+    MyCreditCardsView: (data) {
+      var args = data.getArgs<MyCreditCardsViewArguments>(
+        orElse: () => MyCreditCardsViewArguments(),
+      );
+      return CustomMaterialPageRoute(
+        builder: (context) => MyCreditCardsView(key: args.key),
         settings: data,
       );
     },
@@ -287,15 +297,13 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    RestaurantsView: (data) {
-      return CustomMaterialPageRoute(
-        builder: (context) => RestaurantsView(),
-        settings: data,
-      );
-    },
     MomentStoryView: (data) {
-      return CustomMaterialPageRoute(
-        builder: (context) => MomentStoryView(),
+      var args = data.getArgs<MomentStoryViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MomentStoryView(
+          moments: args.moments,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -358,11 +366,8 @@ class AddressEditViewArguments {
   final Address address;
   final AddressesViewModel addressesViewModel;
   final Key? key;
-  AddressEditViewArguments({
-    required this.address,
-    required this.addressesViewModel,
-    this.key,
-  });
+  AddressEditViewArguments(
+      {required this.address, required this.addressesViewModel, this.key});
 }
 
 /// OnBoardingView arguments holder class
@@ -371,6 +376,7 @@ class OnBoardingViewArguments {
   OnBoardingViewArguments({this.key});
 }
 
+/// SingleExView arguments holder class
 class SingleExViewArguments {
   final ExclusiveSingle singleEx;
   final Key? key;
@@ -384,8 +390,21 @@ class SliderWebviewArguments {
   SliderWebviewArguments({required this.sliderUrl, this.key});
 }
 
+/// MyCreditCardsView arguments holder class
+class MyCreditCardsViewArguments {
+  final Key? key;
+  MyCreditCardsViewArguments({this.key});
+}
+
 /// MyCreditCardAddView arguments holder class
 class MyCreditCardAddViewArguments {
   final Key? key;
   MyCreditCardAddViewArguments({this.key});
+}
+
+/// MomentStoryView arguments holder class
+class MomentStoryViewArguments {
+  final List<MomentModel> moments;
+  final Key? key;
+  MomentStoryViewArguments({required this.moments, this.key});
 }

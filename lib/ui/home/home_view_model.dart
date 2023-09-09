@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';
@@ -260,8 +261,11 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
-  void navToMomentStoryView() async =>
-      await _navService.navigateTo(Routes.momentStoryView);
+  Future<void> navToMomentStoryView(List<MomentModel> moments) async =>
+      await _navService.navigateTo(
+        Routes.momentStoryView,
+        arguments: MomentStoryViewArguments(moments: moments),
+      );
 
   //*----------------- AWESOME DIALOG NAVIGATION ---------------------//
 

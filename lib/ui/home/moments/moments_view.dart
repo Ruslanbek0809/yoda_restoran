@@ -5,9 +5,44 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
 
-List<String> moments = [
-  'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
-  'https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif',
+enum MediaType { image, video, text }
+
+class MomentModel {
+  MomentModel(
+    this.type,
+    this.url,
+  );
+  final MediaType type;
+  // final String caption;
+  final String url;
+  // final int duration;
+}
+
+MediaType translateType(String? type) {
+  if (type == "image") {
+    return MediaType.image;
+  }
+
+  if (type == "video") {
+    return MediaType.video;
+  }
+
+  return MediaType.text;
+}
+
+List<MomentModel> moments = [
+  MomentModel(
+    translateType('text'),
+    'Hello world!\nHave a look at some great Ghanaian delicacies. I\'m sorry if your mouth waters. \n\nTap!',
+  ),
+  MomentModel(
+    translateType('image'),
+    'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
+  ),
+  MomentModel(
+    translateType('video'),
+    'https://raw.githubusercontent.com/blackmann/storyexample/master/assets/small.mp4',
+  ),
 ];
 
 class MomentsView extends ViewModelWidget<HomeViewModel> {
@@ -45,7 +80,8 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                   (moment) => Padding(
                     padding: EdgeInsets.only(right: 12.r),
                     child: GestureDetector(
-                      onTap: model.navToMomentStoryView,
+                      onTap: () async =>
+                          await model.navToMomentStoryView(moments),
                       child: CachedNetworkImage(
                         imageUrl: 'assets/ph_product.png',
                         fit: BoxFit.cover,
