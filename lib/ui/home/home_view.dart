@@ -9,6 +9,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../generated/locale_keys.g.dart';
 import '../../library/upgrader_translations.dart';
 import '../drawer/drawer_view.dart';
@@ -373,6 +374,18 @@ class _HomeViewState extends State<HomeView> {
                                   //*If MAIN CAT FILTER is APPLIED
                                   size: !model.isFilterApplied ? 90.r : 94.r,
                                   child: MainCatsView(),
+                                ),
+                              ),
+                              //*----------------- MOMENTS ---------------------//
+                              SliverPersistentHeader(
+                                pinned: false,
+                                floating: false,
+                                delegate: ContestTabHeader(
+                                  //*If MAIN CAT FILTER is APPLIED
+                                  size: 60 +
+                                      36 +
+                                      18.r, //* cached image height + title height + height paddings height
+                                  child: MomentsView(),
                                 ),
                               ),
                               //*----------------- EXCLUSIVES ---------------------//

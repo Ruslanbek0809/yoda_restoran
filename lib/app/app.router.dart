@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:yoda_res/ui/home/home_exclusives/single_ex_view.dart';
+import 'package:yoda_res/ui/home/moments/moment_story_view.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -55,6 +56,7 @@ class Routes {
   static const String myCreditCardsView = '/my-credit-cards-view';
   static const String myCreditCardAddView = '/my-credit-card-add-view';
   static const String restaurantsView = '/restaurants-view';
+  static const String momentStoryView = '/moment-story-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -78,6 +80,7 @@ class Routes {
     myCreditCardsView,
     myCreditCardAddView,
     restaurantsView,
+    momentStoryView,
   };
 }
 
@@ -108,6 +111,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addressAddView, page: AddressAddView),
     RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
     RouteDef(Routes.restaurantsView, page: RestaurantsView),
+    RouteDef(Routes.momentStoryView, page: MomentStoryView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -286,6 +290,12 @@ class StackedRouter extends RouterBase {
     RestaurantsView: (data) {
       return CustomMaterialPageRoute(
         builder: (context) => RestaurantsView(),
+        settings: data,
+      );
+    },
+    MomentStoryView: (data) {
+      return CustomMaterialPageRoute(
+        builder: (context) => MomentStoryView(),
         settings: data,
       );
     },

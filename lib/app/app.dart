@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/ui/home/moments/moment_story_view.dart';
 
 import '../services/services.dart';
 import '../ui/cart/cart_view.dart';
@@ -43,6 +44,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: SingleExView),
     MaterialRoute(page: SliderWebview),
     MaterialRoute(page: RestaurantsView),
+    MaterialRoute(page: MomentStoryView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

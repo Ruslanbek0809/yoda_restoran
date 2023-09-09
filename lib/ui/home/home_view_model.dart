@@ -260,6 +260,9 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
+  void navToMomentStoryView() async =>
+      await _navService.navigateTo(Routes.momentStoryView);
+
   //*----------------- AWESOME DIALOG NAVIGATION ---------------------//
 
   Future<void> navToResDetailsViewViaAwesomeDialog(
