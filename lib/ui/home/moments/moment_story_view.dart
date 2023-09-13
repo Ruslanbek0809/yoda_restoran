@@ -27,12 +27,11 @@ class _MomentStoryViewState extends State<MomentStoryView> {
       if (moment.type == MediaType.text) {
         storyItems.add(
           StoryItem.text(
-            title: 'Text',
+            title: moment.caption!,
             backgroundColor: kcPrimaryColor,
             // backgroundColor: HexColor(kcPrimaryColor),
             duration: Duration(
-              milliseconds: (5 * 1000).toInt(),
-              // milliseconds: (story.duration! * 1000).toInt(),
+              milliseconds: (moment.duration * 1000).toInt(),
             ),
           ),
         );
@@ -40,11 +39,10 @@ class _MomentStoryViewState extends State<MomentStoryView> {
 
       if (moment.type == MediaType.image) {
         storyItems.add(StoryItem.pageImage(
-          url: moment.url,
+          url: moment.url!,
           controller: controller,
-          caption: 'Image',
           duration: Duration(
-            milliseconds: (5 * 1000).toInt(),
+            milliseconds: (moment.duration * 1000).toInt(),
           ),
         ));
       }
@@ -52,10 +50,10 @@ class _MomentStoryViewState extends State<MomentStoryView> {
       if (moment.type == MediaType.video) {
         storyItems.add(
           StoryItem.pageVideo(
-            moment.url,
+            moment.url!,
             controller: controller,
             caption: 'Video',
-            duration: Duration(milliseconds: (5 * 1000).toInt()),
+            duration: Duration(milliseconds: (moment.duration * 1000).toInt()),
           ),
         );
       }

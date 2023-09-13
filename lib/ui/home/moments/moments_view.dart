@@ -8,14 +8,20 @@ import 'package:yoda_res/ui/home/home_view_model.dart';
 enum MediaType { image, video, text }
 
 class MomentModel {
-  MomentModel(
-    this.type,
+  MomentModel({
+    required this.type,
+    this.caption,
+    this.color,
     this.url,
-  );
+    required this.duration,
+    required this.createdAt,
+  });
   final MediaType type;
-  // final String caption;
-  final String url;
-  // final int duration;
+  final String? caption;
+  final String? color;
+  final String? url;
+  final int duration;
+  final DateTime createdAt;
 }
 
 MediaType translateType(String? type) {
@@ -32,16 +38,26 @@ MediaType translateType(String? type) {
 
 List<MomentModel> moments = [
   MomentModel(
-    translateType('text'),
-    'Hello world!\nHave a look at some great Ghanaian delicacies. I\'m sorry if your mouth waters. \n\nTap!',
+    type: translateType('text'),
+    caption:
+        'Hello world!\nHave a look at some great Ghanaian delicacies. I\'m sorry if your mouth waters. \n\nTap!',
+    color: '#FF891D',
+    duration: 5,
+    createdAt: DateTime.now().subtract(Duration(minutes: 30)),
   ),
   MomentModel(
-    translateType('image'),
-    'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
+    type: translateType('image'),
+    url:
+        'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
+    duration: 5,
+    createdAt: DateTime.now().subtract(Duration(hours: 13)),
   ),
   MomentModel(
-    translateType('video'),
-    'https://raw.githubusercontent.com/blackmann/storyexample/master/assets/small.mp4',
+    type: translateType('video'),
+    url:
+        'https://raw.githubusercontent.com/blackmann/storyexample/master/assets/small.mp4',
+    duration: 5,
+    createdAt: DateTime.now().subtract(Duration(days: 6)),
   ),
 ];
 
