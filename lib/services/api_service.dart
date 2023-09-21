@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:yoda_res/models/moment.dart';
 import '../models/hive_models/hive_models.dart';
 import 'services.dart';
 import '../app/app.locator.dart';
@@ -66,6 +67,29 @@ class ApiService {
       return _mainCategories;
     } catch (error) {
       log.v('ERROR on api/maincategories/ :$error');
+      rethrow;
+    }
+  }
+
+  Future<List<Moment>> getMoments() async {
+    List<Moment> _moments = [];
+    try {
+      Response response = await _apiRoot.dio.get(
+        'api/paginatedRestaurants/',
+        queryParameters: {'stories': true},
+      );
+      log.v(
+          'RESPONSE: api/paginatedRestaurants?stories=True => ${response.data}');
+
+      // if (response.data != null) {
+      //   for (final _moment in response.data) {
+      //     _moments.add(Moment.fromJson(_moment));
+      //   }
+      // }
+
+      return _moments;
+    } catch (error) {
+      log.v('ERROR on api/paginatedRestaurants/ :$error');
       rethrow;
     }
   }

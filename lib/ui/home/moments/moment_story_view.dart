@@ -27,7 +27,7 @@ class _MomentStoryViewState extends State<MomentStoryView> {
       if (moment.type == MediaType.text) {
         storyItems.add(
           StoryItem.text(
-            title: moment.caption!,
+            title: moment.caption!, 
             backgroundColor: kcPrimaryColor,
             // backgroundColor: HexColor(kcPrimaryColor),
             duration: Duration(

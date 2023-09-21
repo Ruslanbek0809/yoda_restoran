@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/moment.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
@@ -22,6 +23,9 @@ class HomeService with ReactiveServiceMixin {
 
   List<MainCategory> _mainCats = [];
   List<MainCategory> get mainCats => _mainCats;
+
+  List<Moment> _moments = [];
+  List<Moment> get moments => _moments;
 
   List<MainCategory> _searchMainCats = [];
   List<MainCategory> get searchMainCats => _searchMainCats;
@@ -72,6 +76,11 @@ class HomeService with ReactiveServiceMixin {
     _searchMainCats = await _api.getSearchMainCats();
     _searchMainCats.sort((prev, next) => prev.order!.compareTo(next.order!));
     log.v('_searchMainCats.length: ${_searchMainCats.length}');
+  }
+
+  Future<void> getMoments() async {
+    _moments = await _api.getMoments();
+    log.v('_moments.length: ${_moments.length}');
   }
 
   // Future<List<Restaurant>?> getRandomRess() async {
