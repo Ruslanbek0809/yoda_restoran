@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:yoda_res/app/custom_material_page_route.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -26,6 +27,7 @@ import '../ui/home/home_exclusives/single_ex_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/home/moments/moment_story_view.dart';
+import '../ui/home/moments/moments_all/moments_all_view.dart';
 import '../ui/home/moments/moments_view.dart';
 import '../ui/home/restaurants/restaurants_view.dart';
 import '../ui/home/slider/slider_webview.dart';
@@ -33,7 +35,6 @@ import '../ui/restaurant/restaurant_details/res_details_view.dart';
 import '../ui/restaurant/restaurant_search/restaurant_search_view.dart';
 import '../ui/startup/onboarding/onboarding_view.dart';
 import '../ui/startup/startup_view.dart';
-import 'custom_material_page_route.dart';
 
 class Routes {
   static const String startUpView = '/';
@@ -59,6 +60,7 @@ class Routes {
   static const String myCreditCardsView = '/my-credit-cards-view';
   static const String myCreditCardAddView = '/my-credit-card-add-view';
   static const String momentStoryView = '/moment-story-view';
+  static const String momentsAllView = '/moments-all-view';
   static const all = <String>{
     startUpView,
     homeView,
@@ -83,6 +85,7 @@ class Routes {
     myCreditCardsView,
     myCreditCardAddView,
     momentStoryView,
+    momentsAllView,
   };
 }
 
@@ -113,6 +116,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.myCreditCardsView, page: MyCreditCardsView),
     RouteDef(Routes.myCreditCardAddView, page: MyCreditCardAddView),
     RouteDef(Routes.momentStoryView, page: MomentStoryView),
+    RouteDef(Routes.momentsAllView, page: MomentsAllView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -304,6 +308,12 @@ class StackedRouter extends RouterBase {
           moments: args.moments,
           key: args.key,
         ),
+        settings: data,
+      );
+    },
+    MomentsAllView: (data) {
+      return CustomMaterialPageRoute(
+        builder: (context) => const MomentsAllView(),
         settings: data,
       );
     },

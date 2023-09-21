@@ -67,12 +67,12 @@ class HomeViewModel extends ReactiveViewModel {
   List<Restaurant> get selectedMainCatRestaurants => _homeService
       .selectedMainCatRestaurants; //* SHOWS found restaurants of selectedMainCats
 
-  //*HOME RESS PAG
+  //* HOME RESS PAG
   int _page = 1;
   int get page => _page;
   bool get isPullUpEnabled => _homeService.isPullUpEnabled;
 
-  //*Custom boolean busy indicator
+  //* Custom boolean busy indicator
   bool get busyForKeys =>
       busy(homeSlidersFuture) ||
       busy(homeMainCatsFuture) ||
@@ -82,7 +82,7 @@ class HomeViewModel extends ReactiveViewModel {
       busy(homePromsFuture) ||
       busy(homeExclusivesFuture);
 
-  //*Custom boolean error indicator
+  //* Custom boolean error indicator
   bool get hasErrorForKeys =>
       hasErrorForKey(homeSlidersFuture) ||
       hasErrorForKey(homeMainCatsFuture) ||
@@ -94,9 +94,9 @@ class HomeViewModel extends ReactiveViewModel {
 
   //*----------------- HOME FETCH ---------------------//
 
-  //*GETS all home data
+  //* GETS all home data
   Future getHomeData() async {
-    //*GETS user's location
+    //* GETS user's location
     await _geolocatorService.getUserLocation();
     await runBusyFuture(_homeService.getSliders(),
         busyObject: homeSlidersFuture);
@@ -115,15 +115,15 @@ class HomeViewModel extends ReactiveViewModel {
 
   //*----------------- PAGINATION ---------------------//
 
-  //*HOME RESS PAG
-  //*GETS more home restaurants
+  //* HOME RESS PAG
+  //* GETS more home restaurants
   Future<void> getMorePaginatedRestaurants() async {
     _page++;
     log.v('getMorePaginatedRestaurants() with _page: $_page');
     await runBusyFuture(_homeService.getPaginatedRess(page: _page));
   }
 
-  //*HOME RESS PAG
+  //* HOME RESS PAG
   void enablePullUp() {
     _page = 1;
     _homeService.enablePullUp();
@@ -131,20 +131,20 @@ class HomeViewModel extends ReactiveViewModel {
 
   //*----------------- HOME GETTER ---------------------//
 
-  //*GETTER for combined list of randomRestaurants and promotedRestaurants
+  //* GETTER for combined list of randomRestaurants and promotedRestaurants
   List<HomeResPromo>? get homeRess {
     List<HomeResPromo> _homeRess = [];
     int promPosCount = 0;
 
-    //*Looping random restaurants
+    //* Looping random restaurants
     for (final _randomRes in _homeService.randomRess) {
       int _randomResPos = _homeService.randomRess.indexOf(_randomRes);
 
-      //*Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
+      //* Here it CHECKS whether PROMOTED EXISTS in promPosCount's position or NOT.
       if (_homeService.proms.isNotEmpty &&
           _homeService.proms.length > promPosCount) {
-        //*Here it CHECKS whether this PROMOTED's position is equa to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
-        //*If it positions are EQUAL, then ADDS this PROMOTED to this RESTAURANT
+        //* Here it CHECKS whether this PROMOTED's position is equa to this RESTAURANT. Add + 1 to restaurant bc of indexOf its position
+        //* If it positions are EQUAL, then ADDS this PROMOTED to this RESTAURANT
         if (_homeService.proms[promPosCount].position == _randomResPos + 1) {
           _homeRess.add(
             HomeResPromo(
@@ -230,6 +230,9 @@ class HomeViewModel extends ReactiveViewModel {
 
   void navToRestaurantsView() async =>
       await _navService.navigateTo(Routes.restaurantsView);
+
+  void navToMomentsAllView() async =>
+      await _navService.navigateTo(Routes.momentsAllView);
 
   void navToSingleExView(ExclusiveSingle singleEx) async =>
       await _navService.navigateTo(

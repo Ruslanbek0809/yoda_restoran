@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/ui/drawer/my_credit_cards/my_credit_cards_add_edit/my_credit_card_add_view.dart';
 import 'package:yoda_res/ui/drawer/my_credit_cards/my_credit_cards_view.dart';
 import 'package:yoda_res/ui/home/moments/moment_story_view.dart';
+import 'package:yoda_res/ui/home/moments/moments_all/moments_all_view.dart';
 
 import '../services/services.dart';
 import '../ui/cart/cart_view.dart';
@@ -49,6 +50,7 @@ import '../ui/startup/startup_view.dart';
     MaterialRoute(page: MyCreditCardsView),
     MaterialRoute(page: MyCreditCardAddView),
     MaterialRoute(page: MomentStoryView),
+    MaterialRoute(page: MomentsAllView),
   ],
   dependencies: [
     LazySingleton(classType: HiveDbService),

@@ -5,6 +5,8 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
 
+import '../../../shared/shared.dart';
+
 enum MediaType { image, video, text }
 
 class MomentModel {
@@ -70,15 +72,39 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
         Padding(
           padding: EdgeInsets.only(
             left: 16.r,
+            right: 12.r,
             top: 12.r,
           ),
-          child: Text(
-            'Moments',
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.bold,
-              color: kcSecondaryDarkColor,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Moments',
+                style: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.bold,
+                  color: kcSecondaryDarkColor,
+                ),
+              ),
+              InkWell(
+                onTap: model.navToMomentsAllView,
+                child: Row(
+                  children: [
+                    Text(
+                      'View all',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: kts14SemiBoldText,
+                    ),
+                    SizedBox(width: 5.w),
+                    Icon(
+                      Icons.arrow_forward,
+                      size: 16.sp,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
         SingleChildScrollView(
