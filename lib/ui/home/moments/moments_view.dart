@@ -2,68 +2,71 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/shared/app_colors.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
 
+import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 
-enum MediaType { image, video, text }
+// enum MediaType { image, video, text }
 
-class MomentModel {
-  MomentModel({
-    required this.type,
-    this.caption,
-    this.color,
-    this.url,
-    required this.duration,
-    required this.createdAt,
-  });
-  final MediaType type;
-  final String? caption;
-  final String? color;
-  final String? url;
-  final int duration;
-  final DateTime createdAt;
-}
+// class MomentModel {
+//   MomentModel({
+//     required this.type,
+//     this.caption,
+//     this.color,
+//     this.url,
+//     required this.duration,
+//     required this.createdAt,
+//   });
+//   final MediaType type;
+//   final String? caption;
+//   final String? color;
+//   final String? url;
+//   final int duration;
+//   final DateTime createdAt;
+// }
 
-MediaType translateType(String? type) {
-  if (type == "image") {
-    return MediaType.image;
-  }
+// MediaType translateType(String? type) {
+//   if (type == "image") {
+//     return MediaType.image;
+//   }
 
-  if (type == "video") {
-    return MediaType.video;
-  }
+//   if (type == "video") {
+//     return MediaType.video;
+//   }
 
-  return MediaType.text;
-}
+//   return MediaType.text;
+// }
 
-List<MomentModel> moments = [
-  MomentModel(
-    type: translateType('text'),
-    caption:
-        'Hello world!\nHave a look at some great Ghanaian delicacies. I\'m sorry if your mouth waters. \n\nTap!',
-    color: '#FF891D',
-    duration: 5,
-    createdAt: DateTime.now().subtract(Duration(minutes: 30)),
-  ),
-  MomentModel(
-    type: translateType('image'),
-    url:
-        'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
-    duration: 5,
-    createdAt: DateTime.now().subtract(Duration(hours: 13)),
-  ),
-  MomentModel(
-    type: translateType('video'),
-    url:
-        'https://raw.githubusercontent.com/blackmann/storyexample/master/assets/small.mp4',
-    duration: 5,
-    createdAt: DateTime.now().subtract(Duration(days: 6)),
-  ),
-];
+// List<MomentModel> moments = [
+//   MomentModel(
+//     type: translateType('text'),
+//     caption:
+//         'Hello world!\nHave a look at some great Ghanaian delicacies. I\'m sorry if your mouth waters. \n\nTap!',
+//     color: '#FF891D',
+//     duration: 5,
+//     createdAt: DateTime.now().subtract(Duration(minutes: 30)),
+//   ),
+//   MomentModel(
+//     type: translateType('image'),
+//     url:
+//         'https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg',
+//     duration: 5,
+//     createdAt: DateTime.now().subtract(Duration(hours: 13)),
+//   ),
+//   MomentModel(
+//     type: translateType('video'),
+//     url:
+//         'https://raw.githubusercontent.com/blackmann/storyexample/master/assets/small.mp4',
+//     duration: 5,
+//     createdAt: DateTime.now().subtract(Duration(days: 6)),
+//   ),
+// ];
 
 class MomentsView extends ViewModelWidget<HomeViewModel> {
+  final List<Restaurant> moments;
+  const MomentsView({required this.moments, Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, HomeViewModel model) {
     return Column(
@@ -117,19 +120,18 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: moments
-                // .take(10)
                 .map(
                   (moment) => Padding(
                     padding: EdgeInsets.only(right: 12.r),
                     child: GestureDetector(
                       onTap: () async =>
-                          await model.navToMomentStoryView(moments),
+                          await model.navToMomentStoryView(moment),
                       child: CachedNetworkImage(
-                        imageUrl: 'assets/ph_product.png',
+                        imageUrl: moment.image ?? 'assets/ph_product.png',
                         fit: BoxFit.cover,
                         imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundColor: kcDividerSecondaryColor,
-                          radius: 30.5,
+                          backgroundColor: kcGreenColor,
+                          radius: 32,
                           child: CircleAvatar(
                             radius: 30,
                             backgroundImage: imageProvider,
@@ -137,7 +139,7 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                         ),
                         placeholder: (context, url) => CircleAvatar(
                           backgroundColor: kcDividerSecondaryColor,
-                          radius: 30.5,
+                          radius: 32,
                           child: CircleAvatar(
                             radius: 30,
                             backgroundImage:
@@ -146,7 +148,7 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                         ),
                         errorWidget: (context, url, error) => CircleAvatar(
                           backgroundColor: kcDividerSecondaryColor,
-                          radius: 30.5,
+                          radius: 32,
                           child: CircleAvatar(
                             radius: 30,
                             backgroundImage:

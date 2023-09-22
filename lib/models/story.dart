@@ -7,12 +7,14 @@ class Story {
   Story({
     this.id,
     this.name,
-    this.text,
-    this.color,
+    this.caption,
+    this.captionColor,
+    this.backgroundColor,
     this.durationS,
     this.createdAt,
     this.updatedAt,
     this.file,
+    this.isImage,
     this.restaurant,
   });
 
@@ -22,11 +24,14 @@ class Story {
   @JsonKey(name: 'name')
   final String? name;
 
-  @JsonKey(name: 'text')
-  final String? text;
+  @JsonKey(name: 'caption')
+  final String? caption;
 
-  @JsonKey(name: 'color')
-  final String? color;
+  @JsonKey(name: 'caption_color')
+  final String? captionColor;
+
+  @JsonKey(name: 'background_color')
+  final String? backgroundColor;
 
   @JsonKey(name: 'durationS')
   final int? durationS;
@@ -39,6 +44,9 @@ class Story {
 
   @JsonKey(name: 'file')
   final String? file;
+
+  @JsonKey(name: 'is_image')
+  final bool? isImage;
 
   @JsonKey(name: 'restaurant')
   final int? restaurant;

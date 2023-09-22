@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
-import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../../models/models.dart';
 import 'prom_res_favorite_button.dart';
@@ -9,7 +8,6 @@ import 'prom_res_view_model.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class PromResView extends StatelessWidget {
   final Restaurant restaurant;
@@ -42,8 +40,8 @@ class PromResView extends StatelessWidget {
                       GestureDetector(
                         onTap: () => model.navToResDetailsView(restaurant),
                         child: YodaImage(
-                          image: restaurant.image ?? 'assets/ph_restaurant.png',
-                          phImage: 'assets/ph_restaurant.png',
+                          image: restaurant.image ?? 'assets/ph_product.png',
+                          phImage: 'assets/ph_product.png',
                           height: 0.18.sh,
                           width: 0.7.sw,
                           borderRadius: Constants.BORDER_RADIUS_20,

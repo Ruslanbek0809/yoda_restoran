@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:yoda_res/models/story.dart';
 
 import 'models.dart';
 
@@ -29,6 +30,7 @@ class Restaurant {
     this.selfPickUp,
     this.delivery,
     this.paymentTypes,
+    this.stories,
   });
 
   @JsonKey(name: 'id')
@@ -96,6 +98,9 @@ class Restaurant {
 
   @JsonKey(name: 'paymentTypes')
   final List<PaymentType>? paymentTypes;
+
+  @JsonKey(name: 'stories')
+  final List<Story>? stories;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
       _$RestaurantFromJson(json);

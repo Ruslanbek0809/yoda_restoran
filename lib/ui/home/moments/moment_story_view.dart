@@ -3,57 +3,71 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:story_view/story_view.dart';
 import 'package:yoda_res/shared/shared.dart';
-import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import 'package:yoda_res/ui/widgets/widgets.dart';
 
+import '../../../models/models.dart';
+import '../../../utils/utils.dart';
+
 class MomentStoryView extends StatefulWidget {
-  final List<MomentModel> moments;
-  const MomentStoryView({required this.moments, Key? key}) : super(key: key);
+  final Restaurant moment;
+  const MomentStoryView({required this.moment, Key? key}) : super(key: key);
 
   @override
   State<MomentStoryView> createState() => _MomentStoryViewState();
 }
 
 class _MomentStoryViewState extends State<MomentStoryView> {
-  List<MomentModel> get moments => widget.moments;
+  Restaurant get moment => widget.moment;
 
   final StoryController controller = StoryController();
-  List<StoryItem> storyItems = [];
+  List<StoryItem> stories = [];
 
   @override
   void initState() {
     super.initState();
-    moments.forEach((moment) {
-      if (moment.type == MediaType.text) {
-        storyItems.add(
-          StoryItem.text(
-            title: moment.caption!, 
-            backgroundColor: kcPrimaryColor,
-            // backgroundColor: HexColor(kcPrimaryColor),
-            duration: Duration(
-              milliseconds: (moment.duration * 1000).toInt(),
-            ),
-          ),
-        );
-      }
-
-      if (moment.type == MediaType.image) {
-        storyItems.add(StoryItem.pageImage(
-          url: moment.url!,
-          controller: controller,
-          duration: Duration(
-            milliseconds: (moment.duration * 1000).toInt(),
-          ),
-        ));
-      }
-
-      if (moment.type == MediaType.video) {
-        storyItems.add(
-          StoryItem.pageVideo(
-            moment.url!,
+    moment.stories?.forEach((story) {
+      if (story.file != null) {
+        if (story.isImage!) {
+          stories.add(StoryItem.pageImage(
+            url: story.file!,
             controller: controller,
-            caption: 'Video',
-            duration: Duration(milliseconds: (moment.duration * 1000).toInt()),
+            duration: Duration(
+              milliseconds: story.durationS != null
+                  ? (story.durationS! * 1000).toInt()
+                  : (5 * 1000).toInt(),
+            ),
+          ));
+        } else {
+          stories.add(
+            StoryItem.pageVideo(
+              story.file!,
+              controller: controller,
+              duration: Duration(
+                milliseconds: story.durationS != null
+                    ? (story.durationS! * 1000).toInt()
+                    : (5 * 1000).toInt(),
+              ),
+            ),
+          );
+        }
+      } else {
+        stories.add(
+          StoryItem.text(
+            title: story.caption ?? '',
+            textStyle: TextStyle(
+              fontSize: 18.sp,
+              color: story.captionColor != null
+                  ? HexColor(story.captionColor!)
+                  : kcFontColor,
+            ),
+            backgroundColor: story.backgroundColor != null
+                ? HexColor(story.backgroundColor!)
+                : kcPrimaryColor,
+            duration: Duration(
+              milliseconds: story.durationS != null
+                  ? (story.durationS! * 1000).toInt()
+                  : (5 * 1000).toInt(),
+            ),
           ),
         );
       }
@@ -67,7 +81,7 @@ class _MomentStoryViewState extends State<MomentStoryView> {
         children: [
           //*----------------- MOMENTS ---------------------//
           StoryView(
-            storyItems: storyItems,
+            storyItems: stories,
             controller: controller,
             onComplete: () {
               Navigator.of(context).pop();
@@ -78,7 +92,7 @@ class _MomentStoryViewState extends State<MomentStoryView> {
               }
             },
             onStoryShow: (storyItem) {
-              int pos = storyItems.indexOf(storyItem);
+              int pos = stories.indexOf(storyItem);
 
               // the reason for doing setState only after the first
               // position is becuase by the first iteration, the layout

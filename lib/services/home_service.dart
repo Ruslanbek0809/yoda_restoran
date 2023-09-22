@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
-import 'package:yoda_res/models/moment.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
@@ -24,8 +23,8 @@ class HomeService with ReactiveServiceMixin {
   List<MainCategory> _mainCats = [];
   List<MainCategory> get mainCats => _mainCats;
 
-  List<Moment> _moments = [];
-  List<Moment> get moments => _moments;
+  List<Restaurant> _moments = [];
+  List<Restaurant> get moments => _moments;
 
   List<MainCategory> _searchMainCats = [];
   List<MainCategory> get searchMainCats => _searchMainCats;

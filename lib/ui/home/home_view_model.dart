@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/models/moment.dart';
 import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -44,7 +43,7 @@ class HomeViewModel extends ReactiveViewModel {
   List<SliderModel>? get sliders => _homeService.sliders;
   List<MainCategory>? get mainCats => _homeService.mainCats;
   List<MainCategory>? get searchMainCats => _homeService.searchMainCats;
-  List<Moment>? get moments => _homeService.moments;
+  List<Restaurant>? get moments => _homeService.moments;
   List<Restaurant>? get randomRess => _homeService.randomRess;
   List<Promoted?> get proms => _homeService.proms;
   List<Exclusive>? get exclusives => _homeService.exclusives;
@@ -271,10 +270,10 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
-  Future<void> navToMomentStoryView(List<MomentModel> moments) async =>
+  Future<void> navToMomentStoryView(Restaurant moment) async =>
       await _navService.navigateTo(
         Routes.momentStoryView,
-        arguments: MomentStoryViewArguments(moments: moments),
+        arguments: MomentStoryViewArguments(moment: moment),
       );
 
   //*----------------- AWESOME DIALOG NAVIGATION ---------------------//

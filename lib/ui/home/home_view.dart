@@ -384,8 +384,9 @@ class _HomeViewState extends State<HomeView> {
                                   //*If MAIN CAT FILTER is APPLIED
                                   size: 60 +
                                       36 +
-                                      18.r, //* cached image height + title height + height paddings height
-                                  child: MomentsView(),
+                                      22.r, //* cached image height + title height + height paddings height
+                                  child:
+                                      MomentsView(moments: model.moments ?? []),
                                 ),
                               ),
                               //*----------------- EXCLUSIVES ---------------------//

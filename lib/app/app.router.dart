@@ -303,9 +303,9 @@ class StackedRouter extends RouterBase {
     },
     MomentStoryView: (data) {
       var args = data.getArgs<MomentStoryViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => MomentStoryView(
-          moments: args.moments,
+          moment: args.moment,
           key: args.key,
         ),
         settings: data,
@@ -414,7 +414,7 @@ class MyCreditCardAddViewArguments {
 
 /// MomentStoryView arguments holder class
 class MomentStoryViewArguments {
-  final List<MomentModel> moments;
+  final Restaurant moment;
   final Key? key;
-  MomentStoryViewArguments({required this.moments, this.key});
+  MomentStoryViewArguments({required this.moment, this.key});
 }
