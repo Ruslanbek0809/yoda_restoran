@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/story.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/models.dart';
+import '../utils/utils.dart';
 import 'services.dart';
 
 // 1 For Reactive View
@@ -16,6 +19,8 @@ class HomeService with ReactiveServiceMixin {
   }
 
   final _api = locator<ApiService>();
+
+  static late Box<int> storiesBox;
 
   List<SliderModel> _sliders = [];
   List<SliderModel> get sliders => _sliders;
@@ -168,6 +173,21 @@ class HomeService with ReactiveServiceMixin {
     log.i('');
 
     _fetchingFilterError.value = false;
+  }
+
+  Future<void> addRestaurantStoriesToStoriesBox(List<Story> stories) async {
+    log.v('addRestaurantStoriesToStoriesBox() stories: ${stories.length}');
+
+    storiesBox = Hive.box<int>(Constants.storiesBox);
+
+    for (var story in stories) {
+      if (!storiesBox.containsKey(story.id)) {
+        await storiesBox.put(
+          story.id, //* Unique hive id for this object
+          story.id!,
+        );
+      }
+    }
   }
 
   //*------------------ RESTAURANTS APIS ---------------------//

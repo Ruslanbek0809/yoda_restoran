@@ -377,18 +377,18 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               //*----------------- MOMENTS ---------------------//
-                              SliverPersistentHeader(
-                                pinned: false,
-                                floating: false,
-                                delegate: ContestTabHeader(
-                                  //*If MAIN CAT FILTER is APPLIED
-                                  size: 60 +
-                                      36 +
-                                      22.r, //* cached image height + title height + height paddings height
-                                  child:
-                                      MomentsView(moments: model.moments ?? []),
+                              if (model.moments!.isNotEmpty)
+                                SliverPersistentHeader(
+                                  pinned: false,
+                                  floating: false,
+                                  delegate: ContestTabHeader(
+                                    //*If MAIN CAT FILTER is APPLIED
+                                    size: 60 +
+                                        36 +
+                                        22.r, //* cached image height + title height + height paddings height
+                                    child: MomentsView(moments: model.moments!),
+                                  ),
                                 ),
-                              ),
                               //*----------------- EXCLUSIVES ---------------------//
                               //*----------------- FILTER/MAINCAT is NOT APPLIED ---------------------//
                               if (!model.isFilterApplied &&

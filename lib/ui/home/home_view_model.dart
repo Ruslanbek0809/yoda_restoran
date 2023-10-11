@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/models/story.dart';
 import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -214,6 +215,12 @@ class HomeViewModel extends ReactiveViewModel {
   void homeMenuPressed() {
     log.i('openDrawer()');
     homeScaffoldKey.currentState!.openDrawer();
+  }
+
+  //*----------------- MOMENTS ---------------------//
+
+  Future<void> addRestaurantStoriesToStoriesBox(List<Story> stories) async {
+    await _homeService.addRestaurantStoriesToStoriesBox(stories);
   }
 
   //*----------------- DYNAMIC LINK ---------------------//
