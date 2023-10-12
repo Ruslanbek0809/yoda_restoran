@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'app/app.locator.dart';
 import 'models/hive_models/hive_models.dart';
+import 'models/hive_models/hive_story.dart';
 import 'ui/setup_bottom_sheet.dart';
 import 'ui/setup_dialog.dart';
 import 'ui/setup_snackbar.dart';
@@ -25,6 +26,7 @@ void main() async {
   Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
   Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
   Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
+  Hive.registerAdapter<HiveStory>(HiveStoryAdapter());
   setupLocator();
   setupBottomSheet();
   setupDialog();

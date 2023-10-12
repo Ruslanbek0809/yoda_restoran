@@ -13,6 +13,9 @@ Story _$StoryFromJson(Map<String, dynamic> json) => Story(
       captionColor: json['caption_color'] as String?,
       backgroundColor: json['background_color'] as String?,
       durationS: json['durationS'] as int?,
+      deadline: json['deadline'] == null
+          ? null
+          : DateTime.parse(json['deadline'] as String),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -32,6 +35,7 @@ Map<String, dynamic> _$StoryToJson(Story instance) => <String, dynamic>{
       'background_color': instance.backgroundColor,
       'durationS': instance.durationS,
       'created_at': instance.createdAt?.toIso8601String(),
+      'deadline': instance.deadline?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'file': instance.file,
       'is_image': instance.isImage,

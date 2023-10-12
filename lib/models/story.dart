@@ -11,6 +11,7 @@ class Story {
     this.captionColor,
     this.backgroundColor,
     this.durationS,
+    this.deadline,
     this.createdAt,
     this.updatedAt,
     this.file,
@@ -38,6 +39,9 @@ class Story {
 
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
+
+  @JsonKey(name: 'deadline')
+  final DateTime? deadline;
 
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;

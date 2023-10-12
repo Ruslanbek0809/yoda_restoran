@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/hive_models/hive_models.dart';
+import '../models/hive_models/hive_story.dart';
 import '../models/models.dart';
 import 'services.dart';
 import '../utils/utils.dart';
@@ -23,6 +24,7 @@ class HiveDbService with ReactiveServiceMixin {
       cartMealsBox; // Also we don't need other 2 meal and res related boxes here
   static late Box<HiveRating> hiveRatingBox;
   static late Box<HiveCreditCard> hiveCreditCardsBox;
+  static late Box<HiveStory> storiesBox;
 
   HiveRestaurant? cartRes;
 
@@ -45,8 +47,7 @@ class HiveDbService with ReactiveServiceMixin {
     await Hive.openBox<HiveUser>(Constants.userBox);
     await Hive.openBox<int>(
         Constants.favoritesBox); //* Without custom hive object
-    await Hive.openBox<int>(
-        Constants.storiesBox); //* Without custom hive object
+    await Hive.openBox<HiveStory>(Constants.storiesBox);
     await Hive.openBox<HiveRestaurant>(Constants.cartResBox);
     await Hive.openBox<HiveResPaymentType>(Constants.resPaymentTypeBox);
     await Hive.openBox<HiveMeal>(Constants.cartMealsBox);
@@ -64,6 +65,21 @@ class HiveDbService with ReactiveServiceMixin {
     cartRes = cartResBox.get('cartRes',
         defaultValue: HiveRestaurant(id: -1, name: 'Default'));
     log.v('cartRes ${cartRes!.id}');
+  }
+
+  Future<void> cleanStoriesBasedOnDeadlines() async {
+    storiesBox = Hive.box<HiveStory>(Constants.storiesBox);
+    final currentTime = DateTime.now();
+
+    for (var storyKey in storiesBox.keys) {
+      final hiveStory = storiesBox.get(storyKey);
+      if (hiveStory != null) {
+        if (hiveStory.deadline!.isBefore(currentTime)) {
+          await storiesBox.delete(storyKey);
+          log.v('hive story with key: ${hiveStory.id} deleted');
+        }
+      }
+    }
   }
 
   //* GETS all CART meals from cartMealsBox

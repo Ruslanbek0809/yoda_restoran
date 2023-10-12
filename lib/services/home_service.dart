@@ -5,6 +5,7 @@ import 'package:yoda_res/models/story.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
+import '../models/hive_models/hive_story.dart';
 import '../models/models.dart';
 import '../utils/utils.dart';
 import 'services.dart';
@@ -20,7 +21,7 @@ class HomeService with ReactiveServiceMixin {
 
   final _api = locator<ApiService>();
 
-  static late Box<int> storiesBox;
+  static late Box<HiveStory> storiesBox;
 
   List<SliderModel> _sliders = [];
   List<SliderModel> get sliders => _sliders;
@@ -178,13 +179,17 @@ class HomeService with ReactiveServiceMixin {
   Future<void> addRestaurantStoriesToStoriesBox(List<Story> stories) async {
     log.v('addRestaurantStoriesToStoriesBox() stories: ${stories.length}');
 
-    storiesBox = Hive.box<int>(Constants.storiesBox);
+    storiesBox = Hive.box<HiveStory>(Constants.storiesBox);
 
     for (var story in stories) {
       if (!storiesBox.containsKey(story.id)) {
+        final HiveStory hiveStory = HiveStory(
+          id: story.id,
+          deadline: story.deadline,
+        );
         await storiesBox.put(
           story.id, //* Unique hive id for this object
-          story.id!,
+          hiveStory,
         );
       }
     }

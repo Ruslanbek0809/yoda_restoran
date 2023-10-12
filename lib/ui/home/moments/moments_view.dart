@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/hive_models/hive_story.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
 
 import '../../../models/models.dart';
@@ -134,9 +135,10 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                         );
                         await model.navToMomentStoryView(moment);
                       },
-                      child: ValueListenableBuilder<Box<int>>(
+                      child: ValueListenableBuilder<Box<HiveStory>>(
                           valueListenable:
-                              Hive.box<int>(Constants.storiesBox).listenable(),
+                              Hive.box<HiveStory>(Constants.storiesBox)
+                                  .listenable(),
                           builder: (context, hiveStoriesBox, _) {
                             var storyColor = kcDividerSecondaryColor;
                             if (moment.stories != null &&

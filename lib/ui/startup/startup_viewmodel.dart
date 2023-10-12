@@ -82,6 +82,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     _hiveDbService.getCartRes(); //* GETS CART restaurant inside cartResBox
     _hiveDbService.getHiveRatings(); //* GETS hive ratings
     _hiveDbService.getHiveCreditCards(); //* GETS all hive credit cards
+    await _hiveDbService.cleanStoriesBasedOnDeadlines();
 
     //* USE _userService.getInitialUser OR _userService.initUser
     await _userService.initUser();
