@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:yoda_res/app/custom_material_page_route.dart';
 
 import '../models/models.dart';
@@ -26,9 +25,8 @@ import '../ui/drawer/profile/profile_view.dart';
 import '../ui/home/home_exclusives/single_ex_view.dart';
 import '../ui/home/home_search/home_search_view.dart';
 import '../ui/home/home_view.dart';
-import '../ui/home/moments/moment_story_view.dart';
+import '../ui/home/moments/moment_story/moment_story_view.dart';
 import '../ui/home/moments/moments_all/moments_all_view.dart';
-import '../ui/home/moments/moments_view.dart';
 import '../ui/home/restaurants/restaurants_view.dart';
 import '../ui/home/slider/slider_webview.dart';
 import '../ui/restaurant/restaurant_details/res_details_view.dart';
@@ -305,7 +303,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<MomentStoryViewArguments>(nullOk: false);
       return CustomMaterialPageRoute(
         builder: (context) => MomentStoryView(
-          moment: args.moment,
+          restaurant: args.restaurant,
           key: args.key,
         ),
         settings: data,
@@ -414,7 +412,7 @@ class MyCreditCardAddViewArguments {
 
 /// MomentStoryView arguments holder class
 class MomentStoryViewArguments {
-  final Restaurant moment;
+  final Restaurant restaurant;
   final Key? key;
-  MomentStoryViewArguments({required this.moment, this.key});
+  MomentStoryViewArguments({required this.restaurant, this.key});
 }

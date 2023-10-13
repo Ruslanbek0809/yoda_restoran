@@ -104,7 +104,7 @@ class HomeViewModel extends ReactiveViewModel {
         busyObject: homeMainCatsFuture);
     await runBusyFuture(_homeService.getSearchMainCategs(),
         busyObject: homeSearchMainCatsFuture);
-    await runBusyFuture(_homeService.getMoments(limit: 5),
+    await runBusyFuture(_homeService.getMoments(pageSize: 5),
         busyObject: homeMomentsFuture);
     await runBusyFuture(_homeService.getPaginatedRess(),
         busyObject: homeRandomRessFuture);
@@ -277,10 +277,10 @@ class HomeViewModel extends ReactiveViewModel {
         ),
       );
 
-  Future<void> navToMomentStoryView(Restaurant moment) async =>
+  Future<void> navToMomentStoryView(Restaurant restaurant) async =>
       await _navService.navigateTo(
         Routes.momentStoryView,
-        arguments: MomentStoryViewArguments(moment: moment),
+        arguments: MomentStoryViewArguments(restaurant: restaurant),
       );
 
   //*----------------- AWESOME DIALOG NAVIGATION ---------------------//

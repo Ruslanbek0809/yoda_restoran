@@ -57,12 +57,12 @@ class MomentsAllViewModel extends FutureViewModel {
     await _homeService.addRestaurantStoriesToStoriesBox(stories);
   }
 
-  //*----------------- NAVIGATION ---------------------//
+  //*----------------- NAVIGATIONS ---------------------//
 
-  Future<void> navToMomentStoryView(Restaurant moment) async =>
+  Future<void> navToMomentStoryView(Restaurant restaurant) async =>
       await _navService.navigateTo(
         Routes.momentStoryView,
-        arguments: MomentStoryViewArguments(moment: moment),
+        arguments: MomentStoryViewArguments(restaurant: restaurant),
       );
 
   void navToResDetailsViewFromBottomCart() async =>
@@ -98,13 +98,6 @@ class MomentsAllViewModel extends FutureViewModel {
   Future<void> futureToRun() async => runBusyFuture(
         _homeService.getMoments(),
         throwException: true,
-      );
-
-//*----------------------- NAVIGATIONS ----------------------------//
-
-  void navToResDetailsView(Restaurant restaurant) => _navService.navigateTo(
-        Routes.resDetailsView,
-        arguments: ResDetailsViewArguments(restaurant: restaurant),
       );
 
   @override

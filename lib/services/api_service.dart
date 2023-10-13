@@ -70,13 +70,13 @@ class ApiService {
     }
   }
 
-  Future<List<Restaurant>> getMoments({int? limit}) async {
+  Future<List<Restaurant>> getMoments({int? pageSize}) async {
     List<Restaurant> _moments = [];
     try {
       final queryParams = <String, dynamic>{};
       queryParams['stories'] = true;
-      if (limit != null) {
-        queryParams['limit'] = limit;
+      if (pageSize != null) {
+        queryParams['page_size'] = pageSize;
       }
 
       Response response = await _apiRoot.dio.get(
