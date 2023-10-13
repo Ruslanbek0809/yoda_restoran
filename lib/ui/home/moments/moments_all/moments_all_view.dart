@@ -2,8 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
+import '../../../../models/hive_models/hive_story.dart';
 import '../../../../shared/shared.dart';
+import '../../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 import 'moments_all_bottom_cart.dart';
 import 'moments_all_view_model.dart';
@@ -51,71 +54,103 @@ class MomentsAllView extends StatelessWidget {
                                   crossAxisSpacing: 6.r,
                                   childAspectRatio: 0.775,
                                 ),
-                                itemCount: model.allPaginatedRestaurants.length,
+                                itemCount: model.allMoments.length,
                                 itemBuilder: (context, pos) => GestureDetector(
-                                  onTap: () => model.navToResDetailsView(
-                                    model.allPaginatedRestaurants[pos],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      //*----------------- CIRCLE AVATAR RESTAURANT IMAGE ---------------------//
-                                      CachedNetworkImage(
-                                        imageUrl: model
-                                                .allPaginatedRestaurants[pos]
-                                                .square_image ??
-                                            'assets/ph_product.png',
-                                        fit: BoxFit.cover,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                CircleAvatar(
-                                          backgroundColor:
-                                              kcDividerSecondaryColor,
-                                          radius: 50.5,
-                                          child: CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: imageProvider,
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            CircleAvatar(
-                                          backgroundColor:
-                                              kcDividerSecondaryColor,
-                                          radius: 50.5,
-                                          child: CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: AssetImage(
-                                              'assets/ph_product.png',
+                                  onTap: () async {
+                                    await model
+                                        .addRestaurantStoriesToStoriesBox(
+                                      model.allMoments[pos].stories != null &&
+                                              model.allMoments[pos].stories!
+                                                  .isNotEmpty
+                                          ? model.allMoments[pos].stories!
+                                          : [],
+                                    );
+                                    await model.navToMomentStoryView(
+                                      model.allMoments[pos],
+                                    );
+                                  },
+                                  child: ValueListenableBuilder<Box<HiveStory>>(
+                                      valueListenable: Hive.box<HiveStory>(
+                                              Constants.storiesBox)
+                                          .listenable(),
+                                      builder: (context, hiveStoriesBox, _) {
+                                        var storyColor =
+                                            kcDividerSecondaryColor;
+                                        if (model.allMoments[pos].stories !=
+                                                null &&
+                                            model.allMoments[pos].stories!
+                                                .isNotEmpty) {
+                                          bool
+                                              ishiveStoriesBoxContainsAllRestaurantStoriesIds =
+                                              model.allMoments[pos].stories!
+                                                  .every((story) =>
+                                                      hiveStoriesBox
+                                                          .containsKey(
+                                                              story.id));
+                                          if (!ishiveStoriesBoxContainsAllRestaurantStoriesIds) {
+                                            storyColor = kcGreenColor;
+                                          }
+                                        }
+
+                                        return Column(
+                                          children: [
+                                            //*----------------- CIRCLE AVATAR RESTAURANT IMAGE ---------------------//
+                                            CachedNetworkImage(
+                                              imageUrl: model.allMoments[pos]
+                                                      .square_image ??
+                                                  'assets/ph_product.png',
+                                              fit: BoxFit.cover,
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      CircleAvatar(
+                                                backgroundColor: storyColor,
+                                                radius: 52,
+                                                child: CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage:
+                                                      imageProvider,
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  CircleAvatar(
+                                                backgroundColor: storyColor,
+                                                radius: 52,
+                                                child: CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: AssetImage(
+                                                    'assets/ph_product.png',
+                                                  ),
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      CircleAvatar(
+                                                backgroundColor: storyColor,
+                                                radius: 52,
+                                                child: CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: AssetImage(
+                                                    'assets/ph_product.png',
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            CircleAvatar(
-                                          backgroundColor:
-                                              kcDividerSecondaryColor,
-                                          radius: 50.5,
-                                          child: CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: AssetImage(
-                                              'assets/ph_product.png',
+                                            //*----------------- RESTAURANT NAME ---------------------//
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 8.r),
+                                              child: Text(
+                                                model.allMoments[pos].name ??
+                                                    '',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                                style: kts14Text,
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                      //*----------------- RESTAURANT NAME ---------------------//
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 8.r),
-                                        child: Text(
-                                          model.allPaginatedRestaurants[pos]
-                                                  .name ??
-                                              '',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.center,
-                                          style: kts14Text,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                          ],
+                                        );
+                                      }),
                                 ),
                               ),
                             ),

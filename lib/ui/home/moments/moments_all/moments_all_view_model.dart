@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/app/app.logger.dart';
+import 'package:yoda_res/models/story.dart';
 
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.router.dart';
@@ -50,6 +51,20 @@ class MomentsAllViewModel extends FutureViewModel {
     return totalCartSum;
   }
 
+  //*----------------- MOMENTS ---------------------//
+
+  Future<void> addRestaurantStoriesToStoriesBox(List<Story> stories) async {
+    await _homeService.addRestaurantStoriesToStoriesBox(stories);
+  }
+
+  //*----------------- NAVIGATION ---------------------//
+
+  Future<void> navToMomentStoryView(Restaurant moment) async =>
+      await _navService.navigateTo(
+        Routes.momentStoryView,
+        arguments: MomentStoryViewArguments(moment: moment),
+      );
+
   void navToResDetailsViewFromBottomCart() async =>
       await _navService.navigateTo(
         Routes.resDetailsView,
@@ -77,12 +92,11 @@ class MomentsAllViewModel extends FutureViewModel {
 
 //*----------------------- INITIAL ----------------------------//
 
-  List<Restaurant> get allPaginatedRestaurants =>
-      _homeService.allPaginatedRestaurants;
+  List<Restaurant> get allMoments => _homeService.moments;
 
   @override
   Future<void> futureToRun() async => runBusyFuture(
-        _homeService.getAllPaginatedRestaurants(),
+        _homeService.getMoments(),
         throwException: true,
       );
 

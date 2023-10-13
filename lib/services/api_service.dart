@@ -70,12 +70,18 @@ class ApiService {
     }
   }
 
-  Future<List<Restaurant>> getMoments() async {
+  Future<List<Restaurant>> getMoments({int? limit}) async {
     List<Restaurant> _moments = [];
     try {
+      final queryParams = <String, dynamic>{};
+      queryParams['stories'] = true;
+      if (limit != null) {
+        queryParams['limit'] = limit;
+      }
+
       Response response = await _apiRoot.dio.get(
         'api/paginatedRestaurants/',
-        queryParameters: {'stories': true},
+        queryParameters: queryParams,
       );
       // log.v(
       //     'RESPONSE: api/paginatedRestaurants?stories=True => ${response.data}');

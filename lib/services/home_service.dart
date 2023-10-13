@@ -83,8 +83,8 @@ class HomeService with ReactiveServiceMixin {
     log.v('_searchMainCats.length: ${_searchMainCats.length}');
   }
 
-  Future<void> getMoments() async {
-    _moments = await _api.getMoments();
+  Future<void> getMoments({int? limit}) async {
+    _moments = await _api.getMoments(limit: limit);
     log.v('_moments.length: ${_moments.length}');
   }
 
