@@ -213,6 +213,8 @@
     "userDeleteSuccess": "Siziň akkauntyňyz ulgamdan aýryldy",
     "deleteUserInfo": "Hasabyňyz bilen bagly maglumatlar ulgamdan aýrylar we gaýtaryp getirip bolmaz",
     "deleteUserFlashInfo": "Siziň akkauntyňyz 48 sagadyň dowamynda ulgamdan aýrylar",
+    "moments": "Pursatlar",
+    "viewAll": "Hemmesi",
     "msg": "Hello {} in the {} world ",
     "msg_named": "{} are written in the {lang} language"
 }

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'package:yoda_res/models/hive_models/hive_story.dart';
 import 'package:yoda_res/ui/home/home_view_model.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '../../../models/models.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
@@ -85,23 +87,23 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Moments',
+                LocaleKeys.moments,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
                   color: kcSecondaryDarkColor,
                 ),
-              ),
+              ).tr(),
               InkWell(
                 onTap: model.navToMomentsAllView,
                 child: Row(
                   children: [
                     Text(
-                      'View all',
+                      LocaleKeys.viewAll,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kts14SemiBoldText,
-                    ),
+                    ).tr(),
                     SizedBox(width: 5.w),
                     Icon(
                       Icons.arrow_forward,

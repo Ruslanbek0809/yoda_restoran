@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const login = 'login';
   static const enter_phone = 'enter_phone';
   static const continuee = 'continuee';
@@ -32,7 +32,8 @@ abstract class  LocaleKeys {
   static const our_phone_title = 'our_phone_title';
   static const our_phone_for_client_title = 'our_phone_for_client_title';
   static const our_phone_for_client = 'our_phone_for_client';
-  static const our_phone_for_cooperation_title = 'our_phone_for_cooperation_title';
+  static const our_phone_for_cooperation_title =
+      'our_phone_for_cooperation_title';
   static const our_phone_for_cooperation = 'our_phone_for_cooperation';
   static const our_address_title = 'our_address_title';
   static const our_address = 'our_address';
@@ -49,13 +50,15 @@ abstract class  LocaleKeys {
   static const delivery = 'delivery';
   static const workingHours = 'workingHours';
   static const clearCartPls = 'clearCartPls';
-  static const cart_is_full_with_other_restaurant = 'cart_is_full_with_other_restaurant';
+  static const cart_is_full_with_other_restaurant =
+      'cart_is_full_with_other_restaurant';
   static const goToCart = 'goToCart';
   static const clearCart = 'clearCart';
   static const order = 'order';
   static const oneMore = 'oneMore';
   static const howToTake = 'howToTake';
-  static const deliveryPriceWillAddByOperator = 'deliveryPriceWillAddByOperator';
+  static const deliveryPriceWillAddByOperator =
+      'deliveryPriceWillAddByOperator';
   static const wannaClearCart = 'wannaClearCart';
   static const letsClearCart = 'letsClearCart';
   static const no = 'no';
@@ -80,10 +83,14 @@ abstract class  LocaleKeys {
   static const online_payment_fail_retry = 'online_payment_fail_retry';
   static const online_payment_send_code_info = 'online_payment_send_code_info';
   static const sendCodeErrorAttempt = 'sendCodeErrorAttempt';
-  static const online_payment_operation_cancelled = 'online_payment_operation_cancelled';
-  static const online_payment_no_enough_money = 'online_payment_no_enough_money';
-  static const online_payment_wrong_card_info = 'online_payment_wrong_card_info';
-  static const payment_type_changed_from_online_to_cash = 'payment_type_changed_from_online_to_cash';
+  static const online_payment_operation_cancelled =
+      'online_payment_operation_cancelled';
+  static const online_payment_no_enough_money =
+      'online_payment_no_enough_money';
+  static const online_payment_wrong_card_info =
+      'online_payment_wrong_card_info';
+  static const payment_type_changed_from_online_to_cash =
+      'payment_type_changed_from_online_to_cash';
   static const selectCreditCard = 'selectCreditCard';
   static const addNewCreditCard = 'addNewCreditCard';
   static const cash = 'cash';
@@ -103,7 +110,8 @@ abstract class  LocaleKeys {
   static const enterCity = 'enterCity';
   static const enterStreet = 'enterStreet';
   static const wannaDeleteAddress = 'wannaDeleteAddress';
-  static const yourAddressDeletedSuccessfully = 'yourAddressDeletedSuccessfully';
+  static const yourAddressDeletedSuccessfully =
+      'yourAddressDeletedSuccessfully';
   static const house = 'house';
   static const apartment = 'apartment';
   static const floor = 'floor';
@@ -139,7 +147,8 @@ abstract class  LocaleKeys {
   static const select = 'select';
   static const myOrders = 'myOrders';
   static const yourOrderWasPassedToRes = 'yourOrderWasPassedToRes';
-  static const toConfirmOrderWairForCallFromRes = 'toConfirmOrderWairForCallFromRes';
+  static const toConfirmOrderWairForCallFromRes =
+      'toConfirmOrderWairForCallFromRes';
   static const homeScreen = 'homeScreen';
   static const orderWaiting = 'orderWaiting';
   static const orderAccepted = 'orderAccepted';
@@ -216,7 +225,8 @@ abstract class  LocaleKeys {
   static const userDeleteSuccess = 'userDeleteSuccess';
   static const deleteUserInfo = 'deleteUserInfo';
   static const deleteUserFlashInfo = 'deleteUserFlashInfo';
+  static const moments = 'moments';
+  static const viewAll = 'viewAll';
   static const msg = 'msg';
   static const msg_named = 'msg_named';
-
 }

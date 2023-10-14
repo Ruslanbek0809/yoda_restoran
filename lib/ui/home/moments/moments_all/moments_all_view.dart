@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../models/hive_models/hive_story.dart';
 import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
@@ -26,7 +27,7 @@ class MomentsAllView extends StatelessWidget {
             leading: CustomBackButtonWidget(),
             centerTitle: true,
             title: Text(
-              'Moments',
+              LocaleKeys.moments,
               style: kts22DarkText,
             ).tr(),
           ),
