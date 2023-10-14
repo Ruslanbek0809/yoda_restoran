@@ -155,12 +155,13 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                             }
 
                             return CachedNetworkImage(
-                              imageUrl: moment.image ?? 'assets/ph_product.png',
+                              imageUrl: moment.square_image ??
+                                  'assets/ph_product.png',
                               fit: BoxFit.cover,
                               imageBuilder: (context, imageProvider) =>
                                   CircleAvatar(
                                 backgroundColor: storyColor,
-                                radius: 32,
+                                radius: 33,
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundImage: imageProvider,
@@ -168,7 +169,7 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                               ),
                               placeholder: (context, url) => CircleAvatar(
                                 backgroundColor: storyColor,
-                                radius: 32,
+                                radius: 33,
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundImage:
@@ -178,7 +179,7 @@ class MomentsView extends ViewModelWidget<HomeViewModel> {
                               errorWidget: (context, url, error) =>
                                   CircleAvatar(
                                 backgroundColor: storyColor,
-                                radius: 32,
+                                radius: 33,
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundImage:

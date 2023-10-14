@@ -105,7 +105,7 @@ class MomentsAllView extends StatelessWidget {
                                                   (context, imageProvider) =>
                                                       CircleAvatar(
                                                 backgroundColor: storyColor,
-                                                radius: 52,
+                                                radius: 54,
                                                 child: CircleAvatar(
                                                   radius: 50,
                                                   backgroundImage:
@@ -115,7 +115,7 @@ class MomentsAllView extends StatelessWidget {
                                               placeholder: (context, url) =>
                                                   CircleAvatar(
                                                 backgroundColor: storyColor,
-                                                radius: 52,
+                                                radius: 54,
                                                 child: CircleAvatar(
                                                   radius: 50,
                                                   backgroundImage: AssetImage(
@@ -127,7 +127,7 @@ class MomentsAllView extends StatelessWidget {
                                                   (context, url, error) =>
                                                       CircleAvatar(
                                                 backgroundColor: storyColor,
-                                                radius: 52,
+                                                radius: 54,
                                                 child: CircleAvatar(
                                                   radius: 50,
                                                   backgroundImage: AssetImage(

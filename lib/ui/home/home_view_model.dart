@@ -104,7 +104,7 @@ class HomeViewModel extends ReactiveViewModel {
         busyObject: homeMainCatsFuture);
     await runBusyFuture(_homeService.getSearchMainCategs(),
         busyObject: homeSearchMainCatsFuture);
-    await runBusyFuture(_homeService.getMoments(pageSize: 5),
+    await runBusyFuture(_homeService.getMoments(pageSize: 10),
         busyObject: homeMomentsFuture);
     await runBusyFuture(_homeService.getPaginatedRess(),
         busyObject: homeRandomRessFuture);

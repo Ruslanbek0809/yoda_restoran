@@ -383,7 +383,7 @@ class _HomeViewState extends State<HomeView> {
                                   floating: false,
                                   delegate: ContestTabHeader(
                                     //*If MAIN CAT FILTER is APPLIED
-                                    size: 60 +
+                                    size: 64 +
                                         36 +
                                         22.r, //* cached image height + title height + height paddings height
                                     child: MomentsView(moments: model.moments!),
