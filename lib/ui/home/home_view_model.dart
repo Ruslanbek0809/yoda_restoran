@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/models/story.dart';
-import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
 import '../../app/app.router.dart';

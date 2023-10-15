@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -113,7 +115,7 @@ class _MomentStoryViewState extends State<MomentStoryView> {
               //*----------------- YODA RESTORAN LOGO/TITLE ---------------------//
               Container(
                 padding: EdgeInsets.only(
-                  top: 48,
+                  top: Platform.isIOS ? 76 : 48,
                   left: 16,
                   right: 16,
                 ),

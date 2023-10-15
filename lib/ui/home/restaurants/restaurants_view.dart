@@ -122,7 +122,7 @@ class RestaurantsView extends StatelessWidget {
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 10.r,
                                   crossAxisSpacing: 6.r,
-                                  childAspectRatio: 0.775,
+                                  childAspectRatio: 0.77,
                                 ),
                                 itemCount: model.isFilterApplied
                                     ? model.selectedMainCatRestaurants.length
