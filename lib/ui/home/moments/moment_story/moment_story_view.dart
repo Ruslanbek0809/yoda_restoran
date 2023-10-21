@@ -121,14 +121,10 @@ class _MomentStoryViewState extends State<MomentStoryView> {
                 //*----------------- YODA RESTORAN LOGO/TITLE ---------------------//
                 Container(
                   padding: EdgeInsets.only(
-                    top:
-                        // Platform.isIOS
-                        //     ? 76
-                        //     :
-                        safeTopPadding +
-                            16 +
-                            5 +
-                            8, //* top safea are height + progress bar vertical padding + progress bar height + additional padding between progress bar and logo
+                    top: safeTopPadding +
+                        16 +
+                        5 +
+                        2, //* top safea are height + progress bar vertical padding + progress bar height + additional padding between progress bar and logo
                     left: 16,
                     right: 16,
                   ),
