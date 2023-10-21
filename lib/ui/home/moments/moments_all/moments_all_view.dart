@@ -53,7 +53,7 @@ class MomentsAllView extends StatelessWidget {
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 10.r,
                                   crossAxisSpacing: 6.r,
-                                  childAspectRatio: 0.775,
+                                  childAspectRatio: 0.76,
                                 ),
                                 itemCount: model.allMoments.length,
                                 itemBuilder: (context, pos) => GestureDetector(
@@ -141,8 +141,9 @@ class MomentsAllView extends StatelessWidget {
                                               padding:
                                                   EdgeInsets.only(top: 8.r),
                                               child: Text(
-                                                model.allMoments[pos].name ??
-                                                    '',
+                                                'Restaurant Restaurant Restaurant',
+                                                // model.allMoments[pos].name ??
+                                                //     '',
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.center,

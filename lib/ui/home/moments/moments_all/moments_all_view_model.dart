@@ -19,6 +19,16 @@ class MomentsAllViewModel extends FutureViewModel {
   final _hiveDbService = locator<HiveDbService>();
   final _navService = locator<NavigationService>();
 
+//*----------------------- INITIAL ----------------------------//
+
+  List<Restaurant> get allMoments => _homeService.moments;
+
+  @override
+  Future<void> futureToRun() async => runBusyFuture(
+        _homeService.getMoments(pageSize: 1000000),
+        throwException: true,
+      );
+
   //*----------------- BOTTOM CART ---------------------//
 
   //* BOTTOM CART VARS
@@ -88,16 +98,6 @@ class MomentsAllViewModel extends FutureViewModel {
             delivery: cartRes!.delivery,
           ),
         ),
-      );
-
-//*----------------------- INITIAL ----------------------------//
-
-  List<Restaurant> get allMoments => _homeService.moments;
-
-  @override
-  Future<void> futureToRun() async => runBusyFuture(
-        _homeService.getMoments(),
-        throwException: true,
       );
 
   @override
