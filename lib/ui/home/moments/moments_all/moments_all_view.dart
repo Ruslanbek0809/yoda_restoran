@@ -141,9 +141,8 @@ class MomentsAllView extends StatelessWidget {
                                               padding:
                                                   EdgeInsets.only(top: 8.r),
                                               child: Text(
-                                                'Restaurant Restaurant Restaurant',
-                                                // model.allMoments[pos].name ??
-                                                //     '',
+                                                model.allMoments[pos].name ??
+                                                    '',
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.center,
