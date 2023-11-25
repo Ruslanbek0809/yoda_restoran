@@ -16,8 +16,8 @@ class ApiService {
   Future<List<SliderModel>> getSliders() async {
     List<SliderModel> _sliders = [];
     try {
-      Response response = await _apiRoot.dio.get('api/sliders/');
-      // log.v('RESPONSE: api/slider/ => ${response.data}');
+      Response response = await _apiRoot.dio.get('api/sliders1/');
+      // log.v('RESPONSE: api/sliders/ => ${response.data}');
 
       if (response.data != null) {
         for (final _slider in response.data) {
@@ -27,7 +27,8 @@ class ApiService {
 
       return _sliders;
     } catch (error) {
-      log.v('ERROR on api/slider/ :$error');
+      log.v('ERROR on api/sliders1/ :$error');
+      // log.v('ERROR on api/sliders/ :$error');
       rethrow;
     }
   }
