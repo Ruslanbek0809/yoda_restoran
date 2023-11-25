@@ -21,10 +21,10 @@ class UserService {
   static late Box<HiveUser> userBox;
   static late Box<int> favoritesBox;
 
-  String? _otp = '123456';
+  // String? _otp = '123456';
   String?
       _phone; // To store phone info while app is active to use in verifyUser()
-  String? get otp => _otp;
+  // String? get otp => _otp;
 
   HiveUser? _currentUser;
 
@@ -128,7 +128,7 @@ class UserService {
       log.v('RESPONSE: auth/login/ => ${response.data}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        _otp = response.data['otp']; // This _otp var is used for testing ONLY
+        // _otp = response.data['otp']; // This _otp var is used for testing ONLY
 
         _phone =
             '+993${phone.replaceAll(' ', '')}'; // To store phone info while app is active to use in verifyUser()
@@ -142,12 +142,16 @@ class UserService {
     }
   }
 
-  Future<void> verifyUser({Function()? onSuccess, Function()? onFail}) async {
-    log.v('Otp: $otp, Phone: $_phone');
+  Future<void> verifyUser(
+    currentOtp, {
+    Function()? onSuccess,
+    Function()? onFail,
+  }) async {
+    log.v('currentOtp: $currentOtp, phone: $_phone');
 
     final FormData otpFormData = FormData.fromMap({
       'mobile': _phone,
-      'otp': otp,
+      'otp': currentOtp,
     });
     try {
       Response response = await _apiRoot.dio.post(

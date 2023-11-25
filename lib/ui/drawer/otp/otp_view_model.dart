@@ -24,7 +24,7 @@ class OtpViewModel extends FormViewModel {
   final _navService = locator<NavigationService>();
   final _apiRootService = locator<ApiRootService>();
 
-  String? get successOtp => _userService.otp;
+  // String? get successOtp => _userService.otp;
 
   int get durationTime => 59;
 
@@ -55,9 +55,10 @@ class OtpViewModel extends FormViewModel {
   }
 
   //*SAVES otp data by posting otpCode to verify API
-  Future saveOtpData({Function()? onFailForView}) async {
+  Future verifyOtpCode(String currentOtp, {Function()? onFailForView}) async {
     await runBusyFuture(
       _userService.verifyUser(
+        currentOtp,
         onSuccess: () async {
           log.i('onSuccess verifyUser: $_hideResendButton, phone: $phone');
           _apiRootService.initDio(); // MUST REINITIALIZE whole app dio config

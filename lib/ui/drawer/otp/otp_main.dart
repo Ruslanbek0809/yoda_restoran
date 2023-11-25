@@ -147,19 +147,20 @@ class OtpMain extends HookViewModelWidget<OtpViewModel> {
                       return;
                     }
 
-                    if (currentOtp != model.successOtp) {
-                      errorController.add(ErrorAnimationType
-                          .shake); //* Triggering error shake animation
-                      model.showCustomFlashBar(
-                        context: context,
-                        msg: LocaleKeys.incorrect_code.tr(),
-                      );
-                      return;
-                    }
+                    // if (currentOtp != model.successOtp) {
+                    //   errorController.add(ErrorAnimationType
+                    //       .shake); //* Triggering error shake animation
+                    //   model.showCustomFlashBar(
+                    //     context: context,
+                    //     msg: LocaleKeys.incorrect_code.tr(),
+                    //   );
+                    //   return;
+                    // }
 
                     FocusScope.of(context)
                         .unfocus(); // UNFOCUSES all textfield b4 data fetch
-                    await model.saveOtpData(
+                    await model.verifyOtpCode(
+                      currentOtp,
                       onFailForView: () =>
                           model.showCustomFlashBar(context: context),
                     );
