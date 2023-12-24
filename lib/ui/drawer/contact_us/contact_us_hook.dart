@@ -8,7 +8,6 @@ import '../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../widgets/widgets.dart';
-import '../../../utils/utils.dart';
 import 'contact_us_view_model.dart';
 
 class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
