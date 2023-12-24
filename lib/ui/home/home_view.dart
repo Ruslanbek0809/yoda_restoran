@@ -9,6 +9,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:yoda_res/library/snow_widget/snow_widget.dart';
 import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../generated/locale_keys.g.dart';
 import '../../library/upgrader_translations.dart';
@@ -619,65 +620,81 @@ class _HomeViewState extends State<HomeView> {
           key: model.homeScaffoldKey,
           drawer: DrawerView(),
           //* Custom colorful safe area to create IOS like status bar that is compatible with SliverAppBar
-          body: ColorfulSafeArea(
-            left: false,
-            right: false,
-            bottom: false,
-            color: kcWhiteColor,
-            child: Platform.isIOS
-                ? UpgradeAlert(
-                    upgrader: Upgrader(
-                      shouldPopScope: () => true,
-                      messages: context.locale == context.supportedLocales[0]
-                          ? MyTurkmenMessages()
-                          : MyRussianMessages(),
-                      dialogStyle: UpgradeDialogStyle.cupertino,
-                    ),
-                    child: DoubleBackToCloseApp(
-                      snackBar: SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        duration: Duration(seconds: 2),
-                        margin: EdgeInsets.only(
-                          left: 16.r,
-                          right: 16.r,
-                          bottom: 0.05.sh,
+          body: Stack(
+            children: <Widget>[
+              ColorfulSafeArea(
+                left: false,
+                right: false,
+                bottom: false,
+                color: kcWhiteColor,
+                child: Platform.isIOS
+                    ? UpgradeAlert(
+                        upgrader: Upgrader(
+                          shouldPopScope: () => true,
+                          messages:
+                              context.locale == context.supportedLocales[0]
+                                  ? MyTurkmenMessages()
+                                  : MyRussianMessages(),
+                          dialogStyle: UpgradeDialogStyle.cupertino,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: AppTheme().radius10,
-                        ),
-                        content: Text(
-                          LocaleKeys.doubleBackToCloseApp,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15.sp,
+                        child: DoubleBackToCloseApp(
+                          snackBar: SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            duration: Duration(seconds: 2),
+                            margin: EdgeInsets.only(
+                              left: 16.r,
+                              right: 16.r,
+                              bottom: 0.05.sh,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: AppTheme().radius10,
+                            ),
+                            content: Text(
+                              LocaleKeys.doubleBackToCloseApp,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                              ),
+                            ).tr(),
                           ),
-                        ).tr(),
-                      ),
-                      child: body,
-                    ),
-                  )
-                : DoubleBackToCloseApp(
-                    snackBar: SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      duration: Duration(seconds: 2),
-                      margin: EdgeInsets.only(
-                        left: 16.r,
-                        right: 16.r,
-                        bottom: 0.05.sh,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppTheme().radius10,
-                      ),
-                      content: Text(
-                        LocaleKeys.doubleBackToCloseApp,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15.sp,
+                          child: body,
                         ),
-                      ).tr(),
-                    ),
-                    child: body,
+                      )
+                    : DoubleBackToCloseApp(
+                        snackBar: SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          duration: Duration(seconds: 2),
+                          margin: EdgeInsets.only(
+                            left: 16.r,
+                            right: 16.r,
+                            bottom: 0.05.sh,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: AppTheme().radius10,
+                          ),
+                          content: Text(
+                            LocaleKeys.doubleBackToCloseApp,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                            ),
+                          ).tr(),
+                        ),
+                        child: body,
+                      ),
+              ),
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: SnowWidget(
+                    isRunning: true,
+                    totalSnow: 50,
+                    speed: 0.2,
+                    maxRadius: 8,
+                    snowColor: Colors.white,
                   ),
+                ),
+              ),
+            ],
           ),
         );
         // );

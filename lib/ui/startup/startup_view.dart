@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/library/snow_widget/snow_widget.dart';
 
 import '../../generated/locale_keys.g.dart';
 import '../../shared/shared.dart';
@@ -12,8 +13,15 @@ import '../../utils/utils.dart';
 import 'startup_animated_text_hook.dart';
 import 'startup_viewmodel.dart';
 
-class StartUpView extends StatelessWidget {
+class StartUpView extends StatefulWidget {
   StartUpView({Key? key}) : super(key: key);
+
+  @override
+  State<StartUpView> createState() => _StartUpViewState();
+}
+
+class _StartUpViewState extends State<StartUpView> {
+  final GlobalKey<SnowWidgetState> snowWidgetKey = GlobalKey<SnowWidgetState>();
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +119,19 @@ class StartUpView extends StatelessWidget {
                     color: kcPrimaryColor,
                   ),
                 ),
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: SnowWidget(
+                    key:
+                        snowWidgetKey, //* CONTROLS the SnowWidget independently of the parent widget's rebuild
+                    isRunning: true,
+                    totalSnow: 50,
+                    speed: 0.2,
+                    maxRadius: 8,
+                    snowColor: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
           //*---------- STYLE 2 --------------//

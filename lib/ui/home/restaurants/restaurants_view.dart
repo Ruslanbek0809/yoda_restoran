@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/library/snow_widget/snow_widget.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
@@ -218,7 +219,18 @@ class RestaurantsView extends StatelessWidget {
 
                         //*----------------- BOTTOM CART (if cart is NOT EMPTY) ---------------------//
                         if (!model.hasError && model.cartRes!.id != -1)
-                          RestaurantsBottomCart()
+                          RestaurantsBottomCart(),
+                        Positioned.fill(
+                          child: IgnorePointer(
+                            child: SnowWidget(
+                              isRunning: true,
+                              totalSnow: 50,
+                              speed: 0.2,
+                              maxRadius: 8,
+                              snowColor: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
         );
