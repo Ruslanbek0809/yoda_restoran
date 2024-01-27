@@ -59,9 +59,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                       ),
                       SizedBox(width: 15.w),
                       Text(
-                        model.currentUser?.mobile != null
-                            ? model.currentUser!.mobile!
-                            : '+993 65555555',
+                        model.currentUser?.mobile ?? '+993 65555555',
                         style: kts18BoldText,
                       ),
                     ],

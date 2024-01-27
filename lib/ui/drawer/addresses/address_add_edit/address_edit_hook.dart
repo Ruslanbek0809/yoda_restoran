@@ -23,7 +23,8 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
         text: model.house != null ? model.house.toString() : '');
     final _floorController = useTextEditingController(
         text: model.floor != null ? model.floor.toString() : '');
-    final _notesController = useTextEditingController(text: model.note);
+    // final _notesController = useTextEditingController(text: model.note);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,7 +121,7 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
                 controller: _floorController,
                 style: kts18Text,
                 keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: kcDividerColor, width: 0.5),
@@ -137,33 +138,33 @@ class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
             Flexible(child: SizedBox())
           ],
         ),
-        //*-------------- NOTE -------------- //
-        Padding(
-          padding: EdgeInsets.only(top: 20.h),
-          child: Text(
-            LocaleKeys.note,
-            style: kts14HelperText,
-          ).tr(),
-        ),
-        SizedBox(height: 5.h),
-        TextFormField(
-          controller: _notesController,
-          maxLines: 6,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: AppTheme().radius10,
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            filled: true,
-            fillColor: kcSecondaryLightColor,
-          ),
-          validator: model.updateNote,
-        ),
+        // //*-------------- NOTE -------------- //
+        // Padding(
+        //   padding: EdgeInsets.only(top: 20.h),
+        //   child: Text(
+        //     LocaleKeys.note,
+        //     style: kts14HelperText,
+        //   ).tr(),
+        // ),
+        // SizedBox(height: 5.h),
+        // TextFormField(
+        //   controller: _notesController,
+        //   maxLines: 6,
+        //   keyboardType: TextInputType.text,
+        //   textInputAction: TextInputAction.done,
+        //   decoration: InputDecoration(
+        //     border: OutlineInputBorder(
+        //       borderRadius: AppTheme().radius10,
+        //       borderSide: BorderSide.none,
+        //     ),
+        //     focusedBorder: UnderlineInputBorder(
+        //       borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+        //     ),
+        //     filled: true,
+        //     fillColor: kcSecondaryLightColor,
+        //   ),
+        //   validator: model.updateNote,
+        // ),
       ],
     );
   }

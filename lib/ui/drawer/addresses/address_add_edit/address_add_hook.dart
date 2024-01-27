@@ -4,7 +4,6 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../utils/utils.dart';
 import 'address_add_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,7 +18,8 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
     final _apartmentController = useTextEditingController();
     final _houseController = useTextEditingController();
     final _floorController = useTextEditingController();
-    final _notesController = useTextEditingController();
+    // final _notesController = useTextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -113,7 +113,7 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
                 controller: _floorController,
                 style: kts18Text,
                 keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: kcDividerColor, width: 0.5),
@@ -130,33 +130,33 @@ class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
             Flexible(child: SizedBox())
           ],
         ),
-        //*-------------- NOTE -------------- //
-        Padding(
-          padding: EdgeInsets.only(top: 20.h),
-          child: Text(
-            LocaleKeys.note,
-            style: kts14HelperText,
-          ).tr(),
-        ),
-        SizedBox(height: 5.h),
-        TextFormField(
-          controller: _notesController,
-          maxLines: 6,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: AppTheme().radius10,
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            filled: true,
-            fillColor: kcSecondaryLightColor,
-          ),
-          validator: model.updateNote,
-        ),
+        // //*-------------- NOTE -------------- //
+        // Padding(
+        //   padding: EdgeInsets.only(top: 20.h),
+        //   child: Text(
+        //     LocaleKeys.note,
+        //     style: kts14HelperText,
+        //   ).tr(),
+        // ),
+        // SizedBox(height: 5.h),
+        // TextFormField(
+        //   controller: _notesController,
+        //   maxLines: 6,
+        //   keyboardType: TextInputType.text,
+        //   textInputAction: TextInputAction.done,
+        //   decoration: InputDecoration(
+        //     border: OutlineInputBorder(
+        //       borderRadius: AppTheme().radius10,
+        //       borderSide: BorderSide.none,
+        //     ),
+        //     focusedBorder: UnderlineInputBorder(
+        //       borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+        //     ),
+        //     filled: true,
+        //     fillColor: kcSecondaryLightColor,
+        //   ),
+        //   validator: model.updateNote,
+        // ),
       ],
     );
   }

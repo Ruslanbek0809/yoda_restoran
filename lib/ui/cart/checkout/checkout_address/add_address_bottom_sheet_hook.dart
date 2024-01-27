@@ -6,7 +6,6 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
-import '../../../../utils/utils.dart';
 import 'checkout_address_view_model.dart';
 
 class AddAddressBottomSheetHook
@@ -26,7 +25,7 @@ class AddAddressBottomSheetHook
     final _apartmentController = useTextEditingController();
     final _houseController = useTextEditingController();
     final _floorController = useTextEditingController();
-    final _notesController = useTextEditingController();
+    // final _notesController = useTextEditingController();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +120,7 @@ class AddAddressBottomSheetHook
                 controller: _floorController,
                 style: kts18Text,
                 keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: kcDividerColor, width: 0.5),
@@ -138,31 +137,31 @@ class AddAddressBottomSheetHook
             Flexible(child: SizedBox())
           ],
         ),
-        //*-------------- NOTE -------------- //
-        Padding(
-          padding: EdgeInsets.only(left: 5.w, top: 15.h),
-          child: Text(LocaleKeys.note, style: kts14HelperText).tr(),
-        ),
-        SizedBox(height: 5.h),
-        TextFormField(
-          controller: _notesController,
-          maxLines: 5,
-          style: kts18Text,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: AppTheme().radius10,
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kcDividerColor, width: 0.5),
-            ),
-            filled: true,
-            fillColor: kcSecondaryLightColor,
-          ),
-          validator: model.updateNote,
-        ),
+        // //*-------------- NOTE -------------- //
+        // Padding(
+        //   padding: EdgeInsets.only(left: 5.w, top: 15.h),
+        //   child: Text(LocaleKeys.note, style: kts14HelperText).tr(),
+        // ),
+        // SizedBox(height: 5.h),
+        // TextFormField(
+        //   controller: _notesController,
+        //   maxLines: 5,
+        //   style: kts18Text,
+        //   keyboardType: TextInputType.text,
+        //   textInputAction: TextInputAction.done,
+        //   decoration: InputDecoration(
+        //     border: OutlineInputBorder(
+        //       borderRadius: AppTheme().radius10,
+        //       borderSide: BorderSide.none,
+        //     ),
+        //     focusedBorder: UnderlineInputBorder(
+        //       borderSide: BorderSide(color: kcDividerColor, width: 0.5),
+        //     ),
+        //     filled: true,
+        //     fillColor: kcSecondaryLightColor,
+        //   ),
+        //   validator: model.updateNote,
+        // ),
       ],
     );
   }

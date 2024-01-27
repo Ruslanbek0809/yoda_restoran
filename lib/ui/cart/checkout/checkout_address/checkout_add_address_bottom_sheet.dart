@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -26,8 +25,9 @@ class CheckoutAddAddressBottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutAddressViewModel>.reactive(
       builder: (context, model, child) => DraggableScrollableSheet(
-          initialChildSize: 0.8,
-          maxChildSize: 1,
+          initialChildSize: 0.65,
+          minChildSize: 0.2,
+          maxChildSize: 0.8,
           expand: false,
           builder: (context, scrollController) {
             return Container(

@@ -76,10 +76,10 @@ class CheckoutSelectAddressBottomSheetView extends StatelessWidget {
                 ),
               ),
             ),
-            if ((model.addresses ?? []).isNotEmpty)
+            if (model.addresses?.isNotEmpty == true)
               Divider(color: kcDividerColor),
             //*-------------- ADDRESSES -------------- //
-            if ((model.addresses ?? []).isNotEmpty)
+            if (model.addresses?.isNotEmpty == true)
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

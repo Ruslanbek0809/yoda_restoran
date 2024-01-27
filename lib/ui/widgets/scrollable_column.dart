@@ -27,19 +27,14 @@ class ScrollableColumn extends StatelessWidget {
       slivers: [
         SliverFillRemaining(
           hasScrollBody: false,
-          child: AnimatedPadding(
-            padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.decelerate,
-            child: Column(
-              children: children,
-              crossAxisAlignment: crossAxisAlignment,
-              textDirection: textDirection,
-              mainAxisAlignment: mainAxisAlignment,
-              mainAxisSize: mainAxisSize,
-              verticalDirection: verticalDirection,
-              textBaseline: textBaseline,
-            ),
+          child: Column(
+            children: children,
+            crossAxisAlignment: crossAxisAlignment,
+            textDirection: textDirection,
+            mainAxisAlignment: mainAxisAlignment,
+            mainAxisSize: mainAxisSize,
+            verticalDirection: verticalDirection,
+            textBaseline: textBaseline,
           ),
         ),
       ],
