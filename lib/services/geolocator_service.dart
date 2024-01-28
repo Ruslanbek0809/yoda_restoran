@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../app/app.logger.dart';
 
@@ -64,6 +65,7 @@ class GeolocatorService {
       _locationPosition = await Geolocator.getCurrentPosition();
       log.v('=> SUCCESS _locationPosition: $_locationPosition');
     } catch (e) {
+      reportExceptionToSentry(e);
       log.v('=> ERROR _locationPosition: $e');
     }
   }

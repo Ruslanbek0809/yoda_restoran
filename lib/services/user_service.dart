@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/hive_models/hive_models.dart';
@@ -672,6 +673,11 @@ class UserService {
       log.v('ERROR on createBankOrder error.response?.data ?? '
           ' => ${error.response?.data ?? ''}');
 
+      reportDioExceptionToSentry(
+        error,
+        additionalInfo: 'ERROR on createBankOrder() DioError',
+      );
+
       var errorData = error.response?.data;
       if (errorData != null) {
         log.v('ERROR on errorData => $errorData');
@@ -731,24 +737,25 @@ class UserService {
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
-            // Do something before request is sent
             log.i(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
+            return handler.next(options);
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
             // If you want to reject the request with a error message,f
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
           onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
+            return handler.next(response);
             // If you want to reject the request with a error message,
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
+          onError: (DioError error, handler) {
+            reportDioExceptionToSentry(
+              error,
+              additionalInfo: 'ERROR on verifyOtpOrderPayment() DioError',
+            );
+            return handler.next(error);
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
           },
@@ -817,20 +824,30 @@ class UserService {
               //* SUCCESS
               onSuccess(paresElementValue);
             }
-          } on StateError catch (e) {
+          } on StateError catch (error) {
             //* The input element was not found.
-            print('operationCancelledMessage element not found: $e');
+            print('operationCancelledMessage element not found: $error');
 
+            reportExceptionToSentry(
+              error,
+              additionalInfo:
+                  'verifyOtpOrderPayment() StateError operationCancelledMessage',
+            );
             //* Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
             //* SUCCESS
             onSuccess(paresElementValue);
           }
 
           //* Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
-        } on StateError catch (e) {
+        } on StateError catch (error) {
           //* The input element was not found.
-          print('PaRes element not found: $e');
+          print('PaRes element not found: $error');
 
+          reportExceptionToSentry(
+            error,
+            additionalInfo:
+                'verifyOtpOrderPayment() StateError PaRes element not found',
+          );
           // //* PRINTS errorMessage method 1
           // //* Finds the element with the "errorMessage" class
           // var errorMessageElement1 =
@@ -877,6 +894,10 @@ class UserService {
     } on DioError catch (error) {
       log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
       onFail(0);
+      reportDioExceptionToSentry(
+        error,
+        additionalInfo: 'ERROR on verifyOtpOrderPayment() DioError',
+      );
       rethrow;
     }
   }
@@ -906,24 +927,25 @@ class UserService {
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
-            // Do something before request is sent
             log.i(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
-            return handler.next(options); //continue
+            return handler.next(options);
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
             // If you want to reject the request with a error message,f
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
           onResponse: (response, handler) {
-            // Do something with response data
-            return handler.next(response); // continue
+            return handler.next(response);
             // If you want to reject the request with a error message,
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
+          onError: (DioError error, handler) {
+            reportDioExceptionToSentry(
+              error,
+              additionalInfo: 'ERROR on postFinish3ds() DioError',
+            );
+            return handler.next(error);
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
           },
@@ -951,6 +973,10 @@ class UserService {
         onFail();
       }
     } on DioError catch (error) {
+      reportDioExceptionToSentry(
+        error,
+        additionalInfo: 'ERROR on postFinish3ds() DioError',
+      );
       if (error.response?.statusCode == 200 ||
           error.response?.statusCode == 201 ||
           error.response?.statusCode == 302) {
@@ -993,7 +1019,6 @@ class UserService {
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
-            // Do something before request is sent
             log.v(
                 'REQUEST[${options.method}] => BASE URL:${options.baseUrl}?${options.queryParameters} OR FORM DATA:${options.data}');
             return handler.next(options); //continue
@@ -1003,14 +1028,17 @@ class UserService {
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
           onResponse: (response, handler) {
-            // Do something with response data
             return handler.next(response); // continue
             // If you want to reject the request with a error message,
             // you can reject a `DioError` object eg: `handler.reject(dioError)`
           },
-          onError: (DioError e, handler) {
-            // Do something with response error
-            return handler.next(e); //continue
+          onError: (DioError error, handler) {
+            reportDioExceptionToSentry(
+              error,
+              additionalInfo:
+                  'ERROR on checkOnlinePaymentOrderStatusExtended() DioError',
+            );
+            return handler.next(error);
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
           },
@@ -1055,7 +1083,13 @@ class UserService {
       }
     } on DioError catch (error) {
       log.v(
-          'ERROR on checkOnlinePaymentOrderStatusExtended => ${error.response}');
+        'ERROR on checkOnlinePaymentOrderStatusExtended => ${error.response}',
+      );
+      reportDioExceptionToSentry(
+        error,
+        additionalInfo:
+            'ERROR on checkOnlinePaymentOrderStatusExtended() DioError',
+      );
       onFail(SmsErrorEnum.fail);
       rethrow;
     }

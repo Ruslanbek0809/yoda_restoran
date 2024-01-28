@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 import '../../../app/app.router.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../models/hive_models/hive_models.dart';
@@ -89,6 +90,7 @@ class CheckoutViewModel extends ReactiveViewModel {
         busyObject: 'selectAddresses',
       );
     } catch (err) {
+      reportExceptionToSentry(err);
       throw err;
     }
   }
@@ -107,6 +109,7 @@ class CheckoutViewModel extends ReactiveViewModel {
       );
       log.v('CHECKOUT VM _promocode: $_promocode');
     } catch (err) {
+      reportExceptionToSentry(err);
       throw err;
     }
   }

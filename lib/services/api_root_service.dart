@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app/app.logger.dart';
@@ -48,9 +49,21 @@ class ApiRootService {
       return handler.next(response); // continue
       // If you want to reject the request with a error message,
       // you can reject a `DioError` object eg: `handler.reject(dioError)`
-    }, onError: (DioError e, handler) {
-      // Do something with response error
-      return handler.next(e); //continue
+    }, onError: (DioError error, handler) {
+      // Log the error
+      log.v(
+        'API Error: ${error.response?.statusCode} - ${error.response?.data}',
+      );
+
+      //* Capture the error in Sentry globally for all API calls
+      Sentry.captureException(
+        error,
+        stackTrace: error.stackTrace,
+      );
+
+      //* Do any additional error handling if required
+
+      return handler.next(error);
       // If you want to resolve the request with some custom data，
       // you can resolve a `Response` object eg: `handler.resolve(response)`.
     }));

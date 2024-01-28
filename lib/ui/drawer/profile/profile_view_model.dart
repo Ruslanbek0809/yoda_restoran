@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../app/app.logger.dart';
@@ -148,6 +149,7 @@ class ProfileViewModel extends BaseViewModel {
         busyObject: 'save',
       );
     } catch (err) {
+      reportExceptionToSentry(err);
       throw err;
     }
   }

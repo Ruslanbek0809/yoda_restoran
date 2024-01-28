@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/app.router.dart';
@@ -33,7 +34,10 @@ class YodaResApp extends StatelessWidget {
         // locale: DevicePreview.locale(context), //* Config DevicePreview
         // builder: DevicePreview.appBuilder, //* Config DevicePreview
         title: Constants.appName,
-        navigatorObservers: [StackedService.routeObserver],
+        navigatorObservers: [
+          StackedService.routeObserver,
+          SentryNavigatorObserver(), //* Sentry's navigator observer
+        ],
         navigatorKey: StackedService.navigatorKey, //* Stacked_services config
         onGenerateRoute: StackedRouter()
             .onGenerateRoute, //* Auto generates all routes using stacked package
@@ -61,7 +65,7 @@ class YodaResApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         builder: (context, child) {
-          //*A widget that unfocus everything when tapped.
+          //* A widget that unfocus everything when tapped.
           return UnfocusWidget(
             child: ScrollConfiguration(
               behavior: MyBehavior(), // To remove the glow effect entirely

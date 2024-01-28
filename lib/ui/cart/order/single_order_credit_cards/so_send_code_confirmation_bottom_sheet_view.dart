@@ -62,8 +62,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                           children: [
                             Text(
                               soSendCodeConfirmationBottomSheetData
-                                      .paymentCreateBankOrder.phone ??
-                                  '',
+                                          .paymentCreateBankOrder.phone !=
+                                      null
+                                  ? '+${soSendCodeConfirmationBottomSheetData.paymentCreateBankOrder.phone}'
+                                  : '',
                               style: kts18BoldText,
                             ),
                             Text(
@@ -87,8 +89,10 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
                             ).tr(),
                             Text(
                               soSendCodeConfirmationBottomSheetData
-                                      .paymentCreateBankOrder.phone ??
-                                  '',
+                                          .paymentCreateBankOrder.phone !=
+                                      null
+                                  ? '+${soSendCodeConfirmationBottomSheetData.paymentCreateBankOrder.phone}'
+                                  : '',
                               style: kts18BoldText,
                             ),
                           ],
