@@ -68,6 +68,8 @@ abstract class LocaleKeys {
   static const now = 'now';
   static const today = 'today';
   static const tomorrow = 'tomorrow';
+  static const requiredRestaurantTemporarilyDisabled =
+      'requiredRestaurantTemporarilyDisabled';
   static const requiredWorkingHoursForRes = 'requiredWorkingHoursForRes';
   static const paymentType = 'paymentType';
   static const online_paymentType_bank_info = 'online_paymentType_bank_info';

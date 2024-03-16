@@ -34,6 +34,7 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       selfPickUp: fields[14] as bool?,
       delivery: fields[15] as bool?,
       resPaymentTypes: (fields[16] as List?)?.cast<HiveResPaymentType>(),
+      disabled: fields[17] as bool?,
     );
   }
 
@@ -74,7 +75,9 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       ..writeByte(15)
       ..write(obj.delivery)
       ..writeByte(16)
-      ..write(obj.resPaymentTypes);
+      ..write(obj.resPaymentTypes)
+      ..writeByte(17)
+      ..write(obj.disabled);
   }
 
   @override
