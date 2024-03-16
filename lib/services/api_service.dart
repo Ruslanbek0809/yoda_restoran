@@ -399,6 +399,31 @@ class ApiService {
 
   //* ------------------ CART APIS ---------------------//
 
+  Future<Restaurant?> getSingleRestaurant(int resId) async {
+    Restaurant? foundSingleRestaurant;
+    try {
+      Response response = await _apiRoot.dio
+          .get('api/restaurants/', queryParameters: {'id': resId});
+      log.v(
+        'getSingleRestaurant() RESPONSE: api/restaurants/ => ${response.data}',
+      );
+
+      if (response.data != null && response.statusCode == 200) {
+        foundSingleRestaurant = Restaurant.fromJson(response.data);
+      }
+      if (foundSingleRestaurant != null) {
+        log.v('RESPONSE: foundSingleRestaurant => $foundSingleRestaurant');
+      }
+
+      return foundSingleRestaurant;
+    } on DioError catch (error) {
+      log.v(error);
+      // log.v(
+      //     'ERROR on api/restaurants/ :${error.response!.statusCode} and ${error.response!.data}');
+      rethrow;
+    }
+  }
+
   Future<List<Meal>> getCartMeals(List<HiveMeal> cartMeals) async {
     List<Meal> _cartMealsUpdated = [];
 

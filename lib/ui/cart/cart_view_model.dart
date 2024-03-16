@@ -10,6 +10,7 @@ import '../../services/services.dart';
 import '../../utils/utils.dart';
 
 //* A map key of type string
+const String cartSingleRestaurantFuture = 'cartSingleRestaurantFuture';
 const String cartMealsFuture = 'cartMealsFuture';
 const String cartMoreMealsFuture = 'cartMoreMealsFuture';
 
@@ -35,10 +36,17 @@ class CartViewModel extends ReactiveViewModel {
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
 
   //*Custom boolean busy indicator
+  bool get busyForCartSingleRestaurantKey => busy(cartSingleRestaurantFuture);
+
+  //*Custom boolean busy indicator
   bool get busyForCartMealsKey => busy(cartMealsFuture);
 
   //*Custom boolean busy indicator
   bool get busyForCartMoreMealsKey => busy(cartMoreMealsFuture);
+
+  //*Custom boolean error indicator
+  bool get hasErrorForCartSingleRestaurantKeys =>
+      hasErrorForKey(cartSingleRestaurantFuture);
 
   //*Custom boolean error indicator
   bool get hasErrorForCartMealsKeys => hasErrorForKey(cartMealsFuture);
@@ -50,6 +58,8 @@ class CartViewModel extends ReactiveViewModel {
 
   //*GETS all cart data
   Future getCartData() async {
+    await runBusyFuture(_cartService.getSingleRestaurant(cartRes!.id!),
+        busyObject: cartSingleRestaurantFuture);
     await runBusyFuture(_cartService.getCartMeals(cartMeals),
         busyObject: cartMealsFuture);
     await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals),
@@ -122,7 +132,9 @@ class CartViewModel extends ReactiveViewModel {
 
   //* SHOWS CART MEAL REMOVE Dialog
   Future showRemoveCartMealDialog(
-      CartViewModel cartViewModel, HiveMeal cartMeal) async {
+    CartViewModel cartViewModel,
+    HiveMeal cartMeal,
+  ) async {
     log.i('showRemoveCartMealDialog()');
     await _dialogService.showCustomDialog(
       variant: DialogType.removeCartMeal,

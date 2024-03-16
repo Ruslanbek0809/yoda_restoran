@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';

@@ -281,8 +281,22 @@ class CartView extends StatelessWidget {
                               var startTempHourMin =
                                   (startHour * 60) + startMinute;
                               var endTempHourMin = (endHour * 60) + endMinute;
-
-                              if (nowHourMin < startTempHourMin ||
+                              if (model.cartRes?.disabled != null &&
+                                  model.cartRes!.disabled!) {
+                                await showDateRangeErrorFlashBar(
+                                  context: context,
+                                  msg: Text(
+                                    LocaleKeys
+                                        .requiredRestaurantTemporarilyDisabled,
+                                    style: kts16ButtonText,
+                                  ).tr(),
+                                  margin: EdgeInsets.only(
+                                    left: 16.w,
+                                    right: 16.w,
+                                    bottom: 0.13.sh,
+                                  ),
+                                );
+                              } else if (nowHourMin < startTempHourMin ||
                                   nowHourMin > endTempHourMin) {
                                 model.log.v(
                                     'TIME Inconvenience nowHourMin: $nowHourMin, startTempHourMin: $startTempHourMin, endTempHourMin: $endTempHourMin');
@@ -291,7 +305,9 @@ class CartView extends StatelessWidget {
                                   msg: Text(
                                           LocaleKeys.requiredWorkingHoursForRes,
                                           style: kts16ButtonText)
-                                      .tr(args: [model.cartRes!.workingHours!]),
+                                      .tr(
+                                    args: [model.cartRes!.workingHours!],
+                                  ),
                                   margin: EdgeInsets.only(
                                     left: 16.w,
                                     right: 16.w,

@@ -24,6 +24,7 @@ class HiveRestaurant {
     this.selfPickUp,
     this.delivery,
     this.resPaymentTypes,
+    this.disabled,
   });
 
   @HiveField(0)
@@ -76,4 +77,7 @@ class HiveRestaurant {
 
   @HiveField(16)
   final List<HiveResPaymentType>? resPaymentTypes;
+
+  @HiveField(17)
+  final bool? disabled;
 }

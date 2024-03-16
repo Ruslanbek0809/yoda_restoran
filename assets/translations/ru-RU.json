@@ -63,6 +63,7 @@
     "now": "Сейчас",
     "today": "Сегодня",
     "tomorrow": "Завтра",
+    "requiredRestaurantTemporarilyDisabled": "Ресторан временно закрыт",
     "requiredWorkingHoursForRes": "Время приема заказов ресторана {}",
     "paymentType": "Способ оплаты: ",
     "online_paymentType_bank_info": "Принимаются карты банков системы онлайн-платежей “Халкбанка”",

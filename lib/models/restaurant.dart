@@ -29,6 +29,7 @@ class Restaurant {
     this.distance,
     this.selfPickUp,
     this.delivery,
+    this.disabled,
     this.paymentTypes,
     this.stories,
   });
@@ -95,6 +96,9 @@ class Restaurant {
 
   @JsonKey(name: 'delivery')
   final bool? delivery;
+
+  @JsonKey(name: 'disabled')
+  final bool? disabled;
 
   @JsonKey(name: 'paymentTypes')
   final List<PaymentType>? paymentTypes;

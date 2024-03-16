@@ -113,7 +113,8 @@ class HiveDbService with ReactiveServiceMixin {
   //* UPDATES a restaurant in CART
   Future<void> updateResInCart(Restaurant? restaurant) async {
     log.i(
-        'resId: ${restaurant!.id}, restaurant.paymentTypes: ${restaurant.paymentTypes}');
+      'resId: ${restaurant!.id}, restaurant.paymentTypes: ${restaurant.paymentTypes}',
+    );
 
     try {
       List<HiveResPaymentType> _hiveResPaymentTypes = [];

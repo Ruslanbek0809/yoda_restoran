@@ -13,8 +13,10 @@ class CartService {
   final _hiveDbService = locator<HiveDbService>();
 
   Promocode? _promocode;
-
   Promocode? get promocode => _promocode;
+
+  Restaurant? _singleRestaurant;
+  Restaurant? get singleRestaurant => _singleRestaurant;
 
   List<Meal> _cartMealsUpdated = [];
   List<Meal> get cartMealsUpdated => _cartMealsUpdated;
@@ -25,6 +27,11 @@ class CartService {
   List<Meal> get moreMeals => _moreMeals;
 
   //*GETS cart meals to CHECK for any changes and UPDATE according to it
+  Future<void> getSingleRestaurant(int resId) async {
+    _singleRestaurant = await _api.getSingleRestaurant(resId);
+    await _hiveDbService.updateResInCart(_singleRestaurant);
+  }
+
   Future<void> getCartMeals(List<HiveMeal> cartMeals) async {
     _cartMealsUpdated = await _api.getCartMeals(cartMeals);
     await _hiveDbService.updateCartMeals(_cartMealsUpdated);
