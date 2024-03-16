@@ -184,7 +184,7 @@ class HiveDbService with ReactiveServiceMixin {
         imageCard: meal.imageCard,
         name: meal.name,
         price: meal.price,
-        discount: meal.discount!.toInt(),
+        discount: meal.discount?.toInt(),
         discountedPrice: meal.discountedPrice,
         quantity: quantity,
         customs: [],
@@ -395,7 +395,7 @@ class HiveDbService with ReactiveServiceMixin {
           imageCard: meal.imageCard,
           name: meal.name,
           price: meal.price,
-          discount: meal.discount!.toInt(),
+          discount: meal.discount?.toInt(),
           discountedPrice: meal.discountedPrice,
           quantity: quantityDraft,
           volumes: _cartMealVolumes,
@@ -456,6 +456,34 @@ class HiveDbService with ReactiveServiceMixin {
 
       if (_cartMeals.value.isEmpty)
         _bottomCartService.hideBottomCart(); // HIDES BottomCart.
+    }
+  }
+
+  Future<void> updateCartMeals(List<Meal> updatedMeals) async {
+    final cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
+    final Map<int, Meal> updatedMealsMap = {
+      for (var meal in updatedMeals) meal.id ?? -1: meal
+    };
+
+    final cartMealsBoxKeys = cartMealsBox.keys.toList();
+    for (var cartMealsBoxKey in cartMealsBoxKeys) {
+      final currentHiveMeal = cartMealsBox.get(cartMealsBoxKey);
+      final updatedMeal = updatedMealsMap[currentHiveMeal?.id ?? -1];
+      if (updatedMeal != null) {
+        final HiveMeal updatedHiveMeal = HiveMeal(
+          id: currentHiveMeal?.id,
+          image: updatedMeal.image,
+          imageCard: updatedMeal.imageCard,
+          name: updatedMeal.name,
+          price: updatedMeal.price,
+          discount: updatedMeal.discount?.toInt(),
+          discountedPrice: updatedMeal.discountedPrice,
+          quantity: currentHiveMeal?.quantity ?? 1,
+          customs: currentHiveMeal?.customs,
+          volumes: currentHiveMeal?.volumes,
+        );
+        await cartMealsBox.put(cartMealsBoxKey, updatedHiveMeal);
+      }
     }
   }
 

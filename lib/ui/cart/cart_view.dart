@@ -3,7 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/models/hive_models/hive_meal.dart';
 
 import '../../generated/locale_keys.g.dart';
 import '../../models/models.dart';
@@ -72,25 +74,37 @@ class CartView extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   children: <Widget>[
                     //*------------------ CART WIDGET ---------------------//
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding:
-                          EdgeInsets.only(top: 20.h, left: 16.w, right: 16.w),
-                      itemCount: model.cartMeals.length,
-                      itemBuilder: (context, pos) {
-                        return CartMealItem(cartMeal: model.cartMeals[pos]);
-                      },
-                      separatorBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5.h),
-                          child: Divider(
-                            thickness: 1,
-                            color: kcDividerColor.withOpacity(0.5),
+                    ValueListenableBuilder(
+                      valueListenable:
+                          Hive.box<HiveMeal>(Constants.cartMealsBox)
+                              .listenable(),
+                      builder: (context, Box<HiveMeal> cartMealsBox, _) {
+                        final cartMeals = cartMealsBox.values.toList();
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(
+                            top: 20.h,
+                            left: 16.w,
+                            right: 16.w,
                           ),
+                          itemCount: cartMeals.length,
+                          itemBuilder: (context, pos) {
+                            return CartMealItem(cartMeal: cartMeals[pos]);
+                          },
+                          separatorBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: Divider(
+                                thickness: 1,
+                                color: kcDividerColor.withOpacity(0.5),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
+
                     //*------------------ CART MEAL WIDGET TITLE ---------------------//
                     if (!model.hasErrorForCartMoreMealsKeys)
                       // if (!model.hasError)

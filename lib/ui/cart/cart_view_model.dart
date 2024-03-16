@@ -195,7 +195,9 @@ class CartViewModel extends ReactiveViewModel {
 
   //* UPDATES cartMeal. If cartMeals is empty then navBack bc CartView is empty
   Future<void> updateCartMealInCart(
-      HiveMeal cartMeal, int? mealQuantity) async {
+    HiveMeal cartMeal,
+    int? mealQuantity,
+  ) async {
     log.i(
         'updateCartMealInCart() cartMeal.id: ${cartMeal.id}, mealQuantity: $mealQuantity');
 

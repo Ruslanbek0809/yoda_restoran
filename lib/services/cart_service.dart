@@ -27,6 +27,7 @@ class CartService {
   //*GETS cart meals to CHECK for any changes and UPDATE according to it
   Future<void> getCartMeals(List<HiveMeal> cartMeals) async {
     _cartMealsUpdated = await _api.getCartMeals(cartMeals);
+    await _hiveDbService.updateCartMeals(_cartMealsUpdated);
     log.v('getCartMeals() cartMeals => ${cartMeals.length}');
   }
 

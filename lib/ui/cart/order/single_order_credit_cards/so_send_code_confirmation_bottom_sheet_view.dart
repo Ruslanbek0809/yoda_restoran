@@ -42,7 +42,8 @@ class SOSendCodeConfirmationBottomSheetView extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(Constants.BORDER_RADIUS_20)),
+                top: Radius.circular(Constants.BORDER_RADIUS_20),
+              ),
               color: kcWhiteColor,
             ),
             child: ScrollableColumn(
