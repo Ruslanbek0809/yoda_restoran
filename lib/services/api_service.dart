@@ -402,10 +402,9 @@ class ApiService {
   Future<Restaurant?> getSingleRestaurant(int resId) async {
     Restaurant? foundSingleRestaurant;
     try {
-      Response response = await _apiRoot.dio
-          .get('api/restaurants/', queryParameters: {'id': resId});
+      Response response = await _apiRoot.dio.get('api/restaurants/$resId/');
       log.v(
-        'getSingleRestaurant() RESPONSE: api/restaurants/ => ${response.data}',
+        'getSingleRestaurant() RESPONSE: api/restaurants/$resId/ => ${response.data}',
       );
 
       if (response.data != null && response.statusCode == 200) {
@@ -424,17 +423,17 @@ class ApiService {
     }
   }
 
-  Future<List<Meal>> getCartMeals(List<HiveMeal> cartMeals) async {
+  Future<List<Meal>> getCartMeals(int resId, List<HiveMeal> cartMeals) async {
     List<Meal> _cartMealsUpdated = [];
 
-    String _queryPars = 'id=${cartMeals[0].id}';
+    String _queryPars = 'ids=${cartMeals[0].id}';
     for (int i = 1; i < cartMeals.length; i++)
-      _queryPars += '&id=${cartMeals[i].id}'; // Workaround
+      _queryPars += '&ids=${cartMeals[i].id}'; // Workaround
 
     try {
       Response response =
           await _apiRoot.dio.get('api/restaurantMeals/?$_queryPars');
-      // log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
+      log.v('RESPONSE: api/restaurantMeals/?$_queryPars => ${response.data}');
 
       if (response.data != null) {
         for (final _resCategory in response.data) {

@@ -31,7 +31,7 @@ class CartMealItem extends ViewModelWidget<CartViewModel> {
         Expanded(
           child: Container(
             height: 0.3.sw, // MAKES Column apply MainAxisAlignment.spaceBetween
-            padding: EdgeInsets.fromLTRB(10.w, 0.h, 0.w, 0.h),
+            padding: EdgeInsets.only(left: 10.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -32,8 +32,8 @@ class CartService {
     await _hiveDbService.updateResInCart(_singleRestaurant);
   }
 
-  Future<void> getCartMeals(List<HiveMeal> cartMeals) async {
-    _cartMealsUpdated = await _api.getCartMeals(cartMeals);
+  Future<void> getCartMeals(int resId, List<HiveMeal> cartMeals) async {
+    _cartMealsUpdated = await _api.getCartMeals(resId, cartMeals);
     await _hiveDbService.updateCartMeals(_cartMealsUpdated);
     log.v('getCartMeals() cartMeals => ${cartMeals.length}');
   }

@@ -113,7 +113,7 @@ class HiveDbService with ReactiveServiceMixin {
   //* UPDATES a restaurant in CART
   Future<void> updateResInCart(Restaurant? restaurant) async {
     log.i(
-      'resId: ${restaurant!.id}, restaurant.paymentTypes: ${restaurant.paymentTypes}',
+      'updateResInCart() resId: ${restaurant!.id}, restaurant.paymentTypes: ${restaurant.paymentTypes}',
     );
 
     try {
@@ -150,6 +150,7 @@ class HiveDbService with ReactiveServiceMixin {
         selfPickUp: restaurant.selfPickUp,
         delivery: restaurant.delivery,
         resPaymentTypes: _hiveResPaymentTypes,
+        disabled: restaurant.disabled,
       );
 
       await cartResBox.put('cartRes', _restaurant);
@@ -461,6 +462,7 @@ class HiveDbService with ReactiveServiceMixin {
   }
 
   Future<void> updateCartMeals(List<Meal> updatedMeals) async {
+    log.v('updateCartMeals() updatedMeals => ${updatedMeals.length}');
     final cartMealsBox = Hive.box<HiveMeal>(Constants.cartMealsBox);
     final Map<int, Meal> updatedMealsMap = {
       for (var meal in updatedMeals) meal.id ?? -1: meal

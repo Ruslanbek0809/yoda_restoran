@@ -13,6 +13,7 @@ import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 import '../widgets/widgets.dart';
 import 'cart_meal_item.dart';
+import 'cart_meals_shimmer.dart';
 import 'cart_more_meal/cart_more_meal_view.dart';
 import 'cart_more_meal/cart_more_meals_shimmer.dart';
 import 'cart_toggle_button.dart';
@@ -80,34 +81,40 @@ class CartView extends StatelessWidget {
                               .listenable(),
                       builder: (context, Box<HiveMeal> cartMealsBox, _) {
                         final cartMeals = cartMealsBox.values.toList();
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.only(
-                            top: 20.h,
-                            left: 16.w,
-                            right: 16.w,
-                          ),
-                          itemCount: cartMeals.length,
-                          itemBuilder: (context, pos) {
-                            return CartMealItem(cartMeal: cartMeals[pos]);
-                          },
-                          separatorBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: Divider(
-                                thickness: 1,
-                                color: kcDividerColor.withOpacity(0.5),
-                              ),
-                            );
-                          },
-                        );
+                        return model.busyForCartMealsKey
+                            ? CartMealsShimmerWidget(
+                                cartMealsLength:
+                                    cartMeals.length > 5 ? 5 : cartMeals.length,
+                              )
+                            : ListView.separated(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.only(
+                                  top: 20.h,
+                                  left: 16.w,
+                                  right: 16.w,
+                                ),
+                                itemCount: cartMeals.length,
+                                itemBuilder: (context, pos) {
+                                  return CartMealItem(cartMeal: cartMeals[pos]);
+                                },
+                                separatorBuilder: (context, index) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 5.h),
+                                    child: Divider(
+                                      thickness: 1,
+                                      color: kcDividerColor.withOpacity(0.5),
+                                    ),
+                                  );
+                                },
+                              );
                       },
                     ),
 
                     //*------------------ CART MEAL WIDGET TITLE ---------------------//
-                    if (!model.hasErrorForCartMoreMealsKeys)
-                      // if (!model.hasError)
+                    if (!model.hasErrorForCartMoreMealsKeys ||
+                        model.moreMeals.isNotEmpty)
                       Padding(
                         padding: EdgeInsets.only(
                             top: 20.h, bottom: 10.h, left: 16.w, right: 16.w),
@@ -118,11 +125,9 @@ class CartView extends StatelessWidget {
                       ),
                     //*------------------ CART MORE MEAL LIST ---------------------//
                     if (!model.hasErrorForCartMoreMealsKeys)
-                      // if (!model.hasError)
                       AnimatedCrossFade(
                         duration: Duration(milliseconds: 500),
                         crossFadeState: model.busyForCartMoreMealsKey
-                            // crossFadeState: model.isBusy
                             ? CrossFadeState.showFirst
                             : CrossFadeState.showSecond,
                         firstChild: CartMoreMealsShimmerWidget(),
