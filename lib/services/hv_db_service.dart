@@ -488,6 +488,7 @@ class HiveDbService with ReactiveServiceMixin {
         await cartMealsBox.put(cartMealsBoxKey, updatedHiveMeal);
       }
     }
+    _cartMeals.value = cartMealsBox.values.toList();
   }
 
 //* ----------------------- HIVE RATING --------------------------//

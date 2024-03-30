@@ -29,7 +29,29 @@ class CartView extends StatelessWidget {
     return ViewModelBuilder<CartViewModel>.reactive(
       onModelReady: (model) async => await model.getCartData(),
       builder: (context, model, child) {
-        model.log.v('=================== CartView ===================');
+        model.log.v(
+            '=================== CartView ==================='); // Observe ViewModel for price changes
+
+        if (model.showCartMealsDataUpdatedFlashbar) {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            //* Reset the indicator to prevent repetitive triggers
+            model.resetCartMealsDataUpdatedFlashbar();
+
+            await showDateRangeErrorFlashBar(
+              context: context,
+              msg: Text(
+                LocaleKeys.requiredCartMealsDataChanged,
+                style: kts16ButtonText,
+              ).tr(),
+              margin: EdgeInsets.only(
+                left: 16.w,
+                right: 16.w,
+                bottom: 0.13.sh,
+              ),
+            );
+          });
+        }
+
         return WillPopScope(
           onWillPop: () async {
             model.navBack(); // Workaround

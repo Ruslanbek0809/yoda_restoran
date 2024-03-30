@@ -68,6 +68,7 @@ abstract class LocaleKeys {
   static const now = 'now';
   static const today = 'today';
   static const tomorrow = 'tomorrow';
+  static const requiredCartMealsDataChanged = 'requiredCartMealsDataChanged';
   static const requiredRestaurantTemporarilyDisabled =
       'requiredRestaurantTemporarilyDisabled';
   static const requiredWorkingHoursForRes = 'requiredWorkingHoursForRes';

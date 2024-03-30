@@ -1,3 +1,6 @@
+import 'package:collection/collection.dart';
+import 'package:stacked/stacked.dart';
+
 import '../models/hive_models/hive_models.dart';
 
 import '../app/app.locator.dart';
@@ -6,8 +9,14 @@ import '../models/models.dart';
 import 'services.dart';
 
 //*CartService is used only inside CartView and CartMealView
-class CartService {
+// 1 For Reactive View
+class CartService with ReactiveServiceMixin {
   final log = getLogger('CartService');
+
+  CartService() {
+    // 3
+    listenToReactiveValues([_showCartMealsDataUpdatedFlashbar]);
+  }
 
   final _api = locator<ApiService>();
   final _hiveDbService = locator<HiveDbService>();
@@ -26,6 +35,13 @@ class CartService {
   List<Meal> _moreMeals = [];
   List<Meal> get moreMeals => _moreMeals;
 
+  // 2
+  ReactiveValue<bool> _showCartMealsDataUpdatedFlashbar =
+      ReactiveValue<bool>(false);
+
+  bool get showCartMealsDataUpdatedFlashbar =>
+      _showCartMealsDataUpdatedFlashbar.value;
+
   //*GETS cart meals to CHECK for any changes and UPDATE according to it
   Future<void> getSingleRestaurant(int resId) async {
     _singleRestaurant = await _api.getSingleRestaurant(resId);
@@ -34,12 +50,30 @@ class CartService {
 
   Future<void> getCartMeals(int resId, List<HiveMeal> cartMeals) async {
     _cartMealsUpdated = await _api.getCartMeals(resId, cartMeals);
-    await _hiveDbService.updateCartMeals(_cartMealsUpdated);
-    log.v('getCartMeals() cartMeals => ${cartMeals.length}');
+
+    //* Detect price changes
+    bool priceChangeDetected = false;
+    for (var updatedMeal in _cartMealsUpdated) {
+      final existingMeal =
+          cartMeals.firstWhereOrNull((meal) => meal.id == updatedMeal.id);
+      if (existingMeal != null &&
+          (existingMeal.price != updatedMeal.price ||
+              existingMeal.discountedPrice != updatedMeal.discountedPrice)) {
+        priceChangeDetected = true;
+        break;
+      }
+    }
+    _showCartMealsDataUpdatedFlashbar.value = priceChangeDetected;
+    if (priceChangeDetected)
+      await _hiveDbService.updateCartMeals(_cartMealsUpdated);
   }
 
   //*GETS More meals for this res
   Future<void> getMoreMeals(int resId, List<HiveMeal> cartMeals) async {
     _moreMeals = await _api.getMoreMeals(resId, cartMeals);
+  }
+
+  void resetCartMealsDataUpdatedFlashbar() {
+    _showCartMealsDataUpdatedFlashbar.value = false;
   }
 }

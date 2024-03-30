@@ -31,6 +31,9 @@ class CartViewModel extends ReactiveViewModel {
 
   List<Meal> get moreMeals => _cartService.moreMeals;
 
+  bool get showCartMealsDataUpdatedFlashbar =>
+      _cartService.showCartMealsDataUpdatedFlashbar;
+
   bool get isDelivery => _toggleButtonService.isDelivery;
 
   bool get hasLoggedInUser => _userService.hasLoggedInUser;
@@ -62,8 +65,8 @@ class CartViewModel extends ReactiveViewModel {
         busyObject: cartSingleRestaurantFuture);
     await runBusyFuture(_cartService.getCartMeals(cartRes!.id!, cartMeals),
         busyObject: cartMealsFuture);
-    // await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals),
-    //     busyObject: cartMoreMealsFuture);
+    await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals),
+        busyObject: cartMoreMealsFuture);
   }
 
   // //* FETCHS more meals and GETS all carts
@@ -222,6 +225,9 @@ class CartViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  void resetCartMealsDataUpdatedFlashbar() {
+    _cartService.resetCartMealsDataUpdatedFlashbar();
+  }
 //*------------------------ CHECKOUT BOTTOM SHEET ----------------------------//
 
   //* CALLS navs based on user's login state.
@@ -253,5 +259,5 @@ class CartViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [_hiveDbService, _toggleButtonService];
+      [_hiveDbService, _toggleButtonService, _cartService];
 }
