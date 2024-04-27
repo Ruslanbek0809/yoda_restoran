@@ -185,8 +185,10 @@ class _MomentStoryViewState extends State<MomentStoryView> {
                       color: kcWhiteColor,
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       borderRadius: kbr12,
-                      onPressed: () async =>
-                          await model.navToResDetailsView(restaurant),
+                      onPressed: () async {
+                        controller.pause();
+                        await model.navToResDetailsView(restaurant);
+                      },
                     ),
                   ),
                 ),
