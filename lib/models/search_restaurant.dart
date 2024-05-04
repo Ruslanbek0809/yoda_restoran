@@ -27,6 +27,9 @@ class SearchRestaurant {
     this.selfPickUp,
     this.delivery,
     this.paymentTypes,
+    this.discountMeals,
+    this.discountAksiya,
+    this.discountCategory,
   });
 
   @JsonKey(name: 'id')
@@ -85,6 +88,15 @@ class SearchRestaurant {
 
   @JsonKey(name: 'paymentTypes')
   final List<PaymentType>? paymentTypes;
+
+  @JsonKey(name: 'discount-meals')
+  final bool? discountMeals;
+
+  @JsonKey(name: 'discount-aksiya')
+  final bool? discountAksiya;
+
+  @JsonKey(name: 'discount-category')
+  final bool? discountCategory;
 
   factory SearchRestaurant.fromJson(Map<String, dynamic> json) =>
       _$SearchRestaurantFromJson(json);

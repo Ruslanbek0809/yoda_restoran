@@ -31,6 +31,9 @@ SearchRestaurant _$SearchRestaurantFromJson(Map<String, dynamic> json) =>
       paymentTypes: (json['paymentTypes'] as List<dynamic>?)
           ?.map((e) => PaymentType.fromJson(e as Map<String, dynamic>))
           .toList(),
+      discountMeals: json['discount-meals'] as bool?,
+      discountAksiya: json['discount-aksiya'] as bool?,
+      discountCategory: json['discount-category'] as bool?,
     );
 
 Map<String, dynamic> _$SearchRestaurantToJson(SearchRestaurant instance) =>
@@ -54,4 +57,7 @@ Map<String, dynamic> _$SearchRestaurantToJson(SearchRestaurant instance) =>
       'selfPickUp': instance.selfPickUp,
       'delivery': instance.delivery,
       'paymentTypes': instance.paymentTypes,
+      'discount-meals': instance.discountMeals,
+      'discount-aksiya': instance.discountAksiya,
+      'discount-category': instance.discountCategory,
     };

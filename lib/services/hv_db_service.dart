@@ -151,6 +151,9 @@ class HiveDbService with ReactiveServiceMixin {
         delivery: restaurant.delivery,
         resPaymentTypes: _hiveResPaymentTypes,
         disabled: restaurant.disabled,
+        discountMeals: restaurant.discountMeals,
+        discountAksiya: restaurant.discountAksiya,
+        discountCategory: restaurant.discountCategory,
       );
 
       await cartResBox.put('cartRes', _restaurant);

@@ -35,6 +35,9 @@ Restaurant _$RestaurantFromJson(Map<String, dynamic> json) => Restaurant(
       stories: (json['stories'] as List<dynamic>?)
           ?.map((e) => Story.fromJson(e as Map<String, dynamic>))
           .toList(),
+      discountMeals: json['discount-meals'] as bool?,
+      discountAksiya: json['discount-aksiya'] as bool?,
+      discountCategory: json['discount-category'] as bool?,
     );
 
 Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
@@ -63,4 +66,7 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'disabled': instance.disabled,
       'paymentTypes': instance.paymentTypes,
       'stories': instance.stories,
+      'discount-meals': instance.discountMeals,
+      'discount-aksiya': instance.discountAksiya,
+      'discount-category': instance.discountCategory,
     };
