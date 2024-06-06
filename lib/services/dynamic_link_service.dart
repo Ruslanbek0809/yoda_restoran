@@ -1,5 +1,6 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
@@ -24,11 +25,14 @@ class DynamicLinkService {
 
     //*#2 GETS dynamic link in Background / Foreground State
     dynamicLinks.onLink.listen((PendingDynamicLinkData? dynamicLinkData) {
-      // log.v('====== DynamicLinkService Background / Foreground State ======');
-      // 3a. handle link that has been retrieved
       if (dynamicLinkData != null) _handleDeepLink(dynamicLinkData);
     }).onError((error) {
       print('Link Failed: ${error.message}');
+      reportExceptionToSentry(
+        error,
+        additionalInfo:
+            'MY ERROR SENTRY => DynamicLinkService handleBFDynamicLinks',
+      );
     });
   }
 

@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flash/flash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -64,12 +64,22 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
         await prefs.setString(Constants.savedLocale, initLocale.toString());
     }
 
-    //*FIREBASE initialization. This second Firebase.initializeApp() is used to initialize Firebase again in case network is down
-    await Firebase.initializeApp().then((value) async {
-      await _pushNotificationService
-          .initialise(); // INITIALIZATION of FB Push notification
-      await _dynamicLinkService
-          .handleBFDynamicLinks(); // INITIALIZATION of FB Dynamic Link
+    //* Initialize Push Notification Service in a non-blocking way
+    _pushNotificationService.initialise().catchError((error) {
+      log.e('Error initializing PushNotificationService', error);
+      reportExceptionToSentry(
+        error,
+        additionalInfo:
+            'MY ERROR SENTRY => PushNotificationService initialisation',
+      );
+    });
+    //* INITIALIZATION of FB Dynamic Link
+    _dynamicLinkService.handleBFDynamicLinks().catchError((error) {
+      log.e('Error initializing DynamicLinkService', error);
+      reportExceptionToSentry(
+        error,
+        additionalInfo: 'MY ERROR SENTRY => DynamicLinkService initialization',
+      );
     });
 
     //*DEPRECATED after app version 2.3.0+35
