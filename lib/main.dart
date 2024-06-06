@@ -46,8 +46,9 @@ void main() async {
     //* Capture the error in Sentry. This handler is specific to Flutter framework errors.
     //* It catches exceptions thrown during the Flutter build, layout, and paint phases.
     //* These are typically errors related to the Flutter widget tree
-    Sentry.captureException(
+    reportExceptionToSentryWithStacktrace(
       details.exception,
+      additionalInfo: 'MY ERROR SENTRY => Flutter framework error',
       stackTrace: details.stack,
     );
   };
@@ -72,12 +73,13 @@ void main() async {
         ),
       );
     },
-    (exception, stackTrace) async {
-      //*  This is a broader error handler that captures uncaught errors in the Dart zone.
+    (exception, stackTrace) {
+      //* This is a broader error handler that captures uncaught errors in the Dart zone.
       //* It includes errors from asynchronous operations (like Futures and Streams), I/O operations,
       //* and other Dart code that is not part of the Flutter framework.
-      await Sentry.captureException(
+      reportExceptionToSentryWithStacktrace(
         exception,
+        additionalInfo: 'MY ERROR SENTRY => Uncaught async error',
         stackTrace: stackTrace,
       );
     },

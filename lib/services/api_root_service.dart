@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
@@ -50,19 +51,16 @@ class ApiRootService {
       // If you want to reject the request with a error message,
       // you can reject a `DioError` object eg: `handler.reject(dioError)`
     }, onError: (DioError error, handler) {
-      // Log the error
       log.v(
         'API Error: ${error.response?.statusCode} - ${error.response?.data}',
       );
 
-      //* Capture the error in Sentry globally for all API calls
-      Sentry.captureException(
+      reportDioExceptionToSentry(
         error,
-        stackTrace: error.stackTrace,
+        additionalInfo: 'MY ERROR SENTRY => DIO INTERCEPTOR onError',
       );
 
-      //* Do any additional error handling if required
-
+      //TODO: Do any additional error handling if required
       return handler.next(error);
       // If you want to resolve the request with some custom data，
       // you can resolve a `Response` object eg: `handler.resolve(response)`.

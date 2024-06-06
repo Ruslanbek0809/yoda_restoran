@@ -110,7 +110,10 @@ class AddressAddViewModel extends BaseViewModel {
         () => onFail!(),
       ));
     } catch (err) {
-      reportExceptionToSentry(err);
+      reportExceptionToSentry(
+        err,
+        additionalInfo: 'MY ERROR SENTRY => onAddAddressPressed() error',
+      );
       throw err;
     }
   }

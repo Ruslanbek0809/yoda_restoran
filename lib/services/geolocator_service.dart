@@ -65,8 +65,12 @@ class GeolocatorService {
       _locationPosition = await Geolocator.getCurrentPosition();
       log.v('=> SUCCESS _locationPosition: $_locationPosition');
     } catch (e) {
-      reportExceptionToSentry(e);
       log.v('=> ERROR _locationPosition: $e');
+      reportExceptionToSentry(
+        e,
+        additionalInfo:
+            'MY ERROR SENTRY => Geolocator.getCurrentPosition error',
+      );
     }
   }
 

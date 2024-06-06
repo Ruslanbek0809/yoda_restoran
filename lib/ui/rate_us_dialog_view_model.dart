@@ -85,7 +85,10 @@ class RateUsDialogViewModel extends BaseViewModel {
         () => onFail!(),
       ));
     } catch (err) {
-      reportExceptionToSentry(err);
+      reportExceptionToSentry(
+        err,
+        additionalInfo: 'MY ERROR SENTRY => onRatingSendPressed() error',
+      );
       throw err;
     }
   }

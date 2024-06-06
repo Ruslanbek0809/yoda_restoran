@@ -90,7 +90,10 @@ class CheckoutViewModel extends ReactiveViewModel {
         busyObject: 'selectAddresses',
       );
     } catch (err) {
-      reportExceptionToSentry(err);
+      reportExceptionToSentry(
+        err,
+        additionalInfo: 'MY ERROR SENTRY => getAddresses() error',
+      );
       throw err;
     }
   }
@@ -109,7 +112,10 @@ class CheckoutViewModel extends ReactiveViewModel {
       );
       log.v('CHECKOUT VM _promocode: $_promocode');
     } catch (err) {
-      reportExceptionToSentry(err);
+      reportExceptionToSentry(
+        err,
+        additionalInfo: 'MY ERROR SENTRY => searchPromocode() error',
+      );
       throw err;
     }
   }

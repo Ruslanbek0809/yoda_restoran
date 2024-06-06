@@ -675,7 +675,7 @@ class UserService {
 
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'ERROR on createBankOrder() DioError',
+        additionalInfo: 'MY ERROR SENTRY => createBankOrder() DioError',
       );
 
       var errorData = error.response?.data;
@@ -753,7 +753,8 @@ class UserService {
           onError: (DioError error, handler) {
             reportDioExceptionToSentry(
               error,
-              additionalInfo: 'ERROR on verifyOtpOrderPayment() DioError',
+              additionalInfo:
+                  'MY ERROR SENTRY => verifyOtpOrderPayment() DioError',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -826,12 +827,12 @@ class UserService {
             }
           } on StateError catch (error) {
             //* The input element was not found.
-            print('operationCancelledMessage element not found: $error');
+            log.e('operationCancelledMessage element not found: $error');
 
             reportExceptionToSentry(
               error,
               additionalInfo:
-                  'verifyOtpOrderPayment() StateError operationCancelledMessage',
+                  'MY ERROR SENTRY => verifyOtpOrderPayment() StateError operationCancelledMessage',
             );
             //* Step 3.2. If "operationCancelledMessage" element is NOT FOUND, then process was SUCCESS
             //* SUCCESS
@@ -841,12 +842,12 @@ class UserService {
           //* Step 4. If "PaRes" element is NOT FOUND, it EXECUTES next query on "errorMessage" element.
         } on StateError catch (error) {
           //* The input element was not found.
-          print('PaRes element not found: $error');
+          log.e('PaRes element not found: $error');
 
           reportExceptionToSentry(
             error,
             additionalInfo:
-                'verifyOtpOrderPayment() StateError PaRes element not found',
+                'MY ERROR SENTRY => verifyOtpOrderPayment() StateError PaRes element not found',
           );
           // //* PRINTS errorMessage method 1
           // //* Finds the element with the "errorMessage" class
@@ -896,7 +897,7 @@ class UserService {
       onFail(0);
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'ERROR on verifyOtpOrderPayment() DioError',
+        additionalInfo: 'MY ERROR SENTRY => verifyOtpOrderPayment() DioError',
       );
       rethrow;
     }
@@ -943,7 +944,7 @@ class UserService {
           onError: (DioError error, handler) {
             reportDioExceptionToSentry(
               error,
-              additionalInfo: 'ERROR on postFinish3ds() DioError',
+              additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioError',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -975,7 +976,7 @@ class UserService {
     } on DioError catch (error) {
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'ERROR on postFinish3ds() DioError',
+        additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioError',
       );
       if (error.response?.statusCode == 200 ||
           error.response?.statusCode == 201 ||
@@ -1036,7 +1037,7 @@ class UserService {
             reportDioExceptionToSentry(
               error,
               additionalInfo:
-                  'ERROR on checkOnlinePaymentOrderStatusExtended() DioError',
+                  'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioError',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -1088,7 +1089,7 @@ class UserService {
       reportDioExceptionToSentry(
         error,
         additionalInfo:
-            'ERROR on checkOnlinePaymentOrderStatusExtended() DioError',
+            'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioError',
       );
       onFail(SmsErrorEnum.fail);
       rethrow;

@@ -149,7 +149,10 @@ class ProfileViewModel extends BaseViewModel {
         busyObject: 'save',
       );
     } catch (err) {
-      reportExceptionToSentry(err);
+      reportExceptionToSentry(
+        err,
+        additionalInfo: 'MY ERROR SENTRY => onUpdateUserPressed() error',
+      );
       throw err;
     }
   }
