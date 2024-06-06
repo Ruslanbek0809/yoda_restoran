@@ -1,11 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flash/flash.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
+import 'package:yoda_res/shared/shared.dart';
 
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -49,10 +55,23 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     log.i('===== runStartupLogic() ENDED =====');
   }
 
-  Future<void> navToHomeWithConnection(Locale initLocale) async {
+  bool checkAndHandleConnectivity(Locale initLocale) {
+    if (connectivityStatus == ConnectivityStatus.Offline ||
+        connectivityStatus == null) {
+      //* Return true if offline, so that the view can show the flash message
+      return true;
+    } else {
+      navToHomeWithConnection(initLocale);
+      return false;
+    }
+  }
+
+  Future<void> navToHomeWithConnection(
+    Locale initLocale,
+  ) async {
     log.i('===== navToHomeWithConnection() STARTED =====');
 
-    await flashController?.dismiss(); // DISMISSES no internet flashbar
+    // await flashController?.dismiss(); // DISMISSES no internet flashbar
 
     //*So this below condition is to change lang of API initialization to ru lang when app is opened for the first time. Drawback of easy_localization. Workaround
     if (initLocale.toString() == 'ru_RU') {

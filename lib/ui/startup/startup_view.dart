@@ -21,61 +21,28 @@ class StartUpView extends StatefulWidget {
 
 class _StartUpViewState extends State<StartUpView> {
   // final GlobalKey<SnowWidgetState> snowWidgetKey = GlobalKey<SnowWidgetState>();
+  FlashController<Object?>? flashController;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      onModelReady: (model) => WidgetsBinding.instance
-          .addPostFrameCallback((_) => model.runStartupLogic()),
+      onModelReady: (model) =>
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+        model.runStartupLogic();
+      }),
       viewModelBuilder: () => StartUpViewModel(),
       builder: (context, model, child) {
-        //*CALLED when user has NO Internet Connection
-        if (model.startAnimation == false &&
-            (model.connectivityStatus == ConnectivityStatus.Offline ||
-                model.connectivityStatus == null)) {
-          WidgetsBinding.instance.addPostFrameCallback((_) async {
-            await showFlash(
-              context: context,
-              persistent: true,
-              builder: (context, controller) {
-                model.flashController = controller;
-                return Flash(
-                  controller: controller,
-                  barrierDismissible: false,
-                  enableVerticalDrag: false,
-                  borderRadius: AppTheme().radius15,
-                  backgroundColor: kcSecondaryLightColor,
-                  boxShadows: kElevationToShadow[0],
-                  margin: EdgeInsets.only(
-                    left: 32.w,
-                    right: 32.w,
-                    bottom: 0.075.sh,
-                  ),
-                  position: FlashPosition.bottom,
-                  behavior: FlashBehavior.floating,
-                  child: FlashBar(
-                    icon: Padding(
-                      padding: EdgeInsets.only(left: 24.w, right: 12.w),
-                      child: SvgPicture.asset('assets/no_wifi.svg'),
-                    ),
-                    content: Text(
-                      LocaleKeys.noInternet,
-                      style: context.locale == context.supportedLocales[0]
-                          ? kts20Text
-                          : kts18Text,
-                    ).tr(),
-                  ),
-                );
-              },
-            );
+        //* CALLED immediately after start-up animation is completed to check for internet connectivity and navigation based on it
+        if (!model.startAnimation) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            bool isOffline = model.checkAndHandleConnectivity(context.locale);
+            if (isOffline) {
+              showNoConnectionFlash(context);
+            } else {
+              flashController?.dismiss();
+            }
           });
         }
-
-        //*CALLED when user has INTERNET CONNECTION
-        if (model.startAnimation == false &&
-            (model.connectivityStatus != ConnectivityStatus.Offline &&
-                model.connectivityStatus != null))
-          model.navToHomeWithConnection(context.locale);
 
         return Scaffold(
           body: Stack(
@@ -106,7 +73,7 @@ class _StartUpViewState extends State<StartUpView> {
                   ],
                 ),
               ),
-              if (model.startAnimation == false &&
+              if (!model.startAnimation &&
                   (model.connectivityStatus != ConnectivityStatus.Offline &&
                       model.connectivityStatus != null))
                 Positioned(
@@ -232,5 +199,44 @@ class _StartUpViewState extends State<StartUpView> {
         );
       },
     );
+  }
+
+  void showNoConnectionFlash(BuildContext context) {
+    if (flashController?.isDisposed == false) {
+      flashController?.dismiss();
+    }
+    flashController = FlashController<Object?>(
+      context,
+      builder: (context, controller) {
+        return Flash(
+          controller: controller,
+          barrierDismissible: false,
+          enableVerticalDrag: false,
+          borderRadius: AppTheme().radius15,
+          backgroundColor: kcSecondaryLightColor,
+          boxShadows: kElevationToShadow[0],
+          margin: EdgeInsets.only(
+            left: 32.w,
+            right: 32.w,
+            bottom: 0.075.sh,
+          ),
+          position: FlashPosition.bottom,
+          behavior: FlashBehavior.floating,
+          child: FlashBar(
+            icon: Padding(
+              padding: EdgeInsets.only(left: 24.w, right: 12.w),
+              child: SvgPicture.asset('assets/no_wifi.svg'),
+            ),
+            content: Text(
+              LocaleKeys.noInternet,
+              style: context.locale == context.supportedLocales[0]
+                  ? kts20Text
+                  : kts18Text,
+            ).tr(),
+          ),
+        );
+      },
+    );
+    flashController?.show();
   }
 }
