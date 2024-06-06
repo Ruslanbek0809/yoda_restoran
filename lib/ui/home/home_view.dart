@@ -9,6 +9,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:yoda_res/services/sentry/sentry_module.dart';
 import 'package:yoda_res/ui/home/moments/moments_view.dart';
 import '../../generated/locale_keys.g.dart';
 import '../../library/upgrader_translations.dart';
@@ -51,90 +52,63 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-        //* //*----------------- SHAKE SLIDERS DIALOG ---------------------//
-        // ShakeDetector.autoStart(
-        //   shakeThresholdGravity: 1.75,
-        //   onPhoneShake: () async {
-        //     printLog('onPhoneShake WORKING');
-        //     if (model.sliders != null && model.sliders!.isNotEmpty) {
-        //       //*GENERATES a new Random object
-        //       final _random = Random();
-
-        //       // GENERATES a random index based on the list length
-        //       // and USE it to RETRIEVE the element
-        //       final _selectedRandomSlider =
-        //           model.sliders![_random.nextInt(model.sliders!.length)];
-
-        //       //*DISMISSES previous awesome dialog
-        //       if (_awesomeDialog != null) {
-        //         printLog('_awesomeDialog CALLED');
-        //         _awesomeDialog?.dismiss();
-        //         _awesomeDialog = null;
-        //       }
-
-        //       _awesomeDialog = awesomeDialog.AwesomeDialog(
-        //         context: context,
-        //         width: 1.sw,
-        //         showCloseIcon: false,
-        //         headerAnimationLoop: false,
-        //         padding: EdgeInsets.zero,
-        //         // onDissmissCallback: (value) {
-        //         //   _awesomeDialog?.dismiss();
-        //         //   printLog('onDissmissCallback value: $value');
-        //         // },
-
-        //         //*REMOVES top gap in a dialog
-        //         bodyHeaderDistance: 0,
-        //         dialogBackgroundColor: Colors.transparent,
-        //         animType: awesomeDialog.AnimType.SCALE,
-        //         dialogType: awesomeDialog.DialogType.NO_HEADER,
-        //         body: FittedBox(
-        //           child: GestureDetector(
-        //             onTap: () async {
-        //               _awesomeDialog?.dismiss();
-        //               _awesomeDialog = null;
-        //               _selectedRandomSlider.option == 'restoran'
-        //                   ? await model.navToResDetailsViewViaAwesomeDialog(
-        //                       _selectedRandomSlider.restaurant!)
-        //                   : await model
-        //                       .navToSliderWebview(_selectedRandomSlider.url!);
-        //             },
-        //             child: YodaImage(
-        //               //*CHANGES slider image by localization
-        //               image: context.locale == context.supportedLocales[0]
-        //                   ? _selectedRandomSlider.image!
-        //                   : _selectedRandomSlider.imageRu!,
-        //               phImage: 'assets/ph_slider.png',
-        //               borderRadius: 20.0,
-        //             ),
-        //           ),
-        //         ),
-        //       )..show();
-        //     }
-        //   },
-        // );
-
         //*HOME RESS PAG
-        if (model.isPullUpEnabled == false) model.enablePullUp();
+        if (!model.isPullUpEnabled) model.enablePullUp();
 
         //*This TRIGGERS fetch action of home data
         await _refreshController.requestRefresh();
 
-        //*InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
+        //* InAppUpdate for Android only (FLEXIBLE UPDATE STYLE)
         if (Platform.isAndroid) {
-          var info = await InAppUpdate.checkForUpdate();
+          try {
+            var info = await InAppUpdate.checkForUpdate();
 
-          // model.log.v('InAppUpdate Info: $info');
-          printLog('InAppUpdate Info: $info');
-          // model.log.v(
-          //     'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
-          printLog(
-              'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}');
-          if (info.updateAvailability == 2) {
-            printLog('I AM IN startFlexibleUpdate(): ');
-            await InAppUpdate.startFlexibleUpdate().then((value) async {
-              await InAppUpdate.completeFlexibleUpdate();
-            });
+            printLog('InAppUpdate Info: $info');
+            printLog(
+              'InAppUpdate Info.availableVersionCode: ${info.availableVersionCode}',
+            );
+            if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+              printLog('Starting flexible update...');
+              await InAppUpdate.startFlexibleUpdate().then((value) async {
+                await InAppUpdate.completeFlexibleUpdate();
+              }).catchError((error) {
+                reportExceptionToSentry(
+                  error,
+                  additionalInfo:
+                      'MY ERROR SENTRY => Error during flexible update completion',
+                );
+              });
+            }
+          } on PlatformException catch (e) {
+            switch (e.code) {
+              case 'TASK_FAILURE':
+                reportExceptionToSentry(
+                  e,
+                  additionalInfo:
+                      'MY ERROR SENTRY => TASK_FAILURE during in-app update',
+                );
+                break;
+              case 'Install Error(-9)':
+                reportExceptionToSentry(
+                  e,
+                  additionalInfo:
+                      'MY ERROR SENTRY => Play Store not found during in-app update',
+                );
+                break;
+              default:
+                reportExceptionToSentry(
+                  e,
+                  additionalInfo:
+                      'MY ERROR SENTRY => PlatformException during in-app update',
+                );
+                break;
+            }
+          } catch (e) {
+            reportExceptionToSentry(
+              e,
+              additionalInfo:
+                  'MY ERROR SENTRY => Unexpected error during in-app update',
+            );
           }
         }
 
