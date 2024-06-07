@@ -196,305 +196,224 @@ class RestaurantView extends StatelessWidget {
               ],
             ),
 
-            // //*----------------- DISCOUNT/AKSIYA ---------------------//
-            // if ((restaurant.discount != null && restaurant.discount! > 0) ||
-            //     (restaurant.discountMeals == true) ||
-            //     (restaurant.discountCategory == true) ||
-            //     (restaurant.discountAksiya == true))
-            Padding(
-              padding: EdgeInsets.only(right: 18.r),
-              child: Wrap(
-                spacing: 16.r,
-                children: [
-                  //*----------------- DISCOUNT GENERAL ---------------------//
-                  // if ((restaurant.discount != null &&
-                  //         restaurant.discount! > 0) &&
-                  //     (restaurant.hourlyDiscount == null ||
-                  //         restaurant.hourlyDiscount! == 0) &&
-                  //     !model.isHourlyDiscountActive)
-                  FittedBox(
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: kcSecondaryLightColor,
-                            borderRadius: AppTheme().radius20,
-                          ),
-                          margin: EdgeInsets.only(
-                            top: 10.r,
-                            bottom: 2.r,
-                          ),
-                          padding: EdgeInsets.only(
-                            top: 6.r,
-                            bottom: 6.r,
-                            right: 16.r,
-                            left: 22.r + 18.r,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.ideographic,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 5.r),
-                                child: Text(
-                                  LocaleKeys.discount,
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: kcIconColor,
-                                  ),
-                                ).tr(),
-                              ),
-                              Text(
-                                '${formatNum(restaurant.discount ?? 0)}%',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: kcIconColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 0,
-                          top: 5.h,
-                          child: SimpleShadow(
-                            child: SvgPicture.asset(
-                              'assets/discount.svg',
-                              color: kcGreenColor,
-                              width: 34.sp,
-                            ),
-                            opacity: 0.1,
-                            color: kcSecondaryDarkColor,
-                            offset: Offset(2, 2),
-                            sigma: 2,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  //*----------------- DISCOUNT HOURLY  ---------------------//
-                  // if (model.isHourlyDiscountActive ||
-                  //     ((restaurant.discount == null ||
-                  //             restaurant.discount! == 0) &&
-                  //         (restaurant.hourlyDiscount != null &&
-                  //             restaurant.hourlyDiscount! > 0) &&
-                  //         !model.isHourlyDiscountActive))
-                  FittedBox(
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: kcSecondaryLightColor,
-                            borderRadius: AppTheme().radius20,
-                          ),
-                          margin: EdgeInsets.only(
-                            left: 16.r,
-                            top: 10.r,
-                            bottom: 2.r,
-                          ),
-                          padding: EdgeInsets.only(
-                            top: 6.r,
-                            bottom: 6.r,
-                            right: 16.r,
-                            left: 24.r,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.ideographic,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 5.r),
-                                child: Text(
-                                  '12 - 15',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: kcIconColor,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: kcIconColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 0,
-                          top: 5.h,
-                          child: SimpleShadow(
-                            child: SvgPicture.asset(
-                              'assets/discount.svg',
-                              color: kcGreenColor,
-                              width: 34.sp,
-                            ),
-                            opacity: 0.1,
-                            color: kcSecondaryDarkColor,
-                            offset: Offset(2, 2),
-                            sigma: 2,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-
-                  // //*----------------- DISCOUNT GENERAL and HOURLY ---------------------//
-                  // if ((restaurant.discount != null &&
-                  //         restaurant.discount! > 0) &&
-                  //     (restaurant.hourlyDiscount != null &&
-                  //         restaurant.hourlyDiscount! > 0) &&
-                  //     !model.isHourlyDiscountActive)
-                  //   Stack(
-                  //     children: [
-                  //       Container(
-                  //         decoration: BoxDecoration(
-                  //           color: kcSecondaryLightColor,
-                  //           borderRadius: AppTheme().radius20,
-                  //         ),
-                  //         margin: EdgeInsets.only(
-                  //             left: 18.w, top: 10.h, bottom: 2.h),
-                  //         padding: EdgeInsets.only(
-                  //             top: 6.r, bottom: 6.r, right: 16.r, left: 22.r),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             //*----------------- DISCOUNT ---------------------//
-                  //             Row(
-                  //               crossAxisAlignment: CrossAxisAlignment.baseline,
-                  //               textBaseline: TextBaseline.ideographic,
-                  //               children: [
-                  //                 Padding(
-                  //                   padding: EdgeInsets.only(right: 5.r),
-                  //                   child: Text(
-                  //                     LocaleKeys.discount,
-                  //                     style: TextStyle(
-                  //                       fontSize: 14.sp,
-                  //                       color: kcIconColor,
-                  //                     ),
-                  //                   ).tr(),
-                  //                 ),
-                  //                 Text(
-                  //                   '${formatNum(restaurant.discount ?? 0)}%',
-                  //                   style: TextStyle(
-                  //                     fontSize: 16.sp,
-                  //                     fontWeight: FontWeight.w600,
-                  //                     color: kcIconColor,
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //             Text(
-                  //               '/',
-                  //               style: TextStyle(
-                  //                 fontSize: 16.sp,
-                  //                 fontWeight: FontWeight.w600,
-                  //                 color: kcIconColor,
-                  //               ),
-                  //             ),
-                  //             //*----------------- HOURLY DISCOUNT ---------------------//
-                  //             Row(
-                  //               crossAxisAlignment: CrossAxisAlignment.baseline,
-                  //               textBaseline: TextBaseline.ideographic,
-                  //               children: [
-                  //                 Padding(
-                  //                   padding: EdgeInsets.only(right: 5.r),
-                  //                   child: Text(
-                  //                     '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
-                  //                     style: TextStyle(
-                  //                       fontSize: 14.sp,
-                  //                       color: kcIconColor,
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //                 Text(
-                  //                   '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
-                  //                   style: TextStyle(
-                  //                     fontSize: 16.sp,
-                  //                     fontWeight: FontWeight.w600,
-                  //                     color: kcIconColor,
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       Positioned(
-                  //         left: 0,
-                  //         top: 5.h,
-                  //         child: SimpleShadow(
-                  //           child: SvgPicture.asset(
-                  //             'assets/discount.svg',
-                  //             color: kcGreenColor,
-                  //             width: 34.sp,
-                  //           ),
-                  //           opacity: 0.1,
-                  //           color: kcSecondaryDarkColor,
-                  //           offset: Offset(2, 2),
-                  //           sigma: 2,
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-
-                  //*----------------- AKSIYA  ---------------------//
-                  // if (restaurant.discountAksiya == true)
-                  FittedBox(
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: kcSecondaryLightColor,
-                            borderRadius: AppTheme().radius20,
-                          ),
-                          margin: EdgeInsets.only(
-                            left: 18.r,
-                            top: 10.r,
-                            bottom: 2.r,
-                          ),
-                          padding: EdgeInsets.only(
-                            top: 6.r,
-                            bottom: 6.r,
-                            right: 16.r,
-                            left: 22.r,
-                          ),
-                          child: Padding(
+            //*----------------- DISCOUNT ONLY ---------------------//
+            if ((restaurant.discount != null && restaurant.discount! > 0) &&
+                (restaurant.hourlyDiscount == null ||
+                    restaurant.hourlyDiscount! == 0) &&
+                !model.isHourlyDiscountActive)
+              FittedBox(
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: kcSecondaryLightColor,
+                        borderRadius: AppTheme().radius20,
+                      ),
+                      margin:
+                          EdgeInsets.only(left: 18.r, top: 10.r, bottom: 2.r),
+                      padding: EdgeInsets.only(
+                          top: 6.r, bottom: 6.r, right: 16.r, left: 22.r),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.ideographic,
+                        children: [
+                          Padding(
                             padding: EdgeInsets.only(right: 5.r),
                             child: Text(
-                              'Aksiya',
+                              LocaleKeys.discount,
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: kcIconColor,
                               ),
-                            ), //TODO: Add translation
+                            ).tr(),
+                          ),
+                          Text(
+                            '${formatNum(restaurant.discount ?? 0)}%',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: kcIconColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      top: 5.h,
+                      child: SimpleShadow(
+                        child: SvgPicture.asset(
+                          'assets/discount.svg',
+                          color: kcGreenColor,
+                          width: 34.sp,
+                        ),
+                        opacity: 0.1,
+                        color: kcSecondaryDarkColor,
+                        offset: Offset(2, 2),
+                        sigma: 2,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            //*----------------- HOURLY DISCOUNT ONLY ---------------------//
+            if (model.isHourlyDiscountActive ||
+                ((restaurant.discount == null || restaurant.discount! == 0) &&
+                    (restaurant.hourlyDiscount != null &&
+                        restaurant.hourlyDiscount! > 0) &&
+                    !model.isHourlyDiscountActive))
+              FittedBox(
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: kcSecondaryLightColor,
+                        borderRadius: AppTheme().radius20,
+                      ),
+                      margin:
+                          EdgeInsets.only(left: 16.r, top: 10.r, bottom: 2.r),
+                      padding: EdgeInsets.only(
+                          top: 6.r, bottom: 6.r, right: 16.r, left: 24.r),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.ideographic,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 5.r),
+                            child: Text(
+                              '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: kcIconColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      top: 5.h,
+                      child: SimpleShadow(
+                        child: SvgPicture.asset(
+                          'assets/discount.svg',
+                          color: kcGreenColor,
+                          width: 34.sp,
+                        ),
+                        opacity: 0.1,
+                        color: kcSecondaryDarkColor,
+                        offset: Offset(2, 2),
+                        sigma: 2,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+            //*----------------- DISCOUNT and HOURLY DISCOUNT ---------------------//
+            if ((restaurant.discount != null && restaurant.discount! > 0) &&
+                (restaurant.hourlyDiscount != null &&
+                    restaurant.hourlyDiscount! > 0) &&
+                !model.isHourlyDiscountActive)
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: kcSecondaryLightColor,
+                      borderRadius: AppTheme().radius20,
+                    ),
+                    margin: EdgeInsets.only(left: 18.w, top: 10.h, bottom: 2.h),
+                    padding: EdgeInsets.only(
+                        top: 6.r, bottom: 6.r, right: 16.r, left: 22.r),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //*----------------- DISCOUNT ---------------------//
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 5.r),
+                              child: Text(
+                                LocaleKeys.discount,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: kcIconColor,
+                                ),
+                              ).tr(),
+                            ),
+                            Text(
+                              '${formatNum(restaurant.discount ?? 0)}%',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          '/',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: kcIconColor,
                           ),
                         ),
-                        Positioned(
-                          left: 0,
-                          top: 5.h,
-                          child: SimpleShadow(
-                            child: SvgPicture.asset(
-                              'assets/discount.svg',
-                              color: kcGreenColor,
-                              width: 34.sp,
+                        //*----------------- HOURLY DISCOUNT ---------------------//
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 5.r),
+                              child: Text(
+                                '${restaurant.discountBegin!.formateDateTimeHmOnly()} - ${restaurant.discountEnd!.formateDateTimeHmOnly()}',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: kcIconColor,
+                                ),
+                              ),
                             ),
-                            opacity: 0.1,
-                            color: kcSecondaryDarkColor,
-                            offset: Offset(2, 2),
-                            sigma: 2,
-                          ),
-                        )
+                            Text(
+                              '${formatNum(restaurant.hourlyDiscount ?? 0)}%',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kcIconColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
+                  Positioned(
+                    left: 0,
+                    top: 5.h,
+                    child: SimpleShadow(
+                      child: SvgPicture.asset(
+                        'assets/discount.svg',
+                        color: kcGreenColor,
+                        width: 34.sp,
+                      ),
+                      opacity: 0.1,
+                      color: kcSecondaryDarkColor,
+                      offset: Offset(2, 2),
+                      sigma: 2,
+                    ),
+                  )
                 ],
               ),
-            ),
           ],
         ),
       ),
