@@ -101,10 +101,6 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
       );
     });
 
-    //*DEPRECATED after app version 2.3.0+35
-    // //*GETS user's location
-    // await _geolocatorService.getUserLocation();
-
     await _apiRootService.initDio();
     await _hiveDbService.initHiveBoxes();
     _hiveDbService.getCartMeals(); //* GETS all CART meals insiede cartMealBox
