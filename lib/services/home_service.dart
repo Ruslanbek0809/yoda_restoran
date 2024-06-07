@@ -148,8 +148,8 @@ class HomeService with ReactiveServiceMixin {
       openRestaurants,
     );
 
-    //*This line "result.runtimeType != DioError" is Workaround
-    if (result.runtimeType != DioError) {
+    //*This line "result.runtimeType != DioException" is Workaround
+    if (result.runtimeType != DioException) {
       _selectedMainCatRestaurants = result;
       _fetchingFilter.value = false;
       log.v(

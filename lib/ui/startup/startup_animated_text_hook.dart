@@ -7,7 +7,7 @@ import 'startup_viewmodel.dart';
 
 class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
   final Widget child;
-  final int? delay;
+  final int delay;
   const StartUpAnimatedTextHook(
       {required this.child, required this.delay, Key? key})
       : super(key: key);
@@ -21,7 +21,7 @@ class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
 
     //*Animation will be PLAYED only for the first time
     if (model.startAnimation == true)
-      Timer(Duration(milliseconds: delay!), () {
+      Timer(Duration(milliseconds: delay), () {
         model.log.v('_animController CALLED');
         _animController.forward();
       });

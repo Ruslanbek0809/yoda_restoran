@@ -53,7 +53,7 @@ dependencies:
   logger: ^1.1.0
   flutter_hooks: ^0.18.5+1
   url_launcher: ^6.1.6
-  flutter_native_splash: ^1.2.0
+  flutter_native_splash: ^2.2.16
   flutter_launcher_icons: ^0.9.2
   easy_localization: ^3.0.0
   upgrader: ^4.4.0 # For IOS only update feature
@@ -83,7 +83,8 @@ dependencies:
   json_annotation: ^4.4.0
 
   # NETWORK
-  dio: ^4.0.4
+  dio: ^5.1.2
+  native_dio_adapter: ^0.1.0
   connectivity_plus: ^2.2.0
 
   # UI

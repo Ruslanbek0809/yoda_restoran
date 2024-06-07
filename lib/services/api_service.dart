@@ -192,7 +192,7 @@ class ApiService {
       }
 
       return _promotedList;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/promoted/ :${error.response}');
       rethrow;
     }
@@ -210,7 +210,7 @@ class ApiService {
         }
       }
       return _exclusives;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/groupexclusive/ :${error.response}');
       rethrow;
     }
@@ -275,7 +275,7 @@ class ApiService {
         }
       }
       return _selectedMainCatRestaurants;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/promoted/ :${error.response}');
       return error;
     }
@@ -323,7 +323,7 @@ class ApiService {
         }
       }
       return _allPaginatedRestaurants;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/paginatedRestaurants/ :$error');
       rethrow;
     }
@@ -362,9 +362,9 @@ class ApiService {
         }
         onSuccess!(_seRiches);
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/richRes?exclusive=$singleExId :${error.response}');
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -390,10 +390,10 @@ class ApiService {
       } else {
         onFail!();
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/categories/ :${error.response}');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -415,7 +415,7 @@ class ApiService {
       }
 
       return foundSingleRestaurant;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/restaurants/ :${error.response!.statusCode} and ${error.response!.data}');
@@ -442,7 +442,7 @@ class ApiService {
       }
 
       return _cartMealsUpdated;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
@@ -469,7 +469,7 @@ class ApiService {
       }
 
       return _moreMeals;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/restaurantMeals/ :${error.response!.statusCode} and ${error.response!.data}');
@@ -498,7 +498,7 @@ class ApiService {
           'RESPONSE: api/promocode/ _promocodeList[0] => ${_promocodeList[0]}');
 
       return _promocodeList[0];
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       log.v(
           'ERROR on api/promocode/ :${error.response!.statusCode} and ${error.response!.data}');
@@ -523,7 +523,7 @@ class ApiService {
       log.v('RESPONSE: _searchRestaurants => ${_searchRestaurants.length}');
 
       return _searchRestaurants;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       // log.v(
       //     'ERROR on api/restaurants/ :${error.response!.statusCode} and ${error.response!.data}');
@@ -551,7 +551,7 @@ class ApiService {
       log.v('RESPONSE: _searchMeals => ${_searchMeals.length}');
 
       return _searchMeals;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/restaurantMeals/: ${error.response!.data}');
       rethrow;
     }

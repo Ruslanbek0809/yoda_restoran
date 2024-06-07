@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
+import 'package:native_dio_adapter/native_dio_adapter.dart';
 
 import '../app/app.logger.dart';
 import '../utils/utils.dart';
@@ -36,6 +36,8 @@ class ApiRootService {
         _savedLocale == 'en_US' ? Constants.baseUrlTk : Constants.baseUrlRu;
     dio.options.headers = _headers;
 
+    dio.httpClientAdapter = NativeAdapter();
+
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // Do something before request is sent
       log.v(
@@ -44,13 +46,13 @@ class ApiRootService {
       // If you want to resolve the request with some custom data，
       // you can resolve a `Response` object eg: `handler.resolve(response)`.
       // If you want to reject the request with a error message,
-      // you can reject a `DioError` object eg: `handler.reject(dioError)`
+      // you can reject a `DioException` object eg: `handler.reject(DioException)`
     }, onResponse: (response, handler) {
       // Do something with response data
       return handler.next(response); // continue
       // If you want to reject the request with a error message,
-      // you can reject a `DioError` object eg: `handler.reject(dioError)`
-    }, onError: (DioError error, handler) {
+      // you can reject a `DioException` object eg: `handler.reject(DioException)`
+    }, onError: (DioException error, handler) {
       log.v(
         'API Error: ${error.response?.statusCode} - ${error.response?.data}',
       );

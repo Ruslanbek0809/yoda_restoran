@@ -72,10 +72,10 @@ class UserService {
   //       onSuccess!();
   //     } else
   //       onFail!();
-  //   } on DioError catch (error) {
+  //   } on DioException catch (error) {
   //     log.v('ERROR on api/user/ :${error.response}');
   //     onFail!();
-  //     throw DioErrorType.response;
+  //     throw DioExceptionType.response;
   //   }
   // }
 
@@ -136,10 +136,10 @@ class UserService {
         onSuccess!();
       } else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on auth/login/ :${error.response}');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -192,10 +192,10 @@ class UserService {
       } else {
         onFail!();
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on auth/verify/ :$error');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -249,10 +249,10 @@ class UserService {
         onSuccess!();
       } else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/user/${_currentUser!.id}/ :${error.response}');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -280,7 +280,7 @@ class UserService {
       }
 
       return _addresses;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       rethrow;
     }
@@ -319,7 +319,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/address/ ${error.response}');
       onFail!();
       rethrow;
@@ -360,7 +360,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/address/$addressId/ ${error.response}');
       onFail!();
       rethrow;
@@ -377,7 +377,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on api/address/$addressId/: $error');
       onFail!();
       rethrow;
@@ -463,14 +463,14 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/order/ with RESPONSE: ${error.response!.statusCode}');
       if (error.response!.statusCode == 502 ||
           error.response!.statusCode == 503)
         onSuccess!();
       else
         onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -492,7 +492,7 @@ class UserService {
         _orders.sort((prev, next) => prev.status!
             .compareTo(next.status!)); // Sorting status ids in ascending order
       return _orders;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/order/ with RESPONSE: ${error.response}');
       rethrow;
     }
@@ -540,7 +540,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
       rethrow;
@@ -561,7 +561,7 @@ class UserService {
     //     onSuccess!();
     //   else
     //     onFail!();
-    // } on DioError catch (error) {
+    // } on DioException catch (error) {
     //   log.v('ERROR on api/order/$orderId/: ${error.response}');
     //   onFail!();
     //   rethrow;
@@ -580,7 +580,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
       rethrow;
@@ -668,14 +668,14 @@ class UserService {
 
         //* if FAIL
         onFail(CreateBankOrderEnum.fail);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on createBankOrder => ${error.response}');
       log.v('ERROR on createBankOrder error.response?.data ?? '
           ' => ${error.response?.data ?? ''}');
 
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'MY ERROR SENTRY => createBankOrder() DioError',
+        additionalInfo: 'MY ERROR SENTRY => createBankOrder() DioException',
       );
 
       var errorData = error.response?.data;
@@ -743,18 +743,18 @@ class UserService {
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
             // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
           onResponse: (response, handler) {
             return handler.next(response);
             // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
-          onError: (DioError error, handler) {
+          onError: (DioException error, handler) {
             reportDioExceptionToSentry(
               error,
               additionalInfo:
-                  'MY ERROR SENTRY => verifyOtpOrderPayment() DioError',
+                  'MY ERROR SENTRY => verifyOtpOrderPayment() DioException',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -892,12 +892,13 @@ class UserService {
 
         //* if FAIL
         onFail(0);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR on verifyOtpOrderPayment => ${error.response}');
       onFail(0);
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'MY ERROR SENTRY => verifyOtpOrderPayment() DioError',
+        additionalInfo:
+            'MY ERROR SENTRY => verifyOtpOrderPayment() DioException',
       );
       rethrow;
     }
@@ -934,17 +935,17 @@ class UserService {
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
             // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
           onResponse: (response, handler) {
             return handler.next(response);
             // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
-          onError: (DioError error, handler) {
+          onError: (DioException error, handler) {
             reportDioExceptionToSentry(
               error,
-              additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioError',
+              additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioException',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -973,10 +974,10 @@ class UserService {
         //* FAIL
         onFail();
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       reportDioExceptionToSentry(
         error,
-        additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioError',
+        additionalInfo: 'MY ERROR SENTRY => postFinish3ds() DioException',
       );
       if (error.response?.statusCode == 200 ||
           error.response?.statusCode == 201 ||
@@ -1026,18 +1027,18 @@ class UserService {
             // If you want to resolve the request with some custom data，
             // you can resolve a `Response` object eg: `handler.resolve(response)`.
             // If you want to reject the request with a error message,f
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
           onResponse: (response, handler) {
             return handler.next(response); // continue
             // If you want to reject the request with a error message,
-            // you can reject a `DioError` object eg: `handler.reject(dioError)`
+            // you can reject a `DioException` object eg: `handler.reject(DioException)`
           },
-          onError: (DioError error, handler) {
+          onError: (DioException error, handler) {
             reportDioExceptionToSentry(
               error,
               additionalInfo:
-                  'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioError',
+                  'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioException',
             );
             return handler.next(error);
             // If you want to resolve the request with some custom data，
@@ -1082,14 +1083,14 @@ class UserService {
         else
           onFail(SmsErrorEnum.fail);
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(
         'ERROR on checkOnlinePaymentOrderStatusExtended => ${error.response}',
       );
       reportDioExceptionToSentry(
         error,
         additionalInfo:
-            'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioError',
+            'MY ERROR SENTRY => checkOnlinePaymentOrderStatusExtended() DioException',
       );
       onFail(SmsErrorEnum.fail);
       rethrow;
@@ -1114,7 +1115,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(
           'ERROR patchOrderToPaid => api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
@@ -1140,7 +1141,7 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(
           'ERROR patchOrderOnlineToCash => api/order/$orderId/ with RESPONSE: ${error.response}');
       onFail!();
@@ -1185,7 +1186,7 @@ class UserService {
         log.v(
             'AFTER FAIL addRestaurantToFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(
           'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
       //* If server FAILS, DELETE current res id from favoritesBox
@@ -1230,7 +1231,7 @@ class UserService {
         log.v(
             'AFTER FAIL removeRestaurantFromFav() PATCH favoritesBox.values.toList(): ${favoritesBox.values.toList()}');
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(
           'ERROR api/user/${_currentUser!.id}/ with RESPONSE: ${error.response}');
       //* If server FAILS, ADDS previously deleted res to favoritesBox
@@ -1278,10 +1279,10 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/ratings/ with RESPONSE: ${error.response}');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -1314,10 +1315,10 @@ class UserService {
         onSuccess!();
       else
         onFail!();
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v('ERROR api/messages/ with RESPONSE: ${error.response}');
       onFail!();
-      throw DioErrorType.response;
+      throw DioExceptionType.badResponse;
     }
   }
 
@@ -1336,7 +1337,7 @@ class UserService {
       }
 
       return _additionals;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       log.v(error);
       rethrow;
     }

@@ -35,7 +35,7 @@ void reportExceptionToSentryWithStacktrace(
   );
 }
 
-void reportDioExceptionToSentry(DioError error, {String? additionalInfo}) {
+void reportDioExceptionToSentry(DioException error, {String? additionalInfo}) {
   Sentry.captureException(
     additionalInfo != null ? '$additionalInfo $error' : error,
     stackTrace: error.stackTrace,
