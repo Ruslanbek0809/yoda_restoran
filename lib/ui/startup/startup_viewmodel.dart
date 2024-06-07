@@ -1,17 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:yoda_res/generated/locale_keys.g.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
-import 'package:yoda_res/shared/shared.dart';
 
 import '../../app/app.locator.dart';
 import '../../app/app.logger.dart';
@@ -66,123 +61,186 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     }
   }
 
-  Future<void> navToHomeWithConnection(
-    Locale initLocale,
-  ) async {
+  Future<void> navToHomeWithConnection(Locale initLocale) async {
     log.i('===== navToHomeWithConnection() STARTED =====');
 
-    // await flashController?.dismiss(); // DISMISSES no internet flashbar
+    try {
+      if (initLocale.toString() == 'ru_RU') {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final _savedLocale = prefs.getString(Constants.savedLocale) ?? 'en_US';
+        if (_savedLocale != 'ru_RU') {
+          await prefs.setString(Constants.savedLocale, initLocale.toString());
+        }
+      }
 
-    //*So this below condition is to change lang of API initialization to ru lang when app is opened for the first time. Drawback of easy_localization. Workaround
-    if (initLocale.toString() == 'ru_RU') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      final _savedLocale = prefs.getString(Constants.savedLocale) ??
-          'en_US'; // GETS saved locale.
+      await initializePushNotificationService();
+      await initializeDynamicLinkService();
+      await initializeAPIRootService();
+      await initializeHiveDBService();
+      await initializeUserService();
 
-      if (_savedLocale != 'ru_RU')
-        await prefs.setString(Constants.savedLocale, initLocale.toString());
-    }
-
-    //* Initialize Push Notification Service in a non-blocking way
-    _pushNotificationService.initialise().catchError((error) {
-      log.e('Error initializing PushNotificationService', error);
-      reportExceptionToSentry(
-        error,
-        additionalInfo:
-            'MY ERROR SENTRY => PushNotificationService initialisation',
+      navigateBasedOnOnBoardingStatus();
+    } catch (e, stackTrace) {
+      log.e('Error during startup: $e');
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'Startup process error',
+        stackTrace: stackTrace,
       );
-    });
-    //* INITIALIZATION of FB Dynamic Link
-    _dynamicLinkService.handleBFDynamicLinks().catchError((error) {
-      log.e('Error initializing DynamicLinkService', error);
-      reportExceptionToSentry(
-        error,
-        additionalInfo: 'MY ERROR SENTRY => DynamicLinkService initialization',
-      );
-    });
-
-    await _apiRootService.initDio();
-    await _hiveDbService.initHiveBoxes();
-    _hiveDbService.getCartMeals(); //* GETS all CART meals insiede cartMealBox
-    _hiveDbService.getCartRes(); //* GETS CART restaurant inside cartResBox
-    _hiveDbService.getHiveRatings(); //* GETS hive ratings
-    _hiveDbService.getHiveCreditCards(); //* GETS all hive credit cards
-    await _hiveDbService.cleanStoriesBasedOnDeadlines();
-
-    //* USE _userService.getInitialUser OR _userService.initUser
-    await _userService.initUser();
-
-    //* CHECKS whether onBoarding was SEEN or NOT
-    var prefs = await SharedPreferences.getInstance();
-    var _isOnBoardingSeen = prefs.getBool(Constants.isOnBoardingSeen) ?? false;
-    log.v('==== IS ONBOARDING SEEN: $_isOnBoardingSeen ====');
-
-    if (_isOnBoardingSeen) {
-      Platform.isIOS
-          ? await _navService.replaceWithTransition(
-              HomeView(),
-              transitionStyle: Transition.fade,
-            )
-          : await _navService.replaceWith(Routes.homeView);
-    } else {
-      Platform.isIOS
-          ? await _navService.replaceWithTransition(
-              OnBoardingView(),
-              transitionStyle: Transition.fade,
-            )
-          : await _navService.replaceWith(Routes.onBoardingView);
     }
-
-    // //*USER part. GETS initial user with condition and behaves with that in mind
-    // await _userService.getInitialUser(
-    //   onSuccess: () async {
-    //     log.v('==== SUCCESS User ====');
-
-    //     if (_isOnBoardingSeen) {
-    //       Platform.isIOS
-    //           ? await _navService.replaceWithTransition(
-    //               HomeView(),
-    //               transition: NavigationTransition.Fade,
-    //             )
-    //           : await _navService.replaceWith(Routes.homeView);
-    //     } else {
-    //       Platform.isIOS
-    //           ? await _navService.replaceWithTransition(
-    //               OnBoardingView(),
-    //               transition: NavigationTransition.Fade,
-    //             )
-    //           : await _navService.replaceWith(Routes.onBoardingView);
-    //     }
-    //   },
-    //   onFail: () async {
-    //     log.v('====== FAIL User ======');
-    //     SharedPreferences prefs = await SharedPreferences.getInstance();
-    //     String? _accessToken = prefs.getString(Constants.accessToken);
-    //     if (_accessToken != null) {
-    //       await prefs.remove(Constants.accessToken);
-    //       _accessToken = prefs.getString(Constants.accessToken);
-    //       log.i('ACCESS TOKEN after remove: $_accessToken');
-    //     }
-    //     await _userService.clearUser();
-
-    //     if (_isOnBoardingSeen) {
-    //       Platform.isIOS
-    //           ? await _navService.replaceWithTransition(
-    //               HomeView(),
-    //               transition: NavigationTransition.Fade,
-    //             )
-    //           : await _navService.replaceWith(Routes.homeView);
-    //     } else {
-    //       Platform.isIOS
-    //           ? await _navService.replaceWithTransition(
-    //               OnBoardingView(),
-    //               transition: NavigationTransition.Fade,
-    //             )
-    //           : await _navService.replaceWith(Routes.onBoardingView);
-    //     }
-    //   },
-    // );
   }
+
+  Future<void> initializePushNotificationService() async {
+    try {
+      await _pushNotificationService.initialise();
+    } catch (e, stackTrace) {
+      log.e('Error initializing PushNotificationService', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'PushNotificationService initialization',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> initializeDynamicLinkService() async {
+    try {
+      await _dynamicLinkService.handleBFDynamicLinks();
+    } catch (e, stackTrace) {
+      log.e('Error initializing DynamicLinkService', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'DynamicLinkService initialization',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> initializeAPIRootService() async {
+    try {
+      await _apiRootService.initDio();
+    } catch (e, stackTrace) {
+      log.e('Error initializing API root service', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'API root service initialization',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> initializeHiveDBService() async {
+    try {
+      await _hiveDbService.initHiveBoxes();
+      _hiveDbService.getCartMeals();
+      _hiveDbService.getCartRes();
+      _hiveDbService.getHiveRatings();
+      _hiveDbService.getHiveCreditCards();
+      await _hiveDbService.cleanStoriesBasedOnDeadlines();
+    } catch (e, stackTrace) {
+      log.e('Error initializing Hive DB service', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'Hive DB service initialization',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> initializeUserService() async {
+    try {
+      await _userService.initUser();
+    } catch (e, stackTrace) {
+      log.e('Error initializing user service', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'User service initialization',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> navigateBasedOnOnBoardingStatus() async {
+    try {
+      var prefs = await SharedPreferences.getInstance();
+      var _isOnBoardingSeen =
+          prefs.getBool(Constants.isOnBoardingSeen) ?? false;
+      log.v('==== IS ONBOARDING SEEN: $_isOnBoardingSeen ====');
+
+      if (_isOnBoardingSeen) {
+        Platform.isIOS
+            ? await _navService.replaceWithTransition(
+                HomeView(),
+                transitionStyle: Transition.fade,
+              )
+            : await _navService.replaceWith(Routes.homeView);
+      } else {
+        Platform.isIOS
+            ? await _navService.replaceWithTransition(
+                OnBoardingView(),
+                transitionStyle: Transition.fade,
+              )
+            : await _navService.replaceWith(Routes.onBoardingView);
+      }
+    } catch (e, stackTrace) {
+      log.e('Error during navigation based on onboarding status', e);
+      reportExceptionToSentryWithStacktrace(
+        e,
+        additionalInfo: 'Navigation based on onboarding status',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  // //*USER part. GETS initial user with condition and behaves with that in mind
+  // await _userService.getInitialUser(
+  //   onSuccess: () async {
+  //     log.v('==== SUCCESS User ====');
+
+  //     if (_isOnBoardingSeen) {
+  //       Platform.isIOS
+  //           ? await _navService.replaceWithTransition(
+  //               HomeView(),
+  //               transition: NavigationTransition.Fade,
+  //             )
+  //           : await _navService.replaceWith(Routes.homeView);
+  //     } else {
+  //       Platform.isIOS
+  //           ? await _navService.replaceWithTransition(
+  //               OnBoardingView(),
+  //               transition: NavigationTransition.Fade,
+  //             )
+  //           : await _navService.replaceWith(Routes.onBoardingView);
+  //     }
+  //   },
+  //   onFail: () async {
+  //     log.v('====== FAIL User ======');
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     String? _accessToken = prefs.getString(Constants.accessToken);
+  //     if (_accessToken != null) {
+  //       await prefs.remove(Constants.accessToken);
+  //       _accessToken = prefs.getString(Constants.accessToken);
+  //       log.i('ACCESS TOKEN after remove: $_accessToken');
+  //     }
+  //     await _userService.clearUser();
+
+  //     if (_isOnBoardingSeen) {
+  //       Platform.isIOS
+  //           ? await _navService.replaceWithTransition(
+  //               HomeView(),
+  //               transition: NavigationTransition.Fade,
+  //             )
+  //           : await _navService.replaceWith(Routes.homeView);
+  //     } else {
+  //       Platform.isIOS
+  //           ? await _navService.replaceWithTransition(
+  //               OnBoardingView(),
+  //               transition: NavigationTransition.Fade,
+  //             )
+  //           : await _navService.replaceWith(Routes.onBoardingView);
+  //     }
+  //   },
+  // );
 
   @override
   Stream<ConnectivityStatus> get stream =>

@@ -48,8 +48,8 @@ class CartService with ReactiveServiceMixin {
     await _hiveDbService.updateResInCart(_singleRestaurant);
   }
 
-  Future<void> getCartMeals(int resId, List<HiveMeal> cartMeals) async {
-    _cartMealsUpdated = await _api.getCartMeals(resId, cartMeals);
+  Future<void> getCartMeals(List<HiveMeal> cartMeals) async {
+    _cartMealsUpdated = await _api.getCartMeals(cartMeals);
 
     //* Detect price changes
     bool priceChangeDetected = false;

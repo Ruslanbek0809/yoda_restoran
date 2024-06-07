@@ -63,7 +63,7 @@ class CartViewModel extends ReactiveViewModel {
   Future getCartData() async {
     await runBusyFuture(_cartService.getSingleRestaurant(cartRes!.id!),
         busyObject: cartSingleRestaurantFuture);
-    await runBusyFuture(_cartService.getCartMeals(cartRes!.id!, cartMeals),
+    await runBusyFuture(_cartService.getCartMeals(cartMeals),
         busyObject: cartMealsFuture);
     await runBusyFuture(_cartService.getMoreMeals(cartRes!.id!, cartMeals),
         busyObject: cartMoreMealsFuture);

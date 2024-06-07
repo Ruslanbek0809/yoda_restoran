@@ -423,7 +423,7 @@ class ApiService {
     }
   }
 
-  Future<List<Meal>> getCartMeals(int resId, List<HiveMeal> cartMeals) async {
+  Future<List<Meal>> getCartMeals(List<HiveMeal> cartMeals) async {
     List<Meal> _cartMealsUpdated = [];
 
     String _queryPars = 'ids=${cartMeals[0].id}';

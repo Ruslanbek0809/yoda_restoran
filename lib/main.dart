@@ -17,28 +17,86 @@ import 'utils/utils.dart';
 import 'yoda_res_app.dart';
 
 void main() async {
-  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp();
-  await Hive.initFlutter();
-  Hive.registerAdapter<HiveUser>(HiveUserAdapter());
-  Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
-  Hive.registerAdapter<HiveResPaymentType>(HiveResPaymentTypeAdapter());
-  Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
-  Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
-  Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
-  Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
-  Hive.registerAdapter<HiveStory>(HiveStoryAdapter());
-  setupLocator();
-  setupBottomSheet();
-  setupDialog();
-  setupSnackbar();
+
+  //* Set up global HTTP overrides
+  HttpOverrides.global = MyHttpOverrides();
+
+  try {
+    await EasyLocalization.ensureInitialized();
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo:
+          'MY ERROR SENTRY => EasyLocalization initialization error',
+      stackTrace: stackTrace,
+    );
+  }
+  try {
+    await Firebase.initializeApp();
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo: 'MY ERROR SENTRY => Firebase initialization error',
+      stackTrace: stackTrace,
+    );
+  }
+
+  try {
+    await Hive.initFlutter();
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo: 'MY ERROR SENTRY => Hive initialization error',
+      stackTrace: stackTrace,
+    );
+  }
+
+  //* Register Hive adapters
+  try {
+    Hive.registerAdapter<HiveUser>(HiveUserAdapter());
+    Hive.registerAdapter<HiveRestaurant>(HiveRestaurantAdapter());
+    Hive.registerAdapter<HiveResPaymentType>(HiveResPaymentTypeAdapter());
+    Hive.registerAdapter<HiveMeal>(HiveMealAdapter());
+    Hive.registerAdapter<HiveVolCus>(HiveVolCusAdapter());
+    Hive.registerAdapter<HiveRating>(HiveRatingAdapter());
+    Hive.registerAdapter<HiveCreditCard>(HiveCreditCardAdapter());
+    Hive.registerAdapter<HiveStory>(HiveStoryAdapter());
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo: 'MY ERROR SENTRY => Hive adapter registration error',
+      stackTrace: stackTrace,
+    );
+  }
+
+  //* Initialize services
+  try {
+    setupLocator();
+    setupBottomSheet();
+    setupDialog();
+    setupSnackbar();
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo: 'MY ERROR SENTRY => Service setup error',
+      stackTrace: stackTrace,
+    );
+  }
 
   //! ---------- SENTRY CONFIG -------- //
-  await initializeSentry();
+  //* Initialize Sentry
+  try {
+    await initializeSentry();
+  } catch (e, stackTrace) {
+    reportExceptionToSentryWithStacktrace(
+      e,
+      additionalInfo: 'MY ERROR SENTRY => Sentry initialization error',
+      stackTrace: stackTrace,
+    );
+  }
 
-  // When the app is completely closed (not in the background) and opened directly from the push notification
+  //* When the app is completely closed (not in the background) and opened directly from the push notification
   FirebaseMessaging.onBackgroundMessage(fbBackgroundHandler); //* FB Background
 
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -53,6 +111,7 @@ void main() async {
     );
   };
 
+  //* Run the app within a guarded zone to capture any uncaught errors
   await runZonedGuarded<Future<void>>(
     () async {
       runApp(
