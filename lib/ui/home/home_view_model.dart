@@ -272,9 +272,6 @@ class HomeViewModel extends ReactiveViewModel {
                       nameRu: hiveResPaymentType.nameRu,
                     ))
                 .toList(),
-            discountMeals: cartRes!.discountMeals,
-            discountAksiya: cartRes!.discountAksiya,
-            discountCategory: cartRes!.discountCategory,
           ),
         ),
       );

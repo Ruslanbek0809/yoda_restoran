@@ -25,9 +25,6 @@ class HiveRestaurant {
     this.delivery,
     this.resPaymentTypes,
     this.disabled,
-    this.discountMeals,
-    this.discountAksiya,
-    this.discountCategory,
   });
 
   @HiveField(0)
@@ -83,13 +80,4 @@ class HiveRestaurant {
 
   @HiveField(17)
   final bool? disabled;
-
-  @HiveField(18)
-  final bool? discountMeals;
-
-  @HiveField(19)
-  final bool? discountAksiya;
-
-  @HiveField(20)
-  final bool? discountCategory;
 }

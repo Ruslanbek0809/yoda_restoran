@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
+import 'package:yoda_res/app/custom_material_page_route.dart';
 
 import '../models/models.dart';
 import '../ui/cart/cart_view.dart';
@@ -146,7 +146,7 @@ class StackedRouter extends RouterBase {
     },
     RestaurantSearchView: (data) {
       var args = data.getArgs<RestaurantSearchViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => RestaurantSearchView(
           restaurant: args.restaurant,
           key: args.key,
@@ -176,19 +176,19 @@ class StackedRouter extends RouterBase {
       );
     },
     CartView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const CartView(),
         settings: data,
       );
     },
     OrdersView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => OrdersView(),
         settings: data,
       );
     },
     OrderSuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const OrderSuccessView(),
         settings: data,
       );
@@ -197,13 +197,13 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<ProfileViewArguments>(
         orElse: () => ProfileViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => ProfileView(key: args.key),
         settings: data,
       );
     },
     AddressesView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const AddressesView(),
         settings: data,
       );
@@ -235,13 +235,13 @@ class StackedRouter extends RouterBase {
       );
     },
     ContactUsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => ContactUsView(),
         settings: data,
       );
     },
     AboutUsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const AboutUsView(),
         settings: data,
       );
@@ -276,7 +276,7 @@ class StackedRouter extends RouterBase {
       );
     },
     RestaurantsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const RestaurantsView(),
         settings: data,
       );
@@ -285,7 +285,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<MyCreditCardsViewArguments>(
         orElse: () => MyCreditCardsViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => MyCreditCardsView(key: args.key),
         settings: data,
       );
@@ -301,7 +301,7 @@ class StackedRouter extends RouterBase {
     },
     MomentStoryView: (data) {
       var args = data.getArgs<MomentStoryViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => MomentStoryView(
           restaurant: args.restaurant,
           key: args.key,
@@ -310,7 +310,7 @@ class StackedRouter extends RouterBase {
       );
     },
     MomentsAllView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return CustomMaterialPageRoute(
         builder: (context) => const MomentsAllView(),
         settings: data,
       );

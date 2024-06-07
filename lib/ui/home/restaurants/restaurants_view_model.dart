@@ -91,9 +91,6 @@ class RestauranstViewModel extends FutureViewModel {
             distance: cartRes!.distance,
             selfPickUp: cartRes!.selfPickUp,
             delivery: cartRes!.delivery,
-            discountMeals: cartRes!.discountMeals,
-            discountAksiya: cartRes!.discountAksiya,
-            discountCategory: cartRes!.discountCategory,
           ),
         ),
       );

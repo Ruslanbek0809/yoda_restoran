@@ -32,9 +32,6 @@ class Restaurant {
     this.disabled,
     this.paymentTypes,
     this.stories,
-    this.discountMeals,
-    this.discountAksiya,
-    this.discountCategory,
   });
 
   @JsonKey(name: 'id')
@@ -108,15 +105,6 @@ class Restaurant {
 
   @JsonKey(name: 'stories')
   final List<Story>? stories;
-
-  @JsonKey(name: 'discount-meals')
-  final bool? discountMeals;
-
-  @JsonKey(name: 'discount-aksiya')
-  final bool? discountAksiya;
-
-  @JsonKey(name: 'discount-category')
-  final bool? discountCategory;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
       _$RestaurantFromJson(json);

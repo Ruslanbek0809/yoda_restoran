@@ -46,9 +46,6 @@ class CartToggleButton extends ViewModelWidget<CartViewModel> {
             distance: model.cartRes!.distance,
             selfPickUp: model.cartRes!.selfPickUp,
             delivery: model.cartRes!.delivery,
-            discountMeals: model.cartRes!.discountMeals,
-            discountAksiya: model.cartRes!.discountAksiya,
-            discountCategory: model.cartRes!.discountCategory,
           ),
         ),
 //*------------------ DELIVERY TYPE TEXT based on condition ---------------------//

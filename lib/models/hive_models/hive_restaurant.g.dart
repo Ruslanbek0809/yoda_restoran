@@ -35,16 +35,13 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       delivery: fields[15] as bool?,
       resPaymentTypes: (fields[16] as List?)?.cast<HiveResPaymentType>(),
       disabled: fields[17] as bool?,
-      discountMeals: fields[18] as bool?,
-      discountAksiya: fields[19] as bool?,
-      discountCategory: fields[20] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveRestaurant obj) {
     writer
-      ..writeByte(21)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -80,13 +77,7 @@ class HiveRestaurantAdapter extends TypeAdapter<HiveRestaurant> {
       ..writeByte(16)
       ..write(obj.resPaymentTypes)
       ..writeByte(17)
-      ..write(obj.disabled)
-      ..writeByte(18)
-      ..write(obj.discountMeals)
-      ..writeByte(19)
-      ..write(obj.discountAksiya)
-      ..writeByte(20)
-      ..write(obj.discountCategory);
+      ..write(obj.disabled);
   }
 
   @override

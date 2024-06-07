@@ -186,11 +186,6 @@ class CartView extends StatelessWidget {
                                     distance: model.cartRes!.distance,
                                     selfPickUp: model.cartRes!.selfPickUp,
                                     delivery: model.cartRes!.delivery,
-                                    discountMeals: model.cartRes!.discountMeals,
-                                    discountAksiya:
-                                        model.cartRes!.discountAksiya,
-                                    discountCategory:
-                                        model.cartRes!.discountCategory,
                                   ),
                                   cartViewModel: model,
                                 ),
@@ -239,9 +234,6 @@ class CartView extends StatelessWidget {
                     //                     distance: model.cartRes!.distance,
                     //                     selfPickUp: model.cartRes!.selfPickUp,
                     //                     delivery: model.cartRes!.delivery,
-                    // discountMeals: model.cartRes!.discountMeals,
-                    // discountAksiya: model.cartRes!.discountAksiya,
-                    // discountCategory: model.cartRes!.discountCategory,
                     //                   ),
                     //                   cartViewModel: model,
                     //                 ),

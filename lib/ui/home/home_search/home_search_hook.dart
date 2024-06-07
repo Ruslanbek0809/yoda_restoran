@@ -194,11 +194,6 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                 selfPickUp: _searchRestaurant.selfPickUp,
                                 delivery: _searchRestaurant.delivery,
                                 paymentTypes: _searchRestaurant.paymentTypes,
-                                discountMeals: _searchRestaurant.discountMeals,
-                                discountAksiya:
-                                    _searchRestaurant.discountAksiya,
-                                discountCategory:
-                                    _searchRestaurant.discountCategory,
                               )),
                               child: Row(
                                 children: [
@@ -287,12 +282,6 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                       delivery: _searchRestaurant.delivery,
                                       paymentTypes:
                                           _searchRestaurant.paymentTypes,
-                                      discountMeals:
-                                          _searchRestaurant.discountMeals,
-                                      discountAksiya:
-                                          _searchRestaurant.discountAksiya,
-                                      discountCategory:
-                                          _searchRestaurant.discountCategory,
                                     )),
                                     child: Row(
                                       mainAxisAlignment:
@@ -361,12 +350,6 @@ class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
                                   selfPickUp: _searchRestaurant?.selfPickUp,
                                   delivery: _searchRestaurant?.delivery,
                                   paymentTypes: _searchRestaurant?.paymentTypes,
-                                  discountMeals:
-                                      _searchRestaurant?.discountMeals,
-                                  discountAksiya:
-                                      _searchRestaurant?.discountAksiya,
-                                  discountCategory:
-                                      _searchRestaurant?.discountCategory,
                                 )),
                                 child: Padding(
                                   padding: EdgeInsets.only(
