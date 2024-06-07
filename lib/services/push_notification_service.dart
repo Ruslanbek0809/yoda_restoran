@@ -39,7 +39,7 @@ class PushNotificationService {
         log.w('Notification permission denied');
         return;
       }
-      //*Here we get fcmToken and store it in _fcmToken
+      //* Here we get fcmToken and store it in _fcmToken
       _fcmToken = await _fcm.getToken();
       log.v('FCM Token: $_fcmToken');
 
