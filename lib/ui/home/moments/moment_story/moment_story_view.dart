@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -104,14 +102,14 @@ class _MomentStoryViewState extends State<MomentStoryView> {
                       Navigator.pop(context);
                     }
                   },
-                  onStoryShow: (storyItem) {
-                    int pos = stories.indexOf(storyItem);
+                  onStoryShow: (storyItem, index) {
+                    // int pos = stories.indexOf(storyItem);
 
                     // the reason for doing setState only after the first
                     // position is becuase by the first iteration, the layout
                     // hasn't been laid yet, thus raising some exception
                     // (each child need to be laid exactly once)
-                    if (pos > 0) {
+                    if (index > 0) {
                       setState(() {
                         // when = widget.stories![pos].when;
                       });
