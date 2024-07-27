@@ -201,42 +201,23 @@ class _StartUpViewState extends State<StartUpView> {
     );
   }
 
-  void showNoConnectionFlash(BuildContext context) {
-    if (flashController?.isDisposed == false) {
-      flashController?.dismiss();
-    }
-    flashController = FlashController<Object?>(
-      context,
-      builder: (context, controller) {
-        return Flash(
-          controller: controller,
-          barrierDismissible: false,
-          enableVerticalDrag: false,
-          borderRadius: AppTheme().radius15,
-          backgroundColor: kcSecondaryLightColor,
-          boxShadows: kElevationToShadow[0],
-          margin: EdgeInsets.only(
-            left: 32.w,
-            right: 32.w,
-            bottom: 0.075.sh,
-          ),
-          position: FlashPosition.bottom,
-          behavior: FlashBehavior.floating,
-          child: FlashBar(
-            icon: Padding(
-              padding: EdgeInsets.only(left: 24.w, right: 12.w),
-              child: SvgPicture.asset('assets/no_wifi.svg'),
-            ),
-            content: Text(
-              LocaleKeys.noInternet,
-              style: context.locale == context.supportedLocales[0]
-                  ? kts20Text
-                  : kts18Text,
-            ).tr(),
-          ),
-        );
-      },
+  Future<void> showNoConnectionFlash(BuildContext context) async {
+    await showCustomFlashBarWithFlashController(
+      context: context,
+      flashController: flashController,
+      msgTextWidget: Text(
+        LocaleKeys.noInternet,
+        style: context.locale == context.supportedLocales[0]
+            ? kts20Text
+            : kts18Text,
+      ).tr(),
+      childWidget: SvgPicture.asset('assets/no_wifi.svg'),
+      duration: null,
+      margin: EdgeInsets.only(
+        left: 32.w,
+        right: 32.w,
+        bottom: 0.075.sh,
+      ),
     );
-    flashController?.show();
   }
 }

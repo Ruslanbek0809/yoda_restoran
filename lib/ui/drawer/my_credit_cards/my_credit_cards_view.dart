@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:yoda_res/utils/util_functions.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../../shared/shared.dart';
@@ -169,43 +170,11 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
   }
 
   Future<void> showNewCreditCardAddedFlashBar(BuildContext context) async {
-    if (_previousController?.isDisposed == false)
-      await _previousController?.dismiss();
-
-    _previousController = FlashController<dynamic>(
-      context,
-      builder: (context, controller) {
-        return Flash(
-          controller: controller,
-          margin: EdgeInsets.only(
-            left: 16.w,
-            right: 16.w,
-            bottom: 0.05.sh,
-          ),
-          backgroundColor: kcSecondaryDarkColor,
-          borderRadius: kbr15,
-          boxShadows: kElevationToShadow[0],
-          position: FlashPosition.bottom,
-          barrierDismissible: true,
-          behavior: FlashBehavior.floating,
-          child: FlashBar(
-            icon: Padding(
-              padding: EdgeInsets.only(left: 24.w, right: 12.w),
-              child: SvgPicture.asset(
-                'assets/warning.svg',
-                width: 20.w,
-                height: 20.h,
-              ),
-            ),
-            content: Text(
-              LocaleKeys.credit_card_added,
-              style: kts16ButtonText,
-            ).tr(),
-          ),
-        );
-      },
+    await showCustomFlashBarWithFlashController(
+      context: context,
+      flashController: _previousController,
+      msg: LocaleKeys.credit_card_added,
       duration: const Duration(seconds: 2),
     );
-    await _previousController?.show();
   }
 }

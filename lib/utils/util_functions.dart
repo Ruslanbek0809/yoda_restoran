@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -175,38 +176,89 @@ void printLog(dynamic data) {
   }
 }
 
+Future<void> showCustomFlashBarWithFlashController({
+  required BuildContext context,
+  FlashController? flashController,
+  String msg = LocaleKeys.errorOccured,
+  Text? msgTextWidget,
+  Widget? childWidget,
+  bool isCartEmpty = true,
+  Duration? duration = const Duration(seconds: 2),
+  EdgeInsets? margin,
+}) async {
+  if (flashController?.controller.isDismissed == false)
+    await flashController?.dismiss();
+  flashController = await context.showFlash<dynamic>(
+    persistent: false,
+    barrierDismissible: true,
+    duration: duration,
+    onRemoveFromRoute: () {
+      // context.showToast(Text('Flash removed'));
+    },
+    builder: (context, controller) => FlashBar(
+      controller: controller,
+      position: FlashPosition.bottom,
+      behavior: FlashBehavior.floating,
+      // boxShadows: kElevationToShadow[0],
+      shape: RoundedRectangleBorder(borderRadius: AppTheme().radius16),
+      margin: margin ??
+          EdgeInsets.only(
+            left: 16.w,
+            right: 16.w,
+            bottom: isCartEmpty ? 0.05.sh : 0.12.sh,
+          ),
+      backgroundColor: kcSecondaryDarkColor,
+      // clipBehavior: Clip.antiAlias,
+      // indicatorColor: Colors.red,
+      icon: Padding(
+        padding: EdgeInsets.only(left: 24.w, right: 12.w),
+        child: childWidget ??
+            SvgPicture.asset(
+              'assets/warning.svg',
+              width: 20.w,
+              height: 20.h,
+            ),
+      ),
+      // title: Text('Flash Title'),
+      content: msgTextWidget ?? Text(msg, style: kts16ButtonText).tr(),
+    ),
+  );
+}
+
 Future<void> showErrorFlashBar({
   required BuildContext context,
   String msg = LocaleKeys.errorOccured,
   Duration duration = const Duration(milliseconds: 2000),
   required EdgeInsets margin,
 }) async {
-  await showFlash(
-    context: context,
+  await context.showFlash<dynamic>(
+    persistent: false,
+    barrierDismissible: true,
     duration: duration,
-    builder: (context, controller) {
-      return Flash(
-        backgroundColor: kcSecondaryDarkColor,
-        controller: controller,
-        borderRadius: AppTheme().radius15,
-        boxShadows: kElevationToShadow[0],
-        position: FlashPosition.bottom,
-        barrierDismissible: true,
-        behavior: FlashBehavior.floating,
-        margin: margin,
-        child: FlashBar(
-          icon: Padding(
-            padding: EdgeInsets.only(left: 24.w, right: 12.w),
-            child: SvgPicture.asset(
-              'assets/warning.svg',
-              width: 20.w,
-              height: 20.h,
-            ),
-          ),
-          content: Text(msg, style: kts16ButtonText).tr(),
-        ),
-      );
+    onRemoveFromRoute: () {
+      // context.showToast(Text('Flash removed'));
     },
+    builder: (context, controller) => FlashBar(
+      controller: controller,
+      position: FlashPosition.bottom,
+      behavior: FlashBehavior.floating,
+      // boxShadows: kElevationToShadow[0],
+      shape: RoundedRectangleBorder(borderRadius: AppTheme().radius16),
+      margin: margin,
+      backgroundColor: kcSecondaryDarkColor,
+      // clipBehavior: Clip.antiAlias,
+      // indicatorColor: Colors.red,
+      icon: Padding(
+        padding: EdgeInsets.only(left: 24.w, right: 12.w),
+        child: SvgPicture.asset(
+          'assets/warning.svg',
+          width: 20.w,
+          height: 20.h,
+        ),
+      ),
+      // title: Text('Flash Title'),
+      content: Text(msg, style: kts16ButtonText).tr(),
+    ),
   );
 }
 
@@ -215,32 +267,33 @@ Future<void> showDateRangeErrorFlashBar({
   Text? msg,
   required EdgeInsets margin,
 }) async {
-  await showFlash(
-    context: context,
-    duration: Duration(milliseconds: 3000),
-    builder: (context, controller) {
-      return Flash(
-        backgroundColor: kcSecondaryDarkColor,
-        controller: controller,
-        borderRadius: AppTheme().radius15,
-        boxShadows: kElevationToShadow[0],
-        position: FlashPosition.bottom,
-        barrierDismissible: true,
-        behavior: FlashBehavior.floating,
-        margin: margin,
-        child: FlashBar(
-          icon: Padding(
-            padding: EdgeInsets.only(left: 24.w, right: 12.w),
-            child: SvgPicture.asset(
-              'assets/warning.svg',
-              width: 20.w,
-              height: 20.h,
-            ),
-          ),
-          content: msg!,
-        ),
-      );
+  await context.showFlash<dynamic>(
+    persistent: false,
+    barrierDismissible: true,
+    onRemoveFromRoute: () {
+      // context.showToast(Text('Flash removed'));
     },
+    builder: (context, controller) => FlashBar(
+      controller: controller,
+      position: FlashPosition.bottom,
+      behavior: FlashBehavior.floating,
+      // boxShadows: kElevationToShadow[0],
+      shape: RoundedRectangleBorder(borderRadius: AppTheme().radius16),
+      margin: margin,
+      backgroundColor: kcSecondaryDarkColor,
+      // clipBehavior: Clip.antiAlias,
+      // indicatorColor: Colors.red,
+      icon: Padding(
+        padding: EdgeInsets.only(left: 24.w, right: 12.w),
+        child: SvgPicture.asset(
+          'assets/warning.svg',
+          width: 20.w,
+          height: 20.h,
+        ),
+      ),
+      // title: Text('Flash Title'),
+      content: msg!,
+    ),
   );
 }
 
