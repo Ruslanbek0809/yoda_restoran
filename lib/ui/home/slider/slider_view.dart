@@ -51,11 +51,11 @@ class SliderView extends StatelessWidget {
                               ? slider.image ?? 'assets/ph_slider.png'
                               : slider.imageRu ?? 'assets/ph_slider.png',
                           phImage: 'assets/ph_slider.png',
-                          width: 1.sw,
+                          width: SizeExtension(1).sw,
                           height: getValueForScreenType<double>(
                             context: context,
-                            mobile: 0.3.sh,
-                            tablet: 0.375.sh,
+                            mobile: SizeExtension(0.3).sh,
+                            tablet: SizeExtension(0.375).sh,
                           ),
                           borderRadius: 20.0,
                         ),

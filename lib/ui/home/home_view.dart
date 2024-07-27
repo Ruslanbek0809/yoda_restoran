@@ -140,7 +140,7 @@ class _HomeViewState extends State<HomeView> {
             ? CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    expandedHeight: 0.1.sh,
+                    expandedHeight: SizeExtension(0.1).sh,
                     backgroundColor: kcWhiteColor,
                     systemOverlayStyle: customSystemUiOverlayStyle(),
                     elevation: 0,
@@ -184,7 +184,7 @@ class _HomeViewState extends State<HomeView> {
                     delegate: SliverChildListDelegate(
                       [
                         Padding(
-                          padding: EdgeInsets.only(top: 0.4.sh),
+                          padding: EdgeInsets.only(top: SizeExtension(0.4).sh),
                           child: LoadingWidget(),
                         )
                       ],
@@ -222,7 +222,7 @@ class _HomeViewState extends State<HomeView> {
                         ? CustomScrollView(
                             slivers: [
                               SliverAppBar(
-                                expandedHeight: 0.3.sh,
+                                expandedHeight: SizeExtension(0.3).sh,
                                 backgroundColor: kcWhiteColor,
                                 systemOverlayStyle:
                                     customSystemUiOverlayStyle(),
@@ -288,11 +288,12 @@ class _HomeViewState extends State<HomeView> {
                                     !model.isFilterApplied
                                         ? getValueForScreenType<double>(
                                             context: context,
-                                            mobile: 0.075.sh + 0.6.sw,
+                                            mobile: SizeExtension(0.075).sh +
+                                                SizeExtension(0.6).sw,
                                             // mobile: 0.36.sh,
-                                            tablet: 0.45.sh,
+                                            tablet: SizeExtension(0.45).sh,
                                           )
-                                        : 0.1.sh,
+                                        : SizeExtension(0.1).sh,
                                 backgroundColor: kcWhiteColor,
                                 systemOverlayStyle:
                                     customSystemUiOverlayStyle(),
@@ -405,7 +406,7 @@ class _HomeViewState extends State<HomeView> {
                                   ? SliverPadding(
                                       padding: EdgeInsets.only(
                                         top: 14.r,
-                                        bottom: 0.11
+                                        bottom: SizeExtension(0.11)
                                             .sh, // COMPENSATES HomeBottomCart
                                       ), // Changes based on exclusive part
                                       sliver: SliverList(
@@ -569,7 +570,7 @@ class _HomeViewState extends State<HomeView> {
                                           if (!model.hasErrorForKeys &&
                                               model.cartRes!.id != -1)
                                             SizedBox(
-                                                height: 0.11
+                                                height: SizeExtension(0.11)
                                                     .sh), // COMPENSATES HomeBottomCart
                                         ],
                                       ),
@@ -603,12 +604,12 @@ class _HomeViewState extends State<HomeView> {
             color: kcWhiteColor,
             child: Platform.isIOS
                 ? UpgradeAlert(
+                    shouldPopScope: () => true,
+                    dialogStyle: UpgradeDialogStyle.cupertino,
                     upgrader: Upgrader(
-                      shouldPopScope: () => true,
                       messages: context.locale == context.supportedLocales[0]
                           ? MyTurkmenMessages()
                           : MyRussianMessages(),
-                      dialogStyle: UpgradeDialogStyle.cupertino,
                     ),
                     child: DoubleBackToCloseApp(
                       snackBar: SnackBar(
@@ -617,7 +618,7 @@ class _HomeViewState extends State<HomeView> {
                         margin: EdgeInsets.only(
                           left: 16.r,
                           right: 16.r,
-                          bottom: 0.05.sh,
+                          bottom: SizeExtension(0.05).sh,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: AppTheme().radius10,
@@ -640,7 +641,7 @@ class _HomeViewState extends State<HomeView> {
                       margin: EdgeInsets.only(
                         left: 16.r,
                         right: 16.r,
-                        bottom: 0.05.sh,
+                        bottom: SizeExtension(0.05).sh,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: AppTheme().radius10,

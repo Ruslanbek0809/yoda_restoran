@@ -94,8 +94,8 @@ class DrawerView extends StatelessWidget {
         ),
         Divider(
           thickness: 0.5,
-          endIndent: 0.1.sw,
-          indent: 0.17.sw,
+          endIndent: SizeExtension(0.1).sw,
+          indent: SizeExtension(0.17).sw,
           color: kcDividerColor,
         ),
       ],
@@ -114,23 +114,23 @@ class DrawerView extends StatelessWidget {
           mobile: false,
           tablet: true,
         )
-            ? 0.75.sw
+            ? SizeExtension(0.75).sw
             : null,
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 0.2.sh,
+                height: SizeExtension(0.2).sh,
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(top: 15.w),
                 child: SvgPicture.asset(
                   'assets/title_yoda_restoran.svg',
-                  width: 0.55.sw,
+                  width: SizeExtension(0.55).sw,
                 ),
               ),
               Divider(
                 thickness: 0.5,
-                endIndent: 0.1.sw,
+                endIndent: SizeExtension(0.1).sw,
                 color: kcDividerColor,
               ),
               //*----------------- MENU LIST ---------------------//
@@ -204,8 +204,8 @@ class DrawerView extends StatelessWidget {
                     ),
                     Divider(
                       thickness: 0.5,
-                      endIndent: 0.1.sw,
-                      indent: 0.18.sw,
+                      endIndent: SizeExtension(0.1).sw,
+                      indent: SizeExtension(0.18).sw,
                       color: kcDividerColor,
                     ),
                     CustomTextChildButton(
@@ -242,7 +242,10 @@ class DrawerView extends StatelessWidget {
               //*----------------- CONTACT US ---------------------//
               Padding(
                 padding: EdgeInsets.only(
-                    top: 0.1.sh, left: 20.w, bottom: 0.175.sw - 10.h),
+                  top: SizeExtension(0.1).sh,
+                  left: 20.w,
+                  bottom: SizeExtension(0.175).sw - 10.h,
+                ),
                 child: Column(
                   children: [
                     GestureDetector(
