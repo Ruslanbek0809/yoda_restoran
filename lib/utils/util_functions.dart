@@ -159,7 +159,16 @@ enum SnackBarType {
 }
 
 //*Enum for connectivity
-enum ConnectivityStatus { Idle, WiFi, Cellular, Offline }
+enum ConnectivityStatus {
+  Cellular,
+  WiFi,
+  Ethernet,
+  VPN,
+  Bluetooth,
+  Other,
+  Offline,
+  Unknown
+}
 
 //*Platform Types
 final bool isIos = Platform.isIOS;
