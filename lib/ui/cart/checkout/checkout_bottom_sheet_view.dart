@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
-import '../../../library/flutter_datetime_picker.dart';
-import '../../../library/src/datetime_picker_theme.dart';
-import '../../../library/src/i18n_model.dart';
+// import '../../../library/flutter_datetime_picker.dart';
+// import '../../../library/src/datetime_picker_theme.dart' as dpt;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as dateTimePickerPlus;
+import '../../../library/src/i18n_model.dart' as i18nModel;
 import '../../../shared/shared.dart';
 import 'checkout_address/checkout_select_address_bottom_sheet.dart';
 import 'checkout_note_hook.dart';
@@ -165,8 +167,8 @@ class CheckoutBottomSheetView extends StatelessWidget {
                     color: kcWhiteColor,
                     child: InkWell(
                       onTap: () async {
-                        DateTime? _tempDateTime =
-                            await DatePicker.showDateTimePicker(
+                        DateTime? _tempDateTime = await dateTimePickerPlus
+                            .DatePicker.showDateTimePicker(
                           context,
                           showTitleActions: true,
                           minTime: model.now.add(Duration(hours: 1)),
@@ -184,9 +186,9 @@ class CheckoutBottomSheetView extends StatelessWidget {
                             // model.log.v('Senä confirm $date');
                           },
                           locale: context.locale == context.supportedLocales[0]
-                              ? LocaleType.tk
-                              : LocaleType.ru,
-                          theme: DatePickerTheme(
+                              ? i18nModel.LocaleType.tk
+                              : i18nModel.LocaleType.ru,
+                          theme: dateTimePickerPlus.DatePickerTheme(
                             doneStyle: kts20BoldText,
                             backgroundColor: kcWhiteColor,
                           ),
