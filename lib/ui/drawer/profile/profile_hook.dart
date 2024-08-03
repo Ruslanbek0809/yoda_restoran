@@ -11,7 +11,7 @@ import '../../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 import '../../../utils/utils.dart';
 import 'profile_view_model.dart';
-import '../../../library/flutter_datetime_picker.dart';
+import '../../../library/flutter_datetime_picker.dart' as dpt;
 import '../../../library/src/i18n_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -99,7 +99,7 @@ class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
                   onTap: () async {
                     DateTime? date = model.birthDate;
                     FocusScope.of(context).requestFocus(FocusNode());
-                    date = await DatePicker.showDatePicker(
+                    date = await dpt.DatePicker.showDatePicker(
                           context,
                           showTitleActions: true,
                           minTime: DateTime(1900, 1, 1),

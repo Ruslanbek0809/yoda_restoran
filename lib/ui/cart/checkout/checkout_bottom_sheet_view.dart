@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../library/flutter_datetime_picker.dart';
-import '../../../library/src/datetime_picker_theme.dart';
+import '../../../library/src/datetime_picker_theme.dart' as dpt;
 import '../../../library/src/i18n_model.dart';
 import '../../../shared/shared.dart';
 import 'checkout_address/checkout_select_address_bottom_sheet.dart';
@@ -186,7 +186,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
                           locale: context.locale == context.supportedLocales[0]
                               ? LocaleType.tk
                               : LocaleType.ru,
-                          theme: DatePickerTheme(
+                          theme: dpt.DatePickerTheme(
                             doneStyle: kts20BoldText,
                             backgroundColor: kcWhiteColor,
                           ),
