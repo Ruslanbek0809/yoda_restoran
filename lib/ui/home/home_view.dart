@@ -347,7 +347,7 @@ class _HomeViewState extends State<HomeView> {
                                 floating: false,
                                 delegate: ContestTabHeader(
                                   //*If MAIN CAT FILTER is APPLIED
-                                  size: !model.isFilterApplied ? 90.r : 94.r,
+                                  size: !model.isFilterApplied ? 91.r : 95.r,
                                   child: MainCatsView(),
                                 ),
                               ),

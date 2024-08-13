@@ -109,7 +109,7 @@ class SingleOrderView extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: kts18BoldText,
                         ),
-                        SizedBox(height: 3.h),
+                        SizedBox(height: 2.h),
                         //*----------------- ORDER CREATED AT DATE and ORDER STATUS ---------------------//
                         Row(
                           children: [
@@ -131,7 +131,7 @@ class SingleOrderView extends StatelessWidget {
                                   ),
                             Text(
                               ' #${order.orderNumber?.substring(order.orderNumber!.length - 4)}',
-                              style: kts14HelperText, 
+                              style: kts14HelperText,
                             ),
                           ],
                         ),
