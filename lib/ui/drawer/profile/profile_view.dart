@@ -42,6 +42,11 @@ class ProfileView extends StatelessWidget {
                     () async {
                       model.showCustomFlashBar(
                         context: context,
+                        margin: EdgeInsets.only(
+                          left: 0.1.sw,
+                          right: 0.1.sw,
+                          bottom: 0.05.sh,
+                        ),
                         msg: LocaleKeys.userLogoutSuccess.tr(),
                         duration: Duration(seconds: 3),
                       );

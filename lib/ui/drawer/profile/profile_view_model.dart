@@ -210,6 +210,7 @@ class ProfileViewModel extends BaseViewModel {
 
   Future<void> showCustomFlashBar({
     required BuildContext context,
+    required EdgeInsets margin,
     String msg = LocaleKeys.errorOccured,
     Duration duration = const Duration(seconds: 2),
   }) async {
@@ -218,11 +219,7 @@ class ProfileViewModel extends BaseViewModel {
       flashController: _flashController,
       msg: msg,
       duration: duration,
-      margin: EdgeInsets.only(
-        left: 0.1.sw,
-        right: 0.1.sw,
-        bottom: 0.05.sh,
-      ),
+      margin: margin,
     );
   }
 
