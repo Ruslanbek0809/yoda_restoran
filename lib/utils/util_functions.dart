@@ -256,7 +256,7 @@ snackBar(String? message, BuildContext context) {
 
 //*Device Type
 String getDeviceType() {
-  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
   printLog('getDeviceType(): ${data.size.shortestSide}');
   return data.size.shortestSide < 600 ? Constants.PHONE : Constants.TABLET;
 }

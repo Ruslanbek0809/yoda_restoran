@@ -16,13 +16,13 @@ import '../../../library/src/i18n_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ProfileHook extends HookViewModelWidget<ProfileViewModel> {
+class ProfileHook extends StackedHookView<ProfileViewModel> {
   ProfileHook({Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _profileformKey = GlobalKey<FormState>();
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ProfileViewModel model) {
+  Widget builder(BuildContext context, ProfileViewModel model) {
     model.log.v(
         'name: ${model.currentUser?.firstName}, mobile: ${model.currentUser?.mobile}, email: ${model.currentUser?.email}, gender: ${model.currentUser?.gender}, birthday: ${model.currentUser?.birthday}');
 

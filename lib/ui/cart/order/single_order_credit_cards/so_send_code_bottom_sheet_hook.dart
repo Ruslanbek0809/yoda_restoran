@@ -8,7 +8,7 @@ import '../../../../shared/shared.dart';
 import 'so_credit_cards_view_model.dart';
 
 class SOSendCodeBottomSheetHook
-    extends HookViewModelWidget<SOCreditCardsViewModel> {
+    extends StackedHookView<SOCreditCardsViewModel> {
   const SOSendCodeBottomSheetHook({
     Key? key,
   }) : super(
@@ -16,8 +16,7 @@ class SOSendCodeBottomSheetHook
         );
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, SOCreditCardsViewModel model) {
+  Widget builder(BuildContext context, SOCreditCardsViewModel model) {
     final _sendCodeController = useTextEditingController();
 
     return Column(

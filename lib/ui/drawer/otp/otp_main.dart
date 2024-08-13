@@ -11,11 +11,11 @@ import '../../../utils/utils.dart';
 import 'otp_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class OtpMain extends HookViewModelWidget<OtpViewModel> {
+class OtpMain extends StackedHookView<OtpViewModel> {
   OtpMain({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, OtpViewModel model) {
+  Widget builder(BuildContext context, OtpViewModel model) {
     final otpController = useTextEditingController();
 
     //*Here I used 2nd approach of creating textEditingController without StatefullWidget

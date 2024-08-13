@@ -10,11 +10,11 @@ import '../../widgets/widgets.dart';
 import 'home_search_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class HomeSearchHook extends HookViewModelWidget<HomeSearchViewModel> {
+class HomeSearchHook extends StackedHookView<HomeSearchViewModel> {
   final _debouncer = Debouncer(milliseconds: 500);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, HomeSearchViewModel model) {
+  Widget builder(BuildContext context, HomeSearchViewModel model) {
     model.log.v('buildViewModelWidget CALLED');
     final _searchController = useTextEditingController(text: model.searchText);
     if ((model.searchText ?? '').isEmpty) _searchController.clear();

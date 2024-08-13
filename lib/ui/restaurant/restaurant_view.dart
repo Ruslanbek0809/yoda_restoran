@@ -20,7 +20,7 @@ class RestaurantView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ResViewModel>.reactive(
       //*INITIALIZES hourly discount variables for further condition
-      onModelReady: (model) =>
+      onViewModelReady: (model) =>
           restaurant.hourlyDiscount != null && restaurant.hourlyDiscount! > 0
               ? model.initializeHourlyDiscountVars(
                   restaurant.discountBegin!, restaurant.discountEnd!)

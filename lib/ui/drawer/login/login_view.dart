@@ -30,7 +30,7 @@ class LoginView extends StatelessWidget with $LoginView {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
-      onModelReady: (model) =>
+      onViewModelReady: (model) =>
           listenToFormUpdated(model), // Needed when generating formFields
       viewModelBuilder: () => LoginViewModel(isCartView),
       builder: (context, model, child) => Scaffold(

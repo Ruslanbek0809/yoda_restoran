@@ -7,11 +7,11 @@ import '../../../../shared/shared.dart';
 import '../../../../utils/utils.dart';
 import 'moments_all_view_model.dart';
 
-class MomentsAllBottomCart extends HookViewModelWidget<MomentsAllViewModel> {
+class MomentsAllBottomCart extends StackedHookView<MomentsAllViewModel> {
   const MomentsAllBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, MomentsAllViewModel model) {
+  Widget builder(BuildContext context, MomentsAllViewModel model) {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );

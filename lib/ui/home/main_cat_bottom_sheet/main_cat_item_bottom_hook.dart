@@ -9,15 +9,14 @@ import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainCategoryItemBottomHook
-    extends HookViewModelWidget<MainCatBottomViewModel> {
+    extends StackedHookView<MainCatBottomViewModel> {
   final MainCategory? mainCategory;
   MainCategoryItemBottomHook({
     Key? key,
     this.mainCategory,
   }) : super(key: key);
 
-  Widget buildViewModelWidget(
-      BuildContext context, MainCatBottomViewModel model) {
+  Widget builder(BuildContext context, MainCatBottomViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 75),

@@ -7,12 +7,11 @@ import '../shared/shared.dart';
 import '../utils/utils.dart';
 import 'rate_us_dialog_view_model.dart';
 
-class RateUsDialogHook extends HookViewModelWidget<RateUsDialogViewModel> {
+class RateUsDialogHook extends StackedHookView<RateUsDialogViewModel> {
   const RateUsDialogHook({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, RateUsDialogViewModel model) {
+  Widget builder(BuildContext context, RateUsDialogViewModel model) {
     final _notesController = useTextEditingController();
     return TextField(
       controller: _notesController,

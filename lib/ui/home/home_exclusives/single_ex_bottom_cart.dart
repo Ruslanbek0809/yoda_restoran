@@ -7,11 +7,11 @@ import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'single_ex_view_model.dart';
 
-class SingleExBottomCart extends HookViewModelWidget<SingleExViewModel> {
+class SingleExBottomCart extends StackedHookView<SingleExViewModel> {
   const SingleExBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, SingleExViewModel model) {
+  Widget builder(BuildContext context, SingleExViewModel model) {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );

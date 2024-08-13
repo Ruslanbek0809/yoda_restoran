@@ -3,7 +3,7 @@ import '../app/app.logger.dart';
 import '../utils/utils.dart';
 
 // 1 For Reactive Views
-class BottomCartService with ReactiveServiceMixin {
+class BottomCartService with ListenableServiceMixin {
   final log = getLogger('BottomCartService');
 
   BottomCartService() {

@@ -27,7 +27,7 @@ class SingleOrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleOrderViewModel>.reactive(
-      onModelReady: (model) => model.initSingleOrder(),
+      onViewModelReady: (model) => model.initSingleOrder(),
       viewModelBuilder: () => SingleOrderViewModel(
         order: order,
         orderViewModel: orderViewModel,
@@ -131,7 +131,7 @@ class SingleOrderView extends StatelessWidget {
                                   ),
                             Text(
                               ' #${order.orderNumber?.substring(order.orderNumber!.length - 4)}',
-                              style: kts14HelperText, 
+                              style: kts14HelperText,
                             ),
                           ],
                         ),

@@ -29,7 +29,7 @@ class CheckoutBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CheckoutViewModel>.reactive(
-      onModelReady: (model) => model.getOnModelReady(),
+      onViewModelReady: (model) => model.getOnModelReady(),
       viewModelBuilder: () => CheckoutViewModel(),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(

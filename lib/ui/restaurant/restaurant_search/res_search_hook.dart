@@ -8,12 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'restaurant_search_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ResSearchHook extends HookViewModelWidget<RestaurantSearchViewModel> {
+class ResSearchHook extends StackedHookView<RestaurantSearchViewModel> {
   final _debouncer = Debouncer(milliseconds: 500);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, RestaurantSearchViewModel model) {
+  Widget builder(BuildContext context, RestaurantSearchViewModel model) {
     final _searchController = useTextEditingController(text: model.searchText);
     if ((model.searchText ?? '').isEmpty) _searchController.clear();
     return Container(

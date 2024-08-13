@@ -11,13 +11,13 @@ import '../../widgets/widgets.dart';
 import '../main_cat_bottom_sheet/main_cat_bottom_sheet_view.dart';
 import 'main_cat_view_model.dart';
 
-class MainCatAllItemHook extends HookViewModelWidget<MainCatViewModel> {
+class MainCatAllItemHook extends StackedHookView<MainCatViewModel> {
   MainCatAllItemHook({
     Key? key,
   }) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, MainCatViewModel model) {
+  Widget builder(BuildContext context, MainCatViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.9);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 75),

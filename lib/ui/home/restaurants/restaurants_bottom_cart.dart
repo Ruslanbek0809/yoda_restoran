@@ -7,12 +7,11 @@ import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'restaurants_view_model.dart';
 
-class RestaurantsBottomCart extends HookViewModelWidget<RestauranstViewModel> {
+class RestaurantsBottomCart extends StackedHookView<RestauranstViewModel> {
   const RestaurantsBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, RestauranstViewModel model) {
+  Widget builder(BuildContext context, RestauranstViewModel model) {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 150),
     );
