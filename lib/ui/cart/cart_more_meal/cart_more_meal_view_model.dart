@@ -226,6 +226,6 @@ class CartMoreMealViewModel extends ReactiveViewModel {
   Future navToCartView() async => await _navService.navigateTo(Routes.cartView);
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get reactiveServices =>
       [_bottomCartService, _hiveDbService];
 }

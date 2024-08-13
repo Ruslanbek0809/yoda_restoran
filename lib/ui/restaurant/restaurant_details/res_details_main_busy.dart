@@ -6,23 +6,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
-import 'package:yoda_res/ui/widgets/colored_tabbar.dart';
 import '../../../shared/shared.dart';
 import '../../toggle_buttons/toggle_buttons_view.dart';
 import '../../../utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/widgets.dart';
-import '../meal/meal_item_shimmer_hook.dart';
 import 'res_details_view_model.dart';
 
-class ResDetailsMainBusy extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsMainBusy extends StackedHookView<ResDetailsViewModel> {
   const ResDetailsMainBusy({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
-    double itemWidth = (1.sw - 12.w - 20.h) / 2;
+  Widget builder(BuildContext context, ResDetailsViewModel model) {
+    // double itemWidth = (1.sw - 12.w - 20.h) / 2;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
-    double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
+    // double itemHeight = itemWidth + 0.15.sh; // 0.15.sh is for item height
 
     //*------------- TAB CONTROLLER ----------------//
     final tabController = useTabController(

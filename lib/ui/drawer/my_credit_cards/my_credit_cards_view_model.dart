@@ -52,5 +52,5 @@ class CreditCardsViewModel extends ReactiveViewModel {
       await _navService.pushNamedAndRemoveUntil(Routes.homeView);
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
+  List<ListenableServiceMixin> get listenableServices => [_hiveDbService];
 }

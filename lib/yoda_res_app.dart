@@ -71,7 +71,8 @@ class YodaResApp extends StatelessWidget {
               behavior: MyBehavior(), // To remove the glow effect entirely
               child: MediaQuery(
                 //* Setting font does not change with system font size
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                data: MediaQuery.of(context)
+                    .copyWith(textScaler: TextScaler.linear(1.0)),
                 child: child!,
               ),
             ),

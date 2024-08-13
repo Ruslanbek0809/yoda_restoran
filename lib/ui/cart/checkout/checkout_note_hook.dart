@@ -8,11 +8,11 @@ import 'checkout_view_model.dart';
 import '../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class CheckoutNoteHook extends HookViewModelWidget<CheckoutViewModel> {
+class CheckoutNoteHook extends StackedHookView<CheckoutViewModel> {
   const CheckoutNoteHook({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
+  Widget builder(BuildContext context, CheckoutViewModel model) {
     final _noteController = useTextEditingController();
 
     // model.log.v('CheckoutNoteHook =========');

@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'startup_viewmodel.dart';
 
-class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
+class StartUpAnimatedTextHook extends StackedHookView<StartUpViewModel> {
   final Widget child;
   final int delay;
   const StartUpAnimatedTextHook(
@@ -13,7 +13,7 @@ class StartUpAnimatedTextHook extends HookViewModelWidget<StartUpViewModel> {
       : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, StartUpViewModel model) {
+  Widget builder(BuildContext context, StartUpViewModel model) {
     final _animController =
         useAnimationController(duration: Duration(milliseconds: 800));
     Animation<double> _fadeInFadeOut;

@@ -28,7 +28,7 @@ class MealBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MealViewModel>.reactive(
-      onModelReady: (model) => model.setOnModelReadyVolsCustoms(meal),
+      onViewModelReady: (model) => model.setOnModelReadyVolsCustoms(meal),
       // viewModelBuilder: () => MealViewModel(),
       viewModelBuilder: () => mealViewModel,
       disposeViewModel: false,

@@ -6,7 +6,7 @@ import '../models/hive_models/hive_models.dart';
 import '../models/models.dart';
 import 'services.dart';
 
-class CheckoutService with ReactiveServiceMixin {
+class CheckoutService with ListenableServiceMixin {
   final log = getLogger('CheckoutService');
 
   CheckoutService() {

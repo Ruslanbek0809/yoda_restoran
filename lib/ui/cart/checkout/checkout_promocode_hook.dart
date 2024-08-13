@@ -11,13 +11,13 @@ import '../../../shared/shared.dart';
 import '../../../utils/utils.dart';
 import 'checkout_view_model.dart';
 
-class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
+class CheckoutPromocodeHook extends StackedHookView<CheckoutViewModel> {
   CheckoutPromocodeHook({Key? key}) : super(key: key);
 
   final _debouncer = Debouncer(milliseconds: 500);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, CheckoutViewModel model) {
+  Widget builder(BuildContext context, CheckoutViewModel model) {
     final _promocodeController = useTextEditingController();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +79,8 @@ class CheckoutPromocodeHook extends HookViewModelWidget<CheckoutViewModel> {
                     ),
                   ),
                   onChanged: (value) => value.length > 2
-                      ? _debouncer.run(() => model.searchPromocode(value).then((value) => null))
+                      ? _debouncer.run(() =>
+                          model.searchPromocode(value).then((value) => null))
                       : model.resetPromocode(),
                   onSubmitted: (value) => value.length > 2
                       ? _debouncer.run(() => model.searchPromocode(value))

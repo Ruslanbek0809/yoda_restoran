@@ -287,6 +287,6 @@ class CheckoutViewModel extends ReactiveViewModel {
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_checkoutService, _hiveDbService, _toggleButtonService];
 }

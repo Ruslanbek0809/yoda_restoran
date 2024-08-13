@@ -11,7 +11,7 @@ import '../../../utils/utils.dart';
 import 'meal_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MealItemHook extends HookViewModelWidget<MealViewModel> {
+class MealItemHook extends StackedHookView<MealViewModel> {
   final Meal meal;
   final Restaurant restaurant;
   const MealItemHook({
@@ -21,7 +21,7 @@ class MealItemHook extends HookViewModelWidget<MealViewModel> {
   }) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, MealViewModel model) {
+  Widget builder(BuildContext context, MealViewModel model) {
     Tween<double> _tween = Tween(begin: 1, end: 0.98);
     final _tweenController = useAnimationController(
       duration: const Duration(milliseconds: 100),

@@ -538,7 +538,6 @@
 //   final bool? showTitleActions;
 //   final DatePickerTheme theme;
 //   final double bottomPadding;
-
 //   @override
 //   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
 //     double maxHeight = theme.containerHeight;

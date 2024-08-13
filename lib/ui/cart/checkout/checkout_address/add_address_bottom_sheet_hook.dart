@@ -9,7 +9,7 @@ import '../../../../shared/shared.dart';
 import 'checkout_address_view_model.dart';
 
 class AddAddressBottomSheetHook
-    extends HookViewModelWidget<CheckoutAddressViewModel> {
+    extends StackedHookView<CheckoutAddressViewModel> {
   const AddAddressBottomSheetHook({
     Key? key,
   }) : super(
@@ -17,8 +17,7 @@ class AddAddressBottomSheetHook
         );
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, CheckoutAddressViewModel model) {
+  Widget builder(BuildContext context, CheckoutAddressViewModel model) {
     final _cityController =
         useTextEditingController(text: LocaleKeys.ashgabat.tr());
     final _streetController = useTextEditingController();

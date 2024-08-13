@@ -318,6 +318,6 @@ class MealViewModel extends ReactiveViewModel {
       .navigateTo(Routes.cartView); // TODO: Change page transition here
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_bottomCartService, _hiveDbService];
 }

@@ -10,13 +10,13 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../widgets/widgets.dart';
 import 'contact_us_view_model.dart';
 
-class ContactUsHook extends HookViewModelWidget<ContactUsViewModel> {
+class ContactUsHook extends StackedHookView<ContactUsViewModel> {
   ContactUsHook({Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _contactformKey = GlobalKey<FormState>();
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ContactUsViewModel model) {
+  Widget builder(BuildContext context, ContactUsViewModel model) {
     var maskFormatter = MaskTextInputFormatter(
         mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
     final _nameController = useTextEditingController();

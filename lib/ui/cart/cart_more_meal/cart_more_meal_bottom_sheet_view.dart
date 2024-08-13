@@ -29,7 +29,7 @@ class CartMoreMealBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CartMoreMealViewModel>.reactive(
-      onModelReady: (model) => model.setOnModelReadyVolsCustoms(meal),
+      onViewModelReady: (model) => model.setOnModelReadyVolsCustoms(meal),
       viewModelBuilder: () => cartMoreMealViewModel,
       disposeViewModel: false,
       builder: (context, model, child) => ClipRRect(

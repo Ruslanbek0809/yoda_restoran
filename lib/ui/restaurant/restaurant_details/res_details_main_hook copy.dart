@@ -20,11 +20,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'restaurant_favorite_button.dart';
 
-class ResDetailsMainHook extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsMainHook extends StackedHookView<ResDetailsViewModel> {
   const ResDetailsMainHook({Key? key}) : super(key: key, reactive: true);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+  Widget builder(BuildContext context, ResDetailsViewModel model) {
     //*------------- ANIMATION CONTROLLER for FADE TRANSITION ----------------//
     final _animController =
         useAnimationController(duration: Duration(milliseconds: 200));

@@ -26,7 +26,7 @@ class _StartUpViewState extends State<StartUpView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      onModelReady: (model) =>
+      onViewModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) {
         model.runStartupLogic();
       }),

@@ -9,7 +9,7 @@ import 'services.dart';
 import '../utils/utils.dart';
 
 //* 1 For Reactive Views
-class HiveDbService with ReactiveServiceMixin {
+class HiveDbService with ListenableServiceMixin {
   final log = getLogger('HiveDbService');
 
   HiveDbService() {

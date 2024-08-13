@@ -30,10 +30,11 @@ class SOConfirmationBottomSheetView extends StatelessWidget {
       viewModelBuilder: () => SOCreditCardsViewModel(
         soBottomSheetData: soConfirmationBottomSheetData.soBottomSheetData,
       ),
-      onModelReady: (model) => !soConfirmationBottomSheetData.isNewCreditCard
-          ? model.assignHiveCreditCardToTemp(
-              soConfirmationBottomSheetData.hiveCreditCard!)
-          : null,
+      onViewModelReady: (model) =>
+          !soConfirmationBottomSheetData.isNewCreditCard
+              ? model.assignHiveCreditCardToTemp(
+                  soConfirmationBottomSheetData.hiveCreditCard!)
+              : null,
       builder: (context, model, child) => DraggableScrollableSheet(
           initialChildSize:
               soConfirmationBottomSheetData.isNewCreditCard ? 0.875 : 0.61,

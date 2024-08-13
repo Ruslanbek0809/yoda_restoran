@@ -23,10 +23,10 @@ class RestaurantSearchView extends StatelessWidget {
     return ViewModelBuilder<RestaurantSearchViewModel>.reactive(
       viewModelBuilder: () => RestaurantSearchViewModel(restaurant.id!),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (value) {
             model.navBack(); // Workaround
-            return false;
           },
           child: Scaffold(
             backgroundColor: kcWhiteColor,

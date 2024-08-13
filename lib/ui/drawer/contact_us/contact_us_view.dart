@@ -12,10 +12,10 @@ class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ContactUsViewModel>.reactive(
-      builder: (context, model, child) => WillPopScope(
-        onWillPop: () async {
+      builder: (context, model, child) => PopScope(
+        canPop: false,
+        onPopInvoked: (value) {
           model.navToHomeByRemovingAll(); // Workaround
-          return false;
         },
         child: Scaffold(
           appBar: AppBar(

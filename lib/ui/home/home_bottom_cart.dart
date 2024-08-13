@@ -7,11 +7,11 @@ import '../../shared/shared.dart';
 import '../../utils/utils.dart';
 import 'home_view_model.dart';
 
-class HomeBottomCart extends HookViewModelWidget<HomeViewModel> {
+class HomeBottomCart extends StackedHookView<HomeViewModel> {
   const HomeBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, HomeViewModel model) {
+  Widget builder(BuildContext context, HomeViewModel model) {
     final bottomCartController = useAnimationController(
       duration: const Duration(milliseconds: 300),
     );

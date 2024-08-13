@@ -332,5 +332,5 @@ class SingleOrderViewModel extends ReactiveViewModel {
       await _navService.pushNamedAndRemoveUntil(Routes.ordersView);
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
+  List<ListenableServiceMixin> get listenableServices => [_hiveDbService];
 }

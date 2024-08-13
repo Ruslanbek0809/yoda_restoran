@@ -19,11 +19,12 @@ class ToggleButtonView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ToggleButtonViewModel>.reactive(
       // If restaurant's selfPickUp is TRUE and delivery is FALSE then toggle's initial value must be selfPickUp TRUE
-      onModelReady: (model) => restaurant.selfPickUp! && !restaurant.delivery!
-          ? model.updateToggleToSelfPickUp()
-          : !restaurant.selfPickUp! && restaurant.delivery!
-              ? model.updateToggleToDelivery()
-              : () {},
+      onViewModelReady: (model) =>
+          restaurant.selfPickUp! && !restaurant.delivery!
+              ? model.updateToggleToSelfPickUp()
+              : !restaurant.selfPickUp! && restaurant.delivery!
+                  ? model.updateToggleToDelivery()
+                  : () {},
       viewModelBuilder: () => ToggleButtonViewModel(),
       builder: (context, model, child) => LayoutBuilder(
           builder: (context, constraints) => GestureDetector(

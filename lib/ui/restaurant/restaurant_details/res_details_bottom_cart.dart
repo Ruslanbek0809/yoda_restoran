@@ -8,11 +8,11 @@ import '../../../utils/utils.dart';
 import 'res_bottom_cart/res_bottom_cart_total_view.dart';
 import 'res_details_view_model.dart';
 
-class ResDetailsBottomCart extends HookViewModelWidget<ResDetailsViewModel> {
+class ResDetailsBottomCart extends StackedHookView<ResDetailsViewModel> {
   const ResDetailsBottomCart({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, ResDetailsViewModel model) {
+  Widget builder(BuildContext context, ResDetailsViewModel model) {
     final bottomCartController =
         useAnimationController(duration: const Duration(milliseconds: 300));
     final bottomCartOffset =

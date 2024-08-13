@@ -22,7 +22,7 @@ class AddressEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddressEditViewModel>.reactive(
-      onModelReady: (model) => model.setInitialAddress(),
+      onViewModelReady: (model) => model.setInitialAddress(),
       viewModelBuilder: () => AddressEditViewModel(
         address: address,
         addressesViewModel: addressesViewModel,

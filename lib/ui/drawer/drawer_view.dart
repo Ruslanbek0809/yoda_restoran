@@ -107,7 +107,7 @@ class DrawerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DrawerViewModel>.reactive(
-      onModelReady: (model) => model.getAppVersion(),
+      onViewModelReady: (model) => model.getAppVersion(),
       builder: (context, model, child) => Drawer(
         width: getValueForScreenType<bool>(
           context: context,

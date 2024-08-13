@@ -4,17 +4,15 @@ import 'package:stacked_hooks/stacked_hooks.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../shared/shared.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'address_edit_view_model.dart';
 
-class AddressEditHook extends HookViewModelWidget<AddressEditViewModel> {
+class AddressEditHook extends StackedHookView<AddressEditViewModel> {
   const AddressEditHook({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, AddressEditViewModel model) {
+  Widget builder(BuildContext context, AddressEditViewModel model) {
     final _cityController = useTextEditingController(text: model.city);
     final _streetController = useTextEditingController(text: model.street);
     final _apartmentController = useTextEditingController(

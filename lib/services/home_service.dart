@@ -11,7 +11,7 @@ import '../utils/utils.dart';
 import 'services.dart';
 
 // 1 For Reactive View
-class HomeService with ReactiveServiceMixin {
+class HomeService with ListenableServiceMixin {
   final log = getLogger('HomeService');
 
   HomeService() {

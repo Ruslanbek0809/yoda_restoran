@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'cart_more_meal_bottom_sheet_view.dart';
 import 'cart_more_meal_view_model.dart';
 
-class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
+class CartMoreMealHook extends StackedHookView<CartMoreMealViewModel> {
   final Meal meal;
   final Restaurant
       restaurant; // Needed for add meal with conditions only in CART
@@ -23,8 +23,7 @@ class CartMoreMealHook extends HookViewModelWidget<CartMoreMealViewModel> {
   }) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, CartMoreMealViewModel model) {
+  Widget builder(BuildContext context, CartMoreMealViewModel model) {
     double itemWidth = 0.35.sw + 10.w;
     // (screenwidth - Gridview crossAxisSpacing * 2 - Gridview mainAxisSpacing * 2) / crossAxisCount
     double itemHeight = itemWidth * 1.75; // 0.32.sw is for item height

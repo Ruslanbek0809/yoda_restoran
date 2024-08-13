@@ -258,6 +258,6 @@ class CartViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_hiveDbService, _toggleButtonService, _cartService];
 }

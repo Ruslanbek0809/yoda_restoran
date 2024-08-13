@@ -10,7 +10,7 @@ import 'services.dart';
 
 //*CartService is used only inside CartView and CartMealView
 // 1 For Reactive View
-class CartService with ReactiveServiceMixin {
+class CartService with ListenableServiceMixin {
   final log = getLogger('CartService');
 
   CartService() {

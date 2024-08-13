@@ -103,5 +103,5 @@ class MainCatBottomViewModel extends ReactiveViewModel {
   void navBack() => _navService.back();
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
+  List<ListenableServiceMixin> get listenableServices => [_mainCatService];
 }

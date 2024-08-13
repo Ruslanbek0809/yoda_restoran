@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'address_add_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class AddressAddHook extends HookViewModelWidget<AddressAddViewModel> {
+class AddressAddHook extends StackedHookView<AddressAddViewModel> {
   const AddressAddHook({Key? key}) : super(key: key);
 
   @override
-  Widget buildViewModelWidget(BuildContext context, AddressAddViewModel model) {
+  Widget builder(BuildContext context, AddressAddViewModel model) {
     final _cityController =
         useTextEditingController(text: LocaleKeys.ashgabat.tr());
     final _streetController = useTextEditingController();

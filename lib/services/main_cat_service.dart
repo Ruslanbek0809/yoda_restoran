@@ -5,7 +5,7 @@ import '../models/models.dart';
 import '../utils/utils.dart';
 
 // 1 For Reactive Views
-class MainCatService with ReactiveServiceMixin {
+class MainCatService with ListenableServiceMixin {
   final log = getLogger('MainCatService');
 
   MainCatService() {
