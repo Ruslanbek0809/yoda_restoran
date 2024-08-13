@@ -62,46 +62,64 @@ class SingleExReachText extends ViewModelWidget<SingleExViewModel> {
                                   data: seRich.richText,
                                   style: {
                                     "body": Style(
-                                        margin: EdgeInsets.zero,
-                                        padding:
-                                            EdgeInsets.zero), // GENERAL BODY
+                                      margin: Margins.zero,
+                                      padding: HtmlPaddings.zero,
+                                    ), // GENERAL BODY
                                     "p": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero), // NORMAL
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ), // NORMAL
                                     "pre": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero), // FORMATTED
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ), // FORMATTED
                                     "h1": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero),
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ),
                                     "h2": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero),
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ),
                                     "h3": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero),
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ),
                                     "h4": Style(
-                                        margin: EdgeInsets.fromLTRB(
-                                            16.w, 0.h, 16.w, 10.h),
-                                        padding: EdgeInsets.zero),
+                                      margin: Margins(
+                                        left: Margin(16.w),
+                                        right: Margin(16.w),                                                                                                                       
+                                        bottom: Margin(10.h),
+                                      ),
+                                      padding: HtmlPaddings.zero,
+                                    ),
                                   },
-                                  onLinkTap: (url, _, __, ___) async {
+                                  onLinkTap: (url, _, __) async {
                                     final Uri launchUri = Uri(
                                       scheme: 'https',
                                       path: url,
                                     );
                                     await launchUrl(launchUri);
-                                  },
-                                  onImageTap: (src, _, __, ___) {
-                                    print(src);
-                                  },
-                                  onImageError: (exception, stackTrace) {
-                                    print(exception);
                                   },
                                   onCssParseError: (css, messages) {
                                     print("css that errored: $css");
