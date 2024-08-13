@@ -22,7 +22,7 @@ class MainCatBottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainCatBottomViewModel>.reactive(
-      onModelReady: (model) => model.assignTempCats(),
+      onViewModelReady: (model) => model.assignTempCats(),
       viewModelBuilder: () => MainCatBottomViewModel(),
       builder: (context, model, child) => Container(
         decoration: BoxDecoration(

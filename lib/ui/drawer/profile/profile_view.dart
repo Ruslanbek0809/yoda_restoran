@@ -15,11 +15,11 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
-      onModelReady: (model) => model.assignCurrentUserValues(),
-      builder: (context, model, child) => WillPopScope(
-        onWillPop: () async {
+      onViewModelReady: (model) => model.assignCurrentUserValues(),
+      builder: (context, model, child) => PopScope(
+        canPop: false,
+        onPopInvoked: (value) {
           model.navToHomeByRemovingAll(); // Workaround
-          return false;
         },
         child: Scaffold(
           drawer: DrawerView(),

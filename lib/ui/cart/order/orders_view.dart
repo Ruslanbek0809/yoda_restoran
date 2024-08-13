@@ -29,7 +29,7 @@ class _OrdersViewState extends State<OrdersView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<OrderViewModel>.reactive(
-      onModelReady: (model) async => await model.getInitialOrders(),
+      onViewModelReady: (model) async => await model.getInitialOrders(),
       builder: (context, model, child) {
         //*When the app is open and it receives a push notification
         FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
@@ -60,10 +60,10 @@ class _OrdersViewState extends State<OrdersView> {
           //* REINITIALIZES ORDERS
           await model.getInitialOrders();
         });
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (value) {
             model.navToHomeByRemovingAll(); // Workaround
-            return false;
           },
           child: Scaffold(
             appBar: AppBar(

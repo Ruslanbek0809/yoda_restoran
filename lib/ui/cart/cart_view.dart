@@ -52,10 +52,10 @@ class CartView extends StatelessWidget {
           });
         }
 
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (value) {
             model.navBack(); // Workaround
-            return false;
           },
           child: Scaffold(
             appBar: AppBar(

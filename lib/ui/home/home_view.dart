@@ -50,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-      onModelReady: (model) =>
+      onViewModelReady: (model) =>
           WidgetsBinding.instance.addPostFrameCallback((_) async {
         //*HOME RESS PAG
         if (!model.isPullUpEnabled) model.enablePullUp();

@@ -23,10 +23,10 @@ class _MyCreditCardsViewState extends State<MyCreditCardsView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreditCardsViewModel>.reactive(
-      builder: (context, model, child) => WillPopScope(
-        onWillPop: () async {
+      builder: (context, model, child) => PopScope(
+        canPop: false,
+        onPopInvoked: (value) async {
           model.navToHomeByRemovingAll(); // Workaround
-          return false;
         },
         child: Scaffold(
           appBar: AppBar(

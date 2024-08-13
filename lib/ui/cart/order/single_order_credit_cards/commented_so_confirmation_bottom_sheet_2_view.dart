@@ -24,7 +24,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return ViewModelBuilder<SOCreditCardsViewModel>.reactive(
-//       // onModelReady: (model) => model.getOnModelReady(),
+//       // onViewModelReady: (model) => model.getOnModelReady(),
 //       viewModelBuilder: () => SOCreditCardsViewModel(),
 //       builder: (context, model, child) => Container(
 //         decoration: BoxDecoration(
