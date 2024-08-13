@@ -40,6 +40,6 @@ class ResBottomCartTotalViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_hiveDbService, _bottomCartService];
 }

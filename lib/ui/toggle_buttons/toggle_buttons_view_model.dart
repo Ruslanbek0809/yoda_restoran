@@ -74,5 +74,5 @@ class ToggleButtonViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_toggleButtonService];
+  List<ListenableServiceMixin> get listenableServices => [_toggleButtonService];
 }

@@ -2,7 +2,7 @@ import 'package:stacked/stacked.dart';
 
 import '../app/app.logger.dart';
 
-// 1 Here ReactiveServiceMixin is used when any of these values change the listeners registered with this service will be notified to update their UI
+// 1 Here listenableServices is used when any of these values change the listeners registered with this service will be notified to update their UI
 class ToggleButtonService with ListenableServiceMixin {
   final log = getLogger('ToggleButtonService');
 

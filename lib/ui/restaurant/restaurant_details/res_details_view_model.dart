@@ -268,6 +268,6 @@ class ResDetailsViewModel extends FutureViewModel {
   //     );
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_bottomCartService, _hiveDbService];
 }

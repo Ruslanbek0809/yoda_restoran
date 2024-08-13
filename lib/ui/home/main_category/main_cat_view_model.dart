@@ -60,5 +60,5 @@ class MainCatViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_mainCatService];
+  List<ListenableServiceMixin> get listenableServices => [_mainCatService];
 }

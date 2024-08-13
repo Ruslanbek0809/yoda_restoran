@@ -434,5 +434,5 @@ class SOCreditCardsViewModel extends ReactiveViewModel {
   void navBack() => _navService.back();
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_hiveDbService];
+  List<ListenableServiceMixin> get listenableServices => [_hiveDbService];
 }

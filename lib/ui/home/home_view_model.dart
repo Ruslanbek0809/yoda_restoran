@@ -375,6 +375,6 @@ class HomeViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices =>
+  List<ListenableServiceMixin> get listenableServices =>
       [_mainCatService, _bottomCartService, _homeService, _hiveDbService];
 }

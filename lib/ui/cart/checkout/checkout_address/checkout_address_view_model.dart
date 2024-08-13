@@ -225,5 +225,5 @@ class CheckoutAddressViewModel extends ReactiveViewModel {
   }
 
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_checkoutService];
+  List<ListenableServiceMixin> get listenableServices => [_checkoutService];
 }
