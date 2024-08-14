@@ -11,7 +11,7 @@ class CartMealsShimmerWidget extends StatelessWidget {
     required this.cartMealsLength,
     super.key,
   });
-  int cartMealsLength;
+  final int cartMealsLength;
 
   @override
   Widget build(BuildContext context) {

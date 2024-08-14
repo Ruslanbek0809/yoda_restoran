@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../../../app/app.locator.dart';

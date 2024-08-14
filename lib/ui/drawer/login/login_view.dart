@@ -17,14 +17,14 @@ import 'package:easy_localization/easy_localization.dart';
   fields: [
     FormTextField(name: 'phone'),
   ],
-) // Needed when generating Formfields
+) // Needed when generating FormFields
 
 class LoginView extends StatelessWidget with $LoginView {
-  final bool isCartView;
   LoginView({required this.isCartView, Key? key}) : super(key: key);
 
+  final bool isCartView;
   final formKey = GlobalKey<FormState>();
-  var maskFormatter = MaskTextInputFormatter(
+  final maskFormatter = MaskTextInputFormatter(
       mask: '## ## ## ##', filter: {'#': RegExp(r'[0-9]')});
 
   @override

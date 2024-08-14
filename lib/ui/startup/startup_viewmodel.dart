@@ -92,7 +92,7 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
 
   Future<void> initializePushNotificationService() async {
     try {
-      await _pushNotificationService.initialise();
+      await _pushNotificationService.initialize();
     } catch (e, stackTrace) {
       log.e('Error initializing PushNotificationService', e);
       reportExceptionToSentryWithStacktrace(

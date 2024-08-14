@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:stacked_services/stacked_services.dart' hide Trans;
+import 'package:stacked_services/stacked_services.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
 
 import '../app/app.locator.dart';
@@ -19,7 +19,7 @@ class PushNotificationService {
   String? _fcmToken;
   String? get fcmToken => _fcmToken;
 
-  Future initialise() async {
+  Future initialize() async {
     log.v('====== PushNotificationService STARTED Fcm Token ======');
 
     //*This function is used to authorize permissions. On Anroid not needed. Here I use it to see authorizationStatus
