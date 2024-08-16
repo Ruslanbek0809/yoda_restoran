@@ -40,6 +40,7 @@ class ApiRootService {
 
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // Do something before request is sent
+      options.headers["token"] = accessToken;
       log.v(
           'REQUEST[${options.method}] => PATH: ${Constants.baseUrlTk}${options.path}');
       return handler.next(options); //continue

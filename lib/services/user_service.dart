@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:yoda_res/services/sentry/sentry_module.dart';
+import 'package:yoda_res/utils/log.dart';
 import '../app/app.locator.dart';
 import '../app/app.logger.dart';
 import '../models/hive_models/hive_models.dart';
@@ -12,6 +14,7 @@ import '../utils/utils.dart';
 import 'services.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' show Document;
+import 'package:http/http.dart' as http;
 
 class UserService {
   final log = getLogger('UserService');
@@ -505,18 +508,41 @@ class UserService {
   ) async {
     List<Order> _paginatedOrders = [];
     try {
-      Response response =
-          await _apiRoot.dio.get('api/paginatedorder?page=$page');
-      log.v('RESPONSE: api/paginatedorder/ => ${response.data}');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? accessToken = prefs.getString(Constants.accessToken);
+      // print(accessToken);
+      // Response response = await _apiRoot.dio.get(
+      //   'api/paginatedorder?page=$page',
+      //   options: Options(
+      //     headers: {"Authorization": "Bearer " + (accessToken ?? '')},
+      //     contentType: Headers.jsonContentType,
+      //     responseType: ResponseType.json,
+      //   ),
+      // );
+      // log.v('RESPONSE: api/paginatedorder/ => ${response.data}');
 
-      if (response.data['results'] != null) {
-        for (final _paginatedOrder in response.data['results'])
+      var url = Uri.https(
+          'yodarestoran.com', 'api/paginatedorder', {"page": page.toString()});
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
+
+      printl(response.statusCode.toString());
+      final data = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+      print(data);
+      if (data.containsKey('results')) {
+        for (final _paginatedOrder in data['results'])
           _paginatedOrders.add(Order.fromJson(_paginatedOrder));
       }
       if (_paginatedOrders.isNotEmpty)
         _paginatedOrders.sort((prev, next) => prev.status!
             .compareTo(next.status!)); // Sorting status ids in ascending order
-      onSuccess!(_paginatedOrders, response.data['next']);
+      onSuccess!(_paginatedOrders, data['next']);
     } catch (error) {
       log.v('ERROR on api/paginatedorder:$error');
       rethrow;
